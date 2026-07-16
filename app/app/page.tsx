@@ -1,4 +1,3 @@
-import RiskMatrix from "./components/RiskMatrix";
 import Footer from "./components/Footer";
 import FeaturedTools from "./components/FeaturedTools";
 import Categories from "./components/Categories";
@@ -27,11 +26,9 @@ export default function Home() {
           Explore Tools
         </a>
       </section>
-
       <Categories />
       <FeaturedTools />
-      <RiskMatrix />
       <Footer />
-    </main>
+      </main>
   );
 }
