@@ -146,15 +146,33 @@ export default function RiskMatrix() {
               <div className="mt-2 text-6xl font-bold">{score}</div>
 
               <div
-                className={`mt-5 inline-flex rounded-full border px-4 py-2 text-sm font-semibold ${risk.badgeClass}`}
-              >
-                {risk.label} Risk
-                Recommended Actions
+  className={`mt-5 inline-flex rounded-full border px-4 py-2 text-sm font-semibold ${risk.badgeClass}`}
+>
+  {risk.label} Risk
+</div>
 
-               ✔ Review existing controls
-               ✔ Supervisor awareness required
-               ✔ Monitor during work
-              </div>
+<div className="mt-6 border-t border-white/10 pt-5">
+  <div className="text-sm font-semibold text-white">
+    Recommended Actions
+  </div>
+
+  <ul className="mt-3 space-y-2 text-sm text-slate-300">
+    <li className="flex gap-2">
+      <span className="text-blue-400">✓</span>
+      <span>Review existing controls</span>
+    </li>
+
+    <li className="flex gap-2">
+      <span className="text-blue-400">✓</span>
+      <span>Supervisor awareness required</span>
+    </li>
+
+    <li className="flex gap-2">
+      <span className="text-blue-400">✓</span>
+      <span>Monitor during work</span>
+    </li>
+  </ul>
+</div>
             </div>
           </div>
 
