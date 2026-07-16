@@ -145,22 +145,145 @@ export default function RiskMatrix() {
     doc.text(action, 28, y);
   });
 
-  doc.setDrawColor(226, 232, 240);
-  doc.line(18, 210, 192, 210);
+ // Risk Matrix table
+doc.setTextColor(15, 23, 42);
+doc.setFont("helvetica", "bold");
+doc.setFontSize(14);
+doc.text("Risk Matrix", 18, 194);
 
-  doc.setTextColor(100, 116, 139);
-  doc.setFontSize(9);
-  doc.text(
-    "This report was generated automatically by SafeBase Risk Matrix Calculator.",
-    18,
-    220
+const matrixX = 42;
+const matrixY = 202;
+const cellWidth = 25;
+const cellHeight = 11;
+
+doc.setFontSize(8);
+
+// Likelihood headers
+for (let likelihoodValue = 1; likelihoodValue <= 5; likelihoodValue++) {
+  const x = matrixX + likelihoodValue * cellWidth;
+
+  doc.setFillColor(241, 245, 249);
+  doc.roundedRect(x, matrixY, cellWidth - 1, cellHeight - 1, 1, 1, "F");
+
+  doc.setTextColor(15, 23, 42);
+  doc.text(`L${likelihoodValue}`, x + (cellWidth - 1) / 2, matrixY + 7, {
+    align: "center",
+  });
+}
+
+// Top-left header
+doc.setFillColor(241, 245, 249);
+doc.roundedRect(
+  matrixX,
+  matrixY,
+  cellWidth - 1,
+  cellHeight - 1,
+  1,
+  1,
+  "F"
+);
+
+doc.setTextColor(15, 23, 42);
+doc.text("S × L", matrixX + (cellWidth - 1) / 2, matrixY + 7, {
+  align: "center",
+});
+
+// Matrix rows
+for (let severityValue = 5; severityValue >= 1; severityValue--) {
+  const rowIndex = 5 - severityValue;
+  const y = matrixY + (rowIndex + 1) * cellHeight;
+
+  doc.setFillColor(241, 245, 249);
+  doc.roundedRect(
+    matrixX,
+    y,
+    cellWidth - 1,
+    cellHeight - 1,
+    1,
+    1,
+    "F"
   );
 
-  doc.text(
-    "safebase-hazel.vercel.app/tools/risk-matrix",
-    18,
-    228
-  );
+  doc.setTextColor(15, 23, 42);
+  doc.text(`S${severityValue}`, matrixX + (cellWidth - 1) / 2, y + 7, {
+    align: "center",
+  });
+
+  for (let likelihoodValue = 1; likelihoodValue <= 5; likelihoodValue++) {
+    const cellScore = severityValue * likelihoodValue;
+    const x = matrixX + likelihoodValue * cellWidth;
+
+    if (cellScore <= 4) {
+      doc.setFillColor(16, 185, 129);
+    } else if (cellScore <= 9) {
+      doc.setFillColor(250, 204, 21);
+    } else if (cellScore <= 16) {
+      doc.setFillColor(249, 115, 22);
+    } else {
+      doc.setFillColor(239, 68, 68);
+    }
+
+    doc.roundedRect(
+      x,
+      y,
+      cellWidth - 1,
+      cellHeight - 1,
+      1,
+      1,
+      "F"
+    );
+
+    if (
+      likelihoodValue === likelihood &&
+      severityValue === severity
+    ) {
+      doc.setDrawColor(37, 99, 235);
+      doc.setLineWidth(1.2);
+      doc.roundedRect(
+        x,
+        y,
+        cellWidth - 1,
+        cellHeight - 1,
+        1,
+        1,
+        "S"
+      );
+      doc.setLineWidth(0.2);
+    }
+
+    const useDarkText = cellScore > 4 && cellScore <= 9;
+
+    doc.setTextColor(
+      useDarkText ? 15 : 255,
+      useDarkText ? 23 : 255,
+      useDarkText ? 42 : 255
+    );
+
+    doc.text(String(cellScore), x + (cellWidth - 1) / 2, y + 7, {
+      align: "center",
+    });
+  }
+}
+
+// Footer
+doc.setDrawColor(226, 232, 240);
+doc.line(18, 276, 192, 276);
+
+doc.setTextColor(100, 116, 139);
+doc.setFont("helvetica", "normal");
+doc.setFontSize(8);
+
+doc.text(
+  "This report was generated automatically by SafeBase Risk Matrix Calculator.",
+  18,
+  284
+);
+
+doc.text(
+  "safebase-hazel.vercel.app/tools/risk-matrix",
+  18,
+  290
+);
 
   doc.save(`SafeBase-Risk-Matrix-${score}.pdf`);
 };
