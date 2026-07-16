@@ -1,6 +1,6 @@
-import jsPDF from "jspdf";
 "use client";
 
+import jsPDF from "jspdf";
 import { useMemo, useState } from "react";
 
 const likelihoodOptions = [
