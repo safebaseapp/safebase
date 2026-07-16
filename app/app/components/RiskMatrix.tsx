@@ -411,6 +411,31 @@ doc.text(
 >
   📄 Download PDF
 </button>
+const copyResult = async () => {
+  const likelihoodLabel =
+    likelihoodOptions.find((item) => item.value === likelihood)?.label ?? "";
+
+  const severityLabel =
+    severityOptions.find((item) => item.value === severity)?.label ?? "";
+
+  const actions =
+    recommendations[risk.label as keyof typeof recommendations] ?? [];
+
+  const resultText = [
+    "SAFEBASE Risk Matrix",
+    "",
+    `Likelihood: ${likelihood} - ${likelihoodLabel}`,
+    `Severity: ${severity} - ${severityLabel}`,
+    `Risk Score: ${score}`,
+    `Risk Level: ${risk.label} Risk`,
+    "",
+    "Recommended Actions:",
+    ...actions.map((action) => `• ${action}`),
+  ].join("\n");
+
+  await navigator.clipboard.writeText(resultText);
+  alert("Result copied to clipboard.");
+};
 </div>
             </div>
           </div>
