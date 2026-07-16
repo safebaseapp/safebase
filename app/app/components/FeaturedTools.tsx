@@ -1,9 +1,10 @@
+import Link from "next/Link";
 const tools = [
   {
     title: "Risk Matrix Calculator",
     description: "Evaluate and classify workplace risks quickly.",
     type: "Calculator",
-    href: "#risk-matrix",
+    href: "/tools/risk-matrix",
   },
   {
     title: "TRIR Calculator",
@@ -83,9 +84,13 @@ export default function FeaturedTools() {
                 {tool.description}
               </p>
 
-              <button className="mt-6 font-semibold text-blue-600">
-                Learn more →
-              </button>
+              <Link
+              href={tool.href}
+              className="mt-6 inline-block font-semibold text-blue-600"
+              >
+               Learn more →
+               </Link>
+               
             </article>
           ))}
         </div>
