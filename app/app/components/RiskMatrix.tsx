@@ -57,22 +57,112 @@ export default function RiskMatrix() {
 
   const score = likelihood * severity;
   const risk = useMemo(() => getRiskLevel(score), [score]);
-  const downloadPDF = () => {
+ const downloadPDF = () => {
   const doc = new jsPDF();
 
+  const likelihoodLabel =
+    likelihoodOptions.find((item) => item.value === likelihood)?.label ?? "";
+
+  const severityLabel =
+    severityOptions.find((item) => item.value === severity)?.label ?? "";
+
+  const actions =
+    recommendations[risk.label as keyof typeof recommendations] ?? [];
+
+  const today = new Date().toLocaleDateString("en-GB");
+
+  doc.setFillColor(15, 23, 42);
+  doc.rect(0, 0, 210, 34, "F");
+
+  doc.setTextColor(255, 255, 255);
   doc.setFontSize(22);
-  doc.text("SAFEBASE", 20, 20);
+  doc.setFont("helvetica", "bold");
+  doc.text("SAFEBASE", 18, 16);
 
-  doc.setFontSize(16);
-  doc.text("Risk Matrix Report", 20, 35);
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  doc.text("Safety tools and resources", 18, 24);
 
+  doc.setTextColor(15, 23, 42);
+  doc.setFontSize(18);
+  doc.setFont("helvetica", "bold");
+  doc.text("Risk Matrix Report", 18, 48);
+
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(100, 116, 139);
+  doc.text(`Generated: ${today}`, 18, 56);
+
+  doc.setDrawColor(226, 232, 240);
+  doc.roundedRect(18, 66, 174, 58, 3, 3);
+
+  doc.setTextColor(71, 85, 105);
+  doc.setFontSize(10);
+  doc.text("Likelihood", 26, 78);
+  doc.text("Severity", 26, 94);
+  doc.text("Risk Score", 108, 78);
+  doc.text("Risk Level", 108, 94);
+
+  doc.setTextColor(15, 23, 42);
   doc.setFontSize(12);
-  doc.text(`Likelihood: ${likelihood}`, 20, 55);
-  doc.text(`Severity: ${severity}`, 20, 65);
-  doc.text(`Risk Score: ${score}`, 20, 75);
-  doc.text(`Risk Level: ${risk.label}`, 20, 85);
+  doc.setFont("helvetica", "bold");
+  doc.text(`${likelihood} - ${likelihoodLabel}`, 26, 85);
+  doc.text(`${severity} - ${severityLabel}`, 26, 101);
+  doc.text(String(score), 108, 85);
+  doc.text(`${risk.label} Risk`, 108, 101);
 
-  doc.save("RiskMatrixReport.pdf");
+  if (risk.label === "Low") {
+    doc.setFillColor(16, 185, 129);
+  } else if (risk.label === "Medium") {
+    doc.setFillColor(250, 204, 21);
+  } else if (risk.label === "High") {
+    doc.setFillColor(249, 115, 22);
+  } else {
+    doc.setFillColor(239, 68, 68);
+  }
+
+  doc.roundedRect(108, 106, 52, 10, 5, 5, "F");
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(9);
+  doc.setFont("helvetica", "bold");
+  doc.text(`${risk.label.toUpperCase()} RISK`, 134, 113, {
+    align: "center",
+  });
+
+  doc.setTextColor(15, 23, 42);
+  doc.setFontSize(14);
+  doc.text("Recommended Actions", 18, 142);
+
+  doc.setFontSize(11);
+  doc.setFont("helvetica", "normal");
+
+  actions.forEach((action, index) => {
+    const y = 154 + index * 10;
+    doc.setTextColor(37, 99, 235);
+    doc.text("•", 20, y);
+    doc.setTextColor(51, 65, 85);
+    doc.text(action, 28, y);
+  });
+
+  doc.setDrawColor(226, 232, 240);
+  doc.line(18, 210, 192, 210);
+
+  doc.setTextColor(100, 116, 139);
+  doc.setFontSize(9);
+  doc.text(
+    "This report was generated automatically by SafeBase Risk Matrix Calculator.",
+    18,
+    220
+  );
+
+  doc.text(
+    "safebase-hazel.vercel.app/tools/risk-matrix",
+    18,
+    228
+  );
+
+  doc.save(`SafeBase-Risk-Matrix-${score}.pdf`);
 };
   const recommendations = {
   Low: [
