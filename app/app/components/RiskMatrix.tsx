@@ -56,6 +56,28 @@ export default function RiskMatrix() {
 
   const score = likelihood * severity;
   const risk = useMemo(() => getRiskLevel(score), [score]);
+  const recommendations = {
+  Low: [
+    "Continue with current controls",
+    "Monitor the task",
+  ],
+  Medium: [
+    "Review existing controls",
+    "Supervisor awareness required",
+    "Monitor during work",
+  ],
+  High: [
+    "Additional control measures required",
+    "Supervisor approval required",
+    "Review RAMS before starting",
+  ],
+  Extreme: [
+    "STOP WORK immediately",
+    "Engineering controls required",
+    "Management approval required",
+    "Risk assessment must be revised",
+  ],
+};
 
   return (
     <section id="risk-matrix" className="bg-slate-950 px-6 py-24 text-white">
@@ -127,6 +149,11 @@ export default function RiskMatrix() {
                 className={`mt-5 inline-flex rounded-full border px-4 py-2 text-sm font-semibold ${risk.badgeClass}`}
               >
                 {risk.label} Risk
+                Recommended Actions
+
+               ✔ Review existing controls
+               ✔ Supervisor awareness required
+               ✔ Monitor during work
               </div>
             </div>
           </div>
