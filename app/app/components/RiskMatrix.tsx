@@ -1,3 +1,4 @@
+import jsPDF from "jspdf";
 "use client";
 
 import { useMemo, useState } from "react";
@@ -56,6 +57,23 @@ export default function RiskMatrix() {
 
   const score = likelihood * severity;
   const risk = useMemo(() => getRiskLevel(score), [score]);
+  const downloadPDF = () => {
+  const doc = new jsPDF();
+
+  doc.setFontSize(22);
+  doc.text("SAFEBASE", 20, 20);
+
+  doc.setFontSize(16);
+  doc.text("Risk Matrix Report", 20, 35);
+
+  doc.setFontSize(12);
+  doc.text(`Likelihood: ${likelihood}`, 20, 55);
+  doc.text(`Severity: ${severity}`, 20, 65);
+  doc.text(`Risk Score: ${score}`, 20, 75);
+  doc.text(`Risk Level: ${risk.label}`, 20, 85);
+
+  doc.save("RiskMatrixReport.pdf");
+};
   const recommendations = {
   Low: [
     "Continue with current controls",
@@ -64,8 +82,9 @@ export default function RiskMatrix() {
   Medium: [
     "Review existing controls",
     "Supervisor awareness required",
-    "Monitor during work",
-  ],
+    "Monitor during work",],
+    
+   
   High: [
     "Additional control measures required",
     "Supervisor approval required",
@@ -172,6 +191,13 @@ export default function RiskMatrix() {
       <span>Monitor during work</span>
     </li>
   </ul>
+  <button
+  type="button"
+  onClick={downloadPDF}
+  className="mt-6 w-full rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-700"
+>
+  📄 Download PDF
+</button>
 </div>
             </div>
           </div>
