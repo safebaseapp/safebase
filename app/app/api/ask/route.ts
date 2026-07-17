@@ -94,6 +94,7 @@ Keep answers short, practical and professional.`,
   );
 
   const data = await response.json();
+  console.log(data);
 
   let answer =
     data.choices?.[0]?.message?.content ||
