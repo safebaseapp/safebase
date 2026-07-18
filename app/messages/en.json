@@ -8,14 +8,20 @@
     "comingSoon": "Coming soon"
   },
   "Navigation": {
-    "home": "Home",
     "tools": "Tools",
-    "knowledge": "Knowledge",
-    "about": "About"
+    "aiAssistant": "AI Assistant",
+    "categories": "Categories",
+    "resources": "Resources",
+    "about": "About",
+    "contact": "Contact",
+    "explore": "Explore",
+    "tagline": "Safety tools and resources"
   },
   "HomePage": {
-    "title": "Smart HSE Tools for Safer Workplaces",
-    "description": "Calculators, checklists, templates and reliable resources for occupational health and safety professionals."
+    "title": "SAFEBASE",
+    "subtitle": "Modern platform for HSE professionals.",
+    "description": "Free calculators, checklists, templates and practical safety resources.",
+    "exploreTools": "Explore Tools"
   },
   "ToolsPage": {
     "eyebrow": "SafeBase Tools",

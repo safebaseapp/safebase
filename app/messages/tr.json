@@ -8,14 +8,20 @@
     "comingSoon": "Yakında"
   },
   "Navigation": {
-    "home": "Ana Sayfa",
     "tools": "Araçlar",
-    "knowledge": "Bilgi Merkezi",
-    "about": "Hakkımızda"
+    "aiAssistant": "Yapay Zekâ Asistanı",
+    "categories": "Kategoriler",
+    "resources": "Kaynaklar",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "explore": "Keşfet",
+    "tagline": "İş güvenliği araçları ve kaynakları"
   },
   "HomePage": {
-    "title": "Daha Güvenli İşyerleri İçin Akıllı HSE Araçları",
-    "description": "İş sağlığı ve güvenliği profesyonelleri için hesaplayıcılar, kontrol listeleri, şablonlar ve güvenilir kaynaklar."
+    "title": "SAFEBASE",
+    "subtitle": "HSE profesyonelleri için modern platform.",
+    "description": "Ücretsiz hesaplayıcılar, kontrol listeleri, şablonlar ve pratik iş güvenliği kaynakları.",
+    "exploreTools": "Araçları Keşfet"
   },
   "ToolsPage": {
     "eyebrow": "SafeBase Araçları",
