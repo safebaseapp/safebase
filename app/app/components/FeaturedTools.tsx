@@ -1,40 +1,47 @@
 import Link from "next/link";
+
 const tools = [
   {
     title: "Risk Matrix Calculator",
     description: "Evaluate and classify workplace risks quickly.",
     type: "Calculator",
     href: "/tools/risk-matrix",
+    available: true,
   },
   {
     title: "TRIR Calculator",
     description: "Calculate Total Recordable Incident Rate.",
     type: "Calculator",
-      href: "#",
+    href: "/tools/trir",
+    available: true,
   },
   {
-    title: "LTIFR Calculator",
-    description: "Calculate Lost Time Injury Frequency Rate.",
-    type: "Calculator",
-    href: "#",
-  },
+  title: "LTIFR Calculator",
+  description: "Calculate Lost Time Injury Frequency Rate.",
+  type: "Calculator",
+  href: "/tools/ltifr",
+  available: true,
+},
   {
     title: "Scaffold Inspection",
     description: "Complete a structured scaffold safety inspection.",
     type: "Checklist",
-      href: "#",
+    href: "#",
+    available: false,
   },
   {
     title: "Hot Work Checklist",
     description: "Verify critical controls before hot work starts.",
     type: "Checklist",
     href: "#",
+    available: false,
   },
   {
     title: "Toolbox Talk Template",
     description: "Create clear and practical toolbox talk documents.",
     type: "Template",
     href: "#",
+    available: false,
   },
 ];
 
@@ -57,42 +64,66 @@ export default function FeaturedTools() {
             </p>
           </div>
 
-          <button className="w-fit rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-950 hover:text-slate-950">
+          <Link
+            href="/tools"
+            className="w-fit rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-950 hover:text-slate-950"
+          >
             View all tools
-          </button>
+          </Link>
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {tools.map((tool) => (
-            <article
-              key={tool.title}
-              className="rounded-3xl border border-slate-200 bg-slate-50 p-7 transition hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg"
-            >
-              <div className="flex items-center justify-between gap-4">
-                <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
-                  {tool.type}
-                </span>
-
-                <span className="text-sm text-slate-400">Coming soon</span>
-              </div>
-
-              <h3 className="mt-6 text-xl font-semibold text-slate-950">
-                {tool.title}
-              </h3>
-
-              <p className="mt-3 text-sm leading-6 text-slate-600">
-                {tool.description}
-              </p>
-
-              <Link
-              href={tool.href}
-              className="mt-6 inline-block font-semibold text-blue-600"
+          {tools.map((tool) => {
+            const cardContent = (
+              <article
+                className={`h-full rounded-3xl border bg-slate-50 p-7 transition ${
+                  tool.available
+                    ? "border-slate-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg"
+                    : "border-slate-200 opacity-75"
+                }`}
               >
-               Learn more →
-               </Link>
-               
-            </article>
-          ))}
+                <div className="flex items-center justify-between gap-4">
+                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+                    {tool.type}
+                  </span>
+
+                  <span
+                    className={`text-sm font-medium ${
+                      tool.available ? "text-emerald-600" : "text-slate-400"
+                    }`}
+                  >
+                    {tool.available ? "Available" : "Coming soon"}
+                  </span>
+                </div>
+
+                <h3 className="mt-6 text-xl font-semibold text-slate-950">
+                  {tool.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-6 text-slate-600">
+                  {tool.description}
+                </p>
+
+                <div
+                  className={`mt-6 font-semibold ${
+                    tool.available ? "text-blue-600" : "text-slate-400"
+                  }`}
+                >
+                  {tool.available ? "Open tool →" : "Available soon"}
+                </div>
+              </article>
+            );
+
+            if (!tool.available) {
+              return <div key={tool.title}>{cardContent}</div>;
+            }
+
+            return (
+              <Link key={tool.title} href={tool.href} className="block">
+                {cardContent}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

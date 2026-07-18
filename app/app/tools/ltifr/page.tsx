@@ -115,25 +115,49 @@ export default function TRIRCalculatorPage() {
 
               <div className="mt-5">
                 {result === null ? (
-                  <>
-                    <div className="text-5xl font-bold text-slate-500">—</div>
+                 <>
+  <div className="text-5xl font-extrabold text-slate-500">
+    --
+  </div>
 
-                    <p className="mt-4 leading-7 text-slate-400">
-                      Enter the number of recordable cases and total hours
-                      worked to calculate TRIR.
-                    </p>
-                  </>
+  <p className="mt-4 text-lg font-semibold text-slate-300">
+    Waiting for input
+  </p>
+
+  <p className="mt-2 leading-7 text-slate-400">
+    Enter the number of lost time injuries and total hours worked to calculate LTIFR.
+  </p>
+</>
                 ) : (
-                  <>
-                    <div className="text-5xl font-bold text-white">
-                      {result.toFixed(2)}
-                    </div>
+                 <>
+  <div className="text-5xl font-extrabold text-white">
+    {result.toFixed(2)}
+  </div>
 
-                    <p className="mt-4 leading-7 text-slate-300">
-                      This represents the number of recordable cases per
-                      200,000 hours worked.
-                    </p>
-                  </>
+  <div
+    className={`mt-5 inline-flex rounded-full px-4 py-2 text-sm font-semibold ${
+      result < 1
+        ? "bg-green-500/20 text-green-300"
+        : result < 3
+        ? "bg-yellow-500/20 text-yellow-300"
+        : "bg-red-500/20 text-red-300"
+    }`}
+  >
+    {result < 1
+      ? "🟢 Excellent"
+      : result < 3
+      ? "🟡 Moderate"
+      : "🔴 Needs Immediate Review"}
+  </div>
+
+  <p className="mt-5 leading-7 text-slate-300">
+    {result < 1
+      ? "Excellent safety performance. Your LTIFR is below the international benchmark."
+      : result < 3
+      ? "Moderate injury frequency. Continue monitoring incident trends and corrective actions."
+      : "High injury frequency detected. Review incidents and implement immediate corrective actions."}
+  </p>
+</>
                 )}
               </div>
             </section>
