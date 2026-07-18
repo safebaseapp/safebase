@@ -1,0 +1,26 @@
+{
+  "Common": {
+    "siteName": "SafeBase",
+    "language": "Dil",
+    "turkish": "Türkçe",
+    "english": "English",
+    "available": "Kullanılabilir",
+    "comingSoon": "Yakında"
+  },
+  "Navigation": {
+    "home": "Ana Sayfa",
+    "tools": "Araçlar",
+    "knowledge": "Bilgi Merkezi",
+    "about": "Hakkımızda"
+  },
+  "HomePage": {
+    "title": "Daha Güvenli İşyerleri İçin Akıllı HSE Araçları",
+    "description": "İş sağlığı ve güvenliği profesyonelleri için hesaplayıcılar, kontrol listeleri, şablonlar ve güvenilir kaynaklar."
+  },
+  "ToolsPage": {
+    "eyebrow": "SafeBase Araçları",
+    "title": "İş Güvenliği Hesaplayıcıları",
+    "description": "Güvenlik analizlerini daha hızlı, anlaşılır ve tutarlı hale getiren pratik HSE hesaplayıcıları.",
+    "openCalculator": "Hesaplayıcıyı Aç"
+  }
+}

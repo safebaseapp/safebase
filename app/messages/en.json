@@ -1,0 +1,26 @@
+{
+  "Common": {
+    "siteName": "SafeBase",
+    "language": "Language",
+    "turkish": "Türkçe",
+    "english": "English",
+    "available": "Available",
+    "comingSoon": "Coming soon"
+  },
+  "Navigation": {
+    "home": "Home",
+    "tools": "Tools",
+    "knowledge": "Knowledge",
+    "about": "About"
+  },
+  "HomePage": {
+    "title": "Smart HSE Tools for Safer Workplaces",
+    "description": "Calculators, checklists, templates and reliable resources for occupational health and safety professionals."
+  },
+  "ToolsPage": {
+    "eyebrow": "SafeBase Tools",
+    "title": "Safety Calculators",
+    "description": "Practical HSE calculators designed to make safety analysis faster, clearer and more consistent.",
+    "openCalculator": "Open Calculator"
+  }
+}
