@@ -15,13 +15,31 @@ export default function Navbar() {
           </div>
         </a>
 
-        <div className="hidden gap-8 text-gray-300 md:flex">
-          <a href="#tools">Tools</a>
-          <a href="#categories">Categories</a>
-          <a href="#resources">Resources</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </div>
+       <div className="hidden gap-8 text-gray-300 md:flex">
+  <a href="#tools" className="hover:text-blue-400 transition">
+    Tools
+  </a>
+
+  <a href="/ai-assistant" className="font-semibold text-blue-400 hover:text-blue-300 transition">
+    🤖 AI Assistant
+  </a>
+
+  <a href="#categories" className="hover:text-blue-400 transition">
+    Categories
+  </a>
+
+  <a href="#resources" className="hover:text-blue-400 transition">
+    Resources
+  </a>
+
+  <a href="#about" className="hover:text-blue-400 transition">
+    About
+  </a>
+
+  <a href="#contact" className="hover:text-blue-400 transition">
+    Contact
+  </a>
+</div>
 
         <button className="rounded-lg bg-blue-600 px-5 py-2 font-semibold text-white hover:bg-blue-700">
           Explore

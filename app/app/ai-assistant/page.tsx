@@ -3,12 +3,58 @@
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+
 export default function AIAssistantPage() {
   const [question, setQuestion] = useState("");
-const [answer, setAnswer] = useState("");
-const [loading, setLoading] = useState(false);
+  const [answer, setAnswer] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const askAI = async () => {
+    const cleanQuestion = question.trim();
+
+    if (!cleanQuestion) {
+      setError("Please enter an HSE question.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setAnswer("");
+      setError("");
+
+      const res = await fetch("/api/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          question: cleanQuestion,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("SafeBase AI request failed.");
+      }
+
+      const data = await res.json();
+
+      setAnswer(
+        data.answer ||
+          "This information is not available in the current SafeBase Knowledge Base."
+      );
+    } catch (err) {
+      console.error(err);
+      setError(
+        "SafeBase AI could not process your request. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-16 text-white">
+    <main className="min-h-screen bg-slate-950 px-4 py-12 text-white sm:px-6 md:py-16">
       <div className="mx-auto max-w-4xl">
         <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-blue-400">
           AI Safety Assistant
@@ -19,49 +65,173 @@ const [loading, setLoading] = useState(false);
         </h1>
 
         <p className="mt-4 max-w-2xl text-slate-400">
-          Ask practical HSE questions and receive structured safety guidance.
+          Ask practical HSE questions and receive structured safety guidance
+          based on the SafeBase Knowledge Base.
         </p>
 
-        <div className="mt-10 rounded-2xl border border-slate-800 bg-slate-900 p-6">
+        {/* Question box */}
+        <div className="mt-10 rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-xl shadow-black/20 sm:p-6">
+          <label
+            htmlFor="safety-question"
+            className="mb-3 block text-sm font-semibold text-slate-300"
+          >
+            Your safety question
+          </label>
+
           <textarea
-         value={question}
-         onChange={(e) => setQuestion(e.target.value)}
-         className="min-h-40 w-full resize-none rounded-xl border border-slate-700 bg-slate-950 p-4 text-white outline-none placeholder:text-slate-500 focus:border-blue-500"
-         placeholder="Example: What controls are required for grinding work?"
+            id="safety-question"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            className="min-h-40 w-full resize-none rounded-xl border border-slate-700 bg-slate-950 p-4 text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+            placeholder="Example: What controls are required for grinding work?"
           />
 
-          <button
-  onClick={async () => {
-    setLoading(true);
-setAnswer("");
-    const res = await fetch("/api/ask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ question }),
-    });
+          {error && (
+            <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+              ⚠️ {error}
+            </div>
+          )}
 
-    const data = await res.json();
-    setAnswer(data.answer);
-    setLoading(false);
-  }}
-  className="mt-4 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-500"
->
-            Ask AI
+          <button
+            type="button"
+            onClick={askAI}
+            disabled={loading || !question.trim()}
+            className="mt-4 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
+          >
+            {loading ? "Analyzing..." : "Ask AI"}
           </button>
         </div>
 
-        <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900 p-6">
-          <h2 className="text-xl font-semibold">AI Response</h2>
+        {/* AI response */}
+        <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-xl shadow-black/20 sm:p-6">
+          <div className="flex items-center gap-3 border-b border-slate-800 pb-4">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600/15 text-xl">
+              🤖
+            </div>
 
-          <div className="mt-3 text-slate-300">
-  <ReactMarkdown>
-  {loading
-    ? "🤖 SafeBase AI is analyzing your question...\n\nPlease wait..."
-    : answer || "Your answer will appear here."}
-</ReactMarkdown>
-</div>
+            <div>
+              <h2 className="text-xl font-semibold">AI Response</h2>
+              <p className="text-sm text-slate-500">
+                SafeBase Knowledge Guidance
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            {loading ? (
+              <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-5">
+                <div className="flex items-center gap-3 text-blue-300">
+                  <span className="animate-pulse text-xl">🤖</span>
+
+                  <div>
+                    <p className="font-semibold">
+                      SafeBase AI is analyzing your question...
+                    </p>
+
+                    <p className="mt-1 text-sm text-slate-400">
+                      Reviewing relevant safety guidance and standards.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : answer ? (
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  h1: ({ children }) => (
+                    <h1 className="mb-4 mt-8 border-b border-slate-700 pb-3 text-2xl font-bold text-white first:mt-0">
+                      {children}
+                    </h1>
+                  ),
+
+                  h2: ({ children }) => (
+                    <h2 className="mb-3 mt-8 flex items-center gap-2 text-xl font-bold text-blue-300 first:mt-0">
+                      <span className="h-2 w-2 rounded-full bg-blue-500" />
+                      {children}
+                    </h2>
+                  ),
+
+                  h3: ({ children }) => (
+                    <h3 className="mb-3 mt-6 text-lg font-semibold text-slate-100">
+                      {children}
+                    </h3>
+                  ),
+
+                  p: ({ children }) => (
+                    <p className="mb-4 leading-7 text-slate-300">
+                      {children}
+                    </p>
+                  ),
+
+                  ul: ({ children }) => (
+                    <ul className="mb-6 space-y-3">{children}</ul>
+                  ),
+
+                  ol: ({ children }) => (
+                    <ol className="mb-6 list-decimal space-y-3 pl-6 text-slate-300">
+                      {children}
+                    </ol>
+                  ),
+
+                  li: ({ children }) => (
+                    <li className="flex items-start gap-3 leading-7 text-slate-300">
+                      <span className="mt-2 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-xs text-emerald-400">
+                        ✓
+                      </span>
+
+                      <span>{children}</span>
+                    </li>
+                  ),
+
+                  strong: ({ children }) => (
+                    <strong className="font-semibold text-white">
+                      {children}
+                    </strong>
+                  ),
+
+                  blockquote: ({ children }) => (
+                    <blockquote className="my-5 rounded-xl border-l-4 border-amber-400 bg-amber-400/10 px-5 py-4 text-amber-100">
+                      {children}
+                    </blockquote>
+                  ),
+
+                  a: ({ href, children }) => (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-blue-400 underline decoration-blue-400/40 underline-offset-4 hover:text-blue-300"
+                    >
+                      {children}
+                    </a>
+                  ),
+
+                  code: ({ children }) => (
+                    <code className="rounded bg-slate-800 px-1.5 py-0.5 text-sm text-blue-300">
+                      {children}
+                    </code>
+                  ),
+
+                  hr: () => <hr className="my-7 border-slate-700" />,
+                }}
+              >
+                {answer}
+              </ReactMarkdown>
+            ) : (
+              <div className="rounded-xl border border-dashed border-slate-700 bg-slate-950/40 p-6 text-center">
+                <div className="text-3xl">🦺</div>
+
+                <p className="mt-3 font-medium text-slate-300">
+                  Your answer will appear here.
+                </p>
+
+                <p className="mt-1 text-sm text-slate-500">
+                  Ask about hot work, confined spaces, LOTO, PPE, or other HSE
+                  topics.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </main>

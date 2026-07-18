@@ -33,27 +33,30 @@ const selectedFiles = knowledgeFiles.filter(
 
 const filesToUse =
   selectedFiles.length > 0 ? selectedFiles : ["ppe.md"];
+  console.log("Question:", question);
+console.log("Matched Topics:", matchedTopics);
+console.log("Files To Use:", filesToUse);
 
 const knowledge = filesToUse
   .map((file) =>
     fs.readFileSync(path.join(knowledgeFolder, file), "utf-8")
   )
   .join("\n\n");
-  const response = await fetch(
-    "https://openrouter.ai/api/v1/chat/completions",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "openai/gpt-oss-20b:free",
-        temperature: 0,
-        messages: [
-          {
-            role: "system",
-            content: `You are SafeBase AI, a senior HSE engineer.
+const response = await fetch(
+  "https://openrouter.ai/api/v1/chat/completions",
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "openai/gpt-oss-20b:free",
+      temperature: 0,
+      messages: [
+        {
+          role: "system",
+          content: `You are SafeBase AI, a senior HSE engineer.
 
 Use the following SafeBase knowledge as the primary reference:
 
@@ -83,60 +86,30 @@ Use this structure:
 
 Use bullet points instead of tables.
 Keep answers short, practical and professional.`,
-          },
-          {
-            role: "user",
-            content: question,
-          },
-        ],
-      }),
-    }
-  );
-
-  const data = await response.json();
-  console.log(data);
-
-  let answer =
-    data.choices?.[0]?.message?.content ||
-    data.error?.message ||
-    "Unknown API error";
-    answer = answer.replace(
-  /OSHA\s+(?:29\s+CFR\s+)?1910\.215\s*[–—-]\s*[^\n]*/gi,
-  "OSHA 1910.215 – Abrasive Wheel Machinery"
+        },
+        {
+          role: "user",
+          content: question,
+        },
+      ],
+    }),
+  }
 );
 
-  const allowedStandards = [
-    "1910.132",
-    "1910.133",
-    "1910.134",
-    "1910.135",
-    "1910.136",
-    "1910.138",
-    "1910.215",
-  ];
-
-  const mentionedStandards = answer.match(/\b1910\.\d+\b/g) || [];
-
-  const invalidStandards = mentionedStandards.filter(
-    (standard: string) => !allowedStandards.includes(standard)
-  );
-
-  const containsForeignCharacters =
-    /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\u0400-\u04ff]/.test(
-      answer
-    );
-
-  if (invalidStandards.length > 0 || containsForeignCharacters) {
-    return Response.json({
-      answer:
-        "SafeBase AI could not produce a fully verified answer. Please try again.",
-    });
-  }
+if (!response.ok) {
+  const text = await response.text();
 
   return Response.json({
-  answer:
-    answer +
-    "\n\n## Sources\n\n" +
-    filesToUse.map((file) => `- ${file}`).join("\n"),
+    answer: `OpenRouter ${response.status}\n\n${text}`,
+  });
+}
+
+const data = await response.json();
+const answer =
+  data?.choices?.[0]?.message?.content ??
+  "This information is not available in the current SafeBase Knowledge Base.";
+
+return Response.json({
+  answer,
 });
 }
