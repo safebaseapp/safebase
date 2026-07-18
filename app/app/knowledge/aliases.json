@@ -1,4 +1,18 @@
 {
+  "hot-work": [
+    "hot work",
+    "hotwork",
+    "welding",
+    "weld",
+    "cutting",
+    "brazing",
+    "torch cutting",
+    "gas cutting",
+    "arc welding",
+    "fire watch",
+    "hot work permit",
+    "spark producing work"
+  ],
   "grinding": [
     "grinding",
     "grinder",
@@ -7,7 +21,6 @@
     "abrasive wheel",
     "grinding wheel"
   ],
-
   "ppe": [
     "ppe",
     "helmet",
