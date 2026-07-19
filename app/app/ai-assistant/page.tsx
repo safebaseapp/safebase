@@ -262,14 +262,43 @@ export default function AIAssistantPage() {
                     </h3>
 
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {sources.map((source) => (
-                        <span
-                          key={source}
-                          className="rounded-lg border border-blue-500/20 bg-blue-500/10 px-3 py-2 text-sm text-blue-300"
-                        >
-                          📄 {source}
-                        </span>
-                      ))}
+                      {sources.map((source) => {
+  const sourceNames: Record<string, { tr: string; en: string }> = {
+    "ppe.md": {
+      tr: "Kişisel Koruyucu Donanım",
+      en: "Personal Protective Equipment",
+    },
+    "grinding.md": {
+      tr: "Taşlama Çalışmaları",
+      en: "Grinding Operations",
+    },
+    "hot-work.md": {
+      tr: "Sıcak İş Çalışmaları",
+      en: "Hot Work",
+    },
+    "confined-space.md": {
+      tr: "Kapalı Alan Çalışmaları",
+      en: "Confined Space",
+    },
+    "loto.md": {
+      tr: "Kilitleme ve Etiketleme",
+      en: "Lockout Tagout",
+    },
+  };
+
+  const label =
+    sourceNames[source]?.[isTurkish ? "tr" : "en"] ||
+    source.replace(".md", "").replaceAll("-", " ");
+
+  return (
+    <span
+      key={source}
+      className="rounded-lg border border-blue-500/20 bg-blue-500/10 px-3 py-2 text-sm text-blue-300"
+    >
+      📄 {label}
+    </span>
+  );
+})}
                     </div>
                   </div>
                 )}
