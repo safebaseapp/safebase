@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 export default function AIAssistantPage() {
+  const pathname = usePathname();
+  const isTurkish = pathname.startsWith("/tr");
+
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [sources, setSources] = useState<string[]>([]);
@@ -15,7 +19,11 @@ export default function AIAssistantPage() {
     const cleanQuestion = question.trim();
 
     if (!cleanQuestion) {
-      setError("Please enter an HSE question.");
+      setError(
+        isTurkish
+          ? "Lütfen bir HSE sorusu girin."
+          : "Please enter an HSE question."
+      );
       return;
     }
 
@@ -32,6 +40,7 @@ export default function AIAssistantPage() {
         },
         body: JSON.stringify({
           question: cleanQuestion,
+          locale: isTurkish ? "tr" : "en",
         }),
       });
 
@@ -43,7 +52,9 @@ export default function AIAssistantPage() {
 
       setAnswer(
         data.answer ||
-          "This information is not available in the current SafeBase Knowledge Base."
+          (isTurkish
+            ? "Bu bilgi mevcut SafeBase Bilgi Tabanında bulunmuyor."
+            : "This information is not available in the current SafeBase Knowledge Base.")
       );
 
       setSources(Array.isArray(data.sources) ? data.sources : []);
@@ -51,7 +62,9 @@ export default function AIAssistantPage() {
       console.error(err);
 
       setError(
-        "SafeBase AI could not process your request. Please try again."
+        isTurkish
+          ? "SafeBase AI isteğinizi işleyemedi. Lütfen tekrar deneyin."
+          : "SafeBase AI could not process your request. Please try again."
       );
     } finally {
       setLoading(false);
@@ -62,16 +75,17 @@ export default function AIAssistantPage() {
     <main className="min-h-screen bg-slate-950 px-4 py-12 text-white sm:px-6 md:py-16">
       <div className="mx-auto max-w-4xl">
         <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-blue-400">
-          AI Safety Assistant
+          {isTurkish ? "Yapay Zekâ Güvenlik Asistanı" : "AI Safety Assistant"}
         </p>
 
         <h1 className="text-4xl font-bold md:text-5xl">
-          Ask SafeBase AI
+          {isTurkish ? "SafeBase AI'a Sor" : "Ask SafeBase AI"}
         </h1>
 
         <p className="mt-4 max-w-2xl text-slate-400">
-          Ask practical HSE questions and receive structured safety guidance
-          based on the SafeBase Knowledge Base.
+          {isTurkish
+            ? "Pratik HSE soruları sorun ve SafeBase Bilgi Tabanına dayalı yapılandırılmış güvenlik rehberliği alın."
+            : "Ask practical HSE questions and receive structured safety guidance based on the SafeBase Knowledge Base."}
         </p>
 
         <div className="mt-10 rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-xl shadow-black/20 sm:p-6">
@@ -79,7 +93,7 @@ export default function AIAssistantPage() {
             htmlFor="safety-question"
             className="mb-3 block text-sm font-semibold text-slate-300"
           >
-            Your safety question
+            {isTurkish ? "İş güvenliği sorunuz" : "Your safety question"}
           </label>
 
           <textarea
@@ -87,7 +101,11 @@ export default function AIAssistantPage() {
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             className="min-h-40 w-full resize-none rounded-xl border border-slate-700 bg-slate-950 p-4 text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-            placeholder="Example: What controls are required for grinding work?"
+            placeholder={
+              isTurkish
+                ? "Örnek: Taşlama çalışmasında hangi kontroller gereklidir?"
+                : "Example: What controls are required for grinding work?"
+            }
           />
 
           {error && (
@@ -102,7 +120,13 @@ export default function AIAssistantPage() {
             disabled={loading || !question.trim()}
             className="mt-4 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
           >
-            {loading ? "Analyzing..." : "Ask AI"}
+            {loading
+              ? isTurkish
+                ? "Analiz ediliyor..."
+                : "Analyzing..."
+              : isTurkish
+                ? "AI'a Sor"
+                : "Ask AI"}
           </button>
         </div>
 
@@ -114,11 +138,13 @@ export default function AIAssistantPage() {
 
             <div>
               <h2 className="text-xl font-semibold">
-                AI Response
+                {isTurkish ? "AI Yanıtı" : "AI Response"}
               </h2>
 
               <p className="text-sm text-slate-500">
-                SafeBase Knowledge Guidance
+                {isTurkish
+                  ? "SafeBase Bilgi Rehberliği"
+                  : "SafeBase Knowledge Guidance"}
               </p>
             </div>
           </div>
@@ -127,17 +153,19 @@ export default function AIAssistantPage() {
             {loading ? (
               <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-5">
                 <div className="flex items-center gap-3 text-blue-300">
-                  <span className="animate-pulse text-xl">
-                    🤖
-                  </span>
+                  <span className="animate-pulse text-xl">🤖</span>
 
                   <div>
                     <p className="font-semibold">
-                      SafeBase AI is analyzing your question...
+                      {isTurkish
+                        ? "SafeBase AI sorunuzu analiz ediyor..."
+                        : "SafeBase AI is analyzing your question..."}
                     </p>
 
                     <p className="mt-1 text-sm text-slate-400">
-                      Reviewing relevant safety guidance and standards.
+                      {isTurkish
+                        ? "İlgili iş güvenliği rehberleri ve standartları inceleniyor."
+                        : "Reviewing relevant safety guidance and standards."}
                     </p>
                   </div>
                 </div>
@@ -173,9 +201,7 @@ export default function AIAssistantPage() {
                     ),
 
                     ul: ({ children }) => (
-                      <ul className="mb-6 space-y-3">
-                        {children}
-                      </ul>
+                      <ul className="mb-6 space-y-3">{children}</ul>
                     ),
 
                     ol: ({ children }) => (
@@ -223,9 +249,7 @@ export default function AIAssistantPage() {
                       </code>
                     ),
 
-                    hr: () => (
-                      <hr className="my-7 border-slate-700" />
-                    ),
+                    hr: () => <hr className="my-7 border-slate-700" />,
                   }}
                 >
                   {answer}
@@ -234,7 +258,7 @@ export default function AIAssistantPage() {
                 {sources.length > 0 && (
                   <div className="mt-8 rounded-xl border border-slate-700 bg-slate-950/50 p-5">
                     <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-slate-400">
-                      📚 Knowledge Sources
+                      📚 {isTurkish ? "Bilgi Kaynakları" : "Knowledge Sources"}
                     </h3>
 
                     <div className="mt-4 flex flex-wrap gap-2">
@@ -252,17 +276,18 @@ export default function AIAssistantPage() {
               </>
             ) : (
               <div className="rounded-xl border border-dashed border-slate-700 bg-slate-950/40 p-6 text-center">
-                <div className="text-3xl">
-                  🦺
-                </div>
+                <div className="text-3xl">🦺</div>
 
                 <p className="mt-3 font-medium text-slate-300">
-                  Your answer will appear here.
+                  {isTurkish
+                    ? "Yanıtınız burada görünecek."
+                    : "Your answer will appear here."}
                 </p>
 
                 <p className="mt-1 text-sm text-slate-500">
-                  Ask about hot work, confined spaces, LOTO, PPE, or other HSE
-                  topics.
+                  {isTurkish
+                    ? "Sıcak iş, kapalı alan, LOTO, KKD veya diğer HSE konuları hakkında soru sorun."
+                    : "Ask about hot work, confined spaces, LOTO, PPE, or other HSE topics."}
                 </p>
               </div>
             )}
