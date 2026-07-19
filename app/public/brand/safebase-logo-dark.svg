@@ -1,0 +1,63 @@
+<svg
+  width="420"
+  height="96"
+  viewBox="0 0 420 96"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-labelledby="title description"
+>
+  <title id="title">SafeBase</title>
+  <desc id="description">SafeBase dark background logo</desc>
+
+  <g transform="translate(4 4)">
+    <path
+      d="M44 2L80 17V43C80 65 65.6 81.4 44 88C22.4 81.4 8 65 8 43V17L44 2Z"
+      fill="#FFFFFF"
+    />
+
+    <path
+      d="M44 10L72 22V43C72 60.1 61.2 72.9 44 79C26.8 72.9 16 60.1 16 43V22L44 10Z"
+      fill="#2563EB"
+    />
+
+    <path
+      d="M27 43L39 55L63 29"
+      stroke="#FFFFFF"
+      stroke-width="9"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <path
+      d="M39 55L63 29"
+      stroke="#22C55E"
+      stroke-width="7"
+      stroke-linecap="round"
+    />
+  </g>
+
+  <text
+    x="105"
+    y="57"
+    fill="#FFFFFF"
+    font-family="Inter, Arial, sans-serif"
+    font-size="46"
+    font-weight="800"
+    letter-spacing="-1.5"
+  >
+    SAFE<tspan fill="#3B82F6">BASE</tspan>
+  </text>
+
+  <text
+    x="108"
+    y="79"
+    fill="#22C55E"
+    font-family="Inter, Arial, sans-serif"
+    font-size="13"
+    font-weight="700"
+    letter-spacing="3.1"
+  >
+    SAFETY WITHOUT BORDERS
+  </text>
+</svg>

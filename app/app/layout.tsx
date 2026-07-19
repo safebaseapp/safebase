@@ -1,5 +1,5 @@
-import type {Metadata} from "next";
-import {Geist, Geist_Mono} from "next/font/google";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,8 +13,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SafeBase",
-  description: "Free safety tools and resources for HSE professionals.",
+  title: {
+    default: "SafeBase",
+    template: "%s | SafeBase",
+  },
+  description:
+    "Global HSE platform with safety calculators, AI assistant, OSHA knowledge, templates and inspection checklists.",
+  keywords: [
+    "HSE",
+    "Safety",
+    "OSHA",
+    "Risk Matrix",
+    "TRIR",
+    "LTIFR",
+    "PPE",
+    "Confined Space",
+    "Hot Work",
+    "LOTO",
+    "SafeBase",
+  ],
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -27,7 +47,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased bg-slate-950 text-white">
+        {children}
+      </body>
     </html>
   );
 }
