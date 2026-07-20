@@ -70,6 +70,23 @@ const SparkIcon = () => (
   </svg>
 );
 
+const CheckIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+    className="h-5 w-5"
+  >
+    <path
+      d="m5 12.5 4.2 4.2L19 7"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export default async function LocalizedHomePage({ params }: Props) {
   const { locale } = await params;
 
@@ -108,7 +125,7 @@ export default async function LocalizedHomePage({ params }: Props) {
 
     toolsLabel: isTurkish ? "Profesyonel Araçlar" : "Professional Tools",
 
-    knowledgeLabel: isTurkish ? "Güvenlik Bilgileri" : "Safety Knowledge",
+    knowledgeLabel: isTurkish ? "Bilgi Konuları" : "Knowledge Topics",
 
     aiLabel: isTurkish ? "Yapay Zekâ Asistanı" : "AI Assistant",
 
@@ -125,7 +142,101 @@ export default async function LocalizedHomePage({ params }: Props) {
     trustedText: isTurkish
       ? "Tek platform. Daha güvenli işyerleri."
       : "One platform. Safer workplaces.",
+
+    whyEyebrow: isTurkish ? "Neden SafeBase?" : "Why SafeBase?",
+
+    whyTitle: isTurkish
+      ? "Günlük HSE çalışmalarını daha hızlı ve daha kolay yönet"
+      : "Make everyday HSE work faster and easier",
+
+    whyDescription: isTurkish
+      ? "SafeBase, sahada ve ofiste ihtiyaç duyulan temel HSE araçlarını tek ve sade bir platformda bir araya getirir."
+      : "SafeBase brings essential HSE tools for field and office work together in one focused platform.",
+
+    statsEyebrow: isTurkish ? "SafeBase Rakamlarla" : "SafeBase in Numbers",
+
+    statsTitle: isTurkish
+      ? "Büyümeye hazır sağlam bir temel"
+      : "A strong foundation built to grow",
+
+    audienceEyebrow: isTurkish ? "Kimler İçin?" : "Built For",
+
+    audienceTitle: isTurkish
+      ? "Farklı sektörlerdeki güvenlik profesyonelleri"
+      : "Safety professionals across multiple industries",
   };
+
+  const advantages = [
+    {
+      icon: "🌍",
+      title: isTurkish ? "Global Yaklaşım" : "Global Approach",
+      description: isTurkish
+        ? "İngilizce ve Türkçe destekle farklı ülkelerdeki HSE profesyonelleri için tasarlandı."
+        : "Designed for HSE professionals across countries with English and Turkish support.",
+    },
+    {
+      icon: "🤖",
+      title: isTurkish ? "Kaynaklı AI Rehberliği" : "Source-Aware AI Guidance",
+      description: isTurkish
+        ? "SafeBase AI, mevcut bilgi tabanındaki HSE kaynaklarını kullanarak pratik yanıtlar üretir."
+        : "SafeBase AI uses the available HSE knowledge base to provide practical guidance.",
+    },
+    {
+      icon: "🧮",
+      title: isTurkish ? "Profesyonel Hesaplayıcılar" : "Professional Calculators",
+      description: isTurkish
+        ? "Temel HSE performans göstergelerini hızlı, kolay ve anlaşılır şekilde hesapla."
+        : "Calculate essential HSE performance indicators quickly and clearly.",
+    },
+    {
+      icon: "📚",
+      title: isTurkish ? "Tek Merkezde Bilgi" : "Knowledge in One Place",
+      description: isTurkish
+        ? "Araçlara, güvenlik bilgilerine ve kullanıma hazır kaynaklara tek platformdan ulaş."
+        : "Access tools, safety knowledge and ready-to-use resources from one platform.",
+    },
+  ];
+
+  const statistics = [
+    {
+      value: "4+",
+      label: isTurkish ? "Aktif Hesaplayıcı" : "Active Calculators",
+    },
+    {
+      value: "5+",
+      label: isTurkish ? "Bilgi Konusu" : "Knowledge Topics",
+    },
+    {
+      value: "2",
+      label: isTurkish ? "Desteklenen Dil" : "Supported Languages",
+    },
+    {
+      value: "AI",
+      label: isTurkish ? "HSE Asistanı" : "HSE Assistant",
+    },
+  ];
+
+  const audiences = isTurkish
+    ? [
+        "HSE Uzmanları",
+        "İş Güvenliği Mühendisleri",
+        "Saha Süpervizörleri",
+        "İnşaat Projeleri",
+        "Petrol ve Gaz",
+        "Üretim Tesisleri",
+        "Kimya Tesisleri",
+        "Bakım Ekipleri",
+      ]
+    : [
+        "HSE Officers",
+        "Safety Engineers",
+        "Site Supervisors",
+        "Construction Projects",
+        "Oil & Gas",
+        "Manufacturing",
+        "Chemical Plants",
+        "Maintenance Teams",
+      ];
 
   return (
     <main className="min-h-screen overflow-hidden bg-slate-950 text-white">
@@ -247,6 +358,35 @@ export default async function LocalizedHomePage({ params }: Props) {
                     ”
                   </div>
 
+                  <div className="mt-5 space-y-2 rounded-xl border border-emerald-400/10 bg-emerald-400/[0.04] p-4">
+                    <div className="flex items-center gap-2 text-sm font-semibold text-slate-300">
+                      <span className="text-emerald-400">
+                        <CheckIcon />
+                      </span>
+                      {isTurkish
+                        ? "SafeBase bilgi tabanı"
+                        : "SafeBase knowledge base"}
+                    </div>
+
+                    <div className="flex items-center gap-2 text-sm font-semibold text-slate-300">
+                      <span className="text-emerald-400">
+                        <CheckIcon />
+                      </span>
+                      {isTurkish
+                        ? "Kullanılan kaynakları gösterir"
+                        : "Displays the sources used"}
+                    </div>
+
+                    <div className="flex items-center gap-2 text-sm font-semibold text-slate-300">
+                      <span className="text-emerald-400">
+                        <CheckIcon />
+                      </span>
+                      {isTurkish
+                        ? "Pratik HSE rehberliği"
+                        : "Practical HSE guidance"}
+                    </div>
+                  </div>
+
                   <Link
                     href={`/${locale}/ai-assistant`}
                     className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3.5 font-black text-white transition hover:bg-blue-500"
@@ -279,6 +419,102 @@ export default async function LocalizedHomePage({ params }: Props) {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-b border-white/10 bg-slate-950 py-24">
+        <div className="absolute left-[-180px] top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-blue-600/10 blur-[120px]" />
+
+        <div className="absolute right-[-160px] top-[-100px] h-[420px] w-[420px] rounded-full bg-emerald-500/10 blur-[120px]" />
+
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-emerald-400">
+              {content.whyEyebrow}
+            </p>
+
+            <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] text-white sm:text-5xl">
+              {content.whyTitle}
+            </h2>
+
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-400">
+              {content.whyDescription}
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {advantages.map((item) => (
+              <article
+                key={item.title}
+                className="group rounded-[26px] border border-white/10 bg-white/[0.045] p-6 transition duration-300 hover:-translate-y-2 hover:border-blue-400/30 hover:bg-white/[0.07]"
+              >
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-3xl shadow-lg shadow-black/20">
+                  {item.icon}
+                </div>
+
+                <h3 className="mt-6 text-xl font-black text-white">
+                  {item.title}
+                </h3>
+
+                <p className="mt-3 leading-7 text-slate-400">
+                  {item.description}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-20">
+            <div className="text-center">
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-blue-400">
+                {content.statsEyebrow}
+              </p>
+
+              <h2 className="mt-4 text-3xl font-black tracking-[-0.03em] text-white sm:text-4xl">
+                {content.statsTitle}
+              </h2>
+            </div>
+
+            <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+              {statistics.map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-[24px] border border-white/10 bg-white/[0.04] px-5 py-7 text-center shadow-xl shadow-black/10"
+                >
+                  <p className="text-4xl font-black tracking-[-0.04em] text-white sm:text-5xl">
+                    {item.value}
+                  </p>
+
+                  <p className="mt-3 text-sm font-bold text-slate-400 sm:text-base">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-20 rounded-[32px] border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.025] p-7 shadow-2xl shadow-black/20 sm:p-10">
+            <div className="text-center">
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-emerald-400">
+                {content.audienceEyebrow}
+              </p>
+
+              <h2 className="mt-4 text-3xl font-black tracking-[-0.03em] text-white sm:text-4xl">
+                {content.audienceTitle}
+              </h2>
+            </div>
+
+            <div className="mx-auto mt-9 flex max-w-5xl flex-wrap justify-center gap-3">
+              {audiences.map((audience) => (
+                <span
+                  key={audience}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-5 py-3 text-sm font-bold text-slate-300 transition hover:border-emerald-400/30 hover:bg-emerald-400/[0.08] hover:text-white"
+                >
+                  <span className="text-emerald-400">✓</span>
+                  {audience}
+                </span>
+              ))}
             </div>
           </div>
         </div>
