@@ -158,20 +158,86 @@ export default function AIAssistantPage() {
         throw new Error("SafeBase AI request failed.");
       }
 
-      const data = await response.json();
+      if (!response.body) {
+        throw new Error("SafeBase AI response stream is unavailable.");
+      }
 
-      const assistantMessage: Message = {
-        id: createMessageId(),
-        role: "assistant",
-        content:
-          data.answer ||
-          (isTurkish
-            ? "Bu bilgi mevcut SafeBase Bilgi Tabanında bulunmuyor."
-            : "This information is not available in the current SafeBase Knowledge Base."),
-        sources: Array.isArray(data.sources) ? data.sources : [],
-      };
+      const sourcesHeader =
+        response.headers.get("X-SafeBase-Sources");
 
-      setMessages((current) => [...current, assistantMessage]);
+      let responseSources: string[] = [];
+
+      if (sourcesHeader) {
+        try {
+          const parsedSources = JSON.parse(
+            decodeURIComponent(sourcesHeader)
+          );
+
+          responseSources = Array.isArray(parsedSources)
+            ? parsedSources
+            : [];
+        } catch {
+          responseSources = [];
+        }
+      }
+
+      const assistantMessageId = createMessageId();
+
+      setMessages((current) => [
+        ...current,
+        {
+          id: assistantMessageId,
+          role: "assistant",
+          content: "",
+          sources: responseSources,
+        },
+      ]);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let streamedAnswer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        streamedAnswer += decoder.decode(value, {
+          stream: true,
+        });
+
+        setMessages((current) =>
+          current.map((message) =>
+            message.id === assistantMessageId
+              ? {
+                  ...message,
+                  content: streamedAnswer,
+                }
+              : message
+          )
+        );
+      }
+
+      streamedAnswer += decoder.decode();
+
+      if (!streamedAnswer.trim()) {
+        const fallbackAnswer = isTurkish
+          ? "Bu bilgi mevcut SafeBase Bilgi Tabanında bulunmuyor."
+          : "This information is not available in the current SafeBase Knowledge Base.";
+
+        setMessages((current) =>
+          current.map((message) =>
+            message.id === assistantMessageId
+              ? {
+                  ...message,
+                  content: fallbackAnswer,
+                }
+              : message
+          )
+        );
+      }
     } catch (requestError) {
       console.error(requestError);
 

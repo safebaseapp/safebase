@@ -181,6 +181,7 @@ Language rules:
         body: JSON.stringify({
           model: "openai/gpt-oss-20b:free",
           temperature: 0,
+          stream: true,
           messages: [
             {
               role: "system",
@@ -236,21 +237,94 @@ General rules:
       );
     }
 
-    const data =
-      (await response.json()) as OpenRouterResponse;
+    if (!response.body) {
+      return Response.json(
+        {
+          answer:
+            locale === "tr"
+              ? "SafeBase AI şu anda yanıt oluşturamadı. Lütfen tekrar deneyin."
+              : "SafeBase AI could not generate a response. Please try again.",
+          sources: filesToUse,
+        },
+        { status: 502 }
+      );
+    }
 
-    const fallbackAnswer =
-      locale === "tr"
-        ? "Bu bilgi mevcut SafeBase Bilgi Tabanında bulunmuyor."
-        : "This information is not available in the current SafeBase Knowledge Base.";
+    const upstreamReader = response.body.getReader();
+    const decoder = new TextDecoder();
+    const encoder = new TextEncoder();
 
-    const answer =
-      data.choices?.[0]?.message?.content?.trim() ||
-      fallbackAnswer;
+    const outputStream = new ReadableStream({
+      async start(controller) {
+        let buffer = "";
 
-    return Response.json({
-      answer,
-      sources: filesToUse,
+        try {
+          while (true) {
+            const { done, value } = await upstreamReader.read();
+
+            if (done) {
+              break;
+            }
+
+            buffer += decoder.decode(value, { stream: true });
+
+            const lines = buffer.split("\n");
+            buffer = lines.pop() ?? "";
+
+            for (const line of lines) {
+              const trimmedLine = line.trim();
+
+              if (!trimmedLine.startsWith("data:")) {
+                continue;
+              }
+
+              const jsonText = trimmedLine.slice(5).trim();
+
+              if (!jsonText || jsonText === "[DONE]") {
+                continue;
+              }
+
+              try {
+                const event = JSON.parse(jsonText) as {
+                  choices?: Array<{
+                    delta?: {
+                      content?: string;
+                    };
+                  }>;
+                };
+
+                const content =
+                  event.choices?.[0]?.delta?.content;
+
+                if (typeof content === "string" && content) {
+                  controller.enqueue(encoder.encode(content));
+                }
+              } catch {
+                // Eksik SSE parçalarını sessizce atla.
+              }
+            }
+          }
+
+          controller.close();
+        } catch (streamError) {
+          console.error("SafeBase streaming error:", streamError);
+          controller.error(streamError);
+        } finally {
+          upstreamReader.releaseLock();
+        }
+      },
+    });
+
+    return new Response(outputStream, {
+      status: 200,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-cache, no-transform",
+        "X-Content-Type-Options": "nosniff",
+        "X-SafeBase-Sources": encodeURIComponent(
+          JSON.stringify(filesToUse)
+        ),
+      },
     });
   } catch (error) {
     console.error("SafeBase AI API error:", error);
