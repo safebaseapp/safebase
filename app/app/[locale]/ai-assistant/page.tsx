@@ -147,6 +147,10 @@ export default function AIAssistantPage() {
         body: JSON.stringify({
           question: cleanQuestion,
           locale,
+          messages: [...messages, userMessage].map((message) => ({
+            role: message.role,
+            content: message.content,
+          })),
         }),
       });
 
