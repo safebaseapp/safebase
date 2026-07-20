@@ -32,7 +32,7 @@ export default function LocalizedNavbar({locale}: Props) {
           </Link>
 
           <Link
-            href="/ai-assistant"
+            href={`/${locale}/ai-assistant`}
             className="font-semibold text-blue-400 transition hover:text-blue-300"
           >
             🤖 {isTurkish ? "Yapay Zekâ Asistanı" : "AI Assistant"}

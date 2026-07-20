@@ -20,7 +20,7 @@ export default function Navbar() {
     Tools
   </a>
 
-  <a href="/ai-assistant" className="font-semibold text-blue-400 hover:text-blue-300 transition">
+  <a href="/en/ai-assistant" className="font-semibold text-blue-400 hover:text-blue-300 transition">
     🤖 AI Assistant
   </a>
 
