@@ -32,37 +32,31 @@ export default function LocalizedNavbar({locale}: Props) {
           </Link>
 
           <Link
-            href={`/${locale}/ai-assistant`}
+            href="/ai-assistant"
             className="font-semibold text-blue-400 transition hover:text-blue-300"
           >
             🤖 {isTurkish ? "Yapay Zekâ Asistanı" : "AI Assistant"}
           </Link>
 
           <Link
-            href="/#categories"
+            href="/knowledge-base"
             className="transition hover:text-blue-400"
           >
-            {isTurkish ? "Kategoriler" : "Categories"}
+            📚 {isTurkish ? "Bilgi Merkezi" : "Knowledge Base"}
           </Link>
 
           <Link
-            href="/#resources"
+            href="/downloads"
             className="transition hover:text-blue-400"
           >
-            {isTurkish ? "Kaynaklar" : "Resources"}
+            ⬇️ {isTurkish ? "İndirmeler" : "Downloads"}
           </Link>
 
-          <Link
-            href="/#about"
-            className="transition hover:text-blue-400"
-          >
+          <Link href="/#about" className="transition hover:text-blue-400">
             {isTurkish ? "Hakkımızda" : "About"}
           </Link>
 
-          <Link
-            href="/#contact"
-            className="transition hover:text-blue-400"
-          >
+          <Link href="/#contact" className="transition hover:text-blue-400">
             {isTurkish ? "İletişim" : "Contact"}
           </Link>
         </div>
@@ -71,7 +65,7 @@ export default function LocalizedNavbar({locale}: Props) {
           <LanguageSwitcher locale={locale} />
 
           <Link
-            href="/#categories"
+            href="/tools"
             className="hidden rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700 sm:inline-flex"
           >
             {isTurkish ? "Keşfet" : "Explore"}
