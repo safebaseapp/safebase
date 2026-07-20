@@ -1,7 +1,7 @@
+import type {Metadata} from "next";
 import {hasLocale, NextIntlClientProvider} from "next-intl";
 import {setRequestLocale} from "next-intl/server";
 import {notFound} from "next/navigation";
-import type {Metadata} from "next";
 import {routing} from "../../i18n/routing";
 import LocalizedNavbar from "./components/LocalizedNavbar";
 
