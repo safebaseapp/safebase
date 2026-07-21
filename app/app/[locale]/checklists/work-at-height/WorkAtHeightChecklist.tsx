@@ -317,6 +317,14 @@ const labels = {
     disclaimer:
       "This checklist supports field inspections but does not replace applicable legislation, permits, risk assessments, manufacturer instructions or site procedures.",
     generated: "Generated with SafeBase",
+    liveStatus: "Live safety status",
+    safe: "SAFE",
+    warning: "WARNING",
+    unsafe: "UNSAFE",
+    safeText: "No critical failures have been identified.",
+    warningText: "The inspection is incomplete. Complete all applicable items.",
+    unsafeText:
+      "A critical control has failed. Work must not proceed until corrected.",
   },
   tr: {
     eyebrow: "Etkileşimli saha denetimi",
@@ -359,6 +367,15 @@ const labels = {
     disclaimer:
       "Bu kontrol listesi saha denetimini destekler; geçerli mevzuatın, izinlerin, risk değerlendirmelerinin, üretici talimatlarının veya saha prosedürlerinin yerine geçmez.",
     generated: "SafeBase ile oluşturuldu",
+    liveStatus: "Canlı güvenlik durumu",
+    safe: "GÜVENLİ",
+    warning: "UYARI",
+    unsafe: "GÜVENSİZ",
+    safeText: "Kritik bir uygunsuzluk tespit edilmedi.",
+    warningText:
+      "Denetim tamamlanmadı. Uygulanabilir tüm maddeleri cevaplayın.",
+    unsafeText:
+      "Kritik bir kontrol başarısız. Uygunsuzluk giderilmeden çalışma başlamamalıdır.",
   },
 };
 
@@ -423,6 +440,42 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
     t.passedText,
     t.pending,
     t.pendingText,
+  ]);
+
+  const liveSafetyStatus = useMemo(() => {
+    if (criticalFailures.length > 0) {
+      return {
+        label: t.unsafe,
+        text: t.unsafeText,
+        className: "border-red-500/40 bg-red-500/10 text-red-200",
+        indicatorClassName: "bg-red-400",
+      };
+    }
+
+    if (!isComplete) {
+      return {
+        label: t.warning,
+        text: t.warningText,
+        className: "border-amber-500/40 bg-amber-500/10 text-amber-200",
+        indicatorClassName: "bg-amber-400",
+      };
+    }
+
+    return {
+      label: t.safe,
+      text: t.safeText,
+      className: "border-emerald-500/40 bg-emerald-500/10 text-emerald-200",
+      indicatorClassName: "bg-emerald-400",
+    };
+  }, [
+    criticalFailures.length,
+    isComplete,
+    t.safe,
+    t.safeText,
+    t.unsafe,
+    t.unsafeText,
+    t.warning,
+    t.warningText,
   ]);
 
   const sections = Array.from(new Set(items.map((item) => item.section)));
@@ -492,6 +545,30 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
               className="h-full rounded-full bg-blue-500 transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
+          </div>
+
+          <div
+            className={`mt-6 flex flex-col gap-4 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between ${liveSafetyStatus.className} print:border-slate-300 print:bg-white print:text-black`}
+          >
+            <div className="flex items-center gap-3">
+              <span
+                className={`h-3 w-3 shrink-0 rounded-full ${liveSafetyStatus.indicatorClassName}`}
+              />
+
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-75">
+                  {t.liveStatus}
+                </p>
+
+                <p className="mt-1 text-2xl font-bold">
+                  {liveSafetyStatus.label}
+                </p>
+              </div>
+            </div>
+
+            <p className="max-w-2xl text-sm leading-6">
+              {liveSafetyStatus.text}
+            </p>
           </div>
         </section>
 
