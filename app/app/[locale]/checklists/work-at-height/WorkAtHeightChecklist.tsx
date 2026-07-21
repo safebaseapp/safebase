@@ -123,6 +123,8 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
           action: "",
           responsible: "",
           targetDate: "",
+          priority: "medium",
+          status: "open",
         },
       }));
 
@@ -136,10 +138,10 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
     });
   }
 
-  function updateCorrectiveAction(
+  function updateCorrectiveAction<K extends keyof CorrectiveAction>(
     id: string,
-    field: keyof CorrectiveAction,
-    value: string,
+    field: K,
+    value: CorrectiveAction[K],
   ) {
     setCorrectiveActions((current) => ({
       ...current,
@@ -147,6 +149,8 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
         action: current[id]?.action ?? "",
         responsible: current[id]?.responsible ?? "",
         targetDate: current[id]?.targetDate ?? "",
+        priority: current[id]?.priority ?? "medium",
+        status: current[id]?.status ?? "open",
         [field]: value,
       },
     }));
@@ -439,6 +443,69 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
                                     }
                                     className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
                                   />
+                                </label>
+
+                                <label className="block">
+                                  <span className="mb-2 block text-sm font-medium text-slate-300 print:text-slate-700">
+                                    {t.priority}
+                                  </span>
+
+                                  <select
+                                    value={
+                                      correctiveActions[item.id]?.priority ??
+                                      "medium"
+                                    }
+                                    onChange={(event) =>
+                                      updateCorrectiveAction(
+                                        item.id,
+                                        "priority",
+                                        event.target
+                                          .value as CorrectiveAction["priority"],
+                                      )
+                                    }
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
+                                  >
+                                    <option value="low">{t.priorityLow}</option>
+                                    <option value="medium">
+                                      {t.priorityMedium}
+                                    </option>
+                                    <option value="high">
+                                      {t.priorityHigh}
+                                    </option>
+                                    <option value="critical">
+                                      {t.priorityCritical}
+                                    </option>
+                                  </select>
+                                </label>
+
+                                <label className="block">
+                                  <span className="mb-2 block text-sm font-medium text-slate-300 print:text-slate-700">
+                                    {t.findingStatus}
+                                  </span>
+
+                                  <select
+                                    value={
+                                      correctiveActions[item.id]?.status ??
+                                      "open"
+                                    }
+                                    onChange={(event) =>
+                                      updateCorrectiveAction(
+                                        item.id,
+                                        "status",
+                                        event.target
+                                          .value as CorrectiveAction["status"],
+                                      )
+                                    }
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
+                                  >
+                                    <option value="open">{t.statusOpen}</option>
+                                    <option value="progress">
+                                      {t.statusProgress}
+                                    </option>
+                                    <option value="closed">
+                                      {t.statusClosed}
+                                    </option>
+                                  </select>
                                 </label>
                               </div>
                             </div>
