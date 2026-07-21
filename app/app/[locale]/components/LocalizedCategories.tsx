@@ -10,9 +10,7 @@ export default function LocalizedCategories({ locale }: Props) {
   const categories = [
     {
       icon: "🧮",
-      title: isTurkish
-        ? "İş Güvenliği Hesaplayıcıları"
-        : "Safety Calculators",
+      title: isTurkish ? "İş Güvenliği Hesaplayıcıları" : "Safety Calculators",
       description: isTurkish
         ? "Risk matrisi, TRIR, LTIFR ve diğer pratik HSE hesaplamaları."
         : "Risk matrix, TRIR, LTIFR and other practical HSE calculations.",
@@ -23,15 +21,13 @@ export default function LocalizedCategories({ locale }: Props) {
     },
     {
       icon: "✅",
-      title: isTurkish
-        ? "Denetim Kontrol Listeleri"
-        : "Inspection Checklists",
+      title: isTurkish ? "Denetim Kontrol Listeleri" : "Inspection Checklists",
       description: isTurkish
         ? "Kritik saha faaliyetleri için yapılandırılmış denetim kontrol listeleri."
         : "Structured field inspection checklists for critical site activities.",
       href: "/checklists",
-      comingSoon: true,
-      badge: isTurkish ? "Geliştiriliyor" : "In Development",
+      comingSoon: false,
+      badge: isTurkish ? "Aktif" : "Available",
       accent: "emerald",
     },
     {
