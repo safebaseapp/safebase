@@ -14,7 +14,6 @@ const categories = [
     description:
       "Structured field inspection checklists for critical site activities.",
     href: "/checklists",
-    comingSoon: true,
   },
   {
     icon: "📄",
