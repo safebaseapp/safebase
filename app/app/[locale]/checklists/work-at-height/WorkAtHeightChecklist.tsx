@@ -6,6 +6,12 @@ import { useMemo, useState } from "react";
 type Locale = "tr" | "en";
 type Answer = "yes" | "no" | "na" | null;
 
+type CorrectiveAction = {
+  action: string;
+  responsible: string;
+  targetDate: string;
+};
+
 type ChecklistItem = {
   id: string;
   section: string;
@@ -317,6 +323,16 @@ const labels = {
     disclaimer:
       "This checklist supports field inspections but does not replace applicable legislation, permits, risk assessments, manufacturer instructions or site procedures.",
     generated: "Generated with SafeBase",
+    correctiveAction: "Corrective Action",
+    correctiveActionHelp:
+      "Describe the action required to eliminate or control this finding.",
+    actionRequired: "Required action",
+    actionPlaceholder:
+      "Describe the corrective action, temporary control or follow-up requirement...",
+    responsiblePerson: "Responsible person",
+    responsiblePlaceholder: "Name or responsible team",
+    targetDate: "Target date",
+    openFinding: "Open finding",
     liveStatus: "Live safety status",
     safe: "SAFE",
     warning: "WARNING",
@@ -367,6 +383,16 @@ const labels = {
     disclaimer:
       "Bu kontrol listesi saha denetimini destekler; geçerli mevzuatın, izinlerin, risk değerlendirmelerinin, üretici talimatlarının veya saha prosedürlerinin yerine geçmez.",
     generated: "SafeBase ile oluşturuldu",
+    correctiveAction: "Düzeltici Faaliyet",
+    correctiveActionHelp:
+      "Bu bulguyu ortadan kaldırmak veya kontrol altına almak için gerekli faaliyeti açıklayın.",
+    actionRequired: "Yapılması gereken faaliyet",
+    actionPlaceholder:
+      "Düzeltici faaliyeti, geçici önlemi veya takip gerekliliğini açıklayın...",
+    responsiblePerson: "Sorumlu kişi",
+    responsiblePlaceholder: "Kişi veya sorumlu ekip",
+    targetDate: "Hedef tarih",
+    openFinding: "Açık bulgu",
     liveStatus: "Canlı güvenlik durumu",
     safe: "GÜVENLİ",
     warning: "UYARI",
@@ -385,6 +411,9 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
 
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [comments, setComments] = useState("");
+  const [correctiveActions, setCorrectiveActions] = useState<
+    Record<string, CorrectiveAction>
+  >({});
 
   const answeredCount = items.filter(
     (item) => answers[item.id] !== null && answers[item.id] !== undefined,
@@ -485,11 +514,47 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
       ...current,
       [id]: answer,
     }));
+
+    if (answer === "no") {
+      setCorrectiveActions((current) => ({
+        ...current,
+        [id]: current[id] ?? {
+          action: "",
+          responsible: "",
+          targetDate: "",
+        },
+      }));
+
+      return;
+    }
+
+    setCorrectiveActions((current) => {
+      const next = { ...current };
+      delete next[id];
+      return next;
+    });
+  }
+
+  function updateCorrectiveAction(
+    id: string,
+    field: keyof CorrectiveAction,
+    value: string,
+  ) {
+    setCorrectiveActions((current) => ({
+      ...current,
+      [id]: {
+        action: current[id]?.action ?? "",
+        responsible: current[id]?.responsible ?? "",
+        targetDate: current[id]?.targetDate ?? "",
+        [field]: value,
+      },
+    }));
   }
 
   function resetInspection() {
     setAnswers({});
     setComments("");
+    setCorrectiveActions({});
   }
 
   return (
@@ -685,6 +750,99 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
                                   : "—"}
                           </p>
                         </div>
+
+                        {selected === "no" && (
+                          <div className="lg:col-span-2">
+                            <div className="rounded-2xl border border-red-500/30 bg-red-500/5 p-5 print:border-red-300 print:bg-white">
+                              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                                <div>
+                                  <div className="flex flex-wrap items-center gap-3">
+                                    <h3 className="font-bold text-red-200 print:text-red-700">
+                                      {t.correctiveAction}
+                                    </h3>
+
+                                    <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-200 print:border-red-300 print:bg-white print:text-red-700">
+                                      {t.openFinding}
+                                    </span>
+                                  </div>
+
+                                  <p className="mt-2 text-sm leading-6 text-slate-400 print:text-slate-700">
+                                    {t.correctiveActionHelp}
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div className="mt-5 grid gap-4 lg:grid-cols-2">
+                                <label className="block lg:col-span-2">
+                                  <span className="mb-2 block text-sm font-medium text-slate-300 print:text-slate-700">
+                                    {t.actionRequired}
+                                  </span>
+
+                                  <textarea
+                                    value={
+                                      correctiveActions[item.id]?.action ?? ""
+                                    }
+                                    onChange={(event) =>
+                                      updateCorrectiveAction(
+                                        item.id,
+                                        "action",
+                                        event.target.value,
+                                      )
+                                    }
+                                    placeholder={t.actionPlaceholder}
+                                    rows={3}
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
+                                  />
+                                </label>
+
+                                <label className="block">
+                                  <span className="mb-2 block text-sm font-medium text-slate-300 print:text-slate-700">
+                                    {t.responsiblePerson}
+                                  </span>
+
+                                  <input
+                                    type="text"
+                                    value={
+                                      correctiveActions[item.id]?.responsible ??
+                                      ""
+                                    }
+                                    onChange={(event) =>
+                                      updateCorrectiveAction(
+                                        item.id,
+                                        "responsible",
+                                        event.target.value,
+                                      )
+                                    }
+                                    placeholder={t.responsiblePlaceholder}
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
+                                  />
+                                </label>
+
+                                <label className="block">
+                                  <span className="mb-2 block text-sm font-medium text-slate-300 print:text-slate-700">
+                                    {t.targetDate}
+                                  </span>
+
+                                  <input
+                                    type="date"
+                                    value={
+                                      correctiveActions[item.id]?.targetDate ??
+                                      ""
+                                    }
+                                    onChange={(event) =>
+                                      updateCorrectiveAction(
+                                        item.id,
+                                        "targetDate",
+                                        event.target.value,
+                                      )
+                                    }
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
+                                  />
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
