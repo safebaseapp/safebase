@@ -73,7 +73,7 @@ export default async function LocalizedChecklistsPage({params}: Props) {
       standard: "OSHA 1926 Subpart L",
       duration: isTurkish ? "8–12 dakika" : "8–12 min",
       href: "/checklists/scaffolding",
-      available: false,
+      available: true,
     },
     {
       icon: "🕳️",
