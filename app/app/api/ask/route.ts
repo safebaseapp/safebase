@@ -12,14 +12,6 @@ type RequestBody = {
   messages?: unknown;
 };
 
-type OpenRouterResponse = {
-  choices?: Array<{
-    message?: {
-      content?: string;
-    };
-  }>;
-};
-
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as RequestBody;
@@ -36,7 +28,7 @@ export async function POST(req: Request) {
               typeof message === "object" &&
               message !== null &&
               "role" in message &&
-              "content" in message
+              "content" in message,
           )
           .map((message) => ({
             role:
@@ -44,9 +36,7 @@ export async function POST(req: Request) {
                 ? ("assistant" as const)
                 : ("user" as const),
             content:
-              typeof message.content === "string"
-                ? message.content.trim()
-                : "",
+              typeof message.content === "string" ? message.content.trim() : "",
           }))
           .filter((message) => message.content.length > 0)
           .slice(-10)
@@ -61,24 +51,18 @@ export async function POST(req: Request) {
               : "Please enter a valid HSE question.",
           sources: [],
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    const knowledgeFolder = path.join(
-      process.cwd(),
-      "app",
-      "knowledge"
-    );
+    const knowledgeFolder = path.join(process.cwd(), "app", "knowledge");
 
-    const aliasesPath = path.join(
-      knowledgeFolder,
-      "aliases.json"
-    );
+    const aliasesPath = path.join(knowledgeFolder, "aliases.json");
 
-    const aliases = JSON.parse(
-      fs.readFileSync(aliasesPath, "utf-8")
-    ) as Record<string, string[]>;
+    const aliases = JSON.parse(fs.readFileSync(aliasesPath, "utf-8")) as Record<
+      string,
+      string[]
+    >;
 
     const knowledgeFiles = fs
       .readdirSync(knowledgeFolder)
@@ -90,28 +74,23 @@ export async function POST(req: Request) {
       .join(" ")
       .toLowerCase();
 
-    const normalizedQuestion =
-      conversationSearchText || question.toLowerCase();
+    const normalizedQuestion = conversationSearchText || question.toLowerCase();
 
     const matchedTopics = Object.entries(aliases)
       .filter(([topic, keywords]) => {
         const searchTerms = [topic, ...keywords];
 
         return searchTerms.some((term) =>
-          normalizedQuestion.includes(term.toLowerCase())
+          normalizedQuestion.includes(term.toLowerCase()),
         );
       })
       .map(([topic]) => `${topic}.md`);
 
     const selectedFiles = knowledgeFiles.filter(
-      (file) =>
-        matchedTopics.includes(file) || file === "ppe.md"
+      (file) => matchedTopics.includes(file) || file === "ppe.md",
     );
 
-    const filesToUse =
-      selectedFiles.length > 0
-        ? selectedFiles
-        : ["ppe.md"];
+    const filesToUse = selectedFiles.length > 0 ? selectedFiles : ["ppe.md"];
 
     console.log("Question:", question);
     console.log("Locale:", locale);
@@ -119,12 +98,7 @@ export async function POST(req: Request) {
     console.log("Files To Use:", filesToUse);
 
     const knowledge = filesToUse
-      .map((file) =>
-        fs.readFileSync(
-          path.join(knowledgeFolder, file),
-          "utf-8"
-        )
-      )
+      .map((file) => fs.readFileSync(path.join(knowledgeFolder, file), "utf-8"))
       .join("\n\n");
 
     const languageInstruction =
@@ -213,17 +187,13 @@ General rules:
                 ]),
           ],
         }),
-      }
+      },
     );
 
     if (!response.ok) {
       const text = await response.text();
 
-      console.error(
-        "OpenRouter error:",
-        response.status,
-        text
-      );
+      console.error("OpenRouter error:", response.status, text);
 
       return Response.json(
         {
@@ -233,7 +203,7 @@ General rules:
               : "SafeBase AI could not generate a response. Please try again.",
           sources: filesToUse,
         },
-        { status: 502 }
+        { status: 502 },
       );
     }
 
@@ -246,7 +216,7 @@ General rules:
               : "SafeBase AI could not generate a response. Please try again.",
           sources: filesToUse,
         },
-        { status: 502 }
+        { status: 502 },
       );
     }
 
@@ -293,8 +263,7 @@ General rules:
                   }>;
                 };
 
-                const content =
-                  event.choices?.[0]?.delta?.content;
+                const content = event.choices?.[0]?.delta?.content;
 
                 if (typeof content === "string" && content) {
                   controller.enqueue(encoder.encode(content));
@@ -321,9 +290,7 @@ General rules:
         "Content-Type": "text/plain; charset=utf-8",
         "Cache-Control": "no-cache, no-transform",
         "X-Content-Type-Options": "nosniff",
-        "X-SafeBase-Sources": encodeURIComponent(
-          JSON.stringify(filesToUse)
-        ),
+        "X-SafeBase-Sources": encodeURIComponent(JSON.stringify(filesToUse)),
       },
     });
   } catch (error) {
@@ -331,11 +298,10 @@ General rules:
 
     return Response.json(
       {
-        answer:
-          "SafeBase AI could not process the request.",
+        answer: "SafeBase AI could not process the request.",
         sources: [],
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

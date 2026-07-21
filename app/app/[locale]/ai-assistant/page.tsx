@@ -2,13 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FormEvent,
-  KeyboardEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -86,8 +80,7 @@ export default function AIAssistantPage() {
     : [
         {
           label: "Confined Space",
-          question:
-            "What checks are required before confined-space entry?",
+          question: "What checks are required before confined-space entry?",
         },
         {
           label: "Hot Work",
@@ -162,24 +155,21 @@ export default function AIAssistantPage() {
         throw new Error("SafeBase AI response stream is unavailable.");
       }
 
-      const sourcesHeader =
-        response.headers.get("X-SafeBase-Sources");
+      const sourcesHeader = response.headers.get("X-SafeBase-Sources");
 
-      let responseSources: string[] = [];
-
-      if (sourcesHeader) {
-        try {
-          const parsedSources = JSON.parse(
-            decodeURIComponent(sourcesHeader)
-          );
-
-          responseSources = Array.isArray(parsedSources)
-            ? parsedSources
-            : [];
-        } catch {
-          responseSources = [];
+      const responseSources: string[] = (() => {
+        if (!sourcesHeader) {
+          return [];
         }
-      }
+
+        try {
+          const parsedSources = JSON.parse(decodeURIComponent(sourcesHeader));
+
+          return Array.isArray(parsedSources) ? parsedSources : [];
+        } catch {
+          return [];
+        }
+      })();
 
       const assistantMessageId = createMessageId();
 
@@ -195,7 +185,6 @@ export default function AIAssistantPage() {
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
-      let streamedAnswer = "";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -204,40 +193,63 @@ export default function AIAssistantPage() {
           break;
         }
 
-        streamedAnswer += decoder.decode(value, {
+        const decodedChunk = decoder.decode(value, {
           stream: true,
         });
+
+        if (!decodedChunk) {
+          continue;
+        }
 
         setMessages((current) =>
           current.map((message) =>
             message.id === assistantMessageId
               ? {
                   ...message,
-                  content: streamedAnswer,
+                  content: message.content + decodedChunk,
                 }
-              : message
-          )
+              : message,
+          ),
         );
       }
 
-      streamedAnswer += decoder.decode();
+      const finalChunk = decoder.decode();
 
-      if (!streamedAnswer.trim()) {
+      if (finalChunk) {
+        setMessages((current) =>
+          current.map((message) =>
+            message.id === assistantMessageId
+              ? {
+                  ...message,
+                  content: message.content + finalChunk,
+                }
+              : message,
+          ),
+        );
+      }
+
+      setMessages((current) => {
+        const assistantMessage = current.find(
+          (message) => message.id === assistantMessageId,
+        );
+
+        if (assistantMessage?.content.trim()) {
+          return current;
+        }
+
         const fallbackAnswer = isTurkish
           ? "Bu bilgi mevcut SafeBase Bilgi Tabanında bulunmuyor."
           : "This information is not available in the current SafeBase Knowledge Base.";
 
-        setMessages((current) =>
-          current.map((message) =>
-            message.id === assistantMessageId
-              ? {
-                  ...message,
-                  content: fallbackAnswer,
-                }
-              : message
-          )
+        return current.map((message) =>
+          message.id === assistantMessageId
+            ? {
+                ...message,
+                content: fallbackAnswer,
+              }
+            : message,
         );
-      }
+      });
     } catch (requestError) {
       console.error(requestError);
 
@@ -585,9 +597,7 @@ export default function AIAssistantPage() {
                                   {children}
                                 </code>
                               ),
-                              hr: () => (
-                                <hr className="my-7 border-white/10" />
-                              ),
+                              hr: () => <hr className="my-7 border-white/10" />,
                             }}
                           >
                             {message.content}

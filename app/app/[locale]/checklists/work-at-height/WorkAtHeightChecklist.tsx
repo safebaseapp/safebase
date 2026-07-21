@@ -26,6 +26,21 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
     (item) => answers[item.id] === "yes",
   ).length;
 
+  const noCount = items.filter((item) => answers[item.id] === "no").length;
+
+  const naCount = items.filter((item) => answers[item.id] === "na").length;
+
+  const findings = items.filter((item) => answers[item.id] === "no");
+
+  const openActionCount = findings.filter(
+    (item) => correctiveActions[item.id]?.status !== "closed",
+  ).length;
+
+  const highPriorityCount = findings.filter((item) => {
+    const priority = correctiveActions[item.id]?.priority;
+    return priority === "high" || priority === "critical";
+  }).length;
+
   const criticalFailures = items.filter(
     (item) => item.critical && answers[item.id] === "no",
   );
@@ -162,6 +177,51 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
     setCorrectiveActions({});
   }
 
+  function getPriorityLabel(
+    priority: CorrectiveAction["priority"] | undefined,
+  ) {
+    if (priority === "low") return t.priorityLow;
+    if (priority === "high") return t.priorityHigh;
+    if (priority === "critical") return t.priorityCritical;
+    return t.priorityMedium;
+  }
+
+  function getPriorityClass(
+    priority: CorrectiveAction["priority"] | undefined,
+  ) {
+    if (priority === "low") {
+      return "border-emerald-500/30 bg-emerald-500/10 text-emerald-200";
+    }
+
+    if (priority === "high") {
+      return "border-orange-500/30 bg-orange-500/10 text-orange-200";
+    }
+
+    if (priority === "critical") {
+      return "border-red-500/30 bg-red-500/10 text-red-200";
+    }
+
+    return "border-amber-500/30 bg-amber-500/10 text-amber-200";
+  }
+
+  function getStatusLabel(status: CorrectiveAction["status"] | undefined) {
+    if (status === "progress") return t.statusProgress;
+    if (status === "closed") return t.statusClosed;
+    return t.statusOpen;
+  }
+
+  function getStatusClass(status: CorrectiveAction["status"] | undefined) {
+    if (status === "progress") {
+      return "border-amber-500/30 bg-amber-500/10 text-amber-200";
+    }
+
+    if (status === "closed") {
+      return "border-emerald-500/30 bg-emerald-500/10 text-emerald-200";
+    }
+
+    return "border-red-500/30 bg-red-500/10 text-red-200";
+  }
+
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-10 text-white print:bg-white print:text-black">
       <div className="mx-auto max-w-7xl">
@@ -281,7 +341,7 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
                 </div>
 
                 <div className="divide-y divide-slate-800 print:divide-slate-300">
-                  {sectionItems.map((item, index) => {
+                  {sectionItems.map((item) => {
                     const selected = answers[item.id];
 
                     return (
@@ -519,6 +579,133 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
             );
           })}
         </div>
+
+        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:border-slate-300 print:bg-white">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
+              {t.inspectionSummary}
+            </p>
+
+            <p className="mt-3 max-w-3xl leading-7 text-slate-400 print:text-slate-700">
+              {t.summaryDescription}
+            </p>
+          </div>
+
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              [t.totalQuestions, items.length],
+              [t.answeredQuestions, answeredCount],
+              [t.yesAnswers, yesCount],
+              [t.noAnswers, noCount],
+              [t.naAnswers, naCount],
+              [t.completionRate, `${progress}%`],
+              [t.complianceRate, `${score}%`],
+              [t.findings, criticalFailures.length],
+              [t.openActions, openActionCount],
+              [t.highPriorityFindings, highPriorityCount],
+            ].map(([label, value]) => (
+              <div
+                key={label}
+                className="rounded-2xl border border-slate-700 bg-slate-950 p-5 print:border-slate-300 print:bg-white"
+              >
+                <p className="text-sm text-slate-500">{label}</p>
+                <p className="mt-2 text-3xl font-bold">{value}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:border-slate-300 print:bg-white">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
+              {t.findingsSummary}
+            </p>
+
+            <p className="mt-3 max-w-3xl leading-7 text-slate-400 print:text-slate-700">
+              {t.findingsDescription}
+            </p>
+          </div>
+
+          {findings.length === 0 ? (
+            <div className="mt-7 rounded-2xl border border-dashed border-slate-700 bg-slate-950 p-8 text-center print:border-slate-300 print:bg-white">
+              <p className="text-xl font-bold">{t.noFindings}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                {t.noFindingsDescription}
+              </p>
+            </div>
+          ) : (
+            <div className="mt-7 grid gap-5 lg:grid-cols-2">
+              {findings.map((item, index) => {
+                const action = correctiveActions[item.id];
+
+                return (
+                  <article
+                    key={item.id}
+                    className="rounded-2xl border border-red-500/25 bg-red-500/5 p-6 print:break-inside-avoid print:border-slate-300 print:bg-white"
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div className="max-w-xl">
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-red-300 print:text-red-700">
+                          {t.findingNumber} #{index + 1}
+                        </p>
+
+                        <h3 className="mt-3 text-lg font-bold leading-7">
+                          {item.text}
+                        </h3>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        <span
+                          className={`rounded-full border px-3 py-1 text-xs font-semibold ${getPriorityClass(
+                            action?.priority,
+                          )}`}
+                        >
+                          {getPriorityLabel(action?.priority)}
+                        </span>
+
+                        <span
+                          className={`rounded-full border px-3 py-1 text-xs font-semibold ${getStatusClass(
+                            action?.status,
+                          )}`}
+                        >
+                          {getStatusLabel(action?.status)}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 rounded-xl border border-slate-700 bg-slate-950 p-4 print:border-slate-300 print:bg-white">
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+                        {t.correctiveAction}
+                      </p>
+
+                      <p className="mt-2 leading-7 text-slate-300 print:text-black">
+                        {action?.action || t.correctiveActionMissing}
+                      </p>
+                    </div>
+
+                    <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <p className="text-sm text-slate-500">
+                          {t.responsiblePerson}
+                        </p>
+                        <p className="mt-1 font-semibold">
+                          {action?.responsible || t.notAssigned}
+                        </p>
+                      </div>
+
+                      <div>
+                        <p className="text-sm text-slate-500">{t.targetDate}</p>
+                        <p className="mt-1 font-semibold">
+                          {action?.targetDate || t.noTargetDate}
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+        </section>
 
         <section
           className={`mt-8 rounded-3xl border p-7 ${result.className} print:border-slate-300 print:bg-white print:text-black`}
