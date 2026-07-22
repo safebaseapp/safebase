@@ -42,7 +42,7 @@ const articles: Article[] = [
     readTime: 8,
     standard: "OSHA",
     featured: true,
-    available: false,
+    available: true,
   },
   {
     id: 2,
@@ -59,7 +59,7 @@ const articles: Article[] = [
     readTime: 10,
     standard: "OSHA",
     featured: true,
-    available: false,
+    available: true,
   },
   {
     id: 3,
@@ -76,7 +76,7 @@ const articles: Article[] = [
     readTime: 7,
     standard: "OSHA",
     featured: true,
-    available: false,
+    available: true,
   },
   {
     id: 4,
@@ -93,7 +93,7 @@ const articles: Article[] = [
     readTime: 9,
     standard: "OSHA",
     featured: true,
-    available: false,
+    available: true,
   },
   {
     id: 5,
@@ -109,7 +109,7 @@ const articles: Article[] = [
     category: "hazard-control",
     readTime: 6,
     standard: "OSHA",
-    available: false,
+    available: true,
   },
   {
     id: 6,
@@ -125,7 +125,7 @@ const articles: Article[] = [
     category: "equipment",
     readTime: 6,
     standard: "OSHA",
-    available: false,
+    available: true,
   },
   {
     id: 7,
@@ -141,7 +141,7 @@ const articles: Article[] = [
     category: "equipment",
     readTime: 9,
     standard: "OSHA",
-    available: false,
+    available: true,
   },
   {
     id: 8,
@@ -157,7 +157,7 @@ const articles: Article[] = [
     category: "work-activities",
     readTime: 8,
     standard: "OSHA",
-    available: false,
+    available: true,
   },
   {
     id: 9,
@@ -173,7 +173,7 @@ const articles: Article[] = [
     category: "hazard-control",
     readTime: 9,
     standard: "OSHA",
-    available: false,
+    available: true,
   },
   {
     id: 10,
@@ -189,7 +189,7 @@ const articles: Article[] = [
     category: "emergency",
     readTime: 7,
     standard: "OSHA",
-    available: false,
+    available: true,
   },
   {
     id: 11,
@@ -205,7 +205,7 @@ const articles: Article[] = [
     category: "equipment",
     readTime: 10,
     standard: "OSHA",
-    available: false,
+    available: true,
   },
   {
     id: 12,
@@ -221,7 +221,7 @@ const articles: Article[] = [
     category: "hazard-control",
     readTime: 9,
     standard: "OSHA",
-    available: false,
+    available: true,
   },
 ];
 
