@@ -43,7 +43,7 @@ export default async function LocalizedChecklistsPage({params}: Props) {
       standard: "OSHA 1910.252",
       duration: isTurkish ? "5–7 dakika" : "5–7 min",
       href: "/checklists/hot-work",
-      available: false,
+      available: true,
     },
     {
       icon: "🔒",
