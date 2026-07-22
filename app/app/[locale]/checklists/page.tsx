@@ -57,7 +57,7 @@ export default async function LocalizedChecklistsPage({params}: Props) {
       standard: "OSHA 1910.147",
       duration: isTurkish ? "6–10 dakika" : "6–10 min",
       href: "/checklists/loto",
-      available: false,
+      available: true,
     },
     {
       icon: "🏗️",
