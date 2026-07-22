@@ -1,9 +1,9 @@
 export const labels = {
   en: {
-    eyebrow: "Professional scaffold inspection",
-    title: "Scaffold Inspection Checklist",
+    eyebrow: "Professional hot work inspection",
+    title: "Hot Work Safety Checklist",
     subtitle:
-      "Inspect scaffold foundations, structural components, platforms, access and protective systems before releasing the scaffold for use.",
+      "Verify permits, fire prevention measures, gas testing, equipment condition and work-area controls before starting hot work.",
     back: "Back to checklists",
     company: "Company",
     project: "Project",
@@ -89,10 +89,10 @@ export const labels = {
       "A critical control has failed. Work must not proceed until corrected.",
   },
   tr: {
-    eyebrow: "Profesyonel iskele saha denetimi",
-    title: "İskele Denetim Kontrol Listesi",
+    eyebrow: "Profesyonel sıcak çalışma saha denetimi",
+    title: "Sıcak Çalışma Güvenlik Kontrol Listesi",
     subtitle:
-      "İskeleyi kullanıma açmadan önce temel, yapı elemanları, platformlar, erişim ve koruma sistemlerini kontrol edin.",
+      "Sıcak çalışma başlamadan önce izinleri, yangın önlemlerini, gaz ölçümlerini, ekipman durumunu ve çalışma alanı kontrollerini doğrulayın.",
     back: "Kontrol listelerine dön",
     company: "Firma",
     project: "Proje",
