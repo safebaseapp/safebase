@@ -87,7 +87,7 @@ export default async function LocalizedChecklistsPage({params}: Props) {
       standard: "OSHA 1910.146",
       duration: isTurkish ? "8–12 dakika" : "8–12 min",
       href: "/checklists/confined-space",
-      available: false,
+      available: true,
     },
     {
       icon: "🏗️",
