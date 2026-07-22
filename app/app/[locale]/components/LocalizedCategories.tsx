@@ -37,8 +37,8 @@ export default function LocalizedCategories({ locale }: Props) {
         ? "Kullanıma hazır formlar, raporlar, izinler ve iş güvenliği dokümanları."
         : "Ready-to-use forms, reports, permits and safety documentation.",
       href: "/templates",
-      comingSoon: true,
-      badge: isTurkish ? "Geliştiriliyor" : "In Development",
+      comingSoon: false,
+      badge: isTurkish ? "Aktif" : "Available",
       accent: "violet",
     },
     {
@@ -47,9 +47,9 @@ export default function LocalizedCategories({ locale }: Props) {
       description: isTurkish
         ? "HSE profesyonelleri için anlaşılır ve pratik iş güvenliği rehberleri."
         : "Clear and practical safety guidance for HSE professionals.",
-      href: "/knowledge",
-      comingSoon: true,
-      badge: isTurkish ? "Geliştiriliyor" : "In Development",
+      href: "/knowledge-base",
+      comingSoon: false,
+      badge: isTurkish ? "Aktif" : "Available",
       accent: "cyan",
     },
   ];
@@ -113,6 +113,7 @@ export default function LocalizedCategories({ locale }: Props) {
               <p className="text-sm font-bold text-slate-950">
                 {isTurkish ? "Tek platform" : "One platform"}
               </p>
+
               <p className="text-sm text-slate-500">
                 {isTurkish
                   ? "Araçlar, bilgi ve rehberlik"
