@@ -6,7 +6,7 @@ import { checklistItems } from "./checklistData";
 import { labels } from "./labels";
 import type { Answer, CorrectiveAction, Props } from "./types";
 
-export default function ScaffoldChecklist({ locale }: Props) {
+export default function HotWorkChecklist({ locale }: Props) {
   const t = labels[locale];
   const items = checklistItems[locale];
 
