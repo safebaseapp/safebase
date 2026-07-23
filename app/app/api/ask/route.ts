@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { searchGuides } from "../../[locale]/knowledge-base/data/guides";
 
 type ConversationMessage = {
   role?: unknown;
@@ -75,6 +76,21 @@ export async function POST(req: Request) {
       .toLowerCase();
 
     const normalizedQuestion = conversationSearchText || question.toLowerCase();
+
+    const guideSearchQuery = [conversationSearchText, question]
+      .filter(Boolean)
+      .join(" ");
+
+    const guideSearchResults = searchGuides(guideSearchQuery, 3);
+
+    console.log(
+      "AI v2 Guide Matches:",
+      guideSearchResults.map((result) => ({
+        slug: result.guide.slug,
+        score: result.score,
+        matchedTerms: result.matchedTerms,
+      })),
+    );
 
     const matchedTopics = Object.entries(aliases)
       .filter(([topic, keywords]) => {
