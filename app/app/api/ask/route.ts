@@ -127,6 +127,13 @@ export async function POST(req: Request) {
         ? guidesToAIContext(matchedGuides, locale)
         : "";
 
+    const responseSources = Array.from(
+      new Set([
+        ...matchedGuides.map((guide) => `${guide.slug}.md`),
+        ...filesToUse,
+      ]),
+    );
+
     const knowledge = [
       guideKnowledge
         ? "===== SAFEBASE AI V2 GUIDE KNOWLEDGE =====\n\n" + guideKnowledge
@@ -327,7 +334,7 @@ General rules:
         "Content-Type": "text/plain; charset=utf-8",
         "Cache-Control": "no-cache, no-transform",
         "X-Content-Type-Options": "nosniff",
-        "X-SafeBase-Sources": encodeURIComponent(JSON.stringify(filesToUse)),
+        "X-SafeBase-Sources": encodeURIComponent(JSON.stringify(responseSources)),
       },
     });
   } catch (error) {
