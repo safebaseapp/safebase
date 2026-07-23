@@ -6,3 +6,4 @@ export { ppeGuide } from "./ppe";
 export { grindingGuide } from "./grinding";
 export { excavationGuide } from "./excavation";
 export { scaffoldingGuide } from "./scaffolding";
+export { electricalSafetyGuide } from "./electrical-safety";
