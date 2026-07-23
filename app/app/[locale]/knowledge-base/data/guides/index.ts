@@ -11,3 +11,5 @@ export { fireSafetyGuide } from "./fire-safety";
 export { craneSafetyGuide } from "./crane-safety";
 export { chemicalSafetyGuide } from "./chemical-safety";
 export { allGuides, getGuideBySlug } from "./all-guides";
+export { searchGuides } from "./guide-search";
+export type { GuideSearchResult } from "./guide-search";
