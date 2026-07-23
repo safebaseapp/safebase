@@ -1,6 +1,9 @@
 import fs from "fs";
 import path from "path";
-import { searchGuides } from "../../[locale]/knowledge-base/data/guides";
+import {
+  guidesToAIContext,
+  searchGuides,
+} from "../../[locale]/knowledge-base/data/guides";
 
 type ConversationMessage = {
   role?: unknown;
@@ -113,8 +116,26 @@ export async function POST(req: Request) {
     console.log("Matched Topics:", matchedTopics);
     console.log("Files To Use:", filesToUse);
 
-    const knowledge = filesToUse
+    const legacyKnowledge = filesToUse
       .map((file) => fs.readFileSync(path.join(knowledgeFolder, file), "utf-8"))
+      .join("\n\n");
+
+    const matchedGuides = guideSearchResults.map((result) => result.guide);
+
+    const guideKnowledge =
+      matchedGuides.length > 0
+        ? guidesToAIContext(matchedGuides, locale)
+        : "";
+
+    const knowledge = [
+      guideKnowledge
+        ? "===== SAFEBASE AI V2 GUIDE KNOWLEDGE =====\n\n" + guideKnowledge
+        : "",
+      legacyKnowledge
+        ? "===== LEGACY SAFEBASE KNOWLEDGE =====\n\n" + legacyKnowledge
+        : "",
+    ]
+      .filter(Boolean)
       .join("\n\n");
 
     const languageInstruction =
