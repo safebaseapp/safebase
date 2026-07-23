@@ -13,3 +13,4 @@ export { chemicalSafetyGuide } from "./chemical-safety";
 export { allGuides, getGuideBySlug } from "./all-guides";
 export { searchGuides } from "./guide-search";
 export type { GuideSearchResult } from "./guide-search";
+export { guideToAIContext, guidesToAIContext } from "./guide-context";
