@@ -4,3 +4,4 @@ export { hotWorkGuide } from "./hot-work";
 export { lotoGuide } from "./loto";
 export { ppeGuide } from "./ppe";
 export { grindingGuide } from "./grinding";
+export { excavationGuide } from "./excavation";
