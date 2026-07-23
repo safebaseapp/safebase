@@ -10,3 +10,4 @@ export { electricalSafetyGuide } from "./electrical-safety";
 export { fireSafetyGuide } from "./fire-safety";
 export { craneSafetyGuide } from "./crane-safety";
 export { chemicalSafetyGuide } from "./chemical-safety";
+export { allGuides, getGuideBySlug } from "./all-guides";
