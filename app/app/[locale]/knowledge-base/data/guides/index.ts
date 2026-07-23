@@ -5,3 +5,4 @@ export { lotoGuide } from "./loto";
 export { ppeGuide } from "./ppe";
 export { grindingGuide } from "./grinding";
 export { excavationGuide } from "./excavation";
+export { scaffoldingGuide } from "./scaffolding";
