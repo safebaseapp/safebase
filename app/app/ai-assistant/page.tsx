@@ -284,6 +284,34 @@ export default function AIAssistantPage() {
       tr: "Kilitleme ve Etiketleme",
       en: "Lockout Tagout",
     },
+    "working-at-height.md": {
+  tr: "Yüksekte Çalışma",
+  en: "Working at Height",
+},
+"excavation.md": {
+  tr: "Kazı Çalışmaları",
+  en: "Excavation",
+},
+"scaffolding.md": {
+  tr: "İskele Güvenliği",
+  en: "Scaffold Safety",
+},
+"electrical-safety.md": {
+  tr: "Elektrik Güvenliği",
+  en: "Electrical Safety",
+},
+"fire-safety.md": {
+  tr: "Yangın Güvenliği",
+  en: "Fire Safety",
+},
+"crane-safety.md": {
+  tr: "Vinç ve Kaldırma",
+  en: "Crane & Lifting",
+},
+"chemical-safety.md": {
+  tr: "Kimyasal Güvenlik",
+  en: "Chemical Safety",
+},
   };
 
   const label =
