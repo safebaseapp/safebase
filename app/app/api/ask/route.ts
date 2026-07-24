@@ -72,17 +72,10 @@ export async function POST(req: Request) {
       .readdirSync(knowledgeFolder)
       .filter((file) => file.endsWith(".md"));
 
-    const conversationSearchText = conversationMessages
-      .filter((message) => message.role === "user")
-      .map((message) => message.content)
-      .join(" ")
-      .toLowerCase();
-
-    const normalizedQuestion = conversationSearchText || question.toLowerCase();
-
-    const guideSearchQuery = [conversationSearchText, question]
-      .filter(Boolean)
-      .join(" ");
+    // Kaynak araması yalnızca güncel soru üzerinden yapılır.
+    // Önceki konuşmalar cevap bağlamında korunur ancak rehber seçimini etkilemez.
+    const normalizedQuestion = question.toLowerCase();
+    const guideSearchQuery = question;
 
     const guideSearchResults = searchGuides(guideSearchQuery, 3);
 
