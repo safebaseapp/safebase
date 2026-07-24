@@ -19,6 +19,17 @@ type DownloadItem = {
   icon: string;
   featured?: boolean;
   available: boolean;
+  pdfUrl?: string;
+  docxUrl?: string;
+  version: string;
+  updated: {
+    en: string;
+    tr: string;
+  };
+  language: {
+    en: string;
+    tr: string;
+  };
 };
 
 const downloads: DownloadItem[] = [
@@ -36,7 +47,11 @@ const downloads: DownloadItem[] = [
     format: "PDF",
     icon: "🔥",
     featured: true,
-    available: false,
+    available: true,
+    pdfUrl: "/downloads/hot-work-inspection-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
   },
   {
     id: 2,
@@ -52,7 +67,11 @@ const downloads: DownloadItem[] = [
     format: "PDF",
     icon: "🕳️",
     featured: true,
-    available: false,
+    available: true,
+    pdfUrl: "/downloads/confined-space-entry-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
   },
   {
     id: 3,
@@ -68,7 +87,11 @@ const downloads: DownloadItem[] = [
     format: "PDF",
     icon: "🔒",
     featured: true,
-    available: false,
+    available: true,
+    pdfUrl: "/downloads/loto-verification-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
   },
   {
     id: 4,
@@ -84,7 +107,11 @@ const downloads: DownloadItem[] = [
     format: "DOCX",
     icon: "⚠️",
     featured: true,
-    available: false,
+    available: true,
+    docxUrl: "/downloads/risk-assessment-template.docx",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
   },
   {
     id: 5,
@@ -99,7 +126,11 @@ const downloads: DownloadItem[] = [
     category: "checklists",
     format: "PDF",
     icon: "⛑️",
-    available: false,
+    available: true,
+    pdfUrl: "/downloads/ppe-inspection-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
   },
   {
     id: 6,
@@ -114,7 +145,11 @@ const downloads: DownloadItem[] = [
     category: "checklists",
     format: "PDF",
     icon: "🪜",
-    available: false,
+    available: true,
+    pdfUrl: "/downloads/working-at-height-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
   },
   {
     id: 7,
@@ -129,7 +164,12 @@ const downloads: DownloadItem[] = [
     category: "toolbox-talks",
     format: "PDF + DOCX",
     icon: "🗣️",
-    available: false,
+    available: true,
+    pdfUrl: "/downloads/daily-toolbox-talk-record.pdf",
+    docxUrl: "/downloads/daily-toolbox-talk-record.docx",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
   },
   {
     id: 8,
@@ -144,7 +184,11 @@ const downloads: DownloadItem[] = [
     category: "templates",
     format: "DOCX",
     icon: "🔎",
-    available: false,
+    available: true,
+    docxUrl: "/downloads/incident-investigation-form.docx",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
   },
   {
     id: 9,
@@ -159,7 +203,11 @@ const downloads: DownloadItem[] = [
     category: "checklists",
     format: "PDF",
     icon: "🏗️",
-    available: false,
+    available: true,
+    pdfUrl: "/downloads/scaffold-inspection-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
   },
 ];
 
@@ -232,18 +280,22 @@ export default function DownloadsPage() {
     {
       id: "all",
       label: isTurkish ? "Tümü" : "All Resources",
+      count: downloads.length,
     },
     {
       id: "checklists",
       label: isTurkish ? "Kontrol Listeleri" : "Checklists",
+      count: downloads.filter((item) => item.category === "checklists").length,
     },
     {
       id: "templates",
       label: isTurkish ? "Şablonlar" : "Templates",
+      count: downloads.filter((item) => item.category === "templates").length,
     },
     {
       id: "toolbox-talks",
       label: isTurkish ? "Toolbox Talk" : "Toolbox Talks",
+      count: downloads.filter((item) => item.category === "toolbox-talks").length,
     },
   ];
 
@@ -272,6 +324,19 @@ export default function DownloadsPage() {
   }, [activeCategory, locale, search]);
 
   const featuredDownloads = downloads.filter((item) => item.featured);
+
+  const previewUrl = (item: DownloadItem) => item.pdfUrl;
+
+  const downloadUrl = (item: DownloadItem) =>
+    item.docxUrl ?? item.pdfUrl ?? "#";
+
+  const downloadLabel = (item: DownloadItem) => {
+    if (item.docxUrl) {
+      return isTurkish ? "DOCX İndir" : "Download DOCX";
+    }
+
+    return isTurkish ? "PDF İndir" : "Download PDF";
+  };
 
   const categoryLabel = (category: DownloadItem["category"]) => {
     if (category === "checklists") {
@@ -357,10 +422,57 @@ export default function DownloadsPage() {
                         : "border-white/10 bg-white/[0.045] text-slate-400 hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
                     }`}
                   >
-                    {category.label}
+                    <span>{category.label}</span>
+                    <span
+                      className={`ml-2 rounded-full px-2 py-0.5 text-xs ${
+                        isActive
+                          ? "bg-white/20 text-white"
+                          : "bg-white/[0.07] text-slate-500"
+                      }`}
+                    >
+                      {category.count}
+                    </span>
                   </button>
                 );
               })}
+            </div>
+
+            <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {[
+                {
+                  value: `${downloads.length}+`,
+                  label: isTurkish ? "Kaynak" : "Resources",
+                  icon: "📄",
+                },
+                {
+                  value: "3",
+                  label: isTurkish ? "Kategori" : "Categories",
+                  icon: "📂",
+                },
+                {
+                  value: "2",
+                  label: isTurkish ? "Dil" : "Languages",
+                  icon: "🌍",
+                },
+                {
+                  value: isTurkish ? "Haftalık" : "Weekly",
+                  label: isTurkish ? "Güncelleme" : "Updates",
+                  icon: "🔄",
+                },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="group rounded-2xl border border-white/10 bg-white/[0.045] p-5 text-left backdrop-blur-xl transition hover:-translate-y-1 hover:border-blue-400/30 hover:bg-white/[0.07]"
+                >
+                  <div className="text-2xl">{stat.icon}</div>
+                  <p className="mt-4 text-2xl font-black text-white sm:text-3xl">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1 text-sm font-bold text-slate-400">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -410,6 +522,15 @@ export default function DownloadsPage() {
                     {categoryLabel(item.category)}
                   </p>
 
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 text-[11px] font-black text-emerald-300">
+                      ✓ {isTurkish ? "Profesyonel" : "Professional"}
+                    </span>
+                    <span className="rounded-full border border-blue-400/20 bg-blue-400/10 px-2.5 py-1 text-[11px] font-black text-blue-300">
+                      ✓ {isTurkish ? "Saha Uyumlu" : "Field Ready"}
+                    </span>
+                  </div>
+
                   <h3 className="mt-3 text-xl font-black leading-tight text-white">
                     {item.title[locale]}
                   </h3>
@@ -418,14 +539,37 @@ export default function DownloadsPage() {
                     {item.description[locale]}
                   </p>
 
-                  <button
-                    type="button"
-                    disabled={!item.available}
-                    className="mt-6 inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 font-black text-slate-500"
-                  >
-                    <DownloadIcon />
-                    {isTurkish ? "Yakında" : "Coming Soon"}
-                  </button>
+                  <div className="mt-5 grid grid-cols-3 gap-2 border-t border-white/10 pt-4 text-xs font-bold text-slate-500">
+                    <span>{item.version}</span>
+                    <span className="text-center">{item.language[locale]}</span>
+                    <span className="text-right">{item.updated[locale]}</span>
+                  </div>
+
+                  <div className="mt-5 flex gap-3">
+                    {previewUrl(item) ? (
+                      <a
+                        href={previewUrl(item)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex flex-1 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm font-black text-slate-200 transition hover:border-blue-400/30 hover:bg-white/[0.09] hover:text-white"
+                      >
+                        {isTurkish ? "Önizleme" : "Preview"}
+                      </a>
+                    ) : (
+                      <span className="inline-flex flex-1 cursor-not-allowed items-center justify-center rounded-xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm font-black text-slate-600">
+                        {isTurkish ? "DOCX Dosyası" : "DOCX File"}
+                      </span>
+                    )}
+
+                    <a
+                      href={downloadUrl(item)}
+                      download
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-black text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-500"
+                    >
+                      <DownloadIcon />
+                      {isTurkish ? "İndir" : "Download"}
+                    </a>
+                  </div>
                 </div>
               </article>
             ))}
@@ -477,6 +621,15 @@ export default function DownloadsPage() {
                     {categoryLabel(item.category)}
                   </p>
 
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 text-[11px] font-black text-emerald-300">
+                      ✓ {isTurkish ? "Profesyonel" : "Professional"}
+                    </span>
+                    <span className="rounded-full border border-blue-400/20 bg-blue-400/10 px-2.5 py-1 text-[11px] font-black text-blue-300">
+                      ✓ {isTurkish ? "Saha Uyumlu" : "Field Ready"}
+                    </span>
+                  </div>
+
                   <h3 className="mt-3 text-xl font-black text-white">
                     {item.title[locale]}
                   </h3>
@@ -485,23 +638,36 @@ export default function DownloadsPage() {
                     {item.description[locale]}
                   </p>
 
-                  <div className="mt-6 flex gap-3">
-                    <button
-                      type="button"
-                      disabled
-                      className="inline-flex flex-1 cursor-not-allowed items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-black text-slate-600"
-                    >
-                      {isTurkish ? "Önizleme" : "Preview"}
-                    </button>
+                  <div className="mt-5 grid grid-cols-3 gap-2 border-t border-white/10 pt-4 text-xs font-bold text-slate-500">
+                    <span>{item.version}</span>
+                    <span className="text-center">{item.language[locale]}</span>
+                    <span className="text-right">{item.updated[locale]}</span>
+                  </div>
 
-                    <button
-                      type="button"
-                      disabled={!item.available}
-                      className="inline-flex flex-1 cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-slate-800 px-4 py-3 text-sm font-black text-slate-600"
+                  <div className="mt-5 flex gap-3">
+                    {previewUrl(item) ? (
+                      <a
+                        href={previewUrl(item)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex flex-1 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-black text-slate-300 transition hover:border-blue-400/30 hover:bg-white/[0.08] hover:text-white"
+                      >
+                        {isTurkish ? "Önizleme" : "Preview"}
+                      </a>
+                    ) : (
+                      <span className="inline-flex flex-1 cursor-not-allowed items-center justify-center rounded-xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm font-black text-slate-600">
+                        {isTurkish ? "DOCX Dosyası" : "DOCX File"}
+                      </span>
+                    )}
+
+                    <a
+                      href={downloadUrl(item)}
+                      download
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-black text-white shadow-lg shadow-blue-600/15 transition hover:-translate-y-0.5 hover:bg-blue-500"
                     >
                       <DownloadIcon />
-                      {isTurkish ? "Yakında" : "Soon"}
-                    </button>
+                      {downloadLabel(item)}
+                    </a>
                   </div>
                 </article>
               ))}
