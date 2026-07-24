@@ -77,7 +77,7 @@ export async function POST(req: Request) {
     const normalizedQuestion = question.toLowerCase();
     const guideSearchQuery = question;
 
-    const guideSearchResults = searchGuides(guideSearchQuery, 3);
+    const guideSearchResults = searchGuides(guideSearchQuery, 1);
 
     console.log(
       "AI v2 Guide Matches:",
