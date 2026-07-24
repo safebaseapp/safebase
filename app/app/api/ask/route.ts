@@ -127,23 +127,15 @@ export async function POST(req: Request) {
         ? guidesToAIContext(matchedGuides, locale)
         : "";
 
-    const responseSources = Array.from(
-      new Set([
-        ...matchedGuides.map((guide) => `${guide.slug}.md`),
-        ...filesToUse,
-      ]),
-    );
+    const useGuideKnowledge = matchedGuides.length > 0;
 
-    const knowledge = [
-      guideKnowledge
-        ? "===== SAFEBASE AI V2 GUIDE KNOWLEDGE =====\n\n" + guideKnowledge
-        : "",
-      legacyKnowledge
-        ? "===== LEGACY SAFEBASE KNOWLEDGE =====\n\n" + legacyKnowledge
-        : "",
-    ]
-      .filter(Boolean)
-      .join("\n\n");
+    const responseSources = useGuideKnowledge
+      ? matchedGuides.map((guide) => `${guide.slug}.md`)
+      : filesToUse;
+
+    const knowledge = useGuideKnowledge
+      ? "===== SAFEBASE AI V2 GUIDE KNOWLEDGE =====\n\n" + guideKnowledge
+      : "===== LEGACY SAFEBASE KNOWLEDGE =====\n\n" + legacyKnowledge;
 
     const languageInstruction =
       locale === "tr"
