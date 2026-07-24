@@ -263,6 +263,7 @@ export default function AIAssistantPage() {
 
                     <div className="mt-4 flex flex-wrap gap-2">
                       {sources.map((source) => {
+                        console.log("AI SOURCE RAW:", JSON.stringify(source));
   const sourceNames: Record<string, { tr: string; en: string }> = {
     "ppe.md": {
       tr: "Kişisel Koruyucu Donanım",
