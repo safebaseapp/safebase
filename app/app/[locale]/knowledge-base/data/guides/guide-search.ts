@@ -94,6 +94,11 @@ function localizedValues(value?: { en: string; tr: string }): string[] {
 
 function createSearchSections(guide: SafetyGuide) {
   return {
+    keywords: [
+      ...(guide.searchKeywords?.en ?? []),
+      ...(guide.searchKeywords?.tr ?? []),
+    ],
+
     priority: [
       guide.slug.replace(/-/g, " "),
       ...localizedValues(guide.title),
@@ -139,12 +144,20 @@ function calculateGuideScore(
 ): GuideSearchResult {
   const sections = createSearchSections(guide);
 
+  const keywordsText = normalizeText(sections.keywords.join(" "));
   const priorityText = normalizeText(sections.priority.join(" "));
   const summaryText = normalizeText(sections.summary.join(" "));
   const contentText = normalizeText(sections.content.join(" "));
 
   let score = 0;
   const matchedTerms = new Set<string>();
+
+  if (
+    normalizedQuery.length >= 3 &&
+    keywordsText.includes(normalizedQuery)
+  ) {
+    score += 120;
+  }
 
   if (
     normalizedQuery.length >= 3 &&
@@ -161,6 +174,12 @@ function calculateGuideScore(
   }
 
   for (const term of queryTerms) {
+    if (keywordsText.includes(term)) {
+      score += 40;
+      matchedTerms.add(term);
+      continue;
+    }
+
     if (priorityText.includes(term)) {
       score += 18;
       matchedTerms.add(term);

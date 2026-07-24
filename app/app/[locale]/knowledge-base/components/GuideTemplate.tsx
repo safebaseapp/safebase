@@ -47,6 +47,12 @@ export type SafetyGuide = {
   };
   references: string[];
   relatedGuides?: RelatedGuide[];
+
+  searchKeywords?: {
+    en: string[];
+    tr: string[];
+  };
+
   aiText: LocalizedText;
 };
 
