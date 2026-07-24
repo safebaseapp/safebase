@@ -35,6 +35,34 @@ const sourceNames: Record<string, { tr: string; en: string }> = {
     tr: "Kilitleme ve Etiketleme",
     en: "Lockout Tagout",
   },
+  "working-at-height.md": {
+    tr: "Yüksekte Çalışma",
+    en: "Working at Height",
+  },
+  "excavation.md": {
+    tr: "Kazı Çalışmaları",
+    en: "Excavation",
+  },
+  "scaffolding.md": {
+    tr: "İskele Güvenliği",
+    en: "Scaffolding Safety",
+  },
+  "electrical-safety.md": {
+    tr: "Elektrik Güvenliği",
+    en: "Electrical Safety",
+  },
+  "fire-safety.md": {
+    tr: "Yangın Güvenliği",
+    en: "Fire Safety",
+  },
+  "crane-safety.md": {
+    tr: "Vinç ve Kaldırma Güvenliği",
+    en: "Crane and Lifting Safety",
+  },
+  "chemical-safety.md": {
+    tr: "Kimyasal Güvenlik",
+    en: "Chemical Safety",
+  },
 };
 
 function createMessageId() {
@@ -616,12 +644,19 @@ export default function AIAssistantPage() {
 
                               <div className="mt-3 flex flex-wrap gap-2">
                                 {message.sources.map((source) => {
+                                  const normalizedSource = `${source
+                                    .trim()
+                                    .toLowerCase()
+                                    .replace(/\.md$/, "")
+                                    .replaceAll("_", "-")
+                                    .replace(/\s+/g, "-")}.md`;
+
                                   const label =
-                                    sourceNames[source]?.[
+                                    sourceNames[normalizedSource]?.[
                                       isTurkish ? "tr" : "en"
                                     ] ||
                                     source
-                                      .replace(".md", "")
+                                      .replace(/\.md$/, "")
                                       .replaceAll("-", " ");
 
                                   return (
