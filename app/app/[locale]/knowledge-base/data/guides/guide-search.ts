@@ -36,6 +36,7 @@ const STOP_WORDS = new Set([
   "which",
   "with",
   "you",
+
   "bir",
   "bu",
   "da",
@@ -53,6 +54,13 @@ const STOP_WORDS = new Set([
   "olarak",
   "ve",
   "veya",
+  "hangi",
+  "ilk",
+  "karşı",
+  "gerekir",
+  "gereklidir",
+  "yapılmalıdır",
+  "uygulanmalıdır",
 ]);
 
 function normalizeText(value: string): string {
@@ -71,7 +79,7 @@ function tokenize(value: string): string[] {
       normalizeText(value)
         .split(/[\s-]+/)
         .map((term) => term.trim())
-        .filter((term) => term.length >= 2 && !STOP_WORDS.has(term)),
+        .filter((term) => term.length >= 3 && !STOP_WORDS.has(term)),
     ),
   );
 }
@@ -118,11 +126,6 @@ function createSearchSections(guide: SafetyGuide) {
       guide.emergencySection?.content.en ?? "",
       guide.emergencySection?.content.tr ?? "",
       ...(guide.references ?? []),
-      ...(guide.relatedGuides ?? []).flatMap((relatedGuide) => [
-        relatedGuide.slug.replace(/-/g, " "),
-        relatedGuide.title.en,
-        relatedGuide.title.tr,
-      ]),
       guide.aiText.en,
       guide.aiText.tr,
     ],
@@ -147,25 +150,25 @@ function calculateGuideScore(
     normalizedQuery.length >= 3 &&
     priorityText.includes(normalizedQuery)
   ) {
-    score += 30;
+    score += 60;
   }
 
   if (
     normalizedQuery.length >= 3 &&
     summaryText.includes(normalizedQuery)
   ) {
-    score += 15;
+    score += 25;
   }
 
   for (const term of queryTerms) {
     if (priorityText.includes(term)) {
-      score += 10;
+      score += 18;
       matchedTerms.add(term);
       continue;
     }
 
     if (summaryText.includes(term)) {
-      score += 5;
+      score += 7;
       matchedTerms.add(term);
       continue;
     }
@@ -180,7 +183,7 @@ function calculateGuideScore(
 
   for (const slugWord of slugWords) {
     if (normalizedQuery.includes(slugWord)) {
-      score += 8;
+      score += 15;
       matchedTerms.add(slugWord);
     }
   }
@@ -203,7 +206,7 @@ export function searchGuides(
     return [];
   }
 
-  return allGuides
+  const rankedResults = allGuides
     .map((guide) =>
       calculateGuideScore(guide, normalizedQuery, queryTerms),
     )
@@ -214,6 +217,20 @@ export function searchGuides(
       }
 
       return a.guide.title.en.localeCompare(b.guide.title.en);
-    })
+    });
+
+  const bestScore = rankedResults[0]?.score ?? 0;
+
+  if (bestScore === 0) {
+    return [];
+  }
+
+  const minimumRelevantScore = Math.max(
+    6,
+    Math.floor(bestScore * 0.35),
+  );
+
+  return rankedResults
+    .filter((result) => result.score >= minimumRelevantScore)
     .slice(0, Math.max(1, limit));
 }
