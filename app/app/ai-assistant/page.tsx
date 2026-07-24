@@ -314,8 +314,12 @@ export default function AIAssistantPage() {
 },
   };
 
+  const normalizedSource = source.endsWith(".md")
+    ? source
+    : `${source}.md`;
+
   const label =
-    sourceNames[source]?.[isTurkish ? "tr" : "en"] ||
+    sourceNames[normalizedSource]?.[isTurkish ? "tr" : "en"] ||
     source.replace(".md", "").replaceAll("-", " ");
 
   return (
