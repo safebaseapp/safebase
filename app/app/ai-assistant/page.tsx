@@ -314,13 +314,15 @@ export default function AIAssistantPage() {
 },
   };
 
-  const normalizedSource = source.endsWith(".md")
-    ? source
-    : `${source}.md`;
+  const normalizedSource = `${source
+    .trim()
+    .toLowerCase()
+    .replace(/\.md$/, "")
+    .replaceAll(" ", "-")}.md`;
 
   const label =
     sourceNames[normalizedSource]?.[isTurkish ? "tr" : "en"] ||
-    source.replace(".md", "").replaceAll("-", " ");
+    source.replace(/\.md$/, "").replaceAll("-", " ");
 
   return (
     <span
