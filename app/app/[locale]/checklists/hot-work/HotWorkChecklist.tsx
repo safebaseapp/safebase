@@ -4,6 +4,11 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { checklistItems } from "./checklistData";
 import { labels } from "./labels";
+import {
+  analyzeHotWorkChecklist,
+  type ChecklistAnalysisResult,
+  type ChecklistAnswer,
+} from "../../../../lib/ai/analyzeChecklist";
 import type { Answer, CorrectiveAction, Props } from "./types";
 
 export default function HotWorkChecklist({ locale }: Props) {
@@ -15,6 +20,8 @@ export default function HotWorkChecklist({ locale }: Props) {
   const [correctiveActions, setCorrectiveActions] = useState<
     Record<string, CorrectiveAction>
   >({});
+  const [analysis, setAnalysis] =
+    useState<ChecklistAnalysisResult | null>(null);
 
   const answeredCount = items.filter(
     (item) => answers[item.id] !== null && answers[item.id] !== undefined,
@@ -171,10 +178,31 @@ export default function HotWorkChecklist({ locale }: Props) {
     }));
   }
 
+  function runSafetyAnalysis() {
+    const formattedAnswers: ChecklistAnswer[] = Object.entries(answers).map(
+      ([id, answer]) => ({
+        id,
+        answer:
+          answer === "yes"
+            ? "Yes"
+            : answer === "no"
+              ? "No"
+              : "N/A",
+        remarks:
+          answer === "no"
+            ? correctiveActions[id]?.action || undefined
+            : undefined,
+      }),
+    );
+
+    setAnalysis(analyzeHotWorkChecklist(formattedAnswers, locale));
+  }
+
   function resetInspection() {
     setAnswers({});
     setComments("");
     setCorrectiveActions({});
+    setAnalysis(null);
   }
 
   function getPriorityLabel(
@@ -739,6 +767,192 @@ export default function HotWorkChecklist({ locale }: Props) {
           </div>
         </section>
 
+        {analysis && (
+          <section className="mt-8 rounded-3xl border border-blue-500/30 bg-blue-500/5 p-7 print:border-slate-300 print:bg-white">
+            <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
+                  {locale === "tr"
+                    ? "SafeBase Güvenlik Analizi"
+                    : "SafeBase Safety Analysis"}
+                </p>
+
+                <h2 className="mt-3 text-3xl font-bold">
+                  {locale === "tr"
+                    ? "Kontrol Listesi Analiz Sonucu"
+                    : "Checklist Analysis Result"}
+                </h2>
+
+                <p className="mt-4 max-w-3xl leading-7 text-slate-300 print:text-slate-700">
+                  {analysis.summary}
+                </p>
+              </div>
+
+              <div
+                className={`rounded-2xl border px-5 py-4 ${
+                  analysis.canWorkProceed
+                    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-200"
+                    : "border-red-500/30 bg-red-500/10 text-red-200"
+                } print:border-slate-300 print:bg-white print:text-black`}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-75">
+                  {locale === "tr"
+                    ? "Çalışma Kararı"
+                    : "Work Decision"}
+                </p>
+
+                <p className="mt-2 text-xl font-bold">
+                  {analysis.canWorkProceed
+                    ? locale === "tr"
+                      ? "Çalışma Devam Edebilir"
+                      : "Work May Proceed"
+                    : locale === "tr"
+                      ? "Çalışma Başlatılmamalı"
+                      : "Work Must Not Proceed"}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                [
+                  locale === "tr" ? "Güvenlik Skoru" : "Safety Score",
+                  `${analysis.score}/100`,
+                ],
+                [
+                  locale === "tr" ? "Genel Risk" : "Overall Risk",
+                  analysis.overallRisk,
+                ],
+                [
+                  locale === "tr" ? "Uygunsuzluk" : "Findings",
+                  analysis.nonCompliantItems,
+                ],
+                [
+                  locale === "tr" ? "Kritik Bulgu" : "Critical Findings",
+                  analysis.criticalFindings.length,
+                ],
+              ].map(([label, value]) => (
+                <div
+                  key={String(label)}
+                  className="rounded-2xl border border-slate-700 bg-slate-950 p-5 print:border-slate-300 print:bg-white"
+                >
+                  <p className="text-sm text-slate-500">{label}</p>
+                  <p className="mt-2 text-2xl font-bold">{value}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-7 grid gap-6 lg:grid-cols-2">
+              <div className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
+                <h3 className="text-lg font-bold">
+                  {locale === "tr"
+                    ? "Önerilen Aksiyonlar"
+                    : "Recommended Actions"}
+                </h3>
+
+                <div className="mt-4 space-y-3">
+                  {analysis.recommendations.map((recommendation, index) => (
+                    <div
+                      key={`${recommendation}-${index}`}
+                      className="flex gap-3"
+                    >
+                      <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-500/15 text-xs font-bold text-blue-300">
+                        {index + 1}
+                      </span>
+                      <p className="leading-7 text-slate-300 print:text-black">
+                        {recommendation}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
+                <h3 className="text-lg font-bold">
+                  {locale === "tr"
+                    ? "Referanslar"
+                    : "References"}
+                </h3>
+
+                {analysis.references.length > 0 ? (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {analysis.references.map((reference) => (
+                      <span
+                        key={reference}
+                        className="rounded-full border border-slate-700 px-3 py-2 text-sm text-slate-300 print:border-slate-300 print:text-black"
+                      >
+                        {reference}
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="mt-4 text-slate-500">
+                    {locale === "tr"
+                      ? "Aktif bulgular için referans bulunmuyor."
+                      : "No references are associated with active findings."}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {analysis.findings.length > 0 && (
+              <div className="mt-7">
+                <h3 className="text-xl font-bold">
+                  {locale === "tr"
+                    ? "Analiz Bulguları"
+                    : "Analysis Findings"}
+                </h3>
+
+                <div className="mt-5 grid gap-5 lg:grid-cols-2">
+                  {analysis.findings.map((finding) => (
+                    <article
+                      key={finding.id}
+                      className="rounded-2xl border border-red-500/25 bg-red-500/5 p-6 print:break-inside-avoid print:border-slate-300 print:bg-white"
+                    >
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-red-300 print:text-red-700">
+                            {finding.id}
+                          </p>
+                          <h4 className="mt-2 font-bold leading-7">
+                            {finding.requirement}
+                          </h4>
+                        </div>
+
+                        <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-200 print:bg-white print:text-red-700">
+                          {finding.riskLevel}
+                        </span>
+                      </div>
+
+                      <div className="mt-5 space-y-4 text-sm leading-6">
+                        <div>
+                          <p className="font-semibold text-slate-400">
+                            {locale === "tr" ? "Rehberlik" : "Guidance"}
+                          </p>
+                          <p className="mt-1 text-slate-300 print:text-black">
+                            {finding.guidance}
+                          </p>
+                        </div>
+
+                        <div>
+                          <p className="font-semibold text-slate-400">
+                            {locale === "tr"
+                              ? "Düzeltici Faaliyet"
+                              : "Corrective Action"}
+                          </p>
+                          <p className="mt-1 text-slate-300 print:text-black">
+                            {finding.correctiveAction}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+          </section>
+        )}
+
         <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:border-slate-300 print:bg-white">
           <label htmlFor="inspection-comments">
             <span className="block text-lg font-bold">{t.comments}</span>
@@ -755,6 +969,17 @@ export default function HotWorkChecklist({ locale }: Props) {
         </section>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row print:hidden">
+          <button
+            type="button"
+            onClick={runSafetyAnalysis}
+            disabled={answeredCount === 0}
+            className="rounded-2xl bg-violet-600 px-6 py-4 font-semibold text-white transition hover:bg-violet-500 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {locale === "tr"
+              ? "🤖 Güvenlik Analizi Yap"
+              : "🤖 Analyze Safety"}
+          </button>
+
           <button
             type="button"
             onClick={() => window.print()}
