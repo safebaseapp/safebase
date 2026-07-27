@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { checklistItems } from "./checklistData";
+import { generateAssessment } from "@/lib/api/assessmentClient";
 import { labels } from "./labels";
 import {
   analyzeHotWorkChecklist,
@@ -22,6 +23,8 @@ export default function HotWorkChecklist({ locale }: Props) {
   >({});
   const [analysis, setAnalysis] =
     useState<ChecklistAnalysisResult | null>(null);
+    const [professionalAssessment, setProfessionalAssessment] = useState<any>(null);
+const [isAiLoading, setIsAiLoading] = useState(false);
 
   const answeredCount = items.filter(
     (item) => answers[item.id] !== null && answers[item.id] !== undefined,
@@ -195,7 +198,73 @@ export default function HotWorkChecklist({ locale }: Props) {
       }),
     );
 
-    setAnalysis(analyzeHotWorkChecklist(formattedAnswers, locale));
+    const analysisResult = analyzeHotWorkChecklist(
+      formattedAnswers,
+      locale,
+    );
+
+    setAnalysis(analysisResult);
+    setProfessionalAssessment(null);
+
+    if (analysisResult.workDecision === "Incomplete Assessment") {
+      setIsAiLoading(false);
+      return;
+    }
+
+    setIsAiLoading(true);
+
+    const workDecision =
+      analysisResult.workDecision === "Stop Work"
+        ? "STOP WORK"
+        : analysisResult.workDecision === "Proceed With Conditions"
+          ? "PROCEED WITH CONDITIONS"
+          : "APPROVED";
+
+    generateAssessment({
+      workType: analysisResult.checklistTitle || "Hot Work",
+      language: locale,
+      assessmentStatus: analysisResult.assessmentStatus,
+      completionRate: analysisResult.completionRate,
+      safetyScore: analysisResult.score,
+      overallRisk: analysisResult.overallRisk,
+      workDecision,
+      permitReadiness: analysisResult.permitReadiness,
+      severityBreakdown: {
+        critical: analysisResult.severityBreakdown.Critical,
+        high: analysisResult.severityBreakdown.High,
+        medium: analysisResult.severityBreakdown.Medium,
+        low: analysisResult.severityBreakdown.Low,
+      },
+      findings: analysisResult.findings.map((finding) => ({
+        id: finding.id,
+        title: finding.requirement,
+        description: finding.guidance,
+        severity: finding.riskLevel as
+          | "Low"
+          | "Medium"
+          | "High"
+          | "Critical",
+        recommendation: finding.correctiveAction,
+        reference: finding.references?.[0],
+      })),
+      recommendations: analysisResult.recommendations.map(
+        (recommendation, index) => ({
+          title: recommendation,
+          priority: index + 1,
+        }),
+      ),
+      references: analysisResult.references,
+    })
+      .then((result) => {
+        console.log("AI Professional Assessment:", result);
+        setProfessionalAssessment(result);
+      })
+      .catch((error: unknown) => {
+        console.error("AI Assessment Error:", error);
+      })
+      .finally(() => {
+        setIsAiLoading(false);
+      });
   }
 
   function resetInspection() {
