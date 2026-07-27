@@ -14,6 +14,21 @@ export interface ChecklistAnswer {
 
 export type AnalysisRiskLevel = "Low" | "Medium" | "High" | "Critical";
 
+export type AssessmentStatus = "Partial" | "Complete";
+
+export type WorkDecision =
+  | "Stop Work"
+  | "Incomplete Assessment"
+  | "Proceed With Conditions"
+  | "Work May Proceed";
+
+export interface SeverityBreakdown {
+  Critical: number;
+  High: number;
+  Medium: number;
+  Low: number;
+}
+
 export interface ChecklistFinding {
   id: string;
   requirement: string;
@@ -33,6 +48,12 @@ export interface ChecklistAnalysisResult {
 
   overallRisk: AnalysisRiskLevel;
   score: number;
+
+  assessmentStatus: AssessmentStatus;
+  completionRate: number;
+  permitReadiness: number;
+  workDecision: WorkDecision;
+  severityBreakdown: SeverityBreakdown;
 
   totalItems: number;
   answeredItems: number;
@@ -144,6 +165,48 @@ function getOverallRisk(
   return findings.length > 0 ? "Low" : "Low";
 }
 
+function getWorkDecision(
+  overallRisk: AnalysisRiskLevel,
+  findings: ChecklistFinding[],
+  unansweredItems: number,
+): WorkDecision {
+  if (
+    overallRisk === "Critical" ||
+    overallRisk === "High" ||
+    findings.some((finding) => finding.critical)
+  ) {
+    return "Stop Work";
+  }
+
+  if (unansweredItems > 0) {
+    return "Incomplete Assessment";
+  }
+
+  if (findings.length > 0) {
+    return "Proceed With Conditions";
+  }
+
+  return "Work May Proceed";
+}
+
+function buildSeverityBreakdown(
+  findings: ChecklistFinding[],
+): SeverityBreakdown {
+  return findings.reduce<SeverityBreakdown>(
+    (result, finding) => {
+      const level = normalizeRiskLevel(finding.riskLevel);
+      result[level] += 1;
+      return result;
+    },
+    {
+      Critical: 0,
+      High: 0,
+      Medium: 0,
+      Low: 0,
+    },
+  );
+}
+
 function buildRecommendations(
   overallRisk: AnalysisRiskLevel,
   findings: ChecklistFinding[],
@@ -237,26 +300,30 @@ function buildSummary(
   nonCompliantItems: number,
   criticalFindings: number,
   unansweredItems: number,
+  totalItems: number,
   locale: SupportedLocale,
 ): string {
+  const completedItems = totalItems - unansweredItems;
+  const isPartial = unansweredItems > 0;
+
   if (locale === "tr") {
     return [
-      `Kontrol listesi güvenlik skoru ${score}/100 olarak hesaplandı.`,
+      isPartial
+        ? `Bu, tamamlanan ${completedItems}/${totalItems} maddeye dayalı kısmi bir değerlendirmedir.`
+        : "Tüm kontrol maddelerine dayalı nihai değerlendirme tamamlandı.",
+      `Güvenlik skoru ${score}/100 olarak hesaplandı.`,
       `Genel risk seviyesi: ${overallRisk}.`,
       `${nonCompliantItems} uygunsuzluk ve ${criticalFindings} kritik bulgu tespit edildi.`,
-      unansweredItems > 0
-        ? `${unansweredItems} madde henüz cevaplanmadı.`
-        : "Tüm kontrol maddeleri değerlendirildi.",
     ].join(" ");
   }
 
   return [
-    `The checklist safety score is ${score}/100.`,
+    isPartial
+      ? `This is a partial assessment based on ${completedItems}/${totalItems} completed checklist items.`
+      : "The final assessment has been completed using all checklist items.",
+    `The safety score is ${score}/100.`,
     `Overall risk level: ${overallRisk}.`,
     `${nonCompliantItems} non-conformity finding(s) and ${criticalFindings} critical finding(s) were identified.`,
-    unansweredItems > 0
-      ? `${unansweredItems} item(s) remain unanswered.`
-      : "All checklist items were assessed.",
   ].join(" ");
 }
 
@@ -381,11 +448,37 @@ export function analyzeChecklist(
     locale,
   );
 
+  const assessmentStatus: AssessmentStatus =
+    unansweredItems === 0 ? "Complete" : "Partial";
+
+  const completionRate =
+    items.length === 0
+      ? 0
+      : Math.round(((items.length - unansweredItems) / items.length) * 100);
+
+  const severityBreakdown = buildSeverityBreakdown(findings);
+
+  const permitReadiness = Math.max(
+    0,
+    Math.min(
+      100,
+      completionRate -
+        severityBreakdown.Critical * 40 -
+        severityBreakdown.High * 15 -
+        severityBreakdown.Medium * 7 -
+        severityBreakdown.Low * 3,
+    ),
+  );
+
+  const workDecision = getWorkDecision(
+    overallRisk,
+    findings,
+    unansweredItems,
+  );
+
   const canWorkProceed =
-    criticalFindings.length === 0 &&
-    overallRisk !== "Critical" &&
-    overallRisk !== "High" &&
-    unansweredItems === 0;
+    workDecision === "Work May Proceed" ||
+    workDecision === "Proceed With Conditions";
 
   return {
     checklistId: document.id,
@@ -394,6 +487,12 @@ export function analyzeChecklist(
 
     overallRisk,
     score,
+
+    assessmentStatus,
+    completionRate,
+    permitReadiness,
+    workDecision,
+    severityBreakdown,
 
     totalItems: items.length,
     answeredItems: answers.filter((answer) =>
@@ -417,6 +516,7 @@ export function analyzeChecklist(
       findings.length,
       criticalFindings.length,
       unansweredItems,
+      items.length,
       locale,
     ),
 

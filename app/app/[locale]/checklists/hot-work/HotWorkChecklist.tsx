@@ -767,80 +767,373 @@ export default function HotWorkChecklist({ locale }: Props) {
           </div>
         </section>
 
-        {analysis && (
-          <section className="mt-8 rounded-3xl border border-blue-500/30 bg-blue-500/5 p-7 print:border-slate-300 print:bg-white">
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
-                  {locale === "tr"
-                    ? "SafeBase Güvenlik Analizi"
-                    : "SafeBase Safety Analysis"}
-                </p>
+               {analysis && (
+          <section className="mt-8 overflow-hidden rounded-3xl border border-blue-500/30 bg-blue-500/5 print:border-slate-300 print:bg-white">
+            <div className="border-b border-blue-500/20 bg-slate-950/40 p-7 sm:p-8 print:border-slate-300 print:bg-white">
+              <div className="flex flex-col gap-7 xl:flex-row xl:items-start xl:justify-between">
+                <div className="max-w-4xl">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">
+                      {locale === "tr"
+                        ? "SafeBase Profesyonel Güvenlik Değerlendirmesi"
+                        : "SafeBase Professional Safety Assessment"}
+                    </p>
 
-                <h2 className="mt-3 text-3xl font-bold">
-                  {locale === "tr"
-                    ? "Kontrol Listesi Analiz Sonucu"
-                    : "Checklist Analysis Result"}
-                </h2>
+                    <span
+                      className={`rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] ${
+                        analysis.assessmentStatus === "Complete"
+                          ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-200"
+                          : "border-amber-500/30 bg-amber-500/10 text-amber-200"
+                      } print:border-slate-300 print:bg-white print:text-black`}
+                    >
+                      {analysis.assessmentStatus === "Complete"
+                        ? locale === "tr"
+                          ? "Tam Değerlendirme"
+                          : "Complete Assessment"
+                        : locale === "tr"
+                          ? "Kısmi Değerlendirme"
+                          : "Partial Assessment"}
+                    </span>
+                  </div>
 
-                <p className="mt-4 max-w-3xl leading-7 text-slate-300 print:text-slate-700">
-                  {analysis.summary}
-                </p>
-              </div>
+                  <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+                    {locale === "tr"
+                      ? "Kontrol Listesi Yönetici Özeti"
+                      : "Checklist Executive Summary"}
+                  </h2>
 
-              <div
-                className={`rounded-2xl border px-5 py-4 ${
-                  analysis.canWorkProceed
-                    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-200"
-                    : "border-red-500/30 bg-red-500/10 text-red-200"
-                } print:border-slate-300 print:bg-white print:text-black`}
-              >
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-75">
-                  {locale === "tr"
-                    ? "Çalışma Kararı"
-                    : "Work Decision"}
-                </p>
-
-                <p className="mt-2 text-xl font-bold">
-                  {analysis.canWorkProceed
-                    ? locale === "tr"
-                      ? "Çalışma Devam Edebilir"
-                      : "Work May Proceed"
-                    : locale === "tr"
-                      ? "Çalışma Başlatılmamalı"
-                      : "Work Must Not Proceed"}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                [
-                  locale === "tr" ? "Güvenlik Skoru" : "Safety Score",
-                  `${analysis.score}/100`,
-                ],
-                [
-                  locale === "tr" ? "Genel Risk" : "Overall Risk",
-                  analysis.overallRisk,
-                ],
-                [
-                  locale === "tr" ? "Uygunsuzluk" : "Findings",
-                  analysis.nonCompliantItems,
-                ],
-                [
-                  locale === "tr" ? "Kritik Bulgu" : "Critical Findings",
-                  analysis.criticalFindings.length,
-                ],
-              ].map(([label, value]) => (
-                <div
-                  key={String(label)}
-                  className="rounded-2xl border border-slate-700 bg-slate-950 p-5 print:border-slate-300 print:bg-white"
-                >
-                  <p className="text-sm text-slate-500">{label}</p>
-                  <p className="mt-2 text-2xl font-bold">{value}</p>
+                  <p className="mt-5 max-w-3xl text-base leading-8 text-slate-300 print:text-slate-700">
+                    {analysis.summary}
+                  </p>
                 </div>
-              ))}
+
+                <div
+                  className={`min-w-full rounded-3xl border p-6 text-center shadow-lg xl:min-w-80 ${
+                    analysis.workDecision === "Stop Work"
+                      ? "border-red-500/40 bg-red-500/10 text-red-100 shadow-red-950/20"
+                      : analysis.workDecision === "Incomplete Assessment"
+                        ? "border-amber-500/40 bg-amber-500/10 text-amber-100 shadow-amber-950/20"
+                        : analysis.workDecision === "Proceed With Conditions"
+                          ? "border-orange-500/40 bg-orange-500/10 text-orange-100 shadow-orange-950/20"
+                          : "border-emerald-500/40 bg-emerald-500/10 text-emerald-100 shadow-emerald-950/20"
+                  } print:border-slate-300 print:bg-white print:text-black`}
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] opacity-75">
+                    {locale === "tr" ? "Çalışma Kararı" : "Work Decision"}
+                  </p>
+
+                  <p className="mt-3 text-3xl font-black uppercase tracking-tight">
+                    {analysis.workDecision === "Stop Work"
+                      ? locale === "tr"
+                        ? "🛑 İŞİ DURDUR"
+                        : "🛑 STOP WORK"
+                      : analysis.workDecision === "Incomplete Assessment"
+                        ? locale === "tr"
+                          ? "⚠️ DEĞERLENDİRME EKSİK"
+                          : "⚠️ ASSESSMENT INCOMPLETE"
+                        : analysis.workDecision === "Proceed With Conditions"
+                          ? locale === "tr"
+                            ? "🟠 KOŞULLU DEVAM"
+                            : "🟠 PROCEED WITH CONDITIONS"
+                          : locale === "tr"
+                            ? "✅ ÇALIŞMA DEVAM EDEBİLİR"
+                            : "✅ WORK MAY PROCEED"}
+                  </p>
+
+                  <p className="mt-4 text-sm leading-6 opacity-80">
+                    {analysis.workDecision === "Stop Work"
+                      ? locale === "tr"
+                        ? "Belirlenen yüksek veya kritik riskler kapatılmadan çalışma başlatılmamalıdır."
+                        : "Work must not start until the identified high or critical risks are closed."
+                      : analysis.workDecision === "Incomplete Assessment"
+                        ? locale === "tr"
+                          ? "Nihai karar verilmeden önce kalan kontrol maddeleri değerlendirilmelidir."
+                          : "The remaining checklist items must be assessed before a final decision is made."
+                        : analysis.workDecision === "Proceed With Conditions"
+                          ? locale === "tr"
+                            ? "Çalışma yalnızca belirlenen düzeltici faaliyetler ve kontroller uygulanarak sürdürülebilir."
+                            : "Work may proceed only with the identified corrective actions and controls in place."
+                          : locale === "tr"
+                            ? "Mevcut değerlendirmeye göre çalışmanın devam etmesini engelleyen açık bir bulgu bulunmamaktadır."
+                            : "The current assessment identified no open finding preventing the work from proceeding."}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+                <div className="rounded-2xl border border-slate-700 bg-slate-950 p-5 print:border-slate-300 print:bg-white">
+                  <p className="text-sm text-slate-500">
+                    {locale === "tr" ? "Tamamlanma" : "Completion"}
+                  </p>
+
+                  <p className="mt-2 text-3xl font-bold">
+                    {analysis.completionRate}%
+                  </p>
+
+                  <div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-800 print:border print:border-slate-300 print:bg-white">
+                    <div
+                      className="h-full rounded-full bg-blue-500 transition-all duration-500"
+                      style={{
+                        width: `${analysis.completionRate}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-slate-700 bg-slate-950 p-5 print:border-slate-300 print:bg-white">
+                  <p className="text-sm text-slate-500">
+                    {locale === "tr" ? "Güvenlik Skoru" : "Safety Score"}
+                  </p>
+
+                  <p className="mt-2 text-3xl font-bold">
+                    {analysis.score}
+                    <span className="text-lg text-slate-500">/100</span>
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-slate-700 bg-slate-950 p-5 print:border-slate-300 print:bg-white">
+                  <p className="text-sm text-slate-500">
+                    {locale === "tr" ? "Genel Risk" : "Overall Risk"}
+                  </p>
+
+                  <p
+                    className={`mt-2 text-3xl font-bold ${
+                      analysis.overallRisk === "Critical"
+                        ? "text-red-300"
+                        : analysis.overallRisk === "High"
+                          ? "text-orange-300"
+                          : analysis.overallRisk === "Medium"
+                            ? "text-amber-300"
+                            : "text-emerald-300"
+                    } print:text-black`}
+                  >
+                    {analysis.overallRisk === "Critical"
+                      ? "🔴 "
+                      : analysis.overallRisk === "High"
+                        ? "🟠 "
+                        : analysis.overallRisk === "Medium"
+                          ? "🟡 "
+                          : "🟢 "}
+                    {analysis.overallRisk}
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-slate-700 bg-slate-950 p-5 print:border-slate-300 print:bg-white">
+                  <p className="text-sm text-slate-500">
+                    {locale === "tr" ? "Uygunsuzluk" : "Findings"}
+                  </p>
+
+                  <p className="mt-2 text-3xl font-bold">
+                    {analysis.nonCompliantItems}
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-slate-700 bg-slate-950 p-5 print:border-slate-300 print:bg-white">
+                  <p className="text-sm text-slate-500">
+                    {locale === "tr"
+                      ? "Kritik Bulgular"
+                      : "Critical Findings"}
+                  </p>
+
+                  <p className="mt-2 text-3xl font-bold text-red-300 print:text-black">
+                    {analysis.criticalFindings.length}
+                  </p>
+                </div>
+              </div>
             </div>
+            <div className="mt-7 rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
+  <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+    <div>
+      <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-400">
+        {locale === "tr"
+          ? "Bulgu Şiddet Dağılımı"
+          : "Finding Severity Breakdown"}
+      </p>
+
+      <h3 className="mt-2 text-2xl font-bold">
+        {locale === "tr"
+          ? "Risk Seviyelerine Göre Bulgular"
+          : "Findings by Risk Level"}
+      </h3>
+    </div>
+
+    <p className="text-sm text-slate-500">
+      {locale === "tr"
+        ? `Toplam ${analysis.findings.length} bulgu`
+        : `${analysis.findings.length} total finding(s)`}
+    </p>
+  </div>
+
+  <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    {[
+      {
+        label: locale === "tr" ? "Kritik" : "Critical",
+        value: analysis.severityBreakdown.Critical,
+        icon: "🔴",
+        className:
+          "border-red-500/30 bg-red-500/10 text-red-200",
+      },
+      {
+        label: locale === "tr" ? "Yüksek" : "High",
+        value: analysis.severityBreakdown.High,
+        icon: "🟠",
+        className:
+          "border-orange-500/30 bg-orange-500/10 text-orange-200",
+      },
+      {
+        label: locale === "tr" ? "Orta" : "Medium",
+        value: analysis.severityBreakdown.Medium,
+        icon: "🟡",
+        className:
+          "border-amber-500/30 bg-amber-500/10 text-amber-200",
+      },
+      {
+        label: locale === "tr" ? "Düşük" : "Low",
+        value: analysis.severityBreakdown.Low,
+        icon: "🟢",
+        className:
+          "border-emerald-500/30 bg-emerald-500/10 text-emerald-200",
+      },
+    ].map((severity) => (
+      <div
+        key={severity.label}
+        className={`rounded-2xl border p-5 ${severity.className} print:border-slate-300 print:bg-white print:text-black`}
+      >
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-sm font-semibold uppercase tracking-[0.12em]">
+            {severity.label}
+          </p>
+
+          <span className="text-xl" aria-hidden="true">
+            {severity.icon}
+          </span>
+        </div>
+
+        <p className="mt-3 text-4xl font-black">
+          {severity.value}
+        </p>
+
+        <p className="mt-2 text-xs opacity-75">
+          {locale === "tr"
+            ? "Aktif analiz bulgusu"
+            : "Active analysis finding"}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="mt-7 rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
+  <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <div>
+      <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-400">
+        {locale === "tr" ? "İzin Hazırlık Durumu" : "Permit Readiness"}
+      </p>
+
+      <h3 className="mt-2 text-2xl font-bold">
+        {analysis.permitReadiness >= 85
+          ? locale === "tr"
+            ? "Yetkilendirmeye Hazır"
+            : "Ready for Authorization"
+          : analysis.permitReadiness >= 60
+            ? locale === "tr"
+              ? "Koşullu Olarak Hazır"
+              : "Conditionally Ready"
+            : locale === "tr"
+              ? "İzin İçin Hazır Değil"
+              : "Not Ready for Permit"}
+      </h3>
+
+      <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-400 print:text-slate-700">
+        {locale === "tr"
+          ? "Bu değer; kontrol listesi tamamlanma oranı ve açık bulguların risk seviyeleri dikkate alınarak hesaplanır."
+          : "This value is calculated using checklist completion and the risk severity of open findings."}
+      </p>
+    </div>
+
+    <div className="text-left lg:text-right">
+      <p
+        className={`text-5xl font-black ${
+          analysis.permitReadiness >= 85
+            ? "text-emerald-300"
+            : analysis.permitReadiness >= 60
+              ? "text-amber-300"
+              : "text-red-300"
+        } print:text-black`}
+      >
+        {analysis.permitReadiness}%
+      </p>
+
+      <p className="mt-1 text-sm text-slate-500">
+        {locale === "tr" ? "Hazırlık puanı" : "Readiness score"}
+      </p>
+    </div>
+  </div>
+
+  <div className="mt-6 h-4 overflow-hidden rounded-full bg-slate-800 print:border print:border-slate-300 print:bg-white">
+    <div
+      className={`h-full rounded-full transition-all duration-700 ${
+        analysis.permitReadiness >= 85
+          ? "bg-emerald-500"
+          : analysis.permitReadiness >= 60
+            ? "bg-amber-500"
+            : "bg-red-500"
+      }`}
+      style={{ width: `${analysis.permitReadiness}%` }}
+    />
+  </div>
+
+  <div className="mt-3 flex justify-between text-xs font-medium text-slate-500">
+    <span>0%</span>
+    <span>60%</span>
+    <span>85%</span>
+    <span>100%</span>
+  </div>
+
+  <div className="mt-5 grid gap-3 sm:grid-cols-3">
+    <div
+      className={`rounded-xl border p-4 ${
+        analysis.permitReadiness < 60
+          ? "border-red-500/40 bg-red-500/10 text-red-200"
+          : "border-slate-700 text-slate-500"
+      } print:border-slate-300 print:bg-white print:text-black`}
+    >
+      <p className="text-sm font-bold">
+        {locale === "tr" ? "Hazır Değil" : "Not Ready"}
+      </p>
+      <p className="mt-1 text-xs opacity-75">0–59%</p>
+    </div>
+
+    <div
+      className={`rounded-xl border p-4 ${
+        analysis.permitReadiness >= 60 &&
+        analysis.permitReadiness < 85
+          ? "border-amber-500/40 bg-amber-500/10 text-amber-200"
+          : "border-slate-700 text-slate-500"
+      } print:border-slate-300 print:bg-white print:text-black`}
+    >
+      <p className="text-sm font-bold">
+        {locale === "tr" ? "Koşullu Hazır" : "Conditionally Ready"}
+      </p>
+      <p className="mt-1 text-xs opacity-75">60–84%</p>
+    </div>
+
+    <div
+      className={`rounded-xl border p-4 ${
+        analysis.permitReadiness >= 85
+          ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-200"
+          : "border-slate-700 text-slate-500"
+      } print:border-slate-300 print:bg-white print:text-black`}
+    >
+      <p className="text-sm font-bold">
+        {locale === "tr"
+          ? "Yetkilendirmeye Hazır"
+          : "Ready for Authorization"}
+      </p>
+      <p className="mt-1 text-xs opacity-75">85–100%</p>
+    </div>
+  </div>
+</div>
 
             <div className="mt-7 grid gap-6 lg:grid-cols-2">
               <div className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
