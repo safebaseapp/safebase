@@ -17,6 +17,8 @@ export default function HotWorkChecklist({ locale }: Props) {
   const t = labels[locale];
   const items = checklistItems[locale];
 
+  const isPremiumUser = false;
+
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [comments, setComments] = useState("");
   const [correctiveActions, setCorrectiveActions] = useState<
@@ -286,6 +288,19 @@ export default function HotWorkChecklist({ locale }: Props) {
     } finally {
       setIsAiLoading(false);
     }
+  }
+
+  function handlePremiumAssessmentClick() {
+    if (!isPremiumUser) {
+      alert(
+        locale === "tr"
+          ? "🔒 Bu özellik Premium üyeler içindir."
+          : "🔒 This feature is available to Premium members.",
+      );
+      return;
+    }
+
+    void generateAiAssessment();
   }
 
   function resetInspection() {
@@ -1615,12 +1630,12 @@ export default function HotWorkChecklist({ locale }: Props) {
           </button>
           <button
   type="button"
-  onClick={generateAiAssessment}
+  onClick={handlePremiumAssessmentClick}
   className="rounded-2xl bg-fuchsia-600 px-6 py-4 font-semibold text-white transition hover:bg-fuchsia-500 disabled:cursor-not-allowed disabled:opacity-40"
 >
   {locale === "tr"
-    ? "✨ AI Değerlendirmesi (Premium)"
-    : "✨ Generate AI Assessment (Premium)"}
+    ? "🔒 AI Değerlendirmesi (Premium)"
+    : "🔒 Generate AI Assessment (Premium)"}
 </button>
 
           <button
