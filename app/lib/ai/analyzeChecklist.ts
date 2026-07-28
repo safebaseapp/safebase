@@ -1,3 +1,4 @@
+import { confinedSpaceChecklist } from "../../data/checklists/confined-space";
 import {
   hotWorkChecklist,
   type ChecklistDocument,
@@ -534,3 +535,15 @@ export function analyzeHotWorkChecklist(
     locale,
   );
 }
+
+export function analyzeConfinedSpaceChecklist(
+  answers: ChecklistAnswer[],
+  locale: SupportedLocale = "en",
+): ChecklistAnalysisResult {
+  return analyzeChecklist(
+    confinedSpaceChecklist,
+    answers,
+    locale,
+  );
+}
+

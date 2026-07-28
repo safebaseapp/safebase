@@ -6,12 +6,6 @@ import { checklistItems } from "./checklistData";
 import { labels } from "./labels";
 import type { Answer, CorrectiveAction, Props } from "./types";
 import PremiumAssessmentButton from "../components/PremiumAssessmentButton";
-import ChecklistAnalysisPanel from "../components/ChecklistAnalysisPanel";
-import {
-  analyzeConfinedSpaceChecklist,
-  type ChecklistAnalysisResult,
-  type ChecklistAnswer,
-} from "../../../../lib/ai/analyzeChecklist";
 
 export default function ConfinedSpaceChecklist({ locale }: Props) {
   const t = labels[locale];
@@ -22,9 +16,6 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
   const [correctiveActions, setCorrectiveActions] = useState<
     Record<string, CorrectiveAction>
   >({});
-
-  const [analysis, setAnalysis] =
-    useState<ChecklistAnalysisResult | null>(null);
 
   const answeredCount = items.filter(
     (item) => answers[item.id] !== null && answers[item.id] !== undefined,
@@ -181,45 +172,10 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
     }));
   }
 
-  function runSafetyAnalysis() {
-    const formattedAnswers: ChecklistAnswer[] = Object.entries(answers).map(
-      ([id, answer]) => ({
-        id,
-        answer:
-          answer === "yes"
-            ? "Yes"
-            : answer === "no"
-              ? "No"
-              : "N/A",
-        remarks:
-          answer === "no"
-            ? correctiveActions[id]?.action || undefined
-            : undefined,
-      }),
-    );
-
-    const analysisResult = analyzeConfinedSpaceChecklist(
-      formattedAnswers,
-      locale,
-    );
-
-    setAnalysis(analysisResult);
-
-    setTimeout(() => {
-      document
-        .querySelector("[data-checklist-analysis]")
-        ?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-    }, 100);
-  }
-
   function resetInspection() {
     setAnswers({});
     setComments("");
     setCorrectiveActions({});
-    setAnalysis(null);
   }
 
   function getPriorityLabel(
@@ -800,16 +756,6 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
         </section>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row print:hidden">
-          <button
-            type="button"
-            onClick={runSafetyAnalysis}
-            className="rounded-2xl bg-emerald-600 px-6 py-4 font-semibold text-white transition hover:bg-emerald-500"
-          >
-            {locale === "tr"
-              ? "🔍 Güvenlik Analizi Yap"
-              : "🔍 Analyze Safety"}
-          </button>
-
           <PremiumAssessmentButton
             locale={locale}
           />
