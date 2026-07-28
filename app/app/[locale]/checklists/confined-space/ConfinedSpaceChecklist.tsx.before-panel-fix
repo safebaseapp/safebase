@@ -784,16 +784,6 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           </div>
         </section>
 
-        <div
-          data-checklist-analysis
-          className="mt-8"
-        >
-          <ChecklistAnalysisPanel
-            locale={locale}
-            analysis={analysis}
-          />
-        </div>
-
         <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:border-slate-300 print:bg-white">
           <label htmlFor="inspection-comments">
             <span className="block text-lg font-bold">{t.comments}</span>
