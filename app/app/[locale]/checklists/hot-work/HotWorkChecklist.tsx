@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { checklistItems } from "./checklistData";
 import { generateAssessment } from "@/lib/api/assessmentClient";
+import type { ProfessionalAssessmentOutput } from "@/lib/ai/assessmentTypes";
 import { labels } from "./labels";
 import {
   analyzeHotWorkChecklist,
@@ -23,8 +24,9 @@ export default function HotWorkChecklist({ locale }: Props) {
   >({});
   const [analysis, setAnalysis] =
     useState<ChecklistAnalysisResult | null>(null);
-    const [professionalAssessment, setProfessionalAssessment] = useState<any>(null);
-const [isAiLoading, setIsAiLoading] = useState(false);
+  const [professionalAssessment, setProfessionalAssessment] =
+    useState<ProfessionalAssessmentOutput | null>(null);
+  const [isAiLoading, setIsAiLoading] = useState(false);
 
   const answeredCount = items.filter(
     (item) => answers[item.id] !== null && answers[item.id] !== undefined,
@@ -272,6 +274,8 @@ const [isAiLoading, setIsAiLoading] = useState(false);
     setComments("");
     setCorrectiveActions({});
     setAnalysis(null);
+    setProfessionalAssessment(null);
+    setIsAiLoading(false);
   }
 
   function getPriorityLabel(
@@ -1315,6 +1319,251 @@ const [isAiLoading, setIsAiLoading] = useState(false);
           </section>
         )}
 
+        {isAiLoading && (
+          <section className="mt-8 rounded-3xl border border-violet-500/30 bg-violet-500/5 p-7 print:hidden">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/15 text-2xl">
+                🤖
+              </div>
+
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-violet-300">
+                  {locale === "tr"
+                    ? "SafeBase AI çalışıyor"
+                    : "SafeBase AI is working"}
+                </p>
+
+                <p className="mt-2 text-slate-300">
+                  {locale === "tr"
+                    ? "Profesyonel HSE değerlendirmesi hazırlanıyor..."
+                    : "Generating the professional HSE assessment..."}
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {professionalAssessment && (
+          <section className="mt-8 overflow-hidden rounded-3xl border border-violet-500/30 bg-violet-500/5 print:border-slate-300 print:bg-white">
+            <div className="border-b border-violet-500/20 bg-slate-950/40 p-7 sm:p-8 print:border-slate-300 print:bg-white">
+              <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
+                <div className="max-w-4xl">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-300">
+                      {locale === "tr"
+                        ? "SafeBase AI Profesyonel Değerlendirmesi"
+                        : "SafeBase AI Professional Assessment"}
+                    </p>
+
+                    <span className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-violet-200 print:border-slate-300 print:bg-white print:text-black">
+                      GPT-5 MINI
+                    </span>
+                  </div>
+
+                  <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+                    {locale === "tr"
+                      ? "Yönetici Değerlendirmesi"
+                      : "Executive Assessment"}
+                  </h2>
+
+                  <p className="mt-5 max-w-4xl text-base leading-8 text-slate-300 print:text-slate-700">
+                    {professionalAssessment.executiveAssessment}
+                  </p>
+                </div>
+
+                <div
+                  className={`min-w-full rounded-3xl border p-6 text-center shadow-lg xl:min-w-80 ${
+                    professionalAssessment.finalRecommendation === "STOP WORK"
+                      ? "border-red-500/40 bg-red-500/10 text-red-100 shadow-red-950/20"
+                      : professionalAssessment.finalRecommendation ===
+                          "PROCEED WITH CONDITIONS"
+                        ? "border-orange-500/40 bg-orange-500/10 text-orange-100 shadow-orange-950/20"
+                        : "border-emerald-500/40 bg-emerald-500/10 text-emerald-100 shadow-emerald-950/20"
+                  } print:border-slate-300 print:bg-white print:text-black`}
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] opacity-75">
+                    {locale === "tr"
+                      ? "Nihai AI Tavsiyesi"
+                      : "Final AI Recommendation"}
+                  </p>
+
+                  <p className="mt-3 text-3xl font-black uppercase tracking-tight">
+                    {professionalAssessment.finalRecommendation === "STOP WORK"
+                      ? locale === "tr"
+                        ? "🛑 İŞİ DURDUR"
+                        : "🛑 STOP WORK"
+                      : professionalAssessment.finalRecommendation ===
+                          "PROCEED WITH CONDITIONS"
+                        ? locale === "tr"
+                          ? "🟠 KOŞULLU DEVAM"
+                          : "🟠 PROCEED WITH CONDITIONS"
+                        : locale === "tr"
+                          ? "✅ ONAYLANDI"
+                          : "✅ APPROVED"}
+                  </p>
+
+                  <p className="mt-4 text-xs leading-5 opacity-75">
+                    {locale === "tr"
+                      ? "AI sonucu, SafeBase kural motorunun kararını değiştirmez."
+                      : "The AI assessment does not override the SafeBase rule-engine decision."}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-6 p-7 sm:p-8 xl:grid-cols-2">
+              <article className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
+                <h3 className="text-xl font-bold">
+                  {locale === "tr"
+                    ? "Operasyonel Risk"
+                    : "Operational Risk"}
+                </h3>
+
+                <p className="mt-4 leading-7 text-slate-300 print:text-black">
+                  {professionalAssessment.operationalRisk}
+                </p>
+              </article>
+
+              <article className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
+                <h3 className="text-xl font-bold">
+                  {locale === "tr"
+                    ? "Muhtemel Sonuçlar"
+                    : "Potential Consequences"}
+                </h3>
+
+                <div className="mt-4 space-y-3">
+                  {professionalAssessment.potentialConsequences.map(
+                    (consequence, index) => (
+                      <div
+                        key={`${consequence}-${index}`}
+                        className="flex gap-3"
+                      >
+                        <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500/15 text-xs font-bold text-red-300">
+                          {index + 1}
+                        </span>
+
+                        <p className="leading-7 text-slate-300 print:text-black">
+                          {consequence}
+                        </p>
+                      </div>
+                    ),
+                  )}
+                </div>
+              </article>
+
+              {professionalAssessment.criticalConcerns.length > 0 && (
+                <article className="rounded-2xl border border-red-500/30 bg-red-500/5 p-6 print:border-slate-300 print:bg-white">
+                  <h3 className="text-xl font-bold text-red-200 print:text-black">
+                    {locale === "tr"
+                      ? "Kritik Endişeler"
+                      : "Critical Concerns"}
+                  </h3>
+
+                  <div className="mt-4 space-y-3">
+                    {professionalAssessment.criticalConcerns.map(
+                      (concern, index) => (
+                        <div key={`${concern}-${index}`} className="flex gap-3">
+                          <span className="mt-1 text-red-300">●</span>
+
+                          <p className="leading-7 text-slate-300 print:text-black">
+                            {concern}
+                          </p>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                </article>
+              )}
+
+              {professionalAssessment.positiveFindings.length > 0 && (
+                <article className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-6 print:border-slate-300 print:bg-white">
+                  <h3 className="text-xl font-bold text-emerald-200 print:text-black">
+                    {locale === "tr"
+                      ? "Olumlu Bulgular"
+                      : "Positive Findings"}
+                  </h3>
+
+                  <div className="mt-4 space-y-3">
+                    {professionalAssessment.positiveFindings.map(
+                      (finding, index) => (
+                        <div key={`${finding}-${index}`} className="flex gap-3">
+                          <span className="mt-1 text-emerald-300">✓</span>
+
+                          <p className="leading-7 text-slate-300 print:text-black">
+                            {finding}
+                          </p>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                </article>
+              )}
+            </div>
+
+            <div className="border-t border-violet-500/20 p-7 sm:p-8 print:border-slate-300">
+              <h3 className="text-2xl font-bold">
+                {locale === "tr"
+                  ? "Öncelikli Aksiyon Planı"
+                  : "Priority Action Plan"}
+              </h3>
+
+              <div className="mt-5 space-y-4">
+                {professionalAssessment.priorityActions.map((item) => (
+                  <article
+                    key={`${item.priority}-${item.action}`}
+                    className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:break-inside-avoid print:border-slate-300 print:bg-white"
+                  >
+                    <div className="flex gap-4">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-violet-500/15 text-lg font-black text-violet-200">
+                        {item.priority}
+                      </span>
+
+                      <div>
+                        <h4 className="text-lg font-bold">{item.action}</h4>
+
+                        <p className="mt-3 leading-7 text-slate-400 print:text-slate-700">
+                          <span className="font-semibold text-slate-300 print:text-black">
+                            {locale === "tr" ? "Gerekçe: " : "Reason: "}
+                          </span>
+                          {item.reason}
+                        </p>
+
+                        {item.reference && (
+                          <p className="mt-3 text-sm text-blue-300 print:text-black">
+                            <span className="font-semibold">
+                              {locale === "tr" ? "Referans: " : "Reference: "}
+                            </span>
+                            {item.reference}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-violet-500/20 p-7 sm:p-8 print:border-slate-300">
+              <h3 className="text-xl font-bold">
+                {locale === "tr"
+                  ? "Uygulanabilir Standartlar"
+                  : "Applicable Standards"}
+              </h3>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {professionalAssessment.applicableStandards.map((standard) => (
+                  <span
+                    key={standard}
+                    className="rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-2 text-sm text-violet-200 print:border-slate-300 print:bg-white print:text-black"
+                  >
+                    {standard}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:border-slate-300 print:bg-white">
           <label htmlFor="inspection-comments">
             <span className="block text-lg font-bold">{t.comments}</span>
@@ -1334,12 +1583,16 @@ const [isAiLoading, setIsAiLoading] = useState(false);
           <button
             type="button"
             onClick={runSafetyAnalysis}
-            disabled={answeredCount === 0}
+            disabled={answeredCount === 0 || isAiLoading}
             className="rounded-2xl bg-violet-600 px-6 py-4 font-semibold text-white transition hover:bg-violet-500 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {locale === "tr"
-              ? "🤖 Güvenlik Analizi Yap"
-              : "🤖 Analyze Safety"}
+            {isAiLoading
+              ? locale === "tr"
+                ? "🤖 AI Değerlendirmesi Hazırlanıyor..."
+                : "🤖 Generating AI Assessment..."
+              : locale === "tr"
+                ? "🤖 Güvenlik Analizi Yap"
+                : "🤖 Analyze Safety"}
           </button>
 
           <button
