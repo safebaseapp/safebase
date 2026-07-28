@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { checklistItems } from "./checklistData";
 import { generateAssessment } from "@/lib/api/assessmentClient";
+import { checklistItems } from "./checklistData";
 import type { ProfessionalAssessmentOutput } from "@/lib/ai/assessmentTypes";
 import { labels } from "./labels";
 import {
@@ -207,66 +207,85 @@ export default function HotWorkChecklist({ locale }: Props) {
 
     setAnalysis(analysisResult);
     setProfessionalAssessment(null);
+    setIsAiLoading(false);
+  }
 
-    if (analysisResult.workDecision === "Incomplete Assessment") {
-      setIsAiLoading(false);
+
+  async function generateAiAssessment() {
+    if (!analysis || isAiLoading) {
+      alert(
+        locale === "tr"
+          ? "Önce Güvenlik Analizi Yap butonuna basın."
+          : "Run Analyze Safety first.",
+      );
       return;
     }
 
     setIsAiLoading(true);
+    setProfessionalAssessment(null);
 
     const workDecision =
-      analysisResult.workDecision === "Stop Work"
+      analysis.workDecision === "Stop Work"
         ? "STOP WORK"
-        : analysisResult.workDecision === "Proceed With Conditions"
+        : analysis.workDecision === "Proceed With Conditions"
           ? "PROCEED WITH CONDITIONS"
           : "APPROVED";
 
-    generateAssessment({
-      workType: analysisResult.checklistTitle || "Hot Work",
-      language: locale,
-      assessmentStatus: analysisResult.assessmentStatus,
-      completionRate: analysisResult.completionRate,
-      safetyScore: analysisResult.score,
-      overallRisk: analysisResult.overallRisk,
-      workDecision,
-      permitReadiness: analysisResult.permitReadiness,
-      severityBreakdown: {
-        critical: analysisResult.severityBreakdown.Critical,
-        high: analysisResult.severityBreakdown.High,
-        medium: analysisResult.severityBreakdown.Medium,
-        low: analysisResult.severityBreakdown.Low,
-      },
-      findings: analysisResult.findings.map((finding) => ({
-        id: finding.id,
-        title: finding.requirement,
-        description: finding.guidance,
-        severity: finding.riskLevel as
-          | "Low"
-          | "Medium"
-          | "High"
-          | "Critical",
-        recommendation: finding.correctiveAction,
-        reference: finding.references?.[0],
-      })),
-      recommendations: analysisResult.recommendations.map(
-        (recommendation, index) => ({
-          title: recommendation,
-          priority: index + 1,
-        }),
-      ),
-      references: analysisResult.references,
-    })
-      .then((result) => {
-        console.log("AI Professional Assessment:", result);
-        setProfessionalAssessment(result);
-      })
-      .catch((error: unknown) => {
-        console.error("AI Assessment Error:", error);
-      })
-      .finally(() => {
-        setIsAiLoading(false);
+    try {
+      const result = await generateAssessment({
+        workType: analysis.checklistTitle || "Hot Work",
+        language: locale,
+        assessmentStatus: analysis.assessmentStatus,
+        completionRate: analysis.completionRate,
+        safetyScore: analysis.score,
+        overallRisk: analysis.overallRisk,
+        workDecision,
+        permitReadiness: analysis.permitReadiness,
+        severityBreakdown: {
+          critical: analysis.severityBreakdown.Critical,
+          high: analysis.severityBreakdown.High,
+          medium: analysis.severityBreakdown.Medium,
+          low: analysis.severityBreakdown.Low,
+        },
+        findings: analysis.findings.map((finding) => ({
+          id: finding.id,
+          title: finding.requirement,
+          description: finding.guidance,
+          severity: finding.riskLevel as
+            | "Low"
+            | "Medium"
+            | "High"
+            | "Critical",
+          recommendation: finding.correctiveAction,
+          reference: finding.references?.[0],
+        })),
+        recommendations: analysis.recommendations.map(
+          (recommendation, index) => ({
+            title: recommendation,
+            priority: index + 1,
+          }),
+        ),
+        references: analysis.references,
       });
+
+      setProfessionalAssessment(result);
+
+      setTimeout(() => {
+        document
+          .querySelector("[data-ai-assessment]")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    } catch (error) {
+      console.error("AI Assessment Error:", error);
+
+      alert(
+        locale === "tr"
+          ? "AI değerlendirmesi oluşturulamadı. API bağlantısını kontrol edin."
+          : "AI assessment could not be generated. Check the API connection.",
+      );
+    } finally {
+      setIsAiLoading(false);
+    }
   }
 
   function resetInspection() {
@@ -1344,7 +1363,7 @@ export default function HotWorkChecklist({ locale }: Props) {
         )}
 
         {professionalAssessment && (
-          <section className="mt-8 overflow-hidden rounded-3xl border border-violet-500/30 bg-violet-500/5 print:border-slate-300 print:bg-white">
+          <section data-ai-assessment className="mt-8 overflow-hidden rounded-3xl border border-violet-500/30 bg-violet-500/5 print:border-slate-300 print:bg-white">
             <div className="border-b border-violet-500/20 bg-slate-950/40 p-7 sm:p-8 print:border-slate-300 print:bg-white">
               <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
                 <div className="max-w-4xl">
@@ -1594,6 +1613,15 @@ export default function HotWorkChecklist({ locale }: Props) {
                 ? "🤖 Güvenlik Analizi Yap"
                 : "🤖 Analyze Safety"}
           </button>
+          <button
+  type="button"
+  onClick={generateAiAssessment}
+  className="rounded-2xl bg-fuchsia-600 px-6 py-4 font-semibold text-white transition hover:bg-fuchsia-500 disabled:cursor-not-allowed disabled:opacity-40"
+>
+  {locale === "tr"
+    ? "✨ AI Değerlendirmesi (Premium)"
+    : "✨ Generate AI Assessment (Premium)"}
+</button>
 
           <button
             type="button"
