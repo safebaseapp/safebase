@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { checklistItems } from "./checklistData";
 import { labels } from "./labels";
 import type { Answer, CorrectiveAction, Props } from "./types";
+import PremiumAssessmentButton from "../components/PremiumAssessmentButton";
 
 export default function ConfinedSpaceChecklist({ locale }: Props) {
   const t = labels[locale];
@@ -755,6 +756,10 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
         </section>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row print:hidden">
+          <PremiumAssessmentButton
+            locale={locale}
+          />
+
           <button
             type="button"
             onClick={() => window.print()}
