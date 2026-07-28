@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { generateAssessment } from "@/lib/api/assessmentClient";
+import PremiumAssessmentButton from "../components/PremiumAssessmentButton";
 import { checklistItems } from "./checklistData";
 import type { ProfessionalAssessmentOutput } from "@/lib/ai/assessmentTypes";
 import { labels } from "./labels";
@@ -1628,15 +1629,11 @@ export default function HotWorkChecklist({ locale }: Props) {
                 ? "🤖 Güvenlik Analizi Yap"
                 : "🤖 Analyze Safety"}
           </button>
-          <button
-  type="button"
-  onClick={handlePremiumAssessmentClick}
-  className="rounded-2xl bg-fuchsia-600 px-6 py-4 font-semibold text-white transition hover:bg-fuchsia-500 disabled:cursor-not-allowed disabled:opacity-40"
->
-  {locale === "tr"
-    ? "🔒 AI Değerlendirmesi (Premium)"
-    : "🔒 Generate AI Assessment (Premium)"}
-</button>
+          <PremiumAssessmentButton
+  locale={locale}
+  disabled={!analysis || isAiLoading}
+  onPremiumClick={handlePremiumAssessmentClick}
+/>
 
           <button
             type="button"
