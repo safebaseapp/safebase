@@ -5,13 +5,6 @@ import { useMemo, useState } from "react";
 import { checklistItems } from "./checklistData";
 import { labels } from "./labels";
 import type { Answer, CorrectiveAction, Props } from "./types";
-import PremiumAssessmentButton from "../components/PremiumAssessmentButton";
-import ChecklistAnalysisPanel from "../components/ChecklistAnalysisPanel";
-import {
-  analyzeLotoChecklist,
-  type ChecklistAnalysisResult,
-  type ChecklistAnswer,
-} from "../../../../lib/ai/analyzeChecklist";
 
 export default function LotoChecklist({ locale }: Props) {
   const t = labels[locale];
@@ -22,11 +15,6 @@ export default function LotoChecklist({ locale }: Props) {
   const [correctiveActions, setCorrectiveActions] = useState<
     Record<string, CorrectiveAction>
   >({});
-
-  const [analysis, setAnalysis] =
-    useState<ChecklistAnalysisResult | null>(null);
-  const [analysisOpened, setAnalysisOpened] = useState(false);
-  const [analysisError, setAnalysisError] = useState<string | null>(null);
 
   const answeredCount = items.filter(
     (item) => answers[item.id] !== null && answers[item.id] !== undefined,
@@ -183,64 +171,10 @@ export default function LotoChecklist({ locale }: Props) {
     }));
   }
 
-  function runSafetyAnalysis() {
-    setAnalysisOpened(true);
-    setAnalysisError(null);
-
-    try {
-      const formattedAnswers: ChecklistAnswer[] = items.map((item) => {
-        const answer = answers[item.id];
-
-        return {
-          id: item.id,
-          answer:
-            answer === "yes"
-              ? "Yes"
-              : answer === "no"
-                ? "No"
-                : "N/A",
-          remarks:
-            answer === "no"
-              ? correctiveActions[item.id]?.action || undefined
-              : undefined,
-        };
-      });
-
-      const analysisResult = analyzeLotoChecklist(
-        formattedAnswers,
-        locale,
-      );
-
-      setAnalysis(analysisResult);
-    } catch (error) {
-      console.error("LOTO analysis failed:", error);
-      setAnalysis(null);
-      setAnalysisError(
-        error instanceof Error
-          ? error.message
-          : locale === "tr"
-            ? "LOTO güvenlik analizi oluşturulamadı."
-            : "LOTO safety analysis could not be generated.",
-      );
-    }
-
-    window.setTimeout(() => {
-      document
-        .querySelector("[data-checklist-analysis]")
-        ?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-    }, 150);
-  }
-
   function resetInspection() {
     setAnswers({});
     setComments("");
     setCorrectiveActions({});
-    setAnalysis(null);
-    setAnalysisOpened(false);
-    setAnalysisError(null);
   }
 
   function getPriorityLabel(
@@ -821,18 +755,6 @@ export default function LotoChecklist({ locale }: Props) {
         </section>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row print:hidden">
-          <button
-            type="button"
-            onClick={runSafetyAnalysis}
-            className="rounded-2xl bg-emerald-600 px-6 py-4 font-semibold text-white transition hover:bg-emerald-500"
-          >
-            {locale === "tr"
-              ? "🔍 Güvenlik Analizi Yap"
-              : "🔍 Analyze Safety"}
-          </button>
-
-          <PremiumAssessmentButton locale={locale} />
-
           <button
             type="button"
             onClick={() => window.print()}

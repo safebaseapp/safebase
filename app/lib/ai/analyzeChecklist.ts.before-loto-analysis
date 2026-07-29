@@ -547,13 +547,3 @@ export function analyzeConfinedSpaceChecklist(
   );
 }
 
-export function analyzeLotoChecklist(
-  answers: ChecklistAnswer[],
-  locale: SupportedLocale = "en",
-): ChecklistAnalysisResult {
-  return analyzeChecklist(
-    confinedSpaceChecklist,
-    answers,
-    locale,
-  );
-}
