@@ -587,4 +587,3 @@ export function analyzeLotoChecklist(
     recommendations,
   };
 }
-
