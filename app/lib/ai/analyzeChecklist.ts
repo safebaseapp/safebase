@@ -1,3 +1,4 @@
+import { workingAtHeightChecklist } from "../../data/checklists/working-at-height";
 import { lotoChecklist } from "../../data/checklists/loto";
 import { confinedSpaceChecklist } from "../../data/checklists/confined-space";
 import {
@@ -112,10 +113,7 @@ function normalizeRiskLevel(riskLevel: string): AnalysisRiskLevel {
   return "Low";
 }
 
-function getRiskWeight(
-  riskLevel: string,
-  critical: boolean,
-): number {
+function getRiskWeight(riskLevel: string, critical: boolean): number {
   if (critical) {
     return 10;
   }
@@ -133,9 +131,7 @@ function getRiskWeight(
   }
 }
 
-function getOverallRisk(
-  findings: ChecklistFinding[],
-): AnalysisRiskLevel {
+function getOverallRisk(findings: ChecklistFinding[]): AnalysisRiskLevel {
   if (findings.some((finding) => finding.critical)) {
     return "Critical";
   }
@@ -149,9 +145,7 @@ function getOverallRisk(
   }
 
   if (
-    findings.some(
-      (finding) => normalizeRiskLevel(finding.riskLevel) === "High",
-    )
+    findings.some((finding) => normalizeRiskLevel(finding.riskLevel) === "High")
   ) {
     return "High";
   }
@@ -338,9 +332,7 @@ export function analyzeChecklist(
     (section) => section.items,
   ) as ChecklistItemShape[];
 
-  const answerMap = new Map(
-    answers.map((answer) => [answer.id, answer]),
-  );
+  const answerMap = new Map(answers.map((answer) => [answer.id, answer]));
 
   const findings: ChecklistFinding[] = [];
 
@@ -364,10 +356,7 @@ export function analyzeChecklist(
       continue;
     }
 
-    const riskWeight = getRiskWeight(
-      item.riskLevel,
-      item.critical,
-    );
+    const riskWeight = getRiskWeight(item.riskLevel, item.critical);
 
     totalPossibleRiskWeight += riskWeight;
 
@@ -380,62 +369,39 @@ export function analyzeChecklist(
 
     findings.push({
       id: item.id,
-      requirement: getLocalizedText(
-        item.requirement,
-        locale,
-      ),
+      requirement: getLocalizedText(item.requirement, locale),
       answer: response.answer,
       remarks: response.remarks,
       critical: item.critical,
       riskLevel: item.riskLevel,
-      guidance: getLocalizedText(
-        item.guidance,
-        locale,
-      ),
-      correctiveAction: getLocalizedText(
-        item.correctiveAction,
-        locale,
-      ),
+      guidance: getLocalizedText(item.guidance, locale),
+      correctiveAction: getLocalizedText(item.correctiveAction, locale),
       references: item.references ?? [],
     });
   }
 
-  const applicableItems =
-    compliantItems + findings.length;
+  const applicableItems = compliantItems + findings.length;
 
   const score =
     totalPossibleRiskWeight === 0
       ? 0
       : Math.max(
           0,
-          Math.round(
-            100 -
-              (failedRiskWeight /
-                totalPossibleRiskWeight) *
-                100,
-          ),
+          Math.round(100 - (failedRiskWeight / totalPossibleRiskWeight) * 100),
         );
 
-  const criticalFindings = findings.filter(
-    (finding) => finding.critical,
-  );
+  const criticalFindings = findings.filter((finding) => finding.critical);
 
   const overallRisk = getOverallRisk(findings);
 
   const correctiveActions = [
     ...new Set(
-      findings
-        .map((finding) => finding.correctiveAction)
-        .filter(Boolean),
+      findings.map((finding) => finding.correctiveAction).filter(Boolean),
     ),
   ];
 
   const references = [
-    ...new Set(
-      findings.flatMap(
-        (finding) => finding.references,
-      ),
-    ),
+    ...new Set(findings.flatMap((finding) => finding.references)),
   ];
 
   const recommendations = buildRecommendations(
@@ -445,10 +411,7 @@ export function analyzeChecklist(
     locale,
   );
 
-  const checklistTitle = getLocalizedText(
-    document.title,
-    locale,
-  );
+  const checklistTitle = getLocalizedText(document.title, locale);
 
   const assessmentStatus: AssessmentStatus =
     unansweredItems === 0 ? "Complete" : "Partial";
@@ -472,11 +435,7 @@ export function analyzeChecklist(
     ),
   );
 
-  const workDecision = getWorkDecision(
-    overallRisk,
-    findings,
-    unansweredItems,
-  );
+  const workDecision = getWorkDecision(overallRisk, findings, unansweredItems);
 
   const canWorkProceed =
     workDecision === "Work May Proceed" ||
@@ -530,33 +489,21 @@ export function analyzeHotWorkChecklist(
   answers: ChecklistAnswer[],
   locale: SupportedLocale = "en",
 ): ChecklistAnalysisResult {
-  return analyzeChecklist(
-    hotWorkChecklist,
-    answers,
-    locale,
-  );
+  return analyzeChecklist(hotWorkChecklist, answers, locale);
 }
 
 export function analyzeConfinedSpaceChecklist(
   answers: ChecklistAnswer[],
   locale: SupportedLocale = "en",
 ): ChecklistAnalysisResult {
-  return analyzeChecklist(
-    confinedSpaceChecklist,
-    answers,
-    locale,
-  );
+  return analyzeChecklist(confinedSpaceChecklist, answers, locale);
 }
 
 export function analyzeLotoChecklist(
   answers: ChecklistAnswer[],
   locale: SupportedLocale = "en",
 ): ChecklistAnalysisResult {
-  const result = analyzeChecklist(
-    lotoChecklist,
-    answers,
-    locale,
-  );
+  const result = analyzeChecklist(lotoChecklist, answers, locale);
 
   const recommendations = result.recommendations.map((recommendation) => {
     if (locale === "tr") {
@@ -579,6 +526,42 @@ export function analyzeLotoChecklist(
       .replace(
         "Hot work should not be authorized until all high-risk findings have been closed.",
         "Work on the equipment should not be authorized until all high-risk Lockout/Tagout findings have been closed.",
+      );
+  });
+
+  return {
+    ...result,
+    recommendations,
+  };
+}
+
+export function analyzeWorkingAtHeightChecklist(
+  answers: ChecklistAnswer[],
+  locale: SupportedLocale = "en",
+): ChecklistAnalysisResult {
+  const result = analyzeChecklist(workingAtHeightChecklist, answers, locale);
+
+  const recommendations = result.recommendations.map((recommendation) => {
+    if (locale === "tr") {
+      return recommendation
+        .replace(
+          "Kritik uygunsuzluklar giderilmeden sıcak çalışmayı başlatmayın veya devam ettirmeyin.",
+          "Kritik yüksekte çalışma uygunsuzlukları giderilmeden çalışmayı başlatmayın veya devam ettirmeyin.",
+        )
+        .replace(
+          "Yüksek riskli uygunsuzluklar kapatılmadan çalışma izni verilmemelidir.",
+          "Yüksek riskli yüksekte çalışma uygunsuzlukları kapatılmadan çalışma izni verilmemelidir.",
+        );
+    }
+
+    return recommendation
+      .replace(
+        "Do not start or continue hot work until all critical non-conformities have been corrected.",
+        "Do not start or continue work at height until all critical non-conformities have been corrected.",
+      )
+      .replace(
+        "Hot work should not be authorized until all high-risk findings have been closed.",
+        "Work at height should not be authorized until all high-risk findings have been closed.",
       );
   });
 
