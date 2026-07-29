@@ -189,32 +189,30 @@ export default function LotoChecklist({ locale }: Props) {
 
     try {
       const formattedAnswers: ChecklistAnswer[] = items.map((item) => {
-        const answer = answers[item.id];
+        const selectedAnswer = answers[item.id];
 
         return {
           id: item.id,
           answer:
-            answer === "yes"
+            selectedAnswer === "yes"
               ? "Yes"
-              : answer === "no"
+              : selectedAnswer === "no"
                 ? "No"
                 : "N/A",
           remarks:
-            answer === "no"
+            selectedAnswer === "no"
               ? correctiveActions[item.id]?.action || undefined
               : undefined,
         };
       });
 
-      const analysisResult = analyzeLotoChecklist(
-        formattedAnswers,
-        locale,
-      );
+      const result = analyzeLotoChecklist(formattedAnswers, locale);
 
-      setAnalysis(analysisResult);
+      setAnalysis(result);
     } catch (error) {
-      console.error("LOTO analysis failed:", error);
+      console.error("LOTO analysis error:", error);
       setAnalysis(null);
+
       setAnalysisError(
         error instanceof Error
           ? error.message
@@ -225,13 +223,17 @@ export default function LotoChecklist({ locale }: Props) {
     }
 
     window.setTimeout(() => {
-      document
-        .querySelector("[data-checklist-analysis]")
-        ?.scrollIntoView({
+      const target = document.querySelector(
+        "[data-checklist-analysis]",
+      );
+
+      if (target) {
+        target.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
-    }, 150);
+      }
+    }, 100);
   }
 
   function resetInspection() {
@@ -804,6 +806,47 @@ export default function LotoChecklist({ locale }: Props) {
             </div>
           </div>
         </section>
+
+        <div
+          data-checklist-analysis
+          className="scroll-mt-8"
+        >
+          {analysisOpened && (
+            <div className="mt-8">
+              {analysis ? (
+                <ChecklistAnalysisPanel
+                  locale={locale}
+                  analysis={analysis}
+                />
+              ) : (
+                <section className="rounded-3xl border border-amber-500/30 bg-slate-900 p-7 text-white">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">
+                    {locale === "tr"
+                      ? "LOTO Güvenlik Analizi"
+                      : "LOTO Safety Analysis"}
+                  </p>
+
+                  <h2 className="mt-3 text-2xl font-bold">
+                    {analysisError
+                      ? locale === "tr"
+                        ? "Analiz oluşturulamadı"
+                        : "Analysis could not be generated"
+                      : locale === "tr"
+                        ? "Analiz hazırlanıyor"
+                        : "Preparing analysis"}
+                  </h2>
+
+                  <p className="mt-3 leading-7 text-slate-300">
+                    {analysisError ||
+                      (locale === "tr"
+                        ? `${answeredCount}/${items.length} madde cevaplandı. ${noCount} uygunsuzluk ve ${criticalFailures.length} kritik bulgu tespit edildi.`
+                        : `${answeredCount}/${items.length} items answered. ${noCount} non-compliances and ${criticalFailures.length} critical findings identified.`)}
+                  </p>
+                </section>
+              )}
+            </div>
+          )}
+        </div>
 
         <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:border-slate-300 print:bg-white">
           <label htmlFor="inspection-comments">
