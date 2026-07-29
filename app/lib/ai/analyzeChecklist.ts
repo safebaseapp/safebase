@@ -552,10 +552,39 @@ export function analyzeLotoChecklist(
   answers: ChecklistAnswer[],
   locale: SupportedLocale = "en",
 ): ChecklistAnalysisResult {
-  return analyzeChecklist(
+  const result = analyzeChecklist(
     lotoChecklist,
     answers,
     locale,
   );
+
+  const recommendations = result.recommendations.map((recommendation) => {
+    if (locale === "tr") {
+      return recommendation
+        .replace(
+          "Kritik uygunsuzluklar giderilmeden sıcak çalışmayı başlatmayın veya devam ettirmeyin.",
+          "Kritik LOTO uygunsuzlukları giderilmeden ekipman üzerinde çalışmayı başlatmayın veya devam ettirmeyin.",
+        )
+        .replace(
+          "Yüksek riskli uygunsuzluklar kapatılmadan çalışma izni verilmemelidir.",
+          "Yüksek riskli LOTO uygunsuzlukları kapatılmadan ekipman üzerinde çalışmaya izin verilmemelidir.",
+        );
+    }
+
+    return recommendation
+      .replace(
+        "Do not start or continue hot work until all critical non-conformities have been corrected.",
+        "Do not start or continue work on the equipment until all critical Lockout/Tagout non-conformities have been corrected.",
+      )
+      .replace(
+        "Hot work should not be authorized until all high-risk findings have been closed.",
+        "Work on the equipment should not be authorized until all high-risk Lockout/Tagout findings have been closed.",
+      );
+  });
+
+  return {
+    ...result,
+    recommendations,
+  };
 }
 

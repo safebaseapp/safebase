@@ -55,19 +55,19 @@ export const lotoChecklist = {
           applicability: "LOTO",
           guidance: {
             en: critical
-              ? "Do not proceed until this critical LOTO requirement has been verified and any deficiency has been corrected."
-              : "Verify this LOTO requirement at the work location and record any identified deficiency.",
+              ? `Stop the activity and verify the critical requirement: "${item.text}". Work must not resume until the requirement is fully satisfied.`
+              : `Verify the following requirement at the work location: "${item.text}". Record and communicate any identified deficiency.`,
             tr: critical
-              ? "Bu kritik LOTO gerekliliği doğrulanmadan ve eksiklik giderilmeden çalışmaya devam etmeyin."
-              : "Bu LOTO gerekliliğini çalışma alanında doğrulayın ve tespit edilen eksikliği kayıt altına alın.",
+              ? `Faaliyeti durdurun ve şu kritik gerekliliği doğrulayın: "${turkishItem?.text ?? item.text}". Gereklilik tamamen sağlanmadan çalışma yeniden başlatılmamalıdır.`
+              : `Şu gerekliliği çalışma alanında doğrulayın: "${turkishItem?.text ?? item.text}". Tespit edilen eksikliği kayıt altına alın ve ilgili kişilere bildirin.`,
           },
           correctiveAction: {
             en: critical
-              ? "Stop the activity, isolate all hazardous energy sources and correct the deficiency before work resumes."
-              : "Correct the identified LOTO deficiency and verify the control before continuing the activity.",
+              ? `Stop work, maintain hazardous-energy isolation and correct the deficiency related to: "${item.text}". Reverify the isolation before work resumes.`
+              : `Correct the deficiency related to: "${item.text}". Confirm the control is effective before continuing the activity.`,
             tr: critical
-              ? "Faaliyeti durdurun, tüm tehlikeli enerji kaynaklarını izole edin ve çalışma yeniden başlamadan önce eksikliği giderin."
-              : "Tespit edilen LOTO eksikliğini giderin ve faaliyete devam etmeden önce kontrolü doğrulayın.",
+              ? `Çalışmayı durdurun, tehlikeli enerji izolasyonunu koruyun ve şu maddeyle ilgili eksikliği giderin: "${turkishItem?.text ?? item.text}". Çalışma yeniden başlamadan önce izolasyonu tekrar doğrulayın.`
+              : `Şu maddeyle ilgili eksikliği giderin: "${turkishItem?.text ?? item.text}". Faaliyete devam etmeden önce kontrolün etkili olduğunu doğrulayın.`,
           },
           references: [
             "OSHA 29 CFR 1910.147",
