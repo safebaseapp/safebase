@@ -1,4 +1,3 @@
-import { lotoChecklist } from "../../data/checklists/loto";
 import { confinedSpaceChecklist } from "../../data/checklists/confined-space";
 import {
   hotWorkChecklist,
@@ -553,9 +552,8 @@ export function analyzeLotoChecklist(
   locale: SupportedLocale = "en",
 ): ChecklistAnalysisResult {
   return analyzeChecklist(
-    lotoChecklist,
+    confinedSpaceChecklist,
     answers,
     locale,
   );
 }
-
