@@ -1,7 +1,10 @@
+import LogoutButton from "./LogoutButton"; 
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../../i18n/routing";
+
+
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -104,15 +107,19 @@ export default async function DashboardPage({ params }: Props) {
             </p>
           </div>
 
+          <div className="flex flex-col gap-3 sm:flex-row">
           <Link
-            href={`/${locale}/checklists`}
-            className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-500"
+         href={`/${locale}/checklists`}
+          className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-500"
           >
-            {isTurkish ? "+ Yeni denetim" : "+ New inspection"}
-          </Link>
-        </div>
+          {isTurkish ? "+ Yeni denetim" : "+ New inspection"}
+         </Link>
 
-        <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+         <LogoutButton locale={locale} />
+         </div>
+         </div>
+
+         <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {statCards.map((card) => (
             <article
               key={card.en}
