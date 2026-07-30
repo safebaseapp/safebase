@@ -1,14 +1,14 @@
 import Link from "next/link";
-import {hasLocale} from "next-intl";
-import {notFound} from "next/navigation";
-import {routing} from "../../../i18n/routing";
+import { hasLocale } from "next-intl";
+import { notFound } from "next/navigation";
+import { routing } from "../../../i18n/routing";
 
 type Props = {
-  params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 };
 
-export default async function LocalizedChecklistsPage({params}: Props) {
-  const {locale} = await params;
+export default async function LocalizedChecklistsPage({ params }: Props) {
+  const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -33,9 +33,7 @@ export default async function LocalizedChecklistsPage({params}: Props) {
     },
     {
       icon: "🔥",
-      title: isTurkish
-        ? "Sıcak Çalışma Kontrolü"
-        : "Hot Work Inspection",
+      title: isTurkish ? "Sıcak Çalışma Kontrolü" : "Hot Work Inspection",
       description: isTurkish
         ? "Sıcak çalışma öncesinde izinleri, yangın önlemlerini, gaz ölçümünü, yangın gözcüsünü ve saha düzenini doğrulayın."
         : "Verify permits, fire prevention controls, gas testing, fire watch and housekeeping before hot work.",
@@ -61,15 +59,11 @@ export default async function LocalizedChecklistsPage({params}: Props) {
     },
     {
       icon: "🏗️",
-      title: isTurkish
-        ? "İskele Güvenlik Kontrolü"
-        : "Scaffolding Inspection",
+      title: isTurkish ? "İskele Güvenlik Kontrolü" : "Scaffolding Inspection",
       description: isTurkish
         ? "Erişimi, platformları, korkulukları, etiketleri, temelleri, çapraz bağlantıları ve düşen cisim kontrollerini inceleyin."
         : "Check access, platforms, guardrails, tags, foundations, bracing and dropped-object controls.",
-      category: isTurkish
-        ? "Geçici Yapılar"
-        : "Temporary Structures",
+      category: isTurkish ? "Geçici Yapılar" : "Temporary Structures",
       standard: "OSHA 1926 Subpart L",
       duration: isTurkish ? "8–12 dakika" : "8–12 min",
       href: "/checklists/scaffold",
@@ -100,8 +94,8 @@ export default async function LocalizedChecklistsPage({params}: Props) {
       category: isTurkish ? "Kaldırma İşleri" : "Lifting",
       standard: "OSHA 1926 Subpart CC",
       duration: isTurkish ? "10–15 dakika" : "10–15 min",
-      href: "/checklists/lifting-operations",
-      available: false,
+      href: "/checklists/lifting",
+      available: true,
     },
   ];
 
@@ -115,9 +109,7 @@ export default async function LocalizedChecklistsPage({params}: Props) {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.4fr_0.6fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-400">
-              {isTurkish
-                ? "SafeBase Saha Araçları"
-                : "SafeBase Field Tools"}
+              {isTurkish ? "SafeBase Saha Araçları" : "SafeBase Field Tools"}
             </p>
 
             <h1 className="mt-5 max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
@@ -278,10 +270,7 @@ export default async function LocalizedChecklistsPage({params}: Props) {
               }
 
               return (
-                <Link
-                  key={checklist.href}
-                  href={`/${locale}${checklist.href}`}
-                >
+                <Link key={checklist.href} href={`/${locale}${checklist.href}`}>
                   {card}
                 </Link>
               );

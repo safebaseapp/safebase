@@ -7,7 +7,7 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-export default async function ScaffoldChecklistPage({ params }: Props) {
+export default async function LiftingChecklistPage({ params }: Props) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {

@@ -1,9 +1,9 @@
 export const labels = {
   en: {
     eyebrow: "Professional scaffold inspection",
-    title: "Scaffold Inspection Checklist",
+    title: "Lifting Operations Inspection Checklist",
     subtitle:
-      "Inspect scaffold foundations, structural components, platforms, access and protective systems before releasing the scaffold for use.",
+      "Inspect lifting plans, crane setup, load details, rigging equipment, exclusion zones and communication controls before the operation begins.",
     back: "Back to checklists",
     company: "Company",
     project: "Project",
@@ -84,13 +84,14 @@ export const labels = {
     warning: "WARNING",
     unsafe: "UNSAFE",
     safeText: "No critical failures have been identified.",
-    warningText: "The inspection is incomplete. Complete all applicable items.",
+    warningText:
+      "The lifting inspection is incomplete. Complete all applicable items.",
     unsafeText:
       "A critical control has failed. Work must not proceed until corrected.",
   },
   tr: {
     eyebrow: "Profesyonel iskele saha denetimi",
-    title: "İskele Denetim Kontrol Listesi",
+    title: "Kaldırma Operasyonları Denetim Kontrol Listesi",
     subtitle:
       "İskeleyi kullanıma açmadan önce temel, yapı elemanları, platformlar, erişim ve koruma sistemlerini kontrol edin.",
     back: "Kontrol listelerine dön",
