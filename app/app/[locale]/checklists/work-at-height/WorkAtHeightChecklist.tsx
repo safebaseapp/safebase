@@ -5,6 +5,13 @@ import { useMemo, useState } from "react";
 import { checklistItems } from "./checklistData";
 import { labels } from "./labels";
 import type { Answer, CorrectiveAction, Props } from "./types";
+import PremiumAssessmentButton from "../components/PremiumAssessmentButton";
+import ChecklistAnalysisPanel from "../components/ChecklistAnalysisPanel";
+import {
+  analyzeWorkingAtHeightChecklist,
+  type ChecklistAnalysisResult,
+  type ChecklistAnswer,
+} from "../../../../lib/ai/analyzeChecklist";
 
 export default function WorkAtHeightChecklist({ locale }: Props) {
   const t = labels[locale];
@@ -15,6 +22,12 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
   const [correctiveActions, setCorrectiveActions] = useState<
     Record<string, CorrectiveAction>
   >({});
+
+  const [analysis, setAnalysis] = useState<ChecklistAnalysisResult | null>(
+    null,
+  );
+  const [analysisOpened, setAnalysisOpened] = useState(false);
+  const [analysisError, setAnalysisError] = useState<string | null>(null);
 
   const answeredCount = items.filter(
     (item) => answers[item.id] !== null && answers[item.id] !== undefined,
@@ -171,10 +184,62 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
     }));
   }
 
+  function runSafetyAnalysis() {
+    setAnalysisOpened(true);
+    setAnalysisError(null);
+
+    try {
+      const formattedAnswers: ChecklistAnswer[] = items.map((item) => {
+        const selectedAnswer = answers[item.id];
+
+        return {
+          id: item.id,
+          answer:
+            selectedAnswer === "yes"
+              ? "Yes"
+              : selectedAnswer === "no"
+                ? "No"
+                : "N/A",
+          remarks:
+            selectedAnswer === "no"
+              ? correctiveActions[item.id]?.action || undefined
+              : undefined,
+        };
+      });
+
+      const result = analyzeWorkingAtHeightChecklist(formattedAnswers, locale);
+
+      setAnalysis(result);
+    } catch (error) {
+      console.error("Working at height analysis error:", error);
+      setAnalysis(null);
+
+      setAnalysisError(
+        error instanceof Error
+          ? error.message
+          : locale === "tr"
+            ? "Yüksekte çalışma güvenlik analizi oluşturulamadı."
+            : "Working at height safety analysis could not be generated.",
+      );
+    }
+
+    window.setTimeout(() => {
+      const target = document.querySelector("[data-checklist-analysis]");
+
+      target?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+  }
+
   function resetInspection() {
     setAnswers({});
     setComments("");
     setCorrectiveActions({});
+    setAnalysis(null);
+    setAnalysisOpened(false);
+    setAnalysisError(null);
   }
 
   function getPriorityLabel(
@@ -739,6 +804,41 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
           </div>
         </section>
 
+        <div data-checklist-analysis className="scroll-mt-8">
+          {analysisOpened && (
+            <div className="mt-8">
+              {analysis ? (
+                <ChecklistAnalysisPanel locale={locale} analysis={analysis} />
+              ) : (
+                <section className="rounded-3xl border border-amber-500/30 bg-slate-900 p-7 text-white">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">
+                    {locale === "tr"
+                      ? "Yüksekte Çalışma Güvenlik Analizi"
+                      : "Working at Height Safety Analysis"}
+                  </p>
+
+                  <h2 className="mt-3 text-2xl font-bold">
+                    {analysisError
+                      ? locale === "tr"
+                        ? "Analiz oluşturulamadı"
+                        : "Analysis could not be generated"
+                      : locale === "tr"
+                        ? "Analiz hazırlanıyor"
+                        : "Preparing analysis"}
+                  </h2>
+
+                  <p className="mt-3 leading-7 text-slate-300">
+                    {analysisError ||
+                      (locale === "tr"
+                        ? `${answeredCount}/${items.length} madde cevaplandı. ${noCount} uygunsuzluk ve ${criticalFailures.length} kritik bulgu tespit edildi.`
+                        : `${answeredCount}/${items.length} items answered. ${noCount} non-compliances and ${criticalFailures.length} critical findings identified.`)}
+                  </p>
+                </section>
+              )}
+            </div>
+          )}
+        </div>
+
         <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:border-slate-300 print:bg-white">
           <label htmlFor="inspection-comments">
             <span className="block text-lg font-bold">{t.comments}</span>
@@ -755,6 +855,16 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
         </section>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row print:hidden">
+          <button
+            type="button"
+            onClick={runSafetyAnalysis}
+            className="rounded-2xl bg-emerald-600 px-6 py-4 font-semibold text-white transition hover:bg-emerald-500"
+          >
+            {locale === "tr" ? "🔍 Güvenlik Analizi Yap" : "🔍 Analyze Safety"}
+          </button>
+
+          <PremiumAssessmentButton locale={locale} />
+
           <button
             type="button"
             onClick={() => window.print()}
