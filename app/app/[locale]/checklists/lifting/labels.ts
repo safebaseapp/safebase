@@ -1,6 +1,6 @@
 export const labels = {
   en: {
-    eyebrow: "Professional scaffold inspection",
+    eyebrow: "Professional lifting operations inspection",
     title: "Lifting Operations Inspection Checklist",
     subtitle:
       "Inspect lifting plans, crane setup, load details, rigging equipment, exclusion zones and communication controls before the operation begins.",
