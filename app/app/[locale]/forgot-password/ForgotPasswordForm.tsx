@@ -36,6 +36,7 @@ export default function ForgotPasswordForm({ locale }: Props) {
           ? `Şifre sıfırlama bağlantısı gönderilemedi: ${error.message}`
           : `Password reset link could not be sent: ${error.message}`,
       );
+
       setIsLoading(false);
       return;
     }
@@ -71,17 +72,17 @@ export default function ForgotPasswordForm({ locale }: Props) {
         />
       </div>
 
-      {errorMessage ? (
+      {errorMessage && (
         <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
           {errorMessage}
         </div>
-      ) : null}
+      )}
 
-      {successMessage ? (
+      {successMessage && (
         <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
           {successMessage}
         </div>
-      ) : null}
+      )}
 
       <button
         type="submit"
