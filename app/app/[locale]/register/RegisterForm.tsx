@@ -40,11 +40,14 @@ export default function RegisterForm({ locale }: Props) {
     });
 
     if (error) {
+      console.error("Supabase signup error:", error);
+
       setErrorMessage(
         isTurkish
-          ? "Hesap oluşturulamadı. Bilgileri kontrol edip tekrar dene."
-          : "Account could not be created. Check your details and try again.",
+          ? `Hesap oluşturulamadı: ${error.message}`
+          : `Account could not be created: ${error.message}`,
       );
+
       setIsLoading(false);
       return;
     }
@@ -131,17 +134,17 @@ export default function RegisterForm({ locale }: Props) {
         </p>
       </div>
 
-      {errorMessage ? (
+      {errorMessage && (
         <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
           {errorMessage}
         </div>
-      ) : null}
+      )}
 
-      {successMessage ? (
+      {successMessage && (
         <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm leading-6 text-emerald-300">
           {successMessage}
         </div>
-      ) : null}
+      )}
 
       <button
         type="submit"
