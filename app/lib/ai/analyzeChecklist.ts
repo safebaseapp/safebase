@@ -1,3 +1,4 @@
+import { liftingChecklist } from "../../data/checklists/lifting";
 import { scaffoldingChecklist } from "../../data/checklists/scaffolding";
 import { workingAtHeightChecklist } from "../../data/checklists/working-at-height";
 import { lotoChecklist } from "../../data/checklists/loto";
@@ -599,6 +600,42 @@ export function analyzeScaffoldingChecklist(
       .replace(
         "Hot work should not be authorized until all high-risk findings have been closed.",
         "The scaffold should not be released for use until all high-risk findings have been closed.",
+      );
+  });
+
+  return {
+    ...result,
+    recommendations,
+  };
+}
+
+export function analyzeLiftingChecklist(
+  answers: ChecklistAnswer[],
+  locale: SupportedLocale = "en",
+): ChecklistAnalysisResult {
+  const result = analyzeChecklist(liftingChecklist, answers, locale);
+
+  const recommendations = result.recommendations.map((recommendation) => {
+    if (locale === "tr") {
+      return recommendation
+        .replace(
+          "Kritik uygunsuzluklar giderilmeden sıcak çalışmayı başlatmayın veya devam ettirmeyin.",
+          "Kritik kaldırma uygunsuzlukları giderilmeden operasyona başlamayın veya devam etmeyin.",
+        )
+        .replace(
+          "Yüksek riskli uygunsuzluklar kapatılmadan çalışma izni verilmemelidir.",
+          "Yüksek riskli kaldırma uygunsuzlukları kapatılmadan operasyona izin verilmemelidir.",
+        );
+    }
+
+    return recommendation
+      .replace(
+        "Do not start or continue hot work until all critical non-conformities have been corrected.",
+        "Do not start or continue the lifting operation until all critical non-conformities have been corrected.",
+      )
+      .replace(
+        "Hot work should not be authorized until all high-risk findings have been closed.",
+        "The lifting operation should not be authorized until all high-risk findings have been closed.",
       );
   });
 
