@@ -90,7 +90,7 @@ export const labels = {
       "A critical control has failed. Work must not proceed until corrected.",
   },
   tr: {
-    eyebrow: "Profesyonel iskele saha denetimi",
+    eyebrow: "Profesyonel kaldırma operasyonları denetimi",
     title: "Kaldırma Operasyonları Denetim Kontrol Listesi",
     subtitle:
       "İskeleyi kullanıma açmadan önce temel, yapı elemanları, platformlar, erişim ve koruma sistemlerini kontrol edin.",
