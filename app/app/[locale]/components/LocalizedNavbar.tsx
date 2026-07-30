@@ -1,11 +1,11 @@
-import {Link} from "../../../i18n/navigation";
+import { Link } from "../../../i18n/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 type Props = {
   locale: "tr" | "en";
 };
 
-export default function LocalizedNavbar({locale}: Props) {
+export default function LocalizedNavbar({ locale }: Props) {
   const isTurkish = locale === "tr";
 
   return (
@@ -27,6 +27,13 @@ export default function LocalizedNavbar({locale}: Props) {
         </Link>
 
         <div className="hidden items-center gap-8 text-slate-300 lg:flex">
+          <Link
+            href="/dashboard"
+            className="font-semibold text-blue-400 transition hover:text-blue-300"
+          >
+            📊 Dashboard
+          </Link>
+
           <Link href="/tools" className="transition hover:text-blue-400">
             {isTurkish ? "Araçlar" : "Tools"}
           </Link>
@@ -45,10 +52,7 @@ export default function LocalizedNavbar({locale}: Props) {
             📚 {isTurkish ? "Bilgi Merkezi" : "Knowledge Base"}
           </Link>
 
-          <Link
-            href="/downloads"
-            className="transition hover:text-blue-400"
-          >
+          <Link href="/downloads" className="transition hover:text-blue-400">
             ⬇️ {isTurkish ? "İndirmeler" : "Downloads"}
           </Link>
 
