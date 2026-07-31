@@ -256,6 +256,7 @@ const articles: Article[] = [
     category: "work-activities",
     readTime: 9,
     standard: "OSHA",
+    featured: false,
     available: true,
   },
 
