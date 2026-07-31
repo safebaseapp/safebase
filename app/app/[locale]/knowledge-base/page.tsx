@@ -223,6 +223,24 @@ const articles: Article[] = [
     standard: "OSHA",
     available: true,
   },
+
+  {
+    id: 13,
+    slug: "permit-to-work",
+    title: {
+      en: "Permit to Work",
+      tr: "Çalışma İzni Sistemi",
+    },
+    description: {
+      en: "Planning, authorization, isolation, gas testing, permit control, shift handover and safe closure of high-risk work.",
+      tr: "Yüksek riskli işlerin planlanması, yetkilendirilmesi, izolasyon, gaz ölçümü, izin yönetimi, vardiya teslimi ve güvenli kapatılması.",
+    },
+    category: "work-activities",
+    readTime: 12,
+    standard: "OSHA",
+    featured: true,
+    available: true,
+  },
 ];
 
 const SearchIcon = () => (
