@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import ReactMarkdown from "react-markdown";
