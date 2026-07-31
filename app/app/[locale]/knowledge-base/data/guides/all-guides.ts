@@ -14,7 +14,9 @@ import { craneSafetyGuide } from "./crane-safety";
 import { chemicalSafetyGuide } from "./chemical-safety";
 import { permitToWorkGuide } from "./permit-to-work";
 
+import { manualHandlingGuide } from "./manual-handling";
 export const allGuides: SafetyGuide[] = [
+  manualHandlingGuide,
   permitToWorkGuide,
   workingAtHeightGuide,
   confinedSpaceGuide,

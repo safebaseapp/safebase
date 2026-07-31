@@ -15,3 +15,4 @@ export { searchGuides } from "./guide-search";
 export type { GuideSearchResult } from "./guide-search";
 export { guideToAIContext, guidesToAIContext } from "./guide-context";
 export { permitToWorkGuide } from "./permit-to-work";
+export { manualHandlingGuide } from "./manual-handling";

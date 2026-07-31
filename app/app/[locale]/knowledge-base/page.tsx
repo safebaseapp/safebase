@@ -241,6 +241,24 @@ const articles: Article[] = [
     featured: true,
     available: true,
   },
+
+  {
+    id: 14,
+    slug: "manual-handling",
+    title: {
+      en: "Manual Handling Safety",
+      tr: "Elle Taşıma Güvenliği",
+    },
+    description: {
+      en: "Safe lifting, carrying, pushing and pulling practices for reducing musculoskeletal injury risks.",
+      tr: "Kas-iskelet sistemi yaralanma risklerini azaltmak için güvenli kaldırma, taşıma, itme ve çekme uygulamaları.",
+    },
+    category: "work-activities",
+    readTime: 9,
+    standard: "OSHA",
+    available: true,
+  },
+
 ];
 
 const SearchIcon = () => (
