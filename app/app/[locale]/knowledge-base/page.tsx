@@ -324,6 +324,80 @@ const ArrowIcon = () => (
   </svg>
 );
 
+
+function normalizeText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function levenshteinDistance(first: string, second: string) {
+  const rows = first.length + 1;
+  const columns = second.length + 1;
+
+  const matrix = Array.from({ length: rows }, () =>
+    Array<number>(columns).fill(0),
+  );
+
+  for (let row = 0; row < rows; row += 1) {
+    matrix[row][0] = row;
+  }
+
+  for (let column = 0; column < columns; column += 1) {
+    matrix[0][column] = column;
+  }
+
+  for (let row = 1; row < rows; row += 1) {
+    for (let column = 1; column < columns; column += 1) {
+      const substitutionCost =
+        first[row - 1] === second[column - 1] ? 0 : 1;
+
+      matrix[row][column] = Math.min(
+        matrix[row - 1][column] + 1,
+        matrix[row][column - 1] + 1,
+        matrix[row - 1][column - 1] + substitutionCost,
+      );
+    }
+  }
+
+  return matrix[first.length][second.length];
+}
+
+function matchesFuzzySearch(searchableText: string, searchTerm: string) {
+  if (!searchTerm) {
+    return true;
+  }
+
+  if (searchableText.includes(searchTerm)) {
+    return true;
+  }
+
+  const searchWords = searchTerm.split(/\s+/).filter(Boolean);
+  const contentWords = searchableText
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean);
+
+  return searchWords.every((searchWord) =>
+    contentWords.some((contentWord) => {
+      if (
+        contentWord.includes(searchWord) ||
+        searchWord.includes(contentWord)
+      ) {
+        return true;
+      }
+
+      const allowedDistance = searchWord.length >= 7 ? 2 : 1;
+
+      return (
+        Math.abs(contentWord.length - searchWord.length) <= allowedDistance &&
+        levenshteinDistance(contentWord, searchWord) <= allowedDistance
+      );
+    }),
+  );
+}
+
 export default function KnowledgeBasePage() {
   const params = useParams<{ locale: string }>();
   const locale = params.locale === "tr" ? "tr" : "en";
@@ -356,24 +430,25 @@ export default function KnowledgeBasePage() {
   ];
 
   const filteredArticles = useMemo(() => {
-    const normalizedSearch = search.trim().toLowerCase();
+    const normalizedSearch = normalizeText(search);
 
     return articles.filter((article) => {
       const matchesCategory =
         activeCategory === "all" || article.category === activeCategory;
 
-      const searchableText = [
-        article.title[locale],
-        article.description[locale],
-        article.standard,
-        article.category,
-      ]
-        .join(" ")
-        .toLowerCase();
+      const searchableText = normalizeText(
+        [
+          article.title[locale],
+          article.description[locale],
+          article.standard,
+          article.category,
+        ].join(" "),
+      );
 
-      const matchesSearch =
-        normalizedSearch.length === 0 ||
-        searchableText.includes(normalizedSearch);
+      const matchesSearch = matchesFuzzySearch(
+        searchableText,
+        normalizedSearch,
+      );
 
       return matchesCategory && matchesSearch;
     });
@@ -478,6 +553,7 @@ export default function KnowledgeBasePage() {
         </div>
       </section>
 
+      {search.trim() === "" && activeCategory === "all" && (
       <section className="border-b border-white/10 bg-slate-950 py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
@@ -605,6 +681,8 @@ export default function KnowledgeBasePage() {
         </div>
       </section>
 
+      )}
+
       <section className="relative overflow-hidden bg-slate-950 py-24">
         <div className="absolute left-[-180px] top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-blue-600/10 blur-[130px]" />
 
@@ -616,10 +694,20 @@ export default function KnowledgeBasePage() {
               </p>
 
               <h2 className="mt-4 text-3xl font-black tracking-[-0.035em] text-white sm:text-4xl">
-                {isTurkish
-                  ? "Tüm HSE konularını keşfet"
-                  : "Explore all HSE topics"}
+                {search.trim()
+                  ? (isTurkish ? "Arama Sonuçları" : "Search Results")
+                  : (isTurkish
+                      ? "Tüm HSE konularını keşfet"
+                      : "Explore all HSE topics")}
               </h2>
+
+              {search.trim() && (
+                <p className="mt-3 text-slate-400">
+                  {isTurkish
+                    ? `"${search}" için sonuçlar`
+                    : `Results for "${search}"`}
+                </p>
+              )}
             </div>
 
             <p className="text-sm font-bold text-slate-500">

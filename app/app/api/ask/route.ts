@@ -77,7 +77,7 @@ export async function POST(req: Request) {
     const normalizedQuestion = question.toLowerCase();
     const guideSearchQuery = question;
 
-    const guideSearchResults = searchGuides(guideSearchQuery, 1);
+    const guideSearchResults = searchGuides(guideSearchQuery, 3);
 
     console.log(
       "AI v2 Guide Matches:",
@@ -174,17 +174,16 @@ Language rules:
 `;
 
     const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
+      "https://api.openai.com/v1/chat/completions",
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
-        },
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
         body: JSON.stringify({
-          model: "openai/gpt-oss-20b:free",
-          temperature: 0,
-          stream: true,
+          model: process.env.OPENAI_MODEL || "gpt-5-mini",
+stream: true,
           messages: [
             {
               role: "system",
