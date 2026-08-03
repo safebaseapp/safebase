@@ -191,6 +191,75 @@ const downloads: DownloadItem[] = [
     updated: { en: "August 2026", tr: "Ağustos 2026" },
     language: { en: "TR / EN", tr: "TR / EN" },
   },
+  {
+    id: 14,
+    title: {
+      en: "Mandatory PPE Poster",
+      tr: "Zorunlu KKD Posteri",
+    },
+    description: {
+      en: "A field-ready poster covering essential personal protective equipment requirements.",
+      tr: "Temel kişisel koruyucu donanım gerekliliklerini gösteren sahaya hazır poster.",
+    },
+    category: "posters",
+    format: "PDF",
+    icon: "🦺",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/mandatory-ppe-poster-en.pdf",
+      tr: "/downloads/mandatory-ppe-poster-tr.pdf",
+    },
+    version: "v1.0",
+    updated: { en: "August 2026", tr: "Ağustos 2026" },
+    language: { en: "English", tr: "Türkçe" },
+  },
+  {
+    id: 15,
+    title: {
+      en: "LOTO Golden Rules Poster",
+      tr: "LOTO Altın Kuralları Posteri",
+    },
+    description: {
+      en: "Six essential lockout and tagout steps for safe energy isolation.",
+      tr: "Güvenli enerji izolasyonu için altı temel kilitleme ve etiketleme adımı.",
+    },
+    category: "posters",
+    format: "PDF",
+    icon: "🔒",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/loto-golden-rules-poster-en.pdf",
+      tr: "/downloads/loto-golden-rules-poster-tr.pdf",
+    },
+    version: "v1.0",
+    updated: { en: "August 2026", tr: "Ağustos 2026" },
+    language: { en: "English", tr: "Türkçe" },
+  },
+  {
+    id: 16,
+    title: {
+      en: "Working at Height Safety Poster",
+      tr: "Yüksekte Çalışma Güvenliği Posteri",
+    },
+    description: {
+      en: "Practical rules for fall prevention, anchorage, dropped objects and rescue planning.",
+      tr: "Düşmenin önlenmesi, ankraj, düşen cisimler ve kurtarma planlaması için pratik kurallar.",
+    },
+    category: "posters",
+    format: "PDF",
+    icon: "🪜",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/working-at-height-rules-poster-en.pdf",
+      tr: "/downloads/working-at-height-rules-poster-tr.pdf",
+    },
+    version: "v1.0",
+    updated: { en: "August 2026", tr: "Ağustos 2026" },
+    language: { en: "English", tr: "Türkçe" },
+  },
 
 ];
 
