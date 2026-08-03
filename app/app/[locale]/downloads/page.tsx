@@ -329,6 +329,105 @@ const downloads: DownloadItem[] = [
     updated: { en: "August 2026", tr: "Ağustos 2026" },
     language: { en: "English", tr: "Türkçe" },
   },
+  {
+    id: 20,
+    title: {
+      en: "Electrical Safety Rules Poster",
+      tr: "Elektrik Güvenliği Kuralları Posteri",
+    },
+    description: {
+      en: "Essential electrical safety rules covering isolation, LOTO, testing, PPE and damaged equipment.",
+      tr: "İzolasyon, LOTO, test, KKD ve hasarlı ekipman kontrollerini kapsayan elektrik güvenliği kuralları.",
+    },
+    category: "posters",
+    format: "PDF",
+    icon: "⚡",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/electrical-safety-rules-poster-en.pdf",
+      tr: "/downloads/electrical-safety-rules-poster-tr.pdf",
+    },
+    version: "v1.0",
+    updated: {
+      en: "August 2026",
+      tr: "Ağustos 2026",
+    },
+    language: {
+      en: "English",
+      tr: "Türkçe",
+    },
+  },
+
+  {
+    id: 21,
+    title: {
+      en: "Working at Height Toolbox Talk",
+      tr: "Yüksekte Çalışma Toolbox Talk",
+    },
+    description: {
+      en: "A ready-to-deliver toolbox talk covering fall hazards, anchorage, dropped objects and rescue planning.",
+      tr: "Düşme riskleri, ankraj, düşen cisimler ve kurtarma planını kapsayan kullanıma hazır toolbox talk.",
+    },
+    category: "toolbox-talks",
+    format: "PDF",
+    icon: "🪜",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/working-at-height-toolbox-talk-en.pdf",
+      tr: "/downloads/working-at-height-toolbox-talk-tr.pdf",
+    },
+    version: "v1.0",
+    updated: { en: "August 2026", tr: "Ağustos 2026" },
+    language: { en: "English", tr: "Türkçe" },
+  },
+  {
+    id: 22,
+    title: {
+      en: "Hot Work Toolbox Talk",
+      tr: "Sıcak Çalışma Toolbox Talk",
+    },
+    description: {
+      en: "A practical toolbox talk covering permits, gas testing, fire watch, equipment checks and fire prevention.",
+      tr: "İzin, gaz ölçümü, yangın gözcüsü, ekipman kontrolü ve yangın önlemlerini kapsayan pratik toolbox talk.",
+    },
+    category: "toolbox-talks",
+    format: "PDF",
+    icon: "🔥",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/hot-work-toolbox-talk-en.pdf",
+      tr: "/downloads/hot-work-toolbox-talk-tr.pdf",
+    },
+    version: "v1.0",
+    updated: { en: "August 2026", tr: "Ağustos 2026" },
+    language: { en: "English", tr: "Türkçe" },
+  },
+  {
+    id: 23,
+    title: {
+      en: "Scaffold Safety Toolbox Talk",
+      tr: "İskele Güvenliği Toolbox Talk",
+    },
+    description: {
+      en: "A field-ready talk covering scaffold tags, safe access, platforms, edge protection and unauthorized changes.",
+      tr: "İskele etiketi, güvenli erişim, platformlar, kenar koruması ve yetkisiz değişiklikleri kapsayan sahaya hazır toolbox talk.",
+    },
+    category: "toolbox-talks",
+    format: "PDF",
+    icon: "🏗️",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/scaffold-safety-toolbox-talk-en.pdf",
+      tr: "/downloads/scaffold-safety-toolbox-talk-tr.pdf",
+    },
+    version: "v1.0",
+    updated: { en: "August 2026", tr: "Ağustos 2026" },
+    language: { en: "English", tr: "Türkçe" },
+  },
 
 ];
 

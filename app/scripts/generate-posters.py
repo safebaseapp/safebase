@@ -896,6 +896,121 @@ POSTERS = [
             ],
         },
     },
+    {
+        "base": "electrical-safety-rules-poster",
+        "tr": {
+            "title": "ELEKTRİK GÜVENLİĞİ KURALLARI",
+            "subtitle": "ELECTRICAL SAFETY RULES",
+            "alert": "İZOLE ET • KİLİTLE • ENERJİYİ DOĞRULA",
+            "blocks": [
+                {
+                    "heading": "YETKİSİZ MÜDAHALE ETME",
+                    "items": [
+                        "Elektrik ekipmanına yalnızca yetkili personel müdahale etsin.",
+                        "Açık pano ve enerji altında çalışma alanlarından uzak dur.",
+                    ],
+                },
+                {
+                    "heading": "ENERJİYİ İZOLE ET",
+                    "items": [
+                        "Bakım veya onarım öncesi tüm enerji kaynaklarını belirle.",
+                        "Gerekli LOTO uygulamalarını eksiksiz uygula.",
+                    ],
+                },
+                {
+                    "heading": "DOKUNMADAN ÖNCE TEST ET",
+                    "items": [
+                        "Uygun test cihazıyla enerji olmadığını doğrula.",
+                        "Test cihazını kullanım öncesi ve sonrası kontrol et.",
+                    ],
+                },
+                {
+                    "heading": "HASARLI EKİPMAN KULLANMA",
+                    "items": [
+                        "Kablo, fiş, uzatma ve muhafazaları kullanım öncesi kontrol et.",
+                        "Hasarlı ekipmanı hemen kullanımdan kaldır.",
+                    ],
+                },
+                {
+                    "heading": "UYGUN KKD VE ALET KULLAN",
+                    "items": [
+                        "Göreve uygun yalıtımlı el aletleri kullan.",
+                        "Gerekliyse ark flaşına uygun KKD kullan.",
+                    ],
+                },
+                {
+                    "heading": "ALANI GÜVENLİ TUT",
+                    "items": [
+                        "Elektrik panolarının önünü açık ve kuru tut.",
+                        "Geçici kabloları su, ezilme ve trafik riskinden koru.",
+                    ],
+                },
+            ],
+            "footer_title": "İŞİ DERHAL DURDUR",
+            "footer_items": [
+                "Açık iletken varsa",
+                "İzolasyon doğrulanmadıysa",
+                "Ekipman hasarlıysa",
+                "Yetkili personel yoksa",
+            ],
+        },
+        "en": {
+            "title": "ELECTRICAL SAFETY RULES",
+            "subtitle": "PREVENT SHOCK, ARC FLASH AND FIRE",
+            "alert": "ISOLATE • LOCK OUT • VERIFY ZERO ENERGY",
+            "blocks": [
+                {
+                    "heading": "NO UNAUTHORIZED WORK",
+                    "items": [
+                        "Only authorized personnel may work on electrical equipment.",
+                        "Stay clear of open panels and energized work areas.",
+                    ],
+                },
+                {
+                    "heading": "ISOLATE THE ENERGY",
+                    "items": [
+                        "Identify all energy sources before maintenance or repair.",
+                        "Apply all required lockout and tagout controls.",
+                    ],
+                },
+                {
+                    "heading": "TEST BEFORE TOUCH",
+                    "items": [
+                        "Verify absence of voltage with a suitable test instrument.",
+                        "Check the tester before and after use.",
+                    ],
+                },
+                {
+                    "heading": "DO NOT USE DAMAGED EQUIPMENT",
+                    "items": [
+                        "Inspect cables, plugs, extensions and enclosures before use.",
+                        "Remove damaged equipment from service immediately.",
+                    ],
+                },
+                {
+                    "heading": "USE SUITABLE PPE AND TOOLS",
+                    "items": [
+                        "Use insulated tools suitable for the task.",
+                        "Wear arc-rated PPE where the assessment requires it.",
+                    ],
+                },
+                {
+                    "heading": "KEEP THE AREA SAFE",
+                    "items": [
+                        "Keep electrical panels accessible, clean and dry.",
+                        "Protect temporary cables from water, crushing and traffic.",
+                    ],
+                },
+            ],
+            "footer_title": "STOP WORK IMMEDIATELY",
+            "footer_items": [
+                "Conductors are exposed",
+                "Isolation is not verified",
+                "Equipment is damaged",
+                "Authorized personnel are absent",
+            ],
+        },
+    },
 
 ]
 
