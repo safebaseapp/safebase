@@ -551,6 +551,352 @@ POSTERS = [
             ],
         },
     },
+    {
+        "base": "scaffold-safety-rules-poster",
+        "tr": {
+            "title": "İSKELE GÜVENLİK KURALLARI",
+            "subtitle": "SCAFFOLD SAFETY RULES",
+            "alert": "KONTROL ET • ETİKETİ DOĞRULA • GÜVENLİ KULLAN",
+            "blocks": [
+                {
+                    "heading": "ETİKETİ KONTROL ET",
+                    "items": [
+                        "İskele etiketini ve geçerlilik durumunu doğrula.",
+                        "Kırmızı etiketli iskeleyi kullanma.",
+                    ],
+                },
+                {
+                    "heading": "ERİŞİMİ DOĞRULA",
+                    "items": [
+                        "Uygun merdiven veya güvenli erişim noktası kullan.",
+                        "Korkuluklara tırmanma.",
+                    ],
+                },
+                {
+                    "heading": "PLATFORMU KONTROL ET",
+                    "items": [
+                        "Platformların tam, sabit ve boşluksuz olduğunu doğrula.",
+                        "Kaygan veya hasarlı platformu kullanma.",
+                    ],
+                },
+                {
+                    "heading": "KORKULUKLARI KONTROL ET",
+                    "items": [
+                        "Üst korkuluk, ara korkuluk ve topuk levhasını kontrol et.",
+                        "Eksik koruma varsa işi başlatma.",
+                    ],
+                },
+                {
+                    "heading": "YÜK SINIRINI AŞMA",
+                    "items": [
+                        "Malzeme ve personel yükünü güvenli sınırlar içinde tut.",
+                        "Platform üzerinde gereksiz malzeme biriktirme.",
+                    ],
+                },
+                {
+                    "heading": "DEĞİŞİKLİK YAPMA",
+                    "items": [
+                        "Yetkisiz şekilde parça sökme veya iskeleyi değiştirme.",
+                        "Hasar veya eksikliği hemen bildir.",
+                    ],
+                },
+            ],
+            "footer_title": "İSKELEYİ KULLANMA",
+            "footer_items": [
+                "Etiket geçersizse",
+                "Korkuluk eksikse",
+                "Platform hasarlıysa",
+                "Güvenli erişim yoksa",
+            ],
+        },
+        "en": {
+            "title": "SCAFFOLD SAFETY RULES",
+            "subtitle": "SAFE ACCESS AND WORKING PLATFORMS",
+            "alert": "INSPECT • CHECK THE TAG • USE SAFELY",
+            "blocks": [
+                {
+                    "heading": "CHECK THE TAG",
+                    "items": [
+                        "Verify the scaffold tag and inspection status.",
+                        "Never use a red-tagged scaffold.",
+                    ],
+                },
+                {
+                    "heading": "VERIFY SAFE ACCESS",
+                    "items": [
+                        "Use the designated ladder or access point.",
+                        "Never climb scaffold guardrails.",
+                    ],
+                },
+                {
+                    "heading": "CHECK THE PLATFORM",
+                    "items": [
+                        "Confirm platforms are complete, secured and free from gaps.",
+                        "Do not use slippery or damaged platforms.",
+                    ],
+                },
+                {
+                    "heading": "CHECK EDGE PROTECTION",
+                    "items": [
+                        "Inspect top rails, midrails and toe boards.",
+                        "Do not start if protection is incomplete.",
+                    ],
+                },
+                {
+                    "heading": "DO NOT OVERLOAD",
+                    "items": [
+                        "Keep personnel and materials within the safe load limit.",
+                        "Do not store unnecessary materials on platforms.",
+                    ],
+                },
+                {
+                    "heading": "DO NOT MODIFY",
+                    "items": [
+                        "Never remove or modify components without authorization.",
+                        "Report damage or missing parts immediately.",
+                    ],
+                },
+            ],
+            "footer_title": "DO NOT USE THE SCAFFOLD",
+            "footer_items": [
+                "The tag is invalid",
+                "Guardrails are missing",
+                "Platforms are damaged",
+                "Safe access is unavailable",
+            ],
+        },
+    },
+    {
+        "base": "hot-work-safety-rules-poster",
+        "tr": {
+            "title": "SICAK ÇALIŞMA GÜVENLİK KURALLARI",
+            "subtitle": "HOT WORK SAFETY RULES",
+            "alert": "İZİN AL • ALANI HAZIRLA • YANGINI ÖNLE",
+            "blocks": [
+                {
+                    "heading": "ÇALIŞMA İZNİNİ DOĞRULA",
+                    "items": [
+                        "Geçerli sıcak çalışma izni olmadan işe başlama.",
+                        "İzin koşullarını ve çalışma sınırlarını kontrol et.",
+                    ],
+                },
+                {
+                    "heading": "YANICI MADDELERİ KALDIR",
+                    "items": [
+                        "Yanıcı ve parlayıcı malzemeleri güvenli mesafeye taşı.",
+                        "Taşınamayan malzemeleri uygun örtüyle koru.",
+                    ],
+                },
+                {
+                    "heading": "GAZ ÖLÇÜMÜ YAP",
+                    "items": [
+                        "Gerekli alanlarda atmosfer ve gaz ölçümünü doğrula.",
+                        "Koşullar değişirse ölçümü tekrarla.",
+                    ],
+                },
+                {
+                    "heading": "YANGIN GÖZCÜSÜ GÖREVLENDİR",
+                    "items": [
+                        "Eğitimli yangın gözcüsünün görev başında olduğunu doğrula.",
+                        "Gözcünün alanı kesintisiz izlemesini sağla.",
+                    ],
+                },
+                {
+                    "heading": "EKİPMANI KONTROL ET",
+                    "items": [
+                        "Kablo, hortum, regülatör ve bağlantıları incele.",
+                        "Uygun yangın söndürücüyü erişilebilir tut.",
+                    ],
+                },
+                {
+                    "heading": "İŞ SONRASI KONTROL ET",
+                    "items": [
+                        "Kıvılcım, kor ve gizli yanma riskini kontrol et.",
+                        "Belirlenen süre boyunca yangın gözetimini sürdür.",
+                    ],
+                },
+            ],
+            "footer_title": "İŞİ DERHAL DURDUR",
+            "footer_items": [
+                "İzin geçersizse",
+                "Gaz ölçümü uygun değilse",
+                "Yangın gözcüsü yoksa",
+                "Yanıcı maddeler korunmamışsa",
+            ],
+        },
+        "en": {
+            "title": "HOT WORK SAFETY RULES",
+            "subtitle": "WELDING, CUTTING AND GRINDING SAFETY",
+            "alert": "AUTHORIZE • PREPARE • PREVENT FIRE",
+            "blocks": [
+                {
+                    "heading": "VERIFY THE PERMIT",
+                    "items": [
+                        "Do not start without a valid hot work permit.",
+                        "Confirm the permit conditions and work boundaries.",
+                    ],
+                },
+                {
+                    "heading": "REMOVE COMBUSTIBLES",
+                    "items": [
+                        "Move flammable materials to a safe distance.",
+                        "Protect materials that cannot be removed.",
+                    ],
+                },
+                {
+                    "heading": "TEST THE ATMOSPHERE",
+                    "items": [
+                        "Verify required atmospheric and gas testing.",
+                        "Repeat testing if conditions change.",
+                    ],
+                },
+                {
+                    "heading": "ASSIGN A FIRE WATCH",
+                    "items": [
+                        "Confirm a trained fire watch is present.",
+                        "Ensure continuous observation of the work area.",
+                    ],
+                },
+                {
+                    "heading": "INSPECT EQUIPMENT",
+                    "items": [
+                        "Inspect cables, hoses, regulators and connections.",
+                        "Keep a suitable extinguisher immediately available.",
+                    ],
+                },
+                {
+                    "heading": "CHECK AFTER COMPLETION",
+                    "items": [
+                        "Inspect for sparks, embers and hidden combustion.",
+                        "Maintain fire watch for the required period.",
+                    ],
+                },
+            ],
+            "footer_title": "STOP WORK IMMEDIATELY",
+            "footer_items": [
+                "The permit is invalid",
+                "Gas readings are unsafe",
+                "No fire watch is present",
+                "Combustibles are unprotected",
+            ],
+        },
+    },
+    {
+        "base": "confined-space-entry-rules-poster",
+        "tr": {
+            "title": "KAPALI ALAN GİRİŞ KURALLARI",
+            "subtitle": "CONFINED SPACE ENTRY RULES",
+            "alert": "İZİN AL • ATMOSFERİ ÖLÇ • KURTARMAYI HAZIRLA",
+            "blocks": [
+                {
+                    "heading": "GİRİŞ İZNİNİ DOĞRULA",
+                    "items": [
+                        "Geçerli kapalı alan giriş izni olmadan giriş yapma.",
+                        "Görevleri ve giriş koşullarını kontrol et.",
+                    ],
+                },
+                {
+                    "heading": "ENERJİYİ İZOLE ET",
+                    "items": [
+                        "Mekanik, elektriksel ve proses enerjilerini izole et.",
+                        "Gerekli LOTO uygulamalarını doğrula.",
+                    ],
+                },
+                {
+                    "heading": "ATMOSFERİ ÖLÇ",
+                    "items": [
+                        "Oksijen, yanıcı gaz ve toksik gaz ölçümlerini yap.",
+                        "Giriş boyunca gerekli sürekli ölçümü sürdür.",
+                    ],
+                },
+                {
+                    "heading": "HAVALANDIRMAYI SAĞLA",
+                    "items": [
+                        "Uygun temiz hava ve mekanik havalandırma kullan.",
+                        "Oksijenle havalandırma yapma.",
+                    ],
+                },
+                {
+                    "heading": "GÖZCÜ VE İLETİŞİM",
+                    "items": [
+                        "Gözcünün giriş noktasında kalmasını sağla.",
+                        "Giren personelle kesintisiz iletişim kur.",
+                    ],
+                },
+                {
+                    "heading": "KURTARMA HAZIRLIĞI",
+                    "items": [
+                        "Giriş öncesinde uygulanabilir kurtarma planını doğrula.",
+                        "Kurtarma ekipmanını hazır ve erişilebilir tut.",
+                    ],
+                },
+            ],
+            "footer_title": "GİRİŞ YAPMA",
+            "footer_items": [
+                "İzin geçersizse",
+                "Atmosfer güvenli değilse",
+                "Gözcü bulunmuyorsa",
+                "Kurtarma planı hazır değilse",
+            ],
+        },
+        "en": {
+            "title": "CONFINED SPACE ENTRY RULES",
+            "subtitle": "SAFE ENTRY AND RESCUE REQUIREMENTS",
+            "alert": "AUTHORIZE • TEST • PREPARE RESCUE",
+            "blocks": [
+                {
+                    "heading": "VERIFY THE ENTRY PERMIT",
+                    "items": [
+                        "Do not enter without a valid confined space permit.",
+                        "Confirm responsibilities and entry conditions.",
+                    ],
+                },
+                {
+                    "heading": "ISOLATE ENERGY",
+                    "items": [
+                        "Isolate mechanical, electrical and process energy.",
+                        "Verify all required LOTO controls.",
+                    ],
+                },
+                {
+                    "heading": "TEST THE ATMOSPHERE",
+                    "items": [
+                        "Test oxygen, flammable gases and toxic gases.",
+                        "Continue monitoring throughout the entry where required.",
+                    ],
+                },
+                {
+                    "heading": "PROVIDE VENTILATION",
+                    "items": [
+                        "Use suitable fresh-air or mechanical ventilation.",
+                        "Never ventilate with oxygen.",
+                    ],
+                },
+                {
+                    "heading": "ATTENDANT AND COMMUNICATION",
+                    "items": [
+                        "Keep the attendant at the entry point.",
+                        "Maintain continuous communication with entrants.",
+                    ],
+                },
+                {
+                    "heading": "PREPARE FOR RESCUE",
+                    "items": [
+                        "Verify a workable rescue plan before entry.",
+                        "Keep rescue equipment ready and accessible.",
+                    ],
+                },
+            ],
+            "footer_title": "DO NOT ENTER",
+            "footer_items": [
+                "The permit is invalid",
+                "The atmosphere is unsafe",
+                "No attendant is present",
+                "Rescue is not ready",
+            ],
+        },
+    },
+
 ]
 
 

@@ -260,6 +260,75 @@ const downloads: DownloadItem[] = [
     updated: { en: "August 2026", tr: "Ağustos 2026" },
     language: { en: "English", tr: "Türkçe" },
   },
+  {
+    id: 17,
+    title: {
+      en: "Scaffold Safety Rules Poster",
+      tr: "İskele Güvenlik Kuralları Posteri",
+    },
+    description: {
+      en: "Essential rules for scaffold tags, access, platforms, edge protection and safe use.",
+      tr: "İskele etiketi, erişim, platform, kenar koruması ve güvenli kullanım için temel kurallar.",
+    },
+    category: "posters",
+    format: "PDF",
+    icon: "🏗️",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/scaffold-safety-rules-poster-en.pdf",
+      tr: "/downloads/scaffold-safety-rules-poster-tr.pdf",
+    },
+    version: "v1.0",
+    updated: { en: "August 2026", tr: "Ağustos 2026" },
+    language: { en: "English", tr: "Türkçe" },
+  },
+  {
+    id: 18,
+    title: {
+      en: "Hot Work Safety Rules Poster",
+      tr: "Sıcak Çalışma Güvenlik Kuralları Posteri",
+    },
+    description: {
+      en: "Practical hot work controls covering permits, gas testing, fire watch and post-work inspection.",
+      tr: "İzin, gaz ölçümü, yangın gözcüsü ve iş sonrası kontrolü kapsayan pratik sıcak çalışma kuralları.",
+    },
+    category: "posters",
+    format: "PDF",
+    icon: "🔥",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/hot-work-safety-rules-poster-en.pdf",
+      tr: "/downloads/hot-work-safety-rules-poster-tr.pdf",
+    },
+    version: "v1.0",
+    updated: { en: "August 2026", tr: "Ağustos 2026" },
+    language: { en: "English", tr: "Türkçe" },
+  },
+  {
+    id: 19,
+    title: {
+      en: "Confined Space Entry Rules Poster",
+      tr: "Kapalı Alan Giriş Kuralları Posteri",
+    },
+    description: {
+      en: "Key confined space controls for permits, isolation, atmospheric testing, attendants and rescue readiness.",
+      tr: "İzin, izolasyon, atmosfer ölçümü, gözcü ve kurtarma hazırlığı için temel kapalı alan kontrolleri.",
+    },
+    category: "posters",
+    format: "PDF",
+    icon: "🕳️",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/confined-space-entry-rules-poster-en.pdf",
+      tr: "/downloads/confined-space-entry-rules-poster-tr.pdf",
+    },
+    version: "v1.0",
+    updated: { en: "August 2026", tr: "Ağustos 2026" },
+    language: { en: "English", tr: "Türkçe" },
+  },
 
 ];
 
