@@ -557,7 +557,10 @@ export default function AIAssistantPage() {
 
                         {message.role === "user" ? (
                           <p className="whitespace-pre-wrap leading-7">
-                            {message.content}
+                            {message.content.replace(
+  /\((hot-work|permit-to-work|confined-space|confined\s+space|loto|lockout-tagout|excavation|scaffolding|manual-handling|working-at-height|ppe)\)/gi,
+  ""
+).replace(/Genel Bakarış/gi, "Genel Bakış")}
                           </p>
                         ) : (
                           <ReactMarkdown

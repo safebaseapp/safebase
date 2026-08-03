@@ -146,18 +146,18 @@ export default async function LocalizedHomePage({ params }: Props) {
     whyEyebrow: isTurkish ? "Neden SafeBase?" : "Why SafeBase?",
 
     whyTitle: isTurkish
-      ? "Günlük HSE çalışmalarını daha hızlı ve daha kolay yönet"
-      : "Make everyday HSE work faster and easier",
+      ? "Tüm HSE araçları tek platformda"
+      : "Move from fragmented safety work to one focused platform",
 
     whyDescription: isTurkish
-      ? "SafeBase, sahada ve ofiste ihtiyaç duyulan temel HSE araçlarını tek ve sade bir platformda bir araya getirir."
-      : "SafeBase brings essential HSE tools for field and office work together in one focused platform.",
+      ? "SafeBase; yapay zekâyı, hesaplayıcıları, rehberleri, kontrol listelerini ve kaynakları tek çalışma alanında birleştirir."
+      : "SafeBase brings AI, calculators, guidance, checklists and resources together in one focused workspace.",
 
     statsEyebrow: isTurkish ? "SafeBase Rakamlarla" : "SafeBase in Numbers",
 
     statsTitle: isTurkish
       ? "Büyümeye hazır sağlam bir temel"
-      : "A strong foundation built to grow",
+      : "A continuously growing HSE platform with new tools and guides.",
 
     audienceEyebrow: isTurkish ? "Kimler İçin?" : "Built For",
 
@@ -168,32 +168,40 @@ export default async function LocalizedHomePage({ params }: Props) {
 
   const advantages = [
     {
-      icon: "🌍",
-      title: isTurkish ? "Global Yaklaşım" : "Global Approach",
+      icon: "🧩",
+      title: isTurkish
+        ? "Dağınık Araçlar\nTek Platform"
+        : "Fragmented Tools\nOne Platform",
       description: isTurkish
-        ? "İngilizce ve Türkçe destekle farklı ülkelerdeki HSE profesyonelleri için tasarlandı."
-        : "Designed for HSE professionals across countries with English and Turkish support.",
+        ? "Hesaplayıcılar, AI, rehberler ve kontrol listeleri tek merkezde."
+        : "Use calculators, guidance, checklists and AI from one workspace instead of switching between disconnected tools.",
     },
     {
-      icon: "🤖",
-      title: isTurkish ? "Kaynaklı AI Rehberliği" : "Source-Aware AI Guidance",
+      icon: "🧠",
+      title: isTurkish
+        ? "Genel AI\nKaynaklı AI"
+        : "Generic AI\nSource-Aware AI",
       description: isTurkish
-        ? "SafeBase AI, mevcut bilgi tabanındaki HSE kaynaklarını kullanarak pratik yanıtlar üretir."
-        : "SafeBase AI uses the available HSE knowledge base to provide practical guidance.",
+        ? "AI cevaplarının kullandığı HSE kaynaklarını da görün."
+        : "SafeBase AI uses the available HSE knowledge base and shows the sources used for its response.",
     },
     {
-      icon: "🧮",
-      title: isTurkish ? "Profesyonel Hesaplayıcılar" : "Professional Calculators",
+      icon: "⚡",
+      title: isTurkish
+        ? "Manuel İşlemler\nAnında Sonuç"
+        : "Manual Work\nInstant Results",
       description: isTurkish
-        ? "Temel HSE performans göstergelerini hızlı, kolay ve anlaşılır şekilde hesapla."
-        : "Calculate essential HSE performance indicators quickly and clearly.",
+        ? "Dakikalar süren HSE işlemlerini saniyeler içinde tamamlayın."
+        : "Reach essential HSE calculations, field controls and practical answers in less time.",
     },
     {
-      icon: "📚",
-      title: isTurkish ? "Tek Merkezde Bilgi" : "Knowledge in One Place",
+      icon: "📈",
+      title: isTurkish
+        ? "Statik İçerik\nSürekli Gelişen Platform"
+        : "Static Content\nGrowing Platform",
       description: isTurkish
-        ? "Araçlara, güvenlik bilgilerine ve kullanıma hazır kaynaklara tek platformdan ulaş."
-        : "Access tools, safety knowledge and ready-to-use resources from one platform.",
+        ? "Yeni araçlar ve rehberlerle sürekli gelişen bir HSE platformu."
+        : "Use an HSE workspace that continues to grow with new guides, tools and professional resources.",
     },
   ];
 
@@ -298,7 +306,38 @@ export default async function LocalizedHomePage({ params }: Props) {
                 </Link>
               </div>
 
-              <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm font-semibold text-slate-400">
+              <div className="mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+                {[
+                  {
+                    value: "AI",
+                    label: isTurkish ? "Bilgi Asistanı" : "Knowledge Assistant",
+                  },
+                  {
+                    value: "TR / EN",
+                    label: isTurkish ? "Çift Dil Desteği" : "Bilingual Support",
+                  },
+                  {
+                    value: "5+",
+                    label: isTurkish ? "Profesyonel Rehber" : "Professional Guides",
+                  },
+                  {
+                    value: "24/7",
+                    label: isTurkish ? "Anında Erişim" : "Instant Access",
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="rounded-2xl border border-white/10 bg-white/[0.045] px-4 py-4 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:bg-blue-500/[0.08]"
+                  >
+                    <p className="text-lg font-black text-white">{item.value}</p>
+                    <p className="mt-1 text-xs font-semibold leading-5 text-slate-400">
+                      {item.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm font-semibold text-slate-400">
                 <span className="inline-flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.9)]" />
                   {content.platformLabel}
@@ -398,14 +437,14 @@ export default async function LocalizedHomePage({ params }: Props) {
 
                 <div className="mt-5 grid grid-cols-3 gap-3">
                   <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center">
-                    <p className="text-2xl font-black text-white">4+</p>
+                    <p className="whitespace-pre-line text-2xl font-black text-white">4+</p>
                     <p className="mt-1 text-xs font-semibold text-slate-400">
                       {content.toolsLabel}
                     </p>
                   </div>
 
                   <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center">
-                    <p className="text-2xl font-black text-white">5+</p>
+                    <p className="whitespace-pre-line text-2xl font-black text-white">5+</p>
                     <p className="mt-1 text-xs font-semibold text-slate-400">
                       {content.knowledgeLabel}
                     </p>
@@ -420,6 +459,108 @@ export default async function LocalizedHomePage({ params }: Props) {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative border-b border-white/10 bg-slate-950 px-6 py-24 lg:px-8 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-emerald-400">
+              {isTurkish ? "Platform Özellikleri" : "Platform Highlights"}
+            </p>
+
+            <h2 className="mt-4 max-w-4xl text-3xl font-black leading-tight tracking-[-0.035em] text-white sm:text-4xl lg:text-5xl">
+              {isTurkish
+                ? "HSE profesyonelleri için ihtiyacınız olan her şey"
+                : "Everything HSE professionals need in one place"}
+            </h2>
+
+            <p className="mt-5 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">
+              {isTurkish
+                ? "Yapay zekâ, profesyonel rehberler, hesaplayıcılar, kontrol listeleri ve indirilebilir kaynaklarla günlük HSE çalışmalarınızı hızlandırın."
+                : "Work faster with AI guidance, professional knowledge, calculators, inspection checklists and downloadable HSE resources."}
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {[
+              {
+                icon: "🤖",
+                title: isTurkish ? "Yapay Zekâ Asistanı" : "AI Assistant",
+                description: isTurkish
+                  ? "SafeBase bilgi tabanından beslenen pratik ve kaynaklı HSE yanıtları alın."
+                  : "Get practical HSE answers backed by the SafeBase knowledge base.",
+                href: `/${locale}/ai-assistant`,
+              },
+              {
+                icon: "📚",
+                title: isTurkish ? "Bilgi Merkezi" : "Knowledge Base",
+                description: isTurkish
+                  ? "Kritik iş güvenliği konularına yönelik profesyonel rehberlere ulaşın."
+                  : "Access professional guidance for critical workplace safety topics.",
+                href: `/${locale}/knowledge-base`,
+              },
+              {
+                icon: "🧮",
+                title: isTurkish ? "Hesaplayıcılar" : "Calculators",
+                description: isTurkish
+                  ? "TRIR, LTIFR, risk matrisi ve diğer HSE hesaplamalarını hızlıca yapın."
+                  : "Calculate TRIR, LTIFR, risk scores and other HSE metrics quickly.",
+                href: `/${locale}/tools`,
+              },
+              {
+                icon: "✅",
+                title: isTurkish ? "Kontrol Listeleri" : "Checklists",
+                description: isTurkish
+                  ? "Saha denetimleri için yapılandırılmış ve uygulanabilir kontrol listeleri kullanın."
+                  : "Use structured, practical checklists for workplace inspections.",
+                href: `/${locale}/checklists`,
+              },
+              {
+                icon: "📄",
+                title: isTurkish ? "Şablonlar" : "Templates",
+                description: isTurkish
+                  ? "Risk değerlendirmesi, toolbox ve raporlama için hazır dokümanlara ulaşın."
+                  : "Access ready-to-use documents for risk, toolbox talks and reporting.",
+                href: `/${locale}/downloads`,
+              },
+              {
+                icon: "⬇️",
+                title: isTurkish ? "İndirilebilir Kaynaklar" : "Downloads",
+                description: isTurkish
+                  ? "Profesyonel HSE dokümanlarını tek merkezden keşfedin."
+                  : "Discover professional HSE resources from one central library.",
+                href: `/${locale}/downloads`,
+              },
+            ].map((item) => (
+              <Link
+                key={item.title}
+                href={item.href}
+                className="group rounded-3xl border border-white/10 bg-white/[0.035] p-6 transition duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:bg-blue-500/[0.07]"
+              >
+                <div className="flex items-start gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-slate-900 text-2xl">
+                    {item.icon}
+                  </span>
+
+                  <div>
+                    <h3 className="text-xl font-black text-white">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-3 leading-7 text-slate-400">
+                      {item.description}
+                    </p>
+
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-blue-300 transition group-hover:gap-3 group-hover:text-blue-200">
+                      {isTurkish ? "Keşfet" : "Explore"}
+                      <ArrowIcon />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
