@@ -19,10 +19,7 @@ type DownloadItem = {
   icon: string;
   featured?: boolean;
   available: boolean;
-  pdfUrl?: {
-    en: string;
-    tr: string;
-  };
+  pdfUrl?: string;
   docxUrl?: string;
   version: string;
   updated: {
@@ -70,13 +67,7 @@ const downloads: DownloadItem[] = [
     format: "PDF + DOCX",
     icon: "🗣️",
     available: true,
-    pdfUrl: {
-
-      en: "/downloads/daily-toolbox-talk-record.pdf",
-
-      tr: "/downloads/daily-toolbox-talk-record.pdf",
-
-    },
+    pdfUrl: "/downloads/daily-toolbox-talk-record.pdf",
     docxUrl: "/downloads/daily-toolbox-talk-record.docx",
     version: "v1.0",
     updated: { en: "July 2026", tr: "Temmuz 2026" },
@@ -100,7 +91,7 @@ const downloads: DownloadItem[] = [
     version: "v1.0",
     updated: { en: "July 2026", tr: "Temmuz 2026" },
     language: { en: "English", tr: "İngilizce" },
-  },
+  },,
   {
     id: 10,
     title: {
@@ -116,10 +107,7 @@ const downloads: DownloadItem[] = [
     icon: "🦺",
     featured: true,
     available: true,
-    pdfUrl: {
-      en: "/downloads/ppe-selection-quick-guide-en.pdf",
-      tr: "/downloads/ppe-selection-quick-guide-tr.pdf",
-    },
+    pdfUrl: "/downloads/ppe-selection-quick-guide.pdf",
     version: "v1.0",
     updated: { en: "August 2026", tr: "Ağustos 2026" },
     language: { en: "TR / EN", tr: "TR / EN" },
@@ -139,10 +127,7 @@ const downloads: DownloadItem[] = [
     icon: "📘",
     featured: true,
     available: true,
-    pdfUrl: {
-      en: "/downloads/hierarchy-of-controls-quick-guide-en.pdf",
-      tr: "/downloads/hierarchy-of-controls-quick-guide-tr.pdf",
-    },
+    pdfUrl: "/downloads/hierarchy-of-controls-quick-guide.pdf",
     version: "v1.0",
     updated: { en: "August 2026", tr: "Ağustos 2026" },
     language: { en: "TR / EN", tr: "TR / EN" },
@@ -161,10 +146,7 @@ const downloads: DownloadItem[] = [
     format: "PDF",
     icon: "🚨",
     available: true,
-    pdfUrl: {
-      en: "/downloads/emergency-response-poster-en.pdf",
-      tr: "/downloads/emergency-response-poster-tr.pdf",
-    },
+    pdfUrl: "/downloads/emergency-response-poster.pdf",
     version: "v1.0",
     updated: { en: "August 2026", tr: "Ağustos 2026" },
     language: { en: "TR / EN", tr: "TR / EN" },
@@ -183,10 +165,7 @@ const downloads: DownloadItem[] = [
     format: "PDF",
     icon: "🧯",
     available: true,
-    pdfUrl: {
-      en: "/downloads/fire-extinguisher-selection-poster-en.pdf",
-      tr: "/downloads/fire-extinguisher-selection-poster-tr.pdf",
-    },
+    pdfUrl: "/downloads/fire-extinguisher-selection-poster.pdf",
     version: "v1.0",
     updated: { en: "August 2026", tr: "Ağustos 2026" },
     language: { en: "TR / EN", tr: "TR / EN" },
@@ -315,11 +294,10 @@ export default function DownloadsPage() {
 
   const featuredDownloads = downloads.filter((item) => item.featured);
 
-  const previewUrl = (item: DownloadItem) =>
-    item.pdfUrl?.[locale];
+  const previewUrl = (item: DownloadItem) => item.pdfUrl;
 
   const downloadUrl = (item: DownloadItem) =>
-    item.docxUrl ?? item.pdfUrl?.[locale] ?? "#";
+    item.docxUrl ?? item.pdfUrl ?? "#";
 
   const downloadLabel = (item: DownloadItem) => {
     if (item.docxUrl) {

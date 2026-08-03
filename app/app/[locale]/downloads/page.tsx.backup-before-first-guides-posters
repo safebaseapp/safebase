@@ -19,10 +19,7 @@ type DownloadItem = {
   icon: string;
   featured?: boolean;
   available: boolean;
-  pdfUrl?: {
-    en: string;
-    tr: string;
-  };
+  pdfUrl?: string;
   docxUrl?: string;
   version: string;
   updated: {
@@ -70,13 +67,7 @@ const downloads: DownloadItem[] = [
     format: "PDF + DOCX",
     icon: "🗣️",
     available: true,
-    pdfUrl: {
-
-      en: "/downloads/daily-toolbox-talk-record.pdf",
-
-      tr: "/downloads/daily-toolbox-talk-record.pdf",
-
-    },
+    pdfUrl: "/downloads/daily-toolbox-talk-record.pdf",
     docxUrl: "/downloads/daily-toolbox-talk-record.docx",
     version: "v1.0",
     updated: { en: "July 2026", tr: "Temmuz 2026" },
@@ -101,97 +92,6 @@ const downloads: DownloadItem[] = [
     updated: { en: "July 2026", tr: "Temmuz 2026" },
     language: { en: "English", tr: "İngilizce" },
   },
-  {
-    id: 10,
-    title: {
-      en: "PPE Selection Quick Guide",
-      tr: "KKD Seçim Hızlı Rehberi",
-    },
-    description: {
-      en: "A practical guide for selecting personal protective equipment based on workplace hazards.",
-      tr: "İş yeri tehlikelerine göre kişisel koruyucu donanım seçimi için pratik rehber.",
-    },
-    category: "guides",
-    format: "PDF",
-    icon: "🦺",
-    featured: true,
-    available: true,
-    pdfUrl: {
-      en: "/downloads/ppe-selection-quick-guide-en.pdf",
-      tr: "/downloads/ppe-selection-quick-guide-tr.pdf",
-    },
-    version: "v1.0",
-    updated: { en: "August 2026", tr: "Ağustos 2026" },
-    language: { en: "TR / EN", tr: "TR / EN" },
-  },
-  {
-    id: 11,
-    title: {
-      en: "Hierarchy of Controls Quick Guide",
-      tr: "Kontrol Hiyerarşisi Hızlı Rehberi",
-    },
-    description: {
-      en: "Understand and apply the five levels of workplace risk control.",
-      tr: "İş yeri risk kontrolünün beş seviyesini anlayın ve uygulayın.",
-    },
-    category: "guides",
-    format: "PDF",
-    icon: "📘",
-    featured: true,
-    available: true,
-    pdfUrl: {
-      en: "/downloads/hierarchy-of-controls-quick-guide-en.pdf",
-      tr: "/downloads/hierarchy-of-controls-quick-guide-tr.pdf",
-    },
-    version: "v1.0",
-    updated: { en: "August 2026", tr: "Ağustos 2026" },
-    language: { en: "TR / EN", tr: "TR / EN" },
-  },
-  {
-    id: 12,
-    title: {
-      en: "Emergency Response Poster",
-      tr: "Acil Durum Müdahale Posteri",
-    },
-    description: {
-      en: "Clear emergency actions covering alarms, evacuation and assembly-point requirements.",
-      tr: "Alarm, tahliye ve toplanma noktası gerekliliklerini açıklayan acil durum posteri.",
-    },
-    category: "posters",
-    format: "PDF",
-    icon: "🚨",
-    available: true,
-    pdfUrl: {
-      en: "/downloads/emergency-response-poster-en.pdf",
-      tr: "/downloads/emergency-response-poster-tr.pdf",
-    },
-    version: "v1.0",
-    updated: { en: "August 2026", tr: "Ağustos 2026" },
-    language: { en: "TR / EN", tr: "TR / EN" },
-  },
-  {
-    id: 13,
-    title: {
-      en: "Fire Extinguisher Selection Poster",
-      tr: "Yangın Söndürücü Seçim Posteri",
-    },
-    description: {
-      en: "A quick-reference poster for selecting extinguishers based on the type of fire.",
-      tr: "Yangın türüne göre uygun söndürücü seçimi için hızlı referans posteri.",
-    },
-    category: "posters",
-    format: "PDF",
-    icon: "🧯",
-    available: true,
-    pdfUrl: {
-      en: "/downloads/fire-extinguisher-selection-poster-en.pdf",
-      tr: "/downloads/fire-extinguisher-selection-poster-tr.pdf",
-    },
-    version: "v1.0",
-    updated: { en: "August 2026", tr: "Ağustos 2026" },
-    language: { en: "TR / EN", tr: "TR / EN" },
-  },
-
 ];
 
 const SearchIcon = () => (
@@ -315,11 +215,10 @@ export default function DownloadsPage() {
 
   const featuredDownloads = downloads.filter((item) => item.featured);
 
-  const previewUrl = (item: DownloadItem) =>
-    item.pdfUrl?.[locale];
+  const previewUrl = (item: DownloadItem) => item.pdfUrl;
 
   const downloadUrl = (item: DownloadItem) =>
-    item.docxUrl ?? item.pdfUrl?.[locale] ?? "#";
+    item.docxUrl ?? item.pdfUrl ?? "#";
 
   const downloadLabel = (item: DownloadItem) => {
     if (item.docxUrl) {

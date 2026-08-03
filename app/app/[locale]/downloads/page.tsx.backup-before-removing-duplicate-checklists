@@ -14,15 +14,12 @@ type DownloadItem = {
     en: string;
     tr: string;
   };
-  category: "templates" | "toolbox-talks" | "guides" | "posters";
+  category: "checklists" | "templates" | "toolbox-talks";
   format: "PDF" | "DOCX" | "PDF + DOCX";
   icon: string;
   featured?: boolean;
   available: boolean;
-  pdfUrl?: {
-    en: string;
-    tr: string;
-  };
+  pdfUrl?: string;
   docxUrl?: string;
   version: string;
   updated: {
@@ -36,6 +33,66 @@ type DownloadItem = {
 };
 
 const downloads: DownloadItem[] = [
+  {
+    id: 1,
+    title: {
+      en: "Hot Work Inspection Checklist",
+      tr: "Sıcak Çalışma Kontrol Listesi",
+    },
+    description: {
+      en: "Verify permits, fire prevention measures, equipment condition and area controls before hot work begins.",
+      tr: "Sıcak çalışma öncesinde izinleri, yangın önlemlerini, ekipman durumunu ve alan kontrollerini doğrulayın.",
+    },
+    category: "checklists",
+    format: "PDF",
+    icon: "🔥",
+    featured: true,
+    available: true,
+    pdfUrl: "/downloads/hot-work-inspection-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
+  },
+  {
+    id: 2,
+    title: {
+      en: "Confined Space Entry Checklist",
+      tr: "Kapalı Alan Giriş Kontrol Listesi",
+    },
+    description: {
+      en: "Review atmospheric testing, rescue readiness, communication and entry requirements.",
+      tr: "Atmosfer ölçümünü, kurtarma hazırlığını, iletişimi ve giriş gerekliliklerini kontrol edin.",
+    },
+    category: "checklists",
+    format: "PDF",
+    icon: "🕳️",
+    featured: true,
+    available: true,
+    pdfUrl: "/downloads/confined-space-entry-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
+  },
+  {
+    id: 3,
+    title: {
+      en: "LOTO Verification Checklist",
+      tr: "LOTO Doğrulama Kontrol Listesi",
+    },
+    description: {
+      en: "Confirm isolation points, lock application, stored-energy release and zero-energy verification.",
+      tr: "İzolasyon noktalarını, kilit uygulamasını, depolanmış enerjinin boşaltılmasını ve sıfır enerji doğrulamasını kontrol edin.",
+    },
+    category: "checklists",
+    format: "PDF",
+    icon: "🔒",
+    featured: true,
+    available: true,
+    pdfUrl: "/downloads/loto-verification-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
+  },
   {
     id: 4,
     title: {
@@ -57,6 +114,44 @@ const downloads: DownloadItem[] = [
     language: { en: "English", tr: "İngilizce" },
   },
   {
+    id: 5,
+    title: {
+      en: "PPE Inspection Checklist",
+      tr: "KKD Kontrol Listesi",
+    },
+    description: {
+      en: "Inspect the condition, suitability and availability of essential personal protective equipment.",
+      tr: "Temel kişisel koruyucu donanımların durumunu, uygunluğunu ve kullanılabilirliğini kontrol edin.",
+    },
+    category: "checklists",
+    format: "PDF",
+    icon: "⛑️",
+    available: true,
+    pdfUrl: "/downloads/ppe-inspection-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
+  },
+  {
+    id: 6,
+    title: {
+      en: "Working at Height Checklist",
+      tr: "Yüksekte Çalışma Kontrol Listesi",
+    },
+    description: {
+      en: "Check access systems, fall protection, anchorage points, dropped-object controls and rescue planning.",
+      tr: "Erişim sistemlerini, düşüş korumasını, ankraj noktalarını, düşen cisim önlemlerini ve kurtarma planını kontrol edin.",
+    },
+    category: "checklists",
+    format: "PDF",
+    icon: "🪜",
+    available: true,
+    pdfUrl: "/downloads/working-at-height-checklist.pdf",
+    version: "v1.0",
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
+  },
+  {
     id: 7,
     title: {
       en: "Daily Toolbox Talk Record",
@@ -70,13 +165,7 @@ const downloads: DownloadItem[] = [
     format: "PDF + DOCX",
     icon: "🗣️",
     available: true,
-    pdfUrl: {
-
-      en: "/downloads/daily-toolbox-talk-record.pdf",
-
-      tr: "/downloads/daily-toolbox-talk-record.pdf",
-
-    },
+    pdfUrl: "/downloads/daily-toolbox-talk-record.pdf",
     docxUrl: "/downloads/daily-toolbox-talk-record.docx",
     version: "v1.0",
     updated: { en: "July 2026", tr: "Temmuz 2026" },
@@ -102,96 +191,24 @@ const downloads: DownloadItem[] = [
     language: { en: "English", tr: "İngilizce" },
   },
   {
-    id: 10,
+    id: 9,
     title: {
-      en: "PPE Selection Quick Guide",
-      tr: "KKD Seçim Hızlı Rehberi",
+      en: "Scaffold Inspection Checklist",
+      tr: "İskele Kontrol Listesi",
     },
     description: {
-      en: "A practical guide for selecting personal protective equipment based on workplace hazards.",
-      tr: "İş yeri tehlikelerine göre kişisel koruyucu donanım seçimi için pratik rehber.",
+      en: "Inspect access, platforms, guardrails, toe boards, foundations, tags and general scaffold condition.",
+      tr: "Erişimi, platformları, korkulukları, topuk levhalarını, temeli, etiketleri ve genel iskele durumunu kontrol edin.",
     },
-    category: "guides",
+    category: "checklists",
     format: "PDF",
-    icon: "🦺",
-    featured: true,
+    icon: "🏗️",
     available: true,
-    pdfUrl: {
-      en: "/downloads/ppe-selection-quick-guide-en.pdf",
-      tr: "/downloads/ppe-selection-quick-guide-tr.pdf",
-    },
+    pdfUrl: "/downloads/scaffold-inspection-checklist.pdf",
     version: "v1.0",
-    updated: { en: "August 2026", tr: "Ağustos 2026" },
-    language: { en: "TR / EN", tr: "TR / EN" },
+    updated: { en: "July 2026", tr: "Temmuz 2026" },
+    language: { en: "English", tr: "İngilizce" },
   },
-  {
-    id: 11,
-    title: {
-      en: "Hierarchy of Controls Quick Guide",
-      tr: "Kontrol Hiyerarşisi Hızlı Rehberi",
-    },
-    description: {
-      en: "Understand and apply the five levels of workplace risk control.",
-      tr: "İş yeri risk kontrolünün beş seviyesini anlayın ve uygulayın.",
-    },
-    category: "guides",
-    format: "PDF",
-    icon: "📘",
-    featured: true,
-    available: true,
-    pdfUrl: {
-      en: "/downloads/hierarchy-of-controls-quick-guide-en.pdf",
-      tr: "/downloads/hierarchy-of-controls-quick-guide-tr.pdf",
-    },
-    version: "v1.0",
-    updated: { en: "August 2026", tr: "Ağustos 2026" },
-    language: { en: "TR / EN", tr: "TR / EN" },
-  },
-  {
-    id: 12,
-    title: {
-      en: "Emergency Response Poster",
-      tr: "Acil Durum Müdahale Posteri",
-    },
-    description: {
-      en: "Clear emergency actions covering alarms, evacuation and assembly-point requirements.",
-      tr: "Alarm, tahliye ve toplanma noktası gerekliliklerini açıklayan acil durum posteri.",
-    },
-    category: "posters",
-    format: "PDF",
-    icon: "🚨",
-    available: true,
-    pdfUrl: {
-      en: "/downloads/emergency-response-poster-en.pdf",
-      tr: "/downloads/emergency-response-poster-tr.pdf",
-    },
-    version: "v1.0",
-    updated: { en: "August 2026", tr: "Ağustos 2026" },
-    language: { en: "TR / EN", tr: "TR / EN" },
-  },
-  {
-    id: 13,
-    title: {
-      en: "Fire Extinguisher Selection Poster",
-      tr: "Yangın Söndürücü Seçim Posteri",
-    },
-    description: {
-      en: "A quick-reference poster for selecting extinguishers based on the type of fire.",
-      tr: "Yangın türüne göre uygun söndürücü seçimi için hızlı referans posteri.",
-    },
-    category: "posters",
-    format: "PDF",
-    icon: "🧯",
-    available: true,
-    pdfUrl: {
-      en: "/downloads/fire-extinguisher-selection-poster-en.pdf",
-      tr: "/downloads/fire-extinguisher-selection-poster-tr.pdf",
-    },
-    version: "v1.0",
-    updated: { en: "August 2026", tr: "Ağustos 2026" },
-    language: { en: "TR / EN", tr: "TR / EN" },
-  },
-
 ];
 
 const SearchIcon = () => (
@@ -266,26 +283,19 @@ export default function DownloadsPage() {
       count: downloads.length,
     },
     {
+      id: "checklists",
+      label: isTurkish ? "Kontrol Listeleri" : "Checklists",
+      count: downloads.filter((item) => item.category === "checklists").length,
+    },
+    {
       id: "templates",
       label: isTurkish ? "Şablonlar" : "Templates",
       count: downloads.filter((item) => item.category === "templates").length,
     },
     {
-      id: "guides",
-      label: isTurkish ? "Rehberler" : "Guides",
-      count: downloads.filter((item) => item.category === "guides").length,
-    },
-    {
-      id: "posters",
-      label: isTurkish ? "Posterler" : "Posters",
-      count: downloads.filter((item) => item.category === "posters").length,
-    },
-    {
       id: "toolbox-talks",
       label: isTurkish ? "Toolbox Talk" : "Toolbox Talks",
-      count: downloads.filter(
-        (item) => item.category === "toolbox-talks"
-      ).length,
+      count: downloads.filter((item) => item.category === "toolbox-talks").length,
     },
   ];
 
@@ -315,11 +325,10 @@ export default function DownloadsPage() {
 
   const featuredDownloads = downloads.filter((item) => item.featured);
 
-  const previewUrl = (item: DownloadItem) =>
-    item.pdfUrl?.[locale];
+  const previewUrl = (item: DownloadItem) => item.pdfUrl;
 
   const downloadUrl = (item: DownloadItem) =>
-    item.docxUrl ?? item.pdfUrl?.[locale] ?? "#";
+    item.docxUrl ?? item.pdfUrl ?? "#";
 
   const downloadLabel = (item: DownloadItem) => {
     if (item.docxUrl) {
@@ -330,16 +339,12 @@ export default function DownloadsPage() {
   };
 
   const categoryLabel = (category: DownloadItem["category"]) => {
+    if (category === "checklists") {
+      return isTurkish ? "Kontrol Listesi" : "Checklist";
+    }
+
     if (category === "templates") {
       return isTurkish ? "Şablon" : "Template";
-    }
-
-    if (category === "guides") {
-      return isTurkish ? "Rehber" : "Guide";
-    }
-
-    if (category === "posters") {
-      return isTurkish ? "Poster" : "Poster";
     }
 
     return "Toolbox Talk";
@@ -377,10 +382,11 @@ export default function DownloadsPage() {
             </h1>
 
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-400 sm:text-xl">
-            {isTurkish
-            ? "Profesyonel HSE şablonları, rehberler, posterler ve sahada kullanıma hazır indirilebilir kaynakları keşfedin."
-            : "Explore professional HSE templates, guides, posters and ready-to-use downloadable resources."}
+              {isTurkish
+                ? "Saha ve ofis çalışmalarınız için kontrol listeleri, şablonlar ve kullanıma hazır HSE kaynakları."
+                : "Checklists, templates and ready-to-use HSE resources for field and office work."}
             </p>
+
             <div className="mx-auto mt-10 max-w-2xl">
               <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.06] px-5 py-4 shadow-2xl shadow-black/20 backdrop-blur-xl transition focus-within:border-blue-500/40 focus-within:ring-4 focus-within:ring-blue-500/10">
                 <span className="text-slate-500">
@@ -393,8 +399,8 @@ export default function DownloadsPage() {
                   onChange={(event) => setSearch(event.target.value)}
                   placeholder={
                     isTurkish
-                      ? "Şablon, rehber, poster veya toolbox talk ara..."
-                      : "Search templates, guides, posters or toolbox talks..."
+                      ? "Kontrol listesi veya şablon ara..."
+                      : "Search checklists and templates..."
                   }
                   className="w-full bg-transparent text-white outline-none placeholder:text-slate-600"
                 />
@@ -439,7 +445,7 @@ export default function DownloadsPage() {
                   icon: "📄",
                 },
                 {
-                  value: String(new Set(downloads.map((item) => item.category)).size),
+                  value: "3",
                   label: isTurkish ? "Kategori" : "Categories",
                   icon: "📂",
                 },

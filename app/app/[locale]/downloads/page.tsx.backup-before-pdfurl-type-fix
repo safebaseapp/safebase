@@ -70,13 +70,7 @@ const downloads: DownloadItem[] = [
     format: "PDF + DOCX",
     icon: "🗣️",
     available: true,
-    pdfUrl: {
-
-      en: "/downloads/daily-toolbox-talk-record.pdf",
-
-      tr: "/downloads/daily-toolbox-talk-record.pdf",
-
-    },
+    pdfUrl: "/downloads/daily-toolbox-talk-record.pdf",
     docxUrl: "/downloads/daily-toolbox-talk-record.docx",
     version: "v1.0",
     updated: { en: "July 2026", tr: "Temmuz 2026" },
