@@ -1,8 +1,9 @@
 import LogoutButton from "./LogoutButton"; 
 import Link from "next/link";
 import { hasLocale } from "next-intl";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { routing } from "../../../i18n/routing";
+import { createClient } from "@/utils/supabase/server";
 
 
 
@@ -81,6 +82,38 @@ export default async function DashboardPage({ params }: Props) {
 
   const isTurkish = locale === "tr";
 
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect(`/${locale}/login?next=/${locale}/dashboard`);
+  }
+
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("full_name,plan,role,status")
+    .eq("id", user.id)
+    .single();
+
+  if (profileError || !profile) {
+    redirect(`/${locale}/login`);
+  }
+
+  if (profile.status === "suspended") {
+    redirect(`/${locale}/account-suspended`);
+  }
+
+  const displayName =
+    profile.full_name ||
+    user.email?.split("@")[0] ||
+    (isTurkish ? "Kullanıcı" : "User");
+
+  const isPremium =
+    profile.plan === "premium" || profile.role === "admin";
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
@@ -96,7 +129,7 @@ export default async function DashboardPage({ params }: Props) {
               </h1>
 
               <p className="mt-2 text-2xl font-semibold text-blue-400">
-                Sercan 👋
+                {displayName} 👋
               </p>
             </div>
 
@@ -187,17 +220,27 @@ export default async function DashboardPage({ params }: Props) {
             <div className="mt-5 flex items-end justify-between">
               <div>
                 <p className="text-3xl font-bold">
-                  {isTurkish ? "Ücretsiz" : "Free"}
+                  {isPremium
+                    ? isTurkish
+                      ? "Premium"
+                      : "Premium"
+                    : isTurkish
+                      ? "Ücretsiz"
+                      : "Free"}
                 </p>
                 <p className="mt-2 text-sm text-slate-400">
-                  {isTurkish
-                    ? "Temel SafeBase araçlarına erişim"
-                    : "Access to core SafeBase tools"}
+                  {isPremium
+                    ? isTurkish
+                      ? "Tüm premium SafeBase özelliklerine erişim"
+                      : "Access to all premium SafeBase features"
+                    : isTurkish
+                      ? "Temel SafeBase araçlarına erişim"
+                      : "Access to core SafeBase tools"}
                 </p>
               </div>
 
               <span className="rounded-full bg-blue-500/15 px-3 py-1 text-xs font-bold text-blue-300">
-                FREE
+                {isPremium ? "PREMIUM" : "FREE"}
               </span>
             </div>
 
