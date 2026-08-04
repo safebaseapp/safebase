@@ -293,9 +293,9 @@ def compact_list_box(
     pale=PALE_BLUE,
 ):
     """Compact list box designed for the lower section of page 2."""
-    font_size = 6.5
-    leading = 3.2 * mm
-    item_gap = 0.4 * mm
+    font_size = 6.8
+    leading = 3.5 * mm
+    item_gap = 0.7 * mm
     content_width = width - 20 * mm
 
     wrapped_items = [
@@ -306,11 +306,11 @@ def compact_list_box(
     total_line_count = sum(max(1, len(lines)) for lines in wrapped_items)
 
     height = max(
-        34 * mm,
-        14 * mm
+        42 * mm,
+        16 * mm
         + total_line_count * leading
         + len(items) * item_gap
-        + 3 * mm,
+        + 5 * mm,
     )
 
     c.setFillColor(pale)
@@ -323,7 +323,7 @@ def compact_list_box(
     title_size = 9.2 if len(title_value) < 32 else 8.1
     text(c, title_value, x + 6 * mm, y - 7.3 * mm, title_size, BOLD, white)
 
-    item_y = y - 15.5 * mm
+    item_y = y - 18 * mm
 
     for lines in wrapped_items:
         c.setFillColor(color)
@@ -419,13 +419,13 @@ def compact_checklist_box(c, title_value, items, x, y, width):
 
 def compact_supervisor_box(c, title_value, body, x, y, width):
     """Compact supervisor script box for page 2."""
-    font_size = 7.2
-    leading = 3.7 * mm
+    font_size = 7.8
+    leading = 4.2 * mm
     lines = wrapped_lines(c, body, width - 18 * mm, font_size, REGULAR)
 
     height = max(
-        25 * mm,
-        14 * mm + len(lines) * leading,
+        30 * mm,
+        17 * mm + len(lines) * leading,
     )
 
     c.setFillColor(PALE_BLUE)
@@ -435,7 +435,7 @@ def compact_supervisor_box(c, title_value, body, x, y, width):
 
     text(c, title_value, x + 7 * mm, y - 8 * mm, 9.2, BOLD, BLUE)
 
-    line_y = y - 14 * mm
+    line_y = y - 17 * mm
     for line in lines:
         text(c, line, x + 8 * mm, line_y, font_size, REGULAR, DARK)
         line_y -= leading
@@ -643,8 +643,7 @@ def create_toolbox(filename, content):
     y = height - 60 * mm
     half = (width - 37 * mm) / 2
 
-    # Tehlikeler ve kontroller kompakt kutularla çizilir.
-    left_y = compact_list_box(
+    left_y = section_box(
         c,
         content["hazards_title"],
         content["hazards"],
@@ -653,9 +652,10 @@ def create_toolbox(filename, content):
         half,
         RED,
         PALE_RED,
+        88 * mm,
     )
 
-    right_y = compact_list_box(
+    right_y = section_box(
         c,
         content["controls_title"],
         content["controls"],
@@ -664,6 +664,7 @@ def create_toolbox(filename, content):
         half,
         GREEN,
         PALE_GREEN,
+        88 * mm,
     )
 
     y = min(left_y, right_y)
@@ -704,7 +705,7 @@ def create_toolbox(filename, content):
         verification_bottom,
     )
 
-    if page_two_bottom < 20 * mm:
+    if page_two_bottom < 19 * mm:
         raise RuntimeError(
             f"Page 2 content entered footer area: "
             f"{page_two_bottom / mm:.1f} mm"
