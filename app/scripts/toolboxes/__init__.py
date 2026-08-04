@@ -6,6 +6,7 @@ from .crane_banksman_safety import CRANE_BANKSMAN_SAFETY
 from .dropped_objects import DROPPED_OBJECTS
 from .electrical_safety import ELECTRICAL_SAFETY
 from .excavation_safety import EXCAVATION_SAFETY
+from .fire_safety import FIRE_SAFETY
 from .forklift_safety import FORKLIFT_SAFETY
 from .hand_power_tools import HAND_POWER_TOOLS
 from .hot_work import HOT_WORK
@@ -26,6 +27,7 @@ TOOLBOXES = [
     DROPPED_OBJECTS,
     ELECTRICAL_SAFETY,
     EXCAVATION_SAFETY,
+    FIRE_SAFETY,
     FORKLIFT_SAFETY,
     HAND_POWER_TOOLS,
     HOT_WORK,

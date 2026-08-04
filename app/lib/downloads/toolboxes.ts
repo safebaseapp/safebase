@@ -388,4 +388,34 @@ export const TOOLBOX_DOWNLOADS = [
     },
   },
 
+  {
+    id: 39,
+    title: {
+      en: "Fire Safety Toolbox Talk",
+      tr: "Yangın Güvenliği Toolbox Talk",
+    },
+    description: {
+      en: "Professional toolbox talk covering the fire triangle, hot work, extinguishers, PASS method, emergency response and evacuation.",
+      tr: "Yangın üçgeni, sıcak çalışma, yangın söndürücüler, PASS yöntemi, acil durum müdahalesi ve tahliyeyi kapsayan profesyonel toolbox talk.",
+    },
+    category: "toolbox-talks" as const,
+    format: "PDF" as const,
+    icon: "🔥",
+    featured: true,
+    available: true,
+    pdfUrl: {
+      en: "/downloads/fire-safety-toolbox-talk-en.pdf",
+      tr: "/downloads/fire-safety-toolbox-talk-tr.pdf",
+    },
+    version: "v1.0",
+    updated: {
+      en: "August 2026",
+      tr: "Ağustos 2026",
+    },
+    language: {
+      en: "English",
+      tr: "Türkçe",
+    },
+  },
+
 ];
