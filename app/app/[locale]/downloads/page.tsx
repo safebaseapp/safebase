@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
+import { TOOLBOX_DOWNLOADS } from "@/lib/downloads/toolboxes";
 
 type DownloadItem = {
   id: number;
@@ -428,6 +429,7 @@ const downloads: DownloadItem[] = [
     updated: { en: "August 2026", tr: "Ağustos 2026" },
     language: { en: "English", tr: "Türkçe" },
   },
+  ...TOOLBOX_DOWNLOADS,
 
 ];
 
