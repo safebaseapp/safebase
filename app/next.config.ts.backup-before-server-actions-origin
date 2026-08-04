@@ -4,18 +4,6 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  experimental: {
-    serverActions: {
-      allowedOrigins: [
-        "probable-palm-tree-966r5rr774gwcp944-3000.app.github.dev",
-        "*.app.github.dev",
-      
-        "localhost:3000",
-        "127.0.0.1:3000",
-      ],
-    },
-  },
-
   turbopack: {
     root: process.cwd(),
   },

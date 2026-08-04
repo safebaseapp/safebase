@@ -9,9 +9,6 @@ const nextConfig: NextConfig = {
       allowedOrigins: [
         "probable-palm-tree-966r5rr774gwcp944-3000.app.github.dev",
         "*.app.github.dev",
-      
-        "localhost:3000",
-        "127.0.0.1:3000",
       ],
     },
   },
