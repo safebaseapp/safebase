@@ -78,103 +78,6 @@ function createMessageId() {
   return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
-function copilotToMarkdown(
-  copilot: CopilotResponse,
-  isTurkish: boolean,
-): string {
-  const sections: string[] = [];
-
-  const addList = (title: string, items: string[]) => {
-    if (items.length > 0) {
-      sections.push(
-        `## ${title}\n\n${items.map((item) => `- ${item}`).join("\n")}`,
-      );
-    }
-  };
-
-  sections.push(
-    `## ${isTurkish ? "Genel Bakış" : "Overview"}\n\n${copilot.summary}`,
-  );
-
-  if (copilot.riskReason) {
-    sections.push(
-      `## ${isTurkish ? "Ön Risk Değerlendirmesi" : "Preliminary Risk Assessment"}\n\n**${copilot.riskLevel}** — ${copilot.riskReason}`,
-    );
-  }
-
-  addList(
-    isTurkish ? "Ana Tehlikeler" : "Main Hazards",
-    copilot.hazards,
-  );
-
-  addList(
-    isTurkish ? "Kritik Kontroller" : "Critical Controls",
-    copilot.criticalControls,
-  );
-
-  addList(
-    isTurkish ? "Gerekli KKD" : "Required PPE",
-    copilot.requiredPpe,
-  );
-
-  addList(
-    isTurkish ? "İzinler ve Dokümanlar" : "Permits and Documents",
-    copilot.permitsAndDocuments,
-  );
-
-  addList(
-    isTurkish ? "Çalışma Öncesi" : "Before Starting",
-    copilot.beforeStarting,
-  );
-
-  addList(
-    isTurkish ? "Çalışma Sırasında" : "During the Work",
-    copilot.duringWork,
-  );
-
-  addList(
-    isTurkish ? "Çalışma Sonrası" : "After Completion",
-    copilot.afterCompletion,
-  );
-
-  addList(
-    isTurkish
-      ? "Çalışmayı Derhal Durdurun"
-      : "Stop Work Immediately If",
-    copilot.stopWorkConditions,
-  );
-
-  addList(
-    isTurkish ? "Yaygın Hatalar" : "Common Failures",
-    copilot.commonFailures,
-  );
-
-  addList(
-    isTurkish ? "Uygulanabilir Standartlar" : "Applicable Standards",
-    copilot.applicableStandards,
-  );
-
-  addList(
-    isTurkish ? "SafeBase Hızlı Kontrol Listesi" : "SafeBase Quick Checklist",
-    copilot.quickChecklist.map((item) => `☐ ${item}`),
-  );
-
-  if (copilot.recommendation) {
-    sections.push(
-      `## ${isTurkish ? "SafeBase Önerisi" : "SafeBase Recommendation"}\n\n${copilot.recommendation}`,
-    );
-  }
-
-  if (copilot.clarificationQuestions.length > 0) {
-    addList(
-      isTurkish ? "Netleştirilmesi Gerekenler" : "Clarification Required",
-      copilot.clarificationQuestions,
-    );
-  }
-
-  return sections.join("\n\n");
-}
-
 export default function AIAssistantPage() {
   const pathname = usePathname();
   const isTurkish = pathname.startsWith("/tr");
@@ -274,7 +177,6 @@ export default function AIAssistantPage() {
         body: JSON.stringify({
           question: cleanQuestion,
           locale,
-          responseMode: "structured",
           messages: [...messages, userMessage].map((message) => ({
             role: message.role,
             content: message.content,
@@ -283,35 +185,109 @@ export default function AIAssistantPage() {
       });
 
       if (!response.ok) {
-        const errorPayload = await response.text();
-        console.error("SafeBase structured response error:", errorPayload);
-        throw new Error("SafeBase AI structured request failed.");
+        throw new Error("SafeBase AI request failed.");
       }
 
-      const payload = (await response.json()) as {
-        data?: CopilotResponse;
-        sources?: string[];
-      };
-
-      if (!payload.data) {
-        throw new Error("SafeBase Copilot data is unavailable.");
+      if (!response.body) {
+        throw new Error("SafeBase AI response stream is unavailable.");
       }
 
-      const copilot = payload.data;
-      const responseSources = Array.isArray(payload.sources)
-        ? payload.sources
-        : [];
+      const sourcesHeader = response.headers.get("X-SafeBase-Sources");
 
-      const assistantMessage: Message = {
-        id: createMessageId(),
-        role: "assistant",
-        content: copilotToMarkdown(copilot, isTurkish),
-        sources: responseSources,
-        recommendations: getRecommendations(cleanQuestion),
-        copilot,
-      };
+      const responseSources: string[] = (() => {
+        if (!sourcesHeader) {
+          return [];
+        }
 
-      setMessages((current) => [...current, assistantMessage]);
+        try {
+          const parsedSources = JSON.parse(decodeURIComponent(sourcesHeader));
+
+          return Array.isArray(parsedSources) ? parsedSources : [];
+        } catch {
+          return [];
+        }
+      })();
+
+      const assistantMessageId = createMessageId();
+
+      setMessages((current) => [
+        ...current,
+        {
+          id: assistantMessageId,
+          role: "assistant",
+          content: "",
+          sources: responseSources,
+          recommendations: getRecommendations(cleanQuestion),
+        },
+      ]);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        const decodedChunk = decoder.decode(value, {
+          stream: true,
+        });
+
+        if (!decodedChunk) {
+          continue;
+        }
+
+        setMessages((current) =>
+          current.map((message) =>
+            message.id === assistantMessageId
+              ? {
+                  ...message,
+                  content: message.content + decodedChunk,
+                }
+              : message,
+          ),
+        );
+      }
+
+      const finalChunk = decoder.decode();
+
+      if (finalChunk) {
+        setMessages((current) =>
+          current.map((message) =>
+            message.id === assistantMessageId
+              ? {
+                  ...message,
+                  content: message.content + finalChunk,
+                }
+              : message,
+          ),
+        );
+      }
+
+      setMessages((current) => {
+        const assistantMessage = current.find(
+          (message) => message.id === assistantMessageId,
+        );
+
+        if (assistantMessage?.content.trim()) {
+          return current;
+        }
+
+        const fallbackAnswer = isTurkish
+          ? "Bu bilgi mevcut SafeBase Bilgi Tabanında bulunmuyor."
+          : "This information is not available in the current SafeBase Knowledge Base.";
+
+        return current.map((message) =>
+          message.id === assistantMessageId
+            ? {
+                ...message,
+                content: fallbackAnswer,
+              }
+            : message,
+        );
+      });
     } catch (requestError) {
       console.error(requestError);
 

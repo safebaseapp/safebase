@@ -1,0 +1,176 @@
+import {
+  riskLevels,
+  type CopilotParseResult,
+  type CopilotResponse,
+} from "@/lib/ai/copilot-types";
+
+function isStringArray(value: unknown): value is string[] {
+  return (
+    Array.isArray(value) &&
+    value.every((item) => typeof item === "string")
+  );
+}
+
+function isNullableString(value: unknown): value is string | null {
+  return value === null || typeof value === "string";
+}
+
+function describeValue(value: unknown): string {
+  if (value === null) {
+    return "null";
+  }
+
+  if (Array.isArray(value)) {
+    const itemTypes = [...new Set(value.map((item) => typeof item))];
+
+    return `array[${itemTypes.join(", ") || "empty"}]`;
+  }
+
+  return typeof value;
+}
+
+function validateCopilotResponse(value: unknown): string[] {
+  const errors: string[] = [];
+
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return [
+      `root: expected object, received ${describeValue(value)}`,
+    ];
+  }
+
+  const candidate = value as Record<string, unknown>;
+
+  if (candidate.version !== "1.0") {
+    errors.push(
+      `version: expected "1.0", received ${JSON.stringify(candidate.version)}`,
+    );
+  }
+
+  if (
+    candidate.mode !== "general-guidance" &&
+    candidate.mode !== "operational-assessment"
+  ) {
+    errors.push(
+      `mode: expected "general-guidance" or "operational-assessment", received ${JSON.stringify(candidate.mode)}`,
+    );
+  }
+
+  if (typeof candidate.title !== "string") {
+    errors.push(
+      `title: expected string, received ${describeValue(candidate.title)}`,
+    );
+  }
+
+  if (typeof candidate.summary !== "string") {
+    errors.push(
+      `summary: expected string, received ${describeValue(candidate.summary)}`,
+    );
+  }
+
+  if (
+    typeof candidate.riskLevel !== "string" ||
+    !riskLevels.includes(
+      candidate.riskLevel as CopilotResponse["riskLevel"],
+    )
+  ) {
+    errors.push(
+      `riskLevel: expected ${riskLevels.join(" | ")}, received ${JSON.stringify(candidate.riskLevel)}`,
+    );
+  }
+
+  if (!isNullableString(candidate.riskReason)) {
+    errors.push(
+      `riskReason: expected string or null, received ${describeValue(candidate.riskReason)}`,
+    );
+  }
+
+  const arrayFields = [
+    "hazards",
+    "criticalControls",
+    "requiredPpe",
+    "permitsAndDocuments",
+    "beforeStarting",
+    "duringWork",
+    "afterCompletion",
+    "stopWorkConditions",
+    "commonFailures",
+    "applicableStandards",
+    "quickChecklist",
+    "clarificationQuestions",
+    "relatedTopics",
+  ] as const;
+
+  for (const field of arrayFields) {
+    if (!isStringArray(candidate[field])) {
+      errors.push(
+        `${field}: expected string[], received ${describeValue(candidate[field])}`,
+      );
+    }
+  }
+
+  if (typeof candidate.recommendation !== "string") {
+    errors.push(
+      `recommendation: expected string, received ${describeValue(candidate.recommendation)}`,
+    );
+  }
+
+  return errors;
+}
+
+function isCopilotResponse(value: unknown): value is CopilotResponse {
+  return validateCopilotResponse(value).length === 0;
+}
+
+function removeMarkdownFence(input: string): string {
+  const trimmed = input.trim();
+
+  if (!trimmed.startsWith("```")) {
+    return trimmed;
+  }
+
+  return trimmed
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/, "")
+    .trim();
+}
+
+export function parseCopilotResponse(
+  input: string,
+): CopilotParseResult {
+  const cleanedInput = removeMarkdownFence(input);
+
+  if (!cleanedInput) {
+    return {
+      success: false,
+      error: "Copilot response is empty.",
+    };
+  }
+
+  try {
+    const parsed: unknown = JSON.parse(cleanedInput);
+    const validationErrors = validateCopilotResponse(parsed);
+
+    if (!isCopilotResponse(parsed)) {
+      return {
+        success: false,
+        error: [
+          "Copilot response does not match the required schema.",
+          ...validationErrors.map((item) => `- ${item}`),
+        ].join("\n"),
+      };
+    }
+
+    return {
+      success: true,
+      data: parsed,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error:
+        error instanceof Error
+          ? `Copilot response is not valid JSON: ${error.message}`
+          : "Copilot response is not valid JSON.",
+    };
+  }
+}

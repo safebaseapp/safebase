@@ -1,0 +1,103 @@
+import {
+  riskLevels,
+  type CopilotParseResult,
+  type CopilotResponse,
+} from "@/lib/ai/copilot-types";
+
+function isStringArray(value: unknown): value is string[] {
+  return (
+    Array.isArray(value) &&
+    value.every((item) => typeof item === "string")
+  );
+}
+
+function isNullableString(
+  value: unknown,
+): value is string | null {
+  return value === null || typeof value === "string";
+}
+
+function isCopilotResponse(
+  value: unknown,
+): value is CopilotResponse {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+
+  return (
+    candidate.version === "1.0" &&
+    (candidate.mode === "general-guidance" ||
+      candidate.mode === "operational-assessment") &&
+    typeof candidate.title === "string" &&
+    typeof candidate.summary === "string" &&
+    typeof candidate.riskLevel === "string" &&
+    riskLevels.includes(
+      candidate.riskLevel as CopilotResponse["riskLevel"],
+    ) &&
+    isNullableString(candidate.riskReason) &&
+    isStringArray(candidate.hazards) &&
+    isStringArray(candidate.criticalControls) &&
+    isStringArray(candidate.requiredPpe) &&
+    isStringArray(candidate.permitsAndDocuments) &&
+    isStringArray(candidate.beforeStarting) &&
+    isStringArray(candidate.duringWork) &&
+    isStringArray(candidate.afterCompletion) &&
+    isStringArray(candidate.stopWorkConditions) &&
+    isStringArray(candidate.commonFailures) &&
+    isStringArray(candidate.applicableStandards) &&
+    isStringArray(candidate.quickChecklist) &&
+    typeof candidate.recommendation === "string" &&
+    isStringArray(candidate.clarificationQuestions) &&
+    isStringArray(candidate.relatedTopics)
+  );
+}
+
+function removeMarkdownFence(input: string): string {
+  const trimmed = input.trim();
+
+  if (!trimmed.startsWith("```")) {
+    return trimmed;
+  }
+
+  return trimmed
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/, "")
+    .trim();
+}
+
+export function parseCopilotResponse(
+  input: string,
+): CopilotParseResult {
+  const cleanedInput = removeMarkdownFence(input);
+
+  if (!cleanedInput) {
+    return {
+      success: false,
+      error: "Copilot response is empty.",
+    };
+  }
+
+  try {
+    const parsed: unknown = JSON.parse(cleanedInput);
+
+    if (!isCopilotResponse(parsed)) {
+      return {
+        success: false,
+        error:
+          "Copilot response does not match the required schema.",
+      };
+    }
+
+    return {
+      success: true,
+      data: parsed,
+    };
+  } catch {
+    return {
+      success: false,
+      error: "Copilot response is not valid JSON.",
+    };
+  }
+}

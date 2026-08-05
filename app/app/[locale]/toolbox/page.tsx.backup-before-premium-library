@@ -1,0 +1,521 @@
+import Link from "next/link";
+
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+type ToolboxItem = {
+  slug: string;
+  icon: string;
+  category: string;
+  title: {
+    tr: string;
+    en: string;
+  };
+  description: {
+    tr: string;
+    en: string;
+  };
+  duration: number;
+  status: "live" | "coming-soon";
+};
+
+const toolboxItems: ToolboxItem[] = [
+  {
+    slug: "working-at-height",
+    icon: "🏗️",
+    category: "work-at-height",
+    title: {
+      tr: "Yüksekte Çalışma",
+      en: "Working at Height",
+    },
+    description: {
+      tr: "Düşme riskleri, güvenli erişim, ankraj ve düşüş durdurma kontrolleri.",
+      en: "Fall hazards, safe access, anchorage and fall-arrest controls.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "scaffold-safety",
+    icon: "🏗️",
+    category: "scaffolding",
+    title: {
+      tr: "İskele Güvenliği",
+      en: "Scaffold Safety",
+    },
+    description: {
+      tr: "İskele erişimi, platform, korkuluk, etiketleme ve kullanım kontrolleri.",
+      en: "Scaffold access, platforms, guardrails, tagging and use controls.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "safety-harness",
+    icon: "🪢",
+    category: "work-at-height",
+    title: {
+      tr: "Emniyet Kemeri Kullanımı",
+      en: "Safety Harness",
+    },
+    description: {
+      tr: "Tam vücut emniyet kemeri, bağlantı elemanları ve doğru ankraj kullanımı.",
+      en: "Full-body harnesses, connectors and correct anchorage use.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "hot-work",
+    icon: "🔥",
+    category: "hot-work",
+    title: {
+      tr: "Sıcak Çalışma",
+      en: "Hot Work",
+    },
+    description: {
+      tr: "Kaynak, kesme ve taşlama işlerinde izin, yangın gözcüsü ve kıvılcım kontrolü.",
+      en: "Permits, fire watch and spark control for welding, cutting and grinding.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "loto",
+    icon: "🔒",
+    category: "loto",
+    title: {
+      tr: "Kilitleme ve Etiketleme",
+      en: "Lockout Tagout",
+    },
+    description: {
+      tr: "Enerji izolasyonu, kişisel kilitler ve sıfır enerji doğrulaması.",
+      en: "Energy isolation, personal locks and zero-energy verification.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "confined-space",
+    icon: "⚠️",
+    category: "confined-space",
+    title: {
+      tr: "Kapalı Alan Güvenliği",
+      en: "Confined Space Safety",
+    },
+    description: {
+      tr: "Atmosfer ölçümü, giriş izni, gözcü ve kurtarma hazırlığı.",
+      en: "Atmospheric testing, entry permits, attendants and rescue readiness.",
+    },
+    duration: 7,
+    status: "live",
+  },
+  {
+    slug: "electrical-safety",
+    icon: "⚡",
+    category: "electrical",
+    title: {
+      tr: "Elektrik Güvenliği",
+      en: "Electrical Safety",
+    },
+    description: {
+      tr: "Elektrik tehlikeleri, hasarlı ekipman ve güvenli izolasyon kontrolleri.",
+      en: "Electrical hazards, damaged equipment and safe isolation controls.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "excavation-safety",
+    icon: "🚧",
+    category: "excavation",
+    title: {
+      tr: "Kazı Güvenliği",
+      en: "Excavation Safety",
+    },
+    description: {
+      tr: "Göçük, yer altı hizmetleri, erişim ve kazı çevresi kontrolleri.",
+      en: "Cave-ins, underground services, access and excavation-area controls.",
+    },
+    duration: 6,
+    status: "live",
+  },
+  {
+    slug: "lifting-operations",
+    icon: "🏗️",
+    category: "lifting",
+    title: {
+      tr: "Kaldırma Operasyonları",
+      en: "Lifting Operations",
+    },
+    description: {
+      tr: "Kaldırma planı, sapanlar, işaretçi ve askıdaki yük kontrolleri.",
+      en: "Lift plans, rigging, banksmen and suspended-load controls.",
+    },
+    duration: 6,
+    status: "live",
+  },
+  {
+    slug: "crane-banksman-safety",
+    icon: "🏗️",
+    category: "lifting",
+    title: {
+      tr: "Vinç İşaretçisi Güvenliği",
+      en: "Crane Banksman Safety",
+    },
+    description: {
+      tr: "Standart işaretler, görüş alanı ve güvenli iletişim kuralları.",
+      en: "Standard signals, visibility and safe communication rules.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "mobile-equipment-safety",
+    icon: "🚜",
+    category: "mobile-equipment",
+    title: {
+      tr: "Mobil Ekipman Güvenliği",
+      en: "Mobile Equipment Safety",
+    },
+    description: {
+      tr: "Yaya ayrımı, kör noktalar, hız kontrolü ve geri manevra güvenliği.",
+      en: "Pedestrian separation, blind spots, speed and reversing safety.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "forklift-safety",
+    icon: "🚜",
+    category: "mobile-equipment",
+    title: {
+      tr: "Forklift Güvenliği",
+      en: "Forklift Safety",
+    },
+    description: {
+      tr: "Yük kapasitesi, kör noktalar, hız ve yaya güvenliği kontrolleri.",
+      en: "Load capacity, blind spots, speed and pedestrian-safety controls.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "ppe-safety",
+    icon: "🦺",
+    category: "ppe",
+    title: {
+      tr: "Kişisel Koruyucu Donanım",
+      en: "Personal Protective Equipment",
+    },
+    description: {
+      tr: "Doğru KKD seçimi, kontrolü, kullanımı ve bakım kuralları.",
+      en: "Correct PPE selection, inspection, use and maintenance.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "hand-power-tools",
+    icon: "🛠️",
+    category: "tools",
+    title: {
+      tr: "El Aletleri ve Elektrikli Aletler",
+      en: "Hand and Power Tools",
+    },
+    description: {
+      tr: "Uygun alet seçimi, muhafaza, kablo ve kullanım öncesi kontroller.",
+      en: "Tool selection, guards, cables and pre-use inspections.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "ladder-safety",
+    icon: "🪜",
+    category: "work-at-height",
+    title: {
+      tr: "Merdiven Güvenliği",
+      en: "Ladder Safety",
+    },
+    description: {
+      tr: "Doğru merdiven seçimi, açı, sabitleme ve üç nokta temas kuralı.",
+      en: "Correct ladder selection, angle, securing and three-point contact.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "housekeeping",
+    icon: "🧹",
+    category: "housekeeping",
+    title: {
+      tr: "Saha Düzeni ve Temizlik",
+      en: "Housekeeping",
+    },
+    description: {
+      tr: "Yürüme yolları, atıklar, malzeme istifi ve kayma-takılma riskleri.",
+      en: "Walkways, waste, storage and slip-trip hazards.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "fire-safety",
+    icon: "🧯",
+    category: "fire-safety",
+    title: {
+      tr: "Yangın Güvenliği",
+      en: "Fire Safety",
+    },
+    description: {
+      tr: "Yangın önleme, alarm, söndürücü ve tahliye kontrolleri.",
+      en: "Fire prevention, alarms, extinguishers and evacuation controls.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "chemical-safety",
+    icon: "🧪",
+    category: "chemical",
+    title: {
+      tr: "Kimyasal Güvenlik",
+      en: "Chemical Safety",
+    },
+    description: {
+      tr: "Etiketleme, SDS, depolama, dökülme ve maruziyet kontrolleri.",
+      en: "Labelling, SDS, storage, spill and exposure controls.",
+    },
+    duration: 6,
+    status: "live",
+  },
+  {
+    slug: "dropped-objects",
+    icon: "📦",
+    category: "dropped-objects",
+    title: {
+      tr: "Düşen Cisimler",
+      en: "Dropped Objects",
+    },
+    description: {
+      tr: "Alet sabitleme, bariyer, istifleme ve alt alan koruma kontrolleri.",
+      en: "Tool tethering, barriers, storage and lower-area protection.",
+    },
+    duration: 5,
+    status: "live",
+  },
+  {
+    slug: "manual-handling",
+    icon: "📦",
+    category: "manual-handling",
+    title: {
+      tr: "Elle Taşıma",
+      en: "Manual Handling",
+    },
+    description: {
+      tr: "Yük değerlendirmesi, doğru kaldırma tekniği ve mekanik yardım kullanımı.",
+      en: "Load assessment, safe lifting technique and mechanical assistance.",
+    },
+    duration: 5,
+    status: "live",
+  },
+];
+
+const categories = [
+  { id: "all", tr: "Tümü", en: "All", icon: "▦" },
+  { id: "work-at-height", tr: "Yüksekte Çalışma", en: "Work at Height", icon: "🏗️" },
+  { id: "hot-work", tr: "Sıcak İş", en: "Hot Work", icon: "🔥" },
+  { id: "scaffolding", tr: "İskele", en: "Scaffolding", icon: "🏗️" },
+  { id: "loto", tr: "LOTO", en: "LOTO", icon: "🔒" },
+  { id: "confined-space", tr: "Kapalı Alan", en: "Confined Space", icon: "⚠️" },
+  { id: "electrical", tr: "Elektrik", en: "Electrical", icon: "⚡" },
+  { id: "lifting", tr: "Kaldırma", en: "Lifting", icon: "🏗️" },
+  { id: "mobile-equipment", tr: "Mobil Ekipman", en: "Mobile Equipment", icon: "🚜" },
+  { id: "ppe", tr: "KKD", en: "PPE", icon: "🦺" },
+  { id: "fire-safety", tr: "Yangın", en: "Fire Safety", icon: "🧯" },
+  { id: "chemical", tr: "Kimyasal", en: "Chemical", icon: "🧪" },
+];
+
+export default async function ToolboxLibraryPage({ params }: Props) {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const isTurkish = locale === "tr";
+
+  return (
+    <main className="min-h-screen bg-slate-50">
+      <section className="border-b border-slate-200 bg-white px-6 py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-blue-600">
+            {isTurkish ? "SafeBase Toolbox Kütüphanesi" : "SafeBase Toolbox Library"}
+          </p>
+
+          <div className="mt-5 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+            <div className="max-w-3xl">
+              <h1 className="text-4xl font-black tracking-[-0.04em] text-slate-950 sm:text-6xl">
+                {isTurkish
+                  ? "Sahaya hazır profesyonel toolbox konuşmaları."
+                  : "Professional toolbox talks, ready for the field."}
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+                {isTurkish
+                  ? "Günlük saha toplantılarında kullanabileceğiniz kısa, net ve uygulanabilir HSE içeriklerini keşfedin."
+                  : "Explore concise, practical HSE content for daily site safety meetings."}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
+                <p className="text-2xl font-black text-slate-950">
+                  {toolboxItems.length}+
+                </p>
+                <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-500">
+                  {isTurkish ? "Toolbox" : "Toolbox Talks"}
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
+                <p className="text-2xl font-black text-slate-950">5–7</p>
+                <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-500">
+                  {isTurkish ? "Dakika" : "Minutes"}
+                </p>
+              </div>
+
+              <div className="col-span-2 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 sm:col-span-1">
+                <p className="text-2xl font-black text-emerald-600">
+                  {isTurkish ? "Ücretsiz" : "Free"}
+                </p>
+                <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-500">
+                  {isTurkish ? "Erişim" : "Access"}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <label className="relative block flex-1">
+                <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-slate-400">
+                  🔎
+                </span>
+
+                <input
+                  type="search"
+                  placeholder={
+                    isTurkish
+                      ? "Toolbox konusu ara..."
+                      : "Search toolbox topics..."
+                  }
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-4 pl-12 pr-4 text-sm font-semibold text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+                />
+              </label>
+
+              <button
+                type="button"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-slate-950 px-5 py-4 text-sm font-black text-white lg:hidden"
+              >
+                ☰ {isTurkish ? "Kategoriler" : "Categories"}
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-8 lg:grid-cols-[260px_1fr]">
+            <aside className="hidden self-start rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm lg:block lg:sticky lg:top-24">
+              <p className="px-3 text-xs font-black uppercase tracking-[0.18em] text-slate-400">
+                {isTurkish ? "Kategoriler" : "Categories"}
+              </p>
+
+              <nav className="mt-4 space-y-2">
+                {categories.map((category, index) => (
+                  <button
+                    type="button"
+                    key={category.id}
+                    className={`flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-bold transition ${
+                      index === 0
+                        ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                    }`}
+                  >
+                    <span>{category.icon}</span>
+                    <span>{isTurkish ? category.tr : category.en}</span>
+                  </button>
+                ))}
+              </nav>
+            </aside>
+
+            <div>
+              <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-600">
+                    {isTurkish ? "Tüm Toolbox Konuları" : "All Toolbox Topics"}
+                  </p>
+
+                  <h2 className="mt-2 text-3xl font-black text-slate-950">
+                    {isTurkish
+                      ? `${toolboxItems.length} profesyonel toolbox`
+                      : `${toolboxItems.length} professional toolbox talks`}
+                  </h2>
+                </div>
+
+                <p className="text-sm font-semibold text-slate-500">
+                  {isTurkish
+                    ? "Yeni konular düzenli olarak eklenir."
+                    : "New topics are added regularly."}
+                </p>
+              </div>
+
+              <div className="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                {toolboxItems.map((item) => (
+                  <Link
+                    key={item.slug}
+                    href={`/${locale}/toolbox/${item.slug}`}
+                    className="group flex min-h-[310px] flex-col rounded-[26px] border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-500/10"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-3xl ring-1 ring-blue-100 transition group-hover:scale-110">
+                        {item.icon}
+                      </div>
+
+                      <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-black text-emerald-700">
+                        {isTurkish ? "Hazır" : "Ready"}
+                      </span>
+                    </div>
+
+                    <h3 className="mt-6 text-xl font-black text-slate-950 transition group-hover:text-blue-600">
+                      {isTurkish ? item.title.tr : item.title.en}
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-7 text-slate-600">
+                      {isTurkish ? item.description.tr : item.description.en}
+                    </p>
+
+                    <div className="mt-auto border-t border-slate-200 pt-5">
+                      <div className="flex items-center justify-between gap-4">
+                        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-500">
+                          {item.duration} {isTurkish ? "dk" : "min"}
+                        </span>
+
+                        <span className="inline-flex items-center gap-2 font-black text-blue-600 transition group-hover:gap-3">
+                          {isTurkish ? "Toolbox'ı Aç" : "Open Toolbox"}
+                          <span>→</span>
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

@@ -1,5 +1,4 @@
-import LogoutButton from "./LogoutButton";
-import CompanyBranding from "./CompanyBranding"; 
+import LogoutButton from "./LogoutButton"; 
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound, redirect } from "next/navigation";
@@ -266,12 +265,6 @@ export default async function DashboardPage({ params }: Props) {
             </button>
           </aside>
         </div>
-
-        <CompanyBranding
-          locale={locale}
-          userId={user.id}
-          isPremium={isPremium}
-        />
 
         <section className="mt-6 rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">

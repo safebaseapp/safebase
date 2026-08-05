@@ -6,21 +6,12 @@ import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import RiskSummaryCard from "@/components/ai/RiskSummaryCard";
-import {
-  getRecommendations,
-  type Recommendation,
-} from "@/lib/ai/recommendations";
-
-import type { CopilotResponse } from "@/lib/ai/copilot-types";
 
 type Message = {
   id: string;
   role: "user" | "assistant";
   content: string;
   sources?: string[];
-  recommendations?: Recommendation[];
-  copilot?: CopilotResponse;
 };
 
 const sourceNames: Record<string, { tr: string; en: string }> = {
@@ -76,103 +67,6 @@ const sourceNames: Record<string, { tr: string; en: string }> = {
 
 function createMessageId() {
   return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-}
-
-function copilotToMarkdown(
-  copilot: CopilotResponse,
-  isTurkish: boolean,
-): string {
-  const sections: string[] = [];
-
-  const addList = (title: string, items: string[]) => {
-    if (items.length > 0) {
-      sections.push(
-        `## ${title}\n\n${items.map((item) => `- ${item}`).join("\n")}`,
-      );
-    }
-  };
-
-  sections.push(
-    `## ${isTurkish ? "Genel Bakış" : "Overview"}\n\n${copilot.summary}`,
-  );
-
-  if (copilot.riskReason) {
-    sections.push(
-      `## ${isTurkish ? "Ön Risk Değerlendirmesi" : "Preliminary Risk Assessment"}\n\n**${copilot.riskLevel}** — ${copilot.riskReason}`,
-    );
-  }
-
-  addList(
-    isTurkish ? "Ana Tehlikeler" : "Main Hazards",
-    copilot.hazards,
-  );
-
-  addList(
-    isTurkish ? "Kritik Kontroller" : "Critical Controls",
-    copilot.criticalControls,
-  );
-
-  addList(
-    isTurkish ? "Gerekli KKD" : "Required PPE",
-    copilot.requiredPpe,
-  );
-
-  addList(
-    isTurkish ? "İzinler ve Dokümanlar" : "Permits and Documents",
-    copilot.permitsAndDocuments,
-  );
-
-  addList(
-    isTurkish ? "Çalışma Öncesi" : "Before Starting",
-    copilot.beforeStarting,
-  );
-
-  addList(
-    isTurkish ? "Çalışma Sırasında" : "During the Work",
-    copilot.duringWork,
-  );
-
-  addList(
-    isTurkish ? "Çalışma Sonrası" : "After Completion",
-    copilot.afterCompletion,
-  );
-
-  addList(
-    isTurkish
-      ? "Çalışmayı Derhal Durdurun"
-      : "Stop Work Immediately If",
-    copilot.stopWorkConditions,
-  );
-
-  addList(
-    isTurkish ? "Yaygın Hatalar" : "Common Failures",
-    copilot.commonFailures,
-  );
-
-  addList(
-    isTurkish ? "Uygulanabilir Standartlar" : "Applicable Standards",
-    copilot.applicableStandards,
-  );
-
-  addList(
-    isTurkish ? "SafeBase Hızlı Kontrol Listesi" : "SafeBase Quick Checklist",
-    copilot.quickChecklist.map((item) => `☐ ${item}`),
-  );
-
-  if (copilot.recommendation) {
-    sections.push(
-      `## ${isTurkish ? "SafeBase Önerisi" : "SafeBase Recommendation"}\n\n${copilot.recommendation}`,
-    );
-  }
-
-  if (copilot.clarificationQuestions.length > 0) {
-    addList(
-      isTurkish ? "Netleştirilmesi Gerekenler" : "Clarification Required",
-      copilot.clarificationQuestions,
-    );
-  }
-
-  return sections.join("\n\n");
 }
 
 export default function AIAssistantPage() {
@@ -237,7 +131,7 @@ export default function AIAssistantPage() {
       behavior: "smooth",
       block: "end",
     });
-  }, [messages.length, loading]);
+  }, [messages, loading]);
 
   const askAI = async (questionOverride?: string) => {
     const cleanQuestion = (questionOverride ?? question).trim();
@@ -274,7 +168,6 @@ export default function AIAssistantPage() {
         body: JSON.stringify({
           question: cleanQuestion,
           locale,
-          responseMode: "structured",
           messages: [...messages, userMessage].map((message) => ({
             role: message.role,
             content: message.content,
@@ -283,35 +176,108 @@ export default function AIAssistantPage() {
       });
 
       if (!response.ok) {
-        const errorPayload = await response.text();
-        console.error("SafeBase structured response error:", errorPayload);
-        throw new Error("SafeBase AI structured request failed.");
+        throw new Error("SafeBase AI request failed.");
       }
 
-      const payload = (await response.json()) as {
-        data?: CopilotResponse;
-        sources?: string[];
-      };
-
-      if (!payload.data) {
-        throw new Error("SafeBase Copilot data is unavailable.");
+      if (!response.body) {
+        throw new Error("SafeBase AI response stream is unavailable.");
       }
 
-      const copilot = payload.data;
-      const responseSources = Array.isArray(payload.sources)
-        ? payload.sources
-        : [];
+      const sourcesHeader = response.headers.get("X-SafeBase-Sources");
 
-      const assistantMessage: Message = {
-        id: createMessageId(),
-        role: "assistant",
-        content: copilotToMarkdown(copilot, isTurkish),
-        sources: responseSources,
-        recommendations: getRecommendations(cleanQuestion),
-        copilot,
-      };
+      const responseSources: string[] = (() => {
+        if (!sourcesHeader) {
+          return [];
+        }
 
-      setMessages((current) => [...current, assistantMessage]);
+        try {
+          const parsedSources = JSON.parse(decodeURIComponent(sourcesHeader));
+
+          return Array.isArray(parsedSources) ? parsedSources : [];
+        } catch {
+          return [];
+        }
+      })();
+
+      const assistantMessageId = createMessageId();
+
+      setMessages((current) => [
+        ...current,
+        {
+          id: assistantMessageId,
+          role: "assistant",
+          content: "",
+          sources: responseSources,
+        },
+      ]);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          break;
+        }
+
+        const decodedChunk = decoder.decode(value, {
+          stream: true,
+        });
+
+        if (!decodedChunk) {
+          continue;
+        }
+
+        setMessages((current) =>
+          current.map((message) =>
+            message.id === assistantMessageId
+              ? {
+                  ...message,
+                  content: message.content + decodedChunk,
+                }
+              : message,
+          ),
+        );
+      }
+
+      const finalChunk = decoder.decode();
+
+      if (finalChunk) {
+        setMessages((current) =>
+          current.map((message) =>
+            message.id === assistantMessageId
+              ? {
+                  ...message,
+                  content: message.content + finalChunk,
+                }
+              : message,
+          ),
+        );
+      }
+
+      setMessages((current) => {
+        const assistantMessage = current.find(
+          (message) => message.id === assistantMessageId,
+        );
+
+        if (assistantMessage?.content.trim()) {
+          return current;
+        }
+
+        const fallbackAnswer = isTurkish
+          ? "Bu bilgi mevcut SafeBase Bilgi Tabanında bulunmuyor."
+          : "This information is not available in the current SafeBase Knowledge Base.";
+
+        return current.map((message) =>
+          message.id === assistantMessageId
+            ? {
+                ...message,
+                content: fallbackAnswer,
+              }
+            : message,
+        );
+      });
     } catch (requestError) {
       console.error(requestError);
 
@@ -589,8 +555,7 @@ export default function AIAssistantPage() {
                           )}
                         </div>
 
-                        {message.role === "user" ? 
-                        ( 
+                        {message.role === "user" ? (
                           <p className="whitespace-pre-wrap leading-7">
                             {message.content.replace(
   /\((hot-work|permit-to-work|confined-space|confined\s+space|loto|lockout-tagout|excavation|scaffolding|manual-handling|working-at-height|ppe)\)/gi,
@@ -598,23 +563,8 @@ export default function AIAssistantPage() {
 ).replace(/Genel Bakarış/gi, "Genel Bakış")}
                           </p>
                         ) : (
-                          <>
-                            {message.copilot && (
-                              <RiskSummaryCard
-                                locale={locale}
-                                riskLevel={message.copilot.riskLevel}
-                                title={message.copilot.title}
-                                summary={message.copilot.summary}
-                                riskReason={message.copilot.riskReason}
-                                hazards={message.copilot.hazards}
-                                criticalControlCount={
-                                  message.copilot.criticalControls.length
-                                }
-                              />
-                            )}
-
-                            <ReactMarkdown
-                              remarkPlugins={[remarkGfm]}
+                          <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
                             components={{
                               h1: ({ children }) => (
                                 <h1 className="mb-4 mt-7 border-b border-white/10 pb-3 text-2xl font-black text-white first:mt-0">
@@ -683,7 +633,6 @@ export default function AIAssistantPage() {
                           >
                             {message.content}
                           </ReactMarkdown>
-                          </>
                         )}
 
                         {message.role === "assistant" &&
@@ -725,95 +674,6 @@ export default function AIAssistantPage() {
                               </div>
                             </div>
                           )}
-                        {message.role === "assistant" &&
-                          message.recommendations &&
-                          message.recommendations.length > 0 && (
-                            <div className="mt-6 border-t border-white/10 pt-5">
-                              <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                                <div>
-                                  <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-400">
-                                    {isTurkish
-                                      ? "İlgili SafeBase Kaynakları"
-                                      : "Related SafeBase Resources"}
-                                  </p>
-
-                                  <p className="mt-2 text-sm leading-6 text-slate-500">
-                                    {isTurkish
-                                      ? "Sorunuzla ilgili rehberleri, kontrol listelerini ve profesyonel içerikleri açın."
-                                      : "Open guides, checklists and professional resources related to your question."}
-                                  </p>
-                                </div>
-
-                                <span className="w-fit rounded-full border border-emerald-400/15 bg-emerald-400/[0.07] px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-emerald-300">
-                                  SafeBase Copilot
-                                </span>
-                              </div>
-
-                              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                                {message.recommendations.map(
-                                  (recommendation) => (
-                                    <Link
-                                      key={recommendation.id}
-                                      href={`/${locale}${recommendation.href}`}
-                                      className="group rounded-2xl border border-white/10 bg-slate-950/50 p-4 transition duration-300 hover:-translate-y-0.5 hover:border-blue-400/30 hover:bg-blue-500/[0.08]"
-                                    >
-                                      <div className="flex items-start gap-3">
-                                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-xl">
-                                          {recommendation.icon}
-                                        </span>
-
-                                        <div className="min-w-0">
-                                          <div className="flex flex-wrap items-center gap-2">
-                                            <p className="font-black text-white transition group-hover:text-blue-300">
-                                              {
-                                                recommendation.title[
-                                                  isTurkish ? "tr" : "en"
-                                                ]
-                                              }
-                                            </p>
-
-                                            <span className="rounded-full border border-white/10 bg-white/[0.05] px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.1em] text-slate-400">
-                                              {recommendation.type ===
-                                              "knowledge"
-                                                ? isTurkish
-                                                  ? "Rehber"
-                                                  : "Guide"
-                                                : recommendation.type ===
-                                                    "checklist"
-                                                  ? isTurkish
-                                                    ? "Kontrol Listesi"
-                                                    : "Checklist"
-                                                  : recommendation.type ===
-                                                      "toolbox"
-                                                    ? "Toolbox"
-                                                    : isTurkish
-                                                      ? "Şablon"
-                                                      : "Template"}
-                                            </span>
-                                          </div>
-
-                                          <p className="mt-2 text-sm leading-6 text-slate-500 transition group-hover:text-slate-400">
-                                            {
-                                              recommendation.description[
-                                                isTurkish ? "tr" : "en"
-                                              ]
-                                            }
-                                          </p>
-
-                                          <p className="mt-3 text-xs font-black text-blue-400 transition group-hover:text-blue-300">
-                                            {isTurkish
-                                              ? "Kaynağı aç →"
-                                              : "Open resource →"}
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </Link>
-                                  ),
-                                )}
-                              </div>
-                            </div>
-                          )}
-
                       </div>
                     </article>
                   ))}

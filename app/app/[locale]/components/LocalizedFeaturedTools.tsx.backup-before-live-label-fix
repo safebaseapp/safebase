@@ -106,12 +106,13 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       href: "/checklists/scaffold",
       available: true,
       icon: "🏗️",
-      label: isTurkish ? "Hazır" : "Ready",
+      label: isTurkish ? "Geliştiriliyor" : "In Development",
       accent: "amber",
       features: isTurkish
         ? ["Saha denetimi", "Kritik kontroller", "Mobil uyumlu"]
         : ["Site inspection", "Critical controls", "Mobile friendly"],
-      meta: isTurkish ? "2 dakika" : "2 min",
+      meta: isTurkish ? "Yakında" : "Coming soon",
+      progress: 80,
     },
     {
       title: isTurkish
@@ -124,12 +125,13 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       href: "/checklists/hot-work",
       available: true,
       icon: "🔥",
-      label: isTurkish ? "Hazır" : "Ready",
+      label: isTurkish ? "Geliştiriliyor" : "In Development",
       accent: "rose",
       features: isTurkish
         ? ["Permit kontrolü", "Yangın önlemleri", "Stop-work koşulları"]
         : ["Permit checks", "Fire prevention", "Stop-work conditions"],
-      meta: isTurkish ? "2 dakika" : "2 min",
+      meta: isTurkish ? "Yakında" : "Coming soon",
+      progress: 85,
     },
     {
       title: isTurkish
@@ -245,14 +247,6 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       title: isTurkish ? "Şablonlar" : "Templates",
       description: isTurkish ? "Hazır HSE dokümanları" : "Ready HSE documents",
       href: `/${locale}/templates`,
-    },
-    {
-      icon: "🧰",
-      title: isTurkish ? "Toolbox Kütüphanesi" : "Toolbox Library",
-      description: isTurkish
-        ? "20 profesyonel Toolbox Talk"
-        : "20 professional Toolbox Talks",
-      href: `/${locale}/toolbox`,
     },
   ];
 
@@ -572,17 +566,12 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
                       }`}
                     >
                       {tool.available
-                        ? tool.type ===
-                          (isTurkish ? "Kontrol Listesi" : "Checklist")
-                          ? isTurkish
-                            ? "Kontrol Listesini Aç"
-                            : "Open Checklist"
-                          : isTurkish
-                            ? "Aracı Aç"
-                            : "Open Tool"
+                        ? isTurkish
+                          ? "Aracı aç"
+                          : "Open tool"
                         : isTurkish
                           ? "Yakında"
-                          : "Coming Soon"}
+                          : "Coming soon"}
                       <span>→</span>
                     </span>
                   </div>
