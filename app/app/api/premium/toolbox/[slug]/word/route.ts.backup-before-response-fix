@@ -836,7 +836,7 @@ export async function GET(request: Request, { params }: RouteProps) {
   const buffer = await Packer.toBuffer(document);
   const filename = `${slug}-toolbox-talk-${locale}-premium.docx`;
 
-  return new NextResponse(new Uint8Array(buffer), {
+  return new NextResponse(buffer, {
     status: 200,
     headers: {
       "Content-Type":
