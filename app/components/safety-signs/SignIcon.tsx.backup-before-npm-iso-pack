@@ -1,0 +1,44 @@
+import type { SignIcon } from "@/lib/safety-signs/types";
+
+type Props = {
+  icon: SignIcon;
+};
+
+const isoFiles: Record<SignIcon, string> = {
+  helmet: "M014.svg",
+  glasses: "M004.svg",
+  gloves: "M009.svg",
+  footwear: "M008.svg",
+  hearing: "M003.svg",
+
+  "no-smoking": "P002.svg",
+  "no-entry": "P004.svg",
+  "no-flame": "P003.svg",
+
+  "high-voltage": "W012.svg",
+  forklift: "W014.svg",
+  "falling-objects": "W035.svg",
+  slippery: "W011.svg",
+
+  "first-aid": "E003.svg",
+  "emergency-exit": "E001.svg",
+  "assembly-point": "E007.svg",
+
+  "fire-extinguisher": "F001.svg",
+};
+
+export default function SignIcon({
+  icon,
+}: Props) {
+  const fileName = isoFiles[icon];
+
+  return (
+    <img
+      src={`/safety-signs/iso/${fileName}`}
+      alt=""
+      aria-hidden="true"
+      className="block h-full w-full object-contain"
+      draggable={false}
+    />
+  );
+}

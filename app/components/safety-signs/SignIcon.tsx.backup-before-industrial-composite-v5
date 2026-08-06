@@ -1,0 +1,134 @@
+import Icon from "@mdi/react";
+import * as mdi from "@mdi/js";
+import type { SignIcon } from "@/lib/safety-signs/types";
+
+type Props = {
+  icon: SignIcon;
+};
+
+const mdiSet = mdi as unknown as Record<string, string>;
+
+function pickIcon(
+  ...names: string[]
+): string {
+  for (const name of names) {
+    const path = mdiSet[name];
+
+    if (typeof path === "string" && path.length > 0) {
+      return path;
+    }
+  }
+
+  return mdiSet.mdiShieldAlert ?? "";
+}
+
+const iconPaths: Record<SignIcon, string> = {
+  helmet: pickIcon(
+    "mdiHardHat",
+    "mdiAccountHardHat",
+    "mdiHelmetSafety",
+  ),
+
+  glasses: pickIcon(
+    "mdiSafetyGoggles",
+    "mdiGlasses",
+    "mdiSunglasses",
+  ),
+
+  gloves: pickIcon(
+    "mdiHandBackRight",
+    "mdiHandFrontRight",
+    "mdiHandExtended",
+  ),
+
+  footwear: pickIcon(
+    "mdiShoeSneaker",
+    "mdiShoeFormal",
+    "mdiFootPrint",
+  ),
+
+  hearing: pickIcon(
+    "mdiEarHearing",
+    "mdiHeadphones",
+    "mdiEarHearingLoop",
+  ),
+
+  "no-smoking": pickIcon(
+    "mdiSmokingOff",
+    "mdiSmoking",
+  ),
+
+  "no-entry": pickIcon(
+    "mdiAccountCancel",
+    "mdiAccountOff",
+    "mdiCancel",
+  ),
+
+  "no-flame": pickIcon(
+    "mdiFireOff",
+    "mdiFireAlert",
+    "mdiFire",
+  ),
+
+  "high-voltage": pickIcon(
+    "mdiLightningBolt",
+    "mdiFlash",
+    "mdiElectricSwitch",
+  ),
+
+  forklift: pickIcon(
+    "mdiForklift",
+    "mdiTruckIndustrial",
+    "mdiTruck",
+  ),
+
+  "falling-objects": pickIcon(
+    "mdiPackageVariantClosed",
+    "mdiPackageDown",
+    "mdiArrowDownBoldBox",
+  ),
+
+  slippery: pickIcon(
+    "mdiHuman",
+    "mdiWalk",
+    "mdiRun",
+  ),
+
+  "first-aid": pickIcon(
+    "mdiMedicalBag",
+    "mdiHospitalBox",
+    "mdiPlusBox",
+  ),
+
+  "emergency-exit": pickIcon(
+    "mdiExitRun",
+    "mdiDoorOpen",
+    "mdiLocationExit",
+  ),
+
+  "assembly-point": pickIcon(
+    "mdiAccountGroup",
+    "mdiAccountMultiple",
+    "mdiHumanGreetingProximity",
+  ),
+
+  "fire-extinguisher": pickIcon(
+    "mdiFireExtinguisher",
+    "mdiFireHydrant",
+    "mdiFire",
+  ),
+};
+
+export default function SignIcon({
+  icon,
+}: Props) {
+  return (
+    <Icon
+      path={iconPaths[icon]}
+      size="100%"
+      color="currentColor"
+      title={icon}
+      aria-hidden="true"
+    />
+  );
+}

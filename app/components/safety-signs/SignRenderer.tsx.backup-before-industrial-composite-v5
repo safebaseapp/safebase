@@ -1,0 +1,138 @@
+import SignIcon from "./SignIcon";
+import type {
+  SafetySign,
+  SignLocale,
+} from "@/lib/safety-signs/types";
+
+type Props = {
+  sign: SafetySign;
+  locale: SignLocale;
+  compact?: boolean;
+};
+
+export default function SignRenderer({
+  sign,
+  locale,
+  compact = false,
+}: Props) {
+  const title = sign.title[locale];
+
+  const titleSize = compact
+    ? "text-[19px]"
+    : "text-[36px]";
+
+  const shell =
+    "flex h-full w-full flex-col overflow-hidden rounded-[16px] border-[6px] border-white bg-white shadow-[0_18px_45px_rgba(0,0,0,0.28)]";
+
+  if (sign.category === "mandatory") {
+    return (
+      <div className={shell}>
+        <div className="flex min-h-0 flex-[7] items-center justify-center bg-[#0754b8] p-[7%]">
+          <div className="flex aspect-square w-[60%] items-center justify-center rounded-full bg-white p-[18%] text-[#0754b8] shadow-[0_12px_28px_rgba(0,0,0,0.16)]">
+            <SignIcon icon={sign.icon} />
+          </div>
+        </div>
+
+        <div className="flex min-h-0 flex-[3] items-center justify-center bg-white px-[9%] py-[5%] text-center">
+          <h2
+            className={`${titleSize} font-black uppercase leading-[1.08] tracking-[-0.02em] text-slate-950`}
+          >
+            {title}
+          </h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (sign.category === "prohibition") {
+    return (
+      <div className={shell}>
+        <div className="relative flex min-h-0 flex-[7] items-center justify-center bg-white p-[7%]">
+          <div className="relative flex aspect-square w-[60%] items-center justify-center rounded-full border-[16px] border-[#df111c] p-[18%] text-slate-950">
+            <SignIcon icon={sign.icon} />
+
+            <div className="absolute left-[1%] top-1/2 h-[16px] w-[98%] -translate-y-1/2 -rotate-45 rounded-full bg-[#df111c]" />
+          </div>
+        </div>
+
+        <div className="flex min-h-0 flex-[3] items-center justify-center bg-[#df111c] px-[9%] py-[5%] text-center">
+          <h2
+            className={`${titleSize} font-black uppercase leading-[1.08] tracking-[-0.02em] text-white`}
+          >
+            {title}
+          </h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (sign.category === "warning") {
+    return (
+      <div className={shell}>
+        <div className="flex min-h-0 flex-[7] items-center justify-center bg-[#ffd129] p-[6%]">
+          <div
+            className="relative flex h-[72%] w-[72%] items-center justify-center bg-slate-950"
+            style={{
+              clipPath:
+                "polygon(50% 0%, 100% 100%, 0% 100%)",
+            }}
+          >
+            <div
+              className="absolute inset-[7%] flex items-center justify-center bg-[#ffd129]"
+              style={{
+                clipPath:
+                  "polygon(50% 0%, 100% 100%, 0% 100%)",
+              }}
+            >
+              <div className="mt-[18%] h-[38%] w-[38%] text-slate-950">
+                <SignIcon icon={sign.icon} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex min-h-0 flex-[3] items-center justify-center bg-slate-950 px-[9%] py-[5%] text-center">
+          <h2
+            className={`${titleSize} font-black uppercase leading-[1.08] tracking-[-0.02em] text-white`}
+          >
+            {title}
+          </h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (sign.category === "fire") {
+    return (
+      <div className={shell}>
+        <div className="flex min-h-0 flex-[7] items-center justify-center bg-[#d71920] p-[21%] text-white">
+          <SignIcon icon={sign.icon} />
+        </div>
+
+        <div className="flex min-h-0 flex-[3] items-center justify-center bg-white px-[9%] py-[5%] text-center">
+          <h2
+            className={`${titleSize} font-black uppercase leading-[1.08] tracking-[-0.02em] text-slate-950`}
+          >
+            {title}
+          </h2>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={shell}>
+      <div className="flex min-h-0 flex-[7] items-center justify-center bg-[#008c5a] p-[21%] text-white">
+        <SignIcon icon={sign.icon} />
+      </div>
+
+      <div className="flex min-h-0 flex-[3] items-center justify-center bg-white px-[9%] py-[5%] text-center">
+        <h2
+          className={`${titleSize} font-black uppercase leading-[1.08] tracking-[-0.02em] text-slate-950`}
+        >
+          {title}
+        </h2>
+      </div>
+    </div>
+  );
+}

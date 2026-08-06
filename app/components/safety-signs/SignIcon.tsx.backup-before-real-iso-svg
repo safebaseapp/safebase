@@ -1,0 +1,319 @@
+import Icon from "@mdi/react";
+import * as mdi from "@mdi/js";
+import type { SignIcon } from "@/lib/safety-signs/types";
+
+type Props = {
+  icon: SignIcon;
+};
+
+const mdiSet = mdi as unknown as Record<string, string>;
+
+function pickIcon(...names: string[]): string {
+  for (const name of names) {
+    const path = mdiSet[name];
+
+    if (typeof path === "string" && path.length > 0) {
+      return path;
+    }
+  }
+
+  return mdiSet.mdiShieldAlert ?? "";
+}
+
+function MdiShape({
+  path,
+  className = "",
+}: {
+  path: string;
+  className?: string;
+}) {
+  return (
+    <Icon
+      path={path}
+      size="100%"
+      color="currentColor"
+      aria-hidden="true"
+      className={className}
+    />
+  );
+}
+
+const paths = {
+  helmet: pickIcon(
+    "mdiHardHat",
+    "mdiAccountHardHat",
+    "mdiHelmetSafety",
+  ),
+
+  glasses: pickIcon(
+    "mdiSafetyGoggles",
+    "mdiGlasses",
+    "mdiSunglasses",
+  ),
+
+  gloves: pickIcon(
+    "mdiHandBackRight",
+    "mdiHandFrontRight",
+    "mdiHandExtended",
+  ),
+
+  footwear: pickIcon(
+    "mdiShoeFormal",
+    "mdiShoeSneaker",
+    "mdiBoot",
+  ),
+
+  hearing: pickIcon(
+    "mdiHeadphones",
+    "mdiEarHearing",
+    "mdiEarHearingLoop",
+  ),
+
+  smoking: pickIcon(
+    "mdiSmoking",
+    "mdiCigar",
+  ),
+
+  person: pickIcon(
+    "mdiAccount",
+    "mdiHuman",
+  ),
+
+  fire: pickIcon(
+    "mdiFire",
+    "mdiFireAlert",
+  ),
+
+  voltage: pickIcon(
+    "mdiLightningBolt",
+    "mdiFlash",
+  ),
+
+  forklift: pickIcon(
+    "mdiForklift",
+    "mdiTruckIndustrial",
+  ),
+
+  package: pickIcon(
+    "mdiPackageVariantClosed",
+    "mdiPackage",
+  ),
+
+  arrowDown: pickIcon(
+    "mdiArrowDownBold",
+    "mdiArrowDownThick",
+  ),
+
+  slipperyPerson: pickIcon(
+    "mdiRunFast",
+    "mdiRun",
+    "mdiWalk",
+  ),
+
+  water: pickIcon(
+    "mdiWaves",
+    "mdiWater",
+  ),
+
+  firstAid: pickIcon(
+    "mdiMedicalBag",
+    "mdiHospitalBox",
+    "mdiPlusBox",
+  ),
+
+  exit: pickIcon(
+    "mdiExitRun",
+    "mdiLocationExit",
+    "mdiDoorOpen",
+  ),
+
+  assembly: pickIcon(
+    "mdiAccountGroup",
+    "mdiAccountMultiple",
+    "mdiHumanGreetingProximity",
+  ),
+
+  extinguisher: pickIcon(
+    "mdiFireExtinguisher",
+    "mdiFireHydrant",
+  ),
+};
+
+export default function SignIcon({ icon }: Props) {
+  if (icon === "helmet") {
+    return <MdiShape path={paths.helmet} />;
+  }
+
+  if (icon === "glasses") {
+    return <MdiShape path={paths.glasses} />;
+  }
+
+  if (icon === "gloves") {
+    return (
+      <div className="relative h-full w-full">
+        <MdiShape
+          path={paths.gloves}
+          className="absolute inset-0 scale-[1.08]"
+        />
+
+        <MdiShape
+          path={paths.gloves}
+          className="absolute inset-0 -translate-x-[17%] translate-y-[6%] scale-[0.72] -rotate-[18deg] opacity-90"
+        />
+      </div>
+    );
+  }
+
+  if (icon === "footwear") {
+    return (
+      <div className="relative h-full w-full">
+        <MdiShape
+          path={paths.footwear}
+          className="absolute inset-0 translate-x-[4%] scale-[1.12]"
+        />
+
+        <div className="absolute bottom-[12%] left-[8%] h-[10%] w-[80%] rounded-full bg-current" />
+      </div>
+    );
+  }
+
+  if (icon === "hearing") {
+    return (
+      <MdiShape
+        path={paths.hearing}
+        className="scale-[1.12]"
+      />
+    );
+  }
+
+  if (icon === "no-smoking") {
+    return (
+      <MdiShape
+        path={paths.smoking}
+        className="scale-[1.18]"
+      />
+    );
+  }
+
+  if (icon === "no-entry") {
+    return (
+      <div className="relative h-full w-full">
+        <MdiShape
+          path={paths.person}
+          className="absolute inset-0 scale-[1.06]"
+        />
+
+        <div className="absolute left-[5%] top-[44%] h-[15%] w-[90%] rounded-full bg-current" />
+      </div>
+    );
+  }
+
+  if (icon === "no-flame") {
+    return (
+      <MdiShape
+        path={paths.fire}
+        className="scale-[1.18]"
+      />
+    );
+  }
+
+  if (icon === "high-voltage") {
+    return (
+      <MdiShape
+        path={paths.voltage}
+        className="scale-[1.28]"
+      />
+    );
+  }
+
+  if (icon === "forklift") {
+    return (
+      <div className="relative h-full w-full">
+        <MdiShape
+          path={paths.forklift}
+          className="absolute inset-0 scale-[1.15]"
+        />
+
+        <div className="absolute bottom-[11%] left-[7%] h-[8%] w-[86%] rounded-full bg-current" />
+      </div>
+    );
+  }
+
+  if (icon === "falling-objects") {
+    return (
+      <div className="relative h-full w-full">
+        <MdiShape
+          path={paths.person}
+          className="absolute bottom-[2%] left-[4%] h-[55%] w-[55%]"
+        />
+
+        <MdiShape
+          path={paths.package}
+          className="absolute right-[2%] top-[1%] h-[48%] w-[48%]"
+        />
+
+        <MdiShape
+          path={paths.arrowDown}
+          className="absolute right-[18%] top-[37%] h-[35%] w-[35%]"
+        />
+      </div>
+    );
+  }
+
+  if (icon === "slippery") {
+    return (
+      <div className="relative h-full w-full">
+        <MdiShape
+          path={paths.slipperyPerson}
+          className="absolute inset-x-[7%] top-[1%] h-[76%] w-[86%] -rotate-[12deg]"
+        />
+
+        <MdiShape
+          path={paths.water}
+          className="absolute bottom-[-3%] left-[3%] h-[38%] w-[94%] scale-x-[1.12]"
+        />
+      </div>
+    );
+  }
+
+  if (icon === "first-aid") {
+    return (
+      <MdiShape
+        path={paths.firstAid}
+        className="scale-[1.08]"
+      />
+    );
+  }
+
+  if (icon === "emergency-exit") {
+    return (
+      <MdiShape
+        path={paths.exit}
+        className="scale-[1.12]"
+      />
+    );
+  }
+
+  if (icon === "assembly-point") {
+    return (
+      <div className="relative h-full w-full">
+        <MdiShape
+          path={paths.assembly}
+          className="absolute inset-[10%] scale-[1.08]"
+        />
+
+        <span className="absolute left-[2%] top-1/2 h-[12%] w-[22%] -translate-y-1/2 bg-current" />
+        <span className="absolute right-[2%] top-1/2 h-[12%] w-[22%] -translate-y-1/2 bg-current" />
+        <span className="absolute left-1/2 top-[1%] h-[22%] w-[12%] -translate-x-1/2 bg-current" />
+        <span className="absolute bottom-[1%] left-1/2 h-[22%] w-[12%] -translate-x-1/2 bg-current" />
+      </div>
+    );
+  }
+
+  return (
+    <MdiShape
+      path={paths.extinguisher}
+      className="scale-[1.14]"
+    />
+  );
+}

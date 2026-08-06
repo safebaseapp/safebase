@@ -1,0 +1,158 @@
+import type { SignIcon } from "@/lib/safety-signs/types";
+
+type Props = {
+  icon: SignIcon;
+};
+
+const svgClass = "h-full w-full fill-current";
+
+export default function SignIcon({ icon }: Props) {
+  switch (icon) {
+    case "helmet":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <path d="M12 68h76v13H12V68Z" />
+          <path d="M20 64c1-23 13-40 31-44v35h8V20c18 4 30 21 31 44H20Z" />
+          <path d="M29 64V48h9v16h-9Zm33 0V48h9v16h-9Z" />
+          <path d="M17 59h66v10H17V59Z" />
+        </svg>
+      );
+
+    case "glasses":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <path d="M7 36h18l7 30c2 9 8 14 18 14h2c10 0 16-5 18-14l7-30h16v12h-7l-6 23c-3 14-13 21-28 21h-2c-15 0-25-7-28-21l-6-23H7V36Z" />
+          <path d="M28 46h44l-4 17c-1 5-5 8-11 8H43c-6 0-10-3-11-8l-4-17Z" />
+          <path d="M40 51h20v8H40v-8Z" fill="white" opacity=".22" />
+        </svg>
+      );
+
+    case "gloves":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <path d="M21 91 8 57c-5-13 10-20 17-8l6 10V26c0-11 14-11 14 0v25h3V16c0-11 14-11 14 0v35h3V23c0-11 14-11 14 0v31h3V35c0-11 14-11 14 0v28c0 21-13 33-34 33H28l-7-5Z" />
+          <path d="M25 75c11-6 20-6 31-2l-3 9c-9-3-16-2-24 2l-4-9Z" fill="white" opacity=".18" />
+        </svg>
+      );
+
+    case "footwear":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <path d="M14 10h40v37c10 9 24 14 40 17v23H7V60l7-9V10Z" />
+          <path d="M16 40h38v12H16V40Zm-7 30h83v10H9V70Z" fill="white" opacity=".22" />
+          <path d="M53 52c11 8 23 11 36 14l-4 9c-15-3-27-8-38-16l6-7Z" />
+        </svg>
+      );
+
+    case "hearing":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <path d="M13 49C13 19 28 4 50 4s37 15 37 45H74c0-22-9-32-24-32S26 27 26 49H13Z" />
+          <rect x="7" y="45" width="30" height="45" rx="13" />
+          <rect x="63" y="45" width="30" height="45" rx="13" />
+          <path d="M32 63h36v14H32V63Z" />
+          <path d="M18 55h8v25h-8V55Zm56 0h8v25h-8V55Z" fill="white" opacity=".24" />
+        </svg>
+      );
+
+    case "no-smoking":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <rect x="8" y="60" width="63" height="17" rx="3" />
+          <rect x="73" y="60" width="19" height="17" rx="2" />
+          <path d="M58 51c11-9-5-15 5-28 7 13 20 19 8 33l-13-5Zm20 0c10-9-5-15 5-28 7 13 20 19 8 33l-13-5Z" />
+          <path d="M14 65h51v7H14v-7Z" fill="white" opacity=".24" />
+        </svg>
+      );
+
+    case "no-entry":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <circle cx="50" cy="19" r="12" />
+          <path d="M39 34h22l6 27 21 25-12 10-26-29-25 29-12-10 20-27 6-25Z" />
+          <path d="M19 42h62v14H19V42Z" />
+        </svg>
+      );
+
+    case "no-flame":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <path d="M52 3c5 19 27 31 27 54 0 22-13 39-30 39S19 79 19 58c0-17 11-30 21-46 1 16 7 24 9 34 11-13 11-29 3-43Z" />
+          <path d="M49 48c4 10 14 17 14 28 0 9-6 16-14 16s-14-7-14-16c0-9 6-16 11-23 0 7 2 11 3 16 5-6 5-14 0-21Z" fill="white" opacity=".27" />
+        </svg>
+      );
+
+    case "high-voltage":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <path d="M61 1 17 61h29L32 99l52-67H55L61 1Z" />
+        </svg>
+      );
+
+    case "forklift":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <circle cx="27" cy="80" r="12" />
+          <circle cx="68" cy="80" r="12" />
+          <path d="M7 69h68V36H40L29 69H7Zm35-57h25l14 24H59l-6-11H42V12Z" />
+          <path d="M80 8h11v63H80V8Zm11 57h9v10h-9V65Z" />
+          <path d="M17 48h18v12H17V48Z" fill="white" opacity=".22" />
+        </svg>
+      );
+
+    case "falling-objects":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <circle cx="30" cy="62" r="11" />
+          <path d="M20 75h21l6 22H14l6-22Z" />
+          <rect x="57" y="5" width="30" height="30" rx="2" />
+          <path d="M65 39h15v21h12L72 83 52 60h13V39Z" />
+        </svg>
+      );
+
+    case "slippery":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <circle cx="45" cy="12" r="10" />
+          <path d="m37 26 21 23 25 11-8 14-24-11-13 14-30 5-3-15 25-7 11-15-15-13 11-6Z" />
+          <path d="M1 87c16-9 28 6 43-1s26 6 41-1c7-3 12-1 15 1v12H1V87Z" />
+        </svg>
+      );
+
+    case "first-aid":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <path d="M34 2h32v32h32v32H66v32H34V66H2V34h32V2Z" />
+        </svg>
+      );
+
+    case "emergency-exit":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <path d="M3 5h55v90H3V5Zm31 12a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm-9 21-6 25 18 8 13 24 12-7-15-27-11-6 3-10 9 10 10-8-17-18-16 9Z" />
+          <path d="M58 42h25V28l17 22-17 22V58H58V42Z" />
+        </svg>
+      );
+
+    case "assembly-point":
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <circle cx="50" cy="50" r="14" />
+          <path d="M43 0h14v30H43V0Zm0 70h14v30H43V70ZM0 43h30v14H0V43Zm70 0h30v14H70V43Z" />
+          <path d="m8 17 10-10 22 22-10 10L8 17Zm52 54 10-10 22 22-10 10-22-22ZM82 7l10 10-22 22-10-10L82 7ZM8 83l22-22 10 10-22 22L8 83Z" />
+        </svg>
+      );
+
+    case "fire-extinguisher":
+    default:
+      return (
+        <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+          <rect x="27" y="27" width="43" height="70" rx="10" />
+          <path d="M37 27V14h25v13M43 14V3h23l20 14-8 11-16-12v9H37Z" />
+          <path d="M70 42h12c11 0 17 8 17 20v13H85V61c0-5-2-7-6-7h-9V42Z" />
+          <path d="M41 57c16-10 26 6 14 18-11 11-27-5-14-18Z" />
+          <path d="M35 81h28v8H35v-8Z" fill="white" opacity=".25" />
+        </svg>
+      );
+  }
+}

@@ -1,0 +1,249 @@
+import type {
+  SafetySign,
+  SignCategory,
+} from "./types";
+
+export const signCategories: Array<{
+  id: "all" | SignCategory;
+  tr: string;
+  en: string;
+}> = [
+  { id: "all", tr: "Tüm Levhalar", en: "All Signs" },
+  { id: "mandatory", tr: "Zorunluluk", en: "Mandatory" },
+  { id: "prohibition", tr: "Yasaklama", en: "Prohibition" },
+  { id: "warning", tr: "Uyarı", en: "Warning" },
+  { id: "emergency", tr: "Acil Durum", en: "Emergency" },
+  { id: "fire", tr: "Yangın", en: "Fire Equipment" },
+  { id: "information", tr: "Bilgilendirme", en: "Information" },
+];
+
+export const safetySigns: SafetySign[] = [
+  {
+    slug: "safety-helmet-must-be-worn",
+    code: "SB-M-001",
+    category: "mandatory",
+    icon: "helmet",
+    title: {
+      tr: "Baret Takmak Zorunludur",
+      en: "Safety Helmet Must Be Worn",
+    },
+    description: {
+      tr: "Baret kullanımının zorunlu olduğu alanlar için.",
+      en: "For areas where safety helmets are mandatory.",
+    },
+  },
+  {
+    slug: "eye-protection-must-be-worn",
+    code: "SB-M-002",
+    category: "mandatory",
+    icon: "glasses",
+    title: {
+      tr: "Koruyucu Gözlük Takmak Zorunludur",
+      en: "Eye Protection Must Be Worn",
+    },
+    description: {
+      tr: "Göz koruması gereken çalışma alanları için.",
+      en: "For work areas requiring eye protection.",
+    },
+  },
+  {
+    slug: "protective-gloves-must-be-worn",
+    code: "SB-M-003",
+    category: "mandatory",
+    icon: "gloves",
+    title: {
+      tr: "Koruyucu Eldiven Kullanmak Zorunludur",
+      en: "Protective Gloves Must Be Worn",
+    },
+    description: {
+      tr: "Göreve uygun koruyucu eldiven kullanımı için.",
+      en: "For task-appropriate protective glove requirements.",
+    },
+  },
+  {
+    slug: "safety-footwear-must-be-worn",
+    code: "SB-M-004",
+    category: "mandatory",
+    icon: "footwear",
+    title: {
+      tr: "Güvenlik Ayakkabısı Giymek Zorunludur",
+      en: "Safety Footwear Must Be Worn",
+    },
+    description: {
+      tr: "Koruyucu iş ayakkabısı gereken alanlar için.",
+      en: "For areas requiring protective safety footwear.",
+    },
+  },
+  {
+    slug: "hearing-protection-must-be-worn",
+    code: "SB-M-005",
+    category: "mandatory",
+    icon: "hearing",
+    title: {
+      tr: "Kulak Koruyucu Kullanmak Zorunludur",
+      en: "Hearing Protection Must Be Worn",
+    },
+    description: {
+      tr: "Gürültülü çalışma alanları için.",
+      en: "For high-noise work areas.",
+    },
+  },
+  {
+    slug: "no-smoking",
+    code: "SB-P-001",
+    category: "prohibition",
+    icon: "no-smoking",
+    title: {
+      tr: "Sigara İçilmez",
+      en: "No Smoking",
+    },
+    description: {
+      tr: "Sigara içmenin yasak olduğu alanlar için.",
+      en: "For areas where smoking is prohibited.",
+    },
+  },
+  {
+    slug: "no-unauthorized-entry",
+    code: "SB-P-002",
+    category: "prohibition",
+    icon: "no-entry",
+    title: {
+      tr: "Yetkisiz Giriş Yasaktır",
+      en: "No Unauthorized Entry",
+    },
+    description: {
+      tr: "Kontrollü ve kısıtlı erişim alanları için.",
+      en: "For controlled and restricted-access areas.",
+    },
+  },
+  {
+    slug: "no-open-flame",
+    code: "SB-P-003",
+    category: "prohibition",
+    icon: "no-flame",
+    title: {
+      tr: "Açık Alev Yasaktır",
+      en: "No Open Flame",
+    },
+    description: {
+      tr: "Yanıcı veya patlayıcı tehlike bulunan alanlar için.",
+      en: "For areas containing flammable or explosive hazards.",
+    },
+  },
+  {
+    slug: "warning-high-voltage",
+    code: "SB-W-001",
+    category: "warning",
+    icon: "high-voltage",
+    title: {
+      tr: "Dikkat! Yüksek Gerilim",
+      en: "Warning! High Voltage",
+    },
+    description: {
+      tr: "Elektrik çarpması ve yüksek gerilim tehlikesi için.",
+      en: "For electrical shock and high-voltage hazards.",
+    },
+  },
+  {
+    slug: "warning-forklift-traffic",
+    code: "SB-W-002",
+    category: "warning",
+    icon: "forklift",
+    title: {
+      tr: "Dikkat! Forklift Trafiği",
+      en: "Warning! Forklift Traffic",
+    },
+    description: {
+      tr: "Forklift ve yaya yollarının kesiştiği alanlar için.",
+      en: "For areas where forklifts and pedestrians interact.",
+    },
+  },
+  {
+    slug: "warning-falling-objects",
+    code: "SB-W-003",
+    category: "warning",
+    icon: "falling-objects",
+    title: {
+      tr: "Dikkat! Düşen Cisimler",
+      en: "Warning! Falling Objects",
+    },
+    description: {
+      tr: "Yukarıdan malzeme düşme riski bulunan alanlar için.",
+      en: "For areas exposed to falling-object hazards.",
+    },
+  },
+  {
+    slug: "warning-slippery-surface",
+    code: "SB-W-004",
+    category: "warning",
+    icon: "slippery",
+    title: {
+      tr: "Dikkat! Kaygan Zemin",
+      en: "Warning! Slippery Surface",
+    },
+    description: {
+      tr: "Kayma riski bulunan zeminler için.",
+      en: "For floors presenting a slip hazard.",
+    },
+  },
+  {
+    slug: "first-aid",
+    code: "SB-E-001",
+    category: "emergency",
+    icon: "first-aid",
+    title: {
+      tr: "İlk Yardım",
+      en: "First Aid",
+    },
+    description: {
+      tr: "İlk yardım ekipmanı veya istasyonunu göstermek için.",
+      en: "Identifies first-aid equipment or stations.",
+    },
+  },
+  {
+    slug: "emergency-exit",
+    code: "SB-E-002",
+    category: "emergency",
+    icon: "emergency-exit",
+    title: {
+      tr: "Acil Çıkış",
+      en: "Emergency Exit",
+    },
+    description: {
+      tr: "Acil tahliye çıkışlarını göstermek için.",
+      en: "Identifies emergency evacuation exits.",
+    },
+  },
+  {
+    slug: "assembly-point",
+    code: "SB-E-003",
+    category: "emergency",
+    icon: "assembly-point",
+    title: {
+      tr: "Acil Toplanma Noktası",
+      en: "Emergency Assembly Point",
+    },
+    description: {
+      tr: "Tahliye sonrası toplanma alanlarını göstermek için.",
+      en: "Identifies emergency assembly locations.",
+    },
+  },
+  {
+    slug: "fire-extinguisher",
+    code: "SB-F-001",
+    category: "fire",
+    icon: "fire-extinguisher",
+    title: {
+      tr: "Yangın Söndürücü",
+      en: "Fire Extinguisher",
+    },
+    description: {
+      tr: "Yangın söndürücü konumunu göstermek için.",
+      en: "Identifies the location of a fire extinguisher.",
+    },
+  },
+];
+
+export function getSafetySign(slug: string) {
+  return safetySigns.find((sign) => sign.slug === slug);
+}

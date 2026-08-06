@@ -1,0 +1,150 @@
+import SignIcon from "./SignIcon";
+import type {
+  SafetySign,
+  SignLocale,
+} from "@/lib/safety-signs/types";
+
+type Props = {
+  sign: SafetySign;
+  locale: SignLocale;
+  compact?: boolean;
+};
+
+export default function SignRenderer({
+  sign,
+  locale,
+  compact = false,
+}: Props) {
+  const title = sign.title[locale];
+
+  const iconSize = compact
+    ? "h-24 w-24"
+    : "h-44 w-44";
+
+  const titleSize = compact
+    ? "text-lg"
+    : "text-4xl";
+
+  const codeSize = compact
+    ? "text-[8px]"
+    : "text-xs";
+
+  if (sign.category === "mandatory") {
+    return (
+      <div className="flex h-full w-full flex-col overflow-hidden rounded-[24px] border-[10px] border-white bg-blue-700 shadow-2xl">
+        <div className="flex flex-1 items-center justify-center p-6">
+          <div className="flex aspect-square w-[66%] items-center justify-center rounded-full bg-white p-[12%] text-blue-700">
+            <div className={iconSize}>
+              <SignIcon icon={sign.icon} />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white px-5 py-5 text-center text-slate-950">
+          <h2 className={`${titleSize} font-black uppercase leading-tight`}>
+            {title}
+          </h2>
+
+          <p className={`mt-2 font-black tracking-[0.16em] text-slate-500 ${codeSize}`}>
+            {sign.code} • SAFEBASE
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (sign.category === "prohibition") {
+    return (
+      <div className="flex h-full w-full flex-col overflow-hidden rounded-[24px] border-[10px] border-white bg-white shadow-2xl">
+        <div className="flex flex-1 items-center justify-center p-6">
+          <div className="relative flex aspect-square w-[66%] items-center justify-center rounded-full border-[18px] border-red-600 p-[13%] text-slate-950">
+            <div className={iconSize}>
+              <SignIcon icon={sign.icon} />
+            </div>
+
+            <div className="absolute left-[7%] top-1/2 h-[18px] w-[86%] -translate-y-1/2 -rotate-45 rounded-full bg-red-600" />
+          </div>
+        </div>
+
+        <div className="bg-red-600 px-5 py-5 text-center text-white">
+          <h2 className={`${titleSize} font-black uppercase leading-tight`}>
+            {title}
+          </h2>
+
+          <p className={`mt-2 font-black tracking-[0.16em] text-red-100 ${codeSize}`}>
+            {sign.code} • SAFEBASE
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (sign.category === "warning") {
+    return (
+      <div className="flex h-full w-full flex-col overflow-hidden rounded-[24px] border-[10px] border-white bg-amber-400 shadow-2xl">
+        <div className="flex flex-1 items-center justify-center p-6">
+          <div
+            className="relative flex h-[68%] w-[76%] items-center justify-center text-slate-950"
+            style={{
+              clipPath:
+                "polygon(50% 0%, 100% 100%, 0% 100%)",
+              background: "#0f172a",
+            }}
+          >
+            <div
+              className="absolute inset-[8%] flex items-center justify-center bg-amber-400 pb-[2%]"
+              style={{
+                clipPath:
+                  "polygon(50% 0%, 100% 100%, 0% 100%)",
+              }}
+            >
+              <div className={`${iconSize} mt-[18%]`}>
+                <SignIcon icon={sign.icon} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-slate-950 px-5 py-5 text-center text-white">
+          <h2 className={`${titleSize} font-black uppercase leading-tight`}>
+            {title}
+          </h2>
+
+          <p className={`mt-2 font-black tracking-[0.16em] text-amber-400 ${codeSize}`}>
+            {sign.code} • SAFEBASE
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  const isFire = sign.category === "fire";
+
+  return (
+    <div
+      className={`flex h-full w-full flex-col overflow-hidden rounded-[24px] border-[10px] border-white shadow-2xl ${
+        isFire ? "bg-red-600" : "bg-emerald-600"
+      }`}
+    >
+      <div className="flex flex-1 items-center justify-center p-6 text-white">
+        <div className={iconSize}>
+          <SignIcon icon={sign.icon} />
+        </div>
+      </div>
+
+      <div className="bg-white px-5 py-5 text-center text-slate-950">
+        <h2 className={`${titleSize} font-black uppercase leading-tight`}>
+          {title}
+        </h2>
+
+        <p
+          className={`mt-2 font-black tracking-[0.16em] ${
+            isFire ? "text-red-600" : "text-emerald-600"
+          } ${codeSize}`}
+        >
+          {sign.code} • SAFEBASE
+        </p>
+      </div>
+    </div>
+  );
+}

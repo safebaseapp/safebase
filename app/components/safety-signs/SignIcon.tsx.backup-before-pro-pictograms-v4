@@ -1,0 +1,161 @@
+import type { SignIcon } from "@/lib/safety-signs/types";
+
+type Props = {
+  icon: SignIcon;
+};
+
+const svgClass = "h-full w-full fill-current";
+
+export default function SignIcon({ icon }: Props) {
+  if (icon === "helmet") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <path d="M15 66h70v13H15z" />
+        <path d="M22 62c1-23 12-39 28-43v31h7V19c16 4 27 20 28 43H22Z" />
+        <path d="M31 55V40h8v15H31Zm30 0V40h8v15h-8Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "glasses") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <path d="M9 39h15l7 29c2 7 7 11 14 11h8c7 0 12-4 14-11l7-29h17v10h-8l-6 23c-3 11-12 17-24 17h-8c-12 0-21-6-24-17l-6-23H9V39Z" />
+        <path d="M30 48h39l-3 12H33l-3-12Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "gloves") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <path d="M25 91 12 55c-4-11 9-17 15-7l5 9V25c0-9 12-9 12 0v27h3V17c0-9 12-9 12 0v35h3V23c0-9 12-9 12 0v31h3V34c0-9 12-9 12 0v31c0 18-12 29-30 29H29l-4-3Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "footwear") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <path d="M17 14h35v37c9 8 22 12 38 15v20H10V62l7-8V14Z" />
+        <path d="M20 43h32v8H20zM10 72h80v8H10z" fill="white" opacity=".28" />
+      </svg>
+    );
+  }
+
+  if (icon === "hearing") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <path d="M17 48C17 20 31 7 50 7s33 13 33 41h-11c0-20-8-30-22-30S28 28 28 48H17Z" />
+        <rect x="10" y="45" width="26" height="42" rx="11" />
+        <rect x="64" y="45" width="26" height="42" rx="11" />
+        <path d="M32 64h36v11H32z" />
+      </svg>
+    );
+  }
+
+  if (icon === "no-smoking") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <rect x="11" y="58" width="59" height="16" rx="3" />
+        <rect x="72" y="58" width="17" height="16" rx="2" />
+        <path d="M61 49c9-8-5-13 5-24 5 12 17 17 6 29l-11-5Zm17 0c9-8-5-13 5-24 5 12 17 17 6 29l-11-5Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "no-entry") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <circle cx="50" cy="22" r="12" />
+        <path d="M42 35h16l5 26 18 22-10 8-21-25-20 25-10-8 17-23 5-25Z" />
+        <path d="M25 42h50v12H25z" />
+      </svg>
+    );
+  }
+
+  if (icon === "no-flame") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <path d="M51 6c4 18 25 29 25 51 0 21-12 36-27 36S22 78 22 58c0-16 10-28 19-42 1 14 6 22 8 31 10-12 10-27 2-41Z" />
+        <path d="M48 49c3 10 13 16 13 27 0 8-5 14-12 14s-12-6-12-14c0-8 5-14 9-21 0 6 2 10 2 14 5-6 5-13 0-20Z" fill="white" opacity=".3" />
+      </svg>
+    );
+  }
+
+  if (icon === "high-voltage") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <path d="M59 3 20 59h27L35 97l46-61H54L59 3Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "forklift") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <circle cx="29" cy="78" r="11" />
+        <circle cx="68" cy="78" r="11" />
+        <path d="M12 69h61V37H42l-9 32H12Zm33-54h21l12 22H58l-5-10h-8V15Z" />
+        <path d="M79 14h9v56H79zM88 65h10v8H88z" />
+      </svg>
+    );
+  }
+
+  if (icon === "falling-objects") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <circle cx="31" cy="61" r="10" />
+        <path d="M22 73h18l5 21H17l5-21Z" />
+        <rect x="57" y="8" width="27" height="27" rx="2" />
+        <path d="M64 41h13v20h10L70 79 53 61h11V41Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "slippery") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <circle cx="46" cy="14" r="9" />
+        <path d="m39 27 19 22 22 10-7 12-22-10-12 13-28 5-3-13 24-7 10-14-14-12 11-6Z" />
+        <path d="M3 87c14-8 26 5 39-1s24 5 38-1 18 2 20 3v8H3v-9Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "first-aid") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <path d="M36 5h28v31h31v28H64v31H36V64H5V36h31V5Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "emergency-exit") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <path d="M5 8h52v84H5V8Zm29 12a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm-8 20-5 22 17 8 12 21 10-6-13-23-11-6 3-10 8 9 8-7-15-16-14 8Z" />
+        <path d="M58 44h26V31l15 19-15 19V56H58V44Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "assembly-point") {
+    return (
+      <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+        <circle cx="50" cy="50" r="12" />
+        <path d="M44 2h12v27H44zM44 71h12v27H44zM2 44h27v12H2zM71 44h27v12H71z" />
+        <path d="m12 20 8-8 20 20-8 8-20-20Zm48 60 8-8 20 20-8 8-20-20Zm20-68 8 8-20 20-8-8 20-20ZM12 80l20-20 8 8-20 20-8-8Z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 100 100" className={svgClass} aria-hidden="true">
+      <rect x="29" y="27" width="39" height="67" rx="9" />
+      <path d="M38 27V15h23v12M43 15V5h22l17 13-7 9-14-11v8H38Z" />
+      <path d="M68 41h11c10 0 15 7 15 18v12H82V58c0-4-1-5-4-5H68V41Z" />
+      <path d="M43 55c15-9 24 5 13 16-10 10-24-4-13-16Z" />
+    </svg>
+  );
+}

@@ -1,0 +1,42 @@
+export type SignLocale = "tr" | "en";
+
+export type SignCategory =
+  | "mandatory"
+  | "prohibition"
+  | "warning"
+  | "emergency"
+  | "fire"
+  | "information";
+
+export type SignIcon =
+  | "helmet"
+  | "glasses"
+  | "gloves"
+  | "footwear"
+  | "hearing"
+  | "no-smoking"
+  | "no-entry"
+  | "no-flame"
+  | "high-voltage"
+  | "forklift"
+  | "falling-objects"
+  | "slippery"
+  | "first-aid"
+  | "emergency-exit"
+  | "fire-extinguisher"
+  | "assembly-point";
+
+export type SafetySign = {
+  slug: string;
+  code: string;
+  category: SignCategory;
+  icon: SignIcon;
+  title: {
+    tr: string;
+    en: string;
+  };
+  description: {
+    tr: string;
+    en: string;
+  };
+};

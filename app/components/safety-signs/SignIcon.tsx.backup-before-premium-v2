@@ -1,0 +1,159 @@
+import type { SignIcon } from "@/lib/safety-signs/types";
+
+type Props = {
+  icon: SignIcon;
+};
+
+const common =
+  "h-full w-full fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round]";
+
+export default function SignIcon({ icon }: Props) {
+  if (icon === "helmet") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="6">
+        <path d="M18 64c1-27 14-43 32-43s31 16 32 43" />
+        <path d="M13 64h74v12H13zM50 21v28" />
+      </svg>
+    );
+  }
+
+  if (icon === "glasses") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="6">
+        <path d="M12 43h13l7 26h22l7-26h27" />
+        <path d="M54 69h22l8-26M32 52h29" />
+      </svg>
+    );
+  }
+
+  if (icon === "gloves") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="5">
+        <path d="M30 80 18 52c-4-10 7-15 12-6l6 10V23c0-8 11-8 11 0v26-33c0-8 11-8 11 0v33-27c0-8 11-8 11 0v30-20c0-8 11-8 11 0v31c0 17-10 27-25 27Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "footwear") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="6">
+        <path d="M21 18h28v35c11 8 24 12 39 14v17H14V64l7-7Z" />
+        <path d="M22 44h27M15 71h73" />
+      </svg>
+    );
+  }
+
+  if (icon === "hearing") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="6">
+        <path d="M24 60V42c0-23 12-34 26-34s26 11 26 34v18" />
+        <rect x="15" y="52" width="19" height="31" rx="8" />
+        <rect x="66" y="52" width="19" height="31" rx="8" />
+      </svg>
+    );
+  }
+
+  if (icon === "no-smoking") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="6">
+        <path d="M18 61h50v13H18zM68 61h15v13H68z" />
+        <path d="M76 49c10-8-5-13 5-22M60 49c10-8-5-13 5-22" />
+      </svg>
+    );
+  }
+
+  if (icon === "no-entry") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="6">
+        <circle cx="50" cy="28" r="10" />
+        <path d="M50 38v28M31 48h38M50 66 34 88M50 66l16 22" />
+      </svg>
+    );
+  }
+
+  if (icon === "no-flame") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="6">
+        <path d="M50 13c3 15 20 24 20 42 0 15-9 27-20 27S30 70 30 55c0-13 8-22 14-32 1 11 5 17 6 24 8-10 7-22 0-34Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "high-voltage") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="5">
+        <path d="m57 9-28 47h22L38 91l34-50H50Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "forklift") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="5">
+        <path d="M18 68h48V39H39l-9 29M66 68h17V22M83 68h11" />
+        <circle cx="31" cy="75" r="9" />
+        <circle cx="67" cy="75" r="9" />
+        <path d="M42 39V22h19l8 17" />
+      </svg>
+    );
+  }
+
+  if (icon === "falling-objects") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="5">
+        <circle cx="36" cy="62" r="8" />
+        <path d="M36 70v19M25 78h22" />
+        <rect x="56" y="14" width="19" height="19" />
+        <path d="M65 39v15m-7-7 7 7 7-7" />
+      </svg>
+    );
+  }
+
+  if (icon === "slippery") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="5">
+        <circle cx="45" cy="18" r="7" />
+        <path d="m45 28 10 21 19 10M54 48 35 65M36 66l-20 4M56 51l-6 25" />
+        <path d="M12 86c17-8 28 7 45-1s25 6 34-1" />
+      </svg>
+    );
+  }
+
+  if (icon === "first-aid") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="4">
+        <path d="M39 13h22v26h26v22H61v26H39V61H13V39h26Z" />
+      </svg>
+    );
+  }
+
+  if (icon === "emergency-exit") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="5">
+        <rect x="12" y="12" width="48" height="76" />
+        <circle cx="37" cy="30" r="7" />
+        <path d="m37 38-3 19M34 46l16 9M34 57 54 76M34 57 20 78" />
+        <path d="M61 50h29M80 40l10 10-10 10" />
+      </svg>
+    );
+  }
+
+  if (icon === "assembly-point") {
+    return (
+      <svg viewBox="0 0 100 100" className={common} strokeWidth="5">
+        <circle cx="50" cy="50" r="11" />
+        <path d="M50 12v21M50 67v21M12 50h21M67 50h21" />
+        <path d="m19 19 15 15M81 19 66 34M19 81l15-15M81 81 66 66" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 100 100" className={common} strokeWidth="5">
+      <rect x="32" y="28" width="36" height="60" rx="8" />
+      <path d="M40 28V17h20v11M43 17v-8h20M63 9l13 9" />
+      <path d="M68 43h10c6 0 8 5 8 11v9" />
+      <path d="M44 57c12-7 17 5 7 12-9 6-16-5-7-12Z" />
+    </svg>
+  );
+}

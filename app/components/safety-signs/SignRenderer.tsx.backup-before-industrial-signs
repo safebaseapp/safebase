@@ -1,0 +1,262 @@
+import SignIcon from "./SignIcon";
+import type {
+  SafetySign,
+  SignLocale,
+} from "@/lib/safety-signs/types";
+
+type Props = {
+  sign: SafetySign;
+  locale: SignLocale;
+  compact?: boolean;
+};
+
+export default function SignRenderer({
+  sign,
+  locale,
+  compact = false,
+}: Props) {
+  const title = sign.title[locale];
+
+  const frameRadius = compact
+    ? "rounded-[18px]"
+    : "rounded-[28px]";
+
+  const titleClass = compact
+    ? "text-[19px]"
+    : "text-[38px]";
+
+  const categoryLabels = {
+    mandatory: {
+      tr: "ZORUNLU GÜVENLİK TALİMATI",
+      en: "MANDATORY SAFETY INSTRUCTION",
+    },
+    prohibition: {
+      tr: "YASAKLAYICI GÜVENLİK LEVHASI",
+      en: "PROHIBITION SAFETY SIGN",
+    },
+    warning: {
+      tr: "TEHLİKE UYARI LEVHASI",
+      en: "HAZARD WARNING SIGN",
+    },
+    emergency: {
+      tr: "ACİL DURUM LEVHASI",
+      en: "EMERGENCY SAFETY SIGN",
+    },
+    fire: {
+      tr: "YANGIN EKİPMANI LEVHASI",
+      en: "FIRE EQUIPMENT SIGN",
+    },
+    information: {
+      tr: "GÜVENLİK BİLGİ LEVHASI",
+      en: "SAFETY INFORMATION SIGN",
+    },
+  } as const;
+
+  const categoryLabel =
+    categoryLabels[sign.category][locale];
+
+  const footer = (
+    <div className="grid grid-cols-[1fr_auto] items-center border-t border-slate-200 bg-slate-50 px-5 py-3">
+      <div>
+        <p className="text-[8px] font-black uppercase tracking-[0.18em] text-slate-500">
+          {categoryLabel}
+        </p>
+
+        <p className="mt-1 text-[9px] font-black tracking-[0.15em] text-slate-950">
+          {sign.code} • SAFEBASE PRO SERIES
+        </p>
+      </div>
+
+      <div className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[8px] font-black uppercase tracking-[0.13em] text-emerald-700">
+        Print Ready
+      </div>
+    </div>
+  );
+
+  if (sign.category === "mandatory") {
+    return (
+      <div
+        className={`flex h-full w-full flex-col overflow-hidden border-[7px] border-white bg-white shadow-[0_24px_60px_rgba(0,0,0,0.32)] ${frameRadius}`}
+      >
+        <div className="relative flex min-h-0 flex-1 flex-col bg-[#1247d8]">
+          <div className="flex items-center justify-between border-b border-white/20 px-5 py-3 text-white">
+            <span className="text-[9px] font-black uppercase tracking-[0.18em]">
+              Mandatory
+            </span>
+
+            <span className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[8px] font-black">
+              {sign.code}
+            </span>
+          </div>
+
+          <div className="flex flex-1 items-center justify-center px-8 py-7">
+            <div className="flex aspect-square w-[74%] items-center justify-center rounded-full bg-white p-[13%] text-[#1247d8] shadow-[0_18px_45px_rgba(0,0,0,0.22)]">
+              <SignIcon icon={sign.icon} />
+            </div>
+          </div>
+
+          <div className="h-[8px] bg-[#0b2f99]" />
+        </div>
+
+        <div className="flex min-h-[125px] items-center justify-center bg-white px-7 py-5 text-center">
+          <h2
+            className={`${titleClass} max-w-[95%] font-black uppercase leading-[1.04] tracking-[-0.025em] text-slate-950`}
+          >
+            {title}
+          </h2>
+        </div>
+
+        {footer}
+      </div>
+    );
+  }
+
+  if (sign.category === "prohibition") {
+    return (
+      <div
+        className={`flex h-full w-full flex-col overflow-hidden border-[7px] border-white bg-white shadow-[0_24px_60px_rgba(0,0,0,0.32)] ${frameRadius}`}
+      >
+        <div className="relative flex min-h-0 flex-1 flex-col bg-white">
+          <div className="flex items-center justify-between border-b border-slate-200 px-5 py-3">
+            <span className="text-[9px] font-black uppercase tracking-[0.18em] text-red-600">
+              Prohibition
+            </span>
+
+            <span className="rounded-full border border-red-200 bg-red-50 px-3 py-1 text-[8px] font-black text-red-700">
+              {sign.code}
+            </span>
+          </div>
+
+          <div className="flex flex-1 items-center justify-center px-8 py-7">
+            <div className="relative flex aspect-square w-[74%] items-center justify-center rounded-full border-[20px] border-red-600 p-[14%] text-slate-950 shadow-[0_16px_38px_rgba(0,0,0,0.16)]">
+              <SignIcon icon={sign.icon} />
+
+              <div className="absolute left-[4%] top-1/2 h-[20px] w-[92%] -translate-y-1/2 -rotate-45 rounded-full bg-red-600" />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex min-h-[125px] items-center justify-center bg-red-600 px-7 py-5 text-center">
+          <h2
+            className={`${titleClass} max-w-[95%] font-black uppercase leading-[1.04] tracking-[-0.025em] text-white`}
+          >
+            {title}
+          </h2>
+        </div>
+
+        {footer}
+      </div>
+    );
+  }
+
+  if (sign.category === "warning") {
+    return (
+      <div
+        className={`flex h-full w-full flex-col overflow-hidden border-[7px] border-white bg-white shadow-[0_24px_60px_rgba(0,0,0,0.32)] ${frameRadius}`}
+      >
+        <div className="relative flex min-h-0 flex-1 flex-col bg-[#ffc928]">
+          <div className="flex items-center justify-between border-b border-slate-950/20 px-5 py-3">
+            <span className="text-[9px] font-black uppercase tracking-[0.18em] text-slate-950">
+              Warning
+            </span>
+
+            <span className="rounded-full border border-slate-950/20 bg-white/40 px-3 py-1 text-[8px] font-black text-slate-950">
+              {sign.code}
+            </span>
+          </div>
+
+          <div className="flex flex-1 items-center justify-center px-6 py-5">
+            <div
+              className="relative flex h-[82%] w-[82%] items-center justify-center bg-slate-950"
+              style={{
+                clipPath:
+                  "polygon(50% 0%, 100% 100%, 0% 100%)",
+              }}
+            >
+              <div
+                className="absolute inset-[7%] flex items-center justify-center bg-[#ffc928] pb-[2%]"
+                style={{
+                  clipPath:
+                    "polygon(50% 0%, 100% 100%, 0% 100%)",
+                }}
+              >
+                <div className="mt-[17%] h-[43%] w-[43%] text-slate-950">
+                  <SignIcon icon={sign.icon} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex min-h-[125px] items-center justify-center bg-slate-950 px-7 py-5 text-center">
+          <h2
+            className={`${titleClass} max-w-[95%] font-black uppercase leading-[1.04] tracking-[-0.025em] text-white`}
+          >
+            {title}
+          </h2>
+        </div>
+
+        {footer}
+      </div>
+    );
+  }
+
+  const isFire = sign.category === "fire";
+  const primary = isFire
+    ? "bg-red-600"
+    : "bg-emerald-600";
+
+  const accentText = isFire
+    ? "text-red-700"
+    : "text-emerald-700";
+
+  return (
+    <div
+      className={`flex h-full w-full flex-col overflow-hidden border-[7px] border-white bg-white shadow-[0_24px_60px_rgba(0,0,0,0.32)] ${frameRadius}`}
+    >
+      <div className={`relative flex min-h-0 flex-1 flex-col ${primary}`}>
+        <div className="flex items-center justify-between border-b border-white/20 px-5 py-3 text-white">
+          <span className="text-[9px] font-black uppercase tracking-[0.18em]">
+            {isFire ? "Fire Equipment" : "Emergency"}
+          </span>
+
+          <span className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[8px] font-black">
+            {sign.code}
+          </span>
+        </div>
+
+        <div className="flex flex-1 items-center justify-center px-8 py-8 text-white">
+          <div className="h-[58%] w-[58%] drop-shadow-[0_14px_20px_rgba(0,0,0,0.25)]">
+            <SignIcon icon={sign.icon} />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex min-h-[125px] items-center justify-center bg-white px-7 py-5 text-center">
+        <h2
+          className={`${titleClass} max-w-[95%] font-black uppercase leading-[1.04] tracking-[-0.025em] text-slate-950`}
+        >
+          {title}
+        </h2>
+      </div>
+
+      <div className="grid grid-cols-[1fr_auto] items-center border-t border-slate-200 bg-slate-50 px-5 py-3">
+        <div>
+          <p
+            className={`text-[8px] font-black uppercase tracking-[0.18em] ${accentText}`}
+          >
+            {categoryLabel}
+          </p>
+
+          <p className="mt-1 text-[9px] font-black tracking-[0.15em] text-slate-950">
+            {sign.code} • SAFEBASE PRO SERIES
+          </p>
+        </div>
+
+        <div className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[8px] font-black uppercase tracking-[0.13em] text-emerald-700">
+          Print Ready
+        </div>
+      </div>
+    </div>
+  );
+}
