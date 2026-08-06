@@ -1,0 +1,178 @@
+import type { PosterDefinition } from "@/lib/posters-v2/types";
+
+type Locale = "tr" | "en";
+
+type Props = {
+  locale: Locale;
+  poster: PosterDefinition;
+};
+
+export default function PreJobStrip({ locale, poster }: Props) {
+  const isTurkish = locale === "tr";
+
+  const checks =
+    poster.code === "SB-LOTO-001"
+      ? isTurkish
+        ? [
+            "Enerji Prosedürü",
+            "Tüm Enerji Kaynakları",
+            "Etkilenen Personel",
+            "Kişisel Kilitler",
+            "Depolanmış Enerji",
+            "Sıfır Enerji Testi",
+            "Güvenli Devreye Alma",
+          ]
+        : [
+            "Energy Procedure",
+            "All Energy Sources",
+            "Affected Employees",
+            "Personal Locks",
+            "Stored Energy",
+            "Zero-Energy Test",
+            "Safe Restoration",
+          ]
+      : poster.code === "SB-EL-001"
+        ? isTurkish
+        ? [
+            "İş İzni ve Risk Analizi",
+            "Enerji Kaynakları",
+            "LOTO",
+            "Gerilimsizlik Testi",
+            "Yetkili Personel",
+            "GFCI / RCD",
+            "Bariyer ve KKD",
+          ]
+        : [
+            "Permit and Risk Assessment",
+            "Energy Sources",
+            "LOTO",
+            "Absence-of-Voltage Test",
+            "Qualified Person",
+            "GFCI / RCD",
+            "Barriers and PPE",
+          ]
+      : poster.code === "SB-CS-001"
+        ? isTurkish
+        ? [
+            "Giriş İzni",
+            "Atmosfer Ölçümü",
+            "LOTO ve İzolasyon",
+            "Gözcü",
+            "Havalandırma",
+            "İletişim",
+            "Kurtarma Planı",
+          ]
+        : [
+            "Entry Permit",
+            "Atmospheric Test",
+            "LOTO and Isolation",
+            "Attendant",
+            "Ventilation",
+            "Communication",
+            "Rescue Plan",
+          ]
+      : poster.code === "SB-HW-001"
+        ? isTurkish
+        ? [
+            "Sıcak Çalışma İzni",
+            "Gaz Ölçümü",
+            "Yanıcı Kontrolü",
+            "Yangın Gözcüsü",
+            "Söndürücü",
+            "Kıvılcım Bariyeri",
+            "İş Sonrası Kontrol",
+          ]
+        : [
+            "Hot Work Permit",
+            "Gas Testing",
+            "Combustible Check",
+            "Fire Watch",
+            "Extinguisher",
+            "Spark Barriers",
+            "Post-Work Watch",
+          ]
+      : poster.code === "SB-SCF-001"
+        ? isTurkish
+        ? [
+            "Kontrol Etiketi",
+            "Yetkin Kişi",
+            "Temel ve Altlık",
+            "Bağlantı ve Çapraz",
+            "Tam Platform",
+            "Güvenli Erişim",
+            "Alt Alan İzolasyonu",
+          ]
+        : [
+            "Inspection Status",
+            "Competent Person",
+            "Foundation",
+            "Ties and Braces",
+            "Full Platform",
+            "Safe Access",
+            "Area Isolation",
+          ]
+        : isTurkish
+          ? [
+            "Çalışma İzni",
+            "Risk Değerlendirmesi",
+            "Toolbox",
+            "Kurtarma Planı",
+            "Hava Koşulları",
+            "KKD Kontrolü",
+            "Alt Alan İzolasyonu",
+          ]
+        : [
+            "Work Permit",
+            "Risk Assessment",
+            "Toolbox Talk",
+            "Rescue Plan",
+            "Weather",
+            "PPE Check",
+            "Area Isolation",
+          ];
+
+  return (
+    <section className="mt-3 overflow-hidden rounded-[18px] border border-slate-300 bg-white shadow-sm">
+      <div className="flex items-center justify-between bg-slate-950 px-5 py-2.5 text-white">
+        <div className="flex items-center gap-3">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500 text-sm font-black">
+            ✓
+          </span>
+
+          <div>
+            <p className="text-[8px] font-black uppercase tracking-[0.2em] text-emerald-400">
+              SafeBase Pre-Job Control
+            </p>
+
+            <h2 className="text-[16px] font-black uppercase leading-none">
+              {isTurkish
+                ? "İşe Başlamadan Önce Kontrol Et"
+                : "Check Before Starting"}
+            </h2>
+          </div>
+        </div>
+
+        <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[9px] font-black uppercase tracking-wider">
+          30 SEC CHECK
+        </span>
+      </div>
+
+      <div className="grid grid-cols-7 gap-2 p-3">
+        {checks.map((item) => (
+          <div
+            key={item}
+            className="flex min-h-[42px] items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-2.5 py-2"
+          >
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded border-2 border-emerald-600 bg-white text-[10px] font-black text-emerald-600">
+              ✓
+            </span>
+
+            <span className="text-[8px] font-black uppercase leading-[1.2] text-slate-800">
+              {item}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}

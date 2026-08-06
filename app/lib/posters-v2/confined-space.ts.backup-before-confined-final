@@ -1,0 +1,221 @@
+import type { PosterDefinition } from "./types";
+
+export const confinedSpacePoster: PosterDefinition = {
+  code: "SB-CS-001",
+  revision: "1.0",
+
+  title: {
+    tr: "Kapalı Alan Giriş Kritik Güvenlik Kuralları",
+    en: "Confined Space Entry Critical Safety Rules",
+  },
+
+  slogan: {
+    tr: "İzin Al • Atmosferi Ölç • İzole Et • Kurtarmaya Hazır Ol",
+    en: "Authorize • Test • Isolate • Prepare for Rescue",
+  },
+
+  rules: [
+    {
+      number: "01",
+      title: {
+        tr: "Giriş İzni",
+        en: "Entry Permit",
+      },
+      items: {
+        tr: [
+          "Geçerli kapalı alan giriş iznini doğrula.",
+          "İzin üzerindeki tehlike ve kontrolleri incele.",
+          "Koşullar değişirse girişi durdur ve izni yeniden değerlendir.",
+        ],
+        en: [
+          "Verify a valid confined-space entry permit.",
+          "Review all hazards and controls listed on the permit.",
+          "Stop entry and reassess the permit if conditions change.",
+        ],
+      },
+      icon: "training",
+      tone: "mandatory",
+    },
+    {
+      number: "02",
+      title: {
+        tr: "Atmosfer Ölçümü",
+        en: "Atmospheric Testing",
+      },
+      items: {
+        tr: [
+          "Önce oksijen, sonra yanıcı ve toksik gazları ölç.",
+          "Üst, orta ve alt seviyelerden numune al.",
+          "Sonuçları izin formuna kaydet ve sınırları doğrula.",
+        ],
+        en: [
+          "Test oxygen first, then flammable and toxic gases.",
+          "Sample the top, middle and bottom of the space.",
+          "Record results on the permit and verify acceptable limits.",
+        ],
+      },
+      icon: "weather",
+      tone: "mandatory",
+    },
+    {
+      number: "03",
+      title: {
+        tr: "Enerji İzolasyonu",
+        en: "Energy Isolation",
+      },
+      items: {
+        tr: [
+          "Tüm enerji ve akış kaynaklarını belirle.",
+          "LOTO, körleme veya fiziksel ayırma uygula.",
+          "Sıfır enerji durumunu girişten önce doğrula.",
+        ],
+        en: [
+          "Identify every energy and material-flow source.",
+          "Apply LOTO, blanking or positive physical isolation.",
+          "Verify zero-energy status before entry.",
+        ],
+      },
+      icon: "anchor",
+      tone: "mandatory",
+    },
+    {
+      number: "04",
+      title: {
+        tr: "Gözcü",
+        en: "Entry Attendant",
+      },
+      items: {
+        tr: [
+          "Giriş boyunca eğitimli gözcüyü görevde tut.",
+          "İçerideki personel sayısını ve durumunu takip et.",
+          "Gözcü alanı terk etmesin ve başka görev üstlenmesin.",
+        ],
+        en: [
+          "Maintain a trained attendant throughout the entry.",
+          "Track the number and condition of all entrants.",
+          "The attendant must remain at the post without conflicting duties.",
+        ],
+      },
+      icon: "training",
+      tone: "mandatory",
+    },
+    {
+      number: "05",
+      title: {
+        tr: "Havalandırma",
+        en: "Ventilation",
+      },
+      items: {
+        tr: [
+          "Temiz hava sağlayan uygun havalandırma kullan.",
+          "Hava girişini egzoz ve kirletici kaynaklardan uzak tut.",
+          "Havalandırma durursa girişi yeniden değerlendir.",
+        ],
+        en: [
+          "Use suitable ventilation supplying clean air.",
+          "Keep air intakes away from exhausts and contaminant sources.",
+          "Reassess entry immediately if ventilation stops.",
+        ],
+      },
+      icon: "weather",
+      tone: "warning",
+    },
+    {
+      number: "06",
+      title: {
+        tr: "İletişim",
+        en: "Communication",
+      },
+      items: {
+        tr: [
+          "Giren personel ile gözcü arasında sürekli iletişim sağla.",
+          "Telsiz, sesli veya görsel yöntemi girişten önce test et.",
+          "İletişim kaybolursa alanı derhal tahliye et.",
+        ],
+        en: [
+          "Maintain continuous communication with the attendant.",
+          "Test radio, voice or visual methods before entry.",
+          "Evacuate immediately if communication is lost.",
+        ],
+      },
+      icon: "equipment",
+      tone: "warning",
+    },
+    {
+      number: "07",
+      title: {
+        tr: "Kurtarma Hazırlığı",
+        en: "Rescue Readiness",
+      },
+      items: {
+        tr: [
+          "Girişten önce uygulanabilir kurtarma planı hazırla.",
+          "Kurtarma ekibi, tripod ve geri çekme sistemini hazır tut.",
+          "Plansız ve korumasız içeri girerek kurtarma yapma.",
+        ],
+        en: [
+          "Prepare a workable rescue plan before entry.",
+          "Ensure the rescue team and retrieval equipment are ready.",
+          "Never perform an unplanned or unprotected entry rescue.",
+        ],
+      },
+      icon: "fall",
+      tone: "warning",
+    },
+    {
+      number: "08",
+      title: {
+        tr: "Sürekli İzleme",
+        en: "Continuous Monitoring",
+      },
+      items: {
+        tr: [
+          "Atmosfer değişebilecekse ölçümü kesintisiz sürdür.",
+          "Alarm seviyelerini çalışma başlamadan önce doğrula.",
+          "Alarm, belirti veya şüphede alanı derhal tahliye et.",
+        ],
+        en: [
+          "Continuously monitor when atmospheric conditions may change.",
+          "Verify detector alarm settings before work starts.",
+          "Evacuate immediately after any alarm, symptom or concern.",
+        ],
+      },
+      icon: "weather",
+      tone: "information",
+    },
+  ],
+
+  never: {
+    tr: [
+      "Geçerli giriş izni yoksa işi hemen durdur",
+      "Oksijen yüzde 19,5 ile 23,5 arasında değilse girişi durdur",
+      "Yanıcı atmosfer yüzde 10 LEL veya üzerindeyse girişi durdur",
+      "Gözcü, iletişim veya sürekli gaz ölçümü yoksa girişi durdur",
+      "Hazır ve uygulanabilir kurtarma planı yoksa girişi durdur",
+    ],
+    en: [
+      "Stop entry immediately if there is no valid entry permit",
+      "Stop entry if oxygen is outside the 19.5% to 23.5% range",
+      "Stop entry if the atmosphere is at or above 10% of the LFL",
+      "Stop entry if there is no attendant, communication or gas monitoring",
+      "Stop entry if there is no ready and workable rescue plan",
+    ],
+  },
+
+  ppe: {
+    tr: [
+      "Çene Bağlı Baret",
+      "Koruyucu Gözlük",
+      "Kimyasal Eldiven",
+      "Güvenlik Ayakkabısı",
+      "Kurtarma Kemeri",
+    ],
+    en: [
+      "Chin-Strap Helmet",
+      "Safety Glasses",
+      "Chemical Gloves",
+      "Safety Footwear",
+      "Rescue Harness",
+    ],
+  },
+};
