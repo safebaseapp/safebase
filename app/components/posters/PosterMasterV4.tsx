@@ -275,7 +275,8 @@ function RuleCard({
   const tone = toneClasses[rule.tone];
 
   return (
-    <article className="overflow-hidden rounded-[18px] border border-slate-300 bg-white shadow-[0_7px_18px_rgba(15,23,42,0.09)]">
+    <article className="relative overflow-hidden rounded-[18px] border border-slate-300 bg-white shadow-[0_7px_18px_rgba(15,23,42,0.09)]">
+      <div className="absolute inset-x-0 top-0 z-10 h-[3px] bg-slate-950/15" />
       <div
         className={`flex h-11 items-center justify-between px-4 text-white ${tone.header}`}
       >
@@ -434,8 +435,8 @@ export default function PosterMaster({
 
               <p className="mt-2 max-w-[110px] text-[9px] font-black uppercase leading-3 text-emerald-700">
                 {isTurkish
-                  ? "Daha fazla kaynak için tara"
-                  : "Scan for more resources"}
+                  ? "Checklist • Toolbox • Rehber için tara"
+                  : "Scan for checklist • toolbox • guide"}
               </p>
             </div>
 
@@ -463,7 +464,7 @@ export default function PosterMaster({
           </div>
         </div>
 
-        <h1 className="mt-4 max-w-[850px] text-[45px] font-black uppercase leading-[0.94] tracking-[-0.035em] text-slate-950">
+        <h1 className="mt-4 max-w-[860px] text-[43px] font-black uppercase leading-[0.94] tracking-[-0.035em] text-slate-950">
           {poster.title[locale]}
         </h1>
 
@@ -523,7 +524,7 @@ export default function PosterMaster({
         ))}
       </section>
 
-      <section className="mt-4 grid grid-cols-[1.12fr_0.82fr_1.06fr] gap-3">
+      <section className="mt-3 grid grid-cols-[1.12fr_0.82fr_1.06fr] gap-3">
         <div className="overflow-hidden rounded-[18px] border-2 border-red-600 bg-white">
           <div className="flex items-center justify-between bg-red-600 px-5 py-3 text-white">
             <div>

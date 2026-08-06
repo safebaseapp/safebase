@@ -254,14 +254,6 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
         : "20 professional Toolbox Talks",
       href: `/${locale}/toolbox`,
     },
-    {
-      icon: "🖼️",
-      title: isTurkish ? "Güvenlik Posterleri" : "Safety Posters",
-      description: isTurkish
-        ? "Yazdırılabilir profesyonel HSE posterleri"
-        : "Printable professional HSE posters",
-      href: `/${locale}/poster-lab`,
-    },
   ];
 
   return (
@@ -425,7 +417,7 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
             </div>
           </div>
 
-          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {categories.map((category) => (
               <Link
                 key={category.title}

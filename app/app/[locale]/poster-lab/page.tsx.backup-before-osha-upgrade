@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import PosterMaster from "@/components/posters/PosterMasterV4";
+import PosterMaster from "@/components/posters/PosterMaster";
 import PrintPosterButton from "@/components/posters/PrintPosterButton";
 import { workingAtHeightPoster } from "@/lib/posters-v2/working-at-height";
 
