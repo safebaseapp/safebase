@@ -241,8 +241,7 @@ export const safetySigns: SafetySign[] = [
       tr: "Yangın söndürücü konumunu göstermek için.",
       en: "Identifies the location of a fire extinguisher.",
     },
-  },
-
+  },,
   {
     slug: "general-mandatory-action",
     code: "SB-M-001",

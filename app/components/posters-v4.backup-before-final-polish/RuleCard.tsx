@@ -1,0 +1,92 @@
+import type {
+  PosterRule,
+  PosterTone,
+} from "@/lib/posters-v2/types";
+
+type Locale = "tr" | "en";
+
+type Props = {
+  locale: Locale;
+  rule: PosterRule;
+};
+
+const styles: Record<
+  PosterTone,
+  {
+    bar: string;
+    pale: string;
+    badge: string;
+    label: { tr: string; en: string };
+  }
+> = {
+  mandatory: {
+    bar: "bg-emerald-600",
+    pale: "bg-emerald-50",
+    badge: "bg-emerald-600",
+    label: { tr: "ZORUNLU", en: "MANDATORY" },
+  },
+  warning: {
+    bar: "bg-orange-500",
+    pale: "bg-orange-50",
+    badge: "bg-orange-500",
+    label: { tr: "DİKKAT", en: "WARNING" },
+  },
+  information: {
+    bar: "bg-blue-600",
+    pale: "bg-blue-50",
+    badge: "bg-blue-600",
+    label: { tr: "BİLGİ", en: "INFORMATION" },
+  },
+};
+
+const icons: Record<PosterRule["icon"], string> = {
+  ladder: "🪜",
+  harness: "🪢",
+  anchor: "⚓",
+  guardrail: "🏗️",
+  fall: "↘️",
+  weather: "🌬️",
+  equipment: "🧰",
+  training: "🛟",
+};
+
+export default function RuleCard({ locale, rule }: Props) {
+  const tone = styles[rule.tone];
+
+  return (
+    <article className="relative overflow-hidden rounded-[18px] border border-slate-300 bg-white shadow-[0_7px_18px_rgba(15,23,42,0.08)]">
+      <div className={`h-[3px] ${tone.bar}`} />
+
+      <div className="flex h-10 items-center justify-between bg-slate-950 px-4 text-white">
+        <strong className="text-lg font-black">{rule.number}</strong>
+
+        <span className={`rounded-full px-3 py-1 text-[9px] font-black ${tone.bar}`}>
+          {tone.label[locale]}
+        </span>
+      </div>
+
+      <div className={`flex h-[98px] items-center justify-center ${tone.pale}`}>
+        <span className="text-[54px] leading-none">{icons[rule.icon]}</span>
+      </div>
+
+      <h2 className={`flex min-h-[48px] items-center justify-center px-3 text-center text-[15px] font-black uppercase leading-[1.05] text-white ${tone.bar}`}>
+        {rule.title[locale]}
+      </h2>
+
+      <ul className="min-h-[108px] space-y-2 px-4 py-3">
+        {rule.items[locale].map((item) => (
+          <li
+            key={item}
+            className="flex items-start gap-2 text-[11px] font-bold leading-[1.3] text-slate-800"
+          >
+            <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-black text-white ${tone.badge}`}>
+              ✓
+            </span>
+
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+}

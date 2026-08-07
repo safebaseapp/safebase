@@ -1,0 +1,153 @@
+import type { PosterDefinition } from "@/lib/posters-v2/types";
+
+type Locale = "tr" | "en";
+
+type Props = {
+  locale: Locale;
+  poster: PosterDefinition;
+};
+
+export default function BottomPanels({ locale, poster }: Props) {
+  const isTurkish = locale === "tr";
+
+  const values = [
+    {
+      value: "1.8 m",
+      label: isTurkish ? "OSHA inşaat eşiği" : "OSHA construction threshold",
+    },
+    {
+      value: "22.2 kN",
+      label: isTurkish ? "Ankraj değeri / kişi" : "Anchorage value / worker",
+    },
+    {
+      value: "100%",
+      label: isTurkish ? "Sürekli bağlı kal" : "Continuous tie-off",
+    },
+    {
+      value: "3 NOKTA",
+      label: isTurkish ? "Merdiven teması" : "Ladder contact",
+    },
+  ];
+
+  const standards = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN 361"];
+
+  return (
+    <section className="mt-3 grid grid-cols-[1.15fr_0.82fr_1.03fr] gap-3">
+      <div className="overflow-hidden rounded-[18px] border-2 border-red-600 bg-white">
+        <div className="flex items-center justify-between bg-red-600 px-4 py-3 text-white">
+          <div>
+            <p className="text-[8px] font-black uppercase tracking-[0.18em] text-red-100">
+              Critical Stop Criteria
+            </p>
+
+            <h2 className="text-[20px] font-black uppercase leading-none">
+              🛑 {isTurkish ? "İşi Hemen Durdur" : "Stop Work Now"}
+            </h2>
+          </div>
+
+          <span className="rounded-full border border-white/40 bg-white/15 px-3 py-1 text-[9px] font-black">
+            STOP
+          </span>
+        </div>
+
+        <div className="space-y-2 p-3">
+          {poster.never[locale].map((item) => (
+            <div
+              key={item}
+              className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2"
+            >
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-red-600 text-xs font-black text-white">
+                ×
+              </span>
+
+              <p className="text-[10px] font-black uppercase leading-[1.3] text-slate-900">
+                {item}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="overflow-hidden rounded-[18px] border-2 border-amber-500 bg-white">
+        <div className="bg-amber-500 px-4 py-3 text-center text-white">
+          <p className="text-[8px] font-black uppercase tracking-[0.18em] text-amber-100">
+            Technical Control
+          </p>
+
+          <h2 className="text-[19px] font-black uppercase leading-none">
+            {isTurkish ? "Kritik Değerler" : "Critical Values"}
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2 p-3">
+          {values.map((item) => (
+            <div
+              key={item.value}
+              className="rounded-xl border border-amber-200 bg-amber-50 px-2 py-3 text-center"
+            >
+              <p className="text-[21px] font-black leading-none text-slate-950">
+                {item.value}
+              </p>
+
+              <p className="mt-2 text-[8px] font-black uppercase leading-[1.2] text-slate-600">
+                {item.label}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mx-3 mb-3 rounded-xl bg-slate-950 px-3 py-2 text-center text-white">
+          <p className="text-[8px] font-black uppercase tracking-[0.15em] text-emerald-400">
+            Reference
+          </p>
+
+          <p className="mt-1 text-[9px] font-black">
+            OSHA 29 CFR 1926.501 / 1926.502
+          </p>
+
+          <p className="text-[8px] font-bold text-slate-300">
+            EN 361 • EN 365 • EN 795
+          </p>
+        </div>
+      </div>
+
+      <div className="overflow-hidden rounded-[18px] border-2 border-blue-700 bg-white">
+        <div className="bg-blue-700 px-4 py-3 text-center text-white">
+          <p className="text-[8px] font-black uppercase tracking-[0.18em] text-blue-200">
+            Personal Protective Equipment
+          </p>
+
+          <h2 className="text-[20px] font-black uppercase leading-none">
+            {isTurkish ? "Zorunlu KKD" : "Required PPE"}
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-5 gap-2 px-3 py-5">
+          {poster.ppe[locale].map((item, index) => (
+            <div key={item} className="text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-700 text-2xl ring-4 ring-blue-100">
+                {["⛑️", "🥽", "🧤", "🥾", "🪢"][index] ?? "🦺"}
+              </div>
+
+              <p className="mt-2 text-[8px] font-black uppercase leading-[1.2] text-slate-950">
+                {item}
+              </p>
+
+              <p className="mt-1 text-[7px] font-black text-blue-700">
+                {standards[index]}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mx-3 mb-3 rounded-xl border border-blue-200 bg-blue-50 px-3 py-2 text-center">
+          <p className="text-[8px] font-black uppercase leading-3 text-blue-900">
+            {isTurkish
+              ? "Önce toplu koruma, sonra kişisel koruma."
+              : "Collective protection first, personal protection second."}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
