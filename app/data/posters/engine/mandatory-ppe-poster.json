@@ -1,0 +1,115 @@
+{
+  "base": "mandatory-ppe-poster",
+  "tr": {
+    "title": "ZORUNLU KİŞİSEL KORUYUCU DONANIM",
+    "subtitle": "MANDATORY PERSONAL PROTECTIVE EQUIPMENT",
+    "alert": "İŞE BAŞLAMADAN ÖNCE DOĞRU KKD'Yİ KULLAN",
+    "blocks": [
+      {
+        "heading": "BAŞ KORUMASI",
+        "items": [
+          "Onaylı ve hasarsız baret kullan.",
+          "Gereken alanlarda çene bağını tak."
+        ]
+      },
+      {
+        "heading": "GÖZ VE YÜZ KORUMASI",
+        "items": [
+          "Yan korumalı güvenlik gözlüğü kullan.",
+          "Taşlama ve kesmede yüz siperi kullan."
+        ]
+      },
+      {
+        "heading": "EL KORUMASI",
+        "items": [
+          "Tehlikeye ve göreve uygun eldiven seç.",
+          "Hasarlı veya kirlenmiş eldiveni değiştir."
+        ]
+      },
+      {
+        "heading": "AYAK KORUMASI",
+        "items": [
+          "Uygun güvenlik ayakkabısı kullan.",
+          "Kaymaz ve delinmeye dayanıklı tabanı kontrol et."
+        ]
+      },
+      {
+        "heading": "İŞİTME KORUMASI",
+        "items": [
+          "Gürültülü alanlarda kulaklık veya tıkaç kullan.",
+          "Koruyucunun doğru takıldığını kontrol et."
+        ]
+      },
+      {
+        "heading": "YÜKSEKTE ÇALIŞMA",
+        "items": [
+          "Tam vücut emniyet kemeri kullan.",
+          "Onaylı ankraj ve uygun lanyard kullan."
+        ]
+      }
+    ],
+    "footer_title": "İŞE BAŞLAMADAN ÖNCE",
+    "footer_items": [
+      "KKD'ni kontrol et",
+      "İşe uygun ekipmanı seç",
+      "Hasarlı KKD kullanma",
+      "Eksik KKD ile çalışma"
+    ]
+  },
+  "en": {
+    "title": "MANDATORY PERSONAL PROTECTIVE EQUIPMENT",
+    "subtitle": "SAFEBASE PPE REQUIREMENTS",
+    "alert": "WEAR THE CORRECT PPE BEFORE STARTING WORK",
+    "blocks": [
+      {
+        "heading": "HEAD PROTECTION",
+        "items": [
+          "Wear an approved and undamaged safety helmet.",
+          "Use a chin strap where required."
+        ]
+      },
+      {
+        "heading": "EYE AND FACE PROTECTION",
+        "items": [
+          "Wear safety glasses with side protection.",
+          "Use a face shield for grinding and cutting."
+        ]
+      },
+      {
+        "heading": "HAND PROTECTION",
+        "items": [
+          "Select gloves suitable for the task and hazard.",
+          "Replace damaged or contaminated gloves."
+        ]
+      },
+      {
+        "heading": "FOOT PROTECTION",
+        "items": [
+          "Wear suitable safety footwear.",
+          "Check slip and penetration resistance."
+        ]
+      },
+      {
+        "heading": "HEARING PROTECTION",
+        "items": [
+          "Use earplugs or earmuffs in noisy areas.",
+          "Confirm the protection is fitted correctly."
+        ]
+      },
+      {
+        "heading": "WORKING AT HEIGHT",
+        "items": [
+          "Use a full-body harness.",
+          "Use an approved anchorage and suitable lanyard."
+        ]
+      }
+    ],
+    "footer_title": "BEFORE STARTING WORK",
+    "footer_items": [
+      "Inspect your PPE",
+      "Select task-specific PPE",
+      "Do not use damaged PPE",
+      "Do not work with missing PPE"
+    ]
+  }
+}

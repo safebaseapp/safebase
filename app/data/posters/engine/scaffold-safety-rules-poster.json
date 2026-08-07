@@ -1,0 +1,115 @@
+{
+  "base": "scaffold-safety-rules-poster",
+  "tr": {
+    "title": "İSKELE GÜVENLİK KURALLARI",
+    "subtitle": "SCAFFOLD SAFETY RULES",
+    "alert": "KONTROL ET • ETİKETİ DOĞRULA • GÜVENLİ KULLAN",
+    "blocks": [
+      {
+        "heading": "ETİKETİ KONTROL ET",
+        "items": [
+          "İskele etiketini ve geçerlilik durumunu doğrula.",
+          "Kırmızı etiketli iskeleyi kullanma."
+        ]
+      },
+      {
+        "heading": "ERİŞİMİ DOĞRULA",
+        "items": [
+          "Uygun merdiven veya güvenli erişim noktası kullan.",
+          "Korkuluklara tırmanma."
+        ]
+      },
+      {
+        "heading": "PLATFORMU KONTROL ET",
+        "items": [
+          "Platformların tam, sabit ve boşluksuz olduğunu doğrula.",
+          "Kaygan veya hasarlı platformu kullanma."
+        ]
+      },
+      {
+        "heading": "KORKULUKLARI KONTROL ET",
+        "items": [
+          "Üst korkuluk, ara korkuluk ve topuk levhasını kontrol et.",
+          "Eksik koruma varsa işi başlatma."
+        ]
+      },
+      {
+        "heading": "YÜK SINIRINI AŞMA",
+        "items": [
+          "Malzeme ve personel yükünü güvenli sınırlar içinde tut.",
+          "Platform üzerinde gereksiz malzeme biriktirme."
+        ]
+      },
+      {
+        "heading": "DEĞİŞİKLİK YAPMA",
+        "items": [
+          "Yetkisiz şekilde parça sökme veya iskeleyi değiştirme.",
+          "Hasar veya eksikliği hemen bildir."
+        ]
+      }
+    ],
+    "footer_title": "İSKELEYİ KULLANMA",
+    "footer_items": [
+      "Etiket geçersizse",
+      "Korkuluk eksikse",
+      "Platform hasarlıysa",
+      "Güvenli erişim yoksa"
+    ]
+  },
+  "en": {
+    "title": "SCAFFOLD SAFETY RULES",
+    "subtitle": "SAFE ACCESS AND WORKING PLATFORMS",
+    "alert": "INSPECT • CHECK THE TAG • USE SAFELY",
+    "blocks": [
+      {
+        "heading": "CHECK THE TAG",
+        "items": [
+          "Verify the scaffold tag and inspection status.",
+          "Never use a red-tagged scaffold."
+        ]
+      },
+      {
+        "heading": "VERIFY SAFE ACCESS",
+        "items": [
+          "Use the designated ladder or access point.",
+          "Never climb scaffold guardrails."
+        ]
+      },
+      {
+        "heading": "CHECK THE PLATFORM",
+        "items": [
+          "Confirm platforms are complete, secured and free from gaps.",
+          "Do not use slippery or damaged platforms."
+        ]
+      },
+      {
+        "heading": "CHECK EDGE PROTECTION",
+        "items": [
+          "Inspect top rails, midrails and toe boards.",
+          "Do not start if protection is incomplete."
+        ]
+      },
+      {
+        "heading": "DO NOT OVERLOAD",
+        "items": [
+          "Keep personnel and materials within the safe load limit.",
+          "Do not store unnecessary materials on platforms."
+        ]
+      },
+      {
+        "heading": "DO NOT MODIFY",
+        "items": [
+          "Never remove or modify components without authorization.",
+          "Report damage or missing parts immediately."
+        ]
+      }
+    ],
+    "footer_title": "DO NOT USE THE SCAFFOLD",
+    "footer_items": [
+      "The tag is invalid",
+      "Guardrails are missing",
+      "Platforms are damaged",
+      "Safe access is unavailable"
+    ]
+  }
+}

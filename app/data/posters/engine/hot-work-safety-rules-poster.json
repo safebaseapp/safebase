@@ -1,0 +1,115 @@
+{
+  "base": "hot-work-safety-rules-poster",
+  "tr": {
+    "title": "SICAK ÇALIŞMA GÜVENLİK KURALLARI",
+    "subtitle": "HOT WORK SAFETY RULES",
+    "alert": "İZİN AL • ALANI HAZIRLA • YANGINI ÖNLE",
+    "blocks": [
+      {
+        "heading": "ÇALIŞMA İZNİNİ DOĞRULA",
+        "items": [
+          "Geçerli sıcak çalışma izni olmadan işe başlama.",
+          "İzin koşullarını ve çalışma sınırlarını kontrol et."
+        ]
+      },
+      {
+        "heading": "YANICI MADDELERİ KALDIR",
+        "items": [
+          "Yanıcı ve parlayıcı malzemeleri güvenli mesafeye taşı.",
+          "Taşınamayan malzemeleri uygun örtüyle koru."
+        ]
+      },
+      {
+        "heading": "GAZ ÖLÇÜMÜ YAP",
+        "items": [
+          "Gerekli alanlarda atmosfer ve gaz ölçümünü doğrula.",
+          "Koşullar değişirse ölçümü tekrarla."
+        ]
+      },
+      {
+        "heading": "YANGIN GÖZCÜSÜ GÖREVLENDİR",
+        "items": [
+          "Eğitimli yangın gözcüsünün görev başında olduğunu doğrula.",
+          "Gözcünün alanı kesintisiz izlemesini sağla."
+        ]
+      },
+      {
+        "heading": "EKİPMANI KONTROL ET",
+        "items": [
+          "Kablo, hortum, regülatör ve bağlantıları incele.",
+          "Uygun yangın söndürücüyü erişilebilir tut."
+        ]
+      },
+      {
+        "heading": "İŞ SONRASI KONTROL ET",
+        "items": [
+          "Kıvılcım, kor ve gizli yanma riskini kontrol et.",
+          "Belirlenen süre boyunca yangın gözetimini sürdür."
+        ]
+      }
+    ],
+    "footer_title": "İŞİ DERHAL DURDUR",
+    "footer_items": [
+      "İzin geçersizse",
+      "Gaz ölçümü uygun değilse",
+      "Yangın gözcüsü yoksa",
+      "Yanıcı maddeler korunmamışsa"
+    ]
+  },
+  "en": {
+    "title": "HOT WORK SAFETY RULES",
+    "subtitle": "WELDING, CUTTING AND GRINDING SAFETY",
+    "alert": "AUTHORIZE • PREPARE • PREVENT FIRE",
+    "blocks": [
+      {
+        "heading": "VERIFY THE PERMIT",
+        "items": [
+          "Do not start without a valid hot work permit.",
+          "Confirm the permit conditions and work boundaries."
+        ]
+      },
+      {
+        "heading": "REMOVE COMBUSTIBLES",
+        "items": [
+          "Move flammable materials to a safe distance.",
+          "Protect materials that cannot be removed."
+        ]
+      },
+      {
+        "heading": "TEST THE ATMOSPHERE",
+        "items": [
+          "Verify required atmospheric and gas testing.",
+          "Repeat testing if conditions change."
+        ]
+      },
+      {
+        "heading": "ASSIGN A FIRE WATCH",
+        "items": [
+          "Confirm a trained fire watch is present.",
+          "Ensure continuous observation of the work area."
+        ]
+      },
+      {
+        "heading": "INSPECT EQUIPMENT",
+        "items": [
+          "Inspect cables, hoses, regulators and connections.",
+          "Keep a suitable extinguisher immediately available."
+        ]
+      },
+      {
+        "heading": "CHECK AFTER COMPLETION",
+        "items": [
+          "Inspect for sparks, embers and hidden combustion.",
+          "Maintain fire watch for the required period."
+        ]
+      }
+    ],
+    "footer_title": "STOP WORK IMMEDIATELY",
+    "footer_items": [
+      "The permit is invalid",
+      "Gas readings are unsafe",
+      "No fire watch is present",
+      "Combustibles are unprotected"
+    ]
+  }
+}

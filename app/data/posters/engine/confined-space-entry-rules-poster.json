@@ -1,0 +1,115 @@
+{
+  "base": "confined-space-entry-rules-poster",
+  "tr": {
+    "title": "KAPALI ALAN GİRİŞ KURALLARI",
+    "subtitle": "CONFINED SPACE ENTRY RULES",
+    "alert": "İZİN AL • ATMOSFERİ ÖLÇ • KURTARMAYI HAZIRLA",
+    "blocks": [
+      {
+        "heading": "GİRİŞ İZNİNİ DOĞRULA",
+        "items": [
+          "Geçerli kapalı alan giriş izni olmadan giriş yapma.",
+          "Görevleri ve giriş koşullarını kontrol et."
+        ]
+      },
+      {
+        "heading": "ENERJİYİ İZOLE ET",
+        "items": [
+          "Mekanik, elektriksel ve proses enerjilerini izole et.",
+          "Gerekli LOTO uygulamalarını doğrula."
+        ]
+      },
+      {
+        "heading": "ATMOSFERİ ÖLÇ",
+        "items": [
+          "Oksijen, yanıcı gaz ve toksik gaz ölçümlerini yap.",
+          "Giriş boyunca gerekli sürekli ölçümü sürdür."
+        ]
+      },
+      {
+        "heading": "HAVALANDIRMAYI SAĞLA",
+        "items": [
+          "Uygun temiz hava ve mekanik havalandırma kullan.",
+          "Oksijenle havalandırma yapma."
+        ]
+      },
+      {
+        "heading": "GÖZCÜ VE İLETİŞİM",
+        "items": [
+          "Gözcünün giriş noktasında kalmasını sağla.",
+          "Giren personelle kesintisiz iletişim kur."
+        ]
+      },
+      {
+        "heading": "KURTARMA HAZIRLIĞI",
+        "items": [
+          "Giriş öncesinde uygulanabilir kurtarma planını doğrula.",
+          "Kurtarma ekipmanını hazır ve erişilebilir tut."
+        ]
+      }
+    ],
+    "footer_title": "GİRİŞ YAPMA",
+    "footer_items": [
+      "İzin geçersizse",
+      "Atmosfer güvenli değilse",
+      "Gözcü bulunmuyorsa",
+      "Kurtarma planı hazır değilse"
+    ]
+  },
+  "en": {
+    "title": "CONFINED SPACE ENTRY RULES",
+    "subtitle": "SAFE ENTRY AND RESCUE REQUIREMENTS",
+    "alert": "AUTHORIZE • TEST • PREPARE RESCUE",
+    "blocks": [
+      {
+        "heading": "VERIFY THE ENTRY PERMIT",
+        "items": [
+          "Do not enter without a valid confined space permit.",
+          "Confirm responsibilities and entry conditions."
+        ]
+      },
+      {
+        "heading": "ISOLATE ENERGY",
+        "items": [
+          "Isolate mechanical, electrical and process energy.",
+          "Verify all required LOTO controls."
+        ]
+      },
+      {
+        "heading": "TEST THE ATMOSPHERE",
+        "items": [
+          "Test oxygen, flammable gases and toxic gases.",
+          "Continue monitoring throughout the entry where required."
+        ]
+      },
+      {
+        "heading": "PROVIDE VENTILATION",
+        "items": [
+          "Use suitable fresh-air or mechanical ventilation.",
+          "Never ventilate with oxygen."
+        ]
+      },
+      {
+        "heading": "ATTENDANT AND COMMUNICATION",
+        "items": [
+          "Keep the attendant at the entry point.",
+          "Maintain continuous communication with entrants."
+        ]
+      },
+      {
+        "heading": "PREPARE FOR RESCUE",
+        "items": [
+          "Verify a workable rescue plan before entry.",
+          "Keep rescue equipment ready and accessible."
+        ]
+      }
+    ],
+    "footer_title": "DO NOT ENTER",
+    "footer_items": [
+      "The permit is invalid",
+      "The atmosphere is unsafe",
+      "No attendant is present",
+      "Rescue is not ready"
+    ]
+  }
+}

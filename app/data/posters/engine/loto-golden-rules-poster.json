@@ -1,0 +1,103 @@
+{
+  "base": "loto-golden-rules-poster",
+  "tr": {
+    "title": "LOTO ALTIN KURALLARI",
+    "subtitle": "LOCKOUT / TAGOUT GOLDEN RULES",
+    "alert": "KİLİTLE • ETİKETLE • DOĞRULA",
+    "blocks": [
+      {
+        "heading": "ENERJİ KAYNAKLARINI BELİRLE",
+        "items": [
+          "Tüm elektriksel, mekanik ve basınçlı enerji kaynaklarını belirle."
+        ]
+      },
+      {
+        "heading": "EKİPMANI DURDUR",
+        "items": [
+          "Normal durdurma prosedürünü uygula ve etkilenenleri bilgilendir."
+        ]
+      },
+      {
+        "heading": "İZOLE ET",
+        "items": [
+          "Tüm gerekli izolasyon noktalarını güvenli konuma getir."
+        ]
+      },
+      {
+        "heading": "KİLİTLE VE ETİKETLE",
+        "items": [
+          "Her çalışan kendi kişisel kilidini ve etiketini uygulasın."
+        ]
+      },
+      {
+        "heading": "DEPOLANMIŞ ENERJİYİ BOŞALT",
+        "items": [
+          "Basınç, yay, kapasitör ve hareket enerjisini güvenli hale getir."
+        ]
+      },
+      {
+        "heading": "SIFIR ENERJİYİ DOĞRULA",
+        "items": [
+          "Uygun test yöntemiyle izolasyonun etkinliğini doğrula."
+        ]
+      }
+    ],
+    "footer_title": "ASLA YAPMA",
+    "footer_items": [
+      "Başkasının kilidini izinsiz çıkarma",
+      "Stop butonuna güvenme",
+      "Doğrulama yapmadan işe başlama",
+      "Kimliksiz kilit kullanma"
+    ]
+  },
+  "en": {
+    "title": "LOTO GOLDEN RULES",
+    "subtitle": "LOCKOUT / TAGOUT SAFETY",
+    "alert": "LOCK • TAG • VERIFY",
+    "blocks": [
+      {
+        "heading": "IDENTIFY ENERGY SOURCES",
+        "items": [
+          "Identify all electrical, mechanical and pressure energy sources."
+        ]
+      },
+      {
+        "heading": "SHUT DOWN EQUIPMENT",
+        "items": [
+          "Use the normal shutdown procedure and notify affected personnel."
+        ]
+      },
+      {
+        "heading": "ISOLATE",
+        "items": [
+          "Place every required isolation point in a safe position."
+        ]
+      },
+      {
+        "heading": "LOCK AND TAG",
+        "items": [
+          "Each worker must apply their own personal lock and tag."
+        ]
+      },
+      {
+        "heading": "RELEASE STORED ENERGY",
+        "items": [
+          "Control pressure, springs, capacitors and residual movement."
+        ]
+      },
+      {
+        "heading": "VERIFY ZERO ENERGY",
+        "items": [
+          "Verify effective isolation using an appropriate test method."
+        ]
+      }
+    ],
+    "footer_title": "NEVER",
+    "footer_items": [
+      "Remove another person's lock",
+      "Rely on a stop button",
+      "Start work without verification",
+      "Use an unidentified lock"
+    ]
+  }
+}

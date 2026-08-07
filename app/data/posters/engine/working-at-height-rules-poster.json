@@ -1,0 +1,103 @@
+{
+  "base": "working-at-height-rules-poster",
+  "tr": {
+    "title": "YÜKSEKTE ÇALIŞMA KURALLARI",
+    "subtitle": "WORKING AT HEIGHT SAFETY RULES",
+    "alert": "DÜŞMEYİ ÖNLE • BAĞLAN • KURTARMA PLANLA",
+    "blocks": [
+      {
+        "heading": "İŞİ PLANLA",
+        "items": [
+          "Görevi, erişimi, hava koşullarını ve düşme riskini değerlendir."
+        ]
+      },
+      {
+        "heading": "TOPLU KORUMAYI KULLAN",
+        "items": [
+          "Korkuluk, platform ve güvenli erişimi kişisel korumadan önce uygula."
+        ]
+      },
+      {
+        "heading": "EKİPMANI KONTROL ET",
+        "items": [
+          "Merdiven, iskele, platform ve düşüş durdurma ekipmanını incele."
+        ]
+      },
+      {
+        "heading": "DOĞRU BAĞLAN",
+        "items": [
+          "Onaylı ankraj kullan ve mümkün olduğunca yüzde yüz bağlı kal."
+        ]
+      },
+      {
+        "heading": "DÜŞEN CİSİMLERİ ÖNLE",
+        "items": [
+          "Aletleri sabitle ve alt bölgeyi bariyerle."
+        ]
+      },
+      {
+        "heading": "KURTARMA PLANLA",
+        "items": [
+          "İşe başlamadan önce uygulanabilir kurtarma planını doğrula."
+        ]
+      }
+    ],
+    "footer_title": "İŞİ DERHAL DURDUR",
+    "footer_items": [
+      "Koruma eksikse",
+      "Ankraj uygun değilse",
+      "Hava koşulları tehlikeliyse",
+      "Kurtarma planı yoksa"
+    ]
+  },
+  "en": {
+    "title": "WORKING AT HEIGHT SAFETY RULES",
+    "subtitle": "PREVENT FALLS AND DROPPED OBJECTS",
+    "alert": "PREVENT FALLS • STAY CONNECTED • PLAN RESCUE",
+    "blocks": [
+      {
+        "heading": "PLAN THE WORK",
+        "items": [
+          "Assess the task, access, weather and fall exposure."
+        ]
+      },
+      {
+        "heading": "USE COLLECTIVE PROTECTION",
+        "items": [
+          "Use guardrails, platforms and safe access before personal protection."
+        ]
+      },
+      {
+        "heading": "INSPECT EQUIPMENT",
+        "items": [
+          "Inspect ladders, scaffolds, platforms and fall-arrest equipment."
+        ]
+      },
+      {
+        "heading": "CONNECT CORRECTLY",
+        "items": [
+          "Use approved anchorage and remain continuously connected where required."
+        ]
+      },
+      {
+        "heading": "PREVENT DROPPED OBJECTS",
+        "items": [
+          "Secure tools and barricade the area below."
+        ]
+      },
+      {
+        "heading": "PLAN RESCUE",
+        "items": [
+          "Confirm a workable rescue plan before starting."
+        ]
+      }
+    ],
+    "footer_title": "STOP WORK IMMEDIATELY",
+    "footer_items": [
+      "Protection is incomplete",
+      "Anchorage is unsuitable",
+      "Weather becomes unsafe",
+      "No rescue plan is available"
+    ]
+  }
+}

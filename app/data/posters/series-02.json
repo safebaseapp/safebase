@@ -1,0 +1,142 @@
+[
+  {
+    "slug": "ladder-safety-rules",
+    "code": "SB-LAD-001",
+    "category": "Ladder Safety",
+    "revision": "1.0",
+    "title": {
+      "en": "Ladder Critical Safety Rules",
+      "tr": "Merdiven Kritik Güvenlik Kuralları"
+    },
+    "description": {
+      "en": "Selection, inspection, positioning, three-point contact and safe ladder-use requirements.",
+      "tr": "Merdiven seçimi, kontrolü, konumlandırma, üç nokta teması ve güvenli kullanım kuralları."
+    }
+  },
+  {
+    "slug": "mobile-scaffold-safety",
+    "code": "SB-MSC-001",
+    "category": "Scaffolding",
+    "revision": "1.0",
+    "title": {
+      "en": "Mobile Scaffold Critical Safety Rules",
+      "tr": "Mobil İskele Kritik Güvenlik Kuralları"
+    },
+    "description": {
+      "en": "Wheel locking, platform access, stabilization, movement and inspection requirements.",
+      "tr": "Teker kilitleme, platform erişimi, stabilizasyon, hareket ve kontrol gereklilikleri."
+    }
+  },
+  {
+    "slug": "excavation-safety-rules",
+    "code": "SB-EXC-001",
+    "category": "Excavation",
+    "revision": "1.0",
+    "title": {
+      "en": "Excavation Critical Safety Rules",
+      "tr": "Kazı Kritik Güvenlik Kuralları"
+    },
+    "description": {
+      "en": "Ground stability, underground services, access, edge protection and excavation controls.",
+      "tr": "Zemin stabilitesi, yeraltı hatları, erişim, kenar koruması ve kazı kontrolleri."
+    }
+  },
+  {
+    "slug": "crane-lifting-safety",
+    "code": "SB-LFT-001",
+    "category": "Lifting",
+    "revision": "1.0",
+    "title": {
+      "en": "Crane & Lifting Critical Safety Rules",
+      "tr": "Vinç ve Kaldırma Kritik Güvenlik Kuralları"
+    },
+    "description": {
+      "en": "Lift planning, exclusion zones, rigging, signaling and suspended-load controls.",
+      "tr": "Kaldırma planı, yasaklı alan, sapanlama, işaretleşme ve asılı yük kontrolleri."
+    }
+  },
+  {
+    "slug": "forklift-safety-rules",
+    "code": "SB-FLT-001",
+    "category": "Forklift",
+    "revision": "1.0",
+    "title": {
+      "en": "Forklift Critical Safety Rules",
+      "tr": "Forklift Kritik Güvenlik Kuralları"
+    },
+    "description": {
+      "en": "Daily inspection, pedestrian separation, load handling, speed and parking controls.",
+      "tr": "Günlük kontrol, yaya ayrımı, yük taşıma, hız ve park kontrolleri."
+    }
+  },
+  {
+    "slug": "chemical-safety-rules",
+    "code": "SB-CHM-001",
+    "category": "Chemical Safety",
+    "revision": "1.0",
+    "title": {
+      "en": "Chemical Critical Safety Rules",
+      "tr": "Kimyasal Kritik Güvenlik Kuralları"
+    },
+    "description": {
+      "en": "SDS review, labeling, compatibility, PPE, storage and spill-response requirements.",
+      "tr": "SDS kontrolü, etiketleme, uyumluluk, KKD, depolama ve dökülme müdahale gereklilikleri."
+    }
+  },
+  {
+    "slug": "housekeeping-safety-rules",
+    "code": "SB-HSK-001",
+    "category": "Housekeeping",
+    "revision": "1.0",
+    "title": {
+      "en": "Housekeeping Critical Safety Rules",
+      "tr": "Housekeeping Kritik Güvenlik Kuralları"
+    },
+    "description": {
+      "en": "Access routes, waste removal, material storage, trip hazards and work-area organization.",
+      "tr": "Geçiş yolları, atık yönetimi, malzeme depolama, takılma riskleri ve çalışma alanı düzeni."
+    }
+  },
+  {
+    "slug": "manual-handling-safety",
+    "code": "SB-MH-001",
+    "category": "Manual Handling",
+    "revision": "1.0",
+    "title": {
+      "en": "Manual Handling Critical Safety Rules",
+      "tr": "Elle Taşıma Kritik Güvenlik Kuralları"
+    },
+    "description": {
+      "en": "Load assessment, lifting technique, mechanical aids, teamwork and ergonomic controls.",
+      "tr": "Yük değerlendirmesi, kaldırma tekniği, mekanik yardımcılar, ekip çalışması ve ergonomik kontroller."
+    }
+  },
+  {
+    "slug": "dropped-objects-prevention",
+    "code": "SB-DOP-001",
+    "category": "Dropped Objects",
+    "revision": "1.0",
+    "title": {
+      "en": "Dropped Objects Critical Safety Rules",
+      "tr": "Düşen Cisim Kritik Güvenlik Kuralları"
+    },
+    "description": {
+      "en": "Tool tethering, securing materials, exclusion zones, storage and overhead-work controls.",
+      "tr": "Alet bağlama, malzeme sabitleme, yasaklı alan, depolama ve üst seviye çalışma kontrolleri."
+    }
+  },
+  {
+    "slug": "permit-to-work-safety",
+    "code": "SB-PTW-001",
+    "category": "Permit to Work",
+    "revision": "1.0",
+    "title": {
+      "en": "Permit to Work Critical Safety Rules",
+      "tr": "Çalışma İzni Kritik Güvenlik Kuralları"
+    },
+    "description": {
+      "en": "Scope verification, isolations, gas testing, authorization, coordination and permit closure.",
+      "tr": "İş kapsamı doğrulama, izolasyonlar, gaz ölçümü, yetkilendirme, koordinasyon ve izin kapatma."
+    }
+  }
+]

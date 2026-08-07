@@ -3,10 +3,9 @@ export type PosterCategory =
   | "hot-work"
   | "confined-space"
   | "electrical"
-  | "fire"
   | "loto"
   | "ppe"
-  | "emergency";
+  | "general";
 
 export type PosterItem = {
   slug: string;
@@ -28,12 +27,6 @@ export type PosterItem = {
 
 export const posterCategories = [
   {
-    id: "all",
-    icon: "▦",
-    tr: "Tüm Posterler",
-    en: "All Posters",
-  },
-  {
     id: "work-at-height",
     icon: "🏗️",
     tr: "Yüksekte Çalışma",
@@ -42,7 +35,7 @@ export const posterCategories = [
   {
     id: "hot-work",
     icon: "🔥",
-    tr: "Sıcak İş",
+    tr: "Sıcak Çalışma",
     en: "Hot Work",
   },
   {
@@ -58,12 +51,6 @@ export const posterCategories = [
     en: "Electrical",
   },
   {
-    id: "fire",
-    icon: "🧯",
-    tr: "Yangın Güvenliği",
-    en: "Fire Safety",
-  },
-  {
     id: "loto",
     icon: "🔒",
     tr: "LOTO",
@@ -76,76 +63,25 @@ export const posterCategories = [
     en: "PPE",
   },
   {
-    id: "emergency",
-    icon: "🚨",
-    tr: "Acil Durum",
-    en: "Emergency",
+    id: "general",
+    icon: "📌",
+    tr: "Genel",
+    en: "General",
   },
 ] as const;
 
 export const posters: PosterItem[] = [
   {
-    slug: "working-at-height-rules",
-    icon: "🏗️",
-    category: "work-at-height",
-    title: {
-      tr: "Yüksekte Çalışma Güvenlik Kuralları",
-      en: "Working at Height Safety Rules",
-    },
-    description: {
-      tr: "Düşme önleme, güvenli erişim, ankraj, düşen cisimler ve kurtarma planı kontrolleri.",
-      en: "Covers fall prevention, safe access, anchorage, dropped objects and rescue planning.",
-    },
-    pdf: {
-      tr: "/downloads/working-at-height-rules-poster-tr.pdf",
-      en: "/downloads/working-at-height-rules-poster-en.pdf",
-    },
-  },
-  {
-    slug: "scaffold-safety-rules",
-    icon: "🪜",
-    category: "work-at-height",
-    title: {
-      tr: "İskele Güvenlik Kuralları",
-      en: "Scaffold Safety Rules",
-    },
-    description: {
-      tr: "İskele erişimi, platform, korkuluk, etiketleme ve güvenli kullanım gereklilikleri.",
-      en: "Covers scaffold access, platforms, guardrails, tagging and safe use.",
-    },
-    pdf: {
-      tr: "/downloads/scaffold-safety-rules-poster-tr.pdf",
-      en: "/downloads/scaffold-safety-rules-poster-en.pdf",
-    },
-  },
-  {
-    slug: "hot-work-safety-rules",
-    icon: "🔥",
-    category: "hot-work",
-    title: {
-      tr: "Sıcak Çalışma Güvenlik Kuralları",
-      en: "Hot Work Safety Rules",
-    },
-    description: {
-      tr: "Çalışma izni, yanıcı maddeler, gaz ölçümü, yangın gözcüsü ve iş sonrası kontroller.",
-      en: "Covers permits, combustibles, gas testing, fire watch and post-work checks.",
-    },
-    pdf: {
-      tr: "/downloads/hot-work-safety-rules-poster-tr.pdf",
-      en: "/downloads/hot-work-safety-rules-poster-en.pdf",
-    },
-  },
-  {
     slug: "confined-space-entry-rules",
     icon: "⚠️",
     category: "confined-space",
     title: {
-      tr: "Kapalı Alan Giriş Kuralları",
+      tr: "Confined Space Entry Rules",
       en: "Confined Space Entry Rules",
     },
     description: {
-      tr: "Atmosfer ölçümü, giriş izni, gözcü, iletişim ve kurtarma hazırlığı gereklilikleri.",
-      en: "Covers atmospheric testing, permits, attendants, communication and rescue readiness.",
+      tr: "Profesyonel HSE güvenlik posteri.",
+      en: "Professional HSE safety poster.",
     },
     pdf: {
       tr: "/downloads/confined-space-entry-rules-poster-tr.pdf",
@@ -157,12 +93,12 @@ export const posters: PosterItem[] = [
     icon: "⚡",
     category: "electrical",
     title: {
-      tr: "Elektrik Güvenliği Kuralları",
+      tr: "Electrical Safety Rules",
       en: "Electrical Safety Rules",
     },
     description: {
-      tr: "Enerji izolasyonu, hasarlı ekipman, yetkisiz müdahale ve güvenli elektrik çalışması.",
-      en: "Covers energy isolation, damaged equipment, unauthorised work and electrical safety.",
+      tr: "Profesyonel HSE güvenlik posteri.",
+      en: "Professional HSE safety poster.",
     },
     pdf: {
       tr: "/downloads/electrical-safety-rules-poster-tr.pdf",
@@ -170,54 +106,20 @@ export const posters: PosterItem[] = [
     },
   },
   {
-    slug: "fire-extinguisher-selection",
-    icon: "🧯",
-    category: "fire",
+    slug: "hot-work-safety-rules",
+    icon: "🔥",
+    category: "hot-work",
     title: {
-      tr: "Yangın Söndürücü Seçimi",
-      en: "Fire Extinguisher Selection",
+      tr: "Hot Work Safety Rules",
+      en: "Hot Work Safety Rules",
     },
     description: {
-      tr: "Yangın sınıfına göre doğru söndürücünün seçilmesini ve güvenli müdahaleyi destekler.",
-      en: "Supports correct extinguisher selection and safe response for different fire classes.",
+      tr: "Profesyonel HSE güvenlik posteri.",
+      en: "Professional HSE safety poster.",
     },
     pdf: {
-      tr: "/downloads/fire-extinguisher-selection-poster-tr.pdf",
-      en: "/downloads/fire-extinguisher-selection-poster-en.pdf",
-    },
-  },
-  {
-    slug: "emergency-response",
-    icon: "🚨",
-    category: "emergency",
-    title: {
-      tr: "Acil Durum Müdahale Kuralları",
-      en: "Emergency Response Rules",
-    },
-    description: {
-      tr: "Alarm verme, tahliye, toplanma alanı, iletişim ve acil durum sorumlulukları.",
-      en: "Covers alarms, evacuation, assembly points, communication and emergency responsibilities.",
-    },
-    pdf: {
-      tr: "/downloads/emergency-response-poster-tr.pdf",
-      en: "/downloads/emergency-response-poster-en.pdf",
-    },
-  },
-  {
-    slug: "mandatory-ppe",
-    icon: "🦺",
-    category: "ppe",
-    title: {
-      tr: "Zorunlu KKD Kullanımı",
-      en: "Mandatory PPE",
-    },
-    description: {
-      tr: "Çalışma alanlarında kullanılması gereken temel kişisel koruyucu donanımları hatırlatır.",
-      en: "Highlights the essential personal protective equipment required in work areas.",
-    },
-    pdf: {
-      tr: "/downloads/mandatory-ppe-poster-tr.pdf",
-      en: "/downloads/mandatory-ppe-poster-en.pdf",
+      tr: "/downloads/hot-work-safety-rules-poster-tr.pdf",
+      en: "/downloads/hot-work-safety-rules-poster-en.pdf",
     },
   },
   {
@@ -225,16 +127,67 @@ export const posters: PosterItem[] = [
     icon: "🔒",
     category: "loto",
     title: {
-      tr: "LOTO Altın Kuralları",
-      en: "LOTO Golden Rules",
+      tr: "Loto Golden Rules",
+      en: "Loto Golden Rules",
     },
     description: {
-      tr: "Enerji kaynaklarını belirleme, izolasyon, kilitleme, etiketleme ve sıfır enerji doğrulaması.",
-      en: "Covers energy identification, isolation, locking, tagging and zero-energy verification.",
+      tr: "Profesyonel HSE güvenlik posteri.",
+      en: "Professional HSE safety poster.",
     },
     pdf: {
       tr: "/downloads/loto-golden-rules-poster-tr.pdf",
       en: "/downloads/loto-golden-rules-poster-en.pdf",
     },
   },
+  {
+    slug: "mandatory-ppe",
+    icon: "🦺",
+    category: "ppe",
+    title: {
+      tr: "Mandatory Ppe",
+      en: "Mandatory Ppe",
+    },
+    description: {
+      tr: "Profesyonel HSE güvenlik posteri.",
+      en: "Professional HSE safety poster.",
+    },
+    pdf: {
+      tr: "/downloads/mandatory-ppe-poster-tr.pdf",
+      en: "/downloads/mandatory-ppe-poster-en.pdf",
+    },
+  },
+  {
+    slug: "scaffold-safety-rules",
+    icon: "🪜",
+    category: "work-at-height",
+    title: {
+      tr: "Scaffold Safety Rules",
+      en: "Scaffold Safety Rules",
+    },
+    description: {
+      tr: "Profesyonel HSE güvenlik posteri.",
+      en: "Professional HSE safety poster.",
+    },
+    pdf: {
+      tr: "/downloads/scaffold-safety-rules-poster-tr.pdf",
+      en: "/downloads/scaffold-safety-rules-poster-en.pdf",
+    },
+  },
+  {
+    slug: "working-at-height-rules",
+    icon: "🏗️",
+    category: "work-at-height",
+    title: {
+      tr: "Working At Height Rules",
+      en: "Working At Height Rules",
+    },
+    description: {
+      tr: "Profesyonel HSE güvenlik posteri.",
+      en: "Professional HSE safety poster.",
+    },
+    pdf: {
+      tr: "/downloads/working-at-height-rules-poster-tr.pdf",
+      en: "/downloads/working-at-height-rules-poster-en.pdf",
+    },
+  }
 ];

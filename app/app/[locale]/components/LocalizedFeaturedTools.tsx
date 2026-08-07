@@ -1,4 +1,15 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
+import {
+  ShieldCheck,
+  Calculator,
+  BookOpen,
+  ClipboardCheck,
+  FileText,
+  BriefcaseBusiness,
+  Image,
+  TriangleAlert,
+} from "lucide-react";
 
 type Props = {
   locale: "tr" | "en";
@@ -22,7 +33,7 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
     type: string;
     href: string;
     available: boolean;
-    icon: string;
+    icon: ReactNode;
     label: string;
     accent: Accent;
     features: string[];
@@ -39,7 +50,9 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       type: isTurkish ? "Hesaplayıcı" : "Calculator",
       href: "/tools/risk-matrix",
       available: true,
-      icon: "🧮",
+      icon: <Calculator size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
       label: isTurkish ? "En Popüler" : "Most Popular",
       accent: "blue",
       features: isTurkish
@@ -55,7 +68,9 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       type: isTurkish ? "Hesaplayıcı" : "Calculator",
       href: "/tools/trir",
       available: true,
-      icon: "📊",
+      icon: <Calculator size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
       label: isTurkish ? "Ücretsiz" : "Free",
       accent: "emerald",
       features: isTurkish
@@ -141,7 +156,9 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       type: isTurkish ? "Şablon" : "Template",
       href: "/templates",
       available: false,
-      icon: "📄",
+      icon: <FileText size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
       label: isTurkish ? "Planlandı" : "Planned",
       accent: "slate",
       features: isTurkish
@@ -215,7 +232,9 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
 
   const categories = [
     {
-      icon: "🤖",
+      icon: <ShieldCheck size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
       title: isTurkish ? "AI Copilot" : "AI Copilot",
       description: isTurkish
         ? "Profesyonel HSE rehberliği"
@@ -223,31 +242,41 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       href: `/${locale}/ai-assistant`,
     },
     {
-      icon: "🧮",
+      icon: <Calculator size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
       title: isTurkish ? "Hesaplayıcılar" : "Calculators",
       description: isTurkish ? "Hızlı HSE hesaplamaları" : "Fast HSE calculations",
       href: `/${locale}/tools`,
     },
     {
-      icon: "📚",
+      icon: <BookOpen size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
       title: isTurkish ? "Bilgi Merkezi" : "Knowledge Base",
       description: isTurkish ? "Profesyonel rehberler" : "Professional guides",
       href: `/${locale}/knowledge-base`,
     },
     {
-      icon: "📋",
+      icon: <ClipboardCheck size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
       title: isTurkish ? "Kontrol Listeleri" : "Checklists",
       description: isTurkish ? "Saha kontrolleri" : "Site-ready inspections",
       href: `/${locale}/checklists`,
     },
     {
-      icon: "📄",
+      icon: <FileText size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
       title: isTurkish ? "Şablonlar" : "Templates",
       description: isTurkish ? "Hazır HSE dokümanları" : "Ready HSE documents",
       href: `/${locale}/templates`,
     },
     {
-      icon: "🧰",
+      icon: <BriefcaseBusiness size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
       title: isTurkish ? "Toolbox Kütüphanesi" : "Toolbox Library",
       description: isTurkish
         ? "20 profesyonel Toolbox Talk"
@@ -255,13 +284,26 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       href: `/${locale}/toolbox`,
     },
     {
-      icon: "🖼️",
+      icon: <Image size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
       title: isTurkish ? "Güvenlik Posterleri" : "Safety Posters",
       description: isTurkish
         ? "Yazdırılabilir profesyonel HSE posterleri"
         : "Printable professional HSE posters",
       href: `/${locale}/poster-lab`,
     },
+    {
+      icon: <TriangleAlert size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110" />,
+      title: isTurkish ? "Güvenlik Levhaları" : "Safety Signs",
+      description: isTurkish
+        ? "36 profesyonel ISO güvenlik levhası"
+        : "36 professional ISO safety signs",
+      href: `/${locale}/safety-signs`,
+    },
+
   ];
 
   return (
@@ -348,7 +390,7 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
                 key={stat.label}
                 className="rounded-[26px] border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-1 hover:bg-white hover:shadow-xl"
               >
-                <p className="text-3xl font-black text-slate-950">{stat.value}</p>
+                <p className="text-3xl font-black text-slate-950 transition-colors duration-300 group-hover:text-blue-600">{stat.value}</p>
                 <p className="mt-2 text-sm font-bold text-slate-500">
                   {stat.label}
                 </p>
@@ -417,7 +459,7 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
               <p className="text-sm font-black uppercase tracking-[0.22em] text-blue-600">
                 {isTurkish ? "Hızlı Erişim" : "Quick Access"}
               </p>
-              <h3 className="mt-3 text-3xl font-black text-slate-950">
+              <h3 className="mt-3 text-3xl font-black text-slate-950 transition-colors duration-300 group-hover:text-blue-600">
                 {isTurkish
                   ? "SafeBase ile neler yapabilirsiniz?"
                   : "What can you do with SafeBase?"}
@@ -425,15 +467,15 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
             </div>
           </div>
 
-          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {categories.map((category) => (
               <Link
                 key={category.title}
                 href={category.href}
-                className="group rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl"
+                className="group rounded-3xl border border-slate-200 bg-slate-50 p-5 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl transition-all duration-300 hover:shadow-blue-950/5 min-h-[180px]"
               >
                 <span className="text-3xl">{category.icon}</span>
-                <p className="mt-4 font-black text-slate-950 group-hover:text-blue-600">
+                <p className="mt-4 font-black text-slate-950 transition-colors duration-300 group-hover:text-blue-600 group-hover:text-blue-600">
                   {category.title}
                 </p>
                 <p className="mt-2 text-sm leading-6 text-slate-500">
@@ -532,7 +574,7 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
                   {tool.title}
                 </h4>
 
-                <p className="mt-4 text-sm leading-7 text-slate-600">
+                <p className="mt-4 text-sm leading-7 text-slate-500">
                   {tool.description}
                 </p>
 
@@ -540,7 +582,7 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
                   {tool.features.map((feature) => (
                     <p
                       key={feature}
-                      className="flex items-center gap-3 text-sm font-semibold text-slate-600"
+                      className="flex items-center gap-3 text-sm font-semibold text-slate-500"
                     >
                       <span className="text-emerald-500">✓</span>
                       {feature}
@@ -620,12 +662,12 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
               <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-600">
                 {isTurkish ? "Her Ay Büyüyor" : "Growing Every Month"}
               </p>
-              <h3 className="mt-3 text-3xl font-black text-slate-950">
+              <h3 className="mt-3 text-3xl font-black text-slate-950 transition-colors duration-300 group-hover:text-blue-600">
                 {isTurkish
                   ? "Yeni HSE araçları ve kaynakları düzenli olarak ekleniyor."
                   : "New HSE tools and resources are added regularly."}
               </h3>
-              <p className="mt-3 max-w-2xl leading-7 text-slate-600">
+              <p className="mt-3 max-w-2xl leading-7 text-slate-500">
                 {isTurkish
                   ? "SafeBase, günlük saha ihtiyaçlarını karşılayan profesyonel bir HSE çalışma platformuna dönüşüyor."
                   : "SafeBase is becoming a professional HSE workspace built for everyday site needs."}
