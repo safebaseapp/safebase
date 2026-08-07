@@ -4,12 +4,6 @@ import PosterMaster from "@/components/posters-v4/PosterMasterV4";
 import PosterFormatToolbar from "@/components/posters-v4/PosterFormatToolbar";
 import { workingAtHeightPoster } from "@/lib/posters-v2/working-at-height";
 import { ladderSafetyPoster } from "@/lib/posters-v2/ladder-safety";
-import { housekeepingSafetyPoster } from "@/lib/posters-v2/housekeeping-safety";
-import { excavationSafetyPoster } from "@/lib/posters-v2/excavation-safety";
-import { chemicalSafetyPoster } from "@/lib/posters-v2/chemical-safety";
-import { forkliftSafetyPoster } from "@/lib/posters-v2/forklift-safety";
-import { manualHandlingSafetyPoster } from "@/lib/posters-v2/manual-handling-safety";
-import { droppedObjectsSafetyPoster } from "@/lib/posters-v2/dropped-objects-safety";
 import { scaffoldPoster } from "@/lib/posters-v2/scaffold";
 import { hotWorkPoster } from "@/lib/posters-v2/hot-work";
 import { confinedSpacePoster } from "@/lib/posters-v2/confined-space";
@@ -43,12 +37,6 @@ export default async function PosterDetailPage({
   const posterDefinitions = {
     "working-at-height-rules": workingAtHeightPoster,
   "ladder-safety-rules": ladderSafetyPoster,
-    "housekeeping-safety-rules": housekeepingSafetyPoster,
-    "excavation-safety-rules": excavationSafetyPoster,
-    "chemical-safety-rules": chemicalSafetyPoster,
-    "forklift-safety-rules": forkliftSafetyPoster,
-    "manual-handling-safety-rules": manualHandlingSafetyPoster,
-    "dropped-objects-safety-rules": droppedObjectsSafetyPoster,
     "scaffold-safety-rules": scaffoldPoster,
     "hot-work-safety-rules": hotWorkPoster,
     "confined-space-entry-rules": confinedSpacePoster,

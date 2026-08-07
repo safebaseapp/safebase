@@ -323,192 +323,6 @@ export default function BottomPanels({
     mainReference = "OSHA 29 CFR 1926.1053 / 1910.23";
     subReference = "EN 131";
 
-  } else if (poster.code === "SB-HSK-001") {
-    values = [
-      {
-        value: isTurkish ? "TEMİZ" : "CLEAN",
-        label: isTurkish
-          ? "Çalışma alanı standardı"
-          : "Work-area standard",
-      },
-      {
-        value: isTurkish ? "AÇIK" : "CLEAR",
-        label: isTurkish
-          ? "Geçiş ve acil çıkışlar"
-          : "Access and emergency exits",
-      },
-      {
-        value: isTurkish ? "HEMEN" : "IMMEDIATE",
-        label: isTurkish
-          ? "Dökülme ve takılma riskleri"
-          : "Spills and trip hazards",
-      },
-      {
-        value: isTurkish ? "HER VARDİYA" : "EACH SHIFT",
-        label: isTurkish
-          ? "Düzen ve erişim kontrolü"
-          : "Order and access check",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.22 / 1926.25";
-    subReference = "Walking-Working Surfaces • Housekeeping";
-
-  } else if (poster.code === "SB-EXC-001") {
-    values = [
-      {
-        value: isTurkish ? "1,22 m" : "4 ft",
-        label: isTurkish
-          ? "Güvenli erişim eşiği"
-          : "Safe-access threshold",
-      },
-      {
-        value: isTurkish ? "0,61 m" : "2 ft",
-        label: isTurkish
-          ? "Spoil pile minimum setback"
-          : "Minimum spoil setback",
-      },
-      {
-        value: isTurkish ? "1,52 m" : "5 ft",
-        label: isTurkish
-          ? "Koruyucu sistem eşiği*"
-          : "Protective-system threshold*",
-      },
-      {
-        value: isTurkish ? "HER GÜN" : "DAILY",
-        label: isTurkish
-          ? "Yetkin kişi kontrolü"
-          : "Competent-person inspection",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1926.651 / 1926.652";
-    subReference = "OSHA 1926 Subpart P";
-
-  } else if (poster.code === "SB-CHM-001") {
-    values = [
-      {
-        value: isTurkish ? "ETİKET" : "LABEL",
-        label: isTurkish
-          ? "Kap kimliği ve tehlike bilgisi"
-          : "Container identity and hazard",
-      },
-      {
-        value: isTurkish ? "SDS" : "SDS",
-        label: isTurkish
-          ? "Kullanım öncesi kontrol"
-          : "Review before use",
-      },
-      {
-        value: isTurkish ? "UYUMLULUK" : "COMPATIBILITY",
-        label: isTurkish
-          ? "Depolama ve reaksiyon kontrolü"
-          : "Storage and reaction control",
-      },
-      {
-        value: isTurkish ? "RİSKE GÖRE" : "RISK BASED",
-        label: isTurkish
-          ? "KKD ve solunum koruması"
-          : "PPE and respiratory protection",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.1200";
-    subReference = "Hazard Communication Standard";
-
-  } else if (poster.code === "SB-FLT-001") {
-    values = [
-      {
-        value: isTurkish ? "YETKİLİ" : "AUTHORIZED",
-        label: isTurkish
-          ? "Operatör gerekliliği"
-          : "Operator requirement",
-      },
-      {
-        value: isTurkish ? "HER VARDİYA" : "EACH SHIFT",
-        label: isTurkish
-          ? "Forklift kontrolü"
-          : "Forklift inspection",
-      },
-      {
-        value: isTurkish ? "KAPASİTE" : "CAPACITY",
-        label: isTurkish
-          ? "Plaka değerini aşma"
-          : "Do not exceed data plate",
-      },
-      {
-        value: isTurkish ? "YAYA" : "PEDESTRIAN",
-        label: isTurkish
-          ? "Ayrım ve görüş kontrolü"
-          : "Separation and visibility",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.178";
-    subReference = "Powered Industrial Trucks";
-
-  } else if (poster.code === "SB-MH-001") {
-    values = [
-      {
-        value: isTurkish ? "PLANLA" : "PLAN",
-        label: isTurkish
-          ? "Yük ve taşıma yolu"
-          : "Load and route",
-      },
-      {
-        value: isTurkish ? "YAKIN TUT" : "KEEP CLOSE",
-        label: isTurkish
-          ? "Yük-vücut mesafesi"
-          : "Load-to-body position",
-      },
-      {
-        value: isTurkish ? "YARDIM AL" : "GET HELP",
-        label: isTurkish
-          ? "Ekip veya mekanik yardım"
-          : "Team or mechanical aid",
-      },
-      {
-        value: isTurkish ? "BURULMA YOK" : "NO TWIST",
-        label: isTurkish
-          ? "Ayaklarla yön değiştir"
-          : "Turn with your feet",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.176";
-    subReference = "Materials Handling and Storage";
-
-  } else if (poster.code === "SB-DO-001") {
-    values = [
-      {
-        value: isTurkish ? "100%" : "100%",
-        label: isTurkish
-          ? "Alt alan kontrolü"
-          : "Area-below control",
-      },
-      {
-        value: isTurkish ? "TETHER" : "TETHER",
-        label: isTurkish
-          ? "Uygun alet sabitleme"
-          : "Suitable tool securing",
-      },
-      {
-        value: isTurkish ? "BARRIER" : "BARRIER",
-        label: isTurkish
-          ? "Düşme hattı izolasyonu"
-          : "Drop-zone isolation",
-      },
-      {
-        value: isTurkish ? "SON KONTROL" : "FINAL CHECK",
-        label: isTurkish
-          ? "Gevşek malzeme bırakma"
-          : "No loose items left",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1926.501(c) / 1926.502(j)";
-    subReference = "Protection From Falling Objects";
-
   } else {
     values = [
       {
@@ -606,14 +420,6 @@ export default function BottomPanels({
     "EN ISO 11611",
   ];
 
-
-  const standards_SB_HSK_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-  const standards_SB_EXC_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-  const standards_SB_CHM_001 = ["EN 166", "EN ISO 374", "EN 13034", "ISO 20345", "RİSKE GÖRE"];
-  const standards_SB_FLT_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-  const standards_SB_MH_001 = ["EN 388", "ISO 20345", "RİSKE GÖRE", "EN ISO 20471", "RİSKE GÖRE"];
-  const standards_SB_DO_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-
   const standards =
     poster.code === "SB-PPE-001"
       ? ppeStandards
@@ -628,15 +434,6 @@ export default function BottomPanels({
           : poster.code === "SB-HW-001"
             ? hotWorkStandards
             : defaultStandards;
-
-  const serialPpeIcons: Record<string, string[]> = {
-    "SB-HSK-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-    "SB-EXC-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-    "SB-CHM-001": ["🥽", "🧤", "🥼", "🥾", "😷"],
-    "SB-FLT-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-    "SB-MH-001": ["🧤", "🥾", "👕", "🦺", "🛡️"],
-    "SB-DO-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-  };
 
   const ppeIcons =
     poster.code === "SB-PPE-001"
@@ -857,7 +654,7 @@ export default function BottomPanels({
                       />
                     </svg>
                   ) : (
-                    serialPpeIcons[poster.code]?.[index] ?? ppeIcons[index] ?? "🦺"
+                    ppeIcons[index] ?? "🦺"
                   )}
                 </div>
 
