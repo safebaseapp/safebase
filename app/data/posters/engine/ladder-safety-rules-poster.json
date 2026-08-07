@@ -1,0 +1,143 @@
+{
+  "base": "ladder-safety-rules-poster",
+  "tr": {
+    "title": "MERDİVEN KRİTİK GÜVENLİK KURALLARI",
+    "subtitle": "DOĞRU SEÇİM • KONTROL • KONUMLANDIRMA • GÜVENLİ KULLANIM",
+    "alert": "MERDİVENİ KULLANMADAN ÖNCE KONTROL ET",
+    "blocks": [
+      {
+        "heading": "MERDİVENİ KONTROL ET",
+        "items": [
+          "Kullanım öncesi basamakları, yan kolları, ayakları ve bağlantıları kontrol et.",
+          "Hasarlı, eğilmiş veya uygunsuz merdiveni kullanma."
+        ]
+      },
+      {
+        "heading": "DOĞRU MERDİVENİ SEÇ",
+        "items": [
+          "İşe uygun tipte ve yeterli uzunlukta merdiven kullan.",
+          "Metal merdiveni elektrik tehlikesi bulunan alanlarda kullanma."
+        ]
+      },
+      {
+        "heading": "SAĞLAM ZEMİNE KUR",
+        "items": [
+          "Merdiveni düz, sağlam ve kaymaz zemine yerleştir.",
+          "Kutu, palet veya geçici yükselti üzerine merdiven kurma."
+        ]
+      },
+      {
+        "heading": "DOĞRU AÇIYI KORU",
+        "items": [
+          "Dayamalı merdivenlerde yaklaşık 4:1 yerleşim oranını uygula.",
+          "Üst ve alt noktayı mümkün olduğunda sabitle."
+        ]
+      },
+      {
+        "heading": "3 NOKTA TEMASI",
+        "items": [
+          "Tırmanırken her zaman üç nokta temasını koru.",
+          "Merdivene dönük şekilde çık ve in."
+        ]
+      },
+      {
+        "heading": "AŞIRI UZANMA YAPMA",
+        "items": [
+          "Vücudunu merdivenin yan kolları arasında tut.",
+          "Ulaşamıyorsan aşağı in ve merdiveni yeniden konumlandır."
+        ]
+      },
+      {
+        "heading": "ÇALIŞMA ALANINI KORU",
+        "items": [
+          "Kapı, araç ve yaya trafiği bulunan alanlarda merdiveni bariyerle.",
+          "Merdivenin çarpılmasını veya yerinden oynamasını önle."
+        ]
+      },
+      {
+        "heading": "GÜVENSİZSE DUR",
+        "items": [
+          "Kaygan zemin, kuvvetli rüzgar veya hasarlı ekipmanda işi durdur.",
+          "Güvenli kullanım sağlanamıyorsa alternatif erişim ekipmanı kullan."
+        ]
+      }
+    ],
+    "footer_title": "İŞİ HEMEN DURDUR",
+    "footer_items": [
+      "Merdiven hasarlıysa",
+      "Zemin sağlam veya kaymaz değilse",
+      "Merdiven güvenli şekilde konumlandırılamıyorsa",
+      "Hava veya çevre koşulları güvenli değilse"
+    ]
+  },
+  "en": {
+    "title": "LADDER CRITICAL SAFETY RULES",
+    "subtitle": "SELECTION • INSPECTION • SETUP • SAFE USE",
+    "alert": "INSPECT THE LADDER BEFORE USE",
+    "blocks": [
+      {
+        "heading": "INSPECT THE LADDER",
+        "items": [
+          "Check rungs, side rails, feet and connections before use.",
+          "Do not use damaged, bent or unsuitable ladders."
+        ]
+      },
+      {
+        "heading": "SELECT THE RIGHT LADDER",
+        "items": [
+          "Use the correct ladder type and sufficient length for the task.",
+          "Do not use metal ladders where electrical hazards are present."
+        ]
+      },
+      {
+        "heading": "USE STABLE GROUND",
+        "items": [
+          "Place the ladder on firm, level and non-slip ground.",
+          "Never place ladders on boxes, pallets or temporary platforms."
+        ]
+      },
+      {
+        "heading": "MAINTAIN THE CORRECT ANGLE",
+        "items": [
+          "Use approximately a 4:1 setup ratio for leaning ladders.",
+          "Secure the top and bottom whenever practicable."
+        ]
+      },
+      {
+        "heading": "MAINTAIN 3-POINT CONTACT",
+        "items": [
+          "Maintain three points of contact while climbing.",
+          "Face the ladder when ascending or descending."
+        ]
+      },
+      {
+        "heading": "DO NOT OVERREACH",
+        "items": [
+          "Keep your body between the ladder side rails.",
+          "Climb down and reposition the ladder if you cannot safely reach."
+        ]
+      },
+      {
+        "heading": "PROTECT THE WORK AREA",
+        "items": [
+          "Barricade ladders exposed to doors, vehicles or pedestrian traffic.",
+          "Prevent the ladder from being struck or displaced."
+        ]
+      },
+      {
+        "heading": "STOP IF UNSAFE",
+        "items": [
+          "Stop work for slippery surfaces, strong wind or damaged equipment.",
+          "Use an alternative access system when safe ladder use cannot be ensured."
+        ]
+      }
+    ],
+    "footer_title": "STOP WORK IMMEDIATELY",
+    "footer_items": [
+      "The ladder is damaged",
+      "The surface is unstable or slippery",
+      "The ladder cannot be positioned safely",
+      "Weather or surrounding conditions are unsafe"
+    ]
+  }
+}

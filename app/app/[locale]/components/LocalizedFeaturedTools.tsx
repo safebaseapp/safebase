@@ -291,7 +291,7 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       description: isTurkish
         ? "Yazdırılabilir profesyonel HSE posterleri"
         : "Printable professional HSE posters",
-      href: `/${locale}/poster-lab`,
+      href: `/${locale}/posters`,
     },
     {
       icon: <TriangleAlert size={36}

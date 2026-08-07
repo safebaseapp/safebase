@@ -7,7 +7,9 @@ type Props = {
   }>;
 };
 
-export default async function PostersPage({ params }: Props) {
+export default async function PosterLibraryPage({
+  params,
+}: Props) {
   const { locale } = await params;
 
   if (locale !== "tr" && locale !== "en") {

@@ -1,0 +1,83 @@
+{
+  "base": "ladder-safety-rules-poster",
+  "title": "LADDER CRITICAL SAFETY RULES",
+  "code": "SB-LAD-001",
+  "revision": "REV 1.0",
+  "theme": "amber",
+
+  "stats": {
+    "target": "100%",
+    "inspection": "BEFORE USE",
+    "risk": "HIGH",
+    "permit": "REQUIRED IF APPLICABLE"
+  },
+
+  "blocks": [
+    {
+      "heading": "INSPECT BEFORE USE",
+      "items": [
+        "Check rails, rungs and feet.",
+        "Do not use damaged ladders."
+      ]
+    },
+    {
+      "heading": "CORRECT LADDER",
+      "items": [
+        "Choose the correct type and length.",
+        "Never improvise."
+      ]
+    },
+    {
+      "heading": "STABLE POSITION",
+      "items": [
+        "Use firm level ground.",
+        "Secure the ladder whenever possible."
+      ]
+    },
+    {
+      "heading": "3 POINT CONTACT",
+      "items": [
+        "Maintain two hands and one foot.",
+        "Face the ladder while climbing."
+      ]
+    },
+    {
+      "heading": "DO NOT OVERREACH",
+      "items": [
+        "Keep belt buckle between rails.",
+        "Move the ladder instead."
+      ]
+    },
+    {
+      "heading": "SAFE LOAD",
+      "items": [
+        "Do not exceed rated capacity.",
+        "Carry tools safely."
+      ]
+    },
+    {
+      "heading": "WORK AREA",
+      "items": [
+        "Keep area clear.",
+        "Prevent vehicle impact."
+      ]
+    },
+    {
+      "heading": "STOP IF UNSAFE",
+      "items": [
+        "Strong wind.",
+        "Slippery surface.",
+        "Damaged ladder."
+      ]
+    }
+  ],
+
+  "footer_title": "STOP WORK IMMEDIATELY",
+
+  "footer_items": [
+    "Damaged ladder",
+    "Unstable ground",
+    "Overreaching required",
+    "Weather becomes unsafe"
+  ]
+}

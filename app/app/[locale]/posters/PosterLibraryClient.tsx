@@ -12,42 +12,39 @@ type Props = {
   locale: "tr" | "en";
 };
 
-type ActiveCategory = "all" | PosterCategory;
-
 export default function PosterLibraryClient({ locale }: Props) {
   const isTurkish = locale === "tr";
+
   const [query, setQuery] = useState("");
-  const [activeCategory, setActiveCategory] =
-    useState<ActiveCategory>("all");
+  const [category, setCategory] =
+    useState<PosterCategory>("all");
 
   const filteredPosters = useMemo(() => {
-    const normalizedQuery = query.trim().toLocaleLowerCase(
-      isTurkish ? "tr-TR" : "en-US",
-    );
+    const normalizedQuery = query
+      .trim()
+      .toLocaleLowerCase(isTurkish ? "tr-TR" : "en-US");
 
     return posters.filter((poster) => {
-      const categoryMatch =
-        activeCategory === "all" ||
-        poster.category === activeCategory;
+      const categoryMatches =
+        category === "all" || poster.category === category;
 
-      const searchText = [
+      const searchableText = [
         poster.title[locale],
         poster.description[locale],
-        posterCategories.find(
-          (category) => category.id === poster.category,
-        )?.[locale] ?? "",
+        poster.code,
       ]
         .join(" ")
         .toLocaleLowerCase(isTurkish ? "tr-TR" : "en-US");
 
-      return (
-        categoryMatch &&
-        (!normalizedQuery || searchText.includes(normalizedQuery))
-      );
-    });
-  }, [activeCategory, isTurkish, locale, query]);
+      const queryMatches =
+        normalizedQuery.length === 0 ||
+        searchableText.includes(normalizedQuery);
 
-  function getCategoryCount(categoryId: string) {
+      return categoryMatches && queryMatches;
+    });
+  }, [category, isTurkish, locale, query]);
+
+  function getCount(categoryId: PosterCategory) {
     if (categoryId === "all") {
       return posters.length;
     }
@@ -58,12 +55,12 @@ export default function PosterLibraryClient({ locale }: Props) {
   }
 
   return (
-    <main className="min-h-screen bg-[#050a1d] text-white">
+    <main className="min-h-screen bg-[#05091a] text-white">
       <section className="border-b border-white/10 px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.28em] text-rose-400">
+              <p className="text-sm font-black uppercase tracking-[0.26em] text-emerald-400">
                 SafeBase Poster Library
               </p>
 
@@ -75,195 +72,262 @@ export default function PosterLibraryClient({ locale }: Props) {
 
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-400">
                 {isTurkish
-                  ? "Sahada görünür güvenlik iletişimi için yüksek çözünürlüklü, yazdırmaya hazır HSE posterlerini keşfedin."
-                  : "Explore high-resolution, print-ready HSE posters for visible safety communication on site."}
+                  ? "Yazdırmaya hazır profesyonel HSE posterlerini A4 veya A3 formatında görüntüleyin ve PDF olarak kaydedin."
+                  : "View print-ready professional HSE posters in A4 or A3 format and save them as PDF."}
               </p>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                {["⬇ Download A4", "⬇ Download A3", "PDF Included", "TR + EN"].map(
+                  (item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-black text-slate-300"
+                    >
+                      ✓ {item}
+                    </span>
+                  ),
+                )}
+              </div>
             </div>
 
-            <div className="rounded-[26px] border border-rose-400/20 bg-rose-400/10 px-8 py-6">
+            <div className="rounded-[26px] border border-emerald-400/20 bg-emerald-400/10 px-8 py-6">
               <p className="text-4xl font-black">{posters.length}</p>
-              <p className="mt-1 text-xs font-black uppercase tracking-[0.2em] text-rose-300">
-                {isTurkish ? "Hazır Poster" : "Ready Posters"}
+
+              <p className="mt-1 text-xs font-black uppercase tracking-[0.18em] text-emerald-300">
+                {isTurkish ? "Poster Konusu" : "Poster Topics"}
               </p>
             </div>
           </div>
 
-          <div className="mt-10 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4">
-            <span>🔎</span>
+          <label className="relative mt-10 block">
+            <span className="pointer-events-none absolute inset-y-0 left-5 flex items-center text-slate-500">
+              🔎
+            </span>
+
             <input
+              type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder={
                 isTurkish
-                  ? "Poster konusu veya anahtar kelime ara..."
-                  : "Search poster topics or keywords..."
+                  ? "Poster konusu, kodu veya anahtar kelime ara..."
+                  : "Search poster topic, code or keyword..."
               }
-              className="w-full bg-transparent text-white outline-none placeholder:text-slate-600"
+              className="w-full rounded-2xl border border-white/10 bg-white/[0.04] py-4 pl-14 pr-5 text-sm font-semibold text-white outline-none placeholder:text-slate-600 focus:border-emerald-500"
             />
-          </div>
+          </label>
         </div>
       </section>
 
-      <section className="px-6 py-14">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[290px_1fr]">
-          <aside className="h-fit rounded-[28px] border border-white/10 bg-white/[0.035] p-5 lg:sticky lg:top-24">
-            <p className="px-3 text-xs font-black uppercase tracking-[0.22em] text-slate-500">
-              {isTurkish ? "Kategoriler" : "Categories"}
-            </p>
-
-            <div className="mt-5 space-y-2">
-              {posterCategories.map((category) => {
-                const isActive = activeCategory === category.id;
-
-                return (
-                  <button
-                    type="button"
-                    key={category.id}
-                    onClick={() =>
-                      setActiveCategory(
-                        category.id as ActiveCategory,
-                      )
-                    }
-                    className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left font-bold transition ${
-                      isActive
-                        ? "bg-rose-500 text-white shadow-lg shadow-rose-500/20"
-                        : "text-slate-400 hover:bg-white/[0.05] hover:text-white"
-                    }`}
-                  >
-                    <span className="flex items-center gap-3">
-                      <span>{category.icon}</span>
-                      {category[locale]}
-                    </span>
-
-                    <span
-                      className={`rounded-full px-2.5 py-1 text-xs ${
-                        isActive
-                          ? "bg-white/15 text-white"
-                          : "bg-white/[0.05] text-slate-500"
-                      }`}
-                    >
-                      {getCategoryCount(category.id)}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </aside>
-
-          <div>
-            <div className="mb-7 flex items-center justify-between gap-4">
-              <p className="text-sm font-black uppercase tracking-[0.22em] text-slate-500">
-                {filteredPosters.length}{" "}
-                {isTurkish
-                  ? "poster gösteriliyor"
-                  : "posters displayed"}
+      <section className="px-6 py-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[270px_1fr]">
+            <aside className="h-fit rounded-[28px] border border-white/10 bg-[#0d1228] p-5 lg:sticky lg:top-24">
+              <p className="px-3 text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                {isTurkish ? "Kategoriler" : "Categories"}
               </p>
 
-              <span className="rounded-full border border-rose-400/20 bg-rose-400/10 px-3 py-1 text-xs font-bold text-rose-300">
-                A3 • PDF • High Resolution
-              </span>
-            </div>
+              <nav className="mt-4 space-y-2">
+                {posterCategories.map((item) => {
+                  const active = category === item.id;
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {filteredPosters.map((poster) => (
-                <article
-                  key={poster.slug}
-                  className="group relative overflow-hidden rounded-[30px] border border-white/10 bg-gradient-to-b from-[#11172f] to-[#0b1024] p-6 shadow-2xl shadow-black/10 transition hover:-translate-y-2 hover:border-rose-400/30"
-                >
-                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-rose-500 via-orange-400 to-amber-300" />
-
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-4xl">
-                      {poster.icon}
-                    </div>
-
-                    <span className="rounded-full border border-rose-400/25 bg-rose-400/10 px-3 py-1 text-xs font-black text-rose-300">
-                      POSTER
-                    </span>
-                  </div>
-
-                  <div className="mt-7">
-                    <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
-                      Safety Awareness
-                    </p>
-
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">
-                        ✓ {isTurkish ? "Baskıya Hazır" : "Print Ready"}
+                  return (
+                    <button
+                      type="button"
+                      key={item.id}
+                      onClick={() => setCategory(item.id)}
+                      className={`flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-sm font-black transition ${
+                        active
+                          ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20"
+                          : "text-slate-400 hover:bg-white/[0.05] hover:text-white"
+                      }`}
+                    >
+                      <span className="flex items-center gap-3">
+                        <span>{item.icon}</span>
+                        <span>{item[locale]}</span>
                       </span>
 
-                      <span className="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-xs font-bold text-blue-300">
-                        ✓ A3 PDF
+                      <span className="rounded-full bg-white/10 px-2 py-1 text-[10px]">
+                        {getCount(item.id)}
                       </span>
-                    </div>
+                    </button>
+                  );
+                })}
+              </nav>
+            </aside>
 
-                    <h2 className="mt-6 text-2xl font-black leading-tight">
-                      {poster.title[locale]}
-                    </h2>
-
-                    <p className="mt-4 min-h-28 text-sm leading-7 text-slate-400">
-                      {poster.description[locale]}
-                    </p>
-                  </div>
-
-                  <div className="mt-7 border-t border-white/10 pt-5">
-                    <div className="grid grid-cols-2 gap-3">
-                      <Link
-                        href={poster.pdf[locale]}
-                        target="_blank"
-                        className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm font-black transition hover:bg-white/[0.1]"
-                      >
-                        {isTurkish ? "Önizleme" : "Preview"}
-                      </Link>
-
-                      <a
-                        href={poster.pdf[locale]}
-                        download
-                        className="inline-flex items-center justify-center gap-2 rounded-2xl bg-blue-600 px-4 py-3 text-sm font-black transition hover:bg-blue-500"
-                      >
-                        ↓ PDF
-                      </a>
-
-                      <a
-                        href={`/api/premium/posters/${poster.slug}?locale=${locale}`}
-                        className="col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm font-black text-emerald-300 transition hover:-translate-y-1 hover:bg-emerald-400/20"
-                      >
-                        🔒{" "}
-                        {isTurkish
-                          ? "Logolu PDF"
-                          : "Branded PDF"}
-                      </a>
-
-                      <a
-                        href={`/api/premium/posters/${poster.slug}/word?locale=${locale}`}
-                        className="col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl border border-violet-400/30 bg-violet-400/10 px-4 py-3 text-sm font-black text-violet-300 transition hover:-translate-y-1 hover:bg-violet-400/20"
-                      >
-                        📝 🔒{" "}
-                        {isTurkish
-                          ? "Düzenlenebilir Word"
-                          : "Editable Word"}
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            {filteredPosters.length === 0 && (
-              <div className="rounded-[28px] border border-dashed border-white/15 bg-white/[0.03] px-8 py-20 text-center">
-                <p className="text-4xl">🔎</p>
-                <h2 className="mt-5 text-2xl font-black">
+            <div>
+              <div className="flex items-center justify-between gap-4">
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-slate-500">
+                  {filteredPosters.length}{" "}
                   {isTurkish
-                    ? "Poster bulunamadı"
-                    : "No posters found"}
-                </h2>
-                <p className="mt-3 text-slate-500">
-                  {isTurkish
-                    ? "Arama kelimesini veya kategoriyi değiştirin."
-                    : "Try another search term or category."}
+                    ? "poster gösteriliyor"
+                    : "posters displayed"}
                 </p>
+
+                {(query || category !== "all") && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setQuery("");
+                      setCategory("all");
+                    }}
+                    className="text-sm font-black text-emerald-400 hover:text-white"
+                  >
+                    {isTurkish
+                      ? "Filtreleri Temizle"
+                      : "Clear Filters"}
+                  </button>
+                )}
               </div>
-            )}
+
+              <div className="mt-7 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {filteredPosters.map((poster) => (
+                  <article
+                    key={poster.slug}
+                    className="group relative flex min-h-[830px] flex-col overflow-hidden rounded-[30px] border border-white/10 bg-gradient-to-b from-[#11172f] to-[#0b1024] p-6 shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-2 hover:border-emerald-400/35"
+                  >
+                    <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-500 via-blue-500 to-cyan-400" />
+
+                    <div className="relative overflow-hidden rounded-[22px] border border-white/10 bg-[#070b1d] overflow-visible">
+                      <div className="absolute right-5 top-5 z-20">
+                        <span
+                          className={`rounded-full border px-3 py-1 text-xs font-black backdrop-blur-md ${
+                            poster.available
+                              ? "border-emerald-400/30 bg-emerald-950/80 text-emerald-300"
+                              : "border-amber-400/30 bg-amber-950/80 text-amber-300"
+                          }`}
+                        >
+                          {poster.available
+                            ? isTurkish
+                              ? "HAZIR"
+                              : "READY"
+                            : isTurkish
+                              ? "YAKINDA"
+                              : "SOON"}
+                        </span>
+                      </div>
+
+                      {poster.available ? (
+                        <Link
+                          href={`/${locale}/posters/${poster.slug}`}
+                          className="group/preview relative flex h-[330px] items-center justify-center overflow-hidden bg-gradient-to-b from-slate-100 to-slate-300"
+                        >
+                          <div className="relative h-[305px] w-[215px] overflow-hidden rounded-md bg-white shadow-[0_20px_45px_rgba(0,0,0,0.35)] transition duration-300 group-hover/preview:scale-[1.025]">
+                            <iframe
+                              src={`/${locale}/posters/${poster.slug}?size=a3&embed=1`}
+                              title={`${poster.title[locale]} preview`}
+                              loading="lazy"
+                              tabIndex={-1}
+                              aria-hidden="true"
+                              className="pointer-events-none absolute left-0 top-0 border-0"
+                              style={{
+                                width: "1123px",
+                                height: "1588px",
+                                transform: "scale(0.1915)",
+                                transformOrigin: "top left",
+                              }}
+                            />
+                          </div>
+
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/15 via-transparent to-white/10" />
+
+                          <span className="absolute bottom-4 rounded-full border border-white/20 bg-slate-950/80 px-4 py-2 text-xs font-black text-white opacity-0 backdrop-blur transition group-hover/preview:opacity-100">
+                            👁 {isTurkish ? "Önizlemeyi Aç" : "Open Preview"}
+                          </span>
+                        </Link>
+                      ) : (
+                        <div className="flex h-[330px] flex-col items-center justify-center bg-gradient-to-br from-white/[0.06] to-white/[0.01] text-center">
+                          <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.05] text-5xl">
+                            {poster.icon}
+                          </div>
+
+                          <p className="mt-5 text-xs font-black uppercase tracking-[0.2em] text-slate-500">
+                            {isTurkish
+                              ? "Poster hazırlanıyor"
+                              : "Poster in development"}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="mt-6">
+                      <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-400">
+                        {poster.code} • REV {poster.revision}
+                      </p>
+
+                      <h2 className="mt-4 text-2xl font-black leading-tight">
+                        {poster.title[locale]}
+                      </h2>
+
+                      <p className="mt-4 min-h-24 text-sm leading-7 text-slate-400">
+                        {poster.description[locale]}
+                      </p>
+                    </div>
+
+                    
+<div className="mt-6 flex items-center gap-2 flex-nowrap">
+  <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">
+    ✓ Print Ready
+  </span>
+
+  <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-bold text-cyan-300">
+    🌍 TR / EN
+  </span>
+
+  <span className="rounded-full border border-violet-400/20 bg-violet-400/10 px-3 py-1 text-xs font-bold text-violet-300">
+    📄 PDF
+  </span>
+</div>
+
+
+                    <div className="mt-auto border-t border-white/10 pt-6">
+                      {poster.available ? (
+                        <div className="grid grid-cols-2 gap-3 items-stretch">
+                          <Link
+                            href={`/${locale}/posters/${poster.slug}?size=a4`}
+                            className="inline-flex items-center justify-center rounded-xl border border-blue-400/30 bg-blue-400/10 px-4 py-3 text-sm font-black text-blue-300 transition hover:-translate-y-1 hover:bg-blue-400/20"
+                          >
+                            A4 PDF
+                          </Link>
+
+                          <Link
+                            href={`/${locale}/posters/${poster.slug}?size=a3`}
+                            className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-3 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-emerald-500"
+                          >
+                            A3 PDF
+                          </Link>
+
+                          <Link
+                            href={`/${locale}/posters/${poster.slug}`}
+                            className="col-span-2 inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm font-black text-white transition hover:bg-white/[0.1]"
+                          >
+                            👁 Preview</Link>
+                        </div>
+                      ) : (
+                        <div className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-4 text-center text-sm font-black text-slate-600">
+                          {isTurkish
+                            ? "Poster hazırlanıyor"
+                            : "Poster in development"}
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              {filteredPosters.length === 0 && (
+                <div className="mt-10 rounded-[28px] border border-dashed border-white/15 bg-white/[0.03] px-8 py-20 text-center">
+                  <p className="text-4xl">🔎</p>
+
+                  <h2 className="mt-5 text-2xl font-black">
+                    {isTurkish
+                      ? "Poster bulunamadı"
+                      : "No posters found"}
+                  </h2>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>

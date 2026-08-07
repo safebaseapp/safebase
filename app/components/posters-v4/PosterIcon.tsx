@@ -1,15 +1,135 @@
 import type { PosterRule } from "@/lib/posters-v2/types";
 
 type Props = {
-  type: PosterRule["icon"];
+  type: string;
   tone?: "mandatory" | "warning" | "information";
 };
 
 export default function PosterIcon({
+
+  
+
+
   type,
   tone = "mandatory",
 }: Props) {
-  const accent =
+
+  /* LADDER_POSTER_ICONS_START */
+
+  const ladderIconType = type as string;
+
+  if (ladderIconType === "ladder-inspection") {
+    return (
+      <svg viewBox="0 0 100 100" className="h-20 w-20 text-slate-950"
+        fill="none" stroke="currentColor" strokeWidth="5"
+        strokeLinecap="round" strokeLinejoin="round">
+        <rect x="25" y="20" width="50" height="64" rx="7" />
+        <path d="M38 20v-8h24v8" />
+        <path d="M34 48l10 10 23-27" />
+        <path d="M35 70h30" />
+      </svg>
+    );
+  }
+
+  if (ladderIconType === "ladder-select") {
+    return (
+      <svg viewBox="0 0 100 100" className="h-20 w-20 text-slate-950"
+        fill="none" stroke="currentColor" strokeWidth="5"
+        strokeLinecap="round" strokeLinejoin="round">
+        <path d="M31 10L23 90M69 10L77 90" />
+        <path d="M29 28h42M27 46h46M25 64h50M24 82h52" />
+        <path d="M79 23l6 6 10-13" />
+      </svg>
+    );
+  }
+
+  if (ladderIconType === "ladder-ground") {
+    return (
+      <svg viewBox="0 0 100 100" className="h-20 w-20 text-slate-950"
+        fill="none" stroke="currentColor" strokeWidth="5"
+        strokeLinecap="round" strokeLinejoin="round">
+        <path d="M34 13L28 70M64 13L70 70" />
+        <path d="M32 29h34M30 45h38M29 61h40" />
+        <path d="M10 77h80M18 88h64" />
+      </svg>
+    );
+  }
+
+  if (ladderIconType === "ladder-angle") {
+    return (
+      <svg viewBox="0 0 100 100" className="h-20 w-20 text-slate-950"
+        fill="none" stroke="currentColor" strokeWidth="5"
+        strokeLinecap="round" strokeLinejoin="round">
+        <path d="M15 86h73M74 12v74M24 86L67 17" />
+        <path d="M35 68l20 12M43 54l20 12M51 41l17 10" />
+        <path d="M61 73a20 20 0 0 1 13 13" />
+        <text x="65" y="69" fontSize="12" fontWeight="900"
+          fill="currentColor" stroke="none">4:1</text>
+      </svg>
+    );
+  }
+
+  if (ladderIconType === "ladder-contact") {
+    return (
+      <svg viewBox="0 0 100 100" className="h-20 w-20 text-slate-950"
+        fill="none" stroke="currentColor" strokeWidth="4.5"
+        strokeLinecap="round" strokeLinejoin="round">
+        <path d="M24 9L19 91M76 9L81 91" />
+        <path d="M23 27h54M22 48h56M21 69h58" />
+        <circle cx="50" cy="27" r="7" />
+        <path d="M50 34v25M50 41L34 49M50 41l16 8M50 59L38 76M50 59l13 17" />
+        <circle cx="34" cy="49" r="4" fill="#10b981" stroke="none" />
+        <circle cx="66" cy="49" r="4" fill="#10b981" stroke="none" />
+        <circle cx="38" cy="76" r="4" fill="#10b981" stroke="none" />
+      </svg>
+    );
+  }
+
+  if (ladderIconType === "ladder-overreach") {
+    return (
+      <svg viewBox="0 0 100 100" className="h-20 w-20 text-slate-950"
+        fill="none" stroke="currentColor" strokeWidth="4.6"
+        strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20 10L16 91M58 10L63 91" />
+        <path d="M19 30h41M18 50h43M17 70h45" />
+        <circle cx="45" cy="31" r="7" />
+        <path d="M45 38l9 23M51 44l32-12M54 61L42 78M54 61l14 16" />
+        <path d="M76 24l9 8-8 10" />
+      </svg>
+    );
+  }
+
+  if (ladderIconType === "ladder-barricade") {
+    return (
+      <svg viewBox="0 0 100 100" className="h-20 w-20 text-slate-950"
+        fill="none" stroke="currentColor" strokeWidth="4.6"
+        strokeLinecap="round" strokeLinejoin="round">
+        <path d="M33 10L28 58M63 10L68 58" />
+        <path d="M31 27h34M30 43h36" />
+        <rect x="9" y="63" width="82" height="19" rx="4" />
+        <path d="M20 82v10M80 82v10" />
+        <path d="M18 67l16 11M41 67l16 11M64 67l16 11" />
+      </svg>
+    );
+  }
+
+  if (ladderIconType === "ladder-stop") {
+    return (
+      <svg viewBox="0 0 100 100" className="h-20 w-20 text-slate-950"
+        fill="none" stroke="currentColor" strokeWidth="5"
+        strokeLinecap="round" strokeLinejoin="round">
+        <path d="M35 9h30l26 26v30L65 91H35L9 65V35z" />
+        <path d="M50 25v36" />
+        <circle cx="50" cy="73" r="4"
+          fill="currentColor" stroke="none" />
+      </svg>
+    );
+  }
+
+  /* LADDER_POSTER_ICONS_END */
+
+
+const accent =
     tone === "warning"
       ? "stroke-orange-500"
       : tone === "information"

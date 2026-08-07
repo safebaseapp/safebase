@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import PosterMaster from "@/components/posters-v4/PosterMasterV4";
 import PosterFormatToolbar from "@/components/posters-v4/PosterFormatToolbar";
 import { workingAtHeightPoster } from "@/lib/posters-v2/working-at-height";
+import { ladderSafetyPoster } from "@/lib/posters-v2/ladder-safety";
 import { scaffoldPoster } from "@/lib/posters-v2/scaffold";
 import { hotWorkPoster } from "@/lib/posters-v2/hot-work";
 import { confinedSpacePoster } from "@/lib/posters-v2/confined-space";
@@ -35,6 +36,7 @@ export default async function PosterDetailPage({
 
   const posterDefinitions = {
     "working-at-height-rules": workingAtHeightPoster,
+  "ladder-safety-rules": ladderSafetyPoster,
     "scaffold-safety-rules": scaffoldPoster,
     "hot-work-safety-rules": hotWorkPoster,
     "confined-space-entry-rules": confinedSpacePoster,
@@ -142,7 +144,7 @@ export default async function PosterDetailPage({
           className="mx-auto mb-8 max-w-5xl rounded-[28px] border border-slate-300 bg-white p-6 shadow-xl print:hidden"
         >
           <Link
-            href={`/${locale}/poster-lab`}
+            href={`/${locale}/posters`}
             className="text-sm font-black text-blue-600 hover:text-slate-950"
           >
             ← {isTurkish ? "Poster Kütüphanesi" : "Poster Library"}

@@ -14,7 +14,7 @@ export default function PosterFormatToolbar({ locale }: Props) {
   const selectedSize = searchParams.get("size") === "a4" ? "a4" : "a3";
 
   function selectSize(size: "a4" | "a3") {
-    router.replace(`/${locale}/poster-lab?size=${size}`, {
+    router.replace(`/${locale}/posters?size=${size}`, {
       scroll: false,
     });
   }

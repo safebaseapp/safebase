@@ -12,6 +12,52 @@ type CriticalValue = {
   label: string;
 };
 
+
+
+/* SAFEBASE_LADDER_HARNESS_START */
+function SafeBaseHarnessIcon() {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className="h-12 w-12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {/* shoulders */}
+      <path d="M34 20L50 43L66 20" />
+
+      {/* outer shoulder straps */}
+      <path d="M34 20L25 53L34 82" />
+      <path d="M66 20L75 53L66 82" />
+
+      {/* chest straps */}
+      <path d="M29 45H71" />
+
+      {/* centre body */}
+      <path d="M50 43V64" />
+
+      {/* leg straps */}
+      <path d="M34 82L46 61" />
+      <path d="M66 82L54 61" />
+
+      {/* waist belt */}
+      <path d="M30 60H70" />
+
+      {/* central D-ring */}
+      <circle cx="50" cy="48" r="6" />
+
+      {/* leg loops */}
+      <path d="M34 82c5 6 12 7 16 1" />
+      <path d="M66 82c-5 6-12 7-16 1" />
+    </svg>
+  );
+}
+/* SAFEBASE_LADDER_HARNESS_END */
+
 export default function BottomPanels({
   locale,
   poster,
@@ -245,6 +291,38 @@ export default function BottomPanels({
 
     mainReference = "OSHA 29 CFR 1926.451";
     subReference = "OSHA 1926 Subpart L";
+
+  } else if (poster.code === "SB-LAD-001") {
+    values = [
+      {
+        value: "4 : 1",
+        label: isTurkish
+          ? "Güvenli yerleşim oranı"
+          : "Safe setup ratio",
+      },
+      {
+        value: isTurkish ? "0,9 m" : "0.9 m / 3 ft",
+        label: isTurkish
+          ? "Üst seviyeye güvenli taşma"
+          : "Extension above landing",
+      },
+      {
+        value: isTurkish ? "3 NOKTA" : "3-POINT",
+        label: isTurkish
+          ? "Sürekli merdiven teması"
+          : "Continuous ladder contact",
+      },
+      {
+        value: isTurkish ? "MAX YÜK" : "MAX LOAD",
+        label: isTurkish
+          ? "Üretici kapasitesini aşma"
+          : "Do not exceed rated capacity",
+      },
+    ];
+
+    mainReference = "OSHA 29 CFR 1926.1053 / 1910.23";
+    subReference = "EN 131";
+
   } else {
     values = [
       {
@@ -276,10 +354,14 @@ export default function BottomPanels({
     ];
 
     mainReference =
-      "OSHA 29 CFR 1926.501 / 1926.502";
+      poster.code === "SB-LAD-001"
+                  ? "OSHA 29 CFR 1926.1053 / 1910.23"
+                  : "OSHA 29 CFR 1926.501 / 1926.502";
 
     subReference =
-      "EN 361 • EN 365 • EN 795";
+      poster.code === "SB-LAD-001"
+                  ? "EN 131"
+                  : "EN 361 • EN 365 • EN 795";
   }
 
   const defaultStandards = [
@@ -525,8 +607,55 @@ export default function BottomPanels({
                 key={item}
                 className="text-center"
               >
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-700 text-2xl ring-4 ring-blue-100">
-                  {ppeIcons[index] ?? "🦺"}
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-700 text-2xl text-white ring-4 ring-blue-100">
+                  {poster.code === "SB-LAD-001" && index === 4 ? (
+                    <svg
+                      viewBox="0 0 100 100"
+                      className="h-9 w-9"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-label="Full Body Harness"
+                    >
+                      {/* shoulder straps */}
+                      <path d="M31 18L50 42L69 18" />
+
+                      {/* outer harness straps */}
+                      <path d="M31 18L23 53L34 86" />
+                      <path d="M69 18L77 53L66 86" />
+
+                      {/* chest strap */}
+                      <path d="M28 44H72" />
+
+                      {/* waist belt */}
+                      <path d="M29 61H71" />
+
+                      {/* centre connection */}
+                      <path d="M50 42V65" />
+                      <circle cx="50" cy="48" r="6" />
+
+                      {/* leg straps */}
+                      <path d="M34 86L46 62" />
+                      <path d="M66 86L54 62" />
+
+                      {/* leg loops */}
+                      <path d="M34 86c5 5 11 5 16-1" />
+                      <path d="M66 86c-5 5-11 5-16-1" />
+
+                      {/* D-ring */}
+                      <circle
+                        cx="50"
+                        cy="48"
+                        r="3"
+                        fill="currentColor"
+                        stroke="none"
+                      />
+                    </svg>
+                  ) : (
+                    ppeIcons[index] ?? "🦺"
+                  )}
                 </div>
 
                 <p className="mt-2 text-[9px] font-black uppercase leading-[1.15] text-slate-950">

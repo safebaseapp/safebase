@@ -43,17 +43,12 @@ const toneClasses: Record<
 function Icon({
   type,
 }: {
-  type: string;
+  type: PosterRule["icon"];
 }) {
   const common =
     "h-24 w-24 fill-none stroke-slate-900 [stroke-linecap:round] [stroke-linejoin:round]";
 
-  
-
-
-  
-
-if (type === "ladder") {
+  if (type === "ladder") {
     return (
       <svg viewBox="0 0 100 100" className={common} strokeWidth="6">
         <path d="M28 88 39 12M72 88 61 12M34 31h32M32 50h36M30 69h40" />
@@ -114,108 +109,7 @@ if (type === "ladder") {
     );
   }
 
-  
-  if (type === "inspection") {
-    return (
-      <svg viewBox="0 0 100 100" className={common} strokeWidth="5.5">
-        <rect x="24" y="18" width="52" height="66" rx="8" />
-        <path d="M38 18V12h24v6" />
-        <path d="M35 43l9 9 20-22" />
-        <path d="M35 68h30" />
-      </svg>
-    );
-  }
-
-  if (type === "ladder") {
-    return (
-      <svg viewBox="0 0 100 100" className={common} strokeWidth="5.5">
-        <path d="M30 12L22 88" />
-        <path d="M70 12L78 88" />
-        <path d="M29 27h42" />
-        <path d="M27 43h46" />
-        <path d="M25 59h50" />
-        <path d="M24 75h52" />
-      </svg>
-    );
-  }
-
-  if (type === "ground") {
-    return (
-      <svg viewBox="0 0 100 100" className={common} strokeWidth="5.5">
-        <path d="M31 15L25 73" />
-        <path d="M65 15L72 73" />
-        <path d="M29 31h38M27 47h42M26 63h45" />
-        <path d="M12 78h76" />
-        <path d="M18 88h64" />
-      </svg>
-    );
-  }
-
-  if (type === "angle") {
-    return (
-      <svg viewBox="0 0 100 100" className={common} strokeWidth="5.5">
-        <path d="M26 82L62 17" />
-        <path d="M39 58l22 12" />
-        <path d="M34 68l22 12" />
-        <path d="M17 82h69" />
-        <path d="M61 17l12 65" />
-        <path d="M67 67a20 20 0 0 1 13 15" />
-      </svg>
-    );
-  }
-
-  if (type === "three-point") {
-    return (
-      <svg viewBox="0 0 100 100" className={common} strokeWidth="5.2">
-        <path d="M28 12L22 88M72 12l6 76" />
-        <path d="M27 30h46M25 50h50M24 70h52" />
-        <circle cx="50" cy="27" r="8" />
-        <path d="M50 35v23" />
-        <path d="M50 42L35 51" />
-        <path d="M50 42l15 9" />
-        <path d="M50 58L38 75" />
-        <path d="M50 58l13 17" />
-      </svg>
-    );
-  }
-
-  if (type === "overreach") {
-    return (
-      <svg viewBox="0 0 100 100" className={common} strokeWidth="5.2">
-        <path d="M24 12L18 88M58 12l7 76" />
-        <path d="M22 32h38M21 51h41M19 70h45" />
-        <circle cx="47" cy="30" r="7" />
-        <path d="M47 37l8 22" />
-        <path d="M52 43l30-9" />
-        <path d="M55 58L43 76" />
-        <path d="M55 58l14 16" />
-      </svg>
-    );
-  }
-
-  if (type === "barricade") {
-    return (
-      <svg viewBox="0 0 100 100" className={common} strokeWidth="5.2">
-        <path d="M25 14L20 63M58 14l6 49" />
-        <path d="M23 30h37M21 47h41" />
-        <rect x="10" y="66" width="80" height="16" rx="4" />
-        <path d="M20 81v10M80 81v10" />
-        <path d="M20 70l12 8M43 70l12 8M66 70l12 8" />
-      </svg>
-    );
-  }
-
-  if (type === "stop") {
-    return (
-      <svg viewBox="0 0 100 100" className={common} strokeWidth="5.5">
-        <path d="M35 12h30l23 23v30L65 88H35L12 65V35z" />
-        <path d="M32 32l36 36" />
-        <path d="M68 32L32 68" />
-      </svg>
-    );
-  }
-
-if (type === "equipment") {
+  if (type === "equipment") {
     return (
       <svg viewBox="0 0 100 100" className={common} strokeWidth="6">
         <path
@@ -253,54 +147,6 @@ function PpeIcon({
 }: {
   type: "helmet" | "glasses" | "gloves" | "footwear" | "harness";
 }) {
-
-  /* SAFEBASE_FULL_BODY_HARNESS_ICON */
-  const ppeTypeValue = String(type).toLowerCase();
-
-  if (
-    ppeTypeValue.includes("harness") ||
-    ppeTypeValue.includes("kemer")
-  ) {
-    return (
-      <svg
-        viewBox="0 0 100 100"
-        className="h-14 w-14 fill-none stroke-slate-950"
-        strokeWidth="5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="50" cy="18" r="8" />
-
-        <path d="M50 26v23" />
-
-        <path d="M50 33L30 45" />
-        <path d="M50 33l20 12" />
-
-        <path d="M37 40l8 19" />
-        <path d="M63 40l-8 19" />
-
-        <path d="M45 59L32 82" />
-        <path d="M55 59l13 23" />
-
-        <path d="M34 35l16 24 16-24" />
-
-        <path d="M34 35l-7 35" />
-        <path d="M66 35l7 35" />
-
-        <path d="M27 70h12" />
-        <path d="M61 70h12" />
-
-        <circle
-          cx="50"
-          cy="59"
-          r="5"
-          className="fill-emerald-500 stroke-none"
-        />
-      </svg>
-    );
-  }
-
-
   const common =
     "h-11 w-11 fill-none stroke-white [stroke-linecap:round] [stroke-linejoin:round]";
 
@@ -532,35 +378,6 @@ export default function PosterMaster({
         ]
       : [];
 
-  const ladderCriticalValues = [
-    {
-      value: "4 : 1",
-      tr: "Güvenli yerleşim oranı",
-      en: "Safe setup ratio",
-    },
-    {
-      value: "0,9 m",
-      tr: "Üst seviyeye taşma",
-      en: "Extension above landing",
-    },
-    {
-      value: "3 NOKTA",
-      tr: "Sürekli merdiven teması",
-      en: "Three-point contact",
-    },
-    {
-      value: "MAX YÜK",
-      tr: "Üretici kapasitesini aşma",
-      en: "Do not exceed rated load",
-    },
-  ];
-
-  const posterCriticalValues =
-    poster.code === "SB-LAD-001"
-      ? ladderCriticalValues
-      : criticalValues;
-
-
   return (
     <div
       id="safebase-poster"
@@ -753,28 +570,7 @@ export default function PosterMaster({
           </div>
 
           <div className="grid grid-cols-2 gap-2.5 p-3">
-            {(poster.code === "SB-LAD-001" ? [
-                    {
-                      value: "4 : 1",
-                      tr: "Güvenli yerleşim oranı",
-                      en: "Safe setup ratio",
-                    },
-                    {
-                      value: "0,9 m",
-                      tr: "Üst seviyeye taşma",
-                      en: "Extension above landing",
-                    },
-                    {
-                      value: "3 NOKTA",
-                      tr: "Sürekli merdiven teması",
-                      en: "Three-point contact",
-                    },
-                    {
-                      value: "MAX YÜK",
-                      tr: "Üretici kapasitesini aşma",
-                      en: "Do not exceed rated load",
-                    },
-                  ] : criticalValues).map((item) => (
+            {criticalValues.map((item) => (
               <div
                 key={item.value}
                 className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-3 text-center"

@@ -41,11 +41,11 @@ export default function Header({ locale, poster }: Props) {
 
         <h1 className="mt-6 max-w-[760px] text-[50px] font-black uppercase leading-[0.94] tracking-[-0.035em] text-slate-950">
           {poster.title[locale].split("CRITICAL").map((part, i, arr) => (
-      <>
-        {part}
-        {i < arr.length - 1 && <span className="text-red-600">CRITICAL</span>}
-      </>
-    ))}
+            <span key={`title-part-${i}`}>
+              {part}
+              {i < arr.length - 1 && <span className="text-red-600">CRITICAL</span>}
+            </span>
+          ))}
         </h1>
 
         <div className="mt-5 flex items-center gap-4">
