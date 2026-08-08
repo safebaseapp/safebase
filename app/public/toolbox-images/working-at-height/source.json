@@ -1,0 +1,10 @@
+{
+  "toolbox": "working-at-height",
+  "status": "images-pending",
+  "required": [
+    "hero.jpg",
+    "do.jpg",
+    "dont.jpg"
+  ],
+  "note": "Use openly licensed or otherwise commercially permitted brand-neutral industrial working-at-height images."
+}

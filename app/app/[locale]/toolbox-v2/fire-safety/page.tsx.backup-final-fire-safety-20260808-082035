@@ -1,0 +1,344 @@
+"use client";
+
+import { useParams } from "next/navigation";
+
+export default function FireSafetyToolboxV2Page() {
+  const params = useParams();
+  const locale = params?.locale === "tr" ? "tr" : "en";
+  const tr = locale === "tr";
+
+  return (
+    <main className="min-h-screen bg-slate-950 py-10 text-slate-900">
+      <div className="mx-auto w-full max-w-[1050px] space-y-10 px-4">
+
+        {/* PAGE 1 */}
+        <section className="min-h-[1400px] overflow-hidden rounded-[28px] bg-white shadow-2xl">
+
+          <header className="bg-slate-950 px-12 py-10 text-white">
+            <p className="text-xs font-black uppercase tracking-[0.25em] text-emerald-400">
+              SafeBase Professional Toolbox Talk
+            </p>
+
+            <div className="mt-4 flex items-end justify-between gap-8">
+              <div>
+                <h1 className="text-4xl font-black tracking-tight">
+                  {tr ? "YANGIN GÜVENLİĞİ TOOLBOX" : "FIRE SAFETY TOOLBOX TALK"}
+                </h1>
+
+                <p className="mt-3 max-w-2xl text-base text-slate-300">
+                  {tr
+                    ? "Yangın tehlikelerini önleyin ve acil durumda güvenli şekilde hareket edin."
+                    : "Prevent fire hazards and respond safely in emergencies."}
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-blue-600 px-7 py-4 text-center">
+                <p className="text-xl font-black">8–10</p>
+                <p className="text-[10px] font-black uppercase tracking-widest">
+                  {tr ? "Dakika" : "Minutes"}
+                </p>
+              </div>
+            </div>
+          </header>
+
+          <div className="grid gap-7 p-10 lg:grid-cols-[1.1fr_0.9fr]">
+
+            <div className="space-y-6">
+
+              <div className="overflow-hidden rounded-2xl border border-blue-200 bg-blue-50">
+                <div className="bg-blue-600 px-6 py-3 text-sm font-black uppercase tracking-wider text-white">
+                  {tr ? "Amaç" : "Objective"}
+                </div>
+                <p className="p-6 text-base leading-7 text-slate-700">
+                  {tr
+                    ? "Yangınları önlemek, erken müdahaleyi desteklemek ve personelin güvenli tahliyesini sağlamak."
+                    : "Prevent fires, support early response and ensure safe evacuation of personnel."}
+                </p>
+              </div>
+
+              <div className="overflow-hidden rounded-2xl border border-emerald-200 bg-emerald-50">
+                <div className="bg-emerald-500 px-6 py-3 text-sm font-black uppercase tracking-wider text-white">
+                  {tr ? "Konu Açıklaması" : "Topic Explanation"}
+                </div>
+
+                <div className="space-y-3 p-6 text-sm leading-6 text-slate-700">
+                  <p>● {tr ? "Yangın için yakıt, oksijen ve ısı gerekir." : "Fire requires fuel, oxygen and heat."}</p>
+                  <p>● {tr ? "Yanıcı malzemeleri doğru depolayın ve sıcak çalışmayı izin sistemiyle yönetin." : "Store flammable materials correctly and manage hot work under permit."}</p>
+                  <p>● {tr ? "Alarm noktalarını, kaçış yollarını ve toplanma alanını bilin." : "Know alarm points, escape routes and assembly areas."}</p>
+                </div>
+              </div>
+
+              <div className="overflow-hidden rounded-2xl border border-orange-200 bg-orange-50">
+                <div className="bg-orange-500 px-6 py-3 text-sm font-black uppercase tracking-wider text-white">
+                  {tr ? "Gerçekçi Saha Senaryosu" : "Realistic Site Scenario"}
+                </div>
+
+                <div className="space-y-3 p-6 text-sm leading-6 text-slate-700">
+                  <p>
+                    ● {tr
+                      ? "Taşlama kıvılcımları yakındaki yanıcı malzemeleri tutuşturdu."
+                      : "Grinding sparks ignited nearby combustible materials."}
+                  </p>
+                  <p>
+                    ● {tr
+                      ? "Yakındaki yangın söndürücü ile yangın hızlı şekilde kontrol altına alındı."
+                      : "A nearby extinguisher allowed the fire to be controlled quickly."}
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="space-y-6">
+
+              {/* HERO VISUAL */}
+              <div className="flex min-h-[430px] flex-col items-center justify-center rounded-3xl border-2 border-dashed border-slate-300 bg-slate-100 p-8 text-center">
+                <div className="text-6xl">🔥</div>
+
+                <p className="mt-5 text-lg font-black text-slate-700">
+                  {tr ? "Ana Saha Görseli" : "Primary Site Visual"}
+                </p>
+
+                <p className="mt-2 max-w-xs text-sm leading-6 text-slate-500">
+                  {tr
+                    ? "Buraya markasız ve açık lisanslı gerçek bir endüstriyel yangın güvenliği fotoğrafı gelecek."
+                    : "A brand-neutral, openly licensed industrial fire-safety photo will appear here."}
+                </p>
+
+                <p className="mt-5 rounded-full bg-white px-4 py-2 text-[11px] font-bold text-slate-500">
+                  /toolbox-images/fire-safety/hero.jpg
+                </p>
+              </div>
+
+              {/* FIRE TRIANGLE */}
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                  {tr ? "Yangın Üçgeni" : "Fire Triangle"}
+                </p>
+
+                <div className="mt-5 grid grid-cols-3 gap-3 text-center">
+                  <div className="rounded-xl bg-red-50 p-4">
+                    <div className="text-3xl">🔥</div>
+                    <p className="mt-2 text-xs font-black">{tr ? "ISI" : "HEAT"}</p>
+                  </div>
+
+                  <div className="rounded-xl bg-amber-50 p-4">
+                    <div className="text-3xl">🛢️</div>
+                    <p className="mt-2 text-xs font-black">{tr ? "YAKIT" : "FUEL"}</p>
+                  </div>
+
+                  <div className="rounded-xl bg-blue-50 p-4">
+                    <div className="text-3xl">💨</div>
+                    <p className="mt-2 text-xs font-black">{tr ? "OKSİJEN" : "OXYGEN"}</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="mx-10 rounded-2xl border-2 border-blue-500 bg-blue-50 p-6">
+            <p className="text-xs font-black uppercase tracking-wider text-blue-600">
+              {tr ? "Hatırla" : "Remember"}
+            </p>
+            <p className="mt-2 text-lg font-black text-slate-900">
+              {tr
+                ? "Yangını önlemek, yangınla mücadele etmekten her zaman daha güvenlidir."
+                : "Preventing a fire is always safer than fighting one."}
+            </p>
+          </div>
+
+        </section>
+
+
+        {/* PAGE 2 */}
+        <section className="min-h-[1400px] overflow-hidden rounded-[28px] bg-white shadow-2xl">
+
+          <header className="bg-slate-950 px-12 py-9 text-white">
+            <p className="text-xs font-black uppercase tracking-[0.25em] text-emerald-400">
+              SafeBase Professional Toolbox Talk
+            </p>
+            <h2 className="mt-3 text-3xl font-black">
+              {tr ? "YANGIN GÜVENLİĞİ" : "FIRE SAFETY"}
+            </h2>
+          </header>
+
+          <div className="space-y-8 p-10">
+
+            <div className="grid gap-6 lg:grid-cols-2">
+
+              <div className="overflow-hidden rounded-2xl border border-red-200 bg-red-50">
+                <div className="bg-red-600 px-6 py-3 font-black text-white">
+                  ⚠️ {tr ? "TEMEL TEHLİKELER" : "KEY HAZARDS"}
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 p-6 text-sm font-semibold text-slate-700">
+                  <p>● {tr ? "Sıcak çalışma" : "Hot work"}</p>
+                  <p>● {tr ? "Yanıcı sıvılar" : "Flammable liquids"}</p>
+                  <p>● {tr ? "Gaz kaçakları" : "Gas leaks"}</p>
+                  <p>● {tr ? "Elektrik arızaları" : "Electrical faults"}</p>
+                  <p>● {tr ? "Sigara" : "Smoking"}</p>
+                  <p>● {tr ? "Kötü housekeeping" : "Poor housekeeping"}</p>
+                </div>
+              </div>
+
+              <div className="overflow-hidden rounded-2xl border border-emerald-200 bg-emerald-50">
+                <div className="bg-emerald-500 px-6 py-3 font-black text-white">
+                  ✅ {tr ? "KONTROL ÖNLEMLERİ" : "CONTROL MEASURES"}
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 p-6 text-sm font-semibold text-slate-700">
+                  <p>● Hot Work Permit</p>
+                  <p>● {tr ? "Yanıcıları kaldır" : "Remove combustibles"}</p>
+                  <p>● {tr ? "Söndürücüyü kontrol et" : "Inspect extinguisher"}</p>
+                  <p>● Fire Watch</p>
+                  <p>● {tr ? "Kaçış yolunu açık tut" : "Keep escape route clear"}</p>
+                  <p>● {tr ? "Gaz tüplerini sabitle" : "Secure gas cylinders"}</p>
+                </div>
+              </div>
+
+            </div>
+
+            {/* DO / DON'T VISUAL AREA */}
+            <div className="grid gap-6 lg:grid-cols-2">
+
+              <div className="rounded-2xl border-2 border-emerald-400 bg-emerald-50 p-6">
+                <p className="text-lg font-black text-emerald-700">
+                  ✅ {tr ? "DOĞRU" : "DO"}
+                </p>
+
+                <div className="mt-4 flex min-h-[270px] items-center justify-center rounded-xl border-2 border-dashed border-emerald-300 bg-white text-center">
+                  <div>
+                    <div className="text-5xl">🧯</div>
+                    <p className="mt-3 font-bold text-slate-700">
+                      {tr
+                        ? "Söndürücü erişilebilir ve çalışma alanına uygun."
+                        : "Extinguisher accessible and suitable for the work."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border-2 border-red-400 bg-red-50 p-6">
+                <p className="text-lg font-black text-red-700">
+                  ❌ {tr ? "YANLIŞ" : "DON'T"}
+                </p>
+
+                <div className="mt-4 flex min-h-[270px] items-center justify-center rounded-xl border-2 border-dashed border-red-300 bg-white text-center">
+                  <div>
+                    <div className="text-5xl">🔥📦</div>
+                    <p className="mt-3 font-bold text-slate-700">
+                      {tr
+                        ? "Kıvılcım alanında yanıcı malzeme bırakma."
+                        : "Do not leave combustible material in the spark zone."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+
+              <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6">
+                <p className="font-black text-blue-700">
+                  {tr ? "TARTIŞMA SORULARI" : "DISCUSSION QUESTIONS"}
+                </p>
+
+                <div className="mt-4 space-y-2 text-sm text-slate-700">
+                  <p>• {tr ? "En yakın söndürücü nerede?" : "Where is the nearest extinguisher?"}</p>
+                  <p>• {tr ? "Toplanma alanımız nerede?" : "Where is the assembly point?"}</p>
+                  <p>• {tr ? "Alarm nasıl verilir?" : "How do you raise the alarm?"}</p>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6">
+                <p className="font-black text-emerald-700">
+                  {tr ? "BUGÜN BAŞLAMADAN ÖNCE" : "VERIFY BEFORE STARTING TODAY"}
+                </p>
+
+                <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-700">
+                  <p>☐ {tr ? "Söndürücü hazır" : "Extinguisher ready"}</p>
+                  <p>☐ {tr ? "Kaçış yolu açık" : "Escape route clear"}</p>
+                  <p>☐ Permit ready</p>
+                  <p>☐ Fire watch</p>
+                  <p>☐ Housekeeping</p>
+                  <p>☐ {tr ? "Ekip bilgilendirildi" : "Team briefed"}</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+
+        {/* PAGE 3 */}
+        <section className="min-h-[1400px] overflow-hidden rounded-[28px] bg-white shadow-2xl">
+
+          <header className="bg-slate-950 px-12 py-12 text-white">
+            <h2 className="text-3xl font-black">
+              {tr ? "KATILIM VE ONAY" : "ATTENDANCE AND APPROVAL"}
+            </h2>
+
+            <p className="mt-4 text-slate-300">
+              {tr ? "Yangın Güvenliği Toolbox" : "Fire Safety Toolbox Talk"}
+            </p>
+          </header>
+
+          <div className="p-12">
+
+            <div className="grid grid-cols-2 gap-x-12 gap-y-8">
+              {[
+                tr ? "Proje / Saha" : "Project / Site",
+                tr ? "Tarih" : "Date",
+                tr ? "Anlatan" : "Presented by",
+                tr ? "Çalışma Alanı" : "Work Area",
+              ].map((label) => (
+                <div key={label}>
+                  <p className="text-xs font-black uppercase tracking-wider text-slate-600">
+                    {label}
+                  </p>
+                  <div className="mt-5 border-b border-slate-300" />
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-12 overflow-hidden rounded-xl border border-slate-300">
+              <div className="grid grid-cols-[60px_1.5fr_1fr_1fr] bg-slate-950 px-4 py-4 text-xs font-black uppercase text-white">
+                <div>No</div>
+                <div>{tr ? "Ad Soyad" : "Full Name"}</div>
+                <div>{tr ? "Firma / Görev" : "Company / Role"}</div>
+                <div>{tr ? "İmza" : "Signature"}</div>
+              </div>
+
+              {Array.from({ length: 14 }, (_, i) => (
+                <div
+                  key={i}
+                  className="grid min-h-[52px] grid-cols-[60px_1.5fr_1fr_1fr] border-t border-slate-300 text-sm"
+                >
+                  <div className="border-r border-slate-300 p-4">
+                    {i + 1}
+                  </div>
+                  <div className="border-r border-slate-300 p-4" />
+                  <div className="border-r border-slate-300 p-4" />
+                  <div className="p-4" />
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10">
+              <p className="text-sm font-black">
+                {tr ? "Supervisor Notları" : "Supervisor Notes"}
+              </p>
+
+              <div className="mt-4 min-h-[150px] rounded-2xl border border-slate-300" />
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+  );
+}

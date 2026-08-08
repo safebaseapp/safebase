@@ -1,0 +1,38 @@
+{
+  "toolbox": "fire-safety",
+  "images": [
+    {
+      "file": "hero.jpg",
+      "usage": "hero",
+      "title": "Fire Extinguisher",
+      "author": "Darkday / Flickr",
+      "source": "https://commons.wikimedia.org/wiki/File:Fire_Extinguisher_(12671224185).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "modified": true,
+      "modification": "Displayed with SafeBase layout cropping only"
+    },
+    {
+      "file": "do.jpg",
+      "usage": "correct-example",
+      "title": "Example of Chemicals and Flammable Liquids Properly Stored",
+      "author": "Mreid41",
+      "source": "https://commons.wikimedia.org/wiki/File:FlammableCabinet_ONG.jpg",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "modified": true,
+      "modification": "Displayed with SafeBase layout cropping only"
+    },
+    {
+      "file": "dont.jpg",
+      "usage": "hazard-example",
+      "title": "Welding Sparks",
+      "author": "Steve Jurvetson",
+      "source": "https://commons.wikimedia.org/wiki/File:Welding_Sparks_(3843951412).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "modified": true,
+      "modification": "Displayed with SafeBase layout cropping only"
+    }
+  ]
+}
