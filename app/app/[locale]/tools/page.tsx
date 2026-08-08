@@ -51,6 +51,17 @@ export default async function LocalizedToolsPage({params}: Props) {
         : "Calculate injury severity using lost workdays and total hours worked.",
       href: "/tools/severity-rate",
     },
+  {
+    icon: "⚡",
+    title: isTurkish
+      ? "Hızlı Risk Analizi"
+      : "Quick Risk Assessment",
+    description: isTurkish
+      ? "100 faaliyet ve 900 hazır risk ile profesyonel HIRARC risk değerlendirmenizi hızlıca oluşturun."
+      : "Build a professional HIRARC risk assessment quickly with 100 activities and 900 ready-to-use risks.",
+    href: "/tools/quick-risk-assessment",
+  },
+
   ];
 
   return (
