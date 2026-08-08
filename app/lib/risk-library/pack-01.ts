@@ -89,7 +89,85 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Onaylı ankraj ve uygun bağlantı ekipmanı", en: "Approved anchorage and suitable connecting equipment" },
         additionalControls: { tr: "Çalışma öncesi gerekli düşüş açıklığını hesapla ve uygun sistemi seç", en: "Calculate required fall clearance before work and select a suitable system" },
       },
-],
+      {
+        hazard: { tr: "Yanal ankraj nedeniyle swing fall oluşması", en: "Swing fall caused by lateral anchorage" },
+        consequence: { tr: "Çalışanın yapıya çarpması veya ciddi düşme yaralanması", en: "Worker striking the structure or suffering serious fall injury" },
+        personsAtRisk: {
+          tr: "Yüksekte çalışan personel ve alt seviyedeki çalışanlar",
+          en: "Personnel working at height and workers at lower levels"
+        },
+        existingControls: {
+          tr: "Yetkin personel, uygun erişim sistemi, düşüş koruma ekipmanı ve iş öncesi saha kontrolü",
+          en: "Competent personnel, suitable access systems, fall-protection equipment and pre-work area inspection"
+        },
+        additionalControls: { tr: "Ankraj noktasını mümkün olduğunca çalışanın üzerinde ve düşüş hattına yakın seç", en: "Position the anchorage as far as practicable above the worker and close to the fall line" },
+      },
+      {
+        hazard: { tr: "Uyumsuz bağlantı elemanlarının birlikte kullanılması", en: "Use of incompatible fall-protection connectors" },
+        consequence: { tr: "Karabina veya bağlantının istemsiz açılması sonucu düşme", en: "Unintentional connector opening resulting in a fall" },
+        personsAtRisk: {
+          tr: "Yüksekte çalışan personel ve alt seviyedeki çalışanlar",
+          en: "Personnel working at height and workers at lower levels"
+        },
+        existingControls: {
+          tr: "Yetkin personel, uygun erişim sistemi, düşüş koruma ekipmanı ve iş öncesi saha kontrolü",
+          en: "Competent personnel, suitable access systems, fall-protection equipment and pre-work area inspection"
+        },
+        additionalControls: { tr: "Karabina, lanyard ve ankraj bağlantılarının birbiriyle uyumlu olduğunu doğrula", en: "Verify compatibility between connectors, lanyards and anchorage points" },
+      },
+      {
+        hazard: { tr: "Geçici yaşam hattının yanlış kurulması veya gerilmesi", en: "Incorrect installation or tensioning of temporary lifeline" },
+        consequence: { tr: "Düşüş koruma sisteminin arızalanması", en: "Failure of the fall-protection system" },
+        personsAtRisk: {
+          tr: "Yüksekte çalışan personel ve alt seviyedeki çalışanlar",
+          en: "Personnel working at height and workers at lower levels"
+        },
+        existingControls: {
+          tr: "Yetkin personel, uygun erişim sistemi, düşüş koruma ekipmanı ve iş öncesi saha kontrolü",
+          en: "Competent personnel, suitable access systems, fall-protection equipment and pre-work area inspection"
+        },
+        additionalControls: { tr: "Geçici yaşam hattını üretici talimatına ve onaylı kurulum yöntemine göre monte et", en: "Install temporary lifelines according to manufacturer instructions and the approved installation method" },
+      },
+      {
+        hazard: { tr: "Düşüş sonrası askıda kalma süresinin uzaması", en: "Prolonged suspension following a fall" },
+        consequence: { tr: "Suspension intolerance ve ciddi sağlık etkisi", en: "Suspension intolerance and serious health effects" },
+        personsAtRisk: {
+          tr: "Yüksekte çalışan personel ve alt seviyedeki çalışanlar",
+          en: "Personnel working at height and workers at lower levels"
+        },
+        existingControls: {
+          tr: "Yetkin personel, uygun erişim sistemi, düşüş koruma ekipmanı ve iş öncesi saha kontrolü",
+          en: "Competent personnel, suitable access systems, fall-protection equipment and pre-work area inspection"
+        },
+        additionalControls: { tr: "Çalışma başlamadan hızlı kurtarma planı, ekipmanı ve sorumlu kurtarma personelini hazırla", en: "Prepare a rapid rescue plan, rescue equipment and designated rescuers before work begins" },
+      },
+      {
+        hazard: { tr: "Kırılgan yüzeyin güvenli zannedilerek üzerine basılması", en: "Fragile surface incorrectly assumed to be load-bearing" },
+        consequence: { tr: "Yüzeyin kırılması sonucu yüksekten düşme", en: "Fall from height following failure of the fragile surface" },
+        personsAtRisk: {
+          tr: "Yüksekte çalışan personel ve alt seviyedeki çalışanlar",
+          en: "Personnel working at height and workers at lower levels"
+        },
+        existingControls: {
+          tr: "Yetkin personel, uygun erişim sistemi, düşüş koruma ekipmanı ve iş öncesi saha kontrolü",
+          en: "Competent personnel, suitable access systems, fall-protection equipment and pre-work area inspection"
+        },
+        additionalControls: { tr: "Kırılgan yüzeyleri önceden belirle, işaretle ve uygun çalışma platformu veya yürüyüş yolu kullan", en: "Identify and mark fragile surfaces and use suitable working platforms or walkways" },
+      },
+      {
+        hazard: { tr: "Düşüş koruma ekipmanının kimyasal veya sıcak yüzey nedeniyle hasar görmesi", en: "Fall-protection equipment damaged by chemicals or hot surfaces" },
+        consequence: { tr: "Lanyard veya harness bütünlüğünün bozulması sonucu düşme", en: "Fall resulting from loss of lanyard or harness integrity" },
+        personsAtRisk: {
+          tr: "Yüksekte çalışan personel ve alt seviyedeki çalışanlar",
+          en: "Personnel working at height and workers at lower levels"
+        },
+        existingControls: {
+          tr: "Yetkin personel, uygun erişim sistemi, düşüş koruma ekipmanı ve iş öncesi saha kontrolü",
+          en: "Competent personnel, suitable access systems, fall-protection equipment and pre-work area inspection"
+        },
+        additionalControls: { tr: "Düşüş koruma ekipmanını kimyasal, kıvılcım ve sıcak yüzeylerden koru ve maruziyet sonrası kontrol et", en: "Protect fall-protection equipment from chemicals, sparks and hot surfaces and inspect it after exposure" },
+      }
+    ],
   },
 
   {
@@ -1514,6 +1592,45 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         personsAtRisk: { tr: "Alt seviyedeki çalışanlar", en: "Personnel below" },
         existingControls: { tr: "Malzeme sabitleme ve alt alan izolasyonu", en: "Material securing and exclusion zone below" },
         additionalControls: { tr: "Alet tethering kullan ve çatı altındaki dışlama alanını koru", en: "Use tool tethering and maintain the exclusion zone below" },
+      },
+      {
+        hazard: { tr: "Çatı erişim noktasında kayma veya düşme", en: "Slip or fall at roof access point" },
+        consequence: { tr: "Çatıya erişen personelin düşerek yaralanması", en: "Personnel accessing the roof falling and being injured" },
+        personsAtRisk: {
+          tr: "Çatı çalışmasını gerçekleştiren personel ve alt seviyedeki çalışanlar",
+          en: "Roof workers and personnel at lower levels"
+        },
+        existingControls: {
+          tr: "Yetkili personel, güvenli erişim ve çalışma alanı kontrolü",
+          en: "Authorized personnel, safe access and work-area inspection"
+        },
+        additionalControls: { tr: "Çatı erişimini sabit, temiz ve güvenli tut", en: "Keep roof access stable, clear and safe" },
+      },
+      {
+        hazard: { tr: "Çatı üzerinde sabitlenmemiş malzeme bulunması", en: "Unsecured materials on the roof" },
+        consequence: { tr: "Malzemenin düşmesi ve alt seviyedeki personele çarpması", en: "Material falling and striking personnel below" },
+        personsAtRisk: {
+          tr: "Çatı çalışmasını gerçekleştiren personel ve alt seviyedeki çalışanlar",
+          en: "Roof workers and personnel at lower levels"
+        },
+        existingControls: {
+          tr: "Yetkili personel, güvenli erişim ve çalışma alanı kontrolü",
+          en: "Authorized personnel, safe access and work-area inspection"
+        },
+        additionalControls: { tr: "Çatıdaki malzeme ve ekipmanları düşmeye karşı sabitle", en: "Secure roof materials and equipment against falling" },
+      },
+      {
+        hazard: { tr: "Çatı çalışması sırasında olumsuz hava koşulları", en: "Adverse weather conditions during roof work" },
+        consequence: { tr: "Kayma, denge kaybı veya yüksekten düşme", en: "Slip, loss of balance or fall from height" },
+        personsAtRisk: {
+          tr: "Çatı çalışmasını gerçekleştiren personel ve alt seviyedeki çalışanlar",
+          en: "Roof workers and personnel at lower levels"
+        },
+        existingControls: {
+          tr: "Yetkili personel, güvenli erişim ve çalışma alanı kontrolü",
+          en: "Authorized personnel, safe access and work-area inspection"
+        },
+        additionalControls: { tr: "Şiddetli rüzgar, yağış veya yıldırım durumunda çalışmayı durdur", en: "Stop work during strong winds, precipitation or lightning" },
       }
     ],
   },
