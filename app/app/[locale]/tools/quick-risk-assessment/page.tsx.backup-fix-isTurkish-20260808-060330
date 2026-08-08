@@ -210,79 +210,6 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   /* SAFEBASE_RISK_LIBRARY_ALL_END */
 
   
-  
-
-/* SAFEBASE_RISK_LIBRARY_PACK01_STATE_START */
-
-  const [selectedLibraryActivity, setSelectedLibraryActivity] =
-    useState(riskLibraryAll[0]?.id ?? "");
-
-  const selectedLibraryTemplate = riskLibraryAll.find(
-    (template) => template.id === selectedLibraryActivity
-  );
-
-  const loadLibraryActivity = () => {
-    if (!selectedLibraryTemplate) return;
-
-    const lang = isTurkish ? "tr" : "en";
-
-    const selectedEntries = selectedLibraryTemplate.items.filter(
-      (_, index) => selectedLibraryRiskIndexes.includes(index)
-    );
-
-    if (selectedEntries.length === 0) return;
-
-    const generated: RiskRegisterItem[] =
-      selectedEntries.map((entry) => ({
-        ...createRiskItem(),
-
-        activity: selectedLibraryTemplate.activity[lang],
-        hazard: entry.hazard[lang],
-        consequence: entry.consequence[lang],
-        personsAtRisk: entry.personsAtRisk[lang],
-        existingControls: entry.existingControls[lang],
-        additionalControls: entry.additionalControls[lang],
-
-        // Site-specific risk scoring must be completed by the assessor.
-        likelihood: 1,
-        severity: 1,
-        residualLikelihood: 1,
-        residualSeverity: 1,
-      }));
-
-    setRiskItems((current) => {
-      const blank =
-        current.length === 1 &&
-        !current[0].activity &&
-        !current[0].hazard &&
-        !current[0].consequence &&
-        !current[0].existingControls;
-
-      return blank ? generated : [...current, ...generated];
-    });
-  };
-
-  /* SAFEBASE_RISK_LIBRARY_PACK01_STATE_END */
-
-
-
-
-  const [locale, setLocale] = useState<"tr" | "en">("en");
-  const [activity, setActivity] = useState("");
-  const [hazard, setHazard] = useState("");
-  const [existingControls, setExistingControls] = useState("");
-  const [likelihood, setLikelihood] = useState(1);
-  const [severity, setSeverity] = useState(1);
-  const [showResult, setShowResult] = useState(false);
-
-  useEffect(() => {
-    params.then(({ locale }) => {
-      setLocale(locale === "tr" ? "tr" : "en");
-    });
-  }, [params]);
-
-  const isTurkish = locale === "tr";
-
   /* SAFEBASE_LIBRARY_FILTER_STATE_START */
 
   const [librarySearch, setLibrarySearch] = useState("");
@@ -296,7 +223,7 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   const libraryCategories = Array.from(
     new Map(
       riskLibraryAll.map((item) => [
-        item.category.en,
+        isTurkish ? item.category.tr : item.category.en,
         item.category,
       ])
     ).values()
@@ -369,6 +296,76 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
 
   /* SAFEBASE_LIBRARY_FILTER_STATE_END */
 
+/* SAFEBASE_RISK_LIBRARY_PACK01_STATE_START */
+
+  const [selectedLibraryActivity, setSelectedLibraryActivity] =
+    useState(riskLibraryAll[0]?.id ?? "");
+
+  const selectedLibraryTemplate = riskLibraryAll.find(
+    (template) => template.id === selectedLibraryActivity
+  );
+
+  const loadLibraryActivity = () => {
+    if (!selectedLibraryTemplate) return;
+
+    const lang = isTurkish ? "tr" : "en";
+
+    const selectedEntries = selectedLibraryTemplate.items.filter(
+      (_, index) => selectedLibraryRiskIndexes.includes(index)
+    );
+
+    if (selectedEntries.length === 0) return;
+
+    const generated: RiskRegisterItem[] =
+      selectedEntries.map((entry) => ({
+        ...createRiskItem(),
+
+        activity: selectedLibraryTemplate.activity[lang],
+        hazard: entry.hazard[lang],
+        consequence: entry.consequence[lang],
+        personsAtRisk: entry.personsAtRisk[lang],
+        existingControls: entry.existingControls[lang],
+        additionalControls: entry.additionalControls[lang],
+
+        // Site-specific risk scoring must be completed by the assessor.
+        likelihood: 1,
+        severity: 1,
+        residualLikelihood: 1,
+        residualSeverity: 1,
+      }));
+
+    setRiskItems((current) => {
+      const blank =
+        current.length === 1 &&
+        !current[0].activity &&
+        !current[0].hazard &&
+        !current[0].consequence &&
+        !current[0].existingControls;
+
+      return blank ? generated : [...current, ...generated];
+    });
+  };
+
+  /* SAFEBASE_RISK_LIBRARY_PACK01_STATE_END */
+
+
+
+
+  const [locale, setLocale] = useState<"tr" | "en">("en");
+  const [activity, setActivity] = useState("");
+  const [hazard, setHazard] = useState("");
+  const [existingControls, setExistingControls] = useState("");
+  const [likelihood, setLikelihood] = useState(1);
+  const [severity, setSeverity] = useState(1);
+  const [showResult, setShowResult] = useState(false);
+
+  useEffect(() => {
+    params.then(({ locale }) => {
+      setLocale(locale === "tr" ? "tr" : "en");
+    });
+  }, [params]);
+
+  const isTurkish = locale === "tr";
   const score = likelihood * severity;
 
   const levelKey =
@@ -974,10 +971,7 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
                     : category.en;
 
                   return (
-                    <option
-                      key={`${category.en}-${category.tr}`}
-                      value={value}
-                    >
+                    <option key={value} value={value}>
                       {value}
                     </option>
                   );

@@ -209,10 +209,7 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   ];
   /* SAFEBASE_RISK_LIBRARY_ALL_END */
 
-  
-  
-
-/* SAFEBASE_RISK_LIBRARY_PACK01_STATE_START */
+  /* SAFEBASE_RISK_LIBRARY_PACK01_STATE_START */
 
   const [selectedLibraryActivity, setSelectedLibraryActivity] =
     useState(riskLibraryAll[0]?.id ?? "");
@@ -226,14 +223,8 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
 
     const lang = isTurkish ? "tr" : "en";
 
-    const selectedEntries = selectedLibraryTemplate.items.filter(
-      (_, index) => selectedLibraryRiskIndexes.includes(index)
-    );
-
-    if (selectedEntries.length === 0) return;
-
     const generated: RiskRegisterItem[] =
-      selectedEntries.map((entry) => ({
+      selectedLibraryTemplate.items.map((entry) => ({
         ...createRiskItem(),
 
         activity: selectedLibraryTemplate.activity[lang],
@@ -282,93 +273,6 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   }, [params]);
 
   const isTurkish = locale === "tr";
-
-  /* SAFEBASE_LIBRARY_FILTER_STATE_START */
-
-  const [librarySearch, setLibrarySearch] = useState("");
-  const [libraryCategory, setLibraryCategory] = useState("all");
-
-  const [selectedLibraryRiskIndexes, setSelectedLibraryRiskIndexes] =
-    useState<number[]>(
-      riskLibraryAll[0]?.items.map((_, index) => index) ?? []
-    );
-
-  const libraryCategories = Array.from(
-    new Map(
-      riskLibraryAll.map((item) => [
-        item.category.en,
-        item.category,
-      ])
-    ).values()
-  );
-
-  const filteredRiskLibrary = riskLibraryAll.filter((template) => {
-    const query = librarySearch.trim().toLocaleLowerCase(
-      isTurkish ? "tr-TR" : "en-US"
-    );
-
-    const activityName = (
-      isTurkish ? template.activity.tr : template.activity.en
-    ).toLocaleLowerCase(isTurkish ? "tr-TR" : "en-US");
-
-    const categoryName = (
-      isTurkish ? template.category.tr : template.category.en
-    ).toLocaleLowerCase(isTurkish ? "tr-TR" : "en-US");
-
-    const hazardText = template.items
-      .map((item) => (isTurkish ? item.hazard.tr : item.hazard.en))
-      .join(" ")
-      .toLocaleLowerCase(isTurkish ? "tr-TR" : "en-US");
-
-    const matchesSearch =
-      !query ||
-      activityName.includes(query) ||
-      categoryName.includes(query) ||
-      hazardText.includes(query);
-
-    const matchesCategory =
-      libraryCategory === "all" ||
-      (isTurkish
-        ? template.category.tr
-        : template.category.en) === libraryCategory;
-
-    return matchesSearch && matchesCategory;
-  });
-
-  const selectLibraryActivity = (activityId: string) => {
-    setSelectedLibraryActivity(activityId);
-
-    const template = riskLibraryAll.find(
-      (item) => item.id === activityId
-    );
-
-    setSelectedLibraryRiskIndexes(
-      template?.items.map((_, index) => index) ?? []
-    );
-  };
-
-  const toggleLibraryRisk = (index: number) => {
-    setSelectedLibraryRiskIndexes((current) =>
-      current.includes(index)
-        ? current.filter((item) => item !== index)
-        : [...current, index].sort((a, b) => a - b)
-    );
-  };
-
-  const selectAllLibraryRisks = () => {
-    if (!selectedLibraryTemplate) return;
-
-    setSelectedLibraryRiskIndexes(
-      selectedLibraryTemplate.items.map((_, index) => index)
-    );
-  };
-
-  const clearLibraryRiskSelection = () => {
-    setSelectedLibraryRiskIndexes([]);
-  };
-
-  /* SAFEBASE_LIBRARY_FILTER_STATE_END */
-
   const score = likelihood * severity;
 
   const levelKey =
@@ -925,156 +829,43 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
           </div>
         </div>
 
-        <div className="space-y-5 p-6">
+        <div className="grid gap-5 p-6 lg:grid-cols-[1fr_auto]">
 
-          {/* SEARCH + CATEGORY */}
-          <div className="grid gap-4 lg:grid-cols-[1fr_320px]">
+          <label>
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Hazır Faaliyet Seç" : "Select Ready Activity"}
+            </span>
 
-            <label>
-              <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
-                {isTurkish ? "Kütüphanede Ara" : "Search Library"}
-              </span>
-
-              <div className="relative">
-                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
-                  🔎
-                </span>
-
-                <input
-                  type="text"
-                  value={librarySearch}
-                  onChange={(e) => setLibrarySearch(e.target.value)}
-                  placeholder={
-                    isTurkish
-                      ? "Faaliyet, kategori veya tehlike ara..."
-                      : "Search activity, category or hazard..."
-                  }
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900 py-4 pl-11 pr-4 text-sm font-semibold text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500"
-                />
-              </div>
-            </label>
-
-            <label>
-              <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
-                {isTurkish ? "Kategori" : "Category"}
-              </span>
-
-              <select
-                value={libraryCategory}
-                onChange={(e) => setLibraryCategory(e.target.value)}
-                className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-4 text-sm font-bold text-white outline-none transition focus:border-blue-500"
-              >
-                <option value="all">
-                  {isTurkish ? "Tüm Kategoriler" : "All Categories"}
-                </option>
-
-                {libraryCategories.map((category) => {
-                  const value = isTurkish
-                    ? category.tr
-                    : category.en;
-
-                  return (
-                    <option
-                      key={`${category.en}-${category.tr}`}
-                      value={value}
-                    >
-                      {value}
-                    </option>
-                  );
-                })}
-              </select>
-            </label>
-
-          </div>
-
-          {/* RESULT COUNT */}
-          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3">
-
-            <p className="text-sm font-bold text-slate-400">
-              <span className="font-black text-white">
-                {filteredRiskLibrary.length}
-              </span>{" "}
-              {isTurkish
-                ? "faaliyet bulundu"
-                : "activities found"}
-            </p>
-
-            {(librarySearch || libraryCategory !== "all") && (
-              <button
-                type="button"
-                onClick={() => {
-                  setLibrarySearch("");
-                  setLibraryCategory("all");
-                }}
-                className="text-xs font-black text-blue-400 transition hover:text-blue-300"
-              >
-                ✕ {isTurkish ? "Filtreleri Temizle" : "Clear Filters"}
-              </button>
-            )}
-
-          </div>
-
-          {/* ACTIVITY SELECT + LOAD */}
-          <div className="grid gap-5 lg:grid-cols-[1fr_auto]">
-
-            <label>
-              <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
-                {isTurkish ? "Hazır Faaliyet Seç" : "Select Ready Activity"}
-              </span>
-
-              <select
-                value={
-                  filteredRiskLibrary.some(
-                    (template) =>
-                      template.id === selectedLibraryActivity
-                  )
-                    ? selectedLibraryActivity
-                    : ""
-                }
-                onChange={(e) =>
-                  selectLibraryActivity(e.target.value)
-                }
-                className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-4 text-sm font-bold text-white outline-none transition focus:border-blue-500"
-              >
-                <option value="" disabled>
-                  {filteredRiskLibrary.length
-                    ? isTurkish
-                      ? "Faaliyet seç..."
-                      : "Select activity..."
-                    : isTurkish
-                    ? "Sonuç bulunamadı"
-                    : "No results found"}
-                </option>
-
-                {filteredRiskLibrary.map((template) => (
-                  <option key={template.id} value={template.id}>
-                    {isTurkish
-                      ? template.activity.tr
-                      : template.activity.en}
-                    {" — "}
-                    {template.items.length}
-                    {isTurkish ? " risk" : " risk items"}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <button
-              type="button"
-              onClick={loadLibraryActivity}
-              disabled={
-                !selectedLibraryTemplate ||
-                selectedLibraryRiskIndexes.length === 0
+            <select
+              value={selectedLibraryActivity}
+              onChange={(e) =>
+                setSelectedLibraryActivity(e.target.value)
               }
-              className="self-end rounded-xl bg-blue-500 px-6 py-4 text-sm font-black text-white transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-40"
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-4 text-sm font-bold text-white outline-none transition focus:border-blue-500"
             >
-              ⚡{" "}
-              {isTurkish
-                ? `${selectedLibraryRiskIndexes.length} Riski Analize Aktar`
-                : `Load ${selectedLibraryRiskIndexes.length} Risks`}
-            </button>
+              {riskLibraryAll.map((template) => (
+                <option key={template.id} value={template.id}>
+                  {isTurkish
+                    ? template.activity.tr
+                    : template.activity.en}
+                  {" — "}
+                  {template.items.length}
+                  {isTurkish ? " risk" : " risk items"}
+                </option>
+              ))}
+            </select>
+          </label>
 
-          </div>
+          <button
+            type="button"
+            onClick={loadLibraryActivity}
+            className="self-end rounded-xl bg-blue-500 px-6 py-4 text-sm font-black text-white transition hover:bg-blue-400"
+          >
+            ⚡{" "}
+            {isTurkish
+              ? "Risk Analizine Aktar"
+              : "Load into Assessment"}
+          </button>
 
         </div>
 
@@ -1085,89 +876,16 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
               {isTurkish ? "Bu şablondaki riskler" : "Risks in this template"}
             </p>
 
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-
-              <p className="text-sm font-bold text-slate-400">
-                <span className="font-black text-blue-300">
-                  {selectedLibraryRiskIndexes.length}
+            <div className="mt-3 flex flex-wrap gap-2">
+              {selectedLibraryTemplate.items.map((entry, index) => (
+                <span
+                  key={`${selectedLibraryTemplate.id}-${index}`}
+                  className="rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-xs font-bold text-slate-300"
+                >
+                  {String(index + 1).padStart(2, "0")} •{" "}
+                  {isTurkish ? entry.hazard.tr : entry.hazard.en}
                 </span>
-                {" / "}
-                {selectedLibraryTemplate.items.length}{" "}
-                {isTurkish ? "risk seçili" : "risks selected"}
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  onClick={selectAllLibraryRisks}
-                  className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 px-3 py-2 text-xs font-black text-emerald-300 transition hover:bg-emerald-500/10"
-                >
-                  ✓ {isTurkish ? "Tümünü Seç" : "Select All"}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={clearLibraryRiskSelection}
-                  className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-xs font-black text-slate-400 transition hover:text-white"
-                >
-                  ✕ {isTurkish ? "Seçimi Temizle" : "Clear Selection"}
-                </button>
-              </div>
-
-            </div>
-
-            <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-
-              {selectedLibraryTemplate.items.map((entry, index) => {
-                const selected =
-                  selectedLibraryRiskIndexes.includes(index);
-
-                return (
-                  <button
-                    key={`${selectedLibraryTemplate.id}-${index}`}
-                    type="button"
-                    onClick={() => toggleLibraryRisk(index)}
-                    className={`group flex items-start gap-3 rounded-xl border p-4 text-left transition ${
-                      selected
-                        ? "border-blue-500/50 bg-blue-500/10"
-                        : "border-slate-800 bg-slate-900/70 hover:border-slate-700"
-                    }`}
-                  >
-                    <span
-                      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border text-[11px] font-black ${
-                        selected
-                          ? "border-blue-400 bg-blue-500 text-white"
-                          : "border-slate-600 bg-slate-950 text-transparent"
-                      }`}
-                    >
-                      ✓
-                    </span>
-
-                    <div>
-                      <p
-                        className={`text-sm font-black ${
-                          selected
-                            ? "text-white"
-                            : "text-slate-300"
-                        }`}
-                      >
-                        {String(index + 1).padStart(2, "0")} •{" "}
-                        {isTurkish
-                          ? entry.hazard.tr
-                          : entry.hazard.en}
-                      </p>
-
-                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500">
-                        {isTurkish
-                          ? entry.consequence.tr
-                          : entry.consequence.en}
-                      </p>
-                    </div>
-
-                  </button>
-                );
-              })}
-
+              ))}
             </div>
 
             <div className="mt-5 rounded-xl border border-amber-500/20 bg-amber-500/5 px-4 py-3">

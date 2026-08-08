@@ -974,10 +974,7 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
                     : category.en;
 
                   return (
-                    <option
-                      key={`${category.en}-${category.tr}`}
-                      value={value}
-                    >
+                    <option key={value} value={value}>
                       {value}
                     </option>
                   );
