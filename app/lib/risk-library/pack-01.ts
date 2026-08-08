@@ -45,6 +45,29 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Korkuluk, güvenli kapak, bariyer ve uyarı işaretleri", en: "Guardrails, secure covers, barricades and warning signs" },
         additionalControls: { tr: "Koruyucuların vardiya boyunca yerinde olduğunu doğrula", en: "Verify protection remains secure throughout the shift" },
       },
+      // EXPANSION::working-at-height
+{
+        hazard: { tr: "Uygun olmayan ankraj noktası", en: "Unsuitable anchorage point" },
+        consequence: { tr: "Düşüş koruma sisteminin başarısız olması ve ölüm", en: "Failure of fall-protection system and fatality" },
+        personsAtRisk: { tr: "Yüksekte çalışan personel", en: "Personnel working at height" },
+        existingControls: { tr: "Onaylı ankraj noktası ve uygun bağlantı sistemi", en: "Approved anchorage and suitable connection system" },
+        additionalControls: { tr: "Ankraj kapasitesini ve uygunluğunu işe başlamadan doğrula", en: "Verify anchorage suitability and capacity before work" },
+      },
+      {
+        hazard: { tr: "Askıda kalma travması", en: "Suspension trauma" },
+        consequence: { tr: "Bilinç kaybı, ciddi sağlık etkisi veya ölüm", en: "Loss of consciousness, serious health effects or fatality" },
+        personsAtRisk: { tr: "Düşüş durdurma sisteminde askıda kalan çalışan", en: "Worker suspended in a fall-arrest system" },
+        existingControls: { tr: "Kurtarma planı ve uygun kurtarma ekipmanı", en: "Rescue plan and suitable rescue equipment" },
+        additionalControls: { tr: "Kurtarma süresini azaltmak için işe özel plan ve tatbikat uygula", en: "Use a task-specific rescue plan and drills to minimize rescue time" },
+      },
+      {
+        hazard: { tr: "Yetersiz aydınlatma", en: "Insufficient lighting" },
+        consequence: { tr: "Yanlış adım, denge kaybı ve düşme", en: "Misstep, loss of balance and fall" },
+        personsAtRisk: { tr: "Yüksekte çalışanlar", en: "Workers at height" },
+        existingControls: { tr: "Uygun sabit veya geçici aydınlatma", en: "Suitable permanent or temporary lighting" },
+        additionalControls: { tr: "Çalışma ve erişim yollarının yeterli aydınlatıldığını doğrula", en: "Verify adequate lighting of work and access routes" },
+      }
+
     ],
   },
 
@@ -74,6 +97,29 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Zemin kontrolü, base plate, sole board, brace ve tie sistemi", en: "Ground assessment, base plates, sole boards, bracing and ties" },
         additionalControls: { tr: "Teslim öncesi yetkin kişi kontrolü yap", en: "Complete competent-person inspection before handover" },
       },
+      // EXPANSION::scaffold-erection
+{
+        hazard: { tr: "Elektrik hattına yakın iskele kurulumu", en: "Scaffold erection near electrical lines" },
+        consequence: { tr: "Elektrik çarpması veya ölüm", en: "Electric shock or fatality" },
+        personsAtRisk: { tr: "İskele kurulum ekibi", en: "Scaffold erection crew" },
+        existingControls: { tr: "Enerji hattı tespiti ve güvenli yaklaşma mesafesi", en: "Power-line identification and safe clearance" },
+        additionalControls: { tr: "Kurulum başlamadan elektrik tehlikesini plan üzerinde doğrula", en: "Verify electrical hazards in the erection plan before starting" },
+      },
+      {
+        hazard: { tr: "Elle ağır iskele parçası taşıma", en: "Manual handling of heavy scaffold components" },
+        consequence: { tr: "Kas-iskelet yaralanması", en: "Musculoskeletal injury" },
+        personsAtRisk: { tr: "İskele çalışanları", en: "Scaffold workers" },
+        existingControls: { tr: "Ekip kaldırma ve uygun taşıma yöntemi", en: "Team lifting and suitable handling method" },
+        additionalControls: { tr: "Ağır veya uzun parçalar için mekanik yardım kullan", en: "Use mechanical assistance for heavy or long components" },
+      },
+      {
+        hazard: { tr: "Kurulum alanında trafik veya mobil ekipman", en: "Vehicle or mobile-equipment movement in erection area" },
+        consequence: { tr: "Çarpışma veya iskele stabilitesinin bozulması", en: "Collision or scaffold instability" },
+        personsAtRisk: { tr: "İskele ekibi ve araç operatörleri", en: "Scaffold crew and vehicle operators" },
+        existingControls: { tr: "Bariyer ve trafik ayrımı", en: "Barricading and traffic segregation" },
+        additionalControls: { tr: "Kurulum süresince araç yaklaşmasını fiziksel olarak sınırla", en: "Physically restrict vehicle approach during erection" },
+      }
+
     ],
   },
 
@@ -103,6 +149,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Güvenli erişim merdiveni ve trapdoor kontrolü", en: "Safe access ladder and trapdoor control" },
         additionalControls: { tr: "Erişim noktalarını günlük saha turunda kontrol et", en: "Verify access points during daily site inspections" },
       },
+      // SAFEBASE_PACK02::scaffold-inspection
+      {
+        hazard: { tr: "İskele etiketinin yanlış veya güncel olmaması", en: "Incorrect or outdated scaffold tag" },
+        consequence: { tr: "Güvensiz iskelenin kullanılması ve düşme", en: "Use of unsafe scaffold and potential fall" },
+        personsAtRisk: { tr: "İskele kullanıcıları", en: "Scaffold users" },
+        existingControls: { tr: "Etiketleme sistemi ve yetkin kişi kontrolü", en: "Tagging system and competent-person inspection" },
+        additionalControls: { tr: "Etiket tarihini ve iskele durumunu kullanım öncesi doğrula", en: "Verify tag date and scaffold status before use" },
+      },
+      {
+        hazard: { tr: "Platformda aşırı yükleme", en: "Scaffold platform overloading" },
+        consequence: { tr: "Platform arızası veya iskele stabilitesinin kaybı", en: "Platform failure or loss of scaffold stability" },
+        personsAtRisk: { tr: "İskele kullanıcıları", en: "Scaffold users" },
+        existingControls: { tr: "Yük sınıfı ve kapasite kontrolü", en: "Load-class and capacity control" },
+        additionalControls: { tr: "Malzeme istifini ve çalışan sayısını tasarım kapasitesine göre kontrol et", en: "Control stored materials and personnel against design capacity" },
+      },
+      {
+        hazard: { tr: "Eksik toe board veya düşen cisim koruması", en: "Missing toe board or falling-object protection" },
+        consequence: { tr: "Alt seviyedeki personelin düşen cisimle yaralanması", en: "Injury to personnel below from falling objects" },
+        personsAtRisk: { tr: "Alt seviyedeki çalışanlar", en: "Personnel below" },
+        existingControls: { tr: "Toe board, bariyer ve alt alan kontrolü", en: "Toe boards, barricades and area-below control" },
+        additionalControls: { tr: "Düşen cisim riskinin olduğu seviyelerde korumaları tamamla", en: "Complete falling-object protection where exposure exists" },
+      }
     ],
   },
 
@@ -132,6 +200,29 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Uygun havalandırma ve maruziyet kontrolü", en: "Suitable ventilation and exposure controls" },
         additionalControls: { tr: "Gerekirse lokal emiş veya uygun solunum koruması uygula", en: "Use local extraction or suitable respiratory protection where required" },
       },
+      // EXPANSION::hot-work
+{
+        hazard: { tr: "Yakındaki kapalı hacimlere kıvılcım geçişi", en: "Spark travel into adjacent enclosed areas" },
+        consequence: { tr: "Gizli yangın veya patlama", en: "Hidden fire or explosion" },
+        personsAtRisk: { tr: "Yakın alan çalışanları", en: "Nearby personnel" },
+        existingControls: { tr: "Kıvılcım yollarının kontrolü ve fire watch", en: "Spark-path control and fire watch" },
+        additionalControls: { tr: "Duvar, açıklık ve alt seviyelerde gizli kıvılcım geçişini kontrol et", en: "Check hidden spark paths through openings, walls and lower levels" },
+      },
+      {
+        hazard: { tr: "Sıcak yüzey teması", en: "Contact with hot surfaces" },
+        consequence: { tr: "Cilt yanıkları", en: "Skin burns" },
+        personsAtRisk: { tr: "Sıcak çalışma ekibi", en: "Hot-work crew" },
+        existingControls: { tr: "Uygun eldiven ve sıcak yüzey kontrolü", en: "Suitable gloves and hot-surface control" },
+        additionalControls: { tr: "Sıcak parçaları işaretle veya güvenli alanda soğumaya bırak", en: "Mark hot components or allow them to cool in a controlled area" },
+      },
+      {
+        hazard: { tr: "Yangın söndürme ekipmanının yetersizliği", en: "Inadequate firefighting equipment" },
+        consequence: { tr: "Yangının kontrol altına alınamaması", en: "Failure to control a developing fire" },
+        personsAtRisk: { tr: "Çalışma alanındaki tüm personel", en: "All personnel in work area" },
+        existingControls: { tr: "Uygun tipte yangın söndürücü", en: "Suitable type of fire extinguisher" },
+        additionalControls: { tr: "İşe başlamadan önce söndürücü tipini, durumunu ve erişilebilirliğini doğrula", en: "Verify extinguisher type, condition and accessibility before work" },
+      }
+
     ],
   },
 
@@ -161,6 +252,29 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Kurtarma planı, gözcü ve uygun kurtarma ekipmanı", en: "Rescue plan, attendant and suitable rescue equipment" },
         additionalControls: { tr: "İşe özel kurtarma yöntemini giriş öncesi doğrula", en: "Verify the task-specific rescue method before entry" },
       },
+      // EXPANSION::confined-space
+{
+        hazard: { tr: "Sıvı veya katı malzeme ile boğulma", en: "Engulfment by liquid or solid material" },
+        consequence: { tr: "Boğulma veya ölüm", en: "Suffocation or fatality" },
+        personsAtRisk: { tr: "Kapalı alan çalışanları", en: "Confined-space workers" },
+        existingControls: { tr: "Pozitif proses izolasyonu", en: "Positive process isolation" },
+        additionalControls: { tr: "Giriş öncesi tüm giriş hatlarını fiziksel olarak doğrula", en: "Physically verify all incoming lines before entry" },
+      },
+      {
+        hazard: { tr: "Aşırı sıcaklık", en: "Extreme temperature" },
+        consequence: { tr: "Isı stresi, bilinç kaybı", en: "Heat stress or loss of consciousness" },
+        personsAtRisk: { tr: "Kapalı alan giriş personeli", en: "Confined-space entrants" },
+        existingControls: { tr: "Havalandırma ve çalışma süresi kontrolü", en: "Ventilation and work-duration control" },
+        additionalControls: { tr: "Sıcaklık ve iş yüküne göre çalışma/mola düzeni belirle", en: "Set work/rest arrangements based on temperature and workload" },
+      },
+      {
+        hazard: { tr: "Yetersiz iç aydınlatma", en: "Inadequate internal lighting" },
+        consequence: { tr: "Takılma, düşme veya iş hatası", en: "Trips, falls or task errors" },
+        personsAtRisk: { tr: "Kapalı alan çalışanları", en: "Confined-space workers" },
+        existingControls: { tr: "Uygun düşük voltajlı veya alan sınıfına uygun aydınlatma", en: "Suitable low-voltage or area-rated lighting" },
+        additionalControls: { tr: "Aydınlatma ekipmanının alan koşullarına uygunluğunu doğrula", en: "Verify lighting is suitable for the area conditions" },
+      }
+
     ],
   },
 
@@ -190,6 +304,29 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Bariyer, güvenli geçiş ve aydınlatma", en: "Barricades, safe crossings and lighting" },
         additionalControls: { tr: "Yoğun alanlarda sağlam fiziksel koruma kullan", en: "Use robust physical protection in high-traffic areas" },
       },
+      // EXPANSION::excavation
+{
+        hazard: { tr: "Kazıda su birikmesi", en: "Water accumulation in excavation" },
+        consequence: { tr: "Göçme, kayma veya boğulma", en: "Collapse, slip or drowning" },
+        personsAtRisk: { tr: "Kazı içindeki çalışanlar", en: "Workers inside excavation" },
+        existingControls: { tr: "Su kontrolü ve pompalama", en: "Water control and pumping" },
+        additionalControls: { tr: "Su girişi devam ediyorsa işi durdur ve stabiliteyi yeniden değerlendir", en: "Stop work and reassess stability if water ingress continues" },
+      },
+      {
+        hazard: { tr: "Araçların kazı kenarına yaklaşması", en: "Vehicles approaching excavation edge" },
+        consequence: { tr: "Kenar çökmesi veya aracın kazıya düşmesi", en: "Edge collapse or vehicle falling into excavation" },
+        personsAtRisk: { tr: "Operatörler ve kazı çalışanları", en: "Operators and excavation workers" },
+        existingControls: { tr: "Araç bariyeri ve güvenli mesafe", en: "Vehicle barriers and safe stand-off distance" },
+        additionalControls: { tr: "Ağır araç yaklaşma sınırını saha planında işaretle", en: "Mark heavy-vehicle approach limits in the site plan" },
+      },
+      {
+        hazard: { tr: "Kazı atmosferinde tehlikeli gaz", en: "Hazardous atmosphere in excavation" },
+        consequence: { tr: "Zehirlenme veya oksijen yetersizliği", en: "Poisoning or oxygen deficiency" },
+        personsAtRisk: { tr: "Derin veya kapalı karakterli kazıda çalışanlar", en: "Workers in deep or enclosed excavations" },
+        existingControls: { tr: "Gerekli durumlarda gaz ölçümü", en: "Gas testing where required" },
+        additionalControls: { tr: "Proses hattı veya gaz riski bulunan alanlarda atmosfer ölçüm kriteri belirle", en: "Define atmospheric-testing criteria where process or gas hazards may exist" },
+      }
+
     ],
   },
 
@@ -219,6 +356,29 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Kullanım öncesi kontrol ve kusurlu ekipmanı hizmet dışı bırakma", en: "Pre-use inspection and removal of defective equipment from service" },
         additionalControls: { tr: "Geçici onarım kullanımını engelle", en: "Prevent use of temporary repairs" },
       },
+      // EXPANSION::electrical-maintenance
+{
+        hazard: { tr: "Yanlış devre üzerinde çalışma", en: "Working on the wrong circuit" },
+        consequence: { tr: "Elektrik çarpması veya arc flash", en: "Electric shock or arc flash" },
+        personsAtRisk: { tr: "Elektrik personeli", en: "Electrical personnel" },
+        existingControls: { tr: "Devre kimliği ve çizim kontrolü", en: "Circuit identification and drawing verification" },
+        additionalControls: { tr: "Test-before-touch yöntemiyle doğru devre ve enerjisizliği doğrula", en: "Verify correct circuit and de-energized condition using test-before-touch" },
+      },
+      {
+        hazard: { tr: "Uygun olmayan test cihazı", en: "Unsuitable test instrument" },
+        consequence: { tr: "Yanlış ölçüm veya elektrik yaralanması", en: "Incorrect reading or electrical injury" },
+        personsAtRisk: { tr: "Elektrik çalışanları", en: "Electrical workers" },
+        existingControls: { tr: "Göreve uygun ve kontrol edilmiş ölçüm cihazı", en: "Task-appropriate and inspected test instrument" },
+        additionalControls: { tr: "Cihaz kategori ve voltaj sınıfını devreye göre doğrula", en: "Verify meter category and voltage rating against the circuit" },
+      },
+      {
+        hazard: { tr: "Elektrik panosu önünde yetersiz çalışma alanı", en: "Insufficient working clearance at electrical panel" },
+        consequence: { tr: "Kaçışın zorlaşması veya elektrik temas riski", en: "Restricted escape or increased electrical-contact risk" },
+        personsAtRisk: { tr: "Elektrik personeli", en: "Electrical personnel" },
+        existingControls: { tr: "Panel önünün açık tutulması", en: "Maintaining clear panel access" },
+        additionalControls: { tr: "Çalışma öncesi güvenli yaklaşma ve kaçış alanını doğrula", en: "Verify safe approach and escape clearance before work" },
+      }
+
     ],
   },
 
@@ -248,6 +408,29 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Ekipman kimliği, çizim ve saha doğrulaması", en: "Equipment identification, drawings and field verification" },
         additionalControls: { tr: "Kritik izolasyonda bağımsız ikinci kontrol uygula", en: "Use independent second verification for critical isolations" },
       },
+      // EXPANSION::loto
+{
+        hazard: { tr: "Vardiya değişiminde kilit transfer hatası", en: "Lock-transfer failure during shift change" },
+        consequence: { tr: "Yetkisiz enerjilendirme", en: "Unauthorized re-energization" },
+        personsAtRisk: { tr: "İzolasyon altında çalışan personel", en: "Personnel working under isolation" },
+        existingControls: { tr: "Vardiya değişim prosedürü", en: "Shift-change procedure" },
+        additionalControls: { tr: "Kilit devrini yazılı ve yüz yüze doğrulamayla yönet", en: "Manage lock transfer through documented and face-to-face verification" },
+      },
+      {
+        hazard: { tr: "Birden fazla ekip için grup izolasyon hatası", en: "Group-isolation failure for multiple crews" },
+        consequence: { tr: "Ekiplerden biri çalışırken sistemin enerjilenmesi", en: "System energization while another crew is still working" },
+        personsAtRisk: { tr: "Tüm bakım ekipleri", en: "All maintenance crews" },
+        existingControls: { tr: "Group lockbox sistemi", en: "Group lockbox system" },
+        additionalControls: { tr: "Her çalışanın kişisel kilidinin grup izolasyonunda mevcut olduğunu doğrula", en: "Verify every worker's personal lock is applied to the group isolation" },
+      },
+      {
+        hazard: { tr: "Kontrol enerjisinin izole edilmemesi", en: "Failure to isolate control energy" },
+        consequence: { tr: "Beklenmeyen ekipman aktivasyonu", en: "Unexpected equipment activation" },
+        personsAtRisk: { tr: "Bakım çalışanları", en: "Maintenance workers" },
+        existingControls: { tr: "Elektrik, pnömatik, hidrolik ve mekanik enerji kontrolü", en: "Control of electrical, pneumatic, hydraulic and mechanical energy" },
+        additionalControls: { tr: "Ana enerji dışında tüm yardımcı ve kontrol enerjilerini checklist ile doğrula", en: "Verify all auxiliary and control energies using a checklist" },
+      }
+
     ],
   },
 
@@ -277,6 +460,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Dengeli yük, kapasite kontrolü ve güvenli taşıma yüksekliği", en: "Stable load, capacity verification and safe travel height" },
         additionalControls: { tr: "Dengesiz yükü taşımaya başlama", en: "Do not move unstable loads" },
       },
+      // SAFEBASE_PACK02::forklift-operation
+      {
+        hazard: { tr: "Kör noktada görüş kaybı", en: "Restricted visibility at blind spots" },
+        consequence: { tr: "Yaya veya ekipmanla çarpışma", en: "Collision with pedestrians or equipment" },
+        personsAtRisk: { tr: "Yayalar ve operatör", en: "Pedestrians and operator" },
+        existingControls: { tr: "Korna, hız kontrolü ve belirlenmiş trafik yolları", en: "Horn, speed control and designated traffic routes" },
+        additionalControls: { tr: "Kritik kör noktalarda ayna, spotter veya fiziksel ayrım kullan", en: "Use mirrors, spotters or physical separation at critical blind spots" },
+      },
+      {
+        hazard: { tr: "Forkların yüksek konumda taşınması", en: "Travelling with forks elevated" },
+        consequence: { tr: "Devrilme veya personele çarpma", en: "Overturn or impact with personnel" },
+        personsAtRisk: { tr: "Operatör ve yakın çalışanlar", en: "Operator and nearby personnel" },
+        existingControls: { tr: "Güvenli seyir yüksekliği ve operatör eğitimi", en: "Safe travelling height and operator training" },
+        additionalControls: { tr: "Seyir sırasında forkları üreticiye uygun düşük konumda tut", en: "Keep forks in the manufacturer-recommended low travel position" },
+      },
+      {
+        hazard: { tr: "Şarj veya yakıt ikmali sırasında yangın", en: "Fire during charging or refueling" },
+        consequence: { tr: "Yanık, yangın veya ekipman hasarı", en: "Burns, fire or equipment damage" },
+        personsAtRisk: { tr: "Operatör ve bakım personeli", en: "Operator and maintenance personnel" },
+        existingControls: { tr: "Belirlenmiş şarj veya yakıt ikmal alanı", en: "Designated charging or refueling area" },
+        additionalControls: { tr: "Ateş kaynaklarını uzaklaştır ve uygun havalandırmayı doğrula", en: "Remove ignition sources and verify suitable ventilation" },
+      }
     ],
   },
 
@@ -306,6 +511,29 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Hat tespiti, mesafe kontrolü ve işaretçi", en: "Power-line identification, clearance control and signal person" },
         additionalControls: { tr: "Güvenli yaklaşma mesafesini saha planında doğrula", en: "Verify safe clearance in the site lift plan" },
       },
+      // EXPANSION::mobile-crane
+{
+        hazard: { tr: "Rüzgar nedeniyle yük kontrolünün kaybı", en: "Loss of load control due to wind" },
+        consequence: { tr: "Yük salınımı, çarpma veya devrilme", en: "Load swing, impact or overturn" },
+        personsAtRisk: { tr: "Kaldırma ekibi ve çevre personeli", en: "Lifting team and nearby personnel" },
+        existingControls: { tr: "Rüzgar takibi ve üretici limitleri", en: "Wind monitoring and manufacturer limits" },
+        additionalControls: { tr: "Rüzgar limiti aşıldığında kaldırmayı durdur", en: "Stop lifting when wind limits are exceeded" },
+      },
+      {
+        hazard: { tr: "Outrigger altında zemin çökmesi", en: "Ground failure beneath outrigger" },
+        consequence: { tr: "Vinç devrilmesi", en: "Crane overturn" },
+        personsAtRisk: { tr: "Operatör ve kaldırma ekibi", en: "Operator and lifting team" },
+        existingControls: { tr: "Zemin değerlendirmesi ve uygun outrigger mat", en: "Ground assessment and suitable outrigger mats" },
+        additionalControls: { tr: "Yeraltı boşlukları ve zemin taşıma kapasitesini kritik kaldırmalarda doğrula", en: "Verify underground voids and ground-bearing capacity for critical lifts" },
+      },
+      {
+        hazard: { tr: "İletişim kaybı", en: "Communication failure" },
+        consequence: { tr: "Kontrolsüz vinç veya yük hareketi", en: "Uncontrolled crane or load movement" },
+        personsAtRisk: { tr: "Kaldırma ekibi", en: "Lifting team" },
+        existingControls: { tr: "Belirlenmiş işaretçi ve radyo iletişimi gerektiğinde", en: "Designated signal person and radio communication where required" },
+        additionalControls: { tr: "İletişim belirsiz veya kesilmişse tüm hareketi durdur", en: "Stop all movement if communication is unclear or lost" },
+      }
+
     ],
   },
 
@@ -335,6 +563,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Yük ağırlığı ve tüm kaldırma bileşenlerinin kapasite doğrulaması", en: "Verification of load weight and all lifting-component capacities" },
         additionalControls: { tr: "Şüpheli ağırlıkları kaldırma öncesi doğrula", en: "Verify uncertain load weights before lifting" },
       },
+      // PACK01_BATCH::lifting-operations
+      {
+        hazard: { tr: "Askı ekipmanının yanlış seçilmesi", en: "Incorrect selection of lifting accessory" },
+        consequence: { tr: "Askı ekipmanı arızası ve yük düşmesi", en: "Lifting accessory failure and dropped load" },
+        personsAtRisk: { tr: "Kaldırma ekibi ve çevredeki çalışanlar", en: "Lifting team and nearby personnel" },
+        existingControls: { tr: "Yüke uygun sapan, mapa ve aksesuar seçimi", en: "Selection of slings, shackles and accessories suitable for the load" },
+        additionalControls: { tr: "SWL/WLL, açı ve yük geometrisini kaldırma öncesi doğrula", en: "Verify SWL/WLL, sling angles and load geometry before lifting" },
+      },
+      {
+        hazard: { tr: "Personelin askıdaki yük altında bulunması", en: "Personnel beneath suspended load" },
+        consequence: { tr: "Ezilme, ciddi yaralanma veya ölüm", en: "Crushing, serious injury or fatality" },
+        personsAtRisk: { tr: "Tüm saha personeli", en: "All site personnel" },
+        existingControls: { tr: "Dışlama alanı ve kaldırma gözetimi", en: "Exclusion zone and lifting supervision" },
+        additionalControls: { tr: "Askıdaki yük altında ve yük hareket hattında personel bulunmasını engelle", en: "Prevent personnel from entering beneath suspended loads or the load path" },
+      },
+      {
+        hazard: { tr: "Tag line kontrolünün kaybedilmesi", en: "Loss of tag-line control" },
+        consequence: { tr: "Yükün dönmesi veya personele çarpması", en: "Load rotation or impact with personnel" },
+        personsAtRisk: { tr: "Rigging ekibi", en: "Rigging crew" },
+        existingControls: { tr: "Uygun tag line ve kontrollü yönlendirme", en: "Suitable tag lines and controlled load guidance" },
+        additionalControls: { tr: "Tag line kullanımının ek risk oluşturduğu durumları kaldırma öncesi değerlendir", en: "Assess whether tag-line use introduces additional hazards before lifting" },
+      }
     ],
   },
 
@@ -364,6 +614,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Dönüş alanı kontrolü ve bariyerleme", en: "Swing-radius control and barricading" },
         additionalControls: { tr: "İşaretçi pozisyonunu hareket öncesi doğrula", en: "Verify signal-person position before movement" },
       },
+      // PACK01_BATCH::banksman
+      {
+        hazard: { tr: "Operatör ile banksman arasında iletişim kaybı", en: "Loss of communication between operator and banksman" },
+        consequence: { tr: "Kontrolsüz araç hareketi veya çarpışma", en: "Uncontrolled vehicle movement or collision" },
+        personsAtRisk: { tr: "Banksman, operatör ve yayalar", en: "Banksman, operator and pedestrians" },
+        existingControls: { tr: "Standart el işaretleri ve gerektiğinde radyo", en: "Standard hand signals and radio where required" },
+        additionalControls: { tr: "İletişim kaybolduğunda tüm araç hareketini durdur", en: "Stop all vehicle movement when communication is lost" },
+      },
+      {
+        hazard: { tr: "Banksman'ın aracın kör noktasında bulunması", en: "Banksman positioned in vehicle blind spot" },
+        consequence: { tr: "Ezilme veya ciddi yaralanma", en: "Crushing or serious injury" },
+        personsAtRisk: { tr: "Banksman", en: "Banksman" },
+        existingControls: { tr: "Güvenli görüş pozisyonu ve araç-yaya ayrımı", en: "Safe visible position and vehicle-pedestrian segregation" },
+        additionalControls: { tr: "Banksman'ın operatör tarafından sürekli görülebileceği pozisyonu koru", en: "Maintain a position where the banksman remains continuously visible to the operator" },
+      },
+      {
+        hazard: { tr: "Yetkisiz kişinin yönlendirmeye müdahale etmesi", en: "Unauthorized person interfering with signaling" },
+        consequence: { tr: "Yanlış manevra ve çarpışma", en: "Incorrect maneuver and collision" },
+        personsAtRisk: { tr: "Operatör ve saha çalışanları", en: "Operator and site personnel" },
+        existingControls: { tr: "Tek yetkili banksman belirlenmesi", en: "Designation of a single authorized banksman" },
+        additionalControls: { tr: "Operatörün yalnızca belirlenmiş banksman talimatlarını takip etmesini sağla", en: "Ensure the operator follows instructions only from the designated banksman" },
+      }
     ],
   },
 
@@ -393,6 +665,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Uygun ekipman, maruziyet kontrolü ve işitme koruması", en: "Suitable equipment, exposure control and hearing protection" },
         additionalControls: { tr: "Uzun süreli maruziyeti sınırla", en: "Limit prolonged exposure" },
       },
+      // PACK01_BATCH::grinding
+      {
+        hazard: { tr: "Taşlama diskinin parçalanması", en: "Grinding disc rupture" },
+        consequence: { tr: "Kesik, göz yaralanması veya ciddi travma", en: "Cut, eye injury or serious trauma" },
+        personsAtRisk: { tr: "Taşlama operatörü ve yakın çalışanlar", en: "Grinding operator and nearby personnel" },
+        existingControls: { tr: "Uygun disk seçimi, guard ve kullanım öncesi kontrol", en: "Correct disc selection, guard and pre-use inspection" },
+        additionalControls: { tr: "Disk RPM değerinin makine hızına uygunluğunu doğrula", en: "Verify the disc RPM rating is suitable for the grinder speed" },
+      },
+      {
+        hazard: { tr: "Kıvılcımın yanıcı malzemelere ulaşması", en: "Grinding sparks reaching combustible materials" },
+        consequence: { tr: "Yangın veya patlama", en: "Fire or explosion" },
+        personsAtRisk: { tr: "Operatör ve çevredeki çalışanlar", en: "Operator and nearby personnel" },
+        existingControls: { tr: "Yanıcıların kaldırılması ve sıcak çalışma kontrolü", en: "Removal of combustibles and hot-work controls" },
+        additionalControls: { tr: "Kıvılcım yönünü, alt seviyeleri ve gizli boşlukları kontrol et", en: "Control spark direction, lower levels and hidden openings" },
+      },
+      {
+        hazard: { tr: "Yüksek gürültü ve titreşim", en: "High noise and vibration" },
+        consequence: { tr: "İşitme kaybı veya el-kol titreşim etkisi", en: "Hearing loss or hand-arm vibration effects" },
+        personsAtRisk: { tr: "Taşlama operatörü", en: "Grinding operator" },
+        existingControls: { tr: "İşitme koruması ve uygun ekipman", en: "Hearing protection and suitable equipment" },
+        additionalControls: { tr: "Maruziyet süresini ve ekipmanın titreşim durumunu kontrol et", en: "Control exposure duration and equipment vibration condition" },
+      }
     ],
   },
 
@@ -422,6 +716,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Sıcak çalışma izni ve fire watch", en: "Hot-work permit and fire watch" },
         additionalControls: { tr: "İş sonrası yangın gözetimini saha kuralına göre sürdür", en: "Continue post-work fire watch according to site requirements" },
       },
+      // PACK01_BATCH::welding
+      {
+        hazard: { tr: "Kaynak ark ışınına maruziyet", en: "Exposure to welding arc radiation" },
+        consequence: { tr: "Göz hasarı veya cilt yanığı", en: "Eye damage or skin burns" },
+        personsAtRisk: { tr: "Kaynakçı ve yakın çalışanlar", en: "Welder and nearby personnel" },
+        existingControls: { tr: "Kaynak maskesi, uygun filtre ve kaynak perdesi", en: "Welding helmet, suitable filter and welding screens" },
+        additionalControls: { tr: "Yakın çalışanları ark ışınından fiziksel perde ile koru", en: "Protect nearby personnel from arc radiation using physical screens" },
+      },
+      {
+        hazard: { tr: "Kaynak dumanının birikmesi", en: "Accumulation of welding fumes" },
+        consequence: { tr: "Solunum sistemi etkileri veya zehirlenme", en: "Respiratory effects or poisoning" },
+        personsAtRisk: { tr: "Kaynakçı ve çevre personeli", en: "Welder and surrounding personnel" },
+        existingControls: { tr: "Doğal veya mekanik havalandırma", en: "Natural or mechanical ventilation" },
+        additionalControls: { tr: "Gerekli olduğunda lokal emiş veya uygun solunum koruması kullan", en: "Use local extraction or suitable respiratory protection where required" },
+      },
+      {
+        hazard: { tr: "Kaynak kablosu veya elektrot tutucunun hasarlı olması", en: "Damaged welding cable or electrode holder" },
+        consequence: { tr: "Elektrik çarpması veya yangın", en: "Electric shock or fire" },
+        personsAtRisk: { tr: "Kaynakçı", en: "Welder" },
+        existingControls: { tr: "Kullanım öncesi elektrik ekipmanı kontrolü", en: "Pre-use inspection of electrical welding equipment" },
+        additionalControls: { tr: "Hasarlı kablo, bağlantı veya holder ekipmanını derhal kullanım dışı bırak", en: "Immediately remove damaged cables, connections or holders from service" },
+      }
     ],
   },
 
@@ -451,6 +767,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Güvenli kavrama ve uygun taşıma yöntemi", en: "Secure grip and suitable handling method" },
         additionalControls: { tr: "Dengesiz yüklerde taşıma yardım ekipmanı kullan", en: "Use handling aids for unstable loads" },
       },
+      // PACK01_BATCH::manual-handling
+      {
+        hazard: { tr: "Aşırı ağır yükün elle kaldırılması", en: "Manual lifting of excessive load" },
+        consequence: { tr: "Bel, omuz veya kas-iskelet yaralanması", en: "Back, shoulder or musculoskeletal injury" },
+        personsAtRisk: { tr: "Malzeme taşıyan çalışanlar", en: "Personnel handling materials" },
+        existingControls: { tr: "Yük değerlendirmesi ve ekip kaldırma", en: "Load assessment and team lifting" },
+        additionalControls: { tr: "Uygun olduğunda mekanik kaldırma veya taşıma ekipmanı kullan", en: "Use mechanical lifting or handling equipment where practicable" },
+      },
+      {
+        hazard: { tr: "Yük taşırken görüşün kapanması", en: "Obstructed vision while carrying a load" },
+        consequence: { tr: "Takılma, düşme veya çarpışma", en: "Trip, fall or collision" },
+        personsAtRisk: { tr: "Malzeme taşıyan çalışanlar", en: "Personnel handling materials" },
+        existingControls: { tr: "Güvenli taşıma güzergahı", en: "Safe handling route" },
+        additionalControls: { tr: "Görüşü kapatan yüklerde ikinci kişi veya taşıma ekipmanı kullan", en: "Use a second person or handling equipment where the load obstructs vision" },
+      },
+      {
+        hazard: { tr: "Yükün keskin veya sıcak yüzeye sahip olması", en: "Load with sharp or hot surfaces" },
+        consequence: { tr: "Kesik veya yanık", en: "Cut or burn injury" },
+        personsAtRisk: { tr: "Malzeme taşıyan çalışanlar", en: "Personnel handling materials" },
+        existingControls: { tr: "Uygun eldiven ve yük kontrolü", en: "Suitable gloves and load inspection" },
+        additionalControls: { tr: "Taşıma öncesi yükün yüzey ve sıcaklık tehlikelerini değerlendir", en: "Assess surface and temperature hazards before handling" },
+      }
     ],
   },
 
@@ -480,6 +818,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Spill kit, ikincil muhafaza ve acil durum prosedürü", en: "Spill kit, secondary containment and emergency procedure" },
         additionalControls: { tr: "Dökülme müdahale ekipmanını çalışma noktasında doğrula", en: "Verify spill-response equipment at the work location" },
       },
+      // PACK01_BATCH::chemical-handling
+      {
+        hazard: { tr: "Kimyasal sıçraması", en: "Chemical splash" },
+        consequence: { tr: "Göz veya cilt yaralanması", en: "Eye or skin injury" },
+        personsAtRisk: { tr: "Kimyasal kullanan çalışanlar", en: "Personnel handling chemicals" },
+        existingControls: { tr: "Kimyasal gözlük, eldiven ve koruyucu kıyafet", en: "Chemical goggles, gloves and protective clothing" },
+        additionalControls: { tr: "KKD seçimini SDS ve kimyasal özelliklerine göre doğrula", en: "Verify PPE selection against the SDS and chemical properties" },
+      },
+      {
+        hazard: { tr: "Uyumsuz kimyasalların karıştırılması", en: "Mixing incompatible chemicals" },
+        consequence: { tr: "Toksik gaz, yangın veya şiddetli reaksiyon", en: "Toxic gas, fire or violent reaction" },
+        personsAtRisk: { tr: "Kimyasal çalışanları ve çevre personeli", en: "Chemical handlers and nearby personnel" },
+        existingControls: { tr: "Etiketleme, SDS ve segregasyon", en: "Labeling, SDS and segregation" },
+        additionalControls: { tr: "Karıştırma veya transfer öncesi kimyasal uyumluluğunu doğrula", en: "Verify chemical compatibility before mixing or transfer" },
+      },
+      {
+        hazard: { tr: "Kimyasal kabının yanlış etiketlenmesi", en: "Incorrectly labeled chemical container" },
+        consequence: { tr: "Yanlış kullanım veya tehlikeli maruziyet", en: "Incorrect use or hazardous exposure" },
+        personsAtRisk: { tr: "Tüm kimyasal kullanıcıları", en: "All chemical users" },
+        existingControls: { tr: "Etiketleme ve kapalı kap sistemi", en: "Labeling and closed-container system" },
+        additionalControls: { tr: "Etiketsiz veya içeriği belirsiz kapların kullanımını yasakla", en: "Prohibit use of unlabeled or unidentified containers" },
+      }
     ],
   },
 
@@ -509,6 +869,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Bariyer, tabela ve kontrollü erişim", en: "Barricades, signs and controlled access" },
         additionalControls: { tr: "Test boyunca erişim kontrolünü aktif tut", en: "Maintain active access control throughout the test" },
       },
+      // PACK01_BATCH::pressure-testing
+      {
+        hazard: { tr: "Test basıncının aşılması", en: "Exceeding test pressure" },
+        consequence: { tr: "Sistem arızası veya yüksek enerjili salım", en: "System failure or high-energy release" },
+        personsAtRisk: { tr: "Test ekibi ve çevredeki çalışanlar", en: "Test team and nearby personnel" },
+        existingControls: { tr: "Onaylı prosedür ve kalibre manometre", en: "Approved procedure and calibrated pressure gauge" },
+        additionalControls: { tr: "Belirlenen maksimum test basıncını aşmayı önleyecek kontrol uygula", en: "Apply controls to prevent exceeding the specified maximum test pressure" },
+      },
+      {
+        hazard: { tr: "Test alanına yetkisiz giriş", en: "Unauthorized entry into pressure-test area" },
+        consequence: { tr: "Basınçlı sistem arızasına maruziyet", en: "Exposure to pressure-system failure" },
+        personsAtRisk: { tr: "Diğer saha çalışanları", en: "Other site personnel" },
+        existingControls: { tr: "Dışlama alanı ve bariyerleme", en: "Exclusion zone and barricading" },
+        additionalControls: { tr: "Test boyunca kontrollü erişim sağla", en: "Maintain controlled access throughout the test" },
+      },
+      {
+        hazard: { tr: "Test sonrası sistemde artık basınç kalması", en: "Residual pressure remaining after test" },
+        consequence: { tr: "Bağlantı açılırken ani basınç salımı", en: "Sudden pressure release during disconnection" },
+        personsAtRisk: { tr: "Test ve bakım personeli", en: "Test and maintenance personnel" },
+        existingControls: { tr: "Kontrollü depressurization", en: "Controlled depressurization" },
+        additionalControls: { tr: "Sistem açılmadan önce sıfır basıncı fiziksel olarak doğrula", en: "Physically verify zero pressure before opening the system" },
+      }
     ],
   },
 
@@ -538,6 +920,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Ayrılmış atık kutuları ve düzenli toplama", en: "Segregated waste containers and routine collection" },
         additionalControls: { tr: "Atık toplama sıklığını iş yoğunluğuna göre artır", en: "Increase collection frequency according to work intensity" },
       },
+      // PACK01_BATCH::housekeeping
+      {
+        hazard: { tr: "Yürüme yollarında malzeme birikmesi", en: "Materials obstructing walkways" },
+        consequence: { tr: "Takılma veya düşme", en: "Trip or fall" },
+        personsAtRisk: { tr: "Tüm saha çalışanları", en: "All site personnel" },
+        existingControls: { tr: "Belirlenmiş yürüme yolları ve düzenli temizlik", en: "Designated walkways and regular housekeeping" },
+        additionalControls: { tr: "Kaçış ve yürüme yollarını vardiya boyunca açık tut", en: "Keep escape and pedestrian routes clear throughout the shift" },
+      },
+      {
+        hazard: { tr: "Dökülen yağ veya sıvı", en: "Oil or liquid spill" },
+        consequence: { tr: "Kayma veya düşme", en: "Slip or fall" },
+        personsAtRisk: { tr: "Tüm saha personeli", en: "All site personnel" },
+        existingControls: { tr: "Spill kit ve temizlik prosedürü", en: "Spill kits and cleaning procedure" },
+        additionalControls: { tr: "Dökülmeyi derhal izole et, temizle ve kaynağını ortadan kaldır", en: "Immediately isolate and clean the spill and eliminate its source" },
+      },
+      {
+        hazard: { tr: "Atıkların uygunsuz depolanması", en: "Improper waste storage" },
+        consequence: { tr: "Yangın, kesik veya çevresel risk", en: "Fire, cuts or environmental hazard" },
+        personsAtRisk: { tr: "Saha çalışanları", en: "Site personnel" },
+        existingControls: { tr: "Belirlenmiş atık konteynerleri", en: "Designated waste containers" },
+        additionalControls: { tr: "Atıkları türüne göre ayır ve konteynerlerin taşmasını önle", en: "Segregate waste by type and prevent containers from overflowing" },
+      }
     ],
   },
 
@@ -567,6 +971,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Uygun ekipman ve hasar kontrolü", en: "Suitable equipment and damage checks" },
         additionalControls: { tr: "Hasarlı kablo veya prizleri kullanım dışı bırak", en: "Remove damaged cables or outlets from use" },
       },
+      // PACK01_BATCH::office-work
+      {
+        hazard: { tr: "Uzun süreli uygunsuz oturma pozisyonu", en: "Prolonged poor sitting posture" },
+        consequence: { tr: "Boyun, sırt veya kas-iskelet rahatsızlığı", en: "Neck, back or musculoskeletal discomfort" },
+        personsAtRisk: { tr: "Ofis çalışanları", en: "Office workers" },
+        existingControls: { tr: "Uygun masa, sandalye ve ekran düzeni", en: "Suitable desk, chair and screen arrangement" },
+        additionalControls: { tr: "Çalışma istasyonunu ergonomik olarak ayarla ve düzenli hareket molası ver", en: "Adjust the workstation ergonomically and take regular movement breaks" },
+      },
+      {
+        hazard: { tr: "Elektrik kablolarının geçiş yolunda bulunması", en: "Electrical cables across walkways" },
+        consequence: { tr: "Takılma veya elektrik riski", en: "Trip or electrical hazard" },
+        personsAtRisk: { tr: "Ofis çalışanları ve ziyaretçiler", en: "Office workers and visitors" },
+        existingControls: { tr: "Kablo yönetimi ve düzenli housekeeping", en: "Cable management and good housekeeping" },
+        additionalControls: { tr: "Kabloları geçiş yollarından kaldır veya uygun kablo koruyucu kullan", en: "Remove cables from walkways or use suitable cable protection" },
+      },
+      {
+        hazard: { tr: "Acil çıkış yolunun engellenmesi", en: "Obstructed emergency exit route" },
+        consequence: { tr: "Acil tahliyenin gecikmesi", en: "Delayed emergency evacuation" },
+        personsAtRisk: { tr: "Ofiste bulunan herkes", en: "All office occupants" },
+        existingControls: { tr: "Belirlenmiş acil çıkış ve yönlendirme", en: "Designated emergency exits and signage" },
+        additionalControls: { tr: "Kaçış yollarını ve acil çıkış kapılarını sürekli açık tut", en: "Keep escape routes and emergency exit doors continuously clear" },
+      }
     ],
   },
 
@@ -596,6 +1022,28 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Ayna, tabela, hız kontrolü ve korna kullanımı", en: "Mirrors, signage, speed control and horn use" },
         additionalControls: { tr: "Görüş engellerini kaldır veya kavşağı yeniden düzenle", en: "Remove visibility obstructions or redesign the intersection" },
       },
+      // PACK01_BATCH::traffic-management
+      {
+        hazard: { tr: "Araç ve yaya yollarının kesişmesi", en: "Vehicle and pedestrian routes crossing" },
+        consequence: { tr: "Çarpışma, ezilme veya ölüm", en: "Collision, crushing or fatality" },
+        personsAtRisk: { tr: "Yayalar ve araç operatörleri", en: "Pedestrians and vehicle operators" },
+        existingControls: { tr: "Araç-yaya ayrımı ve belirlenmiş yollar", en: "Vehicle-pedestrian segregation and designated routes" },
+        additionalControls: { tr: "Kritik kesişim noktalarında fiziksel ayrım veya kontrollü geçiş uygula", en: "Use physical segregation or controlled crossings at critical intersections" },
+      },
+      {
+        hazard: { tr: "Kör noktalarda araç hareketi", en: "Vehicle movement at blind spots" },
+        consequence: { tr: "Yaya veya araçla çarpışma", en: "Collision with pedestrians or vehicles" },
+        personsAtRisk: { tr: "Saha personeli ve sürücüler", en: "Site personnel and drivers" },
+        existingControls: { tr: "Hız limiti, uyarı işaretleri ve korna", en: "Speed limits, warning signs and horn" },
+        additionalControls: { tr: "Kritik kör noktalarda ayna veya banksman kullan", en: "Use mirrors or a banksman at critical blind spots" },
+      },
+      {
+        hazard: { tr: "Geri manevra sırasında kontrol kaybı", en: "Loss of control during reversing" },
+        consequence: { tr: "Çarpışma veya ezilme", en: "Collision or crushing" },
+        personsAtRisk: { tr: "Operatör, banksman ve yayalar", en: "Operator, banksman and pedestrians" },
+        existingControls: { tr: "Geri vites alarmı ve banksman desteği", en: "Reverse alarm and banksman support" },
+        additionalControls: { tr: "Mümkün olduğunda geri manevrayı azaltacak trafik düzeni oluştur", en: "Design traffic flow to minimize reversing wherever practicable" },
+      }
     ],
   },
 
@@ -625,13 +1073,35 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Hava takibi ve güvenli çalışma limitleri", en: "Weather monitoring and safe work limits" },
         additionalControls: { tr: "Güvensiz hava koşullarında çalışmayı durdur", en: "Stop work during unsafe weather conditions" },
       },
+      // PACK01_BATCH::roof-work
+      {
+        hazard: { tr: "Kırılgan çatı yüzeyi", en: "Fragile roof surface" },
+        consequence: { tr: "Çatıdan düşme ve ölüm", en: "Fall through roof and fatality" },
+        personsAtRisk: { tr: "Çatı çalışanları", en: "Roof workers" },
+        existingControls: { tr: "Kırılgan alan tespiti, platform ve düşüş koruması", en: "Fragile-area identification, platforms and fall protection" },
+        additionalControls: { tr: "Kırılgan yüzeyleri açıkça işaretle ve doğrudan üzerine basılmasını engelle", en: "Clearly mark fragile surfaces and prevent direct access onto them" },
+      },
+      {
+        hazard: { tr: "Çatı kenarında düşme", en: "Fall from roof edge" },
+        consequence: { tr: "Ciddi yaralanma veya ölüm", en: "Serious injury or fatality" },
+        personsAtRisk: { tr: "Çatı çalışanları", en: "Roof workers" },
+        existingControls: { tr: "Kenar koruması veya uygun düşüş koruma sistemi", en: "Edge protection or suitable fall-protection system" },
+        additionalControls: { tr: "Çalışma başlamadan tüm açık kenarları ve geçiş noktalarını kontrol et", en: "Inspect all open edges and access points before work starts" },
+      },
+      {
+        hazard: { tr: "Çatıdan malzeme veya alet düşmesi", en: "Materials or tools falling from roof" },
+        consequence: { tr: "Alt seviyedeki personelin yaralanması", en: "Injury to personnel below" },
+        personsAtRisk: { tr: "Alt seviyedeki çalışanlar", en: "Personnel below" },
+        existingControls: { tr: "Malzeme sabitleme ve alt alan izolasyonu", en: "Material securing and exclusion zone below" },
+        additionalControls: { tr: "Alet tethering kullan ve çatı altındaki dışlama alanını koru", en: "Use tool tethering and maintain the exclusion zone below" },
+      }
     ],
   },
 
   {
     id: "meWP",
     category: { tr: "Yüksekte Çalışma", en: "Work at Height" },
-    activity: { tr: "MEWP / Personel Yükseltici Platform", en: "MEWP Operation" },
+    activity: { tr: "MEWP / Personel Yükseltici Platform", en: "MEWP / Mobile Elevating Work Platform" },
     items: [
       {
         hazard: { tr: "Platformdan düşme", en: "Fall from platform" },
@@ -653,6 +1123,27 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         personsAtRisk: { tr: "Platformdaki çalışanlar", en: "Platform occupants" },
         existingControls: { tr: "Üst engel kontrolü ve kontrollü hareket", en: "Overhead-obstruction checks and controlled movement" },
         additionalControls: { tr: "Dar alanlarda hareket hızını azalt ve spotter kullan", en: "Reduce movement speed and use a spotter in restricted areas" },
+      },
+      {
+        hazard: { tr: "MEWP'nin enerji hattına yaklaşması", en: "MEWP approaching overhead power lines" },
+        consequence: { tr: "Elektrik çarpması veya ölüm", en: "Electric shock or fatality" },
+        personsAtRisk: { tr: "MEWP operatörü, platform çalışanları ve yakındaki personel", en: "MEWP operator, platform occupants and nearby personnel" },
+        existingControls: { tr: "Enerji hatlarından güvenli yaklaşma mesafesi ve saha kontrolü", en: "Safe clearance from power lines and work-area checks" },
+        additionalControls: { tr: "Enerji hatlarını çalışma öncesi belirle ve gerekli güvenli yaklaşma mesafesini koru", en: "Identify power lines before work and maintain the required safe clearance" },
+      },
+      {
+        hazard: { tr: "MEWP hareketi sırasında çarpışma", en: "Collision during MEWP movement" },
+        consequence: { tr: "Ezilme, çarpma veya ciddi yaralanma", en: "Crushing, impact or serious injury" },
+        personsAtRisk: { tr: "MEWP operatörü, platform çalışanları ve çevredeki personel", en: "MEWP operator, platform occupants and surrounding personnel" },
+        existingControls: { tr: "Kontrollü sürüş, güzergah kontrolü ve eğitimli operatör", en: "Controlled driving, route checks and trained operator" },
+        additionalControls: { tr: "Kör noktalarda gözcü kullan ve yaya erişimini hareket güzergahından ayır", en: "Use a spotter at blind spots and segregate pedestrians from the travel route" },
+      },
+      {
+        hazard: { tr: "Platformdan alet veya malzeme düşmesi", en: "Dropped tools or materials from MEWP platform" },
+        consequence: { tr: "Aşağıdaki personelin ciddi şekilde yaralanması", en: "Serious injury to personnel below" },
+        personsAtRisk: { tr: "MEWP altında veya çevresinde bulunan çalışanlar", en: "Personnel below or around the MEWP" },
+        existingControls: { tr: "Platform düzeni ve malzemelerin güvenli yerleştirilmesi", en: "Platform housekeeping and secure placement of materials" },
+        additionalControls: { tr: "Aletleri sabitle ve platform altında kontrollü dışlama alanı oluştur", en: "Secure tools and establish a controlled exclusion zone below the platform" },
       },
     ],
   },
