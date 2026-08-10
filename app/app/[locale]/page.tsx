@@ -533,6 +533,16 @@ export default async function LocalizedHomePage({ params }: Props) {
                   : "Discover professional HSE resources from one central library.",
                 href: `/${locale}/downloads`,
               },
+              {
+                icon: "🛡️",
+                title: isTurkish
+                  ? "Profesyonel Risk Analizi"
+                  : "Professional Risk Assessment",
+                description: isTurkish
+                  ? "100 faaliyet ve 900 hazır risk ile profesyonel HIRARC risk değerlendirmesi oluşturun."
+                  : "Build professional HIRARC assessments with 100 activities and 900 ready-to-use risks.",
+                href: `/${locale}/tools/quick-risk-assessment`,
+              },
             ].map((item) => (
               <Link
                 key={item.title}

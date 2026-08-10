@@ -284,10 +284,16 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
         likelihood: suggestedScore.likelihood,
         severity: suggestedScore.severity,
 
-        // Residual risk remains site-specific and must be assessed
-        // after additional controls are considered.
-        residualLikelihood: 1,
-        residualSeverity: 1,
+        // Suggested residual score after the listed additional controls.
+        // The assessor can still edit these values based on actual conditions.
+        residualLikelihood:
+          suggestedScore.likelihood * suggestedScore.severity >= 10 ? 2 : 1,
+        residualSeverity:
+          suggestedScore.likelihood * suggestedScore.severity >= 10
+            ? 2
+            : suggestedScore.likelihood * suggestedScore.severity >= 5
+              ? 2
+              : 1,
         };
       });
 
