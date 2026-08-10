@@ -7,6 +7,7 @@ import { riskLibraryPack02 } from "@/lib/risk-library/pack-02";
 import { riskLibraryPack03 } from "@/lib/risk-library/pack-03";
 import { riskLibraryPack04 } from "@/lib/risk-library/pack-04";
 import { riskLibraryPack05 } from "@/lib/risk-library/pack-05";
+import { createClient } from "@/utils/supabase/client";
 
 type RiskLevel = {
   labelTr: string;
@@ -47,6 +48,11 @@ type Props = {
 };
 
 export default function QuickRiskAssessmentPage({ params }: Props) {
+  const supabase = createClient();
+  const [savedAssessmentId, setSavedAssessmentId] = useState<string | null>(null);
+  const [isSavingAssessment, setIsSavingAssessment] = useState(false);
+  const [saveAssessmentMessage, setSaveAssessmentMessage] = useState("");
+
 
   /* SAFEBASE_RISK_HEADER_STATE_START */
   const [projectName, setProjectName] = useState("");
@@ -124,7 +130,77 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
     setRiskItems((current) => [...current, createRiskItem()]);
   };
 
-  const duplicateRiskItem = (id: string) => {
+  
+  const saveRiskAssessment = async () => {
+    setIsSavingAssessment(true);
+    setSaveAssessmentMessage("");
+
+    try {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        setSaveAssessmentMessage(
+          "Risk analizini kaydetmek için giriş yapmanız gerekiyor."
+        );
+        return;
+      }
+
+      const payload = {
+        user_id: user.id,
+        title: projectName.trim()
+          ? `${projectName} - ${documentNo}`
+          : documentNo || "Risk Assessment",
+        project_name: projectName || null,
+        company_name: companyName || null,
+        location: assessmentLocation || null,
+        assessor_name: assessorName || null,
+        assessment_date: assessmentDate || null,
+        revision: assessmentRevision || null,
+        document_no: documentNo || null,
+        department: department || null,
+        asset_area: assetArea || null,
+        process_method: processMethod || null,
+        prepared_by: assessorName || null,
+        reviewed_by: reviewedBy || null,
+        approved_by: approvedBy || null,
+        risk_items: riskItems,
+        updated_at: new Date().toISOString(),
+      };
+
+      if (savedAssessmentId) {
+        const { error } = await supabase
+          .from("risk_assessments")
+          .update(payload)
+          .eq("id", savedAssessmentId)
+          .eq("user_id", user.id);
+
+        if (error) throw error;
+
+        setSaveAssessmentMessage("Risk analizi güncellendi.");
+      } else {
+        const { data, error } = await supabase
+          .from("risk_assessments")
+          .insert(payload)
+          .select("id")
+          .single();
+
+        if (error) throw error;
+
+        setSavedAssessmentId(data.id);
+        setSaveAssessmentMessage("Risk analizi kaydedildi.");
+      }
+    } catch (error) {
+      console.error("Risk assessment save error:", error);
+      setSaveAssessmentMessage("Risk analizi kaydedilemedi.");
+    } finally {
+      setIsSavingAssessment(false);
+    }
+  };
+
+const duplicateRiskItem = (id: string) => {
     setRiskItems((current) => {
       const source = current.find((item) => item.id === id);
 
@@ -1027,6 +1103,22 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
               📄 {isTurkish ? "PDF / Yazdır" : "PDF / Print"}
             </button>
 
+          {/* SAFEBASE_RISK_SAVE_BUTTON */}
+          <button
+            type="button"
+            onClick={saveRiskAssessment}
+            disabled={isSavingAssessment}
+            className="rounded-xl border border-emerald-500/50 bg-emerald-500/10 px-5 py-3 text-sm font-black text-emerald-300 transition hover:bg-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {isSavingAssessment
+              ? isTurkish
+                ? "Kaydediliyor..."
+                : "Saving..."
+              : isTurkish
+                ? "💾 Analizi Kaydet"
+                : "💾 Save Assessment"}
+          </button>
+
             <button
               type="button"
               onClick={addRiskItem}
@@ -1461,6 +1553,8 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
               </article>
             );
           })}
+
+          
 
           <button
             type="button"
