@@ -451,6 +451,323 @@ export default function MethodStatementPage({ params }: Props) {
   };
 
 
+  const loadConfinedSpaceTemplate = () => {
+    setActivity(
+      isTurkish ? "Kapalı Alana Giriş" : "Confined Space Entry"
+    );
+
+    setDocumentNo("SB-MS-003");
+
+    setScope(
+      isTurkish
+        ? "Bu Method Statement; tank, vessel, pit, manhole, kanal, silo ve benzeri kapalı veya kısıtlı alanlara güvenli giriş yapılması, çalışma süresince güvenli koşulların korunması ve alanın kontrollü şekilde terk edilmesi için uygulanacak yöntemi tanımlar. Çalışma; giriş izni, enerji izolasyonu, atmosfer testi, havalandırma, giriş gözetimi, iletişim, kurtarma hazırlığı ve çalışma sonrası kapatma faaliyetlerini kapsar."
+        : "This Method Statement defines the safe method for entry into tanks, vessels, pits, manholes, ducts, silos and similar confined or restricted spaces, maintaining safe conditions during the work and completing the entry under controlled conditions. It covers entry permitting, energy isolation, atmospheric testing, ventilation, entry monitoring, communication, rescue preparedness and post-work closeout."
+    );
+
+    setResponsibilities(
+      isTurkish
+        ? "Giriş Süpervizörü: Giriş koşullarını, izolasyonları, izin şartlarını, atmosfer testlerini ve kurtarma hazırlığını doğrular; girişe izin verir ve gerektiğinde girişi sonlandırır.\nGözcü / Attendant: Kapalı alan dışında görev yapar, içerideki personeli takip eder, iletişimi sürdürür, koşulları izler ve gerekli durumda tahliyeyi başlatır. Yetkisi yoksa kurtarma amacıyla alana girmez.\nYetkili Giriş Yapan Personel: Alanın tehlikelerini bilir, gerekli PPE ve ekipmanı kullanır, gözcü ile iletişimi sürdürür ve alarm veya tehlike halinde alanı terk eder.\nHSE Personeli: Risk değerlendirmesi, gaz ölçümü, saha kontrolü ve prosedür gerekliliklerinin uygulanmasını destekler."
+        : "Entry Supervisor: Verifies entry conditions, isolations, permit requirements, atmospheric testing and rescue preparedness; authorizes entry and terminates entry when required.\nAttendant: Remains outside the confined space, tracks entrants, maintains communication, monitors conditions and initiates evacuation where required. The attendant shall not enter for rescue unless specifically trained, equipped and authorized.\nAuthorized Entrants: Understand the hazards, use required PPE and equipment, maintain communication with the attendant and exit when alarms or unsafe conditions occur.\nHSE Personnel: Supports risk assessment, atmospheric testing, field verification and implementation of procedural requirements."
+    );
+
+    setCompetency(
+      isTurkish
+        ? "Kapalı alana girişte görev alan giriş süpervizörü, gözcü, yetkili giriş yapan personel ve gerektiğinde kurtarma ekibi görevlerine uygun eğitim, bilgi ve yetkinliğe sahip olmalıdır. Personel kapalı alan tehlikelerini, atmosfer testi sonuçlarının anlamını, izolasyon gerekliliklerini, iletişim yöntemlerini ve acil durumda yapılacakları bilmelidir."
+        : "The entry supervisor, attendant, authorized entrants and rescue personnel where applicable shall have training, knowledge and competency appropriate to their assigned duties. Personnel shall understand confined-space hazards, atmospheric test results, isolation requirements, communication arrangements and emergency actions."
+    );
+
+    setPpe(
+      isTurkish
+        ? "• Baret\n• Emniyet ayakkabısı\n• İş eldiveni\n• Uygun iş kıyafeti\n• Göreve uygun göz / yüz koruması\n• Risk değerlendirmesine göre uygun solunum koruması\n• Gerekliyse tam vücut emniyet kemeri ve kurtarma bağlantı sistemi\n• Kimyasal veya proses maruziyetine göre ilave PPE"
+        : "• Safety helmet\n• Safety footwear\n• Work gloves\n• Suitable work clothing\n• Task-appropriate eye / face protection\n• Suitable respiratory protection where required by the risk assessment\n• Full-body harness and retrieval connection where required\n• Additional PPE based on chemical or process exposure"
+    );
+
+    setToolsEquipment(
+      isTurkish
+        ? "• Kalibre edilmiş uygun çoklu gaz ölçüm cihazı\n• Mekanik havalandırma / hava üfleme ekipmanı\n• Uygun iletişim ekipmanı\n• Tripod, retrieval winch veya uygun kurtarma sistemi gerektiğinde\n• Tam vücut emniyet kemeri gerektiğinde\n• Bariyer ve uyarı levhaları\n• Ex-proof / intrinsically safe ekipman gerektiğinde\n• Uygun aydınlatma\n• LOTO / izolasyon ekipmanı\n• Kurtarma ve ilk yardım ekipmanı"
+        : "• Suitable calibrated multi-gas detector\n• Mechanical ventilation / air-moving equipment\n• Suitable communication equipment\n• Tripod, retrieval winch or suitable rescue system where required\n• Full-body harness where required\n• Barricades and warning signs\n• Explosion-protected / intrinsically safe equipment where required\n• Suitable lighting\n• LOTO / isolation equipment\n• Rescue and first-aid equipment"
+    );
+
+    setPermits(
+      isTurkish
+        ? "Geçerli Kapalı Alana Giriş İzni işe başlamadan önce hazırlanmalı ve giriş süpervizörü tarafından onaylanmalıdır. İzin üzerinde giriş yapılacak alan, çalışma amacı, izin süresi, yetkili giriş yapan personel, gözcü, izolasyonlar, atmosfer testi sonuçları, gerekli PPE, iletişim ve kurtarma düzenlemeleri doğrulanmalıdır. Çalışma koşulları değişirse veya izin süresi sona ererse giriş durdurulmalı ve izin yeniden değerlendirilmelidir."
+        : "A valid Confined Space Entry Permit shall be prepared before entry and authorized by the entry supervisor. The permit shall verify the space to be entered, purpose of entry, permit duration, authorized entrants, attendant, isolations, atmospheric test results, required PPE, communication and rescue arrangements. Entry shall stop and the permit shall be reassessed if conditions change or the permit expires."
+    );
+
+    setPreWorkRequirements(
+      isTurkish
+        ? "• Kapalı alanı ve potansiyel tehlikeleri belirle.\n• Göreve özel risk değerlendirmesini ve giriş iznini kontrol et.\n• Prosese bağlı tüm enerji ve malzeme kaynaklarını güvenli şekilde izole et ve LOTO uygula.\n• Gerekli boru hatlarını blank/blind veya uygun izolasyon yöntemiyle güvenli hale getir.\n• Alanın giriş ve çıkış yollarını kontrol et.\n• Atmosferi uygun ve kalibre edilmiş gaz ölçüm cihazıyla test et.\n• Oksijen, yanıcı gaz/buhar ve potansiyel toksik maddeleri değerlendir.\n• Gerekiyorsa mekanik havalandırmayı kur ve yeterliliğini doğrula.\n• Yetkili giriş yapan personeli ve gözcüyü belirle.\n• İçerideki personelin takip yöntemini ve iletişim sistemini doğrula.\n• Kurtarma yöntemini, kurtarma ekipmanını ve görevli personeli girişten önce hazırla.\n• Çevredeki eş zamanlı işleri ve giriş alanına yetkisiz erişimi kontrol et."
+        : "• Identify the confined space and potential hazards.\n• Review the task-specific risk assessment and entry permit.\n• Safely isolate all process energy and material sources and apply LOTO.\n• Secure connected lines using blanking/blinding or another suitable isolation method where required.\n• Inspect entry and exit routes.\n• Test the atmosphere using a suitable calibrated gas detector.\n• Evaluate oxygen, flammable gases/vapours and potential toxic contaminants.\n• Establish mechanical ventilation where required and verify its effectiveness.\n• Assign authorized entrants and an attendant.\n• Verify entrant tracking and communication arrangements.\n• Prepare the rescue method, rescue equipment and responsible personnel before entry.\n• Control simultaneous activities and unauthorized access around the entry point."
+    );
+
+    setMethodSteps([
+      {
+        id: `cs-1-${Date.now()}`,
+        step: isTurkish
+          ? "Kapalı alanı değerlendir ve giriş gerekliliğini doğrula."
+          : "Evaluate the confined space and confirm the need for entry.",
+        hazards: isTurkish
+          ? "Tanımlanmamış kapalı alan tehlikeleri, gereksiz giriş, yetersiz planlama."
+          : "Unidentified confined-space hazards, unnecessary entry and inadequate planning.",
+        controls: isTurkish
+          ? "Mümkünse işi alana girmeden gerçekleştir. Giriş gerekiyorsa kapalı alanın özelliklerini, geçmiş prosesini ve potansiyel tehlikelerini risk değerlendirmesinde belirle."
+          : "Perform the task without entry where reasonably practicable. Where entry is required, identify the space characteristics, previous process conditions and potential hazards in the risk assessment.",
+        responsible: isTurkish
+          ? "Giriş Süpervizörü / HSE"
+          : "Entry Supervisor / HSE",
+      },
+      {
+        id: `cs-2-${Date.now()}`,
+        step: isTurkish
+          ? "Enerji ve proses kaynaklarını izole et."
+          : "Isolate energy and process sources.",
+        hazards: isTurkish
+          ? "Beklenmeyen enerji, sıvı/gaz girişi, hareketli ekipman, basınç veya engulfment."
+          : "Unexpected energy, liquid/gas ingress, moving equipment, pressure or engulfment.",
+        controls: isTurkish
+          ? "LOTO uygula. Elektrik, mekanik, hidrolik, pnömatik ve proses kaynaklarını izole et. Gerekli boru ve hatlarda uygun blank/blind veya pozitif izolasyon kullan. İzolasyonları giriş öncesi doğrula."
+          : "Apply LOTO. Isolate electrical, mechanical, hydraulic, pneumatic and process sources. Use suitable blanking/blinding or positive isolation on connected lines where required. Verify isolations before entry.",
+        responsible: isTurkish
+          ? "Yetkin Kişi / Giriş Süpervizörü"
+          : "Competent Person / Entry Supervisor",
+      },
+      {
+        id: `cs-3-${Date.now()}`,
+        step: isTurkish
+          ? "Atmosfer testi gerçekleştir."
+          : "Conduct atmospheric testing.",
+        hazards: isTurkish
+          ? "Oksijen yetersizliği veya zenginliği, yanıcı atmosfer, toksik gaz veya buhar."
+          : "Oxygen deficiency/enrichment, flammable atmosphere, toxic gases or vapours.",
+        controls: isTurkish
+          ? "Kalibre edilmiş uygun cihazla giriş öncesi atmosfer testi yap. Alanın farklı seviyelerini ve gerekli bölgelerini ölç. Kabul kriterleri sağlanmadan girişe izin verme."
+          : "Conduct pre-entry atmospheric testing using suitable calibrated equipment. Test relevant levels and locations within the space. Do not authorize entry until acceptable conditions are confirmed.",
+        responsible: isTurkish
+          ? "Yetkin Gaz Ölçüm Personeli / HSE"
+          : "Competent Gas Tester / HSE",
+      },
+      {
+        id: `cs-4-${Date.now()}`,
+        step: isTurkish
+          ? "Havalandırma ve giriş düzenlemelerini kur."
+          : "Establish ventilation and entry arrangements.",
+        hazards: isTurkish
+          ? "Atmosferin bozulması, yetersiz hava değişimi, uygunsuz erişim veya çıkış."
+          : "Atmospheric deterioration, inadequate air exchange or unsafe access/egress.",
+        controls: isTurkish
+          ? "Gerekiyorsa mekanik havalandırma sağla. Hava girişini temiz bir kaynaktan al. Giriş ve çıkış yolunu açık tut; ekipmanın tahliyeyi engellemesini önle."
+          : "Provide mechanical ventilation where required. Draw ventilation air from a clean source. Keep entry and exit routes clear and prevent equipment from obstructing evacuation.",
+        responsible: isTurkish
+          ? "Giriş Süpervizörü"
+          : "Entry Supervisor",
+      },
+      {
+        id: `cs-5-${Date.now()}`,
+        step: isTurkish
+          ? "Gözcü, iletişim ve kurtarma hazırlığını doğrula."
+          : "Verify attendant, communication and rescue readiness.",
+        hazards: isTurkish
+          ? "İçerideki personelin takip edilememesi, iletişim kaybı, gecikmiş kurtarma."
+          : "Loss of entrant tracking, communication failure or delayed rescue.",
+        controls: isTurkish
+          ? "Gözcüyü giriş noktasında görevlendir. İçerideki personeli sürekli takip et. İletişim yöntemini test et. Kurtarma planı ve ekipmanının hazır olduğunu doğrula."
+          : "Assign an attendant at the entry point. Continuously track entrants. Test the communication method. Confirm the rescue plan and rescue equipment are ready.",
+        responsible: isTurkish
+          ? "Giriş Süpervizörü / Gözcü"
+          : "Entry Supervisor / Attendant",
+      },
+      {
+        id: `cs-6-${Date.now()}`,
+        step: isTurkish
+          ? "Kapalı alana kontrollü giriş yap ve çalışmayı gerçekleştir."
+          : "Enter the confined space under controlled conditions and perform the work.",
+        hazards: isTurkish
+          ? "Atmosferik maruziyet, fiziksel tehlikeler, sıcaklık stresi, ekipman veya proses tehlikeleri."
+          : "Atmospheric exposure, physical hazards, heat stress, equipment or process hazards.",
+        controls: isTurkish
+          ? "Sadece izin üzerinde yetkilendirilmiş personelin girişine izin ver. Gerekli PPE ve ekipmanı kullan. Gözcü ile iletişimi sürdür. Atmosferi ve çalışma koşullarını izin şartlarına göre izlemeye devam et."
+          : "Allow entry only by personnel authorized on the permit. Use required PPE and equipment. Maintain communication with the attendant. Continue monitoring atmosphere and work conditions as required by the permit.",
+        responsible: isTurkish
+          ? "Yetkili Giriş Yapan Personel / Gözcü"
+          : "Authorized Entrants / Attendant",
+      },
+      {
+        id: `cs-7-${Date.now()}`,
+        step: isTurkish
+          ? "Tehlikeli veya değişen koşullarda tahliyeyi başlat."
+          : "Initiate evacuation when unsafe or changing conditions occur.",
+        hazards: isTurkish
+          ? "Gaz alarmı, havalandırma kaybı, proses değişikliği, çalışan rahatsızlığı veya iletişim kaybı."
+          : "Gas alarm, ventilation failure, process change, worker distress or communication loss.",
+        controls: isTurkish
+          ? "Alarm, yasak koşul, personelde maruziyet belirtisi veya gözcü/giriş süpervizörü talimatı halinde personel alanı derhal terk etmelidir. Giriş şartları yeniden doğrulanmadan yeniden giriş yapılmamalıdır."
+          : "Entrants shall exit immediately following an alarm, prohibited condition, signs of exposure or instruction from the attendant or entry supervisor. Re-entry shall not occur until entry conditions are re-established.",
+        responsible: isTurkish
+          ? "Tüm Giriş Personeli / Gözcü"
+          : "All Entrants / Attendant",
+      },
+      {
+        id: `cs-8-${Date.now()}`,
+        step: isTurkish
+          ? "Çalışmayı tamamla, personeli say ve giriş iznini kapat."
+          : "Complete the work, account for personnel and close the entry permit.",
+        hazards: isTurkish
+          ? "İçeride personel veya ekipman kalması, izolasyonların erken kaldırılması, kontrolsüz yeniden devreye alma."
+          : "Personnel or equipment remaining inside, premature removal of isolations or uncontrolled recommissioning.",
+        controls: isTurkish
+          ? "Tüm personelin alanı terk ettiğini doğrula. Alet, ekipman ve atıkları çıkar. Giriş süpervizörü izni kapatsın. İzolasyonlar yalnızca uygun yetkilendirme ve kontrollü devreye alma prosedürüyle kaldırılsın."
+          : "Confirm all personnel have exited. Remove tools, equipment and waste. The entry supervisor shall close the permit. Remove isolations only under proper authorization and controlled recommissioning procedures.",
+        responsible: isTurkish
+          ? "Giriş Süpervizörü"
+          : "Entry Supervisor",
+      },
+    ]);
+
+    setEmergencyArrangements(
+      isTurkish
+        ? "Kapalı alana giriş başlamadan önce göreve uygun bir kurtarma yöntemi belirlenmeli ve kurtarma ekipmanı hazır olmalıdır. Mümkün olduğunda giriş yapmadan kurtarma yöntemleri tercih edilmelidir. Gözcü yetkisi, eğitimi ve ekipmanı bulunmadıkça kurtarma amacıyla alana girmemelidir. Acil durumda giriş durdurulmalı, alarm verilerek saha acil durum prosedürü uygulanmalı ve kurtarma ekibi devreye alınmalıdır."
+        : "A task-appropriate rescue method shall be established and rescue equipment made ready before confined-space entry begins. Non-entry rescue methods should be used where feasible. The attendant shall not enter the space for rescue unless trained, equipped and specifically authorized. In an emergency, entry shall stop, the alarm shall be raised, the site emergency procedure implemented and the rescue team activated."
+    );
+
+    setEnvironmentalControls(
+      isTurkish
+        ? "Kapalı alan içindeki atık, sludge, kimyasal kalıntı veya diğer maddeler proje atık yönetim sistemine göre kontrol edilmelidir. Havalandırma çıkışının diğer çalışanları tehlikeli gaz veya buhara maruz bırakmaması sağlanmalıdır. Dökülme veya drenaja kontrolsüz boşaltım önlenmeli ve çalışma sonunda alan temiz bırakılmalıdır."
+        : "Waste, sludge, chemical residues and other materials within the confined space shall be managed in accordance with the project waste-management system. Ventilation exhaust shall not expose other personnel to hazardous gases or vapours. Uncontrolled spills or discharge to drainage shall be prevented and the area left clean after completion."
+    );
+
+    setReferences(
+      isTurkish
+        ? "• SafeBase görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1910.146 – Permit-Required Confined Spaces\n• OSHA 29 CFR 1926 Subpart AA – Confined Spaces in Construction\n• Proje / saha Kapalı Alana Giriş ve LOTO prosedürleri\n• Gaz ölçüm cihazı ve kullanılan ekipmanların üretici talimatları"
+        : "• SafeBase task-specific risk assessment\n• OSHA 29 CFR 1910.146 – Permit-Required Confined Spaces\n• OSHA 29 CFR 1926 Subpart AA – Confined Spaces in Construction\n• Project / site Confined Space Entry and LOTO procedures\n• Manufacturer instructions for gas detectors and equipment used"
+    );
+  };
+
+
+  const loadLotoTemplate = () => {
+    setActivity(isTurkish ? "LOTO / Enerji İzolasyonu" : "LOTO / Energy Isolation");
+    setDocumentNo("SB-MS-004");
+
+    setScope(
+      isTurkish
+        ? "Bu Method Statement; bakım, onarım, temizlik, ayar veya müdahale öncesinde tehlikeli enerji kaynaklarının belirlenmesi, izole edilmesi, kilitlenmesi ve etiketlenmesi, sıfır enerji durumunun doğrulanması ve çalışma tamamlandıktan sonra kontrollü yeniden devreye alma yöntemini tanımlar."
+        : "This Method Statement defines the safe method for identifying hazardous energy sources, isolating, locking and tagging them, verifying zero-energy condition and controlled recommissioning before maintenance, repair, cleaning, adjustment or intervention."
+    );
+
+    setResponsibilities(
+      isTurkish
+        ? "Saha Süpervizörü: İzolasyon kapsamını doğrular ve çalışmayı koordine eder.\nYetkili LOTO Personeli: Enerji kaynaklarını belirler, izolasyonu uygular, kilit ve etiketleri takar ve sıfır enerji durumunu doğrular.\nHSE Personeli: Risk değerlendirmesi ve saha kontrollerini destekler.\nÇalışanlar: İzolasyon sınırlarına uyar ve başkasının kilit veya etiketini kaldırmaz."
+        : "Site Supervisor: Confirms the isolation scope and coordinates the work.\nAuthorized LOTO Personnel: Identify energy sources, apply isolations, install locks and tags and verify zero-energy condition.\nHSE Personnel: Support risk assessment and field verification.\nWorkers: Respect isolation boundaries and shall not remove another person's lock or tag."
+    );
+
+    setCompetency(
+      isTurkish
+        ? "LOTO uygulayan personel enerji izolasyonu, kilitleme/etiketleme, depolanmış enerji ve sıfır enerji doğrulama konusunda eğitimli ve yetkili olmalıdır."
+        : "Personnel applying LOTO shall be trained and authorized in energy isolation, lockout/tagout, stored energy and zero-energy verification."
+    );
+
+    setPpe(
+      isTurkish
+        ? "• Baret\n• Emniyet ayakkabısı\n• İş eldiveni\n• Uygun iş kıyafeti\n• Göreve uygun göz / yüz koruması\n• Elektrik riski varsa uygun elektrik / arc-rated PPE"
+        : "• Safety helmet\n• Safety footwear\n• Work gloves\n• Suitable work clothing\n• Task-appropriate eye / face protection\n• Suitable electrical / arc-rated PPE where required"
+    );
+
+    setToolsEquipment(
+      isTurkish
+        ? "• Onaylı kişisel LOTO kilitleri\n• LOTO etiketleri\n• Hasplar / lock box\n• Uygun izolasyon ekipmanı\n• Gerilim test cihazı gerektiğinde\n• Bariyer ve uyarı levhaları"
+        : "• Approved personal LOTO locks\n• LOTO tags\n• Hasps / lock box\n• Suitable isolation equipment\n• Voltage tester where required\n• Barricades and warning signs"
+    );
+
+    setPermits(
+      isTurkish
+        ? "İlgili LOTO / enerji izolasyon prosedürü uygulanmalı ve gerekiyorsa çalışma izniyle ilişkilendirilmelidir. Tüm enerji kaynakları ve izolasyon noktaları işe başlamadan önce doğrulanmalıdır."
+        : "The applicable LOTO / energy-isolation procedure shall be implemented and linked to the work permit where required. All energy sources and isolation points shall be verified before work begins."
+    );
+
+    setPreWorkRequirements(
+      isTurkish
+        ? "• Tüm enerji kaynaklarını belirle.\n• Elektrik, mekanik, hidrolik, pnömatik, termal ve proses enerjilerini değerlendir.\n• Doğru izolasyon noktalarını belirle.\n• Ekipmanı kontrollü şekilde durdur.\n• Enerji kaynaklarını izole et.\n• Kilit ve etiketleri uygula.\n• Depolanmış / artık enerjiyi boşalt veya güvenli hale getir.\n• Sıfır enerji durumunu doğrula."
+        : "• Identify all energy sources.\n• Evaluate electrical, mechanical, hydraulic, pneumatic, thermal and process energy.\n• Identify correct isolation points.\n• Shut down equipment in a controlled manner.\n• Isolate energy sources.\n• Apply locks and tags.\n• Release or secure stored / residual energy.\n• Verify zero-energy condition."
+    );
+
+    setMethodSteps([
+      {
+        id: `loto-1-${Date.now()}`,
+        step: isTurkish ? "İzolasyon kapsamını ve enerji kaynaklarını belirle." : "Identify the isolation scope and energy sources.",
+        hazards: isTurkish ? "Tanımlanmamış enerji kaynağı veya eksik izolasyon." : "Unidentified energy source or incomplete isolation.",
+        controls: isTurkish ? "Ekipman ve proses üzerindeki tüm enerji kaynaklarını belirle ve izolasyon planını doğrula." : "Identify all energy sources associated with the equipment/process and verify the isolation plan.",
+        responsible: isTurkish ? "Süpervizör / Yetkili LOTO Personeli" : "Supervisor / Authorized LOTO Person",
+      },
+      {
+        id: `loto-2-${Date.now()}`,
+        step: isTurkish ? "Ekipmanı kontrollü şekilde durdur." : "Shut down the equipment in a controlled manner.",
+        hazards: isTurkish ? "Beklenmeyen hareket veya proses etkisi." : "Unexpected movement or process effect.",
+        controls: isTurkish ? "Normal durdurma prosedürünü uygula ve etkilenen personeli bilgilendir." : "Apply the normal shutdown procedure and inform affected personnel.",
+        responsible: isTurkish ? "Operatör / Süpervizör" : "Operator / Supervisor",
+      },
+      {
+        id: `loto-3-${Date.now()}`,
+        step: isTurkish ? "Enerji kaynaklarını izole et." : "Isolate energy sources.",
+        hazards: isTurkish ? "Elektrik, basınç, hidrolik, pnömatik, mekanik veya proses enerjisi." : "Electrical, pressure, hydraulic, pneumatic, mechanical or process energy.",
+        controls: isTurkish ? "Tüm enerji kaynaklarını uygun izolasyon noktalarından ayır ve güvenli konuma getir." : "Isolate all energy sources at appropriate isolation points and place them in a safe state.",
+        responsible: isTurkish ? "Yetkili LOTO Personeli" : "Authorized LOTO Person",
+      },
+      {
+        id: `loto-4-${Date.now()}`,
+        step: isTurkish ? "Kilit ve etiketleri uygula." : "Apply locks and tags.",
+        hazards: isTurkish ? "İzolasyonun yetkisiz kaldırılması." : "Unauthorized removal of isolation.",
+        controls: isTurkish ? "Her yetkili çalışan kendi kişisel kilit ve etiketini prosedüre göre uygulasın." : "Each authorized worker shall apply their personal lock and tag in accordance with the procedure.",
+        responsible: isTurkish ? "Yetkili LOTO Personeli" : "Authorized LOTO Person",
+      },
+      {
+        id: `loto-5-${Date.now()}`,
+        step: isTurkish ? "Depolanmış enerjiyi güvenli hale getir." : "Control stored energy.",
+        hazards: isTurkish ? "Basınç, yay, yerçekimi, kondansatör veya sıcaklık enerjisi." : "Pressure, springs, gravity, capacitors or thermal energy.",
+        controls: isTurkish ? "Depolanmış enerjiyi boşalt, bloke et, sabitle veya güvenli seviyeye indir." : "Release, block, secure or otherwise reduce stored energy to a safe condition.",
+        responsible: isTurkish ? "Yetkili Personel" : "Authorized Person",
+      },
+      {
+        id: `loto-6-${Date.now()}`,
+        step: isTurkish ? "Sıfır enerji durumunu doğrula." : "Verify zero-energy condition.",
+        hazards: isTurkish ? "İzolasyonun başarısız olması veya artık enerji." : "Isolation failure or residual energy.",
+        controls: isTurkish ? "Uygun test ve doğrulama yöntemiyle ekipmanın enerjisiz olduğunu doğrula. Elektrik için uygun test-before-touch yöntemi uygula." : "Verify de-energization using an appropriate test method. For electrical systems apply suitable test-before-touch verification.",
+        responsible: isTurkish ? "Yetkili LOTO Personeli" : "Authorized LOTO Person",
+      },
+      {
+        id: `loto-7-${Date.now()}`,
+        step: isTurkish ? "Çalışmayı izolasyon altında gerçekleştir." : "Perform the work under isolation.",
+        hazards: isTurkish ? "İzolasyonun değiştirilmesi, yeni enerji kaynağı veya saha koşulu." : "Isolation alteration, new energy source or changing conditions.",
+        controls: isTurkish ? "LOTO sınırlarını koru. İzolasyon değişirse işi durdur ve yeniden değerlendir." : "Maintain LOTO boundaries. Stop work and reassess if the isolation changes.",
+        responsible: isTurkish ? "Tüm Çalışanlar / Süpervizör" : "All Workers / Supervisor",
+      },
+      {
+        id: `loto-8-${Date.now()}`,
+        step: isTurkish ? "Kontrollü yeniden devreye alma yap." : "Perform controlled recommissioning.",
+        hazards: isTurkish ? "Personel veya ekipman hazır değilken enerji verilmesi." : "Re-energization while personnel or equipment are not ready.",
+        controls: isTurkish ? "Alanı kontrol et, personeli bilgilendir, kişisel kilitlerin yetkili kişilerce kaldırıldığını doğrula ve enerjiyi kontrollü şekilde geri ver." : "Inspect the area, notify personnel, verify personal locks are removed by authorized persons and restore energy in a controlled manner.",
+        responsible: isTurkish ? "Süpervizör / Yetkili LOTO Personeli" : "Supervisor / Authorized LOTO Person",
+      },
+    ]);
+
+    setEmergencyArrangements(
+      isTurkish
+        ? "Beklenmeyen enerji verme, ekipman hareketi veya proses salımı halinde çalışma derhal durdurulmalı, alan güvenli hale getirilmeli ve ilgili acil durum prosedürü uygulanmalıdır."
+        : "In the event of unexpected energization, equipment movement or process release, work shall stop immediately, the area shall be made safe and the applicable emergency procedure implemented."
+    );
+
+    setEnvironmentalControls(
+      isTurkish
+        ? "İzolasyon sırasında oluşabilecek proses sıvıları, yağ veya kimyasallar kontrollü şekilde toplanmalı; dökülme ve drenaja kontrolsüz boşaltım önlenmelidir."
+        : "Process liquids, oils or chemicals released during isolation shall be collected in a controlled manner and uncontrolled spills or discharge to drainage prevented."
+    );
+
+    setReferences(
+      isTurkish
+        ? "• SafeBase görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1910.147 – Control of Hazardous Energy (Lockout/Tagout)\n• Proje / saha LOTO prosedürü\n• Kullanılan ekipmanın üretici talimatları"
+        : "• SafeBase task-specific risk assessment\n• OSHA 29 CFR 1910.147 – Control of Hazardous Energy (Lockout/Tagout)\n• Project / site LOTO procedure\n• Manufacturer instructions for equipment used"
+    );
+  };
+
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10">
@@ -515,7 +832,7 @@ export default function MethodStatementPage({ params }: Props) {
             </div>
 
             <div className="rounded-2xl border border-emerald-400/20 bg-slate-950/70 px-5 py-4 text-center">
-              <p className="text-3xl font-black text-emerald-300">2</p>
+              <p className="text-3xl font-black text-emerald-300">4</p>
               <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-400">
                 {isTurkish ? "Hazır Şablon" : "Ready Template"}
               </p>
@@ -586,6 +903,72 @@ export default function MethodStatementPage({ params }: Props) {
                 </span>
               </div>
             </button>
+
+            <button
+              type="button"
+              onClick={loadConfinedSpaceTemplate}
+              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-cyan-500/50 hover:bg-cyan-500/[0.07]"
+            >
+              <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 text-2xl">
+                    🕳️
+                  </span>
+
+                  <div>
+                    <h3 className="font-black text-white">
+                      {isTurkish
+                        ? "Kapalı Alana Giriş"
+                        : "Confined Space Entry"}
+                    </h3>
+
+                    <p className="mt-1 text-sm leading-6 text-slate-400">
+                      {isTurkish
+                        ? "Giriş izni, LOTO, gaz ölçümü, havalandırma, gözcü, kurtarma düzenlemeleri ve 8 iş adımı."
+                        : "Entry permit, LOTO, gas testing, ventilation, attendant, rescue arrangements and 8 work steps."}
+                    </p>
+                  </div>
+                </div>
+
+                <span className="shrink-0 rounded-xl bg-cyan-500 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-cyan-400">
+                  {isTurkish
+                    ? "Şablonu Yükle"
+                    : "Load Template"}
+                </span>
+              </div>
+            </button>
+
+            <button
+              type="button"
+              onClick={loadLotoTemplate}
+              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-emerald-500/50 hover:bg-emerald-500/[0.07]"
+            >
+              <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-2xl">
+                    🔒
+                  </span>
+
+                  <div>
+                    <h3 className="font-black text-white">
+                      {isTurkish ? "LOTO / Enerji İzolasyonu" : "LOTO / Energy Isolation"}
+                    </h3>
+
+                    <p className="mt-1 text-sm leading-6 text-slate-400">
+                      {isTurkish
+                        ? "Enerji kaynakları, kilit/etiket, depolanmış enerji, sıfır enerji doğrulama ve yeniden devreye alma."
+                        : "Energy sources, lock/tag, stored energy, zero-energy verification and controlled recommissioning."}
+                    </p>
+                  </div>
+                </div>
+
+                <span className="shrink-0 rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-black text-slate-950">
+                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                </span>
+              </div>
+            </button>
+
+
 
           </div>
         </section>

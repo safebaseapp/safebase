@@ -200,7 +200,167 @@ export default function MethodStatementPrint({
             </thead>
 
             <tbody>
-              {(activity === "Sıcak Çalışma" || activity === "Hot Work"
+              {(activity === "LOTO / Enerji İzolasyonu" || activity === "LOTO / Energy Isolation"
+                ? [
+                    [
+                      isTurkish
+                        ? "Tanımlanmamış enerji kaynağı"
+                        : "Unidentified energy source",
+                      isTurkish
+                        ? "Elektrik, mekanik, hidrolik, pnömatik, termal, yerçekimi ve proses enerjileri dahil tüm tehlikeli enerji kaynakları işe başlamadan önce belirlenmelidir."
+                        : "All hazardous energy sources, including electrical, mechanical, hydraulic, pneumatic, thermal, gravitational and process energy, shall be identified before work begins.",
+                      isTurkish
+                        ? "Enerji kaynağı listesi"
+                        : "Energy-source verification",
+                    ],
+                    [
+                      isTurkish
+                        ? "Eksik / yanlış izolasyon"
+                        : "Incomplete / incorrect isolation",
+                      isTurkish
+                        ? "Doğru izolasyon noktaları ekipman ve proses bilgilerine göre belirlenmeli, tüm ilgili kaynaklar güvenli şekilde izole edilmelidir."
+                        : "Correct isolation points shall be identified from equipment and process information and all relevant sources safely isolated.",
+                      isTurkish
+                        ? "İzolasyon noktası kontrolü"
+                        : "Isolation-point check",
+                    ],
+                    [
+                      isTurkish
+                        ? "Yetkisiz yeniden enerjilendirme"
+                        : "Unauthorized re-energization",
+                      isTurkish
+                        ? "Yetkili personel prosedüre uygun kişisel kilit ve etiket uygulamalı; başkasına ait kilit/etiket yetkisiz şekilde kaldırılmamalıdır."
+                        : "Authorized personnel shall apply personal locks and tags in accordance with the procedure; another person's lock/tag shall not be removed without authorization.",
+                      isTurkish
+                        ? "Kilit / etiket kontrolü"
+                        : "Lock / tag verification",
+                    ],
+                    [
+                      isTurkish
+                        ? "Depolanmış / artık enerji"
+                        : "Stored / residual energy",
+                      isTurkish
+                        ? "Basınç, yay, yerçekimi, kondansatör, sıcaklık ve diğer depolanmış enerjiler boşaltılmalı, bloke edilmeli veya güvenli hale getirilmelidir."
+                        : "Pressure, springs, gravity, capacitors, thermal energy and other stored energy shall be released, blocked or otherwise made safe.",
+                      isTurkish
+                        ? "Artık enerji kontrolü"
+                        : "Stored-energy check",
+                    ],
+                    [
+                      isTurkish
+                        ? "Sıfır enerji doğrulanmaması"
+                        : "Failure to verify zero energy",
+                      isTurkish
+                        ? "İzolasyon sonrası uygun test veya try-out yöntemiyle sıfır enerji durumu doğrulanmalı; elektrik için uygun gerilim yokluğu testi yapılmalıdır."
+                        : "After isolation, zero-energy condition shall be verified using a suitable test or try-out method; electrical systems shall be tested for absence of voltage.",
+                      isTurkish
+                        ? "Zero-energy / test sonucu"
+                        : "Zero-energy / test result",
+                    ],
+                    [
+                      isTurkish
+                        ? "Çalışma sırasında izolasyon değişikliği"
+                        : "Isolation change during work",
+                      isTurkish
+                        ? "İzolasyon noktaları ve LOTO sınırları çalışma boyunca korunmalı; herhangi bir değişiklikte iş durdurulmalı ve izolasyon yeniden doğrulanmalıdır."
+                        : "Isolation points and LOTO boundaries shall be maintained throughout the work; work shall stop and isolation be reverified if any change occurs.",
+                      isTurkish
+                        ? "LOTO sınırı kontrolü"
+                        : "LOTO-boundary verification",
+                    ],
+                    [
+                      isTurkish
+                        ? "Kontrolsüz yeniden devreye alma"
+                        : "Uncontrolled recommissioning",
+                      isTurkish
+                        ? "Tüm personel ve ekipmanın güvenli konumda olduğu doğrulanmalı, kişisel kilitler yetkili kişilerce kaldırılmalı ve enerji kontrollü şekilde geri verilmelidir."
+                        : "Confirm personnel and equipment are in a safe condition, personal locks are removed by authorized persons and energy is restored in a controlled manner.",
+                      isTurkish
+                        ? "Yeniden devreye alma kontrolü"
+                        : "Recommissioning verification",
+                    ],
+                  ]
+                : activity === "Kapalı Alana Giriş" || activity === "Confined Space Entry"
+                ? [
+                    [
+                      isTurkish
+                        ? "Oksijen yetersizliği / zenginliği"
+                        : "Oxygen deficiency / enrichment",
+                      isTurkish
+                        ? "Giriş öncesinde ve gerekli olduğu sürece çalışma sırasında kalibre edilmiş uygun gaz ölçüm cihazıyla oksijen seviyesi kontrol edilmeli ve kabul kriterleri sağlanmalıdır."
+                        : "Oxygen concentration shall be checked before entry and, where required, continuously during the work using suitable calibrated gas-detection equipment, and acceptance criteria shall be maintained.",
+                      isTurkish
+                        ? "O₂ ölçümü / kayıt"
+                        : "O₂ test / record",
+                    ],
+                    [
+                      isTurkish
+                        ? "Yanıcı atmosfer"
+                        : "Flammable atmosphere",
+                      isTurkish
+                        ? "LEL seviyesi uygun gaz ölçüm cihazıyla kontrol edilmeli, kabul sınırları aşılırsa giriş yapılmamalı veya çalışma derhal durdurulmalıdır."
+                        : "LEL shall be monitored using suitable gas-detection equipment. Entry shall not proceed, or work shall stop immediately, if acceptable limits are exceeded.",
+                      isTurkish
+                        ? "LEL ölçümü"
+                        : "LEL verification",
+                    ],
+                    [
+                      isTurkish
+                        ? "Toksik gaz / buhar"
+                        : "Toxic gases / vapours",
+                      isTurkish
+                        ? "H₂S, CO ve prosese bağlı diğer potansiyel toksik maddeler risk değerlendirmesine göre ölçülmeli ve kabul limitleri doğrulanmalıdır."
+                        : "H₂S, CO and other process-specific toxic contaminants shall be tested as required by the risk assessment and verified against acceptable limits.",
+                      isTurkish
+                        ? "Gaz testi sonucu"
+                        : "Gas-test result",
+                    ],
+                    [
+                      isTurkish
+                        ? "Beklenmeyen enerji / proses girişi"
+                        : "Unexpected energy / process ingress",
+                      isTurkish
+                        ? "Elektrik, mekanik, hidrolik, pnömatik ve proses kaynakları LOTO ve gerekli pozitif izolasyon yöntemleriyle güvenli şekilde izole edilmeli ve giriş öncesi doğrulanmalıdır."
+                        : "Electrical, mechanical, hydraulic, pneumatic and process sources shall be safely isolated using LOTO and required positive-isolation methods and verified before entry.",
+                      isTurkish
+                        ? "LOTO / izolasyon doğrulama"
+                        : "LOTO / isolation verification",
+                    ],
+                    [
+                      isTurkish
+                        ? "Havalandırma yetersizliği"
+                        : "Inadequate ventilation",
+                      isTurkish
+                        ? "Gerektiğinde mekanik havalandırma kurulmalı, temiz hava kaynağı kullanılmalı ve havalandırmanın etkinliği atmosfer ölçümleriyle doğrulanmalıdır."
+                        : "Mechanical ventilation shall be provided where required, using a clean air source, and its effectiveness shall be verified by atmospheric testing.",
+                      isTurkish
+                        ? "Havalandırma kontrolü"
+                        : "Ventilation verification",
+                    ],
+                    [
+                      isTurkish
+                        ? "İletişim / gözetim kaybı"
+                        : "Loss of communication / monitoring",
+                      isTurkish
+                        ? "Gözcü giriş noktasında sürekli görev yapmalı, içerideki personeli takip etmeli ve uygun iletişim sistemi çalışma süresince aktif tutulmalıdır."
+                        : "The attendant shall remain at the entry point, continuously track entrants and maintain an effective communication system throughout the entry.",
+                      isTurkish
+                        ? "Gözcü / iletişim kontrolü"
+                        : "Attendant / communication check",
+                    ],
+                    [
+                      isTurkish
+                        ? "Kurtarma ihtiyacı"
+                        : "Rescue requirement",
+                      isTurkish
+                        ? "Giriş başlamadan önce göreve uygun kurtarma planı, ekipmanı ve gerekli kurtarma personeli hazır olmalıdır. Uygulanabilir olduğunda giriş yapmadan kurtarma yöntemi tercih edilmelidir."
+                        : "A task-appropriate rescue plan, equipment and required rescue personnel shall be ready before entry. Non-entry rescue shall be preferred where feasible.",
+                      isTurkish
+                        ? "Kurtarma planı hazır"
+                        : "Rescue plan confirmed",
+                    ],
+                  ]
+                : activity === "Sıcak Çalışma" || activity === "Hot Work"
                 ? [
                     [
                       isTurkish ? "Yangın / tutuşma" : "Fire / ignition",

@@ -131,7 +131,69 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   };
 
   
-  const saveRiskAssessment = async () => {
+  
+/* SAFEBASE_LOAD_SAVED_ASSESSMENT */
+useEffect(() => {
+  const loadSavedAssessment = async () => {
+    const assessmentId = new URLSearchParams(
+      window.location.search
+    ).get("assessment");
+
+    if (!assessmentId) return;
+
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) return;
+
+    const { data, error } = await supabase
+      .from("risk_assessments")
+      .select("*")
+      .eq("id", assessmentId)
+      .eq("user_id", user.id)
+      .single();
+
+    if (error || !data) {
+      console.error("Risk assessment load error:", error);
+      setSaveAssessmentMessage("Kayıtlı risk analizi yüklenemedi.");
+      return;
+    }
+
+    setProjectName(data.project_name || "");
+    setCompanyName(data.company_name || "");
+    setAssessmentLocation(data.location || "");
+    setAssessorName(data.assessor_name || "");
+    setAssessmentDate(data.assessment_date || "");
+    setAssessmentRevision(data.revision || "1.0");
+
+    setDepartment(data.department || "");
+    setAssetArea(data.asset_area || "");
+    setProcessMethod(data.process_method || "");
+    setDocumentNo(data.document_no || "SB-HIRARC-001");
+    setReviewedBy(data.reviewed_by || "");
+    setApprovedBy(data.approved_by || "");
+
+    const loadedRiskItems = Array.isArray(data.risk_items)
+      ? (data.risk_items as unknown as RiskRegisterItem[])
+      : [];
+
+    if (loadedRiskItems.length > 0) {
+      setRiskItems(loadedRiskItems);
+    }
+
+    setSavedAssessmentId(data.id);
+    setSaveAssessmentMessage("Kayıtlı risk analizi yüklendi.");
+
+    console.log("✅ Saved risk assessment loaded:", data.id);
+  };
+
+  loadSavedAssessment();
+}, []);
+/* SAFEBASE_LOAD_SAVED_ASSESSMENT_END */
+
+const saveRiskAssessment = async () => {
     setIsSavingAssessment(true);
     setSaveAssessmentMessage("");
 

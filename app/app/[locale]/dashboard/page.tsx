@@ -1,5 +1,6 @@
 import LogoutButton from "./LogoutButton";
-import CompanyBranding from "./CompanyBranding"; 
+import CompanyBranding from "./CompanyBranding";
+import RiskAssessmentActions from "./RiskAssessmentActions"; 
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound, redirect } from "next/navigation";
@@ -114,6 +115,16 @@ export default async function DashboardPage({ params }: Props) {
 
   const isPremium =
     profile.plan === "premium" || profile.role === "admin";
+
+  const { data: riskAssessments } = await supabase
+    .from("risk_assessments")
+    .select(
+      "id,title,project_name,company_name,document_no,assessment_date,risk_items,updated_at"
+    )
+    .eq("user_id", user.id)
+    .order("updated_at", { ascending: false })
+    .limit(5);
+
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -272,6 +283,112 @@ export default async function DashboardPage({ params }: Props) {
           userId={user.id}
           isPremium={isPremium}
         />
+
+        <section className="mt-6 rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-xl font-bold">
+                {isTurkish ? "Risk Analizlerim" : "My Risk Assessments"}
+              </h2>
+              <p className="mt-1 text-sm text-slate-400">
+                {isTurkish
+                  ? "Kaydettiğiniz profesyonel HIRARC değerlendirmelerini görüntüleyin."
+                  : "View your saved professional HIRARC assessments."}
+              </p>
+            </div>
+
+            <Link
+              href={`/${locale}/tools/quick-risk-assessment`}
+              className="inline-flex items-center justify-center rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+            >
+              {isTurkish ? "+ Yeni Risk Analizi" : "+ New Risk Assessment"}
+            </Link>
+          </div>
+
+          {riskAssessments && riskAssessments.length > 0 ? (
+            <div className="mt-6 grid gap-4">
+              {riskAssessments.map((assessment) => {
+                const riskCount = Array.isArray(assessment.risk_items)
+                  ? assessment.risk_items.length
+                  : 0;
+
+                return (
+                  <article
+                    key={assessment.id}
+                    className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5"
+                  >
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h3 className="font-semibold text-white">
+                            {assessment.title ||
+                              assessment.document_no ||
+                              (isTurkish ? "Risk Analizi" : "Risk Assessment")}
+                          </h3>
+
+                          <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-300">
+                            {riskCount} {isTurkish ? "risk" : "risks"}
+                          </span>
+                        </div>
+
+                        <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-slate-400">
+                          {assessment.project_name && (
+                            <span>
+                              {isTurkish ? "Proje:" : "Project:"}{" "}
+                              {assessment.project_name}
+                            </span>
+                          )}
+
+                          {assessment.company_name && (
+                            <span>
+                              {isTurkish ? "Şirket:" : "Company:"}{" "}
+                              {assessment.company_name}
+                            </span>
+                          )}
+
+                          {assessment.assessment_date && (
+                            <span>
+                              {isTurkish ? "Tarih:" : "Date:"}{" "}
+                              {assessment.assessment_date}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        <Link
+                          href={`/${locale}/tools/quick-risk-assessment?assessment=${assessment.id}`}
+                          className="rounded-xl border border-blue-500/40 bg-blue-500/10 px-4 py-2.5 text-sm font-semibold text-blue-300 transition hover:bg-blue-500/20"
+                        >
+                          {isTurkish ? "Analizi Aç" : "Open Assessment"}
+                        </Link>
+
+                        <RiskAssessmentActions
+                          assessmentId={assessment.id}
+                          locale={locale}
+                        />
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="mt-6 rounded-2xl border border-dashed border-slate-700 bg-slate-950/50 px-6 py-10 text-center">
+              <div className="text-4xl">🛡️</div>
+              <h3 className="mt-4 font-semibold">
+                {isTurkish
+                  ? "Henüz kayıtlı risk analizi yok"
+                  : "No saved risk assessments yet"}
+              </h3>
+              <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-400">
+                {isTurkish
+                  ? "İlk profesyonel HIRARC değerlendirmenizi oluşturup kaydettiğinizde burada görünecek."
+                  : "Your saved professional HIRARC assessments will appear here."}
+              </p>
+            </div>
+          )}
+        </section>
 
         <section className="mt-6 rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
