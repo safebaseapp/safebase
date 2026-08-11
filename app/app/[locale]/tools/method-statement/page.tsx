@@ -262,6 +262,195 @@ export default function MethodStatementPage({ params }: Props) {
   };
 
 
+  const loadHotWorkTemplate = () => {
+    setActivity(isTurkish ? "Sıcak Çalışma" : "Hot Work");
+    setDocumentNo("SB-MS-002");
+
+    setScope(
+      isTurkish
+        ? "Bu Method Statement; kaynak, kesme, taşlama, lehimleme ve alev, kıvılcım veya yüksek sıcaklık oluşturan diğer sıcak çalışma faaliyetlerinin güvenli şekilde planlanması ve yürütülmesi için uygulanacak yöntemi tanımlar. Çalışma alanının hazırlanması, yanıcı maddelerin kontrolü, gerekli izinlerin alınması, yangın önleme tedbirleri, uygun PPE kullanımı, çalışma sırasında gözetim ve iş tamamlandıktan sonraki yangın kontrollerini kapsar."
+        : "This Method Statement defines the safe method for planning and carrying out welding, cutting, grinding, brazing and other hot-work activities that generate flame, sparks or high temperatures. It covers preparation of the work area, control of combustible materials, required permits, fire-prevention measures, suitable PPE, monitoring during the work and post-work fire checks."
+    );
+
+    setResponsibilities(
+      isTurkish
+        ? "Saha Süpervizörü: Çalışmayı planlar, sıcak çalışma alanını kontrol eder, izin şartlarının sağlandığını doğrular ve uygulamayı gözetir.\nHSE Personeli: Risk değerlendirmesi, saha kontrolleri ve sıcak çalışma güvenlik gerekliliklerinin uygulanmasını destekler.\nYangın Gözcüsü: Çalışma sırasında ve saha prosedürünün gerektirdiği süre boyunca çalışma sonrasında yangın riskini izler ve uygun yangın söndürme ekipmanını hazır bulundurur.\nÇalışanlar: Onaylı çalışma yöntemine uyar, ekipmanı kullanım öncesi kontrol eder ve tehlikeli veya değişen koşulları bildirir."
+        : "Site Supervisor: Plans the work, verifies the hot-work area, confirms permit requirements are satisfied and supervises implementation.\nHSE Personnel: Supports risk assessment, field verification and implementation of hot-work safety requirements.\nFire Watch: Monitors for fire during the work and for the period required by site procedures after completion, keeping suitable firefighting equipment immediately available.\nWorkers: Follow the approved work method, inspect equipment before use and report unsafe or changing conditions."
+    );
+
+    setCompetency(
+      isTurkish
+        ? "Sıcak çalışmayı gerçekleştiren personel yaptığı işe uygun eğitim, bilgi ve deneyime sahip olmalıdır. Kaynakçı veya ilgili operatör, kullanılan ekipmanı güvenli şekilde kullanabilecek yetkinlikte olmalıdır. Yangın gözcüsü yangın risklerini, alarm yöntemini ve mevcut yangın söndürme ekipmanının güvenli kullanımını bilmelidir."
+        : "Personnel carrying out hot work shall have suitable training, knowledge and experience for the task. Welders or other operators shall be competent to use the relevant equipment safely. The fire watch shall understand fire hazards, alarm arrangements and the safe use of the available firefighting equipment."
+    );
+
+    setPpe(
+      isTurkish
+        ? "• Baret\n• Emniyet ayakkabısı\n• Isıya ve yapılan işe uygun eldiven\n• Aleve dayanıklı / uygun iş kıyafeti\n• Kaynak maskesi veya yapılan işe uygun yüz ve göz koruması\n• Gerektiğinde işitme koruması\n• Risk değerlendirmesine göre uygun solunum koruması"
+        : "• Safety helmet\n• Safety footwear\n• Heat-resistant/task-appropriate gloves\n• Flame-resistant / suitable work clothing\n• Welding helmet or task-appropriate face and eye protection\n• Hearing protection where required\n• Suitable respiratory protection where required by the risk assessment"
+    );
+
+    setToolsEquipment(
+      isTurkish
+        ? "• Kaynak / kesme / taşlama ekipmanı\n• Uygun ve kontrol edilmiş elektrik kabloları ve bağlantıları\n• Gaz tüpleri, regülatörler, hortumlar ve geri tepme emniyet tertibatları gerektiğinde\n• Kaynak perdeleri / kıvılcım bariyerleri\n• Uygun yangın söndürücü ekipman\n• Yanmaz örtü veya kıvılcım tutucu malzemeler\n• Bariyer ve uyarı levhaları\n• Gerektiğinde uygun gaz ölçüm cihazı"
+        : "• Welding / cutting / grinding equipment\n• Suitable inspected electrical cables and connections\n• Gas cylinders, regulators, hoses and flashback protection where applicable\n• Welding screens / spark barriers\n• Suitable firefighting equipment\n• Fire-resistant blankets or spark-containment materials\n• Barricades and warning signs\n• Suitable gas-detection equipment where required"
+    );
+
+    setPermits(
+      isTurkish
+        ? "Geçerli Sıcak Çalışma İzni (Hot Work Permit) işe başlamadan önce alınmalı ve çalışma alanında doğrulanmalıdır. Risk değerlendirmesi, eş zamanlı işler, yangın riski ve saha prosedürüne göre gerekli gaz ölçümleri kontrol edilmelidir. İzin koşulları değişirse çalışma durdurulmalı ve izin yeniden değerlendirilmelidir."
+        : "A valid Hot Work Permit shall be obtained and verified at the work area before work starts. The risk assessment, simultaneous activities, fire hazards and any atmospheric testing required by site procedures shall be reviewed. Work shall stop and the permit shall be reassessed if conditions change."
+    );
+
+    setPreWorkRequirements(
+      isTurkish
+        ? "• Göreve özel risk değerlendirmesini ve Sıcak Çalışma İznini kontrol et.\n• Çalışma alanındaki yanıcı ve parlayıcı malzemeleri belirle ve mümkünse uzaklaştır.\n• Uzaklaştırılamayan yanıcı malzemeleri uygun yanmaz örtü veya bariyerle koru.\n• Kıvılcım ve sıcak parçacıkların alt seviyelere, açıklıklara veya bitişik alanlara ulaşma ihtimalini kontrol et.\n• Uygun yangın söndürme ekipmanını hazır bulundur.\n• Yangın gözcüsünü belirle ve görevlerini doğrula.\n• Kaynak, kesme veya taşlama ekipmanını kullanım öncesi kontrol et.\n• Gaz tüplerinin doğru konumlandırıldığını, sabitlendiğini ve bağlantıların uygun olduğunu doğrula.\n• Gerekliyse çalışma öncesi atmosfer / gaz ölçümünü gerçekleştir ve sonuçları izin şartlarına göre doğrula.\n• Yakındaki personeli ark ışını, kıvılcım, duman ve sıcak yüzeylerden korumak için alanı bariyerle."
+        : "• Review the task-specific risk assessment and Hot Work Permit.\n• Identify combustible and flammable materials in the work area and remove them where reasonably practicable.\n• Protect combustible materials that cannot be removed using suitable fire-resistant covers or barriers.\n• Check whether sparks or hot particles could reach lower levels, openings or adjacent areas.\n• Provide suitable firefighting equipment.\n• Assign a fire watch and confirm their responsibilities.\n• Inspect welding, cutting or grinding equipment before use.\n• Verify gas cylinders are correctly positioned, secured and properly connected.\n• Where required, perform atmospheric / gas testing and verify results against permit requirements.\n• Barricade or screen the area to protect nearby personnel from arc radiation, sparks, fumes and hot surfaces."
+    );
+
+    setMethodSteps([
+      {
+        id: `hot-1-${Date.now()}`,
+        step: isTurkish
+          ? "Çalışmayı planla ve sıcak çalışma iznini doğrula."
+          : "Plan the work and verify the Hot Work Permit.",
+        hazards: isTurkish
+          ? "Yetersiz planlama, izin şartlarının eksik olması, eş zamanlı işler."
+          : "Inadequate planning, incomplete permit conditions and simultaneous activities.",
+        controls: isTurkish
+          ? "Risk değerlendirmesini ve izin şartlarını gözden geçir. İş kapsamını, çalışma yerini ve çevredeki faaliyetleri doğrula. Şartlar uygun değilse işe başlama."
+          : "Review the risk assessment and permit conditions. Verify the work scope, location and surrounding activities. Do not start until conditions are acceptable.",
+        responsible: isTurkish
+          ? "Saha Süpervizörü / HSE"
+          : "Site Supervisor / HSE",
+      },
+      {
+        id: `hot-2-${Date.now()}`,
+        step: isTurkish
+          ? "Çalışma alanını hazırla ve yangın yükünü kontrol et."
+          : "Prepare the work area and control the fire load.",
+        hazards: isTurkish
+          ? "Yanıcı maddelerin tutuşması, kıvılcımın çevre veya alt seviyelere yayılması."
+          : "Ignition of combustible materials and spread of sparks to adjacent or lower areas.",
+        controls: isTurkish
+          ? "Yanıcı maddeleri uzaklaştır veya uygun şekilde koru. Açıklıkları ve kıvılcım geçiş yollarını kontrol et. Gerektiğinde yanmaz örtü ve kaynak perdesi kullan."
+          : "Remove or adequately protect combustible materials. Control openings and potential spark paths. Use fire-resistant blankets and welding screens where required.",
+        responsible: isTurkish
+          ? "Süpervizör / Yangın Gözcüsü"
+          : "Supervisor / Fire Watch",
+      },
+      {
+        id: `hot-3-${Date.now()}`,
+        step: isTurkish
+          ? "Ekipmanı, enerji bağlantılarını ve gaz sistemlerini kontrol et."
+          : "Inspect equipment, energy connections and gas systems.",
+        hazards: isTurkish
+          ? "Elektrik çarpması, ekipman arızası, gaz kaçağı, hortum veya regülatör arızası."
+          : "Electric shock, equipment failure, gas leakage or hose/regulator failure.",
+        controls: isTurkish
+          ? "Ekipmanı kullanım öncesi kontrol et. Hasarlı kablo, hortum, regülatör veya ekipmanı kullanma. Gaz tüplerini dik ve sabit tut; uygun bağlantı ve geri tepme korumasını doğrula."
+          : "Inspect equipment before use. Do not use damaged cables, hoses, regulators or equipment. Keep gas cylinders upright and secured and verify suitable connections and flashback protection.",
+        responsible: isTurkish
+          ? "Yetkin Operatör / Süpervizör"
+          : "Competent Operator / Supervisor",
+      },
+      {
+        id: `hot-4-${Date.now()}`,
+        step: isTurkish
+          ? "Yangın önleme düzenlemelerini ve gerekiyorsa gaz ölçümünü tamamla."
+          : "Establish fire-prevention arrangements and atmospheric testing where required.",
+        hazards: isTurkish
+          ? "Yangın, patlama, yanıcı atmosfer veya yetersiz oksijen koşulları."
+          : "Fire, explosion, flammable atmosphere or oxygen-deficient conditions.",
+        controls: isTurkish
+          ? "Uygun yangın söndürücüyü erişilebilir konuma yerleştir ve yangın gözcüsünü hazır bulundur. Saha prosedürü veya risk değerlendirmesi gerektiriyorsa yetkin kişi tarafından gaz ölçümü yap ve kabul kriterlerini doğrula."
+          : "Position suitable firefighting equipment for immediate access and provide a fire watch. Where required by site procedure or risk assessment, conduct atmospheric testing by a competent person and verify acceptance criteria.",
+        responsible: isTurkish
+          ? "HSE / Yangın Gözcüsü / Yetkin Kişi"
+          : "HSE / Fire Watch / Competent Person",
+      },
+      {
+        id: `hot-5-${Date.now()}`,
+        step: isTurkish
+          ? "Sıcak çalışmayı kontrollü şekilde gerçekleştir."
+          : "Perform the hot work under controlled conditions.",
+        hazards: isTurkish
+          ? "Kıvılcım, sıcak metal, ark ışını, yanık, duman, gürültü ve yangın."
+          : "Sparks, hot metal, arc radiation, burns, fumes, noise and fire.",
+        controls: isTurkish
+          ? "Uygun PPE kullan. Kaynak perdelerini ve bariyerleri koru. Kıvılcım yönünü kontrol et. Havalandırmayı sürdür ve yangın gözcüsünün alanı sürekli izlemesini sağla."
+          : "Use suitable PPE. Maintain welding screens and barriers. Control the direction of sparks. Maintain ventilation and ensure the fire watch continuously monitors the area.",
+        responsible: isTurkish
+          ? "Operatör / Yangın Gözcüsü"
+          : "Operator / Fire Watch",
+      },
+      {
+        id: `hot-6-${Date.now()}`,
+        step: isTurkish
+          ? "Çalışma koşullarındaki değişiklikleri izle ve gerektiğinde işi durdur."
+          : "Monitor changing conditions and stop work where necessary.",
+        hazards: isTurkish
+          ? "Yeni yanıcı maddeler, gaz birikmesi, havalandırma kaybı, izin şartlarının değişmesi."
+          : "New combustible materials, gas accumulation, loss of ventilation or changed permit conditions.",
+        controls: isTurkish
+          ? "Alan ve çevre koşullarını izlemeye devam et. İzin şartları geçersiz hale gelirse veya yeni tehlike oluşursa sıcak çalışmayı derhal durdur ve yeniden değerlendir."
+          : "Continue monitoring the work area and surrounding conditions. Stop hot work immediately and reassess if permit conditions become invalid or new hazards arise.",
+        responsible: isTurkish
+          ? "Tüm Çalışanlar / Süpervizör"
+          : "All Workers / Supervisor",
+      },
+      {
+        id: `hot-7-${Date.now()}`,
+        step: isTurkish
+          ? "İş tamamlandıktan sonra ekipmanı güvenli şekilde kapat."
+          : "Shut down equipment safely after completion.",
+        hazards: isTurkish
+          ? "Sıcak yüzeyler, basınçlı gaz, enerji bırakılması ve kontrolsüz ekipman."
+          : "Hot surfaces, pressurised gas, residual energy and uncontrolled equipment.",
+        controls: isTurkish
+          ? "Ekipmanı kapat ve enerjisini güvenli şekilde kes. Gaz tüplerinin vanalarını kapat. Sıcak parçaları belirle ve güvenli soğuma alanında tut."
+          : "Shut down and safely isolate equipment. Close gas-cylinder valves. Identify hot components and place them in a safe cooling area.",
+        responsible: isTurkish
+          ? "Operatör / Süpervizör"
+          : "Operator / Supervisor",
+      },
+      {
+        id: `hot-8-${Date.now()}`,
+        step: isTurkish
+          ? "Çalışma sonrası yangın kontrolünü gerçekleştir ve alanı teslim et."
+          : "Conduct the post-work fire check and close out the area.",
+        hazards: isTurkish
+          ? "Gizli kor, gecikmeli tutuşma, sıcak metal veya fark edilmeyen yangın başlangıcı."
+          : "Hidden embers, delayed ignition, hot metal or undetected fire development.",
+        controls: isTurkish
+          ? "Çalışma alanını, alt seviyeleri ve kıvılcım ulaşabilecek bitişik bölgeleri kontrol et. Yangın gözcülüğünü saha prosedürü ve izin şartlarında belirtilen süre boyunca sürdür. Alan güvenli doğrulanmadan izlemeyi sonlandırma."
+          : "Inspect the work area, lower levels and adjacent locations that may have received sparks. Continue fire-watch monitoring for the period specified by site procedures and permit conditions. Do not close the monitoring period until the area is confirmed safe.",
+        responsible: isTurkish
+          ? "Yangın Gözcüsü / Süpervizör"
+          : "Fire Watch / Supervisor",
+      },
+    ]);
+
+    setEmergencyArrangements(
+      isTurkish
+        ? "Yangın veya kontrolsüz tutuşma halinde sıcak çalışma derhal durdurulmalı, enerji ve gaz kaynakları güvenli ise izole edilmeli ve saha alarm / acil durum prosedürü uygulanmalıdır. Eğitimli personel yalnızca güvenli olması halinde uygun yangın söndürücü ile ilk müdahaleyi gerçekleştirmelidir. Alan tahliye yolları ve acil durum erişimi çalışma boyunca açık tutulmalıdır."
+        : "In the event of fire or uncontrolled ignition, hot work shall stop immediately, energy and gas sources shall be isolated where safe to do so, and the site alarm / emergency procedure shall be activated. Trained personnel may use suitable firefighting equipment for initial response only where it is safe to do so. Evacuation routes and emergency access shall remain clear throughout the work."
+    );
+
+    setEnvironmentalControls(
+      isTurkish
+        ? "Kaynak çubukları, taşlama diskleri, metal parçaları ve diğer atıkları belirlenen atık sistemine göre topla. Kaynak dumanı ve diğer emisyonları uygun havalandırma ile kontrol et. Yağ, yakıt, kimyasal veya diğer maddelerin zemine ve drenaja kontrolsüz bırakılmasını önle. Çalışma sonunda alanı temiz ve güvenli bırak."
+        : "Collect welding consumables, grinding discs, metal debris and other waste in accordance with the designated waste-management system. Control welding fumes and other emissions using suitable ventilation. Prevent uncontrolled release of oils, fuels, chemicals or other substances to ground or drainage systems. Leave the area clean and safe after completion."
+    );
+
+    setReferences(
+      isTurkish
+        ? "• SafeBase görev bazlı risk değerlendirmesi\n• OSHA – Welding, Cutting, and Brazing (29 CFR 1910 Subpart Q)\n• OSHA – Fire Prevention and Protection requirements\n• Proje / saha Sıcak Çalışma ve PTW prosedürleri\n• Kullanılan ekipmanın üretici talimatları"
+        : "• SafeBase task-specific risk assessment\n• OSHA – Welding, Cutting, and Brazing (29 CFR 1910 Subpart Q)\n• OSHA – Fire Prevention and Protection requirements\n• Project / site Hot Work and PTW procedures\n• Manufacturer instructions for equipment used"
+    );
+  };
+
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10">
@@ -326,14 +515,14 @@ export default function MethodStatementPage({ params }: Props) {
             </div>
 
             <div className="rounded-2xl border border-emerald-400/20 bg-slate-950/70 px-5 py-4 text-center">
-              <p className="text-3xl font-black text-emerald-300">1</p>
+              <p className="text-3xl font-black text-emerald-300">2</p>
               <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-400">
                 {isTurkish ? "Hazır Şablon" : "Ready Template"}
               </p>
             </div>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 grid gap-4 lg:grid-cols-2">
             <button
               type="button"
               onClick={loadWorkingAtHeightTemplate}
@@ -367,6 +556,37 @@ export default function MethodStatementPage({ params }: Props) {
                 </span>
               </div>
             </button>
+            
+            <button
+              type="button"
+              onClick={loadHotWorkTemplate}
+              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-orange-500/50 hover:bg-orange-500/[0.07]"
+            >
+              <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-2xl">
+                    🔥
+                  </span>
+
+                  <div>
+                    <h3 className="font-black text-white">
+                      {isTurkish ? "Sıcak Çalışma" : "Hot Work"}
+                    </h3>
+
+                    <p className="mt-1 text-sm leading-6 text-slate-400">
+                      {isTurkish
+                        ? "Kaynak, kesme ve taşlama için PTW, yangın önleme, gaz kontrolü, yangın gözcüsü ve 8 iş adımı."
+                        : "PTW, fire prevention, gas controls, fire watch and 8 work steps for welding, cutting and grinding."}
+                    </p>
+                  </div>
+                </div>
+
+                <span className="shrink-0 rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-orange-400">
+                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                </span>
+              </div>
+            </button>
+
           </div>
         </section>
         {/* SAFEBASE_METHOD_LIBRARY_END */}

@@ -200,95 +200,144 @@ export default function MethodStatementPrint({
             </thead>
 
             <tbody>
-              <tr>
-                <td>
-                  {isTurkish
-                    ? "Yüksekten düşme"
-                    : "Fall from height"}
-                </td>
-                <td>
-                  {isTurkish
-                    ? "Uygun çalışma platformu, korkuluk sistemi veya risk değerlendirmesine göre onaylı kişisel düşüş koruma sistemi hazır olmalıdır."
-                    : "Suitable work platform, guardrail system or approved personal fall-protection system shall be available as required by the risk assessment."}
-                </td>
-                <td>
-                  {isTurkish
-                    ? "Süpervizör saha kontrolü"
-                    : "Supervisor field verification"}
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  {isTurkish
-                    ? "Düşen cisim"
-                    : "Dropped objects"}
-                </td>
-                <td>
-                  {isTurkish
-                    ? "Alt alan gerektiğinde bariyerlenmeli, gevşek malzemeler emniyete alınmalı ve uygun durumlarda tool lanyard kullanılmalıdır."
-                    : "The area below shall be barricaded where required, loose materials secured and tool lanyards used where appropriate."}
-                </td>
-                <td>
-                  {isTurkish
-                    ? "Dışlama alanı / housekeeping kontrolü"
-                    : "Exclusion-zone / housekeeping check"}
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  {isTurkish
-                    ? "Uygunsuz erişim veya platform"
-                    : "Unsafe access or platform"}
-                </td>
-                <td>
-                  {isTurkish
-                    ? "İskele, platform, MEWP veya kullanılan diğer erişim sistemi işe başlamadan önce uygunluk açısından kontrol edilmelidir."
-                    : "Scaffold, platform, MEWP or other access system used for the task shall be checked for suitability before work starts."}
-                </td>
-                <td>
-                  {isTurkish
-                    ? "Yetkin kişi / ekipman kontrolü"
-                    : "Competent-person / equipment check"}
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  {isTurkish
-                    ? "Olumsuz hava koşulları"
-                    : "Adverse weather"}
-                </td>
-                <td>
-                  {isTurkish
-                    ? "Rüzgar, yağış, görüş ve yüzey koşullarının güvenli çalışmaya uygun olduğu doğrulanmalıdır."
-                    : "Wind, precipitation, visibility and surface conditions shall be confirmed suitable for safe work."}
-                </td>
-                <td>
-                  {isTurkish
-                    ? "Çalışma öncesi saha değerlendirmesi"
-                    : "Pre-work site assessment"}
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  {isTurkish
-                    ? "Kurtarma ihtiyacı"
-                    : "Rescue requirement"}
-                </td>
-                <td>
-                  {isTurkish
-                    ? "Düşme sonrası askıda kalma ihtimali varsa uygun kurtarma yöntemi, ekipmanı ve görevli personel önceden belirlenmelidir."
-                    : "Where suspension following a fall is possible, a suitable rescue method, equipment and responsible personnel shall be identified in advance."}
-                </td>
-                <td>
-                  {isTurkish
-                    ? "Kurtarma planı hazır"
-                    : "Rescue plan available"}
-                </td>
-              </tr>
+              {(activity === "Sıcak Çalışma" || activity === "Hot Work"
+                ? [
+                    [
+                      isTurkish ? "Yangın / tutuşma" : "Fire / ignition",
+                      isTurkish
+                        ? "Yanıcı ve parlayıcı malzemeler çalışma alanından uzaklaştırılmalı veya uygun yanmaz malzeme ile korunmalıdır."
+                        : "Combustible and flammable materials shall be removed from the work area or protected using suitable fire-resistant materials.",
+                      isTurkish
+                        ? "Alan ve yangın yükü kontrolü"
+                        : "Area / fire-load inspection",
+                    ],
+                    [
+                      isTurkish
+                        ? "Kıvılcım ve sıcak metal"
+                        : "Sparks and hot metal",
+                      isTurkish
+                        ? "Kıvılcımın alt seviyelere, açıklıklara ve bitişik alanlara ulaşması önlenmeli; gerektiğinde kaynak perdesi ve yanmaz örtü kullanılmalıdır."
+                        : "Sparks shall be prevented from reaching lower levels, openings and adjacent areas; welding screens and fire-resistant blankets shall be used where required.",
+                      isTurkish
+                        ? "Kıvılcım yayılım kontrolü"
+                        : "Spark-spread verification",
+                    ],
+                    [
+                      isTurkish
+                        ? "Yanıcı / tehlikeli atmosfer"
+                        : "Flammable / hazardous atmosphere",
+                      isTurkish
+                        ? "Risk değerlendirmesi veya saha prosedürü gerektiriyorsa sıcak çalışma öncesinde ve gerektiğinde çalışma sırasında uygun atmosfer ölçümü yapılmalıdır."
+                        : "Where required by the risk assessment or site procedure, suitable atmospheric testing shall be completed before and, where necessary, during hot work.",
+                      isTurkish
+                        ? "Gaz ölçümü / PTW kontrolü"
+                        : "Gas test / PTW verification",
+                    ],
+                    [
+                      isTurkish
+                        ? "Gaz tüpleri ve ekipmanı"
+                        : "Gas cylinders and equipment",
+                      isTurkish
+                        ? "Gaz tüpleri dik ve sabit tutulmalı; hortumlar, regülatörler, bağlantılar ve gerekli geri tepme emniyet tertibatları kullanım öncesi kontrol edilmelidir."
+                        : "Gas cylinders shall be upright and secured; hoses, regulators, connections and required flashback protection shall be inspected before use.",
+                      isTurkish
+                        ? "Ekipman kontrolü"
+                        : "Equipment inspection",
+                    ],
+                    [
+                      isTurkish
+                        ? "Elektrik tehlikesi"
+                        : "Electrical hazard",
+                      isTurkish
+                        ? "Kaynak ve taşlama ekipmanının kabloları, fişleri, bağlantıları ve genel durumu kontrol edilmeli; hasarlı ekipman kullanılmamalıdır."
+                        : "Cables, plugs, connections and the general condition of welding and grinding equipment shall be checked; defective equipment shall not be used.",
+                      isTurkish
+                        ? "Kullanım öncesi kontrol"
+                        : "Pre-use inspection",
+                    ],
+                    [
+                      isTurkish
+                        ? "Kaynak dumanı / maruziyet"
+                        : "Welding fumes / exposure",
+                      isTurkish
+                        ? "Çalışma alanında yeterli havalandırma sağlanmalı; risk değerlendirmesine göre lokal emiş veya uygun solunum koruması kullanılmalıdır."
+                        : "Adequate ventilation shall be provided; local extraction or suitable respiratory protection shall be used where required by the risk assessment.",
+                      isTurkish
+                        ? "Havalandırma kontrolü"
+                        : "Ventilation verification",
+                    ],
+                    [
+                      isTurkish
+                        ? "Yangın gözetimi"
+                        : "Fire watch",
+                      isTurkish
+                        ? "Uygun yangın söndürme ekipmanı hazır bulundurulmalı ve yetkilendirilmiş yangın gözcüsü çalışma sırasında ve gerekli çalışma sonrası süre boyunca alanı izlemelidir."
+                        : "Suitable firefighting equipment shall be immediately available and an assigned fire watch shall monitor the area during the work and for the required post-work period.",
+                      isTurkish
+                        ? "Yangın gözcüsü hazır"
+                        : "Fire watch confirmed",
+                    ],
+                  ]
+                : [
+                    [
+                      isTurkish ? "Yüksekten düşme" : "Fall from height",
+                      isTurkish
+                        ? "Uygun çalışma platformu, korkuluk sistemi veya risk değerlendirmesine göre onaylı kişisel düşüş koruma sistemi hazır olmalıdır."
+                        : "Suitable work platform, guardrail system or approved personal fall-protection system shall be available as required by the risk assessment.",
+                      isTurkish
+                        ? "Süpervizör saha kontrolü"
+                        : "Supervisor field verification",
+                    ],
+                    [
+                      isTurkish ? "Düşen cisim" : "Dropped objects",
+                      isTurkish
+                        ? "Alt alan gerektiğinde bariyerlenmeli, gevşek malzemeler emniyete alınmalı ve uygun durumlarda tool lanyard kullanılmalıdır."
+                        : "The area below shall be barricaded where required, loose materials secured and tool lanyards used where appropriate.",
+                      isTurkish
+                        ? "Dışlama alanı / housekeeping kontrolü"
+                        : "Exclusion-zone / housekeeping check",
+                    ],
+                    [
+                      isTurkish
+                        ? "Uygunsuz erişim veya platform"
+                        : "Unsafe access or platform",
+                      isTurkish
+                        ? "İskele, platform, MEWP veya kullanılan diğer erişim sistemi işe başlamadan önce uygunluk açısından kontrol edilmelidir."
+                        : "Scaffold, platform, MEWP or other access system used for the task shall be checked for suitability before work starts.",
+                      isTurkish
+                        ? "Yetkin kişi / ekipman kontrolü"
+                        : "Competent-person / equipment check",
+                    ],
+                    [
+                      isTurkish
+                        ? "Olumsuz hava koşulları"
+                        : "Adverse weather",
+                      isTurkish
+                        ? "Rüzgar, yağış, görüş ve yüzey koşullarının güvenli çalışmaya uygun olduğu doğrulanmalıdır."
+                        : "Wind, precipitation, visibility and surface conditions shall be confirmed suitable for safe work.",
+                      isTurkish
+                        ? "Çalışma öncesi saha değerlendirmesi"
+                        : "Pre-work site assessment",
+                    ],
+                    [
+                      isTurkish
+                        ? "Kurtarma ihtiyacı"
+                        : "Rescue requirement",
+                      isTurkish
+                        ? "Düşme sonrası askıda kalma ihtimali varsa uygun kurtarma yöntemi, ekipmanı ve görevli personel önceden belirlenmelidir."
+                        : "Where suspension following a fall is possible, a suitable rescue method, equipment and responsible personnel shall be identified in advance.",
+                      isTurkish
+                        ? "Kurtarma planı hazır"
+                        : "Rescue plan available",
+                    ],
+                  ]
+              ).map(([hazard, control, verification]) => (
+                <tr key={hazard}>
+                  <td>{hazard}</td>
+                  <td>{control}</td>
+                  <td>{verification}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </section>
@@ -758,8 +807,8 @@ export default function MethodStatementPrint({
           }
 
           .ms-sequence-section {
-            page-break-before: page;
-            break-before: page;
+            page-break-before: auto;
+            break-before: auto;
           }
 
           .ms-approval {
