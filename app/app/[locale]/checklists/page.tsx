@@ -2,6 +2,7 @@ import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../../i18n/routing";
+import { createClient } from "@/utils/supabase/server";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -15,6 +16,36 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
   }
 
   const isTurkish = locale === "tr";
+
+  const supabase = await createClient();
+
+  const { data: contentControlRows } = await supabase
+    .from("content_controls")
+    .select(
+      "content_key,published,visible,access_level,featured"
+    )
+    .like("content_key", "checklist:%");
+
+  const controlMap = new Map(
+    (contentControlRows ?? [])
+      .filter(
+        (row) =>
+          typeof row.content_key === "string" &&
+          row.content_key.startsWith("checklist:")
+      )
+      .map((row) => [
+        row.content_key.replace(/^checklist:/, ""),
+        {
+          published: row.published ?? true,
+          visible: row.visible ?? true,
+          accessLevel:
+            row.access_level === "premium"
+              ? "premium"
+              : "free",
+          featured: row.featured ?? false,
+        },
+      ])
+  );
 
   const checklists = [
     {
@@ -99,7 +130,17 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
     },
   ];
 
-  const availableCount = checklists.filter(
+  const visibleChecklists = checklists.filter((checklist) => {
+    const slug = checklist.href.split("/").filter(Boolean).pop() ?? "";
+    const control = controlMap.get(slug);
+
+    return (
+      (control?.published ?? true) &&
+      (control?.visible ?? true)
+    );
+  });
+
+  const availableCount = visibleChecklists.filter(
     (checklist) => checklist.available,
   ).length;
 
@@ -146,7 +187,7 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
 
             <div className="mt-8 grid grid-cols-2 gap-4">
               <div>
-                <p className="text-4xl font-bold">{checklists.length}</p>
+                <p className="text-4xl font-bold">{visibleChecklists.length}</p>
                 <p className="mt-2 text-sm text-slate-400">
                   {isTurkish ? "Toplam liste" : "Total checklists"}
                 </p>
@@ -190,13 +231,34 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {checklists.map((checklist) => {
+            {visibleChecklists.map((checklist) => {
+              const slug =
+                checklist.href.split("/").filter(Boolean).pop() ?? "";
+
+              const control = controlMap.get(slug);
+
+              const isPremium =
+                control?.accessLevel === "premium";
+
+              const isFeatured =
+                control?.featured ?? false;
+
+              const checklistHref =
+                `/${locale}${checklist.href}`;
+
+              const premiumHref =
+                `/${locale}/upgrade?next=${encodeURIComponent(
+                  checklistHref
+                )}`;
+
               const card = (
                 <article
                   className={`group flex h-full flex-col rounded-3xl border bg-slate-900 p-7 transition duration-300 ${
-                    checklist.available
-                      ? "border-slate-800 hover:-translate-y-1 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-950/20"
-                      : "border-slate-800 opacity-70"
+                    isPremium
+                      ? "border-violet-400/35 hover:-translate-y-1 hover:border-violet-400/65 hover:shadow-xl hover:shadow-violet-950/20"
+                      : checklist.available
+                        ? "border-slate-800 hover:-translate-y-1 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-950/20"
+                        : "border-slate-800 opacity-70"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-4">
@@ -211,19 +273,38 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
                           : "border border-amber-500/20 bg-amber-500/10 text-amber-300"
                       }`}
                     >
-                      {checklist.available
-                        ? isTurkish
-                          ? "Kullanılabilir"
-                          : "Available"
-                        : isTurkish
-                          ? "Geliştiriliyor"
-                          : "In Development"}
+                      {isPremium
+                        ? "👑 PREMIUM"
+                        : checklist.available
+                          ? isTurkish
+                            ? "Kullanılabilir"
+                            : "Available"
+                          : isTurkish
+                            ? "Geliştiriliyor"
+                            : "In Development"}
                     </span>
                   </div>
 
-                  <p className="mt-7 text-xs font-semibold uppercase tracking-[0.16em] text-blue-400">
-                    {checklist.category}
-                  </p>
+                  <div className="mt-7 flex flex-wrap items-center gap-2">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-400">
+                      {checklist.category}
+                    </p>
+
+                    {isFeatured && (
+                      <span className="rounded-full border border-amber-400/20 bg-amber-400/10 px-2.5 py-1 text-[10px] font-black uppercase text-amber-300">
+                        ★ {isTurkish ? "Öne Çıkan" : "Featured"}
+                      </span>
+                    )}
+                  </div>
+
+                  {isPremium && (
+                    <div className="mt-4 rounded-xl border border-violet-400/20 bg-violet-500/10 px-3 py-2 text-xs font-black text-violet-300">
+                      🔒{" "}
+                      {isTurkish
+                        ? "Premium üyelik ile erişilebilir"
+                        : "Available with Premium"}
+                    </div>
+                  )}
 
                   <h3 className="mt-3 text-2xl font-bold tracking-tight">
                     {checklist.title}
@@ -254,13 +335,17 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
                   </div>
 
                   <div className="mt-7 font-semibold text-blue-400 transition group-hover:translate-x-1">
-                    {checklist.available
+                    {isPremium
                       ? isTurkish
-                        ? "Denetimi Başlat →"
-                        : "Start Inspection →"
-                      : isTurkish
-                        ? "Yakında kullanılabilir"
-                        : "Available Soon"}
+                        ? "👑 Kilidi Aç →"
+                        : "👑 Unlock →"
+                      : checklist.available
+                        ? isTurkish
+                          ? "Denetimi Başlat →"
+                          : "Start Inspection →"
+                        : isTurkish
+                          ? "Yakında kullanılabilir"
+                          : "Available Soon"}
                   </div>
                 </article>
               );
@@ -270,7 +355,14 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
               }
 
               return (
-                <Link key={checklist.href} href={`/${locale}${checklist.href}`}>
+                <Link
+                  key={checklist.href}
+                  href={
+                    isPremium
+                      ? premiumHref
+                      : checklistHref
+                  }
+                >
                   {card}
                 </Link>
               );

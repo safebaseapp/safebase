@@ -71,7 +71,7 @@ export default async function RegisterPage({ params }: Props) {
             <p className="text-sm text-slate-500">Safety without borders.</p>
           </section>
 
-          <section className="p-7 sm:p-10 lg:p-12">
+          <section className="p-7 sm:p-8 lg:p-10">
             <Link
               href={`/${safeLocale}`}
               className="inline-flex text-sm font-semibold text-slate-400 transition hover:text-white"
@@ -79,7 +79,7 @@ export default async function RegisterPage({ params }: Props) {
               ← {isTurkish ? "Ana sayfaya dön" : "Back to homepage"}
             </Link>
 
-            <div className="mt-10">
+            <div className="mt-7">
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-blue-400">
                 {isTurkish ? "SafeBase'e katıl" : "Join SafeBase"}
               </p>

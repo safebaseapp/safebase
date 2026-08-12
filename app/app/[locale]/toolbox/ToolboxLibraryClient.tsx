@@ -5,8 +5,17 @@ import { useMemo, useState } from "react";
 
 type Locale = "tr" | "en";
 
+type ToolboxContentControl = {
+  slug: string;
+  published: boolean;
+  visible: boolean;
+  accessLevel: "free" | "premium";
+  featured: boolean;
+};
+
 type Props = {
   locale: Locale;
+  controls: ToolboxContentControl[];
 };
 
 type ToolboxItem = {
@@ -349,8 +358,22 @@ const categories = [
   { id: "manual-handling", tr: "Elle Taşıma", en: "Manual Handling", icon: "📦" },
 ];
 
-export default function ToolboxLibraryClient({ locale }: Props) {
+export default function ToolboxLibraryClient({
+  locale,
+  controls,
+}: Props) {
   const isTurkish = locale === "tr";
+
+  const controlMap = useMemo(
+    () =>
+      new Map(
+        controls.map((control) => [
+          control.slug,
+          control,
+        ])
+      ),
+    [controls]
+  );
 
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
@@ -362,6 +385,18 @@ export default function ToolboxLibraryClient({ locale }: Props) {
     );
 
     return toolboxItems.filter((item) => {
+      const control = controlMap.get(item.slug);
+
+      const isPublished =
+        control?.published ?? true;
+
+      const isVisible =
+        control?.visible ?? true;
+
+      if (!isPublished || !isVisible) {
+        return false;
+      }
+
       const localizedTitle = isTurkish ? item.title.tr : item.title.en;
       const localizedDescription = isTurkish
         ? item.description.tr
@@ -378,7 +413,7 @@ export default function ToolboxLibraryClient({ locale }: Props) {
 
       return matchesCategory && matchesQuery;
     });
-  }, [category, isTurkish, query]);
+  }, [category, controlMap, isTurkish, query]);
 
   function getPdfHref(item: ToolboxItem) {
     if (item.hasPdf === false || !item.pdfSlug) {
@@ -526,10 +561,30 @@ export default function ToolboxLibraryClient({ locale }: Props) {
             {filteredItems.map((item) => {
               const pdfHref = getPdfHref(item);
 
+              const control = controlMap.get(item.slug);
+
+              const isPremium =
+                control?.accessLevel === "premium";
+
+              const isFeatured =
+                control?.featured ?? false;
+
+              const toolboxHref =
+                `/${locale}/toolbox/${item.slug}`;
+
+              const premiumHref =
+                `/${locale}/upgrade?next=${encodeURIComponent(
+                  toolboxHref
+                )}`;
+
               return (
                 <article
                   key={item.slug}
-                  className="group relative flex min-h-[560px] flex-col overflow-hidden rounded-[30px] border border-white/10 bg-[#0d1228] p-7 shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-2 hover:border-blue-500/40 hover:shadow-blue-950/40"
+                  className={`group relative flex min-h-[560px] flex-col overflow-hidden rounded-[30px] border bg-[#0d1228] p-7 shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-2 ${
+                    isPremium
+                      ? "border-violet-400/30 hover:border-violet-400/60 hover:shadow-violet-950/30"
+                      : "border-white/10 hover:border-blue-500/40 hover:shadow-blue-950/40"
+                  }`}
                 >
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-500/[0.04] via-transparent to-emerald-400/[0.02]" />
 
@@ -538,9 +593,23 @@ export default function ToolboxLibraryClient({ locale }: Props) {
                       {item.icon}
                     </div>
 
-                    <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-2 text-xs font-black uppercase tracking-wider text-blue-300">
-                      PDF
-                    </span>
+                    <div className="flex flex-col items-end gap-2">
+                      {isPremium ? (
+                        <span className="rounded-full border border-violet-400/30 bg-violet-500/10 px-4 py-2 text-xs font-black uppercase tracking-wider text-violet-300">
+                          👑 PREMIUM
+                        </span>
+                      ) : (
+                        <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-2 text-xs font-black uppercase tracking-wider text-blue-300">
+                          FREE
+                        </span>
+                      )}
+
+                      {isFeatured && (
+                        <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
+                          ★ {isTurkish ? "ÖNE ÇIKAN" : "FEATURED"}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <div className="relative mt-8">
@@ -561,6 +630,15 @@ export default function ToolboxLibraryClient({ locale }: Props) {
                         {item.duration} {isTurkish ? "dk" : "min"}
                       </span>
                     </div>
+
+                    {isPremium && (
+                      <div className="mt-5 rounded-xl border border-violet-400/15 bg-violet-500/[0.07] px-3 py-2 text-xs font-bold text-violet-300">
+                        🔒{" "}
+                        {isTurkish
+                          ? "Premium üyelik ile erişilebilir"
+                          : "Available with Premium"}
+                      </div>
+                    )}
 
                     <h2 className="mt-5 text-2xl font-black leading-tight tracking-tight text-white transition group-hover:text-blue-300">
                       {isTurkish ? item.title.tr : item.title.en}
@@ -590,7 +668,14 @@ export default function ToolboxLibraryClient({ locale }: Props) {
                     </div>
 
                     <div className="mt-7 grid grid-cols-2 gap-3 xl:grid-cols-3">
-                      {pdfHref ? (
+                      {isPremium ? (
+                        <Link
+                          href={toolboxHref}
+                          className="inline-flex items-center justify-center gap-2 rounded-2xl border border-violet-400/20 bg-violet-500/[0.08] px-4 py-4 text-sm font-black text-violet-200 transition hover:bg-violet-500/[0.14]"
+                        >
+                          🔒 {isTurkish ? "Önizle" : "Preview"}
+                        </Link>
+                      ) : pdfHref ? (
                         <a
                           href={pdfHref}
                           target="_blank"
@@ -601,14 +686,21 @@ export default function ToolboxLibraryClient({ locale }: Props) {
                         </a>
                       ) : (
                         <Link
-                          href={`/${locale}/toolbox/${item.slug}`}
+                          href={toolboxHref}
                           className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-sm font-black text-white transition hover:border-white/20 hover:bg-white/[0.08]"
                         >
                           {isTurkish ? "Önizleme" : "Preview"}
                         </Link>
                       )}
 
-                      {pdfHref ? (
+                      {isPremium ? (
+                        <Link
+                          href={premiumHref}
+                          className="inline-flex items-center justify-center gap-2 rounded-2xl bg-violet-600 px-4 py-4 text-sm font-black text-white shadow-xl shadow-violet-950/20 transition hover:-translate-y-1 hover:bg-violet-500"
+                        >
+                          👑 {isTurkish ? "Kilidi Aç" : "Unlock"}
+                        </Link>
+                      ) : pdfHref ? (
                         <a
                           href={pdfHref}
                           download
@@ -641,15 +733,27 @@ export default function ToolboxLibraryClient({ locale }: Props) {
                         </span>
                       )}
 
-                      <a
-                        href={`/api/premium/toolbox/${item.slug}/word?locale=${locale}`}
-                        className="col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl border border-blue-400/30 bg-blue-400/10 px-4 py-4 text-sm font-black text-blue-300 transition hover:-translate-y-1 hover:bg-blue-400/20 xl:col-span-3"
-                      >
-                        📝 🔒{" "}
-                        {isTurkish
-                          ? "Düzenlenebilir Word"
-                          : "Editable Word"}
-                      </a>
+                      {isPremium ? (
+                        <Link
+                          href={premiumHref}
+                          className="col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl border border-violet-400/30 bg-violet-500/10 px-4 py-4 text-sm font-black text-violet-200 transition hover:-translate-y-1 hover:bg-violet-500/20 xl:col-span-3"
+                        >
+                          📝 🔒{" "}
+                          {isTurkish
+                            ? "Premium Word"
+                            : "Premium Word"}
+                        </Link>
+                      ) : (
+                        <a
+                          href={`/api/premium/toolbox/${item.slug}/word?locale=${locale}`}
+                          className="col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl border border-blue-400/30 bg-blue-400/10 px-4 py-4 text-sm font-black text-blue-300 transition hover:-translate-y-1 hover:bg-blue-400/20 xl:col-span-3"
+                        >
+                          📝 🔒{" "}
+                          {isTurkish
+                            ? "Düzenlenebilir Word"
+                            : "Editable Word"}
+                        </a>
+                      )}
                     </div>
                   </div>
                 </article>

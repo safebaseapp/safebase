@@ -65,7 +65,7 @@ export default function RegisterForm({ locale }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+    <form onSubmit={handleSubmit} className="mt-5 space-y-4">
       <div>
         <label
           htmlFor="fullName"
@@ -149,7 +149,7 @@ export default function RegisterForm({ locale }: Props) {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full rounded-xl bg-blue-600 px-5 py-3.5 font-semibold text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-xl bg-blue-600 px-4 py-3.5 font-semibold text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isLoading
           ? isTurkish

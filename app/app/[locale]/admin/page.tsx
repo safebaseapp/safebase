@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { getUserRole, isAdminUser } from "@/lib/auth/access";
 
+const OWNER_EMAIL = "safebase.global@gmail.com";
+
 type Props = {
   params: Promise<{
     locale: string;
@@ -26,13 +28,13 @@ const navigation = [
     icon: "👑",
     tr: "Üyelikler",
     en: "Memberships",
-    href: "#memberships",
+    href: "/memberships",
   },
   {
     icon: "📚",
     tr: "İçerik Yönetimi",
     en: "Content Management",
-    href: "#content",
+    href: "/content",
   },
   {
     icon: "🚀",
@@ -168,7 +170,10 @@ export default async function AdminPage({ params }: Props) {
     redirect(`/${locale}/login?next=/${locale}/admin`);
   }
 
-  if (!isAdminUser(user)) {
+  const isOwner =
+    user.email?.trim().toLowerCase() === OWNER_EMAIL;
+
+  if (!isOwner || !isAdminUser(user)) {
     redirect(`/${locale}/dashboard`);
   }
 

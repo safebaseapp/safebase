@@ -62,6 +62,17 @@ export default async function LocalizedToolsPage({params}: Props) {
     href: "/tools/quick-risk-assessment",
   },
 
+    {
+      icon: "📄",
+      title: isTurkish
+        ? "Method Statement Oluşturucu"
+        : "Method Statement Generator",
+      description: isTurkish
+        ? "20 hazır profesyonel çalışma yöntemi şablonunu düzenleyin ve sahaya hazır PDF dokümanları oluşturun."
+        : "Customize 20 ready-to-use professional work method templates and generate site-ready PDF documents.",
+      href: "/tools/method-statement",
+    },
+
   ];
 
   return (
@@ -111,9 +122,13 @@ export default async function LocalizedToolsPage({params}: Props) {
               </p>
 
               <div className="mt-6 font-semibold text-blue-400 transition group-hover:translate-x-1">
-                {isTurkish
-                  ? "Hesaplayıcıyı Aç →"
-                  : "Open Calculator →"}
+                {tool.href === "/tools/method-statement"
+                  ? isTurkish
+                    ? "Aracı Aç →"
+                    : "Open Tool →"
+                  : isTurkish
+                    ? "Hesaplayıcıyı Aç →"
+                    : "Open Calculator →"}
               </div>
             </Link>
           ))}

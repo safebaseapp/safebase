@@ -1,0 +1,393 @@
+import { Link } from "../../../i18n/navigation";
+
+type Props = {
+  locale: "tr" | "en";
+};
+
+function ArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      className="h-4 w-4"
+      aria-hidden="true"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      className="h-5 w-5"
+      aria-hidden="true"
+    >
+      <path d="M12 3 5.5 5.7v5.2c0 4.3 2.7 8.1 6.5 10.1 3.8-2 6.5-5.8 6.5-10.1V5.7L12 3Z" />
+      <path d="m9.3 12 1.7 1.7 3.8-4" />
+    </svg>
+  );
+}
+
+function DocumentIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      className="h-5 w-5"
+      aria-hidden="true"
+    >
+      <path d="M7 3.5h7l4 4V20H7V3.5Z" />
+      <path d="M14 3.5V8h4M9.5 12h5M9.5 15h5" />
+    </svg>
+  );
+}
+
+function SparkIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      className="h-5 w-5"
+      aria-hidden="true"
+    >
+      <path d="M12 3c.7 4.2 2.8 6.3 7 7-4.2.7-6.3 2.8-7 7-.7-4.2-2.8-6.3-7-7 4.2-.7 6.3-2.8 7-7Z" />
+      <path d="M19 16c.3 1.8 1.2 2.7 3 3-1.8.3-2.7 1.2-3 3-.3-1.8-1.2-2.7-3-3 1.8-.3 2.7-1.2 3-3Z" />
+    </svg>
+  );
+}
+
+export default function ProductShowcase({ locale }: Props) {
+  const tr = locale === "tr";
+
+  return (
+    <section className="relative overflow-hidden border-b border-white/10 bg-slate-950 px-6 py-24 text-white lg:px-8 lg:py-32">
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-blue-600/[0.08] blur-[130px]" />
+
+      <div className="relative mx-auto max-w-7xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-emerald-400">
+            {tr ? "SAFEBASE İLE OLUŞTURUN" : "BUILD WITH SAFEBASE"}
+          </p>
+
+          <h2 className="mt-5 text-4xl font-black tracking-[-0.035em] sm:text-5xl lg:text-6xl">
+            {tr
+              ? "HSE çalışmalarını fikirden çıktıya taşıyın."
+              : "Take HSE work from idea to final output."}
+          </h2>
+
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">
+            {tr
+              ? "Analiz oluşturun, profesyonel doküman hazırlayın ve saha sorularınızı kaynaklı HSE rehberliğiyle çözün."
+              : "Build assessments, prepare professional documents and solve site questions with source-backed HSE guidance."}
+          </p>
+        </div>
+
+        <div className="mt-16 space-y-6">
+
+          {/* RISK ASSESSMENT */}
+          <div className="group grid overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.025] lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-14">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 text-blue-300">
+                <ShieldIcon />
+              </div>
+
+              <div className="mt-7 text-xs font-black uppercase tracking-[0.22em] text-blue-400">
+                01 · {tr ? "RİSK YÖNETİMİ" : "RISK MANAGEMENT"}
+              </div>
+
+              <h3 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">
+                {tr ? "Profesyonel Risk Analizi" : "Professional Risk Assessment"}
+              </h3>
+
+              <p className="mt-5 max-w-xl leading-7 text-slate-400">
+                {tr
+                  ? "100 faaliyet ve 900 hazır risk arasından seçim yapın. Tehlikeleri, kontrolleri ve risk seviyelerini profesyonel HIRARC yapısında oluşturun."
+                  : "Choose from 100 activities and 900 ready-to-use risks. Build hazards, controls and risk levels in a professional HIRARC structure."}
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-2">
+                {[
+                  tr ? "100 faaliyet" : "100 activities",
+                  tr ? "900 hazır risk" : "900 ready risks",
+                  "HIRARC",
+                ].map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-bold text-slate-300"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              <Link
+                href="/tools/quick-risk-assessment"
+                className="mt-8 inline-flex w-fit items-center gap-2 font-bold text-blue-400 transition group-hover:gap-3 group-hover:text-blue-300"
+              >
+                {tr ? "Risk analizi oluştur" : "Build risk assessment"}
+                <ArrowIcon />
+              </Link>
+            </div>
+
+            <div className="relative min-h-[390px] border-t border-white/10 bg-[#071126] p-6 lg:border-l lg:border-t-0 lg:p-10">
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.04)_1px,transparent_1px)] bg-[size:32px_32px]" />
+
+              <div className="relative mx-auto max-w-xl rounded-2xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl">
+                <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                  <div>
+                    <p className="font-bold">
+                      {tr ? "Risk Değerlendirmesi" : "Risk Assessment"}
+                    </p>
+                    <p className="mt-1 text-xs text-slate-500">
+                      HIRARC · SafeBase
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-400">
+                    {tr ? "Hazır" : "Ready"}
+                  </span>
+                </div>
+
+                <div className="mt-5 grid gap-3">
+                  {[
+                    [tr ? "Faaliyet" : "Activity", tr ? "Yüksekte Çalışma" : "Working at Height"],
+                    [tr ? "Tehlike" : "Hazard", tr ? "Yüksekten düşme" : "Fall from height"],
+                    [tr ? "Risk Seviyesi" : "Risk Level", tr ? "Yüksek" : "High"],
+                  ].map(([label, value], index) => (
+                    <div
+                      key={label}
+                      className="grid grid-cols-[110px_1fr_auto] items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] p-4"
+                    >
+                      <span className="text-xs text-slate-500">{label}</span>
+                      <span className="text-sm font-semibold text-slate-200">{value}</span>
+                      <span
+                        className={`h-2.5 w-2.5 rounded-full ${
+                          index === 2 ? "bg-amber-400" : "bg-emerald-400"
+                        }`}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-4 rounded-xl border border-blue-400/15 bg-blue-500/[0.06] p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-blue-300">
+                    {tr ? "Kontrol Önlemleri" : "Control Measures"}
+                  </p>
+                  <div className="mt-3 space-y-2 text-xs text-slate-400">
+                    <p>✓ {tr ? "Onaylı erişim sistemi" : "Approved access system"}</p>
+                    <p>✓ {tr ? "Düşmeye karşı koruma" : "Fall protection"}</p>
+                    <p>✓ {tr ? "Çalışma öncesi kontrol" : "Pre-work inspection"}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* METHOD STATEMENT */}
+          <div className="group grid overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.025] lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="relative order-2 min-h-[390px] border-t border-white/10 bg-[#071126] p-6 lg:order-1 lg:border-r lg:border-t-0 lg:p-10">
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.04)_1px,transparent_1px)] bg-[size:32px_32px]" />
+
+              <div className="relative mx-auto max-w-xl overflow-hidden rounded-xl bg-white text-slate-950 shadow-2xl">
+                <div className="flex items-center justify-between border-b border-slate-200 p-5">
+                  <div>
+                    <p className="text-xs font-black text-emerald-600">SafeBase</p>
+                    <p className="mt-1 font-black">METHOD STATEMENT</p>
+                  </div>
+                  <div className="text-right text-[9px] text-slate-500">
+                    <p>SB-MS-001</p>
+                    <p>REV 1.0</p>
+                  </div>
+                </div>
+
+                <div className="p-5">
+                  <div className="rounded bg-slate-900 px-3 py-2 text-xs font-bold text-white">
+                    1. {tr ? "İŞİN KAPSAMI" : "SCOPE OF WORK"}
+                  </div>
+                  <div className="mt-2 h-12 rounded border border-slate-200 bg-slate-50" />
+
+                  <div className="mt-4 grid grid-cols-2 gap-3">
+                    {[
+                      tr ? "GÖREV VE SORUMLULUKLAR" : "ROLES & RESPONSIBILITIES",
+                      "PPE",
+                      tr ? "İZİNLER / PTW" : "PERMITS / PTW",
+                      tr ? "RİSK KONTROLLERİ" : "RISK CONTROLS",
+                    ].map((item) => (
+                      <div key={item}>
+                        <div className="bg-slate-900 px-2 py-1.5 text-[9px] font-bold text-white">
+                          {item}
+                        </div>
+                        <div className="space-y-1 border border-slate-200 p-2">
+                          <div className="h-1.5 rounded bg-slate-200" />
+                          <div className="h-1.5 w-4/5 rounded bg-slate-200" />
+                          <div className="h-1.5 w-2/3 rounded bg-slate-200" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 rounded bg-slate-900 px-3 py-2 text-xs font-bold text-white">
+                    {tr ? "ÇALIŞMA METODU / İŞ SIRASI" : "WORK METHOD / SEQUENCE"}
+                  </div>
+
+                  <div className="mt-2 space-y-1.5">
+                    {[1, 2, 3].map((item) => (
+                      <div
+                        key={item}
+                        className="grid grid-cols-[25px_1fr] border border-slate-200 text-[9px]"
+                      >
+                        <div className="flex items-center justify-center bg-slate-50 font-bold">
+                          0{item}
+                        </div>
+                        <div className="p-2">
+                          <div className="h-1.5 rounded bg-slate-200" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="order-1 flex flex-col justify-center p-8 sm:p-10 lg:order-2 lg:p-14">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 text-blue-300">
+                <DocumentIcon />
+              </div>
+
+              <div className="mt-7 text-xs font-black uppercase tracking-[0.22em] text-blue-400">
+                02 · {tr ? "DOKÜMANTASYON" : "DOCUMENTATION"}
+              </div>
+
+              <h3 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">
+                Method Statement
+              </h3>
+
+              <p className="mt-5 max-w-xl leading-7 text-slate-400">
+                {tr
+                  ? "20 hazır çalışma yönteminden başlayın. Proje bilgilerinizi girin, içeriği özelleştirin ve profesyonel saha dokümanınızı oluşturun."
+                  : "Start from 20 ready work methods. Add project information, customize the content and create a professional site document."}
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-2">
+                {[
+                  tr ? "20 hazır method" : "20 ready methods",
+                  tr ? "Düzenlenebilir" : "Editable",
+                  "PDF",
+                ].map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-bold text-slate-300"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              <Link
+                href="/tools/method-statement"
+                className="mt-8 inline-flex w-fit items-center gap-2 font-bold text-blue-400 transition group-hover:gap-3 group-hover:text-blue-300"
+              >
+                {tr ? "Method Statement oluştur" : "Build Method Statement"}
+                <ArrowIcon />
+              </Link>
+            </div>
+          </div>
+
+          {/* AI */}
+          <div className="group grid overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.025] lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-14">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-400/20 bg-emerald-500/10 text-emerald-300">
+                <SparkIcon />
+              </div>
+
+              <div className="mt-7 text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
+                03 · {tr ? "HSE REHBERLİĞİ" : "HSE GUIDANCE"}
+              </div>
+
+              <h3 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">
+                SafeBase AI
+              </h3>
+
+              <p className="mt-5 max-w-xl leading-7 text-slate-400">
+                {tr
+                  ? "Saha sorularınızı HSE odaklı analiz edin. Risk özetini, kritik kontrolleri, KKD gereksinimlerini ve ilgili kaynakları tek cevapta görün."
+                  : "Analyze site questions with an HSE focus. See the risk summary, critical controls, PPE requirements and relevant sources in one response."}
+              </p>
+
+              <Link
+                href="/ai-assistant"
+                className="mt-8 inline-flex w-fit items-center gap-2 font-bold text-emerald-400 transition group-hover:gap-3 group-hover:text-emerald-300"
+              >
+                {tr ? "SafeBase AI'a sor" : "Ask SafeBase AI"}
+                <ArrowIcon />
+              </Link>
+            </div>
+
+            <div className="relative min-h-[390px] border-t border-white/10 bg-[#071126] p-6 lg:border-l lg:border-t-0 lg:p-10">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.08),transparent_65%)]" />
+
+              <div className="relative mx-auto max-w-xl rounded-2xl border border-white/10 bg-slate-900/90 p-5 shadow-2xl">
+                <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-300">
+                    <SparkIcon />
+                  </div>
+                  <div>
+                    <p className="font-bold">SafeBase AI</p>
+                    <p className="text-xs text-slate-500">
+                      {tr ? "HSE bilgi asistanı" : "HSE knowledge assistant"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-5 rounded-xl border border-white/10 bg-slate-950 p-4 text-sm text-slate-300">
+                  {tr
+                    ? "Kapalı alana giriş öncesinde hangi kontroller yapılmalıdır?"
+                    : "What controls are required before confined-space entry?"}
+                </div>
+
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {[
+                    tr ? "Risk Özeti" : "Risk Summary",
+                    tr ? "Kritik Kontroller" : "Critical Controls",
+                    tr ? "KKD ve İzinler" : "PPE & Permits",
+                    tr ? "İlgili Kaynaklar" : "Related Sources",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="rounded-xl border border-emerald-400/10 bg-emerald-500/[0.04] p-4"
+                    >
+                      <div className="flex items-center gap-2 text-sm font-bold text-slate-200">
+                        <span className="text-emerald-400">✓</span>
+                        {item}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-4 flex items-center justify-between rounded-xl border border-blue-400/10 bg-blue-500/[0.04] p-4">
+                  <span className="text-xs text-slate-400">
+                    {tr ? "SafeBase bilgi tabanı" : "SafeBase knowledge base"}
+                  </span>
+                  <span className="text-xs font-bold text-blue-300">
+                    {tr ? "Kaynaklı yanıt" : "Source-backed"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}

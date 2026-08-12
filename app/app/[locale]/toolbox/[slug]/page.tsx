@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import ToolboxActions from "./ToolboxActions";
 import {
   getToolboxBySlug,
   toolboxData,
   type ToolboxLocalizedContent,
 } from "@/lib/toolbox/toolbox-data";
+import { getContentAccess } from "@/lib/content/get-content-access";
 
 type Props = {
   params: Promise<{
@@ -145,6 +146,33 @@ export default async function ToolboxDetailPage({ params }: Props) {
   if (!toolbox) {
     notFound();
   }
+  const access = await getContentAccess(`toolbox:${slug}`);
+
+  if (!access.published || !access.visible) {
+    notFound();
+  }
+
+  if (
+    access.accessLevel === "premium" &&
+    !access.canAccess
+  ) {
+    if (!access.isAuthenticated) {
+      redirect(
+        `/${locale}/login?next=/${locale}/toolbox/${slug}`
+      );
+    }
+
+    if (access.isSuspended) {
+      redirect(`/${locale}/dashboard`);
+    }
+
+    redirect(
+      `/${locale}/upgrade?next=/${locale}/toolbox/${slug}`
+    );
+  }
+
+
+
 
   const content = getLocalizedContent(toolbox, locale);
   const isTurkish = locale === "tr";

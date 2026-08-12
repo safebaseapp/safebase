@@ -8,12 +8,35 @@ import {
   type PosterCategory,
 } from "./poster-data";
 
-type Props = {
-  locale: "tr" | "en";
+type PosterContentControl = {
+  slug: string;
+  published: boolean;
+  visible: boolean;
+  accessLevel: "free" | "premium";
+  featured: boolean;
 };
 
-export default function PosterLibraryClient({ locale }: Props) {
+type Props = {
+  locale: "tr" | "en";
+  controls: PosterContentControl[];
+};
+
+export default function PosterLibraryClient({
+  locale,
+  controls,
+}: Props) {
   const isTurkish = locale === "tr";
+
+  const controlMap = useMemo(
+    () =>
+      new Map(
+        controls.map((control) => [
+          control.slug,
+          control,
+        ])
+      ),
+    [controls]
+  );
 
   const [query, setQuery] = useState("");
   const [category, setCategory] =
@@ -25,6 +48,18 @@ export default function PosterLibraryClient({ locale }: Props) {
       .toLocaleLowerCase(isTurkish ? "tr-TR" : "en-US");
 
     return posters.filter((poster) => {
+      const control = controlMap.get(poster.slug);
+
+      const isPublished =
+        control?.published ?? true;
+
+      const isVisible =
+        control?.visible ?? true;
+
+      if (!isPublished || !isVisible) {
+        return false;
+      }
+
       const categoryMatches =
         category === "all" || poster.category === category;
 
@@ -42,7 +77,7 @@ export default function PosterLibraryClient({ locale }: Props) {
 
       return categoryMatches && queryMatches;
     });
-  }, [category, isTurkish, locale, query]);
+  }, [category, controlMap, isTurkish, locale, query]);
 
   function getCount(categoryId: PosterCategory) {
     if (categoryId === "all") {
@@ -182,12 +217,39 @@ export default function PosterLibraryClient({ locale }: Props) {
               </div>
 
               <div className="mt-7 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {filteredPosters.map((poster) => (
+                {filteredPosters.map((poster) => {
+                  const control = controlMap.get(poster.slug);
+
+                  const isPremium =
+                    control?.accessLevel === "premium";
+
+                  const isFeatured =
+                    control?.featured ?? false;
+
+                  const posterHref =
+                    `/${locale}/posters/${poster.slug}`;
+
+                  const premiumHref =
+                    `/${locale}/upgrade?next=${encodeURIComponent(
+                      posterHref
+                    )}`;
+
+                  return (
                   <article
                     key={poster.slug}
-                    className="group relative flex min-h-[830px] flex-col overflow-hidden rounded-[30px] border border-white/10 bg-gradient-to-b from-[#11172f] to-[#0b1024] p-6 shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-2 hover:border-emerald-400/35"
+                    className={`group relative flex min-h-[830px] flex-col overflow-hidden rounded-[30px] border bg-gradient-to-b from-[#11172f] to-[#0b1024] p-6 shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-2 ${
+                      isPremium
+                        ? "border-violet-400/35 hover:border-violet-400/65"
+                        : "border-white/10 hover:border-emerald-400/35"
+                    }`}
                   >
-                    <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-emerald-500 via-blue-500 to-cyan-400" />
+                    <div
+                      className={`absolute inset-x-0 top-0 h-1 ${
+                        isPremium
+                          ? "bg-gradient-to-r from-violet-500 via-fuchsia-500 to-amber-400"
+                          : "bg-gradient-to-r from-emerald-500 via-blue-500 to-cyan-400"
+                      }`}
+                    />
 
                     <div className="relative overflow-hidden rounded-[22px] border border-white/10 bg-[#070b1d] overflow-visible">
                       <div className="absolute right-5 top-5 z-20">
@@ -198,19 +260,25 @@ export default function PosterLibraryClient({ locale }: Props) {
                               : "border-amber-400/30 bg-amber-950/80 text-amber-300"
                           }`}
                         >
-                          {poster.available
-                            ? isTurkish
-                              ? "HAZIR"
-                              : "READY"
-                            : isTurkish
-                              ? "YAKINDA"
-                              : "SOON"}
+                          {isPremium
+                            ? "👑 PREMIUM"
+                            : poster.available
+                              ? isTurkish
+                                ? "HAZIR"
+                                : "READY"
+                              : isTurkish
+                                ? "YAKINDA"
+                                : "SOON"}
                         </span>
                       </div>
 
                       {poster.available ? (
                         <Link
-                          href={`/${locale}/posters/${poster.slug}`}
+                          href={
+                            isPremium
+                              ? premiumHref
+                              : posterHref
+                          }
                           className="group/preview relative flex h-[330px] items-center justify-center overflow-hidden bg-gradient-to-b from-slate-100 to-slate-300"
                         >
                           <div className="relative h-[305px] w-[215px] overflow-hidden rounded-md bg-white shadow-[0_20px_45px_rgba(0,0,0,0.35)] transition duration-300 group-hover/preview:scale-[1.025]">
@@ -256,6 +324,15 @@ export default function PosterLibraryClient({ locale }: Props) {
                         {poster.code} • REV {poster.revision}
                       </p>
 
+                      {isPremium && (
+                        <div className="mt-4 rounded-xl border border-violet-400/20 bg-violet-500/10 px-3 py-2 text-xs font-black text-violet-300">
+                          🔒{" "}
+                          {isTurkish
+                            ? "Premium üyelik ile erişilebilir"
+                            : "Available with Premium"}
+                        </div>
+                      )}
+
                       <h2 className="mt-4 text-2xl font-black leading-tight">
                         {poster.title[locale]}
                       </h2>
@@ -285,24 +362,39 @@ export default function PosterLibraryClient({ locale }: Props) {
                       {poster.available ? (
                         <div className="grid grid-cols-2 gap-3 items-stretch">
                           <Link
-                            href={`/${locale}/posters/${poster.slug}?size=a4`}
+                            href={
+                              isPremium
+                                ? premiumHref
+                                : `/${locale}/posters/${poster.slug}?size=a4`
+                            }
                             className="inline-flex items-center justify-center rounded-xl border border-blue-400/30 bg-blue-400/10 px-4 py-3 text-sm font-black text-blue-300 transition hover:-translate-y-1 hover:bg-blue-400/20"
                           >
-                            A4 PDF
+                            {isPremium ? "🔒 A4 PDF" : "A4 PDF"}
                           </Link>
 
                           <Link
-                            href={`/${locale}/posters/${poster.slug}?size=a3`}
+                            href={
+                              isPremium
+                                ? premiumHref
+                                : `/${locale}/posters/${poster.slug}?size=a3`
+                            }
                             className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-3 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-emerald-500"
                           >
-                            A3 PDF
+                            {isPremium ? "👑 Kilidi Aç" : "A3 PDF"}
                           </Link>
 
                           <Link
-                            href={`/${locale}/posters/${poster.slug}`}
+                            href={
+                              isPremium
+                                ? premiumHref
+                                : posterHref
+                            }
                             className="col-span-2 inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm font-black text-white transition hover:bg-white/[0.1]"
                           >
-                            👁 Preview</Link>
+                            {isPremium
+                              ? "🔒 Premium Preview"
+                              : "👁 Preview"}
+                          </Link>
                         </div>
                       ) : (
                         <div className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-4 text-center text-sm font-black text-slate-600">
@@ -313,7 +405,8 @@ export default function PosterLibraryClient({ locale }: Props) {
                       )}
                     </div>
                   </article>
-                ))}
+                  );
+                })}
               </div>
 
               {filteredPosters.length === 0 && (
