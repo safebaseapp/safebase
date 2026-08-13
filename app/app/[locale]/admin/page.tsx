@@ -40,13 +40,13 @@ const navigation = [
     icon: "🚀",
     tr: "Özellik Bayrakları",
     en: "Feature Flags",
-    href: "#features",
+    href: "/features",
   },
   {
     icon: "⚙️",
     tr: "Ayarlar",
     en: "Settings",
-    href: "#settings",
+    href: "/settings",
   },
 ];
 
@@ -371,12 +371,12 @@ export default async function AdminPage({ params }: Props) {
                     </p>
                   </div>
 
-                  <span className="w-fit rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-black text-amber-300">
-                    {isTurkish ? "SIRADAKİ FAZ" : "NEXT PHASE"}
+                  <span className="w-fit rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-black text-emerald-300">
+                  {isTurkish ? "AKTİF" : "ACTIVE"}
                   </span>
-                </div>
+                 </div>
 
-                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                 <div className="mt-6 grid gap-3 sm:grid-cols-3">
                   {section.items.map((item) => (
                     <div
                       key={item}
