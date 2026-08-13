@@ -1,0 +1,880 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
+type Locale = "tr" | "en";
+type Level = "low" | "medium" | "high" | "extreme";
+
+type Activity = {
+  id: string;
+  icon: string;
+  tr: string;
+  en: string;
+};
+
+type Interaction = {
+  level: Level;
+  initialRisk: number;
+  residualRisk: number;
+  hazardsTr: string[];
+  hazardsEn: string[];
+  controlsTr: string[];
+  controlsEn: string[];
+};
+
+type Props = {
+  locale: Locale;
+};
+
+const activities: Activity[] = [
+  { id: "hot-work", icon: "🔥", tr: "Sıcak Çalışma", en: "Hot Work" },
+  { id: "lifting", icon: "🏗️", tr: "Kaldırma Operasyonu", en: "Lifting Operation" },
+  { id: "work-at-height", icon: "🦺", tr: "Yüksekte Çalışma", en: "Work at Height" },
+  { id: "confined-space", icon: "⚠️", tr: "Kapalı Alan Çalışması", en: "Confined Space Entry" },
+  { id: "excavation", icon: "🚧", tr: "Kazı Çalışması", en: "Excavation" },
+  { id: "electrical", icon: "⚡", tr: "Elektrik Çalışması", en: "Electrical Work" },
+  { id: "chemical", icon: "🧪", tr: "Kimyasal Çalışma", en: "Chemical Handling" },
+  { id: "air-blowing", icon: "💨", tr: "Air Blowing / Basınç Testi", en: "Air Blowing / Pressure Testing" },
+];
+
+const levelMeta: Record<
+  Level,
+  {
+    tr: string;
+    en: string;
+    badge: string;
+    dot: string;
+    scoreClass: string;
+  }
+> = {
+  low: {
+    tr: "Düşük",
+    en: "Low",
+    badge: "border-emerald-400/20 bg-emerald-500/10 text-emerald-300",
+    dot: "bg-emerald-400",
+    scoreClass: "text-emerald-400",
+  },
+  medium: {
+    tr: "Orta",
+    en: "Medium",
+    badge: "border-yellow-400/20 bg-yellow-500/10 text-yellow-300",
+    dot: "bg-yellow-400",
+    scoreClass: "text-yellow-400",
+  },
+  high: {
+    tr: "Yüksek",
+    en: "High",
+    badge: "border-orange-400/20 bg-orange-500/10 text-orange-300",
+    dot: "bg-orange-500",
+    scoreClass: "text-orange-400",
+  },
+  extreme: {
+    tr: "Çok Yüksek",
+    en: "Extreme",
+    badge: "border-red-400/20 bg-red-500/10 text-red-300",
+    dot: "bg-red-500",
+    scoreClass: "text-red-400",
+  },
+};
+
+function makeInteraction(
+  level: Level,
+  initialRisk: number,
+  residualRisk: number,
+  hazardsTr: string[],
+  hazardsEn: string[],
+  controlsTr: string[],
+  controlsEn: string[]
+): Interaction {
+  return {
+    level,
+    initialRisk,
+    residualRisk,
+    hazardsTr,
+    hazardsEn,
+    controlsTr,
+    controlsEn,
+  };
+}
+
+const defaultHazardsTr = [
+  "Çalışma alanlarının birbirini etkilemesi",
+  "Personel ve ekipman güzergâhlarının çakışması",
+  "İletişim ve koordinasyon eksikliği",
+];
+
+const defaultHazardsEn = [
+  "Interaction between work areas",
+  "Conflicting personnel and equipment routes",
+  "Communication and coordination failure",
+];
+
+const defaultControlsTr = [
+  "PTW koordinasyonu sağlayın",
+  "Çalışma alanlarını ayırın ve erişimi kontrol edin",
+  "Sorumlu supervisorlar arasında sürekli iletişim sağlayın",
+  "SIMOPS öncesi ortak toolbox meeting gerçekleştirin",
+];
+
+const defaultControlsEn = [
+  "Coordinate permits to work",
+  "Segregate work areas and control access",
+  "Maintain communication between responsible supervisors",
+  "Conduct a joint SIMOPS toolbox meeting before work starts",
+];
+
+const specificInteractions: Record<string, Interaction> = {
+  "confined-space|hot-work": makeInteraction(
+    "extreme",
+    20,
+    8,
+    [
+      "Kapalı alanda yanıcı buharların tutuşması",
+      "Sıcak çalışma dumanlarının kapalı alana girmesi",
+      "Atmosferin bozulması / oksijen seviyesinin etkilenmesi",
+      "Acil durum ve tahliye faaliyetlerinin çakışması",
+    ],
+    [
+      "Ignition of flammable vapors inside confined space",
+      "Hot work fumes entering confined space",
+      "Atmosphere deterioration / oxygen displacement",
+      "Emergency response and evacuation conflicts",
+    ],
+    [
+      "Her iki faaliyet için geçerli PTW doğrulaması",
+      "Sürekli gaz ölçümü ve atmosfer takibi",
+      "Etkili mekanik havalandırma",
+      "Fire watch görevlendirilmesi",
+      "Alan izolasyonu ve erişim kontrolü",
+      "Supervisorlar arası doğrudan iletişim",
+      "Acil durum düzenlemelerinin doğrulanması",
+      "Gerekirse faaliyetlerden birini yeniden planlayın",
+    ],
+    [
+      "Valid PTW for both activities",
+      "Continuous gas testing and atmosphere monitoring",
+      "Effective mechanical ventilation",
+      "Dedicated fire watch",
+      "Area segregation and access control",
+      "Direct communication between supervisors",
+      "Confirm emergency arrangements",
+      "Consider rescheduling one of the activities",
+    ]
+  ),
+
+  "hot-work|lifting": makeInteraction(
+    "high",
+    15,
+    6,
+    [
+      "Kaldırılan yükün sıcak çalışma alanına girmesi",
+      "Kıvılcım ve sıcak parçacıkların lifting ekibini etkilemesi",
+      "Vinç hareketleri ile çalışma alanı erişiminin çakışması",
+    ],
+    [
+      "Suspended load entering the hot work area",
+      "Sparks and hot particles affecting the lifting team",
+      "Crane movements conflicting with work area access",
+    ],
+    [
+      "Exclusion zone oluşturun",
+      "Kaldırma rotasını sıcak çalışma alanından ayırın",
+      "Banksman ve fire watch iletişimini sağlayın",
+      "Eş zamanlı operasyonu supervisor onayına bağlayın",
+    ],
+    [
+      "Establish an exclusion zone",
+      "Separate the lifting route from the hot work area",
+      "Maintain communication between banksman and fire watch",
+      "Require supervisor approval for simultaneous operation",
+    ]
+  ),
+
+  "lifting|work-at-height": makeInteraction(
+    "high",
+    16,
+    6,
+    [
+      "Askıdaki yükün yüksekte çalışan personeli etkilemesi",
+      "Düşen cisim ve kaldırılan yük risklerinin birleşmesi",
+      "İskele veya platform erişiminin vinç operasyonu ile kesişmesi",
+    ],
+    [
+      "Suspended load affecting personnel working at height",
+      "Combined dropped-object and suspended-load hazards",
+      "Scaffold or platform access conflicting with crane operation",
+    ],
+    [
+      "Yük altında personel bulunmasını engelleyin",
+      "Kaldırma exclusion zone uygulayın",
+      "WAH alanını fiziksel olarak ayırın",
+      "Tek bir koordinatör üzerinden iletişim sağlayın",
+    ],
+    [
+      "Prevent personnel from entering below suspended loads",
+      "Apply lifting exclusion zones",
+      "Physically segregate the work-at-height area",
+      "Coordinate both activities through a single responsible person",
+    ]
+  ),
+
+  "electrical|hot-work": makeInteraction(
+    "extreme",
+    20,
+    8,
+    [
+      "Enerjili ekipman yakınında sıcak çalışma",
+      "Ark / kıvılcım kaynaklı ek tutuşma riski",
+      "Kablo ve elektrik ekipmanlarının sıcak çalışma nedeniyle zarar görmesi",
+    ],
+    [
+      "Hot work near energized equipment",
+      "Additional ignition risk from arcs and sparks",
+      "Damage to cables and electrical equipment from hot work",
+    ],
+    [
+      "LOTO ve izolasyon durumunu doğrulayın",
+      "Enerji kaynaklarını mümkünse devre dışı bırakın",
+      "Yangın önleme tedbirlerini artırın",
+      "Yetkili elektrik personeli ile koordinasyon sağlayın",
+    ],
+    [
+      "Verify LOTO and isolation status",
+      "De-energize sources where possible",
+      "Increase fire prevention controls",
+      "Coordinate with authorized electrical personnel",
+    ]
+  ),
+
+  "air-blowing|work-at-height": makeInteraction(
+    "low",
+    4,
+    2,
+    defaultHazardsTr,
+    defaultHazardsEn,
+    defaultControlsTr,
+    defaultControlsEn
+  ),
+};
+
+function interactionKey(a: string, b: string) {
+  return [a, b].sort().join("|");
+}
+
+function pseudoInteraction(a: string, b: string): Interaction {
+  const key = interactionKey(a, b);
+
+  if (specificInteractions[key]) {
+    return specificInteractions[key];
+  }
+
+  const source = `${a}:${b}`;
+  let hash = 0;
+
+  for (let i = 0; i < source.length; i++) {
+    hash += source.charCodeAt(i);
+  }
+
+  const bucket = hash % 4;
+
+  if (bucket === 0) {
+    return makeInteraction(
+      "medium",
+      8,
+      4,
+      defaultHazardsTr,
+      defaultHazardsEn,
+      defaultControlsTr,
+      defaultControlsEn
+    );
+  }
+
+  if (bucket === 1) {
+    return makeInteraction(
+      "high",
+      12,
+      6,
+      defaultHazardsTr,
+      defaultHazardsEn,
+      defaultControlsTr,
+      defaultControlsEn
+    );
+  }
+
+  if (bucket === 2) {
+    return makeInteraction(
+      "medium",
+      6,
+      3,
+      defaultHazardsTr,
+      defaultHazardsEn,
+      defaultControlsTr,
+      defaultControlsEn
+    );
+  }
+
+  return makeInteraction(
+    "high",
+    15,
+    8,
+    defaultHazardsTr,
+    defaultHazardsEn,
+    defaultControlsTr,
+    defaultControlsEn
+  );
+}
+
+export default function SimopsPlanner({ locale }: Props) {
+  const isTurkish = locale === "tr";
+
+  const [selected, setSelected] = useState<string[]>([
+    "hot-work",
+    "lifting",
+    "work-at-height",
+  ]);
+
+  const [search, setSearch] = useState("");
+  const [activePair, setActivePair] = useState<[string, string]>([
+    "hot-work",
+    "confined-space",
+  ]);
+
+  const [decision, setDecision] = useState<
+    "proceed" | "controls" | "reschedule" | "stop"
+  >("controls");
+
+  const filteredActivities = activities.filter((activity) => {
+    const label = isTurkish ? activity.tr : activity.en;
+    return label.toLowerCase().includes(search.toLowerCase());
+  });
+
+  const activeInteraction = pseudoInteraction(activePair[0], activePair[1]);
+
+  const selectedInteractions = useMemo(() => {
+    const result: Interaction[] = [];
+
+    for (let i = 0; i < selected.length; i++) {
+      for (let j = i + 1; j < selected.length; j++) {
+        result.push(pseudoInteraction(selected[i], selected[j]));
+      }
+    }
+
+    return result;
+  }, [selected]);
+
+  const maxInitial =
+    selectedInteractions.length > 0
+      ? Math.max(...selectedInteractions.map((x) => x.initialRisk))
+      : 0;
+
+  const maxResidual =
+    selectedInteractions.length > 0
+      ? Math.max(...selectedInteractions.map((x) => x.residualRisk))
+      : 0;
+
+  const highestLevel: Level =
+    selectedInteractions.some((x) => x.level === "extreme")
+      ? "extreme"
+      : selectedInteractions.some((x) => x.level === "high")
+        ? "high"
+        : selectedInteractions.some((x) => x.level === "medium")
+          ? "medium"
+          : "low";
+
+  const activityById = (id: string) =>
+    activities.find((activity) => activity.id === id);
+
+  const activityName = (id: string) => {
+    const activity = activityById(id);
+    if (!activity) return id;
+    return isTurkish ? activity.tr : activity.en;
+  };
+
+  const toggleActivity = (id: string) => {
+    setSelected((current) =>
+      current.includes(id)
+        ? current.filter((item) => item !== id)
+        : [...current, id]
+    );
+  };
+
+  const riskLevelFromScore = (score: number): Level => {
+    if (score <= 4) return "low";
+    if (score <= 9) return "medium";
+    if (score <= 16) return "high";
+    return "extreme";
+  };
+
+  const initialLevel = riskLevelFromScore(maxInitial);
+  const residualLevel = riskLevelFromScore(maxResidual);
+
+  const decisions = [
+    {
+      id: "proceed" as const,
+      tr: "Devam Et",
+      en: "Proceed",
+      trSub: "Riskler kabul edilebilir",
+      enSub: "Risks are acceptable",
+      className:
+        "border-emerald-400/40 bg-emerald-500/10 text-emerald-300",
+    },
+    {
+      id: "controls" as const,
+      tr: "Ek Kontrollerle Devam Et",
+      en: "Proceed with Additional Controls",
+      trSub: "Ek koruyucu tedbirler uygula",
+      enSub: "Implement extra safeguards",
+      className:
+        "border-yellow-400/40 bg-yellow-500/10 text-yellow-300",
+    },
+    {
+      id: "reschedule" as const,
+      tr: "Faaliyetleri Yeniden Planla",
+      en: "Reschedule Activities",
+      trSub: "Etkileşimi azalt",
+      enSub: "Reduce interaction",
+      className:
+        "border-orange-400/40 bg-orange-500/10 text-orange-300",
+    },
+    {
+      id: "stop" as const,
+      tr: "Devam Etme",
+      en: "Do Not Proceed",
+      trSub: "Risk seviyesi çok yüksek",
+      enSub: "Risk level too high",
+      className: "border-red-400/40 bg-red-500/10 text-red-300",
+    },
+  ];
+
+  return (
+    <section className="min-h-screen bg-slate-950 px-4 py-12 text-white sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1500px]">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-400">
+              SAFEBASE CONTROL OF WORK
+            </p>
+
+            <h1 className="mt-3 text-3xl font-black tracking-tight">
+              SIMOPS Planner
+            </h1>
+
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-400">
+              {isTurkish
+                ? "Eş zamanlı faaliyetleri planlayın, etkileşimleri belirleyin ve gerekli kontrol önlemlerini yönetin."
+                : "Plan and manage simultaneous operations to identify interactions and control risks."}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            className="rounded-xl border border-white/10 bg-slate-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
+          >
+            📄 {isTurkish ? "SIMOPS Raporu (PDF)" : "Download Report (PDF)"}
+          </button>
+        </div>
+
+        {/* SUMMARY */}
+        <div className="mt-8 grid overflow-hidden rounded-2xl border border-white/10 bg-slate-900/55 md:grid-cols-2 xl:grid-cols-5">
+          <SummaryItem
+            title={isTurkish ? "Seçili Faaliyetler" : "Selected Activities"}
+            value={String(selected.length)}
+            sub={`${isTurkish ? "toplam" : "of"} ${activities.length}`}
+            accent="text-white"
+          />
+
+          <SummaryItem
+            title={isTurkish ? "Etkileşim Seviyesi" : "Interaction Level"}
+            value={isTurkish ? levelMeta[highestLevel].tr : levelMeta[highestLevel].en}
+            sub={isTurkish ? "İnceleme gerekli" : "Review required"}
+            accent={levelMeta[highestLevel].scoreClass}
+          />
+
+          <SummaryItem
+            title={isTurkish ? "İlk Risk (Maks.)" : "Initial Risk (Max)"}
+            value={String(maxInitial)}
+            sub={isTurkish ? levelMeta[initialLevel].tr : levelMeta[initialLevel].en}
+            accent={levelMeta[initialLevel].scoreClass}
+          />
+
+          <SummaryItem
+            title={isTurkish ? "Kalan Risk (Maks.)" : "Residual Risk (Max)"}
+            value={String(maxResidual)}
+            sub={isTurkish ? levelMeta[residualLevel].tr : levelMeta[residualLevel].en}
+            accent={levelMeta[residualLevel].scoreClass}
+          />
+
+          <SummaryItem
+            title={isTurkish ? "Durum" : "Status"}
+            value={isTurkish ? "Aktif" : "Active"}
+            sub={isTurkish ? "SIMOPS planı" : "SIMOPS plan"}
+            accent="text-blue-400"
+          />
+        </div>
+
+        <div className="mt-5 grid items-start gap-5 xl:grid-cols-[300px_minmax(0,1fr)]">
+          {/* ACTIVITIES */}
+          <aside className="rounded-2xl border border-white/10 bg-slate-900/55 p-4">
+            <h2 className="text-base font-black">
+              1. {isTurkish ? "Faaliyetleri Seçin" : "Select Activities"}
+            </h2>
+
+            <p className="mt-1 text-xs leading-5 text-slate-400">
+              {isTurkish
+                ? "Aynı zamanda gerçekleştirilecek faaliyetleri seçin."
+                : "Choose activities that will occur simultaneously."}
+            </p>
+
+            <input
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder={isTurkish ? "Faaliyet ara..." : "Search activity..."}
+              className="mt-4 w-full rounded-xl border border-white/10 bg-slate-950 px-3 py-2.5 text-sm text-white outline-none placeholder:text-slate-600 focus:border-blue-500"
+            />
+
+            <div className="mt-3 space-y-2">
+              {filteredActivities.map((activity) => {
+                const active = selected.includes(activity.id);
+
+                return (
+                  <button
+                    key={activity.id}
+                    type="button"
+                    onClick={() => toggleActivity(activity.id)}
+                    className={`flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-left text-sm transition ${
+                      active
+                        ? "border-blue-500/60 bg-blue-500/15 text-white"
+                        : "border-white/10 bg-slate-950/35 text-slate-300 hover:bg-white/5"
+                    }`}
+                  >
+                    <span
+                      className={`flex h-5 w-5 items-center justify-center rounded border text-[11px] ${
+                        active
+                          ? "border-blue-400 bg-blue-500 text-white"
+                          : "border-slate-600"
+                      }`}
+                    >
+                      {active ? "✓" : ""}
+                    </span>
+
+                    <span>{activity.icon}</span>
+
+                    <span className="font-semibold">
+                      {isTurkish ? activity.tr : activity.en}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
+              <button
+                type="button"
+                onClick={() => setSelected([])}
+                className="rounded-lg border border-white/10 bg-slate-950 px-3 py-2 text-xs font-bold text-slate-300"
+              >
+                🗑 {isTurkish ? "Temizle" : "Clear All"}
+              </button>
+
+              <span className="text-xs font-bold text-blue-400">
+                {selected.length} {isTurkish ? "seçili" : "selected"}
+              </span>
+            </div>
+          </aside>
+
+          {/* MATRIX AREA */}
+          <div className="space-y-5">
+            <div className="rounded-2xl border border-white/10 bg-slate-900/55 p-4">
+              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <h2 className="text-base font-black">
+                    2. {isTurkish ? "SIMOPS Etkileşim Matrisi" : "SIMOPS Interaction Matrix"}
+                  </h2>
+
+                  <p className="mt-1 text-xs text-slate-400">
+                    {isTurkish
+                      ? "Etkileşim detaylarını ve gerekli kontrolleri görmek için hücreye tıklayın."
+                      : "Click any cell to view interaction details, hazards and required controls."}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-4 text-xs">
+                  {(["low", "medium", "high", "extreme"] as Level[]).map((level) => (
+                    <div key={level} className="flex items-center gap-2">
+                      <span className={`h-3 w-3 rounded-full ${levelMeta[level].dot}`} />
+                      <span className="text-slate-300">
+                        {isTurkish ? levelMeta[level].tr : levelMeta[level].en}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-5 overflow-x-auto">
+                <div className="min-w-[900px] overflow-hidden rounded-xl border border-white/10">
+                  <div
+                    className="grid"
+                    style={{
+                      gridTemplateColumns: `150px repeat(${activities.length}, minmax(130px, 1fr))`,
+                    }}
+                  >
+                    <div className="border-b border-r border-white/10 bg-slate-950/60 p-3" />
+
+                    {activities.map((activity) => (
+                      <div
+                        key={activity.id}
+                        className="flex min-h-14 items-center justify-center border-b border-r border-white/10 bg-slate-950/60 px-2 text-center text-xs font-bold last:border-r-0"
+                      >
+                        {isTurkish ? activity.tr : activity.en}
+                      </div>
+                    ))}
+
+                    {activities.map((row) => (
+                      <div key={`row-${row.id}`} className="contents">
+                        <div className="flex min-h-14 items-center border-b border-r border-white/10 bg-slate-950/60 px-3 text-xs font-bold">
+                          {isTurkish ? row.tr : row.en}
+                        </div>
+
+                        {activities.map((column) => {
+                          const same = row.id === column.id;
+
+                          if (same) {
+                            return (
+                              <div
+                                key={`${row.id}-${column.id}`}
+                                className="flex min-h-14 items-center justify-center border-b border-r border-white/10 bg-slate-950/30 text-slate-600"
+                              >
+                                —
+                              </div>
+                            );
+                          }
+
+                          const interaction = pseudoInteraction(row.id, column.id);
+                          const active =
+                            interactionKey(row.id, column.id) ===
+                            interactionKey(activePair[0], activePair[1]);
+
+                          return (
+                            <button
+                              key={`${row.id}-${column.id}`}
+                              type="button"
+                              onClick={() => setActivePair([row.id, column.id])}
+                              className={`flex min-h-14 items-center justify-center border-b border-r border-white/10 px-2 transition hover:bg-white/5 ${
+                                active ? "bg-blue-500/10 ring-1 ring-inset ring-blue-500" : ""
+                              }`}
+                            >
+                              <span
+                                className={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1 text-[11px] font-black ${levelMeta[interaction.level].badge}`}
+                              >
+                                <span
+                                  className={`h-2.5 w-2.5 rounded-full ${levelMeta[interaction.level].dot}`}
+                                />
+                                {isTurkish
+                                  ? levelMeta[interaction.level].tr
+                                  : levelMeta[interaction.level].en}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* DETAIL */}
+              <div className="mt-5 overflow-hidden rounded-xl border border-white/10 bg-slate-950/35">
+                <div className="flex flex-wrap items-center gap-3 border-b border-white/10 px-4 py-3">
+                  <span className="font-black">
+                    {activityName(activePair[0])}
+                  </span>
+
+                  <span className="text-slate-500">+</span>
+
+                  <span className="font-black">
+                    {activityName(activePair[1])}
+                  </span>
+
+                  <span
+                    className={`rounded-full border px-2.5 py-1 text-[11px] font-black ${levelMeta[activeInteraction.level].badge}`}
+                  >
+                    {isTurkish
+                      ? levelMeta[activeInteraction.level].tr
+                      : levelMeta[activeInteraction.level].en}
+                  </span>
+                </div>
+
+                <div className="grid lg:grid-cols-[1fr_1.7fr_180px]">
+                  <div className="border-b border-white/10 p-4 lg:border-b-0 lg:border-r">
+                    <h3 className="text-xs font-black uppercase tracking-wide text-slate-300">
+                      {isTurkish
+                        ? "Potansiyel Etkileşim Tehlikeleri"
+                        : "Potential Interaction Hazards"}
+                    </h3>
+
+                    <ul className="mt-4 space-y-3">
+                      {(isTurkish
+                        ? activeInteraction.hazardsTr
+                        : activeInteraction.hazardsEn
+                      ).map((hazard) => (
+                        <li
+                          key={hazard}
+                          className="flex gap-2 text-xs leading-5 text-slate-300"
+                        >
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" />
+                          <span>{hazard}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="border-b border-white/10 p-4 lg:border-b-0 lg:border-r">
+                    <h3 className="text-xs font-black uppercase tracking-wide text-slate-300">
+                      {isTurkish ? "Gerekli Kontroller" : "Required Controls"}
+                    </h3>
+
+                    <div className="mt-4 grid gap-x-5 gap-y-3 sm:grid-cols-2">
+                      {(isTurkish
+                        ? activeInteraction.controlsTr
+                        : activeInteraction.controlsEn
+                      ).map((control) => (
+                        <div
+                          key={control}
+                          className="flex gap-2 text-xs leading-5 text-slate-300"
+                        >
+                          <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-[9px] font-black text-emerald-400">
+                            ✓
+                          </span>
+                          <span>{control}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="border-b border-white/10 p-4">
+                      <div className="text-[11px] font-bold uppercase text-slate-400">
+                        {isTurkish ? "İlk Risk" : "Initial Risk"}
+                      </div>
+
+                      <div className="mt-2 flex items-end gap-2">
+                        <span className="text-3xl font-black text-red-400">
+                          {activeInteraction.initialRisk}
+                        </span>
+                        <span className="pb-1 text-xs font-bold text-red-300">
+                          {isTurkish
+                            ? levelMeta[riskLevelFromScore(activeInteraction.initialRisk)].tr
+                            : levelMeta[riskLevelFromScore(activeInteraction.initialRisk)].en}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-4">
+                      <div className="text-[11px] font-bold uppercase text-slate-400">
+                        {isTurkish ? "Kalan Risk" : "Residual Risk"}
+                      </div>
+
+                      <div className="mt-2 flex items-end gap-2">
+                        <span className="text-3xl font-black text-yellow-400">
+                          {activeInteraction.residualRisk}
+                        </span>
+                        <span className="pb-1 text-xs font-bold text-yellow-300">
+                          {isTurkish
+                            ? levelMeta[riskLevelFromScore(activeInteraction.residualRisk)].tr
+                            : levelMeta[riskLevelFromScore(activeInteraction.residualRisk)].en}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* DECISION */}
+            <div className="rounded-2xl border border-white/10 bg-slate-900/55 p-4">
+              <h2 className="text-base font-black">
+                3. {isTurkish ? "Koordinasyon ve Karar" : "Coordination & Decision"}
+              </h2>
+
+              <p className="mt-1 text-xs text-slate-400">
+                {isTurkish
+                  ? "Özet değerlendirmeyi inceleyin ve nasıl ilerleyeceğinize karar verin."
+                  : "Review the summary and decide how to proceed."}
+              </p>
+
+              <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+                {decisions.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setDecision(item.id)}
+                    className={`rounded-xl border p-4 text-left transition ${
+                      decision === item.id
+                        ? `${item.className} ring-2 ring-white/10`
+                        : "border-white/10 bg-slate-950/35 text-slate-300 hover:bg-white/5"
+                    }`}
+                  >
+                    <div className="text-sm font-black">
+                      {isTurkish ? item.tr : item.en}
+                    </div>
+
+                    <div className="mt-1 text-xs opacity-75">
+                      {isTurkish ? item.trSub : item.enSub}
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-4 flex flex-col gap-3 rounded-xl border border-white/10 bg-slate-950/40 p-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <div className="text-[11px] font-bold uppercase tracking-wide text-slate-500">
+                    {isTurkish ? "SIMOPS Koordinatörü" : "SIMOPS Coordinator"}
+                  </div>
+
+                  <div className="mt-1 font-black text-white">
+                    Sercan Aslan
+                  </div>
+
+                  <div className="text-xs text-slate-400">
+                    HSE Supervisor
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className="rounded-lg border border-white/10 bg-slate-900 px-4 py-2 text-xs font-bold text-slate-200"
+                >
+                  {isTurkish ? "Değiştir" : "Change"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SummaryItem({
+  title,
+  value,
+  sub,
+  accent,
+}: {
+  title: string;
+  value: string;
+  sub: string;
+  accent: string;
+}) {
+  return (
+    <div className="border-b border-white/10 p-4 last:border-b-0 md:border-r md:last:border-r-0 xl:border-b-0">
+      <div className="text-xs font-semibold text-slate-400">{title}</div>
+
+      <div className={`mt-2 text-2xl font-black ${accent}`}>
+        {value}
+      </div>
+
+      <div className="mt-1 text-xs text-slate-500">{sub}</div>
+    </div>
+  );
+}
