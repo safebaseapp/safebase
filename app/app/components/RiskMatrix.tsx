@@ -3,26 +3,44 @@
 import jsPDF from "jspdf";
 import { useMemo, useState } from "react";
 
-const likelihoodOptions = [
-  { value: 1, label: "Rare" },
-  { value: 2, label: "Unlikely" },
-  { value: 3, label: "Possible" },
-  { value: 4, label: "Likely" },
-  { value: 5, label: "Almost Certain" },
-];
+const likelihoodOptions = {
+  tr: [
+    { value: 1, label: "Nadir" },
+    { value: 2, label: "Düşük Olasılık" },
+    { value: 3, label: "Olası" },
+    { value: 4, label: "Muhtemel" },
+    { value: 5, label: "Neredeyse Kesin" },
+  ],
+  en: [
+    { value: 1, label: "Rare" },
+    { value: 2, label: "Unlikely" },
+    { value: 3, label: "Possible" },
+    { value: 4, label: "Likely" },
+    { value: 5, label: "Almost Certain" },
+  ],
+};
 
-const severityOptions = [
-  { value: 1, label: "Insignificant" },
-  { value: 2, label: "Minor" },
-  { value: 3, label: "Moderate" },
-  { value: 4, label: "Major" },
-  { value: 5, label: "Catastrophic" },
-];
+const severityOptions = {
+  tr: [
+    { value: 1, label: "Önemsiz" },
+    { value: 2, label: "Hafif" },
+    { value: 3, label: "Orta" },
+    { value: 4, label: "Ciddi" },
+    { value: 5, label: "Felaket" },
+  ],
+  en: [
+    { value: 1, label: "Insignificant" },
+    { value: 2, label: "Minor" },
+    { value: 3, label: "Moderate" },
+    { value: 4, label: "Major" },
+    { value: 5, label: "Catastrophic" },
+  ],
+};
 
-function getRiskLevel(score: number) {
+function getRiskLevel(score: number, locale: "tr" | "en") {
   if (score <= 4) {
     return {
-      label: "Low",
+      label: locale === "tr" ? "Düşük" : "Low",
       cellClass: "bg-emerald-500 text-white",
       badgeClass: "border-emerald-300 bg-emerald-100 text-emerald-800",
     };
@@ -30,7 +48,7 @@ function getRiskLevel(score: number) {
 
   if (score <= 9) {
     return {
-      label: "Medium",
+      label: locale === "tr" ? "Orta" : "Medium",
       cellClass: "bg-yellow-400 text-slate-950",
       badgeClass: "border-yellow-300 bg-yellow-100 text-yellow-800",
     };
@@ -38,36 +56,82 @@ function getRiskLevel(score: number) {
 
   if (score <= 16) {
     return {
-      label: "High",
+      label: locale === "tr" ? "Yüksek" : "High",
       cellClass: "bg-orange-500 text-white",
       badgeClass: "border-orange-300 bg-orange-100 text-orange-800",
     };
   }
 
   return {
-    label: "Extreme",
+    label: locale === "tr" ? "Çok Yüksek" : "Extreme",
     cellClass: "bg-red-600 text-white",
     badgeClass: "border-red-300 bg-red-100 text-red-800",
   };
 }
 
-export default function RiskMatrix() {
+type RiskMatrixProps = {
+  locale: "tr" | "en";
+};
+
+export default function RiskMatrix({ locale }: RiskMatrixProps) {
+  const isTurkish = locale === "tr";
+  const currentLikelihoodOptions = likelihoodOptions[locale];
+  const currentSeverityOptions = severityOptions[locale];
+
+  const t = {
+    eyebrow: isTurkish ? "ETKİLEŞİMLİ HESAPLAYICI" : "INTERACTIVE CALCULATOR",
+    title: isTurkish ? "Risk Matrisi Hesaplayıcı" : "Risk Matrix Calculator",
+    description: isTurkish
+      ? "Risk puanını ve risk seviyesini anında hesaplamak için olasılık ve şiddet değerlerini seçin."
+      : "Select likelihood and severity to calculate the risk score and risk level instantly.",
+    likelihood: isTurkish ? "Olasılık" : "Likelihood",
+    severity: isTurkish ? "Şiddet" : "Severity",
+    riskScore: isTurkish ? "Risk Puanı" : "Risk Score",
+    recommendedActions: isTurkish ? "Önerilen Aksiyonlar" : "Recommended Actions",
+    downloadPdf: isTurkish ? "📄 PDF İndir" : "{t.downloadPdf}",
+    riskSuffix: isTurkish ? "Risk" : "Risk",
+    controlMeasures: isTurkish ? "Kontrol Önlemleri" : "Control Measures",
+    controlPlaceholder: isTurkish
+      ? "Uygulanacak kontrol önlemlerini yazın..."
+      : "Enter the control measures to be implemented...",
+    residualRisk: isTurkish ? "Kalan Risk" : "Residual Risk",
+    residualLikelihood: isTurkish ? "Kalan Olasılık" : "Residual Likelihood",
+    residualSeverity: isTurkish ? "Kalan Şiddet" : "Residual Severity",
+  };
+
   const [likelihood, setLikelihood] = useState(3);
   const [severity, setSeverity] = useState(3);
 
+  // Residual risk values after control measures
+  const [residualLikelihood, setResidualLikelihood] = useState(2);
+  const [residualSeverity, setResidualSeverity] = useState(2);
+  const [controlMeasures, setControlMeasures] = useState("");
+
   const score = likelihood * severity;
-  const risk = useMemo(() => getRiskLevel(score), [score]);
+  const risk = useMemo(() => getRiskLevel(score, locale), [score, locale]);
+
+  const residualScore = residualLikelihood * residualSeverity;
+  const residualRisk = useMemo(
+    () => getRiskLevel(residualScore, locale),
+    [residualScore, locale]
+  );
  const downloadPDF = () => {
   const doc = new jsPDF();
 
   const likelihoodLabel =
-    likelihoodOptions.find((item) => item.value === likelihood)?.label ?? "";
+    currentLikelihoodOptions.find((item) => item.value === likelihood)?.label ?? "";
 
   const severityLabel =
-    severityOptions.find((item) => item.value === severity)?.label ?? "";
+    currentSeverityOptions.find((item) => item.value === severity)?.label ?? "";
 
-  const actions =
-    recommendations[risk.label as keyof typeof recommendations] ?? [];
+  const actions: string[] =
+    locale === "tr"
+      ? recommendations.tr[
+          risk.label as keyof typeof recommendations.tr
+        ] ?? []
+      : recommendations.en[
+          risk.label as keyof typeof recommendations.en
+        ] ?? [];
 
   const today = new Date().toLocaleDateString("en-GB");
 
@@ -274,7 +338,7 @@ doc.setFont("helvetica", "normal");
 doc.setFontSize(8);
 
 doc.text(
-  "This report was generated automatically by SafeBase Risk Matrix Calculator.",
+  "This report was generated automatically by SafeBase {t.title}.",
   18,
   284
 );
@@ -288,44 +352,76 @@ doc.text(
   doc.save(`SafeBase-Risk-Matrix-${score}.pdf`);
 };
   const recommendations = {
-  Low: [
-    "Continue with current controls",
-    "Monitor the task",
-  ],
-  Medium: [
-    "Review existing controls",
-    "Supervisor awareness required",
-    "Monitor during work",],
-    
-   
-  High: [
-    "Additional control measures required",
-    "Supervisor approval required",
-    "Review RAMS before starting",
-  ],
-  Extreme: [
-    "STOP WORK immediately",
-    "Engineering controls required",
-    "Management approval required",
-    "Risk assessment must be revised",
-  ],
-};
+    tr: {
+      "Düşük": [
+        "Mevcut kontrol önlemlerine devam edin.",
+        "Çalışmayı izlemeye devam edin.",
+      ],
+      "Orta": [
+        "Mevcut kontrol önlemlerini gözden geçirin.",
+        "Saha sorumlusunu bilgilendirin.",
+        "Çalışma süresince riski izleyin.",
+      ],
+      "Yüksek": [
+        "Ek kontrol önlemleri uygulayın.",
+        "Saha sorumlusu onayı alın.",
+        "Çalışmaya başlamadan önce risk değerlendirmesini gözden geçirin.",
+      ],
+      "Çok Yüksek": [
+        "ÇALIŞMAYI DERHAL DURDURUN.",
+        "Mühendislik kontrolleri uygulayın.",
+        "Yönetim onayı alın.",
+        "Risk değerlendirmesini revize edin.",
+      ],
+    },
+    en: {
+      Low: [
+        "Continue with current controls.",
+        "Continue monitoring the task.",
+      ],
+      Medium: [
+        "Review existing control measures.",
+        "Inform the site supervisor.",
+        "Monitor the risk during the work.",
+      ],
+      High: [
+        "Implement additional control measures.",
+        "Obtain supervisor approval.",
+        "Review the risk assessment before starting work.",
+      ],
+      Extreme: [
+        "STOP WORK immediately.",
+        "Implement engineering controls.",
+        "Obtain management approval.",
+        "Revise the risk assessment.",
+      ],
+    },
+  };
+
+  const currentRecommendations: string[] =
+    locale === "tr"
+      ? recommendations.tr[
+          risk.label as keyof typeof recommendations.tr
+        ] ?? []
+      : recommendations.en[
+          risk.label as keyof typeof recommendations.en
+        ] ?? [];
+
 
   return (
     <section id="risk-matrix" className="bg-slate-950 px-6 py-24 text-white">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">
-            Interactive calculator
+            {t.eyebrow}
           </p>
 
           <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
-            Risk Matrix Calculator
+              {t.title}
           </h2>
 
           <p className="mt-5 leading-7 text-slate-400">
-            Select likelihood and severity to calculate the risk score and risk
-            level instantly.
+              {t.description}
           </p>
         </div>
 
@@ -334,7 +430,7 @@ doc.text(
             <div className="grid gap-6">
               <label>
                 <span className="text-sm font-medium text-slate-300">
-                  Likelihood
+                  {t.likelihood}
                 </span>
 
                 <select
@@ -344,7 +440,7 @@ doc.text(
                   }
                   className="mt-3 w-full rounded-xl border border-white/10 bg-slate-900 px-4 py-3 text-white outline-none focus:border-blue-400"
                 >
-                  {likelihoodOptions.map((option) => (
+                  {currentLikelihoodOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.value} — {option.label}
                     </option>
@@ -354,7 +450,7 @@ doc.text(
 
               <label>
                 <span className="text-sm font-medium text-slate-300">
-                  Severity
+                  {t.severity}
                 </span>
 
                 <select
@@ -364,7 +460,7 @@ doc.text(
                   }
                   className="mt-3 w-full rounded-xl border border-white/10 bg-slate-900 px-4 py-3 text-white outline-none focus:border-blue-400"
                 >
-                  {severityOptions.map((option) => (
+                  {currentSeverityOptions.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.value} — {option.label}
                     </option>
@@ -374,37 +470,107 @@ doc.text(
             </div>
 
             <div className="mt-8 rounded-2xl border border-white/10 bg-slate-900 p-6">
-              <div className="text-sm text-slate-400">Risk score</div>
+              <div className="text-sm text-slate-400">{t.riskScore}</div>
               <div className="mt-2 text-6xl font-bold">{score}</div>
 
               <div
   className={`mt-5 inline-flex rounded-full border px-4 py-2 text-sm font-semibold ${risk.badgeClass}`}
 >
-  {risk.label} Risk
+  {risk.label} {t.riskSuffix}
 </div>
 
 <div className="mt-6 border-t border-white/10 pt-5">
   <div className="text-sm font-semibold text-white">
-    Recommended Actions
+    {t.recommendedActions}
   </div>
 
   <ul className="mt-3 space-y-2 text-sm text-slate-300">
-    <li className="flex gap-2">
-      <span className="text-blue-400">✓</span>
-      <span>Review existing controls</span>
-    </li>
-
-    <li className="flex gap-2">
-      <span className="text-blue-400">✓</span>
-      <span>Supervisor awareness required</span>
-    </li>
-
-    <li className="flex gap-2">
-      <span className="text-blue-400">✓</span>
-      <span>Monitor during work</span>
-    </li>
+    {currentRecommendations.map((action) => (
+      <li key={action} className="flex gap-2">
+        <span className="text-blue-400">✓</span>
+        <span>{action}</span>
+      </li>
+    ))}
   </ul>
-  <button
+  <div className="mt-6 border-t border-white/10 pt-6">
+  <div className="text-sm font-semibold text-white">
+    {t.controlMeasures}
+  </div>
+
+  <textarea
+    value={controlMeasures}
+    onChange={(event) => setControlMeasures(event.target.value)}
+    placeholder={t.controlPlaceholder}
+    rows={4}
+    className="mt-3 w-full resize-none rounded-xl border border-white/10 bg-slate-950 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-blue-400"
+  />
+
+  <div className="mt-6 text-sm font-semibold text-white">
+    {t.residualRisk}
+  </div>
+
+  <div className="mt-3 grid gap-4 sm:grid-cols-2">
+    <label>
+      <span className="text-sm font-medium text-slate-300">
+        {t.residualLikelihood}
+      </span>
+
+      <select
+        value={residualLikelihood}
+        onChange={(event) =>
+          setResidualLikelihood(Number(event.target.value))
+        }
+        className="mt-3 w-full rounded-xl border border-white/10 bg-slate-950 px-4 py-3 text-white outline-none focus:border-blue-400"
+      >
+        {currentLikelihoodOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.value} – {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
+
+    <label>
+      <span className="text-sm font-medium text-slate-300">
+        {t.residualSeverity}
+      </span>
+
+      <select
+        value={residualSeverity}
+        onChange={(event) =>
+          setResidualSeverity(Number(event.target.value))
+        }
+        className="mt-3 w-full rounded-xl border border-white/10 bg-slate-950 px-4 py-3 text-white outline-none focus:border-blue-400"
+      >
+        {currentSeverityOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.value} – {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
+  </div>
+
+  <div className="mt-4 rounded-xl border border-white/10 bg-slate-950 p-4">
+    <div className="text-sm text-slate-400">
+      {t.residualRisk}
+    </div>
+
+    <div className="mt-2 flex items-center justify-between gap-4">
+      <div className="text-4xl font-bold text-white">
+        {residualScore}
+      </div>
+
+      <div
+        className={`inline-flex rounded-full border px-4 py-2 text-sm font-semibold ${residualRisk.badgeClass}`}
+      >
+        {residualRisk.label} {t.riskSuffix}
+      </div>
+    </div>
+  </div>
+</div>
+
+<button
   type="button"
   onClick={downloadPDF}
   className="mt-6 w-full rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-700"
@@ -439,7 +605,7 @@ doc.text(
 
                     {[1, 2, 3, 4, 5].map((likelihoodValue) => {
                       const cellScore = severityValue * likelihoodValue;
-                      const cellRisk = getRiskLevel(cellScore);
+                      const cellRisk = getRiskLevel(cellScore, locale);
                       const isSelected =
                         severityValue === severity &&
                         likelihoodValue === likelihood;
