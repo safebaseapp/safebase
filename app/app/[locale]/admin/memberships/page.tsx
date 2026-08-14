@@ -110,7 +110,7 @@ export default async function MembershipsPage({ params }: Props) {
             </Link>
 
             <p className="mt-6 text-xs font-black uppercase tracking-[0.22em] text-violet-400">
-              SAFEBASE MEMBERSHIP CONTROL
+              SERNEM MEMBERSHIP CONTROL
             </p>
 
             <h1 className="mt-2 text-4xl font-black tracking-tight">
@@ -231,8 +231,8 @@ export default async function MembershipsPage({ params }: Props) {
                   ? "Premium doküman indirmeleri"
                   : "Premium document downloads",
                 isTurkish
-                  ? "Gelişmiş SafeBase özellikleri"
-                  : "Advanced SafeBase features",
+                  ? "Gelişmiş Sernem özellikleri"
+                  : "Advanced Sernem features",
               ].map((item) => (
                 <div
                   key={item}

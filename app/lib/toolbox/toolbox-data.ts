@@ -127,7 +127,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — SDS, kimyasal risk değerlendirmesi ve saha prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — SDS, kimyasal risk değerlendirmesi ve saha prosedürleri önceliklidir."
     },
     "en": {
       "title": "CHEMICAL SAFETY TOOLBOX TALK",
@@ -212,7 +212,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Safety Data Sheets, chemical risk assessments and site procedures take priority."
+      "footer": "Sernem HSE Resource — Safety Data Sheets, chemical risk assessments and site procedures take priority."
     }
   },
   {
@@ -302,7 +302,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Kapalı alan giriş izni, gaz ölçümü, izolasyon ve saha kurtarma prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Kapalı alan giriş izni, gaz ölçümü, izolasyon ve saha kurtarma prosedürleri önceliklidir."
     },
     "en": {
       "title": "CONFINED SPACE TOOLBOX TALK",
@@ -387,7 +387,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Entry permits, gas testing, isolation and site rescue procedures take priority."
+      "footer": "Sernem HSE Resource — Entry permits, gas testing, isolation and site rescue procedures take priority."
     }
   },
   {
@@ -477,7 +477,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Kaldırma planı, işaretleşme kuralları ve saha vinç prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Kaldırma planı, işaretleşme kuralları ve saha vinç prosedürleri önceliklidir."
     },
     "en": {
       "title": "CRANE AND BANKSMAN SAFETY TOOLBOX TALK",
@@ -562,7 +562,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Lifting plans, signalling rules and site crane procedures take priority."
+      "footer": "Sernem HSE Resource — Lifting plans, signalling rules and site crane procedures take priority."
     }
   },
   {
@@ -652,7 +652,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Düşen cisim kontrol planı, yüksekte çalışma kuralları ve saha prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Düşen cisim kontrol planı, yüksekte çalışma kuralları ve saha prosedürleri önceliklidir."
     },
     "en": {
       "title": "DROPPED OBJECT PREVENTION TOOLBOX TALK",
@@ -737,7 +737,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Dropped-object controls, work-at-height requirements and site procedures take priority."
+      "footer": "Sernem HSE Resource — Dropped-object controls, work-at-height requirements and site procedures take priority."
     }
   },
   {
@@ -827,7 +827,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Elektrik izolasyonu, LOTO ve saha elektrik prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Elektrik izolasyonu, LOTO ve saha elektrik prosedürleri önceliklidir."
     },
     "en": {
       "title": "ELECTRICAL SAFETY TOOLBOX TALK",
@@ -912,7 +912,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Electrical isolation, LOTO and site electrical procedures take priority."
+      "footer": "Sernem HSE Resource — Electrical isolation, LOTO and site electrical procedures take priority."
     }
   },
   {
@@ -1002,7 +1002,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Excavation Safety"
+      "footer": "Sernem HSE Resource — Excavation Safety"
     },
     "en": {
       "title": "EXCAVATION SAFETY TOOLBOX TALK",
@@ -1087,7 +1087,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SafeBase HSE Resource — Excavation Safety"
+      "footer": "Sernem HSE Resource — Excavation Safety"
     }
   },
   {
@@ -1177,7 +1177,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları",
-      "footer": "SafeBase HSE Resource — Fire Safety"
+      "footer": "Sernem HSE Resource — Fire Safety"
     },
     "en": {
       "title": "FIRE SAFETY TOOLBOX TALK",
@@ -1262,7 +1262,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SafeBase HSE Resource — Fire Safety"
+      "footer": "Sernem HSE Resource — Fire Safety"
     }
   },
   {
@@ -1352,7 +1352,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Forklift Safety"
+      "footer": "Sernem HSE Resource — Forklift Safety"
     },
     "en": {
       "title": "FORKLIFT SAFETY TOOLBOX TALK",
@@ -1437,7 +1437,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SafeBase HSE Resource — Forklift Safety"
+      "footer": "Sernem HSE Resource — Forklift Safety"
     }
   },
   {
@@ -1527,7 +1527,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Üretici talimatları, ekipman kontrolleri ve saha prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Üretici talimatları, ekipman kontrolleri ve saha prosedürleri önceliklidir."
     },
     "en": {
       "title": "HAND AND POWER TOOLS TOOLBOX TALK",
@@ -1612,7 +1612,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Manufacturer instructions, equipment inspection requirements and site procedures take priority."
+      "footer": "Sernem HSE Resource — Manufacturer instructions, equipment inspection requirements and site procedures take priority."
     }
   },
   {
@@ -1702,7 +1702,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Çalışma izni, risk değerlendirmesi ve saha prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Çalışma izni, risk değerlendirmesi ve saha prosedürleri önceliklidir."
     },
     "en": {
       "title": "HOT WORK TOOLBOX TALK",
@@ -1787,7 +1787,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Permit conditions, risk assessments and site procedures take priority."
+      "footer": "Sernem HSE Resource — Permit conditions, risk assessments and site procedures take priority."
     }
   },
   {
@@ -1877,7 +1877,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Atık yönetimi, yangın güvenliği ve saha prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Atık yönetimi, yangın güvenliği ve saha prosedürleri önceliklidir."
     },
     "en": {
       "title": "HOUSEKEEPING TOOLBOX TALK",
@@ -1962,7 +1962,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Waste management, fire safety and site procedures take priority."
+      "footer": "Sernem HSE Resource — Waste management, fire safety and site procedures take priority."
     }
   },
   {
@@ -2052,7 +2052,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları",
-      "footer": "SafeBase HSE Resource — Ladder Safety"
+      "footer": "Sernem HSE Resource — Ladder Safety"
     },
     "en": {
       "title": "LADDER SAFETY TOOLBOX TALK",
@@ -2137,7 +2137,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SafeBase HSE Resource — Ladder Safety"
+      "footer": "Sernem HSE Resource — Ladder Safety"
     }
   },
   {
@@ -2227,7 +2227,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Kaldırma planı, ekipman sertifikaları ve saha kaldırma prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Kaldırma planı, ekipman sertifikaları ve saha kaldırma prosedürleri önceliklidir."
     },
     "en": {
       "title": "LIFTING OPERATIONS TOOLBOX TALK",
@@ -2312,7 +2312,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Lifting plans, equipment certification and site lifting procedures take priority."
+      "footer": "Sernem HSE Resource — Lifting plans, equipment certification and site lifting procedures take priority."
     }
   },
   {
@@ -2402,7 +2402,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — İzolasyon planı, çalışma izni ve saha LOTO prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — İzolasyon planı, çalışma izni ve saha LOTO prosedürleri önceliklidir."
     },
     "en": {
       "title": "LOCKOUT TAGOUT TOOLBOX TALK",
@@ -2487,7 +2487,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Isolation plans, permits and site LOTO procedures take priority."
+      "footer": "Sernem HSE Resource — Isolation plans, permits and site LOTO procedures take priority."
     }
   },
   {
@@ -2756,7 +2756,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Trafik yönetim planı, üretici talimatları ve saha mobil ekipman prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Trafik yönetim planı, üretici talimatları ve saha mobil ekipman prosedürleri önceliklidir."
     },
     "en": {
       "title": "MOBILE EQUIPMENT SAFETY TOOLBOX TALK",
@@ -2841,7 +2841,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Traffic-management plans, manufacturer instructions and site mobile-equipment procedures take priority."
+      "footer": "Sernem HSE Resource — Traffic-management plans, manufacturer instructions and site mobile-equipment procedures take priority."
     }
   },
   {
@@ -2931,7 +2931,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Risk değerlendirmesi, üretici talimatları ve saha KKD prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Risk değerlendirmesi, üretici talimatları ve saha KKD prosedürleri önceliklidir."
     },
     "en": {
       "title": "PERSONAL PROTECTIVE EQUIPMENT TOOLBOX TALK",
@@ -3016,7 +3016,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Risk assessments, manufacturer instructions and site PPE procedures take priority."
+      "footer": "Sernem HSE Resource — Risk assessments, manufacturer instructions and site PPE procedures take priority."
     }
   },
   {
@@ -3106,7 +3106,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Üretici talimatları, risk değerlendirmesi ve saha prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Üretici talimatları, risk değerlendirmesi ve saha prosedürleri önceliklidir."
     },
     "en": {
       "title": "SAFETY HARNESS USE TOOLBOX TALK",
@@ -3191,7 +3191,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Manufacturer instructions, risk assessments and site procedures take priority."
+      "footer": "Sernem HSE Resource — Manufacturer instructions, risk assessments and site procedures take priority."
     }
   },
   {
@@ -3281,7 +3281,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — İskele etiketi, risk değerlendirmesi ve saha prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — İskele etiketi, risk değerlendirmesi ve saha prosedürleri önceliklidir."
     },
     "en": {
       "title": "SCAFFOLD SAFETY TOOLBOX TALK",
@@ -3366,7 +3366,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Scaffold tags, risk assessments and site procedures take priority."
+      "footer": "Sernem HSE Resource — Scaffold tags, risk assessments and site procedures take priority."
     }
   },
   {
@@ -3456,7 +3456,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SafeBase HSE Resource — Çalışma izni, risk değerlendirmesi ve saha prosedürleri önceliklidir."
+      "footer": "Sernem HSE Resource — Çalışma izni, risk değerlendirmesi ve saha prosedürleri önceliklidir."
     },
     "en": {
       "title": "WORKING AT HEIGHT TOOLBOX TALK",
@@ -3541,7 +3541,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes / additional site instructions",
-      "footer": "SafeBase HSE Resource — Permit conditions, risk assessments and site procedures take priority."
+      "footer": "Sernem HSE Resource — Permit conditions, risk assessments and site procedures take priority."
     }
   }
 ] as ToolboxRecord[];

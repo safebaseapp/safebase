@@ -126,7 +126,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
     const W = doc.internal.pageSize.getWidth();
     const H = doc.internal.pageSize.getHeight();
 
-    // SafeBase PDF Unicode fonts
+    // Sernem PDF Unicode fonts
     const fontToBase64 = async (url: string) => {
       const response = await fetch(url);
 
@@ -154,17 +154,17 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
       fontToBase64("/fonts/DejaVuSans-Bold.ttf"),
     ]);
 
-    doc.addFileToVFS("SafeBase-Regular.ttf", regularFont);
+    doc.addFileToVFS("Sernem-Regular.ttf", regularFont);
     doc.addFont(
-      "SafeBase-Regular.ttf",
-      "SafeBasePDF",
+      "Sernem-Regular.ttf",
+      "SernemPDF",
       "normal"
     );
 
-    doc.addFileToVFS("SafeBase-Bold.ttf", boldFont);
+    doc.addFileToVFS("Sernem-Bold.ttf", boldFont);
     doc.addFont(
-      "SafeBase-Bold.ttf",
-      "SafeBasePDF",
+      "Sernem-Bold.ttf",
+      "SernemPDF",
       "bold"
     );
 
@@ -200,7 +200,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
       bold = false,
       align: "left" | "center" | "right" = "left"
     ) => {
-      doc.setFont("SafeBasePDF", bold ? "bold" : "normal");
+      doc.setFont("SernemPDF", bold ? "bold" : "normal");
       doc.setFontSize(size);
       doc.setTextColor(...color);
       doc.text(safe(value), x, y, { align });
@@ -243,7 +243,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
     doc.rect(0, 0, W, H, "F");
 
     // Header
-    text("SAFEBASE", 14, 14, 17, C.white, true);
+    text("SERNEM", 14, 14, 17, C.white, true);
     text(
       isTurkish ? "Profesyonel HSE Platformu" : "Professional HSE Platform",
       14,
@@ -326,7 +326,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
 
     const controlLines = doc.splitTextToSize(safe(controls), 170);
 
-    doc.setFont("SafeBasePDF", "normal");
+    doc.setFont("SernemPDF", "normal");
     doc.setFontSize(6.8);
     doc.setTextColor(...C.muted);
     doc.text(controlLines.slice(0, 3), 19, 129);
@@ -455,10 +455,10 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
     doc.setDrawColor(...C.border);
     doc.line(14, H - 14, 196, H - 14);
 
-    text("SafeBase | Professional HSE Platform | Risk Matrix", 14, H - 8, 5.5, C.muted);
+    text("Sernem | Professional HSE Platform | Risk Matrix", 14, H - 8, 5.5, C.muted);
     text("Page 1 / 1", 196, H - 8, 5.5, C.muted, false, "right");
 
-    doc.save(`SafeBase-Risk-Matrix-${score}-to-${residualScore}.pdf`);
+    doc.save(`Sernem-Risk-Matrix-${score}-to-${residualScore}.pdf`);
   };
 
 const recommendations = {

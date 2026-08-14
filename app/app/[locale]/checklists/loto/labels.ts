@@ -39,7 +39,7 @@ export const labels = {
     print: "Print / Save PDF",
     disclaimer:
       "This checklist supports lockout / tagout inspections but does not replace applicable legislation, equipment-specific procedures, permits, risk assessments, electrical-safety requirements or site rules.",
-    generated: "Generated with SafeBase",
+    generated: "Generated with Sernem",
     correctiveAction: "Corrective Action",
     correctiveActionHelp:
       "Describe the action required to eliminate or control this energy-isolation finding.",
@@ -135,7 +135,7 @@ export const labels = {
     print: "Yazdır / PDF Kaydet",
     disclaimer:
       "Bu kontrol listesi kilitleme ve etiketleme denetimini destekler; geçerli mevzuatın, ekipmana özel prosedürlerin, izinlerin, risk değerlendirmelerinin, elektrik güvenliği gerekliliklerinin veya saha kurallarının yerine geçmez.",
-    generated: "SafeBase ile oluşturuldu",
+    generated: "Sernem ile oluşturuldu",
     correctiveAction: "Düzeltici Faaliyet",
     correctiveActionHelp:
       "Bu enerji izolasyonu bulgusunu ortadan kaldırmak veya kontrol altına almak için gerekli faaliyeti açıklayın.",

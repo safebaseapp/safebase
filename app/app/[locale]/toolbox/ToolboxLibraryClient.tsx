@@ -430,7 +430,7 @@ export default function ToolboxLibraryClient({
           <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
             <div className="max-w-3xl">
               <p className="text-sm font-black uppercase tracking-[0.24em] text-emerald-400">
-                SafeBase Toolbox Library
+                Sernem Toolbox Library
               </p>
 
               <h1 className="mt-5 text-4xl font-black tracking-[-0.04em] sm:text-6xl">
@@ -794,7 +794,7 @@ export default function ToolboxLibraryClient({
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-400">
-                  SafeBase
+                  Sernem
                 </p>
                 <h2 className="mt-2 text-2xl font-black text-white">
                   {isTurkish ? "Kategoriler" : "Categories"}

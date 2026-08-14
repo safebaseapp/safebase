@@ -81,7 +81,7 @@ export default async function FeatureFlagsPage({
 
         <header className="mt-8 border-b border-white/10 pb-8">
           <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
-            SAFEBASE FEATURE CONTROL
+            SERNEM FEATURE CONTROL
           </p>
 
           <h1 className="mt-4 text-4xl font-black tracking-[-0.04em] sm:text-5xl">

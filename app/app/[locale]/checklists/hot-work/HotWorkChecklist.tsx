@@ -893,8 +893,8 @@ export default function HotWorkChecklist({ locale }: Props) {
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-violet-300">
                   {locale === "tr"
-                    ? "SafeBase AI çalışıyor"
-                    : "SafeBase AI is working"}
+                    ? "Sernem AI çalışıyor"
+                    : "Sernem AI is working"}
                 </p>
 
                 <p className="mt-2 text-slate-300">
@@ -915,8 +915,8 @@ export default function HotWorkChecklist({ locale }: Props) {
                   <div className="flex flex-wrap items-center gap-3">
                     <p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-300">
                       {locale === "tr"
-                        ? "SafeBase AI Profesyonel Değerlendirmesi"
-                        : "SafeBase AI Professional Assessment"}
+                        ? "Sernem AI Profesyonel Değerlendirmesi"
+                        : "Sernem AI Professional Assessment"}
                     </p>
 
                     <span className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-violet-200 print:border-slate-300 print:bg-white print:text-black">
@@ -968,8 +968,8 @@ export default function HotWorkChecklist({ locale }: Props) {
 
                   <p className="mt-4 text-xs leading-5 opacity-75">
                     {locale === "tr"
-                      ? "AI sonucu, SafeBase kural motorunun kararını değiştirmez."
-                      : "The AI assessment does not override the SafeBase rule-engine decision."}
+                      ? "AI sonucu, Sernem kural motorunun kararını değiştirmez."
+                      : "The AI assessment does not override the Sernem rule-engine decision."}
                   </p>
                 </div>
               </div>

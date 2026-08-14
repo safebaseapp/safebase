@@ -68,7 +68,7 @@ export default async function PlatformSettingsPage({
 
         <header className="mt-8 border-b border-white/10 pb-8">
           <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
-            SAFEBASE PLATFORM CONTROL
+            SERNEM PLATFORM CONTROL
           </p>
 
           <h1 className="mt-4 text-4xl font-black tracking-[-0.04em] sm:text-5xl">

@@ -13,7 +13,7 @@ export default function PosterIcon({
   type,
   tone = "mandatory",
 }: Props) {
-  /* SAFEBASE_SERIAL_ICON_ENGINE_START */
+  /* SERNEM_SERIAL_ICON_ENGINE_START */
   const sbSerialType = String(type);
 
   const SBIcon = ({
@@ -100,7 +100,7 @@ export default function PosterIcon({
     return <SBIcon><rect x="24" y="18" width="52" height="66" rx="7"/><path d="M38 18v-7h24v7M35 49l10 10 22-27M35 70h30"/></SBIcon>;
   }
 
-  /* SAFEBASE_SERIAL_ICON_ENGINE_END */
+  /* SERNEM_SERIAL_ICON_ENGINE_END */
 
 
 

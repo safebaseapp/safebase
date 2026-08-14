@@ -77,7 +77,7 @@ export default function ProductShowcase({ locale }: Props) {
       <div className="relative mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-black uppercase tracking-[0.28em] text-emerald-400">
-            {tr ? "SAFEBASE İLE OLUŞTURUN" : "BUILD WITH SAFEBASE"}
+            {tr ? "SERNEM İLE OLUŞTURUN" : "BUILD WITH SERNEM"}
           </p>
 
           <h2 className="mt-5 text-3xl font-black tracking-[-0.035em] sm:text-5xl lg:text-6xl">
@@ -150,7 +150,7 @@ export default function ProductShowcase({ locale }: Props) {
                       {tr ? "Risk Değerlendirmesi" : "Risk Assessment"}
                     </p>
                     <p className="mt-1 text-xs text-slate-500">
-                      HIRARC · SafeBase
+                      HIRARC · Sernem
                     </p>
                   </div>
                   <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-400">
@@ -201,7 +201,7 @@ export default function ProductShowcase({ locale }: Props) {
               <div className="relative mx-auto max-w-xl overflow-hidden rounded-xl bg-white text-slate-950 shadow-2xl">
                 <div className="flex items-center justify-between border-b border-slate-200 p-5">
                   <div>
-                    <p className="text-xs font-black text-emerald-600">SafeBase</p>
+                    <p className="text-xs font-black text-emerald-600">Sernem</p>
                     <p className="mt-1 font-black">METHOD STATEMENT</p>
                   </div>
                   <div className="text-right text-[9px] text-slate-500">
@@ -315,7 +315,7 @@ export default function ProductShowcase({ locale }: Props) {
               </div>
 
               <h3 className="mt-3 text-3xl font-black tracking-tight sm:text-3xl">
-                SafeBase AI
+                Sernem AI
               </h3>
 
               <p className="mt-5 max-w-xl leading-7 text-slate-400">
@@ -328,7 +328,7 @@ export default function ProductShowcase({ locale }: Props) {
                 href="/ai-assistant"
                 className="mt-8 inline-flex w-fit items-center gap-2 font-bold text-emerald-400 transition group-hover:gap-3 group-hover:text-emerald-300"
               >
-                {tr ? "SafeBase AI'a sor" : "Ask SafeBase AI"}
+                {tr ? "Sernem AI'a sor" : "Ask Sernem AI"}
                 <ArrowIcon />
               </Link>
             </div>
@@ -342,7 +342,7 @@ export default function ProductShowcase({ locale }: Props) {
                     <SparkIcon />
                   </div>
                   <div>
-                    <p className="font-bold">SafeBase AI</p>
+                    <p className="font-bold">Sernem AI</p>
                     <p className="text-xs text-slate-500">
                       {tr ? "HSE bilgi asistanı" : "HSE knowledge assistant"}
                     </p>
@@ -376,7 +376,7 @@ export default function ProductShowcase({ locale }: Props) {
 
                 <div className="mt-4 flex items-center justify-between rounded-xl border border-blue-400/10 bg-blue-500/[0.04] p-4">
                   <span className="text-xs text-slate-400">
-                    {tr ? "SafeBase bilgi tabanı" : "SafeBase knowledge base"}
+                    {tr ? "Sernem bilgi tabanı" : "Sernem knowledge base"}
                   </span>
                   <span className="text-xs font-bold text-blue-300">
                     {tr ? "Kaynaklı yanıt" : "Source-backed"}

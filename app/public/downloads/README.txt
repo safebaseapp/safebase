@@ -1,4 +1,4 @@
-SafeBase Downloads Pack
+Sernem Downloads Pack
 
 Copy all PDF and DOCX files into your Next.js project folder:
 public/downloads/

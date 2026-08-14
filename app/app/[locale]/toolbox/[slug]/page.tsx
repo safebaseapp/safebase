@@ -202,7 +202,7 @@ export default async function ToolboxDetailPage({ params }: Props) {
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <span className="rounded-full bg-blue-500/15 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-blue-300">
-              SafeBase Toolbox
+              Sernem Toolbox
             </span>
 
             <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-black text-emerald-300">

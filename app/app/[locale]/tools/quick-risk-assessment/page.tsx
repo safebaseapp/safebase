@@ -54,7 +54,7 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   const [saveAssessmentMessage, setSaveAssessmentMessage] = useState("");
 
 
-  /* SAFEBASE_RISK_HEADER_STATE_START */
+  /* SERNEM_RISK_HEADER_STATE_START */
   const [projectName, setProjectName] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [assessmentLocation, setAssessmentLocation] = useState("");
@@ -63,20 +63,20 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
     new Date().toISOString().slice(0, 10)
   );
   const [assessmentRevision, setAssessmentRevision] = useState("1.0");
-  /* SAFEBASE_RISK_HEADER_STATE_END */
+  /* SERNEM_RISK_HEADER_STATE_END */
 
-  /* SAFEBASE_HIRARC_HEADER_STATE_START */
+  /* SERNEM_HIRARC_HEADER_STATE_START */
   const [department, setDepartment] = useState("");
   const [assetArea, setAssetArea] = useState("");
   const [processMethod, setProcessMethod] = useState("");
   const [documentNo, setDocumentNo] = useState("SB-HIRARC-001");
   const [reviewedBy, setReviewedBy] = useState("");
   const [approvedBy, setApprovedBy] = useState("");
-  /* SAFEBASE_HIRARC_HEADER_STATE_END */
+  /* SERNEM_HIRARC_HEADER_STATE_END */
 
 
 
-  /* SAFEBASE_MULTI_RISK_STATE_START */
+  /* SERNEM_MULTI_RISK_STATE_START */
 
   type RiskRegisterItem = {
     id: string;
@@ -132,7 +132,7 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
 
   
   
-/* SAFEBASE_LOAD_SAVED_ASSESSMENT */
+/* SERNEM_LOAD_SAVED_ASSESSMENT */
 useEffect(() => {
   const loadSavedAssessment = async () => {
     const assessmentId = new URLSearchParams(
@@ -191,7 +191,7 @@ useEffect(() => {
 
   loadSavedAssessment();
 }, []);
-/* SAFEBASE_LOAD_SAVED_ASSESSMENT_END */
+/* SERNEM_LOAD_SAVED_ASSESSMENT_END */
 
 const saveRiskAssessment = async () => {
     setIsSavingAssessment(true);
@@ -293,11 +293,11 @@ const duplicateRiskItem = (id: string) => {
   };
 
 
-  /* SAFEBASE_RISK_PRINT_HANDLER_START */
+  /* SERNEM_RISK_PRINT_HANDLER_START */
   const handlePrintRiskAssessment = () => {
     window.print();
   };
-  /* SAFEBASE_RISK_PRINT_HANDLER_END */
+  /* SERNEM_RISK_PRINT_HANDLER_END */
 
   const getRiskStyle = (score: number) => {
     if (score >= 20) {
@@ -335,9 +335,9 @@ const duplicateRiskItem = (id: string) => {
     };
   };
 
-  /* SAFEBASE_MULTI_RISK_STATE_END */
+  /* SERNEM_MULTI_RISK_STATE_END */
 
-  /* SAFEBASE_RISK_LIBRARY_ALL_START */
+  /* SERNEM_RISK_LIBRARY_ALL_START */
   const riskLibraryAll = [
     ...riskLibraryPack01,
     ...riskLibraryPack02,
@@ -345,12 +345,12 @@ const duplicateRiskItem = (id: string) => {
     ...riskLibraryPack04,
     ...riskLibraryPack05,
   ];
-  /* SAFEBASE_RISK_LIBRARY_ALL_END */
+  /* SERNEM_RISK_LIBRARY_ALL_END */
 
   
   
 
-/* SAFEBASE_RISK_LIBRARY_PACK01_STATE_START */
+/* SERNEM_RISK_LIBRARY_PACK01_STATE_START */
 
   const [selectedLibraryActivity, setSelectedLibraryActivity] =
     useState(riskLibraryAll[0]?.id ?? "");
@@ -447,7 +447,7 @@ const duplicateRiskItem = (id: string) => {
     });
   };
 
-  /* SAFEBASE_RISK_LIBRARY_PACK01_STATE_END */
+  /* SERNEM_RISK_LIBRARY_PACK01_STATE_END */
 
 
 
@@ -468,7 +468,7 @@ const duplicateRiskItem = (id: string) => {
 
   const isTurkish = locale === "tr";
 
-  /* SAFEBASE_LIBRARY_FILTER_STATE_START */
+  /* SERNEM_LIBRARY_FILTER_STATE_START */
 
   const [librarySearch, setLibrarySearch] = useState("");
   const [libraryCategory, setLibraryCategory] = useState("all");
@@ -552,7 +552,7 @@ const duplicateRiskItem = (id: string) => {
     setSelectedLibraryRiskIndexes([]);
   };
 
-  /* SAFEBASE_LIBRARY_FILTER_STATE_END */
+  /* SERNEM_LIBRARY_FILTER_STATE_END */
 
   const score = likelihood * severity;
 
@@ -584,13 +584,13 @@ const duplicateRiskItem = (id: string) => {
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-12 text-white">
 
-      {/* SAFEBASE_RISK_HEADER_UI_START */}
+      {/* SERNEM_RISK_HEADER_UI_START */}
       <section className="mb-8 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/70 shadow-xl">
         <div className="border-b border-slate-800 bg-gradient-to-r from-emerald-950/60 to-slate-950 px-6 py-5">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
-                SafeBase Risk Assessment
+                Sernem Risk Assessment
               </p>
 
               <h2 className="mt-1 text-2xl font-black text-white">
@@ -694,7 +694,7 @@ const duplicateRiskItem = (id: string) => {
         </div>
       </section>
       
-      {/* SAFEBASE_HIRARC_HEADER_UI_START */}
+      {/* SERNEM_HIRARC_HEADER_UI_START */}
 
       <section className="mb-8 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/70">
 
@@ -795,9 +795,9 @@ const duplicateRiskItem = (id: string) => {
 
       </section>
 
-      {/* SAFEBASE_HIRARC_HEADER_UI_END */}
+      {/* SERNEM_HIRARC_HEADER_UI_END */}
 
-      {/* SAFEBASE_RISK_HEADER_UI_END */}
+      {/* SERNEM_RISK_HEADER_UI_END */}
 
 
       <div className="mx-auto max-w-6xl">
@@ -812,7 +812,7 @@ const duplicateRiskItem = (id: string) => {
 
       </div>
 
-      {/* SAFEBASE_RISK_LIBRARY_PACK01_UI_START */}
+      {/* SERNEM_RISK_LIBRARY_PACK01_UI_START */}
 
       <section className="mx-auto mt-10 w-full max-w-7xl overflow-hidden rounded-2xl border border-blue-500/20 bg-slate-950/80 shadow-2xl">
 
@@ -822,7 +822,7 @@ const duplicateRiskItem = (id: string) => {
 
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-400">
-                SafeBase Professional Risk Library
+                Sernem Professional Risk Library
               </p>
 
               <h2 className="mt-2 text-2xl font-black text-white">
@@ -1128,10 +1128,10 @@ const duplicateRiskItem = (id: string) => {
 
       </section>
 
-      {/* SAFEBASE_RISK_LIBRARY_PACK01_UI_END */}
+      {/* SERNEM_RISK_LIBRARY_PACK01_UI_END */}
 
 
-      {/* SAFEBASE_MULTI_RISK_UI_START */}
+      {/* SERNEM_MULTI_RISK_UI_START */}
 
       <section className="mx-auto mt-10 w-full max-w-7xl rounded-2xl border border-slate-800 bg-slate-950/70 shadow-2xl">
 
@@ -1156,7 +1156,7 @@ const duplicateRiskItem = (id: string) => {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {/* SAFEBASE_RISK_PRINT_BUTTON */}
+            {/* SERNEM_RISK_PRINT_BUTTON */}
             <button
               type="button"
               onClick={handlePrintRiskAssessment}
@@ -1165,7 +1165,7 @@ const duplicateRiskItem = (id: string) => {
               📄 {isTurkish ? "PDF / Yazdır" : "PDF / Print"}
             </button>
 
-          {/* SAFEBASE_RISK_SAVE_BUTTON */}
+          {/* SERNEM_RISK_SAVE_BUTTON */}
           <button
             type="button"
             onClick={saveRiskAssessment}
@@ -1190,7 +1190,7 @@ const duplicateRiskItem = (id: string) => {
             </button>
           </div>
 
-          {/* SAFEBASE_RISK_LEGEND */}
+          {/* SERNEM_RISK_LEGEND */}
           <div className="flex flex-wrap gap-2 lg:ml-auto">
             <span className="rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-[10px] font-black text-emerald-300">
               1–4 {isTurkish ? "DÜŞÜK" : "LOW"}
@@ -1629,9 +1629,9 @@ const duplicateRiskItem = (id: string) => {
         </div>
       </section>
 
-      {/* SAFEBASE_MULTI_RISK_UI_END */}
+      {/* SERNEM_MULTI_RISK_UI_END */}
 
-      {/* SAFEBASE_RISK_PRINT_REPORT_START */}
+      {/* SERNEM_RISK_PRINT_REPORT_START */}
 
       <style>{`
         @media screen {
@@ -1928,7 +1928,7 @@ const duplicateRiskItem = (id: string) => {
         </div>
 
 
-        {/* SAFEBASE_HIRARC_PRINT_INFO */}
+        {/* SERNEM_HIRARC_PRINT_INFO */}
         <table
           style={{
             width: "100%",
@@ -2345,7 +2345,7 @@ const duplicateRiskItem = (id: string) => {
           }}
         >
           <span>
-            SafeBase • Professional Risk Assessment
+            Sernem • Professional Risk Assessment
           </span>
 
           <span>
@@ -2357,7 +2357,7 @@ const duplicateRiskItem = (id: string) => {
 
       </section>
 
-      {/* SAFEBASE_RISK_PRINT_REPORT_END */}
+      {/* SERNEM_RISK_PRINT_REPORT_END */}
 
 
 

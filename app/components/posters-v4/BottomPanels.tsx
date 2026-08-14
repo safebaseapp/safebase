@@ -14,8 +14,8 @@ type CriticalValue = {
 
 
 
-/* SAFEBASE_LADDER_HARNESS_START */
-function SafeBaseHarnessIcon() {
+/* SERNEM_LADDER_HARNESS_START */
+function SernemHarnessIcon() {
   return (
     <svg
       viewBox="0 0 100 100"
@@ -56,7 +56,7 @@ function SafeBaseHarnessIcon() {
     </svg>
   );
 }
-/* SAFEBASE_LADDER_HARNESS_END */
+/* SERNEM_LADDER_HARNESS_END */
 
 export default function BottomPanels({
   locale,

@@ -1599,7 +1599,7 @@ export default function SimopsPlanner({ locale }: Props) {
     // =========================================================
     fillPage();
 
-    txt("SafeBase", 12, 13, 17, C.white, "bold");
+    txt("Sernem", 12, 13, 17, C.white, "bold");
     txt(
       isTurkish ? "Profesyonel HSE Platformu" : "Professional HSE Platform",
       12,
@@ -1847,7 +1847,7 @@ export default function SimopsPlanner({ locale }: Props) {
     doc.addPage();
     fillPage();
 
-    txt("SafeBase", 12, 13, 15, C.white, "bold");
+    txt("Sernem", 12, 13, 15, C.white, "bold");
     txt(
       isTurkish ? "SIMOPS DETAY VE KARAR" : "SIMOPS DETAIL & DECISION",
       12,
@@ -2109,7 +2109,7 @@ export default function SimopsPlanner({ locale }: Props) {
       doc.setPage(i);
 
       txt(
-        "SafeBase • Control of Work • SIMOPS",
+        "Sernem • Control of Work • SIMOPS",
         12,
         H - 5,
         5.5,
@@ -2128,7 +2128,7 @@ export default function SimopsPlanner({ locale }: Props) {
       projectName.trim().replace(/[^a-zA-Z0-9-_]+/g, "-") || "SIMOPS";
 
     doc.save(
-      `SafeBase-SIMOPS-${safeProject}-${workDate || "Assessment"}.pdf`
+      `Sernem-SIMOPS-${safeProject}-${workDate || "Assessment"}.pdf`
     );
   };
 
@@ -2138,7 +2138,7 @@ export default function SimopsPlanner({ locale }: Props) {
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-400">
-              SAFEBASE CONTROL OF WORK
+              SERNEM CONTROL OF WORK
             </p>
 
             <h1 className="mt-3 text-4xl font-black tracking-tight">

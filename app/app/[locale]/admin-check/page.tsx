@@ -29,7 +29,7 @@ export default async function AdminCheckPage({ params }: Props) {
     <main className="min-h-screen bg-slate-950 px-6 py-12 text-white">
       <div className="mx-auto max-w-2xl rounded-3xl border border-white/10 bg-white/[0.04] p-8">
         <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-400">
-          SafeBase Admin Check
+          Sernem Admin Check
         </p>
 
         <h1 className="mt-4 text-3xl font-black">

@@ -269,7 +269,7 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Güvenli erişim merdiveni ve trapdoor kontrolü", en: "Safe access ladder and trapdoor control" },
         additionalControls: { tr: "Erişim noktalarını günlük saha turunda kontrol et", en: "Verify access points during daily site inspections" },
       },
-      // SAFEBASE_PACK02::scaffold-inspection
+      // SERNEM_PACK02::scaffold-inspection
       {
         hazard: { tr: "İskele etiketinin yanlış veya güncel olmaması", en: "Incorrect or outdated scaffold tag" },
         consequence: { tr: "Güvensiz iskelenin kullanılması ve düşme", en: "Use of unsafe scaffold and potential fall" },
@@ -706,7 +706,7 @@ export const riskLibraryPack01: RiskLibraryActivity[] = [
         existingControls: { tr: "Dengeli yük, kapasite kontrolü ve güvenli taşıma yüksekliği", en: "Stable load, capacity verification and safe travel height" },
         additionalControls: { tr: "Dengesiz yükü taşımaya başlama", en: "Do not move unstable loads" },
       },
-      // SAFEBASE_PACK02::forklift-operation
+      // SERNEM_PACK02::forklift-operation
       {
         hazard: { tr: "Kör noktada görüş kaybı", en: "Restricted visibility at blind spots" },
         consequence: { tr: "Yaya veya ekipmanla çarpışma", en: "Collision with pedestrians or equipment" },

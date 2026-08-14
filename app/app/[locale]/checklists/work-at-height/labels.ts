@@ -38,7 +38,7 @@ export const labels = {
     print: "Print / Save PDF",
     disclaimer:
       "This checklist supports field inspections but does not replace applicable legislation, permits, risk assessments, manufacturer instructions or site procedures.",
-    generated: "Generated with SafeBase",
+    generated: "Generated with Sernem",
     correctiveAction: "Corrective Action",
     correctiveActionHelp:
       "Describe the action required to eliminate or control this finding.",
@@ -128,7 +128,7 @@ export const labels = {
     print: "Yazdır / PDF Kaydet",
     disclaimer:
       "Bu kontrol listesi saha denetimini destekler; geçerli mevzuatın, izinlerin, risk değerlendirmelerinin, üretici talimatlarının veya saha prosedürlerinin yerine geçmez.",
-    generated: "SafeBase ile oluşturuldu",
+    generated: "Sernem ile oluşturuldu",
     correctiveAction: "Düzeltici Faaliyet",
     correctiveActionHelp:
       "Bu bulguyu ortadan kaldırmak veya kontrol altına almak için gerekli faaliyeti açıklayın.",

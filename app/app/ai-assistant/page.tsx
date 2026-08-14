@@ -46,7 +46,7 @@ export default function AIAssistantPage() {
       });
 
       if (!res.ok) {
-        throw new Error("SafeBase AI request failed.");
+        throw new Error("Sernem AI request failed.");
       }
 
       const data = await res.json();
@@ -54,8 +54,8 @@ export default function AIAssistantPage() {
       setAnswer(
         data.answer ||
           (isTurkish
-            ? "Bu bilgi mevcut SafeBase Bilgi Tabanında bulunmuyor."
-            : "This information is not available in the current SafeBase Knowledge Base.")
+            ? "Bu bilgi mevcut Sernem Bilgi Tabanında bulunmuyor."
+            : "This information is not available in the current Sernem Knowledge Base.")
       );
 
       setSources(Array.isArray(data.sources) ? data.sources : []);
@@ -64,8 +64,8 @@ export default function AIAssistantPage() {
 
       setError(
         isTurkish
-          ? "SafeBase AI isteğinizi işleyemedi. Lütfen tekrar deneyin."
-          : "SafeBase AI could not process your request. Please try again."
+          ? "Sernem AI isteğinizi işleyemedi. Lütfen tekrar deneyin."
+          : "Sernem AI could not process your request. Please try again."
       );
     } finally {
       setLoading(false);
@@ -80,13 +80,13 @@ export default function AIAssistantPage() {
         </p>
 
         <h1 className="text-4xl font-bold md:text-5xl">
-          {isTurkish ? "SafeBase AI'a Sor" : "Ask SafeBase AI"}
+          {isTurkish ? "Sernem AI'a Sor" : "Ask Sernem AI"}
         </h1>
 
         <p className="mt-4 max-w-2xl text-slate-400">
           {isTurkish
-            ? "Pratik HSE soruları sorun ve SafeBase Bilgi Tabanına dayalı yapılandırılmış güvenlik rehberliği alın."
-            : "Ask practical HSE questions and receive structured safety guidance based on the SafeBase Knowledge Base."}
+            ? "Pratik HSE soruları sorun ve Sernem Bilgi Tabanına dayalı yapılandırılmış güvenlik rehberliği alın."
+            : "Ask practical HSE questions and receive structured safety guidance based on the Sernem Knowledge Base."}
         </p>
 
         <div className="mt-10 rounded-2xl border border-slate-800 bg-slate-900 p-5 shadow-xl shadow-black/20 sm:p-6">
@@ -144,8 +144,8 @@ export default function AIAssistantPage() {
 
               <p className="text-sm text-slate-500">
                 {isTurkish
-                  ? "SafeBase Bilgi Rehberliği"
-                  : "SafeBase Knowledge Guidance"}
+                  ? "Sernem Bilgi Rehberliği"
+                  : "Sernem Knowledge Guidance"}
               </p>
             </div>
           </div>
@@ -159,8 +159,8 @@ export default function AIAssistantPage() {
                   <div>
                     <p className="font-semibold">
                       {isTurkish
-                        ? "SafeBase AI sorunuzu analiz ediyor..."
-                        : "SafeBase AI is analyzing your question..."}
+                        ? "Sernem AI sorunuzu analiz ediyor..."
+                        : "Sernem AI is analyzing your question..."}
                     </p>
 
                     <p className="mt-1 text-sm text-slate-400">

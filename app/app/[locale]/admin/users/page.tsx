@@ -80,7 +80,7 @@ export default async function AdminUsersPage({ params }: Props) {
             </Link>
 
             <p className="mt-6 text-sm font-black uppercase tracking-[0.2em] text-emerald-400">
-              SafeBase User Management
+              Sernem User Management
             </p>
 
             <h1 className="mt-3 text-4xl font-black tracking-[-0.04em] sm:text-5xl">
@@ -211,7 +211,7 @@ export default async function AdminUsersPage({ params }: Props) {
                         <p className="font-black text-white">
                           {profile.full_name ||
                             profile.email?.split("@")[0] ||
-                            "SafeBase User"}
+                            "Sernem User"}
                         </p>
                         <p className="mt-1 text-sm text-slate-400">
                           {profile.email ?? "—"}

@@ -122,7 +122,7 @@ export default async function GuidePage({
 
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-400">
-                SafeBase Safety Guide
+                Sernem Safety Guide
               </p>
 
               <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
@@ -258,7 +258,7 @@ export default async function GuidePage({
             </h2>
 
             <p className="mt-2 text-slate-400">
-              Ask SafeBase AI for practical guidance based on this safety
+              Ask Sernem AI for practical guidance based on this safety
               guide.
             </p>
           </div>
@@ -267,7 +267,7 @@ export default async function GuidePage({
             href={`/ai-assistant?topic=${encodeURIComponent(guide.title)}`}
             className="mt-5 inline-flex shrink-0 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-500 sm:mt-0"
           >
-            Ask SafeBase AI →
+            Ask Sernem AI →
           </Link>
         </section>
       </div>

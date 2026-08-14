@@ -99,7 +99,7 @@ export const riskLibraryPack02: RiskLibraryActivity[] = [
         existingControls: { tr: "Kullanım öncesi kontrol ve taşıma kapasitesinin doğrulanması", en: "Pre-use inspection and verification of load rating" },
         additionalControls: { tr: "Hasarlı veya etiketsiz merdiveni derhal kullanım dışı bırak", en: "Immediately remove damaged or unidentified ladders from service" },
       },
-      // SAFEBASE_PACK02::ladder-work
+      // SERNEM_PACK02::ladder-work
       {
         hazard: { tr: "Merdiven üzerinde aşırı uzanma", en: "Overreaching from ladder" },
         consequence: { tr: "Denge kaybı ve düşme", en: "Loss of balance and fall" },
@@ -171,7 +171,7 @@ export const riskLibraryPack02: RiskLibraryActivity[] = [
         existingControls: { tr: "Geçici bracing ve mühendislik montaj sırası", en: "Temporary bracing and engineered erection sequence" },
         additionalControls: { tr: "Kalıcı bağlantılar tamamlanmadan geçici destekleri kaldırma", en: "Do not remove temporary supports before permanent connections are complete" },
       },
-      // SAFEBASE_PACK02::steel-erection
+      // SERNEM_PACK02::steel-erection
       {
         hazard: { tr: "Bağlantı tamamlanmadan yükün vinçten ayrılması", en: "Releasing the load before connections are complete" },
         consequence: { tr: "Çelik elemanın devrilmesi veya düşmesi", en: "Steel member collapse or fall" },
@@ -243,7 +243,7 @@ export const riskLibraryPack02: RiskLibraryActivity[] = [
         existingControls: { tr: "Uygun merdiven veya tasarlanmış erişim noktası", en: "Suitable ladder or designed access point" },
         additionalControls: { tr: "Çalışma ilerledikçe erişim noktasının uygunluğunu kontrol et", en: "Check access suitability as work progresses" },
       },
-      // SAFEBASE_PACK02::trenching
+      // SERNEM_PACK02::trenching
       {
         hazard: { tr: "Hendek kenarında kazı malzemesi", en: "Spoil pile too close to trench edge" },
         consequence: { tr: "Kenar göçmesi veya malzemenin hendeğe düşmesi", en: "Edge collapse or material falling into trench" },
@@ -387,7 +387,7 @@ export const riskLibraryPack02: RiskLibraryActivity[] = [
         existingControls: { tr: "Uygun destek ve kaldırma ekipmanı", en: "Suitable supports and lifting equipment" },
         additionalControls: { tr: "Bağlantı tamamen açılmadan yükü destekle", en: "Support the load before the connection is fully released" },
       },
-      // SAFEBASE_PACK02::flange-breaking
+      // SERNEM_PACK02::flange-breaking
       {
         hazard: { tr: "Yanlış flanşın açılması", en: "Opening the wrong flange" },
         consequence: { tr: "Beklenmeyen proses salımı", en: "Unexpected process release" },
@@ -459,7 +459,7 @@ export const riskLibraryPack02: RiskLibraryActivity[] = [
         existingControls: { tr: "Kontrollü depressurization ve sıfır basınç doğrulaması", en: "Controlled depressurization and zero-pressure verification" },
         additionalControls: { tr: "Sıfır basınç teyidi olmadan sistem açma", en: "Do not open the system without confirmed zero pressure" },
       },
-      // SAFEBASE_PACK02::hydrostatic-testing
+      // SERNEM_PACK02::hydrostatic-testing
       {
         hazard: { tr: "Test alanına yetkisiz giriş", en: "Unauthorized entry into hydrotest area" },
         consequence: { tr: "Basınçlı sistem arızasına maruziyet", en: "Exposure to pressurized system failure" },
@@ -531,7 +531,7 @@ export const riskLibraryPack02: RiskLibraryActivity[] = [
         existingControls: { tr: "Bariyer ve kontrollü erişim", en: "Barricading and controlled access" },
         additionalControls: { tr: "Test süresince dedicated access controller kullan", en: "Use dedicated access control throughout the test" },
       },
-      // SAFEBASE_PACK02::pneumatic-testing
+      // SERNEM_PACK02::pneumatic-testing
       {
         hazard: { tr: "Hortum veya geçici bağlantı kopması", en: "Hose or temporary connection failure" },
         consequence: { tr: "Hortum savrulması veya yüksek enerjili çarpma", en: "Hose whip or high-energy impact" },
@@ -603,7 +603,7 @@ export const riskLibraryPack02: RiskLibraryActivity[] = [
         existingControls: { tr: "Gürültü alanı kontrolü ve uygun işitme koruması", en: "Noise-area control and suitable hearing protection" },
         additionalControls: { tr: "Gereksiz personeli yüksek gürültü alanından uzaklaştır", en: "Keep non-essential personnel outside the high-noise area" },
       },
-      // SAFEBASE_PACK02::air-blowing
+      // SERNEM_PACK02::air-blowing
       {
         hazard: { tr: "Discharge bölgesine kontrolsüz erişim", en: "Uncontrolled access to discharge zone" },
         consequence: { tr: "Yüksek basınçlı hava veya partiküle maruziyet", en: "Exposure to high-pressure air or debris" },
@@ -675,7 +675,7 @@ export const riskLibraryPack02: RiskLibraryActivity[] = [
         existingControls: { tr: "Ateşleme kaynaklarının kontrolü ve uygun depolama", en: "Ignition-source control and suitable storage" },
         additionalControls: { tr: "Yanıcı malzeme miktarını çalışma alanında minimumda tut", en: "Keep quantities of flammable material at the work area to a minimum" },
       },
-      // SAFEBASE_PACK02::painting
+      // SERNEM_PACK02::painting
       {
         hazard: { tr: "Solvent buharına maruziyet", en: "Exposure to solvent vapors" },
         consequence: { tr: "Baş dönmesi, solunum etkisi veya zehirlenme", en: "Dizziness, respiratory effects or poisoning" },

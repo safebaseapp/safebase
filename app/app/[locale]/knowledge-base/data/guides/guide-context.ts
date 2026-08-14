@@ -88,7 +88,7 @@ export function guidesToAIContext(
   return guides
     .map(
       (guide, index) =>
-        `===== SAFEBASE GUIDE ${index + 1} =====\n\n${guideToAIContext(
+        `===== SERNEM GUIDE ${index + 1} =====\n\n${guideToAIContext(
           guide,
           locale,
         )}`,

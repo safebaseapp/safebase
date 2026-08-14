@@ -11,7 +11,7 @@ export default function LocalizedFooter({ locale }: Props) {
     <footer className="border-t border-slate-200 bg-slate-950 px-6 py-12 text-slate-300">
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-4">
         <div>
-          <div className="text-xl font-bold text-white">SafeBase</div>
+          <div className="text-xl font-bold text-white">Sernem</div>
           <p className="mt-3 text-sm leading-6 text-slate-400">
             {isTurkish
               ? "HSE profesyonelleri için ücretsiz iş güvenliği araçları, kontrol listeleri, şablonlar ve pratik kaynaklar."
@@ -73,7 +73,7 @@ export default function LocalizedFooter({ locale }: Props) {
 
       <div className="mx-auto mt-10 flex max-w-7xl flex-col gap-3 border-t border-white/10 pt-6 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
         <div>
-          © 2026 SafeBase.{" "}
+          © 2026 Sernem.{" "}
           {isTurkish ? "Tüm hakları saklıdır." : "All rights reserved."}
         </div>
 

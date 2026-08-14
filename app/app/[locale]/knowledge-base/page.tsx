@@ -847,7 +847,7 @@ export default function KnowledgeBasePage() {
             <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
               <div>
                 <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-400">
-                  SafeBase AI
+                  Sernem AI
                 </p>
 
                 <h2 className="mt-4 max-w-3xl text-3xl font-black tracking-[-0.035em] text-white sm:text-4xl">
@@ -858,8 +858,8 @@ export default function KnowledgeBasePage() {
 
                 <p className="mt-5 max-w-2xl leading-7 text-slate-400">
                   {isTurkish
-                    ? "SafeBase AI'a HSE sorunu sor ve mevcut bilgi tabanına dayalı pratik bir yanıt al."
-                    : "Ask SafeBase AI an HSE question and receive practical guidance based on the available knowledge base."}
+                    ? "Sernem AI'a HSE sorunu sor ve mevcut bilgi tabanına dayalı pratik bir yanıt al."
+                    : "Ask Sernem AI an HSE question and receive practical guidance based on the available knowledge base."}
                 </p>
               </div>
 
@@ -867,7 +867,7 @@ export default function KnowledgeBasePage() {
                 href={`/${locale}/ai-assistant`}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-4 font-black text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-1 hover:bg-blue-500"
               >
-                {isTurkish ? "SafeBase AI'a Sor" : "Ask SafeBase AI"}
+                {isTurkish ? "Sernem AI'a Sor" : "Ask Sernem AI"}
                 <ArrowIcon />
               </Link>
             </div>

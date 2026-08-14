@@ -191,7 +191,7 @@ export default async function AdminPage({ params }: Props) {
               S
             </span>
 
-            <span>SafeBase Admin</span>
+            <span>Sernem Admin</span>
           </Link>
 
           <div className="mt-8 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4">
@@ -247,7 +247,7 @@ export default async function AdminPage({ params }: Props) {
           <header className="flex flex-col justify-between gap-6 border-b border-white/10 pb-8 xl:flex-row xl:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.22em] text-emerald-400">
-                SafeBase Control Center
+                Sernem Control Center
               </p>
 
               <h1 className="mt-4 text-4xl font-black tracking-[-0.045em] sm:text-5xl">

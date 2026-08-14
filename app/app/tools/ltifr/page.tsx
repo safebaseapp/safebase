@@ -233,17 +233,17 @@ export default function LTIFRCalculatorPage() {
       fontToBase64("/fonts/DejaVuSans-Bold.ttf"),
     ]);
 
-    doc.addFileToVFS("SafeBase-Regular.ttf", regularFont);
+    doc.addFileToVFS("Sernem-Regular.ttf", regularFont);
     doc.addFont(
-      "SafeBase-Regular.ttf",
-      "SafeBasePDF",
+      "Sernem-Regular.ttf",
+      "SernemPDF",
       "normal"
     );
 
-    doc.addFileToVFS("SafeBase-Bold.ttf", boldFont);
+    doc.addFileToVFS("Sernem-Bold.ttf", boldFont);
     doc.addFont(
-      "SafeBase-Bold.ttf",
-      "SafeBasePDF",
+      "Sernem-Bold.ttf",
+      "SernemPDF",
       "bold"
     );
 
@@ -274,7 +274,7 @@ export default function LTIFRCalculatorPage() {
 
     const setFont = (bold = false) => {
       doc.setFont(
-        "SafeBasePDF",
+        "SernemPDF",
         bold ? "bold" : "normal"
       );
     };
@@ -401,7 +401,7 @@ export default function LTIFRCalculatorPage() {
 
     write("S", 14, 10.6, 5, C.white, true, "center");
 
-    write("SafeBase", 21, 8.6, 7.4, C.white, true);
+    write("Sernem", 21, 8.6, 7.4, C.white, true);
     write(
       isTurkish
         ? "Profesyonel HSE Platformu"
@@ -1271,7 +1271,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     write(
-      "SafeBase",
+      "Sernem",
       W - 16,
       disclaimerY + 9,
       6,
@@ -1297,7 +1297,7 @@ export default function LTIFRCalculatorPage() {
     doc.line(10, 285, W - 10, 285);
 
     write(
-      "SafeBase • LTIFR Calculator",
+      "Sernem • LTIFR Calculator",
       10,
       290,
       3.1,
@@ -1325,7 +1325,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     doc.save(
-      `SafeBase-LTIFR-Dashboard-${resultText.replace(".", "-")}.pdf`
+      `Sernem-LTIFR-Dashboard-${resultText.replace(".", "-")}.pdf`
     );
   };
 
@@ -1933,7 +1933,7 @@ export default function LTIFRCalculatorPage() {
 
           <div className="shrink-0 text-right">
             <div className="text-lg font-black text-white">
-              SafeBase
+              Sernem
             </div>
 
             <div className="text-[10px] text-slate-500">

@@ -189,7 +189,7 @@ export const confinedSpaceGuide: SafetyGuide = {
   ],
 
   aiText: {
-    en: "Ask SafeBase AI a confined-space question and receive practical guidance based on the knowledge base.",
-    tr: "Kapalı alan girişi konusunda SafeBase AI'a soru sor ve bilgi tabanına dayalı pratik rehberlik al.",
+    en: "Ask Sernem AI a confined-space question and receive practical guidance based on the knowledge base.",
+    tr: "Kapalı alan girişi konusunda Sernem AI'a soru sor ve bilgi tabanına dayalı pratik rehberlik al.",
   },
 };

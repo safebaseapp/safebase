@@ -203,7 +203,7 @@ export const lotoGuide: SafetyGuide = {
   ],
 
   aiText: {
-    en: "Ask SafeBase AI a Lockout Tagout question and receive practical guidance based on the knowledge base.",
-    tr: "Kilitleme ve Etiketleme konusunda SafeBase AI'a soru sor ve bilgi tabanına dayalı pratik rehberlik al.",
+    en: "Ask Sernem AI a Lockout Tagout question and receive practical guidance based on the knowledge base.",
+    tr: "Kilitleme ve Etiketleme konusunda Sernem AI'a soru sor ve bilgi tabanına dayalı pratik rehberlik al.",
   },
 };

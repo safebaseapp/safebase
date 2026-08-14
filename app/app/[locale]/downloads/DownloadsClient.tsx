@@ -929,7 +929,7 @@ export default function DownloadsPage() {
             <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto]">
               <div>
                 <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-400">
-                  SafeBase
+                  Sernem
                 </p>
 
                 <h2 className="mt-4 max-w-3xl text-3xl font-black tracking-[-0.035em] text-white sm:text-4xl">
@@ -940,8 +940,8 @@ export default function DownloadsPage() {
 
                 <p className="mt-5 max-w-2xl leading-7 text-slate-400">
                   {isTurkish
-                    ? "Kontrol listeleri, şablonlar, toolbox talk belgeleri ve saha formları SafeBase kütüphanesine eklenecek."
-                    : "Checklists, templates, toolbox-talk documents and field forms will be added to the SafeBase library."}
+                    ? "Kontrol listeleri, şablonlar, toolbox talk belgeleri ve saha formları Sernem kütüphanesine eklenecek."
+                    : "Checklists, templates, toolbox-talk documents and field forms will be added to the Sernem library."}
                 </p>
               </div>
 

@@ -37,7 +37,7 @@ export default function PreJobStrip({ locale }: Props) {
 
           <div>
             <p className="text-[8px] font-black uppercase tracking-[0.2em] text-emerald-400">
-              SafeBase Pre-Job Control
+              Sernem Pre-Job Control
             </p>
 
             <h2 className="text-[16px] font-black uppercase leading-none">

@@ -1,6 +1,6 @@
 import type { User } from "@supabase/supabase-js";
 
-export type SafeBaseRole = "free" | "premium" | "admin";
+export type SernemRole = "free" | "premium" | "admin";
 
 function normalizeEmail(email?: string | null) {
   return email?.trim().toLowerCase() ?? "";
@@ -28,7 +28,7 @@ export function isAdminUser(user: User | null | undefined): boolean {
   return adminEmails.has(email);
 }
 
-export function getUserRole(user: User | null | undefined): SafeBaseRole {
+export function getUserRole(user: User | null | undefined): SernemRole {
   if (isAdminUser(user)) {
     return "admin";
   }

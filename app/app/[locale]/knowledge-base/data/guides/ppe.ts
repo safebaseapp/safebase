@@ -210,7 +210,7 @@ export const ppeGuide: SafetyGuide = {
   ],
 
   aiText: {
-    en: "Ask SafeBase AI a personal protective equipment question and receive practical guidance based on the knowledge base.",
-    tr: "Kişisel koruyucu donanım konusunda SafeBase AI'a soru sor ve bilgi tabanına dayalı pratik rehberlik al.",
+    en: "Ask Sernem AI a personal protective equipment question and receive practical guidance based on the knowledge base.",
+    tr: "Kişisel koruyucu donanım konusunda Sernem AI'a soru sor ve bilgi tabanına dayalı pratik rehberlik al.",
   },
 };

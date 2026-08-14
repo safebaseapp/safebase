@@ -294,7 +294,7 @@ export default function GuideTemplate({
             )}`}
             className="mt-6 inline-flex rounded-xl bg-blue-600 px-6 py-4 font-black text-white transition hover:bg-blue-500"
           >
-            {isTurkish ? "SafeBase AI'a Sor" : "Ask SafeBase AI"} →
+            {isTurkish ? "Sernem AI'a Sor" : "Ask Sernem AI"} →
           </Link>
         </article>
       </section>

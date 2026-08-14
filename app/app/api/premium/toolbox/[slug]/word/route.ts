@@ -505,8 +505,8 @@ export async function GET(request: Request, { params }: RouteProps) {
   const footerText = stringValue(
     content.footer,
     isTurkish
-      ? "SafeBase HSE Kaynağı — İzin koşulları, risk değerlendirmeleri ve saha prosedürleri önceliklidir."
-      : "SafeBase HSE Resource — Permit conditions, risk assessments and site procedures take priority.",
+      ? "Sernem HSE Kaynağı — İzin koşulları, risk değerlendirmeleri ve saha prosedürleri önceliklidir."
+      : "Sernem HSE Resource — Permit conditions, risk assessments and site procedures take priority.",
   );
 
   const coverChildren: Array<Paragraph | Table> = [];
@@ -539,7 +539,7 @@ export async function GET(request: Request, { params }: RouteProps) {
       },
       children: [
         new TextRun({
-          text: "SAFEBASE TOOLBOX TALK",
+          text: "SERNEM TOOLBOX TALK",
           bold: true,
           color: "10B981",
           size: 24,
@@ -813,7 +813,7 @@ export async function GET(request: Request, { params }: RouteProps) {
   );
 
   const document = new Document({
-    creator: "SafeBase",
+    creator: "Sernem",
     title,
     description: subtitle,
     sections: [

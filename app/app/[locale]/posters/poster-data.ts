@@ -234,7 +234,7 @@ export const posters: PosterLibraryItem[] = [
     revision: "1.0",
   },
 
-  /* SAFEBASE_SERIAL_POSTERS_START */
+  /* SERNEM_SERIAL_POSTERS_START */
   {
     slug: "housekeeping-safety-rules",
     code: "SB-HSK-001",
@@ -331,6 +331,6 @@ export const posters: PosterLibraryItem[] = [
     available: true,
     revision: "1.0",
   },
-  /* SAFEBASE_SERIAL_POSTERS_END */
+  /* SERNEM_SERIAL_POSTERS_END */
 
 ];

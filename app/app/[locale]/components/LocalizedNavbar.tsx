@@ -93,7 +93,7 @@ export default function LocalizedNavbar({ locale }: Props) {
 
           <div className="min-w-0">
             <div className="text-lg font-black tracking-tight">
-              SafeBase
+              Sernem
             </div>
 
             <div className="truncate text-xs text-slate-500">

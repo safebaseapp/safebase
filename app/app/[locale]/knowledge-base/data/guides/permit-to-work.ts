@@ -307,7 +307,7 @@ export const permitToWorkGuide: SafetyGuide = {
   ],
 
   aiText: {
-    en: "Ask SafeBase AI about permit selection, authorization, isolations, gas testing, simultaneous operations, permit suspension, shift handover or permit closure.",
-    tr: "İzin türü seçimi, yetkilendirme, izolasyonlar, gaz ölçümü, eş zamanlı operasyonlar, izin askıya alma, vardiya teslimi veya izin kapatma hakkında SafeBase AI'a soru sor.",
+    en: "Ask Sernem AI about permit selection, authorization, isolations, gas testing, simultaneous operations, permit suspension, shift handover or permit closure.",
+    tr: "İzin türü seçimi, yetkilendirme, izolasyonlar, gaz ölçümü, eş zamanlı operasyonlar, izin askıya alma, vardiya teslimi veya izin kapatma hakkında Sernem AI'a soru sor.",
   },
 };

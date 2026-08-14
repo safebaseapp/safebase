@@ -59,7 +59,7 @@ export default async function DownloadsPage({
             </div>
 
             <p className="mt-8 text-xs font-black uppercase tracking-[0.22em] text-amber-300">
-              SAFEBASE FEATURE CONTROL
+              SERNEM FEATURE CONTROL
             </p>
 
             <h1 className="mt-4 text-4xl font-black tracking-[-0.04em] sm:text-5xl">
@@ -70,8 +70,8 @@ export default async function DownloadsPage({
 
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-400">
               {isTurkish
-                ? "SafeBase indirilebilir kaynakları geçici olarak devre dışı bırakılmıştır. Özellik yeniden etkinleştirildiğinde HSE belgelerine ve kaynaklarına tekrar erişebilirsiniz."
-                : "SafeBase downloadable resources have been temporarily disabled. You will be able to access HSE documents and resources again when the feature is enabled."}
+                ? "Sernem indirilebilir kaynakları geçici olarak devre dışı bırakılmıştır. Özellik yeniden etkinleştirildiğinde HSE belgelerine ve kaynaklarına tekrar erişebilirsiniz."
+                : "Sernem downloadable resources have been temporarily disabled. You will be able to access HSE documents and resources again when the feature is enabled."}
             </p>
 
             <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/10 px-4 py-2 text-sm font-black text-amber-300">

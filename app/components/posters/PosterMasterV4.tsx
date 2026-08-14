@@ -254,7 +254,7 @@ function PpeIcon({
   type: "helmet" | "glasses" | "gloves" | "footwear" | "harness";
 }) {
 
-  /* SAFEBASE_FULL_BODY_HARNESS_ICON */
+  /* SERNEM_FULL_BODY_HARNESS_ICON */
   const ppeTypeValue = String(type).toLowerCase();
 
   if (
@@ -586,7 +586,7 @@ export default function PosterMaster({
               </span>
 
               <span className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-slate-700">
-                SafeBase Pro Series
+                Sernem Pro Series
               </span>
             </div>
 
@@ -607,8 +607,8 @@ export default function PosterMaster({
                   src="/posters/safebase-qr.png"
                   alt={
                     isTurkish
-                      ? "SafeBase kaynakları QR kodu"
-                      : "SafeBase resources QR code"
+                      ? "Sernem kaynakları QR kodu"
+                      : "Sernem resources QR code"
                   }
                   width={76}
                   height={76}
@@ -669,7 +669,7 @@ export default function PosterMaster({
 
             <div>
               <p className="text-[9px] font-black uppercase tracking-[0.18em] text-emerald-400">
-                SafeBase Pre-Job Control
+                Sernem Pre-Job Control
               </p>
 
               <h2 className="text-[17px] font-black uppercase leading-none">
@@ -745,7 +745,7 @@ export default function PosterMaster({
         <div className="overflow-hidden rounded-[18px] border-2 border-amber-500 bg-white">
           <div className="bg-amber-500 px-4 py-3 text-center text-white">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-amber-100">
-              SafeBase Technical Control
+              Sernem Technical Control
             </p>
             <h2 className="mt-0.5 text-[21px] font-black uppercase leading-none">
               {isTurkish ? "Kritik Değerler" : "Critical Values"}
@@ -882,7 +882,7 @@ export default function PosterMaster({
 
         <div className="text-right">
           <p className="text-[9px] font-black uppercase tracking-[0.16em] text-emerald-400">
-            SafeBase Verified • 2026
+            Sernem Verified • 2026
           </p>
 
           <p className="mt-1 text-sm font-black">www.safebase.app</p>

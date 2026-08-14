@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "SafeBase",
-    template: "%s | SafeBase",
+    default: "Sernem",
+    template: "%s | Sernem",
   },
   description:
     "Global HSE platform with safety calculators, AI assistant, OSHA knowledge, templates and inspection checklists.",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "Confined Space",
     "Hot Work",
     "LOTO",
-    "SafeBase",
+    "Sernem",
   ],
   icons: {
     icon: "/icon.svg",

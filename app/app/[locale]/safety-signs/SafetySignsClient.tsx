@@ -59,7 +59,7 @@ export default function SafetySignsClient({
     <main className="min-h-screen bg-[#05091a] px-6 py-16 text-white">
       <div className="mx-auto max-w-7xl">
         <p className="text-sm font-black uppercase tracking-[0.25em] text-emerald-400">
-          SafeBase Safety Sign Engine V1
+          Sernem Safety Sign Engine V1
         </p>
 
         <h1 className="mt-5 max-w-5xl text-5xl font-black tracking-[-0.05em] sm:text-7xl">

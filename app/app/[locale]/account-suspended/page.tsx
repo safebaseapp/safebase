@@ -41,7 +41,7 @@ export default async function AccountSuspendedPage({ params }: Props) {
         </div>
 
         <p className="mt-7 text-sm font-black uppercase tracking-[0.2em] text-red-300">
-          SafeBase Account Security
+          Sernem Account Security
         </p>
 
         <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
@@ -52,8 +52,8 @@ export default async function AccountSuspendedPage({ params }: Props) {
 
         <p className="mt-4 leading-7 text-slate-400">
           {isTurkish
-            ? "Bu hesap için SafeBase çalışma alanına erişim geçici olarak durdurulmuştur. Hesabınızın yeniden etkinleştirilmesi için SafeBase yönetimiyle iletişime geçin."
-            : "Access to the SafeBase workspace has been temporarily disabled for this account. Contact SafeBase administration to have your account reviewed."}
+            ? "Bu hesap için Sernem çalışma alanına erişim geçici olarak durdurulmuştur. Hesabınızın yeniden etkinleştirilmesi için Sernem yönetimiyle iletişime geçin."
+            : "Access to the Sernem workspace has been temporarily disabled for this account. Contact Sernem administration to have your account reviewed."}
         </p>
 
         <div className="mt-7 rounded-2xl border border-white/10 bg-slate-950/60 p-4">

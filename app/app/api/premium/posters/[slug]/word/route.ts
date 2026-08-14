@@ -627,8 +627,8 @@ export async function GET(
       children: [
         new TextRun({
           text: isTurkish
-            ? "SafeBase Profesyonel HSE Poster Kütüphanesi"
-            : "SafeBase Professional HSE Poster Library",
+            ? "Sernem Profesyonel HSE Poster Kütüphanesi"
+            : "Sernem Professional HSE Poster Library",
           bold: true,
           color: "64748B",
           size: 14,
@@ -638,7 +638,7 @@ export async function GET(
   );
 
   const document = new Document({
-    creator: "SafeBase",
+    creator: "Sernem",
     title,
     description: subtitle,
     sections: [
@@ -672,7 +672,7 @@ export async function GET(
                 },
                 children: [
                   new TextRun({
-                    text: "SafeBase • ",
+                    text: "Sernem • ",
                     color: "64748B",
                     size: 14,
                   }),

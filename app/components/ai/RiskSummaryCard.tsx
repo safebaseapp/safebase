@@ -81,7 +81,7 @@ export default function RiskSummaryCard({
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
-              {isTurkish ? "SafeBase Risk Özeti" : "SafeBase Risk Summary"}
+              {isTurkish ? "Sernem Risk Özeti" : "Sernem Risk Summary"}
             </p>
 
             <h3 className="mt-2 text-xl font-black text-white sm:text-2xl">
@@ -111,8 +111,8 @@ export default function RiskSummaryCard({
           <p className="mt-3 text-sm leading-7 text-slate-300">
             {summary ||
               (isTurkish
-                ? "Bu değerlendirme, kullanıcının sağladığı bilgiler ve mevcut SafeBase Bilgi Tabanı esas alınarak hazırlanmıştır."
-                : "This assessment is based on the information provided by the user and the current SafeBase Knowledge Base.")}
+                ? "Bu değerlendirme, kullanıcının sağladığı bilgiler ve mevcut Sernem Bilgi Tabanı esas alınarak hazırlanmıştır."
+                : "This assessment is based on the information provided by the user and the current Sernem Knowledge Base.")}
           </p>
 
           {riskReason && (

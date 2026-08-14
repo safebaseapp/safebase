@@ -132,7 +132,7 @@ export default async function DashboardPage({ params }: Props) {
         <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="mb-2 text-sm font-semibold uppercase tracking-[0.22em] text-blue-400">
-              {isTurkish ? "SafeBase çalışma alanı" : "SafeBase workspace"}
+              {isTurkish ? "Sernem çalışma alanı" : "Sernem workspace"}
             </p>
 
             <div>
@@ -195,8 +195,8 @@ export default async function DashboardPage({ params }: Props) {
                 </h2>
                 <p className="mt-1 text-sm text-slate-400">
                   {isTurkish
-                    ? "En çok kullanılan SafeBase araçlarına ulaş."
-                    : "Access your most-used SafeBase tools."}
+                    ? "En çok kullanılan Sernem araçlarına ulaş."
+                    : "Access your most-used Sernem tools."}
                 </p>
               </div>
             </div>
@@ -243,11 +243,11 @@ export default async function DashboardPage({ params }: Props) {
                 <p className="mt-2 text-sm text-slate-400">
                   {isPremium
                     ? isTurkish
-                      ? "Tüm premium SafeBase özelliklerine erişim"
-                      : "Access to all premium SafeBase features"
+                      ? "Tüm premium Sernem özelliklerine erişim"
+                      : "Access to all premium Sernem features"
                     : isTurkish
-                      ? "Temel SafeBase araçlarına erişim"
-                      : "Access to core SafeBase tools"}
+                      ? "Temel Sernem araçlarına erişim"
+                      : "Access to core Sernem tools"}
                 </p>
               </div>
 

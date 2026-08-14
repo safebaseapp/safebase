@@ -631,8 +631,8 @@ export default function AccountPage({ params }: Props) {
                     </h3>
                     <p className="mt-1 text-sm text-slate-400">
                       {isTurkish
-                        ? "SafeBase profilinizi temsil edecek avatarı seçin."
-                        : "Choose an avatar to represent your SafeBase profile."}
+                        ? "Sernem profilinizi temsil edecek avatarı seçin."
+                        : "Choose an avatar to represent your Sernem profile."}
                     </p>
                   </div>
 
@@ -754,8 +754,8 @@ export default function AccountPage({ params }: Props) {
                     </h3>
                     <p className="mt-1 text-sm text-slate-400">
                       {isTurkish
-                        ? "SafeBase arayüz dilinizi seçin."
-                        : "Choose your SafeBase interface language."}
+                        ? "Sernem arayüz dilinizi seçin."
+                        : "Choose your Sernem interface language."}
                     </p>
                   </div>
 
@@ -819,7 +819,7 @@ export default function AccountPage({ params }: Props) {
             {/* PROFILE IDENTITY / EMPTY SPACE FILL */}
             <div className="border-t border-white/10 bg-gradient-to-br from-blue-950/30 via-slate-900 to-emerald-950/20 p-7">
               <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
-                {isTurkish ? "SAFEBASE PROFİL KİMLİĞİ" : "SAFEBASE PROFILE IDENTITY"}
+                {isTurkish ? "SERNEM PROFİL KİMLİĞİ" : "SERNEM PROFILE IDENTITY"}
               </p>
 
               <div className="mt-5 grid gap-5 md:grid-cols-[auto_1fr] md:items-center">
@@ -842,8 +842,8 @@ export default function AccountPage({ params }: Props) {
 
                   <p className="mt-2 text-sm text-slate-400">
                     {isTurkish
-                      ? "SafeBase çalışma alanınızdaki kişisel profil kimliğiniz."
-                      : "Your personal profile identity across the SafeBase workspace."}
+                      ? "Sernem çalışma alanınızdaki kişisel profil kimliğiniz."
+                      : "Your personal profile identity across the Sernem workspace."}
                   </p>
 
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -925,7 +925,7 @@ export default function AccountPage({ params }: Props) {
                   ? [
                       isTurkish ? "Premium HSE kaynakları" : "Premium HSE resources",
                       isTurkish ? "Premium doküman indirmeleri" : "Premium document downloads",
-                      isTurkish ? "Gelişmiş SafeBase özellikleri" : "Advanced SafeBase features",
+                      isTurkish ? "Gelişmiş Sernem özellikleri" : "Advanced Sernem features",
                     ]
                   : [
                       isTurkish ? "Ücretsiz HSE araçları" : "Free HSE tools",
@@ -956,8 +956,8 @@ export default function AccountPage({ params }: Props) {
               {isOwner && (
                 <div className="mt-5 rounded-xl border border-blue-400/15 bg-blue-500/[0.06] px-4 py-3 text-sm text-blue-300">
                   {isTurkish
-                    ? "SafeBase sahibi hesabı: yönetici ve Premium erişimleri aktiftir."
-                    : "SafeBase owner account: administrator and Premium access are active."}
+                    ? "Sernem sahibi hesabı: yönetici ve Premium erişimleri aktiftir."
+                    : "Sernem owner account: administrator and Premium access are active."}
                 </div>
               )}
             </section>

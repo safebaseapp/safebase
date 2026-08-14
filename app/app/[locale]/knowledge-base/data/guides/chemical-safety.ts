@@ -216,7 +216,7 @@ export const chemicalSafetyGuide: SafetyGuide = {
   ],
 
   aiText: {
-    en: "Ask SafeBase AI any chemical safety question and receive guidance based on OSHA and GHS best practices.",
-    tr: "Kimyasal güvenliği hakkında SafeBase AI'a soru sorarak OSHA ve GHS uygulamalarına dayalı rehberlik alın.",
+    en: "Ask Sernem AI any chemical safety question and receive guidance based on OSHA and GHS best practices.",
+    tr: "Kimyasal güvenliği hakkında Sernem AI'a soru sorarak OSHA ve GHS uygulamalarına dayalı rehberlik alın.",
   },
 };

@@ -107,7 +107,7 @@ function resolveRequestedFeature(
   ) {
     return {
       icon: "🤖",
-      category: "SafeBase AI",
+      category: "Sernem AI",
       title: isTurkish ? "Premium AI Asistan" : "Premium AI Assistant",
       description: isTurkish
         ? "Gelişmiş HSE yapay zekâ özelliklerine erişmeye çalışıyorsunuz."
@@ -181,13 +181,13 @@ function resolveRequestedFeature(
 
   return {
     icon: "👑",
-    category: "SafeBase Premium",
+    category: "Sernem Premium",
     title: isTurkish
-      ? "Premium SafeBase Özelliği"
-      : "Premium SafeBase Feature",
+      ? "Premium Sernem Özelliği"
+      : "Premium Sernem Feature",
     description: isTurkish
-      ? "Premium üyelik gerektiren gelişmiş bir SafeBase özelliğine erişmeye çalışıyorsunuz."
-      : "You are trying to access an advanced SafeBase feature that requires Premium membership.",
+      ? "Premium üyelik gerektiren gelişmiş bir Sernem özelliğine erişmeye çalışıyorsunuz."
+      : "You are trying to access an advanced Sernem feature that requires Premium membership.",
   };
 }
 
@@ -298,7 +298,7 @@ export default async function UpgradePage({
         <header className="mt-10 border-b border-white/10 pb-10">
           <div className="max-w-4xl">
             <p className="text-xs font-black uppercase tracking-[0.24em] text-emerald-400">
-              SAFEBASE PREMIUM
+              SERNEM PREMIUM
             </p>
 
             <h2 className="mt-4 max-w-3xl text-4xl font-black tracking-[-0.04em] sm:text-5xl lg:text-6xl">
@@ -309,8 +309,8 @@ export default async function UpgradePage({
 
             <p className="mt-5 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">
               {isTurkish
-                ? "Premium; gelişmiş içerikleri, profesyonel dokümanları, AI desteğini ve yeni SafeBase özelliklerini tek üyelik altında bir araya getirir."
-                : "Premium brings advanced content, professional documents, AI support and upcoming SafeBase capabilities together in one membership."}
+                ? "Premium; gelişmiş içerikleri, profesyonel dokümanları, AI desteğini ve yeni Sernem özelliklerini tek üyelik altında bir araya getirir."
+                : "Premium brings advanced content, professional documents, AI support and upcoming Sernem capabilities together in one membership."}
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">
@@ -381,7 +381,7 @@ export default async function UpgradePage({
             <div className="relative">
               <div className="flex items-center justify-between gap-4">
                 <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-300">
-                  SAFEBASE PREMIUM
+                  SERNEM PREMIUM
                 </p>
 
                 <span className="rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-[10px] font-black text-amber-300">
