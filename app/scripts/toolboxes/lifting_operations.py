@@ -1,4 +1,4 @@
-"""SafeBase Lifting Operations Toolbox Talk content."""
+"""SERNEM Lifting Operations Toolbox Talk content."""
 
 LIFTING_OPERATIONS = {
     "base": "lifting-operations-toolbox-talk",
@@ -118,7 +118,7 @@ LIFTING_OPERATIONS = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Kaldırma planı, ekipman sertifikaları ve "
+            "SERNEM HSE Resource — Kaldırma planı, ekipman sertifikaları ve "
             "saha kaldırma prosedürleri önceliklidir."
         ),
     },
@@ -238,7 +238,7 @@ LIFTING_OPERATIONS = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Lifting plans, equipment certification and "
+            "SERNEM HSE Resource — Lifting plans, equipment certification and "
             "site lifting procedures take priority."
         ),
     },

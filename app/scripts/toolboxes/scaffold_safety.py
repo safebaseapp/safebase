@@ -1,4 +1,4 @@
-"""SafeBase Scaffold Safety Toolbox Talk content."""
+"""SERNEM Scaffold Safety Toolbox Talk content."""
 
 SCAFFOLD_SAFETY = {
     "base": "scaffold-safety-toolbox-talk",
@@ -122,7 +122,7 @@ SCAFFOLD_SAFETY = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — İskele etiketi, risk değerlendirmesi ve "
+            "SERNEM HSE Resource — İskele etiketi, risk değerlendirmesi ve "
             "saha prosedürleri önceliklidir."
         ),
     },
@@ -246,7 +246,7 @@ SCAFFOLD_SAFETY = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Scaffold tags, risk assessments and "
+            "SERNEM HSE Resource — Scaffold tags, risk assessments and "
             "site procedures take priority."
         ),
     },

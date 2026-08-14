@@ -1,4 +1,4 @@
-"""SafeBase Excavation Safety Toolbox Talk content."""
+"""SERNEM Excavation Safety Toolbox Talk content."""
 
 EXCAVATION_SAFETY = {
     "base": "excavation-safety-toolbox-talk",
@@ -109,7 +109,7 @@ EXCAVATION_SAFETY = {
         "fields": ["Proje / Saha","Tarih","Konuşmayı yapan","Çalışma alanı"],
         "table_headers": ["No","Ad Soyad","Firma / Görev","İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
-        "footer": "SafeBase HSE Resource — Excavation Safety"
+        "footer": "SERNEM HSE Resource — Excavation Safety"
     },
 
     "en": {
@@ -195,6 +195,6 @@ EXCAVATION_SAFETY = {
         "fields": ["Project / Site","Date","Presented by","Work area"],
         "table_headers": ["No","Full Name","Company / Role","Signature"],
         "notes_title": "Supervisor notes",
-        "footer": "SafeBase HSE Resource — Excavation Safety"
+        "footer": "SERNEM HSE Resource — Excavation Safety"
     }
 }

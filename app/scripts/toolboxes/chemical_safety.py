@@ -1,4 +1,4 @@
-"""SafeBase Chemical Safety Toolbox Talk content."""
+"""SERNEM Chemical Safety Toolbox Talk content."""
 
 CHEMICAL_SAFETY = {
     "base": "chemical-safety-toolbox-talk",
@@ -122,7 +122,7 @@ CHEMICAL_SAFETY = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — SDS, kimyasal risk değerlendirmesi ve "
+            "SERNEM HSE Resource — SDS, kimyasal risk değerlendirmesi ve "
             "saha prosedürleri önceliklidir."
         ),
     },
@@ -244,7 +244,7 @@ CHEMICAL_SAFETY = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Safety Data Sheets, chemical risk assessments and "
+            "SERNEM HSE Resource — Safety Data Sheets, chemical risk assessments and "
             "site procedures take priority."
         ),
     },

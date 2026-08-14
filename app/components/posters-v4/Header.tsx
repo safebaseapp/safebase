@@ -29,7 +29,7 @@ export default function Header({ locale, poster }: Props) {
 
         <div className="mt-5">
           <p className="text-[40px] font-black leading-none">
-            <span className="text-emerald-600">Safe</span>Base
+            <span className="text-emerald-600">SERNEM</span>
           </p>
 
           <p className="mt-2 text-[10px] font-black uppercase tracking-[0.22em] text-slate-500">

@@ -1,4 +1,4 @@
-"""SafeBase Personal Protective Equipment Toolbox Talk content."""
+"""SERNEM Personal Protective Equipment Toolbox Talk content."""
 
 PPE_SAFETY = {
     "base": "ppe-safety-toolbox-talk",
@@ -120,7 +120,7 @@ PPE_SAFETY = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Risk değerlendirmesi, üretici talimatları ve "
+            "SERNEM HSE Resource — Risk değerlendirmesi, üretici talimatları ve "
             "saha KKD prosedürleri önceliklidir."
         ),
     },
@@ -240,7 +240,7 @@ PPE_SAFETY = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Risk assessments, manufacturer instructions and "
+            "SERNEM HSE Resource — Risk assessments, manufacturer instructions and "
             "site PPE procedures take priority."
         ),
     },

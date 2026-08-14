@@ -1,4 +1,4 @@
-"""SafeBase Hand and Power Tools Toolbox Talk content."""
+"""SERNEM Hand and Power Tools Toolbox Talk content."""
 
 HAND_POWER_TOOLS = {
     "base": "hand-power-tools-toolbox-talk",
@@ -116,7 +116,7 @@ HAND_POWER_TOOLS = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Üretici talimatları, ekipman kontrolleri ve "
+            "SERNEM HSE Resource — Üretici talimatları, ekipman kontrolleri ve "
             "saha prosedürleri önceliklidir."
         ),
     },
@@ -233,7 +233,7 @@ HAND_POWER_TOOLS = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Manufacturer instructions, equipment inspection requirements and "
+            "SERNEM HSE Resource — Manufacturer instructions, equipment inspection requirements and "
             "site procedures take priority."
         ),
     },

@@ -1,4 +1,4 @@
-"""SafeBase Electrical Safety Toolbox Talk content."""
+"""SERNEM Electrical Safety Toolbox Talk content."""
 
 ELECTRICAL_SAFETY = {
     "base": "electrical-safety-toolbox-talk",
@@ -118,7 +118,7 @@ ELECTRICAL_SAFETY = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Elektrik izolasyonu, LOTO ve "
+            "SERNEM HSE Resource — Elektrik izolasyonu, LOTO ve "
             "saha elektrik prosedürleri önceliklidir."
         ),
     },
@@ -238,7 +238,7 @@ ELECTRICAL_SAFETY = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Electrical isolation, LOTO and "
+            "SERNEM HSE Resource — Electrical isolation, LOTO and "
             "site electrical procedures take priority."
         ),
     },

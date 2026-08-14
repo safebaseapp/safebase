@@ -101,7 +101,7 @@ def page_header(c, title, subtitle, duration, page_label):
 
     text(
         c,
-        "SAFEBASE TOOLBOX TALK",
+        "SERNEM TOOLBOX TALK",
         17 * mm,
         height - 13 * mm,
         9.5,
@@ -451,7 +451,7 @@ def footer(c, footer_text):
 
     text(
         c,
-        "SAFEBASE",
+        "SERNEM",
         17 * mm,
         7 * mm,
         8,

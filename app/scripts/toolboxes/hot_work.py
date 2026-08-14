@@ -1,4 +1,4 @@
-"""SafeBase Toolbox Talk content module."""
+"""SERNEM Toolbox Talk content module."""
 
 HOT_WORK = {'base': 'hot-work-toolbox-talk',
  'tr': {'title': 'SICAK ÇALIŞMA TOOLBOX TALK',
@@ -84,7 +84,7 @@ HOT_WORK = {'base': 'hot-work-toolbox-talk',
         'fields': ['Proje / Saha', 'Tarih', 'Konuşmayı yapan', 'Çalışma alanı'],
         'table_headers': ['No', 'Ad Soyad', 'Firma / Görev', 'İmza'],
         'notes_title': 'Süpervizör notları / ek saha talimatları',
-        'footer': 'SafeBase HSE Resource — Çalışma izni, risk değerlendirmesi ve saha prosedürleri '
+        'footer': 'SERNEM HSE Resource — Çalışma izni, risk değerlendirmesi ve saha prosedürleri '
                   'önceliklidir.'},
  'en': {'title': 'HOT WORK TOOLBOX TALK',
         'subtitle': 'Prevent fire and explosion during welding, cutting and grinding.',
@@ -167,5 +167,5 @@ HOT_WORK = {'base': 'hot-work-toolbox-talk',
         'fields': ['Project / Site', 'Date', 'Presented by', 'Work area'],
         'table_headers': ['No', 'Full Name', 'Company / Role', 'Signature'],
         'notes_title': 'Supervisor notes / additional site instructions',
-        'footer': 'SafeBase HSE Resource — Permit conditions, risk assessments and site procedures '
+        'footer': 'SERNEM HSE Resource — Permit conditions, risk assessments and site procedures '
                   'take priority.'}}

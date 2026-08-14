@@ -1,4 +1,4 @@
-"""SafeBase Forklift Safety Toolbox Talk content."""
+"""SERNEM Forklift Safety Toolbox Talk content."""
 
 FORKLIFT_SAFETY = {
     "base": "forklift-safety-toolbox-talk",
@@ -112,7 +112,7 @@ FORKLIFT_SAFETY = {
         "fields": ["Proje / Saha","Tarih","Konuşmayı yapan","Çalışma alanı"],
         "table_headers": ["No","Ad Soyad","Firma / Görev","İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
-        "footer": "SafeBase HSE Resource — Forklift Safety"
+        "footer": "SERNEM HSE Resource — Forklift Safety"
     },
 
     "en": {
@@ -203,6 +203,6 @@ FORKLIFT_SAFETY = {
         "fields": ["Project / Site","Date","Presented by","Work area"],
         "table_headers": ["No","Full Name","Company / Role","Signature"],
         "notes_title": "Supervisor notes",
-        "footer": "SafeBase HSE Resource — Forklift Safety"
+        "footer": "SERNEM HSE Resource — Forklift Safety"
     },
 }

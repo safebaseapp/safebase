@@ -1,4 +1,4 @@
-"""SafeBase Toolbox Talk content module."""
+"""SERNEM Toolbox Talk content module."""
 
 MANUAL_HANDLING = {
     "base": "manual-handling-toolbox-talk",

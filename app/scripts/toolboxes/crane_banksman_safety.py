@@ -1,4 +1,4 @@
-"""SafeBase Crane and Banksman Safety Toolbox Talk content."""
+"""SERNEM Crane and Banksman Safety Toolbox Talk content."""
 
 CRANE_BANKSMAN_SAFETY = {
     "base": "crane-banksman-safety-toolbox-talk",
@@ -112,7 +112,7 @@ CRANE_BANKSMAN_SAFETY = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Kaldırma planı, işaretleşme kuralları ve "
+            "SERNEM HSE Resource — Kaldırma planı, işaretleşme kuralları ve "
             "saha vinç prosedürleri önceliklidir."
         ),
     },
@@ -228,7 +228,7 @@ CRANE_BANKSMAN_SAFETY = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Lifting plans, signalling rules and "
+            "SERNEM HSE Resource — Lifting plans, signalling rules and "
             "site crane procedures take priority."
         ),
     },

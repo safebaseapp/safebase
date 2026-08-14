@@ -11,7 +11,7 @@ export default function Footer({ locale }: Props) {
     <footer className="mt-3 flex items-center justify-between rounded-[16px] bg-slate-950 px-6 py-3 text-white">
       <div>
         <p className="text-3xl font-black">
-          <span className="text-emerald-500">Safe</span>Base
+          <span className="text-emerald-500">SERNEM</span>
         </p>
 
         <p className="text-[10px] font-bold text-emerald-400">

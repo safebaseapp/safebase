@@ -1,4 +1,4 @@
-"""SafeBase Mobile Equipment Safety Toolbox Talk content."""
+"""SERNEM Mobile Equipment Safety Toolbox Talk content."""
 
 MOBILE_EQUIPMENT_SAFETY = {
     "base": "mobile-equipment-safety-toolbox-talk",
@@ -117,7 +117,7 @@ MOBILE_EQUIPMENT_SAFETY = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Trafik yönetim planı, üretici talimatları ve "
+            "SERNEM HSE Resource — Trafik yönetim planı, üretici talimatları ve "
             "saha mobil ekipman prosedürleri önceliklidir."
         ),
     },
@@ -236,7 +236,7 @@ MOBILE_EQUIPMENT_SAFETY = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Traffic-management plans, manufacturer instructions and "
+            "SERNEM HSE Resource — Traffic-management plans, manufacturer instructions and "
             "site mobile-equipment procedures take priority."
         ),
     },

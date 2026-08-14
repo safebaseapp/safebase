@@ -1,4 +1,4 @@
-"""SafeBase Safety Harness Toolbox Talk content."""
+"""SERNEM Safety Harness Toolbox Talk content."""
 
 SAFETY_HARNESS = {
     "base": "safety-harness-toolbox-talk",
@@ -122,7 +122,7 @@ SAFETY_HARNESS = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Üretici talimatları, risk değerlendirmesi ve "
+            "SERNEM HSE Resource — Üretici talimatları, risk değerlendirmesi ve "
             "saha prosedürleri önceliklidir."
         ),
     },
@@ -245,7 +245,7 @@ SAFETY_HARNESS = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Manufacturer instructions, risk assessments and "
+            "SERNEM HSE Resource — Manufacturer instructions, risk assessments and "
             "site procedures take priority."
         ),
     },

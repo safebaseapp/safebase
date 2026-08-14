@@ -1,4 +1,4 @@
-"""SafeBase Toolbox Talk content registry."""
+"""SERNEM Toolbox Talk content registry."""
 
 from .chemical_safety import CHEMICAL_SAFETY
 from .confined_space import CONFINED_SPACE

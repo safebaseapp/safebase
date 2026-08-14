@@ -1,4 +1,4 @@
-"""SafeBase Confined Space Toolbox Talk content."""
+"""SERNEM Confined Space Toolbox Talk content."""
 
 CONFINED_SPACE = {
     "base": "confined-space-toolbox-talk",
@@ -123,7 +123,7 @@ CONFINED_SPACE = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Kapalı alan giriş izni, gaz ölçümü, izolasyon ve "
+            "SERNEM HSE Resource — Kapalı alan giriş izni, gaz ölçümü, izolasyon ve "
             "saha kurtarma prosedürleri önceliklidir."
         ),
     },
@@ -246,7 +246,7 @@ CONFINED_SPACE = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Entry permits, gas testing, isolation and "
+            "SERNEM HSE Resource — Entry permits, gas testing, isolation and "
             "site rescue procedures take priority."
         ),
     },

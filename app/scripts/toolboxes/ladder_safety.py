@@ -1,4 +1,4 @@
-"""SafeBase Ladder Safety Toolbox Talk content."""
+"""SERNEM Ladder Safety Toolbox Talk content."""
 
 LADDER_SAFETY = {
     "base": "ladder-safety-toolbox-talk",
@@ -110,7 +110,7 @@ LADDER_SAFETY = {
         "fields": ["Proje / Saha","Tarih","Konuşmayı yapan","Çalışma alanı"],
         "table_headers": ["No","Ad Soyad","Firma / Görev","İmza"],
         "notes_title": "Süpervizör notları",
-        "footer": "SafeBase HSE Resource — Ladder Safety"
+        "footer": "SERNEM HSE Resource — Ladder Safety"
     },
 
     "en": {
@@ -201,6 +201,6 @@ LADDER_SAFETY = {
         "fields": ["Project / Site","Date","Presented by","Work area"],
         "table_headers": ["No","Full Name","Company / Role","Signature"],
         "notes_title": "Supervisor notes",
-        "footer": "SafeBase HSE Resource — Ladder Safety"
+        "footer": "SERNEM HSE Resource — Ladder Safety"
     },
 }

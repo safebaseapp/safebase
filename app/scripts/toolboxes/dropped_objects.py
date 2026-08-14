@@ -1,4 +1,4 @@
-"""SafeBase Dropped Object Prevention Toolbox Talk content."""
+"""SERNEM Dropped Object Prevention Toolbox Talk content."""
 
 DROPPED_OBJECTS = {
     "base": "dropped-objects-toolbox-talk",
@@ -115,7 +115,7 @@ DROPPED_OBJECTS = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Düşen cisim kontrol planı, yüksekte çalışma kuralları ve "
+            "SERNEM HSE Resource — Düşen cisim kontrol planı, yüksekte çalışma kuralları ve "
             "saha prosedürleri önceliklidir."
         ),
     },
@@ -232,7 +232,7 @@ DROPPED_OBJECTS = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Dropped-object controls, work-at-height requirements and "
+            "SERNEM HSE Resource — Dropped-object controls, work-at-height requirements and "
             "site procedures take priority."
         ),
     },

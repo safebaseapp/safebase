@@ -1,4 +1,4 @@
-"""SafeBase LOTO Toolbox Talk content."""
+"""SERNEM LOTO Toolbox Talk content."""
 
 LOTO = {
     "base": "loto-toolbox-talk",
@@ -121,7 +121,7 @@ LOTO = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — İzolasyon planı, çalışma izni ve "
+            "SERNEM HSE Resource — İzolasyon planı, çalışma izni ve "
             "saha LOTO prosedürleri önceliklidir."
         ),
     },
@@ -243,7 +243,7 @@ LOTO = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Isolation plans, permits and "
+            "SERNEM HSE Resource — Isolation plans, permits and "
             "site LOTO procedures take priority."
         ),
     },

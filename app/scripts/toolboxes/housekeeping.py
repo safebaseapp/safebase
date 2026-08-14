@@ -1,4 +1,4 @@
-"""SafeBase Housekeeping Toolbox Talk content."""
+"""SERNEM Housekeeping Toolbox Talk content."""
 
 HOUSEKEEPING = {
     "base": "housekeeping-toolbox-talk",
@@ -119,7 +119,7 @@ HOUSEKEEPING = {
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Atık yönetimi, yangın güvenliği ve "
+            "SERNEM HSE Resource — Atık yönetimi, yangın güvenliği ve "
             "saha prosedürleri önceliklidir."
         ),
     },
@@ -236,7 +236,7 @@ HOUSEKEEPING = {
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Waste management, fire safety and "
+            "SERNEM HSE Resource — Waste management, fire safety and "
             "site procedures take priority."
         ),
     },

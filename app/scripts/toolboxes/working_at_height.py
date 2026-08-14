@@ -1,4 +1,4 @@
-"""SafeBase Toolbox Talk content module."""
+"""SERNEM Toolbox Talk content module."""
 
 WORKING_AT_HEIGHT = {'base': 'working-at-height-toolbox-talk',
  'tr': {'title': 'YÜKSEKTE ÇALIŞMA TOOLBOX TALK',
@@ -87,7 +87,7 @@ WORKING_AT_HEIGHT = {'base': 'working-at-height-toolbox-talk',
         'fields': ['Proje / Saha', 'Tarih', 'Konuşmayı yapan', 'Çalışma alanı'],
         'table_headers': ['No', 'Ad Soyad', 'Firma / Görev', 'İmza'],
         'notes_title': 'Süpervizör notları / ek saha talimatları',
-        'footer': 'SafeBase HSE Resource — Çalışma izni, risk değerlendirmesi ve saha prosedürleri '
+        'footer': 'SERNEM HSE Resource — Çalışma izni, risk değerlendirmesi ve saha prosedürleri '
                   'önceliklidir.'},
  'en': {'title': 'WORKING AT HEIGHT TOOLBOX TALK',
         'subtitle': 'Prevent falls, falling objects and fatal injuries.',
@@ -172,5 +172,5 @@ WORKING_AT_HEIGHT = {'base': 'working-at-height-toolbox-talk',
         'fields': ['Project / Site', 'Date', 'Presented by', 'Work area'],
         'table_headers': ['No', 'Full Name', 'Company / Role', 'Signature'],
         'notes_title': 'Supervisor notes / additional site instructions',
-        'footer': 'SafeBase HSE Resource — Permit conditions, risk assessments and site procedures '
+        'footer': 'SERNEM HSE Resource — Permit conditions, risk assessments and site procedures '
                   'take priority.'}}
