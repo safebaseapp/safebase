@@ -188,7 +188,7 @@ export const workingAtHeightGuide: SafetyGuide = {
   ],
 
   aiText: {
-    en: "Ask Sernem AI a working-at-height question and receive practical guidance based on the knowledge base.",
-    tr: "Yüksekte çalışma konusunda Sernem AI'a soru sor ve bilgi tabanına dayalı pratik rehberlik al.",
+    en: "Ask SERNEM AI a working-at-height question and receive practical guidance based on the knowledge base.",
+    tr: "Yüksekte çalışma konusunda SERNEM AI'a soru sor ve bilgi tabanına dayalı pratik rehberlik al.",
   },
 };

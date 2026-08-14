@@ -256,8 +256,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• HSE – Working at Height guidance\n• HSE – Assessing all work at height\n• Proje / saha HSE prosedürleri\n• Kullanılan ekipmanın üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• HSE – Working at Height guidance\n• HSE – Assessing all work at height\n• Project / site HSE procedures\n• Manufacturer instructions for equipment used"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• HSE – Working at Height guidance\n• HSE – Assessing all work at height\n• Proje / saha HSE prosedürleri\n• Kullanılan ekipmanın üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• HSE – Working at Height guidance\n• HSE – Assessing all work at height\n• Project / site HSE procedures\n• Manufacturer instructions for equipment used"
     );
   };
 
@@ -445,8 +445,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA – Welding, Cutting, and Brazing (29 CFR 1910 Subpart Q)\n• OSHA – Fire Prevention and Protection requirements\n• Proje / saha Sıcak Çalışma ve PTW prosedürleri\n• Kullanılan ekipmanın üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA – Welding, Cutting, and Brazing (29 CFR 1910 Subpart Q)\n• OSHA – Fire Prevention and Protection requirements\n• Project / site Hot Work and PTW procedures\n• Manufacturer instructions for equipment used"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA – Welding, Cutting, and Brazing (29 CFR 1910 Subpart Q)\n• OSHA – Fire Prevention and Protection requirements\n• Proje / saha Sıcak Çalışma ve PTW prosedürleri\n• Kullanılan ekipmanın üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA – Welding, Cutting, and Brazing (29 CFR 1910 Subpart Q)\n• OSHA – Fire Prevention and Protection requirements\n• Project / site Hot Work and PTW procedures\n• Manufacturer instructions for equipment used"
     );
   };
 
@@ -637,8 +637,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1910.146 – Permit-Required Confined Spaces\n• OSHA 29 CFR 1926 Subpart AA – Confined Spaces in Construction\n• Proje / saha Kapalı Alana Giriş ve LOTO prosedürleri\n• Gaz ölçüm cihazı ve kullanılan ekipmanların üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA 29 CFR 1910.146 – Permit-Required Confined Spaces\n• OSHA 29 CFR 1926 Subpart AA – Confined Spaces in Construction\n• Project / site Confined Space Entry and LOTO procedures\n• Manufacturer instructions for gas detectors and equipment used"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1910.146 – Permit-Required Confined Spaces\n• OSHA 29 CFR 1926 Subpart AA – Confined Spaces in Construction\n• Proje / saha Kapalı Alana Giriş ve LOTO prosedürleri\n• Gaz ölçüm cihazı ve kullanılan ekipmanların üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1910.146 – Permit-Required Confined Spaces\n• OSHA 29 CFR 1926 Subpart AA – Confined Spaces in Construction\n• Project / site Confined Space Entry and LOTO procedures\n• Manufacturer instructions for gas detectors and equipment used"
     );
   };
 
@@ -762,8 +762,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1910.147 – Control of Hazardous Energy (Lockout/Tagout)\n• Proje / saha LOTO prosedürü\n• Kullanılan ekipmanın üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA 29 CFR 1910.147 – Control of Hazardous Energy (Lockout/Tagout)\n• Project / site LOTO procedure\n• Manufacturer instructions for equipment used"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1910.147 – Control of Hazardous Energy (Lockout/Tagout)\n• Proje / saha LOTO prosedürü\n• Kullanılan ekipmanın üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1910.147 – Control of Hazardous Energy (Lockout/Tagout)\n• Project / site LOTO procedure\n• Manufacturer instructions for equipment used"
     );
   };
 
@@ -954,8 +954,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• Proje / saha Kaldırma Operasyonları prosedürü\n• Onaylı kaldırma planı ve ekipman sertifikaları\n• Vinç ve rigging ekipmanı üretici talimatları\n• OSHA 29 CFR 1926 Subpart CC – Cranes and Derricks in Construction"
-        : "• Sernem task-specific risk assessment\n• Project / site Lifting Operations procedure\n• Approved lifting plan and equipment certificates\n• Crane and rigging-equipment manufacturer instructions\n• OSHA 29 CFR 1926 Subpart CC – Cranes and Derricks in Construction"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha Kaldırma Operasyonları prosedürü\n• Onaylı kaldırma planı ve ekipman sertifikaları\n• Vinç ve rigging ekipmanı üretici talimatları\n• OSHA 29 CFR 1926 Subpart CC – Cranes and Derricks in Construction"
+        : "• SERNEM task-specific risk assessment\n• Project / site Lifting Operations procedure\n• Approved lifting plan and equipment certificates\n• Crane and rigging-equipment manufacturer instructions\n• OSHA 29 CFR 1926 Subpart CC – Cranes and Derricks in Construction"
     );
   };
 
@@ -1148,8 +1148,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart L – Scaffolds\n• Proje / saha İskele prosedürü\n• Onaylı iskele tasarımı / sistem konfigürasyonu gerektiğinde\n• İskele sistemi üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart L – Scaffolds\n• Project / site Scaffold procedure\n• Approved scaffold design / system configuration where required\n• Scaffold-system manufacturer instructions"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart L – Scaffolds\n• Proje / saha İskele prosedürü\n• Onaylı iskele tasarımı / sistem konfigürasyonu gerektiğinde\n• İskele sistemi üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart L – Scaffolds\n• Project / site Scaffold procedure\n• Approved scaffold design / system configuration where required\n• Scaffold-system manufacturer instructions"
     );
   };
 
@@ -1340,8 +1340,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart P – Excavations\n• Proje / saha Kazı ve Toprak İşleri prosedürü\n• Yeraltı servis çizimleri / izin kayıtları\n• Kullanılan iksa ve ekipman üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart P – Excavations\n• Project / site Excavation and Earthworks procedure\n• Underground-service drawings / permit records\n• Manufacturer instructions for protective systems and equipment used"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart P – Excavations\n• Proje / saha Kazı ve Toprak İşleri prosedürü\n• Yeraltı servis çizimleri / izin kayıtları\n• Kullanılan iksa ve ekipman üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart P – Excavations\n• Project / site Excavation and Earthworks procedure\n• Underground-service drawings / permit records\n• Manufacturer instructions for protective systems and equipment used"
     );
   };
 
@@ -1538,8 +1538,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart K – Electrical\n• OSHA 29 CFR 1926.416 – General Requirements\n• OSHA 29 CFR 1926.417 – Lockout and Tagging of Circuits\n• Proje / saha Elektrik Güvenliği ve LOTO prosedürleri\n• Kullanılan ekipman ve test cihazlarının üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart K – Electrical\n• OSHA 29 CFR 1926.416 – General Requirements\n• OSHA 29 CFR 1926.417 – Lockout and Tagging of Circuits\n• Project / site Electrical Safety and LOTO procedures\n• Manufacturer instructions for equipment and test instruments used"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart K – Electrical\n• OSHA 29 CFR 1926.416 – General Requirements\n• OSHA 29 CFR 1926.417 – Lockout and Tagging of Circuits\n• Proje / saha Elektrik Güvenliği ve LOTO prosedürleri\n• Kullanılan ekipman ve test cihazlarının üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart K – Electrical\n• OSHA 29 CFR 1926.416 – General Requirements\n• OSHA 29 CFR 1926.417 – Lockout and Tagging of Circuits\n• Project / site Electrical Safety and LOTO procedures\n• Manufacturer instructions for equipment and test instruments used"
     );
   };
 
@@ -1718,8 +1718,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• OSHA 29 CFR 1926.300 – General Requirements\n• OSHA 29 CFR 1926.303 – Abrasive Wheels and Tools\n• Proje / saha Sıcak Çalışma prosedürü\n• Taşlama / kesme ekipmanı ve disk üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• OSHA 29 CFR 1926.300 – General Requirements\n• OSHA 29 CFR 1926.303 – Abrasive Wheels and Tools\n• Project / site Hot Work procedure\n• Grinder / cutting equipment and disc manufacturer instructions"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• OSHA 29 CFR 1926.300 – General Requirements\n• OSHA 29 CFR 1926.303 – Abrasive Wheels and Tools\n• Proje / saha Sıcak Çalışma prosedürü\n• Taşlama / kesme ekipmanı ve disk üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• OSHA 29 CFR 1926.300 – General Requirements\n• OSHA 29 CFR 1926.303 – Abrasive Wheels and Tools\n• Project / site Hot Work procedure\n• Grinder / cutting equipment and disc manufacturer instructions"
     );
   };
 
@@ -1894,8 +1894,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• OSHA 29 CFR 1926 Subpart R / ilgili kaldırma gereklilikleri proje kapsamına göre\n• Proje / saha Piping, Lifting, Hot Work ve Line Opening prosedürleri\n• Kullanılan ekipman ve üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• Applicable lifting requirements according to project scope\n• Project / site Piping, Lifting, Hot Work and Line Opening procedures\n• Manufacturer instructions for equipment used"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• OSHA 29 CFR 1926 Subpart R / ilgili kaldırma gereklilikleri proje kapsamına göre\n• Proje / saha Piping, Lifting, Hot Work ve Line Opening prosedürleri\n• Kullanılan ekipman ve üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• Applicable lifting requirements according to project scope\n• Project / site Piping, Lifting, Hot Work and Line Opening procedures\n• Manufacturer instructions for equipment used"
     );
   };
 
@@ -2072,8 +2072,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• Proje / saha Hydrotest prosedürü ve onaylı test paketi\n• ASME / proje spesifikasyonları uygulanabildiği ölçüde\n• Test ekipmanı üretici talimatları\n• Basınçlı sistemler için proje izolasyon ve PTW gereklilikleri"
-        : "• Sernem task-specific risk assessment\n• Project / site Hydrotest procedure and approved test package\n• Applicable ASME / project specifications\n• Test-equipment manufacturer instructions\n• Project isolation and PTW requirements for pressurized systems"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha Hydrotest prosedürü ve onaylı test paketi\n• ASME / proje spesifikasyonları uygulanabildiği ölçüde\n• Test ekipmanı üretici talimatları\n• Basınçlı sistemler için proje izolasyon ve PTW gereklilikleri"
+        : "• SERNEM task-specific risk assessment\n• Project / site Hydrotest procedure and approved test package\n• Applicable ASME / project specifications\n• Test-equipment manufacturer instructions\n• Project isolation and PTW requirements for pressurized systems"
     );
   };
 
@@ -2216,8 +2216,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• Proje / saha Air Blowing prosedürü\n• Onaylı test / blowing planı\n• Kompresör ve basınçlı hava ekipmanı üretici talimatları\n• Proje PTW ve basınçlı sistem gereklilikleri"
-        : "• Sernem task-specific risk assessment\n• Project / site Air Blowing procedure\n• Approved test / blowing plan\n• Compressor and compressed-air equipment manufacturer instructions\n• Project PTW and pressurized-system requirements"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha Air Blowing prosedürü\n• Onaylı test / blowing planı\n• Kompresör ve basınçlı hava ekipmanı üretici talimatları\n• Proje PTW ve basınçlı sistem gereklilikleri"
+        : "• SERNEM task-specific risk assessment\n• Project / site Air Blowing procedure\n• Approved test / blowing plan\n• Compressor and compressed-air equipment manufacturer instructions\n• Project PTW and pressurized-system requirements"
     );
   };
 
@@ -2394,8 +2394,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• Kullanılan boya / kaplama ürünlerinin güncel SDS dokümanları\n• Proje / saha Painting & Coating prosedürü\n• Proje kimyasal yönetimi, yangın güvenliği ve PTW prosedürleri\n• Boya / sprey ekipmanı üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• Current SDS documentation for paint / coating products used\n• Project / site Painting & Coating procedure\n• Project chemical-management, fire-safety and PTW procedures\n• Painting / spray-equipment manufacturer instructions"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• Kullanılan boya / kaplama ürünlerinin güncel SDS dokümanları\n• Proje / saha Painting & Coating prosedürü\n• Proje kimyasal yönetimi, yangın güvenliği ve PTW prosedürleri\n• Boya / sprey ekipmanı üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• Current SDS documentation for paint / coating products used\n• Project / site Painting & Coating procedure\n• Project chemical-management, fire-safety and PTW procedures\n• Painting / spray-equipment manufacturer instructions"
     );
   };
 
@@ -2572,8 +2572,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• Proje / saha izolasyon prosedürü ve spesifikasyonları\n• Kullanılan izolasyon malzemesi üretici bilgileri / SDS\n• OSHA 29 CFR 1926 Subpart E – Personal Protective and Life Saving Equipment\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, uygulanabildiği ölçüde\n• Kullanılan el aletleri ve ekipman üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• Project / site insulation procedures and specifications\n• Manufacturer information / SDS for insulation materials used\n• OSHA 29 CFR 1926 Subpart E – Personal Protective and Life Saving Equipment\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, where applicable\n• Manufacturer instructions for tools and equipment used"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha izolasyon prosedürü ve spesifikasyonları\n• Kullanılan izolasyon malzemesi üretici bilgileri / SDS\n• OSHA 29 CFR 1926 Subpart E – Personal Protective and Life Saving Equipment\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, uygulanabildiği ölçüde\n• Kullanılan el aletleri ve ekipman üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• Project / site insulation procedures and specifications\n• Manufacturer information / SDS for insulation materials used\n• OSHA 29 CFR 1926 Subpart E – Personal Protective and Life Saving Equipment\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, where applicable\n• Manufacturer instructions for tools and equipment used"
     );
   };
 
@@ -2767,8 +2767,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• Proje / saha trafik yönetim planı\n• OSHA 29 CFR 1926 Subpart O – Motor Vehicles, Mechanized Equipment, and Marine Operations\n• OSHA 29 CFR 1926.601 – Motor Vehicles\n• OSHA 29 CFR 1926.602 – Material Handling Equipment\n• Kullanılan ekipmanın üretici kullanım talimatları"
-        : "• Sernem task-specific risk assessment\n• Project / site traffic management plan\n• OSHA 29 CFR 1926 Subpart O – Motor Vehicles, Mechanized Equipment, and Marine Operations\n• OSHA 29 CFR 1926.601 – Motor Vehicles\n• OSHA 29 CFR 1926.602 – Material Handling Equipment\n• Equipment manufacturer operating instructions"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha trafik yönetim planı\n• OSHA 29 CFR 1926 Subpart O – Motor Vehicles, Mechanized Equipment, and Marine Operations\n• OSHA 29 CFR 1926.601 – Motor Vehicles\n• OSHA 29 CFR 1926.602 – Material Handling Equipment\n• Kullanılan ekipmanın üretici kullanım talimatları"
+        : "• SERNEM task-specific risk assessment\n• Project / site traffic management plan\n• OSHA 29 CFR 1926 Subpart O – Motor Vehicles, Mechanized Equipment, and Marine Operations\n• OSHA 29 CFR 1926.601 – Motor Vehicles\n• OSHA 29 CFR 1926.602 – Material Handling Equipment\n• Equipment manufacturer operating instructions"
     );
   };
 
@@ -2910,8 +2910,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart X – Stairways and Ladders\n• OSHA 29 CFR 1926.1053 – Ladders\n• Proje / saha yüksekte çalışma ve merdiven prosedürleri\n• Merdiven üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart X – Stairways and Ladders\n• OSHA 29 CFR 1926.1053 – Ladders\n• Project / site work-at-height and ladder procedures\n• Ladder manufacturer instructions"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart X – Stairways and Ladders\n• OSHA 29 CFR 1926.1053 – Ladders\n• Proje / saha yüksekte çalışma ve merdiven prosedürleri\n• Merdiven üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart X – Stairways and Ladders\n• OSHA 29 CFR 1926.1053 – Ladders\n• Project / site work-at-height and ladder procedures\n• Ladder manufacturer instructions"
     );
   };
 
@@ -3054,8 +3054,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• Proje / saha MEWP ve yüksekte çalışma prosedürleri\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, uygulanabildiği ölçüde\n• OSHA 29 CFR 1926 Subpart M – Fall Protection, uygulanabildiği ölçüde\n• Kullanılan MEWP üretici kullanım talimatları"
-        : "• Sernem task-specific risk assessment\n• Project / site MEWP and work-at-height procedures\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, where applicable\n• OSHA 29 CFR 1926 Subpart M – Fall Protection, where applicable\n• MEWP manufacturer operating instructions"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha MEWP ve yüksekte çalışma prosedürleri\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, uygulanabildiği ölçüde\n• OSHA 29 CFR 1926 Subpart M – Fall Protection, uygulanabildiği ölçüde\n• Kullanılan MEWP üretici kullanım talimatları"
+        : "• SERNEM task-specific risk assessment\n• Project / site MEWP and work-at-height procedures\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, where applicable\n• OSHA 29 CFR 1926 Subpart M – Fall Protection, where applicable\n• MEWP manufacturer operating instructions"
     );
   };
 
@@ -3198,8 +3198,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• Proje / saha manuel taşıma ve ergonomi prosedürleri\n• Kullanılan yardımcı taşıma ekipmanı üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• Project / site manual-handling and ergonomic procedures\n• Manufacturer instructions for handling aids used"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• Proje / saha manuel taşıma ve ergonomi prosedürleri\n• Kullanılan yardımcı taşıma ekipmanı üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• Project / site manual-handling and ergonomic procedures\n• Manufacturer instructions for handling aids used"
     );
   };
 
@@ -3376,8 +3376,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• Kullanılan kimyasalların güncel SDS dokümanları\n• OSHA 29 CFR 1926.59 – Hazard Communication\n• OSHA 29 CFR 1926.55 – Gases, Vapors, Fumes, Dusts, and Mists\n• Proje / saha kimyasal yönetimi ve spill response prosedürleri\n• Kimyasal ürün üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• Current SDS documentation for chemicals used\n• OSHA 29 CFR 1926.59 – Hazard Communication\n• OSHA 29 CFR 1926.55 – Gases, Vapors, Fumes, Dusts, and Mists\n• Project / site chemical-management and spill-response procedures\n• Chemical manufacturer instructions"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• Kullanılan kimyasalların güncel SDS dokümanları\n• OSHA 29 CFR 1926.59 – Hazard Communication\n• OSHA 29 CFR 1926.55 – Gases, Vapors, Fumes, Dusts, and Mists\n• Proje / saha kimyasal yönetimi ve spill response prosedürleri\n• Kimyasal ürün üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• Current SDS documentation for chemicals used\n• OSHA 29 CFR 1926.59 – Hazard Communication\n• OSHA 29 CFR 1926.55 – Gases, Vapors, Fumes, Dusts, and Mists\n• Project / site chemical-management and spill-response procedures\n• Chemical manufacturer instructions"
     );
   };
 
@@ -3554,8 +3554,8 @@ export default function MethodStatementPage({ params }: Props) {
 
     setReferences(
       isTurkish
-        ? "• Sernem görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart J – Welding and Cutting\n• OSHA 29 CFR 1926.350 – Gas Welding and Cutting\n• OSHA 29 CFR 1910.253 – Oxygen-Fuel Gas Welding and Cutting, uygulanabildiği ölçüde\n• Proje / saha basınçlı gaz ve sıcak çalışma prosedürleri\n• Gaz tedarikçisi ve ekipman üretici talimatları"
-        : "• Sernem task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart J – Welding and Cutting\n• OSHA 29 CFR 1926.350 – Gas Welding and Cutting\n• OSHA 29 CFR 1910.253 – Oxygen-Fuel Gas Welding and Cutting, where applicable\n• Project / site compressed-gas and hot-work procedures\n• Gas supplier and equipment manufacturer instructions"
+        ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart J – Welding and Cutting\n• OSHA 29 CFR 1926.350 – Gas Welding and Cutting\n• OSHA 29 CFR 1910.253 – Oxygen-Fuel Gas Welding and Cutting, uygulanabildiği ölçüde\n• Proje / saha basınçlı gaz ve sıcak çalışma prosedürleri\n• Gaz tedarikçisi ve ekipman üretici talimatları"
+        : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart J – Welding and Cutting\n• OSHA 29 CFR 1926.350 – Gas Welding and Cutting\n• OSHA 29 CFR 1910.253 – Oxygen-Fuel Gas Welding and Cutting, where applicable\n• Project / site compressed-gas and hot-work procedures\n• Gas supplier and equipment manufacturer instructions"
     );
   };
 
@@ -3574,7 +3574,7 @@ export default function MethodStatementPage({ params }: Props) {
           <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-emerald-400">
-                Sernem Method Statement
+                SERNEM Method Statement
               </p>
 
               <h1 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">

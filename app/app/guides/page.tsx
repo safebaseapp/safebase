@@ -53,7 +53,7 @@ export default function GuidesPage() {
           </p>
 
           <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-            Sernem Safety Guides
+            SERNEM Safety Guides
           </h1>
 
           <p className="mt-5 text-lg leading-8 text-slate-400">
@@ -113,7 +113,7 @@ export default function GuidesPage() {
             </h2>
 
             <p className="mt-2 text-slate-400">
-              Ask Sernem AI and receive structured guidance using the
+              Ask SERNEM AI and receive structured guidance using the
               knowledge base.
             </p>
           </div>
@@ -122,7 +122,7 @@ export default function GuidesPage() {
             href="/ai-assistant"
             className="mt-5 inline-flex rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-500 md:mt-0"
           >
-            Ask Sernem AI →
+            Ask SERNEM AI →
           </Link>
         </section>
       </div>

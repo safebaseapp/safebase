@@ -1599,7 +1599,7 @@ export default function SimopsPlanner({ locale }: Props) {
     // =========================================================
     fillPage();
 
-    txt("Sernem", 12, 13, 17, C.white, "bold");
+    txt("SERNEM", 12, 13, 17, C.white, "bold");
     txt(
       isTurkish ? "Profesyonel HSE Platformu" : "Professional HSE Platform",
       12,
@@ -1847,7 +1847,7 @@ export default function SimopsPlanner({ locale }: Props) {
     doc.addPage();
     fillPage();
 
-    txt("Sernem", 12, 13, 15, C.white, "bold");
+    txt("SERNEM", 12, 13, 15, C.white, "bold");
     txt(
       isTurkish ? "SIMOPS DETAY VE KARAR" : "SIMOPS DETAIL & DECISION",
       12,
@@ -2109,7 +2109,7 @@ export default function SimopsPlanner({ locale }: Props) {
       doc.setPage(i);
 
       txt(
-        "Sernem • Control of Work • SIMOPS",
+        "SERNEM • Control of Work • SIMOPS",
         12,
         H - 5,
         5.5,
@@ -2128,7 +2128,7 @@ export default function SimopsPlanner({ locale }: Props) {
       projectName.trim().replace(/[^a-zA-Z0-9-_]+/g, "-") || "SIMOPS";
 
     doc.save(
-      `Sernem-SIMOPS-${safeProject}-${workDate || "Assessment"}.pdf`
+      `SERNEM-SIMOPS-${safeProject}-${workDate || "Assessment"}.pdf`
     );
   };
 

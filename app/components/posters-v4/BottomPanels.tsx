@@ -15,7 +15,7 @@ type CriticalValue = {
 
 
 /* SERNEM_LADDER_HARNESS_START */
-function SernemHarnessIcon() {
+function SERNEMHarnessIcon() {
   return (
     <svg
       viewBox="0 0 100 100"

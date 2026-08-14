@@ -80,7 +80,7 @@ export default async function LocalizedToolsPage({params}: Props) {
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-400">
-            {isTurkish ? "Sernem Araçları" : "Sernem Tools"}
+            {isTurkish ? "SERNEM Araçları" : "SERNEM Tools"}
           </p>
 
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">

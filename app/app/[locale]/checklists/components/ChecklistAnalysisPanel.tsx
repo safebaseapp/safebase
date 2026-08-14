@@ -74,8 +74,8 @@ export default function ChecklistAnalysisPanel({
             <div className="flex flex-wrap items-center gap-3">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">
                 {isTurkish
-                  ? "Sernem Profesyonel Güvenlik Değerlendirmesi"
-                  : "Sernem Professional Safety Assessment"}
+                  ? "SERNEM Profesyonel Güvenlik Değerlendirmesi"
+                  : "SERNEM Professional Safety Assessment"}
               </p>
 
               <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-blue-200 print:border-slate-300 print:bg-white print:text-black">

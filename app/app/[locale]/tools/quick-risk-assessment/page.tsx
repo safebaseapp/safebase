@@ -590,7 +590,7 @@ const duplicateRiskItem = (id: string) => {
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
-                Sernem Risk Assessment
+                SERNEM Risk Assessment
               </p>
 
               <h2 className="mt-1 text-2xl font-black text-white">
@@ -822,7 +822,7 @@ const duplicateRiskItem = (id: string) => {
 
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-400">
-                Sernem Professional Risk Library
+                SERNEM Professional Risk Library
               </p>
 
               <h2 className="mt-2 text-2xl font-black text-white">
@@ -2345,7 +2345,7 @@ const duplicateRiskItem = (id: string) => {
           }}
         >
           <span>
-            Sernem • Professional Risk Assessment
+            SERNEM • Professional Risk Assessment
           </span>
 
           <span>

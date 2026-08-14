@@ -173,7 +173,7 @@ export default async function AdminUserEditPage({
           </Link>
 
           <p className="mt-6 text-sm font-black uppercase tracking-[0.2em] text-emerald-400">
-            Sernem User Management
+            SERNEM User Management
           </p>
 
           <h1 className="mt-3 text-4xl font-black tracking-[-0.04em] sm:text-5xl">
@@ -217,7 +217,7 @@ export default async function AdminUserEditPage({
                 <p className="text-2xl font-black">
                   {profile.full_name ||
                     profile.email?.split("@")[0] ||
-                    "Sernem User"}
+                    "SERNEM User"}
                 </p>
 
                 <p className="mt-2 text-sm text-slate-400">

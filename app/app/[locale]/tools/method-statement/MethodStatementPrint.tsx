@@ -1820,7 +1820,7 @@ export default function MethodStatementPrint({
         </section>
 
         <footer className="ms-footer">
-          <span>Sernem • Professional HSE Document</span>
+          <span>SERNEM • Professional HSE Document</span>
 
           <span>
             {documentNo || "SB-MS"} • Rev. {revision || "-"}

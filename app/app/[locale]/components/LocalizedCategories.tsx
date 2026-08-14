@@ -88,7 +88,7 @@ export default function LocalizedCategories({ locale }: Props) {
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase tracking-[0.24em] text-blue-600">
-              {isTurkish ? "Sernem'i Keşfet" : "Explore Sernem"}
+              {isTurkish ? "SERNEM'i Keşfet" : "Explore SERNEM"}
             </p>
 
             <h2 className="mt-4 text-3xl font-black tracking-[-0.03em] text-slate-950 sm:text-5xl">

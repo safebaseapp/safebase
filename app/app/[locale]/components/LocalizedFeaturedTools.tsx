@@ -424,7 +424,7 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
             <div>
               <div className="flex flex-wrap items-center gap-3">
                 <span className="rounded-full bg-blue-500/15 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-blue-300">
-                  Sernem AI Copilot
+                  SERNEM AI Copilot
                 </span>
                 <span className="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-black text-emerald-300">
                   ● {isTurkish ? "Aktif" : "Live"}
@@ -439,15 +439,15 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
 
               <p className="mt-4 max-w-2xl leading-7 text-slate-400">
                 {isTurkish
-                  ? "Risk seviyesini, kritik kontrolleri, KKD gereksinimlerini, izinleri ve ilgili Sernem kaynaklarını tek cevapta görün."
-                  : "Review risk levels, critical controls, PPE, permits and related Sernem resources in one response."}
+                  ? "Risk seviyesini, kritik kontrolleri, KKD gereksinimlerini, izinleri ve ilgili SERNEM kaynaklarını tek cevapta görün."
+                  : "Review risk levels, critical controls, PPE, permits and related SERNEM resources in one response."}
               </p>
 
               <Link
                 href={`/${locale}/ai-assistant`}
                 className="group mt-7 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-4 text-sm font-black text-white transition hover:bg-blue-500"
               >
-                {isTurkish ? "AI'a Soru Sor" : "Ask Sernem AI"}
+                {isTurkish ? "AI'a Soru Sor" : "Ask SERNEM AI"}
                 <span className="transition group-hover:translate-x-1">→</span>
               </Link>
             </div>
@@ -481,8 +481,8 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
               </p>
               <h3 className="mt-3 text-3xl font-black text-slate-950 transition-colors duration-300 group-hover:text-blue-600">
                 {isTurkish
-                  ? "Sernem ile neler yapabilirsiniz?"
-                  : "What can you do with Sernem?"}
+                  ? "SERNEM ile neler yapabilirsiniz?"
+                  : "What can you do with SERNEM?"}
               </h3>
             </div>
           </div>
@@ -689,8 +689,8 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
               </h3>
               <p className="mt-3 max-w-2xl leading-7 text-slate-500">
                 {isTurkish
-                  ? "Sernem, günlük saha ihtiyaçlarını karşılayan profesyonel bir HSE çalışma platformuna dönüşüyor."
-                  : "Sernem is becoming a professional HSE workspace built for everyday site needs."}
+                  ? "SERNEM, günlük saha ihtiyaçlarını karşılayan profesyonel bir HSE çalışma platformuna dönüşüyor."
+                  : "SERNEM is becoming a professional HSE workspace built for everyday site needs."}
               </p>
             </div>
 

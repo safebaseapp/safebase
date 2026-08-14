@@ -19,7 +19,7 @@ export default function Header({ locale, poster }: Props) {
           </span>
 
           <span className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-slate-700">
-            Sernem Pro Series
+            SERNEM Pro Series
           </span>
 
           <span className="rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-emerald-700">
@@ -123,8 +123,8 @@ export default function Header({ locale, poster }: Props) {
         <div className="mt-5 flex items-center gap-4">
           <div className="rounded-xl bg-white p-2">
             <img
-              src="/posters/safebase-qr.png"
-              alt="Sernem QR"
+              src="/posters/sernem-qr.png"
+              alt="SERNEM QR"
               className="h-[78px] w-[78px]"
             />
           </div>

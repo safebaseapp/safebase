@@ -24,8 +24,8 @@ export async function generateMetadata({
 
   return {
     title: isTurkish
-      ? "Sernem | Global İSG Bilgi Platformu"
-      : "Sernem | Global HSE Knowledge Platform",
+      ? "SERNEM | Global İSG Bilgi Platformu"
+      : "SERNEM | Global HSE Knowledge Platform",
     description: isTurkish
       ? "Profesyonel İSG hesaplayıcıları, yapay zekâ asistanı, bilgi merkezi ve indirilebilir güvenlik kaynakları."
       : "Professional HSE calculators, AI assistant, knowledge base and downloadable safety resources.",

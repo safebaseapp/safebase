@@ -32,7 +32,7 @@ export default function Footer({ locale }: Props) {
           Verified • Pro Series • 2026
         </p>
 
-        <p className="mt-1 text-xs font-black">www.safebase.app</p>
+        <p className="mt-1 text-xs font-black">www.sernem.com</p>
       </div>
     </footer>
   );

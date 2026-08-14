@@ -96,7 +96,7 @@ export default function PosterLibraryClient({
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.26em] text-emerald-400">
-                Sernem Poster Library
+                SERNEM Poster Library
               </p>
 
               <h1 className="mt-5 max-w-4xl text-5xl font-black tracking-[-0.05em] sm:text-7xl">

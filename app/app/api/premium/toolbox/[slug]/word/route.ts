@@ -505,8 +505,8 @@ export async function GET(request: Request, { params }: RouteProps) {
   const footerText = stringValue(
     content.footer,
     isTurkish
-      ? "Sernem HSE Kaynağı — İzin koşulları, risk değerlendirmeleri ve saha prosedürleri önceliklidir."
-      : "Sernem HSE Resource — Permit conditions, risk assessments and site procedures take priority.",
+      ? "SERNEM HSE Kaynağı — İzin koşulları, risk değerlendirmeleri ve saha prosedürleri önceliklidir."
+      : "SERNEM HSE Resource — Permit conditions, risk assessments and site procedures take priority.",
   );
 
   const coverChildren: Array<Paragraph | Table> = [];
@@ -813,7 +813,7 @@ export async function GET(request: Request, { params }: RouteProps) {
   );
 
   const document = new Document({
-    creator: "Sernem",
+    creator: "SERNEM",
     title,
     description: subtitle,
     sections: [

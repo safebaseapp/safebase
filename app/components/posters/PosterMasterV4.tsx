@@ -586,7 +586,7 @@ export default function PosterMaster({
               </span>
 
               <span className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-slate-700">
-                Sernem Pro Series
+                SERNEM Pro Series
               </span>
             </div>
 
@@ -604,11 +604,11 @@ export default function PosterMaster({
             <div className="text-center">
               <div className="rounded-xl border-2 border-emerald-600 bg-white p-2">
                 <img
-                  src="/posters/safebase-qr.png"
+                  src="/posters/sernem-qr.png"
                   alt={
                     isTurkish
-                      ? "Sernem kaynakları QR kodu"
-                      : "Sernem resources QR code"
+                      ? "SERNEM kaynakları QR kodu"
+                      : "SERNEM resources QR code"
                   }
                   width={76}
                   height={76}
@@ -669,7 +669,7 @@ export default function PosterMaster({
 
             <div>
               <p className="text-[9px] font-black uppercase tracking-[0.18em] text-emerald-400">
-                Sernem Pre-Job Control
+                SERNEM Pre-Job Control
               </p>
 
               <h2 className="text-[17px] font-black uppercase leading-none">
@@ -745,7 +745,7 @@ export default function PosterMaster({
         <div className="overflow-hidden rounded-[18px] border-2 border-amber-500 bg-white">
           <div className="bg-amber-500 px-4 py-3 text-center text-white">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-amber-100">
-              Sernem Technical Control
+              SERNEM Technical Control
             </p>
             <h2 className="mt-0.5 text-[21px] font-black uppercase leading-none">
               {isTurkish ? "Kritik Değerler" : "Critical Values"}
@@ -882,10 +882,10 @@ export default function PosterMaster({
 
         <div className="text-right">
           <p className="text-[9px] font-black uppercase tracking-[0.16em] text-emerald-400">
-            Sernem Verified • 2026
+            SERNEM Verified • 2026
           </p>
 
-          <p className="mt-1 text-sm font-black">www.safebase.app</p>
+          <p className="mt-1 text-sm font-black">www.sernem.com</p>
         </div>
       </footer>
       </div>

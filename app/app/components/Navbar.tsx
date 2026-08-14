@@ -9,7 +9,7 @@ export default function Navbar() {
           </div>
 
           <div>
-            <div className="text-lg font-bold tracking-tight">Sernem</div>
+            <div className="text-lg font-bold tracking-tight">SERNEM</div>
             <div className="text-xs text-slate-400">
               Safety tools and resources
             </div>

@@ -39,7 +39,7 @@ export const labels = {
     print: "Print / Save PDF",
     disclaimer:
       "This checklist supports confined space inspections but does not replace applicable legislation, entry permits, risk assessments, rescue plans, exposure limits or site procedures.",
-    generated: "Generated with Sernem",
+    generated: "Generated with SERNEM",
     correctiveAction: "Corrective Action",
     correctiveActionHelp:
       "Describe the action required to eliminate or control this confined space finding.",
@@ -135,7 +135,7 @@ export const labels = {
     print: "Yazdır / PDF Kaydet",
     disclaimer:
       "Bu kontrol listesi kapalı alan denetimini destekler; geçerli mevzuatın, giriş izinlerinin, risk değerlendirmelerinin, kurtarma planlarının, maruziyet sınırlarının veya saha prosedürlerinin yerine geçmez.",
-    generated: "Sernem ile oluşturuldu",
+    generated: "SERNEM ile oluşturuldu",
     correctiveAction: "Düzeltici Faaliyet",
     correctiveActionHelp:
       "Bu kapalı alan bulgusunu ortadan kaldırmak veya kontrol altına almak için gerekli faaliyeti açıklayın.",

@@ -216,7 +216,7 @@ export const chemicalSafetyGuide: SafetyGuide = {
   ],
 
   aiText: {
-    en: "Ask Sernem AI any chemical safety question and receive guidance based on OSHA and GHS best practices.",
-    tr: "Kimyasal güvenliği hakkında Sernem AI'a soru sorarak OSHA ve GHS uygulamalarına dayalı rehberlik alın.",
+    en: "Ask SERNEM AI any chemical safety question and receive guidance based on OSHA and GHS best practices.",
+    tr: "Kimyasal güvenliği hakkında SERNEM AI'a soru sorarak OSHA ve GHS uygulamalarına dayalı rehberlik alın.",
   },
 };

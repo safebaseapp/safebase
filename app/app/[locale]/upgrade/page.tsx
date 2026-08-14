@@ -107,7 +107,7 @@ function resolveRequestedFeature(
   ) {
     return {
       icon: "🤖",
-      category: "Sernem AI",
+      category: "SERNEM AI",
       title: isTurkish ? "Premium AI Asistan" : "Premium AI Assistant",
       description: isTurkish
         ? "Gelişmiş HSE yapay zekâ özelliklerine erişmeye çalışıyorsunuz."
@@ -181,13 +181,13 @@ function resolveRequestedFeature(
 
   return {
     icon: "👑",
-    category: "Sernem Premium",
+    category: "SERNEM Premium",
     title: isTurkish
-      ? "Premium Sernem Özelliği"
-      : "Premium Sernem Feature",
+      ? "Premium SERNEM Özelliği"
+      : "Premium SERNEM Feature",
     description: isTurkish
-      ? "Premium üyelik gerektiren gelişmiş bir Sernem özelliğine erişmeye çalışıyorsunuz."
-      : "You are trying to access an advanced Sernem feature that requires Premium membership.",
+      ? "Premium üyelik gerektiren gelişmiş bir SERNEM özelliğine erişmeye çalışıyorsunuz."
+      : "You are trying to access an advanced SERNEM feature that requires Premium membership.",
   };
 }
 
@@ -309,8 +309,8 @@ export default async function UpgradePage({
 
             <p className="mt-5 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">
               {isTurkish
-                ? "Premium; gelişmiş içerikleri, profesyonel dokümanları, AI desteğini ve yeni Sernem özelliklerini tek üyelik altında bir araya getirir."
-                : "Premium brings advanced content, professional documents, AI support and upcoming Sernem capabilities together in one membership."}
+                ? "Premium; gelişmiş içerikleri, profesyonel dokümanları, AI desteğini ve yeni SERNEM özelliklerini tek üyelik altında bir araya getirir."
+                : "Premium brings advanced content, professional documents, AI support and upcoming SERNEM capabilities together in one membership."}
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">

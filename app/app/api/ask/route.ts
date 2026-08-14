@@ -183,7 +183,7 @@ Rules:
 - Use null for riskReason only when no risk judgement is appropriate.
 - Use UNDETERMINED when the available information is insufficient.
 - Do not invent standards, limits, measurements or legal requirements.
-- Base all technical content only on the supplied Sernem Knowledge Base.
+- Base all technical content only on the supplied SERNEM Knowledge Base.
 - Write all user-facing values in the requested response language.
 `
         : "";
@@ -213,7 +213,7 @@ Yanıt dili kuralları:
 ## Önemli Notlar
 
 - Bilgi mevcut değilse yalnızca şu mesajı ver:
-"Bu bilgi mevcut Sernem Bilgi Tabanında bulunmuyor."
+"Bu bilgi mevcut SERNEM Bilgi Tabanında bulunmuyor."
 `
         : `
 Language rules:
@@ -235,7 +235,7 @@ Do not simply repeat the hazards.
 
 ## Best Practices
 
-## Sernem Quick Checklist
+## SERNEM Quick Checklist
 
 Generate a short checklist adapted to the user's scenario.
 
@@ -262,7 +262,7 @@ Only include items relevant to the described work.
 ## Important Notes
 
 - If the information is unavailable, use only this message:
-"This information is not available in the current Sernem Knowledge Base."
+"This information is not available in the current SERNEM Knowledge Base."
 `;
 
     const response = await fetch(
@@ -286,9 +286,9 @@ stream: responseMode !== "structured",
           messages: [
             {
               role: "system",
-              content: `You are Sernem AI, an experienced Senior HSE Manager and technical safety advisor.
+              content: `You are SERNEM AI, an experienced Senior HSE Manager and technical safety advisor.
 
-Your purpose is to provide practical, site-ready HSE guidance based strictly on the supplied Sernem Knowledge Base.
+Your purpose is to provide practical, site-ready HSE guidance based strictly on the supplied SERNEM Knowledge Base.
 
 ===== SERNEM KNOWLEDGE =====
 
@@ -300,7 +300,7 @@ ${languageInstruction}
 
 ===== PROFESSIONAL RESPONSE RULES =====
 
-- Use the supplied Sernem Knowledge Base as the only technical source.
+- Use the supplied SERNEM Knowledge Base as the only technical source.
 - Do not use outside knowledge or unsupported assumptions.
 - Review every matched guide before preparing the response.
 - When several matched guides are relevant, combine their controls into one coherent answer.
@@ -380,7 +380,7 @@ Do not calculate or invent a numerical risk score unless likelihood and severity
 
 ## Applicable Standards
 
-## Sernem Recommendation
+## SERNEM Recommendation
 
 Do not force sections that are irrelevant or unsupported by the supplied knowledge.
 
@@ -441,8 +441,8 @@ When missing details could materially change the safety guidance:
         {
           answer:
             locale === "tr"
-              ? "Sernem AI şu anda yanıt oluşturamadı. Lütfen tekrar deneyin."
-              : "Sernem AI could not generate a response. Please try again.",
+              ? "SERNEM AI şu anda yanıt oluşturamadı. Lütfen tekrar deneyin."
+              : "SERNEM AI could not generate a response. Please try again.",
           sources: filesToUse,
         },
         { status: 502 },
@@ -465,7 +465,7 @@ When missing details could materially change the safety guidance:
 
       if (!parsedCopilot.success) {
         console.error(
-          "Sernem structured Copilot parse error:",
+          "SERNEM structured Copilot parse error:",
           parsedCopilot.error,
           rawContent,
         );
@@ -499,8 +499,8 @@ When missing details could materially change the safety guidance:
         {
           answer:
             locale === "tr"
-              ? "Sernem AI şu anda yanıt oluşturamadı. Lütfen tekrar deneyin."
-              : "Sernem AI could not generate a response. Please try again.",
+              ? "SERNEM AI şu anda yanıt oluşturamadı. Lütfen tekrar deneyin."
+              : "SERNEM AI could not generate a response. Please try again.",
           sources: filesToUse,
         },
         { status: 502 },
@@ -563,7 +563,7 @@ When missing details could materially change the safety guidance:
 
           controller.close();
         } catch (streamError) {
-          console.error("Sernem streaming error:", streamError);
+          console.error("SERNEM streaming error:", streamError);
           controller.error(streamError);
         } finally {
           upstreamReader.releaseLock();
@@ -577,15 +577,15 @@ When missing details could materially change the safety guidance:
         "Content-Type": "text/plain; charset=utf-8",
         "Cache-Control": "no-cache, no-transform",
         "X-Content-Type-Options": "nosniff",
-        "X-Sernem-Sources": encodeURIComponent(JSON.stringify(responseSources)),
+        "X-SERNEM-Sources": encodeURIComponent(JSON.stringify(responseSources)),
       },
     });
   } catch (error) {
-    console.error("Sernem AI API error:", error);
+    console.error("SERNEM AI API error:", error);
 
     return Response.json(
       {
-        answer: "Sernem AI could not process the request.",
+        answer: "SERNEM AI could not process the request.",
         sources: [],
       },
       { status: 500 },

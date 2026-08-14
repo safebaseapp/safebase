@@ -150,7 +150,7 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.4fr_0.6fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-400">
-              {isTurkish ? "Sernem Saha Araçları" : "Sernem Field Tools"}
+              {isTurkish ? "SERNEM Saha Araçları" : "SERNEM Field Tools"}
             </p>
 
             <h1 className="mt-5 max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
@@ -204,8 +204,8 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
             <div className="mt-8 border-t border-slate-800 pt-6">
               <p className="text-sm leading-6 text-slate-400">
                 {isTurkish
-                  ? "Sernem denetim arşivi geliştikçe yeni kontrol listeleri düzenli olarak eklenecektir."
-                  : "New checklists will be added regularly as the Sernem inspection library expands."}
+                  ? "SERNEM denetim arşivi geliştikçe yeni kontrol listeleri düzenli olarak eklenecektir."
+                  : "New checklists will be added regularly as the SERNEM inspection library expands."}
               </p>
             </div>
           </div>

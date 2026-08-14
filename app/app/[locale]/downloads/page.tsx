@@ -70,8 +70,8 @@ export default async function DownloadsPage({
 
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-400">
               {isTurkish
-                ? "Sernem indirilebilir kaynakları geçici olarak devre dışı bırakılmıştır. Özellik yeniden etkinleştirildiğinde HSE belgelerine ve kaynaklarına tekrar erişebilirsiniz."
-                : "Sernem downloadable resources have been temporarily disabled. You will be able to access HSE documents and resources again when the feature is enabled."}
+                ? "SERNEM indirilebilir kaynakları geçici olarak devre dışı bırakılmıştır. Özellik yeniden etkinleştirildiğinde HSE belgelerine ve kaynaklarına tekrar erişebilirsiniz."
+                : "SERNEM downloadable resources have been temporarily disabled. You will be able to access HSE documents and resources again when the feature is enabled."}
             </p>
 
             <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/10 px-4 py-2 text-sm font-black text-amber-300">

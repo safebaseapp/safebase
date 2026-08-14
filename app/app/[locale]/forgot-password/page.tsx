@@ -29,7 +29,7 @@ export default async function ForgotPasswordPage({ params }: Props) {
 
         <section className="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl shadow-black/20 sm:p-10">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-400">
-            {isTurkish ? "Sernem hesabı" : "Sernem account"}
+            {isTurkish ? "SERNEM hesabı" : "SERNEM account"}
           </p>
 
           <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">

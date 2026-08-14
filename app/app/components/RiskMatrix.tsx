@@ -126,7 +126,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
     const W = doc.internal.pageSize.getWidth();
     const H = doc.internal.pageSize.getHeight();
 
-    // Sernem PDF Unicode fonts
+    // SERNEM PDF Unicode fonts
     const fontToBase64 = async (url: string) => {
       const response = await fetch(url);
 
@@ -154,17 +154,17 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
       fontToBase64("/fonts/DejaVuSans-Bold.ttf"),
     ]);
 
-    doc.addFileToVFS("Sernem-Regular.ttf", regularFont);
+    doc.addFileToVFS("SERNEM-Regular.ttf", regularFont);
     doc.addFont(
-      "Sernem-Regular.ttf",
-      "SernemPDF",
+      "SERNEM-Regular.ttf",
+      "SERNEMPDF",
       "normal"
     );
 
-    doc.addFileToVFS("Sernem-Bold.ttf", boldFont);
+    doc.addFileToVFS("SERNEM-Bold.ttf", boldFont);
     doc.addFont(
-      "Sernem-Bold.ttf",
-      "SernemPDF",
+      "SERNEM-Bold.ttf",
+      "SERNEMPDF",
       "bold"
     );
 
@@ -200,7 +200,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
       bold = false,
       align: "left" | "center" | "right" = "left"
     ) => {
-      doc.setFont("SernemPDF", bold ? "bold" : "normal");
+      doc.setFont("SERNEMPDF", bold ? "bold" : "normal");
       doc.setFontSize(size);
       doc.setTextColor(...color);
       doc.text(safe(value), x, y, { align });
@@ -326,7 +326,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
 
     const controlLines = doc.splitTextToSize(safe(controls), 170);
 
-    doc.setFont("SernemPDF", "normal");
+    doc.setFont("SERNEMPDF", "normal");
     doc.setFontSize(6.8);
     doc.setTextColor(...C.muted);
     doc.text(controlLines.slice(0, 3), 19, 129);
@@ -455,10 +455,10 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
     doc.setDrawColor(...C.border);
     doc.line(14, H - 14, 196, H - 14);
 
-    text("Sernem | Professional HSE Platform | Risk Matrix", 14, H - 8, 5.5, C.muted);
+    text("SERNEM | Professional HSE Platform | Risk Matrix", 14, H - 8, 5.5, C.muted);
     text("Page 1 / 1", 196, H - 8, 5.5, C.muted, false, "right");
 
-    doc.save(`Sernem-Risk-Matrix-${score}-to-${residualScore}.pdf`);
+    doc.save(`SERNEM-Risk-Matrix-${score}-to-${residualScore}.pdf`);
   };
 
 const recommendations = {

@@ -235,8 +235,8 @@ export default async function ContentManagementPage({
 
               <p className="mt-3 max-w-3xl text-base leading-7 text-slate-400">
                 {isTurkish
-                  ? "Sernem içeriklerini yayın, görünürlük, erişim ve öne çıkarma seviyesinde yönetin."
-                  : "Manage Sernem content publishing, visibility, access and featured status."}
+                  ? "SERNEM içeriklerini yayın, görünürlük, erişim ve öne çıkarma seviyesinde yönetin."
+                  : "Manage SERNEM content publishing, visibility, access and featured status."}
               </p>
             </div>
 

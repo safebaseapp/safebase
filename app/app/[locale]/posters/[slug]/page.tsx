@@ -164,7 +164,7 @@ export default async function PosterDetailPage({
 
           <div className="mt-5 text-center">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-600">
-              {selectedPoster.code} • Sernem Pro Series
+              {selectedPoster.code} • SERNEM Pro Series
             </p>
 
             <h1 className="mt-3 text-3xl font-black text-slate-950">

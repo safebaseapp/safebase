@@ -631,8 +631,8 @@ export default function AccountPage({ params }: Props) {
                     </h3>
                     <p className="mt-1 text-sm text-slate-400">
                       {isTurkish
-                        ? "Sernem profilinizi temsil edecek avatarı seçin."
-                        : "Choose an avatar to represent your Sernem profile."}
+                        ? "SERNEM profilinizi temsil edecek avatarı seçin."
+                        : "Choose an avatar to represent your SERNEM profile."}
                     </p>
                   </div>
 
@@ -754,8 +754,8 @@ export default function AccountPage({ params }: Props) {
                     </h3>
                     <p className="mt-1 text-sm text-slate-400">
                       {isTurkish
-                        ? "Sernem arayüz dilinizi seçin."
-                        : "Choose your Sernem interface language."}
+                        ? "SERNEM arayüz dilinizi seçin."
+                        : "Choose your SERNEM interface language."}
                     </p>
                   </div>
 
@@ -842,8 +842,8 @@ export default function AccountPage({ params }: Props) {
 
                   <p className="mt-2 text-sm text-slate-400">
                     {isTurkish
-                      ? "Sernem çalışma alanınızdaki kişisel profil kimliğiniz."
-                      : "Your personal profile identity across the Sernem workspace."}
+                      ? "SERNEM çalışma alanınızdaki kişisel profil kimliğiniz."
+                      : "Your personal profile identity across the SERNEM workspace."}
                   </p>
 
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -925,7 +925,7 @@ export default function AccountPage({ params }: Props) {
                   ? [
                       isTurkish ? "Premium HSE kaynakları" : "Premium HSE resources",
                       isTurkish ? "Premium doküman indirmeleri" : "Premium document downloads",
-                      isTurkish ? "Gelişmiş Sernem özellikleri" : "Advanced Sernem features",
+                      isTurkish ? "Gelişmiş SERNEM özellikleri" : "Advanced SERNEM features",
                     ]
                   : [
                       isTurkish ? "Ücretsiz HSE araçları" : "Free HSE tools",
@@ -956,8 +956,8 @@ export default function AccountPage({ params }: Props) {
               {isOwner && (
                 <div className="mt-5 rounded-xl border border-blue-400/15 bg-blue-500/[0.06] px-4 py-3 text-sm text-blue-300">
                   {isTurkish
-                    ? "Sernem sahibi hesabı: yönetici ve Premium erişimleri aktiftir."
-                    : "Sernem owner account: administrator and Premium access are active."}
+                    ? "SERNEM sahibi hesabı: yönetici ve Premium erişimleri aktiftir."
+                    : "SERNEM owner account: administrator and Premium access are active."}
                 </div>
               )}
             </section>

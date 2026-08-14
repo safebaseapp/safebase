@@ -155,13 +155,13 @@ function copilotToMarkdown(
   );
 
   addList(
-    isTurkish ? "Sernem Hızlı Kontrol Listesi" : "Sernem Quick Checklist",
+    isTurkish ? "SERNEM Hızlı Kontrol Listesi" : "SERNEM Quick Checklist",
     copilot.quickChecklist.map((item) => `☐ ${item}`),
   );
 
   if (copilot.recommendation) {
     sections.push(
-      `## ${isTurkish ? "Sernem Önerisi" : "Sernem Recommendation"}\n\n${copilot.recommendation}`,
+      `## ${isTurkish ? "SERNEM Önerisi" : "SERNEM Recommendation"}\n\n${copilot.recommendation}`,
     );
   }
 
@@ -284,8 +284,8 @@ export default function AIAssistantPage() {
 
       if (!response.ok) {
         const errorPayload = await response.text();
-        console.error("Sernem structured response error:", errorPayload);
-        throw new Error("Sernem AI structured request failed.");
+        console.error("SERNEM structured response error:", errorPayload);
+        throw new Error("SERNEM AI structured request failed.");
       }
 
       const payload = (await response.json()) as {
@@ -294,7 +294,7 @@ export default function AIAssistantPage() {
       };
 
       if (!payload.data) {
-        throw new Error("Sernem Copilot data is unavailable.");
+        throw new Error("SERNEM Copilot data is unavailable.");
       }
 
       const copilot = payload.data;
@@ -317,8 +317,8 @@ export default function AIAssistantPage() {
 
       setError(
         isTurkish
-          ? "Sernem AI isteğinizi işleyemedi. Lütfen tekrar deneyin."
-          : "Sernem AI could not process your request. Please try again.",
+          ? "SERNEM AI isteğinizi işleyemedi. Lütfen tekrar deneyin."
+          : "SERNEM AI could not process your request. Please try again.",
       );
     } finally {
       setLoading(false);
@@ -373,14 +373,14 @@ export default function AIAssistantPage() {
           >
             <Image
               src="/brand/safebase-mark.svg"
-              alt="Sernem"
+              alt="SERNEM"
               width={46}
               height={46}
               className="h-11 w-11"
             />
 
             <div>
-              <p className="font-black text-white">Sernem AI</p>
+              <p className="font-black text-white">SERNEM AI</p>
               <p className="text-xs text-slate-500">
                 {isTurkish ? "HSE Bilgi Asistanı" : "HSE Knowledge Assistant"}
               </p>
@@ -427,8 +427,8 @@ export default function AIAssistantPage() {
 
             <p className="mt-2 text-xs leading-5 text-slate-500">
               {isTurkish
-                ? "Yanıtlar Sernem Bilgi Tabanındaki mevcut kaynaklara dayanır."
-                : "Responses are based on the available Sernem Knowledge Base."}
+                ? "Yanıtlar SERNEM Bilgi Tabanındaki mevcut kaynaklara dayanır."
+                : "Responses are based on the available SERNEM Knowledge Base."}
             </p>
           </div>
         </aside>
@@ -446,7 +446,7 @@ export default function AIAssistantPage() {
           <header className="relative z-10 flex min-h-20 items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 backdrop-blur-xl sm:px-7">
             <div>
               <h1 className="text-lg font-black sm:text-xl">
-                {isTurkish ? "Sernem AI Asistanı" : "Sernem AI Assistant"}
+                {isTurkish ? "SERNEM AI Asistanı" : "SERNEM AI Assistant"}
               </h1>
 
               <p className="mt-1 hidden text-sm text-slate-500 sm:block">
@@ -569,7 +569,7 @@ export default function AIAssistantPage() {
                               ? isTurkish
                                 ? "Siz"
                                 : "You"
-                              : "Sernem AI"}
+                              : "SERNEM AI"}
                           </p>
 
                           {message.role === "assistant" && (
@@ -733,8 +733,8 @@ export default function AIAssistantPage() {
                                 <div>
                                   <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-400">
                                     {isTurkish
-                                      ? "İlgili Sernem Kaynakları"
-                                      : "Related Sernem Resources"}
+                                      ? "İlgili SERNEM Kaynakları"
+                                      : "Related SERNEM Resources"}
                                   </p>
 
                                   <p className="mt-2 text-sm leading-6 text-slate-500">
@@ -745,7 +745,7 @@ export default function AIAssistantPage() {
                                 </div>
 
                                 <span className="w-fit rounded-full border border-emerald-400/15 bg-emerald-400/[0.07] px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-emerald-300">
-                                  Sernem Copilot
+                                  SERNEM Copilot
                                 </span>
                               </div>
 
@@ -832,7 +832,7 @@ export default function AIAssistantPage() {
 
                       <div className="rounded-3xl border border-white/10 bg-white/[0.055] px-6 py-5">
                         <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-300">
-                          Sernem AI
+                          SERNEM AI
                         </p>
 
                         <div className="mt-4 flex items-center gap-2">
@@ -882,8 +882,8 @@ export default function AIAssistantPage() {
                     className="max-h-36 min-h-12 flex-1 resize-none bg-transparent px-3 py-3 text-white outline-none placeholder:text-slate-600 disabled:cursor-not-allowed"
                     placeholder={
                       isTurkish
-                        ? "Sernem AI'a bir HSE sorusu sorun..."
-                        : "Ask Sernem AI an HSE question..."
+                        ? "SERNEM AI'a bir HSE sorusu sorun..."
+                        : "Ask SERNEM AI an HSE question..."
                     }
                   />
 

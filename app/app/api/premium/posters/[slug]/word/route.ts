@@ -627,8 +627,8 @@ export async function GET(
       children: [
         new TextRun({
           text: isTurkish
-            ? "Sernem Profesyonel HSE Poster Kütüphanesi"
-            : "Sernem Professional HSE Poster Library",
+            ? "SERNEM Profesyonel HSE Poster Kütüphanesi"
+            : "SERNEM Professional HSE Poster Library",
           bold: true,
           color: "64748B",
           size: 14,
@@ -638,7 +638,7 @@ export async function GET(
   );
 
   const document = new Document({
-    creator: "Sernem",
+    creator: "SERNEM",
     title,
     description: subtitle,
     sections: [
@@ -672,7 +672,7 @@ export async function GET(
                 },
                 children: [
                   new TextRun({
-                    text: "Sernem • ",
+                    text: "SERNEM • ",
                     color: "64748B",
                     size: 14,
                   }),

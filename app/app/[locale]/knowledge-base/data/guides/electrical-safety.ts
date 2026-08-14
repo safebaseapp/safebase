@@ -207,7 +207,7 @@ export const electricalSafetyGuide: SafetyGuide = {
   ],
 
   aiText: {
-    en: "Ask Sernem AI any electrical safety question and receive guidance based on OSHA and NFPA best practices.",
-    tr: "Elektrik güvenliği hakkında Sernem AI'a soru sorarak OSHA ve NFPA uygulamalarına dayalı rehberlik alın.",
+    en: "Ask SERNEM AI any electrical safety question and receive guidance based on OSHA and NFPA best practices.",
+    tr: "Elektrik güvenliği hakkında SERNEM AI'a soru sorarak OSHA ve NFPA uygulamalarına dayalı rehberlik alın.",
   },
 };

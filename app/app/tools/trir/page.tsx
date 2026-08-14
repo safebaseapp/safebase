@@ -220,17 +220,17 @@ export default function TRIRPage() {
       fontToBase64("/fonts/DejaVuSans-Bold.ttf"),
     ]);
 
-    doc.addFileToVFS("Sernem-Regular.ttf", regularFont);
+    doc.addFileToVFS("SERNEM-Regular.ttf", regularFont);
     doc.addFont(
-      "Sernem-Regular.ttf",
-      "SernemPDF",
+      "SERNEM-Regular.ttf",
+      "SERNEMPDF",
       "normal"
     );
 
-    doc.addFileToVFS("Sernem-Bold.ttf", boldFont);
+    doc.addFileToVFS("SERNEM-Bold.ttf", boldFont);
     doc.addFont(
-      "Sernem-Bold.ttf",
-      "SernemPDF",
+      "SERNEM-Bold.ttf",
+      "SERNEMPDF",
       "bold"
     );
 
@@ -256,7 +256,7 @@ export default function TRIRPage() {
 
     const setFont = (bold = false) => {
       doc.setFont(
-        "SernemPDF",
+        "SERNEMPDF",
         bold ? "bold" : "normal"
       );
     };
@@ -382,7 +382,7 @@ export default function TRIRPage() {
 
     write("S", 14, 10.6, 5, C.white, true, "center");
 
-    write("Sernem", 21, 8.6, 7.4, C.white, true);
+    write("SERNEM", 21, 8.6, 7.4, C.white, true);
     write(
       isTurkish
         ? "Profesyonel HSE Platformu"
@@ -1241,7 +1241,7 @@ export default function TRIRPage() {
     );
 
     write(
-      "Sernem",
+      "SERNEM",
       W - 16,
       disclaimerY + 9,
       6,
@@ -1264,7 +1264,7 @@ export default function TRIRPage() {
     doc.line(10, 285, W - 10, 285);
 
     write(
-      "Sernem • TRIR Calculator",
+      "SERNEM • TRIR Calculator",
       10,
       290,
       3.1,
@@ -1292,7 +1292,7 @@ export default function TRIRPage() {
     );
 
     doc.save(
-      `Sernem-TRIR-Dashboard-${resultText.replace(".", "-")}.pdf`
+      `SERNEM-TRIR-Dashboard-${resultText.replace(".", "-")}.pdf`
     );
   };
 
@@ -1744,8 +1744,8 @@ export default function TRIRPage() {
         </section>
 
         <footer className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <span>◈ Sernem TRIR Calculator</span>
-          <span>© 2026 Sernem</span>
+          <span>◈ SERNEM TRIR Calculator</span>
+          <span>© 2026 SERNEM</span>
           <span>
             {isTurkish
               ? "Güvenli • Doğru • Profesyonel"

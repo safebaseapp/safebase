@@ -231,8 +231,8 @@ export default async function MembershipsPage({ params }: Props) {
                   ? "Premium doküman indirmeleri"
                   : "Premium document downloads",
                 isTurkish
-                  ? "Gelişmiş Sernem özellikleri"
-                  : "Advanced Sernem features",
+                  ? "Gelişmiş SERNEM özellikleri"
+                  : "Advanced SERNEM features",
               ].map((item) => (
                 <div
                   key={item}

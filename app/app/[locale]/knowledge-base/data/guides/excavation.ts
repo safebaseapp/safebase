@@ -199,7 +199,7 @@ export const excavationGuide: SafetyGuide = {
   ],
 
   aiText: {
-    en: "Ask Sernem AI an excavation or trenching question and receive practical guidance based on the knowledge base.",
-    tr: "Kazı veya hendek çalışmaları konusunda Sernem AI'a soru sor ve bilgi tabanına dayalı pratik rehberlik al.",
+    en: "Ask SERNEM AI an excavation or trenching question and receive practical guidance based on the knowledge base.",
+    tr: "Kazı veya hendek çalışmaları konusunda SERNEM AI'a soru sor ve bilgi tabanına dayalı pratik rehberlik al.",
   },
 };

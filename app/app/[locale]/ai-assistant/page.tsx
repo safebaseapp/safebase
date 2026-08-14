@@ -85,8 +85,8 @@ export default async function AIAssistantPage({
 
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-400">
               {isTurkish
-                ? "Sernem AI Asistan özelliği geçici olarak devre dışı bırakılmıştır. Özellik yeniden etkinleştirildiğinde mevcut hesabınızla kullanmaya devam edebilirsiniz."
-                : "The Sernem AI Assistant has been temporarily disabled. You can continue using it with your existing account when the feature is enabled again."}
+                ? "SERNEM AI Asistan özelliği geçici olarak devre dışı bırakılmıştır. Özellik yeniden etkinleştirildiğinde mevcut hesabınızla kullanmaya devam edebilirsiniz."
+                : "The SERNEM AI Assistant has been temporarily disabled. You can continue using it with your existing account when the feature is enabled again."}
             </p>
 
             <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/10 px-4 py-2 text-sm font-black text-amber-300">

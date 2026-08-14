@@ -29,7 +29,7 @@ export default async function RegisterPage({ params }: Props) {
               </div>
 
               <div>
-                <div className="font-bold">Sernem</div>
+                <div className="font-bold">SERNEM</div>
                 <div className="text-xs text-slate-400">
                   {isTurkish
                     ? "Profesyonel HSE çalışma alanı"
@@ -81,7 +81,7 @@ export default async function RegisterPage({ params }: Props) {
 
             <div className="mt-7">
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-blue-400">
-                {isTurkish ? "Sernem'e katıl" : "Join Sernem"}
+                {isTurkish ? "SERNEM'e katıl" : "Join SERNEM"}
               </p>
 
               <h1 className="mt-3 text-3xl font-bold">

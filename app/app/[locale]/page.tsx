@@ -133,7 +133,7 @@ export default async function LocalizedHomePage({ params }: Props) {
 
     exploreTools: isTurkish ? "Araçları Keşfet" : "Explore Tools",
 
-    askAi: isTurkish ? "Sernem AI'a Sor" : "Ask Sernem AI",
+    askAi: isTurkish ? "SERNEM AI'a Sor" : "Ask SERNEM AI",
 
     platformLabel: isTurkish
       ? "HSE profesyonelleri için geliştirildi"
@@ -150,8 +150,8 @@ export default async function LocalizedHomePage({ params }: Props) {
       : "Get fast answers to real safety questions",
 
     aiCardDescription: isTurkish
-      ? "KKD, sıcak çalışma, kapalı alan, LOTO ve daha fazla HSE konusu hakkında Sernem AI'a soru sor."
-      : "Ask Sernem AI about PPE, hot work, confined space, LOTO and more HSE topics.",
+      ? "KKD, sıcak çalışma, kapalı alan, LOTO ve daha fazla HSE konusu hakkında SERNEM AI'a soru sor."
+      : "Ask SERNEM AI about PPE, hot work, confined space, LOTO and more HSE topics.",
 
     aiCardButton: isTurkish ? "AI Asistanını Aç" : "Open AI Assistant",
 
@@ -159,7 +159,7 @@ export default async function LocalizedHomePage({ params }: Props) {
       ? "Tek platform. Daha güvenli işyerleri."
       : "One platform. Safer workplaces.",
 
-    whyEyebrow: isTurkish ? "Neden Sernem?" : "Why Sernem?",
+    whyEyebrow: isTurkish ? "Neden SERNEM?" : "Why SERNEM?",
 
     whyTitle: isTurkish
       ? "Tüm HSE araçları tek platformda"
@@ -167,9 +167,9 @@ export default async function LocalizedHomePage({ params }: Props) {
 
     whyDescription: isTurkish
       ? "SERNEM; yapay zekâyı, hesaplayıcıları, rehberleri, kontrol listelerini ve kaynakları tek çalışma alanında birleştirir."
-      : "Sernem brings AI, calculators, guidance, checklists and resources together in one focused workspace.",
+      : "SERNEM brings AI, calculators, guidance, checklists and resources together in one focused workspace.",
 
-    statsEyebrow: isTurkish ? "Sernem Rakamlarla" : "Sernem in Numbers",
+    statsEyebrow: isTurkish ? "SERNEM Rakamlarla" : "SERNEM in Numbers",
 
     statsTitle: isTurkish
       ? "Büyümeye hazır sağlam bir temel"
@@ -199,7 +199,7 @@ export default async function LocalizedHomePage({ params }: Props) {
         : "Generic AI\nSource-Aware AI",
       description: isTurkish
         ? "AI cevaplarının kullandığı HSE kaynaklarını da görün."
-        : "Sernem AI uses the available HSE knowledge base and shows the sources used for its response.",
+        : "SERNEM AI uses the available HSE knowledge base and shows the sources used for its response.",
     },
     {
       icon: "⚡",
@@ -331,7 +331,7 @@ export default async function LocalizedHomePage({ params }: Props) {
               <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-400 sm:text-[15px]">
                 {isTurkish
                   ? "SERNEM; günlük iş güvenliği çalışmalarını daha hızlı, tutarlı ve profesyonel hale getirmek için geliştirilen modern bir HSE çalışma alanıdır."
-                  : "Sernem is a modern HSE workspace built to make everyday safety work faster, more consistent and more professional."}
+                  : "SERNEM is a modern HSE workspace built to make everyday safety work faster, more consistent and more professional."}
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -578,8 +578,8 @@ export default async function LocalizedHomePage({ params }: Props) {
 
             <p className="max-w-xl pb-1 text-[15px] leading-7 text-slate-400 sm:text-base sm:leading-7">
               {isTurkish
-                ? "Analizden dokümantasyona, saha kontrollerinden profesyonel rehberliğe kadar Sernem'in temel araçlarına tek çalışma alanından ulaşın."
-                : "From assessments and documentation to field controls and professional guidance, access the core Sernem toolkit from one connected workspace."}
+                ? "Analizden dokümantasyona, saha kontrollerinden profesyonel rehberliğe kadar SERNEM'in temel araçlarına tek çalışma alanından ulaşın."
+                : "From assessments and documentation to field controls and professional guidance, access the core SERNEM toolkit from one connected workspace."}
             </p>
           </div>
 
@@ -607,7 +607,7 @@ export default async function LocalizedHomePage({ params }: Props) {
               },
               {
                 icon: Bot,
-                title: isTurkish ? "Sernem AI" : "Sernem AI",
+                title: isTurkish ? "SERNEM AI" : "SERNEM AI",
                 description: isTurkish
                   ? "Saha sorularınızı HSE odaklı bilgi tabanıyla analiz edin ve ilgili kaynaklara ulaşın."
                   : "Analyze field questions with an HSE-focused knowledge base and access relevant sources.",
@@ -705,7 +705,7 @@ export default async function LocalizedHomePage({ params }: Props) {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-black uppercase tracking-[0.24em] text-emerald-400">
-              {isTurkish ? "Neden Sernem?" : "Why Sernem?"}
+              {isTurkish ? "Neden SERNEM?" : "Why SERNEM?"}
             </p>
 
             <h2 className="mt-4 text-3xl font-black tracking-[-0.04em] text-white sm:text-5xl">
@@ -826,7 +826,7 @@ export default async function LocalizedHomePage({ params }: Props) {
 
               <div className="relative">
                 <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-400">
-                  {isTurkish ? "Sernem'i Keşfet" : "Explore Sernem"}
+                  {isTurkish ? "SERNEM'i Keşfet" : "Explore SERNEM"}
                 </p>
 
                 <h3 className="mt-4 max-w-xl text-3xl font-black leading-tight tracking-[-0.035em] text-white sm:text-3xl">
@@ -837,8 +837,8 @@ export default async function LocalizedHomePage({ params }: Props) {
 
                 <p className="mt-5 max-w-xl leading-8 text-slate-300">
                   {isTurkish
-                    ? "Risk analizinden Method Statement'a, hesaplayıcılardan saha kaynaklarına kadar Sernem araçlarını keşfedin."
-                    : "Explore Sernem tools from risk assessments and Method Statements to calculators and field-ready resources."}
+                    ? "Risk analizinden Method Statement'a, hesaplayıcılardan saha kaynaklarına kadar SERNEM araçlarını keşfedin."
+                    : "Explore SERNEM tools from risk assessments and Method Statements to calculators and field-ready resources."}
                 </p>
 
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">

@@ -111,7 +111,7 @@ export function parseAssessmentResponse(
 
   if (parsed.finalRecommendation !== expectedDecision) {
     throw new Error(
-      "AI final recommendation does not match the Sernem rule-engine decision.",
+      "AI final recommendation does not match the SERNEM rule-engine decision.",
     );
   }
 
