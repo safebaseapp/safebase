@@ -115,353 +115,243 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
     () => getRiskLevel(residualScore, locale),
     [residualScore, locale]
   );
-  // RISK MATRIX PDF V3 FINAL
-  const downloadPDF = async () => {
-    const doc = new jsPDF({
-      orientation: "portrait",
-      unit: "mm",
-      format: "a4",
-    });
+ const downloadPDF = () => {
+  const doc = new jsPDF();
 
-    const W = doc.internal.pageSize.getWidth();
-    const H = doc.internal.pageSize.getHeight();
+  const likelihoodLabel =
+    currentLikelihoodOptions.find((item) => item.value === likelihood)?.label ?? "";
 
-    // SafeBase PDF Unicode fonts
-    const fontToBase64 = async (url: string) => {
-      const response = await fetch(url);
+  const severityLabel =
+    currentSeverityOptions.find((item) => item.value === severity)?.label ?? "";
 
-      if (!response.ok) {
-        throw new Error(`PDF font could not be loaded: ${url}`);
-      }
+  const actions: string[] =
+    locale === "tr"
+      ? recommendations.tr[
+          risk.label as keyof typeof recommendations.tr
+        ] ?? []
+      : recommendations.en[
+          risk.label as keyof typeof recommendations.en
+        ] ?? [];
 
-      const buffer = await response.arrayBuffer();
-      const bytes = new Uint8Array(buffer);
+  const today = new Date().toLocaleDateString("en-GB");
 
-      let binary = "";
-      const chunkSize = 0x8000;
+  doc.setFillColor(15, 23, 42);
+  doc.rect(0, 0, 210, 34, "F");
 
-      for (let i = 0; i < bytes.length; i += chunkSize) {
-        binary += String.fromCharCode(
-          ...bytes.subarray(i, i + chunkSize)
-        );
-      }
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(22);
+  doc.setFont("helvetica", "bold");
+  doc.text("SAFEBASE", 18, 16);
 
-      return btoa(binary);
-    };
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  doc.text("Safety tools and resources", 18, 24);
 
-    const [regularFont, boldFont] = await Promise.all([
-      fontToBase64("/fonts/DejaVuSans.ttf"),
-      fontToBase64("/fonts/DejaVuSans-Bold.ttf"),
-    ]);
+  doc.setTextColor(15, 23, 42);
+  doc.setFontSize(18);
+  doc.setFont("helvetica", "bold");
+  doc.text("Risk Matrix Report", 18, 48);
 
-    doc.addFileToVFS("SafeBase-Regular.ttf", regularFont);
-    doc.addFont(
-      "SafeBase-Regular.ttf",
-      "SafeBasePDF",
-      "normal"
-    );
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(100, 116, 139);
+  doc.text(`Generated: ${today}`, 18, 56);
 
-    doc.addFileToVFS("SafeBase-Bold.ttf", boldFont);
-    doc.addFont(
-      "SafeBase-Bold.ttf",
-      "SafeBasePDF",
-      "bold"
-    );
+  doc.setDrawColor(226, 232, 240);
+  doc.roundedRect(18, 66, 174, 58, 3, 3);
 
-    const C = {
-      bg: [2, 6, 23] as [number, number, number],
-      panel: [15, 23, 42] as [number, number, number],
-      border: [51, 65, 85] as [number, number, number],
-      white: [248, 250, 252] as [number, number, number],
-      muted: [148, 163, 184] as [number, number, number],
-      blue: [59, 130, 246] as [number, number, number],
-      green: [16, 185, 129] as [number, number, number],
-      yellow: [250, 204, 21] as [number, number, number],
-      orange: [249, 115, 22] as [number, number, number],
-      red: [239, 68, 68] as [number, number, number],
-    };
+  doc.setTextColor(71, 85, 105);
+  doc.setFontSize(10);
+  doc.text("Likelihood", 26, 78);
+  doc.text("Severity", 26, 94);
+  doc.text("Risk Score", 108, 78);
+  doc.text("Risk Level", 108, 94);
 
-    const safe = (value: string) => value;
+  doc.setTextColor(15, 23, 42);
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "bold");
+  doc.text(`${likelihood} - ${likelihoodLabel}`, 26, 85);
+  doc.text(`${severity} - ${severityLabel}`, 26, 101);
+  doc.text(String(score), 108, 85);
+  doc.text(`${risk.label} Risk`, 108, 101);
 
+  if (risk.label === "Low") {
+    doc.setFillColor(16, 185, 129);
+  } else if (risk.label === "Medium") {
+    doc.setFillColor(250, 204, 21);
+  } else if (risk.label === "High") {
+    doc.setFillColor(249, 115, 22);
+  } else {
+    doc.setFillColor(239, 68, 68);
+  }
 
-    const colorFor = (value: number) => {
-      if (value <= 4) return C.green;
-      if (value <= 9) return C.yellow;
-      if (value <= 16) return C.orange;
-      return C.red;
-    };
+  doc.roundedRect(108, 106, 52, 10, 5, 5, "F");
 
-    const text = (
-      value: string,
-      x: number,
-      y: number,
-      size = 8,
-      color = C.white,
-      bold = false,
-      align: "left" | "center" | "right" = "left"
-    ) => {
-      doc.setFont("SafeBasePDF", bold ? "bold" : "normal");
-      doc.setFontSize(size);
-      doc.setTextColor(...color);
-      doc.text(safe(value), x, y, { align });
-    };
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(9);
+  doc.setFont("helvetica", "bold");
+  doc.text(`${risk.label.toUpperCase()} RISK`, 134, 113, {
+    align: "center",
+  });
 
-    const box = (x: number, y: number, w: number, h: number) => {
-      doc.setFillColor(...C.panel);
-      doc.setDrawColor(...C.border);
-      doc.roundedRect(x, y, w, h, 3, 3, "FD");
-    };
+  doc.setTextColor(15, 23, 42);
+  doc.setFontSize(14);
+  doc.text("Recommended Actions", 18, 142);
 
-    const likelihoodLabel =
-      currentLikelihoodOptions.find((x) => x.value === likelihood)?.label ?? "";
+  doc.setFontSize(11);
+  doc.setFont("helvetica", "normal");
 
-    const severityLabel =
-      currentSeverityOptions.find((x) => x.value === severity)?.label ?? "";
+  actions.forEach((action, index) => {
+    const y = 154 + index * 10;
+    doc.setTextColor(37, 99, 235);
+    doc.text("•", 20, y);
+    doc.setTextColor(51, 65, 85);
+    doc.text(action, 28, y);
+  });
 
-    const residualLikelihoodLabel =
-      currentLikelihoodOptions.find((x) => x.value === residualLikelihood)?.label ?? "";
+ // Risk Matrix table
+doc.setTextColor(15, 23, 42);
+doc.setFont("helvetica", "bold");
+doc.setFontSize(14);
+doc.text("Risk Matrix", 18, 194);
 
-    const residualSeverityLabel =
-      currentSeverityOptions.find((x) => x.value === residualSeverity)?.label ?? "";
+const matrixX = 42;
+const matrixY = 202;
+const cellWidth = 25;
+const cellHeight = 11;
 
-    const actions =
-      locale === "tr"
-        ? recommendations.tr[risk.label as keyof typeof recommendations.tr] ?? []
-        : recommendations.en[risk.label as keyof typeof recommendations.en] ?? [];
+doc.setFontSize(8);
 
-    const reduction =
-      score > 0
-        ? Math.max(0, Math.round(((score - residualScore) / score) * 100))
-        : 0;
+// Likelihood headers
+for (let likelihoodValue = 1; likelihoodValue <= 5; likelihoodValue++) {
+  const x = matrixX + likelihoodValue * cellWidth;
 
-    const today = new Date().toLocaleDateString(
-      isTurkish ? "tr-TR" : "en-GB"
-    );
+  doc.setFillColor(241, 245, 249);
+  doc.roundedRect(x, matrixY, cellWidth - 1, cellHeight - 1, 1, 1, "F");
 
-    // Background
-    doc.setFillColor(...C.bg);
-    doc.rect(0, 0, W, H, "F");
+  doc.setTextColor(15, 23, 42);
+  doc.text(`L${likelihoodValue}`, x + (cellWidth - 1) / 2, matrixY + 7, {
+    align: "center",
+  });
+}
 
-    // Header
-    text("SAFEBASE", 14, 14, 17, C.white, true);
-    text(
-      isTurkish ? "Profesyonel HSE Platformu" : "Professional HSE Platform",
-      14,
-      20,
-      6.5,
-      C.muted
-    );
+// Top-left header
+doc.setFillColor(241, 245, 249);
+doc.roundedRect(
+  matrixX,
+  matrixY,
+  cellWidth - 1,
+  cellHeight - 1,
+  1,
+  1,
+  "F"
+);
 
-    text(
-      isTurkish ? "RİSK MATRİSİ RAPORU" : "RISK MATRIX REPORT",
-      14,
-      34,
-      17,
-      C.white,
-      true
-    );
+doc.setTextColor(15, 23, 42);
+doc.text("S × L", matrixX + (cellWidth - 1) / 2, matrixY + 7, {
+  align: "center",
+});
 
-    text(
-      `${isTurkish ? "Tarih" : "Date"}: ${today}`,
-      W - 14,
-      14,
-      7,
-      C.muted,
-      false,
-      "right"
-    );
+// Matrix rows
+for (let severityValue = 5; severityValue >= 1; severityValue--) {
+  const rowIndex = 5 - severityValue;
+  const y = matrixY + (rowIndex + 1) * cellHeight;
 
-    // Summary
-    const y1 = 44;
-    const gap = 3;
-    const cardW = (182 - gap * 2) / 3;
+  doc.setFillColor(241, 245, 249);
+  doc.roundedRect(
+    matrixX,
+    y,
+    cellWidth - 1,
+    cellHeight - 1,
+    1,
+    1,
+    "F"
+  );
 
-    box(14, y1, cardW, 28);
-    box(14 + cardW + gap, y1, cardW, 28);
-    box(14 + (cardW + gap) * 2, y1, cardW, 28);
+  doc.setTextColor(15, 23, 42);
+  doc.text(`S${severityValue}`, matrixX + (cellWidth - 1) / 2, y + 7, {
+    align: "center",
+  });
 
-    const initialColor = colorFor(score);
-    const residualColor = colorFor(residualScore);
+  for (let likelihoodValue = 1; likelihoodValue <= 5; likelihoodValue++) {
+    const cellScore = severityValue * likelihoodValue;
+    const x = matrixX + likelihoodValue * cellWidth;
 
-    text(isTurkish ? "İLK RİSK" : "INITIAL RISK", 18, y1 + 7, 6, C.muted, true);
-    text(String(score), 18, y1 + 20, 15, initialColor, true);
-    text(`${safe(risk.label)} Risk`, 34, y1 + 19, 7, initialColor, true);
-    text(`${likelihood} x ${severity}`, 18, y1 + 25, 6, C.muted);
-
-    const x2 = 14 + cardW + gap;
-    text(isTurkish ? "KALAN RİSK" : "RESIDUAL RISK", x2 + 4, y1 + 7, 6, C.muted, true);
-    text(String(residualScore), x2 + 4, y1 + 20, 15, residualColor, true);
-    text(`${safe(residualRisk.label)} Risk`, x2 + 20, y1 + 19, 7, residualColor, true);
-    text(`${residualLikelihood} x ${residualSeverity}`, x2 + 4, y1 + 25, 6, C.muted);
-
-    const x3 = 14 + (cardW + gap) * 2;
-    text(isTurkish ? "RİSK AZALTIMI" : "RISK REDUCTION", x3 + 4, y1 + 7, 6, C.muted, true);
-    text(`${reduction}%`, x3 + 4, y1 + 20, 15, C.green, true);
-    text(isTurkish ? "Kontrol sonrası" : "After controls", x3 + 4, y1 + 25, 6, C.muted);
-
-    // Selected values
-    box(14, 77, 182, 30);
-    text(isTurkish ? "SEÇİLİ DEĞERLER" : "SELECTED VALUES", 19, 85, 7, C.white, true);
-
-    const values = [
-      [isTurkish ? "İlk Olasılık" : "Initial Likelihood", `${likelihood} - ${likelihoodLabel}`],
-      [isTurkish ? "İlk Şiddet" : "Initial Severity", `${severity} - ${severityLabel}`],
-      [isTurkish ? "Kalan Olasılık" : "Residual Likelihood", `${residualLikelihood} - ${residualLikelihoodLabel}`],
-      [isTurkish ? "Kalan Şiddet" : "Residual Severity", `${residualSeverity} - ${residualSeverityLabel}`],
-    ];
-
-    values.forEach(([label, value], i) => {
-      const x = 19 + i * 45;
-      text(label, x, 94, 5.2, C.muted, true);
-      text(value, x, 101, 6.4, C.white, true);
-    });
-
-    // Controls
-    box(14, 112, 182, 31);
-    text(isTurkish ? "KONTROL ÖNLEMLERİ" : "CONTROL MEASURES", 19, 120, 7, C.white, true);
-
-    const controls =
-      controlMeasures.trim() ||
-      (isTurkish ? "Kontrol önlemi girilmedi." : "No control measures entered.");
-
-    const controlLines = doc.splitTextToSize(safe(controls), 170);
-
-    doc.setFont("SafeBasePDF", "normal");
-    doc.setFontSize(6.8);
-    doc.setTextColor(...C.muted);
-    doc.text(controlLines.slice(0, 3), 19, 129);
-
-    // Matrix panel
-    box(14, 148, 182, 87);
-    text(isTurkish ? "5 × 5 RİSK MATRİSİ" : "5 x 5 RISK MATRIX", 19, 156, 8, C.white, true);
-
-    text(
-      isTurkish ? "Mavi: İlk Risk  |  Yeşil: Kalan Risk" : "Blue: Initial Risk  |  Green: Residual Risk",
-      191,
-      156,
-      5.4,
-      C.muted,
-      false,
-      "right"
-    );
-
-    const matrixX = 19;
-    const matrixY = 163;
-    const headerW = 20;
-    const cellW = 31;
-    const cellH = 10.5;
-
-    // Headers
-    doc.setFillColor(30, 41, 59);
-    doc.setDrawColor(...C.border);
-    doc.roundedRect(matrixX, matrixY, headerW - 1, cellH - 1, 1, 1, "FD");
-    text("S x L", matrixX + 9.5, matrixY + 6.5, 6, C.white, true, "center");
-
-    for (let l = 1; l <= 5; l++) {
-      const x = matrixX + headerW + (l - 1) * cellW;
-
-      doc.setFillColor(30, 41, 59);
-      doc.roundedRect(x, matrixY, cellW - 1, cellH - 1, 1, 1, "FD");
-      text(`L${l}`, x + 15, matrixY + 6.5, 6, C.white, true, "center");
+    if (cellScore <= 4) {
+      doc.setFillColor(16, 185, 129);
+    } else if (cellScore <= 9) {
+      doc.setFillColor(250, 204, 21);
+    } else if (cellScore <= 16) {
+      doc.setFillColor(249, 115, 22);
+    } else {
+      doc.setFillColor(239, 68, 68);
     }
 
-    for (let sValue = 5; sValue >= 1; sValue--) {
-      const row = 5 - sValue;
-      const y = matrixY + (row + 1) * cellH;
+    doc.roundedRect(
+      x,
+      y,
+      cellWidth - 1,
+      cellHeight - 1,
+      1,
+      1,
+      "F"
+    );
 
-      doc.setFillColor(30, 41, 59);
-      doc.roundedRect(matrixX, y, headerW - 1, cellH - 1, 1, 1, "FD");
-      text(`S${sValue}`, matrixX + 9.5, y + 6.5, 6, C.white, true, "center");
-
-      for (let lValue = 1; lValue <= 5; lValue++) {
-        const value = sValue * lValue;
-        const x = matrixX + headerW + (lValue - 1) * cellW;
-        const color = colorFor(value);
-
-        doc.setFillColor(...color);
-        doc.roundedRect(x, y, cellW - 1, cellH - 1, 1, 1, "F");
-
-        const initial =
-          lValue === likelihood && sValue === severity;
-
-        const residual =
-          lValue === residualLikelihood && sValue === residualSeverity;
-
-        if (initial) {
-          doc.setDrawColor(...C.blue);
-          doc.setLineWidth(1.3);
-          doc.roundedRect(x, y, cellW - 1, cellH - 1, 1, 1, "S");
-        }
-
-        if (residual) {
-          doc.setDrawColor(...C.green);
-          doc.setLineWidth(1.2);
-          doc.roundedRect(x + 1, y + 1, cellW - 3, cellH - 3, 1, 1, "S");
-        }
-
-        doc.setLineWidth(0.2);
-
-        const dark = value >= 5 && value <= 9;
-        text(
-          String(value),
-          x + 15,
-          y + 6.5,
-          7,
-          dark ? C.bg : C.white,
-          true,
-          "center"
-        );
-
-        if (initial) {
-          text(isTurkish ? "İLK" : "INITIAL", x + 28, y + 2.5, 3.5, C.white, true, "right");
-        }
-
-        if (residual) {
-          text(isTurkish ? "KALAN" : "RESIDUAL", x + 2, y + 9, 3.5, C.white, true);
-        }
-      }
+    if (
+      likelihoodValue === likelihood &&
+      severityValue === severity
+    ) {
+      doc.setDrawColor(37, 99, 235);
+      doc.setLineWidth(1.2);
+      doc.roundedRect(
+        x,
+        y,
+        cellWidth - 1,
+        cellHeight - 1,
+        1,
+        1,
+        "S"
+      );
+      doc.setLineWidth(0.2);
     }
 
-    // Legend
-    const legendY = 228;
-    const legend = [
-      [isTurkish ? "Düşük 1-4" : "Low 1-4", C.green],
-      [isTurkish ? "Orta 5-9" : "Medium 5-9", C.yellow],
-      [isTurkish ? "Yüksek 10-16" : "High 10-16", C.orange],
-      [isTurkish ? "Çok Yüksek 17-25" : "Extreme 17-25", C.red],
-    ] as const;
+    const useDarkText = cellScore > 4 && cellScore <= 9;
 
-    legend.forEach(([label, color], i) => {
-      const x = 22 + i * 43;
-      doc.setFillColor(...color);
-      doc.circle(x, legendY - 1, 1.1, "F");
-      text(label, x + 4, legendY, 5, C.muted, true);
+    doc.setTextColor(
+      useDarkText ? 15 : 255,
+      useDarkText ? 23 : 255,
+      useDarkText ? 42 : 255
+    );
+
+    doc.text(String(cellScore), x + (cellWidth - 1) / 2, y + 7, {
+      align: "center",
     });
+  }
+}
 
-    // Actions
-    box(14, 240, 182, 31);
-    text(isTurkish ? "ÖNERİLEN AKSİYONLAR" : "RECOMMENDED ACTIONS", 19, 248, 7, C.white, true);
+// Footer
+doc.setDrawColor(226, 232, 240);
+doc.line(18, 276, 192, 276);
 
-    let ay = 256;
+doc.setTextColor(100, 116, 139);
+doc.setFont("helvetica", "normal");
+doc.setFontSize(8);
 
-    actions.slice(0, 3).forEach((action) => {
-      doc.setFillColor(...C.blue);
-      doc.circle(20, ay - 1, 0.8, "F");
-      text(action, 24, ay, 6.2, C.muted);
-      ay += 6;
-    });
+doc.text(
+  `This report was generated automatically by SafeBase ${t.title}.`,
+  18,
+  284
+);
 
-    // Footer
-    doc.setDrawColor(...C.border);
-    doc.line(14, H - 14, 196, H - 14);
+doc.text(
+  "safebase-hazel.vercel.app/tools/risk-matrix",
+  18,
+  290
+);
 
-    text("SafeBase | Professional HSE Platform | Risk Matrix", 14, H - 8, 5.5, C.muted);
-    text("Page 1 / 1", 196, H - 8, 5.5, C.muted, false, "right");
-
-    doc.save(`SafeBase-Risk-Matrix-${score}-to-${residualScore}.pdf`);
-  };
-
-const recommendations = {
+  doc.save(`SafeBase-Risk-Matrix-${score}.pdf`);
+};
+  const recommendations = {
     tr: {
       "Düşük": [
         "Mevcut kontrol önlemlerine devam edin.",

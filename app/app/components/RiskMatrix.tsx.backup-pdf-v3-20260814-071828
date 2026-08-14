@@ -115,8 +115,8 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
     () => getRiskLevel(residualScore, locale),
     [residualScore, locale]
   );
-  // RISK MATRIX PDF V3 FINAL
-  const downloadPDF = async () => {
+  // RISK MATRIX PDF V2
+  const downloadPDF = () => {
     const doc = new jsPDF({
       orientation: "portrait",
       unit: "mm",
@@ -125,48 +125,6 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
 
     const W = doc.internal.pageSize.getWidth();
     const H = doc.internal.pageSize.getHeight();
-
-    // SafeBase PDF Unicode fonts
-    const fontToBase64 = async (url: string) => {
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(`PDF font could not be loaded: ${url}`);
-      }
-
-      const buffer = await response.arrayBuffer();
-      const bytes = new Uint8Array(buffer);
-
-      let binary = "";
-      const chunkSize = 0x8000;
-
-      for (let i = 0; i < bytes.length; i += chunkSize) {
-        binary += String.fromCharCode(
-          ...bytes.subarray(i, i + chunkSize)
-        );
-      }
-
-      return btoa(binary);
-    };
-
-    const [regularFont, boldFont] = await Promise.all([
-      fontToBase64("/fonts/DejaVuSans.ttf"),
-      fontToBase64("/fonts/DejaVuSans-Bold.ttf"),
-    ]);
-
-    doc.addFileToVFS("SafeBase-Regular.ttf", regularFont);
-    doc.addFont(
-      "SafeBase-Regular.ttf",
-      "SafeBasePDF",
-      "normal"
-    );
-
-    doc.addFileToVFS("SafeBase-Bold.ttf", boldFont);
-    doc.addFont(
-      "SafeBase-Bold.ttf",
-      "SafeBasePDF",
-      "bold"
-    );
 
     const C = {
       bg: [2, 6, 23] as [number, number, number],
@@ -181,8 +139,20 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
       red: [239, 68, 68] as [number, number, number],
     };
 
-    const safe = (value: string) => value;
-
+    const safe = (value: string) =>
+      value
+        .replace(/İ/g, "I")
+        .replace(/ı/g, "i")
+        .replace(/Ş/g, "S")
+        .replace(/ş/g, "s")
+        .replace(/Ğ/g, "G")
+        .replace(/ğ/g, "g")
+        .replace(/Ü/g, "U")
+        .replace(/ü/g, "u")
+        .replace(/Ö/g, "O")
+        .replace(/ö/g, "o")
+        .replace(/Ç/g, "C")
+        .replace(/ç/g, "c");
 
     const colorFor = (value: number) => {
       if (value <= 4) return C.green;
@@ -200,7 +170,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
       bold = false,
       align: "left" | "center" | "right" = "left"
     ) => {
-      doc.setFont("SafeBasePDF", bold ? "bold" : "normal");
+      doc.setFont("helvetica", bold ? "bold" : "normal");
       doc.setFontSize(size);
       doc.setTextColor(...color);
       doc.text(safe(value), x, y, { align });
@@ -253,7 +223,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
     );
 
     text(
-      isTurkish ? "RİSK MATRİSİ RAPORU" : "RISK MATRIX REPORT",
+      isTurkish ? "RISK MATRISI RAPORU" : "RISK MATRIX REPORT",
       14,
       34,
       17,
@@ -283,31 +253,31 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
     const initialColor = colorFor(score);
     const residualColor = colorFor(residualScore);
 
-    text(isTurkish ? "İLK RİSK" : "INITIAL RISK", 18, y1 + 7, 6, C.muted, true);
+    text(isTurkish ? "ILK RISK" : "INITIAL RISK", 18, y1 + 7, 6, C.muted, true);
     text(String(score), 18, y1 + 20, 15, initialColor, true);
     text(`${safe(risk.label)} Risk`, 34, y1 + 19, 7, initialColor, true);
     text(`${likelihood} x ${severity}`, 18, y1 + 25, 6, C.muted);
 
     const x2 = 14 + cardW + gap;
-    text(isTurkish ? "KALAN RİSK" : "RESIDUAL RISK", x2 + 4, y1 + 7, 6, C.muted, true);
+    text(isTurkish ? "KALAN RISK" : "RESIDUAL RISK", x2 + 4, y1 + 7, 6, C.muted, true);
     text(String(residualScore), x2 + 4, y1 + 20, 15, residualColor, true);
     text(`${safe(residualRisk.label)} Risk`, x2 + 20, y1 + 19, 7, residualColor, true);
     text(`${residualLikelihood} x ${residualSeverity}`, x2 + 4, y1 + 25, 6, C.muted);
 
     const x3 = 14 + (cardW + gap) * 2;
-    text(isTurkish ? "RİSK AZALTIMI" : "RISK REDUCTION", x3 + 4, y1 + 7, 6, C.muted, true);
-    text(`${reduction}%`, x3 + 4, y1 + 20, 15, C.green, true);
-    text(isTurkish ? "Kontrol sonrası" : "After controls", x3 + 4, y1 + 25, 6, C.muted);
+    text(isTurkish ? "RISK AZALTIMI" : "RISK REDUCTION", x3 + 4, y1 + 7, 6, C.muted, true);
+    text(`%${reduction}`, x3 + 4, y1 + 20, 15, C.green, true);
+    text(isTurkish ? "Kontrol sonrasi" : "After controls", x3 + 4, y1 + 25, 6, C.muted);
 
     // Selected values
     box(14, 77, 182, 30);
-    text(isTurkish ? "SEÇİLİ DEĞERLER" : "SELECTED VALUES", 19, 85, 7, C.white, true);
+    text(isTurkish ? "SECILI DEGERLER" : "SELECTED VALUES", 19, 85, 7, C.white, true);
 
     const values = [
-      [isTurkish ? "İlk Olasılık" : "Initial Likelihood", `${likelihood} - ${likelihoodLabel}`],
-      [isTurkish ? "İlk Şiddet" : "Initial Severity", `${severity} - ${severityLabel}`],
-      [isTurkish ? "Kalan Olasılık" : "Residual Likelihood", `${residualLikelihood} - ${residualLikelihoodLabel}`],
-      [isTurkish ? "Kalan Şiddet" : "Residual Severity", `${residualSeverity} - ${residualSeverityLabel}`],
+      [isTurkish ? "Ilk Olasilik" : "Initial Likelihood", `${likelihood} - ${likelihoodLabel}`],
+      [isTurkish ? "Ilk Siddet" : "Initial Severity", `${severity} - ${severityLabel}`],
+      [isTurkish ? "Kalan Olasilik" : "Residual Likelihood", `${residualLikelihood} - ${residualLikelihoodLabel}`],
+      [isTurkish ? "Kalan Siddet" : "Residual Severity", `${residualSeverity} - ${residualSeverityLabel}`],
     ];
 
     values.forEach(([label, value], i) => {
@@ -318,25 +288,25 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
 
     // Controls
     box(14, 112, 182, 31);
-    text(isTurkish ? "KONTROL ÖNLEMLERİ" : "CONTROL MEASURES", 19, 120, 7, C.white, true);
+    text(isTurkish ? "KONTROL ONLEMLERI" : "CONTROL MEASURES", 19, 120, 7, C.white, true);
 
     const controls =
       controlMeasures.trim() ||
-      (isTurkish ? "Kontrol önlemi girilmedi." : "No control measures entered.");
+      (isTurkish ? "Kontrol onlemi girilmedi." : "No control measures entered.");
 
     const controlLines = doc.splitTextToSize(safe(controls), 170);
 
-    doc.setFont("SafeBasePDF", "normal");
+    doc.setFont("helvetica", "normal");
     doc.setFontSize(6.8);
     doc.setTextColor(...C.muted);
     doc.text(controlLines.slice(0, 3), 19, 129);
 
     // Matrix panel
     box(14, 148, 182, 87);
-    text(isTurkish ? "5 × 5 RİSK MATRİSİ" : "5 x 5 RISK MATRIX", 19, 156, 8, C.white, true);
+    text(isTurkish ? "5 x 5 RISK MATRISI" : "5 x 5 RISK MATRIX", 19, 156, 8, C.white, true);
 
     text(
-      isTurkish ? "Mavi: İlk Risk  |  Yeşil: Kalan Risk" : "Blue: Initial Risk  |  Green: Residual Risk",
+      isTurkish ? "Mavi: Ilk Risk  |  Yesil: Kalan Risk" : "Blue: Initial Risk  |  Green: Residual Risk",
       191,
       156,
       5.4,
@@ -413,7 +383,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
         );
 
         if (initial) {
-          text(isTurkish ? "İLK" : "INITIAL", x + 28, y + 2.5, 3.5, C.white, true, "right");
+          text(isTurkish ? "ILK" : "INITIAL", x + 28, y + 2.5, 3.5, C.white, true, "right");
         }
 
         if (residual) {
@@ -425,10 +395,10 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
     // Legend
     const legendY = 228;
     const legend = [
-      [isTurkish ? "Düşük 1-4" : "Low 1-4", C.green],
+      [isTurkish ? "Dusuk 1-4" : "Low 1-4", C.green],
       [isTurkish ? "Orta 5-9" : "Medium 5-9", C.yellow],
-      [isTurkish ? "Yüksek 10-16" : "High 10-16", C.orange],
-      [isTurkish ? "Çok Yüksek 17-25" : "Extreme 17-25", C.red],
+      [isTurkish ? "Yuksek 10-16" : "High 10-16", C.orange],
+      [isTurkish ? "Cok Yuksek 17-25" : "Extreme 17-25", C.red],
     ] as const;
 
     legend.forEach(([label, color], i) => {
@@ -440,7 +410,7 @@ export default function RiskMatrix({ locale }: RiskMatrixProps) {
 
     // Actions
     box(14, 240, 182, 31);
-    text(isTurkish ? "ÖNERİLEN AKSİYONLAR" : "RECOMMENDED ACTIONS", 19, 248, 7, C.white, true);
+    text(isTurkish ? "ONERILEN AKSIYONLAR" : "RECOMMENDED ACTIONS", 19, 248, 7, C.white, true);
 
     let ay = 256;
 
