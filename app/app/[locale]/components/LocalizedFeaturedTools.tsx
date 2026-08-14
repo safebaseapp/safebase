@@ -113,6 +113,26 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       meta: isTurkish ? "1 dakika" : "1 min",
     },
     {
+      title: "SIMOPS Planner",
+      description: isTurkish
+        ? "Eş zamanlı faaliyetleri planlayın, kritik etkileşimleri belirleyin ve gerekli kontrol önlemlerini yönetin."
+        : "Plan simultaneous operations, identify critical interactions and manage required control measures.",
+      type: isTurkish ? "İş Kontrolü" : "Control of Work",
+      href: "/tools/simops",
+      available: true,
+      icon: <TriangleAlert
+        size={36}
+        strokeWidth={2.1}
+        className="text-blue-600 transition-transform duration-300 group-hover:scale-110"
+      />,
+      label: isTurkish ? "Yeni" : "New",
+      accent: "amber",
+      features: isTurkish
+        ? ["Etkileşim matrisi", "Risk değerlendirmesi", "PDF raporu"]
+        : ["Interaction matrix", "Risk assessment", "PDF report"],
+      meta: isTurkish ? "Profesyonel araç" : "Professional tool",
+    },
+    {
       title: isTurkish ? "İskele Denetimi" : "Scaffold Inspection",
       description: isTurkish
         ? "İskele erişimi, platform, korkuluk, etiketleme ve yapısal güvenlik kontrollerini tamamlayın."
