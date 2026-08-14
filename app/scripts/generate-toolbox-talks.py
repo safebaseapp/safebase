@@ -118,7 +118,7 @@ def create_toolbox(filename, language, content):
 
     draw_text(
         c,
-        "SAFEBASE TOOLBOX TALK",
+        "SERNEM TOOLBOX TALK",
         18 * mm,
         page_h - 16 * mm,
         10,
@@ -339,7 +339,7 @@ TOOLBOXES = [
             "fields": ["Proje / Saha", "Tarih", "Konuşmayı yapan", "Çalışma alanı"],
             "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
             "notes_title": "Süpervizör notları / ek saha talimatları",
-            "footer": "SafeBase HSE Resource — Saha prosedürleri ve risk değerlendirmesi önceliklidir.",
+            "footer": "SERNEM HSE Resource — Saha prosedürleri ve risk değerlendirmesi önceliklidir.",
         },
         "en": {
             "title": "WORKING AT HEIGHT TOOLBOX TALK",
@@ -371,7 +371,7 @@ TOOLBOXES = [
             "fields": ["Project / Site", "Date", "Presented by", "Work area"],
             "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
             "notes_title": "Supervisor notes / additional site instructions",
-            "footer": "SafeBase HSE Resource — Site procedures and risk assessments take priority.",
+            "footer": "SERNEM HSE Resource — Site procedures and risk assessments take priority.",
         },
     },
     {
@@ -406,7 +406,7 @@ TOOLBOXES = [
             "fields": ["Proje / Saha", "Tarih", "Konuşmayı yapan", "Çalışma alanı"],
             "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
             "notes_title": "Süpervizör notları / ek saha talimatları",
-            "footer": "SafeBase HSE Resource — Çalışma izni ve saha prosedürleri önceliklidir.",
+            "footer": "SERNEM HSE Resource — Çalışma izni ve saha prosedürleri önceliklidir.",
         },
         "en": {
             "title": "HOT WORK TOOLBOX TALK",
@@ -438,7 +438,7 @@ TOOLBOXES = [
             "fields": ["Project / Site", "Date", "Presented by", "Work area"],
             "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
             "notes_title": "Supervisor notes / additional site instructions",
-            "footer": "SafeBase HSE Resource — Permit conditions and site procedures take priority.",
+            "footer": "SERNEM HSE Resource — Permit conditions and site procedures take priority.",
         },
     },
     {
@@ -473,7 +473,7 @@ TOOLBOXES = [
             "fields": ["Proje / Saha", "Tarih", "Konuşmayı yapan", "Çalışma alanı"],
             "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
             "notes_title": "Süpervizör notları / ek saha talimatları",
-            "footer": "SafeBase HSE Resource — İskele etiketi ve saha prosedürleri önceliklidir.",
+            "footer": "SERNEM HSE Resource — İskele etiketi ve saha prosedürleri önceliklidir.",
         },
         "en": {
             "title": "SCAFFOLD SAFETY TOOLBOX TALK",
@@ -505,7 +505,7 @@ TOOLBOXES = [
             "fields": ["Project / Site", "Date", "Presented by", "Work area"],
             "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
             "notes_title": "Supervisor notes / additional site instructions",
-            "footer": "SafeBase HSE Resource — Scaffold tags and site procedures take priority.",
+            "footer": "SERNEM HSE Resource — Scaffold tags and site procedures take priority.",
         },
     },
 ]

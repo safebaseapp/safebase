@@ -230,7 +230,7 @@ def create_poster(
 
 
 def load_poster_definitions():
-    """Load SafeBase poster definitions from data/posters/engine/*.json."""
+    """Load SERNEM poster definitions from data/posters/engine/*.json."""
     import json
     from pathlib import Path
 

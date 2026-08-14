@@ -35,7 +35,7 @@ def module_template(slug: str, tr_title: str, en_title: str) -> str:
     variable = variable_name(slug)
     base = slug.replace("_", "-") + "-toolbox-talk"
 
-    return f'''"""SafeBase Toolbox Talk content module."""
+    return f'''"""SERNEM Toolbox Talk content module."""
 
 {variable} = {{
     "base": "{base}",
@@ -145,7 +145,7 @@ def module_template(slug: str, tr_title: str, en_title: str) -> str:
         "table_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         "notes_title": "Süpervizör notları / ek saha talimatları",
         "footer": (
-            "SafeBase HSE Resource — Çalışma izni, risk değerlendirmesi ve "
+            "SERNEM HSE Resource — Çalışma izni, risk değerlendirmesi ve "
             "saha prosedürleri önceliklidir."
         ),
     }},
@@ -255,7 +255,7 @@ def module_template(slug: str, tr_title: str, en_title: str) -> str:
         "table_headers": ["No", "Full Name", "Company / Role", "Signature"],
         "notes_title": "Supervisor notes / additional site instructions",
         "footer": (
-            "SafeBase HSE Resource — Permit conditions, risk assessments and "
+            "SERNEM HSE Resource — Permit conditions, risk assessments and "
             "site procedures take priority."
         ),
     }},
@@ -289,7 +289,7 @@ def update_registry(slug: str) -> None:
     variables = sorted(set(variables))
 
     registry = [
-        '"""SafeBase Toolbox Talk content registry."""',
+        '"""SERNEM Toolbox Talk content registry."""',
         "",
         *import_lines,
         "",
@@ -306,7 +306,7 @@ def update_registry(slug: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Yeni SafeBase Toolbox Talk modülü oluşturur."
+        description="Yeni SERNEM Toolbox Talk modülü oluşturur."
     )
     parser.add_argument("slug", help="Örnek: safety_harness")
     parser.add_argument("--tr-title", help="Türkçe başlık")

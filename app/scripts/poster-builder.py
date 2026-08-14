@@ -98,7 +98,7 @@ def list_posters():
     posters = existing_posters()
 
     print()
-    print("SafeBase Poster Engine")
+    print("SERNEM Poster Engine")
     print("=" * 76)
 
     for index, poster in enumerate(
@@ -244,7 +244,7 @@ def generate():
 def main():
     parser = argparse.ArgumentParser(
         description=(
-            "SafeBase JSON Poster Builder"
+            "SERNEM JSON Poster Builder"
         )
     )
 

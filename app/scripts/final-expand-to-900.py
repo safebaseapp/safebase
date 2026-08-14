@@ -863,7 +863,7 @@ for path in Path("lib/risk-library").glob("pack-*.ts"):
         )
     )
 
-print("===== SAFEBASE FINAL 900 =====")
+print("===== SERNEM FINAL 900 =====")
 print("MEVCUT TOPLAM:", global_before)
 
 if global_before != 774:

@@ -372,7 +372,7 @@ export default function AIAssistantPage() {
             className="flex items-center gap-3 rounded-2xl px-2 py-2"
           >
             <Image
-              src="/brand/safebase-mark.svg"
+              src="/brand/sernem-mark.svg"
               alt="SERNEM"
               width={46}
               height={46}
@@ -481,7 +481,7 @@ export default function AIAssistantPage() {
                 <div className="my-auto py-12 text-center">
                   <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[26px] border border-blue-400/20 bg-blue-500/10 shadow-2xl shadow-blue-600/20">
                     <Image
-                      src="/brand/safebase-mark.svg"
+                      src="/brand/sernem-mark.svg"
                       alt=""
                       width={58}
                       height={58}
@@ -541,7 +541,7 @@ export default function AIAssistantPage() {
                       {message.role === "assistant" && (
                         <div className="mt-1 hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 sm:flex">
                           <Image
-                            src="/brand/safebase-mark.svg"
+                            src="/brand/sernem-mark.svg"
                             alt=""
                             width={32}
                             height={32}
@@ -822,7 +822,7 @@ export default function AIAssistantPage() {
                     <article className="flex gap-4">
                       <div className="mt-1 hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 sm:flex">
                         <Image
-                          src="/brand/safebase-mark.svg"
+                          src="/brand/sernem-mark.svg"
                           alt=""
                           width={32}
                           height={32}
