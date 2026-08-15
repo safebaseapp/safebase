@@ -407,7 +407,7 @@ export default function PosterMaster({
             </div>
 
             <p className="text-[34px] font-black leading-none">
-              <span className="text-emerald-600">Safe</span>Base
+              <span className="text-emerald-600">SERNEM</span>
             </p>
             <p className="mt-1 text-xs font-black uppercase tracking-[0.18em] text-slate-500">
               {isTurkish
@@ -660,7 +660,7 @@ export default function PosterMaster({
       <footer className="mt-3 flex items-center justify-between rounded-[16px] bg-slate-950 px-7 py-4 text-white">
         <div>
           <p className="text-2xl font-black">
-            <span className="text-emerald-500">Safe</span>Base
+            <span className="text-emerald-500">SERNEM</span>
           </p>
           <p className="text-xs font-bold text-emerald-400">
             {isTurkish

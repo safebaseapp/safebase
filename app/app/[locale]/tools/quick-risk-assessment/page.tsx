@@ -1778,7 +1778,7 @@ const duplicateRiskItem = (id: string) => {
                   letterSpacing: "-1px",
                 }}
               >
-                <span style={{ color: "#10b981" }}>Safe</span>Base
+                <span style={{ color: "#10b981" }}>SERNEM</span>
               </div>
 
               <div

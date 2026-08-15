@@ -84,7 +84,7 @@ export default function MethodStatementPrint({
           <div className="ms-brand">
             <div className="ms-logo-text">
               <strong>
-                <span>Safe</span>Base
+                <span>SERNEM</span>
               </strong>
               <small>HEALTH &amp; SAFETY RESOURCES</small>
             </div>
