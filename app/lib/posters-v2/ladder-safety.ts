@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const ladderSafetyPoster: PosterDefinition = {
-  code: "SB-LAD-001",
+  code: "SRN-LAD-001",
   revision: "1.0",
 
   title: {

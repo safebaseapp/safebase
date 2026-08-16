@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const hotWorkPoster: PosterDefinition = {
-  code: "SB-HW-001",
+  code: "SRN-HW-001",
   revision: "1.0",
 
   title: {

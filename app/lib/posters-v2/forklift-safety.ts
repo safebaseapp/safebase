@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const forkliftSafetyPoster: PosterDefinition = {
-  code: "SB-FLT-001",
+  code: "SRN-FLT-001",
   revision: "1.0",
   title: {
     tr: "Forklift Kritik Güvenlik Kuralları",

@@ -69,7 +69,7 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   const [department, setDepartment] = useState("");
   const [assetArea, setAssetArea] = useState("");
   const [processMethod, setProcessMethod] = useState("");
-  const [documentNo, setDocumentNo] = useState("SB-HIRARC-001");
+  const [documentNo, setDocumentNo] = useState("SRN-HIRARC-001");
   const [reviewedBy, setReviewedBy] = useState("");
   const [approvedBy, setApprovedBy] = useState("");
   /* SERNEM_HIRARC_HEADER_STATE_END */
@@ -171,7 +171,7 @@ useEffect(() => {
     setDepartment(data.department || "");
     setAssetArea(data.asset_area || "");
     setProcessMethod(data.process_method || "");
-    setDocumentNo(data.document_no || "SB-HIRARC-001");
+    setDocumentNo(data.document_no || "SRN-HIRARC-001");
     setReviewedBy(data.reviewed_by || "");
     setApprovedBy(data.approved_by || "");
 

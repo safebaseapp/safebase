@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const firePoster: PosterDefinition = {
-  code: "SB-FIRE-001",
+  code: "SRN-FIRE-001",
   revision: "1.0",
 
   title: {

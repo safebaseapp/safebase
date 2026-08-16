@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const chemicalSafetyPoster: PosterDefinition = {
-  code: "SB-CHM-001",
+  code: "SRN-CHM-001",
   revision: "1.0",
   title: {
     tr: "Kimyasal Güvenlik Kritik Kuralları",

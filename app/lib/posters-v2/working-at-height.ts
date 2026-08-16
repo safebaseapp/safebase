@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const workingAtHeightPoster: PosterDefinition = {
-  code: "SB-WAH-001",
+  code: "SRN-WAH-001",
   revision: "2.0",
 
   title: {

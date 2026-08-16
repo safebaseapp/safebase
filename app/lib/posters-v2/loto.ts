@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const lotoPoster: PosterDefinition = {
-  code: "SB-LOTO-001",
+  code: "SRN-LOTO-001",
   revision: "1.0",
 
   title: {

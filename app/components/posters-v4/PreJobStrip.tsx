@@ -11,7 +11,7 @@ export default function PreJobStrip({ locale, poster }: Props) {
   const isTurkish = locale === "tr";
 
   const checks =
-    poster.code === "SB-PPE-001"
+    poster.code === "SRN-PPE-001"
       ? isTurkish
         ? [
             "Risk Değerlendirmesi",
@@ -31,7 +31,7 @@ export default function PreJobStrip({ locale, poster }: Props) {
             "Training and Instructions",
             "Cleaning and Storage",
           ]
-      : poster.code === "SB-FIRE-001"
+      : poster.code === "SRN-FIRE-001"
         ? isTurkish
         ? [
             "Alarm ve İletişim",
@@ -51,7 +51,7 @@ export default function PreJobStrip({ locale, poster }: Props) {
             "Trained Personnel",
             "Fuel and Ignition",
           ]
-      : poster.code === "SB-LOTO-001"
+      : poster.code === "SRN-LOTO-001"
         ? isTurkish
         ? [
             "Enerji Prosedürü",
@@ -71,7 +71,7 @@ export default function PreJobStrip({ locale, poster }: Props) {
             "Zero-Energy Test",
             "Safe Restoration",
           ]
-      : poster.code === "SB-EL-001"
+      : poster.code === "SRN-EL-001"
         ? isTurkish
         ? [
             "İş İzni ve Risk Analizi",
@@ -91,7 +91,7 @@ export default function PreJobStrip({ locale, poster }: Props) {
             "GFCI / RCD",
             "Barriers and PPE",
           ]
-      : poster.code === "SB-CS-001"
+      : poster.code === "SRN-CS-001"
         ? isTurkish
         ? [
             "Giriş İzni",
@@ -111,7 +111,7 @@ export default function PreJobStrip({ locale, poster }: Props) {
             "Communication",
             "Rescue Plan",
           ]
-      : poster.code === "SB-HW-001"
+      : poster.code === "SRN-HW-001"
         ? isTurkish
         ? [
             "Sıcak Çalışma İzni",
@@ -131,7 +131,7 @@ export default function PreJobStrip({ locale, poster }: Props) {
             "Spark Barriers",
             "Post-Work Watch",
           ]
-      : poster.code === "SB-SCF-001"
+      : poster.code === "SRN-SCF-001"
         ? isTurkish
         ? [
             "Kontrol Etiketi",

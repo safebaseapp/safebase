@@ -60,37 +60,37 @@ export default function Header({ locale, poster }: Props) {
 
         <div className="mt-3 flex items-center gap-2">
           <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[8px] font-black uppercase tracking-[0.14em] text-slate-600">
-            {poster.code === "SB-PPE-001"
+            {poster.code === "SRN-PPE-001"
               ? "OSHA 1910 Subpart I"
-              : poster.code === "SB-FIRE-001"
+              : poster.code === "SRN-FIRE-001"
                 ? "OSHA 1910 Subpart L"
-                : poster.code === "SB-LOTO-001"
+                : poster.code === "SRN-LOTO-001"
                 ? "OSHA 29 CFR 1910.147"
-                : poster.code === "SB-EL-001"
+                : poster.code === "SRN-EL-001"
                 ? "OSHA 1910 Subpart S"
-                : poster.code === "SB-CS-001"
+                : poster.code === "SRN-CS-001"
                 ? "OSHA 29 CFR 1910.146"
-                : poster.code === "SB-HW-001"
+                : poster.code === "SRN-HW-001"
                   ? "OSHA 1910.252 / 1926.352"
-                  : poster.code === "SB-SCF-001"
+                  : poster.code === "SRN-SCF-001"
                     ? "OSHA 1926.451"
                     : "OSHA 29 CFR 1926"}
           </span>
 
           <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[8px] font-black uppercase tracking-[0.14em] text-slate-600">
-            {poster.code === "SB-PPE-001"
+            {poster.code === "SRN-PPE-001"
               ? "Selection • Fit • Inspection"
-              : poster.code === "SB-FIRE-001"
+              : poster.code === "SRN-FIRE-001"
                 ? "Alarm • Evacuation • Extinguishers"
-                : poster.code === "SB-LOTO-001"
+                : poster.code === "SRN-LOTO-001"
                 ? "Hazardous Energy Control"
-                : poster.code === "SB-EL-001"
+                : poster.code === "SRN-EL-001"
                 ? "LOTO • Shock • Arc Flash"
-                : poster.code === "SB-CS-001"
+                : poster.code === "SRN-CS-001"
                 ? "Permit Space • Atmospheric Testing"
-                : poster.code === "SB-HW-001"
+                : poster.code === "SRN-HW-001"
                   ? "Hot Work • Fire Prevention"
-                  : poster.code === "SB-SCF-001"
+                  : poster.code === "SRN-SCF-001"
                     ? "OSHA Subpart L"
                     : "EN 361 • EN 365 • EN 795"}
           </span>

@@ -91,7 +91,7 @@ export const posterCategories: Array<{
 export const posters: PosterLibraryItem[] = [
   {
     slug: "working-at-height-rules",
-    code: "SB-WAH-001",
+    code: "SRN-WAH-001",
     icon: "🏗️",
     category: "work-at-height",
     title: {
@@ -107,7 +107,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "scaffold-safety-rules",
-    code: "SB-SCF-001",
+    code: "SRN-SCF-001",
     icon: "🪜",
     category: "scaffolding",
     title: {
@@ -123,7 +123,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "hot-work-safety-rules",
-    code: "SB-HW-001",
+    code: "SRN-HW-001",
     icon: "🔥",
     category: "hot-work",
     title: {
@@ -139,7 +139,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "confined-space-entry-rules",
-    code: "SB-CS-001",
+    code: "SRN-CS-001",
     icon: "⚠️",
     category: "confined-space",
     title: {
@@ -155,7 +155,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "electrical-safety-rules",
-    code: "SB-EL-001",
+    code: "SRN-EL-001",
     icon: "⚡",
     category: "electrical",
     title: {
@@ -171,7 +171,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "loto-golden-rules",
-    code: "SB-LOTO-001",
+    code: "SRN-LOTO-001",
     icon: "🔒",
     category: "loto",
     title: {
@@ -187,7 +187,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "fire-safety-rules",
-    code: "SB-FIRE-001",
+    code: "SRN-FIRE-001",
     icon: "🧯",
     category: "fire",
     title: {
@@ -203,7 +203,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "mandatory-ppe",
-    code: "SB-PPE-001",
+    code: "SRN-PPE-001",
     icon: "🦺",
     category: "ppe",
     title: {
@@ -219,7 +219,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "ladder-safety-rules",
-    code: "SB-LAD-001",
+    code: "SRN-LAD-001",
     icon: "🪜",
     category: "work-at-height",
     title: {
@@ -237,7 +237,7 @@ export const posters: PosterLibraryItem[] = [
   /* SERNEM_SERIAL_POSTERS_START */
   {
     slug: "housekeeping-safety-rules",
-    code: "SB-HSK-001",
+    code: "SRN-HSK-001",
     icon: "🧹",
     category: "general" as any,
     title: {
@@ -253,7 +253,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "excavation-safety-rules",
-    code: "SB-EXC-001",
+    code: "SRN-EXC-001",
     icon: "🚧",
     category: "general" as any,
     title: {
@@ -269,7 +269,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "chemical-safety-rules",
-    code: "SB-CHM-001",
+    code: "SRN-CHM-001",
     icon: "🧪",
     category: "general" as any,
     title: {
@@ -285,7 +285,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "forklift-safety-rules",
-    code: "SB-FLT-001",
+    code: "SRN-FLT-001",
     icon: "🚜",
     category: "general" as any,
     title: {
@@ -301,7 +301,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "manual-handling-safety-rules",
-    code: "SB-MH-001",
+    code: "SRN-MH-001",
     icon: "📦",
     category: "general" as any,
     title: {
@@ -317,7 +317,7 @@ export const posters: PosterLibraryItem[] = [
   },
   {
     slug: "dropped-objects-safety-rules",
-    code: "SB-DO-001",
+    code: "SRN-DO-001",
     icon: "⬇️",
     category: "general" as any,
     title: {

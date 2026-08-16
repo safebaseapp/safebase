@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const excavationSafetyPoster: PosterDefinition = {
-  code: "SB-EXC-001",
+  code: "SRN-EXC-001",
   revision: "1.0",
   title: {
     tr: "Kazı Kritik Güvenlik Kuralları",

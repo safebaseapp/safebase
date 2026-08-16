@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const scaffoldPoster: PosterDefinition = {
-  code: "SB-SCF-001",
+  code: "SRN-SCF-001",
   revision: "1.0",
 
   title: {

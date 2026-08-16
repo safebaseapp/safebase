@@ -507,7 +507,7 @@ export default function PosterMaster({
       ];
 
   const criticalValues =
-    poster.code === "SB-WAH-001"
+    poster.code === "SRN-WAH-001"
       ? [
           {
             value: "1.8 m",
@@ -556,7 +556,7 @@ export default function PosterMaster({
   ];
 
   const posterCriticalValues =
-    poster.code === "SB-LAD-001"
+    poster.code === "SRN-LAD-001"
       ? ladderCriticalValues
       : criticalValues;
 
@@ -753,7 +753,7 @@ export default function PosterMaster({
           </div>
 
           <div className="grid grid-cols-2 gap-2.5 p-3">
-            {(poster.code === "SB-LAD-001" ? [
+            {(poster.code === "SRN-LAD-001" ? [
                     {
                       value: "4 : 1",
                       tr: "Güvenli yerleşim oranı",

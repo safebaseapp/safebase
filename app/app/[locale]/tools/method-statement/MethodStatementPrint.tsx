@@ -201,7 +201,7 @@ export default function MethodStatementPrint({
 
             <tbody>
 
-              {documentNo === "SB-MS-020" ? (
+              {documentNo === "SRN-MS-020" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Yüksek basınç / stored energy" : "High pressure / stored energy"}</td>
@@ -271,7 +271,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-019" ? (
+              {documentNo === "SRN-MS-019" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Eksik / yanlış etiket veya SDS" : "Missing / incorrect label or SDS"}</td>
@@ -341,7 +341,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-018" ? (
+              {documentNo === "SRN-MS-018" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Aşırı yük / bel-sırt zorlanması" : "Excessive load / back strain"}</td>
@@ -411,7 +411,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-017" ? (
+              {documentNo === "SRN-MS-017" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Platformdan düşme" : "Fall from platform"}</td>
@@ -481,7 +481,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-016" ? (
+              {documentNo === "SRN-MS-016" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Uygunsuz merdiven seçimi" : "Incorrect ladder selection"}</td>
@@ -544,7 +544,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-015" ? (
+              {documentNo === "SRN-MS-015" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Araç-personel çarpışması" : "Vehicle-person collision"}</td>
@@ -614,7 +614,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-014" ? (
+              {documentNo === "SRN-MS-014" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Lif / toz maruziyeti" : "Fibre / dust exposure"}</td>
@@ -684,7 +684,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-013" ? (
+              {documentNo === "SRN-MS-013" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "VOC / solvent buharı" : "VOC / solvent vapours"}</td>
@@ -754,7 +754,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-012" ? (
+              {documentNo === "SRN-MS-012" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Stored energy / basınçlı hava" : "Stored energy / compressed air"}</td>
@@ -824,7 +824,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-011" ? (
+              {documentNo === "SRN-MS-011" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Stored energy / yüksek basınç" : "Stored energy / high pressure"}</td>
@@ -894,7 +894,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-010" ? (
+              {documentNo === "SRN-MS-010" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Ağır boru / spool elleçleme" : "Heavy pipe / spool handling"}</td>
@@ -964,7 +964,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-009" ? (
+              {documentNo === "SRN-MS-009" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Disk patlaması / kırılması" : "Disc burst / failure"}</td>
@@ -1042,7 +1042,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-008" ? (
+              {documentNo === "SRN-MS-008" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Elektrik çarpması" : "Electric shock"}</td>
@@ -1128,7 +1128,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-007" ? (
+              {documentNo === "SRN-MS-007" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Göçük / toprak çökmesi" : "Cave-in / soil collapse"}</td>
@@ -1214,7 +1214,7 @@ export default function MethodStatementPrint({
                 <>
 
 
-              {documentNo === "SB-MS-005" ? (
+              {documentNo === "SRN-MS-005" ? (
                 <>
                   <tr>
                     <td>{isTurkish ? "Yük düşmesi" : "Dropped load"}</td>
@@ -1823,7 +1823,7 @@ export default function MethodStatementPrint({
           <span>SERNEM • Professional HSE Document</span>
 
           <span>
-            {documentNo || "SB-MS"} • Rev. {revision || "-"}
+            {documentNo || "SRN-MS"} • Rev. {revision || "-"}
           </span>
         </footer>
       </div>

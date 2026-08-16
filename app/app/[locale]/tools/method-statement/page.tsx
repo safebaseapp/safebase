@@ -31,7 +31,7 @@ export default function MethodStatementPage({ params }: Props) {
   const [companyName, setCompanyName] = useState("");
   const [location, setLocation] = useState("");
   const [activity, setActivity] = useState("");
-  const [documentNo, setDocumentNo] = useState("SB-MS-001");
+  const [documentNo, setDocumentNo] = useState("SRN-MS-001");
   const [revision, setRevision] = useState("1.0");
   const [date, setDate] = useState(
     new Date().toISOString().slice(0, 10)
@@ -264,7 +264,7 @@ export default function MethodStatementPage({ params }: Props) {
 
   const loadHotWorkTemplate = () => {
     setActivity(isTurkish ? "Sıcak Çalışma" : "Hot Work");
-    setDocumentNo("SB-MS-002");
+    setDocumentNo("SRN-MS-002");
 
     setScope(
       isTurkish
@@ -456,7 +456,7 @@ export default function MethodStatementPage({ params }: Props) {
       isTurkish ? "Kapalı Alana Giriş" : "Confined Space Entry"
     );
 
-    setDocumentNo("SB-MS-003");
+    setDocumentNo("SRN-MS-003");
 
     setScope(
       isTurkish
@@ -645,7 +645,7 @@ export default function MethodStatementPage({ params }: Props) {
 
   const loadLotoTemplate = () => {
     setActivity(isTurkish ? "LOTO / Enerji İzolasyonu" : "LOTO / Energy Isolation");
-    setDocumentNo("SB-MS-004");
+    setDocumentNo("SRN-MS-004");
 
     setScope(
       isTurkish
@@ -773,7 +773,7 @@ export default function MethodStatementPage({ params }: Props) {
       isTurkish ? "Kaldırma Operasyonları" : "Lifting Operations"
     );
 
-    setDocumentNo("SB-MS-005");
+    setDocumentNo("SRN-MS-005");
 
     setScope(
       isTurkish
@@ -967,7 +967,7 @@ export default function MethodStatementPage({ params }: Props) {
         : "Scaffold Erection / Dismantling"
     );
 
-    setDocumentNo("SB-MS-006");
+    setDocumentNo("SRN-MS-006");
 
     setScope(
       isTurkish
@@ -1159,7 +1159,7 @@ export default function MethodStatementPage({ params }: Props) {
       isTurkish ? "Kazı Çalışmaları" : "Excavation Work"
     );
 
-    setDocumentNo("SB-MS-007");
+    setDocumentNo("SRN-MS-007");
 
     setScope(
       isTurkish
@@ -1351,7 +1351,7 @@ export default function MethodStatementPage({ params }: Props) {
       isTurkish ? "Elektrik Çalışmaları" : "Electrical Work"
     );
 
-    setDocumentNo("SB-MS-008");
+    setDocumentNo("SRN-MS-008");
 
     setScope(
       isTurkish
@@ -1551,7 +1551,7 @@ export default function MethodStatementPage({ params }: Props) {
         : "Grinding & Cutting Work"
     );
 
-    setDocumentNo("SB-MS-009");
+    setDocumentNo("SRN-MS-009");
 
     setScope(
       isTurkish
@@ -1729,7 +1729,7 @@ export default function MethodStatementPage({ params }: Props) {
       isTurkish ? "Borulama Çalışmaları" : "Piping Works"
     );
 
-    setDocumentNo("SB-MS-010");
+    setDocumentNo("SRN-MS-010");
 
     setScope(
       isTurkish
@@ -1907,7 +1907,7 @@ export default function MethodStatementPage({ params }: Props) {
         : "Hydrostatic Pressure Testing"
     );
 
-    setDocumentNo("SB-MS-011");
+    setDocumentNo("SRN-MS-011");
 
     setScope(
       isTurkish
@@ -2083,7 +2083,7 @@ export default function MethodStatementPage({ params }: Props) {
       isTurkish ? "Hava Üfleme" : "Air Blowing"
     );
 
-    setDocumentNo("SB-MS-012");
+    setDocumentNo("SRN-MS-012");
 
     setScope(
       isTurkish
@@ -2229,7 +2229,7 @@ export default function MethodStatementPage({ params }: Props) {
         : "Painting & Coating Works"
     );
 
-    setDocumentNo("SB-MS-013");
+    setDocumentNo("SRN-MS-013");
 
     setScope(
       isTurkish
@@ -2407,7 +2407,7 @@ export default function MethodStatementPage({ params }: Props) {
         : "Insulation Works"
     );
 
-    setDocumentNo("SB-MS-014");
+    setDocumentNo("SRN-MS-014");
 
     setScope(
       isTurkish
@@ -2586,7 +2586,7 @@ export default function MethodStatementPage({ params }: Props) {
         : "Heavy & Mobile Equipment Operations"
     );
 
-    setDocumentNo("SB-MS-015");
+    setDocumentNo("SRN-MS-015");
 
     setScope(
       isTurkish
@@ -2777,7 +2777,7 @@ export default function MethodStatementPage({ params }: Props) {
       isTurkish ? "Merdiven Kullanımı" : "Ladder Use"
     );
 
-    setDocumentNo("SB-MS-016");
+    setDocumentNo("SRN-MS-016");
 
     setScope(
       isTurkish
@@ -2921,7 +2921,7 @@ export default function MethodStatementPage({ params }: Props) {
       isTurkish ? "Manlift / MEWP Çalışmaları" : "MEWP Operations"
     );
 
-    setDocumentNo("SB-MS-017");
+    setDocumentNo("SRN-MS-017");
 
     setScope(
       isTurkish
@@ -3065,7 +3065,7 @@ export default function MethodStatementPage({ params }: Props) {
       isTurkish ? "Elle Taşıma" : "Manual Handling"
     );
 
-    setDocumentNo("SB-MS-018");
+    setDocumentNo("SRN-MS-018");
 
     setScope(
       isTurkish
@@ -3211,7 +3211,7 @@ export default function MethodStatementPage({ params }: Props) {
         : "Chemical Handling"
     );
 
-    setDocumentNo("SB-MS-019");
+    setDocumentNo("SRN-MS-019");
 
     setScope(
       isTurkish
@@ -3389,7 +3389,7 @@ export default function MethodStatementPage({ params }: Props) {
         : "Compressed Gas Cylinder Handling"
     );
 
-    setDocumentNo("SB-MS-020");
+    setDocumentNo("SRN-MS-020");
 
     setScope(
       isTurkish

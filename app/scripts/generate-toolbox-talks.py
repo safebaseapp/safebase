@@ -13,10 +13,10 @@ regular_path = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")
 bold_path = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
 
 if regular_path.exists() and bold_path.exists():
-    pdfmetrics.registerFont(TTFont("SB-Regular", str(regular_path)))
-    pdfmetrics.registerFont(TTFont("SB-Bold", str(bold_path)))
-    REGULAR = "SB-Regular"
-    BOLD = "SB-Bold"
+    pdfmetrics.registerFont(TTFont("SRN-Regular", str(regular_path)))
+    pdfmetrics.registerFont(TTFont("SRN-Bold", str(bold_path)))
+    REGULAR = "SRN-Regular"
+    BOLD = "SRN-Bold"
 else:
     REGULAR = "Helvetica"
     BOLD = "Helvetica-Bold"

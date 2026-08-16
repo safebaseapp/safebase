@@ -205,7 +205,7 @@ export default function ProductShowcase({ locale }: Props) {
                     <p className="mt-1 font-black">METHOD STATEMENT</p>
                   </div>
                   <div className="text-right text-[9px] text-slate-500">
-                    <p>SB-MS-001</p>
+                    <p>SRN-MS-001</p>
                     <p>REV 1.0</p>
                   </div>
                 </div>

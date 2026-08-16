@@ -69,31 +69,31 @@ export default function RuleCard({
   const tone = styles[rule.tone];
 
   function renderIcon() {
-    if (posterCode === "SB-CS-001") {
+    if (posterCode === "SRN-CS-001") {
       return (
         <ConfinedSpaceIcon title={rule.title.en} />
       );
     }
 
-    if (posterCode === "SB-EL-001") {
+    if (posterCode === "SRN-EL-001") {
       return (
         <ElectricalIcon title={rule.title.en} />
       );
     }
 
-    if (posterCode === "SB-LOTO-001") {
+    if (posterCode === "SRN-LOTO-001") {
       return (
         <LotoIcon title={rule.title.en} />
       );
     }
 
-    if (posterCode === "SB-FIRE-001") {
+    if (posterCode === "SRN-FIRE-001") {
       return (
         <FireIcon title={rule.title.en} />
       );
     }
 
-    if (posterCode === "SB-PPE-001") {
+    if (posterCode === "SRN-PPE-001") {
       return (
         <PpeRuleIcon title={rule.title.en} />
       );

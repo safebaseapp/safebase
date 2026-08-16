@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const manualHandlingSafetyPoster: PosterDefinition = {
-  code: "SB-MH-001",
+  code: "SRN-MH-001",
   revision: "1.0",
   title: {
     tr: "Elle Taşıma Kritik Güvenlik Kuralları",

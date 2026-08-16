@@ -1,7 +1,7 @@
 import type { PosterDefinition } from "./types";
 
 export const electricalPoster: PosterDefinition = {
-  code: "SB-EL-001",
+  code: "SRN-EL-001",
   revision: "1.0",
 
   title: {

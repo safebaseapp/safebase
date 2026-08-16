@@ -68,7 +68,7 @@ export default function BottomPanels({
   let mainReference: string;
   let subReference: string;
 
-  if (poster.code === "SB-PPE-001") {
+  if (poster.code === "SRN-PPE-001") {
     values = [
       {
         value: isTurkish ? "RİSK" : "RISK",
@@ -98,7 +98,7 @@ export default function BottomPanels({
 
     mainReference = "OSHA 29 CFR 1910.132";
     subReference = "Personal Protective Equipment";
-  } else if (poster.code === "SB-FIRE-001") {
+  } else if (poster.code === "SRN-FIRE-001") {
     values = [
       {
         value: "22,9 m",
@@ -128,7 +128,7 @@ export default function BottomPanels({
 
     mainReference = "OSHA 29 CFR 1910.38 / 1910.39 / 1910.157";
     subReference = "Emergency Action • Fire Prevention • Extinguishers";
-  } else if (poster.code === "SB-LOTO-001") {
+  } else if (poster.code === "SRN-LOTO-001") {
     values = [
       {
         value: isTurkish ? "TÜMÜ" : "ALL",
@@ -158,7 +158,7 @@ export default function BottomPanels({
 
     mainReference = "OSHA 29 CFR 1910.147";
     subReference = "Control of Hazardous Energy";
-  } else if (poster.code === "SB-EL-001") {
+  } else if (poster.code === "SRN-EL-001") {
     values = [
       {
         value: "0 V",
@@ -193,7 +193,7 @@ export default function BottomPanels({
 
     subReference =
       "OSHA 1910 Subpart S • 1926 Subpart K";
-  } else if (poster.code === "SB-CS-001") {
+  } else if (poster.code === "SRN-CS-001") {
     values = [
       {
         value: "19,5–23,5%",
@@ -225,7 +225,7 @@ export default function BottomPanels({
 
     mainReference = "OSHA 29 CFR 1910.146";
     subReference = "Permit-Required Confined Spaces";
-  } else if (poster.code === "SB-HW-001") {
+  } else if (poster.code === "SRN-HW-001") {
     values = [
       {
         value: "10,7 m",
@@ -259,7 +259,7 @@ export default function BottomPanels({
 
     mainReference = "OSHA 29 CFR 1910.252";
     subReference = "Welding, Cutting and Brazing";
-  } else if (poster.code === "SB-SCF-001") {
+  } else if (poster.code === "SRN-SCF-001") {
     values = [
       {
         value: "4×",
@@ -292,7 +292,7 @@ export default function BottomPanels({
     mainReference = "OSHA 29 CFR 1926.451";
     subReference = "OSHA 1926 Subpart L";
 
-  } else if (poster.code === "SB-LAD-001") {
+  } else if (poster.code === "SRN-LAD-001") {
     values = [
       {
         value: "4 : 1",
@@ -323,7 +323,7 @@ export default function BottomPanels({
     mainReference = "OSHA 29 CFR 1926.1053 / 1910.23";
     subReference = "EN 131";
 
-  } else if (poster.code === "SB-HSK-001") {
+  } else if (poster.code === "SRN-HSK-001") {
     values = [
       {
         value: isTurkish ? "TEMİZ" : "CLEAN",
@@ -354,7 +354,7 @@ export default function BottomPanels({
     mainReference = "OSHA 29 CFR 1910.22 / 1926.25";
     subReference = "Walking-Working Surfaces • Housekeeping";
 
-  } else if (poster.code === "SB-EXC-001") {
+  } else if (poster.code === "SRN-EXC-001") {
     values = [
       {
         value: isTurkish ? "1,22 m" : "4 ft",
@@ -385,7 +385,7 @@ export default function BottomPanels({
     mainReference = "OSHA 29 CFR 1926.651 / 1926.652";
     subReference = "OSHA 1926 Subpart P";
 
-  } else if (poster.code === "SB-CHM-001") {
+  } else if (poster.code === "SRN-CHM-001") {
     values = [
       {
         value: isTurkish ? "ETİKET" : "LABEL",
@@ -416,7 +416,7 @@ export default function BottomPanels({
     mainReference = "OSHA 29 CFR 1910.1200";
     subReference = "Hazard Communication Standard";
 
-  } else if (poster.code === "SB-FLT-001") {
+  } else if (poster.code === "SRN-FLT-001") {
     values = [
       {
         value: isTurkish ? "YETKİLİ" : "AUTHORIZED",
@@ -447,7 +447,7 @@ export default function BottomPanels({
     mainReference = "OSHA 29 CFR 1910.178";
     subReference = "Powered Industrial Trucks";
 
-  } else if (poster.code === "SB-MH-001") {
+  } else if (poster.code === "SRN-MH-001") {
     values = [
       {
         value: isTurkish ? "PLANLA" : "PLAN",
@@ -478,7 +478,7 @@ export default function BottomPanels({
     mainReference = "OSHA 29 CFR 1910.176";
     subReference = "Materials Handling and Storage";
 
-  } else if (poster.code === "SB-DO-001") {
+  } else if (poster.code === "SRN-DO-001") {
     values = [
       {
         value: isTurkish ? "100%" : "100%",
@@ -540,12 +540,12 @@ export default function BottomPanels({
     ];
 
     mainReference =
-      poster.code === "SB-LAD-001"
+      poster.code === "SRN-LAD-001"
                   ? "OSHA 29 CFR 1926.1053 / 1910.23"
                   : "OSHA 29 CFR 1926.501 / 1926.502";
 
     subReference =
-      poster.code === "SB-LAD-001"
+      poster.code === "SRN-LAD-001"
                   ? "EN 131"
                   : "EN 361 • EN 365 • EN 795";
   }
@@ -615,52 +615,52 @@ export default function BottomPanels({
   const standards_SB_DO_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
 
   const standards =
-    poster.code === "SB-PPE-001"
+    poster.code === "SRN-PPE-001"
       ? ppeStandards
-      : poster.code === "SB-FIRE-001"
+      : poster.code === "SRN-FIRE-001"
         ? fireStandards
-        : poster.code === "SB-LOTO-001"
+        : poster.code === "SRN-LOTO-001"
         ? lotoStandards
-        : poster.code === "SB-EL-001"
+        : poster.code === "SRN-EL-001"
         ? electricalStandards
-        : poster.code === "SB-CS-001"
+        : poster.code === "SRN-CS-001"
           ? confinedSpaceStandards
-          : poster.code === "SB-HW-001"
+          : poster.code === "SRN-HW-001"
             ? hotWorkStandards
             : defaultStandards;
 
   const serialPpeIcons: Record<string, string[]> = {
-    "SB-HSK-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-    "SB-EXC-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-    "SB-CHM-001": ["🥽", "🧤", "🥼", "🥾", "😷"],
-    "SB-FLT-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-    "SB-MH-001": ["🧤", "🥾", "👕", "🦺", "🛡️"],
-    "SB-DO-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
+    "SRN-HSK-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
+    "SRN-EXC-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
+    "SRN-CHM-001": ["🥽", "🧤", "🥼", "🥾", "😷"],
+    "SRN-FLT-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
+    "SRN-MH-001": ["🧤", "🥾", "👕", "🦺", "🛡️"],
+    "SRN-DO-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
   };
 
   const ppeIcons =
-    poster.code === "SB-PPE-001"
+    poster.code === "SRN-PPE-001"
       ? ["⛑️", "🥽", "🧤", "🥾", "🦺"]
-      : poster.code === "SB-FIRE-001"
+      : poster.code === "SRN-FIRE-001"
         ? ["⛑️", "🥽", "🧤", "🥾", "🧥"]
-      : poster.code === "SB-EL-001"
+      : poster.code === "SRN-EL-001"
         ? ["⛑️", "🥽", "🧤", "🥾", "🧥"]
-      : poster.code === "SB-HW-001"
+      : poster.code === "SRN-HW-001"
         ? ["🥽", "👓", "🧤", "🥾", "🧥"]
         : ["⛑️", "🥽", "🧤", "🥾", "🪢"];
 
   const ppeHeading =
-    poster.code === "SB-PPE-001"
+    poster.code === "SRN-PPE-001"
       ? isTurkish
         ? "Temel Saha KKD'si"
         : "Basic Site PPE"
-      : poster.code === "SB-FIRE-001"
+      : poster.code === "SRN-FIRE-001"
         ? isTurkish
           ? "Müdahale KKD'si"
           : "Response PPE"
-        : poster.code === "SB-CS-001" ||
-          poster.code === "SB-EL-001" ||
-          poster.code === "SB-LOTO-001"
+        : poster.code === "SRN-CS-001" ||
+          poster.code === "SRN-EL-001" ||
+          poster.code === "SRN-LOTO-001"
         ? isTurkish
         ? "Gerekli KKD"
         : "Required PPE"
@@ -669,23 +669,23 @@ export default function BottomPanels({
         : "Required PPE";
 
   const ppeNote =
-    poster.code === "SB-PPE-001"
+    poster.code === "SRN-PPE-001"
       ? isTurkish
         ? "Temel saha KKD'sine ek korumaları görev ve risk değerlendirmesine göre belirle."
         : "Determine additional protection according to the task and risk assessment."
-      : poster.code === "SB-FIRE-001"
+      : poster.code === "SRN-FIRE-001"
         ? isTurkish
         ? "Yalnızca eğitimli ve yetkilendirilmiş personel başlangıç yangınına müdahale etmelidir."
         : "Only trained and authorized personnel should fight incipient-stage fires."
-      : poster.code === "SB-LOTO-001"
+      : poster.code === "SRN-LOTO-001"
         ? isTurkish
         ? "KKD'yi enerji türü, görev ve risk değerlendirmesine göre seç."
         : "Select PPE based on energy type, task and risk assessment."
-      : poster.code === "SB-EL-001"
+      : poster.code === "SRN-EL-001"
         ? isTurkish
           ? "KKD'yi gerilim, elektrik çarpması ve ark parlaması riskine göre seç."
           : "Select PPE based on voltage, shock and arc-flash hazards."
-        : poster.code === "SB-CS-001"
+        : poster.code === "SRN-CS-001"
           ? isTurkish
             ? "KKD'yi risk değerlendirmesi ve atmosfer sonuçlarına göre seç."
             : "Select PPE based on the risk assessment and atmospheric results."
@@ -763,7 +763,7 @@ export default function BottomPanels({
           ))}
         </div>
 
-        {poster.code === "SB-EL-001" && (
+        {poster.code === "SRN-EL-001" && (
           <div className="mx-3 mb-2 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-center">
             <p className="text-[8px] font-black uppercase tracking-[0.12em] text-amber-800">
               {isTurkish ? "Test Sırası" : "Test Sequence"}
@@ -811,7 +811,7 @@ export default function BottomPanels({
                 className="text-center"
               >
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-700 text-2xl text-white ring-4 ring-blue-100">
-                  {poster.code === "SB-LAD-001" && index === 4 ? (
+                  {poster.code === "SRN-LAD-001" && index === 4 ? (
                     <svg
                       viewBox="0 0 100 100"
                       className="h-9 w-9"
@@ -879,7 +879,7 @@ export default function BottomPanels({
           </p>
         </div>
 
-        {poster.code === "SB-EL-001" && (
+        {poster.code === "SRN-EL-001" && (
           <div className="mx-3 mb-3 grid grid-cols-2 gap-2">
             <div className="rounded-xl border border-blue-200 bg-blue-50 px-3 py-3 text-center">
               <p className="text-[8px] font-black uppercase tracking-[0.12em] text-blue-700">

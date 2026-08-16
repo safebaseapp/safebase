@@ -20,7 +20,7 @@ export const signCategories: Array<{
 export const safetySigns: SafetySign[] = [
   {
     slug: "safety-helmet-must-be-worn",
-    code: "SB-M-001",
+    code: "SRN-M-001",
     category: "mandatory",
     icon: "helmet",
     title: {
@@ -34,7 +34,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "eye-protection-must-be-worn",
-    code: "SB-M-002",
+    code: "SRN-M-002",
     category: "mandatory",
     icon: "glasses",
     title: {
@@ -48,7 +48,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "protective-gloves-must-be-worn",
-    code: "SB-M-003",
+    code: "SRN-M-003",
     category: "mandatory",
     icon: "gloves",
     title: {
@@ -62,7 +62,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "safety-footwear-must-be-worn",
-    code: "SB-M-004",
+    code: "SRN-M-004",
     category: "mandatory",
     icon: "footwear",
     title: {
@@ -76,7 +76,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "hearing-protection-must-be-worn",
-    code: "SB-M-005",
+    code: "SRN-M-005",
     category: "mandatory",
     icon: "hearing",
     title: {
@@ -90,7 +90,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "no-smoking",
-    code: "SB-P-001",
+    code: "SRN-P-001",
     category: "prohibition",
     icon: "no-smoking",
     title: {
@@ -104,7 +104,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "no-unauthorized-entry",
-    code: "SB-P-002",
+    code: "SRN-P-002",
     category: "prohibition",
     icon: "no-entry",
     title: {
@@ -118,7 +118,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "no-open-flame",
-    code: "SB-P-003",
+    code: "SRN-P-003",
     category: "prohibition",
     icon: "no-flame",
     title: {
@@ -132,7 +132,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-high-voltage",
-    code: "SB-W-001",
+    code: "SRN-W-001",
     category: "warning",
     icon: "high-voltage",
     title: {
@@ -146,7 +146,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-forklift-traffic",
-    code: "SB-W-002",
+    code: "SRN-W-002",
     category: "warning",
     icon: "forklift",
     title: {
@@ -160,7 +160,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-falling-objects",
-    code: "SB-W-003",
+    code: "SRN-W-003",
     category: "warning",
     icon: "falling-objects",
     title: {
@@ -174,7 +174,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-slippery-surface",
-    code: "SB-W-004",
+    code: "SRN-W-004",
     category: "warning",
     icon: "slippery",
     title: {
@@ -188,7 +188,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "first-aid",
-    code: "SB-E-001",
+    code: "SRN-E-001",
     category: "emergency",
     icon: "first-aid",
     title: {
@@ -202,7 +202,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "emergency-exit",
-    code: "SB-E-002",
+    code: "SRN-E-002",
     category: "emergency",
     icon: "emergency-exit",
     title: {
@@ -216,7 +216,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "assembly-point",
-    code: "SB-E-003",
+    code: "SRN-E-003",
     category: "emergency",
     icon: "assembly-point",
     title: {
@@ -230,7 +230,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "fire-extinguisher",
-    code: "SB-F-001",
+    code: "SRN-F-001",
     category: "fire",
     icon: "fire-extinguisher",
     title: {
@@ -245,7 +245,7 @@ export const safetySigns: SafetySign[] = [
 
   {
     slug: "general-mandatory-action",
-    code: "SB-M-001",
+    code: "SRN-M-001",
     category: "mandatory",
     icon: "M001",
     title: {
@@ -259,7 +259,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "refer-to-instruction-manual",
-    code: "SB-M-002",
+    code: "SRN-M-002",
     category: "mandatory",
     icon: "M002",
     title: {
@@ -273,7 +273,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "protective-clothing-must-be-worn",
-    code: "SB-M-010",
+    code: "SRN-M-010",
     category: "mandatory",
     icon: "M010",
     title: {
@@ -287,7 +287,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "wash-your-hands",
-    code: "SB-M-011",
+    code: "SRN-M-011",
     category: "mandatory",
     icon: "M011",
     title: {
@@ -301,7 +301,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "use-handrail",
-    code: "SB-M-012",
+    code: "SRN-M-012",
     category: "mandatory",
     icon: "M012",
     title: {
@@ -315,7 +315,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "face-shield-must-be-worn",
-    code: "SB-M-013",
+    code: "SRN-M-013",
     category: "mandatory",
     icon: "M013",
     title: {
@@ -329,7 +329,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "high-visibility-clothing-must-be-worn",
-    code: "SB-M-015",
+    code: "SRN-M-015",
     category: "mandatory",
     icon: "M015",
     title: {
@@ -343,7 +343,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "respiratory-protection-must-be-worn",
-    code: "SB-M-017",
+    code: "SRN-M-017",
     category: "mandatory",
     icon: "M017",
     title: {
@@ -357,7 +357,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "safety-harness-must-be-worn",
-    code: "SB-M-018",
+    code: "SRN-M-018",
     category: "mandatory",
     icon: "M018",
     title: {
@@ -371,7 +371,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "not-drinking-water",
-    code: "SB-P-005",
+    code: "SRN-P-005",
     category: "prohibition",
     icon: "P005",
     title: {
@@ -385,7 +385,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "no-access-for-forklifts",
-    code: "SB-P-006",
+    code: "SRN-P-006",
     category: "prohibition",
     icon: "P006",
     title: {
@@ -399,7 +399,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "do-not-touch",
-    code: "SB-P-010",
+    code: "SRN-P-010",
     category: "prohibition",
     icon: "P010",
     title: {
@@ -413,7 +413,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "no-activated-mobile-phone",
-    code: "SB-P-013",
+    code: "SRN-P-013",
     category: "prohibition",
     icon: "P013",
     title: {
@@ -427,7 +427,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "general-warning",
-    code: "SB-W-001",
+    code: "SRN-W-001",
     category: "warning",
     icon: "W001",
     title: {
@@ -441,7 +441,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-overhead-load",
-    code: "SB-W-015",
+    code: "SRN-W-015",
     category: "warning",
     icon: "W015",
     title: {
@@ -455,7 +455,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-toxic-material",
-    code: "SB-W-016",
+    code: "SRN-W-016",
     category: "warning",
     icon: "W016",
     title: {
@@ -469,7 +469,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-hot-surface",
-    code: "SB-W-017",
+    code: "SRN-W-017",
     category: "warning",
     icon: "W017",
     title: {
@@ -483,7 +483,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-flammable-material",
-    code: "SB-W-021",
+    code: "SRN-W-021",
     category: "warning",
     icon: "W021",
     title: {
@@ -497,7 +497,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-corrosive-substance",
-    code: "SB-W-023",
+    code: "SRN-W-023",
     category: "warning",
     icon: "W023",
     title: {
@@ -511,7 +511,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-crushing-of-hands",
-    code: "SB-W-024",
+    code: "SRN-W-024",
     category: "warning",
     icon: "W024",
     title: {
