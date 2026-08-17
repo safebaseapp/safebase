@@ -141,97 +141,6 @@ export default function SeverityRateCalculatorPage() {
               ? "from-orange-400 to-orange-600"
               : "from-red-400 to-red-600";
 
-  const gaugeColor =
-    result === null
-      ? "#3b82f6"
-      : result < 10
-        ? "#10b981"
-        : result < 25
-          ? "#06b6d4"
-          : result < 50
-            ? "#f59e0b"
-            : result <= 100
-              ? "#f97316"
-              : "#ef4444";
-
-  const resultTextColor =
-    result === null
-      ? "text-blue-300"
-      : result < 10
-        ? "text-emerald-300"
-        : result < 25
-          ? "text-cyan-300"
-          : result < 50
-            ? "text-amber-300"
-            : result <= 100
-              ? "text-orange-300"
-              : "text-red-300";
-
-  const riskSignals =
-    result === null
-      ? []
-      : result < 10
-        ? isTurkish
-          ? [
-              "Belirgin bir yüksek şiddet göstergesi görülmüyor.",
-              "Mevcut önleyici kontrolleri sürdürün.",
-              "Trend değişimlerini düzenli olarak takip edin.",
-            ]
-          : [
-              "No major high-severity indicator is visible.",
-              "Maintain existing preventive controls.",
-              "Continue monitoring changes in the trend.",
-            ]
-        : result < 25
-          ? isTurkish
-            ? [
-                "Tekrarlayan kayıp iş günü olaylarını takip edin.",
-                "İşe dönüş süreçlerini gözden geçirin.",
-                "Kritik faaliyetlerde önleyici kontrolleri doğrulayın.",
-              ]
-            : [
-                "Monitor recurring lost-workday cases.",
-                "Review return-to-work processes.",
-                "Verify preventive controls for critical activities.",
-              ]
-          : result < 50
-            ? isTurkish
-              ? [
-                  "Kayıp iş günü süresinde artış riski.",
-                  "Rehabilitasyon ve işe dönüş planları gözden geçirilmeli.",
-                  "Tekrarlayan yaralanmalar için kök neden analizi yapılmalı.",
-                ]
-              : [
-                  "Risk of increasing lost-workday duration.",
-                  "Review rehabilitation and return-to-work plans.",
-                  "Perform root cause analysis for recurring injuries.",
-                ]
-            : result <= 100
-              ? isTurkish
-                ? [
-                    "Ciddi yaralanma veya uzun iş göremezlik riski.",
-                    "Düzeltici faaliyetlerin etkinliği doğrulanmalı.",
-                    "Yönetim seviyesinde olay incelemesi önerilir.",
-                  ]
-                : [
-                    "Risk of serious injury or prolonged absence.",
-                    "Verify the effectiveness of corrective actions.",
-                    "Management-level incident review is recommended.",
-                  ]
-              : isTurkish
-                ? [
-                    "Ağır yaralanma ve uzun süreli iş göremezlik göstergesi.",
-                    "Kritik olaylar ve yüksek potansiyelli vakalar acilen incelenmeli.",
-                    "Kök neden analizi ve düzeltici faaliyet planı oluşturulmalı.",
-                    "Üst yönetim tarafından performans ve kontroller gözden geçirilmeli.",
-                  ]
-                : [
-                    "Indicator of serious injury and prolonged lost time.",
-                    "Critical and high-potential incidents require urgent review.",
-                    "Root cause analysis and corrective action planning are required.",
-                    "Management should review performance and critical controls.",
-                  ];
-
   return (
     <main className="min-h-screen bg-[#020817] px-4 py-8 text-white sm:px-6 lg:py-10">
       <div className="mx-auto max-w-[1380px]">
@@ -292,11 +201,6 @@ export default function SeverityRateCalculatorPage() {
                       ? "İş kazaları nedeniyle kaybedilen toplam gün sayısı."
                       : "Total number of days lost due to work-related injuries."
                   }
-                  info={
-                    isTurkish
-                      ? "Aynı raporlama döneminde iş kazası veya işle ilişkili yaralanma nedeniyle çalışanların işe gelemediği toplam kayıp iş günü sayısını girin. Kurumunuzun resmi raporlama yöntemini kullanın. Örnek: Bir çalışan 20 gün, başka bir çalışan 10 gün işe gelemediyse toplam 30 girilir."
-                      : "Enter the total number of lost workdays caused by occupational injuries during the same reporting period. Follow your organization's official reporting method. Example: if one employee loses 20 days and another loses 10 days, enter 30."
-                  }
                   value={lostWorkdays}
                   onChange={setLostWorkdays}
                   placeholder={isTurkish ? "Örnek: 30" : "Example: 30"}
@@ -311,11 +215,6 @@ export default function SeverityRateCalculatorPage() {
                     isTurkish
                       ? "Tüm çalışanlar tarafından çalışılan toplam saat."
                       : "Total number of hours worked by all employees."
-                  }
-                  info={
-                    isTurkish
-                      ? "Aynı raporlama döneminde tüm çalışanların gerçekleştirdiği toplam çalışma saatini girin. Örnek: 250 çalışan yılda ortalama 2.000 saat çalıştıysa toplam 500.000 çalışan-saat kullanılır."
-                      : "Enter the total employee hours worked during the same reporting period. Example: 250 employees working approximately 2,000 hours each equals 500,000 employee-hours."
                   }
                   value={hoursWorked}
                   onChange={setHoursWorked}
@@ -377,10 +276,7 @@ export default function SeverityRateCalculatorPage() {
                   <div
                     className="absolute inset-2 rounded-full"
                     style={{
-                      background: `conic-gradient(${gaugeColor} ${Math.max(
-                        gaugePercent * 3.6,
-                        result === null ? 55 : 360
-                      )}deg, #12213d 0deg)`,
+                      background: `conic-gradient(#10b981 ${gaugePercent * 3.6}deg, #2563eb ${Math.max(gaugePercent * 3.6, 55)}deg, #12213d 0deg)`,
                     }}
                   />
 
@@ -392,11 +288,7 @@ export default function SeverityRateCalculatorPage() {
                 </div>
 
                 <div>
-                  <h3
-                    className={`text-2xl font-black ${
-                      result === null ? "text-white" : resultTextColor
-                    }`}
-                  >
+                  <h3 className="text-2xl font-black text-white">
                     {result === null
                       ? isTurkish
                         ? "Sonuç Henüz Yok"
@@ -411,62 +303,6 @@ export default function SeverityRateCalculatorPage() {
                         : "Enter lost workdays and total hours worked to calculate the severity rate."
                       : interpretation}
                   </p>
-
-                  {result !== null && (
-                    <div
-                      className={`mt-5 rounded-2xl border p-4 ${
-                        result < 10
-                          ? "border-emerald-400/15 bg-emerald-500/[0.045]"
-                          : result < 25
-                            ? "border-cyan-400/15 bg-cyan-500/[0.045]"
-                            : result < 50
-                              ? "border-amber-400/15 bg-amber-500/[0.045]"
-                              : result <= 100
-                                ? "border-orange-400/15 bg-orange-500/[0.045]"
-                                : "border-red-400/20 bg-red-500/[0.055]"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <AlertTriangle
-                          size={16}
-                          className={resultTextColor}
-                        />
-
-                        <p
-                          className={`text-[11px] font-black uppercase tracking-[0.14em] ${resultTextColor}`}
-                        >
-                          {isTurkish
-                            ? "DİKKAT EDİLMESİ GEREKEN NOKTALAR"
-                            : "KEY RISK INDICATORS"}
-                        </p>
-                      </div>
-
-                      <div className="mt-3 space-y-2">
-                        {riskSignals.map((risk) => (
-                          <div
-                            key={risk}
-                            className="flex items-start gap-2 text-xs leading-5 text-slate-300"
-                          >
-                            <span
-                              className={`mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full ${
-                                result < 10
-                                  ? "bg-emerald-400"
-                                  : result < 25
-                                    ? "bg-cyan-400"
-                                    : result < 50
-                                      ? "bg-amber-400"
-                                      : result <= 100
-                                        ? "bg-orange-400"
-                                        : "bg-red-400"
-                              }`}
-                            />
-
-                            <span>{risk}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
 
                   {result !== null && (
                     <button
@@ -536,83 +372,6 @@ export default function SeverityRateCalculatorPage() {
           </div>
         </section>
 
-
-        {/* METRIC EXPLAINER */}
-        <section className="mt-6 overflow-hidden rounded-[26px] border border-blue-400/15 bg-gradient-to-br from-[#071327] via-slate-900/90 to-[#040a16] p-5 shadow-[0_20px_60px_rgba(0,0,0,.25)] sm:p-6">
-          <div className="flex flex-col gap-3 border-b border-white/[0.07] pb-5 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">
-                {isTurkish ? "SERNEM METRİK REHBERİ" : "SERNEM METRIC GUIDE"}
-              </p>
-
-              <h2 className="mt-2 text-xl font-black tracking-tight text-white sm:text-2xl">
-                {isTurkish
-                  ? "Şiddet Oranı neyi gösterir?"
-                  : "What does Severity Rate measure?"}
-              </h2>
-            </div>
-
-            <div className="rounded-full border border-blue-400/15 bg-blue-500/[0.06] px-3 py-1.5 text-[10px] font-bold text-blue-300">
-              SR = Lost Workdays × 200,000 / Hours
-            </div>
-          </div>
-
-          <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-            <MetricInfoCard
-              number="01"
-              title={isTurkish ? "Bu metrik nedir?" : "What is this metric?"}
-              text={
-                isTurkish
-                  ? "Şiddet Oranı, iş kazalarının yalnızca kaç kez gerçekleştiğini değil, çalışanların ne kadar süre işten uzak kaldığını ölçer. Böylece yaralanmaların iş gücü üzerindeki etkisini gösterir."
-                  : "Severity Rate measures not only incident frequency, but the amount of working time lost because of occupational injuries."
-              }
-            />
-
-            <MetricInfoCard
-              number="02"
-              title={isTurkish ? "Neden 200.000 saat?" : "Why 200,000 hours?"}
-              text={
-                isTurkish
-                  ? "200.000 çalışan-saat, farklı büyüklükteki işyerlerini ortak bir ölçekte karşılaştırmak için kullanılan normalizasyon bazıdır. Yaklaşık 100 tam zamanlı çalışanın yıllık çalışma süresini temsil eder."
-                  : "The 200,000-hour base normalizes results so organizations of different sizes can be compared on a common scale."
-              }
-            />
-
-            <MetricInfoCard
-              number="03"
-              title={isTurkish ? "12.00 ne anlama gelir?" : "What does 12.00 mean?"}
-              text={
-                isTurkish
-                  ? "12.00 sonucu, girilen dönemdeki kayıp iş günlerinin 200.000 çalışan-saatlik ortak ölçeğe çevrildiğinde 12 kayıp iş gününe karşılık geldiğini gösterir."
-                  : "A result of 12.00 means the lost-workday impact is equivalent to 12 lost days per 200,000 employee-hours."
-              }
-            />
-
-            <MetricInfoCard
-              number="04"
-              title={isTurkish ? "Renkler neye göre?" : "How are colors used?"}
-              text={
-                isTurkish
-                  ? "Renk bantları hızlı yorumlama için SERNEM referans sınıflandırmasıdır. Yasal veya evrensel sınırlar değildir; şirket geçmişi, sektör verileri ve kurumun raporlama standardıyla birlikte değerlendirilmelidir."
-                  : "Color bands are SERNEM reference categories for quick interpretation. They are not universal legal limits and should be considered with company and industry benchmarks."
-              }
-            />
-          </div>
-
-          <div className="mt-4 flex items-start gap-3 rounded-2xl border border-amber-400/15 bg-amber-500/[0.045] p-4">
-            <AlertTriangle
-              size={18}
-              className="mt-0.5 shrink-0 text-amber-400"
-            />
-
-            <p className="text-xs font-medium leading-6 text-slate-300">
-              {isTurkish
-                ? "Yorumlama notu: Daha düşük bir Şiddet Oranı genellikle daha düşük kayıp iş günü etkisini gösterir. Ancak tek başına güvenlik performansının iyi veya kötü olduğunu kanıtlamaz. TRIR, LTIFR, olay şiddeti, ramak kala verileri ve kök neden analizleriyle birlikte değerlendirilmelidir."
-                : "Interpretation note: A lower Severity Rate generally indicates lower lost-workday impact, but it should not be used alone to judge overall safety performance. Review it together with TRIR, LTIFR, incident severity, near-miss data and root cause findings."}
-            </p>
-          </div>
-        </section>
-
         {/* REFERENCE */}
         <section className="mt-6 rounded-[26px] border border-white/[0.08] bg-slate-900/70 p-5 shadow-[0_20px_60px_rgba(0,0,0,.25)] sm:p-6">
           <h2 className="text-sm font-black uppercase tracking-[0.14em] text-blue-400">
@@ -671,7 +430,6 @@ function InputRow({
   icon,
   label,
   help,
-  info,
   value,
   onChange,
   placeholder,
@@ -681,39 +439,25 @@ function InputRow({
   icon: React.ReactNode;
   label: string;
   help: string;
-  info: string;
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
   suffix: string;
   min: string;
 }) {
-  const [infoOpen, setInfoOpen] = useState(false);
-
   return (
     <div className="grid gap-4 sm:grid-cols-[64px_1fr]">
       <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-blue-400/20 bg-blue-500/[0.07] text-blue-300">
         {icon}
       </div>
 
-      <div className="min-w-0">
+      <div>
         <div className="mb-2 flex items-center gap-2">
           <label className="text-sm font-black text-slate-200">
             {label}
           </label>
 
-          <button
-            type="button"
-            onClick={() => setInfoOpen((current) => !current)}
-            aria-expanded={infoOpen}
-            className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition ${
-              infoOpen
-                ? "border-blue-400/40 bg-blue-500/[0.14] text-blue-300"
-                : "border-white/10 bg-white/[0.025] text-slate-500 hover:border-blue-400/30 hover:bg-blue-500/[0.08] hover:text-blue-300"
-            }`}
-          >
-            <Info size={13} />
-          </button>
+          <Info size={14} className="text-slate-500" />
         </div>
 
         <div className="flex overflow-hidden rounded-xl border border-slate-700 bg-slate-950 transition focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/15">
@@ -732,70 +476,10 @@ function InputRow({
           </div>
         </div>
 
-        <p className="mt-2 text-xs font-medium leading-5 text-slate-500">
+        <p className="mt-2 text-xs font-medium text-slate-500">
           {help}
         </p>
-
-        {infoOpen && (
-          <div className="mt-3 overflow-hidden rounded-2xl border border-blue-400/20 bg-gradient-to-br from-blue-500/[0.08] via-[#071225] to-[#050b17] shadow-[0_18px_50px_rgba(0,0,0,.28)]">
-            <div className="flex items-start gap-3 p-4">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.10] text-blue-300">
-                <Info size={17} />
-              </div>
-
-              <div className="min-w-0">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-blue-400">
-                    SERNEM INFO
-                  </p>
-
-                  <button
-                    type="button"
-                    onClick={() => setInfoOpen(false)}
-                    className="text-[10px] font-black uppercase tracking-[0.12em] text-slate-500 transition hover:text-slate-300"
-                  >
-                    ×
-                  </button>
-                </div>
-
-                <p className="mt-2 text-xs font-medium leading-6 text-slate-300">
-                  {info}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
-    </div>
-  );
-}
-
-function MetricInfoCard({
-  number,
-  title,
-  text,
-}: {
-  number: string;
-  title: string;
-  text: string;
-}) {
-  return (
-    <div className="group rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4 transition duration-300 hover:border-blue-400/20 hover:bg-blue-500/[0.04]">
-      <div className="flex items-center justify-between">
-        <span className="text-[10px] font-black tracking-[0.16em] text-blue-400">
-          {number}
-        </span>
-
-        <div className="h-1.5 w-1.5 rounded-full bg-blue-400 shadow-[0_0_12px_rgba(96,165,250,.7)]" />
-      </div>
-
-      <h3 className="mt-3 text-sm font-black text-white">
-        {title}
-      </h3>
-
-      <p className="mt-2 text-xs font-medium leading-6 text-slate-400">
-        {text}
-      </p>
     </div>
   );
 }

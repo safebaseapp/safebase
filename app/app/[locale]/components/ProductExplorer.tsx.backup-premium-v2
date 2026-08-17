@@ -1,0 +1,639 @@
+"use client";
+
+import { useState } from "react";
+import { Link } from "../../../i18n/navigation";
+import {
+  Activity,
+  Bot,
+  CheckCircle2,
+  ClipboardCheck,
+  FileText,
+  Gauge,
+  LayoutDashboard,
+  Layers3,
+  ShieldCheck,
+  Sparkles,
+  X,
+} from "lucide-react";
+
+type Props = {
+  locale: "tr" | "en";
+  onClose: () => void;
+};
+
+type ProductId =
+  | "risk"
+  | "method"
+  | "simops"
+  | "ai"
+  | "dashboard"
+  | "inspection";
+
+type Product = {
+  id: ProductId;
+  titleTr: string;
+  titleEn: string;
+  eyebrowTr: string;
+  eyebrowEn: string;
+  descriptionTr: string;
+  descriptionEn: string;
+  href: string;
+  icon: typeof ShieldCheck;
+  accent: "blue" | "emerald" | "violet" | "cyan";
+};
+
+const products: Product[] = [
+  {
+    id: "risk",
+    titleTr: "Risk Analizi",
+    titleEn: "Risk Assessment",
+    eyebrowTr: "RİSK YÖNETİMİ",
+    eyebrowEn: "RISK MANAGEMENT",
+    descriptionTr:
+      "100 faaliyet ve 900 hazır risk ile profesyonel HIRARC değerlendirmeleri oluşturun.",
+    descriptionEn:
+      "Build professional HIRARC assessments using 100 activities and 900 ready risks.",
+    href: "/tools/quick-risk-assessment",
+    icon: ShieldCheck,
+    accent: "blue",
+  },
+  {
+    id: "method",
+    titleTr: "Method Statement",
+    titleEn: "Method Statement",
+    eyebrowTr: "DOKÜMANTASYON",
+    eyebrowEn: "DOCUMENTATION",
+    descriptionTr:
+      "Hazır çalışma yöntemlerini proje bilgilerinize göre düzenleyin ve profesyonel çıktı oluşturun.",
+    descriptionEn:
+      "Customize ready work methods with project information and create professional outputs.",
+    href: "/tools/method-statement",
+    icon: FileText,
+    accent: "blue",
+  },
+  {
+    id: "simops",
+    titleTr: "SIMOPS",
+    titleEn: "SIMOPS",
+    eyebrowTr: "OPERASYON PLANLAMA",
+    eyebrowEn: "OPERATION PLANNING",
+    descriptionTr:
+      "Eş zamanlı operasyonları görün, çalışma çakışmalarını değerlendirin ve kritik riskleri yönetin.",
+    descriptionEn:
+      "Visualize simultaneous operations, assess work conflicts and manage critical risks.",
+    href: "/tools",
+    icon: Layers3,
+    accent: "violet",
+  },
+  {
+    id: "ai",
+    titleTr: "SERNEM AI",
+    titleEn: "SERNEM AI",
+    eyebrowTr: "HSE REHBERLİĞİ",
+    eyebrowEn: "HSE GUIDANCE",
+    descriptionTr:
+      "Saha sorularınızı analiz edin; risk özeti, kritik kontroller, KKD, izinler ve ilgili kaynakları görün.",
+    descriptionEn:
+      "Analyze field questions and get risk summaries, critical controls, PPE, permits and relevant sources.",
+    href: "/ai-assistant",
+    icon: Bot,
+    accent: "emerald",
+  },
+  {
+    id: "dashboard",
+    titleTr: "Dashboard",
+    titleEn: "Dashboard",
+    eyebrowTr: "ÇALIŞMA ALANI",
+    eyebrowEn: "WORKSPACE",
+    descriptionTr:
+      "Analizlerinizi, kayıtlarınızı, indirmelerinizi ve HSE çalışmalarınızı tek merkezden yönetin.",
+    descriptionEn:
+      "Manage assessments, records, downloads and HSE work from one central workspace.",
+    href: "/dashboard",
+    icon: LayoutDashboard,
+    accent: "cyan",
+  },
+  {
+    id: "inspection",
+    titleTr: "Denetim",
+    titleEn: "Inspection",
+    eyebrowTr: "SAHA KONTROLÜ",
+    eyebrowEn: "FIELD CONTROL",
+    descriptionTr:
+      "Yapılandırılmış kontrol listeleri ile saha denetimlerini daha hızlı ve tutarlı yürütün.",
+    descriptionEn:
+      "Run field inspections faster and more consistently using structured checklists.",
+    href: "/checklists",
+    icon: ClipboardCheck,
+    accent: "emerald",
+  },
+];
+
+const accentStyles = {
+  blue: {
+    icon: "border-blue-400/20 bg-blue-500/10 text-blue-300",
+    active:
+      "border-blue-400/30 bg-blue-500/[0.10] shadow-[0_12px_35px_rgba(37,99,235,0.10)]",
+    dot: "bg-blue-400",
+  },
+  emerald: {
+    icon: "border-emerald-400/20 bg-emerald-500/10 text-emerald-300",
+    active:
+      "border-emerald-400/30 bg-emerald-500/[0.08] shadow-[0_12px_35px_rgba(16,185,129,0.08)]",
+    dot: "bg-emerald-400",
+  },
+  violet: {
+    icon: "border-violet-400/20 bg-violet-500/10 text-violet-300",
+    active:
+      "border-violet-400/30 bg-violet-500/[0.09] shadow-[0_12px_35px_rgba(139,92,246,0.08)]",
+    dot: "bg-violet-400",
+  },
+  cyan: {
+    icon: "border-cyan-400/20 bg-cyan-500/10 text-cyan-300",
+    active:
+      "border-cyan-400/30 bg-cyan-500/[0.08] shadow-[0_12px_35px_rgba(6,182,212,0.08)]",
+    dot: "bg-cyan-400",
+  },
+};
+
+export default function ProductExplorer({ locale, onClose }: Props) {
+  const isTurkish = locale === "tr";
+  const [activeId, setActiveId] = useState<ProductId>("risk");
+
+  const activeProduct =
+    products.find((product) => product.id === activeId) ?? products[0];
+
+  return (
+    <div
+      id="sernem-navigation"
+      className="absolute left-0 right-0 top-full z-[80] border-t border-white/10 bg-slate-950/98 shadow-[0_40px_120px_rgba(0,0,0,0.65)] backdrop-blur-2xl"
+    >
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-[15%] top-[-260px] h-[520px] w-[520px] rounded-full bg-blue-600/10 blur-[150px]" />
+        <div className="absolute right-[5%] top-[-180px] h-[420px] w-[420px] rounded-full bg-emerald-500/[0.06] blur-[140px]" />
+        <div
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-5 py-6 sm:px-6 lg:py-8">
+        {/* HEADER */}
+        <div className="flex items-start justify-between gap-6 border-b border-white/[0.08] pb-6">
+          <div>
+            <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
+              <Sparkles size={14} />
+              {isTurkish ? "SERNEM ÜRÜN AİLESİ" : "SERNEM PRODUCT SUITE"}
+            </div>
+
+            <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white sm:text-3xl">
+              {isTurkish
+                ? "HSE çalışma alanınızı keşfedin."
+                : "Explore your HSE workspace."}
+            </h2>
+
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
+              {isTurkish
+                ? "Risk yönetiminden saha denetimine kadar SERNEM'in temel ürünlerini inceleyin."
+                : "Explore the core SERNEM products from risk management to field inspections."}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={isTurkish ? "Keşfet menüsünü kapat" : "Close explorer"}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 transition hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="mt-6 grid gap-5 lg:grid-cols-[330px_minmax(0,1fr)]">
+          {/* PRODUCT NAVIGATION */}
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
+            {products.map((product) => {
+              const Icon = product.icon;
+              const active = product.id === activeId;
+              const styles = accentStyles[product.accent];
+
+              return (
+                <button
+                  key={product.id}
+                  type="button"
+                  onMouseEnter={() => setActiveId(product.id)}
+                  onFocus={() => setActiveId(product.id)}
+                  onClick={() => setActiveId(product.id)}
+                  className={`group flex w-full items-center gap-3 rounded-2xl border p-3.5 text-left transition-all duration-300 ${
+                    active
+                      ? styles.active
+                      : "border-white/[0.06] bg-white/[0.025] hover:border-white/[0.12] hover:bg-white/[0.045]"
+                  }`}
+                >
+                  <span
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${styles.icon}`}
+                  >
+                    <Icon size={21} strokeWidth={1.9} />
+                  </span>
+
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">
+                      {isTurkish ? product.eyebrowTr : product.eyebrowEn}
+                    </span>
+
+                    <span
+                      className={`mt-1 block font-black ${
+                        active ? "text-white" : "text-slate-200"
+                      }`}
+                    >
+                      {isTurkish ? product.titleTr : product.titleEn}
+                    </span>
+                  </span>
+
+                  <span
+                    className={`h-2 w-2 shrink-0 rounded-full transition ${
+                      active ? styles.dot : "bg-slate-700"
+                    }`}
+                  />
+                </button>
+              );
+            })}
+          </div>
+
+          {/* PRODUCT PREVIEW */}
+          <div className="relative min-h-[510px] overflow-hidden rounded-[28px] border border-white/[0.09] bg-gradient-to-br from-slate-900 via-slate-950 to-slate-950 shadow-2xl shadow-black/30">
+            <div className="absolute right-[-120px] top-[-140px] h-[380px] w-[380px] rounded-full bg-blue-500/[0.10] blur-[110px]" />
+
+            <div className="relative grid h-full lg:grid-cols-[0.82fr_1.18fr]">
+              {/* PRODUCT COPY */}
+              <div className="flex flex-col justify-between border-b border-white/[0.08] p-6 sm:p-8 lg:border-b-0 lg:border-r">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.035] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                    {isTurkish
+                      ? activeProduct.eyebrowTr
+                      : activeProduct.eyebrowEn}
+                  </div>
+
+                  <h3 className="mt-5 text-3xl font-black tracking-[-0.04em] text-white sm:text-4xl">
+                    {isTurkish
+                      ? activeProduct.titleTr
+                      : activeProduct.titleEn}
+                  </h3>
+
+                  <p className="mt-4 max-w-md text-sm leading-7 text-slate-400 sm:text-[15px]">
+                    {isTurkish
+                      ? activeProduct.descriptionTr
+                      : activeProduct.descriptionEn}
+                  </p>
+                </div>
+
+                <div className="mt-8">
+                  <Link
+                    href={activeProduct.href}
+                    onClick={onClose}
+                    className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-blue-950/30 transition hover:bg-blue-500"
+                  >
+                    {isTurkish ? "Ürünü Aç" : "Open Product"}
+                    <span>→</span>
+                  </Link>
+
+                  <div className="mt-5 flex items-center gap-2 text-xs font-bold text-slate-500">
+                    <CheckCircle2
+                      size={15}
+                      className="text-emerald-400"
+                    />
+                    {isTurkish
+                      ? "SERNEM çalışma alanına entegre"
+                      : "Integrated into SERNEM workspace"}
+                  </div>
+                </div>
+              </div>
+
+              {/* VISUAL PREVIEWS */}
+              <div className="relative flex min-h-[410px] items-center justify-center p-5 sm:p-7">
+                {activeId === "risk" && <RiskPreview />}
+                {activeId === "method" && <MethodPreview />}
+                {activeId === "simops" && <SimopsPreview />}
+                {activeId === "ai" && <AiPreview />}
+                {activeId === "dashboard" && <DashboardPreview />}
+                {activeId === "inspection" && <InspectionPreview />}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* FOOTER STRIP */}
+        <div className="mt-5 flex flex-col gap-3 border-t border-white/[0.07] pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-slate-500">
+            {isTurkish
+              ? "Tek platform. Riskten saha uygulamasına kadar bağlantılı HSE iş akışı."
+              : "One platform. A connected HSE workflow from risk to field execution."}
+          </p>
+
+          <Link
+            href="/tools"
+            onClick={onClose}
+            className="text-sm font-black text-blue-300 transition hover:text-blue-200"
+          >
+            {isTurkish ? "Tüm araçları görüntüle →" : "View all tools →"}
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* PREVIEWS                                                                   */
+/* -------------------------------------------------------------------------- */
+
+function PreviewShell({
+  children,
+  title,
+  icon,
+}: {
+  children: React.ReactNode;
+  title: string;
+  icon: React.ReactNode;
+}) {
+  return (
+    <div className="w-full max-w-[580px] overflow-hidden rounded-[22px] border border-white/10 bg-slate-900/85 shadow-2xl shadow-black/30">
+      <div className="flex items-center justify-between border-b border-white/[0.08] px-5 py-4">
+        <div className="flex items-center gap-3">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.08] text-blue-300">
+            {icon}
+          </span>
+
+          <div>
+            <div className="text-sm font-black text-white">{title}</div>
+            <div className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.13em] text-slate-500">
+              SERNEM
+            </div>
+          </div>
+        </div>
+
+        <span className="rounded-full border border-emerald-400/15 bg-emerald-400/[0.07] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em] text-emerald-400">
+          LIVE
+        </span>
+      </div>
+
+      <div className="p-5">{children}</div>
+    </div>
+  );
+}
+
+function RiskPreview() {
+  return (
+    <PreviewShell
+      title="Risk Assessment"
+      icon={<ShieldCheck size={18} />}
+    >
+      <div className="grid gap-3">
+        <DataRow label="Activity" value="Working at Height" status="green" />
+        <DataRow label="Hazard" value="Fall from Height" status="green" />
+        <DataRow label="Risk Level" value="HIGH" status="amber" />
+
+        <div className="mt-1 rounded-xl border border-blue-400/15 bg-blue-500/[0.06] p-4">
+          <div className="text-[10px] font-black uppercase tracking-[0.14em] text-blue-300">
+            Critical Controls
+          </div>
+          <div className="mt-3 grid gap-2 text-xs text-slate-300">
+            <span>✓ Approved access system</span>
+            <span>✓ Fall protection</span>
+            <span>✓ Pre-work inspection</span>
+          </div>
+        </div>
+      </div>
+    </PreviewShell>
+  );
+}
+
+function MethodPreview() {
+  return (
+    <PreviewShell title="Method Statement" icon={<FileText size={18} />}>
+      <div className="rounded-xl bg-slate-100 p-5 text-slate-950">
+        <div className="flex items-start justify-between">
+          <div>
+            <div className="text-[10px] font-black text-emerald-600">
+              SERNEM
+            </div>
+            <div className="mt-1 text-lg font-black">METHOD STATEMENT</div>
+          </div>
+
+          <div className="text-right text-[9px] font-bold text-slate-500">
+            SRN-MS-001
+            <br />
+            REV 1.0
+          </div>
+        </div>
+
+        <div className="mt-5 space-y-3">
+          {["Scope of Work", "Responsibilities", "Work Sequence", "HSE Controls"].map(
+            (item, index) => (
+              <div
+                key={item}
+                className="flex items-center gap-3 rounded-lg border border-slate-200 p-3"
+              >
+                <span className="text-[10px] font-black text-slate-400">
+                  0{index + 1}
+                </span>
+                <span className="text-xs font-bold">{item}</span>
+              </div>
+            )
+          )}
+        </div>
+      </div>
+    </PreviewShell>
+  );
+}
+
+function SimopsPreview() {
+  return (
+    <PreviewShell title="SIMOPS Planner" icon={<Layers3 size={18} />}>
+      <div className="grid gap-3">
+        {[
+          ["Hot Work", "Area A", "HIGH"],
+          ["Lifting", "Area A", "MEDIUM"],
+          ["Scaffolding", "Area B", "LOW"],
+        ].map(([activity, area, risk]) => (
+          <div
+            key={activity}
+            className="grid grid-cols-[1fr_90px_75px] items-center gap-3 rounded-xl border border-white/[0.07] bg-slate-950/70 px-4 py-3"
+          >
+            <div className="font-bold text-white">{activity}</div>
+            <div className="text-xs text-slate-500">{area}</div>
+            <div
+              className={`text-right text-[10px] font-black ${
+                risk === "HIGH"
+                  ? "text-red-400"
+                  : risk === "MEDIUM"
+                    ? "text-amber-400"
+                    : "text-emerald-400"
+              }`}
+            >
+              {risk}
+            </div>
+          </div>
+        ))}
+
+        <div className="mt-1 flex items-center gap-3 rounded-xl border border-violet-400/15 bg-violet-500/[0.06] p-4">
+          <Activity size={18} className="text-violet-300" />
+          <div>
+            <div className="text-xs font-black text-violet-200">
+              2 Operation Conflicts
+            </div>
+            <div className="mt-1 text-[11px] text-slate-500">
+              Review simultaneous activity controls
+            </div>
+          </div>
+        </div>
+      </div>
+    </PreviewShell>
+  );
+}
+
+function AiPreview() {
+  return (
+    <PreviewShell title="SERNEM AI" icon={<Bot size={18} />}>
+      <div className="rounded-xl border border-white/[0.07] bg-slate-950 p-4 text-sm text-white">
+        What controls are required before confined space entry?
+      </div>
+
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        {[
+          "Risk Summary",
+          "Critical Controls",
+          "PPE & Permits",
+          "Related Sources",
+        ].map((item) => (
+          <div
+            key={item}
+            className="rounded-xl border border-emerald-400/15 bg-emerald-500/[0.055] px-4 py-3 text-xs font-bold text-slate-200"
+          >
+            <span className="mr-2 text-emerald-400">✓</span>
+            {item}
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-3 flex justify-between rounded-xl border border-white/[0.07] bg-white/[0.025] px-4 py-3 text-[10px] text-slate-500">
+        <span>SERNEM Knowledge Base</span>
+        <span className="font-bold text-blue-300">Source-backed</span>
+      </div>
+    </PreviewShell>
+  );
+}
+
+function DashboardPreview() {
+  return (
+    <PreviewShell title="HSE Dashboard" icon={<LayoutDashboard size={18} />}>
+      <div className="grid grid-cols-2 gap-3">
+        {[
+          ["12", "Assessments"],
+          ["28", "Inspections"],
+          ["46", "Downloads"],
+          ["AI", "Assistant"],
+        ].map(([value, label]) => (
+          <div
+            key={label}
+            className="rounded-xl border border-white/[0.07] bg-slate-950/65 p-4"
+          >
+            <div className="text-2xl font-black text-white">{value}</div>
+            <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500">
+              {label}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-3 rounded-xl border border-white/[0.07] bg-slate-950/65 p-4">
+        <div className="flex items-center justify-between">
+          <div className="text-xs font-black text-white">Workspace Activity</div>
+          <Gauge size={16} className="text-blue-300" />
+        </div>
+
+        <div className="mt-4 flex h-20 items-end gap-2">
+          {[35, 52, 42, 74, 61, 88, 72, 94].map((height, index) => (
+            <div
+              key={index}
+              className="flex-1 rounded-t bg-blue-500/40"
+              style={{ height: `${height}%` }}
+            />
+          ))}
+        </div>
+      </div>
+    </PreviewShell>
+  );
+}
+
+function InspectionPreview() {
+  return (
+    <PreviewShell title="Field Inspection" icon={<ClipboardCheck size={18} />}>
+      <div className="space-y-3">
+        {[
+          ["Access & Barricades", true],
+          ["PPE Compliance", true],
+          ["Housekeeping", true],
+          ["Permit Verification", false],
+        ].map(([label, completed]) => (
+          <div
+            key={String(label)}
+            className="flex items-center justify-between rounded-xl border border-white/[0.07] bg-slate-950/65 px-4 py-3"
+          >
+            <span className="text-xs font-bold text-slate-200">
+              {String(label)}
+            </span>
+
+            <span
+              className={`flex h-6 w-6 items-center justify-center rounded-full ${
+                completed
+                  ? "bg-emerald-500/10 text-emerald-400"
+                  : "bg-amber-500/10 text-amber-400"
+              }`}
+            >
+              {completed ? "✓" : "!"}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 flex items-center justify-between rounded-xl border border-blue-400/15 bg-blue-500/[0.055] p-4">
+        <div>
+          <div className="text-[10px] font-black uppercase tracking-[0.14em] text-blue-300">
+            Inspection Progress
+          </div>
+          <div className="mt-1 text-xs text-slate-400">3 of 4 controls complete</div>
+        </div>
+
+        <div className="text-xl font-black text-white">75%</div>
+      </div>
+    </PreviewShell>
+  );
+}
+
+function DataRow({
+  label,
+  value,
+  status,
+}: {
+  label: string;
+  value: string;
+  status: "green" | "amber";
+}) {
+  return (
+    <div className="grid grid-cols-[90px_1fr_10px] items-center gap-3 rounded-xl border border-white/[0.07] bg-slate-950/70 px-4 py-3">
+      <span className="text-[10px] text-slate-500">{label}</span>
+      <span className="text-xs font-black text-white">{value}</span>
+      <span
+        className={`h-2 w-2 rounded-full ${
+          status === "green" ? "bg-emerald-400" : "bg-amber-400"
+        }`}
+      />
+    </div>
+  );
+}

@@ -236,48 +236,83 @@ export default function LocalizedNavbar({ locale }: Props) {
             </button>
 
             {isToolsOpen && (
-              <div
-                className="absolute left-1/2 top-[calc(100%+14px)] z-[300] -translate-x-1/2 overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/95 p-2 shadow-[0_25px_70px_rgba(0,0,0,.65)] backdrop-blur-2xl"
-                style={{
-                  width: "560px",
-                  maxWidth: "calc(100vw - 32px)",
-                }}
-              >
-                <div className="px-3 pb-2 pt-2">
-                  <p className="text-[10px] font-black uppercase tracking-[0.20em] text-blue-400">
-                    {isTurkish ? "HSE Araçları" : "HSE Tools"}
-                  </p>
+              <div className="fixed left-1/2 top-[86px] z-[500] w-[min(1180px,calc(100vw-48px))] -translate-x-1/2 overflow-hidden rounded-[28px] border border-blue-400/15 bg-[#030917]/[0.985] p-5 shadow-[0_35px_100px_rgba(0,0,0,.78)] backdrop-blur-2xl">
+                <div className="flex items-center justify-between gap-6 border-b border-white/[0.07] px-1 pb-5">
+                  <div className="max-w-2xl">
+                    <p className="text-[10px] font-black uppercase tracking-[0.22em] text-blue-400">
+                      {isTurkish
+                        ? "SERNEM PROFESYONEL ARAÇLARI"
+                        : "SERNEM PROFESSIONAL TOOLS"}
+                    </p>
 
-                  <p className="mt-1 text-[11px] leading-5 text-slate-500">
-                    {isTurkish
-                      ? "Analiz, dokümantasyon ve performans araçları."
-                      : "Analysis, documentation and performance tools."}
-                  </p>
+                    <h3 className="mt-2 text-2xl font-black tracking-tight text-white">
+                      {isTurkish
+                        ? "HSE iş akışınızı tek merkezden yönetin."
+                        : "Run your HSE workflow from one place."}
+                    </h3>
+
+                    <p className="mt-2 text-sm font-medium text-slate-400">
+                      {isTurkish
+                        ? "Analiz, dokümantasyon, operasyon ve performans araçlarına doğrudan erişin."
+                        : "Access analysis, documentation, operations and performance tools directly."}
+                    </p>
+                  </div>
+
+                  <div className="shrink-0 rounded-full border border-blue-400/15 bg-blue-500/[0.06] px-4 py-2 text-[10px] font-black tracking-[0.12em] text-blue-300">
+                    07 MODULES
+                  </div>
                 </div>
 
-                <div className="mt-1 border-t border-white/[0.06] pt-2">
-                  <div className="grid grid-cols-2 gap-1">
-                    {toolItems.map((item) => (
-                      <Link
-                        key={item.title}
-                        href={item.href}
-                        onClick={closeDropdowns}
-                        className="group rounded-xl border border-transparent p-3 transition hover:border-blue-400/15 hover:bg-blue-500/[0.05]"
-                      >
-                        <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.06] text-base font-black text-blue-300">
-                          {item.icon}
-                        </span>
+                <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+                  {toolItems.map((item, index) => (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      onClick={closeDropdowns}
+                      className="group relative min-h-[168px] overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 transition duration-300 hover:-translate-y-0.5 hover:border-blue-400/25 hover:bg-blue-500/[0.055]"
+                    >
+                      <div className="absolute right-3 top-3 text-[10px] font-black tracking-[0.12em] text-slate-700">
+                        {String(index + 1).padStart(2, "0")}
+                      </div>
 
-                        <span className="mt-3 block text-sm font-black text-slate-200 transition group-hover:text-white">
-                          {item.title}
-                        </span>
+                      <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.08] text-lg font-black text-blue-300 shadow-[0_8px_20px_rgba(37,99,235,.10)]">
+                        {item.icon}
+                      </span>
 
-                        <span className="mt-1 block text-[11px] leading-5 text-slate-400">
-                          {item.description}
-                        </span>
-                      </Link>
-                    ))}
+                      <span className="mt-4 block min-h-[24px] text-[15px] font-black leading-6 text-slate-100 transition group-hover:text-white">
+                        {item.title}
+                      </span>
+
+                      <span className="mt-2 block min-h-[44px] text-[11px] font-medium leading-5 text-slate-400">
+                        {item.description}
+                      </span>
+
+                      <span className="mt-4 inline-flex items-center gap-2 text-[11px] font-black text-blue-400 transition group-hover:text-blue-300">
+                        {isTurkish ? "Aracı Aç" : "Open Tool"}
+                        <span>→</span>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="mt-5 flex items-center justify-between rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4">
+                  <div>
+                    <p className="text-xs font-black text-slate-300">
+                      {isTurkish
+                        ? "Tüm modüller SERNEM çalışma alanına bağlıdır."
+                        : "All modules are connected to the SERNEM workspace."}
+                    </p>
+
+                    <p className="mt-0.5 text-[10px] text-slate-600">
+                      {isTurkish
+                        ? "Analizden raporlamaya tek platform."
+                        : "One platform from analysis to reporting."}
+                    </p>
                   </div>
+
+                  <span className="text-xs font-black text-blue-400">
+                    SERNEM →
+                  </span>
                 </div>
               </div>
             )}

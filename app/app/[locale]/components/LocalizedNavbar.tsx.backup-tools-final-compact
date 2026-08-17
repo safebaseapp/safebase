@@ -236,48 +236,40 @@ export default function LocalizedNavbar({ locale }: Props) {
             </button>
 
             {isToolsOpen && (
-              <div
-                className="absolute left-1/2 top-[calc(100%+14px)] z-[300] -translate-x-1/2 overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/95 p-2 shadow-[0_25px_70px_rgba(0,0,0,.65)] backdrop-blur-2xl"
-                style={{
-                  width: "560px",
-                  maxWidth: "calc(100vw - 32px)",
-                }}
-              >
-                <div className="px-3 pb-2 pt-2">
+              <div className="absolute left-1/2 top-[calc(100%+14px)] z-[300] w-[590px] -translate-x-1/2 overflow-hidden rounded-[24px] border border-white/10 bg-[#030917]/[0.985] p-5 shadow-[0_28px_80px_rgba(0,0,0,.72)] backdrop-blur-2xl">
+                <div className="border-b border-white/[0.07] pb-4">
                   <p className="text-[10px] font-black uppercase tracking-[0.20em] text-blue-400">
-                    {isTurkish ? "HSE Araçları" : "HSE Tools"}
+                    {isTurkish ? "HSE ARAÇLARI" : "HSE TOOLS"}
                   </p>
 
-                  <p className="mt-1 text-[11px] leading-5 text-slate-500">
+                  <p className="mt-1.5 text-xs font-medium text-slate-500">
                     {isTurkish
                       ? "Analiz, dokümantasyon ve performans araçları."
                       : "Analysis, documentation and performance tools."}
                   </p>
                 </div>
 
-                <div className="mt-1 border-t border-white/[0.06] pt-2">
-                  <div className="grid grid-cols-2 gap-1">
-                    {toolItems.map((item) => (
-                      <Link
-                        key={item.title}
-                        href={item.href}
-                        onClick={closeDropdowns}
-                        className="group rounded-xl border border-transparent p-3 transition hover:border-blue-400/15 hover:bg-blue-500/[0.05]"
-                      >
-                        <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.06] text-base font-black text-blue-300">
-                          {item.icon}
-                        </span>
+                <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2">
+                  {toolItems.map((item) => (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      onClick={closeDropdowns}
+                      className="group rounded-xl border border-transparent p-3 transition hover:border-blue-400/15 hover:bg-blue-500/[0.045]"
+                    >
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.07] text-base font-black text-blue-300 transition group-hover:border-blue-400/30 group-hover:bg-blue-500/[0.11]">
+                        {item.icon}
+                      </span>
 
-                        <span className="mt-3 block text-sm font-black text-slate-200 transition group-hover:text-white">
-                          {item.title}
-                        </span>
+                      <span className="mt-3 block text-[14px] font-black leading-5 text-slate-100 transition group-hover:text-white">
+                        {item.title}
+                      </span>
 
-                        <span className="mt-1 block text-[11px] leading-5 text-slate-400">
-                          {item.description}
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
+                      <span className="mt-1 block text-[11px] font-medium leading-5 text-slate-500">
+                        {item.description}
+                      </span>
+                    </Link>
+                  ))}
                 </div>
               </div>
             )}

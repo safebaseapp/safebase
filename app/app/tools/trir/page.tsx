@@ -1566,9 +1566,11 @@ export default function TRIRPage() {
               </div>
 
               <div className="mt-5 rounded-xl border border-white/10 bg-slate-950 px-5 py-5 text-center font-mono text-sm font-bold leading-7 text-slate-100 sm:text-base">
-                TRIR = (Recordable Cases ×{" "}
-                <span className="text-blue-400">200,000</span>)
-                <br />÷ Total Hours Worked
+                TRIR = ({isTurkish ? "Kaydedilebilir Vakalar" : "Recordable Cases"} ×{" "}
+              <span className="text-blue-400">
+                {isTurkish ? "200.000" : "200,000"}
+              </span>
+              <br />÷ {isTurkish ? "Toplam Çalışılan Saat" : "Total Hours Worked"}
               </div>
 
               <p className="mt-4 text-sm leading-6 text-slate-400">

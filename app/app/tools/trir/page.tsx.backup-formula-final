@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import jsPDF from "jspdf";
-import Link from "next/link";
+
+import { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 
 function TrendIcon({ className = "h-7 w-7" }: { className?: string }) {
@@ -26,34 +26,36 @@ function TrendIcon({ className = "h-7 w-7" }: { className?: string }) {
   );
 }
 
-function PersonShieldIcon({
-  className = "h-7 w-7",
-}: {
-  className?: string;
-}) {
+function ShieldIcon({ className = "h-6 w-6" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className}>
-      <circle cx="12" cy="7" r="3" stroke="currentColor" strokeWidth="1.8" />
       <path
-        d="M6.5 19v-3a5.5 5.5 0 0111 0v3"
+        d="M12 3l7 3v5c0 4.7-2.8 8-7 10-4.2-2-7-5.3-7-10V6l7-3z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9.5 12l1.6 1.6 3.7-4"
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinecap="round"
-      />
-      <path
-        d="M16.5 5.2L20 6.7v2.5c0 2.4-1.3 4.2-3.5 5.3-2.2-1.1-3.5-2.9-3.5-5.3V6.7l3.5-1.5z"
-        stroke="currentColor"
-        strokeWidth="1.4"
         strokeLinejoin="round"
       />
     </svg>
   );
 }
 
-function ClockIcon({ className = "h-7 w-7" }: { className?: string }) {
+function ClockIcon({ className = "h-6 w-6" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className}>
-      <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.8" />
+      <circle
+        cx="12"
+        cy="12"
+        r="8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
       <path
         d="M12 7v5l3 2"
         stroke="currentColor"
@@ -70,44 +72,7 @@ function TargetIcon({ className = "h-6 w-6" }: { className?: string }) {
     <svg viewBox="0 0 24 24" fill="none" className={className}>
       <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.8" />
       <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
-      <circle cx="12" cy="12" r="1.4" fill="currentColor" />
-    </svg>
-  );
-}
-
-function PeopleIcon({ className = "h-6 w-6" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
-      <circle cx="9" cy="8" r="3" stroke="currentColor" strokeWidth="1.8" />
-      <circle cx="17" cy="9" r="2" stroke="currentColor" strokeWidth="1.6" />
-      <path
-        d="M4 19v-2a5 5 0 0110 0v2M15 15a4 4 0 014 4"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function ClipboardIcon({ className = "h-6 w-6" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
-      <rect
-        x="5"
-        y="5"
-        width="14"
-        height="16"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <path
-        d="M9 5V3h6v2M9 10h6M9 14h6M9 18h4"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
+      <circle cx="12" cy="12" r="1.3" fill="currentColor" />
     </svg>
   );
 }
@@ -116,17 +81,31 @@ function ChartIcon({ className = "h-6 w-6" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className}>
       <path
-        d="M5 19V12M10 19V9M15 19v-5M20 19V5"
+        d="M5 19V11M10 19V7M15 19v-5M20 19V4"
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinecap="round"
       />
-      <path
-        d="M5 9l5-3 5 2 5-5"
+    </svg>
+  );
+}
+
+function LockIcon({ className = "h-6 w-6" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className}>
+      <rect
+        x="5"
+        y="10"
+        width="14"
+        height="10"
+        rx="2"
         stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M8 10V7a4 4 0 018 0v3"
+        stroke="currentColor"
+        strokeWidth="1.8"
       />
     </svg>
   );
@@ -154,44 +133,52 @@ function InfoTooltip({ text }: { text: string }) {
   );
 }
 
-export default function LTIFRCalculatorPage() {
+export default function TRIRPage() {
   const pathname = usePathname();
   const isTurkish = pathname?.startsWith("/tr");
 
-  const [lostTimeInjuries, setLostTimeInjuries] = useState("");
-  const [hoursWorked, setHoursWorked] = useState("");
+  const [cases, setCases] = useState("");
+  const [hours, setHours] = useState("");
   const [calculated, setCalculated] = useState(false);
 
-  const injuriesNumber = Number(lostTimeInjuries);
-  const hoursNumber = Number(hoursWorked);
+  const casesNumber = Number(cases);
+  const hoursNumber = Number(hours);
+
+  const trir = useMemo(() => {
+    if (
+      !calculated ||
+      !Number.isFinite(casesNumber) ||
+      !Number.isFinite(hoursNumber) ||
+      casesNumber < 0 ||
+      hoursNumber <= 0
+    ) {
+      return null;
+    }
+
+    return (casesNumber * 200000) / hoursNumber;
+  }, [calculated, casesNumber, hoursNumber]);
 
   const validInput =
-    lostTimeInjuries !== "" &&
-    hoursWorked !== "" &&
-    Number.isFinite(injuriesNumber) &&
+    cases !== "" &&
+    hours !== "" &&
+    Number.isFinite(casesNumber) &&
     Number.isFinite(hoursNumber) &&
-    injuriesNumber >= 0 &&
+    casesNumber >= 0 &&
     hoursNumber > 0;
-
-  const result = useMemo(() => {
-    if (!calculated || !validInput) return null;
-
-    return (injuriesNumber * 1_000_000) / hoursNumber;
-  }, [calculated, validInput, injuriesNumber, hoursNumber]);
 
   const calculate = () => {
     if (validInput) setCalculated(true);
   };
 
-  const clearCalculator = () => {
-    setLostTimeInjuries("");
-    setHoursWorked("");
+  const clear = () => {
+    setCases("");
+    setHours("");
     setCalculated(false);
   };
 
 
-  const downloadLTIFRPdf = async () => {
-    if (result === null || !validInput) return;
+  const downloadTRIRPdf = async () => {
+    if (trir === null || !validInput) return;
 
     const doc = new jsPDF({
       orientation: "portrait",
@@ -247,14 +234,10 @@ export default function LTIFRCalculatorPage() {
       "bold"
     );
 
-    // =====================================================
-    // COLORS
-    // =====================================================
     type RGB = [number, number, number];
 
     const C: Record<string, RGB> = {
       bg: [2, 6, 23],
-      bgSoft: [5, 12, 30],
       panel: [15, 23, 42],
       panelDark: [8, 16, 34],
       panelBlue: [9, 29, 58],
@@ -269,7 +252,6 @@ export default function LTIFRCalculatorPage() {
       violet: [124, 58, 237],
       green: [16, 185, 129],
       amber: [245, 158, 11],
-      red: [239, 68, 68],
     };
 
     const setFont = (bold = false) => {
@@ -365,7 +347,7 @@ export default function LTIFRCalculatorPage() {
       write(value, x, y, 5.2, color, true);
     };
 
-    const resultText = result.toFixed(2);
+    const resultText = trir.toFixed(2);
 
     const hoursText = hoursNumber.toLocaleString(
       isTurkish ? "tr-TR" : "en-US"
@@ -376,19 +358,18 @@ export default function LTIFRCalculatorPage() {
     );
 
     const reportId =
-      "LTIFR-" +
+      "TRIR-" +
       new Date()
         .toISOString()
         .replace(/\D/g, "")
         .slice(0, 14);
 
     // =====================================================
-    // PAGE BACKGROUND
+    // PAGE
     // =====================================================
     doc.setFillColor(...C.bg);
     doc.rect(0, 0, W, H, "F");
 
-    // subtle top line
     doc.setDrawColor(...C.border);
     doc.setLineWidth(0.35);
     doc.line(0, 13, W, 13);
@@ -414,8 +395,8 @@ export default function LTIFRCalculatorPage() {
 
     write(
       isTurkish
-        ? "LTIFR PROFESYONEL PERFORMANS RAPORU"
-        : "LTIFR PROFESSIONAL PERFORMANCE REPORT",
+        ? "TRIR PROFESYONEL PERFORMANS RAPORU"
+        : "TRIR PROFESSIONAL PERFORMANCE REPORT",
       W - 10,
       8.5,
       5.2,
@@ -444,7 +425,7 @@ export default function LTIFRCalculatorPage() {
     const rightX = leftX + leftW + gap;
     const rightW = W - rightX - 10;
 
-    // LEFT MAIN CARD
+    // LEFT
     panel(
       leftX,
       topY,
@@ -464,7 +445,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     write(
-      "LTIFR Calculator",
+      "TRIR Calculator",
       leftX + 7,
       topY + 17,
       12.5,
@@ -474,8 +455,8 @@ export default function LTIFRCalculatorPage() {
 
     wrapped(
       isTurkish
-        ? "Kayıp zamanlı yaralanma sıklık oranını, kayıp zamanlı yaralanma sayısı ve toplam çalışma saatleri üzerinden hesaplar."
-        : "Calculates Lost Time Injury Frequency Rate using lost time injuries and total working hours.",
+        ? "Toplam Kaydedilebilir Olay Oranını, kaydedilebilir vaka sayısı ve toplam çalışma saatleri üzerinden hesaplar."
+        : "Calculates Total Recordable Incident Rate using recordable cases and total working hours.",
       leftX + 7,
       topY + 24,
       leftW - 14,
@@ -485,7 +466,6 @@ export default function LTIFRCalculatorPage() {
       3
     );
 
-    // trend icon box
     panel(
       leftX + leftW - 20,
       topY + 7,
@@ -517,11 +497,10 @@ export default function LTIFRCalculatorPage() {
       topY + 10.5
     );
 
-    // Input 1
     write(
       isTurkish
-        ? "Kayıp zamanlı yaralanmalar (LTI)"
-        : "Lost time injuries (LTI)",
+        ? "Toplam kaydedilebilir vaka"
+        : "Total recordable cases",
       leftX + 18,
       topY + 41,
       4.6,
@@ -538,10 +517,10 @@ export default function LTIFRCalculatorPage() {
     );
 
     write(
-      "LTI",
+      "REC",
       leftX + 10,
-      topY + 49.5,
-      3.5,
+      topY + 49.4,
+      3,
       C.blue,
       true,
       "center"
@@ -558,7 +537,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     write(
-      String(injuriesNumber),
+      String(casesNumber),
       leftX + 23,
       topY + 51,
       6.3,
@@ -574,7 +553,6 @@ export default function LTIFRCalculatorPage() {
       C.muted2
     );
 
-    // Input 2
     write(
       isTurkish
         ? "Toplam çalışılan saat"
@@ -633,7 +611,6 @@ export default function LTIFRCalculatorPage() {
       C.muted2
     );
 
-    // Calculation bar
     doc.setFillColor(...C.blue2);
     doc.roundedRect(
       leftX + 7,
@@ -646,7 +623,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     write(
-      `${injuriesNumber} × 1.000.000 ÷ ${hoursText} = ${resultText}`,
+      `${casesNumber} × 200.000 ÷ ${hoursText} = ${resultText}`,
       leftX + leftW / 2,
       topY + 96.3,
       4.3,
@@ -656,7 +633,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     // =====================================================
-    // RIGHT RESULT CARD
+    // RIGHT RESULT
     // =====================================================
     panel(
       rightX,
@@ -669,12 +646,11 @@ export default function LTIFRCalculatorPage() {
     );
 
     sectionTitle(
-      "LTIFR RESULT",
+      "TRIR RESULT",
       rightX + 7,
       topY + 8
     );
 
-    // calculated chip
     doc.setFillColor(5, 53, 45);
     doc.setDrawColor(...C.green);
     doc.roundedRect(
@@ -697,7 +673,6 @@ export default function LTIFRCalculatorPage() {
       "center"
     );
 
-    // result ring
     const ringX = rightX + 20;
     const ringY = topY + 29;
 
@@ -709,7 +684,6 @@ export default function LTIFRCalculatorPage() {
       C.bg
     );
 
-    // jsPDF does not provide arc(); use concentric circles instead.
     doc.setDrawColor(...C.violet);
     doc.setLineWidth(1.5);
     doc.circle(ringX, ringY, 10, "S");
@@ -738,7 +712,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     write(
-      "LTIFR",
+      "TRIR",
       rightX + 38,
       topY + 35,
       9,
@@ -748,8 +722,8 @@ export default function LTIFRCalculatorPage() {
 
     wrapped(
       isTurkish
-        ? "1.000.000 çalışma saati başına kayıp zamanlı yaralanma sıklığı."
-        : "Lost time injury frequency per 1,000,000 hours worked.",
+        ? "200.000 çalışma saati başına toplam kaydedilebilir olay oranı."
+        : "Total Recordable Incident Rate per 200,000 working hours.",
       rightX + 38,
       topY + 41,
       rightW - 45,
@@ -759,7 +733,6 @@ export default function LTIFRCalculatorPage() {
       3
     );
 
-    // result interpretation
     panel(
       rightX + 7,
       topY + 45,
@@ -783,8 +756,8 @@ export default function LTIFRCalculatorPage() {
 
     wrapped(
       isTurkish
-        ? `${resultText} LTIFR değerini tek başına iyi/kötü olarak yorumlamayın; trendler ve benzer operasyonlarla karşılaştırın.`
-        : `Do not classify ${resultText} LTIFR in isolation; compare trends and similar operations.`,
+        ? `${resultText} TRIR değerini tek başına iyi/kötü olarak yorumlamayın; trendler, sektör ve benzer operasyonlarla karşılaştırın.`
+        : `Do not classify ${resultText} TRIR in isolation; compare trends, industry and similar operations.`,
       rightX + 11,
       topY + 53.2,
       rightW - 22,
@@ -796,7 +769,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     // =====================================================
-    // RIGHT FORMULA
+    // FORMULA
     // =====================================================
     const formulaY = topY + 63;
 
@@ -827,7 +800,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     write(
-      "LTIFR = (Lost Time Injuries × 1,000,000)",
+      "TRIR = (Recordable Cases × 200,000)",
       rightX + rightW / 2,
       formulaY + 18,
       4.4,
@@ -848,8 +821,8 @@ export default function LTIFRCalculatorPage() {
 
     wrapped(
       isTurkish
-        ? "1.000.000 saatlik baz, uluslararası LTIFR raporlamasında kullanılan yaygın normalizasyon bazlarından biridir."
-        : "The 1,000,000-hour base is a commonly used normalization basis for LTIFR reporting.",
+        ? "200.000 saatlik baz, yaklaşık 100 tam zamanlı çalışanın yıllık çalışma süresini temsil eden standart normalizasyon bazıdır."
+        : "The 200,000-hour base represents the approximate annual hours of 100 full-time workers.",
       rightX + 7,
       formulaY + 30,
       rightW - 32,
@@ -870,7 +843,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     write(
-      "1,000,000",
+      "200,000",
       rightX + rightW - 16,
       formulaY + 31.2,
       3.3,
@@ -889,7 +862,6 @@ export default function LTIFRCalculatorPage() {
       "center"
     );
 
-    // Important
     panel(
       rightX,
       topY + 106,
@@ -911,8 +883,8 @@ export default function LTIFRCalculatorPage() {
 
     wrapped(
       isTurkish
-        ? "Karşılaştırmalarda aynı LTI tanımı, çalışan kapsamı ve doğrulanmış çalışma saatleri kullanılmalıdır."
-        : "Use consistent LTI definitions, workforce scope and verified working hours for comparisons.",
+        ? "Karşılaştırmalarda aynı kayıt kriteri, çalışan kapsamı ve doğrulanmış çalışma saatleri kullanılmalıdır."
+        : "Use consistent recordability criteria, workforce scope and verified working hours for comparisons.",
       rightX + 7,
       topY + 116.7,
       rightW - 14,
@@ -923,7 +895,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     // =====================================================
-    // KNOWLEDGE GUIDE
+    // KNOWLEDGE
     // =====================================================
     const guideY = 126;
 
@@ -939,16 +911,16 @@ export default function LTIFRCalculatorPage() {
 
     sectionTitle(
       isTurkish
-        ? "LTIFR BİLGİ REHBERİ"
-        : "LTIFR KNOWLEDGE GUIDE",
+        ? "TRIR BİLGİ REHBERİ"
+        : "TRIR KNOWLEDGE GUIDE",
       16,
       guideY + 8
     );
 
     write(
       isTurkish
-        ? "LTIFR'ı doğru okuyun ve doğru kullanın"
-        : "Understand and use LTIFR correctly",
+        ? "TRIR'ı doğru okuyun ve doğru kullanın"
+        : "Understand and use TRIR correctly",
       16,
       guideY + 15,
       8.2,
@@ -958,8 +930,8 @@ export default function LTIFRCalculatorPage() {
 
     wrapped(
       isTurkish
-        ? "Sonucun güvenilir olması; LTI tanımı, raporlama dönemi, çalışan kapsamı ve çalışma saatlerinin tutarlı olmasına bağlıdır."
-        : "Reliable interpretation depends on consistent LTI definitions, reporting periods, workforce scope and working-hour data.",
+        ? "Doğru yorumlama; kayıt kriterlerinin, raporlama döneminin, çalışan kapsamının ve 200.000 saatlik normalizasyonun tutarlı kullanılmasına bağlıdır."
+        : "Reliable interpretation depends on consistent recordability criteria, reporting periods, workforce scope and 200,000-hour normalization.",
       16,
       guideY + 20,
       W - 32,
@@ -978,60 +950,60 @@ export default function LTIFRCalculatorPage() {
       ? [
           {
             no: "01",
-            title: "LTIFR Nedir?",
+            title: "TRIR Nedir?",
             body:
-              "Kayıp zamanlı yaralanma sıklığını çalışma saatlerine göre normalize eden HSE performans göstergesidir.",
+              "Kaydedilebilir iş ilişkili vakaların sıklığını 200.000 çalışma saatine göre normalize eden HSE performans göstergesidir.",
             color: C.blue,
           },
           {
             no: "02",
-            title: "Neden 1.000.000?",
+            title: "Neden 200.000?",
             body:
-              "Farklı büyüklükteki operasyonların yaralanma sıklığını ortak ölçekte kıyaslamayı sağlar.",
+              "Yaklaşık 100 tam zamanlı çalışanın yıllık çalışma süresini temsil eden standart karşılaştırma bazıdır.",
             color: C.green,
           },
           {
             no: "03",
             title: "Hangi Vakalar Sayılır?",
             body:
-              "Yalnızca kuruluşunuzun veya geçerli standardın LTI olarak tanımladığı iş ilişkili vakaları dahil edin.",
+              "Geçerli kayıt standardına göre kaydedilebilir kabul edilen iş ilişkili vakaları dahil edin.",
             color: C.violet,
           },
           {
             no: "04",
             title: "Nasıl Yorumlanır?",
             body:
-              "Tek değeri izole değerlendirmeyin. Trend, sektör verisi, benzer operasyon ve önceki dönemleri birlikte inceleyin.",
+              "Tek değeri izole değerlendirmeyin. Trend, sektör, benzer operasyonlar ve önceki dönemlerle birlikte inceleyin.",
             color: C.amber,
           },
         ]
       : [
           {
             no: "01",
-            title: "What is LTIFR?",
+            title: "What is TRIR?",
             body:
-              "An HSE performance indicator that normalizes lost time injury frequency against hours worked.",
+              "An HSE performance indicator that normalizes recordable work-related cases to 200,000 working hours.",
             color: C.blue,
           },
           {
             no: "02",
-            title: "Why 1,000,000?",
+            title: "Why 200,000?",
             body:
-              "It provides a common scale for comparing injury frequency across different workforce sizes.",
+              "A standard comparison base representing approximately 100 full-time workers annually.",
             color: C.green,
           },
           {
             no: "03",
             title: "Which Cases Count?",
             body:
-              "Include only work-related cases classified as LTI under the applicable reporting standard.",
+              "Include work-related cases classified as recordable under the applicable reporting standard.",
             color: C.violet,
           },
           {
             no: "04",
             title: "How to Interpret?",
             body:
-              "Avoid isolated interpretation. Review trends, industry data, comparable operations and prior periods.",
+              "Avoid isolated interpretation. Compare trends, industry, similar operations and historical periods.",
             color: C.amber,
           },
         ];
@@ -1118,13 +1090,13 @@ export default function LTIFRCalculatorPage() {
 
     const practices = isTurkish
       ? [
-          "LTI sınıflandırmasını tutarlı uygulayın.",
-          "Toplam çalışma saatlerini doğrulayın.",
+          "Kayıt kriterlerini tutarlı uygulayın.",
+          "Çalışma saatlerini doğrulayın.",
           "Tek değerden çok trende odaklanın.",
-          "Sonucu iyileştirme faaliyetleri için kullanın.",
+          "Sonucu iyileştirme faaliyetlerinde kullanın.",
         ]
       : [
-          "Apply consistent LTI classification.",
+          "Apply consistent recordability criteria.",
           "Verify total working hours.",
           "Focus on trends, not a single value.",
           "Use results to support improvement actions.",
@@ -1152,7 +1124,6 @@ export default function LTIFRCalculatorPage() {
       );
     });
 
-    // benchmark card
     panel(
       benchX,
       bottomY,
@@ -1173,8 +1144,8 @@ export default function LTIFRCalculatorPage() {
 
     wrapped(
       isTurkish
-        ? "LTIFR değerini benzer operasyonlar, aynı sektör, önceki dönemler ve kuruluşunuzun hedefleriyle karşılaştırın. Asıl değer tek bir rakamdan çok zaman içindeki yön ve sürekli iyileştirmedir."
-        : "Compare LTIFR with similar operations, the same industry, historical periods and organizational targets. Trend direction and continuous improvement matter more than one isolated number.",
+        ? "TRIR değerini aynı sektör, benzer operasyonlar, önceki dönemler ve kuruluşunuzun kendi hedefleriyle karşılaştırın. Asıl değer tek bir rakamdan çok zaman içindeki yön ve sürekli iyileştirmedir."
+        : "Compare TRIR with the same industry, similar operations, historical periods and your own targets. Trend direction and continuous improvement matter more than one isolated number.",
       benchX + 6,
       bottomY + 16,
       benchW - 45,
@@ -1185,7 +1156,6 @@ export default function LTIFRCalculatorPage() {
       1.2
     );
 
-    // mini trend chart
     const chartX = benchX + benchW - 39;
     const chartY = bottomY + 16;
     const chartW = 31;
@@ -1259,8 +1229,8 @@ export default function LTIFRCalculatorPage() {
 
     wrapped(
       isTurkish
-        ? "Bu rapor girilen verilere dayalı otomatik LTIFR hesaplamasıdır. Kuruluşunuzun, müşterinizin veya geçerli mevzuatın kullandığı LTI tanımı ve raporlama kuralları ayrıca doğrulanmalıdır."
-        : "This report is an automated LTIFR calculation based on the data entered. Verify the LTI definition and reporting requirements used by your organization, client or applicable jurisdiction.",
+        ? "Bu rapor girilen verilere dayalı otomatik TRIR hesaplamasıdır. Kuruluşunuzun, müşterinizin veya geçerli mevzuatın kullandığı kayıt kriterleri ve raporlama kuralları ayrıca doğrulanmalıdır."
+        : "This report is an automated TRIR calculation based on the data entered. Verify the recordability criteria and reporting requirements used by your organization, client or applicable jurisdiction.",
       16,
       disclaimerY + 12,
       W - 55,
@@ -1290,14 +1260,11 @@ export default function LTIFRCalculatorPage() {
       "right"
     );
 
-    // =====================================================
-    // FOOTER
-    // =====================================================
     doc.setDrawColor(...C.border);
     doc.line(10, 285, W - 10, 285);
 
     write(
-      "SERNEM • LTIFR Calculator",
+      "SERNEM • TRIR Calculator",
       10,
       290,
       3.1,
@@ -1325,43 +1292,40 @@ export default function LTIFRCalculatorPage() {
     );
 
     doc.save(
-      `SERNEM-LTIFR-Dashboard-${resultText.replace(".", "-")}.pdf`
+      `SERNEM-TRIR-Dashboard-${resultText.replace(".", "-")}.pdf`
     );
   };
 
-  const displayedResult = result === null ? "--" : result.toFixed(2);
+  const displayedResult = trir !== null ? trir.toFixed(2) : "--";
 
   return (
     <main
       className="relative min-h-screen overflow-hidden bg-slate-950 text-white"
       style={{
         background:
-          "radial-gradient(circle at 14% 8%, rgba(37,99,235,0.10), transparent 25%), radial-gradient(circle at 88% 24%, rgba(6,182,212,0.06), transparent 27%), radial-gradient(circle at 55% 86%, rgba(124,58,237,0.05), transparent 30%), #020617",
+          "radial-gradient(circle at 15% 10%, rgba(37,99,235,0.10), transparent 28%), radial-gradient(circle at 85% 25%, rgba(6,182,212,0.06), transparent 25%), #020617",
       }}
     >
-      {/* BACKGROUND GLOW */}
+      {/* ambient background */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[8%] top-[12%] h-80 w-80 rounded-full bg-blue-600/[0.05] blur-[120px]" />
-        <div className="absolute right-[7%] top-[25%] h-96 w-96 rounded-full bg-cyan-500/[0.04] blur-[140px]" />
+        <div className="absolute left-[12%] top-10 h-[420px] w-[420px] rounded-full bg-blue-600/[0.06] blur-[120px]" />
+        <div className="absolute right-[5%] top-[20%] h-[360px] w-[360px] rounded-full bg-cyan-500/[0.04] blur-[130px]" />
+        <div className="absolute bottom-0 left-[45%] h-[300px] w-[500px] rounded-full bg-violet-600/[0.04] blur-[140px]" />
       </div>
 
       <div className="relative mx-auto w-full max-w-[1380px] px-5 py-10 sm:px-8 lg:px-10 lg:py-14">
-        {/* BACK */}
-        <Link
+        <a
           href={isTurkish ? "/tr/tools" : "/en/tools"}
           className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 transition hover:text-blue-300"
         >
           <span>←</span>
-          {isTurkish
-            ? "Tüm Hesaplayıcılara Dön"
-            : "Back to Safety Calculators"}
-        </Link>
+          {isTurkish ? "Tüm Hesaplayıcılara Dön" : "Back to Safety Calculators"}
+        </a>
 
-        {/* MAIN GRID */}
-        <section className="mt-7 grid gap-7 xl:grid-cols-[1.02fr_0.98fr]">
+        <section className="mt-7 grid gap-7 xl:grid-cols-[1.03fr_0.97fr]">
           {/* LEFT */}
-          <div className="relative overflow-hidden rounded-[28px] border border-blue-400/20 bg-slate-900 p-6 shadow-[0_30px_100px_rgba(0,0,0,.35),0_0_40px_rgba(37,99,235,.05)] sm:p-8 lg:p-9">
-            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-blue-500/[0.07] blur-3xl" />
+          <div className="relative overflow-hidden rounded-[28px] border border-blue-400/20 bg-slate-900 shadow-[0_25px_80px_rgba(2,6,23,0.55),0_0_40px_rgba(37,99,235,0.05)] p-6 shadow-[0_30px_100px_rgba(0,0,0,.35)] sm:p-8 lg:p-9">
+            <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-500/[0.07] blur-3xl" />
 
             <div className="relative">
               <div className="flex items-start justify-between gap-5">
@@ -1373,13 +1337,13 @@ export default function LTIFRCalculatorPage() {
                   </p>
 
                   <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl lg:text-[42px]">
-                    LTIFR Calculator
+                    TRIR Calculator
                   </h1>
 
                   <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400 sm:text-[15px]">
                     {isTurkish
-                      ? "Kayıp zamanlı yaralanma sıklık oranını, kayıp zamanlı yaralanma sayısı ve toplam çalışma saatlerini kullanarak hesaplayın."
-                      : "Calculate the Lost Time Injury Frequency Rate using lost time injuries and total hours worked."}
+                      ? "Toplam Kaydedilebilir Olay Oranını, kaydedilebilir vaka sayısı ve toplam çalışan saatlerini kullanarak profesyonel şekilde hesaplayın."
+                      : "Calculate the Total Recordable Incident Rate using recordable cases and total employee hours worked."}
                   </p>
                 </div>
 
@@ -1388,36 +1352,33 @@ export default function LTIFRCalculatorPage() {
                 </div>
               </div>
 
-              {/* INPUTS */}
               <div className="mt-10 space-y-7">
                 <div className="grid gap-4 sm:grid-cols-[72px_1fr] sm:items-center">
                   <div className="flex h-[66px] w-[66px] items-center justify-center rounded-2xl border border-blue-500/40 bg-blue-500/[0.08] text-blue-400">
-                    <PersonShieldIcon className="h-8 w-8" />
+                    <ShieldIcon className="h-8 w-8" />
                   </div>
 
                   <label>
                     <span className="flex items-center gap-2 text-sm font-bold text-slate-200">
                       {isTurkish
-                        ? "Kayıp zamanlı yaralanmalar (LTI)"
-                        : "Lost time injuries (LTI)"}
-
+                        ? "Toplam kaydedilebilir vaka"
+                        : "Total recordable cases"}
                       <InfoTooltip
                         text={
                           isTurkish
-                            ? "Kuruluşunuzun kullandığı kayıt standardına göre kayıp zaman oluşturan iş ilişkili yaralanmaların sayısını girin. LTI tanımı kullanılan ülke, müşteri veya şirket standardına göre değişebilir."
-                            : "Enter the number of work-related injuries classified as lost time injuries under your organization's reporting standard. LTI definitions can vary by jurisdiction or company standard."
+                            ? "OSHA kayıt kriterlerine göre kaydedilebilir kabul edilen iş ilişkili vakaların toplam sayısını girin. Ölüm, işten uzak kalma, kısıtlı çalışma veya görev değişikliği ve belirli tıbbi tedavi gerektiren vakalar bu kapsama girebilir."
+                            : "Enter the total number of work-related cases considered recordable under OSHA recordkeeping criteria, including cases involving death, days away, restricted work or job transfer, and certain medical treatment."
                         }
                       />
                     </span>
 
                     <input
-                      id="lost-time-injuries"
                       type="number"
                       min="0"
                       step="1"
-                      value={lostTimeInjuries}
-                      onChange={(event) => {
-                        setLostTimeInjuries(event.target.value);
+                      value={cases}
+                      onChange={(e) => {
+                        setCases(e.target.value);
                         setCalculated(false);
                       }}
                       placeholder="4"
@@ -1425,9 +1386,7 @@ export default function LTIFRCalculatorPage() {
                     />
 
                     <span className="mt-2 block text-xs text-slate-500">
-                      {isTurkish
-                        ? "Örnek: 4"
-                        : "Example: 4"}
+                      {isTurkish ? "Örnek: 4" : "Example: 4"}
                     </span>
                   </label>
                 </div>
@@ -1442,24 +1401,21 @@ export default function LTIFRCalculatorPage() {
                       {isTurkish
                         ? "Toplam çalışılan saat"
                         : "Total hours worked"}
-
                       <InfoTooltip
                         text={
                           isTurkish
-                            ? "Aynı raporlama döneminde ilgili çalışan grubunun fiilen çalıştığı toplam saatleri girin. Yaralanma verisi ve çalışma saati aynı döneme ait olmalıdır."
-                            : "Enter total hours actually worked by the relevant workforce during the same reporting period. Injury data and hours worked must refer to the same period."
+                            ? "Aynı raporlama döneminde çalışanların fiilen çalıştığı toplam saatleri girin. Doğru karşılaştırma için vaka sayısı ve çalışma saatleri aynı dönemden olmalıdır."
+                            : "Enter the total hours actually worked by employees during the same reporting period. Cases and working hours must come from the same period for a valid rate."
                         }
                       />
                     </span>
 
                     <input
-                      id="hours-worked"
                       type="number"
                       min="1"
-                      step="1"
-                      value={hoursWorked}
-                      onChange={(event) => {
-                        setHoursWorked(event.target.value);
+                      value={hours}
+                      onChange={(e) => {
+                        setHours(e.target.value);
                         setCalculated(false);
                       }}
                       placeholder="500000"
@@ -1467,15 +1423,12 @@ export default function LTIFRCalculatorPage() {
                     />
 
                     <span className="mt-2 block text-xs text-slate-500">
-                      {isTurkish
-                        ? "Örnek: 500000"
-                        : "Example: 500000"}
+                      {isTurkish ? "Örnek: 500000" : "Example: 500000"}
                     </span>
                   </label>
                 </div>
               </div>
 
-              {/* BUTTONS */}
               <button
                 type="button"
                 onClick={calculate}
@@ -1483,35 +1436,29 @@ export default function LTIFRCalculatorPage() {
                 className="mt-8 flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 text-sm font-black text-white shadow-[0_12px_35px_rgba(37,99,235,.25)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
               >
                 <span className="text-lg">▦</span>
-                {isTurkish
-                  ? "LTIFR HESAPLA"
-                  : "CALCULATE LTIFR"}
+                {isTurkish ? "TRIR HESAPLA" : "CALCULATE TRIR"}
               </button>
 
               <button
                 type="button"
-                onClick={clearCalculator}
+                onClick={clear}
                 className="mt-3 flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-slate-950/30 text-sm font-bold text-slate-300 transition hover:border-white/20 hover:bg-slate-900"
               >
                 <span className="text-lg">↻</span>
-                {isTurkish
-                  ? "Tümünü Temizle"
-                  : "Clear All"}
+                {isTurkish ? "Tümünü Temizle" : "Clear All"}
               </button>
 
-              {/* TIP */}
               <div className="mt-5 flex items-start gap-3 rounded-xl border border-blue-500/25 bg-blue-500/[0.06] px-4 py-4">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm">
                   💡
                 </div>
-
                 <p className="pt-1 text-xs leading-5 text-slate-400">
                   <strong className="text-blue-300">
                     {isTurkish ? "İpucu:" : "Tip:"}
                   </strong>{" "}
                   {isTurkish
-                    ? "Doğru karşılaştırma için LTI sayısı ve toplam çalışma saati aynı raporlama dönemine ait olmalıdır."
-                    : "For accurate comparison, both LTI data and total hours worked should come from the same reporting period."}
+                    ? "Doğru karşılaştırma için vaka ve çalışma saati verilerinin aynı zaman dönemine ait olduğundan emin olun."
+                    : "Ensure case and working-hour data are from the same time period for accurate comparisons."}
                 </p>
               </div>
             </div>
@@ -1519,7 +1466,6 @@ export default function LTIFRCalculatorPage() {
 
           {/* RIGHT */}
           <div className="space-y-5">
-            {/* RESULT */}
             <section
               className="relative overflow-hidden rounded-[28px] border border-cyan-400/30 bg-slate-900 p-6 shadow-[0_30px_100px_rgba(0,0,0,.35),0_0_50px_rgba(6,182,212,.06)] sm:p-8"
               style={{
@@ -1527,31 +1473,27 @@ export default function LTIFRCalculatorPage() {
                   "radial-gradient(circle at 78% 30%, rgba(37,99,235,.12), transparent 35%), linear-gradient(135deg,#0f1c34,#071326)",
               }}
             >
+              <div className="pointer-events-none absolute right-[-8%] top-[25%] h-64 w-64 rounded-full border border-blue-500/10 opacity-30" />
+              <div className="pointer-events-none absolute bottom-0 right-0 h-40 w-80 bg-gradient-to-tl from-blue-500/[0.08] to-transparent" />
+
               <div className="relative flex items-start justify-between">
                 <p className="text-sm font-black uppercase tracking-[0.16em] text-blue-400">
-                  LTIFR RESULT
+                  TRIR RESULT
                 </p>
 
-                <span
-                  className={`rounded-lg border px-3 py-1.5 text-[11px] font-black ${
-                    result === null
-                      ? "border-slate-600/50 bg-slate-800/50 text-slate-400"
-                      : "border-emerald-400/50 bg-emerald-500/10 text-emerald-400"
-                  }`}
-                >
-                  {result === null
-                    ? `◷ ${isTurkish ? "Veri Bekleniyor" : "Waiting for input"}`
-                    : `✓ ${isTurkish ? "Hesaplandı" : "Calculated"}`}
-                </span>
+                {trir !== null && (
+                  <span className="rounded-lg border border-emerald-400/50 bg-emerald-500/10 px-3 py-1.5 text-[11px] font-black text-emerald-400">
+                    ✓ {isTurkish ? "Hesaplandı" : "Calculated"}
+                  </span>
+                )}
               </div>
 
               <div className="relative mt-7 grid gap-7 md:grid-cols-[190px_1fr] md:items-center">
-                {/* RING */}
                 <div className="relative mx-auto flex h-[190px] w-[190px] items-center justify-center rounded-full border border-blue-400/20 bg-slate-950 shadow-[0_0_45px_rgba(37,99,235,.12)]">
                   <div className="absolute inset-[13px] rounded-full bg-[conic-gradient(from_10deg,#168cff,#7357ff,#168cff)] p-[8px]">
                     <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-950">
                       <div className="flex h-[100px] w-[100px] items-center justify-center rounded-full bg-blue-500/[0.07] text-blue-500 shadow-[0_0_35px_rgba(37,99,235,.18)]">
-                        <PersonShieldIcon className="h-14 w-14" />
+                        <TrendIcon className="h-14 w-14" />
                       </div>
                     </div>
                   </div>
@@ -1563,116 +1505,82 @@ export default function LTIFRCalculatorPage() {
                   </div>
 
                   <div className="mt-1 text-4xl font-black tracking-tight text-blue-500">
-                    LTIFR
+                    TRIR
                   </div>
 
                   <p className="mt-4 max-w-sm text-sm leading-6 text-slate-400">
                     {isTurkish
-                      ? "1.000.000 çalışma saati başına kayıp zamanlı yaralanma sıklığı."
-                      : "Lost Time Injury Frequency Rate per 1,000,000 hours worked."}
+                      ? "200.000 çalışma saati başına Toplam Kaydedilebilir Olay Oranı."
+                      : "Total Recordable Incident Rate per 200,000 working hours."}
                   </p>
                 </div>
               </div>
 
-              {/* INTERPRETATION */}
-              <div className="relative mt-6 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 py-4">
-                <div className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-400">
-                  {isTurkish
-                    ? "BU SONUÇ NE ANLAMA GELİYOR?"
-                    : "WHAT THIS MEANS"}
-                </div>
-
-                <p className="mt-2 text-xs leading-5 text-slate-300">
-                  {result === null
-                    ? isTurkish
-                      ? "LTIFR, çalışanların işten uzak kalmasına yol açan kayıp zamanlı yaralanmaların sıklığını normalize ederek gösterir. Sonucu görmek için verileri girin."
-                      : "LTIFR normalizes the frequency of injuries that result in lost time from work. Enter your data to calculate the result."
-                    : isTurkish
-                      ? `Hesaplanan LTIFR değeri ${result.toFixed(
-                          2
-                        )}. Bu değeri tek başına iyi veya kötü olarak sınıflandırmak yerine önceki dönemler, benzer operasyonlar ve kuruluşunuzun kullandığı benchmarklarla karşılaştırın.`
-                      : `The calculated LTIFR is ${result.toFixed(
-                          2
-                        )}. Rather than classifying it as good or bad in isolation, compare it with historical periods, comparable operations and your organization's benchmarks.`}
-                </p>
-              </div>
-
-              {/* DATA */}
-              <div className="relative mt-6 grid grid-cols-2 divide-x divide-white/10 rounded-xl border border-blue-400/20 bg-slate-950/20">
-                <div className="px-5 py-4 text-center">
-                  <div className="text-xs text-slate-400">
-                    {isTurkish
-                      ? "Kayıp Zamanlı Yaralanma"
-                      : "Lost Time Injuries"}
+              {trir !== null && (
+                <div className="relative mt-6 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 py-4">
+                  <div className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-400">
+                    {isTurkish ? "SONUÇ YORUMU" : "RESULT INTERPRETATION"}
                   </div>
 
+                  <p className="mt-2 text-xs leading-5 text-slate-300">
+                    {isTurkish
+                      ? `Hesaplanan TRIR değeri ${trir.toFixed(
+                          2
+                        )}. Bu sonuç performans trendleri, önceki dönemler ve benzer operasyonlarla birlikte değerlendirilmelidir.`
+                      : `The calculated TRIR is ${trir.toFixed(
+                          2
+                        )}. Evaluate this result together with historical trends, comparable operations and reporting periods.`}
+                  </p>
+                </div>
+              )}
+
+              <div className="relative mt-7 grid grid-cols-2 divide-x divide-white/10 rounded-xl border border-blue-400/20 bg-slate-950/20">
+                <div className="px-5 py-4 text-center">
+                  <div className="text-xs text-slate-400">
+                    {isTurkish ? "Kaydedilebilir Vaka" : "Recordable Cases"}
+                  </div>
                   <div className="mt-1 text-xl font-black">
-                    {lostTimeInjuries || "--"}
+                    {cases || "--"}
                   </div>
                 </div>
 
                 <div className="px-5 py-4 text-center">
                   <div className="text-xs text-slate-400">
-                    {isTurkish
-                      ? "Toplam Çalışma Saati"
-                      : "Total Hours Worked"}
+                    {isTurkish ? "Toplam Çalışma Saati" : "Total Hours Worked"}
                   </div>
-
                   <div className="mt-1 text-xl font-black">
                     {hoursNumber > 0
-                      ? hoursNumber.toLocaleString(
-                          isTurkish ? "tr-TR" : "en-US"
-                        )
+                      ? hoursNumber.toLocaleString(isTurkish ? "tr-TR" : "en-US")
                       : "--"}
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* FORMULA */}
             <section className="rounded-[24px] border border-white/10 bg-slate-900/65 p-6 sm:p-7">
               <div className="flex items-center gap-3 text-blue-400">
-                <span className="text-xl">▦</span>
-
+                <span className="text-xl">⚗</span>
                 <h2 className="text-sm font-black uppercase tracking-[0.16em]">
                   {isTurkish ? "FORMÜL" : "FORMULA"}
                 </h2>
               </div>
 
               <div className="mt-5 rounded-xl border border-white/10 bg-slate-950 px-5 py-5 text-center font-mono text-sm font-bold leading-7 text-slate-100 sm:text-base">
-                LTIFR = ({isTurkish ? "Kayıp Zamanlı Yaralanmalar" : "Lost Time Injuries"} ×{" "}
-              <span className="text-blue-400">
-                {isTurkish ? "1.000.000" : "1,000,000"}
-              </span>
-              )
-              <br />
-              ÷ {isTurkish ? "Toplam Çalışılan Saat" : "Total Hours Worked"}
+                TRIR = (Recordable Cases ×{" "}
+                <span className="text-blue-400">200,000</span>)
+                <br />÷ Total Hours Worked
               </div>
 
-              <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_180px]">
-                <p className="text-sm leading-6 text-slate-400">
-                  {isTurkish
-                    ? "1.000.000 saatlik baz, uluslararası LTIFR raporlamasında yaygın kullanılan normalizasyon yöntemlerinden biridir."
-                    : "The 1,000,000-hour base is commonly used for international LTIFR reporting."}
-                </p>
-
-                <div className="rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-4 py-3">
-                  <div className="text-xs font-black text-blue-300">
-                    1,000,000
-                  </div>
-
-                  <div className="mt-1 text-[10px] leading-4 text-slate-500">
-                    {isTurkish
-                      ? "Normalize edilmiş karşılaştırma bazı"
-                      : "Normalized comparison base"}
-                  </div>
-                </div>
-              </div>
-
+              <p className="mt-4 text-sm leading-6 text-slate-400">
+                {isTurkish
+                  ? "200.000 saatlik baz, haftada 40 saat ve yılda 50 hafta çalışan yaklaşık 100 tam zamanlı çalışanın yıllık çalışma süresini temsil eder."
+                  : "The 200,000-hour base represents 100 full-time employees working 40 hours per week for 50 weeks."}
+              </p>
+            
               <button
                 type="button"
-                onClick={downloadLTIFRPdf}
-                disabled={result === null}
+                onClick={downloadTRIRPdf}
+                disabled={trir === null}
                 className="mt-6 flex w-full items-center justify-between rounded-xl border border-blue-400/20 bg-gradient-to-r from-blue-600/20 via-blue-500/10 to-violet-500/20 px-5 py-4 text-left transition hover:border-blue-400/40 hover:from-blue-600/30 hover:to-violet-500/30 disabled:cursor-not-allowed disabled:border-white/5 disabled:bg-slate-950/40 disabled:opacity-40"
               >
                 <span className="flex items-center gap-4">
@@ -1683,8 +1591,8 @@ export default function LTIFRCalculatorPage() {
                   <span>
                     <span className="block text-xs font-black uppercase tracking-[0.08em] text-white">
                       {isTurkish
-                        ? "PROFESYONEL LTIFR RAPORU (PDF)"
-                        : "PROFESSIONAL LTIFR REPORT (PDF)"}
+                        ? "PROFESYONEL TRIR RAPORU (PDF)"
+                        : "PROFESSIONAL TRIR REPORT (PDF)"}
                     </span>
 
                     <span className="mt-1 block text-[11px] text-slate-400">
@@ -1699,15 +1607,12 @@ export default function LTIFRCalculatorPage() {
                   ↓
                 </span>
               </button>
-            </section>
 
-            {/* IMPORTANT */}
+</section>
+
             <section className="rounded-[24px] border border-amber-500/35 bg-gradient-to-r from-amber-500/[0.09] to-orange-500/[0.04] p-6 sm:p-7">
               <div className="flex items-center gap-3">
-                <span className="text-xl text-amber-400">
-                  ⚠
-                </span>
-
+                <span className="text-xl text-amber-400">⚠</span>
                 <h2 className="text-sm font-black uppercase tracking-[0.1em] text-amber-400">
                   {isTurkish ? "ÖNEMLİ" : "IMPORTANT"}
                 </h2>
@@ -1715,232 +1620,139 @@ export default function LTIFRCalculatorPage() {
 
               <p className="mt-4 text-sm leading-6 text-slate-300">
                 {isTurkish
-                  ? "Dönemler veya lokasyonlar arasında kıyaslama yaparken aynı LTI tanımını, aynı çalışan kapsamını ve doğrulanmış çalışma saati verilerini kullanın."
-                  : "Use consistent LTI definitions, workforce scope and verified working-hour data when comparing performance across periods or locations."}
+                  ? "Dönemler, lokasyonlar veya iş birimleri arasında performans karşılaştırması yaparken tutarlı vaka sınıflandırması ve doğrulanmış çalışma saati verileri kullanın."
+                  : "Use consistent case classification and verified working-hour data when comparing performance across periods or locations."}
               </p>
             </section>
           </div>
         </section>
 
-        {/* KNOWLEDGE */}
+        {/* TRIR KNOWLEDGE */}
         <section className="mt-7 rounded-[26px] border border-white/10 bg-slate-900/70 p-6 sm:p-7">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
-              {isTurkish
-                ? "LTIFR BİLGİ REHBERİ"
-                : "UNDERSTAND LTIFR"}
-            </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
+                {isTurkish ? "TRIR BİLGİ REHBERİ" : "TRIR KNOWLEDGE GUIDE"}
+              </p>
 
-            <h2 className="mt-2 text-2xl font-black tracking-tight text-white">
-              {isTurkish
-                ? "LTIFR'ı doğru okuyun ve doğru kullanın"
-                : "Understand and use LTIFR correctly"}
-            </h2>
+              <h2 className="mt-2 text-2xl font-black tracking-tight text-white">
+                {isTurkish
+                  ? "Sonucun ne anlama geldiğini bilin"
+                  : "Understand what the result means"}
+              </h2>
 
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-400">
-              {isTurkish
-                ? "Sonucun güvenilir olması; LTI tanımının, raporlama döneminin, çalışan kapsamının ve kullanılan çalışma saatlerinin tutarlı olmasına bağlıdır."
-                : "Reliable interpretation depends on consistent LTI definitions, reporting periods, workforce scope and working-hour data."}
-            </p>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-400">
+                {isTurkish
+                  ? "TRIR yalnızca bir sayı değildir. Doğru yorumlama; kayıt kriterlerini, çalışma saatlerini, 200.000 saatlik normalizasyonu ve karşılaştırma yöntemini anlamayı gerektirir."
+                  : "TRIR is more than a number. Correct interpretation requires understanding recordability, hours worked, the 200,000-hour normalization and appropriate comparison methods."}
+              </p>
+            </div>
+
+            <span className="inline-flex w-fit rounded-full border border-blue-400/20 bg-blue-500/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.14em] text-blue-300">
+              {isTurkish ? "HSE Referans Bilgisi" : "HSE Reference"}
+            </span>
           </div>
 
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             <KnowledgeCard
               number="01"
-              tone="blue"
-              icon={<TargetIcon />}
-              title={
-                isTurkish
-                  ? "LTIFR Nedir?"
-                  : "What is LTIFR?"
-              }
+              title={isTurkish ? "TRIR Nedir?" : "What is TRIR?"}
               text={
                 isTurkish
-                  ? "LTIFR, belirli bir dönemdeki kayıp zamanlı yaralanmaların sıklığını çalışma saatlerine göre normalize eden bir HSE performans göstergesidir."
-                  : "LTIFR measures the normalized frequency of lost time injuries during a defined reporting period."
+                  ? "TRIR, Toplam Kaydedilebilir Olay Oranıdır. Belirli bir dönemdeki kaydedilebilir iş kazalarını 200.000 çalışma saati bazına normalize ederek güvenlik performansını karşılaştırılabilir hale getirir."
+                  : "TRIR is the Total Recordable Incident Rate. It normalizes recordable work-related cases to a 200,000-hour base so safety performance can be compared consistently."
               }
             />
 
             <KnowledgeCard
               number="02"
-              tone="green"
-              icon={<PeopleIcon />}
-              title={
-                isTurkish
-                  ? "Neden 1.000.000?"
-                  : "Why 1,000,000?"
-              }
+              title={isTurkish ? "200.000 Neden?" : "Why 200,000?"}
               text={
                 isTurkish
-                  ? "1.000.000 saatlik baz, farklı büyüklükteki operasyonların yaralanma sıklığını ortak bir ölçek üzerinde karşılaştırmaya yardımcı olur."
-                  : "The 1,000,000-hour base allows organizations of different sizes to compare injury frequency on a common scale."
+                  ? "200.000 saat, yaklaşık 100 tam zamanlı çalışanın yılda 2.000'er saat çalışmasına karşılık gelen standart normalizasyon bazıdır."
+                  : "200,000 hours is the standard normalization base representing roughly 100 full-time employees working about 2,000 hours each per year."
               }
             />
 
             <KnowledgeCard
               number="03"
-              tone="purple"
-              icon={<ClipboardIcon />}
-              title={
-                isTurkish
-                  ? "Hangi Vakalar Sayılır?"
-                  : "Which Cases Count?"
-              }
+              title={isTurkish ? "Hangi Vakalar Dahil?" : "Which Cases Count?"}
               text={
                 isTurkish
-                  ? "Yalnızca kuruluşunuzun veya geçerli raporlama standardının LTI olarak tanımladığı iş ilişkili vakaları dahil edin. LTI tanımı standarda göre değişebilir."
-                  : "Include only work-related cases classified as LTI under the applicable organizational or reporting standard. Definitions can vary."
+                  ? "OSHA kayıt yaklaşımında ölüm, işten uzak kalma, kısıtlı çalışma veya görev değişikliği ve belirli tıbbi tedavi gerektiren iş ilişkili vakalar kaydedilebilir olabilir."
+                  : "Under OSHA recordkeeping, work-related cases involving death, days away, restricted work or job transfer, and certain medical treatment may be recordable."
               }
             />
 
             <KnowledgeCard
               number="04"
-              tone="amber"
-              icon={<ChartIcon />}
-              title={
-                isTurkish
-                  ? "Nasıl Yorumlanır?"
-                  : "How to Interpret It?"
-              }
+              title={isTurkish ? "Nasıl Yorumlanır?" : "How to Interpret It?"}
               text={
                 isTurkish
-                  ? "Tek bir LTIFR değerini izole yorumlamayın. Trendleri, benzer operasyonları, sektör verilerini ve önceki raporlama dönemlerini birlikte değerlendirin."
-                  : "Do not interpret a single LTIFR value in isolation. Compare trends, similar operations, industry data and historical reporting periods."
+                  ? "TRIR tek başına iyi veya kötü olarak yorumlanmamalıdır. Aynı sektör, lokasyon, dönem ve geçmiş performans ile birlikte değerlendirilmelidir."
+                  : "TRIR should not be judged as good or bad in isolation. Compare it with the same industry, location, reporting period and historical performance."
               }
             />
           </div>
         </section>
 
-        {/* BEST PRACTICE + BENCHMARK */}
-        <section className="mt-5 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[24px] border border-blue-400/15 bg-slate-900/65 p-6">
-            <div className="flex items-center gap-3 text-blue-400">
-              <span className="text-xl">✓</span>
+        {/* BENEFITS */}
+        <section className="mt-7 grid overflow-hidden rounded-[26px] border border-white/10 bg-slate-900 md:grid-cols-2 xl:grid-cols-4">
+          <Feature
+            icon={<TargetIcon />}
+            tone="blue"
+            title={isTurkish ? "Doğru Hesaplama" : "Accurate Calculation"}
+            text={
+              isTurkish
+                ? "200.000 saatlik normalizasyon ile endüstride kullanılan standart TRIR formülü."
+                : "Industry-standard TRIR formula with 200,000-hour normalization."
+            }
+          />
 
-              <h2 className="text-sm font-black uppercase tracking-[0.14em]">
-                {isTurkish
-                  ? "EN İYİ UYGULAMALAR"
-                  : "BEST PRACTICES"}
-              </h2>
-            </div>
+          <Feature
+            icon={<ShieldIcon />}
+            tone="green"
+            title={isTurkish ? "Performans Kıyaslama" : "Benchmark Performance"}
+            text={
+              isTurkish
+                ? "Dönem, lokasyon ve iş birimleri arasında sonuçları karşılaştırın."
+                : "Compare results across periods, locations and business units."
+            }
+          />
 
-            <div className="mt-5 space-y-3">
-              {[
-                isTurkish
-                  ? "LTI sınıflandırmasını tutarlı uygulayın."
-                  : "Apply consistent LTI classification.",
-                isTurkish
-                  ? "Tüm çalışan gruplarının çalışma saatlerini doğrulayın."
-                  : "Verify total hours worked across workforce groups.",
-                isTurkish
-                  ? "Tek bir değerden çok zaman içindeki trende odaklanın."
-                  : "Analyze trends over time, not just a single value.",
-                isTurkish
-                  ? "Sonucu düzeltici ve önleyici faaliyetleri yönlendirmek için kullanın."
-                  : "Use the metric to support improvement actions.",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-3 text-xs leading-5 text-slate-400"
-                >
-                  <span className="mt-0.5 text-blue-400">
-                    ✓
-                  </span>
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <Feature
+            icon={<ChartIcon />}
+            tone="purple"
+            title={isTurkish ? "Veriye Dayalı İçgörü" : "Data-Driven Insights"}
+            text={
+              isTurkish
+                ? "Güvenilir performans metrikleriyle daha güçlü HSE kararları alın."
+                : "Make informed safety decisions with reliable performance metrics."
+            }
+          />
 
-          <div className="relative overflow-hidden rounded-[24px] border border-blue-400/15 bg-slate-900/65 p-6">
-            <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 opacity-30">
-              <svg
-                viewBox="0 0 400 160"
-                className="h-full w-full"
-                preserveAspectRatio="none"
-              >
-                <defs>
-                  <linearGradient
-                    id="lineGradient"
-                    x1="0"
-                    y1="0"
-                    x2="1"
-                    y2="0"
-                  >
-                    <stop offset="0%" stopColor="#2563eb" />
-                    <stop offset="100%" stopColor="#60a5fa" />
-                  </linearGradient>
-                </defs>
-
-                <path
-                  d="M10 135 L55 112 L92 122 L130 91 L165 104 L205 73 L245 88 L285 42 L325 54 L365 18"
-                  fill="none"
-                  stroke="url(#lineGradient)"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-
-                {[["10","135"],["55","112"],["92","122"],["130","91"],["165","104"],["205","73"],["245","88"],["285","42"],["325","54"],["365","18"]].map(
-                  ([cx, cy]) => (
-                    <circle
-                      key={`${cx}-${cy}`}
-                      cx={cx}
-                      cy={cy}
-                      r="5"
-                      fill="#3b82f6"
-                    />
-                  )
-                )}
-              </svg>
-            </div>
-
-            <div className="relative max-w-xl">
-              <div className="flex items-center gap-3 text-blue-400">
-                <span className="text-xl">☆</span>
-
-                <h2 className="text-sm font-black uppercase tracking-[0.14em]">
-                  {isTurkish
-                    ? "KIYASLAMA İPUCU"
-                    : "BENCHMARKING TIP"}
-                </h2>
-              </div>
-
-              <p className="mt-5 max-w-lg text-sm leading-6 text-slate-400">
-                {isTurkish
-                  ? "LTIFR değerini benzer operasyonlar, aynı sektör, önceki dönemler ve kuruluşunuzun kendi hedefleriyle karşılaştırın. Asıl değer tek bir rakamdan çok zaman içindeki yön ve sürekli iyileştirmedir."
-                  : "Compare LTIFR with similar operations, the same industry, historical periods and your organization's own targets. Context and trend direction matter more than a single isolated value."}
-              </p>
-            </div>
-          </div>
+          <Feature
+            icon={<LockIcon />}
+            tone="amber"
+            title={isTurkish ? "Güvenilir ve Uyumlu" : "Trusted & Compliant"}
+            text={
+              isTurkish
+                ? "Global HSE raporlama yaklaşımına uygun, açık ve izlenebilir hesaplama."
+                : "Clear and traceable calculation aligned with global HSE reporting practices."
+            }
+          />
         </section>
 
-        {/* DISCLAIMER */}
-        <section className="mt-5 flex flex-col gap-4 rounded-[22px] border border-white/10 bg-slate-900/50 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="max-w-4xl">
-            <div className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-300">
-              {isTurkish
-                ? "BİLGİLENDİRME"
-                : "DISCLAIMER"}
-            </div>
-
-            <p className="mt-2 text-[11px] leading-5 text-slate-500">
-              {isTurkish
-                ? "Bu araç girilen verilere dayalı bir LTIFR hesaplaması sağlar. Kuruluşunuzun, müşterinizin veya yerel mevzuatın kullandığı LTI tanımı ve raporlama kuralları ayrıca doğrulanmalıdır."
-                : "This tool calculates LTIFR from the data provided. Always verify the LTI definition and reporting requirements used by your organization, client or applicable jurisdiction."}
-            </p>
-          </div>
-
-          <div className="shrink-0 text-right">
-            <div className="text-lg font-black text-white">
-              SERNEM
-            </div>
-
-            <div className="text-[10px] text-slate-500">
-              Professional HSE Platform
-            </div>
-          </div>
-        </section>
+        <footer className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+          <span>◈ SERNEM TRIR Calculator</span>
+          <span>© 2026 SERNEM</span>
+          <span>
+            {isTurkish
+              ? "Güvenli • Doğru • Profesyonel"
+              : "Safe • Accurate • Professional"}{" "}
+            🛡
+          </span>
+        </footer>
       </div>
     </main>
   );
@@ -1948,75 +1760,83 @@ export default function LTIFRCalculatorPage() {
 
 function KnowledgeCard({
   number,
-  tone,
-  icon,
   title,
   text,
 }: {
   number: string;
-  tone: "blue" | "green" | "purple" | "amber";
-  icon: React.ReactNode;
   title: string;
   text: string;
 }) {
-  const tones = {
-    blue: {
-      border: "hover:border-blue-400/35",
-      icon: "border-blue-400/20 bg-blue-500/10 text-blue-400",
-      title: "text-blue-300",
-      number: "text-blue-300",
-    },
-    green: {
-      border: "hover:border-emerald-400/35",
-      icon: "border-emerald-400/20 bg-emerald-500/10 text-emerald-400",
-      title: "text-emerald-300",
-      number: "text-emerald-300",
-    },
-    purple: {
-      border: "hover:border-violet-400/35",
-      icon: "border-violet-400/20 bg-violet-500/10 text-violet-400",
-      title: "text-violet-300",
-      number: "text-violet-300",
-    },
-    amber: {
-      border: "hover:border-amber-400/35",
-      icon: "border-amber-400/20 bg-amber-500/10 text-amber-400",
-      title: "text-amber-300",
-      number: "text-amber-300",
-    },
-  } as const;
-
-  const style = tones[tone];
-
   return (
-    <article
-      className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/45 p-5 transition hover:-translate-y-0.5 hover:bg-slate-950/65 ${style.border}`}
-    >
+    <article className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/45 p-5 transition hover:-translate-y-0.5 hover:border-blue-400/25 hover:bg-slate-950/65">
       <div className="absolute right-4 top-3 text-4xl font-black text-white/[0.03]">
         {number}
       </div>
 
-      <div className="flex items-center justify-between">
-        <div
-          className={`flex h-11 w-11 items-center justify-center rounded-xl border ${style.icon}`}
-        >
-          {icon}
-        </div>
-
-        <span
-          className={`text-[10px] font-black tracking-[0.14em] ${style.number}`}
-        >
-          {number}
-        </span>
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 text-xs font-black text-blue-300">
+        {number}
       </div>
 
-      <h3 className={`mt-4 text-sm font-black ${style.title}`}>
+      <h3 className="mt-4 text-sm font-black text-white">
         {title}
       </h3>
 
       <p className="mt-3 text-[12px] leading-5 text-slate-400">
         {text}
       </p>
+    </article>
+  );
+}
+
+function Feature({
+  icon,
+  tone,
+  title,
+  text,
+}: {
+  icon: React.ReactNode;
+  tone: "blue" | "green" | "purple" | "amber";
+  title: string;
+  text: string;
+}) {
+  const toneMap = {
+    blue: {
+      icon: "border-blue-500/30 bg-blue-500/10 text-blue-400",
+      title: "text-blue-200",
+    },
+    green: {
+      icon: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+      title: "text-emerald-300",
+    },
+    purple: {
+      icon: "border-violet-500/30 bg-violet-500/10 text-violet-400",
+      title: "text-violet-300",
+    },
+    amber: {
+      icon: "border-amber-500/30 bg-amber-500/10 text-amber-400",
+      title: "text-amber-200",
+    },
+  } as const;
+
+  const style = toneMap[tone];
+
+  return (
+    <article className="relative flex min-h-[205px] gap-5 border-b border-white/10 p-6 last:border-b-0 md:[&:nth-child(odd)]:border-r xl:border-b-0 xl:border-r xl:last:border-r-0">
+      <div
+        className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-full border ${style.icon}`}
+      >
+        {icon}
+      </div>
+
+      <div>
+        <h3 className={`text-base font-black leading-5 ${style.title}`}>
+          {title}
+        </h3>
+
+        <p className="mt-3 text-[13px] leading-5 text-slate-400">
+          {text}
+        </p>
+      </div>
     </article>
   );
 }

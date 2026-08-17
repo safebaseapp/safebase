@@ -82,22 +82,6 @@ export default function LocalizedNavbar({ locale }: Props) {
 
   const toolItems = [
     {
-      href: "/tools/quick-risk-assessment",
-      icon: "◇",
-      title: isTurkish ? "Risk Analizi" : "Risk Assessment",
-      description: isTurkish
-        ? "Profesyonel HIRARC risk değerlendirmesi oluşturun."
-        : "Build professional HIRARC risk assessments.",
-    },
-    {
-      href: "/tools/method-statement",
-      icon: "▤",
-      title: "Method Statement",
-      description: isTurkish
-        ? "Profesyonel çalışma yöntemi dokümanları oluşturun."
-        : "Create professional work method documents.",
-    },
-    {
       href: "/tools/risk-matrix",
       icon: "▦",
       title: isTurkish ? "Risk Matrisi" : "Risk Matrix",
@@ -126,8 +110,8 @@ export default function LocalizedNavbar({ locale }: Props) {
       icon: "⚡",
       title: isTurkish ? "Şiddet Oranı" : "Severity Rate",
       description: isTurkish
-        ? "Kayıp iş günlerinin şiddet etkisini ölçün."
-        : "Measure the severity impact of lost workdays.",
+        ? "Kayıp iş günleri üzerinden yaralanma şiddetini hesaplayın."
+        : "Calculate injury severity using lost workdays.",
     },
     {
       href: "/tools/simops",
@@ -137,6 +121,7 @@ export default function LocalizedNavbar({ locale }: Props) {
         ? "Eş zamanlı operasyonları ve çalışma çakışmalarını yönetin."
         : "Manage simultaneous operations and work conflicts.",
     },
+
   ];
 
   const resourceItems = [
@@ -204,13 +189,29 @@ export default function LocalizedNavbar({ locale }: Props) {
             <Link
               href="/dashboard"
               onClick={closeDropdowns}
-              className="rounded-lg px-3.5 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/[0.05] hover:text-white"
+              className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/[0.05] hover:text-white"
             >
               Dashboard
             </Link>
           )}
 
-          {/* HSE TOOLS */}
+          <Link
+            href="/tools/quick-risk-assessment"
+            onClick={closeDropdowns}
+            className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/[0.05] hover:text-white"
+          >
+            {isTurkish ? "Risk Analizi" : "Risk Assessment"}
+          </Link>
+
+          <Link
+            href="/tools/method-statement"
+            onClick={closeDropdowns}
+            className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/[0.05] hover:text-white"
+          >
+            Method Statement
+          </Link>
+
+          {/* CALCULATORS */}
           <div className="relative">
             <button
               type="button"
@@ -218,14 +219,14 @@ export default function LocalizedNavbar({ locale }: Props) {
                 setIsToolsOpen((current) => !current);
                 setIsResourcesOpen(false);
               }}
-              className={`inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold transition ${
+              className={`inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition ${
                 isToolsOpen
                   ? "bg-blue-500/[0.10] text-white"
                   : "text-slate-300 hover:bg-white/[0.05] hover:text-white"
               }`}
             >
-              <span className="text-base">☰</span>
-              {isTurkish ? "HSE Araçları" : "HSE Tools"}
+              <span>☰</span>
+              {isTurkish ? "Hesaplayıcılar" : "Calculators"}
               <span
                 className={`text-[9px] text-slate-500 transition ${
                   isToolsOpen ? "rotate-180" : ""
@@ -236,48 +237,38 @@ export default function LocalizedNavbar({ locale }: Props) {
             </button>
 
             {isToolsOpen && (
-              <div
-                className="absolute left-1/2 top-[calc(100%+14px)] z-[300] -translate-x-1/2 overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/95 p-2 shadow-[0_25px_70px_rgba(0,0,0,.65)] backdrop-blur-2xl"
-                style={{
-                  width: "560px",
-                  maxWidth: "calc(100vw - 32px)",
-                }}
-              >
+              <div className="absolute left-1/2 top-[calc(100%+14px)] z-[300] w-[400px] -translate-x-1/2 overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/95 p-2 shadow-[0_25px_70px_rgba(0,0,0,.65)] backdrop-blur-2xl">
                 <div className="px-3 pb-2 pt-2">
-                  <p className="text-[10px] font-black uppercase tracking-[0.20em] text-blue-400">
-                    {isTurkish ? "HSE Araçları" : "HSE Tools"}
-                  </p>
-
-                  <p className="mt-1 text-[11px] leading-5 text-slate-500">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">
                     {isTurkish
-                      ? "Analiz, dokümantasyon ve performans araçları."
-                      : "Analysis, documentation and performance tools."}
+                      ? "HSE Hesaplayıcıları"
+                      : "HSE Calculators"}
                   </p>
                 </div>
 
-                <div className="mt-1 border-t border-white/[0.06] pt-2">
-                  <div className="grid grid-cols-2 gap-1">
-                    {toolItems.map((item) => (
-                      <Link
-                        key={item.title}
-                        href={item.href}
-                        onClick={closeDropdowns}
-                        className="group rounded-xl border border-transparent p-3 transition hover:border-blue-400/15 hover:bg-blue-500/[0.05]"
-                      >
-                        <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.06] text-base font-black text-blue-300">
-                          {item.icon}
-                        </span>
+                <div className="grid gap-1">
+                  {toolItems.map((item) => (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      onClick={closeDropdowns}
+                      className="group flex items-start gap-3 rounded-xl border border-transparent p-3 transition hover:border-blue-400/15 hover:bg-blue-500/[0.06]"
+                    >
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.07] text-lg font-black text-blue-300">
+                        {item.icon}
+                      </span>
 
-                        <span className="mt-3 block text-sm font-black text-slate-200 transition group-hover:text-white">
+                      <span>
+                        <span className="block text-sm font-black text-slate-200 group-hover:text-white">
                           {item.title}
                         </span>
 
-                        <span className="mt-1 block text-[11px] leading-5 text-slate-400">
+                        <span className="mt-1 block text-xs leading-5 text-slate-400">
                           {item.description}
                         </span>
-                      </Link>
-                    ))}
-                  </div>
+                      </span>
+                    </Link>
+                  ))}
                 </div>
               </div>
             )}
@@ -291,13 +282,13 @@ export default function LocalizedNavbar({ locale }: Props) {
                 setIsResourcesOpen((current) => !current);
                 setIsToolsOpen(false);
               }}
-              className={`inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold transition ${
+              className={`inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition ${
                 isResourcesOpen
                   ? "bg-emerald-500/[0.08] text-white"
                   : "text-slate-300 hover:bg-white/[0.05] hover:text-white"
               }`}
             >
-              <span className="text-base">☰</span>
+              <span>☰</span>
               {isTurkish ? "Kaynaklar" : "Resources"}
               <span
                 className={`text-[9px] text-slate-500 transition ${
@@ -311,7 +302,7 @@ export default function LocalizedNavbar({ locale }: Props) {
             {isResourcesOpen && (
               <div className="absolute left-1/2 top-[calc(100%+14px)] z-[300] w-[410px] -translate-x-1/2 overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/95 p-2 shadow-[0_25px_70px_rgba(0,0,0,.65)] backdrop-blur-2xl">
                 <div className="px-3 pb-2 pt-2">
-                  <p className="text-[10px] font-black uppercase tracking-[0.20em] text-emerald-400">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-400">
                     {isTurkish ? "Saha Kaynakları" : "Field Resources"}
                   </p>
                 </div>
@@ -324,11 +315,11 @@ export default function LocalizedNavbar({ locale }: Props) {
                       onClick={closeDropdowns}
                       className="group rounded-xl border border-transparent p-3 transition hover:border-emerald-400/15 hover:bg-emerald-500/[0.05]"
                     >
-                      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-400/15 bg-emerald-500/[0.06] text-base font-black text-emerald-300">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-400/15 bg-emerald-500/[0.06] text-emerald-300">
                         {item.icon}
                       </span>
 
-                      <span className="mt-3 block text-sm font-black text-slate-200 transition group-hover:text-white">
+                      <span className="mt-3 block text-sm font-black text-slate-200 group-hover:text-white">
                         {item.title}
                       </span>
 
@@ -345,7 +336,7 @@ export default function LocalizedNavbar({ locale }: Props) {
           <Link
             href="/ai-assistant"
             onClick={closeDropdowns}
-            className="rounded-lg px-3.5 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/[0.05] hover:text-white"
+            className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/[0.05] hover:text-white"
           >
             {isTurkish ? "AI Asistan" : "AI Assistant"}
           </Link>

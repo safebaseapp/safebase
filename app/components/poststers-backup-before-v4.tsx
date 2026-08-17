@@ -352,7 +352,7 @@ export default function PosterMaster({
       ];
 
   const criticalValues =
-    poster.code === "SB-WAH-001"
+    poster.code === "SRN-WAH-001"
       ? [
           {
             value: "1.8 m",
