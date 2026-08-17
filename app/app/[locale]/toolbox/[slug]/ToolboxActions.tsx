@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import PrintButton from "@/components/ui/PrintButton";
 
 type Props = {
   printLabel: string;

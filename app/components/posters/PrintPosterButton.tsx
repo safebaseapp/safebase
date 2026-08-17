@@ -1,4 +1,5 @@
 "use client";
+import PrintButton from "@/components/ui/PrintButton";
 
 export default function PrintPosterButton() {
   return (

@@ -23,6 +23,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import ProductShowcase from "./components/ProductShowcase";
+import SernemLogo from "./components/SernemLogo";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -432,9 +433,7 @@ export default async function LocalizedHomePage({ params }: Props) {
               <div className="relative overflow-hidden rounded-[26px] border border-white/10 bg-slate-900/90 p-5 shadow-2xl shadow-black/40 backdrop-blur-2xl sm:p-6">
                 <div className="flex items-center justify-between border-b border-white/10 pb-5">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-xl font-black shadow-lg shadow-blue-950/40">
-                      S
-                    </div>
+                    <SernemLogo className="h-12 w-12 rounded-2xl" />
 
                     <div>
                       <p className="font-black text-white">SERNEM Workspace</p>

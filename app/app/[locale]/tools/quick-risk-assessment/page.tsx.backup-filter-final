@@ -8,7 +8,6 @@ import { riskLibraryPack03 } from "@/lib/risk-library/pack-03";
 import { riskLibraryPack04 } from "@/lib/risk-library/pack-04";
 import { riskLibraryPack05 } from "@/lib/risk-library/pack-05";
 import { createClient } from "@/utils/supabase/client";
-import PrintButton from "@/components/ui/PrintButton";
 
 type RiskLevel = {
   labelTr: string;
@@ -501,106 +500,135 @@ const duplicateRiskItem = (id: string) => {
       .replace(/ç/g, "c")
       .trim();
 
-  const normalizedLibrarySearch = normalizeLibraryText(librarySearch);
+  const getLibrarySearchTerms = (rawQuery: string) => {
+    const query = normalizeLibraryText(rawQuery);
 
-  const categorySearchMap = [
-    {
-      keywords: ["kimyasal", "chemical"],
-      match: ["kimyasal", "chemical"],
-    },
-    {
-      keywords: ["elektrik", "electrical", "electric"],
-      match: ["elektrik", "electrical", "electric"],
-    },
-    {
-      keywords: ["yuksekte", "yukseklik", "height"],
-      match: ["yuksekte", "height"],
-    },
-    {
-      keywords: ["kaldirma", "lifting", "crane"],
-      match: ["kaldirma", "lifting", "crane"],
-    },
-    {
-      keywords: ["kapali alan", "confined"],
-      match: ["kapali alan", "confined"],
-    },
-    {
-      keywords: ["sicak", "hot work", "kaynak", "welding"],
-      match: ["sicak", "hot", "welding"],
-    },
-  ];
+    if (!query) return [];
 
-  const inferredCategoryKeywords =
-    categorySearchMap.find((group) =>
-      group.keywords.some((keyword) =>
-        normalizedLibrarySearch.includes(normalizeLibraryText(keyword))
+    const synonymGroups = [
+      [
+        "sicak calisma",
+        "sicak is",
+        "hot work",
+        "kaynak",
+        "welding",
+        "kesme",
+        "cutting",
+        "taslama",
+        "grinding",
+      ],
+      [
+        "yuksekte calisma",
+        "yukseklik",
+        "working at height",
+        "work at height",
+        "fall from height",
+        "dusme",
+      ],
+      [
+        "kapali alan",
+        "confined space",
+        "confined space entry",
+      ],
+      [
+        "kaldirma",
+        "lifting",
+        "lifting operation",
+        "vinç",
+        "vinc",
+        "crane",
+        "rigging",
+      ],
+      [
+        "kazı",
+        "kazi",
+        "excavation",
+        "trench",
+        "hendek",
+      ],
+      [
+        "elektrik",
+        "electrical",
+        "electric",
+        "electricity",
+        "electric shock",
+      ],
+      [
+        "iskele",
+        "scaffold",
+        "scaffolding",
+      ],
+      [
+        "yangin",
+        "fire",
+        "fire risk",
+      ],
+      [
+        "kimyasal",
+        "chemical",
+        "chemicals",
+      ],
+      [
+        "basinc",
+        "basincli",
+        "pressure",
+        "pressurized",
+      ],
+    ].map((group) => group.map(normalizeLibraryText));
+
+    const matchedGroup = synonymGroups.find((group) =>
+      group.some(
+        (term) =>
+          term.includes(query) ||
+          query.includes(term)
       )
-    )?.match ?? [];
+    );
+
+    return matchedGroup
+      ? Array.from(new Set([query, ...matchedGroup]))
+      : [query];
+  };
+
+  const librarySearchTerms = getLibrarySearchTerms(librarySearch);
 
   const filteredRiskLibrary = riskLibraryAll.filter((template) => {
-    const activityTr = normalizeLibraryText(template.activity.tr);
-    const activityEn = normalizeLibraryText(template.activity.en);
+    const searchableText = normalizeLibraryText(
+      [
+        template.activity.tr,
+        template.activity.en,
+        template.category.tr,
+        template.category.en,
 
-    const categoryTr = normalizeLibraryText(template.category.tr);
-    const categoryEn = normalizeLibraryText(template.category.en);
+        ...template.items.flatMap((item) => [
+          item.hazard.tr,
+          item.hazard.en,
+          item.consequence.tr,
+          item.consequence.en,
+          item.personsAtRisk.tr,
+          item.personsAtRisk.en,
+          item.existingControls.tr,
+          item.existingControls.en,
+          item.additionalControls.tr,
+          item.additionalControls.en,
+        ]),
+      ]
+        .filter(Boolean)
+        .join(" ")
+    );
 
-    // Search intentionally focuses on ACTIVITY NAME.
-    // This prevents broad matches from hazards/controls inside 900 risk records.
     const matchesSearch =
-      !normalizedLibrarySearch ||
-      activityTr.includes(normalizedLibrarySearch) ||
-      activityEn.includes(normalizedLibrarySearch);
+      librarySearchTerms.length === 0 ||
+      librarySearchTerms.some((term) => searchableText.includes(term));
 
-    const normalizedCategory = normalizeLibraryText(libraryCategory);
+    const selectedCategory = normalizeLibraryText(libraryCategory);
 
-    const matchesManualCategory =
+    const matchesCategory =
       libraryCategory === "all" ||
-      categoryTr === normalizedCategory ||
-      categoryEn === normalizedCategory;
+      normalizeLibraryText(template.category.tr) === selectedCategory ||
+      normalizeLibraryText(template.category.en) === selectedCategory;
 
-    const matchesInferredCategory =
-      inferredCategoryKeywords.length === 0 ||
-      inferredCategoryKeywords.some(
-        (keyword) =>
-          categoryTr.includes(normalizeLibraryText(keyword)) ||
-          categoryEn.includes(normalizeLibraryText(keyword))
-      );
-
-    return (
-      matchesSearch &&
-      matchesManualCategory &&
-      matchesInferredCategory
-    );
+    return matchesSearch && matchesCategory;
   });
-
-  useEffect(() => {
-    // No matching activity
-    if (filteredRiskLibrary.length === 0) {
-      setSelectedLibraryActivity("");
-      setSelectedLibraryRiskIndexes([]);
-      return;
-    }
-
-    const currentStillVisible = filteredRiskLibrary.some(
-      (template) => template.id === selectedLibraryActivity
-    );
-
-    // Keep current selection only if it still belongs to filtered results.
-    if (currentStillVisible) return;
-
-    // Otherwise automatically select first matching activity.
-    const firstMatch = filteredRiskLibrary[0];
-
-    setSelectedLibraryActivity(firstMatch.id);
-    setSelectedLibraryRiskIndexes(
-      firstMatch.items.map((_, index) => index)
-    );
-  }, [
-    librarySearch,
-    libraryCategory,
-    isTurkish,
-    selectedLibraryActivity,
-  ]);
 
   const selectLibraryActivity = (activityId: string) => {
     setSelectedLibraryActivity(activityId);
@@ -609,19 +637,8 @@ const duplicateRiskItem = (id: string) => {
       (item) => item.id === activityId
     );
 
-    if (!template) {
-      setSelectedLibraryRiskIndexes([]);
-      return;
-    }
-
-    // Seçilen faaliyetin kategorisini otomatik senkronize et.
-    setLibraryCategory(
-      isTurkish ? template.category.tr : template.category.en
-    );
-
-    // Faaliyetteki tüm hazır riskleri varsayılan olarak seç.
     setSelectedLibraryRiskIndexes(
-      template.items.map((_, index) => index)
+      template?.items.map((_, index) => index) ?? []
     );
   };
 
@@ -1253,19 +1270,9 @@ const duplicateRiskItem = (id: string) => {
             <button
               type="button"
               onClick={handlePrintRiskAssessment}
-              className="group inline-flex items-center gap-3 rounded-xl border border-blue-400/30 bg-gradient-to-b from-blue-500/[0.16] to-blue-600/[0.08] px-4 py-2.5 text-sm font-black text-blue-50 shadow-[0_10px_28px_rgba(37,99,235,.14)] transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300/50 hover:bg-blue-500/[0.18] hover:shadow-[0_14px_34px_rgba(37,99,235,.22)] active:translate-y-0 active:scale-[0.98]"
+              className="rounded-xl border border-blue-500/50 bg-blue-500/10 px-5 py-3 text-sm font-black text-blue-300 transition hover:bg-blue-500/20"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-blue-300/20 bg-blue-500/10 text-base text-blue-100 transition group-hover:bg-blue-500/20">
-                📄
-              </span>
-
-              <span>
-                {isTurkish ? "PDF / Yazdır" : "PDF / Print"}
-              </span>
-
-              <span className="text-blue-300 transition-transform duration-200 group-hover:translate-x-1">
-                →
-              </span>
+              📄 {isTurkish ? "PDF / Yazdır" : "PDF / Print"}
             </button>
 
           {/* SERNEM_RISK_SAVE_BUTTON */}

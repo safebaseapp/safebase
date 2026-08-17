@@ -169,7 +169,7 @@ const products: Product[] = [
       "Eş zamanlı operasyonları görün, çalışma çakışmalarını değerlendirin ve kritik faaliyetleri tek ekranda yönetin.",
     descriptionEn:
       "Visualize simultaneous operations, assess conflicts and manage critical activities from one screen.",
-    href: "/tools",
+    href: "/tools/simops",
     icon: Layers3,
     status: "LIVE",
     accent: "violet",

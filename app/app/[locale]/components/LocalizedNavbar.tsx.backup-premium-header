@@ -176,20 +176,20 @@ export default function LocalizedNavbar({ locale }: Props) {
   ];
 
   return (
-    <nav className="relative z-50 border-b border-blue-400/[0.10] bg-[#020817] text-white shadow-[0_8px_35px_rgba(0,0,0,.28)]">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-3.5 sm:px-6">
+    <nav className="relative z-50 border-b border-white/10 bg-slate-950 text-white">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-6">
         {/* BRAND */}
         <Link
           href="/"
           onClick={closeMenu}
-          className="group flex min-w-0 shrink items-center gap-3.5 pr-5 xl:border-r xl:border-white/[0.08]"
+          className="flex min-w-0 shrink items-center gap-3"
         >
           <SernemLogo />
 
           <div className="min-w-0">
-            <div className="text-[19px] font-black tracking-[-0.02em] text-white transition group-hover:text-blue-50">SERNEM</div>
+            <div className="text-lg font-black tracking-tight">SERNEM</div>
 
-            <div className="mt-0.5 truncate text-[11px] font-medium tracking-wide text-slate-500">
+            <div className="truncate text-xs text-slate-500">
               {isTurkish
                 ? "Profesyonel HSE Platform"
                 : "Professional HSE Platform"}
@@ -198,12 +198,12 @@ export default function LocalizedNavbar({ locale }: Props) {
         </Link>
 
         {/* DESKTOP NAV */}
-        <div className="hidden items-center gap-1.5 xl:flex">
+        <div className="hidden items-center gap-1 xl:flex">
           {isAuthenticated && (
             <Link
               href="/dashboard"
               onClick={closeDropdowns}
-              className="relative rounded-xl px-4 py-2.5 text-[13px] font-bold text-slate-300 transition duration-200 hover:bg-blue-500/[0.07] hover:text-white after:absolute after:bottom-0 after:left-4 after:right-4 after:h-px after:scale-x-0 after:bg-blue-400 after:transition-transform hover:after:scale-x-100"
+              className="rounded-lg px-3.5 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/[0.05] hover:text-white"
             >
               Dashboard
             </Link>
@@ -217,13 +217,13 @@ export default function LocalizedNavbar({ locale }: Props) {
                 setIsToolsOpen((current) => !current);
                 setIsResourcesOpen(false);
               }}
-              className={`inline-flex items-center gap-2.5 rounded-xl border px-4 py-2.5 text-[13px] font-bold transition duration-200 ${
+              className={`inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold transition ${
                 isToolsOpen
-                  ? "border-blue-400/25 bg-blue-500/[0.10] text-white shadow-[0_0_22px_rgba(37,99,235,.08)]"
-                  : "border-transparent text-slate-300 hover:border-blue-400/10 hover:bg-blue-500/[0.06] hover:text-white"
+                  ? "bg-blue-500/[0.10] text-white"
+                  : "text-slate-300 hover:bg-white/[0.05] hover:text-white"
               }`}
             >
-              <span className="flex h-6 w-6 items-center justify-center rounded-md border border-blue-400/15 bg-blue-500/[0.06] text-[12px] font-black text-blue-300">▦</span>
+              <span className="text-base">☰</span>
               {isTurkish ? "HSE Araçları" : "HSE Tools"}
               <span
                 className={`text-[9px] text-slate-500 transition ${
@@ -290,13 +290,13 @@ export default function LocalizedNavbar({ locale }: Props) {
                 setIsResourcesOpen((current) => !current);
                 setIsToolsOpen(false);
               }}
-              className={`inline-flex items-center gap-2.5 rounded-xl border px-4 py-2.5 text-[13px] font-bold transition duration-200 ${
+              className={`inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-semibold transition ${
                 isResourcesOpen
-                  ? "border-emerald-400/20 bg-emerald-500/[0.07] text-white"
-                  : "border-transparent text-slate-300 hover:border-emerald-400/10 hover:bg-emerald-500/[0.05] hover:text-white"
+                  ? "bg-emerald-500/[0.08] text-white"
+                  : "text-slate-300 hover:bg-white/[0.05] hover:text-white"
               }`}
             >
-              <span className="flex h-6 w-6 items-center justify-center rounded-md border border-emerald-400/15 bg-emerald-500/[0.05] text-[12px] font-black text-emerald-300">▤</span>
+              <span className="text-base">☰</span>
               {isTurkish ? "Kaynaklar" : "Resources"}
               <span
                 className={`text-[9px] text-slate-500 transition ${
@@ -344,14 +344,14 @@ export default function LocalizedNavbar({ locale }: Props) {
           <Link
             href="/ai-assistant"
             onClick={closeDropdowns}
-            className="relative rounded-xl px-4 py-2.5 text-[13px] font-bold text-slate-300 transition duration-200 hover:bg-blue-500/[0.07] hover:text-white after:absolute after:bottom-0 after:left-4 after:right-4 after:h-px after:scale-x-0 after:bg-blue-400 after:transition-transform hover:after:scale-x-100"
+            className="rounded-lg px-3.5 py-2 text-sm font-semibold text-slate-300 transition hover:bg-white/[0.05] hover:text-white"
           >
-            <span className="text-violet-300 transition group-hover:text-violet-200">✦</span>{isTurkish ? "AI Asistan" : "AI Assistant"}
+            {isTurkish ? "AI Asistan" : "AI Assistant"}
           </Link>
         </div>
 
         {/* RIGHT ACTIONS */}
-        <div className="flex shrink-0 items-center gap-2 border-l border-white/[0.08] pl-4 sm:gap-2.5">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <LanguageSwitcher locale={locale} />
 
           {!isAuthLoading && (
@@ -362,7 +362,7 @@ export default function LocalizedNavbar({ locale }: Props) {
                     <Link
                       href="/admin"
                       onClick={closeDropdowns}
-                      className="inline-flex h-11 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] px-4 text-[13px] font-black text-violet-200 shadow-[inset_0_1px_0_rgba(255,255,255,.03)] transition hover:border-violet-400/40 hover:bg-violet-500/[0.14]"
+                      className="inline-flex h-11 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.10] px-4 text-sm font-bold text-violet-200 transition hover:border-violet-400/40 hover:bg-violet-500/[0.16]"
                     >
                       Admin
                     </Link>
@@ -371,7 +371,7 @@ export default function LocalizedNavbar({ locale }: Props) {
                   <Link
                     href="/account"
                     onClick={closeDropdowns}
-                    className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-400/20 bg-gradient-to-b from-blue-500 to-blue-600 px-5 text-[13px] font-black text-white shadow-[0_8px_25px_rgba(37,99,235,.22)] transition hover:-translate-y-px hover:from-blue-400 hover:to-blue-600"
+                    className="inline-flex h-11 items-center justify-center rounded-xl bg-blue-600 px-4 text-sm font-bold text-white shadow-lg shadow-blue-950/20 transition hover:bg-blue-500"
                   >
                     {isTurkish ? "Hesabım" : "Account"}
                   </Link>
@@ -381,7 +381,7 @@ export default function LocalizedNavbar({ locale }: Props) {
                   <Link
                     href="/register"
                     onClick={closeDropdowns}
-                    className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-400/20 bg-gradient-to-b from-blue-500 to-blue-600 px-5 text-[13px] font-black text-white shadow-[0_8px_25px_rgba(37,99,235,.22)] transition hover:-translate-y-px hover:from-blue-400 hover:to-blue-600"
+                    className="inline-flex h-11 items-center justify-center rounded-xl bg-blue-600 px-5 text-sm font-bold text-white shadow-lg shadow-blue-950/20 transition hover:bg-blue-500"
                   >
                     {isTurkish ? "Kayıt Ol" : "Sign Up"}
                     <span className="ml-2">→</span>
@@ -390,7 +390,7 @@ export default function LocalizedNavbar({ locale }: Props) {
                   <Link
                     href="/login"
                     onClick={closeDropdowns}
-                    className="inline-flex h-11 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.025] px-5 text-[13px] font-black text-slate-300 transition hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white"
+                    className="inline-flex h-11 items-center justify-center rounded-xl border border-white/15 bg-white/[0.035] px-5 text-sm font-bold text-slate-200 transition hover:border-white/25 hover:bg-white/[0.07] hover:text-white"
                   >
                     {isTurkish ? "Giriş Yap" : "Sign In"}
                   </Link>
@@ -408,10 +408,10 @@ export default function LocalizedNavbar({ locale }: Props) {
             }}
             aria-expanded={isMenuOpen}
             aria-controls="sernem-navigation"
-            className={`inline-flex h-11 items-center justify-center gap-2.5 rounded-xl border px-4 text-[13px] font-black transition duration-200 ${
+            className={`inline-flex h-11 items-center justify-center gap-2 rounded-xl border px-3.5 text-sm font-bold transition ${
               isMenuOpen
-                ? "border-blue-400/40 bg-blue-600 text-white shadow-[0_8px_24px_rgba(37,99,235,.18)]"
-                : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white"
+                ? "border-blue-400/40 bg-blue-600 text-white"
+                : "border-white/15 bg-white/[0.05] text-slate-200 hover:bg-white/10 hover:text-white"
             }`}
           >
             <span className="text-xl leading-none">

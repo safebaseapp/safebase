@@ -397,67 +397,25 @@ export default function AIAssistantPage() {
           </button>
 
           <div className="mt-8">
-            <div className="flex items-center gap-3 px-1">
-              <p className="shrink-0 text-[11px] font-black uppercase tracking-[0.22em] text-slate-500">
-                {isTurkish ? "Hızlı Konular" : "Quick Topics"}
-              </p>
-              <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
-            </div>
+            <p className="px-2 text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+              {isTurkish ? "Hızlı Konular" : "Quick Topics"}
+            </p>
 
-            <div className="mt-4 space-y-2">
-              {quickQuestions.map((item, index) => {
-                const topicStyles = [
-                  {
-                    icon: "🛡",
-                    iconClass:
-                      "border-emerald-400/20 bg-emerald-400/[0.07] text-emerald-300",
-                  },
-                  {
-                    icon: "🔥",
-                    iconClass:
-                      "border-orange-400/20 bg-orange-400/[0.07] text-orange-300",
-                  },
-                  {
-                    icon: "🔒",
-                    iconClass:
-                      "border-violet-400/20 bg-violet-400/[0.07] text-violet-300",
-                  },
-                  {
-                    icon: "⛑",
-                    iconClass:
-                      "border-blue-400/20 bg-blue-400/[0.07] text-blue-300",
-                  },
-                ][index];
-
-                return (
-                  <button
-                    key={item.label}
-                    type="button"
-                    onClick={() => void askAI(item.question)}
-                    disabled={loading}
-                    className="group grid w-full grid-cols-[40px_1fr_20px] items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-2.5 text-left transition-all duration-200 hover:translate-x-0.5 hover:border-blue-400/20 hover:bg-blue-500/[0.06] disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    <span
-                      className={`flex h-10 w-10 items-center justify-center rounded-xl border text-sm ${topicStyles.iconClass}`}
-                    >
-                      {topicStyles.icon}
-                    </span>
-
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-black text-slate-200 transition group-hover:text-white">
-                        {item.label}
-                      </p>
-                      <p className="mt-0.5 text-[10px] font-medium text-slate-600 transition group-hover:text-slate-500">
-                        {isTurkish ? "Hızlı rehberlik" : "Quick guidance"}
-                      </p>
-                    </div>
-
-                    <span className="text-sm text-slate-600 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-blue-300">
-                      →
-                    </span>
-                  </button>
-                );
-              })}
+            <div className="mt-3 space-y-2">
+              {quickQuestions.map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => void askAI(item.question)}
+                  disabled={loading}
+                  className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-semibold text-slate-300 transition hover:bg-white/[0.06] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-300">
+                    #
+                  </span>
+                  {item.label}
+                </button>
+              ))}
             </div>
           </div>
 

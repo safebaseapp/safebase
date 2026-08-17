@@ -14,6 +14,7 @@ import {
   type ChecklistAnswer,
 } from "../../../../lib/ai/analyzeChecklist";
 import type { Answer, CorrectiveAction, Props } from "./types";
+import PrintButton from "@/components/ui/PrintButton";
 
 export default function HotWorkChecklist({ locale }: Props) {
   const t = labels[locale];

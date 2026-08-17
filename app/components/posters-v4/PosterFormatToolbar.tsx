@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import PrintButton from "@/components/ui/PrintButton";
 
 type Props = {
   locale: "tr" | "en";

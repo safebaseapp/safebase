@@ -990,17 +990,14 @@ type SimopsSavedRecord = {
 export default function SimopsPlanner({ locale }: Props) {
   const isTurkish = locale === "tr";
 
-  const [selected, setSelected] = useState<string[]>([
-    "hot-work",
-    "lifting",
-    "work-at-height",
-  ]);
+  const [selected, setSelected] = useState<string[]>([]);
 
   const [search, setSearch] = useState("");
   const [activePair, setActivePair] = useState<[string, string]>([
     "hot-work",
     "confined-space",
   ]);
+  const [hasActiveCell, setHasActiveCell] = useState(false);
 
   const [decision, setDecision] = useState<
     "proceed" | "controls" | "reschedule" | "stop"
@@ -1025,7 +1022,7 @@ export default function SimopsPlanner({ locale }: Props) {
   const [workDate, setWorkDate] = useState("");
   const [shift, setShift] = useState<"day" | "night">("day");
   const [ptwNumbers, setPtwNumbers] = useState("");
-  const [coordinator, setCoordinator] = useState("Sercan Aslan");
+  const [coordinator, setCoordinator] = useState("");
   const [responsiblePerson, setResponsiblePerson] = useState("");
 
   // Additional SIMOPS controls / action tracking
@@ -1037,6 +1034,36 @@ export default function SimopsPlanner({ locale }: Props) {
   // Review / approval
   const [hseApproved, setHseApproved] = useState(false);
   const [areaSupervisorApproved, setAreaSupervisorApproved] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadCoordinatorFromUser() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!mounted || !user) return;
+
+      const metadata = user.user_metadata ?? {};
+
+      const displayName =
+        metadata.full_name ||
+        metadata.name ||
+        metadata.display_name ||
+        "";
+
+      if (displayName) {
+        setCoordinator((current) => current || String(displayName));
+      }
+    }
+
+    loadCoordinatorFromUser();
+
+    return () => {
+      mounted = false;
+    };
+  }, [supabase]);
 
 
   const filteredActivities = activities.filter((activity) => {
@@ -1166,6 +1193,40 @@ export default function SimopsPlanner({ locale }: Props) {
 
     setDecision(recommendationDecision);
   }, [hasEnoughActivities, recommendationDecision]);
+
+  useEffect(() => {
+    if (!hasActiveCell) return;
+
+    const [firstActivity, secondActivity] = activePair;
+
+    if (
+      !selected.includes(firstActivity) ||
+      !selected.includes(secondActivity)
+    ) {
+      setHasActiveCell(false);
+    }
+  }, [selected, activePair, hasActiveCell]);
+
+  // Exactly two activities selected:
+  // automatically activate their matrix intersection.
+  useEffect(() => {
+    if (selected.length !== 2) {
+      if (selected.length < 2) {
+        setHasActiveCell(false);
+      }
+      return;
+    }
+
+    const orderedPair = [...selected].sort((a, b) => {
+      const aIndex = activities.findIndex((activity) => activity.id === a);
+      const bIndex = activities.findIndex((activity) => activity.id === b);
+
+      return aIndex - bIndex;
+    }) as [string, string];
+
+    setActivePair(orderedPair);
+    setHasActiveCell(true);
+  }, [selected]);
 
   const decisions = [
     {
@@ -1368,6 +1429,7 @@ export default function SimopsPlanner({ locale }: Props) {
       payload.activePair.length === 2
     ) {
       setActivePair(payload.activePair);
+      setHasActiveCell(true);
     }
 
     setProjectName(payload.projectName ?? record.project_name ?? "");
@@ -1376,7 +1438,7 @@ export default function SimopsPlanner({ locale }: Props) {
     setWorkDate(payload.workDate ?? record.work_date ?? "");
     setShift(payload.shift ?? "day");
     setPtwNumbers(payload.ptwNumbers ?? "");
-    setCoordinator(payload.coordinator ?? "Sercan Aslan");
+    setCoordinator(payload.coordinator ?? "");
     setResponsiblePerson(payload.responsiblePerson ?? "");
     setAdditionalControls(payload.additionalControls ?? "");
     setActionStatus(payload.actionStatus ?? record.action_status ?? "open");
@@ -1448,13 +1510,10 @@ export default function SimopsPlanner({ locale }: Props) {
     setHseApproved(false);
     setAreaSupervisorApproved(false);
 
-    setSelected([
-      "hot-work",
-      "lifting",
-      "work-at-height",
-    ]);
+    setSelected([]);
 
     setActivePair(["hot-work", "confined-space"]);
+    setHasActiveCell(false);
     setDecision("controls");
 
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -2354,6 +2413,7 @@ export default function SimopsPlanner({ locale }: Props) {
                 {isTurkish ? "SIMOPS Koordinatörü" : "SIMOPS Coordinator"}
               </span>
               <input
+                id="simops-coordinator-input"
                 value={coordinator}
                 onChange={(event) => setCoordinator(event.target.value)}
                 className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/70 px-3 py-2.5 text-xs text-white outline-none focus:border-blue-500"
@@ -2550,14 +2610,20 @@ export default function SimopsPlanner({ locale }: Props) {
 
                           const interaction = pseudoInteraction(row.id, column.id);
                           const active =
-                            interactionKey(row.id, column.id) ===
-                            interactionKey(activePair[0], activePair[1]);
+                            hasActiveCell &&
+                            selected.includes(row.id) &&
+                            selected.includes(column.id) &&
+                            row.id === activePair[0] &&
+                            column.id === activePair[1];
 
                           return (
                             <button
                               key={`${row.id}-${column.id}`}
                               type="button"
-                              onClick={() => setActivePair([row.id, column.id])}
+                              onClick={() => {
+                                setActivePair([row.id, column.id]);
+                                setHasActiveCell(true);
+                              }}
                               className={`flex min-h-[60px] items-center justify-center border-b border-r border-white/10 px-2 transition ${
                                 selected.includes(row.id) && selected.includes(column.id)
                                   ? "bg-white/[0.025]"
@@ -2978,12 +3044,19 @@ export default function SimopsPlanner({ locale }: Props) {
 
                   <div className="mt-2 flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-slate-800 text-sm font-black text-white">
-                      SA
+                      {coordinator
+                        ? coordinator
+                            .split(" ")
+                            .filter(Boolean)
+                            .slice(0, 2)
+                            .map((part) => part[0]?.toUpperCase())
+                            .join("")
+                        : "—"}
                     </div>
 
                     <div>
                       <div className="font-black text-white">
-                        Sercan Aslan
+                        {coordinator || (isTurkish ? "Koordinatör seçilmedi" : "No coordinator selected")}
                       </div>
                       <div className="text-xs text-slate-400">
                         HSE Supervisor
@@ -3000,7 +3073,14 @@ export default function SimopsPlanner({ locale }: Props) {
 
                 <button
                   type="button"
-                  className="rounded-lg border border-white/10 bg-slate-900 px-4 py-2 text-xs font-bold text-slate-200"
+                  onClick={() => {
+                    const input = document.getElementById("simops-coordinator-input");
+                    input?.scrollIntoView({ behavior: "smooth", block: "center" });
+                    window.setTimeout(() => {
+                      (input as HTMLInputElement | null)?.focus();
+                    }, 350);
+                  }}
+                  className="rounded-lg border border-white/10 bg-slate-900 px-4 py-2 text-xs font-bold text-slate-200 transition hover:border-blue-400/30 hover:bg-blue-500/10 hover:text-white"
                 >
                   {isTurkish ? "Değiştir" : "Change"}
                 </button>

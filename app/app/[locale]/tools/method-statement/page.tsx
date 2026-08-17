@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MethodStatementPrint from "./MethodStatementPrint";
+import PrintButton from "@/components/ui/PrintButton";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -3590,13 +3591,10 @@ export default function MethodStatementPage({ params }: Props) {
               </p>
             </div>
 
-            <button
-              type="button"
+            <PrintButton
+              label={isTurkish ? "PDF / Yazdır" : "PDF / Print"}
               onClick={() => window.print()}
-              className="rounded-xl border border-blue-500/40 bg-blue-500/10 px-5 py-3 text-sm font-bold text-blue-300 transition hover:bg-blue-500/20"
-            >
-              📄 {isTurkish ? "PDF / Yazdır" : "PDF / Print"}
-            </button>
+            />
           </div>
         </div>
 
