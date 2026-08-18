@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { parseCopilotResponse } from "@/lib/ai/copilot-parser";
+import { createClient } from "@/utils/supabase/server";
 
 import {
   guidesToAIContext,
@@ -21,6 +22,33 @@ type RequestBody = {
 
 export async function POST(req: Request) {
   try {
+    const supabase = await createClient();
+
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return Response.json(
+        { error: "Unauthorized" },
+        { status: 401 },
+      );
+    }
+
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("plan,role,status")
+      .eq("id", user.id)
+      .single();
+
+    if (profileError || !profile || profile.status === "suspended") {
+      return Response.json(
+        { error: "Account access denied" },
+        { status: 403 },
+      );
+    }
+
     const body = (await req.json()) as RequestBody;
 
     const question =

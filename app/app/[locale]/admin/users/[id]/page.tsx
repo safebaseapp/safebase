@@ -122,16 +122,16 @@ export default async function AdminUserEditPage({
       );
     }
 
-    const { error: updateError } = await serverSupabase
-      .from("profiles")
-      .update({
-        full_name: fullName || null,
-        plan,
-        role,
-        status,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", id);
+    const { error: updateError } = await serverSupabase.rpc(
+      "admin_update_profile",
+      {
+        target_user_id: id,
+        new_full_name: fullName,
+        new_plan: plan,
+        new_role: role,
+        new_status: status,
+      },
+    );
 
     if (updateError) {
       console.error("Profile update error:", updateError);
