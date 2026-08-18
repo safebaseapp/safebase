@@ -36,3 +36,42 @@ input[type="number"] {
   appearance: textfield;
 }
 }
+
+/* =========================================================
+   SERNEM INSPECTION REPORT — PRINT PAGINATION
+   ========================================================= */
+@media print {
+
+  /* Table header should repeat on following pages */
+  thead {
+    display: table-header-group !important;
+  }
+
+  tfoot {
+    display: table-footer-group !important;
+  }
+
+  /* Never split a checklist row */
+  tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Keep section headers with following content */
+  .sernem-print-section-row {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Prevent empty table header at bottom of a page */
+  .sernem-print-table {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  /* Clean A4 print behaviour */
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+}

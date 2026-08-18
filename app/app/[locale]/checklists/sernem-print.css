@@ -1,0 +1,452 @@
+/*
+  SERNEM Inspection Print System
+  Screen UI is untouched.
+*/
+
+@media print {
+
+  @page {
+    size: A4 portrait;
+    margin: 10mm 9mm 11mm 9mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #071a38 !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  body {
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif !important;
+  }
+
+  /* Remove dark application background */
+  main {
+    background: #ffffff !important;
+    color: #071a38 !important;
+  }
+
+  /*
+   * Main printable container.
+   * Existing print:block report becomes the SERNEM document.
+   */
+  .hidden.print\:block {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #071a38 !important;
+  }
+
+  /*
+   * Hide ordinary screen-only content.
+   */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* ------------------------------------------------------
+     SERNEM HEADER
+     ------------------------------------------------------ */
+
+
+
+  /* ------------------------------------------------------
+     TYPOGRAPHY
+     ------------------------------------------------------ */
+
+  .hidden.print\:block h1 {
+    margin: 0 0 2mm 0 !important;
+
+    color: #071a38 !important;
+
+    font-size: 21pt !important;
+    line-height: 1.05 !important;
+    font-weight: 800 !important;
+
+    letter-spacing: -.3px !important;
+  }
+
+  .hidden.print\:block h2 {
+    margin-top: 5mm !important;
+    margin-bottom: 2.5mm !important;
+
+    color: #071a38 !important;
+
+    font-size: 13pt !important;
+    line-height: 1.15 !important;
+    font-weight: 800 !important;
+  }
+
+  .hidden.print\:block h3 {
+    color: #071a38 !important;
+    font-weight: 800 !important;
+  }
+
+  .hidden.print\:block p,
+  .hidden.print\:block span,
+  .hidden.print\:block label {
+    color: #203650;
+  }
+
+  /* ------------------------------------------------------
+     CARDS / SECTIONS
+     ------------------------------------------------------ */
+
+  .hidden.print\:block section,
+  .hidden.print\:block > div {
+    box-shadow: none !important;
+  }
+
+  .hidden.print\:block section {
+    border-color: #cbd7e6 !important;
+  }
+
+  .hidden.print\:block .rounded-3xl,
+  .hidden.print\:block .rounded-2xl,
+  .hidden.print\:block .rounded-xl {
+    border-radius: 7px !important;
+  }
+
+  /*
+   * Existing dark section/card backgrounds become white.
+   */
+  .hidden.print\:block [class*="bg-slate-9"],
+  .hidden.print\:block [class*="bg-slate-8"] {
+    background: #ffffff !important;
+  }
+
+  .hidden.print\:block [class*="border-slate"] {
+    border-color: #cbd7e6 !important;
+  }
+
+  /* ------------------------------------------------------
+     SECTION HEADERS
+     ------------------------------------------------------ */
+
+  .hidden.print\:block [class*="uppercase"][class*="tracking"] {
+    color: #04aeca !important;
+    font-weight: 800 !important;
+    letter-spacing: .10em !important;
+  }
+
+  /* ------------------------------------------------------
+     FORM / PROJECT INFORMATION
+     ------------------------------------------------------ */
+
+  .hidden.print\:block input,
+  .hidden.print\:block textarea,
+  .hidden.print\:block select {
+    background: #ffffff !important;
+
+    color: #071a38 !important;
+
+    border: 1px solid #9eb2c9 !important;
+    border-radius: 5px !important;
+
+    box-shadow: none !important;
+
+    font-size: 9pt !important;
+  }
+
+  .hidden.print\:block input {
+    min-height: 7mm;
+  }
+
+  .hidden.print\:block textarea {
+    resize: none !important;
+  }
+
+  /* ------------------------------------------------------
+     INSPECTION ITEMS
+     ------------------------------------------------------ */
+
+  .hidden.print\:block [class*="border-slate-800"],
+  .hidden.print\:block [class*="border-slate-700"] {
+    border-color: #cbd7e6 !important;
+  }
+
+  /*
+   * Keep inspection rows together whenever possible.
+   */
+  .hidden.print\:block [class*="rounded-2xl"],
+  .hidden.print\:block [class*="rounded-xl"] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* ------------------------------------------------------
+     STATUS / CRITICAL
+     ------------------------------------------------------ */
+
+  .hidden.print\:block [class*="text-red"] {
+    color: #d61f2c !important;
+  }
+
+  .hidden.print\:block [class*="border-red"] {
+    border-color: #e42a35 !important;
+  }
+
+  .hidden.print\:block [class*="bg-red"] {
+    background: #ffffff !important;
+  }
+
+  .hidden.print\:block [class*="text-amber"],
+  .hidden.print\:block [class*="text-yellow"] {
+    color: #9b6400 !important;
+  }
+
+  .hidden.print\:block [class*="text-emerald"],
+  .hidden.print\:block [class*="text-green"] {
+    color: #078447 !important;
+  }
+
+  /* ------------------------------------------------------
+     GRID
+     ------------------------------------------------------ */
+
+  .hidden.print\:block .grid {
+    gap: 2.5mm !important;
+  }
+
+  /* ------------------------------------------------------
+     CORRECTIVE ACTION
+     ------------------------------------------------------ */
+
+  .hidden.print\:block [class*="border-red-500"] {
+    border: 1px solid #ef4444 !important;
+    background: #fff !important;
+  }
+
+  /* ------------------------------------------------------
+     SUMMARY
+     ------------------------------------------------------ */
+
+  .hidden.print\:block [class*="border-blue"],
+  .hidden.print\:block [class*="border-violet"] {
+    border-color: #8fa8c3 !important;
+  }
+
+  /* ------------------------------------------------------
+     FOOTER
+     ------------------------------------------------------ */
+
+  .hidden.print\:block footer {
+    margin-top: 7mm !important;
+    padding-top: 3mm !important;
+
+    border-top: 1px solid #aebfd2 !important;
+
+    color: #60738b !important;
+
+    font-size: 7.5pt !important;
+  }
+
+  .hidden.print\:block footer::after {
+    content: "SERNEM  •  Professional HSE Resource  •  Rev. 2.0";
+    display: block;
+
+    margin-top: 2mm;
+
+    color: #60738b !important;
+
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: .3px;
+  }
+
+  /* ------------------------------------------------------
+     PAGE BREAK CONTROL
+     ------------------------------------------------------ */
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  section {
+    orphans: 3;
+    widows: 3;
+  }
+
+  button {
+    display: none !important;
+  }
+
+  /* Links should not print URLs */
+  a[href]::after {
+    content: none !important;
+  }
+}
+
+/* =========================================================
+   SERNEM INSPECTION REPORT — SECTION PAGINATION FIX
+   ========================================================= */
+
+@media print {
+
+  .sernem-print-section {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .sernem-print-section > div:first-child {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  .sernem-print-section > div {
+    page-break-inside: avoid !important;
+  }
+
+}
+
+/* =========================================================
+   SERNEM INSPECTION REPORT — FINAL PAGE 1 CLEANUP
+   ========================================================= */
+
+@media print {
+
+  /* SERNEM web navbar / site navigation PDF'e girmesin */
+  header:not(.sernem-print-header),
+  nav,
+  [role="navigation"] {
+    display: none !important;
+  }
+
+  /* Print raporunun başlangıcındaki gereksiz web boşluklarını kaldır */
+  body,
+  main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* Profesyonel PDF header görünür kalmalı */
+  .sernem-print-header {
+    display: block !important;
+    margin-top: 0 !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* İlk sayfadaki form alanını biraz sıkıştır */
+  .sernem-print-report input {
+    min-height: 0 !important;
+  }
+
+  /* Tablo mümkün olduğunca ilk sayfadan devam etsin */
+  .sernem-print-report table {
+    break-before: auto !important;
+    page-break-before: auto !important;
+  }
+
+  /* İlk bölüm sırf bütün kalsın diye sonraki sayfaya kaçmasın */
+  .sernem-print-section:first-of-type {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  /* Print çıktısında web gölgeleri gereksiz */
+  .sernem-print-report,
+  .sernem-print-report * {
+    box-shadow: none !important;
+  }
+}
+
+
+/* =========================================================
+   SERNEM WAH REPORT — FINAL PRINT LAYOUT
+   FINAL RULES — keep these at the end of this file
+   ========================================================= */
+
+@media print {
+
+  /*
+   * PAGE 1
+   * SERNEM document header + inspection metadata only.
+   */
+  .sernem-print-header {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    break-after: auto !important;
+    page-break-after: auto !important;
+  }
+
+  /*
+   * PAGE 2+
+   * The inspection table always starts on a fresh page.
+   * This removes the orphan table header from page 1.
+   */
+  .sernem-print-report {
+    display: block !important;
+
+    break-before: page !important;
+    page-break-before: always !important;
+
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+
+    box-shadow: none !important;
+  }
+
+  /*
+   * Prevent the checklist column header from being isolated.
+   */
+  .sernem-print-report > div:first-child {
+    margin-top: 0 !important;
+    break-before: avoid !important;
+    page-break-before: avoid !important;
+  }
+
+  /*
+   * Sections may move naturally between pages.
+   * Each individual checklist row remains protected.
+   */
+  .sernem-print-section {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  .sernem-print-section > div:first-child {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  .sernem-print-section > div:not(:first-child) {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /*
+   * Compact metadata form on page 1 without changing screen UI.
+   */
+  main > div > section:not(.sernem-print-header):not(.sernem-print-report) input {
+    box-shadow: none !important;
+  }
+
+  /*
+   * No website chrome in formal report.
+   */
+  nav,
+  [role="navigation"] {
+    display: none !important;
+  }
+
+  /*
+   * Stable A4 document geometry.
+   */
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+}
+

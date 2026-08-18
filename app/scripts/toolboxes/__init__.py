@@ -14,6 +14,7 @@ from .housekeeping import HOUSEKEEPING
 from .ladder_safety import LADDER_SAFETY
 from .lifting_operations import LIFTING_OPERATIONS
 from .loto import LOTO
+from .manual_handling import MANUAL_HANDLING
 from .mobile_equipment_safety import MOBILE_EQUIPMENT_SAFETY
 from .ppe_safety import PPE_SAFETY
 from .safety_harness import SAFETY_HARNESS
@@ -35,6 +36,7 @@ TOOLBOXES = [
     LADDER_SAFETY,
     LIFTING_OPERATIONS,
     LOTO,
+    MANUAL_HANDLING,
     MOBILE_EQUIPMENT_SAFETY,
     PPE_SAFETY,
     SAFETY_HARNESS,

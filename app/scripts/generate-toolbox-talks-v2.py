@@ -49,6 +49,13 @@ def centered(c, value, x, y, size=9, font=BOLD, color=white):
 
 
 def wrapped_lines(c, value, width, size=9, font=REGULAR):
+    if isinstance(value, (list, tuple)):
+        value = " • ".join(str(item) for item in value)
+    elif value is None:
+        value = ""
+    else:
+        value = str(value)
+
     words = value.split()
     lines = []
     current = ""

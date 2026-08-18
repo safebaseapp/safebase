@@ -1,5 +1,6 @@
 "use client";
 
+import "../sernem-print.css";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { checklistItems } from "./checklistData";
@@ -300,7 +301,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           </Link>
         </div>
 
-        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 shadow-2xl shadow-blue-950/20 sm:p-10 print:border-slate-300 print:bg-white print:shadow-none">
+        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 shadow-2xl shadow-blue-950/20 sm:p-10 print:hidden print:border-slate-300 print:bg-white print:shadow-none">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">
             {t.eyebrow}
           </p>
@@ -344,7 +345,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           </div>
 
           <div
-            className={`mt-6 flex flex-col gap-4 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between ${liveSafetyStatus.className} print:border-slate-300 print:bg-white print:text-black`}
+            className={`mt-6 flex flex-col gap-4 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between ${liveSafetyStatus.className} print:hidden`}
           >
             <div className="flex items-center gap-3">
               <span
@@ -368,7 +369,49 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           </div>
         </section>
 
-        <section className="mt-8 grid gap-4 rounded-3xl border border-slate-800 bg-slate-900 p-6 md:grid-cols-2 xl:grid-cols-3 print:border-slate-300 print:bg-white">
+        
+        {/* SERNEM PROFESSIONAL PRINT HEADER */}
+        <section className="hidden print:block sernem-print-header">
+          <div className="mb-5 border-b-[3px] border-cyan-500 bg-[#061a38] px-6 py-5 text-white">
+            <div className="flex items-start justify-between gap-6">
+              <div>
+                <p className="text-[20px] font-extrabold tracking-[0.08em] text-white">
+                  SERNEM
+                </p>
+                <p className="mt-1 text-[9px] font-medium text-slate-300">
+                  {locale === "tr"
+                    ? "Profesyonel HSE Kaynağı"
+                    : "Professional HSE Resource"}
+                </p>
+              </div>
+
+              <div className="text-right">
+                <p className="text-[10px] font-bold text-white">
+                  SRN-INS-CS-001
+                </p>
+                <p className="mt-1 text-[8px] text-slate-300">
+                  Rev. 2.0
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-5 px-1">
+            <h1 className="text-[22px] font-extrabold leading-tight text-[#071a38]">
+              {locale === "tr"
+                ? "KAPALI ALAN GİRİŞ DENETİM RAPORU"
+                : "CONFINED SPACE ENTRY INSPECTION REPORT"}
+            </h1>
+
+            <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-cyan-600">
+              {locale === "tr"
+                ? "Dijital Saha Denetimi"
+                : "Digital Field Inspection"}
+            </p>
+          </div>
+        </section>
+
+<section className="mt-8 grid gap-4 rounded-3xl border border-slate-800 bg-slate-900 p-6 md:grid-cols-2 xl:grid-cols-3 print:border-slate-300 print:bg-white">
           {[
             [t.company, t.companyPlaceholder, "text"],
             [t.project, t.projectPlaceholder, "text"],
@@ -385,13 +428,277 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
               <input
                 type={type}
                 placeholder={placeholder}
-                className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 print:border-slate-300 print:bg-white print:text-black"
+                className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 print:hidden"
               />
             </label>
           ))}
         </section>
 
-        <div className="mt-8 space-y-8">
+        
+        {/* SERNEM PROFESSIONAL PRINT REPORT */}
+        <section className="hidden print:block sernem-print-report">
+          <div className="mt-5 overflow-hidden rounded-lg border border-slate-300">
+
+            <div className="grid grid-cols-[32px_minmax(0,1fr)_42px_42px_42px_78px_150px] bg-[#061a38] text-white">
+
+              <div className="border-r border-slate-600 px-2 py-3 text-center text-[8px] font-bold">
+                #
+              </div>
+
+              <div className="border-r border-slate-600 px-3 py-3 text-[8px] font-bold">
+                {locale === "tr" ? "Kontrol Maddesi" : "Inspection Item"}
+              </div>
+
+              <div className="border-r border-slate-600 px-1 py-3 text-center text-[7px] font-bold">
+                {locale === "tr" ? "EVET" : "YES"}
+              </div>
+
+              <div className="border-r border-slate-600 px-1 py-3 text-center text-[7px] font-bold">
+                {locale === "tr" ? "HAYIR" : "NO"}
+              </div>
+
+              <div className="border-r border-slate-600 px-1 py-3 text-center text-[7px] font-bold">
+                {locale === "tr" ? "U/D" : "N/A"}
+              </div>
+
+              <div className="border-r border-slate-600 px-2 py-3 text-center text-[7px] font-bold">
+                {locale === "tr" ? "Öncelik" : "Priority"}
+              </div>
+
+              <div className="px-3 py-3 text-[7px] font-bold">
+                {locale === "tr" ? "Yorum / Aksiyon" : "Comments / Action"}
+              </div>
+            </div>
+
+            {sections.map((section, sectionIndex) => {
+              const sectionItems = items.filter(
+                (item) => item.section === section,
+              );
+
+              return (
+                <div
+                  key={`print-${section}`}
+                  className="sernem-print-section"
+                >
+                  <div className="border-y border-slate-300 bg-slate-100 px-4 py-2 text-[9px] font-extrabold uppercase text-[#071a38]">
+                    <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-teal-600 text-[8px] text-white">
+                      {sectionIndex + 1}
+                    </span>
+
+                    {section}
+                  </div>
+
+                  {sectionItems.map((item) => {
+                    const selected = answers[item.id];
+                    const action = correctiveActions[item.id];
+                    const itemNumber = items.indexOf(item) + 1;
+
+                    return (
+                      <div
+                        key={`print-row-${item.id}`}
+                        className="grid grid-cols-[32px_minmax(0,1fr)_42px_42px_42px_78px_150px] break-inside-avoid border-b border-slate-300 text-[#071a38]"
+                      >
+                        <div className="flex items-start justify-center border-r border-slate-300 px-1 py-3 text-[8px] font-bold">
+                          {itemNumber}
+                        </div>
+
+                        <div className="border-r border-slate-300 px-3 py-3">
+                          <p className="text-[8px] font-medium leading-[1.45] text-[#071a38]">
+                            {item.text}
+                          </p>
+                        </div>
+
+                        {(["yes", "no", "na"] as const).map((value) => (
+                          <div
+                            key={value}
+                            className="flex items-center justify-center border-r border-slate-300 py-3"
+                          >
+                            <span
+                              className={`flex h-4 w-4 items-center justify-center border text-[8px] font-bold ${
+                                selected === value
+                                  ? value === "yes"
+                                    ? "border-emerald-600 text-emerald-700"
+                                    : value === "no"
+                                      ? "border-red-600 text-red-700"
+                                      : "border-slate-600 text-slate-700"
+                                  : "border-slate-400 text-transparent"
+                              }`}
+                            >
+                              {selected === value ? "✓" : ""}
+                            </span>
+                          </div>
+                        ))}
+
+                        <div className="flex items-center justify-center border-r border-slate-300 px-2 py-3">
+                          <span
+                            className={`rounded px-2 py-1 text-[6px] font-extrabold text-white ${
+                              item.critical
+                                ? "bg-red-600"
+                                : "bg-amber-500"
+                            }`}
+                          >
+                            {item.critical
+                              ? locale === "tr"
+                                ? "KRİTİK"
+                                : "CRITICAL"
+                              : locale === "tr"
+                                ? "STANDART"
+                                : "STANDARD"}
+                          </span>
+                        </div>
+
+                        <div className="px-3 py-3">
+                          <p className="text-[7px] leading-[1.45] text-[#334155]">
+                            {selected === "no"
+                              ? action?.action ||
+                                (locale === "tr"
+                                  ? "Düzeltici aksiyon girilmedi."
+                                  : "Corrective action not entered.")
+                              : ""}
+                          </p>
+
+                          {selected === "no" && action?.responsible && (
+                            <p className="mt-2 text-[6px] font-semibold text-[#64748b]">
+                              {locale === "tr"
+                                ? "Sorumlu: "
+                                : "Responsible: "}
+                              {action.responsible}
+                            </p>
+                          )}
+
+                          {selected === "no" && action?.targetDate && (
+                            <p className="mt-1 text-[6px] font-semibold text-[#64748b]">
+                              {locale === "tr" ? "Termin: " : "Due: "}
+                              {action.targetDate}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-6 grid grid-cols-5 overflow-hidden rounded-lg border border-slate-300">
+
+            {[
+              [
+                locale === "tr" ? "Toplam" : "Total",
+                items.length,
+              ],
+              [
+                locale === "tr" ? "Cevaplanan" : "Answered",
+                answeredCount,
+              ],
+              ["YES", yesCount],
+              ["NO", noCount],
+              ["N/A", naCount],
+            ].map(([label, value]) => (
+              <div
+                key={String(label)}
+                className="border-r border-slate-300 px-3 py-3 text-center last:border-r-0"
+              >
+                <p className="text-[7px] font-semibold uppercase text-slate-500">
+                  {label}
+                </p>
+
+                <p className="mt-1 text-[14px] font-extrabold text-[#071a38]">
+                  {value}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-5 rounded-lg border border-slate-300 px-4 py-4">
+
+            <p className="text-[8px] font-extrabold uppercase tracking-[0.12em] text-cyan-600">
+              {locale === "tr"
+                ? "Denetim Sonucu"
+                : "Inspection Result"}
+            </p>
+
+            <div className="mt-3 grid grid-cols-3 gap-4">
+
+              <div>
+                <p className="text-[7px] text-slate-500">
+                  {locale === "tr" ? "İlerleme" : "Progress"}
+                </p>
+
+                <p className="mt-1 text-[14px] font-extrabold text-[#071a38]">
+                  {progress}%
+                </p>
+              </div>
+
+              <div>
+                <p className="text-[7px] text-slate-500">
+                  {locale === "tr" ? "Uygunluk" : "Compliance"}
+                </p>
+
+                <p className="mt-1 text-[14px] font-extrabold text-[#071a38]">
+                  {score}%
+                </p>
+              </div>
+
+              <div>
+                <p className="text-[7px] text-slate-500">
+                  {locale === "tr"
+                    ? "Kritik Bulgu"
+                    : "Critical Findings"}
+                </p>
+
+                <p className="mt-1 text-[14px] font-extrabold text-[#071a38]">
+                  {criticalFailures.length}
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-3 gap-4">
+
+            {[
+              locale === "tr" ? "Denetçi" : "Inspector",
+              locale === "tr"
+                ? "Saha Sorumlusu"
+                : "Site Supervisor",
+              locale === "tr" ? "Onaylayan" : "Approved By",
+            ].map((label) => (
+              <div
+                key={label}
+                className="h-24 rounded-lg border border-slate-300 px-4 py-3"
+              >
+                <p className="text-[8px] font-bold text-[#071a38]">
+                  {label}
+                </p>
+
+                <div className="mt-10 border-t border-slate-400 pt-1 text-[6px] text-slate-500">
+                  {locale === "tr"
+                    ? "Ad / İmza / Tarih"
+                    : "Name / Signature / Date"}
+                </div>
+              </div>
+            ))}
+
+          </div>
+
+          <div className="mt-6 border-t border-slate-300 pt-3 text-[6px] leading-4 text-slate-500">
+            <span className="font-bold">SERNEM</span>
+
+            {"  •  "}
+
+            {locale === "tr"
+              ? "Profesyonel HSE Kaynağı"
+              : "Professional HSE Resource"}
+
+            {"  •  SRN-INS-CS-001  •  Rev. 2.0"}
+          </div>
+
+        </section>
+
+
+        <div className="mt-8 space-y-8 print:hidden">
           {sections.map((section) => {
             const sectionItems = items.filter(
               (item) => item.section === section,
@@ -416,7 +723,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
                         className="grid gap-5 p-6 lg:grid-cols-[1fr_auto] lg:items-center"
                       >
                         <div className="flex gap-4">
-                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-sm font-bold text-blue-300 print:border print:border-slate-300 print:bg-white print:text-black">
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-sm font-bold text-blue-300 print:border print:hidden">
                             {items.indexOf(item) + 1}
                           </span>
 
@@ -522,7 +829,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
                                     }
                                     placeholder={t.actionPlaceholder}
                                     rows={3}
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:hidden"
                                   />
                                 </label>
 
@@ -545,7 +852,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
                                       )
                                     }
                                     placeholder={t.responsiblePlaceholder}
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:hidden"
                                   />
                                 </label>
 
@@ -567,7 +874,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
                                         event.target.value,
                                       )
                                     }
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:hidden"
                                   />
                                 </label>
 
@@ -589,7 +896,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
                                           .value as CorrectiveAction["priority"],
                                       )
                                     }
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:hidden"
                                   >
                                     <option value="low">{t.priorityLow}</option>
                                     <option value="medium">
@@ -622,7 +929,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
                                           .value as CorrectiveAction["status"],
                                       )
                                     }
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:hidden"
                                   >
                                     <option value="open">{t.statusOpen}</option>
                                     <option value="progress">
@@ -646,7 +953,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           })}
         </div>
 
-        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:border-slate-300 print:bg-white">
+        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:hidden">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
               {t.inspectionSummary}
@@ -681,7 +988,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           </div>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:border-slate-300 print:bg-white">
+        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:hidden">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">
               {t.findingsSummary}
@@ -774,7 +1081,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
         </section>
 
         <section
-          className={`mt-8 rounded-3xl border p-7 ${result.className} print:border-slate-300 print:bg-white print:text-black`}
+          className={`mt-8 rounded-3xl border p-7 ${result.className} print:hidden`}
         >
           <p className="text-sm font-semibold uppercase tracking-[0.18em]">
             {t.result}
@@ -805,7 +1112,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           </div>
         </section>
 
-        <div data-checklist-analysis className="scroll-mt-8">
+        <div data-checklist-analysis className="scroll-mt-8 print:hidden">
           {analysisOpened && (
             <div className="mt-8">
               {analysis ? (
@@ -843,7 +1150,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           )}
         </div>
 
-        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:border-slate-300 print:bg-white">
+        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:hidden">
           <label htmlFor="inspection-comments">
             <span className="block text-lg font-bold">{t.comments}</span>
 
@@ -853,7 +1160,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
               onChange={(event) => setComments(event.target.value)}
               placeholder={t.commentsPlaceholder}
               rows={6}
-              className="mt-4 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-4 text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 print:border-slate-300 print:bg-white print:text-black"
+              className="mt-4 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-4 text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 print:hidden"
             />
           </label>
         </section>
@@ -890,7 +1197,7 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           </button>
         </div>
 
-        <footer className="mt-10 border-t border-slate-800 py-8 text-sm leading-6 text-slate-500 print:border-slate-300 print:text-slate-700">
+        <footer className="mt-10 border-t border-slate-800 py-8 text-sm leading-6 text-slate-500 print:border-slate-300 print:text-slate-700 print:hidden">
           <p>{t.disclaimer}</p>
           <p className="mt-3 font-semibold">{t.generated}</p>
         </footer>
