@@ -1,7 +1,7 @@
 [
   {
     "slug": "ladder-safety-rules",
-    "code": "SB-LAD-001",
+    "code": "SRN-LAD-001",
     "category": "Ladder Safety",
     "revision": "1.0",
     "title": {
@@ -15,7 +15,7 @@
   },
   {
     "slug": "mobile-scaffold-safety",
-    "code": "SB-MSC-001",
+    "code": "SRN-MSC-001",
     "category": "Scaffolding",
     "revision": "1.0",
     "title": {
@@ -29,7 +29,7 @@
   },
   {
     "slug": "excavation-safety-rules",
-    "code": "SB-EXC-001",
+    "code": "SRN-EXC-001",
     "category": "Excavation",
     "revision": "1.0",
     "title": {
@@ -43,7 +43,7 @@
   },
   {
     "slug": "crane-lifting-safety",
-    "code": "SB-LFT-001",
+    "code": "SRN-LFT-001",
     "category": "Lifting",
     "revision": "1.0",
     "title": {
@@ -57,7 +57,7 @@
   },
   {
     "slug": "forklift-safety-rules",
-    "code": "SB-FLT-001",
+    "code": "SRN-FLT-001",
     "category": "Forklift",
     "revision": "1.0",
     "title": {
@@ -71,7 +71,7 @@
   },
   {
     "slug": "chemical-safety-rules",
-    "code": "SB-CHM-001",
+    "code": "SRN-CHM-001",
     "category": "Chemical Safety",
     "revision": "1.0",
     "title": {
@@ -85,7 +85,7 @@
   },
   {
     "slug": "housekeeping-safety-rules",
-    "code": "SB-HSK-001",
+    "code": "SRN-HSK-001",
     "category": "Housekeeping",
     "revision": "1.0",
     "title": {
@@ -99,7 +99,7 @@
   },
   {
     "slug": "manual-handling-safety",
-    "code": "SB-MH-001",
+    "code": "SRN-MH-001",
     "category": "Manual Handling",
     "revision": "1.0",
     "title": {
@@ -113,7 +113,7 @@
   },
   {
     "slug": "dropped-objects-prevention",
-    "code": "SB-DOP-001",
+    "code": "SRN-DOP-001",
     "category": "Dropped Objects",
     "revision": "1.0",
     "title": {
@@ -127,7 +127,7 @@
   },
   {
     "slug": "permit-to-work-safety",
-    "code": "SB-PTW-001",
+    "code": "SRN-PTW-001",
     "category": "Permit to Work",
     "revision": "1.0",
     "title": {

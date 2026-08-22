@@ -607,12 +607,12 @@ export default function BottomPanels({
   ];
 
 
-  const standards_SB_HSK_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-  const standards_SB_EXC_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-  const standards_SB_CHM_001 = ["EN 166", "EN ISO 374", "EN 13034", "ISO 20345", "RİSKE GÖRE"];
-  const standards_SB_FLT_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-  const standards_SB_MH_001 = ["EN 388", "ISO 20345", "RİSKE GÖRE", "EN ISO 20471", "RİSKE GÖRE"];
-  const standards_SB_DO_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
+  const standards_SRN_HSK_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
+  const standards_SRN_EXC_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
+  const standards_SRN_CHM_001 = ["EN 166", "EN ISO 374", "EN 13034", "ISO 20345", "RİSKE GÖRE"];
+  const standards_SRN_FLT_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
+  const standards_SRN_MH_001 = ["EN 388", "ISO 20345", "RİSKE GÖRE", "EN ISO 20471", "RİSKE GÖRE"];
+  const standards_SRN_DO_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
 
   const standards =
     poster.code === "SRN-PPE-001"
@@ -620,14 +620,26 @@ export default function BottomPanels({
       : poster.code === "SRN-FIRE-001"
         ? fireStandards
         : poster.code === "SRN-LOTO-001"
-        ? lotoStandards
-        : poster.code === "SRN-EL-001"
-        ? electricalStandards
-        : poster.code === "SRN-CS-001"
-          ? confinedSpaceStandards
-          : poster.code === "SRN-HW-001"
-            ? hotWorkStandards
-            : defaultStandards;
+          ? lotoStandards
+          : poster.code === "SRN-EL-001"
+            ? electricalStandards
+            : poster.code === "SRN-CS-001"
+              ? confinedSpaceStandards
+              : poster.code === "SRN-HW-001"
+                ? hotWorkStandards
+                : poster.code === "SRN-HSK-001"
+                  ? standards_SRN_HSK_001
+                  : poster.code === "SRN-EXC-001"
+                    ? standards_SRN_EXC_001
+                    : poster.code === "SRN-CHM-001"
+                      ? standards_SRN_CHM_001
+                      : poster.code === "SRN-FLT-001"
+                        ? standards_SRN_FLT_001
+                        : poster.code === "SRN-MH-001"
+                          ? standards_SRN_MH_001
+                          : poster.code === "SRN-DO-001"
+                            ? standards_SRN_DO_001
+                            : defaultStandards;
 
   const serialPpeIcons: Record<string, string[]> = {
     "SRN-HSK-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
