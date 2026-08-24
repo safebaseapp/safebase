@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import ToolboxActions from "./ToolboxActions";
@@ -135,6 +136,67 @@ export function generateStaticParams() {
       slug: toolbox.slug,
     },
   ]);
+}
+
+
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale: rawLocale, slug } = await params;
+  const locale: "tr" | "en" = rawLocale === "tr" ? "tr" : "en";
+
+  const toolbox = getToolboxBySlug(slug);
+
+  if (!toolbox) {
+    return {};
+  }
+
+  const content = locale === "tr" ? toolbox.tr : toolbox.en;
+
+  const title =
+    content.title ??
+    (locale === "tr"
+      ? "Toolbox Talk | SERNEM"
+      : "Toolbox Talk | SERNEM");
+
+  const description =
+    content.subtitle ??
+    content.application_subtitle ??
+    (locale === "tr"
+      ? "Profesyonel HSE toolbox talk içeriği, tehlikeler, kontrol önlemleri ve saha doğrulama adımları."
+      : "Professional HSE toolbox talk covering hazards, control measures and pre-work site verification.");
+
+  const canonical = `https://www.sernem.com/${locale}/toolbox/${slug}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: {
+        tr: `https://www.sernem.com/tr/toolbox/${slug}`,
+        en: `https://www.sernem.com/en/toolbox/${slug}`,
+        "x-default": `https://www.sernem.com/en/toolbox/${slug}`,
+      },
+    },
+    openGraph: {
+      type: "article",
+      url: canonical,
+      siteName: "SERNEM",
+      title,
+      description,
+      locale: locale === "tr" ? "tr_TR" : "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 export default async function ToolboxDetailPage({ params }: Props) {

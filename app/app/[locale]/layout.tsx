@@ -23,12 +23,12 @@ export async function generateMetadata({
   const isTurkish = locale === "tr";
 
   const title = isTurkish
-    ? "SERNEM | Global İSG Bilgi Platformu"
-    : "SERNEM | Global HSE Knowledge Platform";
+    ? "SERNEM | Profesyonel İSG Araçları ve Güvenlik Kaynakları"
+    : "SERNEM | Professional HSE Tools & Safety Resources";
 
   const description = isTurkish
-    ? "Profesyonel risk analizi, Method Statement, İSG hesaplayıcıları, yapay zekâ destekli HSE rehberliği ve saha güvenliği kaynakları."
-    : "Professional risk assessments, Method Statements, HSE calculators, AI-powered safety guidance and field-ready HSE resources.";
+    ? "Risk analizi, Method Statement, İSG hesaplayıcıları, denetim araçları, Toolbox içerikleri ve yapay zekâ destekli profesyonel HSE kaynakları."
+    : "Professional risk assessments, Method Statements, HSE calculators, inspection tools, Toolbox Talks and AI-powered safety resources.";
 
   return {
     title,
