@@ -394,7 +394,10 @@ const duplicateRiskItem = (id: string) => {
   };
 
   const loadLibraryActivity = () => {
-    if (!selectedLibraryTemplate) return;
+    if (!selectedLibraryTemplate || isLoadingLibraryActivity) return;
+
+    setIsLoadingLibraryActivity(true);
+    setLibraryActivityLoaded(false);
 
     const lang = isTurkish ? "tr" : "en";
 
@@ -446,6 +449,15 @@ const duplicateRiskItem = (id: string) => {
 
       return blank ? generated : [...current, ...generated];
     });
+
+    setTimeout(() => {
+      setIsLoadingLibraryActivity(false);
+      setLibraryActivityLoaded(true);
+
+      setTimeout(() => {
+        setLibraryActivityLoaded(false);
+      }, 1200);
+    }, 350);
   };
 
   /* SERNEM_RISK_LIBRARY_PACK01_STATE_END */
@@ -460,6 +472,8 @@ const duplicateRiskItem = (id: string) => {
   const [likelihood, setLikelihood] = useState(1);
   const [severity, setSeverity] = useState(1);
   const [showResult, setShowResult] = useState(false);
+  const [isLoadingLibraryActivity, setIsLoadingLibraryActivity] = useState(false);
+  const [libraryActivityLoaded, setLibraryActivityLoaded] = useState(false);
 
   useEffect(() => {
     params.then(({ locale }) => {
@@ -1098,15 +1112,27 @@ const duplicateRiskItem = (id: string) => {
               type="button"
               onClick={loadLibraryActivity}
               disabled={
-                !selectedLibraryTemplate ||
-                selectedLibraryRiskIndexes.length === 0
-              }
+              !selectedLibraryTemplate ||
+              selectedLibraryRiskIndexes.length === 0 ||
+              isLoadingLibraryActivity
+            }
               className="self-end rounded-xl bg-blue-500 px-6 py-4 text-sm font-black text-white transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              ⚡{" "}
-              {isTurkish
-                ? `${selectedLibraryRiskIndexes.length} Riski Analize Aktar`
-                : `Load ${selectedLibraryRiskIndexes.length} Risks`}
+              {isLoadingLibraryActivity ? (
+              <>
+                <span className="inline-block animate-spin">⏳</span>{" "}
+                {isTurkish ? "Aktarılıyor..." : "Loading..."}
+              </>
+            ) : libraryActivityLoaded ? (
+              <>✓ {isTurkish ? "Aktarıldı" : "Loaded"}</>
+            ) : (
+              <>
+                ⚡{" "}
+                {isTurkish
+                  ? `${selectedLibraryRiskIndexes.length} Riski Analize Aktar`
+                  : `Load ${selectedLibraryRiskIndexes.length} Risks`}
+              </>
+            )}
             </button>
 
           </div>

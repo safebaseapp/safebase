@@ -7,32 +7,42 @@ type Props = {
 export default function LocalizedFooter({ locale }: Props) {
   const isTurkish = locale === "tr";
 
+  const linkClass =
+    "text-slate-400 transition-colors hover:text-white";
+
   return (
-    <footer className="border-t border-slate-200 bg-slate-950 px-6 py-12 text-slate-300">
+    <footer className="border-t border-white/10 bg-slate-950 px-6 py-12 text-slate-300">
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-4">
         <div>
-          <div className="text-xl font-bold text-white">SERNEM</div>
-          <p className="mt-3 text-sm leading-6 text-slate-400">
+          <Link
+            href={`/${locale}`}
+            className="text-xl font-bold tracking-tight text-white"
+          >
+            SERNEM
+          </Link>
+
+          <p className="mt-3 max-w-xs text-sm leading-6 text-slate-400">
             {isTurkish
-              ? "HSE profesyonelleri için ücretsiz iş güvenliği araçları, kontrol listeleri, şablonlar ve pratik kaynaklar."
-              : "Free safety tools, checklists, templates and practical resources for HSE professionals."}
+              ? "HSE profesyonelleri için iş güvenliği araçları, kontrol listeleri, şablonlar ve pratik saha kaynakları."
+              : "Safety tools, checklists, templates and practical field resources for HSE professionals."}
           </p>
         </div>
 
         <div>
-          <h3 className="font-semibold text-white">
-            {isTurkish ? "Platform" : "Platform"}
-          </h3>
+          <h3 className="font-semibold text-white">Platform</h3>
+
           <div className="mt-4 flex flex-col gap-3 text-sm">
-            <Link href={`/${locale}/tools`} className="hover:text-white">
+            <Link href={`/${locale}/tools`} className={linkClass}>
               {isTurkish ? "Araçlar" : "Tools"}
             </Link>
-            <a href="#categories" className="hover:text-white">
-              {isTurkish ? "Kategoriler" : "Categories"}
-            </a>
-            <a href="#" className="hover:text-white">
+
+            <Link href={`/${locale}/toolbox`} className={linkClass}>
+              Toolbox
+            </Link>
+
+            <Link href={`/${locale}/downloads`} className={linkClass}>
               {isTurkish ? "Kaynaklar" : "Resources"}
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -40,16 +50,19 @@ export default function LocalizedFooter({ locale }: Props) {
           <h3 className="font-semibold text-white">
             {isTurkish ? "Şirket" : "Company"}
           </h3>
+
           <div className="mt-4 flex flex-col gap-3 text-sm">
-            <a href="#" className="hover:text-white">
+            <Link href={`/${locale}/about`} className={linkClass}>
               {isTurkish ? "Hakkımızda" : "About"}
-            </a>
-            <a href="#" className="hover:text-white">
+            </Link>
+
+            <Link href={`/${locale}/contact`} className={linkClass}>
               {isTurkish ? "İletişim" : "Contact"}
-            </a>
-            <a href="#" className="hover:text-white">
+            </Link>
+
+            <Link href={`/${locale}/faq`} className={linkClass}>
               {isTurkish ? "Sık Sorulan Sorular" : "FAQ"}
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -57,16 +70,19 @@ export default function LocalizedFooter({ locale }: Props) {
           <h3 className="font-semibold text-white">
             {isTurkish ? "Yasal" : "Legal"}
           </h3>
+
           <div className="mt-4 flex flex-col gap-3 text-sm">
-            <a href="#" className="hover:text-white">
+            <Link href={`/${locale}/privacy`} className={linkClass}>
               {isTurkish ? "Gizlilik Politikası" : "Privacy Policy"}
-            </a>
-            <a href="#" className="hover:text-white">
+            </Link>
+
+            <Link href={`/${locale}/terms`} className={linkClass}>
               {isTurkish ? "Kullanım Koşulları" : "Terms of Use"}
-            </a>
-            <a href="#" className="hover:text-white">
+            </Link>
+
+            <Link href={`/${locale}/cookies`} className={linkClass}>
               {isTurkish ? "Çerez Politikası" : "Cookie Policy"}
-            </a>
+            </Link>
           </div>
         </div>
       </div>
