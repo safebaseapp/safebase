@@ -399,7 +399,7 @@ export default function LocalizedNavbar({ locale }: Props) {
             </>
           )}
 
-          {!isAuthLoading && !isAuthenticated && (
+          {!isAuthenticated && (
             <Link
               href="/login"
               onClick={closeDropdowns}
