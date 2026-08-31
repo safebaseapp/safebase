@@ -75,3 +75,52 @@ input[type="number"] {
     margin: 10mm;
   }
 }
+
+
+
+/* =========================================================
+   SERNEM PREMIUM PRESS FEEDBACK
+   ========================================================= */
+
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled),
+a,
+[role="button"] {
+  transition:
+    scale 110ms cubic-bezier(.2,.8,.2,1),
+    translate 110ms cubic-bezier(.2,.8,.2,1),
+    filter 110ms ease,
+    box-shadow 110ms ease,
+    opacity 110ms ease !important;
+}
+
+button:not(:disabled):active,
+a:active,
+[role="button"]:active {
+  scale: 0.955 !important;
+  translate: 0 2px !important;
+  filter: brightness(0.86) saturate(1.08) !important;
+  opacity: 0.96 !important;
+  box-shadow:
+    inset 0 3px 8px rgba(0,0,0,.32),
+    0 1px 2px rgba(0,0,0,.18) !important;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button,
+  a,
+  [role="button"] {
+    transition: none !important;
+  }
+}

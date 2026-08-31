@@ -184,7 +184,8 @@ const toolboxItems: ToolboxItem[] = [
       en: "Covers standard hand signals, visibility, communication and safe lifting coordination.",
     },
     duration: "8–10",
-    hasPdf: false,
+    hasPdf: true,
+    pdfSlug: "crane-banksman-safety",
   },
   {
     slug: "mobile-equipment-safety",
@@ -304,7 +305,8 @@ const toolboxItems: ToolboxItem[] = [
       en: "Covers labelling, SDS, storage, spill response and chemical exposure.",
     },
     duration: "8–10",
-    hasPdf: false,
+    hasPdf: true,
+    pdfSlug: "chemical-safety",
   },
   {
     slug: "dropped-objects",
@@ -319,7 +321,8 @@ const toolboxItems: ToolboxItem[] = [
       en: "Covers tool tethering, storage, barriers and lower-area protection.",
     },
     duration: "8–10",
-    hasPdf: false,
+    hasPdf: true,
+    pdfSlug: "dropped-objects",
   },
   {
     slug: "manual-handling",
@@ -334,7 +337,8 @@ const toolboxItems: ToolboxItem[] = [
       en: "Covers load assessment, safe lifting, carrying routes and mechanical assistance.",
     },
     duration: "5–7",
-    hasPdf: false,
+    hasPdf: true,
+    pdfSlug: "manual-handling",
   },
 ];
 

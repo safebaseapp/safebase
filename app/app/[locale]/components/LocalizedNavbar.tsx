@@ -399,6 +399,16 @@ export default function LocalizedNavbar({ locale }: Props) {
             </>
           )}
 
+          {!isAuthLoading && !isAuthenticated && (
+            <Link
+              href="/login"
+              onClick={closeDropdowns}
+              className="inline-flex h-11 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.025] px-3 text-[12px] font-black text-slate-200 transition hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white lg:hidden"
+            >
+              {isTurkish ? "Giriş" : "Sign In"}
+            </Link>
+          )}
+
           {/* PRODUCT EXPLORER */}
           <button
             type="button"
