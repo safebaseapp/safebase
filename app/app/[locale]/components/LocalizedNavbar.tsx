@@ -399,7 +399,26 @@ export default function LocalizedNavbar({ locale }: Props) {
             </>
           )}
 
-          {!isAuthenticated && (
+          {isAuthenticated ? (
+            <div className="flex items-center gap-1.5 lg:hidden">
+              <Link
+                href="/account"
+                onClick={closeDropdowns}
+                className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.08] px-3 text-[12px] font-black text-blue-100 transition hover:bg-blue-500/[0.14]"
+              >
+                {isTurkish ? "Hesabım" : "Account"}
+              </Link>
+
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="inline-flex h-11 items-center justify-center rounded-xl border border-red-400/15 bg-red-500/[0.05] px-2.5 text-[11px] font-black text-red-200 transition hover:border-red-400/25 hover:bg-red-500/[0.10]"
+                aria-label={isTurkish ? "Çıkış Yap" : "Sign Out"}
+              >
+                {isTurkish ? "Çıkış" : "Exit"}
+              </button>
+            </div>
+          ) : (
             <Link
               href="/login"
               onClick={closeDropdowns}
