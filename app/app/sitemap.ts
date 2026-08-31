@@ -5,6 +5,13 @@ const baseUrl = "https://www.sernem.com";
 
 const publicRoutes = [
   "",
+  "/about",
+  "/contact",
+  "/faq",
+  "/privacy",
+  "/terms",
+  "/cookies",
+
   "/tools",
   "/tools/ltifr",
   "/tools/trir",
