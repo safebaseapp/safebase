@@ -49,6 +49,10 @@ type Props = {
 };
 
 export default function QuickRiskAssessmentPage({ params }: Props) {
+  const [riskLoadedFeedback, setRiskLoadedFeedback] = useState(false);
+  const [activeRiskTemplateName, setActiveRiskTemplateName] = useState<string | null>(null);
+
+
   const supabase = createClient();
   const [savedAssessmentId, setSavedAssessmentId] = useState<string | null>(null);
   const [isSavingAssessment, setIsSavingAssessment] = useState(false);
@@ -395,6 +399,28 @@ const duplicateRiskItem = (id: string) => {
 
   const loadLibraryActivity = () => {
     if (!selectedLibraryTemplate || isLoadingLibraryActivity) return;
+
+    // RISK_TEMPLATE_FLOW_FEEDBACK
+    const loadedRiskTemplateName = isTurkish
+      ? selectedLibraryTemplate.activity.tr
+      : selectedLibraryTemplate.activity.en;
+
+    setActiveRiskTemplateName(loadedRiskTemplateName);
+    setRiskLoadedFeedback(true);
+
+    window.setTimeout(() => {
+      setRiskLoadedFeedback(false);
+    }, 1800);
+
+    window.setTimeout(() => {
+      document
+        .getElementById("risk-pdf-action-target")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+    }, 500);
+
 
     setIsLoadingLibraryActivity(true);
     setLibraryActivityLoaded(false);
@@ -803,7 +829,62 @@ const duplicateRiskItem = (id: string) => {
       
       {/* SERNEM_HIRARC_HEADER_UI_START */}
 
-      <section className="mb-8 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/70">
+      
+      <div
+        id="risk-pdf-action-target"
+        className="mb-6 scroll-mt-28 rounded-2xl border border-emerald-500/20 bg-slate-900/80 p-5"
+      >
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-400">
+              {isTurkish ? "Aktif Risk Analizi" : "Active Risk Assessment"}
+            </p>
+
+            <p className="mt-1 text-lg font-bold text-white">
+              {activeRiskTemplateName ||
+                (isTurkish
+                  ? "Şablon seçin ve risk analizini hazırlayın"
+                  : "Select a template and prepare the risk assessment")}
+            </p>
+
+            {riskLoadedFeedback && (
+              <p className="mt-2 text-sm font-bold text-emerald-300">
+                ✓ {isTurkish
+                  ? "Şablon başarıyla yüklendi"
+                  : "Template loaded successfully"}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 px-7 py-4 text-base font-black text-white shadow-[0_12px_35px_rgba(37,99,235,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(34,211,238,0.35)]"
+          >
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-xl">
+              📄
+            </span>
+
+            <span className="flex flex-col items-start leading-tight">
+              <span>
+                {isTurkish ? "PDF Oluştur / Yazdır" : "Generate PDF / Print"}
+              </span>
+
+              <span className="mt-1 text-[11px] font-semibold text-blue-100">
+                {isTurkish
+                  ? "Risk analizi çıktısını hazırla"
+                  : "Prepare Risk Assessment output"}
+              </span>
+            </span>
+
+            <span className="text-xl transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </button>
+        </div>
+      </div>
+
+<section className="mb-8 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/70">
 
         <div className="border-b border-slate-800 px-6 py-4">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-400">

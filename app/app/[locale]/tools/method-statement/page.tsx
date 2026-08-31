@@ -25,8 +25,21 @@ const createMethodStep = (): MethodStep => ({
   responsible: "",
 });
 
+
+
 export default function MethodStatementPage({ params }: Props) {
+  const [loadedTemplateButton, setLoadedTemplateButton] = useState<string | null>(null);
+  const [activeTemplateName, setActiveTemplateName] = useState<string | null>(null);
+
+  const showLoadedButtonFeedback = (id: string) => {
+    setLoadedTemplateButton(id);
+    window.setTimeout(() => {
+      setLoadedTemplateButton((current) => current === id ? null : current);
+    }, 1800);
+  };
+
   const [locale, setLocale] = useState("en");
+  const [loadedTemplate, setLoadedTemplate] = useState<string | null>(null);
 
   const [projectName, setProjectName] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -260,6 +273,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• HSE – Working at Height guidance\n• HSE – Assessing all work at height\n• Proje / saha HSE prosedürleri\n• Kullanılan ekipmanın üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• HSE – Working at Height guidance\n• HSE – Assessing all work at height\n• Project / site HSE procedures\n• Manufacturer instructions for equipment used"
     );
+    setLoadedTemplate("working-at-height");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -449,6 +467,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA – Welding, Cutting, and Brazing (29 CFR 1910 Subpart Q)\n• OSHA – Fire Prevention and Protection requirements\n• Proje / saha Sıcak Çalışma ve PTW prosedürleri\n• Kullanılan ekipmanın üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA – Welding, Cutting, and Brazing (29 CFR 1910 Subpart Q)\n• OSHA – Fire Prevention and Protection requirements\n• Project / site Hot Work and PTW procedures\n• Manufacturer instructions for equipment used"
     );
+    setLoadedTemplate("hot-work");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -641,6 +664,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1910.146 – Permit-Required Confined Spaces\n• OSHA 29 CFR 1926 Subpart AA – Confined Spaces in Construction\n• Proje / saha Kapalı Alana Giriş ve LOTO prosedürleri\n• Gaz ölçüm cihazı ve kullanılan ekipmanların üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1910.146 – Permit-Required Confined Spaces\n• OSHA 29 CFR 1926 Subpart AA – Confined Spaces in Construction\n• Project / site Confined Space Entry and LOTO procedures\n• Manufacturer instructions for gas detectors and equipment used"
     );
+    setLoadedTemplate("confined-space");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -766,6 +794,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1910.147 – Control of Hazardous Energy (Lockout/Tagout)\n• Proje / saha LOTO prosedürü\n• Kullanılan ekipmanın üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1910.147 – Control of Hazardous Energy (Lockout/Tagout)\n• Project / site LOTO procedure\n• Manufacturer instructions for equipment used"
     );
+    setLoadedTemplate("loto");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -958,6 +991,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha Kaldırma Operasyonları prosedürü\n• Onaylı kaldırma planı ve ekipman sertifikaları\n• Vinç ve rigging ekipmanı üretici talimatları\n• OSHA 29 CFR 1926 Subpart CC – Cranes and Derricks in Construction"
         : "• SERNEM task-specific risk assessment\n• Project / site Lifting Operations procedure\n• Approved lifting plan and equipment certificates\n• Crane and rigging-equipment manufacturer instructions\n• OSHA 29 CFR 1926 Subpart CC – Cranes and Derricks in Construction"
     );
+    setLoadedTemplate("lifting");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -1152,6 +1190,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart L – Scaffolds\n• Proje / saha İskele prosedürü\n• Onaylı iskele tasarımı / sistem konfigürasyonu gerektiğinde\n• İskele sistemi üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart L – Scaffolds\n• Project / site Scaffold procedure\n• Approved scaffold design / system configuration where required\n• Scaffold-system manufacturer instructions"
     );
+    setLoadedTemplate("scaffolding");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -1344,6 +1387,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart P – Excavations\n• Proje / saha Kazı ve Toprak İşleri prosedürü\n• Yeraltı servis çizimleri / izin kayıtları\n• Kullanılan iksa ve ekipman üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart P – Excavations\n• Project / site Excavation and Earthworks procedure\n• Underground-service drawings / permit records\n• Manufacturer instructions for protective systems and equipment used"
     );
+    setLoadedTemplate("excavation");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -1542,6 +1590,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart K – Electrical\n• OSHA 29 CFR 1926.416 – General Requirements\n• OSHA 29 CFR 1926.417 – Lockout and Tagging of Circuits\n• Proje / saha Elektrik Güvenliği ve LOTO prosedürleri\n• Kullanılan ekipman ve test cihazlarının üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart K – Electrical\n• OSHA 29 CFR 1926.416 – General Requirements\n• OSHA 29 CFR 1926.417 – Lockout and Tagging of Circuits\n• Project / site Electrical Safety and LOTO procedures\n• Manufacturer instructions for equipment and test instruments used"
     );
+    setLoadedTemplate("electrical");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -1722,6 +1775,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• OSHA 29 CFR 1926.300 – General Requirements\n• OSHA 29 CFR 1926.303 – Abrasive Wheels and Tools\n• Proje / saha Sıcak Çalışma prosedürü\n• Taşlama / kesme ekipmanı ve disk üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• OSHA 29 CFR 1926.300 – General Requirements\n• OSHA 29 CFR 1926.303 – Abrasive Wheels and Tools\n• Project / site Hot Work procedure\n• Grinder / cutting equipment and disc manufacturer instructions"
     );
+    setLoadedTemplate("grinding-cutting");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -1898,6 +1956,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• OSHA 29 CFR 1926 Subpart R / ilgili kaldırma gereklilikleri proje kapsamına göre\n• Proje / saha Piping, Lifting, Hot Work ve Line Opening prosedürleri\n• Kullanılan ekipman ve üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• OSHA 29 CFR 1926 Subpart I – Tools, Hand and Power\n• Applicable lifting requirements according to project scope\n• Project / site Piping, Lifting, Hot Work and Line Opening procedures\n• Manufacturer instructions for equipment used"
     );
+    setLoadedTemplate("piping");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -2076,6 +2139,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha Hydrotest prosedürü ve onaylı test paketi\n• ASME / proje spesifikasyonları uygulanabildiği ölçüde\n• Test ekipmanı üretici talimatları\n• Basınçlı sistemler için proje izolasyon ve PTW gereklilikleri"
         : "• SERNEM task-specific risk assessment\n• Project / site Hydrotest procedure and approved test package\n• Applicable ASME / project specifications\n• Test-equipment manufacturer instructions\n• Project isolation and PTW requirements for pressurized systems"
     );
+    setLoadedTemplate("hydrotest");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -2220,6 +2288,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha Air Blowing prosedürü\n• Onaylı test / blowing planı\n• Kompresör ve basınçlı hava ekipmanı üretici talimatları\n• Proje PTW ve basınçlı sistem gereklilikleri"
         : "• SERNEM task-specific risk assessment\n• Project / site Air Blowing procedure\n• Approved test / blowing plan\n• Compressor and compressed-air equipment manufacturer instructions\n• Project PTW and pressurized-system requirements"
     );
+    setLoadedTemplate("air-blowing");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -2398,6 +2471,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• Kullanılan boya / kaplama ürünlerinin güncel SDS dokümanları\n• Proje / saha Painting & Coating prosedürü\n• Proje kimyasal yönetimi, yangın güvenliği ve PTW prosedürleri\n• Boya / sprey ekipmanı üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• Current SDS documentation for paint / coating products used\n• Project / site Painting & Coating procedure\n• Project chemical-management, fire-safety and PTW procedures\n• Painting / spray-equipment manufacturer instructions"
     );
+    setLoadedTemplate("painting-coating");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -2576,6 +2654,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha izolasyon prosedürü ve spesifikasyonları\n• Kullanılan izolasyon malzemesi üretici bilgileri / SDS\n• OSHA 29 CFR 1926 Subpart E – Personal Protective and Life Saving Equipment\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, uygulanabildiği ölçüde\n• Kullanılan el aletleri ve ekipman üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• Project / site insulation procedures and specifications\n• Manufacturer information / SDS for insulation materials used\n• OSHA 29 CFR 1926 Subpart E – Personal Protective and Life Saving Equipment\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, where applicable\n• Manufacturer instructions for tools and equipment used"
     );
+    setLoadedTemplate("insulation");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -2771,6 +2854,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha trafik yönetim planı\n• OSHA 29 CFR 1926 Subpart O – Motor Vehicles, Mechanized Equipment, and Marine Operations\n• OSHA 29 CFR 1926.601 – Motor Vehicles\n• OSHA 29 CFR 1926.602 – Material Handling Equipment\n• Kullanılan ekipmanın üretici kullanım talimatları"
         : "• SERNEM task-specific risk assessment\n• Project / site traffic management plan\n• OSHA 29 CFR 1926 Subpart O – Motor Vehicles, Mechanized Equipment, and Marine Operations\n• OSHA 29 CFR 1926.601 – Motor Vehicles\n• OSHA 29 CFR 1926.602 – Material Handling Equipment\n• Equipment manufacturer operating instructions"
     );
+    setLoadedTemplate("mobile-equipment");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
   const loadLadderUseTemplate = () => {
@@ -2914,6 +3002,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart X – Stairways and Ladders\n• OSHA 29 CFR 1926.1053 – Ladders\n• Proje / saha yüksekte çalışma ve merdiven prosedürleri\n• Merdiven üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart X – Stairways and Ladders\n• OSHA 29 CFR 1926.1053 – Ladders\n• Project / site work-at-height and ladder procedures\n• Ladder manufacturer instructions"
     );
+    setLoadedTemplate("ladder-use");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -3058,6 +3151,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• Proje / saha MEWP ve yüksekte çalışma prosedürleri\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, uygulanabildiği ölçüde\n• OSHA 29 CFR 1926 Subpart M – Fall Protection, uygulanabildiği ölçüde\n• Kullanılan MEWP üretici kullanım talimatları"
         : "• SERNEM task-specific risk assessment\n• Project / site MEWP and work-at-height procedures\n• OSHA 29 CFR 1926 Subpart L – Scaffolds, where applicable\n• OSHA 29 CFR 1926 Subpart M – Fall Protection, where applicable\n• MEWP manufacturer operating instructions"
     );
+    setLoadedTemplate("mewp");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -3202,6 +3300,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• Proje / saha manuel taşıma ve ergonomi prosedürleri\n• Kullanılan yardımcı taşıma ekipmanı üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart H – Materials Handling, Storage, Use, and Disposal\n• Project / site manual-handling and ergonomic procedures\n• Manufacturer instructions for handling aids used"
     );
+    setLoadedTemplate("manual-handling");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -3380,6 +3483,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• Kullanılan kimyasalların güncel SDS dokümanları\n• OSHA 29 CFR 1926.59 – Hazard Communication\n• OSHA 29 CFR 1926.55 – Gases, Vapors, Fumes, Dusts, and Mists\n• Proje / saha kimyasal yönetimi ve spill response prosedürleri\n• Kimyasal ürün üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• Current SDS documentation for chemicals used\n• OSHA 29 CFR 1926.59 – Hazard Communication\n• OSHA 29 CFR 1926.55 – Gases, Vapors, Fumes, Dusts, and Mists\n• Project / site chemical-management and spill-response procedures\n• Chemical manufacturer instructions"
     );
+    setLoadedTemplate("chemical-handling");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -3558,6 +3666,11 @@ export default function MethodStatementPage({ params }: Props) {
         ? "• SERNEM görev bazlı risk değerlendirmesi\n• OSHA 29 CFR 1926 Subpart J – Welding and Cutting\n• OSHA 29 CFR 1926.350 – Gas Welding and Cutting\n• OSHA 29 CFR 1910.253 – Oxygen-Fuel Gas Welding and Cutting, uygulanabildiği ölçüde\n• Proje / saha basınçlı gaz ve sıcak çalışma prosedürleri\n• Gaz tedarikçisi ve ekipman üretici talimatları"
         : "• SERNEM task-specific risk assessment\n• OSHA 29 CFR 1926 Subpart J – Welding and Cutting\n• OSHA 29 CFR 1926.350 – Gas Welding and Cutting\n• OSHA 29 CFR 1910.253 – Oxygen-Fuel Gas Welding and Cutting, where applicable\n• Project / site compressed-gas and hot-work procedures\n• Gas supplier and equipment manufacturer instructions"
     );
+    setLoadedTemplate("compressed-gas");
+    setTimeout(() => {
+      setLoadedTemplate(null);
+    }, 1200);
+
   };
 
 
@@ -3590,15 +3703,29 @@ export default function MethodStatementPage({ params }: Props) {
                   : "Build the scope, work sequence, hazards, controls and HSE arrangements for an activity in one professional document."}
               </p>
             </div>
-
-            <PrintButton
-              label={isTurkish ? "PDF / Yazdır" : "PDF / Print"}
-              onClick={() => window.print()}
-            />
-          </div>
+</div>
         </div>
 
-        {/* SERNEM_METHOD_LIBRARY_START */}
+              {activeTemplateName && (
+        <div className="mb-6 flex flex-col gap-1 rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.07] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-400">
+              {isTurkish ? "Aktif Şablon" : "Active Template"}
+            </p>
+            <p className="mt-1 text-base font-bold text-white">
+              {activeTemplateName}
+            </p>
+          </div>
+
+          <p className="text-xs text-slate-400">
+            {isTurkish
+              ? "Hazır şablon yüklendi • Düzenlemeler PDF'e yansıtılır"
+              : "Template loaded • Your edits are reflected in the PDF"}
+          </p>
+        </div>
+      )}
+
+{/* SERNEM_METHOD_LIBRARY_START */}
         <section className="mb-6 rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-slate-900 p-6">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -3632,8 +3759,18 @@ export default function MethodStatementPage({ params }: Props) {
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
             <button
               type="button"
-              onClick={loadWorkingAtHeightTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-emerald-500/50 hover:bg-emerald-500/[0.07]"
+              onClick={() => {
+                loadWorkingAtHeightTemplate();
+                showLoadedButtonFeedback("template-1");
+                setActiveTemplateName("Working At Height");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-1 ${loadedTemplateButton === "template-1" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3657,17 +3794,32 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-emerald-400">
-                  {isTurkish
-                    ? "Şablonu Yükle"
-                    : "Load Template"}
+                  {loadedTemplateButton === "template-1" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
             
             <button
               type="button"
-              onClick={loadHotWorkTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-orange-500/50 hover:bg-orange-500/[0.07]"
+              onClick={() => {
+                loadHotWorkTemplate();
+                showLoadedButtonFeedback("template-2");
+                setActiveTemplateName("Hot Work");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+                setActiveTemplateName("Sıcak Çalışma");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-2 ${loadedTemplateButton === "template-2" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3689,15 +3841,32 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-orange-400">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-2" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
 
             <button
               type="button"
-              onClick={loadConfinedSpaceTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-cyan-500/50 hover:bg-cyan-500/[0.07]"
+              onClick={() => {
+                loadConfinedSpaceTemplate();
+                showLoadedButtonFeedback("template-3");
+                setActiveTemplateName("Confined Space");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+                setActiveTemplateName("Kapalı Alana Giriş");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-3 ${loadedTemplateButton === "template-3" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3721,17 +3890,32 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-cyan-500 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-cyan-400">
-                  {isTurkish
-                    ? "Şablonu Yükle"
-                    : "Load Template"}
+                  {loadedTemplateButton === "template-3" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
 
             <button
               type="button"
-              onClick={loadLotoTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-emerald-500/50 hover:bg-emerald-500/[0.07]"
+              onClick={() => {
+                loadLotoTemplate();
+                showLoadedButtonFeedback("template-4");
+                setActiveTemplateName("Loto");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+                setActiveTemplateName("LOTO / Enerji İzolasyonu");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-4 ${loadedTemplateButton === "template-4" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3753,7 +3937,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-emerald-500 px-4 py-2.5 text-sm font-black text-slate-950">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-4" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -3761,8 +3945,25 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadLiftingTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-amber-500/50 hover:bg-amber-500/[0.07]"
+              onClick={() => {
+                loadLiftingTemplate();
+                showLoadedButtonFeedback("template-5");
+                setActiveTemplateName("Lifting");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+                setActiveTemplateName("Kaldırma Operasyonları");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-5 ${loadedTemplateButton === "template-5" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3786,7 +3987,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-amber-500 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-amber-400">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-5" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -3794,8 +3995,25 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadScaffoldingTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-yellow-500/50 hover:bg-yellow-500/[0.07]"
+              onClick={() => {
+                loadScaffoldingTemplate();
+                showLoadedButtonFeedback("template-6");
+                setActiveTemplateName("Scaffolding");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+                setActiveTemplateName("İskele Kurulum / Söküm");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-6 ${loadedTemplateButton === "template-6" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3819,7 +4037,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-amber-400 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-amber-300">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-6" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -3827,8 +4045,25 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadExcavationTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-orange-500/50 hover:bg-orange-500/[0.07]"
+              onClick={() => {
+                loadExcavationTemplate();
+                showLoadedButtonFeedback("template-7");
+                setActiveTemplateName("Excavation");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+                setActiveTemplateName("Kazı Çalışmaları");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-7 ${loadedTemplateButton === "template-7" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3850,7 +4085,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-orange-400">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-7" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -3858,8 +4093,25 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadElectricalTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-yellow-400/50 hover:bg-yellow-400/[0.07]"
+              onClick={() => {
+                loadElectricalTemplate();
+                showLoadedButtonFeedback("template-8");
+                setActiveTemplateName("Electrical");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+                setActiveTemplateName("Elektrik Çalışmaları");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-8 ${loadedTemplateButton === "template-8" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3881,7 +4133,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-yellow-400 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-yellow-300">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-8" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -3889,8 +4141,18 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadGrindingCuttingTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-red-500/50 hover:bg-red-500/[0.07]"
+              onClick={() => {
+                loadGrindingCuttingTemplate();
+                showLoadedButtonFeedback("template-9");
+                setActiveTemplateName("Grinding Cutting");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-9 ${loadedTemplateButton === "template-9" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3914,7 +4176,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-red-500 px-4 py-2.5 text-sm font-black text-white transition group-hover:bg-red-400">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-9" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -3922,8 +4184,25 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadPipingTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-sky-500/50 hover:bg-sky-500/[0.07]"
+              onClick={() => {
+                loadPipingTemplate();
+                showLoadedButtonFeedback("template-10");
+                setActiveTemplateName("Piping");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+                setActiveTemplateName("Boru / Piping Çalışmaları");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-10 ${loadedTemplateButton === "template-10" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3945,7 +4224,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-sky-500 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-sky-400">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-10" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -3953,8 +4232,25 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadHydrotestTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-blue-400/50 hover:bg-blue-400/[0.07]"
+              onClick={() => {
+                loadHydrotestTemplate();
+                showLoadedButtonFeedback("template-11");
+                setActiveTemplateName("Hydrotest");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+                setActiveTemplateName("Hidrostatik Test");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-11 ${loadedTemplateButton === "template-11" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -3978,7 +4274,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-blue-400 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-blue-300">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-11" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -3986,8 +4282,25 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadAirBlowingTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-cyan-400/50 hover:bg-cyan-400/[0.07]"
+              onClick={() => {
+                loadAirBlowingTemplate();
+                showLoadedButtonFeedback("template-12");
+                setActiveTemplateName("Air Blowing");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+                setActiveTemplateName("Air Blowing");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-12 ${loadedTemplateButton === "template-12" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -4009,7 +4322,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-cyan-300 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-cyan-200">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-12" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -4017,8 +4330,18 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadPaintingCoatingTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-violet-400/50 hover:bg-violet-400/[0.07]"
+              onClick={() => {
+                loadPaintingCoatingTemplate();
+                showLoadedButtonFeedback("template-13");
+                setActiveTemplateName("Painting Coating");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-13 ${loadedTemplateButton === "template-13" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -4042,7 +4365,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-violet-400 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-violet-300">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-13" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -4050,8 +4373,18 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadInsulationTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-sky-400/50 hover:bg-sky-400/[0.07]"
+              onClick={() => {
+                loadInsulationTemplate();
+                showLoadedButtonFeedback("template-14");
+                setActiveTemplateName("Insulation");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-14 ${loadedTemplateButton === "template-14" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -4075,7 +4408,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-sky-300 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-sky-200">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-14" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -4083,8 +4416,18 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadMobileEquipmentTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-amber-400/50 hover:bg-amber-400/[0.07]"
+              onClick={() => {
+                loadMobileEquipmentTemplate();
+                showLoadedButtonFeedback("template-15");
+                setActiveTemplateName("Mobile Equipment");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-15 ${loadedTemplateButton === "template-15" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -4108,7 +4451,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-amber-300 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-amber-200">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-15" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -4116,8 +4459,18 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadLadderUseTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-lime-400/50 hover:bg-lime-400/[0.07]"
+              onClick={() => {
+                loadLadderUseTemplate();
+                showLoadedButtonFeedback("template-16");
+                setActiveTemplateName("Ladder Use");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-16 ${loadedTemplateButton === "template-16" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -4136,7 +4489,7 @@ export default function MethodStatementPage({ params }: Props) {
                   </div>
                 </div>
                 <span className="shrink-0 rounded-xl bg-lime-300 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-lime-200">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-16" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -4144,8 +4497,18 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadMewpTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-fuchsia-400/50 hover:bg-fuchsia-400/[0.07]"
+              onClick={() => {
+                loadMewpTemplate();
+                showLoadedButtonFeedback("template-17");
+                setActiveTemplateName("Mewp");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-17 ${loadedTemplateButton === "template-17" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -4164,7 +4527,7 @@ export default function MethodStatementPage({ params }: Props) {
                   </div>
                 </div>
                 <span className="shrink-0 rounded-xl bg-fuchsia-300 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-fuchsia-200">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-17" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -4172,8 +4535,18 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadManualHandlingTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-orange-400/50 hover:bg-orange-400/[0.07]"
+              onClick={() => {
+                loadManualHandlingTemplate();
+                showLoadedButtonFeedback("template-18");
+                setActiveTemplateName("Manual Handling");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-18 ${loadedTemplateButton === "template-18" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -4192,7 +4565,7 @@ export default function MethodStatementPage({ params }: Props) {
                   </div>
                 </div>
                 <span className="shrink-0 rounded-xl bg-orange-300 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-orange-200">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-18" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -4200,8 +4573,18 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadChemicalHandlingTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-emerald-400/50 hover:bg-emerald-400/[0.07]"
+              onClick={() => {
+                loadChemicalHandlingTemplate();
+                showLoadedButtonFeedback("template-19");
+                setActiveTemplateName("Chemical Handling");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-19 ${loadedTemplateButton === "template-19" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -4225,7 +4608,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-emerald-300 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-emerald-200">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-19" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -4233,8 +4616,18 @@ export default function MethodStatementPage({ params }: Props) {
 
             <button
               type="button"
-              onClick={loadCompressedGasTemplate}
-              className="group w-full rounded-2xl border border-slate-700 bg-slate-950/70 p-5 text-left transition hover:border-rose-400/50 hover:bg-rose-400/[0.07]"
+              onClick={() => {
+                loadCompressedGasTemplate();
+                showLoadedButtonFeedback("template-20");
+                setActiveTemplateName("Compressed Gas");
+                window.setTimeout(() => {
+                  document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                  });
+                }, 500);
+              }}
+              className={`template-20 ${loadedTemplateButton === "template-20" ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
             >
               <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-start gap-4">
@@ -4258,7 +4651,7 @@ export default function MethodStatementPage({ params }: Props) {
                 </div>
 
                 <span className="shrink-0 rounded-xl bg-rose-300 px-4 py-2.5 text-sm font-black text-slate-950 transition group-hover:bg-rose-200">
-                  {isTurkish ? "Şablonu Yükle" : "Load Template"}
+                  {loadedTemplateButton === "template-20" ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded") : (isTurkish ? "Şablonu Yükle" : "Load Template")}
                 </span>
               </div>
             </button>
@@ -4269,10 +4662,43 @@ export default function MethodStatementPage({ params }: Props) {
         </section>
         {/* SERNEM_METHOD_LIBRARY_END */}
 
+
+
         <section className="rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
           <h2 className="text-xl font-bold">
             {isTurkish ? "Doküman Bilgileri" : "Document Information"}
           </h2>
+
+        <div
+          id="method-statement-editor-target"
+          className="mt-4 mb-6 flex scroll-mt-28 justify-end"
+        >
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="group inline-flex min-h-14 items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 px-7 py-4 text-base font-black text-white shadow-[0_12px_35px_rgba(37,99,235,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(34,211,238,0.35)] active:translate-y-0"
+          >
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-xl">
+              📄
+            </span>
+
+            <span className="flex flex-col items-start leading-tight">
+              <span>
+                {isTurkish ? "PDF Oluştur / Yazdır" : "Generate PDF / Print"}
+              </span>
+              <span className="mt-1 text-[11px] font-semibold text-blue-100">
+                {isTurkish
+                  ? "Method Statement çıktısını hazırla"
+                  : "Prepare Method Statement output"}
+              </span>
+            </span>
+
+            <span className="ml-1 text-xl transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </button>
+        </div>
+
 
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {[
@@ -4329,8 +4755,7 @@ export default function MethodStatementPage({ params }: Props) {
             </article>
           ))}
         </section>
-
-        <section className="mt-6 rounded-3xl border border-emerald-500/20 bg-slate-900/70 p-6">
+<section className="mt-6 rounded-3xl border border-emerald-500/20 bg-slate-900/70 p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-xl font-bold">
@@ -4375,7 +4800,7 @@ export default function MethodStatementPage({ params }: Props) {
                   </button>
                 </div>
 
-                <div className="grid gap-4 lg:grid-cols-2">
+<div className="grid gap-4 lg:grid-cols-2">
                   {[
                     ["step", isTurkish ? "İşin Yapılış Adımı" : "Work Sequence", item.step],
                     ["hazards", isTurkish ? "Tehlikeler" : "Hazards", item.hazards],
