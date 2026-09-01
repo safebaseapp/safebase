@@ -391,13 +391,13 @@ export default async function UpgradePage({
 
               <h3 className="mt-4 text-3xl font-black tracking-tight">
                 {isTurkish
-                  ? "Premium'a hazır olun."
+                  ? "SERNEM Premium’a Geç"
                   : "Get ready for Premium."}
               </h3>
 
               <p className="mt-3 text-sm leading-6 text-slate-300">
                 {isTurkish
-                  ? "Ödeme sistemi hazırlanıyor. Premium üyelik yayına girdiğinde bu ekrandan doğrudan yükseltme yapabileceksiniz."
+                  ? "Profesyonel HSE araçlarına, gelişmiş içeriklere ve Premium özelliklere erişin. Premium erişiminiz ödeme sonrası hesabınıza otomatik tanımlanır."
                   : "Payments are being prepared. Once Premium launches, you'll be able to upgrade directly from this screen."}
               </p>
 
