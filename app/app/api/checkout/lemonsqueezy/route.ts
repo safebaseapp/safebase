@@ -53,9 +53,7 @@ export async function GET(req: NextRequest) {
     const variant = productsJson.included?.find(
       (item: any) =>
         item?.type === "variants" &&
-        String(item?.attributes?.product_id) === String(product.id) &&
-        item?.attributes?.status === "published" &&
-        item?.attributes?.test_mode === false
+        String(item?.relationships?.product?.data?.id) === String(product.id)
     );
 
     if (!variant) {
