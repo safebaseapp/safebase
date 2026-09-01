@@ -440,16 +440,14 @@ export default async function UpgradePage({
                 </p>
               </div>
 
-              <button
-                type="button"
-                disabled
-                className="mt-6 w-full cursor-not-allowed rounded-2xl bg-blue-600 px-6 py-4 font-black text-white opacity-75"
-              >
-                👑{" "}
-                {isTurkish
-                  ? "Premium yükseltme çok yakında"
-                  : "Premium upgrade coming soon"}
-              </button>
+              <a
+              href="https://sernem.lemonsqueezy.com/checkout/buy/e6363311-0a93-433f-ba14-d2507c4a683f"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 block w-full rounded-2xl bg-blue-600 px-6 py-4 text-center font-black text-white transition hover:bg-blue-500"
+            >
+              {isTurkish ? "Premium’a Geç — €9.99 / ay" : "Upgrade to Premium — €9.99 / month"}
+            </a>
 
               <Link
                 href={`/${locale}/dashboard`}
@@ -462,7 +460,7 @@ export default async function UpgradePage({
 
               <p className="mt-4 text-center text-xs leading-5 text-slate-500">
                 {isTurkish
-                  ? "Premium açıldığında mevcut hesabınızı değiştirmeden yükseltebileceksiniz."
+                  ? "Ödeme sonrası Premium erişiminiz hesabınıza otomatik tanımlanır."
                   : "You'll be able to upgrade your existing account when Premium launches."}
               </p>
             </div>
