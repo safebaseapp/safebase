@@ -105,12 +105,73 @@ export async function POST(request: NextRequest) {
     }
 
     if (!matchedUserId) {
-      console.error("No SERNEM user found for Lemon email:", email);
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const inactiveEvents = new Set([
+      "subscription_expired",
+      "subscription_payment_refunded",
+    ]);
+
+    const pendingStatus = inactiveEvents.has(eventName) ? "inactive" : "active";
+
+    const { data: existingPending, error: pendingLookupError } = await supabase
+      .from("pending_premium_entitlements")
+      .select("id")
+      .ilike("email", normalizedEmail)
+      .maybeSingle();
+
+    if (pendingLookupError) {
+      console.error("Could not check pending Premium entitlement:", pendingLookupError);
       return NextResponse.json(
-        { error: "SERNEM account not found for customer email" },
-        { status: 404 }
+        { error: "Could not check pending Premium entitlement" },
+        { status: 500 }
       );
     }
+
+    if (existingPending?.id) {
+      const { error: pendingUpdateError } = await supabase
+        .from("pending_premium_entitlements")
+        .update({
+          status: pendingStatus,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", existingPending.id);
+
+      if (pendingUpdateError) {
+        console.error("Could not update pending Premium entitlement:", pendingUpdateError);
+        return NextResponse.json(
+          { error: "Could not update pending Premium entitlement" },
+          { status: 500 }
+        );
+      }
+    } else {
+      const { error: pendingInsertError } = await supabase
+        .from("pending_premium_entitlements")
+        .insert({
+          email: normalizedEmail,
+          status: pendingStatus,
+        });
+
+      if (pendingInsertError) {
+        console.error("Could not create pending Premium entitlement:", pendingInsertError);
+        return NextResponse.json(
+          { error: "Could not create pending Premium entitlement" },
+          { status: 500 }
+        );
+      }
+    }
+
+    console.log(
+      `SERNEM pending Premium: ${normalizedEmail} -> ${pendingStatus} (${eventName})`
+    );
+
+    return NextResponse.json({
+      ok: true,
+      pending: true,
+      email: normalizedEmail,
+      status: pendingStatus,
+    });
+  }
 
     /*
       Premium erişim politikası:
