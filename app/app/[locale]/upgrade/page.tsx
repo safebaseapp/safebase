@@ -441,7 +441,7 @@ export default async function UpgradePage({
               </div>
 
               <a
-              href="https://sernem.lemonsqueezy.com/checkout/buy/e6363311-0a93-433f-ba14-d2507c4a683f"
+              href={`/api/checkout/lemonsqueezy?locale=${isTurkish ? "tr" : "en"}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 block w-full rounded-2xl bg-blue-600 px-6 py-4 text-center font-black text-white transition hover:bg-blue-500"
