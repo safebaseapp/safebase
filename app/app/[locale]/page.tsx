@@ -463,7 +463,7 @@ export default async function LocalizedHomePage({ params }: Props) {
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-[700px] lg:-translate-y-2">
+            <div className="relative mx-auto w-full max-w-[670px] lg:-translate-y-2">
               <div className="absolute inset-x-[12%] bottom-[-30px] h-[140px] rounded-full bg-blue-500/20 blur-[80px]" />
 
               <div className="relative">
@@ -475,9 +475,7 @@ export default async function LocalizedHomePage({ params }: Props) {
                       <div className="flex items-center gap-2.5">
                         <SernemLogo className="h-7 w-7 rounded-lg" />
                         <div>
-                          <p className="text-xs font-black tracking-wide text-white">
-                            SERNEM
-                          </p>
+                          
                           <p className="text-[8px] text-slate-500">
                             Professional HSE Platform
                           </p>
