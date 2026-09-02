@@ -303,6 +303,7 @@ export default async function ToolboxDetailPage({ params }: Props) {
                   : "Back to Toolbox Library"
               }
               libraryHref={`/${locale}/toolbox`}
+              pdfHref={`/downloads/${slug}-toolbox-talk-${locale}.pdf`}
             />
           </div>
         </div>

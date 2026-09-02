@@ -173,6 +173,14 @@ export default function LocalizedNavbar({ locale }: Props) {
         ? "Profesyonel saha posterleri ve güvenlik levhaları."
         : "Professional field posters and safety signs.",
     },
+    {
+      href: "/downloads",
+      icon: "↓",
+      title: isTurkish ? "İndirme Merkezi" : "Download Center",
+      description: isTurkish
+        ? "Kullanıma hazır profesyonel HSE dokümanlarını indirin."
+        : "Download ready-to-use professional HSE documents.",
+    },
   ];
 
   return (
@@ -182,14 +190,14 @@ export default function LocalizedNavbar({ locale }: Props) {
         <Link
           href="/"
           onClick={closeMenu}
-          className="group flex min-w-0 shrink items-center gap-3.5 pr-5 xl:border-r xl:border-white/[0.08]"
+          className="-ml-3 sm:ml-0 group flex min-w-0 shrink items-center gap-3.5 pr-5 xl:border-r xl:border-white/[0.08]"
         >
           <SernemLogo />
 
           <div className="min-w-0">
             <div className="text-[19px] font-black tracking-[-0.02em] text-white transition group-hover:text-blue-50">SERNEM</div>
 
-            <div className="mt-0.5 truncate text-[11px] font-medium tracking-wide text-slate-500">
+            <div className="hidden sm:block mt-0.5 truncate text-[11px] font-medium tracking-wide text-slate-500">
               {isTurkish
                 ? "Profesyonel HSE Platform"
                 : "Professional HSE Platform"}
@@ -373,7 +381,7 @@ export default function LocalizedNavbar({ locale }: Props) {
                     onClick={closeDropdowns}
                     className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-400/20 bg-gradient-to-b from-blue-500 to-blue-600 px-5 text-[13px] font-black text-white shadow-[0_8px_25px_rgba(37,99,235,.22)] transition hover:-translate-y-px hover:from-blue-400 hover:to-blue-600"
                   >
-                    {isTurkish ? "Hesabım" : "Account"}
+                    {isTurkish ? "Hesap" : "Account"}
                   </Link>
                 </div>
               ) : (
@@ -400,11 +408,11 @@ export default function LocalizedNavbar({ locale }: Props) {
           )}
 
           {isAuthenticated ? (
-            <div className="flex items-center gap-1.5 lg:hidden">
+            <div className="flex items-center gap-1 lg:hidden">
               <Link
                 href="/account"
                 onClick={closeDropdowns}
-                className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.08] px-3 text-[12px] font-black text-blue-100 transition hover:bg-blue-500/[0.14]"
+                className="inline-flex h-10 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.08] px-2.5 text-[11px] font-black text-blue-100 transition hover:bg-blue-500/[0.14]"
               >
                 {isTurkish ? "Hesabım" : "Account"}
               </Link>
@@ -412,10 +420,10 @@ export default function LocalizedNavbar({ locale }: Props) {
               <button
                 type="button"
                 onClick={handleSignOut}
-                className="inline-flex h-11 items-center justify-center rounded-xl border border-red-400/15 bg-red-500/[0.05] px-2.5 text-[11px] font-black text-red-200 transition hover:border-red-400/25 hover:bg-red-500/[0.10]"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-red-400/15 bg-red-500/[0.05] text-sm font-black text-red-200 transition hover:border-red-400/25 hover:bg-red-500/[0.10]"
                 aria-label={isTurkish ? "Çıkış Yap" : "Sign Out"}
               >
-                {isTurkish ? "Çıkış" : "Exit"}
+                ⎋
               </button>
             </div>
           ) : (
