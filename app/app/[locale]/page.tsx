@@ -324,102 +324,138 @@ export default async function LocalizedHomePage({ params }: Props) {
         }
       `}</style>
       <div className="safebase-home-scale">
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-slate-950">
-        <div className="absolute inset-0 -z-30 bg-slate-950" />
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#020817]">
+        <div
+          className="absolute inset-0 -z-30 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage:
+              "url('/images/sernem-hero-refinery.png')",
+          }}
+        />
 
-        <div className="absolute left-1/2 top-[-260px] -z-20 h-[650px] w-[1050px] -translate-x-1/2 rounded-full bg-blue-600/20 blur-[150px]" />
+        <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(2,8,23,0.98)_0%,rgba(2,8,23,0.91)_35%,rgba(2,8,23,0.68)_65%,rgba(2,8,23,0.72)_100%)]" />
 
-        <div className="absolute bottom-[-260px] right-[-150px] -z-20 h-[560px] w-[560px] rounded-full bg-emerald-500/10 blur-[150px]" />
+        <div className="absolute inset-0 -z-20 bg-gradient-to-b from-[#020817]/25 via-transparent to-[#020817]/90" />
+
+        <div className="absolute left-[-180px] top-[-180px] -z-20 h-[520px] w-[520px] rounded-full bg-blue-600/20 blur-[150px]" />
+        <div className="absolute right-[-120px] top-[-120px] -z-20 h-[620px] w-[620px] rounded-full bg-cyan-500/10 blur-[180px]" />
 
         <div
           className="absolute inset-0 -z-10 opacity-[0.055]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-            backgroundSize: "54px 54px",
+              "linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.45) 1px, transparent 1px)",
+            backgroundSize: "58px 58px",
           }}
         />
 
-        <div className="mx-auto max-w-7xl px-6 pb-14 pt-14 lg:px-8 lg:pb-16 lg:pt-16">
-          <div className="grid items-center gap-8 lg:grid-cols-[1.06fr_0.94fr] xl:gap-12">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-sm font-black text-emerald-300">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.95)]" />
+        <div className="mx-auto max-w-[1440px] px-6 pb-7 pt-9 lg:px-8 lg:pb-8 lg:pt-10">
+          <div className="grid items-center gap-8 lg:grid-cols-[0.98fr_1.02fr] xl:gap-12">
+            <div className="relative z-10">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-400 sm:text-sm">
                 {isTurkish
-                  ? "Profesyonel HSE çalışma platformu"
-                  : "Professional HSE workspace"}
-              </div>
-
-              <p className="mt-8 text-sm font-black uppercase tracking-[0.3em] text-emerald-400">
-                {isTurkish
-                  ? "Saha güvenliği. Daha hızlı. Daha güçlü."
-                  : "Field safety. Faster. Smarter."}
+                  ? "DAHA AKILLI HSE. DAHA GÜVENLİ YARIN."
+                  : "SMARTER HSE. SAFER TOMORROW."}
               </p>
 
-              <h1 className="mt-5 max-w-4xl text-[43px] font-black leading-[0.97] tracking-[-0.048em] text-white sm:text-[49px] lg:text-[54px] xl:text-[58px]">
+              <h1 className="mt-5 max-w-[720px] text-[40px] font-black leading-[0.98] tracking-[-0.05em] text-white sm:text-[49px] lg:text-[51px] xl:text-[56px]">
                 {isTurkish ? (
                   <>
                     HSE çalışmalarınızı
-                    <span className="block bg-gradient-to-r from-white via-blue-100 to-blue-400 bg-clip-text text-transparent">
+                    <span className="block text-blue-400">
                       tek platformda yönetin.
                     </span>
                   </>
                 ) : (
                   <>
                     Run your HSE work
-                    <span className="block bg-gradient-to-r from-white via-blue-100 to-blue-400 bg-clip-text text-transparent">
+                    <span className="block text-blue-400">
                       from one platform.
                     </span>
                   </>
                 )}
               </h1>
 
-              <p className="mt-7 max-w-2xl text-base font-bold leading-7 text-slate-200 sm:text-lg">
+              <p className="mt-6 max-w-[610px] text-[15px] font-medium leading-7 text-slate-300 sm:text-[17px]">
                 {isTurkish
-                  ? "Risk analizleri, Method Statement'lar, AI rehberliği ve sahaya hazır HSE kaynakları."
-                  : "Risk assessments, Method Statements, AI guidance and field-ready HSE resources."}
+                  ? "Risk analizleri, Method Statement'lar, toolbox talk içerikleri, kontrol listeleri, AI rehberliği ve sahaya hazır HSE kaynakları."
+                  : "Risk assessments, Method Statements, toolbox talks, checklists, AI guidance and field-ready HSE resources."}
               </p>
 
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-400 sm:text-[15px]">
-                {isTurkish
-                  ? "SERNEM; günlük iş güvenliği çalışmalarını daha hızlı, tutarlı ve profesyonel hale getirmek için geliştirilen modern bir HSE çalışma alanıdır."
-                  : "SERNEM is a modern HSE workspace built to make everyday safety work faster, more consistent and more professional."}
-              </p>
+              <div className="mt-7 grid max-w-[650px] grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4">
+                {[
+                  {
+                    icon: "◷",
+                    title: isTurkish ? "Zaman Kazanın" : "Save Time",
+                    text: isTurkish ? "Daha hızlı çalışın." : "Work smarter.",
+                  },
+                  {
+                    icon: "◇",
+                    title: isTurkish ? "Riski Azaltın" : "Reduce Risk",
+                    text: isTurkish ? "Tehlikeleri belirleyin." : "Identify hazards.",
+                  },
+                  {
+                    icon: "♙",
+                    title: isTurkish ? "Sahayı Destekleyin" : "Field Ready",
+                    text: isTurkish ? "Pratik HSE araçları." : "Practical HSE tools.",
+                  },
+                  {
+                    icon: "▣",
+                    title: isTurkish ? "Profesyonel Çıktı" : "Professional",
+                    text: isTurkish ? "PDF ve dokümanlar." : "Documents & PDFs.",
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.08] text-base text-blue-400">
+                        {item.icon}
+                      </span>
+                      <p className="text-xs font-black text-white sm:text-[13px]">
+                        {item.title}
+                      </p>
+                    </div>
+                    <p className="mt-2 pl-10 text-[11px] leading-5 text-slate-500">
+                      {item.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:flex-nowrap">
                 <Link
                   href={`/${locale}/tools`}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-black text-white shadow-2xl shadow-blue-600/25 transition duration-300 hover:-translate-y-1 hover:bg-blue-500"
+                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3.5 text-sm font-black text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-1 hover:bg-blue-500"
                 >
                   {isTurkish ? "Araçları Keşfet" : "Explore Tools"}
                   <ArrowIcon />
                 </Link>
 
                 <Link
-                  href={`/${locale}/tools/quick-risk-assessment`}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.055] px-6 py-3.5 text-sm font-black text-white backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.09]"
+                  href={`/${locale}/upgrade`}
+                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-amber-400/30 bg-amber-400/[0.06] px-5 py-3.5 text-sm font-black text-amber-300 transition hover:-translate-y-1 hover:bg-amber-400/[0.1]"
                 >
-                  <ShieldCheck
-                    size={18}
-                    strokeWidth={2}
-                    aria-hidden="true"
-                  />
-                  {isTurkish
-                    ? "Risk Analizi Oluştur"
-                    : "Build Risk Assessment"}
+                  👑 Premium
+                </Link>
+
+                <Link
+                  href={`/${locale}/tools/quick-risk-assessment`}
+                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-5 py-3.5 text-sm font-black text-white transition hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.08]"
+                >
+                  <ShieldCheck size={18} />
+                  {isTurkish ? "Risk Analizi Oluştur" : "Build Risk Assessment"}
                 </Link>
               </div>
 
-              <div className="mt-7 flex flex-wrap gap-2">
+              <div className="mt-5 flex flex-wrap gap-2">
                 {[
-                  isTurkish ? "✓ AI destekli" : "✓ AI-powered",
-                  isTurkish ? "✓ TR / EN" : "✓ TR / EN",
+                  isTurkish ? "✦ AI destekli" : "✦ AI-powered",
+                  "◎ TR / EN",
                   isTurkish ? "✓ Sahaya hazır" : "✓ Field-ready",
                   isTurkish ? "✓ Profesyonel dokümanlar" : "✓ Professional documents",
                 ].map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-white/10 bg-white/[0.045] px-3.5 py-1.5 text-[11px] font-bold text-slate-300"
+                    className="rounded-full border border-white/10 bg-white/[0.035] px-3.5 py-1.5 text-[10px] font-bold text-slate-400"
                   >
                     {item}
                   </span>
@@ -427,174 +463,356 @@ export default async function LocalizedHomePage({ params }: Props) {
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-[485px]">
-              <div className="absolute inset-0 rounded-[40px] bg-blue-600/15 blur-3xl" />
+            <div className="relative mx-auto w-full max-w-[700px] lg:-translate-y-2">
+              <div className="absolute inset-x-[12%] bottom-[-30px] h-[140px] rounded-full bg-blue-500/20 blur-[80px]" />
 
-              <div className="relative overflow-hidden rounded-[26px] border border-white/10 bg-slate-900/90 p-5 shadow-2xl shadow-black/40 backdrop-blur-2xl sm:p-6">
-                <div className="flex items-center justify-between border-b border-white/10 pb-5">
-                  <div className="flex items-center gap-3">
-                    <SernemLogo className="h-12 w-12 rounded-2xl" />
+              <div className="relative">
+                <div className="absolute -right-5 top-[17%] hidden h-[68%] w-[18px] rounded-r-[14px] border border-white/10 bg-slate-900 shadow-2xl lg:block" />
 
-                    <div>
-                      <p className="font-black text-white">SERNEM Workspace</p>
-                      <p className="text-sm text-slate-400">
-                        {isTurkish
-                          ? "Profesyonel HSE araç seti"
-                          : "Professional HSE toolkit"}
-                      </p>
-                    </div>
-                  </div>
-
-                  <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-black text-emerald-300">
-                    LIVE
-                  </span>
-                </div>
-
-                <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  {[
-                    {
-                      icon: ShieldCheck,
-                      title: isTurkish
-                        ? "Risk Analizi"
-                        : "Risk Assessment",
-                      text: isTurkish
-                        ? "100 faaliyet • 900 hazır risk"
-                        : "100 activities • 900 ready risks",
-                      href: `/${locale}/tools/quick-risk-assessment`,
-                    },
-                    {
-                      icon: FileText,
-                      title: "Method Statement",
-                      text: isTurkish
-                        ? "20 hazır çalışma yöntemi"
-                        : "20 ready work methods",
-                      href: `/${locale}/tools/method-statement`,
-                    },
-                    {
-                      icon: Bot,
-                      title: isTurkish
-                        ? "AI Asistan"
-                        : "AI Assistant",
-                      text: isTurkish
-                        ? "Kaynaklı HSE rehberliği"
-                        : "Source-aware HSE guidance",
-                      href: `/${locale}/ai-assistant`,
-                    },
-                    {
-                      icon: BriefcaseBusiness,
-                      title: isTurkish
-                        ? "Saha Kaynakları"
-                        : "Field Resources",
-                      text: isTurkish
-                        ? "Toolbox • Checklist • Poster"
-                        : "Toolbox • Checklist • Posters",
-                      href: `/${locale}/downloads`,
-                    },
-                  ].map((item) => (
-                    <Link
-                      key={item.title}
-                      href={item.href}
-                      className="group rounded-2xl border border-white/10 bg-slate-950 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/25 hover:bg-slate-900/80 hover:shadow-xl hover:shadow-blue-950/20/65 p-4 transition duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:bg-blue-500/[0.08]"
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.07] text-blue-300 transition-all duration-300 group-hover:border-blue-400/35 group-hover:bg-blue-500/[0.12] group-hover:text-blue-200 group-hover:shadow-lg group-hover:shadow-blue-950/30">
-                          <item.icon
-                            size={20}
-                            strokeWidth={1.9}
-                            aria-hidden="true"
-                          />
-                        </span>
-
-                        <span className="text-sm text-slate-600 transition group-hover:text-blue-300">
-                          →
-                        </span>
+                <div className="relative overflow-hidden rounded-[26px] border border-white/15 bg-[#07111f] p-2 shadow-[0_40px_100px_rgba(0,0,0,.6)]">
+                  <div className="overflow-hidden rounded-[20px] border border-white/[0.06] bg-[#050c18]">
+                    <div className="flex items-center justify-between border-b border-white/[0.07] px-4 py-3">
+                      <div className="flex items-center gap-2.5">
+                        <SernemLogo className="h-7 w-7 rounded-lg" />
+                        <div>
+                          <p className="text-xs font-black tracking-wide text-white">
+                            SERNEM
+                          </p>
+                          <p className="text-[8px] text-slate-500">
+                            Professional HSE Platform
+                          </p>
+                        </div>
                       </div>
 
-                      <h3 className="mt-4 font-black text-white">
-                        {item.title}
-                      </h3>
+                      <div className="flex items-center gap-2">
+                        <span className="hidden rounded-lg border border-white/[0.06] bg-white/[0.025] px-3 py-1.5 text-[8px] text-slate-600 sm:block">
+                          {isTurkish ? "HSE araçlarında ara..." : "Search HSE tools..."}
+                        </span>
+                        <span className="h-7 w-7 rounded-full border border-white/10 bg-gradient-to-br from-blue-500/20 to-emerald-500/10" />
+                      </div>
+                    </div>
 
-                      <p className="mt-1 text-xs leading-5 text-slate-400">
-                        {item.text}
-                      </p>
-                    </Link>
-                  ))}
+                    <div className="grid min-h-[385px] grid-cols-[112px_1fr] sm:grid-cols-[138px_1fr]">
+                      <aside className="border-r border-white/[0.07] bg-black/10 p-3">
+                        <p className="px-2 pb-2 text-[8px] font-black uppercase tracking-[0.18em] text-slate-600">
+                          Workspace
+                        </p>
+
+                        {[
+                          ["▣", isTurkish ? "Risk Analizi" : "Risk Assessment"],
+                          ["≡", "Method Statement"],
+                          ["◈", "Toolbox Talks"],
+                          ["✓", isTurkish ? "Kontrol Listeleri" : "Checklists"],
+                          ["⌁", isTurkish ? "Hesaplayıcılar" : "Calculators"],
+                          ["✦", "SERNEM AI"],
+                          ["↓", isTurkish ? "Kaynaklar" : "Downloads"],
+                        ].map(([icon, label], index) => (
+                          <div
+                            key={label}
+                            className={`mb-1 flex items-center gap-2 rounded-lg px-2 py-2 text-[9px] font-bold ${
+                              index === 0
+                                ? "bg-blue-500/[0.12] text-blue-300"
+                                : "text-slate-500"
+                            }`}
+                          >
+                            <span className="w-3 text-center text-blue-400">
+                              {icon}
+                            </span>
+                            <span className="truncate">{label}</span>
+                          </div>
+                        ))}
+                      </aside>
+
+                      <div className="p-4 sm:p-5">
+                        <div className="flex flex-wrap items-center justify-between gap-3">
+                          <div>
+                            <p className="text-[9px] font-black uppercase tracking-[0.16em] text-blue-400">
+                              {isTurkish ? "Risk Analizi" : "Risk Assessment"}
+                            </p>
+                            <h2 className="mt-1 text-lg font-black text-white sm:text-xl">
+                              {isTurkish
+                                ? "Profesyonel HIRARC çalışma alanı"
+                                : "Professional HIRARC workspace"}
+                            </h2>
+                          </div>
+
+                          <span className="rounded-full border border-emerald-400/20 bg-emerald-400/[0.07] px-3 py-1 text-[9px] font-black text-emerald-300">
+                            LIVE
+                          </span>
+                        </div>
+
+                        <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                          {[
+                            ["100", isTurkish ? "Faaliyet" : "Activities"],
+                            ["900", isTurkish ? "Hazır Risk" : "Ready Risks"],
+                            ["20", "Methods"],
+                            ["TR / EN", isTurkish ? "Dil" : "Languages"],
+                          ].map(([value, label]) => (
+                            <div
+                              key={label}
+                              className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-3"
+                            >
+                              <p className="text-lg font-black tracking-tight text-white">
+                                {value}
+                              </p>
+                              <p className="mt-1 text-[8px] font-bold uppercase tracking-[0.12em] text-slate-500">
+                                {label}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="mt-3 grid gap-3 sm:grid-cols-[1.25fr_.75fr]">
+                          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4">
+                            <div className="flex items-center justify-between">
+                              <p className="text-[10px] font-black text-white">
+                                {isTurkish
+                                  ? "Risk değerlendirme kütüphanesi"
+                                  : "Risk assessment library"}
+                              </p>
+                              <span className="text-[8px] text-blue-400">
+                                {isTurkish ? "Görüntüle →" : "View →"}
+                              </span>
+                            </div>
+
+                            <div className="mt-4 space-y-2">
+                              {[
+                                [isTurkish ? "Sıcak Çalışma" : "Hot Work", "HIGH"],
+                                [isTurkish ? "Kapalı Alan" : "Confined Space", "HIGH"],
+                                [isTurkish ? "İskele Çalışması" : "Scaffolding", "MED"],
+                                [isTurkish ? "Elektrik İşleri" : "Electrical Work", "MED"],
+                              ].map(([name, risk], index) => (
+                                <div
+                                  key={name}
+                                  className="grid grid-cols-[1fr_46px] items-center gap-2 rounded-lg border border-white/[0.045] bg-black/10 px-3 py-2"
+                                >
+                                  <div>
+                                    <p className="truncate text-[9px] font-bold text-slate-300">
+                                      {name}
+                                    </p>
+                                    <div className="mt-1 h-1 overflow-hidden rounded-full bg-white/[0.05]">
+                                      <div
+                                        className={`h-full rounded-full ${
+                                          index < 2
+                                            ? "w-[80%] bg-red-500/70"
+                                            : "w-[55%] bg-amber-400/70"
+                                        }`}
+                                      />
+                                    </div>
+                                  </div>
+                                  <span
+                                    className={`text-right text-[7px] font-black ${
+                                      index < 2
+                                        ? "text-red-400"
+                                        : "text-amber-300"
+                                    }`}
+                                  >
+                                    {risk}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="space-y-3">
+                            <div className="rounded-2xl border border-blue-400/10 bg-blue-500/[0.045] p-4">
+                              <div className="flex items-center gap-2">
+                                <Bot size={16} className="text-blue-400" />
+                                <p className="text-[10px] font-black text-white">
+                                  SERNEM AI
+                                </p>
+                              </div>
+                              <p className="mt-3 text-[9px] leading-5 text-slate-400">
+                                {isTurkish
+                                  ? "HSE sorularınızı kaynaklı bilgi tabanıyla analiz edin."
+                                  : "Analyze HSE questions with source-aware guidance."}
+                              </p>
+                              <Link
+                                href={`/${locale}/ai-assistant`}
+                                className="mt-3 inline-flex text-[9px] font-black text-blue-300"
+                              >
+                                {isTurkish ? "AI'ı Aç →" : "Open AI →"}
+                              </Link>
+                            </div>
+
+                            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4">
+                              <p className="text-[9px] font-black uppercase tracking-[0.15em] text-slate-500">
+                                {isTurkish ? "Hızlı Erişim" : "Quick Access"}
+                              </p>
+                              <div className="mt-3 space-y-2">
+                                {[
+                                  ["Method Statement", "20"],
+                                  ["Toolbox Talks", "20"],
+                                  [isTurkish ? "Kontrol Listeleri" : "Checklists", "6"],
+                                  [isTurkish ? "Hesaplayıcılar" : "Calculators", "4"],
+                                ].map(([label, count]) => (
+                                  <div
+                                    key={label}
+                                    className="flex items-center justify-between text-[8px]"
+                                  >
+                                    <span className="text-slate-400">{label}</span>
+                                    <span className="font-black text-slate-200">{count}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="mt-3 rounded-2xl border border-emerald-400/10 bg-emerald-400/[0.04] p-4">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-400">
-                    {isTurkish
-                      ? "Tek çalışma alanı"
-                      : "One connected workspace"}
-                  </p>
-
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
-                    {isTurkish
-                      ? "Analiz oluşturun, hazır doküman yükleyin, rehberlere ulaşın ve HSE araçlarını tek merkezden kullanın."
-                      : "Build assessments, load ready documents, access guidance and use professional HSE tools from one place."}
-                  </p>
-                </div>
+                <div className="mx-auto h-3 w-[84%] rounded-b-[26px] bg-gradient-to-b from-slate-700 to-slate-900 shadow-2xl" />
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="mt-10 border-t border-white/10 pt-8">
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <div className="border-t border-white/10 bg-[#030b16]/95">
+          <div className="mx-auto max-w-[1440px] px-6 py-8 lg:px-8">
+            <div className="text-center">
+              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-blue-400">
+                {isTurkish
+                  ? "TAM HSE İŞ AKIŞI"
+                  : "THE COMPLETE HSE WORKFLOW"}
+              </p>
+              <h2 className="mt-2 text-2xl font-black tracking-[-0.035em] text-white sm:text-3xl">
+                {isTurkish
+                  ? "Tehlikeden sahaya hazır dokümana."
+                  : "From hazard to field-ready document."}
+              </h2>
+            </div>
+
+            <div className="mt-8 grid gap-3 lg:grid-cols-5">
               {[
                 {
-                  value: "20",
-                  label: isTurkish
-                    ? "Method Statement"
-                    : "Method Statements",
-                  detail: isTurkish
-                    ? "Hazır çalışma yöntemi"
-                    : "Ready work methods",
+                  step: "1",
+                  icon: ShieldCheck,
+                  title: isTurkish ? "Risk Analizi" : "Risk Assessment",
+                  text: isTurkish
+                    ? "Tehlikeleri belirleyin ve riski değerlendirin."
+                    : "Identify hazards and evaluate risk.",
+                  href: `/${locale}/tools/quick-risk-assessment`,
                 },
                 {
-                  value: "100",
-                  label: isTurkish
-                    ? "Risk Faaliyeti"
-                    : "Risk Activities",
-                  detail: isTurkish
-                    ? "Hazır faaliyet kütüphanesi"
-                    : "Ready activity library",
+                  step: "2",
+                  icon: FileText,
+                  title: "Method Statement",
+                  text: isTurkish
+                    ? "Güvenli çalışma adımlarını oluşturun."
+                    : "Define safe work steps and controls.",
+                  href: `/${locale}/tools/method-statement`,
                 },
                 {
-                  value: "900",
-                  label: isTurkish
-                    ? "Hazır Risk"
-                    : "Ready Risks",
-                  detail: isTurkish
-                    ? "Kontrollü risk içeriği"
-                    : "Structured risk content",
+                  step: "3",
+                  icon: BriefcaseBusiness,
+                  title: "Toolbox Talk",
+                  text: isTurkish
+                    ? "Ekibinizi saha öncesi bilgilendirin."
+                    : "Communicate and engage your team.",
+                  href: `/${locale}/toolbox`,
                 },
                 {
-                  value: "TR / EN",
-                  label: isTurkish
-                    ? "Çift Dil"
-                    : "Bilingual",
-                  detail: isTurkish
-                    ? "Türkçe ve İngilizce"
-                    : "Turkish and English",
+                  step: "4",
+                  icon: ClipboardCheck,
+                  title: isTurkish ? "Kontrol Listesi" : "Checklist",
+                  text: isTurkish
+                    ? "Saha kontrollerini doğrulayın."
+                    : "Inspect and verify in the field.",
+                  href: `/${locale}/checklists`,
+                },
+                {
+                  step: "5",
+                  icon: Download,
+                  title: "PDF",
+                  text: isTurkish
+                    ? "Profesyonel çıktıyı oluşturun."
+                    : "Generate professional output.",
+                  href: `/${locale}/downloads`,
+                },
+              ].map((item, index) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition hover:-translate-y-1 hover:border-blue-400/25 hover:bg-blue-500/[0.05]"
+                >
+                  {index < 4 && (
+                    <span className="absolute -right-[12px] top-1/2 z-10 hidden -translate-y-1/2 text-xl text-slate-700 lg:block">
+                      →
+                    </span>
+                  )}
+
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.07] text-blue-300">
+                      <item.icon size={18} />
+                    </span>
+                    <span className="text-[10px] font-black text-slate-600">
+                      0{item.step}
+                    </span>
+                  </div>
+
+                  <p className="mt-4 text-sm font-black text-white">
+                    {item.title}
+                  </p>
+
+                  <p className="mt-2 text-[11px] leading-5 text-slate-500">
+                    {item.text}
+                  </p>
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-8 grid gap-3 border-t border-white/[0.08] pt-7 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  icon: ShieldCheck,
+                  title: isTurkish
+                    ? "HSE Profesyonelleri İçin"
+                    : "Built for HSE Professionals",
+                  text: isTurkish
+                    ? "Gerçek saha ihtiyaçlarına odaklı."
+                    : "Focused on real field needs.",
+                },
+                {
+                  icon: GlobeIcon,
+                  title: isTurkish
+                    ? "Global HSE Yaklaşımı"
+                    : "Global HSE Approach",
+                  text: "OSHA • NEBOSH • IOSH",
+                },
+                {
+                  icon: Zap,
+                  title: isTurkish ? "Kolay Kullanım" : "Easy to Use",
+                  text: isTurkish
+                    ? "Hızlı ve sade çalışma alanı."
+                    : "Fast, focused workspace.",
+                },
+                {
+                  icon: ShieldCheck,
+                  title: isTurkish
+                    ? "Profesyonel Dokümanlar"
+                    : "Professional Outputs",
+                  text: isTurkish
+                    ? "Sahaya hazır içerik ve PDF."
+                    : "Field-ready content and PDFs.",
                 },
               ].map((item) => (
                 <div
-                  key={item.label}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-4 transition duration-300 hover:border-blue-400/25 hover:bg-blue-500/[0.055]"
+                  key={item.title}
+                  className="flex items-start gap-3 rounded-xl px-2 py-2"
                 >
-                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent opacity-0 transition group-hover:opacity-100" />
-
-                  <p className="text-2xl font-black tracking-[-0.04em] text-white sm:text-3xl">
-                    {item.value}
-                  </p>
-
-                  <p className="mt-1 text-[11px] font-black uppercase tracking-[0.12em] text-blue-300">
-                    {item.label}
-                  </p>
-
-                  <p className="mt-2 hidden text-xs text-slate-500 sm:block">
-                    {item.detail}
-                  </p>
+                  <span className="mt-0.5 text-blue-400">
+                    <item.icon />
+                  </span>
+                  <div>
+                    <p className="text-xs font-black text-slate-200">
+                      {item.title}
+                    </p>
+                    <p className="mt-1 text-[10px] leading-5 text-slate-500">
+                      {item.text}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
