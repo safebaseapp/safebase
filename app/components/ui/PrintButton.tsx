@@ -1,29 +1,45 @@
 "use client";
 
+import { useState } from "react";
+
 type PrintButtonProps = {
   label?: string;
+  loadingLabel?: string;
   onClick?: () => void;
   className?: string;
 };
 
 export default function PrintButton({
   label = "PDF / Yazdır",
+  loadingLabel = "Hazırlanıyor...",
   onClick,
   className = "",
 }: PrintButtonProps) {
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-      return;
-    }
+  const [isPreparing, setIsPreparing] = useState(false);
 
-    window.print();
+  const handleClick = () => {
+    if (isPreparing) return;
+
+    setIsPreparing(true);
+
+    setTimeout(() => {
+      if (onClick) {
+        onClick();
+      } else {
+        window.print();
+      }
+
+      setTimeout(() => {
+        setIsPreparing(false);
+      }, 500);
+    }, 250);
   };
 
   return (
     <button
       type="button"
       onClick={handleClick}
+      disabled={isPreparing}
       className={`
         group inline-flex items-center justify-center gap-3
         rounded-xl border border-blue-300/40
@@ -37,6 +53,8 @@ export default function PrintButton({
         hover:shadow-[0_15px_38px_rgba(37,99,235,0.45)]
         active:translate-y-0
         active:scale-[0.97]
+        disabled:cursor-wait
+        disabled:opacity-80
         focus-visible:outline-none
         focus-visible:ring-2
         focus-visible:ring-blue-400
@@ -55,21 +73,23 @@ export default function PrintButton({
           group-hover:bg-white/20
         "
       >
-        📄
+        {isPreparing ? "◌" : "📄"}
       </span>
 
-      <span>{label}</span>
+      <span>{isPreparing ? loadingLabel : label}</span>
 
-      <span
-        aria-hidden="true"
-        className="
-          text-blue-100
-          transition-transform duration-200
-          group-hover:translate-x-1
-        "
-      >
-        →
-      </span>
+      {!isPreparing && (
+        <span
+          aria-hidden="true"
+          className="
+            text-blue-100
+            transition-transform duration-200
+            group-hover:translate-x-1
+          "
+        >
+          →
+        </span>
+      )}
     </button>
   );
 }

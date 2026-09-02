@@ -519,7 +519,7 @@ export default function ProductExplorer({ locale, onClose }: Props) {
           <X size={18} />
         </button>
 
-        <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-[360px_1fr]">
           {/* LEFT RAIL */}
           <aside className="flex min-h-0 min-w-0 flex-col">
             <div className="pr-12">
@@ -673,7 +673,7 @@ export default function ProductExplorer({ locale, onClose }: Props) {
 
               <div className="relative grid min-h-[500px] lg:grid-cols-[0.72fr_1.28fr]">
                 {/* PRODUCT COPY */}
-                <div className="flex flex-col justify-between border-b border-white/[0.08] p-7 lg:border-b-0 lg:border-r lg:p-8">
+                <div className="flex flex-col justify-between border-b border-white/[0.08] p-5 sm:p-7 lg:border-b-0 lg:border-r lg:p-5 sm:p-8">
                   <div>
                     <div
                       className={`inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.035] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.17em] ${styles.text}`}
@@ -738,7 +738,7 @@ export default function ProductExplorer({ locale, onClose }: Props) {
                 </div>
 
                 {/* PREVIEW */}
-                <div className="flex items-center justify-center p-5 lg:p-7">
+                <div className="flex items-center justify-center p-5 lg:p-5 sm:p-7">
                   <div
                     key={active.id}
                     className="w-full animate-[sernemPreview_.28s_ease-out]"
