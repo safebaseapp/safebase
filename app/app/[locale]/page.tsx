@@ -316,25 +316,14 @@ export default async function LocalizedHomePage({ params }: Props) {
 
   return (
     <main className="min-h-screen overflow-hidden bg-slate-950 text-white">
-      <style>{`
-        @media (min-width: 1024px) {
-          .safebase-home-scale {
-            zoom: 0.90;
-          }
-        }
-      `}</style>
-      <div className="safebase-home-scale">
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#020817]">
-        <div className="absolute inset-x-0 top-0 -z-30 h-[610px] sm:h-[650px] lg:h-[680px] xl:h-[690px] bg-[#020817]">
-          <Image
-            src="/images/sernem-hse-hero.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-contain object-top"
-          />
-        </div>
+            <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#020817]">
+        <div
+          className="absolute inset-x-0 top-0 -z-30 h-[640px] sm:h-[680px] lg:h-[690px] xl:h-[690px] bg-[#020817] bg-no-repeat bg-[length:100%_100%] bg-top"
+          style={{
+            backgroundImage:
+              "url('/images/sernem-hse-hero.png')",
+          }}
+        />
 
         <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(2,8,23,0.88)_0%,rgba(2,8,23,0.72)_30%,rgba(2,8,23,0.30)_52%,rgba(2,8,23,0.08)_72%,rgba(2,8,23,0.10)_100%)]" />
 
@@ -1129,7 +1118,6 @@ export default async function LocalizedHomePage({ params }: Props) {
       <ProductShowcase locale={safeLocale} />
 
       <LocalizedFooter locale={safeLocale} />
-          </div>
     </main>
   );
 }
