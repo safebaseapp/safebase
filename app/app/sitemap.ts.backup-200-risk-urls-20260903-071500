@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { toolboxData } from "@/lib/toolbox/toolbox-data";
-import { allRiskActivities } from "@/lib/risk-library/all-activities";
+import { riskLibraryPack01 } from "@/lib/risk-library/pack-01";
 
 const baseUrl = "https://www.sernem.com";
 
@@ -71,7 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const riskAssessmentPages: MetadataRoute.Sitemap = locales.flatMap(
     (locale) =>
-      allRiskActivities.map((activity) => ({
+      riskLibraryPack01.map((activity) => ({
         url: `${baseUrl}/${locale}/risk-assessment/${activity.id}`,
         lastModified: now,
         changeFrequency: "monthly",

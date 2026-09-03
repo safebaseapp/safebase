@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { toolboxData } from "@/lib/toolbox/toolbox-data";
-import { allRiskActivities } from "@/lib/risk-library/all-activities";
 
 const baseUrl = "https://www.sernem.com";
 
@@ -44,12 +43,11 @@ const publicRoutes = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const locales = ["tr", "en"] as const;
-  const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     publicRoutes.map((route) => ({
       url: `${baseUrl}/${locale}${route}`,
-      lastModified: now,
+      lastModified: new Date(),
       changeFrequency: route === "" ? "weekly" : "monthly",
       priority:
         route === ""
@@ -63,25 +61,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const toolboxPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     toolboxData.map((toolbox) => ({
       url: `${baseUrl}/${locale}/toolbox/${toolbox.slug}`,
-      lastModified: now,
+      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     }))
   );
 
-  const riskAssessmentPages: MetadataRoute.Sitemap = locales.flatMap(
-    (locale) =>
-      allRiskActivities.map((activity) => ({
-        url: `${baseUrl}/${locale}/risk-assessment/${activity.id}`,
-        lastModified: now,
-        changeFrequency: "monthly",
-        priority: 0.85,
-      }))
-  );
-
-  return [
-    ...staticPages,
-    ...toolboxPages,
-    ...riskAssessmentPages,
-  ];
+  return [...staticPages, ...toolboxPages];
 }

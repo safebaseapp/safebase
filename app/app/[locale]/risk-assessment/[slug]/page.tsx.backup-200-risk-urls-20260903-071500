@@ -1,0 +1,282 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { riskLibraryPack01 } from "@/lib/risk-library/pack-01";
+
+type Locale = "tr" | "en";
+
+type PageProps = {
+  params: Promise<{
+    locale: Locale;
+    slug: string;
+  }>;
+};
+
+const baseUrl = "https://www.sernem.com";
+
+function getActivity(slug: string) {
+  return riskLibraryPack01.find((item) => item.id === slug);
+}
+
+export function generateStaticParams() {
+  return riskLibraryPack01.map((activity) => ({
+    slug: activity.id,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const activity = getActivity(slug);
+
+  if (!activity) {
+    return {};
+  }
+
+  const name = activity.activity[locale];
+  const hazardCount = activity.items.length;
+
+  const title =
+    locale === "tr"
+      ? `${name} Risk Değerlendirmesi | SERNEM`
+      : `${name} Risk Assessment | SERNEM`;
+
+  const description =
+    locale === "tr"
+      ? `${name} için ${hazardCount} hazır tehlike, sonuç, mevcut kontrol ve ilave kontrol önlemini inceleyin. SERNEM ile profesyonel risk değerlendirmesi oluşturun.`
+      : `Review ${hazardCount} ready hazards, consequences, existing controls and additional controls for ${name}. Build a professional HSE risk assessment with SERNEM.`;
+
+  const canonical = `${baseUrl}/${locale}/risk-assessment/${activity.id}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: {
+        en: `${baseUrl}/en/risk-assessment/${activity.id}`,
+        tr: `${baseUrl}/tr/risk-assessment/${activity.id}`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "article",
+      siteName: "SERNEM",
+    },
+  };
+}
+
+export default async function RiskAssessmentActivityPage({
+  params,
+}: PageProps) {
+  const { locale, slug } = await params;
+
+  if (locale !== "tr" && locale !== "en") {
+    notFound();
+  }
+
+  const activity = getActivity(slug);
+
+  if (!activity) {
+    notFound();
+  }
+
+  const isTr = locale === "tr";
+
+  const activityName = activity.activity[locale];
+  const categoryName = activity.category[locale];
+  const hazardCount = activity.items.length;
+
+  return (
+    <main className="min-h-screen bg-slate-950 text-white">
+      <section className="border-b border-white/10">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
+          <Link
+            href={`/${locale}/tools/quick-risk-assessment`}
+            className="text-sm font-medium text-blue-400 transition hover:text-blue-300"
+          >
+            ← {isTr ? "Risk Değerlendirme Aracı" : "Risk Assessment Generator"}
+          </Link>
+
+          <div className="mt-7 max-w-4xl">
+            <div className="mb-4 flex flex-wrap gap-2">
+              <span className="rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-300">
+                {isTr ? "Hazır Risk Değerlendirmesi" : "Ready Risk Assessment"}
+              </span>
+
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-300">
+                {categoryName}
+              </span>
+            </div>
+
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+              {activityName}{" "}
+              <span className="text-blue-400">
+                {isTr ? "Risk Değerlendirmesi" : "Risk Assessment"}
+              </span>
+            </h1>
+
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
+              {isTr
+                ? `${activityName} faaliyeti için ${hazardCount} hazır tehlike; olası sonuçlar, risk altındaki kişiler, mevcut kontroller ve ilave kontrol önlemleriyle birlikte incelenebilir.`
+                : `Review ${hazardCount} ready hazards for ${activityName}, including potential consequences, persons at risk, existing controls and additional control measures.`}
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href={`/${locale}/tools/quick-risk-assessment`}
+                className="rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
+              >
+                {isTr
+                  ? "SERNEM'de Risk Değerlendirmesi Oluştur"
+                  : "Build This Risk Assessment in SERNEM"}
+              </Link>
+
+              <Link
+                href={`/${locale}/tools/risk-matrix`}
+                className="rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                {isTr ? "5×5 Risk Matrisini Aç" : "Open 5×5 Risk Matrix"}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
+        <div className="mb-8 grid gap-4 sm:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+            <div className="text-3xl font-bold">{hazardCount}</div>
+            <div className="mt-1 text-sm text-slate-400">
+              {isTr ? "Hazır tehlike" : "Ready hazards"}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+            <div className="text-3xl font-bold">5×5</div>
+            <div className="mt-1 text-sm text-slate-400">
+              {isTr ? "Risk matrisi uyumlu" : "Risk matrix ready"}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+            <div className="text-3xl font-bold">TR / EN</div>
+            <div className="mt-1 text-sm text-slate-400">
+              {isTr ? "Çift dil desteği" : "Bilingual content"}
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-7">
+          <h2 className="text-2xl font-bold">
+            {isTr
+              ? `${activityName} – Tehlikeler ve Kontroller`
+              : `${activityName} – Hazards & Controls`}
+          </h2>
+
+          <p className="mt-2 max-w-3xl text-slate-400">
+            {isTr
+              ? "Aşağıdaki içerik SERNEM risk kütüphanesindeki faaliyete özel hazır HSE verilerinden oluşturulmuştur."
+              : "The content below is generated from SERNEM's activity-specific HSE risk library."}
+          </p>
+        </div>
+
+        <div className="space-y-5">
+          {activity.items.map((item, index) => (
+            <article
+              key={`${activity.id}-${index}`}
+              className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035]"
+            >
+              <div className="border-b border-white/10 bg-white/[0.025] px-5 py-4 sm:px-6">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-8 min-w-8 items-center justify-center rounded-lg bg-blue-500/15 text-sm font-bold text-blue-300">
+                    {index + 1}
+                  </span>
+
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                      {isTr ? "Tehlike" : "Hazard"}
+                    </div>
+                    <h3 className="mt-1 text-lg font-semibold">
+                      {item.hazard[locale]}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-px bg-white/10 md:grid-cols-2">
+                <div className="bg-slate-950 p-5 sm:p-6">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    {isTr ? "Olası Sonuç" : "Potential Consequence"}
+                  </div>
+                  <p className="mt-2 leading-7 text-slate-300">
+                    {item.consequence[locale]}
+                  </p>
+                </div>
+
+                <div className="bg-slate-950 p-5 sm:p-6">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    {isTr ? "Risk Altındaki Kişiler" : "Persons at Risk"}
+                  </div>
+                  <p className="mt-2 leading-7 text-slate-300">
+                    {item.personsAtRisk[locale]}
+                  </p>
+                </div>
+
+                <div className="bg-slate-950 p-5 sm:p-6">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    {isTr ? "Mevcut Kontroller" : "Existing Controls"}
+                  </div>
+                  <p className="mt-2 leading-7 text-slate-300">
+                    {item.existingControls[locale]}
+                  </p>
+                </div>
+
+                <div className="bg-slate-950 p-5 sm:p-6">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    {isTr ? "İlave Kontroller" : "Additional Controls"}
+                  </div>
+                  <p className="mt-2 leading-7 text-slate-300">
+                    {item.additionalControls[locale]}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-12 rounded-3xl border border-blue-400/20 bg-blue-500/10 p-7 sm:p-9">
+          <h2 className="text-2xl font-bold">
+            {isTr
+              ? "Bu risk değerlendirmesini kendi projeniz için hazırlayın"
+              : "Build this risk assessment for your project"}
+          </h2>
+
+          <p className="mt-3 max-w-3xl leading-7 text-slate-300">
+            {isTr
+              ? "Hazır riskleri seçin, kontrol önlemlerini düzenleyin, risk seviyelerini değerlendirin ve profesyonel çıktınızı SERNEM üzerinden oluşturun."
+              : "Select ready hazards, customize control measures, evaluate risk levels and prepare your professional assessment directly in SERNEM."}
+          </p>
+
+          <Link
+            href={`/${locale}/tools/quick-risk-assessment`}
+            className="mt-6 inline-flex rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
+          >
+            {isTr
+              ? "Risk Değerlendirmesini Başlat"
+              : "Start Risk Assessment"}
+          </Link>
+        </div>
+
+        <div className="mt-10 text-sm leading-6 text-slate-500">
+          {isTr
+            ? "Not: Hazır içerikler başlangıç noktasıdır. Nihai risk değerlendirmesi işin gerçek saha koşulları, uygulanabilir mevzuat, şirket prosedürleri ve yetkin kişi değerlendirmesine göre doğrulanmalıdır."
+            : "Note: Ready-made content is a starting point. The final risk assessment must be validated against actual site conditions, applicable requirements, company procedures and competent-person judgement."}
+        </div>
+      </section>
+    </main>
+  );
+}
