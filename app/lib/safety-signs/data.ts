@@ -20,7 +20,7 @@ export const signCategories: Array<{
 export const safetySigns: SafetySign[] = [
   {
     slug: "safety-helmet-must-be-worn",
-    code: "SRN-M-001",
+    code: "SRN-M-014",
     category: "mandatory",
     icon: "helmet",
     title: {
@@ -34,7 +34,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "eye-protection-must-be-worn",
-    code: "SRN-M-002",
+    code: "SRN-M-004",
     category: "mandatory",
     icon: "glasses",
     title: {
@@ -48,7 +48,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "protective-gloves-must-be-worn",
-    code: "SRN-M-003",
+    code: "SRN-M-009",
     category: "mandatory",
     icon: "gloves",
     title: {
@@ -62,7 +62,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "safety-footwear-must-be-worn",
-    code: "SRN-M-004",
+    code: "SRN-M-008",
     category: "mandatory",
     icon: "footwear",
     title: {
@@ -76,7 +76,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "hearing-protection-must-be-worn",
-    code: "SRN-M-005",
+    code: "SRN-M-003",
     category: "mandatory",
     icon: "hearing",
     title: {
@@ -132,7 +132,7 @@ export const safetySigns: SafetySign[] = [
   },
   {
     slug: "warning-high-voltage",
-    code: "SRN-W-001",
+    code: "SRN-W-012",
     category: "warning",
     icon: "high-voltage",
     title: {

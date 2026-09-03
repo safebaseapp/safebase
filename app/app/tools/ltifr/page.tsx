@@ -464,7 +464,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     write(
-      "LTIFR Calculator",
+      isTurkish ? "LTIFR Hesaplayıcı" : "LTIFR Calculator",
       leftX + 7,
       topY + 17,
       12.5,
@@ -669,7 +669,7 @@ export default function LTIFRCalculatorPage() {
     );
 
     sectionTitle(
-      "LTIFR RESULT",
+      isTurkish ? "LTIFR SONUCU" : "LTIFR RESULT",
       rightX + 7,
       topY + 8
     );
@@ -1297,7 +1297,7 @@ export default function LTIFRCalculatorPage() {
     doc.line(10, 285, W - 10, 285);
 
     write(
-      "SERNEM • LTIFR Calculator",
+      isTurkish ? "SERNEM • LTIFR Hesaplayıcı" : "SERNEM • LTIFR Calculator",
       10,
       290,
       3.1,
@@ -1373,7 +1373,7 @@ export default function LTIFRCalculatorPage() {
                   </p>
 
                   <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl lg:text-[42px]">
-                    LTIFR Calculator
+                    {isTurkish ? "LTIFR Hesaplayıcı" : "LTIFR Calculator"}
                   </h1>
 
                   <p className="mt-5 max-w-xl text-sm leading-7 text-slate-400 sm:text-[15px]">
@@ -1529,7 +1529,7 @@ export default function LTIFRCalculatorPage() {
             >
               <div className="relative flex items-start justify-between">
                 <p className="text-sm font-black uppercase tracking-[0.16em] text-blue-400">
-                  LTIFR RESULT
+                  {isTurkish ? "LTIFR SONUCU" : "LTIFR RESULT"}
                 </p>
 
                 <span
