@@ -326,7 +326,7 @@ export default async function LocalizedHomePage({ params }: Props) {
       <div className="safebase-home-scale">
       <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#020817]">
         <div
-          className="absolute inset-0 -z-30 bg-no-repeat bg-cover bg-[position:58%_center] lg:bg-cover lg:bg-[center_52%]"
+          className="absolute inset-0 -z-30 bg-no-repeat bg-[length:auto_100%] bg-[position:64%_100%] lg:bg-cover lg:bg-[center_52%]"
           style={{
             backgroundImage:
               "url('/images/sernem-hse-hero.png')",
@@ -446,7 +446,19 @@ export default async function LocalizedHomePage({ params }: Props) {
                 </Link>
               </div>
 
-<div className="mt-5 hidden flex-wrap gap-2 sm:flex">
+              <div className="relative mt-5 h-[205px] overflow-hidden rounded-2xl border border-white/10 bg-[#030b16]/35 sm:hidden">
+                <div
+                  className="absolute inset-0 bg-no-repeat"
+                  style={{
+                    backgroundImage: "url('/images/sernem-hse-hero.png')",
+                    backgroundSize: "auto 470px",
+                    backgroundPosition: "64% 72%",
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#020817]/10 via-transparent to-[#020817]/65" />
+              </div>
+
+              <div className="mt-5 hidden flex-wrap gap-2 sm:flex">
                 {[
                   isTurkish ? "✦ AI destekli" : "✦ AI-powered",
                   "◎ TR / EN",

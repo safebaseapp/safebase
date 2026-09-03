@@ -1,0 +1,559 @@
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:727:                              <button
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:730:                                onClick={() =>
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:1092:                      ? "Yüksekte Çalışma Güvenlik Analizi"
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:1099:                        ? "Analiz oluşturulamadı"
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:1102:                        ? "Analiz hazırlanıyor"
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:1134:          <button
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:1136:            onClick={runSafetyAnalysis}
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:1139:            {locale === "tr" ? "🔍 Güvenlik Analizi Yap" : "🔍 Analyze Safety"}
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:1144:          <button
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:1146:            onClick={() => window.print()}
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:1152:          <button
+app/[locale]/checklists/work-at-height/WorkAtHeightChecklist.tsx:1154:            onClick={resetInspection}
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:758:                              <button
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:761:                                onClick={() =>
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:1123:                      ? "İskele Güvenlik Analizi"
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:1130:                        ? "Analiz oluşturulamadı"
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:1133:                        ? "Analiz hazırlanıyor"
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:1165:          <button
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:1167:            onClick={runSafetyAnalysis}
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:1170:            {locale === "tr" ? "🔍 Güvenlik Analizi Yap" : "🔍 Analyze Safety"}
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:1175:          <button
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:1177:            onClick={() => window.print()}
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:1183:          <button
+app/[locale]/checklists/scaffold/ScaffoldChecklist.tsx:1185:            onClick={resetInspection}
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:758:                              <button
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:761:                                onClick={() =>
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:1123:                      ? "Kaldırma Operasyonu Güvenlik Analizi"
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:1130:                        ? "Analiz oluşturulamadı"
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:1133:                        ? "Analiz hazırlanıyor"
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:1165:          <button
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:1167:            onClick={runSafetyAnalysis}
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:1170:            {locale === "tr" ? "🔍 Güvenlik Analizi Yap" : "🔍 Analyze Safety"}
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:1175:          <button
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:1177:            onClick={() => window.print()}
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:1183:          <button
+app/[locale]/checklists/lifting/LiftingChecklist.tsx:1185:            onClick={resetInspection}
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:276:          ? "Önce Güvenlik Analizi Yap butonuna basın."
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:277:          : "Run Analyze Safety first.",
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:878:                              <button
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:881:                                onClick={() =>
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:1502:          <button
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:1504:            onClick={runSafetyAnalysis}
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:1513:                ? "🤖 Güvenlik Analizi Yap"
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:1514:                : "🤖 Analyze Safety"}
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:1523:          <button
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:1525:            onClick={() => window.print()}
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:1531:          <button
+app/[locale]/checklists/hot-work/HotWorkChecklist.tsx:1533:            onClick={resetInspection}
+app/[locale]/checklists/loto/LotoChecklist.tsx:761:                              <button
+app/[locale]/checklists/loto/LotoChecklist.tsx:764:                                onClick={() =>
+app/[locale]/checklists/loto/LotoChecklist.tsx:1132:                      ? "LOTO Güvenlik Analizi"
+app/[locale]/checklists/loto/LotoChecklist.tsx:1139:                        ? "Analiz oluşturulamadı"
+app/[locale]/checklists/loto/LotoChecklist.tsx:1142:                        ? "Analiz hazırlanıyor"
+app/[locale]/checklists/loto/LotoChecklist.tsx:1174:          <button
+app/[locale]/checklists/loto/LotoChecklist.tsx:1176:            onClick={runSafetyAnalysis}
+app/[locale]/checklists/loto/LotoChecklist.tsx:1180:              ? "🔍 Güvenlik Analizi Yap"
+app/[locale]/checklists/loto/LotoChecklist.tsx:1181:              : "🔍 Analyze Safety"}
+app/[locale]/checklists/loto/LotoChecklist.tsx:1186:          <button
+app/[locale]/checklists/loto/LotoChecklist.tsx:1188:            onClick={() => window.print()}
+app/[locale]/checklists/loto/LotoChecklist.tsx:1194:          <button
+app/[locale]/checklists/loto/LotoChecklist.tsx:1196:            onClick={resetInspection}
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:759:                              <button
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:762:                                onClick={() =>
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1127:                      ? "Güvenlik Analizi"
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1134:                        ? "Analiz motorunda hata oluştu"
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1137:                        ? "Analiz hazırlanıyor"
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1169:          <button
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1171:            onClick={runSafetyAnalysis}
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1175:              ? "🔍 Güvenlik Analizi Yap"
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1176:              : "🔍 Analyze Safety"}
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1183:          <button
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1185:            onClick={() => window.print()}
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1191:          <button
+app/[locale]/checklists/confined-space/ConfinedSpaceChecklist.tsx:1193:            onClick={resetInspection}
+app/[locale]/checklists/components/ChecklistAnalysisPanel.tsx:262:              {isTurkish ? "Analiz Bulguları" : "Analysis Findings"}
+app/[locale]/checklists/components/PremiumAssessmentButton.tsx:57:      <button
+app/[locale]/checklists/components/PremiumAssessmentButton.tsx:60:        onClick={handleClick}
+app/[locale]/checklists/components/PremiumAssessmentButton.tsx:140:            <button
+app/[locale]/checklists/components/PremiumAssessmentButton.tsx:142:              onClick={() => setIsOpen(false)}
+app/[locale]/checklists/components/PremiumAssessmentButton.tsx:208:                    : "Analyze your inspection with AI to review critical findings, non-conformities and recommended corrective actions faster."}
+app/[locale]/checklists/components/PremiumAssessmentButton.tsx:255:                  onClick={() => setIsOpen(false)}
+app/[locale]/checklists/components/PremiumAssessmentButton.tsx:277:                <button
+app/[locale]/checklists/components/PremiumAssessmentButton.tsx:279:                  onClick={() => setIsOpen(false)}
+app/[locale]/reset-password/ResetPasswordForm.tsx:133:      <button
+app/[locale]/reset-password/ResetPasswordForm.tsx:134:        type="submit"
+app/[locale]/knowledge-base/page.tsx:537:                  <button
+app/[locale]/knowledge-base/page.tsx:540:                    onClick={() => setActiveCategory(category.id)}
+app/[locale]/knowledge-base/page.tsx:669:                    <button
+app/[locale]/knowledge-base/page.tsx:806:                    <button
+app/[locale]/knowledge-base/page.tsx:833:              <button
+app/[locale]/knowledge-base/page.tsx:835:                onClick={() => {
+app/[locale]/account/page.tsx:456:              <button
+app/[locale]/account/page.tsx:458:                onClick={() => setIsEditing(true)}
+app/[locale]/account/page.tsx:512:              <button
+app/[locale]/account/page.tsx:514:                onClick={() => setIsEditing(true)}
+app/[locale]/account/page.tsx:520:              <button
+app/[locale]/account/page.tsx:522:                onClick={() => router.push(`/${locale}/dashboard`)}
+app/[locale]/account/page.tsx:566:                  <button
+app/[locale]/account/page.tsx:568:                    onClick={() => setIsEditing(true)}
+app/[locale]/account/page.tsx:584:                      <button
+app/[locale]/account/page.tsx:586:                        onClick={() => setIsEditing(true)}
+app/[locale]/account/page.tsx:640:                    <button
+app/[locale]/account/page.tsx:642:                      onClick={() => setIsEditing(true)}
+app/[locale]/account/page.tsx:721:                    <button
+app/[locale]/account/page.tsx:725:                      onClick={() => {
+app/[locale]/account/page.tsx:763:                    <button
+app/[locale]/account/page.tsx:765:                      onClick={() => router.push("/tr/account")}
+app/[locale]/account/page.tsx:775:                    <button
+app/[locale]/account/page.tsx:777:                      onClick={() => router.push("/en/account")}
+app/[locale]/account/page.tsx:792:                  <button
+app/[locale]/account/page.tsx:794:                    onClick={cancelEditing}
+app/[locale]/account/page.tsx:801:                  <button
+app/[locale]/account/page.tsx:803:                    onClick={saveProfile}
+app/[locale]/account/page.tsx:812:                        ? "Değişiklikleri Kaydet"
+app/[locale]/account/page.tsx:813:                        : "Save Changes"}
+app/[locale]/account/page.tsx:947:                <button
+app/[locale]/account/page.tsx:949:                  onClick={() => router.push(`/${locale}/upgrade`)}
+app/[locale]/account/page.tsx:980:              <button
+app/[locale]/account/page.tsx:982:                onClick={() => router.push(`/${locale}/forgot-password`)}
+app/[locale]/account/page.tsx:1009:                  <button
+app/[locale]/account/page.tsx:1012:                    onClick={() => router.push(`/${locale}/${item.path}`)}
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:448:                  ? "Sahada kullanıma hazır toolbox içeriklerini önizleyin veya profesyonel PDF olarak indirin."
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:449:                  : "Preview site-ready toolbox content or download it as a professional PDF."}
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:464:            <button
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:466:              onClick={() => setIsCategoryMenuOpen(true)}
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:513:                    <button
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:516:                      onClick={() => setCategory(item.id)}
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:551:              <button
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:553:                onClick={() => {
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:713:                          ↓ {isTurkish ? "İndir" : "Download"}
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:717:                          {isTurkish ? "PDF Yakında" : "PDF Soon"}
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:728:                            ? "Logolu PDF"
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:729:                            : "Branded PDF"}
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:735:                            ? "Logolu PDF Yakında"
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:736:                            : "Branded PDF Soon"}
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:790:          <button
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:793:            onClick={() => setIsCategoryMenuOpen(false)}
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:808:              <button
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:810:                onClick={() => setIsCategoryMenuOpen(false)}
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:829:                  <button
+app/[locale]/toolbox/ToolboxLibraryClient.tsx:832:                    onClick={() => {
+app/[locale]/toolbox/[slug]/ToolboxActions.tsx:19:      <button
+app/[locale]/toolbox/[slug]/ToolboxActions.tsx:21:        onClick={() => window.print()}
+app/[locale]/toolbox/[slug]/page.tsx:299:              printLabel={isTurkish ? "Yazdır / PDF" : "Print / PDF"}
+app/[locale]/faq/page.tsx:88:                q: "PDF ve doküman oluşturabilir miyim?",
+app/[locale]/faq/page.tsx:89:                a: "SERNEM'in desteklenen araçlarında profesyonel doküman ve PDF çıktıları oluşturulabilir. Kullanılabilir çıktı seçenekleri kullanılan araca ve üyelik seviyesine göre değişebilir.",
+app/[locale]/faq/page.tsx:177:                q: "Can I generate PDFs and documents?",
+app/[locale]/faq/page.tsx:178:                a: "Supported SERNEM tools can provide professional document and PDF outputs. Available output options may vary depending on the tool and membership level.",
+app/[locale]/admin/features/FeatureFlagsClient.tsx:181:                <button
+app/[locale]/admin/features/FeatureFlagsClient.tsx:184:                  onClick={() => toggleFlag(flag)}
+app/[locale]/admin/settings/PlatformSettingsClient.tsx:72:              ? "Kaydetme başarısız."
+app/[locale]/admin/settings/PlatformSettingsClient.tsx:73:              : "Save failed."
+app/[locale]/admin/settings/PlatformSettingsClient.tsx:268:          <button
+app/[locale]/admin/settings/PlatformSettingsClient.tsx:270:            onClick={() =>
+app/[locale]/admin/settings/PlatformSettingsClient.tsx:296:        <button
+app/[locale]/admin/settings/PlatformSettingsClient.tsx:297:          type="submit"
+app/[locale]/admin/settings/PlatformSettingsClient.tsx:306:              ? "Ayarları Kaydet"
+app/[locale]/admin/settings/PlatformSettingsClient.tsx:307:              : "Save Settings"}
+app/[locale]/admin/users/[id]/page.tsx:400:              <button
+app/[locale]/admin/users/[id]/page.tsx:401:                type="submit"
+app/[locale]/admin/users/[id]/page.tsx:404:                💾 {isTurkish ? "Değişiklikleri Kaydet" : "Save Changes"}
+app/[locale]/admin/page.tsx:137:      "Premium Downloads",
+app/[locale]/admin/page.tsx:309:                  "👑 Premium Downloads",
+app/[locale]/admin/content/ContentManagerClient.tsx:182:              ["download", "Download"],
+app/[locale]/admin/content/ContentManagerClient.tsx:184:              <button
+app/[locale]/admin/content/ContentManagerClient.tsx:187:                onClick={() =>
+app/[locale]/admin/content/ContentManagerClient.tsx:335:                      <button
+app/[locale]/admin/content/ContentManagerClient.tsx:338:                        onClick={() =>
+app/[locale]/admin/content/page.tsx:177:      content_type: "Download",
+app/[locale]/posters/PosterLibraryClient.tsx:110:                  ? "Yazdırmaya hazır profesyonel HSE posterlerini A4 veya A3 formatında görüntüleyin ve PDF olarak kaydedin."
+app/[locale]/posters/PosterLibraryClient.tsx:111:                  : "View print-ready professional HSE posters in A4 or A3 format and save them as PDF."}
+app/[locale]/posters/PosterLibraryClient.tsx:115:                {["⬇ Download A4", "⬇ Download A3", "PDF Included", "TR + EN"].map(
+app/[locale]/posters/PosterLibraryClient.tsx:170:                    <button
+app/[locale]/posters/PosterLibraryClient.tsx:173:                      onClick={() => setCategory(item.id)}
+app/[locale]/posters/PosterLibraryClient.tsx:204:                  <button
+app/[locale]/posters/PosterLibraryClient.tsx:206:                    onClick={() => {
+app/[locale]/posters/PosterLibraryClient.tsx:356:    📄 PDF
+app/[locale]/posters/PosterLibraryClient.tsx:372:                            {isPremium ? "🔒 A4 PDF" : "A4 PDF"}
+app/[locale]/posters/PosterLibraryClient.tsx:383:                            {isPremium ? "👑 Kilidi Aç" : "A3 PDF"}
+app/[locale]/dashboard/RiskAssessmentActions.tsx:71:    <button
+app/[locale]/dashboard/RiskAssessmentActions.tsx:73:      onClick={handleDelete}
+app/[locale]/dashboard/page.tsx:32:    en: "Saved resources",
+app/[locale]/dashboard/page.tsx:38:    en: "Downloads",
+app/[locale]/dashboard/page.tsx:39:    tr: "İndirmeler",
+app/[locale]/dashboard/page.tsx:70:    enTitle: "Download resources",
+app/[locale]/dashboard/page.tsx:272:            <button
+app/[locale]/dashboard/page.tsx:291:                {isTurkish ? "Risk Analizlerim" : "My Risk Assessments"}
+app/[locale]/dashboard/page.tsx:295:                  ? "Kaydettiğiniz profesyonel HIRARC değerlendirmelerini görüntüleyin."
+app/[locale]/dashboard/page.tsx:304:              {isTurkish ? "+ Yeni Risk Analizi" : "+ New Risk Assessment"}
+app/[locale]/dashboard/page.tsx:326:                              (isTurkish ? "Risk Analizi" : "Risk Assessment")}
+app/[locale]/dashboard/page.tsx:363:                          {isTurkish ? "Analizi Aç" : "Open Assessment"}
+app/[locale]/dashboard/LogoutButton.tsx:23:    <button
+app/[locale]/dashboard/LogoutButton.tsx:25:      onClick={handleLogout}
+app/[locale]/dashboard/CompanyBranding.tsx:268:              <p>✓ {isTurkish ? "Otomatik PDF markalama" : "Automatic PDF branding"}</p>
+app/[locale]/dashboard/CompanyBranding.tsx:424:              <button
+app/[locale]/dashboard/CompanyBranding.tsx:426:                onClick={handleRemove}
+app/[locale]/dashboard/CompanyBranding.tsx:450:                ? "Yüklediğiniz logo sonraki aşamada premium Toolbox Talk PDF'lerine otomatik olarak eklenecek."
+app/[locale]/dashboard/CompanyBranding.tsx:451:                : "Your uploaded logo will be automatically added to premium Toolbox Talk PDFs in the next stage."}
+app/[locale]/about/page.tsx:57:          "Profesyonel PDF ve doküman çıktıları",
+app/[locale]/about/page.tsx:93:          "Professional PDF and document outputs",
+app/[locale]/page.tsx:18:  Download,
+app/[locale]/page.tsx:408:                    ? "Risk Analizi Oluştur"
+app/[locale]/page.tsx:458:                        ? "Risk Analizi"
+app/[locale]/page.tsx:533:                      ? "Analiz oluşturun, hazır doküman yükleyin, rehberlere ulaşın ve HSE araçlarını tek merkezden kullanın."
+app/[locale]/page.tsx:631:                ? "Analizden dokümantasyona, saha kontrollerinden profesyonel rehberliğe kadar SERNEM'in temel araçlarına tek çalışma alanından ulaşın."
+app/[locale]/page.tsx:641:                  ? "Profesyonel Risk Analizi"
+app/[locale]/page.tsx:653:                  ? "20 hazır çalışma yöntemini proje bilgilerinize göre özelleştirin ve PDF oluşturun."
+app/[locale]/page.tsx:654:                  : "Customize 20 ready work methods for your project and generate professional PDFs.",
+app/[locale]/page.tsx:663:                  : "Analyze field questions with an HSE-focused knowledge base and access relevant sources.",
+app/[locale]/page.tsx:704:                icon: Download,
+app/[locale]/page.tsx:780:                  ? "Analizler, dokümanlar, rehberler ve saha kaynakları tek merkezde."
+app/[locale]/register/RegisterForm.tsx:149:      <button
+app/[locale]/register/RegisterForm.tsx:150:        type="submit"
+app/[locale]/login/LoginForm.tsx:105:      <button
+app/[locale]/login/LoginForm.tsx:106:        type="submit"
+app/[locale]/tools/trir/page.tsx:19:    ? "TRIR değerini kaydedilebilir vaka sayısı ve toplam çalışma saatlerine göre hesaplayın. Formül, açıklama, yorumlama rehberi ve profesyonel PDF raporu."
+app/[locale]/tools/trir/page.tsx:20:    : "Calculate Total Recordable Incident Rate using recordable cases and total hours worked. Includes formula, interpretation guidance and professional PDF reporting.";
+app/[locale]/tools/ltifr/page.tsx:19:    ? "LTIFR değerini kayıp zamanlı yaralanma sayısı ve toplam çalışma saatlerine göre hesaplayın. Formül, açıklama, yorumlama rehberi ve profesyonel PDF raporu."
+app/[locale]/tools/ltifr/page.tsx:20:    : "Calculate Lost Time Injury Frequency Rate using lost time injuries and total hours worked. Includes formula, interpretation guidance and professional PDF reporting.";
+app/[locale]/tools/quick-risk-assessment/layout.tsx:15:    ? "Risk Değerlendirmesi Oluşturucu – Profesyonel İSG Risk Analizi | SERNEM"
+app/[locale]/tools/quick-risk-assessment/page.tsx:53:  const [savedAssessmentId, setSavedAssessmentId] = useState<string | null>(null);
+app/[locale]/tools/quick-risk-assessment/page.tsx:55:  const [saveAssessmentMessage, setSaveAssessmentMessage] = useState("");
+app/[locale]/tools/quick-risk-assessment/page.tsx:138:  const loadSavedAssessment = async () => {
+app/[locale]/tools/quick-risk-assessment/page.tsx:161:      setSaveAssessmentMessage("Kayıtlı risk analizi yüklenemedi.");
+app/[locale]/tools/quick-risk-assessment/page.tsx:187:    setSavedAssessmentId(data.id);
+app/[locale]/tools/quick-risk-assessment/page.tsx:188:    setSaveAssessmentMessage("Kayıtlı risk analizi yüklendi.");
+app/[locale]/tools/quick-risk-assessment/page.tsx:190:    console.log("✅ Saved risk assessment loaded:", data.id);
+app/[locale]/tools/quick-risk-assessment/page.tsx:193:  loadSavedAssessment();
+app/[locale]/tools/quick-risk-assessment/page.tsx:199:    setSaveAssessmentMessage("");
+app/[locale]/tools/quick-risk-assessment/page.tsx:208:        setSaveAssessmentMessage(
+app/[locale]/tools/quick-risk-assessment/page.tsx:245:        setSaveAssessmentMessage("Risk analizi güncellendi.");
+app/[locale]/tools/quick-risk-assessment/page.tsx:255:        setSavedAssessmentId(data.id);
+app/[locale]/tools/quick-risk-assessment/page.tsx:256:        setSaveAssessmentMessage("Risk analizi kaydedildi.");
+app/[locale]/tools/quick-risk-assessment/page.tsx:260:      setSaveAssessmentMessage("Risk analizi kaydedilemedi.");
+app/[locale]/tools/quick-risk-assessment/page.tsx:817:              ? "Kurumsal risk değerlendirmesi ve PDF çıktısında kullanılacak ek bilgiler."
+app/[locale]/tools/quick-risk-assessment/page.tsx:818:              : "Additional information used in the corporate risk assessment and PDF output."}
+app/[locale]/tools/quick-risk-assessment/page.tsx:937:                  ? "Hazır Risk Analizi Kütüphanesi"
+app/[locale]/tools/quick-risk-assessment/page.tsx:1052:              <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1054:                onClick={() => {
+app/[locale]/tools/quick-risk-assessment/page.tsx:1111:            <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1113:              onClick={loadLibraryActivity}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1124:                {isTurkish ? "Aktarılıyor..." : "Loading..."}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1127:              <>✓ {isTurkish ? "Aktarıldı" : "Loaded"}</>
+app/[locale]/tools/quick-risk-assessment/page.tsx:1132:                  ? `${selectedLibraryRiskIndexes.length} Riski Analize Aktar`
+app/[locale]/tools/quick-risk-assessment/page.tsx:1161:                <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1163:                  onClick={selectAllLibraryRisks}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1169:                <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1171:                  onClick={clearLibraryRiskSelection}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1187:                  <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1190:                    onClick={() => toggleLibraryRisk(index)}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1279:            <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1281:              onClick={handlePrintRiskAssessment}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1289:                {isTurkish ? "PDF / Yazdır" : "PDF / Print"}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1298:          <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1300:            onClick={saveRiskAssessment}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1309:                ? "💾 Analizi Kaydet"
+app/[locale]/tools/quick-risk-assessment/page.tsx:1310:                : "💾 Save Assessment"}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1313:            <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1315:              onClick={addRiskItem}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1380:                    <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1382:                      onClick={() => duplicateRiskItem(item.id)}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1388:                    <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1390:                      onClick={() => removeRiskItem(item.id)}
+app/[locale]/tools/quick-risk-assessment/page.tsx:1750:          <button
+app/[locale]/tools/quick-risk-assessment/page.tsx:1752:            onClick={addRiskItem}
+app/[locale]/tools/page.tsx:57:      ? "Hızlı Risk Analizi"
+app/[locale]/tools/page.tsx:68:        ? "Method Statement Oluşturucu"
+app/[locale]/tools/page.tsx:71:        ? "20 hazır profesyonel çalışma yöntemi şablonunu düzenleyin ve sahaya hazır PDF dokümanları oluşturun."
+app/[locale]/tools/page.tsx:72:        : "Customize 20 ready-to-use professional work method templates and generate site-ready PDF documents.",
+app/[locale]/tools/method-statement/layout.tsx:15:    ? "Method Statement Oluşturucu – Güvenli Çalışma Metodu | SERNEM"
+app/[locale]/tools/method-statement/MethodStatementPrint.tsx:1846:           * blank PDF pages.
+app/[locale]/tools/method-statement/page.tsx:3315:          ? "Aktarma / karıştırma işlemini güvenli şekilde gerçekleştir."
+app/[locale]/tools/method-statement/page.tsx:3583:                  ? "Profesyonel Method Statement Oluşturucu"
+app/[locale]/tools/method-statement/page.tsx:3595:              label={isTurkish ? "PDF / Yazdır" : "PDF / Print"}
+app/[locale]/tools/method-statement/page.tsx:3596:              onClick={() => window.print()}
+app/[locale]/tools/method-statement/page.tsx:3633:            <button
+app/[locale]/tools/method-statement/page.tsx:3635:              onClick={loadWorkingAtHeightTemplate}
+app/[locale]/tools/method-statement/page.tsx:3667:            <button
+app/[locale]/tools/method-statement/page.tsx:3669:              onClick={loadHotWorkTemplate}
+app/[locale]/tools/method-statement/page.tsx:3697:            <button
+app/[locale]/tools/method-statement/page.tsx:3699:              onClick={loadConfinedSpaceTemplate}
+app/[locale]/tools/method-statement/page.tsx:3731:            <button
+app/[locale]/tools/method-statement/page.tsx:3733:              onClick={loadLotoTemplate}
+app/[locale]/tools/method-statement/page.tsx:3762:            <button
+app/[locale]/tools/method-statement/page.tsx:3764:              onClick={loadLiftingTemplate}
+app/[locale]/tools/method-statement/page.tsx:3795:            <button
+app/[locale]/tools/method-statement/page.tsx:3797:              onClick={loadScaffoldingTemplate}
+app/[locale]/tools/method-statement/page.tsx:3828:            <button
+app/[locale]/tools/method-statement/page.tsx:3830:              onClick={loadExcavationTemplate}
+app/[locale]/tools/method-statement/page.tsx:3859:            <button
+app/[locale]/tools/method-statement/page.tsx:3861:              onClick={loadElectricalTemplate}
+app/[locale]/tools/method-statement/page.tsx:3890:            <button
+app/[locale]/tools/method-statement/page.tsx:3892:              onClick={loadGrindingCuttingTemplate}
+app/[locale]/tools/method-statement/page.tsx:3923:            <button
+app/[locale]/tools/method-statement/page.tsx:3925:              onClick={loadPipingTemplate}
+app/[locale]/tools/method-statement/page.tsx:3954:            <button
+app/[locale]/tools/method-statement/page.tsx:3956:              onClick={loadHydrotestTemplate}
+app/[locale]/tools/method-statement/page.tsx:3987:            <button
+app/[locale]/tools/method-statement/page.tsx:3989:              onClick={loadAirBlowingTemplate}
+app/[locale]/tools/method-statement/page.tsx:4018:            <button
+app/[locale]/tools/method-statement/page.tsx:4020:              onClick={loadPaintingCoatingTemplate}
+app/[locale]/tools/method-statement/page.tsx:4051:            <button
+app/[locale]/tools/method-statement/page.tsx:4053:              onClick={loadInsulationTemplate}
+app/[locale]/tools/method-statement/page.tsx:4084:            <button
+app/[locale]/tools/method-statement/page.tsx:4086:              onClick={loadMobileEquipmentTemplate}
+app/[locale]/tools/method-statement/page.tsx:4117:            <button
+app/[locale]/tools/method-statement/page.tsx:4119:              onClick={loadLadderUseTemplate}
+app/[locale]/tools/method-statement/page.tsx:4145:            <button
+app/[locale]/tools/method-statement/page.tsx:4147:              onClick={loadMewpTemplate}
+app/[locale]/tools/method-statement/page.tsx:4173:            <button
+app/[locale]/tools/method-statement/page.tsx:4175:              onClick={loadManualHandlingTemplate}
+app/[locale]/tools/method-statement/page.tsx:4201:            <button
+app/[locale]/tools/method-statement/page.tsx:4203:              onClick={loadChemicalHandlingTemplate}
+app/[locale]/tools/method-statement/page.tsx:4234:            <button
+app/[locale]/tools/method-statement/page.tsx:4236:              onClick={loadCompressedGasTemplate}
+app/[locale]/tools/method-statement/page.tsx:4349:            <button
+app/[locale]/tools/method-statement/page.tsx:4351:              onClick={addMethodStep}
+app/[locale]/tools/method-statement/page.tsx:4369:                  <button
+app/[locale]/tools/method-statement/page.tsx:4371:                    onClick={() => removeMethodStep(item.id)}
+app/[locale]/forgot-password/ForgotPasswordForm.tsx:87:      <button
+app/[locale]/forgot-password/ForgotPasswordForm.tsx:88:        type="submit"
+app/[locale]/safety-signs/SafetySignsClient.tsx:108:              <button
+app/[locale]/safety-signs/SafetySignsClient.tsx:111:                onClick={() =>
+app/[locale]/safety-signs/SafetySignsClient.tsx:164:                    A4 PDF
+app/[locale]/safety-signs/SafetySignsClient.tsx:168:                    A3 PDF
+app/[locale]/safety-signs/SafetySignsClient.tsx:180:                  👁 {isTurkish ? "Önizle ve İndir" : "Preview & Download"}
+app/[locale]/safety-signs/[slug]/page.tsx:65:              <button
+app/[locale]/safety-signs/[slug]/page.tsx:69:                A4 PDF
+app/[locale]/safety-signs/[slug]/page.tsx:72:              <button
+app/[locale]/safety-signs/[slug]/page.tsx:76:                A3 PDF
+app/[locale]/safety-signs/[slug]/page.tsx:79:              <button
+app/[locale]/safety-signs/[slug]/page.tsx:89:                ? "İndirme ve yazdırma işlevlerini sonraki adımda levha motoruna bağlayacağız."
+app/[locale]/safety-signs/[slug]/page.tsx:90:                : "Download and print actions will be connected to the sign engine in the next step."}
+app/[locale]/downloads/DownloadsClient.tsx:99:function DownloadIcon() {
+app/[locale]/downloads/DownloadsClient.tsx:137:export default function DownloadsClient() {
+app/[locale]/downloads/DownloadsClient.tsx:299:      return isTurkish ? "DOCX İndir" : "Download DOCX";
+app/[locale]/downloads/DownloadsClient.tsx:302:    return isTurkish ? "İndir" : "Download";
+app/[locale]/downloads/DownloadsClient.tsx:377:                <button
+app/[locale]/downloads/DownloadsClient.tsx:380:                  onClick={() =>
+app/[locale]/downloads/DownloadsClient.tsx:505:              <button
+app/[locale]/downloads/DownloadsClient.tsx:507:                onClick={() =>
+app/[locale]/downloads/DownloadsClient.tsx:579:                          <DownloadIcon />
+app/[locale]/downloads/DownloadsClient.tsx:581:                            ? "İndir"
+app/[locale]/downloads/DownloadsClient.tsx:582:                            : "Download"}
+app/[locale]/downloads/DownloadsClient.tsx:698:                              <DownloadIcon />
+app/[locale]/downloads/DownloadsClient.tsx:701:                                  ? "İndir"
+app/[locale]/downloads/DownloadsClient.tsx:702:                                  : "Download"}
+app/[locale]/downloads/DownloadsClient.tsx:731:              <button
+app/[locale]/downloads/DownloadsClient.tsx:733:                onClick={() => {
+app/[locale]/downloads/page.tsx:3:import DownloadsClient from "./DownloadsClient";
+app/[locale]/downloads/page.tsx:11:export default async function DownloadsPage({
+app/[locale]/downloads/page.tsx:31:      "Premium Downloads feature flag could not be read:",
+app/[locale]/downloads/page.tsx:37:  // DB veya kayıt problemi olursa çalışan Downloads
+app/[locale]/downloads/page.tsx:67:                ? "İndirme Merkezi şu anda kullanılamıyor"
+app/[locale]/downloads/page.tsx:68:                : "Download Center is currently unavailable"}
+app/[locale]/downloads/page.tsx:80:                ? "İndirmeler geçici olarak kapalı"
+app/[locale]/downloads/page.tsx:81:                : "Downloads temporarily disabled"}
+app/[locale]/downloads/page.tsx:100:  return <DownloadsClient />;
+app/[locale]/ai-assistant/AIAssistant.tsx:390:          <button
+app/[locale]/ai-assistant/AIAssistant.tsx:392:            onClick={startNewChat}
+app/[locale]/ai-assistant/AIAssistant.tsx:433:                  <button
+app/[locale]/ai-assistant/AIAssistant.tsx:436:                    onClick={() => void askAI(item.question)}
+app/[locale]/ai-assistant/AIAssistant.tsx:502:              <button
+app/[locale]/ai-assistant/AIAssistant.tsx:504:                onClick={startNewChat}
+app/[locale]/ai-assistant/AIAssistant.tsx:612:                          <button
+app/[locale]/ai-assistant/AIAssistant.tsx:613:                            type="submit"
+app/[locale]/ai-assistant/AIAssistant.tsx:726:                        <button
+app/[locale]/ai-assistant/AIAssistant.tsx:730:                          onClick={() => void askAI(item.question)}
+app/[locale]/ai-assistant/AIAssistant.tsx:801:                            <button
+app/[locale]/ai-assistant/AIAssistant.tsx:803:                              onClick={() => void copyMessage(message)}
+app/[locale]/ai-assistant/AIAssistant.tsx:1116:                  <button
+app/[locale]/ai-assistant/AIAssistant.tsx:1117:                    type="submit"
+app/[locale]/ai-assistant/page.backup.tsx:246:          <button
+app/[locale]/ai-assistant/page.backup.tsx:248:            onClick={startNewChat}
+app/[locale]/ai-assistant/page.backup.tsx:262:                <button
+app/[locale]/ai-assistant/page.backup.tsx:265:                  onClick={() => void askAI(item.question)}
+app/[locale]/ai-assistant/page.backup.tsx:316:              <button
+app/[locale]/ai-assistant/page.backup.tsx:318:                onClick={startNewChat}
+app/[locale]/ai-assistant/page.backup.tsx:368:                      <button
+app/[locale]/ai-assistant/page.backup.tsx:372:                        onClick={() => void askAI(item.question)}
+app/[locale]/ai-assistant/page.backup.tsx:432:                            <button
+app/[locale]/ai-assistant/page.backup.tsx:434:                              onClick={() => void copyMessage(message)}
+app/[locale]/ai-assistant/page.backup.tsx:632:                  <button
+app/[locale]/ai-assistant/page.backup.tsx:633:                    type="submit"
+app/[locale]/upgrade/page.tsx:124:      category: isTurkish ? "Premium İndirme" : "Premium Download",
+app/[locale]/upgrade/page.tsx:126:        ? "Profesyonel İndirilebilir Kaynak"
+app/[locale]/upgrade/page.tsx:127:        : "Professional Downloadable Resource",
+app/[locale]/upgrade/page.tsx:443:              <button
+app/[locale]/components/LanguageSwitcher.tsx:25:      <button
+app/[locale]/components/LanguageSwitcher.tsx:27:        onClick={() => changeLocale("tr")}
+app/[locale]/components/LanguageSwitcher.tsx:39:      <button
+app/[locale]/components/LanguageSwitcher.tsx:41:        onClick={() => changeLocale("en")}
+app/[locale]/components/ProductShowcase.tsx:91:              ? "Analiz oluşturun, profesyonel doküman hazırlayın ve saha sorularınızı kaynaklı HSE rehberliğiyle çözün."
+app/[locale]/components/ProductShowcase.tsx:110:                {tr ? "Profesyonel Risk Analizi" : "Professional Risk Assessment"}
+app/[locale]/components/ProductShowcase.tsx:285:                  "PDF",
+app/[locale]/components/ProductShowcase.tsx:324:                  : "Analyze site questions with an HSE focus. See the risk summary, critical controls, PPE requirements and relevant sources in one response."}
+app/[locale]/components/ProductExplorer.tsx:66:    titleTr: "Risk Analizi",
+app/[locale]/components/ProductExplorer.tsx:103:        value: "PDF",
+app/[locale]/components/ProductExplorer.tsx:116:    subtitleTr: "Çalışma Yöntemi · PDF",
+app/[locale]/components/ProductExplorer.tsx:117:    subtitleEn: "Work Method · PDF",
+app/[locale]/components/ProductExplorer.tsx:137:        value: "PDF",
+app/[locale]/components/ProductExplorer.tsx:219:      "Analyze field questions and receive risk summaries, controls, PPE, permits and relevant HSE sources.",
+app/[locale]/components/ProductExplorer.tsx:265:      "Analizlerinizi, kayıtlarınızı, indirmelerinizi ve HSE çalışmalarınızı tek merkezden yönetin.",
+app/[locale]/components/ProductExplorer.tsx:391:        value: "PDF",
+app/[locale]/components/ProductExplorer.tsx:513:        <button
+app/[locale]/components/ProductExplorer.tsx:515:          onClick={onClose}
+app/[locale]/components/ProductExplorer.tsx:554:                  <button
+app/[locale]/components/ProductExplorer.tsx:559:                    onClick={() => setActiveId(product.id)}
+app/[locale]/components/ProductExplorer.tsx:717:                        onClick={onClose}
+app/[locale]/components/ProductExplorer.tsx:812:          "PDF raporlama",
+app/[locale]/components/ProductExplorer.tsx:819:          "PDF reporting",
+app/[locale]/components/ProductExplorer.tsx:827:          "PDF çıktısı",
+app/[locale]/components/ProductExplorer.tsx:834:          "PDF export",
+app/[locale]/components/ProductExplorer.tsx:877:          "Saved work",
+app/[locale]/components/ProductExplorer.tsx:1233:              ["12", "Risk Analizleri"],
+app/[locale]/components/ProductExplorer.tsx:1235:              ["46", "İndirmeler"],
+app/[locale]/components/ProductExplorer.tsx:1241:              ["46", "Downloads"],
+app/[locale]/components/ProductExplorer.tsx:1412:              PDF
+app/[locale]/components/LocalizedFeaturedTools.tsx:131:        ? ["Etkileşim matrisi", "Risk değerlendirmesi", "PDF raporu"]
+app/[locale]/components/LocalizedFeaturedTools.tsx:132:        : ["Interaction matrix", "Risk assessment", "PDF report"],
+app/[locale]/components/LocalizedNavbar.tsx:88:      title: isTurkish ? "Risk Analizi" : "Risk Assessment",
+app/[locale]/components/LocalizedNavbar.tsx:184:          onClick={closeMenu}
+app/[locale]/components/LocalizedNavbar.tsx:205:              onClick={closeDropdowns}
+app/[locale]/components/LocalizedNavbar.tsx:214:            <button
+app/[locale]/components/LocalizedNavbar.tsx:216:              onClick={() => {
+app/[locale]/components/LocalizedNavbar.tsx:252:                      ? "Analiz, dokümantasyon ve performans araçları."
+app/[locale]/components/LocalizedNavbar.tsx:263:                        onClick={closeDropdowns}
+app/[locale]/components/LocalizedNavbar.tsx:287:            <button
+app/[locale]/components/LocalizedNavbar.tsx:289:              onClick={() => {
+app/[locale]/components/LocalizedNavbar.tsx:323:                      onClick={closeDropdowns}
+app/[locale]/components/LocalizedNavbar.tsx:346:            onClick={closeDropdowns}
+app/[locale]/components/LocalizedNavbar.tsx:364:                      onClick={closeDropdowns}
+app/[locale]/components/LocalizedNavbar.tsx:373:                    onClick={closeDropdowns}
+app/[locale]/components/LocalizedNavbar.tsx:383:                    onClick={closeDropdowns}
+app/[locale]/components/LocalizedNavbar.tsx:392:                    onClick={closeDropdowns}
+app/[locale]/components/LocalizedNavbar.tsx:406:                onClick={closeDropdowns}
+app/[locale]/components/LocalizedNavbar.tsx:412:              <button
+app/[locale]/components/LocalizedNavbar.tsx:414:                onClick={handleSignOut}
+app/[locale]/components/LocalizedNavbar.tsx:424:              onClick={closeDropdowns}
+app/[locale]/components/LocalizedNavbar.tsx:432:          <button
+app/[locale]/components/LocalizedNavbar.tsx:434:            onClick={() => {
+app/tools/trir/page.tsx:3:import jsPDF from "jspdf";
+app/tools/trir/page.tsx:183:    const doc = new jsPDF({
+app/tools/trir/page.tsx:200:        throw new Error(`PDF font could not be loaded: ${url}`);
+app/tools/trir/page.tsx:226:      "SERNEMPDF",
+app/tools/trir/page.tsx:233:      "SERNEMPDF",
+app/tools/trir/page.tsx:259:        "SERNEMPDF",
+app/tools/trir/page.tsx:1432:              <button
+app/tools/trir/page.tsx:1434:                onClick={calculate}
+app/tools/trir/page.tsx:1442:              <button
+app/tools/trir/page.tsx:1444:                onClick={clear}
+app/tools/trir/page.tsx:1582:              <button
+app/tools/trir/page.tsx:1584:                onClick={downloadTRIRPdf}
+app/tools/trir/page.tsx:1596:                        ? "PROFESYONEL TRIR RAPORU (PDF)"
+app/tools/trir/page.tsx:1597:                        : "PROFESSIONAL TRIR REPORT (PDF)"}
+app/tools/ltifr/page.tsx:4:import jsPDF from "jspdf";
+app/tools/ltifr/page.tsx:196:    const doc = new jsPDF({
+app/tools/ltifr/page.tsx:213:        throw new Error(`PDF font could not be loaded: ${url}`);
+app/tools/ltifr/page.tsx:239:      "SERNEMPDF",
+app/tools/ltifr/page.tsx:246:      "SERNEMPDF",
+app/tools/ltifr/page.tsx:277:        "SERNEMPDF",
+app/tools/ltifr/page.tsx:712:    // jsPDF does not provide arc(); use concentric circles instead.
+app/tools/ltifr/page.tsx:1479:              <button
+app/tools/ltifr/page.tsx:1481:                onClick={calculate}
+app/tools/ltifr/page.tsx:1491:              <button
+app/tools/ltifr/page.tsx:1493:                onClick={clearCalculator}
+app/tools/ltifr/page.tsx:1672:              <button
+app/tools/ltifr/page.tsx:1674:                onClick={downloadLTIFRPdf}
+app/tools/ltifr/page.tsx:1686:                        ? "PROFESYONEL LTIFR RAPORU (PDF)"
+app/tools/ltifr/page.tsx:1687:                        : "PROFESSIONAL LTIFR REPORT (PDF)"}
+app/tools/ltifr/page.tsx:1837:                  : "Analyze trends over time, not just a single value.",
+app/tools/severity-rate/page.tsx:329:                <button
+app/tools/severity-rate/page.tsx:331:                  onClick={clearCalculator}
+app/tools/severity-rate/page.tsx:338:                <button
+app/tools/severity-rate/page.tsx:340:                  onClick={() => {}}
+app/tools/severity-rate/page.tsx:472:                    <button
+app/tools/severity-rate/page.tsx:474:                      onClick={copyResult}
+app/tools/severity-rate/page.tsx:705:          <button
+app/tools/severity-rate/page.tsx:707:            onClick={() => setInfoOpen((current) => !current)}
+app/tools/severity-rate/page.tsx:752:                  <button
+app/tools/severity-rate/page.tsx:754:                    onClick={() => setInfoOpen(false)}
+app/ai-assistant/page.tsx:118:          <button
+app/ai-assistant/page.tsx:120:            onClick={askAI}
+app/ai-assistant/page.tsx:126:                ? "Analiz ediliyor..."
+app/components/RiskMatrix.tsx:3:import jsPDF from "jspdf";
+app/components/RiskMatrix.tsx:91:    downloadPdf: isTurkish ? "📄 PDF İndir" : "📄 Download PDF",
+app/components/RiskMatrix.tsx:118:  // RISK MATRIX PDF V3 FINAL
+app/components/RiskMatrix.tsx:119:  const downloadPDF = async () => {
+app/components/RiskMatrix.tsx:120:    const doc = new jsPDF({
+app/components/RiskMatrix.tsx:129:    // SERNEM PDF Unicode fonts
+app/components/RiskMatrix.tsx:134:        throw new Error(`PDF font could not be loaded: ${url}`);
+app/components/RiskMatrix.tsx:160:      "SERNEMPDF",
+app/components/RiskMatrix.tsx:167:      "SERNEMPDF",
+app/components/RiskMatrix.tsx:203:      doc.setFont("SERNEMPDF", bold ? "bold" : "normal");
+app/components/RiskMatrix.tsx:329:    doc.setFont("SERNEMPDF", "normal");
+app/components/RiskMatrix.tsx:780:              <button
+app/components/RiskMatrix.tsx:782:                onClick={downloadPDF}
+app/components/RiskMatrix.tsx:787:                  ? "PROFESYONEL RİSK RAPORU (PDF)"
+app/components/RiskMatrix.tsx:788:                  : "PROFESSIONAL RISK REPORT (PDF)"}
+app/components/RiskMatrix.tsx:794:                  : "Generate and download the detailed risk report."}
+app/components/SimopsPlanner.tsx:4:import { jsPDF } from "jspdf";
+app/components/SimopsPlanner.tsx:959:type SimopsSavedRecord = {
+app/components/SimopsPlanner.tsx:1013:  const [saveLoading, setSaveLoading] = useState(false);
+app/components/SimopsPlanner.tsx:1014:  const [savedRecords, setSavedRecords] = useState<SimopsSavedRecord[]>([]);
+app/components/SimopsPlanner.tsx:1015:  const [saveMessage, setSaveMessage] = useState("");
+app/components/SimopsPlanner.tsx:1272:      setSaveMessage(
+app/components/SimopsPlanner.tsx:1280:    setSaveLoading(true);
+app/components/SimopsPlanner.tsx:1281:    setSaveMessage("");
+app/components/SimopsPlanner.tsx:1337:        setSaveMessage(
+app/components/SimopsPlanner.tsx:1353:        setSaveMessage(
+app/components/SimopsPlanner.tsx:1388:      setSaveMessage(`❌ ${readableError}`);
+app/components/SimopsPlanner.tsx:1390:      setSaveLoading(false);
+app/components/SimopsPlanner.tsx:1409:      setSavedRecords((data ?? []) as SimopsSavedRecord[]);
+app/components/SimopsPlanner.tsx:1412:      setSavedRecords([]);
+app/components/SimopsPlanner.tsx:1418:  function openSavedAssessment(record: SimopsSavedRecord) {
+app/components/SimopsPlanner.tsx:1460:    setSaveMessage(
+app/components/SimopsPlanner.tsx:1469:  async function deleteSavedAssessment(id: string) {
+app/components/SimopsPlanner.tsx:1488:    setSavedRecords((records) =>
+app/components/SimopsPlanner.tsx:1499:    setSaveMessage("");
+app/components/SimopsPlanner.tsx:1532:    const doc = new jsPDF({
+app/components/SimopsPlanner.tsx:2215:            <button
+app/components/SimopsPlanner.tsx:2217:              onClick={startNewAssessment}
+app/components/SimopsPlanner.tsx:2223:            <button
+app/components/SimopsPlanner.tsx:2225:              onClick={loadSimopsHistory}
+app/components/SimopsPlanner.tsx:2231:            <button
+app/components/SimopsPlanner.tsx:2234:              onClick={saveSimopsAssessment}
+app/components/SimopsPlanner.tsx:2246:                    ? "💾 Kaydet"
+app/components/SimopsPlanner.tsx:2247:                    : "💾 Save"}
+app/components/SimopsPlanner.tsx:2250:            <button
+app/components/SimopsPlanner.tsx:2251:              onClick={downloadSimopsPdf}
+app/components/SimopsPlanner.tsx:2255:              📄 {isTurkish ? "SIMOPS Raporu (PDF)" : "Download Report (PDF)"}
+app/components/SimopsPlanner.tsx:2464:                  <button
+app/components/SimopsPlanner.tsx:2467:                    onClick={() => toggleActivity(activity.id)}
+app/components/SimopsPlanner.tsx:2495:              <button
+app/components/SimopsPlanner.tsx:2497:                onClick={() => setSelected([])}
+app/components/SimopsPlanner.tsx:2541:                  <button
+app/components/SimopsPlanner.tsx:2544:                    onClick={() => setSelectedOnly((value) => !value)}
+app/components/SimopsPlanner.tsx:2620:                            <button
+app/components/SimopsPlanner.tsx:2623:                              onClick={() => {
+app/components/SimopsPlanner.tsx:2931:                    <button
+app/components/SimopsPlanner.tsx:2935:                      onClick={() => setDecision(item.id)}
+app/components/SimopsPlanner.tsx:2970:                <button
+app/components/SimopsPlanner.tsx:2972:                  onClick={() => setHseApproved((value) => !value)}
+app/components/SimopsPlanner.tsx:3002:                <button
+app/components/SimopsPlanner.tsx:3004:                  onClick={() =>
+app/components/SimopsPlanner.tsx:3074:                <button
+app/components/SimopsPlanner.tsx:3076:                  onClick={() => {
+app/components/SimopsPlanner.tsx:3105:                    ? "Kaydı açın, düzenleyin, yeniden PDF oluşturun veya silin."
+app/components/SimopsPlanner.tsx:3106:                    : "Open, edit, regenerate the PDF or delete a saved assessment."}
+app/components/SimopsPlanner.tsx:3110:              <button
+app/components/SimopsPlanner.tsx:3112:                onClick={() => setHistoryOpen(false)}
+app/components/SimopsPlanner.tsx:3139:                      <button
+app/components/SimopsPlanner.tsx:3141:                        onClick={() => openSavedAssessment(record)}
+app/components/SimopsPlanner.tsx:3188:                        <button
+app/components/SimopsPlanner.tsx:3190:                          onClick={() => openSavedAssessment(record)}
+app/components/SimopsPlanner.tsx:3196:                        <button
+app/components/SimopsPlanner.tsx:3198:                          onClick={() => deleteSavedAssessment(record.id)}
+app/components/Navbar.tsx:39:            ⬇️ Downloads
+app/components/Navbar.tsx:51:        <button className="rounded-lg bg-blue-600 px-5 py-2 font-semibold text-white transition hover:bg-blue-700">

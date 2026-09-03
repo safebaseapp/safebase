@@ -326,7 +326,7 @@ export default async function LocalizedHomePage({ params }: Props) {
       <div className="safebase-home-scale">
       <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#020817]">
         <div
-          className="absolute inset-0 -z-30 bg-no-repeat bg-cover bg-[position:58%_center] lg:bg-cover lg:bg-[center_52%]"
+          className="absolute inset-0 -z-30 bg-no-repeat bg-[length:auto_76%] bg-[position:58%_0%] lg:bg-cover lg:bg-[center_52%]"
           style={{
             backgroundImage:
               "url('/images/sernem-hse-hero.png')",
@@ -382,7 +382,7 @@ export default async function LocalizedHomePage({ params }: Props) {
                   : "Risk assessments, Method Statements, toolbox talks, checklists, AI guidance and field-ready HSE resources."}
               </p>
 
-              <div className="mt-5 hidden max-w-[650px] grid-cols-2 gap-x-4 gap-y-4 sm:mt-7 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:gap-y-5">
+              <div className="mt-5 grid max-w-[650px] grid-cols-2 gap-x-4 gap-y-4 sm:mt-7 sm:grid-cols-4 sm:gap-x-6 sm:gap-y-5">
                 {[
                   {
                     icon: "◷",
@@ -446,7 +446,7 @@ export default async function LocalizedHomePage({ params }: Props) {
                 </Link>
               </div>
 
-<div className="mt-5 hidden flex-wrap gap-2 sm:flex">
+              <div className="mt-5 hidden flex-wrap gap-2 sm:flex">
                 {[
                   isTurkish ? "✦ AI destekli" : "✦ AI-powered",
                   "◎ TR / EN",

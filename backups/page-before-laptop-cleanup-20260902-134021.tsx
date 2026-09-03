@@ -326,7 +326,7 @@ export default async function LocalizedHomePage({ params }: Props) {
       <div className="safebase-home-scale">
       <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#020817]">
         <div
-          className="absolute inset-0 -z-30 bg-no-repeat bg-cover bg-[position:58%_center] lg:bg-cover lg:bg-[center_52%]"
+          className="absolute inset-0 -z-30 bg-cover bg-[center_65%] bg-no-repeat"
           style={{
             backgroundImage:
               "url('/images/sernem-hse-hero.png')",
@@ -349,20 +349,20 @@ export default async function LocalizedHomePage({ params }: Props) {
           }}
         />
 
-        <div className="mx-auto max-w-[1440px] px-5 pb-5 pt-7 sm:px-6 sm:pb-7 sm:pt-9 lg:px-8 lg:pb-8 lg:pt-10">
+        <div className="mx-auto max-w-[1440px] px-6 pb-7 pt-9 lg:px-8 lg:pb-8 lg:pt-10">
           <div className="grid items-center gap-8 lg:grid-cols-1 xl:gap-12">
             <div className="relative z-10 max-w-[720px]">
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-300 sm:text-sm">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-400 sm:text-sm">
                 {isTurkish
                   ? "DAHA AKILLI HSE. DAHA GÜVENLİ YARIN."
                   : "SMARTER HSE. SAFER TOMORROW."}
               </p>
 
-              <h1 className="mt-5 max-w-[720px] text-[35px] font-black leading-[0.98] tracking-[-0.05em] text-white sm:text-[49px] lg:text-[51px] xl:text-[56px]">
+              <h1 className="mt-5 max-w-[720px] text-[40px] font-black leading-[0.98] tracking-[-0.05em] text-white sm:text-[49px] lg:text-[51px] xl:text-[56px]">
                 {isTurkish ? (
                   <>
                     HSE çalışmalarınızı
-                    <span className="block text-blue-300">
+                    <span className="block text-blue-400">
                       tek platformda yönetin.
                     </span>
                   </>
@@ -376,13 +376,13 @@ export default async function LocalizedHomePage({ params }: Props) {
                 )}
               </h1>
 
-              <p className="mt-4 max-w-[610px] text-[15px] font-medium leading-7 text-slate-300 sm:text-[17px]">
+              <p className="mt-6 max-w-[610px] text-[15px] font-medium leading-7 text-slate-300 sm:text-[17px]">
                 {isTurkish
                   ? "Risk analizleri, Method Statement'lar, toolbox talk içerikleri, kontrol listeleri, AI rehberliği ve sahaya hazır HSE kaynakları."
                   : "Risk assessments, Method Statements, toolbox talks, checklists, AI guidance and field-ready HSE resources."}
               </p>
 
-              <div className="mt-5 hidden max-w-[650px] grid-cols-2 gap-x-4 gap-y-4 sm:mt-7 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:gap-y-5">
+              <div className="mt-7 grid max-w-[650px] grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4">
                 {[
                   {
                     icon: "◷",
@@ -414,14 +414,14 @@ export default async function LocalizedHomePage({ params }: Props) {
                         {item.title}
                       </p>
                     </div>
-                    <p className="mt-2 pl-10 text-[11px] leading-5 text-slate-400">
+                    <p className="mt-2 pl-10 text-[11px] leading-5 text-slate-500">
                       {item.text}
                     </p>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-6 grid grid-cols-2 gap-2 sm:mt-7 sm:flex sm:flex-row sm:flex-wrap sm:gap-3 lg:flex-nowrap">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:flex-nowrap">
                 <Link
                   href={`/${locale}/tools`}
                   className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3.5 text-sm font-black text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-1 hover:bg-blue-500"
@@ -439,14 +439,14 @@ export default async function LocalizedHomePage({ params }: Props) {
 
                 <Link
                   href={`/${locale}/tools/quick-risk-assessment`}
-                  className="col-span-2 inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] sm:col-auto px-5 py-3.5 text-sm font-black text-white transition hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.08]"
+                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-5 py-3.5 text-sm font-black text-white transition hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.08]"
                 >
                   <ShieldCheck size={18} />
                   {isTurkish ? "Risk Analizi Oluştur" : "Build Risk Assessment"}
                 </Link>
               </div>
 
-<div className="mt-5 hidden flex-wrap gap-2 sm:flex">
+              <div className="mt-5 flex flex-wrap gap-2">
                 {[
                   isTurkish ? "✦ AI destekli" : "✦ AI-powered",
                   "◎ TR / EN",
@@ -463,7 +463,7 @@ export default async function LocalizedHomePage({ params }: Props) {
               </div>
             </div>
 
-            <div className="relative mx-auto hidden w-full max-w-[670px] lg:-translate-y-2 lg:block">
+            <div className="relative mx-auto w-full max-w-[670px] lg:-translate-y-2">
               <div className="absolute inset-x-[12%] bottom-[-30px] h-[140px] rounded-full bg-blue-500/20 blur-[80px]" />
 
               <div className="relative">
@@ -492,242 +492,84 @@ export default async function LocalizedHomePage({ params }: Props) {
               </h2>
             </div>
 
-            <div className="relative mt-11 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-  {[
-    {
-      no: "01",
-      short: locale === "tr" ? "RA" : "RA",
-      title: locale === "tr" ? "Risk Analizi" : "Risk Assessment",
-      desc:
-        locale === "tr"
-          ? "Tehlikeleri belirleyin, risk seviyesini değerlendirin."
-          : "Identify hazards and evaluate the level of risk.",
-      type: "risk",
-      dot: "bg-red-500",
-      text: "text-red-400",
-    },
-    {
-      no: "02",
-      short: locale === "tr" ? "ÇY" : "MS",
-      title: locale === "tr" ? "Çalışma Yöntemi" : "Method Statement",
-      desc:
-        locale === "tr"
-          ? "Güvenli çalışma adımlarını ve kontrol tedbirlerini tanımlayın."
-          : "Define safe work steps and control measures.",
-      type: "method",
-      dot: "bg-blue-500",
-      text: "text-blue-400",
-    },
-    {
-      no: "03",
-      short: locale === "tr" ? "TK" : "TB",
-      title: locale === "tr" ? "Toolbox Konuşması" : "Toolbox Talk",
-      desc:
-        locale === "tr"
-          ? "Ekibinizi işe özel riskler ve kontroller hakkında bilgilendirin."
-          : "Brief your team on task-specific risks and controls.",
-      type: "toolbox",
-      dot: "bg-amber-400",
-      text: "text-amber-400",
-    },
-    {
-      no: "04",
-      short: locale === "tr" ? "KL" : "CL",
-      title: locale === "tr" ? "Kontrol Listesi" : "Checklist",
-      desc:
-        locale === "tr"
-          ? "Kontrollerin sahada uygulandığını doğrulayın."
-          : "Inspect and verify controls directly in the field.",
-      type: "checklist",
-      dot: "bg-emerald-400",
-      text: "text-emerald-400",
-    },
-    {
-      no: "05",
-      short: "PDF",
-      title: "PDF",
-      desc:
-        locale === "tr"
-          ? "Profesyonel dokümanınızı oluşturun ve paylaşın."
-          : "Generate and share professional documentation.",
-      type: "pdf",
-      dot: "bg-violet-400",
-      text: "text-violet-400",
-    },
-  ].map((step, index) => (
-    <div
-      key={step.no}
-      className="group relative overflow-visible rounded-2xl border border-white/10 bg-[#07111f]/95 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:bg-[#091625]"
-    >
-      {index < 4 && (
-        <div className="absolute -right-[18px] top-1/2 z-20 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-blue-500/35 bg-[#020817] text-lg font-bold text-blue-400 shadow-[0_0_24px_rgba(59,130,246,0.15)] xl:flex">
-          →
-        </div>
-      )}
-
-      <div className="flex items-center justify-between">
-        <div
-          className={`flex h-11 min-w-11 items-center justify-center rounded-xl border border-blue-500/25 bg-blue-500/10 px-2 text-[11px] font-black tracking-wide ${step.text}`}
-        >
-          {step.short}
-        </div>
-
-        <span className="text-[11px] font-black tracking-[0.22em] text-slate-600">
-          {step.no}
-        </span>
-      </div>
-
-      <div className="mt-5 min-h-[104px] overflow-hidden rounded-xl border border-white/[0.08] bg-[#030b16] p-4 shadow-inner">
-        {step.type === "risk" && (
-          <div>
-            <div className="mb-3 flex items-center justify-between">
-              <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
-                {locale === "tr" ? "Risk Matrisi" : "Risk Matrix"}
-              </span>
-              <span className="rounded bg-red-500/10 px-2 py-0.5 text-[9px] font-bold text-red-400">
-                {locale === "tr" ? "YÜKSEK" : "HIGH"}
-              </span>
-            </div>
-
-            <div className="grid grid-cols-5 gap-1">
+            <div className="mt-8 grid gap-3 lg:grid-cols-5">
               {[
-                "bg-emerald-500/70",
-                "bg-emerald-500/70",
-                "bg-amber-400/75",
-                "bg-orange-500/75",
-                "bg-red-500/75",
-                "bg-emerald-500/70",
-                "bg-amber-400/75",
-                "bg-amber-400/75",
-                "bg-orange-500/75",
-                "bg-red-500/75",
-                "bg-amber-400/75",
-                "bg-amber-400/75",
-                "bg-orange-500/75",
-                "bg-red-500/75",
-                "bg-red-500/75",
-              ].map((color, i) => (
-                <div key={i} className={`h-3 rounded-[3px] ${color}`} />
+                {
+                  step: "1",
+                  icon: ShieldCheck,
+                  title: isTurkish ? "Risk Analizi" : "Risk Assessment",
+                  text: isTurkish
+                    ? "Tehlikeleri belirleyin ve riski değerlendirin."
+                    : "Identify hazards and evaluate risk.",
+                  href: `/${locale}/tools/quick-risk-assessment`,
+                },
+                {
+                  step: "2",
+                  icon: FileText,
+                  title: "Method Statement",
+                  text: isTurkish
+                    ? "Güvenli çalışma adımlarını oluşturun."
+                    : "Define safe work steps and controls.",
+                  href: `/${locale}/tools/method-statement`,
+                },
+                {
+                  step: "3",
+                  icon: BriefcaseBusiness,
+                  title: "Toolbox Talk",
+                  text: isTurkish
+                    ? "Ekibinizi saha öncesi bilgilendirin."
+                    : "Communicate and engage your team.",
+                  href: `/${locale}/toolbox`,
+                },
+                {
+                  step: "4",
+                  icon: ClipboardCheck,
+                  title: isTurkish ? "Kontrol Listesi" : "Checklist",
+                  text: isTurkish
+                    ? "Saha kontrollerini doğrulayın."
+                    : "Inspect and verify in the field.",
+                  href: `/${locale}/checklists`,
+                },
+                {
+                  step: "5",
+                  icon: Download,
+                  title: "PDF",
+                  text: isTurkish
+                    ? "Profesyonel çıktıyı oluşturun."
+                    : "Generate professional output.",
+                  href: `/${locale}/downloads`,
+                },
+              ].map((item, index) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 transition hover:-translate-y-1 hover:border-blue-400/25 hover:bg-blue-500/[0.05]"
+                >
+                  {index < 4 && (
+                    <span className="absolute -right-[12px] top-1/2 z-10 hidden -translate-y-1/2 text-xl text-slate-700 lg:block">
+                      →
+                    </span>
+                  )}
+
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.07] text-blue-300">
+                      <item.icon size={18} />
+                    </span>
+                    <span className="text-[10px] font-black text-slate-600">
+                      0{item.step}
+                    </span>
+                  </div>
+
+                  <p className="mt-4 text-sm font-black text-white">
+                    {item.title}
+                  </p>
+
+                  <p className="mt-2 text-[11px] leading-5 text-slate-500">
+                    {item.text}
+                  </p>
+                </Link>
               ))}
             </div>
-          </div>
-        )}
-
-        {step.type === "method" && (
-          <div>
-            <div className="mb-3 text-[9px] font-bold uppercase tracking-widest text-slate-400">
-              {locale === "tr" ? "Çalışma Adımları" : "Work Steps"}
-            </div>
-
-            <div className="space-y-2.5">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-blue-400/25 bg-blue-500/10 text-[8px] font-black text-blue-400">
-                    {i}
-                  </div>
-                  <div className="h-1.5 flex-1 rounded-full bg-white/10" />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {step.type === "toolbox" && (
-          <div>
-            <div className="mb-3 flex items-center justify-between">
-              <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
-                {locale === "tr" ? "Ekip Bilgilendirme" : "Team Briefing"}
-              </span>
-              <span className="text-[9px] font-bold text-amber-400">
-                {locale === "tr" ? "8 DK" : "8 MIN"}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {[1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#030b16] bg-amber-400/10 text-[8px] font-black text-amber-300"
-                  >
-                    HSE
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex-1 space-y-2">
-                <div className="h-1.5 w-full rounded-full bg-amber-400/25" />
-                <div className="h-1.5 w-[72%] rounded-full bg-white/10" />
-                <div className="h-1.5 w-[52%] rounded-full bg-white/10" />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {step.type === "checklist" && (
-          <div>
-            <div className="mb-3 flex items-center justify-between">
-              <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
-                {locale === "tr" ? "Saha Kontrolü" : "Field Check"}
-              </span>
-              <span className="text-[9px] font-bold text-emerald-400">
-                3 / 3
-              </span>
-            </div>
-
-            <div className="space-y-2.5">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded border border-emerald-400/40 bg-emerald-500/10 text-[9px] text-emerald-300">
-                    ✓
-                  </div>
-                  <div className="h-1.5 flex-1 rounded-full bg-white/10" />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {step.type === "pdf" && (
-          <div>
-            <div className="mb-3 text-[9px] font-bold uppercase tracking-widest text-slate-400">
-              {locale === "tr" ? "Profesyonel Çıktı" : "Professional Output"}
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="relative flex h-14 w-11 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04]">
-                <span className="text-[9px] font-black text-red-400">PDF</span>
-                <div className="absolute right-0 top-0 h-3 w-3 border-b border-l border-white/10 bg-[#07111f]" />
-              </div>
-
-              <div className="flex-1 space-y-2">
-                <div className="h-1.5 w-full rounded-full bg-white/10" />
-                <div className="h-1.5 w-[82%] rounded-full bg-white/10" />
-                <div className="h-1.5 w-[62%] rounded-full bg-violet-400/25" />
-                <div className="mt-2 h-1 w-[44%] rounded-full bg-blue-500/35" />
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <h3 className="mt-5 text-lg font-black text-white">
-        {step.title}
-      </h3>
-
-      <p className="mt-2 min-h-[52px] text-sm leading-6 text-slate-400">
-        {step.desc}
-      </p>
-
-      <div className="mt-5 border-t border-white/[0.07] pt-4">
-        <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-600">
-          <span className={`h-1.5 w-1.5 rounded-full ${step.dot}`} />
-          {locale === "tr" ? "SERNEM İş Akışı" : "SERNEM Workflow"}
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
 
             <div className="mt-8 grid gap-3 border-t border-white/[0.08] pt-7 sm:grid-cols-2 lg:grid-cols-4">
               {[
@@ -775,7 +617,7 @@ export default async function LocalizedHomePage({ params }: Props) {
                     <p className="text-xs font-black text-slate-200">
                       {item.title}
                     </p>
-                    <p className="mt-1 text-[10px] leading-5 text-slate-400">
+                    <p className="mt-1 text-[10px] leading-5 text-slate-500">
                       {item.text}
                     </p>
                   </div>
@@ -786,7 +628,7 @@ export default async function LocalizedHomePage({ params }: Props) {
         </div>
       </section>
 
-      <section className="relative border-b border-white/10 bg-slate-950 px-6 py-14 lg:px-8 lg:py-18">
+      <section className="relative border-b border-white/10 bg-slate-950 px-6 py-14 lg:px-8 lg:py-14 lg:py-18">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-blue-950/20 to-transparent" />
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-10">
@@ -798,13 +640,13 @@ export default async function LocalizedHomePage({ params }: Props) {
               <h2 className="mt-4 max-w-2xl text-3xl font-black leading-[1.03] tracking-[-0.045em] text-white sm:text-5xl">
                 {isTurkish ? (
                   <>
-                    Saha işlerinden profesyonel çıktıya,
-                    <span className="block">her şey tek yerde.</span>
+                    Günlük HSE işlerinizi
+                    <span className="block">daha hızlı tamamlayın.</span>
                   </>
                 ) : (
                   <>
-                    From field work to professional output,
-                    <span className="block">everything in one place.</span>
+                    Complete everyday HSE work
+                    <span className="block">faster.</span>
                   </>
                 )}
               </h2>
@@ -812,61 +654,12 @@ export default async function LocalizedHomePage({ params }: Props) {
 
             <p className="max-w-xl pb-1 text-[15px] leading-7 text-slate-400 sm:text-base sm:leading-7">
               {isTurkish
-                ? "Risk analizinden saha kontrollerine, hesaplayıcılardan AI rehberliğine kadar SERNEM'in temel HSE araçlarına tek çalışma alanından ulaşın."
+                ? "Analizden dokümantasyona, saha kontrollerinden profesyonel rehberliğe kadar SERNEM'in temel araçlarına tek çalışma alanından ulaşın."
                 : "From assessments and documentation to field controls and professional guidance, access the core SERNEM toolkit from one connected workspace."}
             </p>
           </div>
 
-          <div className="
-  mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-6
-
-  [&>*]:relative
-  [&>*]:overflow-hidden
-  [&>*]:!rounded-2xl
-  [&>*]:transition-all
-  [&>*]:duration-300
-  [&>*]:hover:-translate-y-1
-  [&>*]:hover:!border-blue-500/30
-  [&>*]:hover:shadow-[0_24px_70px_rgba(0,0,0,0.28)]
-
-  [&>*:nth-child(1)]:xl:order-1
-  [&>*:nth-child(3)]:xl:order-2
-
-  [&>*:nth-child(1)]:xl:col-span-3
-  [&>*:nth-child(3)]:xl:col-span-3
-
-  [&>*:nth-child(2)]:xl:order-3
-  [&>*:nth-child(4)]:xl:order-4
-  [&>*:nth-child(5)]:xl:order-5
-  [&>*:nth-child(6)]:xl:order-6
-  [&>*:nth-child(7)]:xl:order-7
-  [&>*:nth-child(8)]:xl:order-8
-
-  [&>*:nth-child(2)]:xl:col-span-2
-  [&>*:nth-child(4)]:xl:col-span-2
-  [&>*:nth-child(5)]:xl:col-span-2
-  [&>*:nth-child(6)]:xl:col-span-2
-  [&>*:nth-child(7)]:xl:col-span-2
-  [&>*:nth-child(8)]:xl:col-span-2
-
-  [&>*:nth-child(1)]:xl:min-h-[300px]
-  [&>*:nth-child(3)]:xl:min-h-[300px]
-
-  [&>*:nth-child(1)]:!border-blue-500/30 [&>*:nth-child(1)]:shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_28px_80px_rgba(0,0,0,0.30)]
-  [&>*:nth-child(3)]:!border-emerald-500/25 [&>*:nth-child(3)]:shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_28px_80px_rgba(0,0,0,0.30)]
-
-  [&>*:nth-child(1)]:!bg-[radial-gradient(circle_at_80%_20%,rgba(37,99,235,0.16),transparent_42%),#07111f]
-  [&>*:nth-child(3)]:!bg-[radial-gradient(circle_at_80%_20%,rgba(16,185,129,0.12),transparent_42%),#07111f]
-
-  [&>*:nth-child(1)_h3]:xl:text-2xl
-  [&>*:nth-child(3)_h3]:xl:text-2xl
-
-  [&>*:nth-child(1)_p]:xl:max-w-xl
-  [&>*:nth-child(3)_p]:xl:max-w-xl
-
-  [&>*:nth-child(1)]:xl:p-7
-  [&>*:nth-child(3)]:xl:p-7
-">
+          <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             {[
               {
                 icon: ShieldCheck,
@@ -886,7 +679,7 @@ export default async function LocalizedHomePage({ params }: Props) {
                   ? "20 hazır çalışma yöntemini proje bilgilerinize göre özelleştirin ve PDF oluşturun."
                   : "Customize 20 ready work methods for your project and generate professional PDFs.",
                 href: `/${locale}/tools/method-statement`,
-                badge: isTurkish ? "20 HAZIR YÖNTEM" : "20 READY METHODS",
+                badge: isTurkish ? "20 HAZIR METHOD" : "20 READY METHODS",
               },
               {
                 icon: Bot,
@@ -904,7 +697,7 @@ export default async function LocalizedHomePage({ params }: Props) {
                   ? "Kritik iş güvenliği konuları için anlaşılır, profesyonel ve pratik rehberlere ulaşın."
                   : "Access clear, professional and practical guidance for critical workplace safety topics.",
                 href: `/${locale}/knowledge-base`,
-                badge: isTurkish ? "REHBERLER" : "GUIDES",
+                badge: isTurkish ? "Rehberler" : "Guides",
               },
               {
                 icon: ClipboardCheck,
@@ -913,7 +706,7 @@ export default async function LocalizedHomePage({ params }: Props) {
                   ? "Saha kontrolleri ve denetimleri için yapılandırılmış kontrol listelerini kullanın."
                   : "Use structured checklists for field controls and workplace inspections.",
                 href: `/${locale}/checklists`,
-                badge: isTurkish ? "SAHA" : "FIELD",
+                badge: isTurkish ? "Saha" : "Field",
               },
               {
                 icon: BriefcaseBusiness,
@@ -922,7 +715,7 @@ export default async function LocalizedHomePage({ params }: Props) {
                   ? "Profesyonel Toolbox Talk içerikleriyle günlük saha bilgilendirmelerini hızlandırın."
                   : "Speed up daily field briefings with professional Toolbox Talk resources.",
                 href: `/${locale}/toolbox`,
-                badge: isTurkish ? "TOOLBOX" : "TOOLBOX",
+                badge: "Toolbox",
               },
               {
                 icon: Calculator,
@@ -931,7 +724,7 @@ export default async function LocalizedHomePage({ params }: Props) {
                   ? "Risk matrisi, TRIR, LTIFR ve Severity Rate hesaplamalarını saniyeler içinde yapın."
                   : "Calculate Risk Matrix, TRIR, LTIFR and Severity Rate in seconds.",
                 href: `/${locale}/tools`,
-                badge: isTurkish ? "ÜCRETSİZ" : "FREE",
+                badge: isTurkish ? "Ücretsiz" : "Free",
               },
               {
                 icon: Download,
@@ -940,7 +733,7 @@ export default async function LocalizedHomePage({ params }: Props) {
                   ? "Şablonlar, posterler, güvenlik levhaları ve indirilebilir HSE dokümanlarını keşfedin."
                   : "Discover templates, posters, safety signs and downloadable professional HSE documents.",
                 href: `/${locale}/downloads`,
-                badge: isTurkish ? "KAYNAKLAR" : "RESOURCES",
+                badge: isTurkish ? "Kaynaklar" : "Resources",
               },
             ].map((item) => (
               <Link
@@ -980,7 +773,7 @@ export default async function LocalizedHomePage({ params }: Props) {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-b border-white/10 bg-slate-950 py-12 lg:py-12 lg:py-14">
+      <section className="relative overflow-hidden border-b border-white/10 bg-slate-950 py-14 lg:py-18 lg:py-14 lg:py-18">
         <div className="absolute left-[-200px] top-1/2 h-[460px] w-[460px] -translate-y-1/2 rounded-full bg-blue-600/10 blur-[130px]" />
 
         <div className="absolute right-[-180px] top-[-120px] h-[460px] w-[460px] rounded-full bg-emerald-500/10 blur-[130px]" />
