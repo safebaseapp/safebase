@@ -325,13 +325,16 @@ export default async function LocalizedHomePage({ params }: Props) {
       `}</style>
       <div className="safebase-home-scale">
       <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#020817]">
-        <div
-          className="absolute inset-0 -z-30 bg-no-repeat bg-cover bg-[position:58%_center] lg:bg-cover lg:bg-[center_52%]"
-          style={{
-            backgroundImage:
-              "url('/images/sernem-hse-hero.png')",
-          }}
-        />
+        <div className="absolute inset-x-0 top-0 -z-30 h-[610px] sm:h-[650px] lg:h-[680px] xl:h-[690px] bg-[#020817]">
+          <Image
+            src="/images/sernem-hse-hero.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-contain object-top"
+          />
+        </div>
 
         <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(2,8,23,0.88)_0%,rgba(2,8,23,0.72)_30%,rgba(2,8,23,0.30)_52%,rgba(2,8,23,0.08)_72%,rgba(2,8,23,0.10)_100%)]" />
 
