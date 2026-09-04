@@ -1,3 +1,4 @@
+import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { PDFDocument, rgb } from "pdf-lib";
@@ -167,6 +168,56 @@ export async function GET(request: Request, { params }: RouteProps) {
     }
   }
 
+  /*
+    TRUE PREMIUM WHITE-LABEL MODE
+    --------------------------------------------------
+    Şirket logosu varsa hazır SERNEM PDF modifiye edilmez.
+    Toolbox verisinden tamamen yeni 3 sayfalık şirket PDF'i üretilir.
+  */
+  if (logoFile && logoBlob) {
+    const logoBytes = new Uint8Array(
+      await logoBlob.arrayBuffer(),
+    );
+
+    const extension = logoFile.name
+      .split(".")
+      .pop()
+      ?.toLowerCase();
+
+    const logoMime =
+      logoBlob.type ||
+      (extension === "webp"
+        ? "image/webp"
+        : extension === "jpg" || extension === "jpeg"
+          ? "image/jpeg"
+          : "image/png");
+
+    const premiumPdfBytes =
+      await generatePremiumToolboxPdf({
+        slug,
+        locale: locale as "tr" | "en",
+        logoBytes,
+        logoMime,
+      });
+
+    const premiumFilename =
+      `${slug}-toolbox-talk-${locale}-company.pdf`;
+
+    return new NextResponse(
+      Buffer.from(premiumPdfBytes),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/pdf",
+          "Content-Disposition":
+            `attachment; filename="${premiumFilename}"`,
+          "Cache-Control":
+            "private, no-store, max-age=0",
+        },
+      },
+    );
+  }
+
   const sourcePdfPath = path.join(
     process.cwd(),
     "public",
@@ -224,16 +275,29 @@ export async function GET(request: Request, { params }: RouteProps) {
       .pop()
       ?.toLowerCase();
 
+    const mimeType = logoBlob.type.toLowerCase();
+
+    const isPng =
+      mimeType === "image/png" ||
+      extension === "png";
+
+    const isJpeg =
+      mimeType === "image/jpeg" ||
+      mimeType === "image/jpg" ||
+      extension === "jpg" ||
+      extension === "jpeg";
+
     const embeddedLogo =
-      extension === "png"
+      isPng
         ? await pdfDocument.embedPng(logoBytes)
-        : extension === "jpg" || extension === "jpeg"
+        : isJpeg
           ? await pdfDocument.embedJpg(logoBytes)
           : null;
 
     /*
       pdf-lib doğrudan WebP yerleştiremez.
-      Dashboard WebP kabul ediyor fakat PDF üretiminde PNG/JPG gerekir.
+      PNG/JPEG kontrolünde MIME tipi önceliklidir;
+      dosya uzantısı yalnızca fallback olarak kullanılır.
     */
     if (!embeddedLogo) {
       return NextResponse.json(
@@ -247,13 +311,17 @@ export async function GET(request: Request, { params }: RouteProps) {
       );
     }
 
-    const { width: pageWidth, height: pageHeight } =
-      firstPage.getSize();
+    const pages = pdfDocument.getPages();
 
-    // Yatay logolar daha geniş görünür.
-    // Yükseklik sınırlıdır; alttaki süre kutusunun üzerine taşmaz.
-    const maxLogoWidth = 185;
-    const maxLogoHeight = 44;
+    /*
+      PREMIUM COMPANY BRANDED MODE
+      ------------------------------------------------
+      Şirket logosu varsa tüm PDF şirket dokümanı görünümüne geçer.
+      SERNEM header/footer branding alanları kapatılır.
+    */
+
+    const maxLogoWidth = 165;
+    const maxLogoHeight = 54;
 
     const scale = Math.min(
       maxLogoWidth / embeddedLogo.width,
@@ -264,14 +332,62 @@ export async function GET(request: Request, { params }: RouteProps) {
     const logoWidth = embeddedLogo.width * scale;
     const logoHeight = embeddedLogo.height * scale;
 
-    const logoX = pageWidth - logoWidth - 24;
-    const logoY = pageHeight - logoHeight - 18;
+    pages.forEach((page, index) => {
+      const { width: pageWidth, height: pageHeight } = page.getSize();
 
-    firstPage.drawImage(embeddedLogo, {
-      x: logoX,
-      y: logoY,
-      width: logoWidth,
-      height: logoHeight,
+      // Alt SERNEM footer alanını tüm sayfalarda kapat.
+      page.drawRectangle({
+        x: 0,
+        y: 0,
+        width: pageWidth,
+        height: 42,
+        color: rgb(0.025, 0.075, 0.15),
+      });
+
+      // Footer yerine nötr kurumsal doküman etiketi.
+      page.drawText("TOOLBOX TALK", {
+        x: 42,
+        y: 16,
+        size: 8,
+        color: rgb(0.65, 0.72, 0.82),
+      });
+
+      // İlk iki sayfada üstteki SERNEM TOOLBOX TALK alanını kapat.
+      if (index === 0 || index === 1) {
+        page.drawRectangle({
+          x: 42,
+          y: pageHeight - 50,
+          width: 220,
+          height: 20,
+          color: rgb(0.025, 0.075, 0.15),
+        });
+
+        page.drawText("TOOLBOX TALK", {
+          x: 44,
+          y: pageHeight - 43,
+          size: 10,
+          color: rgb(0.25, 0.72, 1),
+        });
+      }
+
+      // Şirket logosu tüm sayfalarda sağ üstte kurumsal kimlik olarak gösterilir.
+      const logoX = pageWidth - logoWidth - 28;
+      const logoY = pageHeight - logoHeight - 18;
+
+      page.drawRectangle({
+        x: logoX - 8,
+        y: logoY - 6,
+        width: logoWidth + 16,
+        height: logoHeight + 12,
+        color: rgb(1, 1, 1),
+      });
+
+      page.drawImage(embeddedLogo, {
+        x: logoX,
+        y: logoY,
+        width: logoWidth,
+        height: logoHeight,
+      });
     });
 
     const brandedPdfBytes = await pdfDocument.save();
