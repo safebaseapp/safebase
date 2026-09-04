@@ -2,37 +2,89 @@
 
 import "../sernem-print.css";
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
-import { checklistItems } from "./checklistData";
-import { labels } from "./labels";
-import type { Answer, CorrectiveAction, Props } from "./types";
+import { useEffect, useMemo, useState } from "react";
+import { createClient } from "../../../../utils/supabase/client";
+import { generateAssessment } from "@/lib/api/assessmentClient";
+import { isAdminUser } from "@/lib/auth/access";
 import PremiumAssessmentButton from "../components/PremiumAssessmentButton";
+import { checklistItems } from "./checklistData";
+import type { ProfessionalAssessmentOutput } from "@/lib/ai/assessmentTypes";
+import { labels } from "./labels";
 import ChecklistAnalysisPanel from "../components/ChecklistAnalysisPanel";
 import {
-  analyzeLiftingChecklist,
+  analyzeHotWorkChecklist,
   type ChecklistAnalysisResult,
   type ChecklistAnswer,
 } from "../../../../lib/ai/analyzeChecklist";
-import { trackEvent } from "@/lib/analytics";
+import type { Answer, CorrectiveAction, Props } from "./types";
+import PrintButton from "@/components/ui/PrintButton";
 
-export default function LiftingChecklist({ locale }: Props) {
+export default function HotWorkChecklist({ locale }: Props) {
   const t = labels[locale];
   const items = checklistItems[locale];
 
-  const checklistStartedTracked = useRef(false);
-  const checklistCompletedTracked = useRef(false);
+  const [isPremiumUser, setIsPremiumUser] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+
+    async function loadPremiumStatus() {
+      const supabase = createClient();
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) {
+        if (active) setIsPremiumUser(false);
+        return;
+      }
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("plan,role,status")
+        .eq("id", user.id)
+        .single();
+
+      if (!active) return;
+
+      const hasPremiumAccess =
+        isAdminUser(user) ||
+        (
+          profile?.status !== "suspended" &&
+          (
+            profile?.plan === "premium" ||
+            profile?.role === "admin"
+          )
+        );
+
+      console.log("SERNEM ACCESS DEBUG", {
+        email: user.email,
+        profile,
+        admin: isAdminUser(user),
+        hasPremiumAccess,
+      });
+
+      setIsPremiumUser(Boolean(hasPremiumAccess));
+    }
+
+    void loadPremiumStatus();
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [comments, setComments] = useState("");
   const [correctiveActions, setCorrectiveActions] = useState<
     Record<string, CorrectiveAction>
   >({});
-
-  const [analysis, setAnalysis] = useState<ChecklistAnalysisResult | null>(
-    null,
-  );
-  const [analysisOpened, setAnalysisOpened] = useState(false);
-  const [analysisError, setAnalysisError] = useState<string | null>(null);
+  const [analysis, setAnalysis] =
+    useState<ChecklistAnalysisResult | null>(null);
+  const [professionalAssessment, setProfessionalAssessment] =
+    useState<ProfessionalAssessmentOutput | null>(null);
+  const [isAiLoading, setIsAiLoading] = useState(false);
 
   const answeredCount = items.filter(
     (item) => answers[item.id] !== null && answers[item.id] !== undefined,
@@ -144,61 +196,10 @@ export default function LiftingChecklist({ locale }: Props) {
   const sections = Array.from(new Set(items.map((item) => item.section)));
 
   function updateAnswer(id: string, answer: Exclude<Answer, null>) {
-    if (!checklistStartedTracked.current) {
-      trackEvent("checklist_started", {
-        checklist_type: "lifting",
-        locale,
-        total_items: items.length,
-        source: "inspection_checklist",
-      });
-      checklistStartedTracked.current = true;
-    }
-
-    const nextAnswers = {
-      ...answers,
+    setAnswers((current) => ({
+      ...current,
       [id]: answer,
-    };
-
-    const nextAnsweredCount = items.filter(
-      (item) =>
-        nextAnswers[item.id] !== null &&
-        nextAnswers[item.id] !== undefined,
-    ).length;
-
-    if (
-      nextAnsweredCount === items.length &&
-      !checklistCompletedTracked.current
-    ) {
-      const nextApplicable = items.filter(
-        (item) => nextAnswers[item.id] !== "na",
-      );
-
-      const nextYesCount = nextApplicable.filter(
-        (item) => nextAnswers[item.id] === "yes",
-      ).length;
-
-      const nextNoCount = items.filter(
-        (item) => nextAnswers[item.id] === "no",
-      ).length;
-
-      const nextScore =
-        nextApplicable.length > 0
-          ? Math.round((nextYesCount / nextApplicable.length) * 100)
-          : 0;
-
-      trackEvent("checklist_completed", {
-        checklist_type: "lifting",
-        locale,
-        total_items: items.length,
-        compliance_score: nextScore,
-        findings_count: nextNoCount,
-        source: "inspection_checklist",
-      });
-
-      checklistCompletedTracked.current = true;
-    }
-
-    setAnswers(nextAnswers);
+    }));
 
     if (answer === "no") {
       setCorrectiveActions((current) => ({
@@ -241,86 +242,125 @@ export default function LiftingChecklist({ locale }: Props) {
   }
 
   function runSafetyAnalysis() {
-    trackEvent("ai_assessment_used", {
-      assessment_type: "lifting_checklist",
+    const formattedAnswers: ChecklistAnswer[] = Object.entries(answers).map(
+      ([id, answer]) => ({
+        id,
+        answer:
+          answer === "yes"
+            ? "Yes"
+            : answer === "no"
+              ? "No"
+              : "N/A",
+        remarks:
+          answer === "no"
+            ? correctiveActions[id]?.action || undefined
+            : undefined,
+      }),
+    );
+
+    const analysisResult = analyzeHotWorkChecklist(
+      formattedAnswers,
       locale,
-      answered_count: answeredCount,
-      total_items: items.length,
-      findings_count: noCount,
-      critical_findings: criticalFailures.length,
-      source: "inspection_checklist",
-    });
+    );
 
-    setAnalysisOpened(true);
-    setAnalysisError(null);
-
-    try {
-      const formattedAnswers: ChecklistAnswer[] = items.map((item) => {
-        const selectedAnswer = answers[item.id];
-
-        return {
-          id: item.id,
-          answer:
-            selectedAnswer === "yes"
-              ? "Yes"
-              : selectedAnswer === "no"
-                ? "No"
-                : "N/A",
-          remarks:
-            selectedAnswer === "no"
-              ? correctiveActions[item.id]?.action || undefined
-              : undefined,
-        };
-      });
-
-      const result = analyzeLiftingChecklist(formattedAnswers, locale);
-
-      setAnalysis(result);
-    } catch (error) {
-      console.error("Lifting analysis error:", error);
-      setAnalysis(null);
-
-      setAnalysisError(
-        error instanceof Error
-          ? error.message
-          : locale === "tr"
-            ? "Kaldırma operasyonu güvenlik analizi oluşturulamadı."
-            : "Lifting operations safety analysis could not be generated.",
-      );
-    }
-
-    window.setTimeout(() => {
-      const target = document.querySelector("[data-checklist-analysis]");
-
-      target?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 100);
+    setAnalysis(analysisResult);
+    setProfessionalAssessment(null);
+    setIsAiLoading(false);
   }
 
-  function printInspection() {
-    trackEvent("pdf_downloaded", {
-      document_type: "lifting_inspection",
-      locale,
-      completion_rate: progress,
-      compliance_score: score,
-      findings_count: noCount,
-      source: "inspection_checklist",
-    });
 
-    window.print();
+  async function generateAiAssessment() {
+    if (!analysis || isAiLoading) {
+      alert(
+        locale === "tr"
+          ? "Önce Güvenlik Analizi Yap butonuna basın."
+          : "Run Analyze Safety first.",
+      );
+      return;
+    }
+
+    setIsAiLoading(true);
+    setProfessionalAssessment(null);
+
+    const workDecision =
+      analysis.workDecision === "Stop Work"
+        ? "STOP WORK"
+        : analysis.workDecision === "Proceed With Conditions"
+          ? "PROCEED WITH CONDITIONS"
+          : "APPROVED";
+
+    try {
+      const result = await generateAssessment({
+        workType: analysis.checklistTitle || "Hot Work",
+        language: locale,
+        assessmentStatus: analysis.assessmentStatus,
+        completionRate: analysis.completionRate,
+        safetyScore: analysis.score,
+        overallRisk: analysis.overallRisk,
+        workDecision,
+        permitReadiness: analysis.permitReadiness,
+        severityBreakdown: {
+          critical: analysis.severityBreakdown.Critical,
+          high: analysis.severityBreakdown.High,
+          medium: analysis.severityBreakdown.Medium,
+          low: analysis.severityBreakdown.Low,
+        },
+        findings: analysis.findings.map((finding) => ({
+          id: finding.id,
+          title: finding.requirement,
+          description: finding.guidance,
+          severity: finding.riskLevel as
+            | "Low"
+            | "Medium"
+            | "High"
+            | "Critical",
+          recommendation: finding.correctiveAction,
+          reference: finding.references?.[0],
+        })),
+        recommendations: analysis.recommendations.map(
+          (recommendation, index) => ({
+            title: recommendation,
+            priority: index + 1,
+          }),
+        ),
+        references: analysis.references,
+      });
+
+      setProfessionalAssessment(result);
+
+      setTimeout(() => {
+        document
+          .querySelector("[data-ai-assessment]")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    } catch (error) {
+      console.error("AI Assessment Error:", error);
+
+      alert(
+        locale === "tr"
+          ? "AI değerlendirmesi oluşturulamadı. API bağlantısını kontrol edin."
+          : "AI assessment could not be generated. Check the API connection.",
+      );
+    } finally {
+      setIsAiLoading(false);
+    }
+  }
+
+  function handlePremiumAssessmentClick() {
+    if (!isPremiumUser) {
+      return;
+    }
+
+    void generateAiAssessment();
   }
 
   function resetInspection() {
-    checklistStartedTracked.current = false;
-    checklistCompletedTracked.current = false;
     setAnswers({});
     setComments("");
     setCorrectiveActions({});
     setAnalysis(null);
-    setAnalysisOpened(false);
-    setAnalysisError(null);
+    setProfessionalAssessment(null);
+    setIsAiLoading(false);
   }
 
   function getPriorityLabel(
@@ -466,7 +506,7 @@ export default function LiftingChecklist({ locale }: Props) {
 
               <div className="text-right">
                 <p className="text-[10px] font-bold text-white">
-                  SRN-INS-LFT-001
+                  SRN-INS-HW-001
                 </p>
                 <p className="mt-1 text-[8px] text-slate-300">
                   Rev. 2.0
@@ -478,8 +518,8 @@ export default function LiftingChecklist({ locale }: Props) {
           <div className="mb-5 px-1">
             <h1 className="text-[22px] font-extrabold leading-tight text-[#071a38]">
               {locale === "tr"
-                ? "KALDIRMA OPERASYONU DENETİM RAPORU"
-                : "LIFTING OPERATION INSPECTION REPORT"}
+                ? "SICAK ÇALIŞMA DENETİM RAPORU"
+                : "HOT WORK INSPECTION REPORT"}
             </h1>
 
             <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-cyan-600">
@@ -771,7 +811,7 @@ export default function LiftingChecklist({ locale }: Props) {
               ? "Profesyonel HSE Kaynağı"
               : "Professional HSE Resource"}
 
-            {"  •  SRN-INS-LFT-001  •  Rev. 2.0"}
+            {"  •  SRN-INS-HW-001  •  Rev. 2.0"}
           </div>
 
         </section>
@@ -1191,40 +1231,257 @@ export default function LiftingChecklist({ locale }: Props) {
           </div>
         </section>
 
-        <div data-checklist-analysis className="scroll-mt-8 print:hidden">
-          {analysisOpened && (
-            <div className="mt-8">
-              {analysis ? (
-                <ChecklistAnalysisPanel locale={locale} analysis={analysis} />
-              ) : (
-                <section className="rounded-3xl border border-amber-500/30 bg-slate-900 p-7 text-white">
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">
-                    {locale === "tr"
-                      ? "Kaldırma Operasyonu Güvenlik Analizi"
-                      : "Lifting Operations Safety Analysis"}
-                  </p>
+               {analysis && (
+          <ChecklistAnalysisPanel
+            locale={locale}
+            analysis={analysis}
+          />
+        )}
 
-                  <h2 className="mt-3 text-2xl font-bold">
-                    {analysisError
-                      ? locale === "tr"
-                        ? "Analiz oluşturulamadı"
-                        : "Analysis could not be generated"
-                      : locale === "tr"
-                        ? "Analiz hazırlanıyor"
-                        : "Preparing analysis"}
+        {isAiLoading && (
+          <section className="mt-8 rounded-3xl border border-violet-500/30 bg-violet-500/5 p-7 print:hidden">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/15 text-2xl">
+                🤖
+              </div>
+
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-violet-300">
+                  {locale === "tr"
+                    ? "SERNEM AI çalışıyor"
+                    : "SERNEM AI is working"}
+                </p>
+
+                <p className="mt-2 text-slate-300">
+                  {locale === "tr"
+                    ? "Profesyonel HSE değerlendirmesi hazırlanıyor..."
+                    : "Generating the professional HSE assessment..."}
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {professionalAssessment && (
+          <section data-ai-assessment className="mt-8 overflow-hidden rounded-3xl border border-violet-500/30 bg-violet-500/5 print:border-slate-300 print:bg-white">
+            <div className="border-b border-violet-500/20 bg-slate-950/40 p-7 sm:p-8 print:border-slate-300 print:bg-white">
+              <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
+                <div className="max-w-4xl">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-300">
+                      {locale === "tr"
+                        ? "SERNEM AI Profesyonel Değerlendirmesi"
+                        : "SERNEM AI Professional Assessment"}
+                    </p>
+
+                    <span className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-violet-200 print:hidden">
+                      GPT-5 MINI
+                    </span>
+                  </div>
+
+                  <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+                    {locale === "tr"
+                      ? "Yönetici Değerlendirmesi"
+                      : "Executive Assessment"}
                   </h2>
 
-                  <p className="mt-3 leading-7 text-slate-300">
-                    {analysisError ||
-                      (locale === "tr"
-                        ? `${answeredCount}/${items.length} madde cevaplandı. ${noCount} uygunsuzluk ve ${criticalFailures.length} kritik bulgu tespit edildi.`
-                        : `${answeredCount}/${items.length} items answered. ${noCount} non-compliances and ${criticalFailures.length} critical findings identified.`)}
+                  <p className="mt-5 max-w-4xl text-base leading-8 text-slate-300 print:text-slate-700">
+                    {professionalAssessment.executiveAssessment}
                   </p>
-                </section>
+                </div>
+
+                <div
+                  className={`min-w-full rounded-3xl border p-6 text-center shadow-lg xl:min-w-80 ${
+                    professionalAssessment.finalRecommendation === "STOP WORK"
+                      ? "border-red-500/40 bg-red-500/10 text-red-100 shadow-red-950/20"
+                      : professionalAssessment.finalRecommendation ===
+                          "PROCEED WITH CONDITIONS"
+                        ? "border-orange-500/40 bg-orange-500/10 text-orange-100 shadow-orange-950/20"
+                        : "border-emerald-500/40 bg-emerald-500/10 text-emerald-100 shadow-emerald-950/20"
+                  } print:hidden`}
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] opacity-75">
+                    {locale === "tr"
+                      ? "Nihai AI Tavsiyesi"
+                      : "Final AI Recommendation"}
+                  </p>
+
+                  <p className="mt-3 text-3xl font-black uppercase tracking-tight">
+                    {professionalAssessment.finalRecommendation === "STOP WORK"
+                      ? locale === "tr"
+                        ? "🛑 İŞİ DURDUR"
+                        : "🛑 STOP WORK"
+                      : professionalAssessment.finalRecommendation ===
+                          "PROCEED WITH CONDITIONS"
+                        ? locale === "tr"
+                          ? "🟠 KOŞULLU DEVAM"
+                          : "🟠 PROCEED WITH CONDITIONS"
+                        : locale === "tr"
+                          ? "✅ ONAYLANDI"
+                          : "✅ APPROVED"}
+                  </p>
+
+                  <p className="mt-4 text-xs leading-5 opacity-75">
+                    {locale === "tr"
+                      ? "AI sonucu, SERNEM kural motorunun kararını değiştirmez."
+                      : "The AI assessment does not override the SERNEM rule-engine decision."}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-6 p-7 sm:p-8 xl:grid-cols-2">
+              <article className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
+                <h3 className="text-xl font-bold">
+                  {locale === "tr"
+                    ? "Operasyonel Risk"
+                    : "Operational Risk"}
+                </h3>
+
+                <p className="mt-4 leading-7 text-slate-300 print:text-black">
+                  {professionalAssessment.operationalRisk}
+                </p>
+              </article>
+
+              <article className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
+                <h3 className="text-xl font-bold">
+                  {locale === "tr"
+                    ? "Muhtemel Sonuçlar"
+                    : "Potential Consequences"}
+                </h3>
+
+                <div className="mt-4 space-y-3">
+                  {professionalAssessment.potentialConsequences.map(
+                    (consequence, index) => (
+                      <div
+                        key={`${consequence}-${index}`}
+                        className="flex gap-3"
+                      >
+                        <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500/15 text-xs font-bold text-red-300">
+                          {index + 1}
+                        </span>
+
+                        <p className="leading-7 text-slate-300 print:text-black">
+                          {consequence}
+                        </p>
+                      </div>
+                    ),
+                  )}
+                </div>
+              </article>
+
+              {professionalAssessment.criticalConcerns.length > 0 && (
+                <article className="rounded-2xl border border-red-500/30 bg-red-500/5 p-6 print:border-slate-300 print:bg-white">
+                  <h3 className="text-xl font-bold text-red-200 print:text-black">
+                    {locale === "tr"
+                      ? "Kritik Endişeler"
+                      : "Critical Concerns"}
+                  </h3>
+
+                  <div className="mt-4 space-y-3">
+                    {professionalAssessment.criticalConcerns.map(
+                      (concern, index) => (
+                        <div key={`${concern}-${index}`} className="flex gap-3">
+                          <span className="mt-1 text-red-300">●</span>
+
+                          <p className="leading-7 text-slate-300 print:text-black">
+                            {concern}
+                          </p>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                </article>
+              )}
+
+              {professionalAssessment.positiveFindings.length > 0 && (
+                <article className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-6 print:border-slate-300 print:bg-white">
+                  <h3 className="text-xl font-bold text-emerald-200 print:text-black">
+                    {locale === "tr"
+                      ? "Olumlu Bulgular"
+                      : "Positive Findings"}
+                  </h3>
+
+                  <div className="mt-4 space-y-3">
+                    {professionalAssessment.positiveFindings.map(
+                      (finding, index) => (
+                        <div key={`${finding}-${index}`} className="flex gap-3">
+                          <span className="mt-1 text-emerald-300">✓</span>
+
+                          <p className="leading-7 text-slate-300 print:text-black">
+                            {finding}
+                          </p>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                </article>
               )}
             </div>
-          )}
-        </div>
+
+            <div className="border-t border-violet-500/20 p-7 sm:p-8 print:border-slate-300">
+              <h3 className="text-2xl font-bold">
+                {locale === "tr"
+                  ? "Öncelikli Aksiyon Planı"
+                  : "Priority Action Plan"}
+              </h3>
+
+              <div className="mt-5 space-y-4">
+                {professionalAssessment.priorityActions.map((item) => (
+                  <article
+                    key={`${item.priority}-${item.action}`}
+                    className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:break-inside-avoid print:border-slate-300 print:bg-white"
+                  >
+                    <div className="flex gap-4">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-violet-500/15 text-lg font-black text-violet-200">
+                        {item.priority}
+                      </span>
+
+                      <div>
+                        <h4 className="text-lg font-bold">{item.action}</h4>
+
+                        <p className="mt-3 leading-7 text-slate-400 print:text-slate-700">
+                          <span className="font-semibold text-slate-300 print:text-black">
+                            {locale === "tr" ? "Gerekçe: " : "Reason: "}
+                          </span>
+                          {item.reason}
+                        </p>
+
+                        {item.reference && (
+                          <p className="mt-3 text-sm text-blue-300 print:text-black">
+                            <span className="font-semibold">
+                              {locale === "tr" ? "Referans: " : "Reference: "}
+                            </span>
+                            {item.reference}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-violet-500/20 p-7 sm:p-8 print:border-slate-300">
+              <h3 className="text-xl font-bold">
+                {locale === "tr"
+                  ? "Uygulanabilir Standartlar"
+                  : "Applicable Standards"}
+              </h3>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {professionalAssessment.applicableStandards.map((standard) => (
+                  <span
+                    key={standard}
+                    className="rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-2 text-sm text-violet-200 print:hidden"
+                  >
+                    {standard}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:hidden">
           <label htmlFor="inspection-comments">
@@ -1245,16 +1502,27 @@ export default function LiftingChecklist({ locale }: Props) {
           <button
             type="button"
             onClick={runSafetyAnalysis}
-            className="rounded-2xl bg-emerald-600 px-6 py-4 font-semibold text-white transition hover:bg-emerald-500"
+            disabled={answeredCount === 0 || isAiLoading}
+            className="rounded-2xl bg-violet-600 px-6 py-4 font-semibold text-white transition hover:bg-violet-500 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {locale === "tr" ? "🔍 Güvenlik Analizi Yap" : "🔍 Analyze Safety"}
+            {isAiLoading
+              ? locale === "tr"
+                ? "🤖 AI Değerlendirmesi Hazırlanıyor..."
+                : "🤖 Generating AI Assessment..."
+              : locale === "tr"
+                ? "🤖 Güvenlik Analizi Yap"
+                : "🤖 Analyze Safety"}
           </button>
-
-          <PremiumAssessmentButton locale={locale} />
+          <PremiumAssessmentButton
+  locale={locale}
+  disabled={!analysis || isAiLoading}
+              isPremiumUser={isPremiumUser}
+  onPremiumClick={handlePremiumAssessmentClick}
+/>
 
           <button
             type="button"
-            onClick={printInspection}
+            onClick={() => window.print()}
             className="rounded-2xl bg-blue-600 px-6 py-4 font-semibold text-white transition hover:bg-blue-500"
           >
             {t.print}

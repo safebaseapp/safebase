@@ -2,25 +2,21 @@
 
 import "../sernem-print.css";
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { checklistItems } from "./checklistData";
 import { labels } from "./labels";
 import type { Answer, CorrectiveAction, Props } from "./types";
 import PremiumAssessmentButton from "../components/PremiumAssessmentButton";
 import ChecklistAnalysisPanel from "../components/ChecklistAnalysisPanel";
 import {
-  analyzeLiftingChecklist,
+  analyzeLotoChecklist,
   type ChecklistAnalysisResult,
   type ChecklistAnswer,
 } from "../../../../lib/ai/analyzeChecklist";
-import { trackEvent } from "@/lib/analytics";
 
-export default function LiftingChecklist({ locale }: Props) {
+export default function LotoChecklist({ locale }: Props) {
   const t = labels[locale];
   const items = checklistItems[locale];
-
-  const checklistStartedTracked = useRef(false);
-  const checklistCompletedTracked = useRef(false);
 
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [comments, setComments] = useState("");
@@ -28,9 +24,8 @@ export default function LiftingChecklist({ locale }: Props) {
     Record<string, CorrectiveAction>
   >({});
 
-  const [analysis, setAnalysis] = useState<ChecklistAnalysisResult | null>(
-    null,
-  );
+  const [analysis, setAnalysis] =
+    useState<ChecklistAnalysisResult | null>(null);
   const [analysisOpened, setAnalysisOpened] = useState(false);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
 
@@ -144,61 +139,10 @@ export default function LiftingChecklist({ locale }: Props) {
   const sections = Array.from(new Set(items.map((item) => item.section)));
 
   function updateAnswer(id: string, answer: Exclude<Answer, null>) {
-    if (!checklistStartedTracked.current) {
-      trackEvent("checklist_started", {
-        checklist_type: "lifting",
-        locale,
-        total_items: items.length,
-        source: "inspection_checklist",
-      });
-      checklistStartedTracked.current = true;
-    }
-
-    const nextAnswers = {
-      ...answers,
+    setAnswers((current) => ({
+      ...current,
       [id]: answer,
-    };
-
-    const nextAnsweredCount = items.filter(
-      (item) =>
-        nextAnswers[item.id] !== null &&
-        nextAnswers[item.id] !== undefined,
-    ).length;
-
-    if (
-      nextAnsweredCount === items.length &&
-      !checklistCompletedTracked.current
-    ) {
-      const nextApplicable = items.filter(
-        (item) => nextAnswers[item.id] !== "na",
-      );
-
-      const nextYesCount = nextApplicable.filter(
-        (item) => nextAnswers[item.id] === "yes",
-      ).length;
-
-      const nextNoCount = items.filter(
-        (item) => nextAnswers[item.id] === "no",
-      ).length;
-
-      const nextScore =
-        nextApplicable.length > 0
-          ? Math.round((nextYesCount / nextApplicable.length) * 100)
-          : 0;
-
-      trackEvent("checklist_completed", {
-        checklist_type: "lifting",
-        locale,
-        total_items: items.length,
-        compliance_score: nextScore,
-        findings_count: nextNoCount,
-        source: "inspection_checklist",
-      });
-
-      checklistCompletedTracked.current = true;
-    }
-
-    setAnswers(nextAnswers);
+    }));
 
     if (answer === "no") {
       setCorrectiveActions((current) => ({
@@ -241,16 +185,6 @@ export default function LiftingChecklist({ locale }: Props) {
   }
 
   function runSafetyAnalysis() {
-    trackEvent("ai_assessment_used", {
-      assessment_type: "lifting_checklist",
-      locale,
-      answered_count: answeredCount,
-      total_items: items.length,
-      findings_count: noCount,
-      critical_findings: criticalFailures.length,
-      source: "inspection_checklist",
-    });
-
     setAnalysisOpened(true);
     setAnalysisError(null);
 
@@ -273,48 +207,37 @@ export default function LiftingChecklist({ locale }: Props) {
         };
       });
 
-      const result = analyzeLiftingChecklist(formattedAnswers, locale);
+      const result = analyzeLotoChecklist(formattedAnswers, locale);
 
       setAnalysis(result);
     } catch (error) {
-      console.error("Lifting analysis error:", error);
+      console.error("LOTO analysis error:", error);
       setAnalysis(null);
 
       setAnalysisError(
         error instanceof Error
           ? error.message
           : locale === "tr"
-            ? "Kaldırma operasyonu güvenlik analizi oluşturulamadı."
-            : "Lifting operations safety analysis could not be generated.",
+            ? "LOTO güvenlik analizi oluşturulamadı."
+            : "LOTO safety analysis could not be generated.",
       );
     }
 
     window.setTimeout(() => {
-      const target = document.querySelector("[data-checklist-analysis]");
+      const target = document.querySelector(
+        "[data-checklist-analysis]",
+      );
 
-      target?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     }, 100);
   }
 
-  function printInspection() {
-    trackEvent("pdf_downloaded", {
-      document_type: "lifting_inspection",
-      locale,
-      completion_rate: progress,
-      compliance_score: score,
-      findings_count: noCount,
-      source: "inspection_checklist",
-    });
-
-    window.print();
-  }
-
   function resetInspection() {
-    checklistStartedTracked.current = false;
-    checklistCompletedTracked.current = false;
     setAnswers({});
     setComments("");
     setCorrectiveActions({});
@@ -466,7 +389,7 @@ export default function LiftingChecklist({ locale }: Props) {
 
               <div className="text-right">
                 <p className="text-[10px] font-bold text-white">
-                  SRN-INS-LFT-001
+                  SRN-INS-LOTO-001
                 </p>
                 <p className="mt-1 text-[8px] text-slate-300">
                   Rev. 2.0
@@ -478,8 +401,8 @@ export default function LiftingChecklist({ locale }: Props) {
           <div className="mb-5 px-1">
             <h1 className="text-[22px] font-extrabold leading-tight text-[#071a38]">
               {locale === "tr"
-                ? "KALDIRMA OPERASYONU DENETİM RAPORU"
-                : "LIFTING OPERATION INSPECTION REPORT"}
+                ? "LOTO DOĞRULAMA DENETİM RAPORU"
+                : "LOTO VERIFICATION INSPECTION REPORT"}
             </h1>
 
             <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-cyan-600">
@@ -771,7 +694,7 @@ export default function LiftingChecklist({ locale }: Props) {
               ? "Profesyonel HSE Kaynağı"
               : "Professional HSE Resource"}
 
-            {"  •  SRN-INS-LFT-001  •  Rev. 2.0"}
+            {"  •  SRN-INS-LOTO-001  •  Rev. 2.0"}
           </div>
 
         </section>
@@ -1191,17 +1114,23 @@ export default function LiftingChecklist({ locale }: Props) {
           </div>
         </section>
 
-        <div data-checklist-analysis className="scroll-mt-8 print:hidden">
+        <div
+          data-checklist-analysis
+          className="scroll-mt-8"
+        >
           {analysisOpened && (
             <div className="mt-8">
               {analysis ? (
-                <ChecklistAnalysisPanel locale={locale} analysis={analysis} />
+                <ChecklistAnalysisPanel
+                  locale={locale}
+                  analysis={analysis}
+                />
               ) : (
                 <section className="rounded-3xl border border-amber-500/30 bg-slate-900 p-7 text-white">
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">
                     {locale === "tr"
-                      ? "Kaldırma Operasyonu Güvenlik Analizi"
-                      : "Lifting Operations Safety Analysis"}
+                      ? "LOTO Güvenlik Analizi"
+                      : "LOTO Safety Analysis"}
                   </p>
 
                   <h2 className="mt-3 text-2xl font-bold">
@@ -1247,14 +1176,16 @@ export default function LiftingChecklist({ locale }: Props) {
             onClick={runSafetyAnalysis}
             className="rounded-2xl bg-emerald-600 px-6 py-4 font-semibold text-white transition hover:bg-emerald-500"
           >
-            {locale === "tr" ? "🔍 Güvenlik Analizi Yap" : "🔍 Analyze Safety"}
+            {locale === "tr"
+              ? "🔍 Güvenlik Analizi Yap"
+              : "🔍 Analyze Safety"}
           </button>
 
           <PremiumAssessmentButton locale={locale} />
 
           <button
             type="button"
-            onClick={printInspection}
+            onClick={() => window.print()}
             className="rounded-2xl bg-blue-600 px-6 py-4 font-semibold text-white transition hover:bg-blue-500"
           >
             {t.print}

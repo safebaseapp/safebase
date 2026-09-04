@@ -2,7 +2,7 @@
 
 import "../sernem-print.css";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { checklistItems } from "./checklistData";
 import { labels } from "./labels";
 import type { Answer, CorrectiveAction, Props } from "./types";
@@ -13,10 +13,14 @@ import {
   type ChecklistAnalysisResult,
   type ChecklistAnswer,
 } from "../../../../lib/ai/analyzeChecklist";
+import { trackEvent } from "@/lib/analytics";
 
 export default function WorkAtHeightChecklist({ locale }: Props) {
   const t = labels[locale];
   const items = checklistItems[locale];
+
+  const checklistStartedTracked = useRef(false);
+  const checklistCompletedTracked = useRef(false);
 
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [comments, setComments] = useState("");
@@ -140,10 +144,61 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
   const sections = Array.from(new Set(items.map((item) => item.section)));
 
   function updateAnswer(id: string, answer: Exclude<Answer, null>) {
-    setAnswers((current) => ({
-      ...current,
+    if (!checklistStartedTracked.current) {
+      trackEvent("checklist_started", {
+        checklist_type: "work_at_height",
+        locale,
+        total_items: items.length,
+        source: "inspection_checklist",
+      });
+      checklistStartedTracked.current = true;
+    }
+
+    const nextAnswers = {
+      ...answers,
       [id]: answer,
-    }));
+    };
+
+    const nextAnsweredCount = items.filter(
+      (item) =>
+        nextAnswers[item.id] !== null &&
+        nextAnswers[item.id] !== undefined,
+    ).length;
+
+    if (
+      nextAnsweredCount === items.length &&
+      !checklistCompletedTracked.current
+    ) {
+      const nextApplicable = items.filter(
+        (item) => nextAnswers[item.id] !== "na",
+      );
+
+      const nextYesCount = nextApplicable.filter(
+        (item) => nextAnswers[item.id] === "yes",
+      ).length;
+
+      const nextNoCount = items.filter(
+        (item) => nextAnswers[item.id] === "no",
+      ).length;
+
+      const nextScore =
+        nextApplicable.length > 0
+          ? Math.round((nextYesCount / nextApplicable.length) * 100)
+          : 0;
+
+      trackEvent("checklist_completed", {
+        checklist_type: "work_at_height",
+        locale,
+        total_items: items.length,
+        compliance_score: nextScore,
+        findings_count: nextNoCount,
+        source: "inspection_checklist",
+      });
+
+      checklistCompletedTracked.current = true;
+    }
+
+    setAnswers(nextAnswers);
 
     if (answer === "no") {
       setCorrectiveActions((current) => ({
@@ -186,6 +241,16 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
   }
 
   function runSafetyAnalysis() {
+    trackEvent("ai_assessment_used", {
+      assessment_type: "work_at_height_checklist",
+      locale,
+      answered_count: answeredCount,
+      total_items: items.length,
+      findings_count: noCount,
+      critical_findings: criticalFailures.length,
+      source: "inspection_checklist",
+    });
+
     setAnalysisOpened(true);
     setAnalysisError(null);
 
@@ -234,7 +299,22 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
     }, 100);
   }
 
+  function printInspection() {
+    trackEvent("pdf_downloaded", {
+      document_type: "work_at_height_inspection",
+      locale,
+      completion_rate: progress,
+      compliance_score: score,
+      findings_count: noCount,
+      source: "inspection_checklist",
+    });
+
+    window.print();
+  }
+
   function resetInspection() {
+    checklistStartedTracked.current = false;
+    checklistCompletedTracked.current = false;
     setAnswers({});
     setComments("");
     setCorrectiveActions({});
@@ -1143,7 +1223,7 @@ export default function WorkAtHeightChecklist({ locale }: Props) {
 
           <button
             type="button"
-            onClick={() => window.print()}
+            onClick={printInspection}
             className="rounded-2xl bg-blue-600 px-6 py-4 font-semibold text-white transition hover:bg-blue-500"
           >
             {t.print}

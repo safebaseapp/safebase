@@ -9,7 +9,6 @@ import { riskLibraryPack04 } from "@/lib/risk-library/pack-04";
 import { riskLibraryPack05 } from "@/lib/risk-library/pack-05";
 import { createClient } from "@/utils/supabase/client";
 import PrintButton from "@/components/ui/PrintButton";
-import { trackEvent } from "@/lib/analytics";
 
 type RiskLevel = {
   labelTr: string;
@@ -301,13 +300,6 @@ const duplicateRiskItem = (id: string) => {
 
   /* SERNEM_RISK_PRINT_HANDLER_START */
   const handlePrintRiskAssessment = () => {
-    trackEvent("pdf_downloaded", {
-      document_type: "risk_assessment",
-      locale,
-      risk_count: riskItems.length,
-      source: "quick_risk_assessment",
-    });
-
     window.print();
   };
   /* SERNEM_RISK_PRINT_HANDLER_END */
@@ -440,14 +432,6 @@ const duplicateRiskItem = (id: string) => {
     );
 
     if (selectedEntries.length === 0) return;
-
-    trackEvent("risk_assessment_started", {
-      locale: lang,
-      activity_id: selectedLibraryTemplate.id,
-      activity_name: loadedRiskTemplateName,
-      risk_count: selectedEntries.length,
-      source: "risk_library",
-    });
 
     const generated: RiskRegisterItem[] =
       selectedEntries.map((entry) => {
@@ -874,7 +858,7 @@ const duplicateRiskItem = (id: string) => {
 
           <button
             type="button"
-            onClick={handlePrintRiskAssessment}
+            onClick={() => window.print()}
             className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 px-7 py-4 text-base font-black text-white shadow-[0_12px_35px_rgba(37,99,235,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(34,211,238,0.35)]"
           >
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-xl">

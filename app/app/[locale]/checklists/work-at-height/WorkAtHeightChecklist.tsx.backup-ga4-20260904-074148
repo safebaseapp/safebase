@@ -2,25 +2,21 @@
 
 import "../sernem-print.css";
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { checklistItems } from "./checklistData";
 import { labels } from "./labels";
 import type { Answer, CorrectiveAction, Props } from "./types";
 import PremiumAssessmentButton from "../components/PremiumAssessmentButton";
 import ChecklistAnalysisPanel from "../components/ChecklistAnalysisPanel";
 import {
-  analyzeLiftingChecklist,
+  analyzeWorkingAtHeightChecklist,
   type ChecklistAnalysisResult,
   type ChecklistAnswer,
 } from "../../../../lib/ai/analyzeChecklist";
-import { trackEvent } from "@/lib/analytics";
 
-export default function LiftingChecklist({ locale }: Props) {
+export default function WorkAtHeightChecklist({ locale }: Props) {
   const t = labels[locale];
   const items = checklistItems[locale];
-
-  const checklistStartedTracked = useRef(false);
-  const checklistCompletedTracked = useRef(false);
 
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [comments, setComments] = useState("");
@@ -144,61 +140,10 @@ export default function LiftingChecklist({ locale }: Props) {
   const sections = Array.from(new Set(items.map((item) => item.section)));
 
   function updateAnswer(id: string, answer: Exclude<Answer, null>) {
-    if (!checklistStartedTracked.current) {
-      trackEvent("checklist_started", {
-        checklist_type: "lifting",
-        locale,
-        total_items: items.length,
-        source: "inspection_checklist",
-      });
-      checklistStartedTracked.current = true;
-    }
-
-    const nextAnswers = {
-      ...answers,
+    setAnswers((current) => ({
+      ...current,
       [id]: answer,
-    };
-
-    const nextAnsweredCount = items.filter(
-      (item) =>
-        nextAnswers[item.id] !== null &&
-        nextAnswers[item.id] !== undefined,
-    ).length;
-
-    if (
-      nextAnsweredCount === items.length &&
-      !checklistCompletedTracked.current
-    ) {
-      const nextApplicable = items.filter(
-        (item) => nextAnswers[item.id] !== "na",
-      );
-
-      const nextYesCount = nextApplicable.filter(
-        (item) => nextAnswers[item.id] === "yes",
-      ).length;
-
-      const nextNoCount = items.filter(
-        (item) => nextAnswers[item.id] === "no",
-      ).length;
-
-      const nextScore =
-        nextApplicable.length > 0
-          ? Math.round((nextYesCount / nextApplicable.length) * 100)
-          : 0;
-
-      trackEvent("checklist_completed", {
-        checklist_type: "lifting",
-        locale,
-        total_items: items.length,
-        compliance_score: nextScore,
-        findings_count: nextNoCount,
-        source: "inspection_checklist",
-      });
-
-      checklistCompletedTracked.current = true;
-    }
-
-    setAnswers(nextAnswers);
+    }));
 
     if (answer === "no") {
       setCorrectiveActions((current) => ({
@@ -241,16 +186,6 @@ export default function LiftingChecklist({ locale }: Props) {
   }
 
   function runSafetyAnalysis() {
-    trackEvent("ai_assessment_used", {
-      assessment_type: "lifting_checklist",
-      locale,
-      answered_count: answeredCount,
-      total_items: items.length,
-      findings_count: noCount,
-      critical_findings: criticalFailures.length,
-      source: "inspection_checklist",
-    });
-
     setAnalysisOpened(true);
     setAnalysisError(null);
 
@@ -273,19 +208,19 @@ export default function LiftingChecklist({ locale }: Props) {
         };
       });
 
-      const result = analyzeLiftingChecklist(formattedAnswers, locale);
+      const result = analyzeWorkingAtHeightChecklist(formattedAnswers, locale);
 
       setAnalysis(result);
     } catch (error) {
-      console.error("Lifting analysis error:", error);
+      console.error("Working at height analysis error:", error);
       setAnalysis(null);
 
       setAnalysisError(
         error instanceof Error
           ? error.message
           : locale === "tr"
-            ? "Kaldırma operasyonu güvenlik analizi oluşturulamadı."
-            : "Lifting operations safety analysis could not be generated.",
+            ? "Yüksekte çalışma güvenlik analizi oluşturulamadı."
+            : "Working at height safety analysis could not be generated.",
       );
     }
 
@@ -299,22 +234,7 @@ export default function LiftingChecklist({ locale }: Props) {
     }, 100);
   }
 
-  function printInspection() {
-    trackEvent("pdf_downloaded", {
-      document_type: "lifting_inspection",
-      locale,
-      completion_rate: progress,
-      compliance_score: score,
-      findings_count: noCount,
-      source: "inspection_checklist",
-    });
-
-    window.print();
-  }
-
   function resetInspection() {
-    checklistStartedTracked.current = false;
-    checklistCompletedTracked.current = false;
     setAnswers({});
     setComments("");
     setCorrectiveActions({});
@@ -380,7 +300,7 @@ export default function LiftingChecklist({ locale }: Props) {
           </Link>
         </div>
 
-        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 shadow-2xl shadow-blue-950/20 sm:p-10 print:hidden print:border-slate-300 print:bg-white print:shadow-none">
+        <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 shadow-2xl shadow-blue-950/20 sm:p-10 print:hidden">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">
             {t.eyebrow}
           </p>
@@ -424,7 +344,7 @@ export default function LiftingChecklist({ locale }: Props) {
           </div>
 
           <div
-            className={`mt-6 flex flex-col gap-4 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between ${liveSafetyStatus.className} print:hidden`}
+            className={`mt-6 flex flex-col gap-4 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between ${liveSafetyStatus.className} print:border-slate-300 print:bg-white print:text-black`}
           >
             <div className="flex items-center gap-3">
               <span
@@ -448,7 +368,7 @@ export default function LiftingChecklist({ locale }: Props) {
           </div>
         </section>
 
-        
+
         {/* SERNEM PROFESSIONAL PRINT HEADER */}
         <section className="hidden print:block sernem-print-header">
           <div className="mb-5 border-b-[3px] border-cyan-500 bg-[#061a38] px-6 py-5 text-white">
@@ -466,7 +386,7 @@ export default function LiftingChecklist({ locale }: Props) {
 
               <div className="text-right">
                 <p className="text-[10px] font-bold text-white">
-                  SRN-INS-LFT-001
+                  SRN-INS-WAH-001
                 </p>
                 <p className="mt-1 text-[8px] text-slate-300">
                   Rev. 2.0
@@ -478,8 +398,8 @@ export default function LiftingChecklist({ locale }: Props) {
           <div className="mb-5 px-1">
             <h1 className="text-[22px] font-extrabold leading-tight text-[#071a38]">
               {locale === "tr"
-                ? "KALDIRMA OPERASYONU DENETİM RAPORU"
-                : "LIFTING OPERATION INSPECTION REPORT"}
+                ? "YÜKSEKTE ÇALIŞMA DENETİM RAPORU"
+                : "WORKING AT HEIGHT INSPECTION REPORT"}
             </h1>
 
             <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-cyan-600">
@@ -490,7 +410,7 @@ export default function LiftingChecklist({ locale }: Props) {
           </div>
         </section>
 
-<section className="mt-8 grid gap-4 rounded-3xl border border-slate-800 bg-slate-900 p-6 md:grid-cols-2 xl:grid-cols-3 print:border-slate-300 print:bg-white">
+        <section className="mt-8 grid gap-4 rounded-3xl border border-slate-800 bg-slate-900 p-6 md:grid-cols-2 xl:grid-cols-3 print:border-slate-300 print:bg-white">
           {[
             [t.company, t.companyPlaceholder, "text"],
             [t.project, t.projectPlaceholder, "text"],
@@ -507,19 +427,17 @@ export default function LiftingChecklist({ locale }: Props) {
               <input
                 type={type}
                 placeholder={placeholder}
-                className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 print:hidden"
+                className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 print:border-slate-300 print:bg-white print:text-black"
               />
             </label>
           ))}
         </section>
 
-        
+
         {/* SERNEM PROFESSIONAL PRINT REPORT */}
         <section className="hidden print:block sernem-print-report">
           <div className="mt-5 overflow-hidden rounded-lg border border-slate-300">
-
             <div className="grid grid-cols-[32px_minmax(0,1fr)_42px_42px_42px_78px_150px] bg-[#061a38] text-white">
-
               <div className="border-r border-slate-600 px-2 py-3 text-center text-[8px] font-bold">
                 #
               </div>
@@ -557,13 +475,12 @@ export default function LiftingChecklist({ locale }: Props) {
               return (
                 <div
                   key={`print-${section}`}
-                  className="sernem-print-section"
+                  className="sernem-print-section break-inside-avoid"
                 >
                   <div className="border-y border-slate-300 bg-slate-100 px-4 py-2 text-[9px] font-extrabold uppercase text-[#071a38]">
                     <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-teal-600 text-[8px] text-white">
                       {sectionIndex + 1}
                     </span>
-
                     {section}
                   </div>
 
@@ -611,9 +528,7 @@ export default function LiftingChecklist({ locale }: Props) {
                         <div className="flex items-center justify-center border-r border-slate-300 px-2 py-3">
                           <span
                             className={`rounded px-2 py-1 text-[6px] font-extrabold text-white ${
-                              item.critical
-                                ? "bg-red-600"
-                                : "bg-amber-500"
+                              item.critical ? "bg-red-600" : "bg-amber-500"
                             }`}
                           >
                             {item.critical
@@ -638,9 +553,7 @@ export default function LiftingChecklist({ locale }: Props) {
 
                           {selected === "no" && action?.responsible && (
                             <p className="mt-2 text-[6px] font-semibold text-[#64748b]">
-                              {locale === "tr"
-                                ? "Sorumlu: "
-                                : "Responsible: "}
+                              {locale === "tr" ? "Sorumlu: " : "Responsible: "}
                               {action.responsible}
                             </p>
                           )}
@@ -661,7 +574,6 @@ export default function LiftingChecklist({ locale }: Props) {
           </div>
 
           <div className="mt-6 grid grid-cols-5 overflow-hidden rounded-lg border border-slate-300">
-
             {[
               [
                 locale === "tr" ? "Toplam" : "Total",
@@ -682,7 +594,6 @@ export default function LiftingChecklist({ locale }: Props) {
                 <p className="text-[7px] font-semibold uppercase text-slate-500">
                   {label}
                 </p>
-
                 <p className="mt-1 text-[14px] font-extrabold text-[#071a38]">
                   {value}
                 </p>
@@ -691,20 +602,15 @@ export default function LiftingChecklist({ locale }: Props) {
           </div>
 
           <div className="mt-5 rounded-lg border border-slate-300 px-4 py-4">
-
             <p className="text-[8px] font-extrabold uppercase tracking-[0.12em] text-cyan-600">
-              {locale === "tr"
-                ? "Denetim Sonucu"
-                : "Inspection Result"}
+              {locale === "tr" ? "Denetim Sonucu" : "Inspection Result"}
             </p>
 
             <div className="mt-3 grid grid-cols-3 gap-4">
-
               <div>
                 <p className="text-[7px] text-slate-500">
                   {locale === "tr" ? "İlerleme" : "Progress"}
                 </p>
-
                 <p className="mt-1 text-[14px] font-extrabold text-[#071a38]">
                   {progress}%
                 </p>
@@ -714,7 +620,6 @@ export default function LiftingChecklist({ locale }: Props) {
                 <p className="text-[7px] text-slate-500">
                   {locale === "tr" ? "Uygunluk" : "Compliance"}
                 </p>
-
                 <p className="mt-1 text-[14px] font-extrabold text-[#071a38]">
                   {score}%
                 </p>
@@ -722,36 +627,26 @@ export default function LiftingChecklist({ locale }: Props) {
 
               <div>
                 <p className="text-[7px] text-slate-500">
-                  {locale === "tr"
-                    ? "Kritik Bulgu"
-                    : "Critical Findings"}
+                  {locale === "tr" ? "Kritik Bulgu" : "Critical Findings"}
                 </p>
-
                 <p className="mt-1 text-[14px] font-extrabold text-[#071a38]">
                   {criticalFailures.length}
                 </p>
               </div>
-
             </div>
           </div>
 
           <div className="mt-6 grid grid-cols-3 gap-4">
-
             {[
               locale === "tr" ? "Denetçi" : "Inspector",
-              locale === "tr"
-                ? "Saha Sorumlusu"
-                : "Site Supervisor",
+              locale === "tr" ? "Saha Sorumlusu" : "Site Supervisor",
               locale === "tr" ? "Onaylayan" : "Approved By",
             ].map((label) => (
               <div
                 key={label}
                 className="h-24 rounded-lg border border-slate-300 px-4 py-3"
               >
-                <p className="text-[8px] font-bold text-[#071a38]">
-                  {label}
-                </p>
-
+                <p className="text-[8px] font-bold text-[#071a38]">{label}</p>
                 <div className="mt-10 border-t border-slate-400 pt-1 text-[6px] text-slate-500">
                   {locale === "tr"
                     ? "Ad / İmza / Tarih"
@@ -759,23 +654,17 @@ export default function LiftingChecklist({ locale }: Props) {
                 </div>
               </div>
             ))}
-
           </div>
 
           <div className="mt-6 border-t border-slate-300 pt-3 text-[6px] leading-4 text-slate-500">
             <span className="font-bold">SERNEM</span>
-
             {"  •  "}
-
             {locale === "tr"
               ? "Profesyonel HSE Kaynağı"
               : "Professional HSE Resource"}
-
-            {"  •  SRN-INS-LFT-001  •  Rev. 2.0"}
+            {"  •  SRN-INS-WAH-001  •  Rev. 2.0"}
           </div>
-
         </section>
-
 
         <div className="mt-8 space-y-8 print:hidden">
           {sections.map((section) => {
@@ -802,7 +691,7 @@ export default function LiftingChecklist({ locale }: Props) {
                         className="grid gap-5 p-6 lg:grid-cols-[1fr_auto] lg:items-center"
                       >
                         <div className="flex gap-4">
-                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-sm font-bold text-blue-300 print:border print:hidden">
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-sm font-bold text-blue-300 print:border print:border-slate-300 print:bg-white print:text-black">
                             {items.indexOf(item) + 1}
                           </span>
 
@@ -908,7 +797,7 @@ export default function LiftingChecklist({ locale }: Props) {
                                     }
                                     placeholder={t.actionPlaceholder}
                                     rows={3}
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:hidden"
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
                                   />
                                 </label>
 
@@ -931,7 +820,7 @@ export default function LiftingChecklist({ locale }: Props) {
                                       )
                                     }
                                     placeholder={t.responsiblePlaceholder}
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:hidden"
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
                                   />
                                 </label>
 
@@ -953,7 +842,7 @@ export default function LiftingChecklist({ locale }: Props) {
                                         event.target.value,
                                       )
                                     }
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:hidden"
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
                                   />
                                 </label>
 
@@ -975,7 +864,7 @@ export default function LiftingChecklist({ locale }: Props) {
                                           .value as CorrectiveAction["priority"],
                                       )
                                     }
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:hidden"
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
                                   >
                                     <option value="low">{t.priorityLow}</option>
                                     <option value="medium">
@@ -1008,7 +897,7 @@ export default function LiftingChecklist({ locale }: Props) {
                                           .value as CorrectiveAction["status"],
                                       )
                                     }
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:hidden"
+                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-500/10 print:border-slate-300 print:bg-white print:text-black"
                                   >
                                     <option value="open">{t.statusOpen}</option>
                                     <option value="progress">
@@ -1200,8 +1089,8 @@ export default function LiftingChecklist({ locale }: Props) {
                 <section className="rounded-3xl border border-amber-500/30 bg-slate-900 p-7 text-white">
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">
                     {locale === "tr"
-                      ? "Kaldırma Operasyonu Güvenlik Analizi"
-                      : "Lifting Operations Safety Analysis"}
+                      ? "Yüksekte Çalışma Güvenlik Analizi"
+                      : "Working at Height Safety Analysis"}
                   </p>
 
                   <h2 className="mt-3 text-2xl font-bold">
@@ -1236,7 +1125,7 @@ export default function LiftingChecklist({ locale }: Props) {
               onChange={(event) => setComments(event.target.value)}
               placeholder={t.commentsPlaceholder}
               rows={6}
-              className="mt-4 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-4 text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 print:hidden"
+              className="mt-4 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-4 text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 print:border-slate-300 print:bg-white print:text-black"
             />
           </label>
         </section>
@@ -1254,7 +1143,7 @@ export default function LiftingChecklist({ locale }: Props) {
 
           <button
             type="button"
-            onClick={printInspection}
+            onClick={() => window.print()}
             className="rounded-2xl bg-blue-600 px-6 py-4 font-semibold text-white transition hover:bg-blue-500"
           >
             {t.print}
@@ -1269,7 +1158,7 @@ export default function LiftingChecklist({ locale }: Props) {
           </button>
         </div>
 
-        <footer className="mt-10 border-t border-slate-800 py-8 text-sm leading-6 text-slate-500 print:border-slate-300 print:text-slate-700 print:hidden">
+        <footer className="mt-10 border-t border-slate-800 py-8 text-sm leading-6 text-slate-500 print:hidden">
           <p>{t.disclaimer}</p>
           <p className="mt-3 font-semibold">{t.generated}</p>
         </footer>
