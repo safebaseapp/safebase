@@ -13,65 +13,69 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-const statCards = [
+const workspaceCards = [
   {
-    icon: "✅",
-    value: "0",
-    en: "Completed inspections",
-    tr: "Tamamlanan denetimler",
+    code: "PDF",
+    enTitle: "Company-branded documents",
+    trTitle: "Şirket markalı dokümanlar",
+    enText: "Generate professional HSE PDFs with your company identity.",
+    trText: "Şirket kimliğinizle profesyonel HSE PDF'leri oluşturun.",
   },
   {
-    icon: "🤖",
-    value: "0",
-    en: "AI assessments",
-    tr: "AI değerlendirmeleri",
+    code: "RA",
+    enTitle: "Risk workspace",
+    trTitle: "Risk çalışma alanı",
+    enText: "Create, save and manage professional risk assessments.",
+    trText: "Profesyonel risk analizleri oluşturun, kaydedin ve yönetin.",
   },
   {
-    icon: "📚",
-    value: "0",
-    en: "Saved resources",
-    tr: "Kaydedilen kaynaklar",
+    code: "FC",
+    enTitle: "Field controls",
+    trTitle: "Saha kontrolleri",
+    enText: "Use structured inspection, verification and sign-off workflows.",
+    trText: "Denetim, doğrulama ve onay süreçlerini yapılandırılmış şekilde yönetin.",
   },
   {
-    icon: "📥",
-    value: "0",
-    en: "Downloads",
-    tr: "İndirmeler",
+    code: "AI",
+    enTitle: "HSE intelligence",
+    trTitle: "HSE zekâ desteği",
+    enText: "Use AI-assisted guidance across your HSE workflow.",
+    trText: "HSE süreçlerinizde AI destekli rehberlik kullanın.",
   },
 ];
 
 const quickActions = [
   {
-    icon: "📝",
-    enTitle: "Start an inspection",
-    trTitle: "Denetim başlat",
-    enText: "Open a professional HSE checklist.",
-    trText: "Profesyonel bir HSE kontrol listesi aç.",
+    code: "RA",
+    enTitle: "Create Risk Assessment",
+    trTitle: "Risk Analizi Oluştur",
+    enText: "Build and save a structured professional risk assessment.",
+    trText: "Yapılandırılmış profesyonel risk analizi oluşturun ve kaydedin.",
+    href: "/tools/quick-risk-assessment",
+  },
+  {
+    code: "TB",
+    enTitle: "Toolbox Talks",
+    trTitle: "Toolbox Talk",
+    enText: "Open field-ready toolbox talks and premium company PDFs.",
+    trText: "Saha kullanımına hazır toolbox içeriklerini ve şirket PDF'lerini açın.",
+    href: "/toolbox",
+  },
+  {
+    code: "CL",
+    enTitle: "Inspections",
+    trTitle: "Denetimler",
+    enText: "Run professional HSE checklists and field inspections.",
+    trText: "Profesyonel HSE kontrol listeleri ve saha denetimleri uygulayın.",
     href: "/checklists",
   },
   {
-    icon: "🤖",
-    enTitle: "Ask AI Assistant",
-    trTitle: "AI asistana sor",
-    enText: "Get structured HSE guidance.",
-    trText: "Yapılandırılmış HSE desteği al.",
+    code: "AI",
+    enTitle: "AI Assistant",
+    trTitle: "AI Asistan",
+    enText: "Get structured HSE guidance for practical site situations.",
+    trText: "Sahadaki pratik durumlar için yapılandırılmış HSE desteği alın.",
     href: "/ai-assistant",
-  },
-  {
-    icon: "📚",
-    enTitle: "Knowledge Base",
-    trTitle: "Bilgi merkezi",
-    enText: "Browse practical safety guides.",
-    trText: "Pratik güvenlik rehberlerini incele.",
-    href: "/knowledge",
-  },
-  {
-    icon: "📄",
-    enTitle: "Download resources",
-    trTitle: "Kaynak indir",
-    enText: "Access templates and documents.",
-    trText: "Şablonlara ve dokümanlara ulaş.",
-    href: "/templates",
   },
 ];
 
@@ -129,76 +133,111 @@ export default async function DashboardPage({ params }: Props) {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
-        <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.22em] text-blue-400">
-              {isTurkish ? "SERNEM çalışma alanı" : "SERNEM workspace"}
-            </p>
+        <section className="relative mb-8 overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl shadow-black/20 sm:p-8">
+          <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
+          <div className="pointer-events-none absolute bottom-0 left-1/3 h-44 w-44 rounded-full bg-cyan-500/5 blur-3xl" />
 
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                {isTurkish ? "Tekrar hoş geldin," : "Welcome back,"}
+          <div className="relative flex flex-col gap-7 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-3xl">
+              <div className="mb-4 flex flex-wrap items-center gap-3">
+                <span className="rounded-full border border-blue-400/30 bg-blue-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-blue-300">
+                  {isPremium
+                    ? isTurkish
+                      ? "Premium Workspace"
+                      : "Premium Workspace"
+                    : isTurkish
+                      ? "SERNEM Workspace"
+                      : "SERNEM Workspace"}
+                </span>
+
+                {isPremium && (
+                  <span className="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                    {isTurkish ? "Premium aktif" : "Premium active"}
+                  </span>
+                )}
+              </div>
+
+              <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+                {isTurkish ? "Hoş geldin, " : "Welcome back, "}
+                <span className="text-blue-400">{displayName}</span>
               </h1>
 
-              <p className="mt-2 text-2xl font-semibold text-blue-400">
-                {displayName} 👋
+              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-400">
+                {isPremium
+                  ? isTurkish
+                    ? "Risk analizleri, saha kontrolleri, şirket markalı HSE dokümanları ve AI destekli araçlar için profesyonel çalışma alanınız."
+                    : "Your professional workspace for risk assessments, field controls, company-branded HSE documents and AI-assisted tools."
+                  : isTurkish
+                    ? "Profesyonel HSE araçlarınızı, denetimlerinizi ve dokümanlarınızı tek merkezden yönetin."
+                    : "Manage your professional HSE tools, inspections and documents from one workspace."}
               </p>
             </div>
 
-            <p className="mt-3 max-w-2xl text-slate-400">
-              {isTurkish
-                ? "Denetimlerini, AI değerlendirmelerini ve profesyonel HSE kaynaklarını tek merkezden yönet."
-                : "Manage your inspections, AI assessments and professional HSE resources from one workspace."}
-            </p>
+            <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <Link
+                href={`/${locale}/tools/quick-risk-assessment`}
+                className="inline-flex min-w-[190px] items-center justify-center rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-500"
+              >
+                {isTurkish ? "+ Risk Analizi Oluştur" : "+ Create Risk Assessment"}
+              </Link>
+
+              <Link
+                href={`/${locale}/toolbox`}
+                className="inline-flex min-w-[190px] items-center justify-center rounded-xl border border-slate-700 bg-slate-950/70 px-5 py-3 font-semibold text-slate-200 transition hover:border-blue-500/50 hover:bg-slate-900"
+              >
+                {isTurkish ? "Toolbox Talk Aç" : "Open Toolbox Talks"}
+              </Link>
+
+              <LogoutButton locale={locale} />
+            </div>
           </div>
+        </section>
 
-          <div className="flex flex-col gap-3 sm:flex-row">
-          <Link
-         href={`/${locale}/checklists`}
-          className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-500"
-          >
-          {isTurkish ? "+ Yeni denetim" : "+ New inspection"}
-         </Link>
-
-         <LogoutButton locale={locale} />
-         </div>
-         </div>
-
-         <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {statCards.map((card) => (
+        <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {workspaceCards.map((card) => (
             <article
-              key={card.en}
-              className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg shadow-black/10"
+              key={card.enTitle}
+              className="group rounded-2xl border border-slate-800 bg-slate-900/65 p-5 transition hover:border-blue-500/40 hover:bg-slate-900"
             >
               <div className="mb-5 flex items-center justify-between">
-                <span className="text-2xl">{card.icon}</span>
-                <span className="rounded-full border border-slate-700 bg-slate-950 px-2.5 py-1 text-xs font-semibold text-slate-400">
-                  {isTurkish ? "Toplam" : "Total"}
-                </span>
+                <div className="flex h-11 min-w-11 items-center justify-center rounded-xl border border-blue-500/20 bg-blue-500/10 px-3 text-xs font-black tracking-[0.12em] text-blue-300">
+                  {card.code}
+                </div>
+
+                {isPremium && (
+                  <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">
+                    Premium
+                  </span>
+                )}
               </div>
 
-              <p className="text-3xl font-bold">{card.value}</p>
+              <h2 className="font-semibold text-white">
+                {isTurkish ? card.trTitle : card.enTitle}
+              </h2>
 
-              <p className="mt-2 text-sm text-slate-400">
-                {isTurkish ? card.tr : card.en}
+              <p className="mt-2 text-sm leading-6 text-slate-400">
+                {isTurkish ? card.trText : card.enText}
               </p>
             </article>
           ))}
         </section>
 
-        <div className="mt-8 grid gap-6 xl:grid-cols-[1.6fr_0.8fr]">
+        <div className="mt-8 grid gap-6 xl:grid-cols-[1.55fr_0.85fr]">
           <section className="rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
-            <div className="mb-5 flex items-center justify-between">
-              <div>
-                <h2 className="text-xl font-bold">
-                  {isTurkish ? "Hızlı işlemler" : "Quick actions"}
-                </h2>
-                <p className="mt-1 text-sm text-slate-400">
-                  {isTurkish
-                    ? "En çok kullanılan SERNEM araçlarına ulaş."
-                    : "Access your most-used SERNEM tools."}
-                </p>
-              </div>
+            <div className="mb-6">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-400">
+                {isTurkish ? "Çalışma merkezi" : "Control center"}
+              </p>
+
+              <h2 className="mt-2 text-xl font-bold">
+                {isTurkish ? "Hızlı işlemler" : "Quick actions"}
+              </h2>
+
+              <p className="mt-2 text-sm text-slate-400">
+                {isTurkish
+                  ? "Sahada ve ofiste en sık kullandığınız HSE süreçlerine doğrudan erişin."
+                  : "Jump directly into the HSE workflows you use most in the field and office."}
+              </p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
@@ -206,10 +245,16 @@ export default async function DashboardPage({ params }: Props) {
                 <Link
                   key={action.enTitle}
                   href={`/${locale}${action.href}`}
-                  className="group rounded-2xl border border-slate-800 bg-slate-950/70 p-5 transition hover:border-blue-500/60 hover:bg-slate-900"
+                  className="group rounded-2xl border border-slate-800 bg-slate-950/60 p-5 transition hover:-translate-y-0.5 hover:border-blue-500/50 hover:bg-slate-950"
                 >
-                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 text-xl">
-                    {action.icon}
+                  <div className="mb-5 flex items-center justify-between">
+                    <div className="flex h-10 min-w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 px-2 text-[11px] font-black tracking-[0.1em] text-blue-300 transition group-hover:border-blue-500/40">
+                      {action.code}
+                    </div>
+
+                    <span className="text-lg text-slate-600 transition group-hover:translate-x-1 group-hover:text-blue-400">
+                      →
+                    </span>
                   </div>
 
                   <h3 className="font-semibold text-white transition group-hover:text-blue-300">
@@ -224,65 +269,110 @@ export default async function DashboardPage({ params }: Props) {
             </div>
           </section>
 
-          <aside className="rounded-3xl border border-blue-500/30 bg-gradient-to-b from-blue-500/15 to-slate-900 p-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300">
-              {isTurkish ? "Mevcut plan" : "Current plan"}
-            </p>
+          <aside className="relative overflow-hidden rounded-3xl border border-blue-500/30 bg-gradient-to-b from-blue-500/15 via-slate-900 to-slate-950 p-6">
+            <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-blue-500/15 blur-3xl" />
 
-            <div className="mt-5 flex items-end justify-between">
-              <div>
-                <p className="text-3xl font-bold">
-                  {isPremium
-                    ? isTurkish
-                      ? "Premium"
-                      : "Premium"
-                    : isTurkish
-                      ? "Ücretsiz"
-                      : "Free"}
-                </p>
-                <p className="mt-2 text-sm text-slate-400">
-                  {isPremium
-                    ? isTurkish
-                      ? "Tüm premium SERNEM özelliklerine erişim"
-                      : "Access to all premium SERNEM features"
-                    : isTurkish
-                      ? "Temel SERNEM araçlarına erişim"
-                      : "Access to core SERNEM tools"}
-                </p>
+            <div className="relative">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-300">
+                {isTurkish ? "Workspace planı" : "Workspace plan"}
+              </p>
+
+              <div className="mt-4 flex items-start justify-between gap-4">
+                <div>
+                  <h2 className="text-3xl font-bold text-white">
+                    {isPremium ? "Premium" : isTurkish ? "Ücretsiz" : "Free"}
+                  </h2>
+
+                  <p className="mt-2 text-sm leading-6 text-slate-400">
+                    {isPremium
+                      ? isTurkish
+                        ? "Profesyonel HSE dokümanları ve gelişmiş çalışma alanı aktif."
+                        : "Professional HSE documents and advanced workspace features are active."
+                      : isTurkish
+                        ? "Temel SERNEM araçları aktif."
+                        : "Core SERNEM tools are active."}
+                  </p>
+                </div>
+
+                <span
+                  className={`rounded-full px-3 py-1 text-xs font-bold ${
+                    isPremium
+                      ? "border border-emerald-400/20 bg-emerald-500/10 text-emerald-300"
+                      : "border border-slate-700 bg-slate-900 text-slate-400"
+                  }`}
+                >
+                  {isPremium ? "ACTIVE" : "FREE"}
+                </span>
               </div>
 
-              <span className="rounded-full bg-blue-500/15 px-3 py-1 text-xs font-bold text-blue-300">
-                {isPremium ? "PREMIUM" : "FREE"}
-              </span>
+              <div className="my-6 h-px bg-slate-800" />
+
+              <ul className="space-y-3 text-sm text-slate-300">
+                <li className="flex gap-3">
+                  <span className="font-bold text-emerald-400">✓</span>
+                  <span>
+                    {isTurkish
+                      ? "Şirket logolu Premium PDF dokümanları"
+                      : "Company-branded Premium PDF documents"}
+                  </span>
+                </li>
+
+                <li className="flex gap-3">
+                  <span className="font-bold text-emerald-400">✓</span>
+                  <span>
+                    {isTurkish
+                      ? "Doküman referansı ve revizyon kontrolü"
+                      : "Document reference and revision control"}
+                  </span>
+                </li>
+
+                <li className="flex gap-3">
+                  <span className="font-bold text-emerald-400">✓</span>
+                  <span>
+                    {isTurkish
+                      ? "Profesyonel risk ve saha araçları"
+                      : "Professional risk and field tools"}
+                  </span>
+                </li>
+
+                <li className="flex gap-3">
+                  <span className="font-bold text-emerald-400">✓</span>
+                  <span>
+                    {isTurkish
+                      ? "AI destekli HSE çalışma alanı"
+                      : "AI-assisted HSE workspace"}
+                  </span>
+                </li>
+              </ul>
+
+              {isPremium ? (
+                <a
+                  href="#company-branding"
+                  className="mt-7 inline-flex w-full items-center justify-center rounded-xl border border-blue-400/30 bg-blue-500/10 px-4 py-3 font-semibold text-blue-200 transition hover:bg-blue-500/20"
+                >
+                  {isTurkish
+                    ? "Şirket Kimliğini Yönet"
+                    : "Manage Company Branding"}
+                </a>
+              ) : (
+                <Link
+                  href={`/${locale}/upgrade`}
+                  className="mt-7 inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-500"
+                >
+                  {isTurkish ? "Premium'a Geç" : "Upgrade to Premium"}
+                </Link>
+              )}
             </div>
-
-            <div className="my-6 h-px bg-slate-800" />
-
-            <ul className="space-y-3 text-sm text-slate-300">
-              <li>✓ {isTurkish ? "HSE hesaplayıcıları" : "HSE calculators"}</li>
-              <li>
-                ✓ {isTurkish ? "Temel kontrol listeleri" : "Core checklists"}
-              </li>
-              <li>
-                ✓{" "}
-                {isTurkish ? "Bilgi merkezi erişimi" : "Knowledge Base access"}
-              </li>
-            </ul>
-
-            <button
-              type="button"
-              className="mt-7 w-full rounded-xl border border-blue-400/40 bg-blue-500/10 px-4 py-3 font-semibold text-blue-200 transition hover:bg-blue-500/20"
-            >
-              {isTurkish ? "PRO özelliklerini keşfet" : "Explore PRO features"}
-            </button>
           </aside>
         </div>
 
-        <CompanyBranding
-          locale={locale}
-          userId={user.id}
-          isPremium={isPremium}
-        />
+                <div id="company-branding" className="scroll-mt-24">
+          <CompanyBranding
+            locale={locale}
+            userId={user.id}
+            isPremium={isPremium}
+          />
+        </div>
 
         <section className="mt-6 rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
