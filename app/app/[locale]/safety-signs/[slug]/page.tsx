@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SignRenderer from "@/components/safety-signs/SignRenderer";
+import SignDownloadButtons from "@/components/safety-signs/SignDownloadButtons";
 import { getSafetySign } from "@/lib/safety-signs/data";
 
 type Props = {
@@ -61,33 +62,16 @@ export default async function SafetySignDetailPage({
               {sign.description[locale]}
             </p>
 
-            <div className="mt-7 space-y-3">
-              <button
-                type="button"
-                className="w-full rounded-xl bg-blue-600 px-5 py-4 font-black text-white"
-              >
-                A4 PDF
-              </button>
-
-              <button
-                type="button"
-                className="w-full rounded-xl bg-emerald-600 px-5 py-4 font-black text-white"
-              >
-                A3 PDF
-              </button>
-
-              <button
-                type="button"
-                className="w-full rounded-xl border border-slate-300 px-5 py-4 font-black text-slate-900"
-              >
-                PNG
-              </button>
-            </div>
+            <SignDownloadButtons
+              signCode={sign.code}
+              signTitle={sign.title[locale]}
+              locale={locale}
+            />
 
             <p className="mt-6 text-xs font-semibold leading-5 text-slate-500">
               {isTurkish
-                ? "İndirme ve yazdırma işlevlerini sonraki adımda levha motoruna bağlayacağız."
-                : "Download and print actions will be connected to the sign engine in the next step."}
+                ? "Profesyonel kullanıma uygun A4, A3 ve PNG formatlarında indirin."
+                : "Download in A4, A3 or PNG format for professional use."}
             </p>
           </aside>
         </div>

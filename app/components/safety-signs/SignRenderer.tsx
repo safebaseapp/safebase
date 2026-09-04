@@ -22,7 +22,10 @@ export default function SignRenderer({
     : "text-[38px]";
 
   return (
-    <div className="flex h-full w-full flex-col overflow-hidden rounded-[18px] border-[6px] border-white bg-white shadow-[0_20px_55px_rgba(0,0,0,0.34)]">
+    <div
+      data-safety-sign-renderer
+      className="flex h-full w-full flex-col overflow-hidden rounded-[18px] border-[6px] border-white bg-white shadow-[0_20px_55px_rgba(0,0,0,0.34)]"
+    >
       <div className="flex min-h-0 flex-[72] items-center justify-center bg-white px-[8%] py-[7%]">
         <div className="h-full w-full">
           <SignIcon icon={sign.icon} />

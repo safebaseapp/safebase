@@ -33,6 +33,12 @@ const categoryMeta: Record<
     icon: "🖼️",
     accent: "text-orange-400",
   },
+  "safety-signs": {
+    tr: "Güvenlik Levhası",
+    en: "Safety Sign",
+    icon: "⚠️",
+    accent: "text-amber-400",
+  },
   checklists: {
     tr: "Kontrol Listesi",
     en: "Checklist",
@@ -169,6 +175,12 @@ export default function DownloadsClient() {
         icon: "📄",
       },
       {
+        id: "safety-signs",
+        tr: "Güvenlik Levhaları",
+        en: "Safety Signs",
+        icon: "⚠️",
+      },
+      {
         id: "checklists",
         tr: "Kontrol Listeleri",
         en: "Checklists",
@@ -275,6 +287,8 @@ export default function DownloadsClient() {
         return "bg-emerald-600 hover:bg-emerald-500";
       case "posters":
         return "bg-red-600 hover:bg-red-500";
+      case "safety-signs":
+        return "bg-amber-600 hover:bg-amber-500";
       case "guides":
         return "bg-blue-600 hover:bg-blue-500";
       default:
@@ -292,7 +306,15 @@ export default function DownloadsClient() {
 
   const downloadText = (item: ResourceItem) => {
     if (item.href && !item.pdfUrl && !item.docxUrl) {
-      return isTurkish ? "Posteri Aç" : "Open Poster";
+      if (item.category === "safety-signs") {
+        return isTurkish ? "Levhayı Aç" : "Open Sign";
+      }
+
+      if (item.category === "posters") {
+        return isTurkish ? "Posteri Aç" : "Open Poster";
+      }
+
+      return isTurkish ? "Kaynağı Aç" : "Open Resource";
     }
 
     if (item.docxUrl) {
@@ -340,8 +362,8 @@ export default function DownloadsClient() {
 
             <p className="mx-auto mt-5 max-w-[700px] text-[17px] leading-7 text-slate-400">
               {isTurkish
-                ? "Sahada kullanılmak üzere hazırlanmış toolbox talk'lara, posterlere, kontrol listelerine, rehberlere ve profesyonel HSE şablonlarına tek merkezden erişin."
-                : "Access field-ready toolbox talks, posters, checklists, guides and professional HSE templates from one central library."}
+                ? "Sahada kullanılmak üzere hazırlanmış toolbox talk'lara, posterlere, güvenlik levhalarına, kontrol listelerine, rehberlere ve profesyonel HSE şablonlarına tek merkezden erişin."
+                : "Access field-ready toolbox talks, posters, safety signs, checklists, guides and professional HSE templates from one central library."}
             </p>
 
             <div className="mx-auto mt-7 max-w-[610px]">
@@ -358,8 +380,8 @@ export default function DownloadsClient() {
                   }
                   placeholder={
                     isTurkish
-                      ? "Toolbox, poster, checklist veya rehber ara..."
-                      : "Search toolbox talks, posters, checklists or guides..."
+                      ? "Toolbox, poster, güvenlik levhası, checklist veya rehber ara..."
+                      : "Search toolbox talks, posters, safety signs, checklists or guides..."
                   }
                   className="w-full bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
                 />

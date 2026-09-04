@@ -1,9 +1,11 @@
 import { posters } from "@/app/[locale]/posters/poster-data";
+import { safetySigns } from "@/lib/safety-signs/data";
 import { allGuides } from "@/app/[locale]/knowledge-base/data/guides/all-guides";
 
 export type ResourceCategory =
   | "toolbox-talks"
   | "posters"
+  | "safety-signs"
   | "checklists"
   | "guides";
 
@@ -418,6 +420,22 @@ export const RESOURCE_ITEMS: ResourceItem[] = [
         },
       })
     ),
+
+  // SAFETY SIGNS — live SERNEM safety-sign library
+  ...safetySigns.map(
+    (sign): ResourceItem => ({
+      id: `safety-sign-${sign.slug}`,
+      title: sign.title,
+      description: sign.description,
+      category: "safety-signs",
+      icon: "⚠️",
+      format: "WEB",
+      href: {
+        tr: `/tr/safety-signs/${sign.slug}`,
+        en: `/en/safety-signs/${sign.slug}`,
+      },
+    })
+  ),
 
   // CHECKLISTS
   {

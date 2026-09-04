@@ -168,10 +168,18 @@ export default function LocalizedNavbar({ locale }: Props) {
     {
       href: "/posters",
       icon: "▧",
-      title: isTurkish ? "Poster & Levhalar" : "Posters & Signs",
+      title: isTurkish ? "Posterler" : "Posters",
       description: isTurkish
-        ? "Profesyonel saha posterleri ve güvenlik levhaları."
-        : "Professional field posters and safety signs.",
+        ? "Profesyonel ve yazdırılabilir HSE saha posterleri."
+        : "Professional printable HSE field posters.",
+    },
+    {
+      href: "/safety-signs",
+      icon: "!",
+      title: isTurkish ? "Güvenlik Levhaları" : "Safety Signs",
+      description: isTurkish
+        ? "A4, A3 ve PNG formatlarında güvenlik levhaları."
+        : "Safety signs available in A4, A3 and PNG formats.",
     },
     {
       href: "/downloads",

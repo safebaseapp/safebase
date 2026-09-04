@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { toolboxData } from "@/lib/toolbox/toolbox-data";
 import { allRiskActivities } from "@/lib/risk-library/all-activities";
+import { safetySigns } from "@/lib/safety-signs/data";
 
 const baseUrl = "https://www.sernem.com";
 
@@ -79,9 +80,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }))
   );
 
+
+  const safetySignPages: MetadataRoute.Sitemap = locales.flatMap(
+    (locale) =>
+      safetySigns.map((sign) => ({
+        url: `${baseUrl}/${locale}/safety-signs/${sign.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.8,
+      }))
+  );
+
   return [
     ...staticPages,
     ...toolboxPages,
     ...riskAssessmentPages,
+    ...safetySignPages,
   ];
 }

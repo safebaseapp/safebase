@@ -251,7 +251,7 @@ export default function PremiumAssessmentButton({
                 "
               >
                 <Link
-                  href="/pricing"
+                  href="/upgrade"
                   onClick={() => setIsOpen(false)}
                   className="
                     inline-flex flex-1 items-center justify-center
