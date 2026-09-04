@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,6 +55,18 @@ export default async function RootLayout({
     >
       <body className="antialiased bg-slate-950 text-white">
         {children}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-B4TTF1KM9J"
+          strategy="afterInteractive"
+        />
+        <Script id="sernem-ga4" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-B4TTF1KM9J');
+          `}
+        </Script>
       </body>
     </html>
   );
