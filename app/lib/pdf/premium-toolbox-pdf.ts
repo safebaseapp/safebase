@@ -4,11 +4,20 @@ import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 
 type Locale = "tr" | "en";
 
+type DocumentProfile = {
+  projectName?: string;
+  siteName?: string;
+  workArea?: string;
+  presentedBy?: string;
+  revision?: string;
+};
+
 type GeneratePremiumToolboxPdfArgs = {
   slug: string;
   locale: Locale;
   logoBytes: Uint8Array;
   logoMime: string;
+  documentProfile?: DocumentProfile;
 };
 
 const PAGE_W = 794;
@@ -253,6 +262,7 @@ function header({
   duration,
   docRef,
   revision,
+  locale,
 }: {
   logoData: string;
   title: string;
@@ -260,7 +270,11 @@ function header({
   duration: string;
   docRef: string;
   revision: string;
+  locale: Locale;
 }) {
+  const docRefLabel = locale === "tr" ? "DOK. REF" : "DOC REF";
+  const revLabel = locale === "tr" ? "REV" : "REV";
+
   return `
     <rect
       x="0"
@@ -302,7 +316,7 @@ function header({
       y="122"
       font-family="Arial, Helvetica, sans-serif"
       font-size="14"
-      fill="#d6e0ea"
+      fill="#e8eef5"
     >${esc(subtitle)}</text>
 
     <!-- DOCUMENT CONTROL -->
@@ -322,11 +336,11 @@ function header({
       font-size="10"
       font-weight="800"
       letter-spacing="1.1"
-      fill="#c0cfdf"
-    >DOC REF</text>
+      fill="#dce6f0"
+    >${esc(docRefLabel)}</text>
 
     <text
-      x="125"
+      x="139"
       y="156"
       font-family="Arial, Helvetica, sans-serif"
       font-size="9.5"
@@ -349,8 +363,8 @@ function header({
       font-size="9.5"
       font-weight="700"
       letter-spacing="1"
-      fill="#c0cfdf"
-    >REV</text>
+      fill="#dce6f0"
+    >${esc(revLabel)}</text>
 
     <text
       x="340"
@@ -543,6 +557,7 @@ function pageOne(
       duration: asString(c.duration),
       docRef,
       revision,
+      locale,
     })}
 
     <!-- OBJECTIVE -->
@@ -574,12 +589,13 @@ function pageOne(
       font-weight="800"
       letter-spacing="2.4"
       fill="#1785ff"
-    >${esc(asString(c.objective_title, "OBJECTIVE"))}</text>
+    >${esc(locale === "tr" ? "AMAÇ" : asString(c.objective_title, "OBJECTIVE"))}</text>
 
-    ${paragraph(objective, 72, 261, 88, {
-      fontSize: 15,
-      lineHeight: 21,
-      fill: "#24374d",
+    ${paragraph(objective, 72, 258, 96, {
+      fontSize: 13.2,
+      lineHeight: 18,
+      fill: "#17283c",
+      weight: 500,
       maxLines: 3,
     })}
 
@@ -591,7 +607,7 @@ function pageOne(
       font-size="12"
       font-weight="800"
       letter-spacing="2.2"
-      fill="#475569"
+      fill="#334155"
     >${esc(focusTitle)}</text>
 
     ${hazards.slice(0, 3).map((hazard, index) => {
@@ -626,12 +642,12 @@ function pageOne(
           fill="#65bfff"
         >0${index + 1}</text>
 
-        ${paragraph(hazard, x + 57, 392, 26, {
-          fontSize: 11.5,
-          lineHeight: 16,
+        ${paragraph(hazard, x + 57, 390, 29, {
+          fontSize: 10.3,
+          lineHeight: 14,
           weight: 700,
           fill: "#ffffff",
-          maxLines: 3,
+          maxLines: 4,
         })}
       `;
     }).join("")}
@@ -666,10 +682,10 @@ function pageOne(
     />
 
     ${bulletList(explanation, 72, 561, {
-      maxChars: 49,
-      fontSize: 10.1,
-      lineHeight: 13.2,
-      gap: 3,
+      maxChars: 51,
+      fontSize: 9.7,
+      lineHeight: 12.6,
+      gap: 2,
       dotColor: "#1785ff",
       maxItems: 3,
     })}
@@ -693,7 +709,7 @@ function pageOne(
       font-size="13"
       font-weight="800"
       fill="#c2410c"
-    >${esc(asString(c.scenario_title, "SITE SCENARIO"))}</text>
+    >${esc(locale === "tr" ? "GERÇEKÇİ SAHA SENARYOSU" : asString(c.scenario_title, "SITE SCENARIO"))}</text>
 
     <line
       x1="432"
@@ -704,10 +720,10 @@ function pageOne(
     />
 
     ${bulletList(scenario, 436, 563, {
-      maxChars: 48,
-      fontSize: 10.3,
-      lineHeight: 13.7,
-      gap: 3,
+      maxChars: 50,
+      fontSize: 9.8,
+      lineHeight: 12.8,
+      gap: 2,
       dotColor: "#f97316",
       maxItems: 3,
     })}
@@ -768,12 +784,13 @@ function pageOne(
       font-weight="800"
       letter-spacing="1.7"
       fill="#1d4ed8"
-    >${esc(asString(c.supervisor_title, "SUPERVISOR BRIEF"))}</text>
+    >${esc(locale === "tr" ? "SÜPERVİZÖR KONUŞMA METNİ" : asString(c.supervisor_title, "SUPERVISOR BRIEF"))}</text>
 
-    ${paragraph(supervisor, 70, 968, 103, {
-      fontSize: 11.3,
-      lineHeight: 14.7,
-      fill: "#24364b",
+    ${paragraph(supervisor, 70, 968, 108, {
+      fontSize: 10.7,
+      lineHeight: 13.5,
+      fill: "#17283c",
+      weight: 500,
       maxLines: 5,
     })}
 
@@ -850,21 +867,21 @@ function pageTwo(
           stroke-width="1.8"
         />
 
-        <text
-          x="${x + 42}"
-          y="${y + 25}"
-          font-family="Arial, Helvetica, sans-serif"
-          font-size="11.2"
-          font-weight="600"
-          fill="#24364b"
-        >${esc(item)}</text>
+        ${paragraph(item, x + 42, y + 18, 30, {
+          fontSize: 9.5,
+          lineHeight: 11.5,
+          weight: 650,
+          fill: "#17283c",
+          maxLines: 2,
+        })}
 
         <line
-          x1="${x + 246}"
+          x1="${x + 257}"
           y1="${y + 28}"
           x2="${x + 290}"
           y2="${y + 28}"
-          stroke="#566779"
+          stroke="#334155"
+          stroke-width="1.2"
         />
       `;
     })
@@ -878,6 +895,7 @@ function pageTwo(
       duration: asString(c.duration),
       docRef,
       revision,
+      locale,
     })}
 
     <!-- HAZARD REGISTER -->
@@ -908,7 +926,7 @@ function pageTwo(
       font-size="14"
       font-weight="800"
       fill="#ffffff"
-    >${esc(asString(c.hazards_title, "KEY HAZARDS"))}</text>
+    >${esc(locale === "tr" ? "TEMEL TEHLİKELER" : asString(c.hazards_title, "KEY HAZARDS"))}</text>
 
     ${hazards.slice(0, 8).map((item, index) => {
       const y = 278 + index * 38;
@@ -924,9 +942,9 @@ function pageTwo(
         >${String(index + 1).padStart(2, "0")}</text>
 
         ${paragraph(item, 95, y, 38, {
-          fontSize: 10.8,
-          lineHeight: 14.5,
-          fill: "#1f3147",
+          fontSize: 9.8,
+          lineHeight: 12.8,
+          fill: "#17283c",
           maxLines: 2,
         })}
 
@@ -968,7 +986,7 @@ function pageTwo(
       font-size="14"
       font-weight="800"
       fill="#ffffff"
-    >${esc(asString(c.controls_title, "REQUIRED CONTROLS"))}</text>
+    >${esc(locale === "tr" ? "GEREKLİ KONTROLLER" : asString(c.controls_title, "REQUIRED CONTROLS"))}</text>
 
     ${controls.slice(0, 10).map((item, index) => {
       const y = 274 + index * 31;
@@ -982,9 +1000,9 @@ function pageTwo(
         />
 
         ${paragraph(item, 457, y, 40, {
-          fontSize: 10.4,
-          lineHeight: 13.8,
-          fill: "#1f3147",
+          fontSize: 9.6,
+          lineHeight: 12.4,
+          fill: "#17283c",
           maxLines: 2,
         })}
       `;
@@ -999,7 +1017,7 @@ function pageTwo(
       font-weight="800"
       letter-spacing="1.3"
       fill="#0f172a"
-    >${esc(asString(c.verification_title, "PRE-WORK VERIFICATION"))}</text>
+    >${esc(locale === "tr" ? "İŞ ÖNCESİ DOĞRULAMA" : asString(c.verification_title, "PRE-WORK VERIFICATION"))}</text>
 
     <text
       x="690"
@@ -1009,7 +1027,7 @@ function pageTwo(
       font-size="9.5"
       font-weight="700"
       letter-spacing="1"
-      fill="#475569"
+      fill="#334155"
     >${esc(statusLabel)}</text>
 
     ${verificationRows}
@@ -1058,6 +1076,7 @@ function pageThree(
   locale: Locale,
   docRef: string,
   revision: string,
+  documentProfile?: DocumentProfile,
 ) {
   const fields = asArray(c.fields);
   const questions = asArray(c.questions);
@@ -1070,6 +1089,29 @@ function pageThree(
     fields[3] ?? (locale === "tr" ? "Çalışma alanı" : "Work area"),
   ];
 
+  const projectSite = [
+    documentProfile?.projectName?.trim(),
+    documentProfile?.siteName?.trim(),
+  ]
+    .filter(Boolean)
+    .join(" / ");
+
+  const generatedDate = new Intl.DateTimeFormat(
+    locale === "tr" ? "tr-TR" : "en-GB",
+    {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    },
+  ).format(new Date());
+
+  const fieldValues = [
+    projectSite,
+    generatedDate,
+    documentProfile?.presentedBy?.trim() ?? "",
+    documentProfile?.workArea?.trim() ?? "",
+  ];
+
   const tableHeaders = [
     headers[0] ?? "No",
     headers[1] ?? (locale === "tr" ? "Ad Soyad" : "Full Name"),
@@ -1079,7 +1121,7 @@ function pageThree(
 
   const recordTitle =
     locale === "tr"
-      ? "BRİFİNG KAYDI & ONAY"
+      ? "SAHA BRİFİNGİ KAYIT & ONAY"
       : "BRIEFING RECORD & SIGN-OFF";
 
   const docControlTitle =
@@ -1091,6 +1133,11 @@ function pageThree(
     locale === "tr"
       ? "SÜPERVİZÖR ONAYI"
       : "SUPERVISOR SIGN-OFF";
+
+  const statusText =
+    locale === "tr"
+      ? "DURUM: SAHA BRİFİNGİ"
+      : "STATUS: FIELD BRIEFING";
 
   const rows = Array.from({ length: 12 }, (_, i) => i + 1)
     .map((n, i) => {
@@ -1125,6 +1172,7 @@ function pageThree(
       duration: "",
       docRef,
       revision,
+      locale,
     })}
 
     <!-- PROJECT METADATA -->
@@ -1140,20 +1188,32 @@ function pageThree(
     />
 
     ${[
-      [fieldLabels[0], 68, 229, 68, 259, 330],
-      [fieldLabels[1], 414, 229, 414, 259, 706],
-      [fieldLabels[2], 68, 291, 68, 321, 330],
-      [fieldLabels[3], 414, 291, 414, 321, 706],
-    ].map(([label, tx, ty, x1, ly, x2]) => `
+      [fieldLabels[0], fieldValues[0], 68, 229, 68, 259, 330],
+      [fieldLabels[1], fieldValues[1], 414, 229, 414, 259, 706],
+      [fieldLabels[2], fieldValues[2], 68, 291, 68, 321, 330],
+      [fieldLabels[3], fieldValues[3], 414, 291, 414, 321, 706],
+    ].map(([label, value, tx, ty, x1, ly, x2]) => `
       <text
         x="${tx}"
         y="${ty}"
         font-family="Arial, Helvetica, sans-serif"
-        font-size="10.5"
+        font-size="10"
         font-weight="800"
         letter-spacing="0.8"
         fill="#334155"
       >${esc(label)}</text>
+
+      ${
+        value
+          ? paragraph(String(value), Number(tx), Number(ty) + 23, 36, {
+              fontSize: 11.5,
+              lineHeight: 14,
+              weight: 700,
+              fill: "#0f172a",
+              maxLines: 1,
+            })
+          : ""
+      }
 
       <line
         x1="${x1}"
@@ -1209,7 +1269,7 @@ function pageThree(
       font-size="10"
       font-weight="700"
       fill="#ffffff"
-    >STATUS: FIELD BRIEFING</text>
+    >${esc(statusText)}</text>
 
     <!-- DISCUSSION -->
     <rect
@@ -1229,7 +1289,7 @@ function pageThree(
       font-size="12"
       font-weight="800"
       fill="#1d4ed8"
-    >${esc(asString(c.questions_title, "DISCUSSION QUESTIONS"))}</text>
+    >${esc(locale === "tr" ? "TARTIŞMA SORULARI" : asString(c.questions_title, "DISCUSSION QUESTIONS"))}</text>
 
     ${questions.slice(0, 6).map((item, index) => {
       const col = index % 2;
@@ -1264,7 +1324,7 @@ function pageThree(
       font-weight="800"
       letter-spacing="1.1"
       fill="#0f172a"
-    >${esc(asString(c.attendance_title, "ATTENDANCE"))}</text>
+    >${esc(locale === "tr" ? "KATILIM VE ONAY" : asString(c.attendance_title, "ATTENDANCE"))}</text>
 
     <rect
       x="50"
@@ -1337,6 +1397,7 @@ export async function generatePremiumToolboxPdf({
   locale,
   logoBytes,
   logoMime,
+  documentProfile,
 }: GeneratePremiumToolboxPdfArgs) {
   const record = getToolboxBySlug(slug);
 
@@ -1359,7 +1420,8 @@ export async function generatePremiumToolboxPdf({
       .replace(/[^A-Z0-9]+/g, "-")
       .replace(/^-|-$/g, "")}`;
 
-  const revision = "00";
+  const revision =
+    documentProfile?.revision?.trim() || "00";
 
   const safeLogoMime =
     logoMime ||
@@ -1392,6 +1454,7 @@ export async function generatePremiumToolboxPdf({
       locale,
       docRef,
       revision,
+      documentProfile,
     ),
   ];
 

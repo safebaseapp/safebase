@@ -168,6 +168,54 @@ export async function GET(request: Request, { params }: RouteProps) {
     }
   }
 
+  let documentProfile: {
+    projectName?: string;
+    siteName?: string;
+    workArea?: string;
+    presentedBy?: string;
+    revision?: string;
+  } | null = null;
+
+  try {
+    const profilePath = `${user.id}/document-profile.json`;
+
+    const { data: profileBlob, error: profileDownloadError } =
+      await supabase.storage
+        .from(BUCKET_NAME)
+        .download(profilePath);
+
+    if (!profileDownloadError && profileBlob) {
+      const parsed = JSON.parse(await profileBlob.text());
+
+      if (parsed && typeof parsed === "object") {
+        documentProfile = {
+          projectName:
+            typeof parsed.projectName === "string"
+              ? parsed.projectName
+              : "",
+          siteName:
+            typeof parsed.siteName === "string"
+              ? parsed.siteName
+              : "",
+          workArea:
+            typeof parsed.workArea === "string"
+              ? parsed.workArea
+              : "",
+          presentedBy:
+            typeof parsed.presentedBy === "string"
+              ? parsed.presentedBy
+              : "",
+          revision:
+            typeof parsed.revision === "string"
+              ? parsed.revision
+              : "00",
+        };
+      }
+    }
+  } catch (error) {
+    console.error("Document profile read error:", error);
+  }
+
   /*
     TRUE PREMIUM WHITE-LABEL MODE
     --------------------------------------------------
@@ -198,6 +246,7 @@ export async function GET(request: Request, { params }: RouteProps) {
         locale: locale as "tr" | "en",
         logoBytes,
         logoMime,
+        documentProfile: documentProfile ?? undefined,
       });
 
     const premiumFilename =
