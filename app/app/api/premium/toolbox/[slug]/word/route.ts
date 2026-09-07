@@ -9,6 +9,7 @@ import {
   Paragraph,
   ShadingType,
   Table,
+  TableLayoutType,
   TableCell,
   TableRow,
   TextRun,
@@ -195,8 +196,8 @@ function bulletParagraph(text: string, color = "0F766E") {
 function metadataCell(label: string, value = "") {
   return new TableCell({
     width: {
-      size: 50,
-      type: WidthType.PERCENTAGE,
+      size: 4800,
+      type: WidthType.DXA,
     },
     margins: {
       top: 130,
@@ -605,9 +606,11 @@ export async function GET(request: Request, { params }: RouteProps) {
     }),
     new Table({
       width: {
-        size: 100,
-        type: WidthType.PERCENTAGE,
+        size: 9600,
+        type: WidthType.DXA,
       },
+      layout: TableLayoutType.FIXED,
+      columnWidths: [4800, 4800],
       rows: [
         new TableRow({
           children: [
@@ -728,9 +731,11 @@ export async function GET(request: Request, { params }: RouteProps) {
     }),
     new Table({
       width: {
-        size: 100,
-        type: WidthType.PERCENTAGE,
+        size: 9600,
+        type: WidthType.DXA,
       },
+      layout: TableLayoutType.FIXED,
+      columnWidths: [4800, 4800],
       rows: [
         new TableRow({
           children: [
