@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
 import { createClient } from "@/utils/supabase/server";
 import { isAdminUser } from "@/lib/auth/access";
 
@@ -8,10 +7,6 @@ type Props = {
   params: Promise<{
     locale: string;
     id: string;
-  }>;
-  searchParams: Promise<{
-    success?: string;
-    error?: string;
   }>;
 };
 
@@ -26,22 +21,109 @@ type Profile = {
   updated_at: string;
 };
 
-function formatDate(value: string, locale: string) {
-  return new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : "en-GB", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date(value));
+type ActivityEvent = {
+  id: number;
+  event_name: string;
+  path: string | null;
+  metadata: Record<string, unknown> | null;
+  created_at: string;
+};
+
+type RiskAssessment = {
+  id: string;
+  title: string | null;
+  project_name: string | null;
+  company_name: string | null;
+  document_no: string | null;
+  assessment_date: string | null;
+  updated_at: string;
+};
+
+function formatDateTime(value: string | null, locale: string) {
+  if (!value) return "—";
+
+  return new Intl.DateTimeFormat(
+    locale === "tr" ? "tr-TR" : "en-GB",
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }
+  ).format(new Date(value));
 }
 
-export default async function AdminUserEditPage({
-  params,
-  searchParams,
-}: Props) {
+function getActivityLabel(
+  eventName: string,
+  isTurkish: boolean
+) {
+  const labels: Record<string, [string, string, string]> = {
+    dashboard_open: ["🏠", "Dashboard açıldı", "Dashboard opened"],
+  risk_assessment_saved: [
+    "💾",
+    "Risk Assessment kaydedildi",
+    "Risk Assessment saved",
+  ],
+  risk_assessment_updated: [
+    "🔄",
+    "Risk Assessment güncellendi",
+    "Risk Assessment updated",
+  ],
+  risk_assessment_calculated: [
+    "🧠",
+    "Risk Assessment hesaplandı",
+    "Risk Assessment calculated",
+  ],
+  checkout_start: [
+    "💳",
+    "Premium ödeme işlemi başlatıldı",
+    "Premium checkout started",
+  ],
+  trir_open: ["📊", "TRIR Hesaplayıcı açıldı", "TRIR Calculator opened"],
+  ltifr_open: ["📈", "LTIFR Hesaplayıcı açıldı", "LTIFR Calculator opened"],
+  severity_rate_open: ["⚖️", "Severity Rate açıldı", "Severity Rate opened"],
+  risk_matrix_open: ["🧮", "Risk Matrix açıldı", "Risk Matrix opened"],
+  simops_open: ["🔄", "SIMOPS aracı açıldı", "SIMOPS tool opened"],
+  downloads_open: ["📥", "Kaynak Merkezi açıldı", "Resource Center opened"],
+  safety_signs_open: ["🚸", "Safety Signs açıldı", "Safety Signs opened"],
+  checklist_detail_open: ["✅", "Checklist görüntülendi", "Checklist viewed"],
+    risk_assessment_open: [
+      "⚠️",
+      "Risk Assessment açıldı",
+      "Risk Assessment opened",
+    ],
+    method_statement_open: [
+      "📋",
+      "Method Statement açıldı",
+      "Method Statement opened",
+    ],
+    toolbox_open: ["🗣️", "Toolbox açıldı", "Toolbox opened"],
+    premium_view: [
+      "👑",
+      "Premium ekranı görüntülendi",
+      "Premium viewed",
+    ],
+    pdf_download: ["📄", "PDF indirildi", "PDF downloaded"],
+  };
+
+  const value = labels[eventName];
+
+  if (!value) {
+    return {
+      icon: "•",
+      label: eventName,
+    };
+  }
+
+  return {
+    icon: value[0],
+    label: isTurkish ? value[1] : value[2],
+  };
+}
+
+export default async function AdminUserDetailsPage({ params }: Props) {
   const { locale: rawLocale, id } = await params;
-  const query = await searchParams;
 
   const locale = rawLocale === "tr" ? "tr" : "en";
   const isTurkish = locale === "tr";
@@ -49,121 +131,87 @@ export default async function AdminUserEditPage({
   const supabase = await createClient();
 
   const {
-    data: { user },
+    data: { user: adminUser },
   } = await supabase.auth.getUser();
 
-  if (!user) {
+  if (!adminUser) {
     redirect(
-      `/${locale}/login?next=/${locale}/admin/users/${id}`
+      `/${locale}/login?next=/${locale}/admin/users/${encodeURIComponent(id)}`
     );
   }
 
-  if (!isAdminUser(user)) {
+  if (!isAdminUser(adminUser)) {
     redirect(`/${locale}/dashboard`);
   }
 
-  const { data, error } = await supabase
+  const { data: profileData, error: profileError } = await supabase
     .from("profiles")
     .select(
       "id,email,full_name,role,plan,status,created_at,updated_at"
     )
     .eq("id", id)
-    .single();
+    .maybeSingle();
 
-  if (error || !data) {
+  if (profileError) {
+    console.error(
+      "Admin user details profile error:",
+      profileError
+    );
+  }
+
+  if (!profileData) {
     notFound();
   }
 
-  const profile = data as Profile;
-  const isOwnAccount = user.id === profile.id;
+  const profile = profileData as Profile;
 
-  async function updateProfile(formData: FormData) {
-    "use server";
+  const { data: riskAssessmentData, error: riskAssessmentError } =
+    await supabase
+      .from("risk_assessments")
+      .select(
+        "id,title,project_name,company_name,document_no,assessment_date,updated_at"
+      )
+      .eq("user_id", id)
+      .order("updated_at", { ascending: false })
+      .limit(20);
 
-    const serverSupabase = await createClient();
-
-    const {
-      data: { user: currentUser },
-    } = await serverSupabase.auth.getUser();
-
-    if (!currentUser) {
-      redirect(`/${locale}/login`);
-    }
-
-    if (!isAdminUser(currentUser)) {
-      redirect(`/${locale}/dashboard`);
-    }
-
-    const fullName = String(formData.get("full_name") ?? "").trim();
-    const plan = String(formData.get("plan") ?? "");
-    const role = String(formData.get("role") ?? "");
-    const status = String(formData.get("status") ?? "");
-
-    const validPlans = ["free", "premium"];
-    const validRoles = ["user", "admin"];
-    const validStatuses = ["active", "suspended"];
-
-    if (
-      !validPlans.includes(plan) ||
-      !validRoles.includes(role) ||
-      !validStatuses.includes(status)
-    ) {
-      redirect(
-        `/${locale}/admin/users/${id}?error=invalid-values`
-      );
-    }
-
-    if (
-      currentUser.id === id &&
-      (role !== "admin" || status !== "active")
-    ) {
-      redirect(
-        `/${locale}/admin/users/${id}?error=self-protection`
-      );
-    }
-
-    const { error: updateError } = await serverSupabase.rpc(
-      "admin_update_profile",
-      {
-        target_user_id: id,
-        new_full_name: fullName,
-        new_plan: plan,
-        new_role: role,
-        new_status: status,
-      },
-    );
-
-    if (updateError) {
-      console.error("Profile update error:", updateError);
-
-      redirect(
-        `/${locale}/admin/users/${id}?error=update-failed`
-      );
-    }
-
-    revalidatePath(`/${locale}/admin/users`);
-    revalidatePath(`/${locale}/admin/users/${id}`);
-
-    redirect(
-      `/${locale}/admin/users/${id}?success=updated`
+  if (riskAssessmentError) {
+    console.error(
+      "Admin user risk assessments error:",
+      riskAssessmentError
     );
   }
 
-  const errorMessages: Record<string, string> = {
-    "invalid-values": isTurkish
-      ? "Gönderilen bilgiler geçerli değil."
-      : "The submitted values are invalid.",
-    "self-protection": isTurkish
-      ? "Kendi admin yetkinizi kaldıramaz veya kendi hesabınızı askıya alamazsınız."
-      : "You cannot remove your own admin access or suspend your own account.",
-    "update-failed": isTurkish
-      ? "Profil güncellenemedi. Supabase yetkilerini kontrol edin."
-      : "The profile could not be updated. Check Supabase permissions.",
-  };
+  const riskAssessments =
+    (riskAssessmentData ?? []) as RiskAssessment[];
+
+  const { data: activityData, error: activityError } =
+    await supabase
+      .from("user_activity_events")
+      .select("id,event_name,path,metadata,created_at")
+      .eq("user_id", id)
+      .order("created_at", { ascending: false })
+      .limit(100);
+
+  if (activityError) {
+    console.error(
+      "Admin user activity error:",
+      activityError
+    );
+  }
+
+  const activityEvents =
+    (activityData ?? []) as ActivityEvent[];
+
+  const displayName =
+    profile.full_name ||
+    profile.email?.split("@")[0] ||
+    (isTurkish ? "SERNEM Kullanıcısı" : "SERNEM User");
 
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-8 text-white sm:px-8">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-7xl">
+
         <header className="border-b border-white/10 pb-7">
           <Link
             href={`/${locale}/admin/users`}
@@ -172,61 +220,36 @@ export default async function AdminUserEditPage({
             ← {isTurkish ? "Kullanıcılara dön" : "Back to users"}
           </Link>
 
-          <p className="mt-6 text-sm font-black uppercase tracking-[0.2em] text-emerald-400">
-            SERNEM User Management
-          </p>
+          <div className="mt-6 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-400">
+                SERNEM USER INTELLIGENCE
+              </p>
 
-          <h1 className="mt-3 text-4xl font-black tracking-[-0.04em] sm:text-5xl">
-            {isTurkish ? "Kullanıcıyı Düzenle" : "Edit User"}
-          </h1>
+              <h1 className="mt-3 text-4xl font-black tracking-[-0.04em] sm:text-5xl">
+                {displayName}
+              </h1>
 
-          <p className="mt-3 text-slate-400">
-            {isTurkish
-              ? "Kullanıcının üyelik planını, rolünü ve hesap durumunu yönetin."
-              : "Manage the user's membership plan, role and account status."}
-          </p>
-        </header>
+              <p className="mt-2 text-slate-400">
+                {profile.email ?? "—"}
+              </p>
+            </div>
 
-        {query.success === "updated" && (
-          <div className="mt-7 rounded-2xl border border-emerald-400/25 bg-emerald-400/10 px-5 py-4 text-emerald-200">
-            <p className="font-black">
-              ✅{" "}
-              {isTurkish
-                ? "Kullanıcı başarıyla güncellendi."
-                : "User updated successfully."}
-            </p>
-          </div>
-        )}
-
-        {query.error && (
-          <div className="mt-7 rounded-2xl border border-red-400/25 bg-red-400/10 px-5 py-4 text-red-200">
-            <p className="font-black">
-              ❌{" "}
-              {errorMessages[query.error] ??
-                (isTurkish
-                  ? "Beklenmeyen bir hata oluştu."
-                  : "An unexpected error occurred.")}
-            </p>
-          </div>
-        )}
-
-        <section className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035]">
-          <div className="border-b border-white/10 p-6 sm:p-8">
-            <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
-              <div>
-                <p className="text-2xl font-black">
-                  {profile.full_name ||
-                    profile.email?.split("@")[0] ||
-                    "SERNEM User"}
-                </p>
-
-                <p className="mt-2 text-sm text-slate-400">
-                  ID: {profile.id}
-                </p>
-              </div>
+            <div className="flex flex-wrap gap-2">
+              <span
+                className={`rounded-full px-4 py-2 text-xs font-black ${
+                  profile.plan === "premium"
+                    ? "bg-amber-400/15 text-amber-300"
+                    : "bg-emerald-400/15 text-emerald-300"
+                }`}
+              >
+                {profile.plan === "premium"
+                  ? "👑 PREMIUM"
+                  : "🌍 FREE"}
+              </span>
 
               <span
-                className={`w-fit rounded-full px-4 py-2 text-xs font-black ${
+                className={`rounded-full px-4 py-2 text-xs font-black ${
                   profile.status === "active"
                     ? "bg-emerald-400/15 text-emerald-300"
                     : "bg-red-400/15 text-red-300"
@@ -234,178 +257,211 @@ export default async function AdminUserEditPage({
               >
                 {profile.status === "active"
                   ? isTurkish
-                    ? "● AKTİF"
-                    : "● ACTIVE"
+                    ? "HESAP AKTİF"
+                    : "ACCOUNT ACTIVE"
                   : isTurkish
-                    ? "● ASKIDA"
-                    : "● SUSPENDED"}
+                    ? "HESAP ASKIDA"
+                    : "ACCOUNT SUSPENDED"}
               </span>
             </div>
           </div>
+        </header>
 
-          <form action={updateProfile} className="space-y-6 p-6 sm:p-8">
-            <div>
-              <label
-                htmlFor="full_name"
-                className="mb-2 block text-sm font-black text-slate-300"
-              >
-                👤 {isTurkish ? "İsim" : "Name"}
-              </label>
+        <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">
+              {isTurkish ? "Plan" : "Plan"}
+            </p>
+            <p className="mt-3 text-2xl font-black">
+              {profile.plan === "premium" ? "Premium" : "Free"}
+            </p>
+          </article>
 
-              <input
-                id="full_name"
-                name="full_name"
-                type="text"
-                defaultValue={profile.full_name ?? ""}
-                placeholder={
-                  isTurkish ? "Kullanıcının adı" : "User's name"
-                }
-                className="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-blue-400/60"
-              />
-            </div>
+          <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">
+              {isTurkish ? "Rol" : "Role"}
+            </p>
+            <p className="mt-3 text-2xl font-black">
+              {profile.role === "admin" ? "Admin" : "User"}
+            </p>
+          </article>
 
-            <div>
-              <label
-                htmlFor="email"
-                className="mb-2 block text-sm font-black text-slate-300"
-              >
-                📧 {isTurkish ? "E-posta" : "Email"}
-              </label>
+          <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-500">
+              {isTurkish ? "Kayıt Tarihi" : "Registered"}
+            </p>
+            <p className="mt-3 text-lg font-black">
+              {formatDateTime(profile.created_at, locale)}
+            </p>
+          </article>
 
-              <input
-                id="email"
-                type="email"
-                value={profile.email ?? ""}
-                readOnly
-                className="w-full cursor-not-allowed rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-slate-400 outline-none"
-              />
-
-              <p className="mt-2 text-xs text-slate-500">
-                {isTurkish
-                  ? "E-posta, Supabase Auth hesabıyla eşleşmesi gerektiği için bu ekranda salt okunurdur."
-                  : "Email is read-only here because it must remain synchronized with Supabase Auth."}
-              </p>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              <div>
-                <label
-                  htmlFor="plan"
-                  className="mb-2 block text-sm font-black text-slate-300"
-                >
-                  💳 {isTurkish ? "Plan" : "Plan"}
-                </label>
-
-                <select
-                  id="plan"
-                  name="plan"
-                  defaultValue={profile.plan}
-                  className="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-blue-400/60"
-                >
-                  <option value="free">🌍 Free</option>
-                  <option value="premium">👑 Premium</option>
-                </select>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="role"
-                  className="mb-2 block text-sm font-black text-slate-300"
-                >
-                  🛡️ {isTurkish ? "Rol" : "Role"}
-                </label>
-
-                <select
-                  id="role"
-                  name="role"
-                  defaultValue={profile.role}
-                  disabled={isOwnAccount}
-                  className="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white outline-none transition disabled:cursor-not-allowed disabled:opacity-60 focus:border-blue-400/60"
-                >
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
-                </select>
-
-                {isOwnAccount && (
-                  <input type="hidden" name="role" value="admin" />
-                )}
-              </div>
-
-              <div>
-                <label
-                  htmlFor="status"
-                  className="mb-2 block text-sm font-black text-slate-300"
-                >
-                  🚫 {isTurkish ? "Durum" : "Status"}
-                </label>
-
-                <select
-                  id="status"
-                  name="status"
-                  defaultValue={profile.status}
-                  disabled={isOwnAccount}
-                  className="w-full rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white outline-none transition disabled:cursor-not-allowed disabled:opacity-60 focus:border-blue-400/60"
-                >
-                  <option value="active">
-                    {isTurkish ? "Active — Aktif" : "Active"}
-                  </option>
-                  <option value="suspended">
-                    {isTurkish ? "Suspended — Askıda" : "Suspended"}
-                  </option>
-                </select>
-
-                {isOwnAccount && (
-                  <input type="hidden" name="status" value="active" />
-                )}
-              </div>
-            </div>
-
-            {isOwnAccount && (
-              <div className="rounded-2xl border border-amber-400/20 bg-amber-400/10 px-5 py-4 text-sm text-amber-200">
-                🔒{" "}
-                {isTurkish
-                  ? "Kendi hesabınızın admin rolü ve aktif durumu güvenlik amacıyla korunuyor."
-                  : "Your own admin role and active status are protected for security."}
-              </div>
-            )}
-
-            <div className="grid gap-4 rounded-2xl border border-white/10 bg-slate-950/40 p-5 text-sm sm:grid-cols-2">
-              <div>
-                <p className="font-black text-slate-300">
-                  {isTurkish ? "Kayıt tarihi" : "Created"}
-                </p>
-                <p className="mt-1 text-slate-500">
-                  {formatDate(profile.created_at, locale)}
-                </p>
-              </div>
-
-              <div>
-                <p className="font-black text-slate-300">
-                  {isTurkish ? "Son güncelleme" : "Last updated"}
-                </p>
-                <p className="mt-1 text-slate-500">
-                  {formatDate(profile.updated_at, locale)}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:justify-end">
-              <Link
-                href={`/${locale}/admin/users`}
-                className="rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3 text-center font-black text-slate-300 transition hover:bg-white/[0.08]"
-              >
-                {isTurkish ? "İptal" : "Cancel"}
-              </Link>
-
-              <button
-                type="submit"
-                className="rounded-2xl bg-blue-600 px-7 py-3 font-black text-white transition hover:bg-blue-500"
-              >
-                💾 {isTurkish ? "Değişiklikleri Kaydet" : "Save Changes"}
-              </button>
-            </div>
-          </form>
+          <article className="rounded-3xl border border-blue-400/20 bg-blue-400/[0.07] p-6">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-blue-300">
+              {isTurkish ? "Risk Analizleri" : "Risk Assessments"}
+            </p>
+            <p className="mt-3 text-4xl font-black">
+              {riskAssessments.length}
+            </p>
+          </article>
         </section>
+
+        <section className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.6fr]">
+
+          <article className="rounded-3xl border border-white/10 bg-white/[0.035] p-6">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
+              {isTurkish ? "Hesap Bilgileri" : "Account Details"}
+            </p>
+
+            <h2 className="mt-2 text-2xl font-black">
+              {isTurkish ? "Kullanıcı Profili" : "User Profile"}
+            </h2>
+
+            <dl className="mt-6 space-y-5">
+              {[
+                ["User ID", profile.id],
+                ["Email", profile.email ?? "—"],
+                [
+                  isTurkish ? "Tam Ad" : "Full Name",
+                  profile.full_name ?? "—",
+                ],
+                [
+                  isTurkish ? "Hesap Durumu" : "Account Status",
+                  profile.status,
+                ],
+                ["Plan", profile.plan],
+                [isTurkish ? "Rol" : "Role", profile.role],
+                [
+                  isTurkish ? "Kayıt Tarihi" : "Registered",
+                  formatDateTime(profile.created_at, locale),
+                ],
+                [
+                  isTurkish
+                    ? "Profil Güncelleme"
+                    : "Profile Updated",
+                  formatDateTime(profile.updated_at, locale),
+                ],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  className="border-b border-white/10 pb-4 last:border-0"
+                >
+                  <dt className="text-xs font-black uppercase tracking-[0.12em] text-slate-500">
+                    {label}
+                  </dt>
+                  <dd className="mt-2 break-all text-sm font-bold text-slate-200">
+                    {value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </article>
+
+          <article className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035]">
+            <div className="border-b border-white/10 p-6">
+              <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-400">
+                    SERNEM ACTIVITY
+                  </p>
+
+                  <h2 className="mt-2 text-2xl font-black">
+                    {isTurkish
+                      ? "Kullanıcı Aktivitesi"
+                      : "User Activity"}
+                  </h2>
+
+                  <p className="mt-2 text-sm text-slate-400">
+                    {isTurkish
+                      ? "SERNEM içinde kaydedilen gerçek ürün hareketleri."
+                      : "Recorded product activity inside SERNEM."}
+                  </p>
+                </div>
+
+                <div className="rounded-full bg-emerald-400/10 px-4 py-2 text-xs font-black text-emerald-300">
+                  {activityEvents.length} EVENTS
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6">
+              {activityEvents.length === 0 ? (
+                <div className="rounded-2xl border border-dashed border-white/10 bg-slate-950/40 p-8 text-center">
+                  <p className="text-3xl">📭</p>
+
+                  <p className="mt-3 font-black">
+                    {isTurkish
+                      ? "Henüz kayıtlı aktivite yok"
+                      : "No recorded activity yet"}
+                  </p>
+
+                  <p className="mt-2 text-sm text-slate-500">
+                    {isTurkish
+                      ? "Activity Tracking kurulduktan sonraki kullanıcı hareketleri burada görünecek."
+                      : "User activity recorded after Activity Tracking was enabled will appear here."}
+                  </p>
+                </div>
+              ) : (
+                <div className="relative space-y-3">
+                  {activityEvents.map((event) => {
+                    const activity = getActivityLabel(
+                      event.event_name,
+                      isTurkish
+                    );
+
+                    return (
+                      <div
+                        key={event.id}
+                        className="flex gap-4 rounded-2xl border border-white/10 bg-slate-950/40 p-4"
+                      >
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.06] text-lg">
+                          {activity.icon}
+                        </div>
+
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-col justify-between gap-1 sm:flex-row">
+                            <p className="font-black text-white">
+                              {activity.label}
+                            </p>
+
+                            <p className="text-xs font-bold text-slate-500">
+                              {formatDateTime(
+                                event.created_at,
+                                locale
+                              )}
+                            </p>
+                          </div>
+
+                          {event.path ? (
+                            <p className="mt-2 break-all text-xs text-slate-500">
+                              {event.path}
+                            </p>
+                          ) : null}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              <div className="mt-6 border-t border-white/10 pt-6">
+                <p className="text-xs font-black uppercase tracking-[0.16em] text-blue-400">
+                  {isTurkish
+                    ? "Kaydedilmiş İçerik"
+                    : "Saved Content"}
+                </p>
+
+                <p className="mt-2 text-sm text-slate-400">
+                  {isTurkish
+                    ? `${riskAssessments.length} kayıtlı risk analizi`
+                    : `${riskAssessments.length} saved risk assessments`}
+                </p>
+              </div>
+            </div>
+          </article>
+        </section>
+
+
+
       </div>
     </main>
   );

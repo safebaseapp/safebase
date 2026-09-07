@@ -1,3 +1,4 @@
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 import LogoutButton from "./LogoutButton";
 import CompanyBranding from "./CompanyBranding";
 import RiskAssessmentActions from "./RiskAssessmentActions"; 
@@ -132,6 +133,7 @@ export default async function DashboardPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
+      <ActivityTracker eventName="dashboard_open" />
       <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
         <section className="relative mb-8 overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl shadow-black/20 sm:p-8">
           <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />

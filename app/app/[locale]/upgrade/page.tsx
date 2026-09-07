@@ -1,6 +1,8 @@
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import TrackedCheckoutLink from "@/components/analytics/TrackedCheckoutLink";
 
 type Props = {
   params: Promise<{
@@ -94,6 +96,7 @@ export default async function UpgradePage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-8 text-white sm:px-8 sm:py-12">
+      <ActivityTracker eventName="premium_view" />
       <div className="mx-auto max-w-6xl">
         <Link
           href={backHref}
@@ -160,7 +163,7 @@ export default async function UpgradePage({ params }: Props) {
                     : "Your Premium access is activated automatically after payment."}
                 </p>
 
-                <a
+                <TrackedCheckoutLink
                   href={checkoutUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -169,7 +172,7 @@ export default async function UpgradePage({ params }: Props) {
                   {isTurkish
                     ? "Premium’a Geç — €9.99 / ay"
                     : "Upgrade to Premium — €9.99 / month"}
-                </a>
+                </TrackedCheckoutLink>
 
                 {!user && (
                   <Link

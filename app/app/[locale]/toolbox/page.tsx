@@ -1,3 +1,4 @@
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 import { createClient } from "@/utils/supabase/server";
 import ToolboxLibraryClient from "./ToolboxLibraryClient";
 
@@ -47,9 +48,13 @@ export default async function ToolboxLibraryPage({ params }: Props) {
     }));
 
   return (
-    <ToolboxLibraryClient
-      locale={locale}
-      controls={controls}
-    />
+    <>
+      <ActivityTracker eventName="toolbox_open" />
+
+      <ToolboxLibraryClient
+        locale={locale}
+        controls={controls}
+      />
+    </>
   );
 }

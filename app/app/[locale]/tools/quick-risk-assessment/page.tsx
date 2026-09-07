@@ -1,4 +1,6 @@
 "use client";
+import { trackUserEvent } from "@/lib/analytics/track-user-event";
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -247,6 +249,16 @@ const saveRiskAssessment = async () => {
 
         if (error) throw error;
 
+        void trackUserEvent(
+          "risk_assessment_updated",
+          {
+            assessment_id: savedAssessmentId,
+            project_name: projectName || null,
+            document_no: documentNo || null,
+            risk_item_count: riskItems.length,
+          }
+        );
+
         setSaveAssessmentMessage("Risk analizi güncellendi.");
       } else {
         const { data, error } = await supabase
@@ -258,6 +270,17 @@ const saveRiskAssessment = async () => {
         if (error) throw error;
 
         setSavedAssessmentId(data.id);
+
+        void trackUserEvent(
+          "risk_assessment_saved",
+          {
+            assessment_id: data.id,
+            project_name: projectName || null,
+            document_no: documentNo || null,
+            risk_item_count: riskItems.length,
+          }
+        );
+
         setSaveAssessmentMessage("Risk analizi kaydedildi.");
       }
     } catch (error) {
@@ -719,6 +742,13 @@ const duplicateRiskItem = (id: string) => {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setShowResult(true);
+
+    void trackUserEvent(
+      "risk_assessment_calculated",
+      {
+        tool: "quick-risk-assessment",
+      }
+    );
   }
 
   function handleReset() {
@@ -732,6 +762,7 @@ const duplicateRiskItem = (id: string) => {
 
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-12 text-white">
+      <ActivityTracker eventName="risk_assessment_open" />
 
       {/* SERNEM_RISK_HEADER_UI_START */}
       <section className="mb-8 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/70 shadow-xl">

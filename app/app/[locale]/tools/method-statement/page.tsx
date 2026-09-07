@@ -1,4 +1,5 @@
 "use client";
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -3889,6 +3890,7 @@ export default function MethodStatementPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
+      <ActivityTracker eventName="method_statement_open" />
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10">
         <div className="mb-8">
           <Link
