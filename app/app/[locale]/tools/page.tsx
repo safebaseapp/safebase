@@ -1,3 +1,4 @@
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 import Link from "next/link";
 import {hasLocale} from "next-intl";
 import {notFound} from "next/navigation";
@@ -76,6 +77,8 @@ export default async function LocalizedToolsPage({params}: Props) {
   ];
 
   return (
+    <>
+      <ActivityTracker eventName="tools_open" />
     <main className="min-h-screen bg-slate-950 px-6 py-16 text-white">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
@@ -135,5 +138,6 @@ export default async function LocalizedToolsPage({params}: Props) {
         </div>
       </div>
     </main>
+    </>
   );
 }

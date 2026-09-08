@@ -1,4 +1,6 @@
 import { PDFDocument } from "pdf-lib";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import sharp from "sharp";
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 
@@ -22,6 +24,32 @@ type GeneratePremiumToolboxPdfArgs = {
 
 const PAGE_W = 794;
 const PAGE_H = 1123;
+
+async function loadEmbeddedFontCss() {
+  const candidates = [
+    path.join(process.cwd(), "public", "fonts", "DejaVuSans.ttf"),
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed.ttf",
+  ];
+
+  for (const fontPath of candidates) {
+    try {
+      const bytes = await readFile(fontPath);
+      const b64 = bytes.toString("base64");
+
+      return `
+        @font-face {
+          font-family: "SernemPdf";
+          src: url("data:font/ttf;base64,${b64}") format("truetype");
+          font-weight: 100 900;
+          font-style: normal;
+        }
+      `;
+    } catch {}
+  }
+
+  throw new Error("Unicode PDF font could not be loaded.");
+}
 
 function esc(value: unknown) {
   return String(value ?? "")
@@ -93,7 +121,7 @@ function textLines(
         <text
           x="${x}"
           y="${y + index * lineHeight}"
-          font-family="Arial, Helvetica, sans-serif"
+          font-family="SernemPdf"
           font-size="${fontSize}"
           font-weight="${weight}"
           fill="${fill}"
@@ -192,7 +220,7 @@ function checkboxList(
         <text
           x="${px + 29}"
           y="${py}"
-          font-family="Arial, Helvetica, sans-serif"
+          font-family="SernemPdf"
           font-size="14"
           font-weight="500"
           fill="#24364b"
@@ -202,7 +230,7 @@ function checkboxList(
     .join("");
 }
 
-function baseSvg(inner: string) {
+function baseSvg(inner: string, fontCss: string) {
   return `
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -211,6 +239,13 @@ function baseSvg(inner: string) {
     viewBox="0 0 ${PAGE_W} ${PAGE_H}"
   >
     <defs>
+      <style>
+        ${fontCss}
+        text {
+          font-family: "SernemPdf", sans-serif;
+        }
+      </style>
+
       <linearGradient id="headerGrad" x1="0" x2="1">
         <stop offset="0%" stop-color="#06152b"/>
         <stop offset="60%" stop-color="#09284b"/>
@@ -295,7 +330,7 @@ function header({
     <text
       x="54"
       y="42"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="12"
       font-weight="700"
       letter-spacing="4.5"
@@ -305,7 +340,7 @@ function header({
     <text
       x="54"
       y="91"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="${title.length > 24 ? 29 : 35}"
       font-weight="800"
       fill="#ffffff"
@@ -314,7 +349,7 @@ function header({
     <text
       x="54"
       y="122"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="14"
       fill="#e8eef5"
     >${esc(subtitle)}</text>
@@ -332,7 +367,7 @@ function header({
     <text
       x="68"
       y="156"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="10"
       font-weight="800"
       letter-spacing="1.1"
@@ -342,7 +377,7 @@ function header({
     <text
       x="139"
       y="156"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="9.5"
       font-weight="700"
       fill="#ffffff"
@@ -359,7 +394,7 @@ function header({
     <text
       x="302"
       y="156"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="9.5"
       font-weight="700"
       letter-spacing="1"
@@ -369,7 +404,7 @@ function header({
     <text
       x="340"
       y="156"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="9.5"
       font-weight="800"
       fill="#ffffff"
@@ -391,7 +426,7 @@ function header({
           x="519"
           y="152"
           text-anchor="middle"
-          font-family="Arial, Helvetica, sans-serif"
+          font-family="SernemPdf"
           font-size="11"
           font-weight="800"
           fill="#ffffff"
@@ -444,7 +479,7 @@ function footer({
     <text
       x="48"
       y="1082"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="10.5"
       font-weight="800"
       letter-spacing="2.2"
@@ -454,7 +489,7 @@ function footer({
     <text
       x="48"
       y="1101"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="9.5"
       font-weight="700"
       fill="#d8e1eb"
@@ -464,7 +499,7 @@ function footer({
       x="397"
       y="1091"
       text-anchor="middle"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="10.5"
       font-weight="700"
       fill="#d8e1eb"
@@ -483,7 +518,7 @@ function footer({
       x="719"
       y="1089"
       text-anchor="middle"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="11"
       font-weight="800"
       fill="#ffffff"
@@ -511,7 +546,7 @@ function sectionTitle(
     <text
       x="${x + 28}"
       y="${y + 31}"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="19"
       font-weight="800"
       fill="#ffffff"
@@ -526,6 +561,7 @@ function pageOne(
   locale: Locale,
   docRef: string,
   revision: string,
+  fontCss: string,
 ) {
   const objective = asString(c.objective);
   const explanation = asArray(c.explanation);
@@ -584,7 +620,7 @@ function pageOne(
     <text
       x="72"
       y="229"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="11"
       font-weight="800"
       letter-spacing="2.4"
@@ -603,7 +639,7 @@ function pageOne(
     <text
       x="46"
       y="348"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="12"
       font-weight="800"
       letter-spacing="2.2"
@@ -636,7 +672,7 @@ function pageOne(
           x="${x + 29}"
           y="401"
           text-anchor="middle"
-          font-family="Arial, Helvetica, sans-serif"
+          font-family="SernemPdf"
           font-size="12"
           font-weight="800"
           fill="#65bfff"
@@ -667,7 +703,7 @@ function pageOne(
     <text
       x="68"
       y="522"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="13"
       font-weight="800"
       fill="#0f172a"
@@ -705,7 +741,7 @@ function pageOne(
     <text
       x="432"
       y="522"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="13"
       font-weight="800"
       fill="#c2410c"
@@ -750,7 +786,7 @@ function pageOne(
     <text
       x="72"
       y="834"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="11"
       font-weight="800"
       letter-spacing="2"
@@ -779,7 +815,7 @@ function pageOne(
     <text
       x="70"
       y="941"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="12"
       font-weight="800"
       letter-spacing="1.7"
@@ -800,7 +836,7 @@ function pageOne(
       docRef,
       revision,
     })}
-  `);
+  `, fontCss);
 }
 
 function pageTwo(
@@ -810,6 +846,7 @@ function pageTwo(
   locale: Locale,
   docRef: string,
   revision: string,
+  fontCss: string,
 ) {
   const hazards = asArray(c.hazards);
   const controls = asArray(c.controls);
@@ -922,7 +959,7 @@ function pageTwo(
     <text
       x="70"
       y="230"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="14"
       font-weight="800"
       fill="#ffffff"
@@ -935,7 +972,7 @@ function pageTwo(
         <text
           x="68"
           y="${y}"
-          font-family="Arial, Helvetica, sans-serif"
+          font-family="SernemPdf"
           font-size="10"
           font-weight="800"
           fill="#b91c1c"
@@ -982,7 +1019,7 @@ function pageTwo(
     <text
       x="439"
       y="230"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="14"
       font-weight="800"
       fill="#ffffff"
@@ -1012,7 +1049,7 @@ function pageTwo(
     <text
       x="45"
       y="636"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="13"
       font-weight="800"
       letter-spacing="1.3"
@@ -1023,7 +1060,7 @@ function pageTwo(
       x="690"
       y="636"
       text-anchor="end"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="9.5"
       font-weight="700"
       letter-spacing="1"
@@ -1045,7 +1082,7 @@ function pageTwo(
     <text
       x="68"
       y="983"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="10"
       font-weight="800"
       letter-spacing="2"
@@ -1066,7 +1103,7 @@ function pageTwo(
       docRef,
       revision,
     })}
-  `);
+  `, fontCss);
 }
 
 function pageThree(
@@ -1076,6 +1113,7 @@ function pageThree(
   locale: Locale,
   docRef: string,
   revision: string,
+  fontCss: string,
   documentProfile?: DocumentProfile,
 ) {
   const fields = asArray(c.fields);
@@ -1155,7 +1193,7 @@ function pageThree(
         <text
           x="70"
           y="${y + 16}"
-          font-family="Arial, Helvetica, sans-serif"
+          font-family="SernemPdf"
           font-size="9.5"
           font-weight="700"
           fill="#24364b"
@@ -1196,7 +1234,7 @@ function pageThree(
       <text
         x="${tx}"
         y="${ty}"
-        font-family="Arial, Helvetica, sans-serif"
+        font-family="SernemPdf"
         font-size="10"
         font-weight="800"
         letter-spacing="0.8"
@@ -1237,7 +1275,7 @@ function pageThree(
     <text
       x="68"
       y="405"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="9.5"
       font-weight="800"
       letter-spacing="1.8"
@@ -1247,7 +1285,7 @@ function pageThree(
     <text
       x="68"
       y="430"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="10"
       font-weight="700"
       fill="#ffffff"
@@ -1256,7 +1294,7 @@ function pageThree(
     <text
       x="280"
       y="430"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="10"
       font-weight="700"
       fill="#ffffff"
@@ -1265,7 +1303,7 @@ function pageThree(
     <text
       x="410"
       y="430"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="10"
       font-weight="700"
       fill="#ffffff"
@@ -1285,7 +1323,7 @@ function pageThree(
     <text
       x="68"
       y="506"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="12"
       font-weight="800"
       fill="#1d4ed8"
@@ -1319,7 +1357,7 @@ function pageThree(
     <text
       x="48"
       y="656"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="12"
       font-weight="800"
       letter-spacing="1.1"
@@ -1347,10 +1385,10 @@ function pageThree(
     <line x1="388" y1="676" x2="388" y2="985" stroke="#cbd5e1" />
     <line x1="585" y1="676" x2="585" y2="985" stroke="#cbd5e1" />
 
-    <text x="69" y="699" font-family="Arial" font-size="10" font-weight="700" fill="#ffffff">${esc(tableHeaders[0])}</text>
-    <text x="184" y="699" font-family="Arial" font-size="10" font-weight="700" fill="#ffffff">${esc(tableHeaders[1])}</text>
-    <text x="439" y="699" font-family="Arial" font-size="10" font-weight="700" fill="#ffffff">${esc(tableHeaders[2])}</text>
-    <text x="632" y="699" font-family="Arial" font-size="10" font-weight="700" fill="#ffffff">${esc(tableHeaders[3])}</text>
+    <text x="69" y="699" font-family="SernemPdf" font-size="10" font-weight="700" fill="#ffffff">${esc(tableHeaders[0])}</text>
+    <text x="184" y="699" font-family="SernemPdf" font-size="10" font-weight="700" fill="#ffffff">${esc(tableHeaders[1])}</text>
+    <text x="439" y="699" font-family="SernemPdf" font-size="10" font-weight="700" fill="#ffffff">${esc(tableHeaders[2])}</text>
+    <text x="632" y="699" font-family="SernemPdf" font-size="10" font-weight="700" fill="#ffffff">${esc(tableHeaders[3])}</text>
 
     ${rows}
 
@@ -1367,7 +1405,7 @@ function pageThree(
     <text
       x="62"
       y="1020"
-      font-family="Arial, Helvetica, sans-serif"
+      font-family="SernemPdf"
       font-size="9.5"
       font-weight="800"
       fill="#24364b"
@@ -1383,7 +1421,7 @@ function pageThree(
       docRef,
       revision,
     })}
-  `);
+  `, fontCss);
 }
 
 async function svgToPng(svg: string) {
@@ -1430,6 +1468,8 @@ export async function generatePremiumToolboxPdf({
   const logoData =
     `data:${safeLogoMime};base64,${Buffer.from(logoBytes).toString("base64")}`;
 
+  const fontCss = await loadEmbeddedFontCss();
+
   const svgs = [
     pageOne(
       c,
@@ -1438,6 +1478,7 @@ export async function generatePremiumToolboxPdf({
       locale,
       docRef,
       revision,
+      fontCss,
     ),
     pageTwo(
       c,
@@ -1446,6 +1487,7 @@ export async function generatePremiumToolboxPdf({
       locale,
       docRef,
       revision,
+      fontCss,
     ),
     pageThree(
       c,
@@ -1454,6 +1496,7 @@ export async function generatePremiumToolboxPdf({
       locale,
       docRef,
       revision,
+      fontCss,
       documentProfile,
     ),
   ];

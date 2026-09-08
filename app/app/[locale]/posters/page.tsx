@@ -1,3 +1,4 @@
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 import { notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import PosterLibraryClient from "./PosterLibraryClient";
@@ -75,9 +76,12 @@ export default async function PosterLibraryPage({
     }));
 
   return (
+    <>
+      <ActivityTracker eventName="posters_open" />
     <PosterLibraryClient
       locale={locale}
       controls={controls}
     />
+    </>
   );
 }

@@ -1,3 +1,4 @@
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SignRenderer from "@/components/safety-signs/SignRenderer";
@@ -29,6 +30,8 @@ export default async function SafetySignDetailPage({
   const isTurkish = locale === "tr";
 
   return (
+    <>
+      <ActivityTracker eventName="safety_sign_detail_open" />
     <main className="min-h-screen bg-slate-200 px-6 py-12">
       <div className="mx-auto max-w-6xl">
         <Link
@@ -77,5 +80,6 @@ export default async function SafetySignDetailPage({
         </div>
       </div>
     </main>
+    </>
   );
 }

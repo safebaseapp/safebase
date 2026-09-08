@@ -834,7 +834,7 @@ export async function GET(request: Request, { params }: RouteProps) {
           },
         },
         children: coverChildren,
-      },
+      }
     ],
   });
 

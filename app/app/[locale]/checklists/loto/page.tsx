@@ -1,3 +1,4 @@
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../../../i18n/routing";
@@ -15,6 +16,9 @@ export default async function LotoChecklistPage({ params }: Props) {
   }
 
   return (
+    <>
+      <ActivityTracker eventName="checklist_detail_open" />
     <LotoChecklist locale={locale === "tr" ? "tr" : "en"} />
+    </>
   );
 }

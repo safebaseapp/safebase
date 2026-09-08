@@ -6,7 +6,7 @@ import { createClient } from "../../../utils/supabase/client";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ProductExplorer from "./ProductExplorer";
 import SernemLogo from "./SernemLogo";
-
+ 
 type Props = {
   locale: "tr" | "en";
 };
@@ -417,6 +417,16 @@ export default function LocalizedNavbar({ locale }: Props) {
 
           {isAuthenticated ? (
             <div className="flex items-center gap-1 lg:hidden">
+              {isOwner && (
+                <Link
+                  href="/admin"
+                  onClick={closeMenu}
+                  className="inline-flex h-10 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] px-2.5 text-[11px] font-black text-violet-200 transition hover:border-violet-400/40 hover:bg-violet-500/[0.14]"
+                >
+                  Admin
+                </Link>
+              )}
+
               <Link
                 href="/account"
                 onClick={closeDropdowns}

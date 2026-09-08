@@ -98,6 +98,8 @@ export async function GET(request: Request, { params }: RouteProps) {
     );
   }
 
+  const userId = user.id;
+
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("plan,role,status")
@@ -121,6 +123,29 @@ export async function GET(request: Request, { params }: RouteProps) {
     return NextResponse.redirect(
       createSafeUrl(request, `/${locale}/upgrade`),
     );
+  }
+
+
+  async function trackPdfDownload(
+    mode: "company" | "standard" | "branded"
+  ) {
+    const { error } = await supabase
+      .from("user_activity_events")
+      .insert({
+        user_id: userId,
+        event_name: "pdf_download",
+        path: request.url,
+        metadata: {
+          resource_type: "toolbox",
+          slug,
+          locale,
+          mode,
+        },
+      });
+
+    if (error) {
+      console.error("PDF activity tracking error:", error);
+    }
   }
 
   const { data: logoFiles, error: listError } =
@@ -252,6 +277,8 @@ export async function GET(request: Request, { params }: RouteProps) {
     const premiumFilename =
       `${slug}-toolbox-talk-${locale}-company.pdf`;
 
+    await trackPdfDownload("company");
+
     return new NextResponse(
       Buffer.from(premiumPdfBytes),
       {
@@ -303,6 +330,8 @@ export async function GET(request: Request, { params }: RouteProps) {
     if (!logoFile || !logoBlob) {
       const standardFilename =
         `${slug}-toolbox-talk-${locale}.pdf`;
+
+      await trackPdfDownload("standard");
 
       return new NextResponse(Buffer.from(sourcePdfBytes), {
         status: 200,
@@ -441,6 +470,8 @@ export async function GET(request: Request, { params }: RouteProps) {
 
     const brandedPdfBytes = await pdfDocument.save();
     const filename = createDownloadName(slug, locale);
+
+    await trackPdfDownload("branded");
 
     return new NextResponse(Buffer.from(brandedPdfBytes), {
       status: 200,

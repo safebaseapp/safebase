@@ -1,0 +1,2623 @@
+"use client";
+import { trackUserEvent } from "@/lib/analytics/track-user-event";
+import ActivityTracker from "@/components/analytics/ActivityTracker";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { riskLibraryPack01 } from "@/lib/risk-library/pack-01";
+import { riskLibraryPack02 } from "@/lib/risk-library/pack-02";
+import { riskLibraryPack03 } from "@/lib/risk-library/pack-03";
+import { riskLibraryPack04 } from "@/lib/risk-library/pack-04";
+import { riskLibraryPack05 } from "@/lib/risk-library/pack-05";
+import { createClient } from "@/utils/supabase/client";
+import PrintButton from "@/components/ui/PrintButton";
+import { trackEvent } from "@/lib/analytics";
+
+type RiskLevel = {
+  labelTr: string;
+  labelEn: string;
+  descriptionTr: string;
+  descriptionEn: string;
+};
+
+const riskLevels: Record<string, RiskLevel> = {
+  low: {
+    labelTr: "Düşük",
+    labelEn: "Low",
+    descriptionTr: "Mevcut kontroller sürdürülmeli.",
+    descriptionEn: "Maintain the existing controls.",
+  },
+  medium: {
+    labelTr: "Orta",
+    labelEn: "Medium",
+    descriptionTr: "Ek kontrol önlemleri planlanmalı.",
+    descriptionEn: "Additional controls should be planned.",
+  },
+  high: {
+    labelTr: "Yüksek",
+    labelEn: "High",
+    descriptionTr: "İşe başlamadan önce risk azaltılmalı.",
+    descriptionEn: "Reduce the risk before starting the work.",
+  },
+  critical: {
+    labelTr: "Kritik",
+    labelEn: "Critical",
+    descriptionTr: "Faaliyet durdurulmalı ve derhal aksiyon alınmalı.",
+    descriptionEn: "Stop the activity and take immediate action.",
+  },
+};
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default function QuickRiskAssessmentPage({ params }: Props) {
+  const [riskLoadedFeedback, setRiskLoadedFeedback] = useState(false);
+  const [activeRiskTemplateName, setActiveRiskTemplateName] = useState<string | null>(null);
+
+
+  const supabase = createClient();
+  const [savedAssessmentId, setSavedAssessmentId] = useState<string | null>(null);
+  const [isSavingAssessment, setIsSavingAssessment] = useState(false);
+  const [saveAssessmentMessage, setSaveAssessmentMessage] = useState("");
+
+
+  /* SERNEM_RISK_HEADER_STATE_START */
+  const [projectName, setProjectName] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [assessmentLocation, setAssessmentLocation] = useState("");
+  const [assessorName, setAssessorName] = useState("");
+  const [assessmentDate, setAssessmentDate] = useState(
+    new Date().toISOString().slice(0, 10)
+  );
+  const [assessmentRevision, setAssessmentRevision] = useState("1.0");
+  /* SERNEM_RISK_HEADER_STATE_END */
+
+  /* SERNEM_HIRARC_HEADER_STATE_START */
+  const [department, setDepartment] = useState("");
+  const [assetArea, setAssetArea] = useState("");
+  const [processMethod, setProcessMethod] = useState("");
+  const [documentNo, setDocumentNo] = useState("SRN-HIRARC-001");
+  const [reviewedBy, setReviewedBy] = useState("");
+  const [approvedBy, setApprovedBy] = useState("");
+  /* SERNEM_HIRARC_HEADER_STATE_END */
+
+
+
+  /* SERNEM_MULTI_RISK_STATE_START */
+
+  type RiskRegisterItem = {
+    id: string;
+    activity: string;
+    hazard: string;
+    consequence: string;
+    personsAtRisk: string;
+    existingControls: string;
+    likelihood: number;
+    severity: number;
+    additionalControls: string;
+    responsible: string;
+    targetDate: string;
+    residualLikelihood: number;
+    residualSeverity: number;
+  };
+
+  const createRiskItem = (): RiskRegisterItem => ({
+    id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    activity: "",
+    hazard: "",
+    consequence: "",
+    personsAtRisk: "",
+    existingControls: "",
+    likelihood: 1,
+    severity: 1,
+    additionalControls: "",
+    responsible: "",
+    targetDate: "",
+    residualLikelihood: 1,
+    residualSeverity: 1,
+  });
+
+  const [riskItems, setRiskItems] = useState<RiskRegisterItem[]>([
+    createRiskItem(),
+  ]);
+
+  const updateRiskItem = <K extends keyof RiskRegisterItem>(
+    id: string,
+    field: K,
+    value: RiskRegisterItem[K]
+  ) => {
+    setRiskItems((current) =>
+      current.map((item) =>
+        item.id === id ? { ...item, [field]: value } : item
+      )
+    );
+  };
+
+  const addRiskItem = () => {
+    setRiskItems((current) => [...current, createRiskItem()]);
+  };
+
+  
+  
+/* SERNEM_LOAD_SAVED_ASSESSMENT */
+useEffect(() => {
+  const loadSavedAssessment = async () => {
+    const assessmentId = new URLSearchParams(
+      window.location.search
+    ).get("assessment");
+
+    if (!assessmentId) return;
+
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) return;
+
+    const { data, error } = await supabase
+      .from("risk_assessments")
+      .select("*")
+      .eq("id", assessmentId)
+      .eq("user_id", user.id)
+      .single();
+
+    if (error || !data) {
+      console.error("Risk assessment load error:", error);
+      setSaveAssessmentMessage("Kayıtlı risk analizi yüklenemedi.");
+      return;
+    }
+
+    setProjectName(data.project_name || "");
+    setCompanyName(data.company_name || "");
+    setAssessmentLocation(data.location || "");
+    setAssessorName(data.assessor_name || "");
+    setAssessmentDate(data.assessment_date || "");
+    setAssessmentRevision(data.revision || "1.0");
+
+    setDepartment(data.department || "");
+    setAssetArea(data.asset_area || "");
+    setProcessMethod(data.process_method || "");
+    setDocumentNo(data.document_no || "SRN-HIRARC-001");
+    setReviewedBy(data.reviewed_by || "");
+    setApprovedBy(data.approved_by || "");
+
+    const loadedRiskItems = Array.isArray(data.risk_items)
+      ? (data.risk_items as unknown as RiskRegisterItem[])
+      : [];
+
+    if (loadedRiskItems.length > 0) {
+      setRiskItems(loadedRiskItems);
+    }
+
+    setSavedAssessmentId(data.id);
+    setSaveAssessmentMessage("Kayıtlı risk analizi yüklendi.");
+
+    console.log("✅ Saved risk assessment loaded:", data.id);
+  };
+
+  loadSavedAssessment();
+}, []);
+/* SERNEM_LOAD_SAVED_ASSESSMENT_END */
+
+const saveRiskAssessment = async () => {
+    setIsSavingAssessment(true);
+    setSaveAssessmentMessage("");
+
+    try {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        setSaveAssessmentMessage(
+          "Risk analizini kaydetmek için giriş yapmanız gerekiyor."
+        );
+        return;
+      }
+
+      const payload = {
+        user_id: user.id,
+        title: projectName.trim()
+          ? `${projectName} - ${documentNo}`
+          : documentNo || "Risk Assessment",
+        project_name: projectName || null,
+        company_name: companyName || null,
+        location: assessmentLocation || null,
+        assessor_name: assessorName || null,
+        assessment_date: assessmentDate || null,
+        revision: assessmentRevision || null,
+        document_no: documentNo || null,
+        department: department || null,
+        asset_area: assetArea || null,
+        process_method: processMethod || null,
+        prepared_by: assessorName || null,
+        reviewed_by: reviewedBy || null,
+        approved_by: approvedBy || null,
+        risk_items: riskItems,
+        updated_at: new Date().toISOString(),
+      };
+
+      if (savedAssessmentId) {
+        const { error } = await supabase
+          .from("risk_assessments")
+          .update(payload)
+          .eq("id", savedAssessmentId)
+          .eq("user_id", user.id);
+
+        if (error) throw error;
+
+        void trackUserEvent(
+          "risk_assessment_updated",
+          {
+            assessment_id: savedAssessmentId,
+            project_name: projectName || null,
+            document_no: documentNo || null,
+            risk_item_count: riskItems.length,
+          }
+        );
+
+        setSaveAssessmentMessage("Risk analizi güncellendi.");
+      } else {
+        const { data, error } = await supabase
+          .from("risk_assessments")
+          .insert(payload)
+          .select("id")
+          .single();
+
+        if (error) throw error;
+
+        setSavedAssessmentId(data.id);
+
+        void trackUserEvent(
+          "risk_assessment_saved",
+          {
+            assessment_id: data.id,
+            project_name: projectName || null,
+            document_no: documentNo || null,
+            risk_item_count: riskItems.length,
+          }
+        );
+
+        setSaveAssessmentMessage("Risk analizi kaydedildi.");
+      }
+    } catch (error) {
+      console.error("Risk assessment save error:", error);
+      setSaveAssessmentMessage("Risk analizi kaydedilemedi.");
+    } finally {
+      setIsSavingAssessment(false);
+    }
+  };
+
+const duplicateRiskItem = (id: string) => {
+    setRiskItems((current) => {
+      const source = current.find((item) => item.id === id);
+
+      if (!source) return current;
+
+      return [
+        ...current,
+        {
+          ...source,
+          id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        },
+      ];
+    });
+  };
+
+  const removeRiskItem = (id: string) => {
+    setRiskItems((current) => {
+      if (current.length === 1) return current;
+      return current.filter((item) => item.id !== id);
+    });
+  };
+
+  const getRiskLabel = (score: number) => {
+    if (score >= 20) return isTurkish ? "Kritik" : "Critical";
+    if (score >= 10) return isTurkish ? "Yüksek" : "High";
+    if (score >= 5) return isTurkish ? "Orta" : "Medium";
+    return isTurkish ? "Düşük" : "Low";
+  };
+
+
+  /* SERNEM_RISK_PRINT_HANDLER_START */
+  const handlePrintRiskAssessment = () => {
+    trackEvent("pdf_downloaded", {
+      document_type: "risk_assessment",
+      locale,
+      risk_count: riskItems.length,
+      source: "quick_risk_assessment",
+    });
+
+    window.print();
+  };
+  /* SERNEM_RISK_PRINT_HANDLER_END */
+
+  const getRiskStyle = (score: number) => {
+    if (score >= 20) {
+      return {
+        card: "border-red-500/50 bg-red-500/15",
+        title: "text-red-300",
+        score: "text-red-400",
+        badge: "bg-red-500/15 text-red-300 border-red-500/40",
+      };
+    }
+
+    if (score >= 10) {
+      return {
+        card: "border-orange-500/50 bg-orange-500/15",
+        title: "text-orange-300",
+        score: "text-orange-400",
+        badge: "bg-orange-500/15 text-orange-300 border-orange-500/40",
+      };
+    }
+
+    if (score >= 5) {
+      return {
+        card: "border-yellow-500/50 bg-yellow-500/15",
+        title: "text-yellow-300",
+        score: "text-yellow-300",
+        badge: "bg-yellow-500/15 text-yellow-300 border-yellow-500/40",
+      };
+    }
+
+    return {
+      card: "border-emerald-500/50 bg-emerald-500/15",
+      title: "text-emerald-300",
+      score: "text-emerald-400",
+      badge: "bg-emerald-500/15 text-emerald-300 border-emerald-500/40",
+    };
+  };
+
+  /* SERNEM_MULTI_RISK_STATE_END */
+
+  /* SERNEM_RISK_LIBRARY_ALL_START */
+  const riskLibraryAll = [
+    ...riskLibraryPack01,
+    ...riskLibraryPack02,
+    ...riskLibraryPack03,
+    ...riskLibraryPack04,
+    ...riskLibraryPack05,
+  ];
+  /* SERNEM_RISK_LIBRARY_ALL_END */
+
+  
+  
+
+/* SERNEM_RISK_LIBRARY_PACK01_STATE_START */
+
+  const [selectedLibraryActivity, setSelectedLibraryActivity] =
+    useState(riskLibraryAll[0]?.id ?? "");
+
+  const selectedLibraryTemplate = riskLibraryAll.find(
+    (template) => template.id === selectedLibraryActivity
+  );
+
+
+  const getSuggestedLibraryScore = (entry: {
+    hazard: { tr: string; en: string };
+    consequence: { tr: string; en: string };
+  }) => {
+    const text = `${entry.hazard.tr} ${entry.hazard.en} ${entry.consequence.tr} ${entry.consequence.en}`.toLowerCase();
+
+    let severity = 3;
+
+    if (
+      /ölüm|fatality|death|kalıcı sakatlık|permanent disability/.test(text)
+    ) {
+      severity = 5;
+    } else if (
+      /ciddi yaralanma|serious injury|ezilme|crushing|elektrik çarpması|electric shock|kimyasal yanık|chemical burn|işitme kaybı|hearing loss/.test(text)
+    ) {
+      severity = 4;
+    }
+
+    let likelihood = 2;
+
+    if (
+      /yüksekten düş|fall from height|patlama|explosion|yangın|fire|elektrik|electric|basınçlı|pressurized|pressure release|kontrolsüz|uncontrolled|devril|overturn|collapse|çökme|sıkışma|entrapment|crushing|dropped object|düşen cisim/.test(text)
+    ) {
+      likelihood = 3;
+    }
+
+    return {
+      likelihood,
+      severity,
+    };
+  };
+
+  const loadLibraryActivity = () => {
+    if (!selectedLibraryTemplate || isLoadingLibraryActivity) return;
+
+    // RISK_TEMPLATE_FLOW_FEEDBACK
+    const loadedRiskTemplateName = isTurkish
+      ? selectedLibraryTemplate.activity.tr
+      : selectedLibraryTemplate.activity.en;
+
+    setActiveRiskTemplateName(loadedRiskTemplateName);
+    setRiskLoadedFeedback(true);
+
+    window.setTimeout(() => {
+      setRiskLoadedFeedback(false);
+    }, 1800);
+
+    window.setTimeout(() => {
+      document
+        .getElementById("risk-pdf-action-target")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+    }, 500);
+
+
+    setIsLoadingLibraryActivity(true);
+    setLibraryActivityLoaded(false);
+
+    const lang = isTurkish ? "tr" : "en";
+
+    const selectedEntries = selectedLibraryTemplate.items.filter(
+      (_, index) => selectedLibraryRiskIndexes.includes(index)
+    );
+
+    if (selectedEntries.length === 0) return;
+
+    trackEvent("risk_assessment_started", {
+      locale: lang,
+      activity_id: selectedLibraryTemplate.id,
+      activity_name: loadedRiskTemplateName,
+      risk_count: selectedEntries.length,
+      source: "risk_library",
+    });
+
+    const generated: RiskRegisterItem[] =
+      selectedEntries.map((entry) => {
+        const suggestedScore = getSuggestedLibraryScore(entry);
+
+        return {
+        ...createRiskItem(),
+
+        activity: selectedLibraryTemplate.activity[lang],
+        hazard: entry.hazard[lang],
+        consequence: entry.consequence[lang],
+        personsAtRisk: entry.personsAtRisk[lang],
+        existingControls: entry.existingControls[lang],
+        additionalControls: entry.additionalControls[lang],
+
+        // Suggested initial score for ready-made library content.
+        // The assessor can edit these values based on actual site conditions.
+        likelihood: suggestedScore.likelihood,
+        severity: suggestedScore.severity,
+
+        // Suggested residual score after the listed additional controls.
+        // The assessor can still edit these values based on actual conditions.
+        residualLikelihood:
+          suggestedScore.likelihood * suggestedScore.severity >= 10 ? 2 : 1,
+        residualSeverity:
+          suggestedScore.likelihood * suggestedScore.severity >= 10
+            ? 2
+            : suggestedScore.likelihood * suggestedScore.severity >= 5
+              ? 2
+              : 1,
+        };
+      });
+
+    setRiskItems((current) => {
+      const blank =
+        current.length === 1 &&
+        !current[0].activity &&
+        !current[0].hazard &&
+        !current[0].consequence &&
+        !current[0].existingControls;
+
+      return blank ? generated : [...current, ...generated];
+    });
+
+    setTimeout(() => {
+      setIsLoadingLibraryActivity(false);
+      setLibraryActivityLoaded(true);
+
+      setTimeout(() => {
+        setLibraryActivityLoaded(false);
+      }, 1200);
+    }, 350);
+  };
+
+  /* SERNEM_RISK_LIBRARY_PACK01_STATE_END */
+
+
+
+
+  const [locale, setLocale] = useState<"tr" | "en">("en");
+  const [activity, setActivity] = useState("");
+  const [hazard, setHazard] = useState("");
+  const [existingControls, setExistingControls] = useState("");
+  const [likelihood, setLikelihood] = useState(1);
+  const [severity, setSeverity] = useState(1);
+  const [showResult, setShowResult] = useState(false);
+  const [isLoadingLibraryActivity, setIsLoadingLibraryActivity] = useState(false);
+  const [libraryActivityLoaded, setLibraryActivityLoaded] = useState(false);
+
+  useEffect(() => {
+    params.then(({ locale }) => {
+      setLocale(locale === "tr" ? "tr" : "en");
+    });
+  }, [params]);
+
+  const isTurkish = locale === "tr";
+
+  /* SERNEM_LIBRARY_FILTER_STATE_START */
+
+  const [librarySearch, setLibrarySearch] = useState("");
+  const [libraryCategory, setLibraryCategory] = useState("all");
+
+  const [selectedLibraryRiskIndexes, setSelectedLibraryRiskIndexes] =
+    useState<number[]>(
+      riskLibraryAll[0]?.items.map((_, index) => index) ?? []
+    );
+
+  const libraryCategories = Array.from(
+    new Map(
+      riskLibraryAll.map((item) => [
+        item.category.en,
+        item.category,
+      ])
+    ).values()
+  );
+
+  const normalizeLibraryText = (value: string) =>
+    value
+      .toLocaleLowerCase(isTurkish ? "tr-TR" : "en-US")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/ı/g, "i")
+      .replace(/ş/g, "s")
+      .replace(/ğ/g, "g")
+      .replace(/ü/g, "u")
+      .replace(/ö/g, "o")
+      .replace(/ç/g, "c")
+      .trim();
+
+  const normalizedLibrarySearch = normalizeLibraryText(librarySearch);
+
+  const categorySearchMap = [
+    {
+      keywords: ["kimyasal", "chemical"],
+      match: ["kimyasal", "chemical"],
+    },
+    {
+      keywords: ["elektrik", "electrical", "electric"],
+      match: ["elektrik", "electrical", "electric"],
+    },
+    {
+      keywords: ["yuksekte", "yukseklik", "height"],
+      match: ["yuksekte", "height"],
+    },
+    {
+      keywords: ["kaldirma", "lifting", "crane"],
+      match: ["kaldirma", "lifting", "crane"],
+    },
+    {
+      keywords: ["kapali alan", "confined"],
+      match: ["kapali alan", "confined"],
+    },
+    {
+      keywords: ["sicak", "hot work", "kaynak", "welding"],
+      match: ["sicak", "hot", "welding"],
+    },
+  ];
+
+  const inferredCategoryKeywords =
+    categorySearchMap.find((group) =>
+      group.keywords.some((keyword) =>
+        normalizedLibrarySearch.includes(normalizeLibraryText(keyword))
+      )
+    )?.match ?? [];
+
+  const filteredRiskLibrary = riskLibraryAll.filter((template) => {
+    const activityTr = normalizeLibraryText(template.activity.tr);
+    const activityEn = normalizeLibraryText(template.activity.en);
+
+    const categoryTr = normalizeLibraryText(template.category.tr);
+    const categoryEn = normalizeLibraryText(template.category.en);
+
+    // Search intentionally focuses on ACTIVITY NAME.
+    // This prevents broad matches from hazards/controls inside 900 risk records.
+    const matchesSearch =
+      !normalizedLibrarySearch ||
+      activityTr.includes(normalizedLibrarySearch) ||
+      activityEn.includes(normalizedLibrarySearch);
+
+    const normalizedCategory = normalizeLibraryText(libraryCategory);
+
+    const matchesManualCategory =
+      libraryCategory === "all" ||
+      categoryTr === normalizedCategory ||
+      categoryEn === normalizedCategory;
+
+    const matchesInferredCategory =
+      inferredCategoryKeywords.length === 0 ||
+      inferredCategoryKeywords.some(
+        (keyword) =>
+          categoryTr.includes(normalizeLibraryText(keyword)) ||
+          categoryEn.includes(normalizeLibraryText(keyword))
+      );
+
+    return (
+      matchesSearch &&
+      matchesManualCategory &&
+      matchesInferredCategory
+    );
+  });
+
+  useEffect(() => {
+    // No matching activity
+    if (filteredRiskLibrary.length === 0) {
+      setSelectedLibraryActivity("");
+      setSelectedLibraryRiskIndexes([]);
+      return;
+    }
+
+    const currentStillVisible = filteredRiskLibrary.some(
+      (template) => template.id === selectedLibraryActivity
+    );
+
+    // Keep current selection only if it still belongs to filtered results.
+    if (currentStillVisible) return;
+
+    // Otherwise automatically select first matching activity.
+    const firstMatch = filteredRiskLibrary[0];
+
+    setSelectedLibraryActivity(firstMatch.id);
+    setSelectedLibraryRiskIndexes(
+      firstMatch.items.map((_, index) => index)
+    );
+  }, [
+    librarySearch,
+    libraryCategory,
+    isTurkish,
+    selectedLibraryActivity,
+  ]);
+
+  const selectLibraryActivity = (activityId: string) => {
+    setSelectedLibraryActivity(activityId);
+
+    const template = riskLibraryAll.find(
+      (item) => item.id === activityId
+    );
+
+    if (!template) {
+      setSelectedLibraryRiskIndexes([]);
+      return;
+    }
+
+    // Seçilen faaliyetin kategorisini otomatik senkronize et.
+    setLibraryCategory(
+      isTurkish ? template.category.tr : template.category.en
+    );
+
+    // Faaliyetteki tüm hazır riskleri varsayılan olarak seç.
+    setSelectedLibraryRiskIndexes(
+      template.items.map((_, index) => index)
+    );
+  };
+
+  const toggleLibraryRisk = (index: number) => {
+    setSelectedLibraryRiskIndexes((current) =>
+      current.includes(index)
+        ? current.filter((item) => item !== index)
+        : [...current, index].sort((a, b) => a - b)
+    );
+  };
+
+  const selectAllLibraryRisks = () => {
+    if (!selectedLibraryTemplate) return;
+
+    setSelectedLibraryRiskIndexes(
+      selectedLibraryTemplate.items.map((_, index) => index)
+    );
+  };
+
+  const clearLibraryRiskSelection = () => {
+    setSelectedLibraryRiskIndexes([]);
+  };
+
+  /* SERNEM_LIBRARY_FILTER_STATE_END */
+
+  const score = likelihood * severity;
+
+  const levelKey =
+    score <= 4
+      ? "low"
+      : score <= 9
+        ? "medium"
+        : score <= 16
+          ? "high"
+          : "critical";
+
+  const riskLevel = riskLevels[levelKey];
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setShowResult(true);
+
+    void trackUserEvent(
+      "risk_assessment_calculated",
+      {
+        tool: "quick-risk-assessment",
+      }
+    );
+  }
+
+  function handleReset() {
+    setActivity("");
+    setHazard("");
+    setExistingControls("");
+    setLikelihood(1);
+    setSeverity(1);
+    setShowResult(false);
+  }
+
+  return (
+    <main className="min-h-screen bg-slate-950 px-5 py-12 text-white">
+      <ActivityTracker eventName="risk_assessment_open" />
+
+      {/* SERNEM_RISK_HEADER_UI_START */}
+      <section className="mb-8 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/70 shadow-xl">
+        <div className="border-b border-slate-800 bg-gradient-to-r from-emerald-950/60 to-slate-950 px-6 py-5">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
+                SERNEM Risk Assessment
+              </p>
+
+              <h2 className="mt-1 text-2xl font-black text-white">
+                {isTurkish
+                  ? "Değerlendirme Bilgileri"
+                  : "Assessment Information"}
+              </h2>
+
+              <p className="mt-1 text-sm text-slate-400">
+                {isTurkish
+                  ? "Risk değerlendirmesine ait temel proje ve doküman bilgilerini girin."
+                  : "Enter the basic project and document information for this risk assessment."}
+              </p>
+            </div>
+
+            <div className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-xs font-black uppercase tracking-wider text-emerald-300">
+              {isTurkish ? "Profesyonel Değerlendirme" : "Professional Assessment"}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-5 p-6 md:grid-cols-2 xl:grid-cols-3">
+
+          <label className="block">
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Proje" : "Project"}
+            </span>
+            <input
+              type="text"
+              value={projectName}
+              onChange={(e) => setProjectName(e.target.value)}
+              placeholder={isTurkish ? "Proje adı" : "Project name"}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none transition placeholder:text-slate-600 focus:border-emerald-500"
+            />
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Şirket" : "Company"}
+            </span>
+            <input
+              type="text"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              placeholder={isTurkish ? "Şirket adı" : "Company name"}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none transition placeholder:text-slate-600 focus:border-emerald-500"
+            />
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Lokasyon" : "Location"}
+            </span>
+            <input
+              type="text"
+              value={assessmentLocation}
+              onChange={(e) => setAssessmentLocation(e.target.value)}
+              placeholder={isTurkish ? "Saha / bölüm / lokasyon" : "Site / area / location"}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none transition placeholder:text-slate-600 focus:border-emerald-500"
+            />
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Değerlendirmeyi Yapan" : "Assessor"}
+            </span>
+            <input
+              type="text"
+              value={assessorName}
+              onChange={(e) => setAssessorName(e.target.value)}
+              placeholder={isTurkish ? "Ad Soyad" : "Full name"}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none transition placeholder:text-slate-600 focus:border-emerald-500"
+            />
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Değerlendirme Tarihi" : "Assessment Date"}
+            </span>
+            <input
+              type="date"
+              value={assessmentDate}
+              onChange={(e) => setAssessmentDate(e.target.value)}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none transition focus:border-emerald-500"
+            />
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Revizyon" : "Revision"}
+            </span>
+            <input
+              type="text"
+              value={assessmentRevision}
+              onChange={(e) => setAssessmentRevision(e.target.value)}
+              placeholder="1.0"
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none transition placeholder:text-slate-600 focus:border-emerald-500"
+            />
+          </label>
+
+        </div>
+      </section>
+      
+      {/* SERNEM_HIRARC_HEADER_UI_START */}
+
+      
+      <div
+        id="risk-pdf-action-target"
+        className="mb-6 scroll-mt-28 rounded-2xl border border-emerald-500/20 bg-slate-900/80 p-5"
+      >
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-400">
+              {isTurkish ? "Aktif Risk Analizi" : "Active Risk Assessment"}
+            </p>
+
+            <p className="mt-1 text-lg font-bold text-white">
+              {activeRiskTemplateName ||
+                (isTurkish
+                  ? "Şablon seçin ve risk analizini hazırlayın"
+                  : "Select a template and prepare the risk assessment")}
+            </p>
+
+            {riskLoadedFeedback && (
+              <p className="mt-2 text-sm font-bold text-emerald-300">
+                ✓ {isTurkish
+                  ? "Şablon başarıyla yüklendi"
+                  : "Template loaded successfully"}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={handlePrintRiskAssessment}
+            className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 px-7 py-4 text-base font-black text-white shadow-[0_12px_35px_rgba(37,99,235,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(34,211,238,0.35)]"
+          >
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-xl">
+              📄
+            </span>
+
+            <span className="flex flex-col items-start leading-tight">
+              <span>
+                {isTurkish ? "PDF Oluştur / Yazdır" : "Generate PDF / Print"}
+              </span>
+
+              <span className="mt-1 text-[11px] font-semibold text-blue-100">
+                {isTurkish
+                  ? "Risk analizi çıktısını hazırla"
+                  : "Prepare Risk Assessment output"}
+              </span>
+            </span>
+
+            <span className="text-xl transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </button>
+        </div>
+      </div>
+
+<section className="mb-8 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/70">
+
+        <div className="border-b border-slate-800 px-6 py-4">
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-400">
+            {isTurkish
+              ? "HIRARC Doküman Bilgileri"
+              : "HIRARC Document Information"}
+          </p>
+
+          <p className="mt-1 text-sm text-slate-500">
+            {isTurkish
+              ? "Kurumsal risk değerlendirmesi ve PDF çıktısında kullanılacak ek bilgiler."
+              : "Additional information used in the corporate risk assessment and PDF output."}
+          </p>
+        </div>
+
+        <div className="grid gap-5 p-6 md:grid-cols-2 xl:grid-cols-3">
+
+          <label>
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Departman" : "Department"}
+            </span>
+
+            <input
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+              placeholder={isTurkish ? "Örn. HSE / Bakım" : "e.g. HSE / Maintenance"}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none focus:border-blue-500"
+            />
+          </label>
+
+          <label>
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Asset / Alan" : "Asset / Area"}
+            </span>
+
+            <input
+              value={assetArea}
+              onChange={(e) => setAssetArea(e.target.value)}
+              placeholder={isTurkish ? "Ünite / saha / bölüm" : "Unit / site / area"}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none focus:border-blue-500"
+            />
+          </label>
+
+          <label>
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Proses / Metot" : "Process / Method"}
+            </span>
+
+            <input
+              value={processMethod}
+              onChange={(e) => setProcessMethod(e.target.value)}
+              placeholder={isTurkish ? "Çalışma yöntemi" : "Work method"}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none focus:border-blue-500"
+            />
+          </label>
+
+          <label>
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Doküman No" : "Document No"}
+            </span>
+
+            <input
+              value={documentNo}
+              onChange={(e) => setDocumentNo(e.target.value)}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none focus:border-blue-500"
+            />
+          </label>
+
+          <label>
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Kontrol Eden" : "Reviewed By"}
+            </span>
+
+            <input
+              value={reviewedBy}
+              onChange={(e) => setReviewedBy(e.target.value)}
+              placeholder={isTurkish ? "Ad Soyad" : "Full name"}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none focus:border-blue-500"
+            />
+          </label>
+
+          <label>
+            <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+              {isTurkish ? "Onaylayan" : "Approved By"}
+            </span>
+
+            <input
+              value={approvedBy}
+              onChange={(e) => setApprovedBy(e.target.value)}
+              placeholder={isTurkish ? "Ad Soyad" : "Full name"}
+              className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-white outline-none focus:border-blue-500"
+            />
+          </label>
+
+        </div>
+
+      </section>
+
+      {/* SERNEM_HIRARC_HEADER_UI_END */}
+
+      {/* SERNEM_RISK_HEADER_UI_END */}
+
+
+      <div className="mx-auto max-w-6xl">
+        <Link
+          href={`/${locale}/tools`}
+          className="inline-flex text-sm font-semibold text-slate-400 transition hover:text-blue-400"
+        >
+          ← {isTurkish ? "Araçlara dön" : "Back to tools"}
+        </Link>
+
+        
+
+      </div>
+
+      {/* SERNEM_RISK_LIBRARY_PACK01_UI_START */}
+
+      <section className="mx-auto mt-10 w-full max-w-7xl overflow-hidden rounded-2xl border border-blue-500/20 bg-slate-950/80 shadow-2xl">
+
+        <div className="border-b border-slate-800 bg-gradient-to-r from-blue-950/60 via-slate-950 to-emerald-950/40 px-6 py-6">
+
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-blue-400">
+                SERNEM Professional Risk Library
+              </p>
+
+              <h2 className="mt-2 text-2xl font-black text-white">
+                {isTurkish
+                  ? "Hazır Risk Analizi Kütüphanesi"
+                  : "Ready-Made Risk Assessment Library"}
+              </h2>
+
+              <p className="mt-2 max-w-3xl text-sm text-slate-400">
+                {isTurkish
+                  ? "Faaliyeti seçin ve hazır risk kayıtlarını mevcut HIRARC değerlendirmenize tek tıkla aktarın."
+                  : "Select an activity and load ready-made risk items directly into your HIRARC assessment."}
+              </p>
+            </div>
+
+            <div className="flex gap-3">
+
+              <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 px-4 py-3 text-center">
+                <p className="text-2xl font-black text-blue-300">
+                  {riskLibraryAll.length}
+                </p>
+
+                <p className="text-[10px] font-black uppercase tracking-wider text-slate-500">
+                  {isTurkish ? "Faaliyet" : "Activities"}
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-4 py-3 text-center">
+                <p className="text-2xl font-black text-emerald-300">
+                  {riskLibraryAll.reduce(
+                    (total, activity) => total + activity.items.length,
+                    0
+                  )}
+                </p>
+
+                <p className="text-[10px] font-black uppercase tracking-wider text-slate-500">
+                  {isTurkish ? "Hazır Risk" : "Risk Items"}
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-5 p-6">
+
+          {/* SEARCH + CATEGORY */}
+          <div className="grid gap-4 lg:grid-cols-[1fr_320px]">
+
+            <label>
+              <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                {isTurkish ? "Kütüphanede Ara" : "Search Library"}
+              </span>
+
+              <div className="relative">
+                <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">
+                  🔎
+                </span>
+
+                <input
+                  type="text"
+                  value={librarySearch}
+                  onChange={(e) => setLibrarySearch(e.target.value)}
+                  placeholder={
+                    isTurkish
+                      ? "Faaliyet, kategori veya tehlike ara..."
+                      : "Search activity, category or hazard..."
+                  }
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900 py-4 pl-11 pr-4 text-sm font-semibold text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500"
+                />
+              </div>
+            </label>
+
+            <label>
+              <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                {isTurkish ? "Kategori" : "Category"}
+              </span>
+
+              <select
+                value={libraryCategory}
+                onChange={(e) => setLibraryCategory(e.target.value)}
+                className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-4 text-sm font-bold text-white outline-none transition focus:border-blue-500"
+              >
+                <option value="all">
+                  {isTurkish ? "Tüm Kategoriler" : "All Categories"}
+                </option>
+
+                {libraryCategories.map((category) => {
+                  const value = isTurkish
+                    ? category.tr
+                    : category.en;
+
+                  return (
+                    <option
+                      key={`${category.en}-${category.tr}`}
+                      value={value}
+                    >
+                      {value}
+                    </option>
+                  );
+                })}
+              </select>
+            </label>
+
+          </div>
+
+          {/* RESULT COUNT */}
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3">
+
+            <p className="text-sm font-bold text-slate-400">
+              <span className="font-black text-white">
+                {filteredRiskLibrary.length}
+              </span>{" "}
+              {isTurkish
+                ? "faaliyet bulundu"
+                : "activities found"}
+            </p>
+
+            {(librarySearch || libraryCategory !== "all") && (
+              <button
+                type="button"
+                onClick={() => {
+                  setLibrarySearch("");
+                  setLibraryCategory("all");
+                }}
+                className="text-xs font-black text-blue-400 transition hover:text-blue-300"
+              >
+                ✕ {isTurkish ? "Filtreleri Temizle" : "Clear Filters"}
+              </button>
+            )}
+
+          </div>
+
+          {/* ACTIVITY SELECT + LOAD */}
+          <div className="grid gap-5 lg:grid-cols-[1fr_auto]">
+
+            <label>
+              <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                {isTurkish ? "Hazır Faaliyet Seç" : "Select Ready Activity"}
+              </span>
+
+              <select
+                value={
+                  filteredRiskLibrary.some(
+                    (template) =>
+                      template.id === selectedLibraryActivity
+                  )
+                    ? selectedLibraryActivity
+                    : ""
+                }
+                onChange={(e) =>
+                  selectLibraryActivity(e.target.value)
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-4 text-sm font-bold text-white outline-none transition focus:border-blue-500"
+              >
+                <option value="" disabled>
+                  {filteredRiskLibrary.length
+                    ? isTurkish
+                      ? "Faaliyet seç..."
+                      : "Select activity..."
+                    : isTurkish
+                    ? "Sonuç bulunamadı"
+                    : "No results found"}
+                </option>
+
+                {filteredRiskLibrary.map((template) => (
+                  <option key={template.id} value={template.id}>
+                    {isTurkish
+                      ? template.activity.tr
+                      : template.activity.en}
+                    {" — "}
+                    {template.items.length}
+                    {isTurkish ? " risk" : " risk items"}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <button
+              type="button"
+              onClick={loadLibraryActivity}
+              disabled={
+              !selectedLibraryTemplate ||
+              selectedLibraryRiskIndexes.length === 0 ||
+              isLoadingLibraryActivity
+            }
+              className="self-end rounded-xl bg-blue-500 px-6 py-4 text-sm font-black text-white transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {isLoadingLibraryActivity ? (
+              <>
+                <span className="inline-block animate-spin">⏳</span>{" "}
+                {isTurkish ? "Aktarılıyor..." : "Loading..."}
+              </>
+            ) : libraryActivityLoaded ? (
+              <>✓ {isTurkish ? "Aktarıldı" : "Loaded"}</>
+            ) : (
+              <>
+                ⚡{" "}
+                {isTurkish
+                  ? `${selectedLibraryRiskIndexes.length} Riski Analize Aktar`
+                  : `Load ${selectedLibraryRiskIndexes.length} Risks`}
+              </>
+            )}
+            </button>
+
+          </div>
+
+        </div>
+
+        {selectedLibraryTemplate && (
+          <div className="border-t border-slate-800 px-6 py-5">
+
+            <p className="text-xs font-black uppercase tracking-wider text-slate-500">
+              {isTurkish ? "Bu şablondaki riskler" : "Risks in this template"}
+            </p>
+
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+
+              <p className="text-sm font-bold text-slate-400">
+                <span className="font-black text-blue-300">
+                  {selectedLibraryRiskIndexes.length}
+                </span>
+                {" / "}
+                {selectedLibraryTemplate.items.length}{" "}
+                {isTurkish ? "risk seçili" : "risks selected"}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={selectAllLibraryRisks}
+                  className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 px-3 py-2 text-xs font-black text-emerald-300 transition hover:bg-emerald-500/10"
+                >
+                  ✓ {isTurkish ? "Tümünü Seç" : "Select All"}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={clearLibraryRiskSelection}
+                  className="rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-xs font-black text-slate-400 transition hover:text-white"
+                >
+                  ✕ {isTurkish ? "Seçimi Temizle" : "Clear Selection"}
+                </button>
+              </div>
+
+            </div>
+
+            <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+
+              {selectedLibraryTemplate.items.map((entry, index) => {
+                const selected =
+                  selectedLibraryRiskIndexes.includes(index);
+
+                return (
+                  <button
+                    key={`${selectedLibraryTemplate.id}-${index}`}
+                    type="button"
+                    onClick={() => toggleLibraryRisk(index)}
+                    className={`group flex items-start gap-3 rounded-xl border p-4 text-left transition ${
+                      selected
+                        ? "border-blue-500/50 bg-blue-500/10"
+                        : "border-slate-800 bg-slate-900/70 hover:border-slate-700"
+                    }`}
+                  >
+                    <span
+                      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border text-[11px] font-black ${
+                        selected
+                          ? "border-blue-400 bg-blue-500 text-white"
+                          : "border-slate-600 bg-slate-950 text-transparent"
+                      }`}
+                    >
+                      ✓
+                    </span>
+
+                    <div>
+                      <p
+                        className={`text-sm font-black ${
+                          selected
+                            ? "text-white"
+                            : "text-slate-300"
+                        }`}
+                      >
+                        {String(index + 1).padStart(2, "0")} •{" "}
+                        {isTurkish
+                          ? entry.hazard.tr
+                          : entry.hazard.en}
+                      </p>
+
+                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500">
+                        {isTurkish
+                          ? entry.consequence.tr
+                          : entry.consequence.en}
+                      </p>
+                    </div>
+
+                  </button>
+                );
+              })}
+
+            </div>
+
+            <div className="mt-5 rounded-xl border border-amber-500/20 bg-amber-500/5 px-4 py-3">
+
+              <p className="text-xs font-bold leading-5 text-amber-300">
+                ⚠️{" "}
+                {isTurkish
+                  ? "Hazır içerikler başlangıç noktasıdır. Olasılık ve şiddet puanlarını gerçek saha koşulları, ekipman, personel ve mevcut kontroller dikkate alınarak yetkin değerlendirici belirlemelidir."
+                  : "Ready-made content includes suggested initial likelihood and severity scores. A competent assessor must verify or adjust these values based on actual site conditions, equipment, personnel and existing controls."}
+              </p>
+
+            </div>
+
+          </div>
+        )}
+
+      </section>
+
+      {/* SERNEM_RISK_LIBRARY_PACK01_UI_END */}
+
+
+      {/* SERNEM_MULTI_RISK_UI_START */}
+
+      <section className="mx-auto mt-10 w-full max-w-7xl rounded-2xl border border-slate-800 bg-slate-950/70 shadow-2xl">
+
+        <div className="flex flex-col gap-4 border-b border-slate-800 px-6 py-6 lg:flex-row lg:items-center lg:justify-between">
+
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
+              {isTurkish ? "Risk Kayıt Listesi" : "Risk Register"}
+            </p>
+
+            <h2 className="mt-2 text-2xl font-black text-white">
+              {isTurkish
+                ? "Profesyonel Risk Değerlendirmesi"
+                : "Professional Risk Assessment"}
+            </h2>
+
+            <p className="mt-2 max-w-3xl text-sm text-slate-400">
+              {isTurkish
+                ? "Bir değerlendirmeye birden fazla tehlike ekleyin, başlangıç ve kalan risk seviyelerini ayrı ayrı yönetin."
+                : "Add multiple hazards to one assessment and manage initial and residual risk levels independently."}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {/* SERNEM_RISK_PRINT_BUTTON */}
+            <button
+              type="button"
+              onClick={handlePrintRiskAssessment}
+              className="group inline-flex items-center gap-3 rounded-xl border border-blue-400/30 bg-gradient-to-b from-blue-500/[0.16] to-blue-600/[0.08] px-4 py-2.5 text-sm font-black text-blue-50 shadow-[0_10px_28px_rgba(37,99,235,.14)] transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300/50 hover:bg-blue-500/[0.18] hover:shadow-[0_14px_34px_rgba(37,99,235,.22)] active:translate-y-0 active:scale-[0.98]"
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-blue-300/20 bg-blue-500/10 text-base text-blue-100 transition group-hover:bg-blue-500/20">
+                📄
+              </span>
+
+              <span>
+                {isTurkish ? "PDF / Yazdır" : "PDF / Print"}
+              </span>
+
+              <span className="text-blue-300 transition-transform duration-200 group-hover:translate-x-1">
+                →
+              </span>
+            </button>
+
+          {/* SERNEM_RISK_SAVE_BUTTON */}
+          <button
+            type="button"
+            onClick={saveRiskAssessment}
+            disabled={isSavingAssessment}
+            className="rounded-xl border border-emerald-500/50 bg-emerald-500/10 px-5 py-3 text-sm font-black text-emerald-300 transition hover:bg-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {isSavingAssessment
+              ? isTurkish
+                ? "Kaydediliyor..."
+                : "Saving..."
+              : isTurkish
+                ? "💾 Analizi Kaydet"
+                : "💾 Save Assessment"}
+          </button>
+
+            <button
+              type="button"
+              onClick={addRiskItem}
+              className="rounded-xl bg-emerald-500 px-5 py-3 text-sm font-black text-slate-950 transition hover:bg-emerald-400"
+            >
+              + {isTurkish ? "Yeni Risk Ekle" : "Add Risk"}
+            </button>
+          </div>
+
+          {/* SERNEM_RISK_LEGEND */}
+          <div className="flex flex-wrap gap-2 lg:ml-auto">
+            <span className="rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-[10px] font-black text-emerald-300">
+              1–4 {isTurkish ? "DÜŞÜK" : "LOW"}
+            </span>
+            <span className="rounded-full border border-yellow-500/40 bg-yellow-500/10 px-3 py-1 text-[10px] font-black text-yellow-300">
+              5–9 {isTurkish ? "ORTA" : "MEDIUM"}
+            </span>
+            <span className="rounded-full border border-orange-500/40 bg-orange-500/10 px-3 py-1 text-[10px] font-black text-orange-300">
+              10–19 {isTurkish ? "YÜKSEK" : "HIGH"}
+            </span>
+            <span className="rounded-full border border-red-500/40 bg-red-500/10 px-3 py-1 text-[10px] font-black text-red-300">
+              20–25 {isTurkish ? "KRİTİK" : "CRITICAL"}
+            </span>
+          </div>
+
+        </div>
+
+        <div className="space-y-6 p-6">
+
+          {riskItems.map((item, index) => {
+
+            const initialScore = item.likelihood * item.severity;
+            const residualScore =
+              item.residualLikelihood * item.residualSeverity;
+
+            return (
+              <article
+                key={item.id}
+                className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70"
+              >
+
+                <div className="flex flex-col gap-3 border-b border-slate-800 bg-slate-950 px-5 py-4 md:flex-row md:items-center md:justify-between">
+
+                  <div className="flex items-center gap-3">
+
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-sm font-black text-slate-950">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <div>
+                      <p className="font-black text-white">
+                        {isTurkish ? "Risk Kaydı" : "Risk Item"}{" "}
+                        {String(index + 1).padStart(2, "0")}
+                      </p>
+
+                      <p className="text-xs text-slate-500">
+                        {item.activity ||
+                          (isTurkish
+                            ? "Faaliyet henüz girilmedi"
+                            : "Activity not entered")}
+                      </p>
+                    </div>
+
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+
+                    <button
+                      type="button"
+                      onClick={() => duplicateRiskItem(item.id)}
+                      className="rounded-lg border border-slate-700 px-3 py-2 text-xs font-bold text-slate-300 transition hover:border-blue-500 hover:text-blue-300"
+                    >
+                      📋 {isTurkish ? "Kopyala" : "Duplicate"}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => removeRiskItem(item.id)}
+                      disabled={riskItems.length === 1}
+                      className="rounded-lg border border-red-900/70 px-3 py-2 text-xs font-bold text-red-400 transition hover:border-red-500 disabled:cursor-not-allowed disabled:opacity-30"
+                    >
+                      🗑 {isTurkish ? "Sil" : "Delete"}
+                    </button>
+
+                  </div>
+
+                </div>
+
+                <div className="grid gap-5 p-5 lg:grid-cols-2">
+
+                  <label className="block">
+                    <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                      {isTurkish ? "Faaliyet / İş Adımı" : "Activity / Task"}
+                    </span>
+
+                    <input
+                      value={item.activity}
+                      onChange={(e) =>
+                        updateRiskItem(item.id, "activity", e.target.value)
+                      }
+                      placeholder={
+                        isTurkish
+                          ? "Örn. İskele kurulumu"
+                          : "Example: Scaffold erection"
+                      }
+                      className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition focus:border-emerald-500"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                      {isTurkish ? "Tehlike" : "Hazard"}
+                    </span>
+
+                    <input
+                      value={item.hazard}
+                      onChange={(e) =>
+                        updateRiskItem(item.id, "hazard", e.target.value)
+                      }
+                      placeholder={
+                        isTurkish
+                          ? "Örn. Yüksekten düşme"
+                          : "Example: Fall from height"
+                      }
+                      className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition focus:border-emerald-500"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                      {isTurkish ? "Olası Sonuç" : "Potential Consequence"}
+                    </span>
+
+                    <textarea
+                      rows={3}
+                      value={item.consequence}
+                      onChange={(e) =>
+                        updateRiskItem(item.id, "consequence", e.target.value)
+                      }
+                      placeholder={
+                        isTurkish
+                          ? "Yaralanma, ölüm, ekipman hasarı..."
+                          : "Injury, fatality, equipment damage..."
+                      }
+                      className="w-full resize-none rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition focus:border-emerald-500"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                      {isTurkish ? "Risk Altındaki Kişiler" : "Persons at Risk"}
+                    </span>
+
+                    <textarea
+                      rows={3}
+                      value={item.personsAtRisk}
+                      onChange={(e) =>
+                        updateRiskItem(
+                          item.id,
+                          "personsAtRisk",
+                          e.target.value
+                        )
+                      }
+                      placeholder={
+                        isTurkish
+                          ? "Çalışanlar, alt yükleniciler, ziyaretçiler..."
+                          : "Employees, contractors, visitors..."
+                      }
+                      className="w-full resize-none rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition focus:border-emerald-500"
+                    />
+                  </label>
+
+                  <label className="block lg:col-span-2">
+                    <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                      {isTurkish ? "Mevcut Kontroller" : "Existing Controls"}
+                    </span>
+
+                    <textarea
+                      rows={3}
+                      value={item.existingControls}
+                      onChange={(e) =>
+                        updateRiskItem(
+                          item.id,
+                          "existingControls",
+                          e.target.value
+                        )
+                      }
+                      placeholder={
+                        isTurkish
+                          ? "Mevcut mühendislik, idari ve KKD kontrolleri..."
+                          : "Existing engineering, administrative and PPE controls..."
+                      }
+                      className="w-full resize-none rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition focus:border-emerald-500"
+                    />
+                  </label>
+
+                </div>
+
+                {/* INITIAL RISK */}
+
+                <div className="border-y border-slate-800 bg-slate-950/50 p-5">
+
+                  <p className="mb-4 text-xs font-black uppercase tracking-[0.2em] text-amber-400">
+                    {isTurkish ? "Başlangıç Riski" : "Initial Risk"}
+                  </p>
+
+                  <div className="grid gap-4 sm:grid-cols-3">
+
+                    <label>
+                      <span className="mb-2 block text-xs font-bold text-slate-400">
+                        {isTurkish ? "Olasılık" : "Likelihood"}
+                      </span>
+
+                      <select
+                        value={item.likelihood}
+                        onChange={(e) =>
+                          updateRiskItem(
+                            item.id,
+                            "likelihood",
+                            Number(e.target.value)
+                          )
+                        }
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none focus:border-amber-500"
+                      >
+                        {[1, 2, 3, 4, 5].map((value) => (
+                          <option key={value} value={value}>
+                            {value}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+
+                    <label>
+                      <span className="mb-2 block text-xs font-bold text-slate-400">
+                        {isTurkish ? "Şiddet" : "Severity"}
+                      </span>
+
+                      <select
+                        value={item.severity}
+                        onChange={(e) =>
+                          updateRiskItem(
+                            item.id,
+                            "severity",
+                            Number(e.target.value)
+                          )
+                        }
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none focus:border-amber-500"
+                      >
+                        {[1, 2, 3, 4, 5].map((value) => (
+                          <option key={value} value={value}>
+                            {value}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+
+                    <div
+                      className={`rounded-xl border p-4 text-center transition-all duration-300 ${getRiskStyle(initialScore).card}`}
+                    >
+                      <p
+                        className={`text-xs font-black uppercase tracking-wider ${getRiskStyle(initialScore).title}`}
+                      >
+                        {isTurkish ? "Risk Skoru" : "Risk Score"}
+                      </p>
+
+                      <p
+                        className={`mt-1 text-3xl font-black ${getRiskStyle(initialScore).score}`}
+                      >
+                        {initialScore}
+                      </p>
+
+                      <div
+                        className={`mx-auto mt-2 inline-flex rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-wider ${getRiskStyle(initialScore).badge}`}
+                      >
+                        {getRiskLabel(initialScore)}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                {/* ACTIONS */}
+
+                <div className="grid gap-5 p-5 lg:grid-cols-3">
+
+                  <label className="block lg:col-span-3">
+                    <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                      {isTurkish ? "İlave Kontroller" : "Additional Controls"}
+                    </span>
+
+                    <textarea
+                      rows={3}
+                      value={item.additionalControls}
+                      onChange={(e) =>
+                        updateRiskItem(
+                          item.id,
+                          "additionalControls",
+                          e.target.value
+                        )
+                      }
+                      placeholder={
+                        isTurkish
+                          ? "Riski azaltmak için uygulanacak ek kontroller..."
+                          : "Additional controls required to reduce the risk..."
+                      }
+                      className="w-full resize-none rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition focus:border-blue-500"
+                    />
+                  </label>
+
+                  <label>
+                    <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                      {isTurkish ? "Sorumlu" : "Responsible"}
+                    </span>
+
+                    <input
+                      value={item.responsible}
+                      onChange={(e) =>
+                        updateRiskItem(
+                          item.id,
+                          "responsible",
+                          e.target.value
+                        )
+                      }
+                      className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none focus:border-blue-500"
+                    />
+                  </label>
+
+                  <label>
+                    <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
+                      {isTurkish ? "Termin" : "Target Date"}
+                    </span>
+
+                    <input
+                      type="date"
+                      value={item.targetDate}
+                      onChange={(e) =>
+                        updateRiskItem(
+                          item.id,
+                          "targetDate",
+                          e.target.value
+                        )
+                      }
+                      className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none focus:border-blue-500"
+                    />
+                  </label>
+
+                </div>
+
+                {/* RESIDUAL RISK */}
+
+                <div className="border-t border-slate-800 bg-emerald-950/20 p-5">
+
+                  <p className="mb-4 text-xs font-black uppercase tracking-[0.2em] text-emerald-400">
+                    {isTurkish ? "Kalan Risk" : "Residual Risk"}
+                  </p>
+
+                  <div className="grid gap-4 sm:grid-cols-3">
+
+                    <label>
+                      <span className="mb-2 block text-xs font-bold text-slate-400">
+                        {isTurkish ? "Olasılık" : "Likelihood"}
+                      </span>
+
+                      <select
+                        value={item.residualLikelihood}
+                        onChange={(e) =>
+                          updateRiskItem(
+                            item.id,
+                            "residualLikelihood",
+                            Number(e.target.value)
+                          )
+                        }
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none focus:border-emerald-500"
+                      >
+                        {[1, 2, 3, 4, 5].map((value) => (
+                          <option key={value} value={value}>
+                            {value}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+
+                    <label>
+                      <span className="mb-2 block text-xs font-bold text-slate-400">
+                        {isTurkish ? "Şiddet" : "Severity"}
+                      </span>
+
+                      <select
+                        value={item.residualSeverity}
+                        onChange={(e) =>
+                          updateRiskItem(
+                            item.id,
+                            "residualSeverity",
+                            Number(e.target.value)
+                          )
+                        }
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none focus:border-emerald-500"
+                      >
+                        {[1, 2, 3, 4, 5].map((value) => (
+                          <option key={value} value={value}>
+                            {value}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+
+                    <div
+                      className={`rounded-xl border p-4 text-center transition-all duration-300 ${getRiskStyle(residualScore).card}`}
+                    >
+                      <p
+                        className={`text-xs font-black uppercase tracking-wider ${getRiskStyle(residualScore).title}`}
+                      >
+                        {isTurkish ? "Kalan Risk" : "Residual Risk"}
+                      </p>
+
+                      <p
+                        className={`mt-1 text-3xl font-black ${getRiskStyle(residualScore).score}`}
+                      >
+                        {residualScore}
+                      </p>
+
+                      <div
+                        className={`mx-auto mt-2 inline-flex rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-wider ${getRiskStyle(residualScore).badge}`}
+                      >
+                        {getRiskLabel(residualScore)}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </article>
+            );
+          })}
+
+          
+
+          <button
+            type="button"
+            onClick={addRiskItem}
+            className="w-full rounded-xl border border-dashed border-emerald-500/50 bg-emerald-500/5 px-5 py-4 text-sm font-black text-emerald-300 transition hover:bg-emerald-500/10"
+          >
+            + {isTurkish ? "Yeni Risk Ekle" : "Add Another Risk"}
+          </button>
+
+        </div>
+      </section>
+
+      {/* SERNEM_MULTI_RISK_UI_END */}
+
+      {/* SERNEM_RISK_PRINT_REPORT_START */}
+
+      <style>{`
+        @media screen {
+          #safebase-risk-print {
+            display: none;
+          }
+        }
+
+        @media print {
+          @page {
+            size: A4 landscape;
+            margin: 8mm;
+          }
+
+          body {
+            background: white !important;
+          }
+
+          html,
+          body {
+            width: 100% !important;
+            height: auto !important;
+            min-height: 0 !important;
+            overflow: visible !important;
+            background: white !important;
+          }
+
+          body * {
+            visibility: hidden !important;
+          }
+
+          main > *:not(#safebase-risk-print) {
+            display: none !important;
+          }
+
+          header,
+          nav,
+          aside,
+          footer {
+            display: none !important;
+          }
+
+          #safebase-risk-print,
+          #safebase-risk-print * {
+            visibility: visible !important;
+          }
+
+          #safebase-risk-print {
+            display: block !important;
+            position: relative !important;
+            left: auto !important;
+            top: auto !important;
+            width: 100% !important;
+            min-height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            color: #0f172a !important;
+            background: white !important;
+            font-family: Arial, Helvetica, sans-serif !important;
+          }
+
+          .risk-print-item {
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+
+          .risk-print-header {
+            break-after: avoid;
+          }
+
+          .risk-print-table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+
+          .risk-print-table th,
+          .risk-print-table td {
+            border: 1px solid #cbd5e1;
+            padding: 5px;
+            vertical-align: top;
+            font-size: 8px;
+            line-height: 1.3;
+          }
+
+          .risk-print-table th {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+
+          .risk-print-table thead tr:nth-child(2) th {
+            background: #0f172a !important;
+            color: white !important;
+          }
+
+          .risk-print-low {
+            background: #d1fae5 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+
+          .risk-print-medium {
+            background: #fef3c7 !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+
+          .risk-print-high {
+            background: #fed7aa !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+
+          .risk-print-critical {
+            background: #fecaca !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+        }
+      `}</style>
+
+      <section id="safebase-risk-print">
+
+        {/* DOCUMENT HEADER */}
+        <div
+          className="risk-print-header"
+          style={{
+            border: "2px solid #0f172a",
+            marginBottom: "10px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "stretch",
+              borderBottom: "2px solid #0f172a",
+            }}
+          >
+            <div style={{ padding: "12px", flex: 1 }}>
+              <div
+                style={{
+                  fontSize: "24px",
+                  fontWeight: 900,
+                  letterSpacing: "-1px",
+                }}
+              >
+                <span style={{ color: "#10b981" }}>SERNEM</span>
+              </div>
+
+              <div
+                style={{
+                  marginTop: "4px",
+                  fontSize: "8px",
+                  fontWeight: 700,
+                  letterSpacing: "2px",
+                  color: "#64748b",
+                }}
+              >
+                HEALTH & SAFETY RESOURCES
+              </div>
+
+              <div
+                style={{
+                  marginTop: "12px",
+                  fontSize: "19px",
+                  fontWeight: 900,
+                }}
+              >
+                {isTurkish
+                  ? "TEHLİKE TANIMLAMA, RİSK DEĞERLENDİRME VE RİSK KONTROLÜ (HIRARC)"
+                  : "HAZARD IDENTIFICATION, RISK ASSESSMENT & RISK CONTROL (HIRARC)"}
+              </div>
+            </div>
+
+            <div
+              style={{
+                width: "190px",
+                borderLeft: "2px solid #0f172a",
+                padding: "10px",
+                fontSize: "9px",
+              }}
+            >
+              <div style={{ marginBottom: "6px" }}>
+                <strong>
+                  {isTurkish ? "Doküman No:" : "Document No:"}
+                </strong>{" "}
+                {documentNo || "-"}
+              </div>
+
+              <div style={{ marginBottom: "6px" }}>
+                <strong>{isTurkish ? "Tarih:" : "Date:"}</strong>{" "}
+                {assessmentDate || "-"}
+              </div>
+
+              <div style={{ marginBottom: "6px" }}>
+                <strong>{isTurkish ? "Revizyon:" : "Revision:"}</strong>{" "}
+                {assessmentRevision || "-"}
+              </div>
+
+              <div>
+                <strong>{isTurkish ? "Risk Sayısı:" : "Risk Items:"}</strong>{" "}
+                {riskItems.length}
+              </div>
+            </div>
+          </div>
+
+          {/* PROJECT INFORMATION */}
+          <table
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              fontSize: "9px",
+            }}
+          >
+            <tbody>
+              <tr>
+                <td
+                  style={{
+                    width: "16%",
+                    padding: "6px",
+                    fontWeight: 800,
+                    background: "#f1f5f9",
+                    borderRight: "1px solid #cbd5e1",
+                  }}
+                >
+                  {isTurkish ? "PROJE" : "PROJECT"}
+                </td>
+
+                <td
+                  style={{
+                    width: "34%",
+                    padding: "6px",
+                    borderRight: "1px solid #cbd5e1",
+                  }}
+                >
+                  {projectName || "-"}
+                </td>
+
+                <td
+                  style={{
+                    width: "16%",
+                    padding: "6px",
+                    fontWeight: 800,
+                    background: "#f1f5f9",
+                    borderRight: "1px solid #cbd5e1",
+                  }}
+                >
+                  {isTurkish ? "ŞİRKET" : "COMPANY"}
+                </td>
+
+                <td style={{ width: "34%", padding: "6px" }}>
+                  {companyName || "-"}
+                </td>
+              </tr>
+
+              <tr style={{ borderTop: "1px solid #cbd5e1" }}>
+                <td
+                  style={{
+                    padding: "6px",
+                    fontWeight: 800,
+                    background: "#f1f5f9",
+                    borderRight: "1px solid #cbd5e1",
+                  }}
+                >
+                  {isTurkish ? "LOKASYON" : "LOCATION"}
+                </td>
+
+                <td
+                  style={{
+                    padding: "6px",
+                    borderRight: "1px solid #cbd5e1",
+                  }}
+                >
+                  {assessmentLocation || "-"}
+                </td>
+
+                <td
+                  style={{
+                    padding: "6px",
+                    fontWeight: 800,
+                    background: "#f1f5f9",
+                    borderRight: "1px solid #cbd5e1",
+                  }}
+                >
+                  {isTurkish ? "HAZIRLAYAN" : "ASSESSOR"}
+                </td>
+
+                <td style={{ padding: "6px" }}>
+                  {assessorName || "-"}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        {/* SERNEM_HIRARC_PRINT_INFO */}
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            marginBottom: "9px",
+            fontSize: "8px",
+          }}
+        >
+          <tbody>
+
+            <tr>
+              <td
+                style={{
+                  width: "12%",
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                  fontWeight: 800,
+                  background: "#e2e8f0",
+                }}
+              >
+                {isTurkish ? "DEPARTMAN" : "DEPARTMENT"}
+              </td>
+
+              <td
+                style={{
+                  width: "21%",
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                }}
+              >
+                {department || "-"}
+              </td>
+
+              <td
+                style={{
+                  width: "12%",
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                  fontWeight: 800,
+                  background: "#e2e8f0",
+                }}
+              >
+                {isTurkish ? "ASSET / ALAN" : "ASSET / AREA"}
+              </td>
+
+              <td
+                style={{
+                  width: "21%",
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                }}
+              >
+                {assetArea || "-"}
+              </td>
+
+              <td
+                style={{
+                  width: "12%",
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                  fontWeight: 800,
+                  background: "#e2e8f0",
+                }}
+              >
+                {isTurkish ? "PROSES / METOT" : "PROCESS / METHOD"}
+              </td>
+
+              <td
+                style={{
+                  width: "22%",
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                }}
+              >
+                {processMethod || "-"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                style={{
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                  fontWeight: 800,
+                  background: "#e2e8f0",
+                }}
+              >
+                {isTurkish ? "HAZIRLAYAN" : "PREPARED BY"}
+              </td>
+
+              <td
+                style={{
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                }}
+              >
+                {assessorName || "-"}
+              </td>
+
+              <td
+                style={{
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                  fontWeight: 800,
+                  background: "#e2e8f0",
+                }}
+              >
+                {isTurkish ? "KONTROL EDEN" : "REVIEWED BY"}
+              </td>
+
+              <td
+                style={{
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                }}
+              >
+                {reviewedBy || "-"}
+              </td>
+
+              <td
+                style={{
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                  fontWeight: 800,
+                  background: "#e2e8f0",
+                }}
+              >
+                {isTurkish ? "ONAYLAYAN" : "APPROVED BY"}
+              </td>
+
+              <td
+                style={{
+                  border: "1px solid #94a3b8",
+                  padding: "5px",
+                }}
+              >
+                {approvedBy || "-"}
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        {/* RISK TABLE */}
+        <table className="risk-print-table">
+          <thead>
+            <tr>
+              <th
+                rowSpan={2}
+                style={{
+                  width: "3%",
+                  background: "#0f172a",
+                }}
+              >
+                No
+              </th>
+
+              <th
+                colSpan={4}
+                style={{
+                  background: "#dc2626",
+                  color: "#ffffff",
+                  fontSize: "9px",
+                  letterSpacing: "0.7px",
+                }}
+              >
+                {isTurkish
+                  ? "TEHLİKE TANIMLAMA"
+                  : "HAZARD IDENTIFICATION"}
+              </th>
+
+              <th
+                colSpan={4}
+                style={{
+                  background: "#eab308",
+                  color: "#111827",
+                  fontSize: "9px",
+                  letterSpacing: "0.7px",
+                }}
+              >
+                {isTurkish
+                  ? "RİSK ANALİZİ"
+                  : "RISK ANALYSIS"}
+              </th>
+
+              <th
+                colSpan={6}
+                style={{
+                  background: "#16a34a",
+                  color: "#ffffff",
+                  fontSize: "9px",
+                  letterSpacing: "0.7px",
+                }}
+              >
+                {isTurkish
+                  ? "RİSK KONTROLÜ"
+                  : "RISK CONTROL"}
+              </th>
+            </tr>
+
+            <tr>
+              <th style={{ width: "8%" }}>
+                {isTurkish ? "Faaliyet" : "Work Activity"}
+              </th>
+
+              <th style={{ width: "8%" }}>
+                {isTurkish ? "Tehlike" : "Hazard"}
+              </th>
+
+              <th style={{ width: "8%" }}>
+                {isTurkish ? "Olası Sonuç" : "Consequence / Effect"}
+              </th>
+
+              <th style={{ width: "7%" }}>
+                {isTurkish
+                  ? "Risk Altındaki Kişiler"
+                  : "Persons at Risk"}
+              </th>
+
+              <th style={{ width: "11%" }}>
+                {isTurkish
+                  ? "Mevcut Kontroller"
+                  : "Existing Risk Control"}
+              </th>
+
+              <th style={{ width: "3%" }}>
+                L
+              </th>
+
+              <th style={{ width: "3%" }}>
+                S
+              </th>
+
+              <th style={{ width: "5%" }}>
+                {isTurkish ? "Risk" : "Risk"}
+              </th>
+
+              <th style={{ width: "14%" }}>
+                {isTurkish
+                  ? "Yapılacak Aksiyon / İlave Kontrol"
+                  : "Action Required / Additional Controls"}
+              </th>
+
+              <th style={{ width: "7%" }}>
+                {isTurkish
+                  ? "Sorumlu"
+                  : "Person in Charge"}
+              </th>
+
+              <th style={{ width: "7%" }}>
+                {isTurkish
+                  ? "Termin"
+                  : "Due Date"}
+              </th>
+
+              <th style={{ width: "3%" }}>
+                RL
+              </th>
+
+              <th style={{ width: "3%" }}>
+                RS
+              </th>
+
+              <th style={{ width: "5%" }}>
+                {isTurkish
+                  ? "Kalan Risk"
+                  : "Residual Risk"}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {riskItems.map((item, index) => {
+              const initialScore = item.likelihood * item.severity;
+              const residualScore =
+                item.residualLikelihood * item.residualSeverity;
+
+              const printRiskClass = (score: number) => {
+                if (score >= 20) return "risk-print-critical";
+                if (score >= 10) return "risk-print-high";
+                if (score >= 5) return "risk-print-medium";
+                return "risk-print-low";
+              };
+
+              return (
+                <tr key={`print-${item.id}`} className="risk-print-item">
+                  <td style={{ textAlign: "center", fontWeight: 900 }}>
+                    {String(index + 1).padStart(2, "0")}
+                  </td>
+
+                  <td>{item.activity || "-"}</td>
+                  <td>{item.hazard || "-"}</td>
+                  <td>{item.consequence || "-"}</td>
+                  <td>{item.personsAtRisk || "-"}</td>
+                  <td>{item.existingControls || "-"}</td>
+
+                  <td style={{ textAlign: "center" }}>
+                    {item.likelihood}
+                  </td>
+
+                  <td style={{ textAlign: "center" }}>
+                    {item.severity}
+                  </td>
+
+                  <td
+                    className={printRiskClass(initialScore)}
+                    style={{
+                      textAlign: "center",
+                      fontWeight: 900,
+                    }}
+                  >
+                    {initialScore}
+                    <br />
+                    {getRiskLabel(initialScore)}
+                  </td>
+
+                  <td>{item.additionalControls || "-"}</td>
+                  <td>{item.responsible || "-"}</td>
+                  <td>{item.targetDate || "-"}</td>
+
+                  <td style={{ textAlign: "center" }}>
+                    {item.residualLikelihood}
+                  </td>
+
+                  <td style={{ textAlign: "center" }}>
+                    {item.residualSeverity}
+                  </td>
+
+                  <td
+                    className={printRiskClass(residualScore)}
+                    style={{
+                      textAlign: "center",
+                      fontWeight: 900,
+                    }}
+                  >
+                    {residualScore}
+                    <br />
+                    {getRiskLabel(residualScore)}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+
+        {/* SIGNATURE SECTION */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            gap: "10px",
+            marginTop: "14px",
+          }}
+        >
+          {[
+            {
+              title: isTurkish ? "Hazırlayan" : "Prepared By",
+              name: assessorName,
+            },
+            {
+              title: isTurkish ? "Kontrol Eden" : "Reviewed By",
+              name: reviewedBy,
+            },
+            {
+              title: isTurkish ? "Onaylayan" : "Approved By",
+              name: approvedBy,
+            },
+          ].map((sign) => (
+            <div
+              key={sign.title}
+              style={{
+                minHeight: "65px",
+                border: "1px solid #94a3b8",
+                padding: "7px",
+                fontSize: "9px",
+              }}
+            >
+              <strong>{sign.title}</strong>
+
+              <div
+                style={{
+                  marginTop: "7px",
+                  fontWeight: 700,
+                  minHeight: "12px",
+                }}
+              >
+                {sign.name || "-"}
+              </div>
+
+              <div
+                style={{
+                  marginTop: "32px",
+                  borderTop: "1px solid #cbd5e1",
+                  paddingTop: "4px",
+                  color: "#64748b",
+                }}
+              >
+                {isTurkish ? "Ad / İmza / Tarih" : "Name / Signature / Date"}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* FOOTER */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            borderTop: "1px solid #cbd5e1",
+            marginTop: "12px",
+            paddingTop: "5px",
+            fontSize: "7px",
+            color: "#64748b",
+          }}
+        >
+          <span>
+            SERNEM • Professional Risk Assessment
+          </span>
+
+          <span>
+            {isTurkish
+              ? "Kontrol önlemleri uygulanmadan işe başlanmamalıdır."
+              : "Work should not begin until required controls are implemented."}
+          </span>
+        </div>
+
+      </section>
+
+      {/* SERNEM_RISK_PRINT_REPORT_END */}
+
+
+
+</main>
+  );
+}
