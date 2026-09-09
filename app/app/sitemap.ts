@@ -22,6 +22,8 @@ const publicRoutes = [
   "/tools/quick-risk-assessment",
   "/tools/method-statement",
 
+  "/risk-assessment",
+
   "/knowledge-base",
   "/knowledge-base/chemical-safety",
   "/knowledge-base/confined-space",
