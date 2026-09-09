@@ -1,0 +1,783 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+
+type Locale = "tr" | "en";
+
+type Observation = {
+  id: string;
+  user_id: string;
+  observation_date: string;
+  project_name: string | null;
+  location: string | null;
+  company_name: string | null;
+  observation_type:
+    | "positive"
+    | "unsafe_act"
+    | "unsafe_condition";
+  category: string;
+  risk_level:
+    | "low"
+    | "medium"
+    | "high"
+    | "critical";
+  title: string;
+  description: string;
+  corrective_action: string | null;
+  responsible_person: string | null;
+  target_date: string | null;
+  status:
+    | "open"
+    | "in_progress"
+    | "closed";
+  created_at: string;
+};
+
+type Props = {
+  locale: Locale;
+  userId: string;
+  initialObservations: Observation[];
+};
+
+const categories = [
+  "Working at Height",
+  "Hot Work",
+  "PPE",
+  "Housekeeping",
+  "Scaffolding",
+  "Lifting",
+  "Electrical",
+  "Excavation",
+  "Confined Space",
+  "Mobile Equipment",
+  "Chemical Safety",
+  "Other",
+];
+
+export default function HsePerformanceClient({
+  locale,
+  userId,
+  initialObservations,
+}: Props) {
+  const isTurkish = locale === "tr";
+
+  const [observations, setObservations] =
+    useState<Observation[]>(initialObservations);
+
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const [form, setForm] = useState({
+    observation_date:
+      new Date().toISOString().slice(0, 10),
+
+    project_name: "",
+    location: "",
+    company_name: "",
+
+    observation_type: "unsafe_condition",
+    category: "Working at Height",
+    risk_level: "medium",
+
+    title: "",
+    description: "",
+
+    corrective_action: "",
+    responsible_person: "",
+    target_date: "",
+  });
+
+  const stats = useMemo(() => {
+    const total = observations.length;
+
+    const positive = observations.filter(
+      (x) => x.observation_type === "positive",
+    ).length;
+
+    const unsafeAct = observations.filter(
+      (x) => x.observation_type === "unsafe_act",
+    ).length;
+
+    const unsafeCondition = observations.filter(
+      (x) =>
+        x.observation_type === "unsafe_condition",
+    ).length;
+
+    const open = observations.filter(
+      (x) => x.status !== "closed",
+    ).length;
+
+    const overdue = observations.filter((x) => {
+      if (
+        x.status === "closed" ||
+        !x.target_date
+      ) {
+        return false;
+      }
+
+      return (
+        new Date(x.target_date) <
+        new Date(new Date().toDateString())
+      );
+    }).length;
+
+    const closed = observations.filter(
+      (x) => x.status === "closed",
+    ).length;
+
+    const closureRate =
+      open + closed === 0
+        ? 0
+        : Math.round(
+            (closed / (open + closed)) * 100,
+          );
+
+    return {
+      total,
+      positive,
+      unsafeAct,
+      unsafeCondition,
+      open,
+      overdue,
+      closed,
+      closureRate,
+    };
+  }, [observations]);
+
+  async function saveObservation() {
+    if (!form.title.trim() || !form.description.trim()) {
+      setMessage(
+        isTurkish
+          ? "Başlık ve açıklama zorunludur."
+          : "Title and description are required.",
+      );
+      return;
+    }
+
+    setSaving(true);
+    setMessage("");
+
+    const supabase = createClient();
+
+    const payload = {
+      user_id: userId,
+      observation_date: form.observation_date,
+
+      project_name:
+        form.project_name.trim() || null,
+
+      location:
+        form.location.trim() || null,
+
+      company_name:
+        form.company_name.trim() || null,
+
+      observation_type:
+        form.observation_type,
+
+      category:
+        form.category,
+
+      risk_level:
+        form.risk_level,
+
+      title:
+        form.title.trim(),
+
+      description:
+        form.description.trim(),
+
+      corrective_action:
+        form.corrective_action.trim() || null,
+
+      responsible_person:
+        form.responsible_person.trim() || null,
+
+      target_date:
+        form.target_date || null,
+
+      status: "open",
+    };
+
+    const { data, error } = await supabase
+      .from("hse_observations")
+      .insert(payload)
+      .select("*")
+      .single();
+
+    if (error || !data) {
+      setMessage(
+        isTurkish
+          ? `Kayıt başarısız: ${error?.message ?? ""}`
+          : `Save failed: ${error?.message ?? ""}`,
+      );
+
+      setSaving(false);
+      return;
+    }
+
+    setObservations((current) => [
+      data as Observation,
+      ...current,
+    ]);
+
+    setForm((current) => ({
+      ...current,
+      title: "",
+      description: "",
+      corrective_action: "",
+      responsible_person: "",
+      target_date: "",
+    }));
+
+    setMessage(
+      isTurkish
+        ? "Gözlem kaydedildi."
+        : "Observation saved.",
+    );
+
+    setSaving(false);
+  }
+
+  return (
+    <main className="min-h-screen bg-[#020817] text-white">
+      <div className="mx-auto max-w-[1500px] px-4 py-7 sm:px-6 lg:px-8">
+
+        <section className="mb-6 overflow-hidden rounded-[28px] border border-blue-400/15 bg-gradient-to-r from-[#06152b] via-[#071a33] to-[#082747] p-6 shadow-2xl shadow-black/30">
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-400">
+            SERNEM HSE PERFORMANCE
+          </p>
+
+          <h1 className="mt-3 text-3xl font-black sm:text-4xl">
+            {isTurkish
+              ? "Saha Gözlemleri & KPI"
+              : "Observations & KPI"}
+          </h1>
+
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-400">
+            {isTurkish
+              ? "Saha gözlemlerini kaydedin, aksiyonları takip edin ve performansı gerçek verilerle ölçün."
+              : "Capture field observations, track actions and measure HSE performance with real data."}
+          </p>
+        </section>
+
+        <section className="mb-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {[
+            [
+              isTurkish
+                ? "Toplam Gözlem"
+                : "Total Observations",
+              stats.total,
+              "text-blue-300",
+            ],
+            [
+              isTurkish
+                ? "Pozitif Gözlem"
+                : "Positive",
+              stats.positive,
+              "text-emerald-300",
+            ],
+            [
+              isTurkish
+                ? "Güvensiz Davranış"
+                : "Unsafe Acts",
+              stats.unsafeAct,
+              "text-orange-300",
+            ],
+            [
+              isTurkish
+                ? "Güvensiz Durum"
+                : "Unsafe Conditions",
+              stats.unsafeCondition,
+              "text-red-300",
+            ],
+          ].map(([label, value, color]) => (
+            <article
+              key={String(label)}
+              className="rounded-2xl border border-slate-800 bg-slate-900/75 p-5"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
+                {label}
+              </p>
+
+              <p
+                className={`mt-3 text-4xl font-black ${color}`}
+              >
+                {value}
+              </p>
+            </article>
+          ))}
+        </section>
+
+        <div className="grid gap-6 xl:grid-cols-[0.82fr_1.3fr_0.9fr]">
+
+          <section className="rounded-[26px] border border-slate-800 bg-slate-900/80 p-5">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
+              01
+            </p>
+
+            <h2 className="mt-2 text-xl font-black">
+              {isTurkish
+                ? "Yeni Gözlem Ekle"
+                : "Add Observation"}
+            </h2>
+
+            <div className="mt-5 space-y-4">
+
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  type="date"
+                  value={form.observation_date}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      observation_date:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                />
+
+                <select
+                  value={form.risk_level}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      risk_level:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                >
+                  <option value="low">Low</option>
+                  <option value="medium">
+                    Medium
+                  </option>
+                  <option value="high">High</option>
+                  <option value="critical">
+                    Critical
+                  </option>
+                </select>
+              </div>
+
+              <input
+                placeholder={
+                  isTurkish
+                    ? "Proje"
+                    : "Project"
+                }
+                value={form.project_name}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    project_name:
+                      e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  placeholder={
+                    isTurkish
+                      ? "Firma"
+                      : "Company"
+                  }
+                  value={form.company_name}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      company_name:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                />
+
+                <input
+                  placeholder={
+                    isTurkish
+                      ? "Lokasyon"
+                      : "Location"
+                  }
+                  value={form.location}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      location:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                />
+              </div>
+
+              <select
+                value={form.observation_type}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    observation_type:
+                      e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              >
+                <option value="positive">
+                  Positive
+                </option>
+
+                <option value="unsafe_act">
+                  Unsafe Act
+                </option>
+
+                <option value="unsafe_condition">
+                  Unsafe Condition
+                </option>
+              </select>
+
+              <select
+                value={form.category}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    category:
+                      e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              >
+                {categories.map((category) => (
+                  <option
+                    key={category}
+                    value={category}
+                  >
+                    {category}
+                  </option>
+                ))}
+              </select>
+
+              <input
+                placeholder={
+                  isTurkish
+                    ? "Gözlem başlığı"
+                    : "Observation title"
+                }
+                value={form.title}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    title: e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <textarea
+                rows={4}
+                placeholder={
+                  isTurkish
+                    ? "Açıklama"
+                    : "Description"
+                }
+                value={form.description}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    description:
+                      e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <textarea
+                rows={3}
+                placeholder={
+                  isTurkish
+                    ? "Alınacak aksiyon"
+                    : "Corrective action"
+                }
+                value={form.corrective_action}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    corrective_action:
+                      e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  placeholder={
+                    isTurkish
+                      ? "Sorumlu kişi"
+                      : "Responsible"
+                  }
+                  value={form.responsible_person}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      responsible_person:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                />
+
+                <input
+                  type="date"
+                  value={form.target_date}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      target_date:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={saveObservation}
+                disabled={saving}
+                className="w-full rounded-xl bg-blue-600 px-4 py-3 font-black transition hover:bg-blue-500 disabled:opacity-50"
+              >
+                {saving
+                  ? isTurkish
+                    ? "Kaydediliyor..."
+                    : "Saving..."
+                  : isTurkish
+                    ? "Gözlemi Kaydet"
+                    : "Save Observation"}
+              </button>
+
+              {message && (
+                <p className="text-xs text-slate-400">
+                  {message}
+                </p>
+              )}
+            </div>
+          </section>
+
+          <section className="rounded-[26px] border border-slate-800 bg-slate-900/80 p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
+                  02
+                </p>
+
+                <h2 className="mt-2 text-xl font-black">
+                  KPI Dashboard
+                </h2>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+
+              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+                <p className="text-sm font-bold">
+                  {isTurkish
+                    ? "Aksiyon Durumu"
+                    : "Action Status"}
+                </p>
+
+                <div className="mt-5 flex items-end justify-between">
+                  <div>
+                    <p className="text-4xl font-black text-emerald-400">
+                      {stats.closureRate}%
+                    </p>
+
+                    <p className="mt-1 text-xs text-slate-500">
+                      {isTurkish
+                        ? "Kapanma oranı"
+                        : "Closure rate"}
+                    </p>
+                  </div>
+
+                  <div className="space-y-1 text-right text-xs text-slate-400">
+                    <p>
+                      Open: {stats.open}
+                    </p>
+                    <p>
+                      Closed: {stats.closed}
+                    </p>
+                    <p className="text-red-300">
+                      Overdue: {stats.overdue}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+                <p className="text-sm font-bold">
+                  {isTurkish
+                    ? "Performans Seviyesi"
+                    : "Performance Level"}
+                </p>
+
+                <div className="mt-6 flex items-center gap-4">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-500/10 text-3xl font-black text-emerald-300">
+                    {stats.overdue > 5
+                      ? "C"
+                      : stats.overdue > 0
+                        ? "B"
+                        : "A"}
+                  </div>
+
+                  <div>
+                    <p className="font-black text-emerald-300">
+                      {stats.overdue > 5
+                        ? "Needs Attention"
+                        : stats.overdue > 0
+                          ? "Good"
+                          : "Excellent"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div className="mt-5 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+              <p className="text-sm font-bold">
+                {isTurkish
+                  ? "Son Gözlemler"
+                  : "Recent Observations"}
+              </p>
+
+              <div className="mt-4 space-y-3">
+                {observations
+                  .slice(0, 7)
+                  .map((item) => (
+                    <article
+                      key={item.id}
+                      className="rounded-xl border border-slate-800 bg-slate-900/60 p-4"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <p className="font-bold">
+                            {item.title}
+                          </p>
+
+                          <p className="mt-1 text-xs text-slate-500">
+                            {item.company_name ||
+                              "—"}{" "}
+                            •{" "}
+                            {item.project_name ||
+                              "—"}
+                          </p>
+                        </div>
+
+                        <span className="rounded-full border border-slate-700 px-2 py-1 text-[10px] font-black uppercase text-slate-300">
+                          {item.risk_level}
+                        </span>
+                      </div>
+                    </article>
+                  ))}
+
+                {observations.length === 0 && (
+                  <p className="py-8 text-center text-sm text-slate-500">
+                    {isTurkish
+                      ? "Henüz gözlem yok."
+                      : "No observations yet."}
+                  </p>
+                )}
+              </div>
+            </div>
+          </section>
+
+          <aside className="rounded-[26px] border border-slate-800 bg-slate-900/80 p-5">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
+              03
+            </p>
+
+            <h2 className="mt-2 text-xl font-black">
+              {isTurkish
+                ? "Aksiyon Takibi"
+                : "Action Tracking"}
+            </h2>
+
+            <div className="mt-5 grid grid-cols-3 gap-2 text-center text-xs font-black">
+              <div className="rounded-xl bg-blue-600 p-3">
+                {isTurkish ? "Açık" : "Open"}
+                <div className="mt-1 text-lg">
+                  {stats.open}
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-red-300">
+                {isTurkish
+                  ? "Gecikmiş"
+                  : "Overdue"}
+                <div className="mt-1 text-lg">
+                  {stats.overdue}
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-emerald-300">
+                {isTurkish
+                  ? "Kapalı"
+                  : "Closed"}
+                <div className="mt-1 text-lg">
+                  {stats.closed}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-5 space-y-3">
+              {observations
+                .filter(
+                  (item) =>
+                    item.status !== "closed",
+                )
+                .slice(0, 8)
+                .map((item) => (
+                  <article
+                    key={item.id}
+                    className="rounded-2xl border border-slate-800 bg-slate-950/60 p-4"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-bold">
+                          {item.corrective_action ||
+                            item.title}
+                        </p>
+
+                        <p className="mt-2 text-xs text-slate-500">
+                          {item.responsible_person ||
+                            (isTurkish
+                              ? "Sorumlu atanmadı"
+                              : "Unassigned")}
+                        </p>
+
+                        {item.target_date && (
+                          <p className="mt-1 text-xs text-slate-500">
+                            {isTurkish
+                              ? "Hedef:"
+                              : "Due:"}{" "}
+                            {item.target_date}
+                          </p>
+                        )}
+                      </div>
+
+                      <span className="rounded-full border border-orange-400/20 bg-orange-500/10 px-2 py-1 text-[10px] font-black uppercase text-orange-300">
+                        {item.risk_level}
+                      </span>
+                    </div>
+                  </article>
+                ))}
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </main>
+  );
+}

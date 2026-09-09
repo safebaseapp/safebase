@@ -1,0 +1,328 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+type Props = {
+  open: boolean;
+  onClose: () => void;
+  onCapture: (file: File) => void | Promise<void>;
+};
+
+export default function HseCameraCapture({
+  open,
+  onClose,
+  onCapture,
+}: Props) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+
+  const [photo, setPhoto] = useState<Blob | null>(null);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [permissionStep, setPermissionStep] =
+    useState<"intro" | "camera">("intro");
+
+  function stopCamera() {
+    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
+
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+  }
+
+  async function startCamera() {
+    setPermissionStep("camera");
+    setError("");
+    setPhoto(null);
+
+    if (photoUrl) {
+      URL.revokeObjectURL(photoUrl);
+      setPhotoUrl(null);
+    }
+
+    try {
+      stopCamera();
+
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: { ideal: "environment" },
+          width: { ideal: 1920 },
+          height: { ideal: 1080 },
+        },
+        audio: false,
+      });
+
+      streamRef.current = stream;
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        await videoRef.current.play();
+      }
+    } catch (err) {
+      console.error("Camera error:", err);
+      setError(
+        "Camera could not be opened. Check browser camera permission.",
+      );
+    }
+  }
+
+  useEffect(() => {
+    if (open) {
+      stopCamera();
+      setPermissionStep("intro");
+      setPhoto(null);
+      setError("");
+
+      if (photoUrl) {
+        URL.revokeObjectURL(photoUrl);
+        setPhotoUrl(null);
+      }
+    } else {
+      stopCamera();
+    }
+
+    return () => stopCamera();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  function capturePhoto() {
+    const video = videoRef.current;
+
+    if (!video || !video.videoWidth || !video.videoHeight) {
+      return;
+    }
+
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const context = canvas.getContext("2d");
+
+    if (!context) return;
+
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) return;
+
+        stopCamera();
+
+        if (photoUrl) {
+          URL.revokeObjectURL(photoUrl);
+        }
+
+        setPhoto(blob);
+        setPhotoUrl(URL.createObjectURL(blob));
+      },
+      "image/jpeg",
+      0.9,
+    );
+  }
+
+  async function usePhoto() {
+    if (!photo) return;
+
+    setSaving(true);
+
+    try {
+      const file = new File(
+        [photo],
+        `SERNEM-Evidence-${Date.now()}.jpg`,
+        {
+          type: "image/jpeg",
+        },
+      );
+
+      await onCapture(file);
+      closeCamera();
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  function closeCamera() {
+    stopCamera();
+
+    if (photoUrl) {
+      URL.revokeObjectURL(photoUrl);
+    }
+
+    setPhoto(null);
+    setPhotoUrl(null);
+    setError("");
+    setPermissionStep("intro");
+    onClose();
+  }
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 p-3">
+      <div className="w-full max-w-3xl overflow-hidden rounded-[24px] border border-slate-700 bg-[#06101e] shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-800 px-5 py-4">
+          <div>
+            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-blue-400">
+              SERNEM • FIELD EVIDENCE
+            </p>
+
+            <h2 className="mt-1 text-lg font-black text-white">
+              Capture Evidence
+            </h2>
+          </div>
+
+          <button
+            type="button"
+            onClick={closeCamera}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-700 text-slate-400 transition hover:text-white"
+          >
+            ×
+          </button>
+        </div>
+
+        <div className="relative bg-black">
+          {permissionStep === "intro" && !photoUrl && (
+            <div className="flex min-h-[520px] items-center justify-center bg-gradient-to-b from-[#061426] to-[#020817] px-6 py-10">
+              <div className="w-full max-w-lg text-center">
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[24px] border border-blue-400/20 bg-blue-500/10 shadow-2xl shadow-blue-950/40">
+                  <span className="text-4xl">
+                    📷
+                  </span>
+                </div>
+
+                <p className="mt-7 text-[10px] font-black uppercase tracking-[0.24em] text-blue-400">
+                  Secure Field Capture
+                </p>
+
+                <h3 className="mt-3 text-2xl font-black text-white">
+                  Enable Camera Access
+                </h3>
+
+                <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-slate-400">
+                  SERNEM needs temporary camera access to capture field evidence directly from this device.
+                </p>
+
+                <div className="mt-7 grid gap-3 text-left sm:grid-cols-3">
+                  <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
+                    <p className="text-lg">🔒</p>
+                    <p className="mt-2 text-xs font-black text-slate-200">
+                      Private
+                    </p>
+                    <p className="mt-1 text-[10px] leading-4 text-slate-500">
+                      Evidence remains linked to your account.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
+                    <p className="text-lg">📍</p>
+                    <p className="mt-2 text-xs font-black text-slate-200">
+                      Field Ready
+                    </p>
+                    <p className="mt-1 text-[10px] leading-4 text-slate-500">
+                      Capture evidence directly on site.
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-4">
+                    <p className="text-lg">🛡️</p>
+                    <p className="mt-2 text-xs font-black text-slate-200">
+                      Controlled
+                    </p>
+                    <p className="mt-1 text-[10px] leading-4 text-slate-500">
+                      Camera stops when capture is closed.
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => void startCamera()}
+                  className="mt-8 w-full rounded-2xl bg-blue-600 px-6 py-4 text-sm font-black text-white shadow-xl shadow-blue-950/40 transition hover:bg-blue-500 active:scale-[0.99]"
+                >
+                  Enable Camera →
+                </button>
+
+                <p className="mt-3 text-[9px] text-slate-600">
+                  Your browser will ask for camera permission once.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {permissionStep === "camera" && !photoUrl && (
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className="max-h-[68vh] w-full object-contain"
+            />
+          )}
+
+          {photoUrl && (
+            <img
+              src={photoUrl}
+              alt="Captured evidence"
+              className="max-h-[68vh] w-full object-contain"
+            />
+          )}
+
+          {error && (
+            <div className="flex min-h-[320px] items-center justify-center p-8 text-center">
+              <div>
+                <p className="text-sm font-bold text-red-300">
+                  {error}
+                </p>
+
+                <button
+                  type="button"
+                  onClick={() => void startCamera()}
+                  className="mt-4 rounded-xl bg-blue-600 px-5 py-3 text-xs font-black text-white"
+                >
+                  Try Again
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center justify-center gap-3 border-t border-slate-800 p-4">
+          {!photo && !error && (
+            <button
+              type="button"
+              onClick={capturePhoto}
+              className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-white bg-white/20 shadow-xl transition active:scale-95"
+              aria-label="Capture photo"
+            >
+              <span className="h-11 w-11 rounded-full bg-white" />
+            </button>
+          )}
+
+          {photo && (
+            <>
+              <button
+                type="button"
+                onClick={() => void startCamera()}
+                disabled={saving}
+                className="rounded-xl border border-slate-700 px-5 py-3 text-xs font-black text-slate-300"
+              >
+                ↻ Retake
+              </button>
+
+              <button
+                type="button"
+                onClick={() => void usePhoto()}
+                disabled={saving}
+                className="rounded-xl bg-blue-600 px-6 py-3 text-xs font-black text-white transition hover:bg-blue-500 disabled:opacity-50"
+              >
+                {saving ? "Saving..." : "✓ Use Photo"}
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

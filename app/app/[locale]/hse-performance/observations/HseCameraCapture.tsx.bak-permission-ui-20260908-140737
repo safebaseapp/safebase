@@ -1,0 +1,248 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+type Props = {
+  open: boolean;
+  onClose: () => void;
+  onCapture: (file: File) => void | Promise<void>;
+};
+
+export default function HseCameraCapture({
+  open,
+  onClose,
+  onCapture,
+}: Props) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+
+  const [photo, setPhoto] = useState<Blob | null>(null);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+
+  function stopCamera() {
+    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
+
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+  }
+
+  async function startCamera() {
+    setError("");
+    setPhoto(null);
+
+    if (photoUrl) {
+      URL.revokeObjectURL(photoUrl);
+      setPhotoUrl(null);
+    }
+
+    try {
+      stopCamera();
+
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: { ideal: "environment" },
+          width: { ideal: 1920 },
+          height: { ideal: 1080 },
+        },
+        audio: false,
+      });
+
+      streamRef.current = stream;
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        await videoRef.current.play();
+      }
+    } catch (err) {
+      console.error("Camera error:", err);
+      setError(
+        "Camera could not be opened. Check browser camera permission.",
+      );
+    }
+  }
+
+  useEffect(() => {
+    if (open) {
+      void startCamera();
+    } else {
+      stopCamera();
+    }
+
+    return () => stopCamera();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  function capturePhoto() {
+    const video = videoRef.current;
+
+    if (!video || !video.videoWidth || !video.videoHeight) {
+      return;
+    }
+
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const context = canvas.getContext("2d");
+
+    if (!context) return;
+
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) return;
+
+        stopCamera();
+
+        if (photoUrl) {
+          URL.revokeObjectURL(photoUrl);
+        }
+
+        setPhoto(blob);
+        setPhotoUrl(URL.createObjectURL(blob));
+      },
+      "image/jpeg",
+      0.9,
+    );
+  }
+
+  async function usePhoto() {
+    if (!photo) return;
+
+    setSaving(true);
+
+    try {
+      const file = new File(
+        [photo],
+        `SERNEM-Evidence-${Date.now()}.jpg`,
+        {
+          type: "image/jpeg",
+        },
+      );
+
+      await onCapture(file);
+      closeCamera();
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  function closeCamera() {
+    stopCamera();
+
+    if (photoUrl) {
+      URL.revokeObjectURL(photoUrl);
+    }
+
+    setPhoto(null);
+    setPhotoUrl(null);
+    setError("");
+    onClose();
+  }
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 p-3">
+      <div className="w-full max-w-3xl overflow-hidden rounded-[24px] border border-slate-700 bg-[#06101e] shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-800 px-5 py-4">
+          <div>
+            <p className="text-[9px] font-black uppercase tracking-[0.2em] text-blue-400">
+              SERNEM • FIELD EVIDENCE
+            </p>
+
+            <h2 className="mt-1 text-lg font-black text-white">
+              Capture Evidence
+            </h2>
+          </div>
+
+          <button
+            type="button"
+            onClick={closeCamera}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-700 text-slate-400 transition hover:text-white"
+          >
+            ×
+          </button>
+        </div>
+
+        <div className="relative bg-black">
+          {!photoUrl && (
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
+              className="max-h-[68vh] w-full object-contain"
+            />
+          )}
+
+          {photoUrl && (
+            <img
+              src={photoUrl}
+              alt="Captured evidence"
+              className="max-h-[68vh] w-full object-contain"
+            />
+          )}
+
+          {error && (
+            <div className="flex min-h-[320px] items-center justify-center p-8 text-center">
+              <div>
+                <p className="text-sm font-bold text-red-300">
+                  {error}
+                </p>
+
+                <button
+                  type="button"
+                  onClick={() => void startCamera()}
+                  className="mt-4 rounded-xl bg-blue-600 px-5 py-3 text-xs font-black text-white"
+                >
+                  Try Again
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center justify-center gap-3 border-t border-slate-800 p-4">
+          {!photo && !error && (
+            <button
+              type="button"
+              onClick={capturePhoto}
+              className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-white bg-white/20 shadow-xl transition active:scale-95"
+              aria-label="Capture photo"
+            >
+              <span className="h-11 w-11 rounded-full bg-white" />
+            </button>
+          )}
+
+          {photo && (
+            <>
+              <button
+                type="button"
+                onClick={() => void startCamera()}
+                disabled={saving}
+                className="rounded-xl border border-slate-700 px-5 py-3 text-xs font-black text-slate-300"
+              >
+                ↻ Retake
+              </button>
+
+              <button
+                type="button"
+                onClick={() => void usePhoto()}
+                disabled={saving}
+                className="rounded-xl bg-blue-600 px-6 py-3 text-xs font-black text-white transition hover:bg-blue-500 disabled:opacity-50"
+              >
+                {saving ? "Saving..." : "✓ Use Photo"}
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

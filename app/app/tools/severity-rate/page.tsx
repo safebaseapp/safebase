@@ -1,5 +1,7 @@
 "use client";
 
+import { calculateSeverityRate } from "@/lib/hse-metrics";
+
 import { useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
@@ -41,7 +43,7 @@ export default function SeverityRateCalculatorPage() {
       return null;
     }
 
-    return (days * 200_000) / hours;
+    return calculateSeverityRate(days, hours);
   }, [lostWorkdays, hoursWorked]);
 
   const performanceLevel =

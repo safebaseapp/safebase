@@ -1,0 +1,3811 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+import HseCameraCapture from "./HseCameraCapture";
+
+type Locale = "tr" | "en";
+type Status = "open" | "in_progress" | "closed";
+type Risk = "low" | "medium" | "high" | "critical";
+type ObservationType =
+  | "positive"
+  | "unsafe_act"
+  | "unsafe_condition";
+
+type Observation = {
+  id: string;
+  reference_no?: string | null;
+  user_id: string;
+  observation_date: string;
+  project_name: string | null;
+  location: string | null;
+  company_name: string | null;
+  observation_type: ObservationType;
+  category: string;
+  risk_level: Risk;
+  title: string;
+  description: string;
+  corrective_action: string | null;
+  responsible_person: string | null;
+  target_date: string | null;
+  status: Status;
+  photo_url?: string | null;
+  created_at: string;
+  updated_at?: string | null;
+  closed_at?: string | null;
+};
+
+type EvidencePhoto = {
+  id: string;
+  observation_id: string;
+  user_id: string;
+  storage_path: string;
+  file_name: string | null;
+  mime_type: string | null;
+  file_size: number | null;
+  caption: string | null;
+  created_at: string;
+  signed_url: string;
+};
+
+type Props = {
+  locale: Locale;
+  userId: string;
+  initialObservations: Observation[];
+};
+
+type NewObservation = {
+  observation_date: string;
+  project_name: string;
+  company_name: string;
+  location: string;
+  observation_type: ObservationType;
+  category: string;
+  risk_level: Risk;
+  title: string;
+  description: string;
+  corrective_action: string;
+  responsible_person: string;
+  target_date: string;
+};
+
+type SortKey =
+  | "date"
+  | "risk"
+  | "due"
+  | "status";
+
+function startOfToday() {
+  const d = new Date();
+  return new Date(
+    d.getFullYear(),
+    d.getMonth(),
+    d.getDate(),
+  );
+}
+
+function isOverdue(item: Observation) {
+  if (
+    item.status === "closed" ||
+    !item.target_date
+  ) {
+    return false;
+  }
+
+  return (
+    new Date(item.target_date) <
+    startOfToday()
+  );
+}
+
+function unique(values: Array<string | null>) {
+  return Array.from(
+    new Set(
+      values
+        .filter(
+          (x): x is string =>
+            Boolean(x?.trim()),
+        )
+        .map((x) => x.trim()),
+    ),
+  ).sort();
+}
+
+function typeLabel(
+  type: ObservationType,
+  isTurkish = false,
+) {
+  if (type === "positive") {
+    return isTurkish ? "Olumlu Gözlem" : "Positive";
+  }
+
+  if (type === "unsafe_act") {
+    return isTurkish ? "Güvensiz Davranış" : "Unsafe Act";
+  }
+
+  return isTurkish
+    ? "Güvensiz Durum"
+    : "Unsafe Condition";
+}
+
+function statusLabel(
+  status: Status,
+  isTurkish = false,
+) {
+  if (status === "open") {
+    return isTurkish ? "Açık" : "Open";
+  }
+
+  if (status === "in_progress") {
+    return isTurkish
+      ? "Devam Ediyor"
+      : "In Progress";
+  }
+
+  return isTurkish ? "Kapalı" : "Closed";
+}
+
+function formatDate(
+  value: string | null | undefined,
+  isTurkish = false,
+) {
+  if (!value) return "—";
+
+  const datePart = value.slice(0, 10);
+  const [year, month, day] = datePart.split("-");
+
+  const monthsEn = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+  ];
+
+  const monthsTr = [
+    "Oca", "Şub", "Mar", "Nis", "May", "Haz",
+    "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara",
+  ];
+
+  const monthIndex = Number(month) - 1;
+
+  if (!year || !month || !day || monthIndex < 0 || monthIndex > 11) {
+    return value;
+  }
+
+  const months = isTurkish ? monthsTr : monthsEn;
+
+  return `${day} ${months[monthIndex]} ${year}`;
+}
+
+function riskWeight(risk: Risk) {
+  if (risk === "critical") return 4;
+  if (risk === "high") return 3;
+  if (risk === "medium") return 2;
+  return 1;
+}
+
+function statusWeight(status: Status) {
+  if (status === "open") return 3;
+  if (status === "in_progress") return 2;
+  return 1;
+}
+
+function observationRef(
+  item: Observation,
+  index = 0,
+) {
+  if (item.reference_no) {
+    return item.reference_no;
+  }
+
+  const year =
+    item.observation_date?.slice(0, 4) ||
+    String(new Date().getFullYear());
+
+  return `OBS-${year}-${String(
+    index + 1,
+  ).padStart(6, "0")}`;
+}
+
+function dueState(
+  item: Observation,
+  isTurkish = false,
+) {
+  if (
+    item.status === "closed" ||
+    !item.target_date
+  ) {
+    return {
+      label: "",
+      overdue: false,
+      urgent: false,
+    };
+  }
+
+  const today = startOfToday();
+  const due = new Date(
+    `${item.target_date}T00:00:00`,
+  );
+
+  const diff = Math.ceil(
+    (due.getTime() - today.getTime()) /
+      86400000,
+  );
+
+  if (diff < 0) {
+    const days = Math.abs(diff);
+
+    return {
+      label:
+        days === 1
+          ? isTurkish
+            ? "1 gün gecikti"
+            : "1 day overdue"
+          : isTurkish
+            ? `${days} gün gecikti`
+            : `${days} days overdue`,
+      overdue: true,
+      urgent: true,
+    };
+  }
+
+  if (diff === 0) {
+    return {
+      label: isTurkish
+        ? "Bugün termin"
+        : "Due today",
+      overdue: false,
+      urgent: true,
+    };
+  }
+
+  return {
+    label:
+      diff === 1
+        ? isTurkish
+          ? "1 gün kaldı"
+          : "1 day left"
+        : isTurkish
+          ? `${diff} gün kaldı`
+          : `${diff} days left`,
+    overdue: false,
+    urgent: diff <= 3,
+  };
+}
+
+export default function ObservationFollowUpClient({
+  locale,
+  userId,
+  initialObservations,
+}: Props) {
+  const isTurkish = locale === "tr";
+
+  const [observations, setObservations] =
+    useState<Observation[]>(
+      initialObservations,
+    );
+
+  const [search, setSearch] =
+    useState("");
+
+  const [statusFilter, setStatusFilter] =
+    useState("all");
+
+  const [riskFilter, setRiskFilter] =
+    useState("all");
+
+  const [companyFilter, setCompanyFilter] =
+    useState("all");
+
+  const [projectFilter, setProjectFilter] =
+    useState("all");
+
+  const [categoryFilter, setCategoryFilter] =
+    useState("all");
+
+  const [responsibleFilter, setResponsibleFilter] =
+    useState("all");
+
+  const [sortKey, setSortKey] =
+    useState<SortKey>("risk");
+
+  const [editing, setEditing] =
+    useState<Observation | null>(null);
+
+  const [selected, setSelected] =
+    useState<Observation | null>(null);
+
+  const [detailTab, setDetailTab] =
+    useState<"overview" | "evidence" | "timeline">(
+      "overview",
+    );
+
+  const [savingId, setSavingId] =
+    useState<string | null>(null);
+
+  const [message, setMessage] =
+    useState("");
+
+  const [evidenceByObservation, setEvidenceByObservation] =
+    useState<Record<string, EvidencePhoto[]>>({});
+
+  const [newEvidenceFiles, setNewEvidenceFiles] =
+    useState<File[]>([]);
+
+  const [uploadingEvidence, setUploadingEvidence] =
+    useState(false);
+
+  const [cameraOpen, setCameraOpen] =
+    useState(false);
+
+  const [cameraMode, setCameraMode] =
+    useState<"new" | "existing">("new");
+
+  const [creating, setCreating] =
+    useState(false);
+
+  const [newObservation, setNewObservation] =
+    useState<NewObservation>({
+      observation_date: new Date()
+        .toISOString()
+        .slice(0, 10),
+      project_name: "",
+      company_name: "",
+      location: "",
+      observation_type: "unsafe_condition",
+      category: "Working at Height",
+      risk_level: "medium",
+      title: "",
+      description: "",
+      corrective_action: "",
+      responsible_person: "",
+      target_date: "",
+    });
+
+  const companyOptions = useMemo(
+    () =>
+      unique(
+        observations.map(
+          (x) => x.company_name,
+        ),
+      ),
+    [observations],
+  );
+
+  const projectOptions = useMemo(
+    () =>
+      unique(
+        observations.map(
+          (x) => x.project_name,
+        ),
+      ),
+    [observations],
+  );
+
+  const categoryOptions = useMemo(
+    () =>
+      unique(
+        observations.map(
+          (x) => x.category,
+        ),
+      ),
+    [observations],
+  );
+
+  const responsibleOptions = useMemo(
+    () =>
+      unique(
+        observations.map(
+          (x) => x.responsible_person,
+        ),
+      ),
+    [observations],
+  );
+
+  const filtered = useMemo(() => {
+    const q =
+      search.trim().toLowerCase();
+
+    const result =
+      observations.filter((item) => {
+        if (
+          statusFilter !== "all" &&
+          item.status !== statusFilter
+        ) {
+          return false;
+        }
+
+        if (
+          riskFilter !== "all" &&
+          item.risk_level !== riskFilter
+        ) {
+          return false;
+        }
+
+        if (
+          companyFilter !== "all" &&
+          item.company_name !== companyFilter
+        ) {
+          return false;
+        }
+
+        if (
+          projectFilter !== "all" &&
+          item.project_name !== projectFilter
+        ) {
+          return false;
+        }
+
+        if (
+          categoryFilter !== "all" &&
+          item.category !== categoryFilter
+        ) {
+          return false;
+        }
+
+        if (
+          responsibleFilter !== "all" &&
+          item.responsible_person !==
+            responsibleFilter
+        ) {
+          return false;
+        }
+
+        if (!q) return true;
+
+        const haystack = [
+          item.reference_no,
+          item.title,
+          item.description,
+          item.corrective_action,
+          item.responsible_person,
+          item.company_name,
+          item.project_name,
+          item.location,
+          item.category,
+          item.risk_level,
+          item.status,
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+
+        return haystack.includes(q);
+      });
+
+    return [...result].sort((a, b) => {
+      if (sortKey === "risk") {
+        return (
+          riskWeight(b.risk_level) -
+          riskWeight(a.risk_level)
+        );
+      }
+
+      if (sortKey === "status") {
+        return (
+          statusWeight(b.status) -
+          statusWeight(a.status)
+        );
+      }
+
+      if (sortKey === "due") {
+        if (!a.target_date) return 1;
+        if (!b.target_date) return -1;
+
+        return (
+          new Date(a.target_date).getTime() -
+          new Date(b.target_date).getTime()
+        );
+      }
+
+      return (
+        new Date(
+          b.observation_date,
+        ).getTime() -
+        new Date(
+          a.observation_date,
+        ).getTime()
+      );
+    });
+  }, [
+    observations,
+    search,
+    statusFilter,
+    riskFilter,
+    companyFilter,
+    projectFilter,
+    categoryFilter,
+    responsibleFilter,
+    sortKey,
+  ]);
+
+  const stats = useMemo(() => {
+    const open =
+      observations.filter(
+        (x) => x.status === "open",
+      ).length;
+
+    const inProgress =
+      observations.filter(
+        (x) =>
+          x.status === "in_progress",
+      ).length;
+
+    const closed =
+      observations.filter(
+        (x) => x.status === "closed",
+      ).length;
+
+    const overdue =
+      observations.filter(
+        isOverdue,
+      ).length;
+
+    const criticalOpen =
+      observations.filter(
+        (x) =>
+          x.status !== "closed" &&
+          x.risk_level === "critical",
+      ).length;
+
+    const highOpen =
+      observations.filter(
+        (x) =>
+          x.status !== "closed" &&
+          x.risk_level === "high",
+      ).length;
+
+    const closureRate =
+      observations.length > 0
+        ? Math.round(
+            (closed /
+              observations.length) *
+              100,
+          )
+        : 0;
+
+    return {
+      total: observations.length,
+      open,
+      inProgress,
+      closed,
+      overdue,
+      criticalOpen,
+      highOpen,
+      closureRate,
+    };
+  }, [observations]);
+
+  async function loadEvidence() {
+    const supabase = createClient();
+
+    const observationIds =
+      observations.map((item) => item.id);
+
+    if (!observationIds.length) {
+      setEvidenceByObservation({});
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("hse_observation_photos")
+      .select("*")
+      .eq("user_id", userId)
+      .in("observation_id", observationIds)
+      .order("created_at", {
+        ascending: true,
+      });
+
+    if (error) {
+      const detail = [
+        error.message,
+        error.details,
+        error.hint,
+        error.code,
+      ]
+        .filter(Boolean)
+        .join(" • ");
+
+      setMessage(
+        `Evidence load: ${
+          detail || "unknown Supabase error"
+        }`,
+      );
+
+      return;
+    }
+
+    const next: Record<
+      string,
+      EvidencePhoto[]
+    > = {};
+
+    for (const row of data ?? []) {
+      const { data: signed } =
+        await supabase.storage
+          .from(
+            "hse-observation-evidence",
+          )
+          .createSignedUrl(
+            row.storage_path,
+            3600,
+          );
+
+      if (!signed?.signedUrl) {
+        continue;
+      }
+
+      const photo: EvidencePhoto = {
+        ...row,
+        signed_url:
+          signed.signedUrl,
+      };
+
+      if (
+        !next[row.observation_id]
+      ) {
+        next[row.observation_id] =
+          [];
+      }
+
+      next[
+        row.observation_id
+      ].push(photo);
+    }
+
+    setEvidenceByObservation(next);
+  }
+
+  useEffect(() => {
+    void loadEvidence();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
+
+  function sanitizeFileName(
+    fileName: string,
+  ) {
+    return fileName
+      .normalize("NFKD")
+      .replace(
+        /[^a-zA-Z0-9._-]/g,
+        "-",
+      )
+      .replace(/-+/g, "-");
+  }
+
+  function validateEvidenceFiles(
+    files: File[],
+    currentCount = 0,
+  ) {
+    const maxFiles = 5;
+    const maxBytes =
+      8 * 1024 * 1024;
+
+    const accepted: File[] = [];
+
+    for (const file of files) {
+      if (
+        !file.type.startsWith(
+          "image/",
+        )
+      ) {
+        continue;
+      }
+
+      if (file.size > maxBytes) {
+        setMessage(
+          isTurkish
+            ? `${file.name} 8 MB sınırını aşıyor.`
+            : `${file.name} exceeds the 8 MB limit.`,
+        );
+        continue;
+      }
+
+      accepted.push(file);
+    }
+
+    return accepted.slice(
+      0,
+      Math.max(
+        0,
+        maxFiles - currentCount,
+      ),
+    );
+  }
+
+  function addNewEvidence(
+    fileList: FileList | null,
+  ) {
+    if (!fileList) {
+      return;
+    }
+
+    const incoming =
+      validateEvidenceFiles(
+        Array.from(fileList),
+        newEvidenceFiles.length,
+      );
+
+    setNewEvidenceFiles(
+      (current) => [
+        ...current,
+        ...incoming,
+      ],
+    );
+  }
+
+  async function uploadEvidence(
+    observationId: string,
+    files: File[],
+  ) {
+    if (!files.length) {
+      return 0;
+    }
+
+    const supabase = createClient();
+
+    let uploadedCount = 0;
+
+    setUploadingEvidence(true);
+
+    try {
+      for (
+        let i = 0;
+        i < files.length;
+        i += 1
+      ) {
+        const file = files[i];
+
+        const safeName =
+          sanitizeFileName(
+            file.name ||
+              `photo-${i + 1}.jpg`,
+          );
+
+        const storagePath =
+          `${userId}/${observationId}/` +
+          `${Date.now()}-${i}-${safeName}`;
+
+        const { error: uploadError } =
+          await supabase.storage
+            .from(
+              "hse-observation-evidence",
+            )
+            .upload(
+              storagePath,
+              file,
+              {
+                cacheControl:
+                  "3600",
+                upsert: false,
+                contentType:
+                  file.type ||
+                  undefined,
+              },
+            );
+
+        if (uploadError) {
+          const detail = [
+            uploadError.message,
+            uploadError.name,
+          ]
+            .filter(Boolean)
+            .join(" • ");
+
+          const msg =
+            `STORAGE UPLOAD FAILED:\n${
+              detail || "Unknown storage error"
+            }`;
+
+          setMessage(msg);
+          window.alert(msg);
+
+          continue;
+        }
+
+        const {
+          error: insertError,
+        } = await supabase
+          .from(
+            "hse_observation_photos",
+          )
+          .insert({
+            observation_id:
+              observationId,
+            user_id: userId,
+            storage_path:
+              storagePath,
+            file_name:
+              file.name,
+            mime_type:
+              file.type || null,
+            file_size:
+              file.size,
+          });
+
+        if (insertError) {
+          const detail = [
+            insertError.message,
+            insertError.details,
+            insertError.hint,
+            insertError.code,
+          ]
+            .filter(Boolean)
+            .join(" • ");
+
+          const msg =
+            `METADATA INSERT FAILED:\n${
+              detail || "Unknown Supabase error"
+            }`;
+
+          setMessage(msg);
+          window.alert(msg);
+
+          continue;
+        }
+
+        setMessage(
+          isTurkish
+            ? "Fotoğraf başarıyla yüklendi."
+            : "Photo uploaded successfully.",
+        );
+
+        uploadedCount += 1;
+      }
+
+      await loadEvidence();
+
+      return uploadedCount;
+    } finally {
+      setUploadingEvidence(false);
+    }
+  }
+
+  async function deleteEvidencePhoto(
+    photo: EvidencePhoto,
+  ) {
+    const confirmed =
+      window.confirm(
+        isTurkish
+          ? "Bu fotoğrafı silmek istediğinize emin misiniz?"
+          : "Delete this evidence photo?",
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    const supabase = createClient();
+
+    const {
+      error: storageError,
+    } = await supabase.storage
+      .from(
+        "hse-observation-evidence",
+      )
+      .remove([
+        photo.storage_path,
+      ]);
+
+    if (storageError) {
+      setMessage(
+        storageError.message,
+      );
+      return;
+    }
+
+    const { error } =
+      await supabase
+        .from(
+          "hse_observation_photos",
+        )
+        .delete()
+        .eq("id", photo.id)
+        .eq(
+          "user_id",
+          userId,
+        );
+
+    if (error) {
+      setMessage(
+        error.message,
+      );
+      return;
+    }
+
+    await loadEvidence();
+
+    setMessage(
+      isTurkish
+        ? "Fotoğraf silindi."
+        : "Evidence photo deleted.",
+    );
+  }
+
+  function openDetails(item: Observation) {
+    setSelected(item);
+    setDetailTab("overview");
+  }
+
+  function clearFilters() {
+    setSearch("");
+    setStatusFilter("all");
+    setRiskFilter("all");
+    setCompanyFilter("all");
+    setProjectFilter("all");
+    setCategoryFilter("all");
+    setResponsibleFilter("all");
+    setSortKey("risk");
+  }
+
+  async function createObservation() {
+    if (
+      !newObservation.title.trim() ||
+      !newObservation.description.trim()
+    ) {
+      setMessage(
+        isTurkish
+          ? "Bulgu başlığı ve açıklama zorunludur."
+          : "Finding title and description are required.",
+      );
+      return;
+    }
+
+    setSavingId("new-observation");
+    setMessage("");
+
+    const supabase = createClient();
+
+    const payload = {
+      user_id: userId,
+      observation_date:
+        newObservation.observation_date,
+      project_name:
+        newObservation.project_name.trim() ||
+        null,
+      company_name:
+        newObservation.company_name.trim() ||
+        null,
+      location:
+        newObservation.location.trim() ||
+        null,
+      observation_type:
+        newObservation.observation_type,
+      category:
+        newObservation.category.trim() ||
+        "Other",
+      risk_level:
+        newObservation.risk_level,
+      title:
+        newObservation.title.trim(),
+      description:
+        newObservation.description.trim(),
+      corrective_action:
+        newObservation.corrective_action.trim() ||
+        null,
+      responsible_person:
+        newObservation.responsible_person.trim() ||
+        null,
+      target_date:
+        newObservation.target_date ||
+        null,
+      status: "open" as Status,
+    };
+
+    const { data, error } = await supabase
+      .from("hse_observations")
+      .insert(payload)
+      .select("*")
+      .single();
+
+    if (error) {
+      setMessage(
+        isTurkish
+          ? `Gözlem kaydedilemedi: ${error.message}`
+          : `Observation could not be saved: ${error.message}`,
+      );
+
+      setSavingId(null);
+      return;
+    }
+
+    setObservations((current) => [
+      data as Observation,
+      ...current,
+    ]);
+
+    let uploadedPhotos = 0;
+
+    if (newEvidenceFiles.length) {
+      uploadedPhotos =
+        await uploadEvidence(
+          data.id,
+          newEvidenceFiles,
+        );
+    }
+
+    setCreating(false);
+    setNewEvidenceFiles([]);
+
+    setNewObservation({
+      observation_date: new Date()
+        .toISOString()
+        .slice(0, 10),
+      project_name: "",
+      company_name: "",
+      location: "",
+      observation_type: "unsafe_condition",
+      category: "Working at Height",
+      risk_level: "medium",
+      title: "",
+      description: "",
+      corrective_action: "",
+      responsible_person: "",
+      target_date: "",
+    });
+
+    setMessage(
+      isTurkish
+        ? `${data.reference_no ?? "Observation"} kaydedildi${
+            uploadedPhotos
+              ? ` • ${uploadedPhotos} fotoğraf`
+              : ""
+          }.`
+        : `${data.reference_no ?? "Observation"} created${
+            uploadedPhotos
+              ? ` • ${uploadedPhotos} photo(s)`
+              : ""
+          }.`,
+    );
+
+    setSavingId(null);
+  }
+
+  async function changeStatus(
+    item: Observation,
+    status: Status,
+  ) {
+    setSavingId(item.id);
+    setMessage("");
+
+    const supabase = createClient();
+
+    const now =
+      new Date().toISOString();
+
+    const { error } = await supabase
+      .from("hse_observations")
+      .update({
+        status,
+        updated_at: now,
+        closed_at:
+          status === "closed"
+            ? now
+            : null,
+      })
+      .eq("id", item.id)
+      .eq("user_id", userId);
+
+    if (error) {
+      setMessage(
+        isTurkish
+          ? `Durum güncellenemedi: ${error.message}`
+          : `Status update failed: ${error.message}`,
+      );
+
+      setSavingId(null);
+      return;
+    }
+
+    const updatedItem = {
+      ...item,
+      status,
+      updated_at: now,
+      closed_at:
+        status === "closed"
+          ? now
+          : null,
+    };
+
+    setObservations((current) =>
+      current.map((x) =>
+        x.id === item.id
+          ? updatedItem
+          : x,
+      ),
+    );
+
+    if (selected?.id === item.id) {
+      setSelected(updatedItem);
+    }
+
+    setSavingId(null);
+  }
+
+  async function saveEdit() {
+    if (!editing) return;
+
+    if (
+      !editing.title.trim() ||
+      !editing.description.trim()
+    ) {
+      setMessage(
+        isTurkish
+          ? "Başlık ve açıklama zorunludur."
+          : "Title and description are required.",
+      );
+      return;
+    }
+
+    setSavingId(editing.id);
+    setMessage("");
+
+    const supabase = createClient();
+    const now =
+      new Date().toISOString();
+
+    const payload = {
+      observation_date:
+        editing.observation_date,
+
+      project_name:
+        editing.project_name?.trim() ||
+        null,
+
+      company_name:
+        editing.company_name?.trim() ||
+        null,
+
+      location:
+        editing.location?.trim() ||
+        null,
+
+      observation_type:
+        editing.observation_type,
+
+      category:
+        editing.category,
+
+      risk_level:
+        editing.risk_level,
+
+      title:
+        editing.title.trim(),
+
+      description:
+        editing.description.trim(),
+
+      corrective_action:
+        editing.corrective_action?.trim() ||
+        null,
+
+      responsible_person:
+        editing.responsible_person?.trim() ||
+        null,
+
+      target_date:
+        editing.target_date || null,
+
+      updated_at: now,
+    };
+
+    const { error } = await supabase
+      .from("hse_observations")
+      .update(payload)
+      .eq("id", editing.id)
+      .eq("user_id", userId);
+
+    if (error) {
+      setMessage(
+        isTurkish
+          ? `Gözlem güncellenemedi: ${error.message}`
+          : `Observation update failed: ${error.message}`,
+      );
+
+      setSavingId(null);
+      return;
+    }
+
+    const updated = {
+      ...editing,
+      ...payload,
+    };
+
+    setObservations((current) =>
+      current.map((x) =>
+        x.id === editing.id
+          ? updated
+          : x,
+      ),
+    );
+
+    if (selected?.id === editing.id) {
+      setSelected(updated);
+    }
+
+    setEditing(null);
+
+    setMessage(
+      isTurkish
+        ? "Gözlem güncellendi."
+        : "Observation updated.",
+    );
+
+    setSavingId(null);
+  }
+
+  async function deleteObservation(
+    item: Observation,
+  ) {
+    const confirmed = window.confirm(
+      isTurkish
+        ? `"${item.title}" gözlemini kalıcı olarak silmek istediğinize emin misiniz?`
+        : `Are you sure you want to permanently delete "${item.title}"?`,
+    );
+
+    if (!confirmed) return;
+
+    setSavingId(item.id);
+    setMessage("");
+
+    const supabase = createClient();
+
+    const { error } = await supabase
+      .from("hse_observations")
+      .delete()
+      .eq("id", item.id)
+      .eq("user_id", userId);
+
+    if (error) {
+      setMessage(
+        isTurkish
+          ? `Silme başarısız: ${error.message}`
+          : `Delete failed: ${error.message}`,
+      );
+
+      setSavingId(null);
+      return;
+    }
+
+    setObservations((current) =>
+      current.filter(
+        (x) => x.id !== item.id,
+      ),
+    );
+
+    setSelected(null);
+
+    setMessage(
+      isTurkish
+        ? "Gözlem silindi."
+        : "Observation deleted.",
+    );
+
+    setSavingId(null);
+  }
+
+  async function exportExcel() {
+    const XLSX =
+      await import("xlsx");
+
+    const mapRow = (
+      item: Observation,
+      index: number,
+    ) => ({
+      Reference:
+        item.reference_no ??
+        observationRef(item, index),
+      Date: item.observation_date,
+      Project:
+        item.project_name ?? "",
+      Company:
+        item.company_name ?? "",
+      Location:
+        item.location ?? "",
+      Type:
+        typeLabel(
+          item.observation_type,
+        ),
+      Category:
+        item.category,
+      Risk:
+        item.risk_level.toUpperCase(),
+      Finding:
+        item.title,
+      Description:
+        item.description,
+      Corrective_Action:
+        item.corrective_action ?? "",
+      Responsible:
+        item.responsible_person ?? "",
+      Target_Date:
+        item.target_date ?? "",
+      Status:
+        statusLabel(item.status),
+      Overdue:
+        isOverdue(item)
+          ? "YES"
+          : "NO",
+      Closed_Date:
+        item.closed_at ?? "",
+    });
+
+    const allRows =
+      observations.map(mapRow);
+
+    const wb =
+      XLSX.utils.book_new();
+
+    const summary =
+      XLSX.utils.aoa_to_sheet([
+        [
+          "SERNEM HSE ACTION REGISTER",
+        ],
+        [],
+        ["Total", stats.total],
+        ["Open", stats.open],
+        [
+          "In Progress",
+          stats.inProgress,
+        ],
+        ["Overdue", stats.overdue],
+        [
+          "Critical Open",
+          stats.criticalOpen,
+        ],
+        [
+          "High Open",
+          stats.highOpen,
+        ],
+        [
+          "Closed",
+          stats.closed,
+        ],
+        [
+          "Closure Rate",
+          `${stats.closureRate}%`,
+        ],
+        [],
+        [
+          "Generated",
+          new Date().toLocaleString(),
+        ],
+      ]);
+
+    const allSheet =
+      XLSX.utils.json_to_sheet(
+        allRows,
+      );
+
+    const openSheet =
+      XLSX.utils.json_to_sheet(
+        observations
+          .filter(
+            (x) =>
+              x.status !== "closed",
+          )
+          .map(mapRow),
+      );
+
+    const overdueSheet =
+      XLSX.utils.json_to_sheet(
+        observations
+          .filter(isOverdue)
+          .map(mapRow),
+      );
+
+    const closedSheet =
+      XLSX.utils.json_to_sheet(
+        observations
+          .filter(
+            (x) =>
+              x.status === "closed",
+          )
+          .map(mapRow),
+      );
+
+    const widths = [
+      { wch: 18 },
+      { wch: 12 },
+      { wch: 18 },
+      { wch: 18 },
+      { wch: 18 },
+      { wch: 20 },
+      { wch: 22 },
+      { wch: 12 },
+      { wch: 30 },
+      { wch: 42 },
+      { wch: 42 },
+      { wch: 24 },
+      { wch: 14 },
+      { wch: 16 },
+      { wch: 12 },
+      { wch: 18 },
+    ];
+
+    for (const sheet of [
+      allSheet,
+      openSheet,
+      overdueSheet,
+      closedSheet,
+    ]) {
+      sheet["!cols"] = widths;
+
+      sheet["!autofilter"] = {
+        ref:
+          sheet["!ref"] ??
+          "A1:P1",
+      };
+    }
+
+    summary["!cols"] = [
+      { wch: 24 },
+      { wch: 30 },
+    ];
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      summary,
+      "Summary",
+    );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      allSheet,
+      "Action Register",
+    );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      openSheet,
+      "Open Actions",
+    );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      overdueSheet,
+      "Overdue Actions",
+    );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      closedSheet,
+      "Closed Actions",
+    );
+
+    XLSX.writeFile(
+      wb,
+      `SERNEM-HSE-Action-Register-${new Date()
+        .toISOString()
+        .slice(0, 10)}.xlsx`,
+    );
+  }
+
+  const riskLabel = (risk: Risk) => {
+    if (!isTurkish) {
+      return risk.toUpperCase();
+    }
+
+    if (risk === "critical") return "KRİTİK";
+    if (risk === "high") return "YÜKSEK";
+    if (risk === "medium") return "ORTA";
+    return "DÜŞÜK";
+  };
+
+  const categoryLabel = (category: string) => {
+    if (!isTurkish) return category;
+
+    const map: Record<string, string> = {
+      "Working at Height": "Yüksekte Çalışma",
+      "Hot Work": "Sıcak Çalışma",
+      "Housekeeping": "Düzen ve Temizlik",
+      "Scaffolding": "İskele",
+      "Lifting": "Kaldırma Operasyonları",
+      "Electrical": "Elektrik",
+      "Excavation": "Kazı",
+      "Confined Space": "Kapalı Alan",
+      "PPE": "KKD",
+      "Manual Handling": "Elle Taşıma",
+      "Chemical Safety": "Kimyasal Güvenlik",
+      "Fire Safety": "Yangın Güvenliği",
+      "Traffic": "Trafik",
+      "Tools & Equipment": "El Aletleri ve Ekipman",
+      "Other": "Diğer",
+    };
+
+    return map[category] ?? category;
+  };
+
+  const riskClass = (risk: Risk) => {
+    if (risk === "critical") {
+      return "border-red-500/30 bg-red-500/10 text-red-300";
+    }
+
+    if (risk === "high") {
+      return "border-orange-500/30 bg-orange-500/10 text-orange-300";
+    }
+
+    if (risk === "medium") {
+      return "border-amber-500/30 bg-amber-500/10 text-amber-300";
+    }
+
+    return "border-emerald-500/30 bg-emerald-500/10 text-emerald-300";
+  };
+
+  const statusClass = (status: Status) => {
+    if (status === "closed") {
+      return "border-emerald-500/25 bg-emerald-500/10 text-emerald-300";
+    }
+
+    if (status === "in_progress") {
+      return "border-amber-500/25 bg-amber-500/10 text-amber-300";
+    }
+
+    return "border-blue-500/25 bg-blue-500/10 text-blue-300";
+  };
+
+  return (
+    <main className="min-h-screen bg-[#020817] text-white">
+      <div className="mx-auto max-w-[1680px] px-4 py-6 sm:px-6 lg:px-8">
+
+        <section className="rounded-[24px] border border-blue-400/15 bg-gradient-to-r from-[#06152b] via-[#071a33] to-[#082747] px-6 py-5">
+          <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="text-[10px] font-black uppercase tracking-[0.24em] text-blue-400">
+                  {isTurkish
+                    ? "SERNEM • AKSİYON KONTROL MERKEZİ"
+                    : "SERNEM • ACTION CONTROL CENTER"}
+                </p>
+
+                <span className="rounded-full border border-slate-700 bg-black/20 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-slate-400">
+                  {isTurkish ? "Canlı Veri" : "Live Data"}
+                </span>
+              </div>
+
+              <h1 className="mt-2 text-3xl font-black">
+                {isTurkish ? "İSG Aksiyon Takip Sistemi" : "HSE Action Register"}
+              </h1>
+
+              <p className="mt-2 max-w-3xl text-sm text-slate-400">
+                {isTurkish
+                  ? "Saha gözlemlerini, düzeltici aksiyonları, sorumluları ve kapanış durumlarını tek merkezden yönetin."
+                  : "Control field observations, corrective actions, owners, due dates and closure status from one register."}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <a
+                href={`/${locale}/hse-performance`}
+                className="rounded-xl border border-slate-700 bg-slate-950/40 px-4 py-2.5 text-xs font-black text-slate-200 transition hover:border-blue-400/30 hover:text-blue-300"
+              >
+                ← {isTurkish ? "KPI Paneli" : "KPI Dashboard"}
+              </a>
+
+              <button
+                type="button"
+                onClick={() => setCreating(true)}
+                className="rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-black text-white shadow-lg shadow-blue-950/30 transition hover:bg-blue-500"
+              >
+                + {isTurkish ? "Yeni Gözlem" : "New Observation"}
+              </button>
+
+              <button
+                type="button"
+                onClick={exportExcel}
+                className="rounded-xl border border-slate-700 bg-slate-950/40 px-4 py-2.5 text-xs font-black text-slate-200 transition hover:border-emerald-500/30 hover:text-emerald-300"
+              >
+                ↓ {isTurkish ? "Dışa Aktar" : "Export"}
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+          {[
+            [
+              isTurkish ? "TOPLAM GÖZLEM" : "TOTAL OBSERVATIONS",
+              stats.total,
+              "text-blue-300",
+              isTurkish ? "Kaydedilen tüm bulgular" : "All recorded findings",
+            ],
+            [
+              isTurkish ? "AÇIK AKSİYONLAR" : "OPEN ACTIONS",
+              stats.open,
+              "text-blue-300",
+              isTurkish ? "Aksiyon bekleyen açık kayıtlar" : "Open records requiring action",
+            ],
+            [
+              isTurkish ? "DEVAM EDEN" : "IN PROGRESS",
+              stats.inProgress,
+              "text-amber-300",
+              isTurkish ? "Yönetimi devam eden aksiyonlar" : "Actions currently being managed",
+            ],
+            [
+              isTurkish ? "GECİKEN" : "OVERDUE",
+              stats.overdue,
+              "text-red-300",
+              isTurkish ? "Termin tarihi geçen kayıtlar" : "Past target date",
+            ],
+            [
+              isTurkish ? "AÇIK KRİTİK" : "CRITICAL OPEN",
+              stats.criticalOpen,
+              "text-red-300",
+              isTurkish ? "Acil öncelik gerektirir" : "Immediate priority",
+            ],
+            [
+              isTurkish ? "AÇIK YÜKSEK" : "HIGH OPEN",
+              stats.highOpen,
+              "text-orange-300",
+              isTurkish ? "Yüksek öncelikli aksiyonlar" : "High-priority actions",
+            ],
+            [
+              isTurkish ? "KAPANIŞ ORANI" : "CLOSURE RATE",
+              `${stats.closureRate}%`,
+              "text-emerald-300",
+              isTurkish
+                ? `${stats.total} kaydın ${stats.closed} tanesi kapalı`
+                : `${stats.closed} of ${stats.total} closed`,
+            ],
+          ].map(
+            ([
+              label,
+              value,
+              color,
+              sub,
+            ]) => (
+              <div
+                key={String(label)}
+                className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4"
+              >
+                <p className="text-[9px] font-black uppercase tracking-[0.16em] text-slate-500">
+                  {label}
+                </p>
+
+                <p
+                  className={`mt-2 text-2xl font-black ${color}`}
+                >
+                  {value}
+                </p>
+
+                <p className="mt-1 text-[10px] text-slate-600">
+                  {sub}
+                </p>
+              </div>
+            ),
+          )}
+        </section>
+
+        <section className="mt-4 rounded-[22px] border border-slate-800 bg-slate-900/65 p-4">
+          <div className="flex flex-col gap-3 xl:flex-row xl:items-center">
+            <div className="min-w-0 flex-1">
+              <input
+                value={search}
+                onChange={(e) =>
+                  setSearch(
+                    e.target.value,
+                  )
+                }
+                placeholder={
+                  isTurkish
+                    ? "OBS no, bulgu, aksiyon, firma veya sorumlu ara..."
+                    : "Search OBS no, finding, action, company or owner..."
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm outline-none transition placeholder:text-slate-600 focus:border-blue-500/50"
+              />
+            </div>
+
+            <div className="grid gap-2 sm:grid-cols-2 xl:flex">
+              <select
+                value={statusFilter}
+                onChange={(e) =>
+                  setStatusFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  {isTurkish ? "Tüm Durumlar" : "All Statuses"}
+                </option>
+                <option value="open">
+                  {isTurkish ? "Açık" : "Open"}
+                </option>
+                <option value="in_progress">
+                  {isTurkish ? "Devam Ediyor" : "In Progress"}
+                </option>
+                <option value="closed">
+                  {isTurkish ? "Kapalı" : "Closed"}
+                </option>
+              </select>
+
+              <select
+                value={riskFilter}
+                onChange={(e) =>
+                  setRiskFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  {isTurkish ? "Tüm Riskler" : "All Risks"}
+                </option>
+                <option value="critical">
+                  {isTurkish ? "Kritik" : "Critical"}
+                </option>
+                <option value="high">
+                  {isTurkish ? "Yüksek" : "High"}
+                </option>
+                <option value="medium">
+                  {isTurkish ? "Orta" : "Medium"}
+                </option>
+                <option value="low">
+                  {isTurkish ? "Düşük" : "Low"}
+                </option>
+              </select>
+
+              <select
+                value={categoryFilter}
+                onChange={(e) =>
+                  setCategoryFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  {isTurkish ? "Tüm Kategoriler" : "All Categories"}
+                </option>
+
+                {categoryOptions.map(
+                  (item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ),
+                )}
+              </select>
+
+              <select
+                value={companyFilter}
+                onChange={(e) =>
+                  setCompanyFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  {isTurkish ? "Tüm Firmalar" : "All Companies"}
+                </option>
+
+                {companyOptions.map(
+                  (item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ),
+                )}
+              </select>
+
+              <select
+                value={projectFilter}
+                onChange={(e) =>
+                  setProjectFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  {isTurkish ? "Tüm Projeler" : "All Projects"}
+                </option>
+
+                {projectOptions.map(
+                  (item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ),
+                )}
+              </select>
+
+              <select
+                value={responsibleFilter}
+                onChange={(e) =>
+                  setResponsibleFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  {isTurkish ? "Tüm Sorumlular" : "All Owners"}
+                </option>
+
+                {responsibleOptions.map(
+                  (item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ),
+                )}
+              </select>
+
+              <select
+                value={sortKey}
+                onChange={(e) =>
+                  setSortKey(
+                    e.target
+                      .value as SortKey,
+                  )
+                }
+                className="rounded-xl border border-blue-500/20 bg-blue-500/[0.06] px-3 py-3 text-xs font-bold text-blue-200"
+              >
+                <option value="risk">
+                  {isTurkish ? "Sırala: Risk" : "Sort: Risk"}
+                </option>
+                <option value="date">
+                  {isTurkish ? "Sırala: Tarih" : "Sort: Date"}
+                </option>
+                <option value="due">
+                  {isTurkish ? "Sırala: Termin" : "Sort: Due Date"}
+                </option>
+                <option value="status">
+                  {isTurkish ? "Sırala: Durum" : "Sort: Status"}
+                </option>
+              </select>
+
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="rounded-xl border border-slate-700 px-3 py-3 text-xs font-black text-slate-400 transition hover:text-white"
+              >
+                {isTurkish ? "Temizle" : "Clear"}
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-[10px] uppercase tracking-[0.14em] text-slate-600">
+              {isTurkish ? "Gösterilen " : "Showing "}
+              <span className="font-black text-slate-300">
+                {filtered.length}
+              </span>
+              {isTurkish ? " / " : " of "}
+              <span className="font-black text-slate-300">
+                {observations.length}
+              </span>
+              {isTurkish ? " gözlem" : " observations"}
+            </p>
+
+            {message && (
+              <p className="text-xs text-blue-300">
+                {message}
+              </p>
+            )}
+          </div>
+        </section>
+
+        <section className="mt-4 overflow-hidden rounded-[22px] border border-slate-800 bg-slate-900/65">
+          <div className="hidden overflow-x-auto xl:block">
+            <table className="w-full min-w-[1450px] text-left text-xs">
+              <thead className="bg-[#07182d]">
+                <tr className="text-[9px] font-black uppercase tracking-[0.14em] text-slate-500">
+                  <th className="w-[150px] px-4 py-4">
+                    {isTurkish ? "Referans" : "Reference"}
+                  </th>
+
+                  <th className="min-w-[330px] px-4 py-4">
+                    {isTurkish ? "Bulgu" : "Finding"}
+                  </th>
+
+                  <th className="w-[110px] px-4 py-4">
+                    {isTurkish ? "Risk" : "Risk"}
+                  </th>
+
+                  <th className="min-w-[320px] px-4 py-4">
+                    {isTurkish ? "Düzeltici Aksiyon" : "Corrective Action"}
+                  </th>
+
+                  <th className="w-[220px] px-4 py-4">
+                    {isTurkish ? "Sorumlu / Termin" : "Owner / Deadline"}
+                  </th>
+
+                  <th className="w-[150px] px-4 py-4">
+                    {isTurkish ? "Durum" : "Status"}
+                  </th>
+
+                  <th className="w-[120px] px-4 py-4">
+                    {isTurkish ? "Kanıt" : "Evidence"}
+                  </th>
+
+                  <th className="w-[100px] px-4 py-4 text-right">
+                    {isTurkish ? "İşlem" : "Action"}
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {filtered.map((item) => {
+                  const originalIndex =
+                    observations.findIndex(
+                      (x) => x.id === item.id,
+                    );
+
+                  const ref = observationRef(
+                    item,
+                    originalIndex >= 0
+                      ? originalIndex
+                      : 0,
+                  );
+
+                  const due = dueState(item, isTurkish);
+
+                  const photos =
+                    evidenceByObservation[
+                      item.id
+                    ] ?? [];
+
+                  const firstPhoto =
+                    photos[0];
+
+                  return (
+                    <tr
+                      key={item.id}
+                      className={`group border-t border-slate-800/90 align-middle transition hover:bg-blue-500/[0.035] ${
+                        item.risk_level === "critical" &&
+                        item.status !== "closed"
+                          ? "bg-red-500/[0.025]"
+                          : item.risk_level === "high" &&
+                              item.status !== "closed"
+                            ? "bg-orange-500/[0.012]"
+                            : ""
+                      }`}
+                    >
+                      <td className="px-4 py-5 align-top">
+                        <button
+                          type="button"
+                          onClick={() => openDetails(item)}
+                          className="inline-flex rounded-lg border border-blue-500/15 bg-blue-500/[0.045] px-2 py-1 font-mono text-[9px] font-black text-blue-300 transition hover:border-blue-400/30 hover:text-blue-200"
+                        >
+                          {ref}
+                        </button>
+
+                        <p className="mt-2 text-[10px] text-slate-600">
+                          {formatDate(
+                            item.observation_date,
+                            isTurkish,
+                          )}
+                        </p>
+                      </td>
+
+                      <td className="px-4 py-5 align-top">
+                        <div
+                          role="button"
+                          tabIndex={0}
+                          onClick={() => openDetails(item)}
+                          onKeyDown={(e) => {
+                            if (
+                              e.key === "Enter" ||
+                              e.key === " "
+                            ) {
+                              e.preventDefault();
+                              openDetails(item);
+                            }
+                          }}
+                          className="block w-full cursor-pointer text-left"
+                        >
+                          <div className="flex items-start gap-3">
+                            {firstPhoto && (
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  openDetails(item);
+                                  setDetailTab(
+                                    "evidence",
+                                  );
+                                }}
+                                className="relative shrink-0 overflow-hidden rounded-xl border border-slate-700"
+                              >
+                                <img
+                                  src={
+                                    firstPhoto.signed_url
+                                  }
+                                  alt="Observation evidence"
+                                  className="h-14 w-16 object-cover"
+                                />
+
+                                {photos.length > 1 && (
+                                  <span className="absolute bottom-1 right-1 rounded-md bg-black/75 px-1.5 py-0.5 text-[8px] font-black text-white">
+                                    +{photos.length - 1}
+                                  </span>
+                                )}
+                              </button>
+                            )}
+
+                            <div className="min-w-0 flex-1">
+                              <p className="text-sm font-black text-slate-100 transition group-hover:text-blue-200">
+                                {item.title}
+                              </p>
+
+                              <p className="mt-1 line-clamp-2 max-w-[520px] leading-5 text-slate-500">
+                                {item.description}
+                              </p>
+
+                              <div className="mt-2 flex flex-wrap gap-1.5">
+                                {item.project_name && (
+                                  <span className="rounded-md border border-slate-800 bg-slate-950/50 px-2 py-1 text-[8px] font-bold text-slate-500">
+                                    {isTurkish ? "Proje" : "Project"}: {item.project_name}
+                                  </span>
+                                )}
+
+                                {item.company_name && (
+                                  <span className="rounded-md border border-slate-800 bg-slate-950/50 px-2 py-1 text-[8px] font-bold text-slate-500">
+                                    {isTurkish ? "Firma" : "Company"}: {item.company_name}
+                                  </span>
+                                )}
+
+                                {item.location && (
+                                  <span className="rounded-md border border-slate-800 bg-slate-950/50 px-2 py-1 text-[8px] font-bold text-slate-500">
+                                    {isTurkish ? "Konum" : "Location"}: {item.location}
+                                  </span>
+                                )}
+
+                                <span className="rounded-md border border-blue-500/15 bg-blue-500/[0.05] px-2 py-1 text-[8px] font-black text-blue-400/80">
+                                  {categoryLabel(item.category)}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td className="px-4 py-5 align-top">
+                        <span
+                          className={`inline-flex rounded-full border px-2.5 py-1 text-[9px] font-black uppercase ${riskClass(
+                            item.risk_level,
+                          )}`}
+                        >
+                          {riskLabel(item.risk_level)}
+                        </span>
+                      </td>
+
+                      <td className="px-4 py-5 align-top">
+                        {item.corrective_action ? (
+                          <p className="line-clamp-3 max-w-[360px] leading-5 text-slate-300">
+                            {item.corrective_action}
+                          </p>
+                        ) : (
+                          <div className="rounded-xl border border-dashed border-slate-800 bg-slate-950/30 px-3 py-2.5 text-[10px] font-bold text-slate-600">
+                            {isTurkish ? "Düzeltici aksiyon atanmadı" : "No corrective action assigned"}
+                          </div>
+                        )}
+                      </td>
+
+                      <td className="px-4 py-5 align-top">
+                        <div className="flex items-start gap-2.5">
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-[10px] font-black text-slate-300">
+                            {(item.responsible_person ??
+                              "?")
+                              .trim()
+                              .charAt(0)
+                              .toUpperCase()}
+                          </div>
+
+                          <div>
+                            <p className="font-black text-slate-200">
+                              {item.responsible_person ??
+                                (isTurkish ? "Atanmamış" : "Unassigned")}
+                            </p>
+
+                            <p className="mt-1 text-[10px] text-slate-600">
+                              {isTurkish ? "Termin" : "Due"}{" "}
+                              {formatDate(
+                                item.target_date,
+                                isTurkish,
+                              )}
+                            </p>
+
+                            {due.label && (
+                              <span
+                                className={`mt-2 inline-flex rounded-md px-2 py-1 text-[9px] font-black ${
+                                  due.overdue
+                                    ? "bg-red-500/15 text-red-300"
+                                    : due.urgent
+                                      ? "bg-amber-500/15 text-amber-300"
+                                      : "bg-emerald-500/10 text-emerald-300"
+                                }`}
+                              >
+                                {due.label}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+
+                      <td className="px-4 py-5 align-top">
+                        <select
+                          value={item.status}
+                          disabled={
+                            savingId === item.id
+                          }
+                          onChange={(e) =>
+                            changeStatus(
+                              item,
+                              e.target.value as Status,
+                            )
+                          }
+                          className={`rounded-xl border px-3 py-2.5 text-[10px] font-black ${statusClass(
+                            item.status,
+                          )}`}
+                        >
+                          <option value="open">
+                            {isTurkish ? "Açık" : "Open"}
+                          </option>
+
+                          <option value="in_progress">
+                            {isTurkish ? "Devam Ediyor" : "In Progress"}
+                          </option>
+
+                          <option value="closed">
+                            {isTurkish ? "Kapalı" : "Closed"}
+                          </option>
+                        </select>
+
+                        {item.status === "closed" &&
+                          item.closed_at && (
+                            <p className="mt-2 text-[9px] font-bold text-emerald-400/70">
+                              {formatDate(
+                                item.closed_at,
+                                isTurkish,
+                              )}
+                            </p>
+                          )}
+                      </td>
+
+                      <td className="px-4 py-5 align-top">
+                        {firstPhoto ? (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              openDetails(item);
+                              setDetailTab(
+                                "evidence",
+                              );
+                            }}
+                            className="group/evidence relative overflow-hidden rounded-xl border border-slate-700"
+                          >
+                            <img
+                              src={
+                                firstPhoto.signed_url
+                              }
+                              alt="Evidence"
+                              className="h-12 w-16 object-cover transition group-hover/evidence:scale-105"
+                            />
+
+                            {photos.length > 1 && (
+                              <span className="absolute bottom-1 right-1 rounded bg-black/80 px-1.5 py-0.5 text-[8px] font-black text-white">
+                                +{photos.length - 1}
+                              </span>
+                            )}
+                          </button>
+                        ) : (
+                          <span className="inline-flex rounded-lg border border-slate-800 bg-slate-950/35 px-2.5 py-2 text-[9px] font-bold text-slate-600">
+                            {isTurkish ? "Kanıt yok" : "No evidence"}
+                          </span>
+                        )}
+                      </td>
+
+                      <td className="px-4 py-5 text-right align-top">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            openDetails(item)
+                          }
+                          className="whitespace-nowrap rounded-xl border border-blue-500/25 bg-blue-500/[0.06] px-4 py-2.5 text-[10px] font-black text-blue-300 transition hover:bg-blue-500/15"
+                        >
+                          {isTurkish ? "Detayları Gör →" : "View Details →"}
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="space-y-3 p-3 xl:hidden">
+            {filtered.map((item) => {
+              const originalIndex =
+                observations.findIndex(
+                  (x) => x.id === item.id,
+                );
+
+              const due = dueState(item, isTurkish);
+
+              const photos =
+                evidenceByObservation[
+                  item.id
+                ] ?? [];
+
+              const firstPhoto =
+                photos[0];
+
+              return (
+                <article
+                  key={item.id}
+                  className={`overflow-hidden rounded-2xl border ${
+                    item.risk_level === "critical" &&
+                    item.status !== "closed"
+                      ? "border-red-500/20 bg-red-500/[0.035]"
+                      : "border-slate-800 bg-slate-950/55"
+                  }`}
+                >
+                  {firstPhoto && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        openDetails(item);
+                        setDetailTab(
+                          "evidence",
+                        );
+                      }}
+                      className="relative block w-full"
+                    >
+                      <img
+                        src={
+                          firstPhoto.signed_url
+                        }
+                        alt="Observation evidence"
+                        className="h-40 w-full object-cover"
+                      />
+
+                      {photos.length > 1 && (
+                        <span className="absolute bottom-3 right-3 rounded-lg bg-black/75 px-2 py-1 text-[10px] font-black text-white">
+                          +{photos.length - 1}
+                        </span>
+                      )}
+                    </button>
+                  )}
+
+                  <div className="p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            openDetails(item)
+                          }
+                          className="font-mono text-[9px] font-black text-blue-300"
+                        >
+                          {observationRef(
+                            item,
+                            originalIndex >= 0
+                              ? originalIndex
+                              : 0,
+                          )}
+                        </button>
+
+                        <h3 className="mt-1 text-base font-black">
+                          {item.title}
+                        </h3>
+                      </div>
+
+                      <span
+                        className={`rounded-full border px-2 py-1 text-[8px] font-black uppercase ${riskClass(
+                          item.risk_level,
+                        )}`}
+                      >
+                        {riskLabel(item.risk_level)}
+                      </span>
+                    </div>
+
+                    <p className="mt-2 line-clamp-2 text-xs leading-5 text-slate-500">
+                      {item.description}
+                    </p>
+
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {item.project_name && (
+                        <span className="rounded-md border border-slate-800 bg-black/20 px-2 py-1 text-[8px] font-bold text-slate-500">
+                          {item.project_name}
+                        </span>
+                      )}
+
+                      {item.company_name && (
+                        <span className="rounded-md border border-slate-800 bg-black/20 px-2 py-1 text-[8px] font-bold text-slate-500">
+                          {item.company_name}
+                        </span>
+                      )}
+
+                      {item.location && (
+                        <span className="rounded-md border border-slate-800 bg-black/20 px-2 py-1 text-[8px] font-bold text-slate-500">
+                          {item.location}
+                        </span>
+                      )}
+
+                      <span className="rounded-md border border-blue-500/15 bg-blue-500/[0.05] px-2 py-1 text-[8px] font-black text-blue-400/80">
+                        {categoryLabel(item.category)}
+                      </span>
+                    </div>
+
+                    <div className="mt-4 rounded-xl border border-slate-800 bg-black/20 p-3">
+                      <p className="text-[9px] font-black uppercase tracking-[0.13em] text-slate-600">
+                        {isTurkish ? "Düzeltici Aksiyon" : "Corrective Action"}
+                      </p>
+
+                      <p className="mt-2 text-xs leading-5 text-slate-300">
+                        {item.corrective_action ??
+                          "No corrective action assigned"}
+                      </p>
+                    </div>
+
+                    <div className="mt-3 grid grid-cols-2 gap-2">
+                      <div className="rounded-xl border border-slate-800 bg-black/20 p-3">
+                        <p className="text-[9px] text-slate-600">
+                          Owner
+                        </p>
+
+                        <p className="mt-1 text-xs font-black">
+                          {item.responsible_person ??
+                            "Unassigned"}
+                        </p>
+                      </div>
+
+                      <div className="rounded-xl border border-slate-800 bg-black/20 p-3">
+                        <p className="text-[9px] text-slate-600">
+                          Deadline
+                        </p>
+
+                        <p className="mt-1 text-xs font-black">
+                          {formatDate(
+                            item.target_date,
+                          )}
+                        </p>
+
+                        {due.label && (
+                          <p
+                            className={`mt-1 text-[9px] font-black ${
+                              due.overdue
+                                ? "text-red-300"
+                                : due.urgent
+                                  ? "text-amber-300"
+                                  : "text-emerald-300"
+                            }`}
+                          >
+                            {due.label}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="mt-3 grid grid-cols-[1fr_auto] gap-2">
+                      <select
+                        value={item.status}
+                        onChange={(e) =>
+                          changeStatus(
+                            item,
+                            e.target.value as Status,
+                          )
+                        }
+                        className={`rounded-xl border px-3 py-3 text-xs font-black ${statusClass(
+                          item.status,
+                        )}`}
+                      >
+                        <option value="open">
+                          {isTurkish ? "Açık" : "Open"}
+                        </option>
+
+                        <option value="in_progress">
+                          {isTurkish ? "Devam Ediyor" : "In Progress"}
+                        </option>
+
+                        <option value="closed">
+                          {isTurkish ? "Kapalı" : "Closed"}
+                        </option>
+                      </select>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          openDetails(item)
+                        }
+                        className="rounded-xl bg-blue-600 px-4 py-3 text-xs font-black text-white"
+                      >
+                        {isTurkish ? "Açık" : "Open"}
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="px-6 py-20 text-center">
+              <p className="text-sm font-bold text-slate-400">
+                No observations found.
+              </p>
+
+              <p className="mt-2 text-xs text-slate-600">
+                Try changing or clearing the filters.
+              </p>
+            </div>
+          )}
+        </section>
+      </div>
+
+      {selected && (
+        <div
+          className="fixed inset-0 z-[500] flex justify-end bg-black/70 backdrop-blur-sm"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) {
+              setSelected(null);
+            }
+          }}
+        >
+          <aside className="flex h-full w-full max-w-3xl flex-col border-l border-slate-800 bg-[#050e1a] shadow-2xl">
+            <header className="border-b border-slate-800 bg-[#06101e]/95 px-6 py-5 backdrop-blur">
+              <div className="flex items-start justify-between gap-5">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="font-mono text-[10px] font-black tracking-[0.13em] text-blue-400">
+                      {observationRef(selected)}
+                    </p>
+
+                    <span
+                      className={`rounded-full border px-2.5 py-1 text-[8px] font-black uppercase ${riskClass(
+                        selected.risk_level,
+                      )}`}
+                    >
+                      {riskLabel(selected.risk_level)}
+                    </span>
+
+                    <span
+                      className={`rounded-full border px-2.5 py-1 text-[8px] font-black uppercase ${statusClass(
+                        selected.status,
+                      )}`}
+                    >
+                      {statusLabel(
+                        selected.status,
+                      )}
+                    </span>
+                  </div>
+
+                  <h2 className="mt-2 truncate text-2xl font-black text-white">
+                    {selected.title}
+                  </h2>
+
+                  <p className="mt-1 text-xs text-slate-500">
+                    {isTurkish
+                      ? "Bulgu Çalışma Alanı • Canlı Aksiyon Kaydı"
+                      : "Finding Workspace • Live Action Record"}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelected(null)
+                  }
+                  className="h-10 w-10 shrink-0 rounded-xl border border-slate-700 bg-slate-900 text-xl text-slate-300"
+                >
+                  ×
+                </button>
+              </div>
+
+              <nav className="mt-5 flex gap-1 rounded-xl border border-slate-800 bg-slate-950/50 p-1">
+                {[
+                  [
+                    "overview",
+                    isTurkish ? "Genel Bakış" : "Overview",
+                  ],
+                  [
+                    "evidence",
+                    isTurkish ? "Kanıtlar" : "Evidence",
+                  ],
+                  [
+                    "timeline",
+                    isTurkish ? "Geçmiş" : "Timeline",
+                  ],
+                ].map(([key, label]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() =>
+                      setDetailTab(
+                        key as
+                          | "overview"
+                          | "evidence"
+                          | "timeline",
+                      )
+                    }
+                    className={`flex-1 rounded-lg px-3 py-2.5 text-[10px] font-black transition ${
+                      detailTab === key
+                        ? "bg-blue-600 text-white"
+                        : "text-slate-500 hover:text-slate-200"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </nav>
+            </header>
+
+            <div className="flex-1 overflow-y-auto p-6">
+              {detailTab === "overview" && (
+                <div className="space-y-5">
+                  {isOverdue(selected) && (
+                    <div className="flex items-center justify-between gap-4 rounded-2xl border border-red-500/20 bg-red-500/[0.06] p-4">
+                      <div>
+                        <p className="text-xs font-black text-red-300">
+                          {isTurkish
+                            ? "Düzeltici aksiyon gecikmiş durumda"
+                            : "Corrective action is overdue"}
+                        </p>
+
+                        <p className="mt-1 text-[10px] text-red-300/60">
+                          {isTurkish
+                            ? "Derhal takip edilmesi gerekiyor."
+                            : "Immediate follow-up is required."}
+                        </p>
+                      </div>
+
+                      <span className="rounded-lg bg-red-500/15 px-3 py-2 text-[10px] font-black text-red-300">
+                        {dueState(selected, isTurkish).label}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {[
+                      [
+                        isTurkish ? "Proje" : "Project",
+                        selected.project_name ??
+                          isTurkish ? "Atanmamış" : "Not assigned",
+                      ],
+                      [
+                        isTurkish ? "Firma" : "Company",
+                        selected.company_name ??
+                          isTurkish ? "Atanmamış" : "Not assigned",
+                      ],
+                      [
+                        isTurkish ? "Konum" : "Location",
+                        selected.location ??
+                          isTurkish ? "Atanmamış" : "Not assigned",
+                      ],
+                      [
+                        isTurkish ? "Kategori" : "Category",
+                        categoryLabel(selected.category),
+                      ],
+                      [
+                        isTurkish ? "Gözlem Türü" : "Observation Type",
+                        typeLabel(
+                          selected.observation_type,
+                          isTurkish,
+                        ),
+                      ],
+                      [
+                        isTurkish ? "Gözlem Tarihi" : "Observation Date",
+                        formatDate(
+                          selected.observation_date,
+                          isTurkish,
+                        ),
+                      ],
+                    ].map(([label, value]) => (
+                      <div
+                        key={label}
+                        className="rounded-2xl border border-slate-800 bg-slate-900/45 p-4"
+                      >
+                        <p className="text-[8px] font-black uppercase tracking-[0.14em] text-slate-600">
+                          {label}
+                        </p>
+
+                        <p className="mt-2 text-sm font-bold text-slate-200">
+                          {value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <section className="rounded-2xl border border-slate-800 bg-slate-900/45 p-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-[9px] font-black uppercase tracking-[0.15em] text-blue-400">
+                        {isTurkish ? "Bulgu" : "Finding"}
+                      </p>
+
+                      <span className="text-[9px] font-bold text-slate-600">
+                        {selected.category}
+                      </span>
+                    </div>
+
+                    <p className="mt-3 text-sm leading-7 text-slate-300">
+                      {selected.description}
+                    </p>
+                  </section>
+
+                  <section className="rounded-2xl border border-blue-500/15 bg-blue-500/[0.04] p-5">
+                    <p className="text-[9px] font-black uppercase tracking-[0.15em] text-blue-400">
+                      {isTurkish ? "Düzeltici Aksiyon" : "Corrective Action"} Plan
+                    </p>
+
+                    <p className="mt-3 text-sm leading-7 text-slate-300">
+                      {selected.corrective_action ??
+                        "No corrective action has been assigned yet."}
+                    </p>
+
+                    <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                      <div className="rounded-xl border border-slate-800 bg-black/20 p-4">
+                        <p className="text-[9px] text-slate-600">
+                          {isTurkish ? "İşlem" : "Action"} Owner
+                        </p>
+
+                        <div className="mt-2 flex items-center gap-3">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-xs font-black">
+                            {(selected.responsible_person ??
+                              "?")
+                              .charAt(0)
+                              .toUpperCase()}
+                          </div>
+
+                          <p className="font-black text-slate-200">
+                            {selected.responsible_person ??
+                              "Unassigned"}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl border border-slate-800 bg-black/20 p-4">
+                        <p className="text-[9px] text-slate-600">
+                          Target Closure
+                        </p>
+
+                        <p className="mt-2 font-black text-slate-200">
+                          {formatDate(
+                            selected.target_date,
+                          )}
+                        </p>
+
+                        {dueState(selected, isTurkish).label && (
+                          <p
+                            className={`mt-1 text-[9px] font-black ${
+                              dueState(selected)
+                                .overdue
+                                ? "text-red-300"
+                                : dueState(selected)
+                                      .urgent
+                                  ? "text-amber-300"
+                                  : "text-emerald-300"
+                            }`}
+                          >
+                            {
+                              dueState(selected)
+                                .label
+                            }
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="rounded-2xl border border-slate-800 p-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="text-[9px] font-black uppercase tracking-[0.15em] text-slate-500">
+                          Workflow Status
+                        </p>
+
+                        <p className="mt-1 text-xs text-slate-600">
+                          Update the action lifecycle.
+                        </p>
+                      </div>
+
+                      <select
+                        value={selected.status}
+                        onChange={(e) =>
+                          changeStatus(
+                            selected,
+                            e.target
+                              .value as Status,
+                          )
+                        }
+                        className={`rounded-xl border px-4 py-3 text-xs font-black ${statusClass(
+                          selected.status,
+                        )}`}
+                      >
+                        <option value="open">
+                          {isTurkish ? "Açık" : "Open"}
+                        </option>
+
+                        <option value="in_progress">
+                          {isTurkish ? "Devam Ediyor" : "In Progress"}
+                        </option>
+
+                        <option value="closed">
+                          {isTurkish ? "Kapalı" : "Closed"}
+                        </option>
+                      </select>
+                    </div>
+                  </section>
+                </div>
+              )}
+
+              {detailTab === "evidence" && (
+                <div className="space-y-5">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                      <p className="text-[9px] font-black uppercase tracking-[0.15em] text-blue-400">
+                        {isTurkish ? "Gözlem Kanıtları" : "Observation Evidence"}
+                      </p>
+
+                      <h3 className="mt-2 text-xl font-black">
+                        {isTurkish ? "Saha Kanıtları" : "Field Evidence"}
+                      </h3>
+
+                      <p className="mt-1 text-xs text-slate-500">
+                        {isTurkish
+                          ? "Bu gözleme ait özel kanıtlar güvenli şekilde saklanır."
+                          : "Private evidence stored securely for this observation."}
+                      </p>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <label className="cursor-pointer rounded-xl bg-blue-600 px-4 py-3 text-[10px] font-black text-white transition hover:bg-blue-500">
+                        + {isTurkish ? "Fotoğraf Ekle" : "Add Photos"}
+
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          className="hidden"
+                          onChange={async (e) => {
+                            const existing =
+                              evidenceByObservation[
+                                selected.id
+                              ]?.length ?? 0;
+
+                            const files =
+                              validateEvidenceFiles(
+                                Array.from(
+                                  e.target.files ??
+                                    [],
+                                ),
+                                existing,
+                              );
+
+                            if (files.length) {
+                              await uploadEvidence(
+                                selected.id,
+                                files,
+                              );
+                            }
+
+                            e.target.value = "";
+                          }}
+                        />
+                      </label>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCameraMode("existing");
+                          setCameraOpen(true);
+                        }}
+                        className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-[10px] font-black text-slate-300 transition hover:border-blue-500/30 hover:text-white"
+                      >
+                        📷 {isTurkish ? "Kamera" : "Camera"}
+                      </button>
+                    </div>
+                  </div>
+
+                  {uploadingEvidence && (
+                    <div className="flex items-center gap-3 rounded-xl border border-blue-500/15 bg-blue-500/[0.035] px-4 py-3">
+                      <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-blue-400" />
+                      <div>
+                        <p className="text-xs font-black text-blue-200">
+                          {isTurkish
+                            ? "Fotoğraf yükleniyor"
+                            : "Uploading photo"}
+                        </p>
+                        <p className="mt-0.5 text-[10px] text-slate-500">
+                          {isTurkish
+                            ? "Lütfen yükleme tamamlanana kadar bekleyin."
+                            : "Please wait while the evidence is uploaded."}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {(evidenceByObservation[
+                    selected.id
+                  ] ?? []).length > 0 ? (
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      {(evidenceByObservation[
+                        selected.id
+                      ] ?? []).map(
+                        (photo, index) => (
+                          <article
+                            key={photo.id}
+                            className="group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/45"
+                          >
+                            <div className="relative">
+                              <img
+                                src={
+                                  photo.signed_url
+                                }
+                                alt={isTurkish
+                                      ? `Kanıt ${index + 1}`
+                                      : `Evidence ${index + 1}`}
+                                className="h-56 w-full object-cover"
+                              />
+
+                              <div className="absolute left-3 top-3 rounded-lg bg-black/70 px-2 py-1 text-[9px] font-black text-white">
+                                {index + 1} /{" "}
+                                {
+                                  (
+                                    evidenceByObservation[
+                                      selected.id
+                                    ] ?? []
+                                  ).length
+                                }
+                              </div>
+
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  deleteEvidencePhoto(
+                                    photo,
+                                  )
+                                }
+                                className="absolute right-3 top-3 rounded-lg border border-red-400/30 bg-black/75 px-3 py-2 text-[9px] font-black text-red-300 opacity-0 transition group-hover:opacity-100"
+                              >
+                                {isTurkish ? "Sil" : "Delete"}
+                              </button>
+                            </div>
+
+                            <div className="flex items-center justify-between gap-3 p-3">
+                              <div className="min-w-0">
+                                <p className="truncate text-[10px] font-black text-slate-300">
+                                  {photo.file_name ??
+                                    isTurkish
+                                      ? `Kanıt ${index + 1}`
+                                      : `Evidence ${index + 1}`}
+                                </p>
+
+                                <p className="mt-1 text-[9px] text-slate-600">
+                                  {formatDate(
+                                    photo.created_at,
+                                    isTurkish,
+                                  )}
+                                </p>
+                              </div>
+
+                              <span className="shrink-0 rounded-md border border-emerald-500/15 bg-emerald-500/[0.05] px-2 py-1 text-[8px] font-black text-emerald-300">
+                                {isTurkish ? "Kaydedildi" : "Stored"}
+                              </span>
+                            </div>
+                          </article>
+                        ),
+                      )}
+                    </div>
+                  ) : (
+                    <div className="flex min-h-[300px] flex-col items-center justify-center rounded-2xl border border-dashed border-slate-700 bg-slate-950/35 p-8 text-center">
+                      <div className="text-3xl">
+                        📷
+                      </div>
+
+                      <p className="mt-4 text-sm font-black text-slate-300">
+                        {isTurkish ? "Henüz kanıt yok" : "No evidence yet"}
+                      </p>
+
+                      <p className="mt-2 max-w-sm text-xs leading-5 text-slate-600">
+                        {isTurkish
+                          ? "Sahada fotoğraf çekin veya cihazınızdan görsel seçin."
+                          : "Take a photo in the field or select images from the device."}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {detailTab === "timeline" && (
+                <div className="space-y-5">
+                  <div>
+                    <p className="text-[9px] font-black uppercase tracking-[0.15em] text-blue-400">
+                      {isTurkish ? "Kayıt Geçmişi" : "Record Timeline"}
+                    </p>
+
+                    <h3 className="mt-2 text-xl font-black">
+                      {isTurkish ? "Gözlem Geçmişi" : "Observation History"}
+                    </h3>
+                  </div>
+
+                  <div className="space-y-3">
+                    {[
+                      {
+                        title:
+                          isTurkish ? "Gözlem oluşturuldu" : "Observation created",
+                        date:
+                          selected.created_at,
+                        detail:
+                          isTurkish
+                            ? "Saha gözlemi SERNEM sistemine kaydedildi."
+                            : "Field observation entered into SERNEM.",
+                      },
+                      {
+                        title:
+                          isTurkish ? "Son güncelleme" : "Last updated",
+                        date:
+                          selected.updated_at,
+                        detail:
+                          isTurkish
+                            ? "Gözlem üzerindeki son kayıtlı değişiklik."
+                            : "Latest recorded modification to the observation.",
+                      },
+                      ...(selected.closed_at
+                        ? [
+                            {
+                              title:
+                                isTurkish ? "Aksiyon kapatıldı" : "Action closed",
+                              date:
+                                selected.closed_at,
+                              detail:
+                                isTurkish
+                                  ? "Düzeltici aksiyon kapalı olarak işaretlendi."
+                                  : "Corrective action was marked as closed.",
+                            },
+                          ]
+                        : []),
+                    ].map((event, index) => (
+                      <div
+                        key={`${event.title}-${index}`}
+                        className="flex gap-4 rounded-2xl border border-slate-800 bg-slate-900/40 p-4"
+                      >
+                        <div className="mt-1 h-3 w-3 shrink-0 rounded-full border-2 border-blue-400 bg-[#06101e]" />
+
+                        <div>
+                          <p className="text-sm font-black text-slate-200">
+                            {event.title}
+                          </p>
+
+                          <p className="mt-1 text-[10px] font-bold text-blue-300">
+                            {formatDate(
+                              event.date,
+                            )}
+                          </p>
+
+                          <p className="mt-2 text-xs leading-5 text-slate-500">
+                            {event.detail}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <footer className="border-t border-slate-800 bg-[#06101e] px-6 py-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="text-[9px] text-slate-600">
+                  Last update:{" "}
+                  {formatDate(
+                    selected.updated_at,
+                  )}
+                </div>
+
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEditing({
+                        ...selected,
+                      });
+                      setSelected(null);
+                    }}
+                    className="rounded-xl bg-blue-600 px-5 py-3 text-xs font-black text-white transition hover:bg-blue-500"
+                  >
+                    {isTurkish ? "Gözlemi Düzenle" : "Edit Observation"}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      deleteObservation(
+                        selected,
+                      )
+                    }
+                    className="rounded-xl border border-red-500/25 bg-red-500/[0.06] px-4 py-3 text-xs font-black text-red-300"
+                  >
+                    {isTurkish ? "Sil" : "Delete"}
+                  </button>
+                </div>
+              </div>
+            </footer>
+          </aside>
+        </div>
+      )}
+
+      {creating && (
+        <div
+          className="fixed inset-0 z-[650] flex justify-end bg-black/70 backdrop-blur-sm"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) {
+              setCreating(false);
+            }
+          }}
+        >
+          <aside className="h-full w-full max-w-2xl overflow-y-auto border-l border-slate-800 bg-[#06101e] shadow-2xl">
+            <div className="sticky top-0 z-20 border-b border-slate-800 bg-[#06101e]/95 px-6 py-5 backdrop-blur">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-blue-400">
+                    SERNEM • FIELD OBSERVATION
+                  </p>
+
+                  <h2 className="mt-2 text-2xl font-black">
+                    {isTurkish ? "Yeni Gözlem" : "New Observation"}
+                  </h2>
+
+                  <p className="mt-1 text-xs text-slate-500">
+                    {isTurkish
+                      ? "Canlı bir aksiyon kaydı oluşturun ve düzeltici aksiyon sorumluluğunu atayın."
+                      : "Create a live action record and assign corrective-action ownership."}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setCreating(false)
+                  }
+                  className="h-10 w-10 rounded-xl border border-slate-700 bg-slate-900 text-xl"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-6 p-6">
+              <section>
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-500/10 text-[10px] font-black text-blue-300">
+                    01
+                  </span>
+
+                  <div>
+                    <p className="text-xs font-black text-slate-200">
+                      {isTurkish ? "Gözlem Bilgileri" : "Observation Context"}
+                    </p>
+
+                    <p className="text-[10px] text-slate-600">
+                      {isTurkish
+                        ? "Bulgu nerede ve ne zaman tespit edildi?"
+                        : "Where and when was the finding identified?"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <label className="space-y-2">
+                    <span className="text-[9px] font-black uppercase tracking-[0.12em] text-slate-600">
+                      Observation Date
+                    </span>
+
+                    <input
+                      type="date"
+                      value={
+                        newObservation.observation_date
+                      }
+                      onChange={(e) =>
+                        setNewObservation({
+                          ...newObservation,
+                          observation_date:
+                            e.target.value,
+                        })
+                      }
+                      className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                    />
+                  </label>
+
+                  <label className="space-y-2">
+                    <span className="text-[9px] font-black uppercase tracking-[0.12em] text-slate-600">
+                      {isTurkish ? "Risk" : "Risk"} Level
+                    </span>
+
+                    <select
+                      value={
+                        newObservation.risk_level
+                      }
+                      onChange={(e) =>
+                        setNewObservation({
+                          ...newObservation,
+                          risk_level:
+                            e.target.value as Risk,
+                        })
+                      }
+                      className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                    >
+                      <option value="low">
+                        {isTurkish ? "Düşük" : "Low"}
+                      </option>
+                      <option value="medium">
+                        {isTurkish ? "Orta" : "Medium"}
+                      </option>
+                      <option value="high">
+                        {isTurkish ? "Yüksek" : "High"}
+                      </option>
+                      <option value="critical">
+                        {isTurkish ? "Kritik" : "Critical"}
+                      </option>
+                    </select>
+                  </label>
+
+                  <input
+                    value={
+                      newObservation.project_name
+                    }
+                    onChange={(e) =>
+                      setNewObservation({
+                        ...newObservation,
+                        project_name:
+                          e.target.value,
+                      })
+                    }
+                    placeholder="Project"
+                    className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                  />
+
+                  <input
+                    value={
+                      newObservation.company_name
+                    }
+                    onChange={(e) =>
+                      setNewObservation({
+                        ...newObservation,
+                        company_name:
+                          e.target.value,
+                      })
+                    }
+                    placeholder="Company / Contractor"
+                    className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                  />
+
+                  <input
+                    value={
+                      newObservation.location
+                    }
+                    onChange={(e) =>
+                      setNewObservation({
+                        ...newObservation,
+                        location:
+                          e.target.value,
+                      })
+                    }
+                    placeholder="Area / Location"
+                    className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                  />
+
+                  <select
+                    value={
+                      newObservation.observation_type
+                    }
+                    onChange={(e) =>
+                      setNewObservation({
+                        ...newObservation,
+                        observation_type:
+                          e.target
+                            .value as ObservationType,
+                      })
+                    }
+                    className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                  >
+                    <option value="positive">
+                      Positive Observation
+                    </option>
+
+                    <option value="unsafe_act">
+                      Unsafe Act
+                    </option>
+
+                    <option value="unsafe_condition">
+                      Unsafe Condition
+                    </option>
+                  </select>
+                </div>
+              </section>
+
+              <section className="border-t border-slate-800 pt-6">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-orange-500/10 text-[10px] font-black text-orange-300">
+                    02
+                  </span>
+
+                  <div>
+                    <p className="text-xs font-black text-slate-200">
+                      {isTurkish ? "Bulgu" : "Finding"}
+                    </p>
+
+                    <p className="text-[10px] text-slate-600">
+                      Describe exactly what was observed.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <input
+                    value={
+                      newObservation.category
+                    }
+                    onChange={(e) =>
+                      setNewObservation({
+                        ...newObservation,
+                        category:
+                          e.target.value,
+                      })
+                    }
+                    placeholder="Category — e.g. Working at Height"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                  />
+
+                  <input
+                    value={
+                      newObservation.title
+                    }
+                    onChange={(e) =>
+                      setNewObservation({
+                        ...newObservation,
+                        title:
+                          e.target.value,
+                      })
+                    }
+                    placeholder="Finding title"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                  />
+
+                  <textarea
+                    rows={5}
+                    value={
+                      newObservation.description
+                    }
+                    onChange={(e) =>
+                      setNewObservation({
+                        ...newObservation,
+                        description:
+                          e.target.value,
+                      })
+                    }
+                    placeholder="Describe the observation clearly..."
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm leading-6"
+                  />
+                </div>
+              </section>
+
+              <section className="border-t border-slate-800 pt-6">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10 text-[10px] font-black text-emerald-300">
+                    03
+                  </span>
+
+                  <div>
+                    <p className="text-xs font-black text-slate-200">
+                      {isTurkish ? "Düzeltici Aksiyon" : "Corrective Action"}
+                    </p>
+
+                    <p className="text-[10px] text-slate-600">
+                      {isTurkish
+                        ? "Sorumluyu ve hedef kapanış tarihini belirleyin."
+                        : "Define ownership and target closure."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <textarea
+                    rows={4}
+                    value={
+                      newObservation.corrective_action
+                    }
+                    onChange={(e) =>
+                      setNewObservation({
+                        ...newObservation,
+                        corrective_action:
+                          e.target.value,
+                      })
+                    }
+                    placeholder="Required corrective action..."
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm leading-6"
+                  />
+
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <input
+                      value={
+                        newObservation.responsible_person
+                      }
+                      onChange={(e) =>
+                        setNewObservation({
+                          ...newObservation,
+                          responsible_person:
+                            e.target.value,
+                        })
+                      }
+                      placeholder="Responsible person"
+                      className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                    />
+
+                    <label className="space-y-2">
+                      <span className="text-[9px] font-black uppercase tracking-[0.12em] text-slate-600">
+                        Target Date
+                      </span>
+
+                      <input
+                        type="date"
+                        value={
+                          newObservation.target_date
+                        }
+                        onChange={(e) =>
+                          setNewObservation({
+                            ...newObservation,
+                            target_date:
+                              e.target.value,
+                          })
+                        }
+                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </section>
+
+              <section className="border-t border-slate-800 pt-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-cyan-500/10 text-[10px] font-black text-cyan-300">
+                    04
+                  </span>
+
+                  <div>
+                    <p className="text-xs font-black text-slate-200">
+                      {isTurkish ? "Saha Kanıtları" : "Field Evidence"}
+                    </p>
+
+                    <p className="text-[10px] text-slate-600">
+                      {isTurkish
+                        ? "Sahada doğrudan fotoğraf çekin veya galeriden seçin."
+                        : "Take photos directly on site or select from gallery."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCameraMode("new");
+                      setCameraOpen(true);
+                    }}
+                    className="flex min-h-[110px] cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-blue-500/30 bg-blue-500/[0.04] p-4 text-center transition hover:bg-blue-500/[0.08]"
+                  >
+                    <span className="text-2xl">
+                      📷
+                    </span>
+
+                    <span className="mt-2 text-xs font-black text-blue-300">
+                      {isTurkish ? "Fotoğraf Çek" : "Take Photo"}
+                    </span>
+
+                    <span className="mt-1 text-[9px] text-slate-600">
+                      {isTurkish ? "Açık" : "Open"} live camera
+                    </span>
+                  </button>
+
+                  <label className="flex min-h-[110px] cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-700 bg-slate-950/35 p-4 text-center transition hover:border-slate-600">
+                    <span className="text-2xl">
+                      🖼️
+                    </span>
+
+                    <span className="mt-2 text-xs font-black text-slate-300">
+                      {isTurkish ? "Fotoğraf Seç" : "Choose Photos"}
+                    </span>
+
+                    <span className="mt-1 text-[9px] text-slate-600">
+                      {isTurkish ? "En fazla 5 görsel" : "Up to 5 images"}
+                    </span>
+
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="hidden"
+                      onChange={(e) => {
+                        addNewEvidence(
+                          e.target.files,
+                        );
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
+                </div>
+
+                {newEvidenceFiles.length > 0 && (
+                  <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-5">
+                    {newEvidenceFiles.map(
+                      (file, index) => (
+                        <div
+                          key={`${file.name}-${file.lastModified}-${index}`}
+                          className="group relative aspect-square overflow-hidden rounded-xl border border-slate-700 bg-slate-900"
+                        >
+                          <img
+                            src={URL.createObjectURL(
+                              file,
+                            )}
+                            alt=""
+                            className="h-full w-full object-cover"
+                          />
+
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setNewEvidenceFiles(
+                                (current) =>
+                                  current.filter(
+                                    (_, i) =>
+                                      i !== index,
+                                  ),
+                              )
+                            }
+                            className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-black/75 text-xs font-black text-white"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                )}
+
+                <p className="mt-3 text-[9px] text-slate-600">
+                  {newEvidenceFiles.length}/5 images selected • Maximum 8 MB each
+                </p>
+              </section>
+
+              <div className="sticky bottom-0 -mx-6 border-t border-slate-800 bg-[#06101e]/95 px-6 py-4 backdrop-blur">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="hidden text-[10px] text-slate-600 sm:block">
+                    {isTurkish ? "Referans" : "Reference"} number will be assigned automatically.
+                  </p>
+
+                  <div className="ml-auto flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setCreating(false)
+                      }
+                      className="rounded-xl border border-slate-700 px-5 py-3 text-xs font-black text-slate-400"
+                    >
+                      {isTurkish ? "İptal" : "Cancel"}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={createObservation}
+                      disabled={
+                        savingId ===
+                        "new-observation"
+                      }
+                      className="rounded-xl bg-blue-600 px-6 py-3 text-xs font-black text-white shadow-lg shadow-blue-950/30 transition hover:bg-blue-500 disabled:opacity-60"
+                    >
+                      {savingId ===
+                      "new-observation"
+                        ? "Creating..."
+                        : "Create Observation"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      )}
+
+      {editing && (
+        <div className="fixed inset-0 z-[600] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+          <div className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[26px] border border-slate-700 bg-[#07111f] p-6 shadow-2xl">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-blue-400">
+                  Observation Editor
+                </p>
+
+                <h2 className="mt-2 text-2xl font-black">
+                  {isTurkish ? "Gözlemi Düzenle" : "Edit Observation"}
+                </h2>
+              </div>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setEditing(null)
+                }
+                className="h-10 w-10 rounded-xl border border-slate-700 bg-slate-900 text-xl"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="mt-6 grid gap-3 md:grid-cols-2">
+              <input
+                type="date"
+                value={
+                  editing.observation_date
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    observation_date:
+                      e.target.value,
+                  })
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <select
+                value={
+                  editing.risk_level
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    risk_level:
+                      e.target
+                        .value as Risk,
+                  })
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              >
+                <option value="low">
+                  {isTurkish ? "Düşük" : "Low"}
+                </option>
+                <option value="medium">
+                  {isTurkish ? "Orta" : "Medium"}
+                </option>
+                <option value="high">
+                  {isTurkish ? "Yüksek" : "High"}
+                </option>
+                <option value="critical">
+                  {isTurkish ? "Kritik" : "Critical"}
+                </option>
+              </select>
+
+              <input
+                value={
+                  editing.project_name ??
+                  ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    project_name:
+                      e.target.value,
+                  })
+                }
+                placeholder="Project"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <input
+                value={
+                  editing.company_name ??
+                  ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    company_name:
+                      e.target.value,
+                  })
+                }
+                placeholder="Company"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <input
+                value={
+                  editing.location ?? ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    location:
+                      e.target.value,
+                  })
+                }
+                placeholder="Location"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <input
+                value={
+                  editing.category
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    category:
+                      e.target.value,
+                  })
+                }
+                placeholder="Category"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <input
+                value={editing.title}
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    title:
+                      e.target.value,
+                  })
+                }
+                placeholder="Title"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm md:col-span-2"
+              />
+
+              <textarea
+                rows={4}
+                value={
+                  editing.description
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    description:
+                      e.target.value,
+                  })
+                }
+                placeholder="Description"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm md:col-span-2"
+              />
+
+              <textarea
+                rows={3}
+                value={
+                  editing.corrective_action ??
+                  ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    corrective_action:
+                      e.target.value,
+                  })
+                }
+                placeholder="Corrective Action"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm md:col-span-2"
+              />
+
+              <input
+                value={
+                  editing.responsible_person ??
+                  ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    responsible_person:
+                      e.target.value,
+                  })
+                }
+                placeholder="Responsible Person"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <input
+                type="date"
+                value={
+                  editing.target_date ??
+                  ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    target_date:
+                      e.target.value,
+                  })
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+            </div>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={() =>
+                  setEditing(null)
+                }
+                className="rounded-xl border border-slate-700 px-5 py-3 font-black text-slate-300"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={saveEdit}
+                disabled={
+                  savingId ===
+                  editing.id
+                }
+                className="rounded-xl bg-blue-600 px-6 py-3 font-black text-white hover:bg-blue-500"
+              >
+                {savingId ===
+                editing.id
+                  ? "Saving..."
+                  : "Save Changes"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      <HseCameraCapture
+        locale={locale}
+        open={cameraOpen}
+        onClose={() => setCameraOpen(false)}
+        onCapture={async (file) => {
+          if (cameraMode === "new") {
+            const accepted =
+              validateEvidenceFiles(
+                [file],
+                newEvidenceFiles.length,
+              );
+
+            if (accepted.length) {
+              setNewEvidenceFiles(
+                (current) => [
+                  ...current,
+                  ...accepted,
+                ],
+              );
+            }
+
+            return;
+          }
+
+          if (!selected) {
+            return;
+          }
+
+          const existing =
+            evidenceByObservation[
+              selected.id
+            ]?.length ?? 0;
+
+          const accepted =
+            validateEvidenceFiles(
+              [file],
+              existing,
+            );
+
+          if (accepted.length) {
+            await uploadEvidence(
+              selected.id,
+              accepted,
+            );
+          }
+        }}
+      />
+
+    </main>
+  );
+}

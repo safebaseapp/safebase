@@ -298,24 +298,6 @@ export default function LocalizedNavbar({ locale }: Props) {
             )}
           </div>
 
-          {isAuthenticated && (
-            <Link
-              href="/hse-performance"
-              onClick={closeDropdowns}
-              className="relative inline-flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-[13px] font-bold text-slate-300 transition duration-200 hover:bg-cyan-500/[0.07] hover:text-white after:absolute after:bottom-0 after:left-4 after:right-4 after:h-px after:scale-x-0 after:bg-cyan-400 after:transition-transform hover:after:scale-x-100"
-            >
-              <span className="flex h-6 w-6 items-center justify-center rounded-md border border-cyan-400/15 bg-cyan-500/[0.06] text-[11px] font-black text-cyan-300">
-                ◫
-              </span>
-
-              <span>
-                {isTurkish
-                  ? "HSE Performans"
-                  : "HSE Performance"}
-              </span>
-            </Link>
-          )}
-
           {/* RESOURCES */}
           <div className="relative">
             <button

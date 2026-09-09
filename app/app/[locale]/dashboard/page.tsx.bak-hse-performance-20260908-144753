@@ -139,36 +139,6 @@ export default async function DashboardPage({ params }: Props) {
     .limit(5);
 
 
-  const { data: hseDashboardObservations } =
-    await supabase
-      .from("hse_observations")
-      .select("status,risk_level,target_date")
-      .eq("user_id", user.id);
-
-  const hseObservations =
-    hseDashboardObservations ?? [];
-
-  const hseTotal = hseObservations.length;
-
-  const hseOpen = hseObservations.filter(
-    (item) => item.status !== "closed",
-  ).length;
-
-  const hseClosed = hseObservations.filter(
-    (item) => item.status === "closed",
-  ).length;
-
-  const hseCriticalOpen = hseObservations.filter(
-    (item) =>
-      item.status !== "closed" &&
-      item.risk_level === "critical",
-  ).length;
-
-  const hseClosureRate =
-    hseTotal > 0
-      ? Math.round((hseClosed / hseTotal) * 100)
-      : 0;
-
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <ActivityTracker eventName="dashboard_open" />
@@ -406,107 +376,7 @@ export default async function DashboardPage({ params }: Props) {
           </aside>
         </div>
 
-                {/* SERNEM-HSE-PERFORMANCE-CARD */}
-        <section className="mt-6 overflow-hidden rounded-3xl border border-cyan-400/15 bg-gradient-to-br from-[#071728] via-slate-900/95 to-[#06111f] shadow-[0_18px_55px_rgba(0,0,0,.20)]">
-          <div className="p-5 sm:p-6">
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-              <div className="min-w-0">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-lg border border-cyan-400/20 bg-cyan-500/[0.07] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-cyan-300">
-                    {isTurkish ? "Canlı HSE" : "Live HSE"}
-                  </span>
-
-                  {hseCriticalOpen > 0 && (
-                    <span className="rounded-lg border border-red-500/20 bg-red-500/[0.08] px-2.5 py-1 text-[9px] font-black text-red-300">
-                      {hseCriticalOpen}{" "}
-                      {isTurkish ? "açık kritik" : "critical open"}
-                    </span>
-                  )}
-                </div>
-
-                <div className="mt-3 flex flex-col gap-1 sm:flex-row sm:items-end sm:gap-3">
-                  <h2 className="text-xl font-black text-white sm:text-2xl">
-                    {isTurkish
-                      ? "HSE Performance"
-                      : "HSE Performance"}
-                  </h2>
-
-                  <p className="pb-0.5 text-xs text-slate-500">
-                    {isTurkish
-                      ? "Gözlem ve aksiyon özeti"
-                      : "Observation & action overview"}
-                  </p>
-                </div>
-
-                <p className="mt-2 max-w-2xl text-xs leading-5 text-slate-400 sm:text-sm">
-                  {isTurkish
-                    ? "Saha gözlemleri, kanıtlar ve düzeltici aksiyonların güncel durumunu takip edin."
-                    : "Track the current status of field observations, evidence and corrective actions."}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:w-[470px]">
-                {[
-                  [
-                    isTurkish ? "Toplam" : "Total",
-                    hseTotal,
-                    "text-blue-300",
-                  ],
-                  [
-                    isTurkish ? "Açık" : "Open",
-                    hseOpen,
-                    "text-amber-300",
-                  ],
-                  [
-                    isTurkish ? "Kapalı" : "Closed",
-                    hseClosed,
-                    "text-emerald-300",
-                  ],
-                  [
-                    isTurkish ? "Kapanış" : "Closure",
-                    `${hseClosureRate}%`,
-                    "text-cyan-300",
-                  ],
-                ].map(([label, value, color]) => (
-                  <div
-                    key={String(label)}
-                    className="rounded-2xl border border-white/[0.07] bg-black/20 px-4 py-3"
-                  >
-                    <p className="text-[8px] font-black uppercase tracking-[0.14em] text-slate-500">
-                      {label}
-                    </p>
-
-                    <p className={`mt-1 text-xl font-black ${color}`}>
-                      {value}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-5 flex flex-col gap-2 border-t border-white/[0.06] pt-4 sm:flex-row">
-              <Link
-                href={`/${locale}/hse-performance`}
-                className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-black text-white transition hover:bg-blue-500"
-              >
-                {isTurkish
-                  ? "HSE Performance'ı Aç →"
-                  : "Open HSE Performance →"}
-              </Link>
-
-              <Link
-                href={`/${locale}/hse-performance/observations`}
-                className="inline-flex items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-500/[0.05] px-4 py-2.5 text-xs font-black text-cyan-200 transition hover:bg-cyan-500/[0.10]"
-              >
-                {isTurkish
-                  ? "Gözlem Takibi →"
-                  : "Observation Follow-up →"}
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <div id="company-branding" className="scroll-mt-24">
+                <div id="company-branding" className="scroll-mt-24">
           <CompanyBranding
             locale={locale}
             userId={user.id}

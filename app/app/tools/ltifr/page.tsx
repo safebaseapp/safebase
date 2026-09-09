@@ -1,5 +1,7 @@
 "use client";
 
+import { calculateLTIFR } from "@/lib/hse-metrics";
+
 import { useMemo, useState } from "react";
 import jsPDF from "jspdf";
 import Link from "next/link";
@@ -176,7 +178,7 @@ export default function LTIFRCalculatorPage() {
   const result = useMemo(() => {
     if (!calculated || !validInput) return null;
 
-    return (injuriesNumber * 1_000_000) / hoursNumber;
+    return calculateLTIFR(injuriesNumber, hoursNumber);
   }, [calculated, validInput, injuriesNumber, hoursNumber]);
 
   const calculate = () => {
