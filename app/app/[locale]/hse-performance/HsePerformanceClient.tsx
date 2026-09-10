@@ -66,6 +66,17 @@ type IncidentMetrics = {
   management_walkdown_count: number;
 };
 
+type KpiTrendPoint = {
+  key: string;
+  label: string;
+  workedHours: number;
+  trir: number;
+  dart: number;
+  ltifr: number;
+  severity: number;
+  hasData: boolean;
+};
+
 type Props = {
   locale: Locale;
   userId: string;
@@ -168,6 +179,12 @@ export default function HsePerformanceClient({
   const [incidentMetrics, setIncidentMetrics] =
     useState<IncidentMetrics | null>(null);
 
+  const [kpiTrend, setKpiTrend] =
+    useState<KpiTrendPoint[]>([]);
+
+  const [kpiTrendLoading, setKpiTrendLoading] =
+    useState(true);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -237,6 +254,190 @@ export default function HsePerformanceClient({
       cancelled = true;
     };
   }, [userId, filters.project, selectedMonth]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadKpiTrend() {
+      setKpiTrendLoading(true);
+
+      const supabase = createClient();
+
+      const [year, month] =
+        selectedMonth.split("-").map(Number);
+
+      const end = new Date(year, month - 1, 1);
+      const start = new Date(year, month - 12, 1);
+
+      const startDate =
+        `${start.getFullYear()}-${String(
+          start.getMonth() + 1,
+        ).padStart(2, "0")}-01`;
+
+      const endDate =
+        `${end.getFullYear()}-${String(
+          end.getMonth() + 1,
+        ).padStart(2, "0")}-01`;
+
+      let query = supabase
+        .from("hse_incident_metrics")
+        .select(`
+          period_month,
+          project_name,
+          worked_hours,
+          recordable_cases,
+          lti,
+          lost_days,
+          dart_cases
+        `)
+        .eq("user_id", userId)
+        .gte("period_month", startDate)
+        .lte("period_month", endDate)
+        .order("period_month", {
+          ascending: true,
+        });
+
+      if (filters.project === "all") {
+        query = query.eq(
+          "project_name",
+          "All Projects",
+        );
+      } else {
+        query = query.eq(
+          "project_name",
+          filters.project,
+        );
+      }
+
+      const { data, error } = await query;
+
+      if (cancelled) return;
+
+      if (error) {
+        console.error(
+          "HSE KPI trend load error:",
+          error,
+        );
+        setKpiTrend([]);
+        setKpiTrendLoading(false);
+        return;
+      }
+
+      const rows = data ?? [];
+
+      const points: KpiTrendPoint[] = [];
+
+      for (let i = 11; i >= 0; i--) {
+        const d = new Date(
+          year,
+          month - 1 - i,
+          1,
+        );
+
+        const key =
+          `${d.getFullYear()}-${String(
+            d.getMonth() + 1,
+          ).padStart(2, "0")}`;
+
+        const row = rows.find(
+          (item) =>
+            String(item.period_month).slice(0, 7) ===
+            key,
+        );
+
+        const workedHours =
+          Number(row?.worked_hours ?? 0);
+
+        points.push({
+          key,
+          label: monthLabel(key, locale),
+
+          workedHours,
+
+          trir: row
+            ? calculateTRIR(
+                Number(row.recordable_cases ?? 0),
+                workedHours,
+              )
+            : 0,
+
+          dart: row
+            ? calculateDART(
+                Number(row.dart_cases ?? 0),
+                workedHours,
+              )
+            : 0,
+
+          ltifr: row
+            ? calculateLTIFR(
+                Number(row.lti ?? 0),
+                workedHours,
+              )
+            : 0,
+
+          severity: row
+            ? calculateSeverityRate(
+                Number(row.lost_days ?? 0),
+                workedHours,
+              )
+            : 0,
+
+          hasData: Boolean(row),
+        });
+      }
+
+      setKpiTrend(points);
+      setKpiTrendLoading(false);
+    }
+
+    void loadKpiTrend();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    userId,
+    filters.project,
+    selectedMonth,
+    locale,
+  ]);
+
+  const kpiTrendMax = Math.max(
+    1,
+    ...kpiTrend.flatMap((item) => [
+      item.trir,
+      item.dart,
+      item.ltifr,
+      item.severity,
+    ]),
+  );
+
+  function kpiTrendPoints(
+    metric:
+      | "trir"
+      | "dart"
+      | "ltifr"
+      | "severity",
+  ) {
+    return kpiTrend
+      .map((item, index) => {
+        const x =
+          40 +
+          index *
+            (720 /
+              Math.max(
+                1,
+                kpiTrend.length - 1,
+              ));
+
+        const y =
+          205 -
+          (item[metric] / kpiTrendMax) * 155;
+
+        return `${x},${y}`;
+      })
+      .join(" ");
+  }
 
   const [showObservationForm, setShowObservationForm] =
     useState(false);
@@ -1569,6 +1770,257 @@ export default function HsePerformanceClient({
             </article>
           </section>
 
+          {/* KPI PERFORMANCE TREND */}
+          <section
+            id="kpi-trend"
+            className="mt-5 overflow-hidden rounded-[22px] border border-blue-500/20 bg-[#061524] p-5 sm:p-6"
+          >
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-[9px] font-black uppercase tracking-[0.18em] text-blue-400">
+                  SERNEM HSE ANALYTICS
+                </p>
+
+                <h2 className="mt-2 text-xl font-black">
+                  {isTurkish
+                    ? "HSE Performance Trendi"
+                    : "HSE Performance Trend"}
+                </h2>
+
+                <p className="mt-1 text-[11px] text-slate-500">
+                  {isTurkish
+                    ? "TRIR, DART, LTIFR ve Şiddet Oranı — son 12 aylık gerçek KPI kayıtları"
+                    : "TRIR, DART, LTIFR and Severity Rate — actual KPI records for the last 12 months"}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                <span className="rounded-lg border border-slate-700 bg-slate-950/40 px-3 py-1.5 text-[9px] font-black text-slate-400">
+                  {isTurkish
+                    ? "SON 12 AY"
+                    : "LAST 12 MONTHS"}
+                </span>
+
+                <span className="rounded-lg border border-emerald-500/20 bg-emerald-500/[0.06] px-3 py-1.5 text-[9px] font-black text-emerald-300">
+                  {filters.project === "all"
+                    ? isTurkish
+                      ? "TÜM PROJELER"
+                      : "ALL PROJECTS"
+                    : filters.project}
+                </span>
+              </div>
+            </div>
+
+            {kpiTrendLoading ? (
+              <div className="mt-6 flex h-[260px] items-center justify-center rounded-2xl border border-slate-800 bg-slate-950/20 text-xs font-bold text-slate-500">
+                {isTurkish
+                  ? "KPI trendi yükleniyor..."
+                  : "Loading KPI trend..."}
+              </div>
+            ) : (
+              <>
+                <div className="mt-6 overflow-x-auto">
+                  <svg
+                    viewBox="0 0 800 260"
+                    className="h-[260px] min-w-[760px] w-full"
+                    role="img"
+                    aria-label="HSE KPI performance trend"
+                  >
+                    {[50, 90, 130, 170, 205].map(
+                      (y) => (
+                        <line
+                          key={y}
+                          x1="40"
+                          y1={y}
+                          x2="760"
+                          y2={y}
+                          stroke="#1e293b"
+                          strokeWidth="1"
+                        />
+                      ),
+                    )}
+
+                    <polyline
+                      fill="none"
+                      stroke="#3b82f6"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      points={kpiTrendPoints("trir")}
+                    />
+
+                    <polyline
+                      fill="none"
+                      stroke="#f59e0b"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      points={kpiTrendPoints("dart")}
+                    />
+
+                    <polyline
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      points={kpiTrendPoints("ltifr")}
+                    />
+
+                    <polyline
+                      fill="none"
+                      stroke="#a855f7"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      points={kpiTrendPoints("severity")}
+                    />
+
+                    {kpiTrend.map(
+                      (item, index) => {
+                        const x =
+                          40 +
+                          index *
+                            (720 /
+                              Math.max(
+                                1,
+                                kpiTrend.length - 1,
+                              ));
+
+                        return (
+                          <g key={item.key}>
+                            <text
+                              x={x}
+                              y="238"
+                              textAnchor="middle"
+                              fill="#64748b"
+                              fontSize="10"
+                            >
+                              {item.label}
+                            </text>
+
+                            <circle
+                              cx={x}
+                              cy={
+                                205 -
+                                (item.trir /
+                                  kpiTrendMax) *
+                                  155
+                              }
+                              r="4"
+                              fill="#3b82f6"
+                            />
+
+                            <circle
+                              cx={x}
+                              cy={
+                                205 -
+                                (item.dart /
+                                  kpiTrendMax) *
+                                  155
+                              }
+                              r="3"
+                              fill="#f59e0b"
+                            />
+
+                            <circle
+                              cx={x}
+                              cy={
+                                205 -
+                                (item.ltifr /
+                                  kpiTrendMax) *
+                                  155
+                              }
+                              r="3"
+                              fill="#10b981"
+                            />
+
+                            <circle
+                              cx={x}
+                              cy={
+                                205 -
+                                (item.severity /
+                                  kpiTrendMax) *
+                                  155
+                              }
+                              r="3"
+                              fill="#a855f7"
+                            />
+                          </g>
+                        );
+                      },
+                    )}
+                  </svg>
+                </div>
+
+                <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 border-t border-slate-800 pt-4 text-[10px] font-bold text-slate-400">
+                  <span>
+                    <b className="text-blue-400">●</b>{" "}
+                    TRIR
+                  </span>
+
+                  <span>
+                    <b className="text-amber-400">●</b>{" "}
+                    DART
+                  </span>
+
+                  <span>
+                    <b className="text-emerald-400">●</b>{" "}
+                    LTIFR
+                  </span>
+
+                  <span>
+                    <b className="text-purple-400">●</b>{" "}
+                    {isTurkish
+                      ? "Şiddet Oranı"
+                      : "Severity Rate"}
+                  </span>
+                </div>
+
+                <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                  {[
+                    {
+                      label: "TRIR",
+                      value:
+                        kpiTrend.at(-1)?.trir ?? 0,
+                    },
+                    {
+                      label: "DART",
+                      value:
+                        kpiTrend.at(-1)?.dart ?? 0,
+                    },
+                    {
+                      label: "LTIFR",
+                      value:
+                        kpiTrend.at(-1)?.ltifr ?? 0,
+                    },
+                    {
+                      label: isTurkish
+                        ? "Şiddet Oranı"
+                        : "Severity Rate",
+                      value:
+                        kpiTrend.at(-1)?.severity ??
+                        0,
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-xl border border-slate-800 bg-slate-950/35 px-4 py-3"
+                    >
+                      <p className="text-[9px] uppercase tracking-wider text-slate-600">
+                        {item.label}
+                      </p>
+
+                      <p className="mt-1 text-xl font-black">
+                        {item.value.toFixed(2)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </section>
+
           {/* SECONDARY */}
           <section
             id="trend"
@@ -1897,9 +2349,19 @@ export default function HsePerformanceClient({
           {/* REPORT */}
           <div id="reports" className="mt-5">
             <HseReportingPanel
-              locale={locale}
-              observations={filteredObservations}
-            />
+                locale={locale}
+                observations={filteredObservations}
+                incidentMetrics={incidentMetrics}
+                selectedMonth={selectedMonth}
+                selectedProject={filters.project}
+                kpiValues={{
+                  trir,
+                  dart,
+                  ltifr,
+                  severityRate,
+                }}
+                kpiTrend={kpiTrend}
+              />
           </div>
         </div>
       </div>
