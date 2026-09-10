@@ -2,7 +2,7 @@
 
 import "../sernem-print.css";
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { checklistItems } from "./checklistData";
 import { labels } from "./labels";
 import type { Answer, CorrectiveAction, Props } from "./types";
@@ -14,6 +14,10 @@ import {
   type ChecklistAnswer,
 } from "../../../../lib/ai/analyzeChecklist";
 import { trackEvent } from "@/lib/analytics";
+import { generateAssessment } from "@/lib/api/assessmentClient";
+import type { ProfessionalAssessmentOutput } from "@/lib/ai/assessmentTypes";
+import { createClient } from "../../../../utils/supabase/client";
+import { isAdminUser } from "@/lib/auth/access";
 
 export default function ConfinedSpaceChecklist({ locale }: Props) {
   const t = labels[locale];
@@ -32,6 +36,72 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
     useState<ChecklistAnalysisResult | null>(null);
   const [analysisOpened, setAnalysisOpened] = useState(false);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
+  const [professionalAssessment, setProfessionalAssessment] =
+    useState<ProfessionalAssessmentOutput | null>(null);
+  const [isAiLoading, setIsAiLoading] = useState(false);
+
+  const [isPremiumUser, setIsPremiumUser] = useState(false);
+  const [premiumStatusLoaded, setPremiumStatusLoaded] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+
+    async function loadPremiumStatus() {
+      try {
+        const supabase = createClient();
+
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!active) return;
+
+        if (!user) {
+          setIsPremiumUser(false);
+          setPremiumStatusLoaded(true);
+          return;
+        }
+
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("plan, role, status")
+          .eq("id", user.id)
+          .maybeSingle();
+
+        if (!active) return;
+
+        const hasPremiumAccess =
+          isAdminUser(user) ||
+          (
+            profile?.status !== "suspended" &&
+            (
+              profile?.plan === "premium" ||
+              profile?.role === "admin"
+            )
+          );
+
+        setIsPremiumUser(Boolean(hasPremiumAccess));
+        setPremiumStatusLoaded(true);
+      } catch (error) {
+        console.error(
+          "SERNEM premium access check failed:",
+          error,
+        );
+
+        if (active) {
+          setIsPremiumUser(false);
+          setPremiumStatusLoaded(true);
+        }
+      }
+    }
+
+    void loadPremiumStatus();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
 
   const answeredCount = items.filter(
     (item) => answers[item.id] !== null && answers[item.id] !== undefined,
@@ -278,6 +348,8 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
       );
 
       setAnalysis(analysisResult);
+      setProfessionalAssessment(null);
+      setIsAiLoading(false);
     } catch (error) {
       console.error("Confined Space analysis failed:", error);
       setAnalysis(null);
@@ -298,6 +370,104 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           block: "start",
         });
     }, 150);
+  }
+
+  async function generateAiAssessment() {
+    trackEvent("premium_ai_assessment_used", {
+      assessment_type: "confined_space",
+      locale,
+      answered_count: answeredCount,
+      total_items: items.length,
+      findings_count: noCount,
+      critical_findings: criticalFailures.length,
+      source: "confined_space_premium_ai",
+    });
+
+    if (!analysis || isAiLoading) {
+      alert(
+        locale === "tr"
+          ? "Önce Güvenlik Analizi Yap butonuna basın."
+          : "Run Analyze Safety first.",
+      );
+      return;
+    }
+
+    setIsAiLoading(true);
+    setProfessionalAssessment(null);
+
+    const workDecision =
+      analysis.workDecision === "Stop Work"
+        ? "STOP WORK"
+        : analysis.workDecision === "Proceed With Conditions"
+          ? "PROCEED WITH CONDITIONS"
+          : "APPROVED";
+
+    try {
+      const result = await generateAssessment({
+        workType: analysis.checklistTitle || "Confined Space",
+        language: locale,
+        assessmentStatus: analysis.assessmentStatus,
+        completionRate: analysis.completionRate,
+        safetyScore: analysis.score,
+        overallRisk: analysis.overallRisk,
+        workDecision,
+        permitReadiness: analysis.permitReadiness,
+        severityBreakdown: {
+          critical: analysis.severityBreakdown.Critical,
+          high: analysis.severityBreakdown.High,
+          medium: analysis.severityBreakdown.Medium,
+          low: analysis.severityBreakdown.Low,
+        },
+        findings: analysis.findings.map((finding) => ({
+          id: finding.id,
+          title: finding.requirement,
+          description: finding.guidance,
+          severity: finding.riskLevel as
+            | "Low"
+            | "Medium"
+            | "High"
+            | "Critical",
+          recommendation: finding.correctiveAction,
+          reference: finding.references?.[0],
+        })),
+        recommendations: analysis.recommendations.map(
+          (recommendation, index) => ({
+            title: recommendation,
+            priority: index + 1,
+          }),
+        ),
+        references: analysis.references,
+      });
+
+      setProfessionalAssessment(result);
+
+      window.setTimeout(() => {
+        document
+          .querySelector("[data-ai-assessment]")
+          ?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+      }, 100);
+    } catch (error) {
+      console.error("Confined Space AI Assessment Error:", error);
+
+      alert(
+        locale === "tr"
+          ? "AI değerlendirmesi oluşturulamadı. API bağlantısını kontrol edin."
+          : "AI assessment could not be generated. Check the API connection.",
+      );
+    } finally {
+      setIsAiLoading(false);
+    }
+  }
+
+  function handlePremiumAssessmentClick() {
+    if (!isPremiumUser) {
+      return;
+    }
+
+    void generateAiAssessment();
   }
 
   function printInspection() {
@@ -322,6 +492,8 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
     setAnalysis(null);
     setAnalysisOpened(false);
     setAnalysisError(null);
+    setProfessionalAssessment(null);
+    setIsAiLoading(false);
   }
 
   function getPriorityLabel(
@@ -1230,6 +1402,253 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
           )}
         </div>
 
+        {isAiLoading && (
+          <section className="mt-8 rounded-3xl border border-violet-500/30 bg-violet-500/5 p-7 print:hidden">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/15 text-2xl">
+                🤖
+              </div>
+
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-violet-300">
+                  {locale === "tr"
+                    ? "SERNEM AI çalışıyor"
+                    : "SERNEM AI is working"}
+                </p>
+
+                <p className="mt-2 text-slate-300">
+                  {locale === "tr"
+                    ? "Profesyonel HSE değerlendirmesi hazırlanıyor..."
+                    : "Generating the professional HSE assessment..."}
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {professionalAssessment && (
+          <section data-ai-assessment className="mt-8 overflow-hidden rounded-3xl border border-violet-500/30 bg-violet-500/5 print:border-slate-300 print:bg-white">
+            <div className="border-b border-violet-500/20 bg-slate-950/40 p-7 sm:p-8 print:border-slate-300 print:bg-white">
+              <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
+                <div className="max-w-4xl">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-300">
+                      {locale === "tr"
+                        ? "SERNEM AI Profesyonel Değerlendirmesi"
+                        : "SERNEM AI Professional Assessment"}
+                    </p>
+
+                    <span className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-violet-200 print:hidden">
+                      GPT-5 MINI
+                    </span>
+                  </div>
+
+                  <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+                    {locale === "tr"
+                      ? "Yönetici Değerlendirmesi"
+                      : "Executive Assessment"}
+                  </h2>
+
+                  <p className="mt-5 max-w-4xl text-base leading-8 text-slate-300 print:text-slate-700">
+                    {professionalAssessment.executiveAssessment}
+                  </p>
+                </div>
+
+                <div
+                  className={`min-w-full rounded-3xl border p-6 text-center shadow-lg xl:min-w-80 ${
+                    professionalAssessment.finalRecommendation === "STOP WORK"
+                      ? "border-red-500/40 bg-red-500/10 text-red-100 shadow-red-950/20"
+                      : professionalAssessment.finalRecommendation ===
+                          "PROCEED WITH CONDITIONS"
+                        ? "border-orange-500/40 bg-orange-500/10 text-orange-100 shadow-orange-950/20"
+                        : "border-emerald-500/40 bg-emerald-500/10 text-emerald-100 shadow-emerald-950/20"
+                  } print:hidden`}
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] opacity-75">
+                    {locale === "tr"
+                      ? "Nihai AI Tavsiyesi"
+                      : "Final AI Recommendation"}
+                  </p>
+
+                  <p className="mt-3 text-3xl font-black uppercase tracking-tight">
+                    {professionalAssessment.finalRecommendation === "STOP WORK"
+                      ? locale === "tr"
+                        ? "🛑 İŞİ DURDUR"
+                        : "🛑 STOP WORK"
+                      : professionalAssessment.finalRecommendation ===
+                          "PROCEED WITH CONDITIONS"
+                        ? locale === "tr"
+                          ? "🟠 KOŞULLU DEVAM"
+                          : "🟠 PROCEED WITH CONDITIONS"
+                        : locale === "tr"
+                          ? "✅ ONAYLANDI"
+                          : "✅ APPROVED"}
+                  </p>
+
+                  <p className="mt-4 text-xs leading-5 opacity-75">
+                    {locale === "tr"
+                      ? "AI sonucu, SERNEM kural motorunun kararını değiştirmez."
+                      : "The AI assessment does not override the SERNEM rule-engine decision."}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-6 p-7 sm:p-8 xl:grid-cols-2">
+              <article className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
+                <h3 className="text-xl font-bold">
+                  {locale === "tr"
+                    ? "Operasyonel Risk"
+                    : "Operational Risk"}
+                </h3>
+
+                <p className="mt-4 leading-7 text-slate-300 print:text-black">
+                  {professionalAssessment.operationalRisk}
+                </p>
+              </article>
+
+              <article className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
+                <h3 className="text-xl font-bold">
+                  {locale === "tr"
+                    ? "Muhtemel Sonuçlar"
+                    : "Potential Consequences"}
+                </h3>
+
+                <div className="mt-4 space-y-3">
+                  {professionalAssessment.potentialConsequences.map(
+                    (consequence, index) => (
+                      <div
+                        key={`${consequence}-${index}`}
+                        className="flex gap-3"
+                      >
+                        <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500/15 text-xs font-bold text-red-300">
+                          {index + 1}
+                        </span>
+
+                        <p className="leading-7 text-slate-300 print:text-black">
+                          {consequence}
+                        </p>
+                      </div>
+                    ),
+                  )}
+                </div>
+              </article>
+
+              {professionalAssessment.criticalConcerns.length > 0 && (
+                <article className="rounded-2xl border border-red-500/30 bg-red-500/5 p-6 print:border-slate-300 print:bg-white">
+                  <h3 className="text-xl font-bold text-red-200 print:text-black">
+                    {locale === "tr"
+                      ? "Kritik Endişeler"
+                      : "Critical Concerns"}
+                  </h3>
+
+                  <div className="mt-4 space-y-3">
+                    {professionalAssessment.criticalConcerns.map(
+                      (concern, index) => (
+                        <div key={`${concern}-${index}`} className="flex gap-3">
+                          <span className="mt-1 text-red-300">●</span>
+
+                          <p className="leading-7 text-slate-300 print:text-black">
+                            {concern}
+                          </p>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                </article>
+              )}
+
+              {professionalAssessment.positiveFindings.length > 0 && (
+                <article className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-6 print:border-slate-300 print:bg-white">
+                  <h3 className="text-xl font-bold text-emerald-200 print:text-black">
+                    {locale === "tr"
+                      ? "Olumlu Bulgular"
+                      : "Positive Findings"}
+                  </h3>
+
+                  <div className="mt-4 space-y-3">
+                    {professionalAssessment.positiveFindings.map(
+                      (finding, index) => (
+                        <div key={`${finding}-${index}`} className="flex gap-3">
+                          <span className="mt-1 text-emerald-300">✓</span>
+
+                          <p className="leading-7 text-slate-300 print:text-black">
+                            {finding}
+                          </p>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                </article>
+              )}
+            </div>
+
+            <div className="border-t border-violet-500/20 p-7 sm:p-8 print:border-slate-300">
+              <h3 className="text-2xl font-bold">
+                {locale === "tr"
+                  ? "Öncelikli Aksiyon Planı"
+                  : "Priority Action Plan"}
+              </h3>
+
+              <div className="mt-5 space-y-4">
+                {professionalAssessment.priorityActions.map((item) => (
+                  <article
+                    key={`${item.priority}-${item.action}`}
+                    className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:break-inside-avoid print:border-slate-300 print:bg-white"
+                  >
+                    <div className="flex gap-4">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-violet-500/15 text-lg font-black text-violet-200">
+                        {item.priority}
+                      </span>
+
+                      <div>
+                        <h4 className="text-lg font-bold">{item.action}</h4>
+
+                        <p className="mt-3 leading-7 text-slate-400 print:text-slate-700">
+                          <span className="font-semibold text-slate-300 print:text-black">
+                            {locale === "tr" ? "Gerekçe: " : "Reason: "}
+                          </span>
+                          {item.reason}
+                        </p>
+
+                        {item.reference && (
+                          <p className="mt-3 text-sm text-blue-300 print:text-black">
+                            <span className="font-semibold">
+                              {locale === "tr" ? "Referans: " : "Reference: "}
+                            </span>
+                            {item.reference}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-violet-500/20 p-7 sm:p-8 print:border-slate-300">
+              <h3 className="text-xl font-bold">
+                {locale === "tr"
+                  ? "Uygulanabilir Standartlar"
+                  : "Applicable Standards"}
+              </h3>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {professionalAssessment.applicableStandards.map((standard) => (
+                  <span
+                    key={standard}
+                    className="rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-2 text-sm text-violet-200 print:hidden"
+                  >
+                    {standard}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+
+
         <section className="mt-8 rounded-3xl border border-slate-800 bg-slate-900 p-7 print:hidden">
           <label htmlFor="inspection-comments">
             <span className="block text-lg font-bold">{t.comments}</span>
@@ -1258,6 +1677,9 @@ export default function ConfinedSpaceChecklist({ locale }: Props) {
 
           <PremiumAssessmentButton
             locale={locale}
+            disabled={!premiumStatusLoaded || !analysis || isAiLoading}
+            isPremiumUser={isPremiumUser}
+            onPremiumClick={handlePremiumAssessmentClick}
           />
 
           <button

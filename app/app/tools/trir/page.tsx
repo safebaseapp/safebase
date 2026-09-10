@@ -228,7 +228,7 @@ export default function TRIRPage() {
       const { data: existing, error: readError } =
         await supabase
           .from("hse_incident_metrics")
-          .select("id")
+          .select("id, worked_hours")
           .eq("user_id", user.id)
           .eq("period_month", periodMonth)
           .eq("project_name", projectName)
@@ -237,6 +237,36 @@ export default function TRIRPage() {
       if (readError) throw readError;
 
       if (existing?.id) {
+        const existingHours = Number(existing.worked_hours ?? 0);
+
+        if (
+          existingHours > 0 &&
+          existingHours !== hoursNumber
+        ) {
+          const confirmed = window.confirm(
+            isTurkish
+              ? `Bu dönem ve proje için ${existingHours.toLocaleString(
+                  "tr-TR",
+                )} çalışma saati zaten kayıtlı. Yeni hesaplamadaki ${hoursNumber.toLocaleString(
+                  "tr-TR",
+                )} saat ile değiştirmek istiyor musunuz?`
+              : `${existingHours.toLocaleString(
+                  "en-US",
+                )} worked hours are already saved for this period and project. Do you want to replace them with ${hoursNumber.toLocaleString(
+                  "en-US",
+                )} hours from this calculation?`,
+          );
+
+          if (!confirmed) {
+            setKpiMessage(
+              isTurkish
+                ? "Aktarım iptal edildi. Mevcut çalışma saati korunuyor."
+                : "Transfer cancelled. Existing worked hours were preserved.",
+            );
+            return;
+          }
+        }
+
         const { error: updateError } =
           await supabase
             .from("hse_incident_metrics")

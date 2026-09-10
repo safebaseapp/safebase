@@ -1,6 +1,7 @@
 "use client";
 
 import { calculateSeverityRate } from "@/lib/hse-metrics";
+import { createClient } from "@/utils/supabase/client";
 
 import { useMemo, useState } from "react";
 import { useParams } from "next/navigation";
@@ -27,6 +28,13 @@ export default function SeverityRateCalculatorPage() {
   const [lostWorkdays, setLostWorkdays] = useState("");
   const [hoursWorked, setHoursWorked] = useState("");
   const [copied, setCopied] = useState(false);
+
+  const currentDate = new Date();
+  const [kpiMonth, setKpiMonth] = useState(currentDate.getMonth() + 1);
+  const [kpiYear, setKpiYear] = useState(currentDate.getFullYear());
+  const [kpiProject, setKpiProject] = useState("All Projects");
+  const [kpiSaving, setKpiSaving] = useState(false);
+  const [kpiMessage, setKpiMessage] = useState("");
 
   const result = useMemo(() => {
     const days = Number(lostWorkdays);
@@ -96,6 +104,146 @@ export default function SeverityRateCalculatorPage() {
     setLostWorkdays("");
     setHoursWorked("");
     setCopied(false);
+  };
+
+  const saveToHsePerformance = async () => {
+    if (result === null) return;
+
+    const lostDaysNumber = Number(lostWorkdays);
+    const hoursNumber = Number(hoursWorked);
+
+    if (
+      Number.isNaN(lostDaysNumber) ||
+      Number.isNaN(hoursNumber) ||
+      lostDaysNumber < 0 ||
+      hoursNumber <= 0
+    ) {
+      return;
+    }
+
+    setKpiSaving(true);
+    setKpiMessage("");
+
+    try {
+      const supabase = createClient();
+
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        setKpiMessage(
+          isTurkish
+            ? "HSE Performance'a aktarmak için giriş yapmalısınız."
+            : "You must sign in to transfer data to HSE Performance.",
+        );
+        return;
+      }
+
+      const periodMonth =
+        `${kpiYear}-${String(kpiMonth).padStart(2, "0")}-01`;
+
+      const projectName =
+        kpiProject.trim() || "All Projects";
+
+      const { data: existing, error: readError } =
+        await supabase
+          .from("hse_incident_metrics")
+          .select("id, worked_hours")
+          .eq("user_id", user.id)
+          .eq("period_month", periodMonth)
+          .eq("project_name", projectName)
+          .maybeSingle();
+
+      if (readError) throw readError;
+
+      if (existing?.id) {
+        const existingHours = Number(existing.worked_hours ?? 0);
+
+        if (
+          existingHours > 0 &&
+          existingHours !== hoursNumber
+        ) {
+          const confirmed = window.confirm(
+            isTurkish
+              ? `Bu dönem ve proje için ${existingHours.toLocaleString(
+                  "tr-TR",
+                )} çalışma saati zaten kayıtlı. Yeni hesaplamadaki ${hoursNumber.toLocaleString(
+                  "tr-TR",
+                )} saat ile değiştirmek istiyor musunuz?`
+              : `${existingHours.toLocaleString(
+                  "en-US",
+                )} worked hours are already saved for this period and project. Do you want to replace them with ${hoursNumber.toLocaleString(
+                  "en-US",
+                )} hours from this calculation?`,
+          );
+
+          if (!confirmed) {
+            setKpiMessage(
+              isTurkish
+                ? "Aktarım iptal edildi. Mevcut çalışma saati korunuyor."
+                : "Transfer cancelled. Existing worked hours were preserved.",
+            );
+            return;
+          }
+        }
+
+        const { error: updateError } =
+          await supabase
+            .from("hse_incident_metrics")
+            .update({
+              worked_hours: hoursNumber,
+              lost_days: lostDaysNumber,
+              updated_at: new Date().toISOString(),
+            })
+            .eq("id", existing.id)
+            .eq("user_id", user.id);
+
+        if (updateError) throw updateError;
+      } else {
+        const { error: insertError } =
+          await supabase
+            .from("hse_incident_metrics")
+            .insert({
+              user_id: user.id,
+              period_month: periodMonth,
+              project_name: projectName,
+              worked_hours: hoursNumber,
+              lost_days: lostDaysNumber,
+            });
+
+        if (insertError) throw insertError;
+      }
+
+      const monthNames = isTurkish
+        ? [
+            "Ocak", "Şubat", "Mart", "Nisan",
+            "Mayıs", "Haziran", "Temmuz", "Ağustos",
+            "Eylül", "Ekim", "Kasım", "Aralık",
+          ]
+        : [
+            "January", "February", "March", "April",
+            "May", "June", "July", "August",
+            "September", "October", "November", "December",
+          ];
+
+      setKpiMessage(
+        isTurkish
+          ? `✓ ${monthNames[kpiMonth - 1]} ${kpiYear} KPI kaydına aktarıldı.`
+          : `✓ Transferred to ${monthNames[kpiMonth - 1]} ${kpiYear} KPI record.`,
+      );
+    } catch (error) {
+      console.error("Severity Rate → HSE Performance error:", error);
+
+      setKpiMessage(
+        isTurkish
+          ? "Aktarım başarısız. Lütfen tekrar deneyin."
+          : "Transfer failed. Please try again.",
+      );
+    } finally {
+      setKpiSaving(false);
+    }
   };
 
   const copyResult = async () => {
@@ -489,6 +637,155 @@ export default function SeverityRateCalculatorPage() {
                 </div>
               </div>
             </section>
+
+            {result !== null && (
+              <section className="relative overflow-hidden rounded-[26px] border border-cyan-400/30 bg-gradient-to-br from-blue-500/[0.10] via-slate-900 to-cyan-500/[0.06] p-6 shadow-[0_20px_70px_rgba(0,0,0,.28)] sm:p-7">
+                <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-cyan-400/[0.08] blur-3xl" />
+
+                <div className="relative">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-400">
+                        SERNEM HSE PERFORMANCE
+                      </p>
+
+                      <h2 className="mt-2 text-xl font-black">
+                        {isTurkish
+                          ? "Sonucu KPI Sistemine Aktar"
+                          : "Transfer Result to KPI System"}
+                      </h2>
+
+                      <p className="mt-2 max-w-xl text-xs leading-5 text-slate-400">
+                        {isTurkish
+                          ? "Bu Şiddet Oranı hesabındaki çalışma saati ve kayıp iş günü verilerini aylık HSE Performance kaydınıza ekleyin."
+                          : "Add the worked-hours and lost-workday data from this Severity Rate calculation to your monthly HSE Performance record."}
+                      </p>
+                    </div>
+
+                    <span className="shrink-0 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-[9px] font-black text-emerald-300">
+                      KPI READY
+                    </span>
+                  </div>
+
+                  <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_1fr_1.4fr]">
+                    <label>
+                      <span className="mb-2 block text-[9px] font-black uppercase tracking-wider text-slate-500">
+                        {isTurkish ? "Ay" : "Month"}
+                      </span>
+
+                      <select
+                        value={kpiMonth}
+                        onChange={(e) => setKpiMonth(Number(e.target.value))}
+                        className="h-12 w-full rounded-xl border border-white/10 bg-slate-950 px-4 text-sm font-bold text-white outline-none focus:border-blue-500"
+                      >
+                        {(isTurkish
+                          ? [
+                              "Ocak", "Şubat", "Mart", "Nisan",
+                              "Mayıs", "Haziran", "Temmuz", "Ağustos",
+                              "Eylül", "Ekim", "Kasım", "Aralık",
+                            ]
+                          : [
+                              "January", "February", "March", "April",
+                              "May", "June", "July", "August",
+                              "September", "October", "November", "December",
+                            ]
+                        ).map((month, index) => (
+                          <option key={month} value={index + 1}>
+                            {month}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+
+                    <label>
+                      <span className="mb-2 block text-[9px] font-black uppercase tracking-wider text-slate-500">
+                        {isTurkish ? "Yıl" : "Year"}
+                      </span>
+
+                      <select
+                        value={kpiYear}
+                        onChange={(e) => setKpiYear(Number(e.target.value))}
+                        className="h-12 w-full rounded-xl border border-white/10 bg-slate-950 px-4 text-sm font-bold text-white outline-none focus:border-blue-500"
+                      >
+                        {Array.from(
+                          { length: 9 },
+                          (_, index) =>
+                            new Date().getFullYear() - 4 + index,
+                        ).map((year) => (
+                          <option key={year} value={year}>
+                            {year}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+
+                    <label>
+                      <span className="mb-2 block text-[9px] font-black uppercase tracking-wider text-slate-500">
+                        {isTurkish ? "Proje" : "Project"}
+                      </span>
+
+                      <input
+                        value={kpiProject}
+                        onChange={(e) => setKpiProject(e.target.value)}
+                        className="h-12 w-full rounded-xl border border-white/10 bg-slate-950 px-4 text-sm font-bold text-white outline-none focus:border-blue-500"
+                      />
+                    </label>
+                  </div>
+
+                  <div className="mt-4 grid grid-cols-3 gap-3">
+                    <div className="rounded-xl border border-white/10 bg-slate-950/50 p-3">
+                      <p className="text-[9px] uppercase text-slate-500">
+                        {isTurkish ? "Kayıp İş Günü" : "Lost Workdays"}
+                      </p>
+                      <p className="mt-1 text-xl font-black">
+                        {Number(lostWorkdays)}
+                      </p>
+                    </div>
+
+                    <div className="rounded-xl border border-white/10 bg-slate-950/50 p-3">
+                      <p className="text-[9px] uppercase text-slate-500">
+                        {isTurkish ? "Çalışma Saati" : "Worked Hours"}
+                      </p>
+                      <p className="mt-1 text-xl font-black">
+                        {Number(hoursWorked).toLocaleString(
+                          isTurkish ? "tr-TR" : "en-US",
+                        )}
+                      </p>
+                    </div>
+
+                    <div className="rounded-xl border border-blue-400/20 bg-blue-500/[0.07] p-3">
+                      <p className="text-[9px] uppercase text-blue-300">
+                        {isTurkish ? "Şiddet Oranı" : "Severity Rate"}
+                      </p>
+                      <p className="mt-1 text-xl font-black text-blue-300">
+                        {result.toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={saveToHsePerformance}
+                    disabled={kpiSaving}
+                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 px-5 py-4 text-sm font-black text-white shadow-[0_12px_35px_rgba(37,99,235,.25)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {kpiSaving
+                      ? isTurkish
+                        ? "AKTARILIYOR..."
+                        : "TRANSFERRING..."
+                      : isTurkish
+                        ? "↗ HSE PERFORMANCE'A AKTAR"
+                        : "↗ TRANSFER TO HSE PERFORMANCE"}
+                  </button>
+
+                  {kpiMessage && (
+                    <div className="mt-3 rounded-xl border border-emerald-400/20 bg-emerald-500/[0.06] px-4 py-3 text-xs font-bold text-emerald-300">
+                      {kpiMessage}
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
 
             {/* FORMULA */}
             <section className="rounded-[26px] border border-violet-400/20 bg-gradient-to-br from-violet-950/30 via-slate-900 to-slate-950 p-6 sm:p-7">

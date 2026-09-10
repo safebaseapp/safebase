@@ -29,6 +29,7 @@ export default function HotWorkChecklist({ locale }: Props) {
   const checklistCompletedTracked = useRef(false);
 
   const [isPremiumUser, setIsPremiumUser] = useState(false);
+  const [premiumStatusLoaded, setPremiumStatusLoaded] = useState(true);
 
   useEffect(() => {
     let active = true;
