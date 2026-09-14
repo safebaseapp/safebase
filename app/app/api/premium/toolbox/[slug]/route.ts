@@ -4,6 +4,7 @@ import path from "node:path";
 import { PDFDocument, rgb } from "pdf-lib";
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -16,24 +17,7 @@ type RouteProps = {
 
 const BUCKET_NAME = "company-assets";
 
-const allowedToolboxes = new Set([
-  "working-at-height",
-  "scaffold-safety",
-  "safety-harness",
-  "hot-work",
-  "loto",
-  "confined-space",
-  "electrical-safety",
-  "excavation-safety",
-  "lifting-operations",
-  "mobile-equipment-safety",
-  "forklift-safety",
-  "ppe-safety",
-  "hand-power-tools",
-  "ladder-safety",
-  "housekeeping",
-  "fire-safety",
-]);
+
 
 function getSafeLocale(request: Request) {
   const url = new URL(request.url);
@@ -71,13 +55,15 @@ export async function GET(request: Request, { params }: RouteProps) {
   const { slug } = await params;
   const locale = getSafeLocale(request);
 
-  if (!allowedToolboxes.has(slug)) {
+  const toolbox = getToolboxBySlug(slug);
+
+  if (!toolbox) {
     return NextResponse.json(
       {
         error:
           locale === "tr"
-            ? "Bu toolbox için PDF bulunamadı."
-            : "No PDF is available for this toolbox.",
+            ? "Toolbox bulunamadı."
+            : "Toolbox not found.",
       },
       { status: 404 },
     );
@@ -448,24 +434,27 @@ export async function GET(request: Request, { params }: RouteProps) {
         });
       }
 
-      // Şirket logosu tüm sayfalarda sağ üstte kurumsal kimlik olarak gösterilir.
-      const logoX = pageWidth - logoWidth - 28;
-      const logoY = pageHeight - logoHeight - 18;
+      // Firma logosu ilk sayfada başlığı kapatmasın.
+      // Sadece 2. ve 3. sayfada göster.
+      if (index > 0) {
+        const logoX = pageWidth - logoWidth - 28;
+        const logoY = pageHeight - logoHeight - 18;
 
-      page.drawRectangle({
-        x: logoX - 8,
-        y: logoY - 6,
-        width: logoWidth + 16,
-        height: logoHeight + 12,
-        color: rgb(1, 1, 1),
-      });
+        page.drawRectangle({
+          x: logoX - 8,
+          y: logoY - 6,
+          width: logoWidth + 16,
+          height: logoHeight + 12,
+          color: rgb(1, 1, 1),
+        });
 
-      page.drawImage(embeddedLogo, {
-        x: logoX,
-        y: logoY,
-        width: logoWidth,
-        height: logoHeight,
-      });
+        page.drawImage(embeddedLogo, {
+          x: logoX,
+          y: logoY,
+          width: logoWidth,
+          height: logoHeight,
+        });
+      }
     });
 
     const brandedPdfBytes = await pdfDocument.save();

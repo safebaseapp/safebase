@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
+import { toolboxData } from "@/lib/toolbox/toolbox-data";
 
 type Locale = "tr" | "en";
 
@@ -36,7 +37,7 @@ type ToolboxItem = {
   hasPdf?: boolean;
 };
 
-const toolboxItems: ToolboxItem[] = [
+const baseToolboxItems: ToolboxItem[] = [
   {
     slug: "working-at-height",
     pdfSlug: "working-at-height",
@@ -343,6 +344,144 @@ const toolboxItems: ToolboxItem[] = [
   },
 ];
 
+const baseSlugs = new Set(baseToolboxItems.map((item) => item.slug));
+
+function getAutoCategory(slug: string) {
+  if (
+    slug.includes("electrical") ||
+    slug.includes("battery")
+  ) return "electrical";
+
+  if (
+    slug.includes("vehicle") ||
+    slug.includes("pedestrian")
+  ) return "mobile-equipment";
+
+  if (
+    slug.includes("gas-testing") ||
+    slug.includes("compressed-gas")
+  ) return "gas-safety";
+
+  if (
+    slug.includes("grinding") ||
+    slug.includes("welding")
+  ) return "hot-work";
+
+  if (
+    slug.includes("eye-face") ||
+    slug.includes("respiratory") ||
+    slug.includes("hearing")
+  ) return "ppe";
+
+  if (
+    slug.includes("line-of-fire") ||
+    slug.includes("pinch") ||
+    slug.includes("hand-injury")
+  ) return "body-positioning";
+
+  if (
+    slug.includes("slips") ||
+    slug.includes("heat-stress") ||
+    slug.includes("cold-stress")
+  ) return "general-safety";
+
+  if (
+    slug.includes("permit") ||
+    slug.includes("simultaneous") ||
+    slug.includes("stop-work")
+  ) return "work-control";
+
+  if (slug.includes("pressure-testing")) return "process-safety";
+
+  return "general-safety";
+}
+
+function getAutoIcon(slug: string) {
+  if (slug.includes("stored-energy-hydraulic-systems")) return "🔋";
+  if (slug.includes("high-pressure-water-jetting")) return "💦";
+  if (slug.includes("flange-joint-integrity")) return "🔩";
+  if (slug.includes("chemical-transfer-decanting")) return "🧪";
+  if (slug.includes("spill-response")) return "🧽";
+  if (slug.includes("hazardous-waste-handling")) return "☣️";
+  if (slug.includes("portable-generator-safety")) return "⚡";
+  if (slug.includes("extension-leads-cable-management")) return "🔌";
+  if (slug.includes("demolition-dismantling")) return "🔨";
+  if (slug.includes("working-over-water")) return "🛟";
+  if (slug.includes("dropped-object-prevention-zones")) return "🪖";
+  if (slug.includes("temporary-work-platforms")) return "🪜";
+  if (slug.includes("working-near-open-edges")) return "🕳️";
+  if (slug.includes("scaffold-modification-control")) return "🏗️";
+  if (slug.includes("man-basket-personnel-lifting")) return "👷";
+  if (slug.includes("crane-outrigger-setup")) return "🚧";
+  if (slug.includes("rigging-inspection")) return "🪝";
+  if (slug.includes("tag-line-safety")) return "🪢";
+  if (slug.includes("load-stability-center-of-gravity")) return "⚖️";
+  if (slug.includes("forklift-loading-unloading")) return "📦";
+  if (slug.includes("barricading-exclusion-zones")) return "🚧";
+  if (slug.includes("overhead-power-lines")) return "⚡";
+  if (slug.includes("underground-services")) return "🕳️";
+  if (slug.includes("line-breaking-process-opening")) return "🔧";
+  if (slug.includes("nitrogen-inert-gas-safety")) return "💨";
+  if (slug.includes("steam-hot-surfaces")) return "♨️";
+  if (slug.includes("hose-coupling-safety")) return "🔗";
+  if (slug.includes("abrasive-blasting-safety")) return "🥽";
+  if (slug.includes("painting-coating-safety")) return "🎨";
+  if (slug.includes("lightning-severe-weather")) return "🌩️";
+
+  if (slug.includes("line-of-fire")) return "🎯";
+  if (slug.includes("pinch")) return "✋";
+  if (slug.includes("slips")) return "⚠️";
+  if (slug.includes("vehicle")) return "🚧";
+  if (slug.includes("compressed-gas")) return "🧯";
+  if (slug.includes("pressure")) return "🧪";
+  if (slug.includes("grinding")) return "⚙️";
+  if (slug.includes("welding")) return "🔥";
+  if (slug.includes("heat")) return "☀️";
+  if (slug.includes("cold")) return "❄️";
+  if (slug.includes("noise")) return "🎧";
+  if (slug.includes("respiratory")) return "😷";
+  if (slug.includes("eye-face")) return "🥽";
+  if (slug.includes("hand-injury")) return "🧤";
+  if (slug.includes("electrical")) return "⚡";
+  if (slug.includes("battery")) return "🔋";
+  if (slug.includes("gas-testing")) return "📟";
+  if (slug.includes("permit")) return "📋";
+  if (slug.includes("simultaneous")) return "🔄";
+  if (slug.includes("stop-work")) return "🛑";
+
+  return "🦺";
+}
+
+const autoToolboxItems: ToolboxItem[] = toolboxData
+  .filter((record) => !baseSlugs.has(record.slug))
+  .map((record) => ({
+    slug: record.slug,
+    icon: getAutoIcon(record.slug),
+    category: getAutoCategory(record.slug),
+    title: {
+      tr: record.tr.title ?? record.slug,
+      en: record.en.title ?? record.slug,
+    },
+    description: {
+      tr:
+        typeof record.tr.objective === "string"
+          ? record.tr.objective
+          : "Sahada kullanıma hazır profesyonel toolbox talk.",
+      en:
+        typeof record.en.objective === "string"
+          ? record.en.objective
+          : "Professional site-ready toolbox talk.",
+    },
+    duration: "8–10",
+    hasPdf: true,
+    pdfSlug: record.slug,
+  }));
+
+const toolboxItems: ToolboxItem[] = [
+  ...baseToolboxItems,
+  ...autoToolboxItems,
+];
+
 const categories = [
   { id: "all", tr: "Tüm Konular", en: "All Topics", icon: "▦" },
   { id: "work-at-height", tr: "Yüksekte Çalışma", en: "Work at Height", icon: "🏗️" },
@@ -361,6 +500,11 @@ const categories = [
   { id: "chemical", tr: "Kimyasal", en: "Chemical", icon: "🧪" },
   { id: "dropped-objects", tr: "Düşen Cisimler", en: "Dropped Objects", icon: "📦" },
   { id: "manual-handling", tr: "Elle Taşıma", en: "Manual Handling", icon: "📦" },
+  { id: "body-positioning", tr: "Vücut Konumlandırma", en: "Body Positioning", icon: "✋" },
+  { id: "gas-safety", tr: "Gaz Güvenliği", en: "Gas Safety", icon: "📟" },
+  { id: "process-safety", tr: "Proses Güvenliği", en: "Process Safety", icon: "⚙️" },
+  { id: "work-control", tr: "İş Kontrolü", en: "Work Control", icon: "📋" },
+  { id: "general-safety", tr: "Genel Güvenlik", en: "General Safety", icon: "🦺" },
 ];
 
 export default function ToolboxLibraryClient({
@@ -461,7 +605,13 @@ export default function ToolboxLibraryClient({
       return null;
     }
 
-    return `/downloads/${item.pdfSlug}-toolbox-talk-${locale}.pdf`;
+    const isLegacyToolbox = baseSlugs.has(item.slug);
+
+    if (isLegacyToolbox) {
+      return `/downloads/${item.pdfSlug}-toolbox-talk-${locale}.pdf`;
+    }
+
+    return `/api/toolbox/${item.pdfSlug}/pdf?locale=${locale}`;
   }
 
   return (
@@ -709,30 +859,12 @@ export default function ToolboxLibraryClient({
                     </div>
 
                     <div className="mt-7 grid grid-cols-2 gap-3 xl:grid-cols-3">
-                      {isPremium ? (
-                        <Link
-                          href={toolboxHref}
-                          className="inline-flex items-center justify-center gap-2 rounded-2xl border border-violet-400/20 bg-violet-500/[0.08] px-4 py-4 text-sm font-black text-violet-200 transition hover:bg-violet-500/[0.14]"
-                        >
-                          🔒 {isTurkish ? "Önizle" : "Preview"}
-                        </Link>
-                      ) : pdfHref ? (
-                        <a
-                          href={pdfHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-sm font-black text-white transition hover:border-white/20 hover:bg-white/[0.08]"
-                        >
-                          {isTurkish ? "Önizleme" : "Preview"}
-                        </a>
-                      ) : (
-                        <Link
-                          href={toolboxHref}
-                          className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-sm font-black text-white transition hover:border-white/20 hover:bg-white/[0.08]"
-                        >
-                          {isTurkish ? "Önizleme" : "Preview"}
-                        </Link>
-                      )}
+                      <Link
+                        href={toolboxHref}
+                        className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-sm font-black text-white transition hover:border-white/20 hover:bg-white/[0.08]"
+                      >
+                        {isTurkish ? "Önizleme" : "Preview"}
+                      </Link>
 
                       {isPremium ? (
                         <Link

@@ -378,34 +378,35 @@ function header({
       x="139"
       y="156"
       font-family="SernemPdf"
-      font-size="9.5"
+      font-size="7.6"
       font-weight="700"
+      letter-spacing="-0.15"
       fill="#ffffff"
     >${esc(docRef)}</text>
 
     <line
-      x1="288"
+      x1="350"
       y1="145"
-      x2="288"
+      x2="350"
       y2="159"
       stroke="#38516d"
     />
 
     <text
-      x="302"
+      x="363"
       y="156"
       font-family="SernemPdf"
-      font-size="9.5"
+      font-size="8.5"
       font-weight="700"
-      letter-spacing="1"
+      letter-spacing="0.7"
       fill="#dce6f0"
     >${esc(revLabel)}</text>
 
     <text
-      x="340"
+      x="398"
       y="156"
       font-family="SernemPdf"
-      font-size="9.5"
+      font-size="8.5"
       font-weight="800"
       fill="#ffffff"
     >${esc(revision)}</text>
@@ -435,6 +436,9 @@ function header({
         : ""
     }
 
+    ${
+      logoData
+        ? `
     <!-- COMPANY IDENTITY -->
     <rect
       x="590"
@@ -453,6 +457,9 @@ function header({
       height="88"
       preserveAspectRatio="xMidYMid meet"
     />
+        `
+        : ""
+    }
   `;
 }
 
@@ -587,7 +594,7 @@ function pageOne(
 
   return baseSvg(`
     ${header({
-      logoData,
+      logoData: "",
       title,
       subtitle: asString(c.subtitle),
       duration: asString(c.duration),
