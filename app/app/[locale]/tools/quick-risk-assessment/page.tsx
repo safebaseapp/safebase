@@ -3,7 +3,7 @@ import { trackUserEvent } from "@/lib/analytics/track-user-event";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import { riskLibraryPack01 } from "@/lib/risk-library/pack-01";
 import { riskLibraryPack02 } from "@/lib/risk-library/pack-02";
 import { riskLibraryPack03 } from "@/lib/risk-library/pack-03";
@@ -530,7 +530,8 @@ const duplicateRiskItem = (id: string) => {
 
 
 
-  const [locale, setLocale] = useState<"tr" | "en">("en");
+  const { locale: routeLocale } = use(params);
+  const locale: "tr" | "en" = routeLocale === "tr" ? "tr" : "en";
   const [activity, setActivity] = useState("");
   const [hazard, setHazard] = useState("");
   const [existingControls, setExistingControls] = useState("");
@@ -539,12 +540,6 @@ const duplicateRiskItem = (id: string) => {
   const [showResult, setShowResult] = useState(false);
   const [isLoadingLibraryActivity, setIsLoadingLibraryActivity] = useState(false);
   const [libraryActivityLoaded, setLibraryActivityLoaded] = useState(false);
-
-  useEffect(() => {
-    params.then(({ locale }) => {
-      setLocale(locale === "tr" ? "tr" : "en");
-    });
-  }, [params]);
 
   const isTurkish = locale === "tr";
 
@@ -770,7 +765,7 @@ const duplicateRiskItem = (id: string) => {
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
-                SERNEM Risk Assessment
+                {isTurkish ? "SERNEM RİSK DEĞERLENDİRMESİ" : "SERNEM RISK ASSESSMENT"}
               </p>
 
               <h2 className="mt-1 text-2xl font-black text-white">
@@ -964,7 +959,7 @@ const duplicateRiskItem = (id: string) => {
 
           <label>
             <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
-              {isTurkish ? "Asset / Alan" : "Asset / Area"}
+              {isTurkish ? "Ünite / Alan" : "Asset / Area"}
             </span>
 
             <input

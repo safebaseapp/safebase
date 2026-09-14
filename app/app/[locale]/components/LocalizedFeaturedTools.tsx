@@ -61,7 +61,7 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       meta: isTurkish ? "2 dakika" : "2 min",
     },
     {
-      title: "TRIR Calculator",
+      title: isTurkish ? "TRIR Hesaplayıcı" : "TRIR Calculator",
       description: isTurkish
         ? "Toplam Kaydedilebilir Olay Oranını doğru formül ve çalışma saati verileriyle hesaplayın."
         : "Calculate Total Recordable Incident Rate using working-hour and incident data.",
@@ -79,7 +79,7 @@ export default function LocalizedFeaturedTools({ locale }: Props) {
       meta: isTurkish ? "1 dakika" : "1 min",
     },
     {
-      title: "LTIFR Calculator",
+      title: isTurkish ? "LTIFR Hesaplayıcı" : "LTIFR Calculator",
       description: isTurkish
         ? "Kayıp zamanlı yaralanmaların sıklık oranını profesyonel HSE metodolojisiyle hesaplayın."
         : "Calculate Lost Time Injury Frequency Rate using professional HSE methodology.",
