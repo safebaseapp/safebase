@@ -26,29 +26,50 @@ const PAGE_W = 794;
 const PAGE_H = 1123;
 
 async function loadEmbeddedFontCss() {
-  const candidates = [
+  const regularCandidates = [
     path.join(process.cwd(), "public", "fonts", "DejaVuSans.ttf"),
     "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-    "/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed.ttf",
   ];
 
-  for (const fontPath of candidates) {
-    try {
-      const bytes = await readFile(fontPath);
-      const b64 = bytes.toString("base64");
+  const boldCandidates = [
+    path.join(process.cwd(), "public", "fonts", "DejaVuSans-Bold.ttf"),
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+  ];
 
-      return `
-        @font-face {
-          font-family: "SernemPdf";
-          src: url("data:font/ttf;base64,${b64}") format("truetype");
-          font-weight: 100 900;
-          font-style: normal;
-        }
-      `;
-    } catch {}
+  async function loadFont(candidates: string[]) {
+    for (const fontPath of candidates) {
+      try {
+        const bytes = await readFile(fontPath);
+        return Buffer.from(bytes).toString("base64");
+      } catch {}
+    }
+    throw new Error("Unicode PDF font could not be loaded.");
   }
 
-  throw new Error("Unicode PDF font could not be loaded.");
+  const regular = await loadFont(regularCandidates);
+  const bold = await loadFont(boldCandidates);
+
+  return `
+    <style>
+      @font-face {
+        font-family: "SernemPdf";
+        src: url("data:font/ttf;base64,${regular}") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "SernemPdf";
+        src: url("data:font/ttf;base64,${bold}") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      text, tspan {
+        font-family: "SernemPdf", sans-serif;
+      }
+    </style>
+  `;
 }
 
 function esc(value: unknown) {
@@ -1293,9 +1314,11 @@ function pageThree(
       x="68"
       y="430"
       font-family="SernemPdf"
-      font-size="10"
+      font-size="${Math.max(6.8, Math.min(10, 180 / Math.max(1, (`REF: ${docRef}`).length * 0.56)))}"
       font-weight="700"
       fill="#ffffff"
+      textLength="${Math.min(180, Math.max(1, (`REF: ${docRef}`).length * 5.6))}"
+      lengthAdjust="spacingAndGlyphs"
     >REF: ${esc(docRef)}</text>
 
     <text
