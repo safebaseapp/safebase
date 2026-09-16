@@ -925,52 +925,47 @@ export const toolboxData = [
       "application_subtitle": "Tehlikeler, kontrol önlemleri ve günlük iş öncesi doğrulama.",
       "duration": "8–10 DAKİKA",
       "objective_title": "AMAÇ",
-      "objective": "Kazı ve hendek çalışmalarında göçük, yeraltı tesisatına temas, düşme, su baskını, tehlikeli atmosfer ve hareketli ekipman risklerini kontrol etmek; işe başlamadan önce izin, zemin koşulları, yeraltı hatları, koruyucu sistem, güvenli erişim ve acil durum düzenlemelerini doğrulamaktır.",
+      "objective": "Kazı çalışmalarında göçük, yeraltı tesisatları, düşme, ağır ekipman ve atmosferik tehlikeleri değerlendirerek güvenli çalışma koşullarını sağlamaktır.",
       "explanation_title": "KONU ANLATIMI",
       "explanation": [
-        "Kazı güvenliği yalnızca derinlikle belirlenmez. Zemin tipi, önceki dolgular, su, yağmur, titreşim, yakındaki yapılar, trafik ve kazı kenarındaki yükler birlikte değerlendirilmelidir.",
-        "Yeraltı elektrik, gaz, su, proses ve haberleşme hatları güncel çizimler, saha işaretlemeleri ve uygun tespit yöntemleriyle belirlenmelidir. Hat konumu kesin değilse onaylı kontrollü kazı yöntemi uygulanmalıdır.",
-        "Göçük riski bulunan kazılarda uygun şevlendirme, kademelendirme, iksa veya mühendislik onaylı trench box kullanılmalıdır. Koruyucu sistem tamamlanmadan personel kazıya girmemelidir.",
-        "Hafriyat, malzeme ve ağır ekipman kazı kenarından güvenli mesafede tutulmalıdır. Kenar yükü ve ekipman titreşimi stabil görünen zeminin aniden göçmesine neden olabilir.",
-        "Kazıya güvenli giriş ve çıkış sağlanmalı; merdiven sağlam zemine yerleştirilmeli ve kazı çevresi düşmeye karşı korunmalıdır.",
-        "Kazı vardiya öncesinde ve yağmur, su girişi, titreşim, çatlak veya zemin değişikliği sonrasında yetkin kişi tarafından yeniden kontrol edilmelidir."
+        "Her kazı çalışması başlamadan önce kazı izni, yeraltı hatları ve çalışma yöntemi doğrulanmalıdır.",
+        "1,2 m ve üzerindeki kazılarda uygun koruma yöntemi (şevlendirme, iksa veya trench box) değerlendirilmelidir.",
+        "Kazı günlük olarak ve yağmur, titreşim veya zemin değişikliğinden sonra yeniden kontrol edilmelidir."
       ],
       "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
       "scenario": [
-        "Yaklaşık 2,5 metre derinliğindeki boru hattı kazısında ekip, iksa tamamlanmadan kazıya girdi. Hafriyat kazı kenarına yakın istiflenmiş ve hemen yanında ekskavatör çalışıyordu.",
-        "Ekskavatör titreşimi ve kenardaki ilave yük nedeniyle kazı duvarında çatlak oluştu. Birkaç saniye sonra yan duvarın bir bölümü çöktü ve çalışanlardan biri göçük hattında kaldı.",
-        "Koruyucu sistemin tamamlanması, hafriyat ve ekipmanın kenardan uzaklaştırılması ve giriş öncesi yetkin kişi kontrolü olayın oluşmasını önleyebilirdi."
+        "Bir ekip 2,5 m derinliğindeki kazıda şevlendirme yapmadan çalışmaya başladı.",
+        "Ekskavatör çalışırken gevşeyen toprak aniden göçtü ve çalışan bel hizasına kadar toprak altında kaldı.",
+        "Kazı koruması, güvenli mesafe ve günlük kontrol uygulanmış olsaydı olay yaşanmayacaktı."
       ],
       "remember_title": "UNUTMAYIN",
-      "remember": "Kazının birkaç dakika önce güvenli görünmesi şu anda güvenli olduğu anlamına gelmez. Çatlak, su, titreşim veya zemin hareketi görürseniz kazıya girmeyin ve işi durdurun.",
+      "remember": "Korumasız kazıya girmek birkaç saniye içinde ölümcül bir göçüğe neden olabilir.",
       "hazards_title": "TEMEL TEHLİKELER",
       "hazards": [
-        "Kazı veya hendek duvarının ani göçmesi.",
-        "Yeraltı elektrik kablosuna temas veya ark oluşması.",
-        "Gaz, yakıt, su veya proses hattının hasar görmesi.",
-        "Personel, ekipman veya malzemenin kazıya düşmesi.",
-        "Su girişi veya zeminin stabilitesini kaybetmesi.",
-        "Ekskavatör ve araçlarla çarpışma veya sıkışma.",
-        "Oksijen yetersizliği, yanıcı veya toksik atmosfer.",
-        "Yetersiz giriş-çıkış nedeniyle mahsur kalma."
+        "Kazı göçmesi",
+        "Yeraltı elektrik kabloları",
+        "Gaz veya ürün hatları",
+        "Su baskını",
+        "Ağır ekipman hareketi",
+        "Kazıya düşme",
+        "Malzeme düşmesi",
+        "Yetersiz giriş-çıkış"
       ],
       "controls_title": "KONTROL ÖNLEMLERİ",
       "controls": [
-        "Geçerli kazı iznini ve onaylı çalışma yöntemini doğrulayın.",
-        "Yeraltı tesisatlarını uygun yöntemlerle belirleyip işaretleyin.",
-        "Zemin koşullarını yetkin kişi tarafından değerlendirin.",
-        "Gerektiğinde şev, kademe, iksa veya trench box kullanın.",
-        "Hafriyat, malzeme ve ekipmanı kazı kenarından güvenli mesafede tutun.",
-        "Kazı çevresini uygun bariyer ve kenar korumasıyla güvenli hale getirin.",
-        "Güvenli merdiven veya uygun giriş-çıkış sistemi sağlayın.",
-        "Mobil ekipman için güvenli yaklaşma mesafesi ve spotter düzeni oluşturun.",
-        "Atmosferik risk varsa uygun gaz ölçümü ve havalandırma sağlayın.",
-        "Yağmur, titreşim, su veya zemin değişikliğinden sonra yeniden kontrol yapın.",
-        "Göçük belirtisi veya koruyucu sistem arızasında işi derhal durdurun.",
-        "Acil durum ve kurtarma düzenlemelerini işe başlamadan doğrulayın."
+        "Kazı iznini doğrulayın.",
+        "Yeraltı hatlarını belirleyin.",
+        "Şevlendirme, iksa veya trench box kullanın.",
+        "Kazıya güvenli merdiven sağlayın.",
+        "Kazı kenarını bariyerleyin.",
+        "Toprağı kenardan uzak istifleyin.",
+        "Ağır ekipmanı güvenli mesafede tutun.",
+        "Yağmur sonrası yeniden kontrol yapın.",
+        "Gaz ölçümü gerektiğinde uygulayın.",
+        "Acil kurtarma planını doğrulayın."
       ],
       "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
-      "supervisor_script": "Arkadaşlar, bugün kazıya izin, yeraltı hatları, zemin koşulları ve koruyucu sistem doğrulanmadan girmiyoruz. Hafriyat ve ağır ekipman kazı kenarından güvenli mesafede olacak. Merdiven ve bariyerleri kontrol edeceğiz. Çatlak, su girişi, titreşim veya zemin hareketi görürseniz kazıya yaklaşmayın; işi durdurup hemen bildirin. Program baskısı hiçbir zaman korumasız kazıya girmeyi haklı çıkarmaz.",
+      "supervisor_script": "Bugün kazıya girmeden önce izinleri, yeraltı hatlarını ve kazı korumasını birlikte kontrol edeceğiz. Korumasız kazıya girmeyeceğiz. Kazı kenarında gereksiz personel bulunmayacak ve ağır ekipman güvenli mesafede çalışacak.",
       "questions_title": "EKİBE SORULACAK SORULAR",
       "questions": [
         "Kazı izni onaylı mı?",
@@ -1007,7 +1002,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SERNEM HSE Resource — Kazı izni, yeraltı tesisat kontrolü, koruyucu sistem ve saha prosedürleri önceliklidir."
+      "footer": "SERNEM HSE Resource — Excavation Safety"
     },
     "en": {
       "title": "EXCAVATION SAFETY TOOLBOX TALK",
@@ -1015,52 +1010,47 @@ export const toolboxData = [
       "application_subtitle": "Hazards, control measures and daily pre-work verification.",
       "duration": "8–10 MINUTES",
       "objective_title": "OBJECTIVE",
-      "objective": "Control collapse, underground-service strikes, falls, flooding, hazardous atmospheres and mobile-equipment hazards during excavation and trenching, and verify permits, ground conditions, utilities, protective systems, safe access and emergency arrangements before entry.",
+      "objective": "Prevent trench collapse, utility strikes, falls and equipment hazards during excavation work.",
       "explanation_title": "TOPIC EXPLANATION",
       "explanation": [
-        "Excavation safety cannot be determined by depth alone. Soil type, previous fill, water, rainfall, vibration, nearby structures, traffic and surcharge loads at the edge must be assessed together.",
-        "Underground electrical, gas, water, process and communication services must be located using current drawings, site markings and suitable detection methods. Where the exact location remains uncertain, an approved controlled-excavation method must be used.",
-        "Where collapse hazards exist, suitable sloping, benching, shoring or an engineered trench box must be provided. Personnel must not enter until the protective system is complete.",
-        "Spoil, materials and heavy equipment must remain a safe distance from the excavation edge. Surcharge loads and equipment vibration can cause apparently stable ground to fail suddenly.",
-        "Safe access and egress must be maintained. Ladders must be positioned securely and excavation edges protected against falls.",
-        "A competent person must inspect the excavation before the shift and after rain, water ingress, vibration, cracking or any change in ground conditions."
+        "Verify permits and underground utilities before excavation.",
+        "Provide sloping, shoring or trench boxes where required.",
+        "Inspect excavations daily and after weather or ground changes."
       ],
       "scenario_title": "REALISTIC SITE SCENARIO",
       "scenario": [
-        "A crew entered a 2.5-metre-deep pipeline excavation before the shoring system was complete. Spoil was stored close to the edge and an excavator was operating immediately beside the trench.",
-        "Vibration and the additional edge load caused cracking in the trench wall. Seconds later part of the sidewall collapsed and a worker was exposed to the burial zone.",
-        "Completing the protective system, moving spoil and equipment away from the edge and completing a competent-person inspection before entry would have prevented the event."
+        "Workers entered an unsupported trench.",
+        "The sidewall collapsed after equipment vibration.",
+        "Proper trench protection would have prevented the incident."
       ],
       "remember_title": "REMEMBER",
-      "remember": "An excavation that looked safe a few minutes ago may no longer be safe. If you see cracking, water, vibration or ground movement, stay out, stop work and request reassessment.",
+      "remember": "Never enter an unprotected excavation.",
       "hazards_title": "KEY HAZARDS",
       "hazards": [
-        "Sudden collapse of excavation or trench walls.",
-        "Contact with underground electrical cables or electrical arcing.",
-        "Damage to gas, fuel, water or process pipelines.",
-        "People, equipment or materials falling into the excavation.",
-        "Water ingress, flooding or loss of ground stability.",
-        "Collision or crushing involving excavators and vehicles.",
-        "Oxygen deficiency or flammable or toxic atmospheres.",
-        "Entrapment caused by inadequate access and egress."
+        "Collapse",
+        "Underground utilities",
+        "Flooding",
+        "Heavy equipment",
+        "Falls",
+        "Falling material",
+        "Poor access",
+        "Atmospheric hazards"
       ],
       "controls_title": "CONTROL MEASURES",
       "controls": [
-        "Verify the valid excavation permit and approved work method.",
-        "Locate and mark underground services using suitable methods.",
-        "Have ground conditions assessed by a competent person.",
-        "Provide sloping, benching, shoring or a trench box where required.",
-        "Keep spoil, materials and equipment a safe distance from the edge.",
-        "Protect excavation edges with suitable barriers and edge protection.",
-        "Provide secure ladders or another suitable access and egress system.",
-        "Establish safe equipment clearances and spotter arrangements.",
-        "Provide atmospheric testing and ventilation where required.",
-        "Reinspect after rain, vibration, water ingress or ground changes.",
-        "Stop work immediately when collapse indicators or protective-system defects are identified.",
-        "Verify emergency and rescue arrangements before work begins."
+        "Verify permit.",
+        "Locate underground services.",
+        "Use trench protection.",
+        "Provide ladders.",
+        "Barricade excavation.",
+        "Keep spoil away from edge.",
+        "Maintain equipment clearance.",
+        "Inspect after rain.",
+        "Gas test if required.",
+        "Prepare emergency plan."
       ],
       "supervisor_title": "SUPERVISOR TALKING SCRIPT",
-      "supervisor_script": "Team, no one will enter today's excavation until the permit, underground services, ground conditions and protective system have been verified. Spoil and heavy equipment will remain a safe distance from the edge. We will check access and barricading before entry. If you see cracking, water ingress, vibration or ground movement, stay out, stop the work and report it immediately. Schedule pressure never justifies entering an unprotected excavation.",
+      "supervisor_script": "No one will enter an excavation until permits, trench protection and access have been verified.",
       "questions_title": "DISCUSSION QUESTIONS",
       "questions": [
         "Is the permit approved?",
@@ -1097,7 +1087,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SERNEM HSE Resource — Excavation permits, underground-service controls, protective systems and site procedures take priority."
+      "footer": "SERNEM HSE Resource — Excavation Safety"
     }
   },
   {
@@ -1110,7 +1100,7 @@ export const toolboxData = [
       "application_subtitle": "Yangın tehlikeleri, kontrol önlemleri ve acil durum hazırlığı.",
       "duration": "8–10 DAKİKA",
       "objective_title": "AMAÇ",
-      "objective": "Yangın üçgenini oluşturan yakıt, ısı ve oksijen kaynaklarını kontrol ederek yangın oluşmasını önlemek; sıcak çalışma, yanıcı malzeme, elektrik ve gaz kaynaklı riskleri değerlendirmek ve alarm, ilk müdahale, tahliye ve toplanma düzenlemelerini işe başlamadan doğrulamaktır.",
+      "objective": "Yangınların oluşmasını önlemek, erken müdahaleyi sağlamak ve personelin güvenli tahliyesini desteklemektir.",
       "explanation_title": "KONU ANLATIMI",
       "explanation": [
         "Yangın; yakıt, oksijen ve ısı bir araya geldiğinde oluşur. Bu üç unsurdan biri ortadan kaldırıldığında yangın kontrol altına alınabilir.",
@@ -1127,30 +1117,30 @@ export const toolboxData = [
       "remember": "Küçük bir kıvılcım büyük bir yangına dönüşebilir. Önlemek, söndürmekten daha güvenlidir.",
       "hazards_title": "TEMEL TEHLİKELER",
       "hazards": [
-        "Kaynak, kesme ve taşlama kıvılcımlarının yanıcı malzemeleri tutuşturması.",
-        "Yanıcı sıvı, gaz veya buharların kontrolsüz şekilde açığa çıkması.",
-        "Gaz tüpleri, hortumlar veya regülatörlerde sızıntı.",
-        "Hasarlı elektrik ekipmanı, kısa devre veya aşırı yükleme.",
-        "Yanıcı atıkların ve malzemelerin uygunsuz depolanması.",
-        "Sigara kurallarının ihlal edilmesi ve kontrolsüz ateş kaynakları.",
-        "Kaçış yolları veya yangın ekipmanlarının engellenmesi.",
-        "Yangın sonrası duman, toksik gaz ve görüş kaybı."
+        "Sıcak çalışmalar",
+        "Yanıcı sıvılar",
+        "Gaz kaçakları",
+        "Elektrik arızaları",
+        "Sigara kullanımı",
+        "Kötü housekeeping",
+        "Aşırı yüklenmiş elektrik tesisatı",
+        "Uygunsuz depolama"
       ],
       "controls_title": "KONTROL ÖNLEMLERİ",
       "controls": [
-        "Yanıcı ve parlayıcı malzemeleri uygun şekilde depolayın ve ateş kaynaklarından ayırın.",
-        "Sıcak çalışma gereken işlerde geçerli izin ve yangın gözcüsü sağlayın.",
-        "İşe uygun yangın söndürücülerin erişilebilir ve kontrol edilmiş olduğunu doğrulayın.",
-        "Kaçış yolları, acil çıkışlar ve alarm noktalarını sürekli açık tutun.",
-        "Gaz tüplerini dik, sabit ve uygun şekilde ayrılmış durumda depolayın.",
-        "Elektrik arızası, aşırı ısınma veya yanık kokusunda ekipmanı kullanmayı bırakın.",
-        "Yanıcı atıkları uygun kaplarda toplayın ve düzenli olarak uzaklaştırın.",
-        "Sigara kullanımını yalnızca belirlenmiş alanlarla sınırlandırın.",
-        "Yangın durumunda alarm verme, tahliye ve toplanma prosedürünü bilin.",
-        "Yalnızca güvenli ve eğitim kapsamında ise başlangıç aşamasındaki yangına müdahale edin."
+        "Hot Work Permit uygulayın.",
+        "Yanıcı malzemeleri uzaklaştırın.",
+        "Yangın söndürücüleri kontrol edin.",
+        "Kaçış yollarını açık tutun.",
+        "Yangın gözcüsü görevlendirin.",
+        "Elektrik arızalarını bildirin.",
+        "Housekeeping kurallarına uyun.",
+        "Gaz tüplerini doğru depolayın.",
+        "PASS yöntemini bilin.",
+        "Alarm durumunda tahliye olun."
       ],
       "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
-      "supervisor_script": "Arkadaşlar, bugün yangın riskini yalnızca söndürücü bulunup bulunmadığıyla değerlendirmeyeceğiz. Yanıcı maddeleri, kıvılcım ve sıcak yüzeyleri, elektrik ekipmanını, gaz tüplerini, kaçış yollarını ve alarm noktalarını kontrol edeceğiz. Yangın çıkarsa önce alarm verilecek ve insanlar güvenli alana yönlendirilecek. Eğitimli değilseniz veya yangın büyüyorsa müdahale etmeyin; tahliye olun ve acil durum prosedürünü uygulayın.",
+      "supervisor_script": "Bugün sıcak çalışma alanlarını, yangın söndürücüleri ve kaçış yollarını kontrol edeceğiz. Yanıcı malzemeler uzaklaştırılacak ve herkes en yakın alarm noktasını bilecek.",
       "questions_title": "EKİBE SORULACAK SORULAR",
       "questions": [
         "En yakın yangın söndürücü nerede?",
@@ -1187,7 +1177,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları",
-      "footer": "SERNEM HSE Resource — Yangın risk değerlendirmesi, acil durum planı, sıcak çalışma izni ve saha prosedürleri önceliklidir."
+      "footer": "SERNEM HSE Resource — Fire Safety"
     },
     "en": {
       "title": "FIRE SAFETY TOOLBOX TALK",
@@ -1195,7 +1185,7 @@ export const toolboxData = [
       "application_subtitle": "Fire hazards, control measures and emergency preparedness.",
       "duration": "8–10 MINUTES",
       "objective_title": "OBJECTIVE",
-      "objective": "Prevent fire by controlling fuel, heat and oxygen sources; assess hazards associated with hot work, combustible materials, electrical equipment and gases; and verify alarm, initial response, evacuation and assembly arrangements before work begins.",
+      "objective": "Prevent fires, support early response and ensure safe evacuation of personnel.",
       "explanation_title": "TOPIC EXPLANATION",
       "explanation": [
         "Fire requires fuel, oxygen and heat. Removing one of these elements helps prevent or control fire.",
@@ -1212,30 +1202,30 @@ export const toolboxData = [
       "remember": "Preventing a fire is always safer than fighting one.",
       "hazards_title": "KEY HAZARDS",
       "hazards": [
-        "Welding, cutting or grinding sparks igniting combustible materials.",
-        "Uncontrolled release of flammable liquids, gases or vapours.",
-        "Leaks from gas cylinders, hoses or regulators.",
-        "Damaged electrical equipment, short circuits or overloaded circuits.",
-        "Unsafe storage of combustible materials and waste.",
-        "Smoking violations and uncontrolled ignition sources.",
-        "Blocked escape routes or inaccessible firefighting equipment.",
-        "Smoke, toxic combustion products and loss of visibility."
+        "Hot work",
+        "Flammable liquids",
+        "Gas leaks",
+        "Electrical faults",
+        "Smoking",
+        "Poor housekeeping",
+        "Overloaded circuits",
+        "Improper storage"
       ],
       "controls_title": "CONTROL MEASURES",
       "controls": [
-        "Store flammable and combustible materials correctly and away from ignition sources.",
-        "Use an approved hot-work permit and dedicated fire watch where required.",
-        "Verify that suitable inspected extinguishers are immediately accessible.",
-        "Keep escape routes, emergency exits and alarm points unobstructed.",
-        "Store gas cylinders upright, secured and correctly segregated.",
-        "Remove electrical equipment from service if overheating, damage or burning odour is identified.",
-        "Collect combustible waste in suitable containers and remove it regularly.",
-        "Restrict smoking to designated areas.",
-        "Know the alarm, evacuation and assembly-point procedure.",
-        "Attempt initial firefighting only when trained, conditions are safe and escape remains available."
+        "Apply Hot Work Permit.",
+        "Remove combustible materials.",
+        "Inspect fire extinguishers.",
+        "Keep escape routes clear.",
+        "Assign a fire watch.",
+        "Report electrical defects.",
+        "Maintain good housekeeping.",
+        "Store gas cylinders correctly.",
+        "Know the PASS method.",
+        "Evacuate when alarms sound."
       ],
       "supervisor_title": "SUPERVISOR TALKING SCRIPT",
-      "supervisor_script": "Team, today we will assess more than whether an extinguisher is present. We will check combustibles, sparks and hot surfaces, electrical equipment, gas cylinders, escape routes and alarm points. If a fire occurs, raise the alarm first and move people to safety. Do not attempt firefighting unless you are trained, conditions are safe and you have a clear escape route. If the fire grows, evacuate and follow the emergency procedure.",
+      "supervisor_script": "Today we will verify hot work controls, extinguishers and escape routes. Everyone must know the nearest alarm point and assembly area.",
       "questions_title": "DISCUSSION QUESTIONS",
       "questions": [
         "Where is the nearest extinguisher?",
@@ -1272,7 +1262,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SERNEM HSE Resource — Fire risk assessments, emergency plans, hot-work permits and site procedures take priority."
+      "footer": "SERNEM HSE Resource — Fire Safety"
     }
   },
   {
@@ -1325,7 +1315,7 @@ export const toolboxData = [
         "Arızalı forklifti kullanmayın."
       ],
       "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
-      "supervisor_script": "Arkadaşlar, bugün forklift operatörleri hareket başlamadan önce kullanım öncesi kontrolü tamamlayacak. Yük ağırlığı ve kapasite doğrulanacak, yük mümkün olduğunca alçakta taşınacak ve yayalarla forkliftler ayrılacak. Yük görüşü kapatıyorsa güvenli şekilde geri sürüş veya spotter kullanılacak. Emniyet kemeri zorunludur. Kavşak ve kör noktalarda hız düşürülecek. Güvenli çalışmayı etkileyen herhangi bir arızada forklift derhal kullanımdan kaldırılacak.",
+      "supervisor_script": "Bugün forklift kullanan tüm operatörler günlük kontrollerini tamamlayacak. Yük görüşü engelliyorsa geri sürüş veya spotter kullanılacak. Yayalara öncelik verilecek, emniyet kemeri takılacak ve hız limitlerine kesinlikle uyulacaktır.",
       "questions_title": "EKİBE SORULACAK SORULAR",
       "questions": [
         "Forklift günlük kontrolü tamamlandı mı?",
@@ -1362,7 +1352,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SERNEM HSE Resource — Üretici talimatları, trafik yönetim planı, kapasite limitleri ve saha forklift prosedürleri önceliklidir."
+      "footer": "SERNEM HSE Resource — Forklift Safety"
     },
     "en": {
       "title": "FORKLIFT SAFETY TOOLBOX TALK",
@@ -1373,12 +1363,9 @@ export const toolboxData = [
       "objective": "Review forklift hazards including overturning, collisions, dropped loads, blind spots and pedestrian safety while applying safe operating practices.",
       "explanation_title": "TOPIC EXPLANATION",
       "explanation": [
-        "Only trained, authorised and medically fit operators may operate forklifts. Before each shift, inspect brakes, steering, tyres, forks, mast, hydraulics, horn, lights, reversing alarm, seat belt and safety devices.",
-        "The rated capacity shown on the data plate must never be exceeded. Load weight, centre of gravity, attachment use and load position can significantly affect forklift stability.",
-        "Loads must be stable, centred and carried as low as practicable. If the load blocks forward visibility, travel in reverse where safe or use an agreed spotter.",
-        "Pedestrians and forklifts must be separated wherever practicable. Operators must slow down at doors, intersections and blind corners and sound the horn where required.",
-        "Seat belts must be worn. During an overturn, the operator should remain inside the protective zone rather than attempting to jump from the truck.",
-        "When parking, lower the forks fully, select neutral, apply the parking brake, switch off and prevent unauthorised use."
+        "Only trained and authorised operators may operate forklifts. Complete daily inspections before use.",
+        "Carry loads low, stable and within rated capacity. Use reverse travel or a spotter when the load blocks visibility.",
+        "Wear the seat belt, obey site speed limits and always give way to pedestrians."
       ],
       "scenario_title": "REALISTIC SITE SCENARIO",
       "scenario": [
@@ -1390,32 +1377,30 @@ export const toolboxData = [
       "remember": "A forklift is a material handling vehicle, not a personnel carrier.",
       "hazards_title": "KEY HAZARDS",
       "hazards": [
-        "Overturning due to speed, turning, slopes or unstable loads.",
-        "Dropped or unstable loads striking personnel.",
-        "Pedestrians entering blind spots or travel routes.",
-        "Exceeding rated capacity or incorrect load-centre position.",
-        "Restricted visibility during forward travel.",
-        "Failure to use the operator restraint or seat belt.",
-        "Loss of control on ramps, slopes or poor ground.",
-        "Defective equipment or operation by unauthorised personnel."
+        "Overturning",
+        "Dropped loads",
+        "Blind spots",
+        "Pedestrian collisions",
+        "Overloading",
+        "Excessive speed",
+        "No seat belt",
+        "Unauthorised operators"
       ],
       "controls_title": "CONTROL MEASURES",
       "controls": [
-        "Allow only trained and authorised operators to use the forklift.",
-        "Complete and record the pre-use inspection before the shift.",
-        "Confirm load weight and forklift rated capacity before lifting.",
-        "Keep loads stable, centred and as low as practicable during travel.",
-        "Travel in reverse or use a spotter when forward visibility is obstructed.",
-        "Maintain separation from pedestrians and obey site traffic controls.",
-        "Reduce speed at intersections, doorways, corners and congested areas.",
-        "Wear the seat belt and remain within the operator protective zone.",
-        "Follow the approved method when travelling or parking on slopes.",
-        "Lower forks, apply the parking brake and isolate the forklift when parked.",
-        "Never carry passengers unless an approved passenger seat is provided.",
-        "Remove defective forklifts from service and report the defect."
+        "Complete the daily inspection.",
+        "Use authorised operators only.",
+        "Wear the seat belt.",
+        "Carry loads low.",
+        "Use reverse travel or a spotter if visibility is blocked.",
+        "Follow pedestrian controls.",
+        "Obey speed limits.",
+        "Lower forks before parking.",
+        "Apply the parking brake.",
+        "Remove defective forklifts from service."
       ],
       "supervisor_title": "SUPERVISOR TALKING SCRIPT",
-      "supervisor_script": "Team, today's forklift operators will complete the pre-use inspection before movement begins. We will confirm load weight and capacity, keep loads low and maintain separation from pedestrians. If a load blocks visibility, the operator will reverse where safe or use a spotter. Seat belts are mandatory. Slow down at intersections and blind corners, and never allow anyone beneath raised forks or loads. Any defect affecting safe operation means the forklift is removed from service.",
+      "supervisor_script": "Today we will verify daily inspections, ensure seat belts are worn, keep loads low and use spotters where visibility is limited. Pedestrians always have priority.",
       "questions_title": "DISCUSSION QUESTIONS",
       "questions": [
         "Has the daily inspection been completed?",
@@ -1452,7 +1437,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SERNEM HSE Resource — Manufacturer instructions, traffic-management plans, rated-capacity limits and site forklift procedures take priority."
+      "footer": "SERNEM HSE Resource — Forklift Safety"
     }
   },
   {
@@ -2030,7 +2015,7 @@ export const toolboxData = [
         "Gerekirse çalışma alanını bariyerleyin."
       ],
       "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
-      "supervisor_script": "Arkadaşlar, bugün merdiven kullanmadan önce ilk olarak merdivenin bu iş için doğru erişim yöntemi olup olmadığını değerlendireceğiz. Her merdiven kontrol edilecek, sağlam zemine doğru açıyla kurulacak ve gerektiğinde sabitlenecek. Tırmanırken üç temas noktası korunacak, yana uzanmak yerine merdiven yeniden konumlandırılacak ve yasaklı üst basamaklarda çalışılmayacak. Hasarlı, dengesiz veya trafik ya da elektrik tehlikesine maruz merdiven kullanılmayacak.",
+      "supervisor_script": "Bugün tüm merdivenler kullanılmadan önce kontrol edilecek. Hasarlı merdiven kullanılmayacak. 4:1 açısı uygulanacak, üç temas noktası korunacak ve kimse üst basamakta çalışmayacak.",
       "questions_title": "EKİBE SORULACAK SORULAR",
       "questions": [
         "Merdiven kontrol edildi mi?",
@@ -2067,7 +2052,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları",
-      "footer": "SERNEM HSE Resource — Yüksekte çalışma risk değerlendirmesi, üretici talimatları ve saha merdiven prosedürleri önceliklidir."
+      "footer": "SERNEM HSE Resource — Ladder Safety"
     },
     "en": {
       "title": "LADDER SAFETY TOOLBOX TALK",
@@ -2075,15 +2060,12 @@ export const toolboxData = [
       "application_subtitle": "Hazards, safe use and daily pre-work verification.",
       "duration": "8–10 MINUTES",
       "objective_title": "OBJECTIVE",
-      "objective": "Prevent falls, slips and ladder instability by selecting the correct access equipment, inspecting it before use, positioning and securing it correctly, maintaining safe body position and avoiding tasks for which a ladder is not suitable.",
+      "objective": "Ensure the safe use of portable and fixed ladders while preventing falls, slips, overturning and misuse.",
       "explanation_title": "TOPIC EXPLANATION",
       "explanation": [
-        "A ladder should be used only when the task is short-duration and the risk assessment confirms that safer access equipment such as a scaffold or work platform is not reasonably required.",
-        "Inspect the ladder before use. Check stiles, rungs, feet, locks, hinges, ropes and labels. Damaged, contaminated, modified or makeshift ladders must be removed from service.",
-        "Position the ladder on firm, level and non-slip ground. Leaning ladders should use the appropriate safe angle and must be secured against movement where required.",
-        "Maintain three points of contact while climbing. Carry tools in a belt or suitable container so that both hands remain available for climbing.",
-        "Keep your body between the stiles. Do not overreach or work from prohibited top steps; climb down and reposition the ladder.",
-        "Assess nearby electrical conductors, doors, traffic routes and moving equipment before positioning the ladder. Use suitable non-conductive equipment where electrical exposure exists."
+        "Use ladders only for short-duration, low-risk work.",
+        "Inspect ladders before use and remove damaged ladders from service.",
+        "Apply the 4:1 rule, maintain three points of contact and position the ladder on stable ground."
       ],
       "scenario_title": "REALISTIC SITE SCENARIO",
       "scenario": [
@@ -2095,32 +2077,30 @@ export const toolboxData = [
       "remember": "A ladder provides access, not a work platform.",
       "hazards_title": "KEY HAZARDS",
       "hazards": [
-        "Damaged, modified or makeshift ladders.",
-        "Incorrect angle or failure to secure the ladder.",
-        "Soft, uneven, wet or slippery supporting surfaces.",
-        "Standing on prohibited top steps or overreaching.",
-        "Loss of three-point contact while climbing.",
-        "Metal ladders or conductive equipment near electrical hazards.",
-        "Ladder struck by doors, vehicles or mobile equipment.",
-        "Carrying loads that prevent safe climbing and grip."
+        "Damaged ladders",
+        "Incorrect angle",
+        "Unstable ground",
+        "Standing on the top step",
+        "Overreaching",
+        "Metal ladders near electricity",
+        "Unsecured ladders",
+        "Carrying loads while climbing"
       ],
       "controls_title": "CONTROL MEASURES",
       "controls": [
-        "Confirm that a ladder is the correct access equipment for the task.",
-        "Inspect the ladder before every use.",
-        "Remove damaged or defective ladders from service and tag them.",
-        "Place the ladder on firm, level and non-slip ground.",
-        "Use the correct safe angle for leaning ladders.",
-        "Secure the ladder against slipping or movement where required.",
-        "Maintain three points of contact while climbing.",
-        "Keep the body between the stiles and reposition instead of overreaching.",
-        "Do not stand on prohibited top steps or use closed stepladders as leaning ladders.",
-        "Keep hands free by using a tool belt or suitable lifting method.",
-        "Assess electrical hazards and use suitable non-conductive ladders where required.",
-        "Protect the ladder from doors, vehicles and pedestrian traffic."
+        "Inspect before use.",
+        "Apply the 4:1 rule.",
+        "Maintain three points of contact.",
+        "Secure the ladder.",
+        "Do not stand on the top step.",
+        "Reposition instead of overreaching.",
+        "Use fiberglass ladders near electricity.",
+        "Check anti-slip feet.",
+        "Remove damaged ladders from service.",
+        "Barricade the area if necessary."
       ],
       "supervisor_title": "SUPERVISOR TALKING SCRIPT",
-      "supervisor_script": "Team, before anyone uses a ladder today, we will first confirm that a ladder is suitable for the task. Every ladder will be inspected and positioned on firm ground, at the correct angle and secured where required. Maintain three points of contact, keep your body between the stiles and climb down to reposition instead of overreaching. Do not work from prohibited top steps. If the ladder is damaged, unstable or exposed to traffic or electrical hazards, stop and select a safer method.",
+      "supervisor_script": "Today all ladders will be inspected before use. We will apply the 4:1 rule, maintain three points of contact and never work from the top step.",
       "questions_title": "DISCUSSION QUESTIONS",
       "questions": [
         "Has the ladder been inspected?",
@@ -2157,7 +2137,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SERNEM HSE Resource — Work-at-height risk assessments, manufacturer instructions and site ladder procedures take priority."
+      "footer": "SERNEM HSE Resource — Ladder Safety"
     }
   },
   {
@@ -2518,9 +2498,9 @@ export const toolboxData = [
       "title": "ELLE TAŞIMA TOOLBOX TALK",
       "subtitle": "Yükleri doğru değerlendirin, güvenli kaldırın ve gereksiz zorlanmayı önleyin.",
       "application_subtitle": "Kaldırma, taşıma, itme, çekme ve elle konumlandırma işleri öncesinde uygulanır.",
-      "duration": "8–10 DAKİKA",
+      "duration": "5–7 DAKİKA",
       "objective_title": "AMAÇ",
-      "objective": "Elle kaldırma, indirme, taşıma, itme ve çekme işlerinde kas-iskelet yaralanmalarını önlemek; işe başlamadan önce görevin, yükün, çalışma ortamının ve kişinin kapasitesinin değerlendirilmesini ve mümkün olduğunda mekanik yardım kullanılmasını sağlamaktır.",
+      "objective": "Elle taşıma sırasında bel, sırt, omuz, el ve kas-iskelet yaralanmalarını önlemek; yükün, çalışma alanının ve kişinin kapasitesinin işe başlamadan önce değerlendirilmesini sağlamak.",
       "explanation_title": "KONU ANLATIMI",
       "explanation": [
         "Elle taşıma yalnızca ağır yüklerin kaldırılması değildir. Taşıma, indirme, itme, çekme, tutma ve tekrarlı hareketler de kas-iskelet sistemini zorlayabilir.",
@@ -2535,33 +2515,40 @@ export const toolboxData = [
         "Çalışan yükü kaldırırken belinden ani şekilde dönerek yaralanır."
       ],
       "remember_title": "UNUTMAYIN",
-      "remember": "Yükü kaldırabiliyor olmanız onu elle kaldırmanız gerektiği anlamına gelmez. Yük, mesafe, tutuş, çalışma yüksekliği veya güzergâh güvenli değilse mekanik yardım kullanın veya destek isteyin.",
+      "remember": [
+        "Yükü kaldırmadan önce ağırlığını ve ağırlık merkezini değerlendirin.",
+        "Ayaklarınızı dengeli konumlandırın ve yükü vücudunuza yakın tutun.",
+        "Belden eğilmek yerine dizlerinizi bükün.",
+        "Yük taşırken gövdenizi döndürmeyin; ayaklarınızla yön değiştirin.",
+        "Yardım istemek zayıflık değil, doğru güvenlik davranışıdır."
+      ],
       "hazards_title": "ANA TEHLİKELER",
       "hazards": [
-        "Ağır, hacimli, dengesiz veya tutması zor yükler.",
-        "Belden eğilme, dönme ve ani kaldırma hareketleri.",
-        "Uzun taşıma mesafesi veya uygunsuz çalışma yüksekliği.",
-        "El ve parmakların yük ile yüzey arasında sıkışması.",
-        "Yükün görüş alanını kapatması.",
-        "Kaygan, düzensiz veya engelli taşıma güzergâhı.",
-        "Tekrarlı kaldırma, itme veya çekme hareketleri.",
-        "Kişinin fiziksel kapasitesini aşan yük veya görev."
+        "Bel ve sırt incinmeleri",
+        "Kas zorlanmaları ve burkulmalar",
+        "El ve parmak sıkışmaları",
+        "Yükün düşmesi",
+        "Kayma, takılma ve düşme",
+        "Görüşün engellenmesi",
+        "Tekrarlı hareketlere bağlı zorlanmalar"
       ],
       "controls_title": "TEMEL KONTROLLER",
       "controls": [
-        "Görevi, yükü, çalışma ortamını ve kişisel kapasiteyi işe başlamadan değerlendirin.",
-        "Mümkün olduğunda forklift, transpalet, vinç, trolley veya başka mekanik yardım kullanın.",
-        "Yükün ağırlığını, boyutunu, ağırlık merkezini ve tutma noktalarını doğrulayın.",
-        "Taşıma güzergâhını önceden kontrol edin ve engelleri kaldırın.",
-        "Yükü vücuda yakın tutun ve dengeli ayak pozisyonu kullanın.",
-        "Ani kaldırma ve gövdeyi yük altında döndürmekten kaçının.",
-        "Ekip kaldırmasında yöntemi önceden belirleyin ve tek koordinatör kullanın.",
-        "Parmak ve elleri sıkışma noktalarından uzak tutun.",
-        "Görüşü kapatan yüklerde yardım alın veya taşıma yöntemini değiştirin.",
-        "Yorgunluk, ağrı veya kontrol kaybı hissederseniz işi durdurun ve yeniden değerlendirin."
+        "Yükü kaldırmadan önce ağırlığını, boyutunu, şeklini ve tutma noktalarını değerlendirin.",
+        "Mekanik kaldırma ve taşıma ekipmanlarını öncelikli olarak kullanın.",
+        "Taşıma yolunu önceden kontrol edin ve engelleri kaldırın.",
+        "Gerekli olduğunda ekip halinde kaldırma yapın ve tek bir kişiyi yönlendirme için belirleyin.",
+        "Yükü vücuda yakın tutun ve ani hareketlerden kaçının.",
+        "Uygun eldiven ve iş ayakkabısı kullanın.",
+        "Kapasitenizi aşan veya kontrol edemediğiniz yükleri kaldırmayın."
       ],
       "supervisor_title": "SUPERVISOR KONUŞMA METNİ",
-      "supervisor_script": "Arkadaşlar, bugün elle taşıma işlerinde yalnızca yükün kilosuna bakmayacağız. Yükün şekli, tutma noktaları, ağırlık merkezi, taşıma mesafesi, güzergâh ve çalışma yüksekliğini değerlendireceğiz. Mekanik yardım varsa öncelikle onu kullanacağız. Yük görüşünüzü kapatıyorsa, kontrol edemiyorsanız veya tek kişi için uygun değilse zorlamayın; destek isteyin. Ekip kaldırmasında tek kişi komut verecek ve ellerimizi sıkışma noktalarından uzak tutacağız.",
+      "supervisor_script": [
+        "Bugün elle taşıma sırasında en çok hangi işlerde zorlanıyoruz?",
+        "Sahada kullanabileceğimiz mekanik yardımcı ekipmanlar nelerdir?",
+        "Taşıma yolu üzerinde yük taşımayı zorlaştıran engeller var mı?",
+        "Tek kişiyle yapılmaması gereken işler hangileridir?"
+      ],
       "questions_title": "EKİBE SORULAR",
       "questions": [
         "Bu yükü tek başınıza güvenli şekilde kaldırabilir misiniz?",
@@ -2592,15 +2579,15 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "NOTLAR",
-      "footer": "SERNEM HSE Resource — Ergonomi değerlendirmesi, mekanik yardım seçenekleri, risk değerlendirmesi ve saha prosedürleri önceliklidir."
+      "footer": "Bu toolbox genel rehberlik sağlar. Sahaya özgü risk değerlendirmesi, iş yöntemi ve şirket prosedürleri uygulanmalıdır."
     },
     "en": {
       "title": "MANUAL HANDLING TOOLBOX TALK",
       "subtitle": "Assess loads correctly, lift safely and prevent unnecessary strain.",
       "application_subtitle": "Use before lifting, carrying, pushing, pulling or manually positioning loads.",
-      "duration": "8–10 MINUTES",
+      "duration": "5–7 MINUTES",
       "objective_title": "OBJECTIVE",
-      "objective": "Prevent musculoskeletal injuries during lifting, lowering, carrying, pushing and pulling by assessing the task, load, working environment and individual capability before starting and by using mechanical assistance wherever practicable.",
+      "objective": "Prevent back, shoulder, hand and musculoskeletal injuries during manual handling by assessing the load, work area and individual capacity before starting.",
       "explanation_title": "TOPIC EXPLANATION",
       "explanation": [
         "Manual handling includes lifting, lowering, carrying, pushing, pulling, holding and repetitive movements.",
@@ -2615,33 +2602,40 @@ export const toolboxData = [
         "The worker twists while lifting and suffers a back injury."
       ],
       "remember_title": "REMEMBER",
-      "remember": "Being physically able to lift a load does not mean it should be lifted manually. If the load, distance, grip, working height or route is unsafe, use mechanical assistance or ask for help.",
+      "remember": [
+        "Assess the load and centre of gravity before lifting.",
+        "Keep a stable stance and hold the load close to your body.",
+        "Bend your knees instead of bending from the waist.",
+        "Turn with your feet instead of twisting your torso.",
+        "Asking for assistance is the correct safety decision."
+      ],
       "hazards_title": "MAIN HAZARDS",
       "hazards": [
-        "Heavy, bulky, unstable or difficult-to-grip loads.",
-        "Bending, twisting or sudden lifting movements.",
-        "Long carrying distances or unsuitable working heights.",
-        "Hands and fingers trapped between the load and surrounding surfaces.",
-        "Loads restricting the worker's field of vision.",
-        "Slippery, uneven or obstructed carrying routes.",
-        "Repetitive lifting, pushing or pulling.",
-        "Tasks or loads exceeding individual physical capability."
+        "Back and spinal injuries",
+        "Muscle strains and sprains",
+        "Hand and finger trapping",
+        "Dropped loads",
+        "Slips, trips and falls",
+        "Restricted visibility",
+        "Repetitive strain injuries"
       ],
       "controls_title": "KEY CONTROLS",
       "controls": [
-        "Assess the task, load, environment and individual capability before starting.",
-        "Use forklifts, pallet trucks, cranes, trolleys or other mechanical aids wherever practicable.",
-        "Confirm the load weight, size, centre of gravity and grip points.",
-        "Inspect the carrying route and remove obstacles before movement.",
-        "Keep the load close to the body and maintain a stable stance.",
-        "Avoid sudden lifting and twisting the torso while carrying a load.",
-        "Plan team lifts in advance and use one person to coordinate movement.",
-        "Keep hands and fingers clear of trapping and pinch points.",
-        "Obtain assistance or change the method when the load restricts visibility.",
-        "Stop and reassess if fatigue, pain or loss of control develops."
+        "Assess the load's weight, size, shape and grip points.",
+        "Use mechanical lifting and transport equipment wherever possible.",
+        "Inspect and clear the carrying route before starting.",
+        "Use team lifting where required and appoint one person to coordinate.",
+        "Keep the load close to the body and avoid sudden movements.",
+        "Wear suitable gloves and safety footwear.",
+        "Do not lift loads beyond your safe capacity or control."
       ],
       "supervisor_title": "SUPERVISOR SCRIPT",
-      "supervisor_script": "Team, today we will assess more than the weight of anything we move manually. Consider the load shape, grip points, centre of gravity, carrying distance, route and working height. Use mechanical assistance whenever it is available and suitable. If the load blocks your view, cannot be controlled safely or requires more than one person, do not force the lift. During team handling, one person will coordinate the movement and everyone will keep hands clear of pinch points.",
+      "supervisor_script": [
+        "Which manual-handling tasks create the most difficulty today?",
+        "What mechanical aids are available in our work area?",
+        "Are there obstacles along the planned carrying route?",
+        "Which tasks must not be completed by one person?"
+      ],
       "questions_title": "QUESTIONS FOR THE TEAM",
       "questions": [
         "Can you safely control this load alone?",
@@ -2672,7 +2666,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "NOTES",
-      "footer": "SERNEM HSE Resource — Ergonomic assessments, mechanical-handling options, risk assessments and site procedures take priority."
+      "footer": "This toolbox provides general guidance. Apply site-specific risk assessments, work methods and company procedures."
     }
   },
   {

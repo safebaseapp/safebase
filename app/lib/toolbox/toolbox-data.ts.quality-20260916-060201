@@ -925,52 +925,47 @@ export const toolboxData = [
       "application_subtitle": "Tehlikeler, kontrol önlemleri ve günlük iş öncesi doğrulama.",
       "duration": "8–10 DAKİKA",
       "objective_title": "AMAÇ",
-      "objective": "Kazı ve hendek çalışmalarında göçük, yeraltı tesisatına temas, düşme, su baskını, tehlikeli atmosfer ve hareketli ekipman risklerini kontrol etmek; işe başlamadan önce izin, zemin koşulları, yeraltı hatları, koruyucu sistem, güvenli erişim ve acil durum düzenlemelerini doğrulamaktır.",
+      "objective": "Kazı çalışmalarında göçük, yeraltı tesisatları, düşme, ağır ekipman ve atmosferik tehlikeleri değerlendirerek güvenli çalışma koşullarını sağlamaktır.",
       "explanation_title": "KONU ANLATIMI",
       "explanation": [
-        "Kazı güvenliği yalnızca derinlikle belirlenmez. Zemin tipi, önceki dolgular, su, yağmur, titreşim, yakındaki yapılar, trafik ve kazı kenarındaki yükler birlikte değerlendirilmelidir.",
-        "Yeraltı elektrik, gaz, su, proses ve haberleşme hatları güncel çizimler, saha işaretlemeleri ve uygun tespit yöntemleriyle belirlenmelidir. Hat konumu kesin değilse onaylı kontrollü kazı yöntemi uygulanmalıdır.",
-        "Göçük riski bulunan kazılarda uygun şevlendirme, kademelendirme, iksa veya mühendislik onaylı trench box kullanılmalıdır. Koruyucu sistem tamamlanmadan personel kazıya girmemelidir.",
-        "Hafriyat, malzeme ve ağır ekipman kazı kenarından güvenli mesafede tutulmalıdır. Kenar yükü ve ekipman titreşimi stabil görünen zeminin aniden göçmesine neden olabilir.",
-        "Kazıya güvenli giriş ve çıkış sağlanmalı; merdiven sağlam zemine yerleştirilmeli ve kazı çevresi düşmeye karşı korunmalıdır.",
-        "Kazı vardiya öncesinde ve yağmur, su girişi, titreşim, çatlak veya zemin değişikliği sonrasında yetkin kişi tarafından yeniden kontrol edilmelidir."
+        "Her kazı çalışması başlamadan önce kazı izni, yeraltı hatları ve çalışma yöntemi doğrulanmalıdır.",
+        "1,2 m ve üzerindeki kazılarda uygun koruma yöntemi (şevlendirme, iksa veya trench box) değerlendirilmelidir.",
+        "Kazı günlük olarak ve yağmur, titreşim veya zemin değişikliğinden sonra yeniden kontrol edilmelidir."
       ],
       "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
       "scenario": [
-        "Yaklaşık 2,5 metre derinliğindeki boru hattı kazısında ekip, iksa tamamlanmadan kazıya girdi. Hafriyat kazı kenarına yakın istiflenmiş ve hemen yanında ekskavatör çalışıyordu.",
-        "Ekskavatör titreşimi ve kenardaki ilave yük nedeniyle kazı duvarında çatlak oluştu. Birkaç saniye sonra yan duvarın bir bölümü çöktü ve çalışanlardan biri göçük hattında kaldı.",
-        "Koruyucu sistemin tamamlanması, hafriyat ve ekipmanın kenardan uzaklaştırılması ve giriş öncesi yetkin kişi kontrolü olayın oluşmasını önleyebilirdi."
+        "Bir ekip 2,5 m derinliğindeki kazıda şevlendirme yapmadan çalışmaya başladı.",
+        "Ekskavatör çalışırken gevşeyen toprak aniden göçtü ve çalışan bel hizasına kadar toprak altında kaldı.",
+        "Kazı koruması, güvenli mesafe ve günlük kontrol uygulanmış olsaydı olay yaşanmayacaktı."
       ],
       "remember_title": "UNUTMAYIN",
-      "remember": "Kazının birkaç dakika önce güvenli görünmesi şu anda güvenli olduğu anlamına gelmez. Çatlak, su, titreşim veya zemin hareketi görürseniz kazıya girmeyin ve işi durdurun.",
+      "remember": "Korumasız kazıya girmek birkaç saniye içinde ölümcül bir göçüğe neden olabilir.",
       "hazards_title": "TEMEL TEHLİKELER",
       "hazards": [
-        "Kazı veya hendek duvarının ani göçmesi.",
-        "Yeraltı elektrik kablosuna temas veya ark oluşması.",
-        "Gaz, yakıt, su veya proses hattının hasar görmesi.",
-        "Personel, ekipman veya malzemenin kazıya düşmesi.",
-        "Su girişi veya zeminin stabilitesini kaybetmesi.",
-        "Ekskavatör ve araçlarla çarpışma veya sıkışma.",
-        "Oksijen yetersizliği, yanıcı veya toksik atmosfer.",
-        "Yetersiz giriş-çıkış nedeniyle mahsur kalma."
+        "Kazı göçmesi",
+        "Yeraltı elektrik kabloları",
+        "Gaz veya ürün hatları",
+        "Su baskını",
+        "Ağır ekipman hareketi",
+        "Kazıya düşme",
+        "Malzeme düşmesi",
+        "Yetersiz giriş-çıkış"
       ],
       "controls_title": "KONTROL ÖNLEMLERİ",
       "controls": [
-        "Geçerli kazı iznini ve onaylı çalışma yöntemini doğrulayın.",
-        "Yeraltı tesisatlarını uygun yöntemlerle belirleyip işaretleyin.",
-        "Zemin koşullarını yetkin kişi tarafından değerlendirin.",
-        "Gerektiğinde şev, kademe, iksa veya trench box kullanın.",
-        "Hafriyat, malzeme ve ekipmanı kazı kenarından güvenli mesafede tutun.",
-        "Kazı çevresini uygun bariyer ve kenar korumasıyla güvenli hale getirin.",
-        "Güvenli merdiven veya uygun giriş-çıkış sistemi sağlayın.",
-        "Mobil ekipman için güvenli yaklaşma mesafesi ve spotter düzeni oluşturun.",
-        "Atmosferik risk varsa uygun gaz ölçümü ve havalandırma sağlayın.",
-        "Yağmur, titreşim, su veya zemin değişikliğinden sonra yeniden kontrol yapın.",
-        "Göçük belirtisi veya koruyucu sistem arızasında işi derhal durdurun.",
-        "Acil durum ve kurtarma düzenlemelerini işe başlamadan doğrulayın."
+        "Kazı iznini doğrulayın.",
+        "Yeraltı hatlarını belirleyin.",
+        "Şevlendirme, iksa veya trench box kullanın.",
+        "Kazıya güvenli merdiven sağlayın.",
+        "Kazı kenarını bariyerleyin.",
+        "Toprağı kenardan uzak istifleyin.",
+        "Ağır ekipmanı güvenli mesafede tutun.",
+        "Yağmur sonrası yeniden kontrol yapın.",
+        "Gaz ölçümü gerektiğinde uygulayın.",
+        "Acil kurtarma planını doğrulayın."
       ],
       "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
-      "supervisor_script": "Arkadaşlar, bugün kazıya izin, yeraltı hatları, zemin koşulları ve koruyucu sistem doğrulanmadan girmiyoruz. Hafriyat ve ağır ekipman kazı kenarından güvenli mesafede olacak. Merdiven ve bariyerleri kontrol edeceğiz. Çatlak, su girişi, titreşim veya zemin hareketi görürseniz kazıya yaklaşmayın; işi durdurup hemen bildirin. Program baskısı hiçbir zaman korumasız kazıya girmeyi haklı çıkarmaz.",
+      "supervisor_script": "Bugün kazıya girmeden önce izinleri, yeraltı hatlarını ve kazı korumasını birlikte kontrol edeceğiz. Korumasız kazıya girmeyeceğiz. Kazı kenarında gereksiz personel bulunmayacak ve ağır ekipman güvenli mesafede çalışacak.",
       "questions_title": "EKİBE SORULACAK SORULAR",
       "questions": [
         "Kazı izni onaylı mı?",
@@ -1007,7 +1002,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SERNEM HSE Resource — Kazı izni, yeraltı tesisat kontrolü, koruyucu sistem ve saha prosedürleri önceliklidir."
+      "footer": "SERNEM HSE Resource — Excavation Safety"
     },
     "en": {
       "title": "EXCAVATION SAFETY TOOLBOX TALK",
@@ -1015,52 +1010,47 @@ export const toolboxData = [
       "application_subtitle": "Hazards, control measures and daily pre-work verification.",
       "duration": "8–10 MINUTES",
       "objective_title": "OBJECTIVE",
-      "objective": "Control collapse, underground-service strikes, falls, flooding, hazardous atmospheres and mobile-equipment hazards during excavation and trenching, and verify permits, ground conditions, utilities, protective systems, safe access and emergency arrangements before entry.",
+      "objective": "Prevent trench collapse, utility strikes, falls and equipment hazards during excavation work.",
       "explanation_title": "TOPIC EXPLANATION",
       "explanation": [
-        "Excavation safety cannot be determined by depth alone. Soil type, previous fill, water, rainfall, vibration, nearby structures, traffic and surcharge loads at the edge must be assessed together.",
-        "Underground electrical, gas, water, process and communication services must be located using current drawings, site markings and suitable detection methods. Where the exact location remains uncertain, an approved controlled-excavation method must be used.",
-        "Where collapse hazards exist, suitable sloping, benching, shoring or an engineered trench box must be provided. Personnel must not enter until the protective system is complete.",
-        "Spoil, materials and heavy equipment must remain a safe distance from the excavation edge. Surcharge loads and equipment vibration can cause apparently stable ground to fail suddenly.",
-        "Safe access and egress must be maintained. Ladders must be positioned securely and excavation edges protected against falls.",
-        "A competent person must inspect the excavation before the shift and after rain, water ingress, vibration, cracking or any change in ground conditions."
+        "Verify permits and underground utilities before excavation.",
+        "Provide sloping, shoring or trench boxes where required.",
+        "Inspect excavations daily and after weather or ground changes."
       ],
       "scenario_title": "REALISTIC SITE SCENARIO",
       "scenario": [
-        "A crew entered a 2.5-metre-deep pipeline excavation before the shoring system was complete. Spoil was stored close to the edge and an excavator was operating immediately beside the trench.",
-        "Vibration and the additional edge load caused cracking in the trench wall. Seconds later part of the sidewall collapsed and a worker was exposed to the burial zone.",
-        "Completing the protective system, moving spoil and equipment away from the edge and completing a competent-person inspection before entry would have prevented the event."
+        "Workers entered an unsupported trench.",
+        "The sidewall collapsed after equipment vibration.",
+        "Proper trench protection would have prevented the incident."
       ],
       "remember_title": "REMEMBER",
-      "remember": "An excavation that looked safe a few minutes ago may no longer be safe. If you see cracking, water, vibration or ground movement, stay out, stop work and request reassessment.",
+      "remember": "Never enter an unprotected excavation.",
       "hazards_title": "KEY HAZARDS",
       "hazards": [
-        "Sudden collapse of excavation or trench walls.",
-        "Contact with underground electrical cables or electrical arcing.",
-        "Damage to gas, fuel, water or process pipelines.",
-        "People, equipment or materials falling into the excavation.",
-        "Water ingress, flooding or loss of ground stability.",
-        "Collision or crushing involving excavators and vehicles.",
-        "Oxygen deficiency or flammable or toxic atmospheres.",
-        "Entrapment caused by inadequate access and egress."
+        "Collapse",
+        "Underground utilities",
+        "Flooding",
+        "Heavy equipment",
+        "Falls",
+        "Falling material",
+        "Poor access",
+        "Atmospheric hazards"
       ],
       "controls_title": "CONTROL MEASURES",
       "controls": [
-        "Verify the valid excavation permit and approved work method.",
-        "Locate and mark underground services using suitable methods.",
-        "Have ground conditions assessed by a competent person.",
-        "Provide sloping, benching, shoring or a trench box where required.",
-        "Keep spoil, materials and equipment a safe distance from the edge.",
-        "Protect excavation edges with suitable barriers and edge protection.",
-        "Provide secure ladders or another suitable access and egress system.",
-        "Establish safe equipment clearances and spotter arrangements.",
-        "Provide atmospheric testing and ventilation where required.",
-        "Reinspect after rain, vibration, water ingress or ground changes.",
-        "Stop work immediately when collapse indicators or protective-system defects are identified.",
-        "Verify emergency and rescue arrangements before work begins."
+        "Verify permit.",
+        "Locate underground services.",
+        "Use trench protection.",
+        "Provide ladders.",
+        "Barricade excavation.",
+        "Keep spoil away from edge.",
+        "Maintain equipment clearance.",
+        "Inspect after rain.",
+        "Gas test if required.",
+        "Prepare emergency plan."
       ],
       "supervisor_title": "SUPERVISOR TALKING SCRIPT",
-      "supervisor_script": "Team, no one will enter today's excavation until the permit, underground services, ground conditions and protective system have been verified. Spoil and heavy equipment will remain a safe distance from the edge. We will check access and barricading before entry. If you see cracking, water ingress, vibration or ground movement, stay out, stop the work and report it immediately. Schedule pressure never justifies entering an unprotected excavation.",
+      "supervisor_script": "No one will enter an excavation until permits, trench protection and access have been verified.",
       "questions_title": "DISCUSSION QUESTIONS",
       "questions": [
         "Is the permit approved?",
@@ -1097,7 +1087,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SERNEM HSE Resource — Excavation permits, underground-service controls, protective systems and site procedures take priority."
+      "footer": "SERNEM HSE Resource — Excavation Safety"
     }
   },
   {
@@ -1110,7 +1100,7 @@ export const toolboxData = [
       "application_subtitle": "Yangın tehlikeleri, kontrol önlemleri ve acil durum hazırlığı.",
       "duration": "8–10 DAKİKA",
       "objective_title": "AMAÇ",
-      "objective": "Yangın üçgenini oluşturan yakıt, ısı ve oksijen kaynaklarını kontrol ederek yangın oluşmasını önlemek; sıcak çalışma, yanıcı malzeme, elektrik ve gaz kaynaklı riskleri değerlendirmek ve alarm, ilk müdahale, tahliye ve toplanma düzenlemelerini işe başlamadan doğrulamaktır.",
+      "objective": "Yangınların oluşmasını önlemek, erken müdahaleyi sağlamak ve personelin güvenli tahliyesini desteklemektir.",
       "explanation_title": "KONU ANLATIMI",
       "explanation": [
         "Yangın; yakıt, oksijen ve ısı bir araya geldiğinde oluşur. Bu üç unsurdan biri ortadan kaldırıldığında yangın kontrol altına alınabilir.",
@@ -1127,30 +1117,30 @@ export const toolboxData = [
       "remember": "Küçük bir kıvılcım büyük bir yangına dönüşebilir. Önlemek, söndürmekten daha güvenlidir.",
       "hazards_title": "TEMEL TEHLİKELER",
       "hazards": [
-        "Kaynak, kesme ve taşlama kıvılcımlarının yanıcı malzemeleri tutuşturması.",
-        "Yanıcı sıvı, gaz veya buharların kontrolsüz şekilde açığa çıkması.",
-        "Gaz tüpleri, hortumlar veya regülatörlerde sızıntı.",
-        "Hasarlı elektrik ekipmanı, kısa devre veya aşırı yükleme.",
-        "Yanıcı atıkların ve malzemelerin uygunsuz depolanması.",
-        "Sigara kurallarının ihlal edilmesi ve kontrolsüz ateş kaynakları.",
-        "Kaçış yolları veya yangın ekipmanlarının engellenmesi.",
-        "Yangın sonrası duman, toksik gaz ve görüş kaybı."
+        "Sıcak çalışmalar",
+        "Yanıcı sıvılar",
+        "Gaz kaçakları",
+        "Elektrik arızaları",
+        "Sigara kullanımı",
+        "Kötü housekeeping",
+        "Aşırı yüklenmiş elektrik tesisatı",
+        "Uygunsuz depolama"
       ],
       "controls_title": "KONTROL ÖNLEMLERİ",
       "controls": [
-        "Yanıcı ve parlayıcı malzemeleri uygun şekilde depolayın ve ateş kaynaklarından ayırın.",
-        "Sıcak çalışma gereken işlerde geçerli izin ve yangın gözcüsü sağlayın.",
-        "İşe uygun yangın söndürücülerin erişilebilir ve kontrol edilmiş olduğunu doğrulayın.",
-        "Kaçış yolları, acil çıkışlar ve alarm noktalarını sürekli açık tutun.",
-        "Gaz tüplerini dik, sabit ve uygun şekilde ayrılmış durumda depolayın.",
-        "Elektrik arızası, aşırı ısınma veya yanık kokusunda ekipmanı kullanmayı bırakın.",
-        "Yanıcı atıkları uygun kaplarda toplayın ve düzenli olarak uzaklaştırın.",
-        "Sigara kullanımını yalnızca belirlenmiş alanlarla sınırlandırın.",
-        "Yangın durumunda alarm verme, tahliye ve toplanma prosedürünü bilin.",
-        "Yalnızca güvenli ve eğitim kapsamında ise başlangıç aşamasındaki yangına müdahale edin."
+        "Hot Work Permit uygulayın.",
+        "Yanıcı malzemeleri uzaklaştırın.",
+        "Yangın söndürücüleri kontrol edin.",
+        "Kaçış yollarını açık tutun.",
+        "Yangın gözcüsü görevlendirin.",
+        "Elektrik arızalarını bildirin.",
+        "Housekeeping kurallarına uyun.",
+        "Gaz tüplerini doğru depolayın.",
+        "PASS yöntemini bilin.",
+        "Alarm durumunda tahliye olun."
       ],
       "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
-      "supervisor_script": "Arkadaşlar, bugün yangın riskini yalnızca söndürücü bulunup bulunmadığıyla değerlendirmeyeceğiz. Yanıcı maddeleri, kıvılcım ve sıcak yüzeyleri, elektrik ekipmanını, gaz tüplerini, kaçış yollarını ve alarm noktalarını kontrol edeceğiz. Yangın çıkarsa önce alarm verilecek ve insanlar güvenli alana yönlendirilecek. Eğitimli değilseniz veya yangın büyüyorsa müdahale etmeyin; tahliye olun ve acil durum prosedürünü uygulayın.",
+      "supervisor_script": "Bugün sıcak çalışma alanlarını, yangın söndürücüleri ve kaçış yollarını kontrol edeceğiz. Yanıcı malzemeler uzaklaştırılacak ve herkes en yakın alarm noktasını bilecek.",
       "questions_title": "EKİBE SORULACAK SORULAR",
       "questions": [
         "En yakın yangın söndürücü nerede?",
@@ -1187,7 +1177,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları",
-      "footer": "SERNEM HSE Resource — Yangın risk değerlendirmesi, acil durum planı, sıcak çalışma izni ve saha prosedürleri önceliklidir."
+      "footer": "SERNEM HSE Resource — Fire Safety"
     },
     "en": {
       "title": "FIRE SAFETY TOOLBOX TALK",
@@ -1195,7 +1185,7 @@ export const toolboxData = [
       "application_subtitle": "Fire hazards, control measures and emergency preparedness.",
       "duration": "8–10 MINUTES",
       "objective_title": "OBJECTIVE",
-      "objective": "Prevent fire by controlling fuel, heat and oxygen sources; assess hazards associated with hot work, combustible materials, electrical equipment and gases; and verify alarm, initial response, evacuation and assembly arrangements before work begins.",
+      "objective": "Prevent fires, support early response and ensure safe evacuation of personnel.",
       "explanation_title": "TOPIC EXPLANATION",
       "explanation": [
         "Fire requires fuel, oxygen and heat. Removing one of these elements helps prevent or control fire.",
@@ -1212,30 +1202,30 @@ export const toolboxData = [
       "remember": "Preventing a fire is always safer than fighting one.",
       "hazards_title": "KEY HAZARDS",
       "hazards": [
-        "Welding, cutting or grinding sparks igniting combustible materials.",
-        "Uncontrolled release of flammable liquids, gases or vapours.",
-        "Leaks from gas cylinders, hoses or regulators.",
-        "Damaged electrical equipment, short circuits or overloaded circuits.",
-        "Unsafe storage of combustible materials and waste.",
-        "Smoking violations and uncontrolled ignition sources.",
-        "Blocked escape routes or inaccessible firefighting equipment.",
-        "Smoke, toxic combustion products and loss of visibility."
+        "Hot work",
+        "Flammable liquids",
+        "Gas leaks",
+        "Electrical faults",
+        "Smoking",
+        "Poor housekeeping",
+        "Overloaded circuits",
+        "Improper storage"
       ],
       "controls_title": "CONTROL MEASURES",
       "controls": [
-        "Store flammable and combustible materials correctly and away from ignition sources.",
-        "Use an approved hot-work permit and dedicated fire watch where required.",
-        "Verify that suitable inspected extinguishers are immediately accessible.",
-        "Keep escape routes, emergency exits and alarm points unobstructed.",
-        "Store gas cylinders upright, secured and correctly segregated.",
-        "Remove electrical equipment from service if overheating, damage or burning odour is identified.",
-        "Collect combustible waste in suitable containers and remove it regularly.",
-        "Restrict smoking to designated areas.",
-        "Know the alarm, evacuation and assembly-point procedure.",
-        "Attempt initial firefighting only when trained, conditions are safe and escape remains available."
+        "Apply Hot Work Permit.",
+        "Remove combustible materials.",
+        "Inspect fire extinguishers.",
+        "Keep escape routes clear.",
+        "Assign a fire watch.",
+        "Report electrical defects.",
+        "Maintain good housekeeping.",
+        "Store gas cylinders correctly.",
+        "Know the PASS method.",
+        "Evacuate when alarms sound."
       ],
       "supervisor_title": "SUPERVISOR TALKING SCRIPT",
-      "supervisor_script": "Team, today we will assess more than whether an extinguisher is present. We will check combustibles, sparks and hot surfaces, electrical equipment, gas cylinders, escape routes and alarm points. If a fire occurs, raise the alarm first and move people to safety. Do not attempt firefighting unless you are trained, conditions are safe and you have a clear escape route. If the fire grows, evacuate and follow the emergency procedure.",
+      "supervisor_script": "Today we will verify hot work controls, extinguishers and escape routes. Everyone must know the nearest alarm point and assembly area.",
       "questions_title": "DISCUSSION QUESTIONS",
       "questions": [
         "Where is the nearest extinguisher?",
@@ -1272,7 +1262,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SERNEM HSE Resource — Fire risk assessments, emergency plans, hot-work permits and site procedures take priority."
+      "footer": "SERNEM HSE Resource — Fire Safety"
     }
   },
   {
@@ -1325,7 +1315,7 @@ export const toolboxData = [
         "Arızalı forklifti kullanmayın."
       ],
       "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
-      "supervisor_script": "Arkadaşlar, bugün forklift operatörleri hareket başlamadan önce kullanım öncesi kontrolü tamamlayacak. Yük ağırlığı ve kapasite doğrulanacak, yük mümkün olduğunca alçakta taşınacak ve yayalarla forkliftler ayrılacak. Yük görüşü kapatıyorsa güvenli şekilde geri sürüş veya spotter kullanılacak. Emniyet kemeri zorunludur. Kavşak ve kör noktalarda hız düşürülecek. Güvenli çalışmayı etkileyen herhangi bir arızada forklift derhal kullanımdan kaldırılacak.",
+      "supervisor_script": "Bugün forklift kullanan tüm operatörler günlük kontrollerini tamamlayacak. Yük görüşü engelliyorsa geri sürüş veya spotter kullanılacak. Yayalara öncelik verilecek, emniyet kemeri takılacak ve hız limitlerine kesinlikle uyulacaktır.",
       "questions_title": "EKİBE SORULACAK SORULAR",
       "questions": [
         "Forklift günlük kontrolü tamamlandı mı?",
@@ -1362,7 +1352,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları / ek saha talimatları",
-      "footer": "SERNEM HSE Resource — Üretici talimatları, trafik yönetim planı, kapasite limitleri ve saha forklift prosedürleri önceliklidir."
+      "footer": "SERNEM HSE Resource — Forklift Safety"
     },
     "en": {
       "title": "FORKLIFT SAFETY TOOLBOX TALK",
@@ -1373,12 +1363,9 @@ export const toolboxData = [
       "objective": "Review forklift hazards including overturning, collisions, dropped loads, blind spots and pedestrian safety while applying safe operating practices.",
       "explanation_title": "TOPIC EXPLANATION",
       "explanation": [
-        "Only trained, authorised and medically fit operators may operate forklifts. Before each shift, inspect brakes, steering, tyres, forks, mast, hydraulics, horn, lights, reversing alarm, seat belt and safety devices.",
-        "The rated capacity shown on the data plate must never be exceeded. Load weight, centre of gravity, attachment use and load position can significantly affect forklift stability.",
-        "Loads must be stable, centred and carried as low as practicable. If the load blocks forward visibility, travel in reverse where safe or use an agreed spotter.",
-        "Pedestrians and forklifts must be separated wherever practicable. Operators must slow down at doors, intersections and blind corners and sound the horn where required.",
-        "Seat belts must be worn. During an overturn, the operator should remain inside the protective zone rather than attempting to jump from the truck.",
-        "When parking, lower the forks fully, select neutral, apply the parking brake, switch off and prevent unauthorised use."
+        "Only trained and authorised operators may operate forklifts. Complete daily inspections before use.",
+        "Carry loads low, stable and within rated capacity. Use reverse travel or a spotter when the load blocks visibility.",
+        "Wear the seat belt, obey site speed limits and always give way to pedestrians."
       ],
       "scenario_title": "REALISTIC SITE SCENARIO",
       "scenario": [
@@ -1390,32 +1377,30 @@ export const toolboxData = [
       "remember": "A forklift is a material handling vehicle, not a personnel carrier.",
       "hazards_title": "KEY HAZARDS",
       "hazards": [
-        "Overturning due to speed, turning, slopes or unstable loads.",
-        "Dropped or unstable loads striking personnel.",
-        "Pedestrians entering blind spots or travel routes.",
-        "Exceeding rated capacity or incorrect load-centre position.",
-        "Restricted visibility during forward travel.",
-        "Failure to use the operator restraint or seat belt.",
-        "Loss of control on ramps, slopes or poor ground.",
-        "Defective equipment or operation by unauthorised personnel."
+        "Overturning",
+        "Dropped loads",
+        "Blind spots",
+        "Pedestrian collisions",
+        "Overloading",
+        "Excessive speed",
+        "No seat belt",
+        "Unauthorised operators"
       ],
       "controls_title": "CONTROL MEASURES",
       "controls": [
-        "Allow only trained and authorised operators to use the forklift.",
-        "Complete and record the pre-use inspection before the shift.",
-        "Confirm load weight and forklift rated capacity before lifting.",
-        "Keep loads stable, centred and as low as practicable during travel.",
-        "Travel in reverse or use a spotter when forward visibility is obstructed.",
-        "Maintain separation from pedestrians and obey site traffic controls.",
-        "Reduce speed at intersections, doorways, corners and congested areas.",
-        "Wear the seat belt and remain within the operator protective zone.",
-        "Follow the approved method when travelling or parking on slopes.",
-        "Lower forks, apply the parking brake and isolate the forklift when parked.",
-        "Never carry passengers unless an approved passenger seat is provided.",
-        "Remove defective forklifts from service and report the defect."
+        "Complete the daily inspection.",
+        "Use authorised operators only.",
+        "Wear the seat belt.",
+        "Carry loads low.",
+        "Use reverse travel or a spotter if visibility is blocked.",
+        "Follow pedestrian controls.",
+        "Obey speed limits.",
+        "Lower forks before parking.",
+        "Apply the parking brake.",
+        "Remove defective forklifts from service."
       ],
       "supervisor_title": "SUPERVISOR TALKING SCRIPT",
-      "supervisor_script": "Team, today's forklift operators will complete the pre-use inspection before movement begins. We will confirm load weight and capacity, keep loads low and maintain separation from pedestrians. If a load blocks visibility, the operator will reverse where safe or use a spotter. Seat belts are mandatory. Slow down at intersections and blind corners, and never allow anyone beneath raised forks or loads. Any defect affecting safe operation means the forklift is removed from service.",
+      "supervisor_script": "Today we will verify daily inspections, ensure seat belts are worn, keep loads low and use spotters where visibility is limited. Pedestrians always have priority.",
       "questions_title": "DISCUSSION QUESTIONS",
       "questions": [
         "Has the daily inspection been completed?",
@@ -1452,7 +1437,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SERNEM HSE Resource — Manufacturer instructions, traffic-management plans, rated-capacity limits and site forklift procedures take priority."
+      "footer": "SERNEM HSE Resource — Forklift Safety"
     }
   },
   {
@@ -2030,7 +2015,7 @@ export const toolboxData = [
         "Gerekirse çalışma alanını bariyerleyin."
       ],
       "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
-      "supervisor_script": "Arkadaşlar, bugün merdiven kullanmadan önce ilk olarak merdivenin bu iş için doğru erişim yöntemi olup olmadığını değerlendireceğiz. Her merdiven kontrol edilecek, sağlam zemine doğru açıyla kurulacak ve gerektiğinde sabitlenecek. Tırmanırken üç temas noktası korunacak, yana uzanmak yerine merdiven yeniden konumlandırılacak ve yasaklı üst basamaklarda çalışılmayacak. Hasarlı, dengesiz veya trafik ya da elektrik tehlikesine maruz merdiven kullanılmayacak.",
+      "supervisor_script": "Bugün tüm merdivenler kullanılmadan önce kontrol edilecek. Hasarlı merdiven kullanılmayacak. 4:1 açısı uygulanacak, üç temas noktası korunacak ve kimse üst basamakta çalışmayacak.",
       "questions_title": "EKİBE SORULACAK SORULAR",
       "questions": [
         "Merdiven kontrol edildi mi?",
@@ -2067,7 +2052,7 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "Süpervizör notları",
-      "footer": "SERNEM HSE Resource — Yüksekte çalışma risk değerlendirmesi, üretici talimatları ve saha merdiven prosedürleri önceliklidir."
+      "footer": "SERNEM HSE Resource — Ladder Safety"
     },
     "en": {
       "title": "LADDER SAFETY TOOLBOX TALK",
@@ -2075,15 +2060,12 @@ export const toolboxData = [
       "application_subtitle": "Hazards, safe use and daily pre-work verification.",
       "duration": "8–10 MINUTES",
       "objective_title": "OBJECTIVE",
-      "objective": "Prevent falls, slips and ladder instability by selecting the correct access equipment, inspecting it before use, positioning and securing it correctly, maintaining safe body position and avoiding tasks for which a ladder is not suitable.",
+      "objective": "Ensure the safe use of portable and fixed ladders while preventing falls, slips, overturning and misuse.",
       "explanation_title": "TOPIC EXPLANATION",
       "explanation": [
-        "A ladder should be used only when the task is short-duration and the risk assessment confirms that safer access equipment such as a scaffold or work platform is not reasonably required.",
-        "Inspect the ladder before use. Check stiles, rungs, feet, locks, hinges, ropes and labels. Damaged, contaminated, modified or makeshift ladders must be removed from service.",
-        "Position the ladder on firm, level and non-slip ground. Leaning ladders should use the appropriate safe angle and must be secured against movement where required.",
-        "Maintain three points of contact while climbing. Carry tools in a belt or suitable container so that both hands remain available for climbing.",
-        "Keep your body between the stiles. Do not overreach or work from prohibited top steps; climb down and reposition the ladder.",
-        "Assess nearby electrical conductors, doors, traffic routes and moving equipment before positioning the ladder. Use suitable non-conductive equipment where electrical exposure exists."
+        "Use ladders only for short-duration, low-risk work.",
+        "Inspect ladders before use and remove damaged ladders from service.",
+        "Apply the 4:1 rule, maintain three points of contact and position the ladder on stable ground."
       ],
       "scenario_title": "REALISTIC SITE SCENARIO",
       "scenario": [
@@ -2095,32 +2077,30 @@ export const toolboxData = [
       "remember": "A ladder provides access, not a work platform.",
       "hazards_title": "KEY HAZARDS",
       "hazards": [
-        "Damaged, modified or makeshift ladders.",
-        "Incorrect angle or failure to secure the ladder.",
-        "Soft, uneven, wet or slippery supporting surfaces.",
-        "Standing on prohibited top steps or overreaching.",
-        "Loss of three-point contact while climbing.",
-        "Metal ladders or conductive equipment near electrical hazards.",
-        "Ladder struck by doors, vehicles or mobile equipment.",
-        "Carrying loads that prevent safe climbing and grip."
+        "Damaged ladders",
+        "Incorrect angle",
+        "Unstable ground",
+        "Standing on the top step",
+        "Overreaching",
+        "Metal ladders near electricity",
+        "Unsecured ladders",
+        "Carrying loads while climbing"
       ],
       "controls_title": "CONTROL MEASURES",
       "controls": [
-        "Confirm that a ladder is the correct access equipment for the task.",
-        "Inspect the ladder before every use.",
-        "Remove damaged or defective ladders from service and tag them.",
-        "Place the ladder on firm, level and non-slip ground.",
-        "Use the correct safe angle for leaning ladders.",
-        "Secure the ladder against slipping or movement where required.",
-        "Maintain three points of contact while climbing.",
-        "Keep the body between the stiles and reposition instead of overreaching.",
-        "Do not stand on prohibited top steps or use closed stepladders as leaning ladders.",
-        "Keep hands free by using a tool belt or suitable lifting method.",
-        "Assess electrical hazards and use suitable non-conductive ladders where required.",
-        "Protect the ladder from doors, vehicles and pedestrian traffic."
+        "Inspect before use.",
+        "Apply the 4:1 rule.",
+        "Maintain three points of contact.",
+        "Secure the ladder.",
+        "Do not stand on the top step.",
+        "Reposition instead of overreaching.",
+        "Use fiberglass ladders near electricity.",
+        "Check anti-slip feet.",
+        "Remove damaged ladders from service.",
+        "Barricade the area if necessary."
       ],
       "supervisor_title": "SUPERVISOR TALKING SCRIPT",
-      "supervisor_script": "Team, before anyone uses a ladder today, we will first confirm that a ladder is suitable for the task. Every ladder will be inspected and positioned on firm ground, at the correct angle and secured where required. Maintain three points of contact, keep your body between the stiles and climb down to reposition instead of overreaching. Do not work from prohibited top steps. If the ladder is damaged, unstable or exposed to traffic or electrical hazards, stop and select a safer method.",
+      "supervisor_script": "Today all ladders will be inspected before use. We will apply the 4:1 rule, maintain three points of contact and never work from the top step.",
       "questions_title": "DISCUSSION QUESTIONS",
       "questions": [
         "Has the ladder been inspected?",
@@ -2157,7 +2137,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "Supervisor notes",
-      "footer": "SERNEM HSE Resource — Work-at-height risk assessments, manufacturer instructions and site ladder procedures take priority."
+      "footer": "SERNEM HSE Resource — Ladder Safety"
     }
   },
   {
@@ -2518,9 +2498,9 @@ export const toolboxData = [
       "title": "ELLE TAŞIMA TOOLBOX TALK",
       "subtitle": "Yükleri doğru değerlendirin, güvenli kaldırın ve gereksiz zorlanmayı önleyin.",
       "application_subtitle": "Kaldırma, taşıma, itme, çekme ve elle konumlandırma işleri öncesinde uygulanır.",
-      "duration": "8–10 DAKİKA",
+      "duration": "5–7 DAKİKA",
       "objective_title": "AMAÇ",
-      "objective": "Elle kaldırma, indirme, taşıma, itme ve çekme işlerinde kas-iskelet yaralanmalarını önlemek; işe başlamadan önce görevin, yükün, çalışma ortamının ve kişinin kapasitesinin değerlendirilmesini ve mümkün olduğunda mekanik yardım kullanılmasını sağlamaktır.",
+      "objective": "Elle taşıma sırasında bel, sırt, omuz, el ve kas-iskelet yaralanmalarını önlemek; yükün, çalışma alanının ve kişinin kapasitesinin işe başlamadan önce değerlendirilmesini sağlamak.",
       "explanation_title": "KONU ANLATIMI",
       "explanation": [
         "Elle taşıma yalnızca ağır yüklerin kaldırılması değildir. Taşıma, indirme, itme, çekme, tutma ve tekrarlı hareketler de kas-iskelet sistemini zorlayabilir.",
@@ -2535,33 +2515,40 @@ export const toolboxData = [
         "Çalışan yükü kaldırırken belinden ani şekilde dönerek yaralanır."
       ],
       "remember_title": "UNUTMAYIN",
-      "remember": "Yükü kaldırabiliyor olmanız onu elle kaldırmanız gerektiği anlamına gelmez. Yük, mesafe, tutuş, çalışma yüksekliği veya güzergâh güvenli değilse mekanik yardım kullanın veya destek isteyin.",
+      "remember": [
+        "Yükü kaldırmadan önce ağırlığını ve ağırlık merkezini değerlendirin.",
+        "Ayaklarınızı dengeli konumlandırın ve yükü vücudunuza yakın tutun.",
+        "Belden eğilmek yerine dizlerinizi bükün.",
+        "Yük taşırken gövdenizi döndürmeyin; ayaklarınızla yön değiştirin.",
+        "Yardım istemek zayıflık değil, doğru güvenlik davranışıdır."
+      ],
       "hazards_title": "ANA TEHLİKELER",
       "hazards": [
-        "Ağır, hacimli, dengesiz veya tutması zor yükler.",
-        "Belden eğilme, dönme ve ani kaldırma hareketleri.",
-        "Uzun taşıma mesafesi veya uygunsuz çalışma yüksekliği.",
-        "El ve parmakların yük ile yüzey arasında sıkışması.",
-        "Yükün görüş alanını kapatması.",
-        "Kaygan, düzensiz veya engelli taşıma güzergâhı.",
-        "Tekrarlı kaldırma, itme veya çekme hareketleri.",
-        "Kişinin fiziksel kapasitesini aşan yük veya görev."
+        "Bel ve sırt incinmeleri",
+        "Kas zorlanmaları ve burkulmalar",
+        "El ve parmak sıkışmaları",
+        "Yükün düşmesi",
+        "Kayma, takılma ve düşme",
+        "Görüşün engellenmesi",
+        "Tekrarlı hareketlere bağlı zorlanmalar"
       ],
       "controls_title": "TEMEL KONTROLLER",
       "controls": [
-        "Görevi, yükü, çalışma ortamını ve kişisel kapasiteyi işe başlamadan değerlendirin.",
-        "Mümkün olduğunda forklift, transpalet, vinç, trolley veya başka mekanik yardım kullanın.",
-        "Yükün ağırlığını, boyutunu, ağırlık merkezini ve tutma noktalarını doğrulayın.",
-        "Taşıma güzergâhını önceden kontrol edin ve engelleri kaldırın.",
-        "Yükü vücuda yakın tutun ve dengeli ayak pozisyonu kullanın.",
-        "Ani kaldırma ve gövdeyi yük altında döndürmekten kaçının.",
-        "Ekip kaldırmasında yöntemi önceden belirleyin ve tek koordinatör kullanın.",
-        "Parmak ve elleri sıkışma noktalarından uzak tutun.",
-        "Görüşü kapatan yüklerde yardım alın veya taşıma yöntemini değiştirin.",
-        "Yorgunluk, ağrı veya kontrol kaybı hissederseniz işi durdurun ve yeniden değerlendirin."
+        "Yükü kaldırmadan önce ağırlığını, boyutunu, şeklini ve tutma noktalarını değerlendirin.",
+        "Mekanik kaldırma ve taşıma ekipmanlarını öncelikli olarak kullanın.",
+        "Taşıma yolunu önceden kontrol edin ve engelleri kaldırın.",
+        "Gerekli olduğunda ekip halinde kaldırma yapın ve tek bir kişiyi yönlendirme için belirleyin.",
+        "Yükü vücuda yakın tutun ve ani hareketlerden kaçının.",
+        "Uygun eldiven ve iş ayakkabısı kullanın.",
+        "Kapasitenizi aşan veya kontrol edemediğiniz yükleri kaldırmayın."
       ],
       "supervisor_title": "SUPERVISOR KONUŞMA METNİ",
-      "supervisor_script": "Arkadaşlar, bugün elle taşıma işlerinde yalnızca yükün kilosuna bakmayacağız. Yükün şekli, tutma noktaları, ağırlık merkezi, taşıma mesafesi, güzergâh ve çalışma yüksekliğini değerlendireceğiz. Mekanik yardım varsa öncelikle onu kullanacağız. Yük görüşünüzü kapatıyorsa, kontrol edemiyorsanız veya tek kişi için uygun değilse zorlamayın; destek isteyin. Ekip kaldırmasında tek kişi komut verecek ve ellerimizi sıkışma noktalarından uzak tutacağız.",
+      "supervisor_script": [
+        "Bugün elle taşıma sırasında en çok hangi işlerde zorlanıyoruz?",
+        "Sahada kullanabileceğimiz mekanik yardımcı ekipmanlar nelerdir?",
+        "Taşıma yolu üzerinde yük taşımayı zorlaştıran engeller var mı?",
+        "Tek kişiyle yapılmaması gereken işler hangileridir?"
+      ],
       "questions_title": "EKİBE SORULAR",
       "questions": [
         "Bu yükü tek başınıza güvenli şekilde kaldırabilir misiniz?",
@@ -2592,15 +2579,15 @@ export const toolboxData = [
         "İmza"
       ],
       "notes_title": "NOTLAR",
-      "footer": "SERNEM HSE Resource — Ergonomi değerlendirmesi, mekanik yardım seçenekleri, risk değerlendirmesi ve saha prosedürleri önceliklidir."
+      "footer": "Bu toolbox genel rehberlik sağlar. Sahaya özgü risk değerlendirmesi, iş yöntemi ve şirket prosedürleri uygulanmalıdır."
     },
     "en": {
       "title": "MANUAL HANDLING TOOLBOX TALK",
       "subtitle": "Assess loads correctly, lift safely and prevent unnecessary strain.",
       "application_subtitle": "Use before lifting, carrying, pushing, pulling or manually positioning loads.",
-      "duration": "8–10 MINUTES",
+      "duration": "5–7 MINUTES",
       "objective_title": "OBJECTIVE",
-      "objective": "Prevent musculoskeletal injuries during lifting, lowering, carrying, pushing and pulling by assessing the task, load, working environment and individual capability before starting and by using mechanical assistance wherever practicable.",
+      "objective": "Prevent back, shoulder, hand and musculoskeletal injuries during manual handling by assessing the load, work area and individual capacity before starting.",
       "explanation_title": "TOPIC EXPLANATION",
       "explanation": [
         "Manual handling includes lifting, lowering, carrying, pushing, pulling, holding and repetitive movements.",
@@ -2615,33 +2602,40 @@ export const toolboxData = [
         "The worker twists while lifting and suffers a back injury."
       ],
       "remember_title": "REMEMBER",
-      "remember": "Being physically able to lift a load does not mean it should be lifted manually. If the load, distance, grip, working height or route is unsafe, use mechanical assistance or ask for help.",
+      "remember": [
+        "Assess the load and centre of gravity before lifting.",
+        "Keep a stable stance and hold the load close to your body.",
+        "Bend your knees instead of bending from the waist.",
+        "Turn with your feet instead of twisting your torso.",
+        "Asking for assistance is the correct safety decision."
+      ],
       "hazards_title": "MAIN HAZARDS",
       "hazards": [
-        "Heavy, bulky, unstable or difficult-to-grip loads.",
-        "Bending, twisting or sudden lifting movements.",
-        "Long carrying distances or unsuitable working heights.",
-        "Hands and fingers trapped between the load and surrounding surfaces.",
-        "Loads restricting the worker's field of vision.",
-        "Slippery, uneven or obstructed carrying routes.",
-        "Repetitive lifting, pushing or pulling.",
-        "Tasks or loads exceeding individual physical capability."
+        "Back and spinal injuries",
+        "Muscle strains and sprains",
+        "Hand and finger trapping",
+        "Dropped loads",
+        "Slips, trips and falls",
+        "Restricted visibility",
+        "Repetitive strain injuries"
       ],
       "controls_title": "KEY CONTROLS",
       "controls": [
-        "Assess the task, load, environment and individual capability before starting.",
-        "Use forklifts, pallet trucks, cranes, trolleys or other mechanical aids wherever practicable.",
-        "Confirm the load weight, size, centre of gravity and grip points.",
-        "Inspect the carrying route and remove obstacles before movement.",
-        "Keep the load close to the body and maintain a stable stance.",
-        "Avoid sudden lifting and twisting the torso while carrying a load.",
-        "Plan team lifts in advance and use one person to coordinate movement.",
-        "Keep hands and fingers clear of trapping and pinch points.",
-        "Obtain assistance or change the method when the load restricts visibility.",
-        "Stop and reassess if fatigue, pain or loss of control develops."
+        "Assess the load's weight, size, shape and grip points.",
+        "Use mechanical lifting and transport equipment wherever possible.",
+        "Inspect and clear the carrying route before starting.",
+        "Use team lifting where required and appoint one person to coordinate.",
+        "Keep the load close to the body and avoid sudden movements.",
+        "Wear suitable gloves and safety footwear.",
+        "Do not lift loads beyond your safe capacity or control."
       ],
       "supervisor_title": "SUPERVISOR SCRIPT",
-      "supervisor_script": "Team, today we will assess more than the weight of anything we move manually. Consider the load shape, grip points, centre of gravity, carrying distance, route and working height. Use mechanical assistance whenever it is available and suitable. If the load blocks your view, cannot be controlled safely or requires more than one person, do not force the lift. During team handling, one person will coordinate the movement and everyone will keep hands clear of pinch points.",
+      "supervisor_script": [
+        "Which manual-handling tasks create the most difficulty today?",
+        "What mechanical aids are available in our work area?",
+        "Are there obstacles along the planned carrying route?",
+        "Which tasks must not be completed by one person?"
+      ],
       "questions_title": "QUESTIONS FOR THE TEAM",
       "questions": [
         "Can you safely control this load alone?",
@@ -2672,7 +2666,7 @@ export const toolboxData = [
         "Signature"
       ],
       "notes_title": "NOTES",
-      "footer": "SERNEM HSE Resource — Ergonomic assessments, mechanical-handling options, risk assessments and site procedures take priority."
+      "footer": "This toolbox provides general guidance. Apply site-specific risk assessments, work methods and company procedures."
     }
   },
   {
@@ -3559,7 +3553,7 @@ export const toolboxData = [
       "subtitle": "Hareket, basınç ve depolanmış enerjinin tehlike hattından uzak durun.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
-    "objective": "Çalışanların hareket eden, düşen, dönen, fırlayan veya basınç altında serbest kalabilecek ekipman ve malzemelerin hareket hattından uzak tutulmasını sağlamak.",
+    "objective": "Hareketli ekipman, askıdaki yük, basınçlı sistemler ve depolanmış enerjinin beklenmeyen hareketinden kaynaklanan çarpma, ezilme, sıkışma ve fırlayan cisim risklerini değerlendirmek; çalışanların güvenli konumda kalmasını sağlamaktır.",
     "explanation_title": "NEDEN ÖNEMLİ?",
     "explanation": [
       "Ateş hattı, bir yük, araç, ekipman veya enerji beklenmedik şekilde hareket ettiğinde kişinin doğrudan yaralanabileceği bölgedir.",
@@ -3573,7 +3567,7 @@ export const toolboxData = [
       "Olay; yük yolunun önceden belirlenmesi, dışlama alanı, uygun tag line kullanımı ve personelin sıkışma bölgesine girmemesiyle önlenebilirdi."
 ],
     "remember_title": "UNUTMAYIN",
-    "remember": "Bir ekipmanın hareket edebileceği hattın üzerinde veya karşısında durmayın.",
+    "remember": "Hareket eden veya hareket etme potansiyeli bulunan bir yük, araç ya da ekipman ile sabit bir nesne arasına girmeyin.",
     "hazards_title": "TEMEL TEHLİKELER",
     "hazards": [
       "Askıdaki veya hareket eden yüklerin hareket hattında bulunmak.",
@@ -3587,17 +3581,17 @@ export const toolboxData = [
 ],
     "controls_title": "KONTROLLER",
     "controls": [
-      "İşe başlamadan hareket hattını belirleyin.",
-      "Çalışanları yük ve ekipman hareket yolundan ayırın.",
-      "Askıdaki yüklerin altında veya yanında durmayın.",
-      "Basınçlı bağlantıların karşısında durmayın.",
-      "Dönen ekipmanın süpürme alanını bariyerleyin.",
-      "Malzemeyi elle yönlendirmek yerine uygun yardımcı araç kullanın.",
-      "Araç ve ekipman kör noktalarından uzak durun.",
-      "Beklenmeyen hareketi önlemek için enerjiyi izole edin.",
-      "Bariyer ve dışlama bölgelerini koruyun.",
-      "Kontrolsüz hareket ihtimalinde işi durdurun."
-    ],
+      "Hareket ve yük yollarını işe başlamadan belirleyin.",
+      "Personeli askıdaki yüklerden uzak tutun.",
+      "Sıkışma bölgelerinde dışlama alanı oluşturun.",
+      "Yükleri mümkün olduğunda tag line ile yönlendirin.",
+      "Araç hareketlerinde banksman veya spotter kullanın.",
+      "Basınçlı sistemleri müdahale öncesi boşaltın.",
+      "Tehlikeli enerjileri izole edin ve LOTO uygulayın.",
+      "Gergin halat ve sapanların geri tepme hattından uzak durun.",
+      "Operatör ve ekip arasında açık iletişim sağlayın.",
+      "Koşullar değiştiğinde işi durdurup ateş hattını yeniden değerlendirin."
+],
     "supervisor_title": "AMİRİN MESAJI",
     "supervisor_script": "Arkadaşlar, bugün yalnızca işi değil, bir şey beklenmedik şekilde hareket ederse nereye gideceğini de değerlendireceğiz. Hiç kimse askıdaki yük altında, araç kör noktasında veya hareketli yük ile sabit yapı arasında durmayacak. Konumunuzdan emin değilseniz işi durdurun.",
     "questions_title": "EKİBE SORULAR",
@@ -3611,17 +3605,17 @@ export const toolboxData = [
 ],
     "verification_title": "SAHA DOĞRULAMASI",
     "verification": [
-      "Hareket hattı belirlendi",
-      "Dışlama alanı kuruldu",
-      "Askıdaki yük alanı boş",
-      "Basınçlı ekipman kontrol edildi",
-      "Kör noktalar belirlendi",
+      "Hareket hatları belirlendi",
+      "Sıkışma noktaları belirlendi",
+      "Dışlama alanı hazır",
+      "Yük yolu boş",
+      "Tag line uygun",
+      "Banksman belli",
       "Enerji izolasyonu uygun",
-      "Bariyerler yerinde",
-      "İletişim yöntemi belirlendi",
-      "Kaçış yolu açık",
-      "Ekip bilgilendirildi"
-    ],
+      "Basınç kontrol edildi",
+      "İletişim doğrulandı",
+      "Ekip güvenli konumu biliyor"
+],
     "attendance_title": "KATILIM VE ONAY",
     "fields": [
       "Proje / Saha",
@@ -3644,7 +3638,7 @@ export const toolboxData = [
       "subtitle": "Stay clear of movement, pressure and stored-energy paths.",
     "duration": "8–10 minutes",
     "objective_title": "OBJECTIVE",
-    "objective": "Keep personnel clear of the travel path of moving, falling, rotating, swinging or suddenly released equipment and materials.",
+    "objective": "Review struck-by, crushing, caught-between and projectile hazards created by moving equipment, suspended loads, pressurised systems and stored energy, and ensure personnel remain in safe positions.",
     "explanation_title": "WHY IT MATTERS",
     "explanation": [
       "The line of fire is any area where a person could be injured if a load, vehicle, equipment component or stored energy moves unexpectedly.",
@@ -3658,7 +3652,7 @@ export const toolboxData = [
       "The event could have been prevented by defining the load path, maintaining the exclusion zone, using a suitable tag line and keeping personnel out of the pinch zone."
 ],
     "remember_title": "REMEMBER",
-    "remember": "Never position yourself where stored energy or moving equipment can travel toward you.",
+    "remember": "Never position yourself between a moving or potentially moving load, vehicle or equipment and a fixed object.",
     "hazards_title": "KEY HAZARDS",
     "hazards": [
       "Standing in the path of suspended or moving loads.",
@@ -3672,17 +3666,17 @@ export const toolboxData = [
 ],
     "controls_title": "CONTROLS",
     "controls": [
-      "Identify the line of fire before work starts.",
-      "Separate personnel from equipment and load travel paths.",
-      "Never stand beneath or beside suspended loads.",
-      "Stay clear of pressurised connections and release paths.",
-      "Barricade the swing radius of rotating equipment.",
-      "Use suitable handling tools instead of hands where possible.",
-      "Remain outside vehicle and equipment blind spots.",
-      "Isolate energy that could cause unexpected movement.",
-      "Maintain barriers and exclusion zones.",
-      "Stop work whenever movement cannot be controlled."
-    ],
+      "Identify movement and load paths before starting.",
+      "Keep personnel clear of suspended loads.",
+      "Establish exclusion zones around crushing hazards.",
+      "Use suitable tag lines where practicable.",
+      "Use a competent banksman or spotter.",
+      "Depressurise systems before intervention.",
+      "Isolate hazardous energy and apply LOTO.",
+      "Stay outside snap-back zones.",
+      "Maintain clear operator-to-crew communication.",
+      "Stop and reassess whenever conditions change."
+],
     "supervisor_title": "SUPERVISOR MESSAGE",
     "supervisor_script": "Team, today we will consider not only the task but where anything could travel if it moves unexpectedly. No one will stand below suspended loads, in vehicle blind spots or between moving loads and fixed structures. Stop the task if your position is uncertain.",
     "questions_title": "TEAM QUESTIONS",
@@ -3696,17 +3690,17 @@ export const toolboxData = [
 ],
     "verification_title": "FIELD VERIFICATION",
     "verification": [
-      "Line of fire identified",
-      "Exclusion zone established",
-      "Suspended-load area clear",
-      "Pressurised equipment checked",
-      "Blind spots identified",
-      "Energy isolation adequate",
-      "Barriers in place",
-      "Communication method agreed",
-      "Escape route clear",
-      "Crew briefed"
-    ],
+      "Movement paths identified",
+      "Pinch points identified",
+      "Exclusion zone ready",
+      "Load path clear",
+      "Tag line suitable",
+      "Banksman identified",
+      "Energy isolation suitable",
+      "Pressure controlled",
+      "Communication confirmed",
+      "Crew understands safe positions"
+],
     "attendance_title": "ATTENDANCE AND APPROVAL",
     "fields": [
       "Project / Site",
@@ -3732,7 +3726,7 @@ export const toolboxData = [
       "subtitle": "El, parmak ve vücudu sıkışma ve ezilme noktalarından uzak tutun.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
-    "objective": "El ve parmakların hareketli parçalar, ekipman, borular ve sabit yüzeyler arasında sıkışmasını veya ezilmesini önlemek.",
+    "objective": "Flanş, boru, kapak, yük, hareketli ekipman ve mekanik parçalar arasında oluşabilecek sıkışma ve ezilme yaralanmalarını önlemek; elle hizalama yerine güvenli araç ve yöntemlerin kullanılmasını sağlamaktır.",
     "explanation_title": "NEDEN ÖNEMLİ?",
     "explanation": [
       "Sıkışma noktaları çoğu zaman rutin ve basit görünen işlerde oluşur.",
@@ -3746,7 +3740,7 @@ export const toolboxData = [
       "Olay; mekanik hizalama ekipmanı kullanılması, borunun sabitlenmesi ve ellerin sıkışma bölgesinden uzak tutulmasıyla önlenebilirdi."
 ],
     "remember_title": "UNUTMAYIN",
-    "remember": "Elinizi bir parçanın hareket edebileceği veya kapanabileceği noktaya koymayın.",
+    "remember": "Elinizin bulunduğu boşluk kapanabiliyorsa orası bir sıkışma noktasıdır.",
     "hazards_title": "TEMEL TEHLİKELER",
     "hazards": [
       "Flanş ve boru bağlantıları.",
@@ -3760,17 +3754,17 @@ export const toolboxData = [
 ],
     "controls_title": "KONTROLLER",
     "controls": [
+      "Eller yerine uygun hizalama aleti kullanın.",
+      "Ekipmanı hareket öncesi sabitleyin.",
+      "Tehlikeli enerjiyi izole edin.",
       "Sıkışma noktalarını işe başlamadan belirleyin.",
-      "Elleri iki yüzey arasından uzak tutun.",
-      "Parçaları elle hizalamak yerine uygun aparat kullanın.",
-      "Malzemeyi hareket öncesi sabitleyin.",
-      "Beklenmeyen hareket yaratabilecek enerjiyi izole edin.",
-      "Dönen ve hareketli parçaların muhafazalarını koruyun.",
-      "Ağır parçaları elle tutarak konumlandırmayın.",
-      "Uygun eldiven kullanın ancak eldivene güvenmeyin.",
-      "Ekip hareketlerinde tek ve net iletişim kullanın.",
-      "Kontrolsüz hareket ihtimalinde işi durdurun."
-    ],
+      "Ellerinizi hareket hattından uzak tutun.",
+      "Yükü elle itmek yerine mekanik yardım kullanın.",
+      "Operatörle net iletişim kurun.",
+      "Beklenmeyen hareketi önlemek için takoz kullanın.",
+      "Uygun eldiven kullanın ancak eldiveni ana kontrol olarak görmeyin.",
+      "Koşullar değişirse işi durdurun."
+],
     "supervisor_title": "AMİRİN MESAJI",
     "supervisor_script": "Arkadaşlar, bugün hiçbir flanş, boru veya hareketli parça arasına elimizi sokmayacağız. Hizalama için uygun alet kullanacağız ve ekipmanın beklenmedik hareketini önleyeceğiz.",
     "questions_title": "EKİBE SORULAR",
@@ -3785,16 +3779,16 @@ export const toolboxData = [
     "verification_title": "SAHA DOĞRULAMASI",
     "verification": [
       "Sıkışma noktaları belirlendi",
-      "Enerji kontrol edildi",
-      "Parça sabitlendi",
-      "Hizalama aparatı mevcut",
-      "Muhafazalar yerinde",
-      "Eller hareket hattı dışında",
-      "İletişim yöntemi belirlendi",
+      "Ekipman sabit",
+      "Hizalama aleti hazır",
+      "Enerji izolasyonu uygun",
+      "Eller hareket hattından uzak",
+      "Takozlar hazır",
+      "Yük yolu kontrollü",
+      "Operatör iletişimi hazır",
       "KKD uygun",
-      "Çalışma alanı yeterli",
       "Ekip bilgilendirildi"
-    ],
+],
     "attendance_title": "KATILIM VE ONAY",
     "fields": [
       "Proje / Saha",
@@ -3817,7 +3811,7 @@ export const toolboxData = [
       "subtitle": "Keep hands, fingers and body parts clear of pinch and crush zones.",
     "duration": "8–10 minutes",
     "objective_title": "OBJECTIVE",
-    "objective": "Prevent hand and finger injuries caused by trapping or crushing between moving components, equipment, pipework and fixed surfaces.",
+    "objective": "Prevent crushing and caught-between injuries created by flanges, pipes, covers, loads, moving equipment and mechanical components, and ensure safe tools are used instead of hands for alignment.",
     "explanation_title": "WHY IT MATTERS",
     "explanation": [
       "Pinch points are commonly created during routine tasks that appear simple.",
@@ -3831,7 +3825,7 @@ export const toolboxData = [
       "The event could have been prevented by securing the pipe, using alignment tools and keeping hands outside the pinch zone."
 ],
     "remember_title": "REMEMBER",
-    "remember": "Never place your hand where a component can move, close or shift against another surface.",
+    "remember": "If the gap can close while your hand is inside it, it is a pinch point.",
     "hazards_title": "KEY HAZARDS",
     "hazards": [
       "Flanges and pipe connections.",
@@ -3845,17 +3839,17 @@ export const toolboxData = [
 ],
     "controls_title": "CONTROLS",
     "controls": [
+      "Use suitable alignment tools instead of hands.",
+      "Secure equipment before movement.",
+      "Isolate hazardous energy.",
       "Identify pinch points before starting.",
-      "Keep hands clear of opposing surfaces.",
-      "Use alignment tools instead of fingers or hands.",
-      "Secure components before movement.",
-      "Isolate energy capable of unexpected movement.",
-      "Keep guards fitted to moving machinery.",
-      "Do not support heavy components by hand during positioning.",
-      "Wear suitable gloves but never rely on gloves as the primary control.",
-      "Use one clear communication method during coordinated movement.",
-      "Stop work if movement cannot be controlled."
-    ],
+      "Keep hands outside movement paths.",
+      "Use mechanical assistance instead of pushing loads by hand.",
+      "Maintain clear operator communication.",
+      "Use chocks to prevent unexpected movement.",
+      "Use suitable gloves but do not rely on gloves as the main control.",
+      "Stop work if conditions change."
+],
     "supervisor_title": "SUPERVISOR MESSAGE",
     "supervisor_script": "Team, no one will place hands between flanges, pipes or moving components today. We will use suitable alignment tools and control any potential movement before starting.",
     "questions_title": "TEAM QUESTIONS",
@@ -3870,16 +3864,16 @@ export const toolboxData = [
     "verification_title": "FIELD VERIFICATION",
     "verification": [
       "Pinch points identified",
-      "Energy controlled",
-      "Component secured",
-      "Alignment tools available",
-      "Guards in place",
-      "Hands clear of movement path",
-      "Communication agreed",
+      "Equipment secured",
+      "Alignment tools ready",
+      "Energy isolation suitable",
+      "Hands clear of movement",
+      "Chocks ready",
+      "Load path controlled",
+      "Operator communication ready",
       "PPE suitable",
-      "Working space adequate",
       "Crew briefed"
-    ],
+],
     "attendance_title": "ATTENDANCE AND APPROVAL",
     "fields": [
       "Project / Site",
@@ -3905,7 +3899,7 @@ export const toolboxData = [
       "subtitle": "Yürüyüş yollarını açık tutun ve aynı seviyedeki düşmeleri önleyin.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
-    "objective": "Yürüme ve çalışma alanlarında kayma, takılma ve aynı seviyede düşme risklerini ortadan kaldırmak.",
+    "objective": "Yağ, su, kablo, hortum, düzensiz malzeme, seviye farkı ve yetersiz aydınlatmadan kaynaklanan kayma, takılma ve aynı seviyede düşmeleri önlemektir.",
     "explanation_title": "NEDEN ÖNEMLİ?",
     "explanation": [
       "Kayma ve takılmalar basit görünse de burkulma, kırık ve iş günü kaybının önemli nedenlerindendir.",
@@ -3919,7 +3913,7 @@ export const toolboxData = [
       "Dökülmenin hemen temizlenmesi, hortumun uygun güzergâhtan geçirilmesi ve alanın işaretlenmesi olayı önleyebilirdi."
 ],
     "remember_title": "UNUTMAYIN",
-    "remember": "Gördüğünüz takılma tehlikesini yalnızca geçmeyin; kaldırın veya emniyete alın.",
+    "remember": "Geçiş yolu çalışma alanı değildir; açık, temiz ve engelsiz tutulmalıdır.",
     "hazards_title": "TEMEL TEHLİKELER",
     "hazards": [
       "Yağ, su ve kimyasal dökülmeleri.",
@@ -3933,17 +3927,17 @@ export const toolboxData = [
 ],
     "controls_title": "KONTROLLER",
     "controls": [
-      "Yürüme yollarını açık tutun.",
-      "Dökülmeleri hemen temizleyin.",
-      "Kablo ve hortumları geçiş yollarından uzaklaştırın.",
-      "Malzemeleri belirlenmiş alanlarda depolayın.",
-      "Hasarlı zemin ve açıklıkları işaretleyin ve koruyun.",
-      "Merdivenlerde korkuluk kullanın.",
+      "Dökülmeleri derhal temizleyin.",
+      "Kablo ve hortumları geçiş yollarından uzak tutun.",
+      "Malzemeleri belirlenmiş alanlarda istifleyin.",
+      "Bozuk zemini işaretleyin ve bildirin.",
       "Yeterli aydınlatma sağlayın.",
-      "Uygun kaymaz iş ayakkabısı kullanın.",
-      "Telefon kullanarak yürümeyin.",
-      "Düzeltilemeyen tehlikeyi bariyerleyip bildirin."
-    ],
+      "Merdiven ve platformları temiz tutun.",
+      "Islak alanlarda uygun kaymaz yüzey kullanın.",
+      "Geçici tehlikeleri bariyer veya işaretle belirtin.",
+      "Uygun tabanlı iş ayakkabısı kullanın.",
+      "Housekeeping kontrolünü vardiya boyunca sürdürün."
+],
     "supervisor_title": "AMİRİN MESAJI",
     "supervisor_script": "Arkadaşlar, bugün geçiş yollarını depolama alanı olarak kullanmayacağız. Dökülme, hortum, kablo veya bozuk zemin görürsek geçip gitmeyeceğiz; tehlikeyi ortadan kaldıracağız veya alanı kontrol altına alacağız.",
     "questions_title": "EKİBE SORULAR",
@@ -3957,17 +3951,17 @@ export const toolboxData = [
 ],
     "verification_title": "SAHA DOĞRULAMASI",
     "verification": [
-      "Yürüme yolları açık",
+      "Yürüyüş yolları açık",
       "Dökülme yok",
-      "Kablolar düzenli",
-      "Hortumlar güvenli",
-      "Zemin uygun",
-      "Açıklıklar korunmuş",
+      "Kablolar kontrollü",
+      "Hortumlar kontrollü",
+      "Malzeme istifi uygun",
+      "Zemin güvenli",
       "Aydınlatma yeterli",
-      "Merdivenler güvenli",
-      "Ayakkabı uygun",
+      "Merdivenler temiz",
+      "Kaymaz ayakkabı uygun",
       "Ekip bilgilendirildi"
-    ],
+],
     "attendance_title": "KATILIM VE ONAY",
     "fields": [
       "Proje / Saha",
@@ -3990,7 +3984,7 @@ export const toolboxData = [
       "subtitle": "Keep walkways clear and prevent same-level falls.",
     "duration": "8–10 minutes",
     "objective_title": "OBJECTIVE",
-    "objective": "Eliminate slip, trip and same-level fall hazards from access routes and working areas.",
+    "objective": "Prevent slips, trips and same-level falls caused by oil, water, cables, hoses, poor storage, uneven surfaces and inadequate lighting.",
     "explanation_title": "WHY IT MATTERS",
     "explanation": [
       "Slips and trips may appear minor but are common causes of sprains, fractures and lost workdays.",
@@ -4004,7 +3998,7 @@ export const toolboxData = [
       "Immediate spill cleanup, correct hose routing and temporary warning controls would have prevented the event."
 ],
     "remember_title": "REMEMBER",
-    "remember": "Do not simply step over a trip hazard; remove it or make the area safe.",
+    "remember": "A walkway is not a storage area. Keep it clear, clean and unobstructed.",
     "hazards_title": "KEY HAZARDS",
     "hazards": [
       "Oil, water and chemical spills.",
@@ -4018,17 +4012,17 @@ export const toolboxData = [
 ],
     "controls_title": "CONTROLS",
     "controls": [
-      "Keep walkways and access routes clear.",
       "Clean spills immediately.",
-      "Route cables and hoses away from pedestrian paths.",
-      "Store materials only in designated areas.",
-      "Mark and protect damaged floors and openings.",
-      "Use handrails on stairs.",
+      "Keep cables and hoses away from access routes.",
+      "Store materials in designated areas.",
+      "Mark and report damaged surfaces.",
       "Provide adequate lighting.",
-      "Wear suitable slip-resistant safety footwear.",
-      "Do not walk while distracted by a phone.",
-      "Barricade and report hazards that cannot be immediately corrected."
-    ],
+      "Keep stairs and platforms clean.",
+      "Use suitable slip-resistant surfaces in wet areas.",
+      "Barricade or mark temporary hazards.",
+      "Wear suitable slip-resistant footwear.",
+      "Maintain housekeeping throughout the shift."
+],
     "supervisor_title": "SUPERVISOR MESSAGE",
     "supervisor_script": "Team, access routes will not be used for storage today. If you see a spill, cable, hose or damaged surface, do not simply walk past it; remove the hazard or control the area.",
     "questions_title": "TEAM QUESTIONS",
@@ -4044,15 +4038,15 @@ export const toolboxData = [
     "verification": [
       "Walkways clear",
       "No uncontrolled spills",
-      "Cables managed",
-      "Hoses safely routed",
-      "Floor condition acceptable",
-      "Openings protected",
+      "Cables controlled",
+      "Hoses controlled",
+      "Storage suitable",
+      "Surface safe",
       "Lighting adequate",
-      "Stairs safe",
+      "Stairs clean",
       "Footwear suitable",
       "Crew briefed"
-    ],
+],
     "attendance_title": "ATTENDANCE AND APPROVAL",
     "fields": [
       "Project / Site",
@@ -4078,7 +4072,7 @@ export const toolboxData = [
       "subtitle": "Araç ve yayaları fiziksel ve operasyonel olarak birbirinden ayırın.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
-    "objective": "Araç ve mobil ekipmanların çalışanlarla etkileşiminden kaynaklanan çarpma ve ezilme risklerini kontrol etmek.",
+    "objective": "Mobil ekipman ve araçların yaya çalışanlarla etkileşiminde oluşabilecek çarpma, ezilme ve geri manevra risklerini kontrol etmektir.",
     "explanation_title": "NEDEN ÖNEMLİ?",
     "explanation": [
       "Ağır ekipman operatörünün görüş alanı düşündüğünüzden çok daha sınırlı olabilir.",
@@ -4092,7 +4086,7 @@ export const toolboxData = [
       "Fiziksel yaya yolu, bariyer, belirlenmiş geçiş noktası ve kesintisiz spotter kontrolü olayı önleyebilirdi."
 ],
     "remember_title": "UNUTMAYIN",
-    "remember": "Operatörün sizi gördüğünü varsaymayın; yaklaşmadan önce pozitif iletişim kurun.",
+    "remember": "Operatör sizi görmüyorsa aracın sizi gördüğünü varsaymayın.",
     "hazards_title": "TEMEL TEHLİKELER",
     "hazards": [
       "Araç kör noktaları.",
@@ -4106,17 +4100,17 @@ export const toolboxData = [
 ],
     "controls_title": "KONTROLLER",
     "controls": [
-      "Araç ve yaya yollarını fiziksel olarak ayırın.",
-      "Belirlenmiş yaya yollarını kullanın.",
-      "Araç kör noktalarından uzak durun.",
-      "Geri manevrada gerektiğinde banksman kullanın.",
-      "Operatörle göz teması veya pozitif iletişim kurun.",
+      "Yaya ve araç yollarını fiziksel olarak ayırın.",
+      "Belirlenmiş yaya geçişlerini kullanın.",
+      "Geri manevrada spotter kullanın.",
+      "Operatörle göz teması kurmadan yaklaşmayın.",
       "Hız limitlerini uygulayın.",
-      "Geri görüş ve ikaz sistemlerini kontrol edin.",
-      "Yüksek görünürlüklü kıyafet kullanın.",
-      "Park edilen ekipmanı emniyete alın.",
-      "Ayrım sistemi bozulduğunda araç hareketini durdurun."
-    ],
+      "Kör köşe ve kapılarda uyarı sistemi kullanın.",
+      "Görüşü engelleyen yüklerle kontrollü hareket edin.",
+      "Gece çalışmalarında yeterli aydınlatma sağlayın.",
+      "Telefon kullanımını hareket alanlarında yasaklayın.",
+      "Trafik planını işe başlamadan ekiple gözden geçirin."
+],
     "supervisor_title": "AMİRİN MESAJI",
     "supervisor_script": "Arkadaşlar, bugün araç yolundan yürümeyeceğiz ve kestirme kullanmayacağız. Bir araca yaklaşmadan önce operatörle göz teması kuracağız. Operatör bizi görmüyorsa güvenli mesafede kalacağız.",
     "questions_title": "EKİBE SORULAR",
@@ -4130,17 +4124,17 @@ export const toolboxData = [
 ],
     "verification_title": "SAHA DOĞRULAMASI",
     "verification": [
-      "Yaya yolu belirli",
-      "Araç yolu belirli",
-      "Bariyerler yerinde",
-      "Banksman belirlendi",
-      "Kör noktalar kontrol edildi",
-      "İkaz sistemleri çalışıyor",
-      "Hız kontrolü mevcut",
-      "Hi-vis uygun",
-      "Park alanı güvenli",
+      "Yaya yolları belli",
+      "Araç yolları belli",
+      "Bariyerler uygun",
+      "Geçiş noktaları belli",
+      "Spotter atanmış",
+      "Hız limiti belirlenmiş",
+      "Aydınlatma uygun",
+      "Kör köşeler kontrollü",
+      "İletişim yöntemi belli",
       "Ekip bilgilendirildi"
-    ],
+],
     "attendance_title": "KATILIM VE ONAY",
     "fields": [
       "Proje / Saha",
@@ -4163,7 +4157,7 @@ export const toolboxData = [
       "subtitle": "Physically and operationally separate vehicles from pedestrians.",
     "duration": "8–10 minutes",
     "objective_title": "OBJECTIVE",
-    "objective": "Control struck-by and crushing risks created where vehicles and mobile equipment interact with pedestrians.",
+    "objective": "Control struck-by, crushing and reversing hazards where vehicles and mobile equipment interact with pedestrians.",
     "explanation_title": "WHY IT MATTERS",
     "explanation": [
       "Heavy-equipment operators may have much larger blind spots than pedestrians expect.",
@@ -4177,7 +4171,7 @@ export const toolboxData = [
       "A segregated walkway, barriers, designated crossing point and continuous spotter control would have prevented the event."
 ],
     "remember_title": "REMEMBER",
-    "remember": "Never assume an operator has seen you; establish positive communication before approaching.",
+    "remember": "If the operator cannot see you, never assume the vehicle has seen you.",
     "hazards_title": "KEY HAZARDS",
     "hazards": [
       "Vehicle blind spots.",
@@ -4191,17 +4185,17 @@ export const toolboxData = [
 ],
     "controls_title": "CONTROLS",
     "controls": [
-      "Physically separate vehicle and pedestrian routes.",
-      "Use designated pedestrian walkways.",
-      "Stay outside vehicle blind spots.",
-      "Use a banksman for reversing where required.",
-      "Establish eye contact or positive communication with operators.",
+      "Physically separate pedestrian and vehicle routes.",
+      "Use designated pedestrian crossings.",
+      "Use a spotter during reversing.",
+      "Make eye contact before approaching vehicles.",
       "Enforce site speed limits.",
-      "Check reversing aids and warning devices.",
-      "Wear high-visibility clothing.",
-      "Secure parked equipment against movement.",
-      "Stop vehicle movement if segregation controls fail."
-    ],
+      "Use warning systems at blind corners.",
+      "Control movement when loads restrict visibility.",
+      "Provide adequate lighting during night work.",
+      "Prohibit phone use in traffic movement areas.",
+      "Review the traffic plan with the crew before starting."
+],
     "supervisor_title": "SUPERVISOR MESSAGE",
     "supervisor_script": "Team, we will not walk in vehicle routes or take shortcuts today. Before approaching a vehicle, make eye contact with the operator. If the operator cannot see you, stay clear.",
     "questions_title": "TEAM QUESTIONS",
@@ -4215,17 +4209,17 @@ export const toolboxData = [
 ],
     "verification_title": "FIELD VERIFICATION",
     "verification": [
-      "Pedestrian route defined",
-      "Vehicle route defined",
-      "Barriers in place",
-      "Banksman assigned",
-      "Blind spots reviewed",
-      "Warning systems working",
-      "Speed controls active",
-      "Hi-vis suitable",
-      "Parking area safe",
+      "Pedestrian routes identified",
+      "Vehicle routes identified",
+      "Barriers suitable",
+      "Crossings identified",
+      "Spotter appointed",
+      "Speed limit confirmed",
+      "Lighting adequate",
+      "Blind corners controlled",
+      "Communication method confirmed",
       "Crew briefed"
-    ],
+],
     "attendance_title": "ATTENDANCE AND APPROVAL",
     "fields": [
       "Project / Site",
@@ -4251,7 +4245,7 @@ export const toolboxData = [
       "subtitle": "Gaz tüplerini güvenli taşıyın, depolayın ve kullanın.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
-    "objective": "Basınçlı gaz tüplerinin depolanması, taşınması ve kullanımı sırasında yangın, patlama, kaçak ve fırlama risklerini kontrol etmek.",
+    "objective": "Basınçlı gaz tüplerinin taşınması, depolanması ve kullanımı sırasında devrilme, valf kırılması, yangın, patlama ve gaz kaçağı risklerini kontrol etmektir.",
     "explanation_title": "NEDEN ÖNEMLİ?",
     "explanation": [
       "Basınçlı gaz tüpleri yüksek miktarda enerji içerir ve valfin kırılması tüpü kontrolsüz bir projektil haline getirebilir.",
@@ -4265,7 +4259,7 @@ export const toolboxData = [
       "Tüpün uygun taşıma arabasıyla taşınması, dik sabitlenmesi ve valf kapağının kullanılması olayı önleyebilirdi."
 ],
     "remember_title": "UNUTMAYIN",
-    "remember": "Hasarlı vana, basınçlı tüpü kontrolsüz bir fırlama tehlikesine dönüştürebilir.",
+    "remember": "Tüpü valfinden, regülatöründen veya hortumundan taşıma aracı olarak kullanmayın.",
     "hazards_title": "TEMEL TEHLİKELER",
     "hazards": [
       "Tüp devrilmesi.",
@@ -4280,16 +4274,16 @@ export const toolboxData = [
     "controls_title": "KONTROLLER",
     "controls": [
       "Tüpleri dik ve güvenli şekilde sabitleyin.",
-      "Kullanılmayan tüplerde vana koruyucu başlığını takın.",
-      "Oksijen ve yanıcı gazları uygun şekilde ayırın.",
-      "Tüpleri ısı ve tutuşturma kaynaklarından uzak tutun.",
-      "Doğru regülatör ve bağlantıları kullanın.",
-      "Kaçak kontrolünü uygun yöntemle yapın.",
-      "Tüpleri vanasından kaldırmayın veya sürüklemeyin.",
-      "Taşıma için uygun tüp arabası kullanın.",
-      "Hasarlı veya kaçak tüpleri kullanımdan kaldırın.",
-      "Vanaları kullanım sonrası kapatın."
-    ],
+      "Taşıma sırasında uygun tüp arabası kullanın.",
+      "Valf koruma kapağını takın.",
+      "Oksijen ile yanıcı gazları uygun şekilde ayırın.",
+      "Tüpleri ısı ve ateş kaynaklarından uzak tutun.",
+      "Regülatör ve hortumları kullanımdan önce kontrol edin.",
+      "Yağ ve gresin oksijen ekipmanına temasını önleyin.",
+      "Kullanılmayan tüplerin valflerini kapatın.",
+      "Tüp etiketini ve gaz tipini doğrulayın.",
+      "Kaçak şüphesinde alanı boşaltın ve güvenli şekilde bildirin."
+],
     "supervisor_title": "AMİRİN MESAJI",
     "supervisor_script": "Arkadaşlar, bugün hiçbir tüp serbest bırakılmayacak veya elde yuvarlanmayacak. Tüpler dik sabitlenecek, doğru regülatör kullanılacak ve oksijen ekipmanına yağ veya gres temas ettirilmeyecek.",
     "questions_title": "EKİBE SORULAR",
@@ -4303,17 +4297,17 @@ export const toolboxData = [
 ],
     "verification_title": "SAHA DOĞRULAMASI",
     "verification": [
+      "Tüpler dik",
       "Tüpler sabit",
-      "Başlıklar uygun",
-      "Gazlar ayrılmış",
-      "Isı kaynağı yok",
-      "Regülatör doğru",
+      "Valf kapakları uygun",
+      "Gaz tipleri doğrulandı",
+      "Ayrım mesafesi uygun",
+      "Regülatörler sağlam",
       "Hortumlar sağlam",
-      "Kaçak yok",
-      "Tüp arabası mevcut",
-      "Hasarlı tüp ayrıldı",
+      "Isı kaynağı uzakta",
+      "Havalandırma yeterli",
       "Ekip bilgilendirildi"
-    ],
+],
     "attendance_title": "KATILIM VE ONAY",
     "fields": [
       "Proje / Saha",
@@ -4336,7 +4330,7 @@ export const toolboxData = [
       "subtitle": "Handle, store and use compressed-gas cylinders safely.",
     "duration": "8–10 minutes",
     "objective_title": "OBJECTIVE",
-    "objective": "Control fire, explosion, leakage and projectile hazards during the storage, handling and use of compressed-gas cylinders.",
+    "objective": "Control cylinder-fall, valve-damage, fire, explosion and gas-leak hazards during transport, storage and use of compressed-gas cylinders.",
     "explanation_title": "WHY IT MATTERS",
     "explanation": [
       "Compressed-gas cylinders contain significant stored energy and a broken valve can turn a cylinder into an uncontrolled projectile.",
@@ -4350,7 +4344,7 @@ export const toolboxData = [
       "Using a suitable cylinder trolley, securing the cylinder upright and fitting the valve cap would have prevented the event."
 ],
     "remember_title": "REMEMBER",
-    "remember": "A damaged valve can turn a pressurised cylinder into an uncontrolled projectile.",
+    "remember": "Never handle a cylinder by the valve, regulator or hose.",
     "hazards_title": "KEY HAZARDS",
     "hazards": [
       "Cylinder falling.",
@@ -4364,17 +4358,17 @@ export const toolboxData = [
 ],
     "controls_title": "CONTROLS",
     "controls": [
-      "Keep cylinders upright and securely restrained.",
-      "Fit valve-protection caps when cylinders are not in use.",
-      "Separate oxygen and fuel gases as required.",
-      "Keep cylinders away from heat and ignition sources.",
-      "Use the correct regulator and connections.",
-      "Check for leakage using an approved method.",
-      "Never lift or drag a cylinder by its valve.",
+      "Secure cylinders upright.",
       "Use a suitable cylinder trolley for transport.",
-      "Remove damaged or leaking cylinders from service.",
-      "Close cylinder valves after use."
-    ],
+      "Fit valve-protection caps when required.",
+      "Separate oxygen from fuel gases appropriately.",
+      "Keep cylinders away from heat and ignition sources.",
+      "Inspect regulators and hoses before use.",
+      "Keep oil and grease away from oxygen equipment.",
+      "Close cylinder valves when not in use.",
+      "Verify cylinder labels and gas type.",
+      "Evacuate and report safely if leakage is suspected."
+],
     "supervisor_title": "SUPERVISOR MESSAGE",
     "supervisor_script": "Team, no cylinder will be left unsecured or rolled by hand today. Cylinders will remain upright, the correct regulator will be used and oil or grease will never contact oxygen equipment.",
     "questions_title": "TEAM QUESTIONS",
@@ -4388,17 +4382,17 @@ export const toolboxData = [
 ],
     "verification_title": "FIELD VERIFICATION",
     "verification": [
+      "Cylinders upright",
       "Cylinders secured",
-      "Caps suitable",
-      "Gases segregated",
-      "No heat exposure",
-      "Correct regulator",
-      "Hoses sound",
-      "No leakage",
-      "Cylinder trolley available",
-      "Damaged cylinders isolated",
+      "Valve caps suitable",
+      "Gas types verified",
+      "Separation suitable",
+      "Regulators intact",
+      "Hoses intact",
+      "Heat sources controlled",
+      "Ventilation adequate",
       "Crew briefed"
-    ],
+],
     "attendance_title": "ATTENDANCE AND APPROVAL",
     "fields": [
       "Project / Site",
@@ -4424,7 +4418,7 @@ export const toolboxData = [
       "subtitle": "Basınçlı testlerde kontrolsüz enerji boşalmasını ve ekipman arızasını önleyin.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
-    "objective": "Hidrostatik veya pnömatik basınç testlerinde depolanan enerjinin kontrolsüz serbest kalmasını önlemek.",
+    "objective": "Hidrostatik ve pnömatik basınç testlerinde aşırı basınç, bağlantı arızası, kör tapa veya flanş fırlaması, hortum savrulması ve kontrolsüz enerji boşalmasından kaynaklanan ciddi yaralanmaları önlemektir.",
     "explanation_title": "NEDEN ÖNEMLİ?",
     "explanation": [
       "Basınç testi sırasında sistem normal işletmeden çok farklı enerji seviyelerine ulaşabilir. Küçük bir bağlantı hatası bile ciddi bir enerji boşalmasına neden olabilir.",
@@ -4438,7 +4432,7 @@ export const toolboxData = [
       "Testin durdurulması, uygun rated ekipman kullanılması, doğru test paketi ve dışlama alanı olayı önleyebilirdi."
 ],
     "remember_title": "UNUTMAYIN",
-    "remember": "Basınç altındaki bağlantıyı sıkmayın ve kaçağı elinizle aramayın.",
+    "remember": "Basınçlı sistemde küçük bir sızıntı dahi yüksek enerjili jet veya ekipman fırlaması anlamına gelebilir.",
     "hazards_title": "TEMEL TEHLİKELER",
     "hazards": [
       "Aşırı basınç nedeniyle ekipman veya hat arızası.",
@@ -4452,17 +4446,17 @@ export const toolboxData = [
 ],
     "controls_title": "KONTROLLER",
     "controls": [
-      "Onaylı test prosedürünü kullanın.",
-      "Test sınırlarını doğrulayın.",
-      "Kalibre edilmiş manometre kullanın.",
-      "Bağlantı, hortum ve körleri test öncesi kontrol edin.",
-      "Dışlama alanı oluşturun.",
-      "Basıncı kontrollü ve kademeli artırın.",
-      "Potansiyel fırlama hattından uzak durun.",
-      "Basınç altında bağlantı ayarı yapmayın.",
-      "Anormal basınç kaybında testi durdurun.",
-      "Müdahale öncesi sistemi tamamen basınçsız hale getirin."
-    ],
+      "Onaylı test prosedürü ve test paketini doğrulayın.",
+      "Test basıncını ve ekipman tasarım limitlerini kontrol edin.",
+      "Kalibrasyonlu manometreler kullanın.",
+      "Uygun basınç tahliye cihazlarını sağlayın.",
+      "Geçici bağlantı, tapa ve körlemelerin ratinglerini doğrulayın.",
+      "Test alanında etkili dışlama bölgesi oluşturun.",
+      "Basıncı kontrollü ve kademeli olarak yükseltin.",
+      "Sızıntı kontrolünü güvenli mesafeden yapın.",
+      "Basıncı tamamen boşaltmadan müdahale etmeyin.",
+      "Anormal durum veya sızıntıda testi hemen durdurun."
+],
     "supervisor_title": "AMİRİN MESAJI",
     "supervisor_script": "Arkadaşlar, bugün basınç testi sırasında sistemin depolanmış enerji içerdiğini unutmayacağız. Test basıncı, körlemeler, göstergeler ve dışlama alanı doğrulanmadan teste başlamıyoruz. Basınç altındaki bağlantıya yaklaşmayacağız veya müdahale etmeyeceğiz.",
     "questions_title": "EKİBE SORULAR",
@@ -4476,17 +4470,17 @@ export const toolboxData = [
 ],
     "verification_title": "SAHA DOĞRULAMASI",
     "verification": [
-      "Test prosedürü mevcut",
-      "Sınırlar doğrulandı",
+      "Test prosedürü onaylı",
+      "Test basıncı doğrulandı",
+      "Ekipman rating uygun",
       "Manometre kalibre",
-      "Bağlantılar kontrol edildi",
-      "Körler uygun",
-      "Dışlama alanı kuruldu",
-      "Personel alan dışında",
-      "İletişim yöntemi belirli",
-      "Tahliye yöntemi hazır",
+      "Tahliye sistemi hazır",
+      "Körlemeler uygun",
+      "Dışlama alanı hazır",
+      "İletişim yöntemi belli",
+      "Basınç boşaltma yöntemi belli",
       "Ekip bilgilendirildi"
-    ],
+],
     "attendance_title": "KATILIM VE ONAY",
     "fields": [
       "Proje / Saha",
@@ -4509,7 +4503,7 @@ export const toolboxData = [
       "subtitle": "Prevent uncontrolled energy release and equipment failure during pressure testing.",
     "duration": "8–10 minutes",
     "objective_title": "OBJECTIVE",
-    "objective": "Prevent uncontrolled release of stored energy during hydrostatic or pneumatic pressure testing.",
+    "objective": "Prevent serious injuries caused by overpressure, connection failure, ejected blinds or flanges, hose whip and uncontrolled energy release during hydrostatic and pneumatic testing.",
     "explanation_title": "WHY IT MATTERS",
     "explanation": [
       "Pressure testing can expose systems to energy levels very different from normal operating conditions. A small connection failure can release significant energy.",
@@ -4523,7 +4517,7 @@ export const toolboxData = [
       "The event could have been prevented through correct rated equipment, an approved test package, controlled pressurisation and an effective exclusion zone."
 ],
     "remember_title": "REMEMBER",
-    "remember": "Never tighten a pressurised connection or search for a leak with your hand.",
+    "remember": "Even a small leak from a pressurised system can create a high-energy jet or projectile hazard.",
     "hazards_title": "KEY HAZARDS",
     "hazards": [
       "Equipment or piping failure from overpressure.",
@@ -4537,17 +4531,17 @@ export const toolboxData = [
 ],
     "controls_title": "CONTROLS",
     "controls": [
-      "Use an approved test procedure.",
-      "Verify the test boundaries.",
+      "Verify the approved test procedure and test package.",
+      "Confirm test pressure and equipment design limits.",
       "Use calibrated pressure gauges.",
-      "Inspect connections, hoses and blinds before testing.",
-      "Establish an exclusion zone.",
-      "Increase pressure gradually and under control.",
-      "Remain clear of potential projectile paths.",
-      "Never adjust connections while pressurised.",
-      "Stop the test following abnormal pressure loss.",
-      "Fully depressurise before intervention."
-    ],
+      "Provide suitable pressure-relief devices.",
+      "Verify ratings of temporary connections and blinds.",
+      "Establish an effective exclusion zone.",
+      "Increase pressure slowly and in controlled stages.",
+      "Inspect for leaks from a safe distance.",
+      "Do not intervene until pressure is fully released.",
+      "Stop the test immediately if leakage or abnormal conditions occur."
+],
     "supervisor_title": "SUPERVISOR MESSAGE",
     "supervisor_script": "Team, today's pressure test involves stored energy. We will not start until test pressure, blinds, gauges and the exclusion zone are verified. No one will approach or intervene on a connection while it remains pressurised.",
     "questions_title": "TEAM QUESTIONS",
@@ -4561,17 +4555,17 @@ export const toolboxData = [
 ],
     "verification_title": "FIELD VERIFICATION",
     "verification": [
-      "Test procedure available",
-      "Boundaries verified",
+      "Test procedure approved",
+      "Test pressure confirmed",
+      "Equipment rating suitable",
       "Gauge calibrated",
-      "Connections inspected",
+      "Relief system ready",
       "Blinds suitable",
-      "Exclusion zone established",
-      "Personnel clear",
-      "Communication agreed",
-      "Depressurisation method ready",
+      "Exclusion zone ready",
+      "Communication confirmed",
+      "Depressurisation method confirmed",
       "Crew briefed"
-    ],
+],
     "attendance_title": "ATTENDANCE AND APPROVAL",
     "fields": [
       "Project / Site",
@@ -4597,7 +4591,7 @@ export const toolboxData = [
       "subtitle": "Taşlama ve kesme sırasında disk kırılması, kıvılcım ve fırlayan parça risklerini kontrol edin.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
-    "objective": "Taşlama ve kesme işlerinde disk kırılması, geri tepme, kıvılcım, kesilme ve fırlayan parçacık risklerini kontrol etmek.",
+    "objective": "Taşlama ve kesme çalışmalarında disk kırılması, fırlayan parçalar, kıvılcımlar, yangın, kesilme ve ekipman geri tepmesinden kaynaklanan yaralanmaları önlemektir.",
     "explanation_title": "NEDEN ÖNEMLİ?",
     "explanation": [
       "Taşlama diskleri yüksek devirde çalışır ve yanlış disk seçimi, hasar veya aşırı yüklenme disk parçalanmasına neden olabilir.",
@@ -4611,7 +4605,7 @@ export const toolboxData = [
       "Doğru disk seçimi, kullanım öncesi kontrol ve koruyucu muhafazanın uygun kullanımı yaralanmayı önleyebilirdi."
 ],
     "remember_title": "UNUTMAYIN",
-    "remember": "Yanlış veya hasarlı disk yüksek devirde parçalanarak ölümcül fırlayan parçalara dönüşebilir.",
+    "remember": "Hasarlı, yanlış tipte veya RPM değeri uygun olmayan diski hiçbir zaman kullanmayın.",
     "hazards_title": "TEMEL TEHLİKELER",
     "hazards": [
       "Disk kırılması ve fırlayan parçalar.",
@@ -4625,17 +4619,17 @@ export const toolboxData = [
 ],
     "controls_title": "KONTROLLER",
     "controls": [
-      "Diski kullanımdan önce kontrol edin.",
-      "Disk tipini yapılan işe uygun seçin.",
-      "Disk devir değerinin makineye uygunluğunu doğrulayın.",
-      "Muhafazayı çıkarmayın veya değiştirmeyin.",
-      "İş parçasını sabitleyin.",
-      "Kıvılcım yönünü insan ve yanıcı malzemelerden uzak tutun.",
+      "Disk tipini yapılacak işe uygun seçin.",
+      "Disk RPM değerini makine devriyle karşılaştırın.",
+      "Diskte çatlak ve hasar kontrolü yapın.",
+      "Koruyucu muhafazayı doğru konumda kullanın.",
+      "Yanıcı malzemeleri kıvılcım hattından uzaklaştırın.",
+      "İş parçasını sağlam şekilde sabitleyin.",
+      "İki elle kontrollü çalışma yapın.",
       "Gözlük ve yüz siperi kullanın.",
-      "İki elle güvenli tutuş sağlayın.",
-      "Disk değişiminden önce enerjiyi kesin.",
-      "Anormal titreşim veya sıkışmada ekipmanı durdurun."
-    ],
+      "Uygun işitme ve solunum koruması kullanın.",
+      "Disk değişiminden önce enerjiyi kesin."
+],
     "supervisor_title": "AMİRİN MESAJI",
     "supervisor_script": "Arkadaşlar, taşlama makinesini kullanmadan önce disk, muhafaza ve RPM uyumunu kontrol edeceğiz. Kıvılcım yönünde personel veya yanıcı malzeme olmayacak. Koruyucusu çıkarılmış ekipman kullanılmayacak.",
     "questions_title": "EKİBE SORULAR",
@@ -4649,17 +4643,17 @@ export const toolboxData = [
 ],
     "verification_title": "SAHA DOĞRULAMASI",
     "verification": [
-      "Disk sağlam",
-      "Disk tipi uygun",
-      "Devir değeri uygun",
+      "Disk uygun",
+      "Disk hasarsız",
+      "RPM uyumlu",
       "Muhafaza yerinde",
       "İş parçası sabit",
-      "Kıvılcım yönü güvenli",
-      "Yanıcı malzeme kontrol edildi",
-      "KKD uygun",
-      "Kablo güvenli",
+      "Kıvılcım alanı temiz",
+      "Göz koruması uygun",
+      "Yüz siperi hazır",
+      "İşitme koruması uygun",
       "Ekip bilgilendirildi"
-    ],
+],
     "attendance_title": "KATILIM VE ONAY",
     "fields": [
       "Proje / Saha",
@@ -4682,7 +4676,7 @@ export const toolboxData = [
       "subtitle": "Control disc failure, sparks and flying-particle hazards during grinding and cutting.",
     "duration": "8–10 minutes",
     "objective_title": "OBJECTIVE",
-    "objective": "Control wheel failure, kickback, sparks, cutting and flying-particle hazards during grinding and cutting work.",
+    "objective": "Prevent injuries caused by disc failure, flying particles, sparks, fire, cuts and tool kickback during grinding and cutting work.",
     "explanation_title": "WHY IT MATTERS",
     "explanation": [
       "Grinding discs operate at very high speed and incorrect selection, damage or excessive loading can cause catastrophic disc failure.",
@@ -4696,7 +4690,7 @@ export const toolboxData = [
       "Correct disc selection, pre-use inspection and proper guarding would have prevented the event."
 ],
     "remember_title": "REMEMBER",
-    "remember": "An incorrect or damaged wheel can fragment at high speed and become a lethal projectile.",
+    "remember": "Never use a damaged disc or one with an unsuitable type or RPM rating.",
     "hazards_title": "KEY HAZARDS",
     "hazards": [
       "Disc failure and flying fragments.",
@@ -4710,17 +4704,17 @@ export const toolboxData = [
 ],
     "controls_title": "CONTROLS",
     "controls": [
-      "Inspect the wheel before use.",
-      "Select the correct wheel for the task.",
-      "Verify wheel speed rating against tool speed.",
-      "Never remove or modify the guard.",
-      "Secure the workpiece.",
-      "Direct sparks away from people and combustible materials.",
+      "Select the correct disc for the task.",
+      "Confirm the disc RPM rating suits the machine.",
+      "Inspect discs for cracks or damage.",
+      "Keep the guard correctly positioned.",
+      "Remove combustibles from the spark path.",
+      "Secure the workpiece firmly.",
+      "Maintain controlled two-handed operation.",
       "Use safety glasses and a face shield.",
-      "Maintain a secure two-handed grip.",
-      "Disconnect energy before changing wheels.",
-      "Stop the tool for abnormal vibration or binding."
-    ],
+      "Use suitable hearing and respiratory protection.",
+      "Isolate power before changing discs."
+],
     "supervisor_title": "SUPERVISOR MESSAGE",
     "supervisor_script": "Team, before using any grinder we will check the disc, guard and RPM compatibility. No person or combustible material will remain in the spark path. Equipment without a suitable guard will not be used.",
     "questions_title": "TEAM QUESTIONS",
@@ -4734,17 +4728,17 @@ export const toolboxData = [
 ],
     "verification_title": "FIELD VERIFICATION",
     "verification": [
-      "Wheel sound",
-      "Wheel type correct",
-      "Speed rating correct",
+      "Disc suitable",
+      "Disc undamaged",
+      "RPM compatible",
       "Guard fitted",
       "Workpiece secured",
-      "Spark direction safe",
-      "Combustibles controlled",
-      "PPE suitable",
-      "Cable safely routed",
+      "Spark area clear",
+      "Eye protection suitable",
+      "Face shield ready",
+      "Hearing protection suitable",
       "Crew briefed"
-    ],
+],
     "attendance_title": "ATTENDANCE AND APPROVAL",
     "fields": [
       "Project / Site",
@@ -4770,7 +4764,7 @@ export const toolboxData = [
       "subtitle": "Kaynak dumanı ve metal buharlarına maruziyeti kaynağında kontrol edin.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
-    "objective": "Kaynak sırasında oluşan metal dumanı, gaz ve partiküllerin solunmasını kaynağında kontrol etmek.",
+    "objective": "Kaynak sırasında oluşan metal dumanı, gaz ve partiküllerin solunmasından kaynaklanan akut ve uzun süreli sağlık risklerini azaltmaktır.",
     "explanation_title": "NEDEN ÖNEMLİ?",
     "explanation": [
       "Kaynak dumanı gözle görünenden daha ince partiküller ve çeşitli metal oksitler içerebilir.",
@@ -4784,7 +4778,7 @@ export const toolboxData = [
       "Uygun lokal emiş, hava değişimi ve gerekli solunum koruması maruziyeti önemli ölçüde azaltabilirdi."
 ],
     "remember_title": "UNUTMAYIN",
-    "remember": "Dumanı görememeniz havanın güvenli olduğu anlamına gelmez.",
+    "remember": "Kaynak dumanının görünmemesi havanın güvenli olduğu anlamına gelmez.",
     "hazards_title": "TEMEL TEHLİKELER",
     "hazards": [
       "Metal dumanı solunması.",
@@ -4798,17 +4792,17 @@ export const toolboxData = [
 ],
     "controls_title": "KONTROLLER",
     "controls": [
-      "Kaynak yapılacak metal ve kaplamayı belirleyin.",
-      "Uygun olmayan kaplamaları güvenli şekilde temizleyin.",
+      "Kaynak yapılacak malzemeyi ve kaplamayı belirleyin.",
+      "Yüzeydeki boya veya kaplamayı güvenli şekilde temizleyin.",
       "Lokal emiş havalandırması kullanın.",
-      "Yeterli genel havalandırma sağlayın.",
-      "Başınızı duman bulutundan uzak tutun.",
-      "Gerektiğinde uygun solunum koruması kullanın.",
-      "Filtre seçimi ve fit testini doğrulayın.",
-      "Kapalı alanlarda atmosferi izleyin.",
-      "İşe başlamadan LEV çalışmasını kontrol edin.",
-      "Kontroller yetersizse işi durdurun."
-    ],
+      "Genel havalandırmayı yeterli seviyede sağlayın.",
+      "Kaynakçının başını duman bulutunun dışında tutun.",
+      "Gerekliyse uygun respiratör kullanın.",
+      "Respiratör için fit test ve filtre uygunluğunu doğrulayın.",
+      "Kapalı alanlarda atmosfer kontrolü yapın.",
+      "LEV sisteminin çalışmasını işe başlamadan doğrulayın.",
+      "Maruziyet kontrolü yetersizse işi durdurun."
+],
     "supervisor_title": "AMİRİN MESAJI",
     "supervisor_script": "Arkadaşlar, bugün kaynak dumanını yalnızca KKD ile kontrol etmeyeceğiz. Önce lokal emiş ve havalandırmayı sağlayacağız. Malzeme ve kaplama türünü kontrol edecek, gerekiyorsa uygun respiratör kullanacağız.",
     "questions_title": "EKİBE SORULAR",
@@ -4822,17 +4816,17 @@ export const toolboxData = [
 ],
     "verification_title": "SAHA DOĞRULAMASI",
     "verification": [
-      "Malzeme belirlendi",
+      "Malzeme türü belli",
       "Kaplama kontrol edildi",
-      "LEV mevcut",
       "LEV çalışıyor",
-      "Genel havalandırma yeterli",
-      "Solunum KKD uygun",
-      "Fit test uygun",
-      "Filtre doğru",
-      "Atmosfer kontrol edildi",
+      "Havalandırma yeterli",
+      "Kaynakçı konumu uygun",
+      "Respiratör gerekliliği değerlendirildi",
+      "Filtre uygun",
+      "Fit test geçerli",
+      "Atmosfer kontrolü uygun",
       "Ekip bilgilendirildi"
-    ],
+],
     "attendance_title": "KATILIM VE ONAY",
     "fields": [
       "Proje / Saha",
@@ -4855,7 +4849,7 @@ export const toolboxData = [
       "subtitle": "Control welding-fume and metal-vapour exposure at source.",
     "duration": "8–10 minutes",
     "objective_title": "OBJECTIVE",
-    "objective": "Control inhalation of metal fumes, gases and particulates generated during welding at source.",
+    "objective": "Reduce acute and long-term health risks from inhalation of metal fumes, gases and particulates generated during welding.",
     "explanation_title": "WHY IT MATTERS",
     "explanation": [
       "Welding fumes can contain extremely fine particles and different metal oxides that may not always be clearly visible.",
@@ -4869,7 +4863,7 @@ export const toolboxData = [
       "Effective LEV, adequate air exchange and suitable respiratory protection would have significantly reduced the exposure."
 ],
     "remember_title": "REMEMBER",
-    "remember": "The absence of visible welding fume does not mean the atmosphere is safe.",
+    "remember": "The absence of visible welding fumes does not mean the air is safe.",
     "hazards_title": "KEY HAZARDS",
     "hazards": [
       "Inhalation of metal fumes.",
@@ -4884,16 +4878,16 @@ export const toolboxData = [
     "controls_title": "CONTROLS",
     "controls": [
       "Identify the base metal and coatings.",
-      "Safely remove unsuitable coatings.",
+      "Safely remove unsuitable coatings before welding.",
       "Use local exhaust ventilation.",
       "Provide adequate general ventilation.",
       "Keep the welder's head outside the fume plume.",
       "Use suitable respiratory protection where required.",
-      "Verify filter selection and fit testing.",
-      "Monitor the atmosphere in confined areas.",
+      "Verify fit testing and filter suitability.",
+      "Monitor atmosphere in confined or restricted areas.",
       "Confirm LEV operation before starting.",
       "Stop work if exposure controls are ineffective."
-    ],
+],
     "supervisor_title": "SUPERVISOR MESSAGE",
     "supervisor_script": "Team, welding fumes will not be controlled by PPE alone. We will first provide effective LEV and ventilation. We will confirm the material and coating and use suitable respiratory protection where required.",
     "questions_title": "TEAM QUESTIONS",
@@ -4909,15 +4903,15 @@ export const toolboxData = [
     "verification": [
       "Material identified",
       "Coating checked",
-      "LEV available",
       "LEV operating",
       "Ventilation adequate",
-      "Respiratory PPE suitable",
+      "Welder position suitable",
+      "Respirator need assessed",
+      "Filter suitable",
       "Fit test valid",
-      "Filter correct",
-      "Atmosphere checked",
+      "Atmosphere acceptable",
       "Crew briefed"
-    ],
+],
     "attendance_title": "ATTENDANCE AND APPROVAL",
     "fields": [
       "Project / Site",
@@ -4943,7 +4937,7 @@ export const toolboxData = [
       "subtitle": "Sıcak ortamda vücut ısısı, sıvı kaybı ve aşırı yorgunluğu kontrol edin.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
-    "objective": "Sıcak, nem, güneş, ağır iş yükü ve KKD nedeniyle oluşabilecek sıcak stresi ve sıcak çarpmasını önlemek.",
+    "objective": "Yüksek sıcaklık, güneş, ağır fiziksel çalışma ve KKD kullanımından kaynaklanan ısı stresi, sıcak bitkinliği ve sıcak çarpması risklerini önlemektir.",
     "explanation_title": "NEDEN ÖNEMLİ?",
     "explanation": [
       "Isı stresi yalnızca hava sıcaklığına bağlı değildir; nem, güneş, iş yükü, KKD ve çalışanın alışkanlığı da riski etkiler.",
@@ -4957,7 +4951,7 @@ export const toolboxData = [
       "Kademeli aklimatizasyon, planlı su-dinlenme molaları ve buddy kontrolü olayı önleyebilirdi."
 ],
     "remember_title": "UNUTMAYIN",
-    "remember": "Baş dönmesi, koordinasyon bozukluğu veya bilinç değişikliği acil uyarı işaretidir.",
+    "remember": "Bilinç değişikliği veya koordinasyon kaybı görülen çalışanı sıcak ortamda bırakmayın; acil yardım çağırın.",
     "hazards_title": "TEMEL TEHLİKELER",
     "hazards": [
       "Yüksek hava sıcaklığı.",
@@ -4971,17 +4965,17 @@ export const toolboxData = [
 ],
     "controls_title": "KONTROLLER",
     "controls": [
-      "Sıcaklık ve iş yükünü değerlendirin.",
-      "Düzenli su tüketimini sağlayın.",
-      "Planlı dinlenme molaları uygulayın.",
-      "Gölge veya serin dinlenme alanı sağlayın.",
+      "Isı riskini vardiya öncesi değerlendirin.",
+      "İçilebilir serin suyu erişilebilir tutun.",
+      "Planlı su ve dinlenme molaları uygulayın.",
+      "Gölgelik veya serin dinlenme alanı sağlayın.",
       "Ağır işleri mümkünse serin saatlere planlayın.",
-      "Yeni çalışanların sıcaklığa alışma sürecini yönetin.",
-      "Uygun hafif iş kıyafeti kullanın.",
-      "Çalışanları birbirlerini gözlemlemeleri için eşleştirin.",
-      "Sıcak stres belirtilerini takip edin.",
-      "Belirti görüldüğünde işi durdurup acil müdahaleyi başlatın."
-    ],
+      "Yeni çalışanlarda kademeli aklimatizasyon uygulayın.",
+      "Buddy sistemiyle çalışanları gözlemleyin.",
+      "Uygun hafif iş kıyafeti ve KKD seçin.",
+      "Belirti gösteren çalışanı derhal sıcak ortamdan çıkarın.",
+      "Acil durumda tıbbi yardım prosedürünü uygulayın."
+],
     "supervisor_title": "AMİRİN MESAJI",
     "supervisor_script": "Arkadaşlar, bugün sıcaklık yüksekse hızımızı ve mola düzenimizi buna göre ayarlayacağız. Susamayı beklemeden su içeceğiz ve birbirimizin belirtilerini izleyeceğiz. Baş dönmesi veya bulantıyı gizlemeyin.",
     "questions_title": "EKİBE SORULAR",
@@ -4995,17 +4989,17 @@ export const toolboxData = [
 ],
     "verification_title": "SAHA DOĞRULAMASI",
     "verification": [
-      "Sıcaklık değerlendirildi",
-      "Su mevcut",
-      "Mola planı var",
-      "Serin alan mevcut",
-      "İş yükü uygun",
-      "Aklimatizasyon kontrol edildi",
-      "KKD değerlendirildi",
-      "Buddy sistemi mevcut",
-      "Belirtiler anlatıldı",
+      "Isı riski değerlendirildi",
+      "Su hazır",
+      "Gölge alanı hazır",
+      "Mola planı belli",
+      "Ağır işler planlandı",
+      "Aklimatizasyon değerlendirildi",
+      "Buddy sistemi aktif",
+      "KKD uygun",
+      "Acil iletişim belli",
       "Ekip bilgilendirildi"
-    ],
+],
     "attendance_title": "KATILIM VE ONAY",
     "fields": [
       "Proje / Saha",
@@ -5028,7 +5022,7 @@ export const toolboxData = [
       "subtitle": "Control body heat, dehydration and excessive fatigue in hot environments.",
     "duration": "8–10 minutes",
     "objective_title": "OBJECTIVE",
-    "objective": "Prevent heat stress and heat illness caused by temperature, humidity, direct sun, workload and PPE.",
+    "objective": "Prevent heat stress, heat exhaustion and heat stroke caused by high temperatures, direct sun, heavy physical work and PPE.",
     "explanation_title": "WHY IT MATTERS",
     "explanation": [
       "Heat stress is affected not only by air temperature but also humidity, sunlight, workload, PPE and acclimatisation.",
@@ -5042,7 +5036,7 @@ export const toolboxData = [
       "Gradual acclimatisation, planned water-rest breaks and buddy monitoring would have prevented escalation."
 ],
     "remember_title": "REMEMBER",
-    "remember": "Dizziness, poor coordination or altered mental state are serious warning signs.",
+    "remember": "If a worker becomes confused or loses coordination, remove them from heat and obtain emergency medical assistance.",
     "hazards_title": "KEY HAZARDS",
     "hazards": [
       "High air temperature.",
@@ -5056,17 +5050,17 @@ export const toolboxData = [
 ],
     "controls_title": "CONTROLS",
     "controls": [
-      "Assess temperature and workload.",
-      "Provide regular access to drinking water.",
-      "Implement planned recovery breaks.",
-      "Provide shade or a cool recovery area.",
-      "Schedule heavy work for cooler periods where practicable.",
-      "Manage acclimatisation of new workers.",
-      "Use suitable lightweight work clothing where permitted.",
-      "Use a buddy system to observe workers.",
-      "Monitor for heat-stress symptoms.",
-      "Stop work and initiate emergency response when serious symptoms appear."
-    ],
+      "Assess heat risk before the shift.",
+      "Provide accessible cool drinking water.",
+      "Schedule regular hydration and rest breaks.",
+      "Provide shaded or cooled rest areas.",
+      "Plan heavy work for cooler periods where possible.",
+      "Use gradual acclimatisation for new workers.",
+      "Use a buddy system to monitor symptoms.",
+      "Select suitable lightweight clothing and PPE.",
+      "Remove symptomatic workers from the hot area immediately.",
+      "Follow emergency medical-response procedures."
+],
     "supervisor_title": "SUPERVISOR MESSAGE",
     "supervisor_script": "Team, if temperatures are high today we will adjust work pace and rest periods. Drink water before you feel thirsty and watch each other for symptoms. Do not hide dizziness or nausea.",
     "questions_title": "TEAM QUESTIONS",
@@ -5080,17 +5074,17 @@ export const toolboxData = [
 ],
     "verification_title": "FIELD VERIFICATION",
     "verification": [
-      "Heat assessed",
+      "Heat risk assessed",
       "Water available",
-      "Break plan established",
-      "Cool area available",
-      "Workload suitable",
-      "Acclimatisation checked",
-      "PPE assessed",
+      "Shade available",
+      "Break plan confirmed",
+      "Heavy work scheduled",
+      "Acclimatisation assessed",
       "Buddy system active",
-      "Symptoms explained",
+      "PPE suitable",
+      "Emergency contact confirmed",
       "Crew briefed"
-    ],
+],
     "attendance_title": "ATTENDANCE AND APPROVAL",
     "fields": [
       "Project / Site",
@@ -5116,7 +5110,7 @@ export const toolboxData = [
       "subtitle": "Soğuk, rüzgâr ve ıslak koşullarda hipotermi ve donma risklerini kontrol edin.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
-    "objective": "Soğuk, rüzgâr ve ıslak koşullarda hipotermi, donma ve el becerisi kaybını önlemek.",
+    "objective": "Düşük sıcaklık, rüzgâr, ıslak kıyafet ve uzun süreli açık hava çalışmasından kaynaklanan hipotermi, donma ve el becerisi kaybı risklerini önlemektir.",
     "explanation_title": "NEDEN ÖNEMLİ?",
     "explanation": [
       "Rüzgâr ve ıslaklık hissedilen sıcaklığı önemli ölçüde düşürerek soğuk stresini artırabilir.",
@@ -5130,7 +5124,7 @@ export const toolboxData = [
       "Kuru yedek eldiven, düzenli ısınma molası ve erken belirti bildirimi daha ciddi soğuk yaralanmasını önleyebilirdi."
 ],
     "remember_title": "UNUTMAYIN",
-    "remember": "Kontrolsüz titreme, uyuşma veya kafa karışıklığı normal soğuk hissi değildir.",
+    "remember": "Kontrol edilemeyen titreme, bilinç değişikliği veya koordinasyon kaybı ciddi soğuk stresinin belirtisi olabilir.",
     "hazards_title": "TEMEL TEHLİKELER",
     "hazards": [
       "Düşük hava sıcaklığı.",
@@ -5144,17 +5138,17 @@ export const toolboxData = [
 ],
     "controls_title": "KONTROLLER",
     "controls": [
-      "Hava sıcaklığı ve rüzgârı değerlendirin.",
-      "Kuru ve katmanlı kıyafet kullanın.",
-      "El, ayak ve başı koruyun.",
-      "Islanan kıyafeti değiştirin.",
-      "Planlı sıcak alan molaları uygulayın.",
-      "Uzun süre hareketsiz çalışmayı azaltın.",
-      "Soğuk metal ile doğrudan teması önleyin.",
+      "Hava ve rüzgâr koşullarını vardiya öncesi değerlendirin.",
+      "Katmanlı ve kuru iş kıyafeti kullanın.",
+      "Islak kıyafetleri derhal değiştirin.",
+      "Yalıtımlı eldiven ve uygun ayakkabı kullanın.",
+      "Planlı sıcak ortam molaları sağlayın.",
       "Çalışanları buddy sistemiyle takip edin.",
-      "Hipotermi ve donma belirtilerini izleyin.",
-      "Belirti görüldüğünde işi durdurup çalışanı sıcak alana alın."
-    ],
+      "Çıplak cildin soğuk metale temasını önleyin.",
+      "Uzun süreli açık hava işlerini rotasyonla yönetin.",
+      "Soğuk stres belirtilerini ekibe açıklayın.",
+      "Belirti gösteren çalışanı sıcak alana alın ve gerektiğinde tıbbi yardım çağırın."
+],
     "supervisor_title": "AMİRİN MESAJI",
     "supervisor_script": "Arkadaşlar, bugün soğuk ve rüzgâr varsa yalnız sıcaklığa değil ıslaklık ve rüzgâra da dikkat edeceğiz. Islak eldiven veya kıyafetle çalışmaya devam etmeyeceğiz. Uyuşma ve kontrolsüz titremeyi hemen bildirin.",
     "questions_title": "EKİBE SORULAR",
@@ -5169,16 +5163,16 @@ export const toolboxData = [
     "verification_title": "SAHA DOĞRULAMASI",
     "verification": [
       "Hava koşulları değerlendirildi",
-      "Kıyafet kuru",
-      "Katmanlar uygun",
-      "El koruması uygun",
-      "Ayak koruması uygun",
-      "Sıcak mola alanı mevcut",
-      "Mola planı var",
-      "Buddy sistemi mevcut",
-      "Belirtiler anlatıldı",
+      "Rüzgâr dikkate alındı",
+      "Kıyafet uygun",
+      "Yedek kuru kıyafet hazır",
+      "Eldiven uygun",
+      "Isınma alanı hazır",
+      "Mola planı belli",
+      "Buddy sistemi aktif",
+      "Acil yardım yöntemi belli",
       "Ekip bilgilendirildi"
-    ],
+],
     "attendance_title": "KATILIM VE ONAY",
     "fields": [
       "Proje / Saha",
@@ -5201,7 +5195,7 @@ export const toolboxData = [
       "subtitle": "Control hypothermia and frostbite risks in cold, windy and wet conditions.",
     "duration": "8–10 minutes",
     "objective_title": "OBJECTIVE",
-    "objective": "Prevent hypothermia, cold injury and loss of dexterity during work in cold, windy or wet conditions.",
+    "objective": "Prevent hypothermia, frostbite and loss of manual dexterity caused by low temperatures, wind, wet clothing and prolonged outdoor work.",
     "explanation_title": "WHY IT MATTERS",
     "explanation": [
       "Wind and wet conditions can significantly increase cold stress by reducing effective body temperature.",
@@ -5215,7 +5209,7 @@ export const toolboxData = [
       "Dry replacement gloves, regular warming breaks and early reporting would have prevented further cold injury."
 ],
     "remember_title": "REMEMBER",
-    "remember": "Uncontrolled shivering, numbness or confusion is not a normal response to cold.",
+    "remember": "Uncontrolled shivering, confusion or loss of coordination can indicate serious cold stress.",
     "hazards_title": "KEY HAZARDS",
     "hazards": [
       "Low air temperature.",
@@ -5229,17 +5223,17 @@ export const toolboxData = [
 ],
     "controls_title": "CONTROLS",
     "controls": [
-      "Assess temperature and wind conditions.",
-      "Wear dry layered clothing.",
-      "Protect hands, feet and head.",
-      "Replace wet clothing promptly.",
-      "Provide planned warm-up breaks.",
-      "Reduce prolonged stationary work.",
-      "Avoid direct contact with cold metal.",
-      "Use a buddy system to monitor workers.",
-      "Watch for hypothermia and frostbite symptoms.",
-      "Stop work and move affected workers to a warm area."
-    ],
+      "Assess temperature and wind conditions before the shift.",
+      "Use layered and dry work clothing.",
+      "Replace wet clothing immediately.",
+      "Use insulated gloves and suitable footwear.",
+      "Provide scheduled warming breaks.",
+      "Monitor workers using a buddy system.",
+      "Prevent bare-skin contact with cold metal.",
+      "Rotate prolonged outdoor tasks.",
+      "Brief the crew on cold-stress symptoms.",
+      "Move symptomatic workers to warmth and obtain medical help where required."
+],
     "supervisor_title": "SUPERVISOR MESSAGE",
     "supervisor_script": "Team, if conditions are cold and windy today we will consider wind and wetness as well as temperature. Do not continue working in wet gloves or clothing. Report numbness or uncontrolled shivering immediately.",
     "questions_title": "TEAM QUESTIONS",
@@ -5254,16 +5248,16 @@ export const toolboxData = [
     "verification_title": "FIELD VERIFICATION",
     "verification": [
       "Weather assessed",
-      "Clothing dry",
-      "Layers suitable",
-      "Hand protection suitable",
-      "Foot protection suitable",
-      "Warm area available",
-      "Break plan established",
+      "Wind considered",
+      "Clothing suitable",
+      "Dry replacements ready",
+      "Gloves suitable",
+      "Warming area ready",
+      "Break plan confirmed",
       "Buddy system active",
-      "Symptoms explained",
+      "Emergency method confirmed",
       "Crew briefed"
-    ],
+],
     "attendance_title": "ATTENDANCE AND APPROVAL",
     "fields": [
       "Project / Site",

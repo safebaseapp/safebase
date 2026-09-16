@@ -50,7 +50,6 @@ async function loadEmbeddedFontCss() {
   const bold = await loadFont(boldCandidates);
 
   return `
-    <style>
       @font-face {
         font-family: "SernemPdf";
         src: url("data:font/ttf;base64,${regular}") format("truetype");
@@ -66,9 +65,8 @@ async function loadEmbeddedFontCss() {
       }
 
       text, tspan {
-        font-family: "SernemPdf", sans-serif;
+        font-family: "SernemPdf";
       }
-    </style>
   `;
 }
 
