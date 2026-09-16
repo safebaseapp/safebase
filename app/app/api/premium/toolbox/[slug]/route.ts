@@ -167,11 +167,27 @@ export async function GET(request: Request, { params }: RouteProps) {
     }
   }
 
+  const isWorkingAtHeight = slug === "working-at-height";
+
+  /*
+    PILOT (yalnızca working-at-height):
+    Logolu çıktı, şirket kimliğini ön plana çıkaran ayrı "branded-base"
+    tasarımından üretilir (header'da büyük SERNEM markası yoktur, üst-sol
+    köşede logo için rezerve alan bulunur). Logo yoksa standart SERNEM
+    tasarımına geri düşülür. Diğer tüm toolbox'lar mevcut davranışı korur.
+  */
+  const hasUsableLogo = Boolean(logoFile && logoBlob);
+
+  const sourceFilename =
+    isWorkingAtHeight && hasUsableLogo
+      ? `${slug}-toolbox-talk-${locale}-branded-base.pdf`
+      : `${slug}-toolbox-talk-${locale}.pdf`;
+
   const sourcePdfPath = path.join(
     process.cwd(),
     "public",
     "downloads",
-    `${slug}-toolbox-talk-${locale}.pdf`,
+    sourceFilename,
   );
 
   let sourcePdfBytes: Uint8Array;
@@ -250,10 +266,13 @@ export async function GET(request: Request, { params }: RouteProps) {
     const { width: pageWidth, height: pageHeight } =
       firstPage.getSize();
 
-    // Yatay logolar daha geniş görünür.
-    // Yükseklik sınırlıdır; alttaki süre kutusunun üzerine taşmaz.
-    const maxLogoWidth = 185;
-    const maxLogoHeight = 44;
+    /*
+      working-at-height (pilot): logo, branded-base tasarımındaki üst-sol
+      rezerve header alanına belirgin şekilde yerleştirilir (şirket kimliği
+      ön planda). Diğer toolbox'larda mevcut sağ-üst yerleşimi korunur.
+    */
+    const maxLogoWidth = isWorkingAtHeight ? 150 : 185;
+    const maxLogoHeight = isWorkingAtHeight ? 40 : 44;
 
     const scale = Math.min(
       maxLogoWidth / embeddedLogo.width,
@@ -264,8 +283,12 @@ export async function GET(request: Request, { params }: RouteProps) {
     const logoWidth = embeddedLogo.width * scale;
     const logoHeight = embeddedLogo.height * scale;
 
-    const logoX = pageWidth - logoWidth - 24;
-    const logoY = pageHeight - logoHeight - 18;
+    // Rezerve alan generate-working-at-height.py ile senkron:
+    // sol 16mm ≈ 45.35pt, logo üst kenarı üstten 12mm ≈ 34.0pt.
+    const logoX = isWorkingAtHeight ? 45.35 : pageWidth - logoWidth - 24;
+    const logoY = isWorkingAtHeight
+      ? pageHeight - 34.0 - logoHeight
+      : pageHeight - logoHeight - 18;
 
     firstPage.drawImage(embeddedLogo, {
       x: logoX,
