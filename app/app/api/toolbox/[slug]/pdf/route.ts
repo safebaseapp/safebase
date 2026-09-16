@@ -5,6 +5,7 @@ import sharp from "sharp";
 
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf";
+import { applyToolboxPhotoOverlay } from "@/lib/pdf/toolbox-photo-overlay";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -35,11 +36,6 @@ export async function GET(
       });
     }
 
-    /*
-     * STANDARD PDF
-     * Firma logosu KULLANILMAZ.
-     * Sadece SERNEM logosu kullanılır.
-     */
     const logoPath = path.join(
       process.cwd(),
       "public",
@@ -53,7 +49,7 @@ export async function GET(
       .png()
       .toBuffer();
 
-    const pdfBytes = await generatePremiumToolboxPdf({
+    const generatedPdfBytes = await generatePremiumToolboxPdf({
       slug,
       locale,
       logoBytes: sernemLogo,
@@ -62,6 +58,11 @@ export async function GET(
         revision: "00",
       },
     });
+
+    const pdfBytes = await applyToolboxPhotoOverlay(
+      generatedPdfBytes,
+      slug,
+    );
 
     const localized =
       locale === "tr"
