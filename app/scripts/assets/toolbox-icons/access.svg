@@ -1,0 +1,5 @@
+<!-- Lucide construction icon derivative, ISC License -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="5" y="13" width="38" height="16" rx="2"/>
+  <path d="M14 29v12M34 29v12M14 7v6M34 7v6M6 14l15 15M19 13l16 16M32 13l10 10"/>
+</svg>

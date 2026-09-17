@@ -1,0 +1,6 @@
+<!-- Lucide-inspired, ISC License -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="6" y="9" width="36" height="30" rx="3"/>
+  <path d="M6 19h36M24 19l-5 7 7 4-5 9"/>
+  <path d="M11 14h4M21 14h4M31 14h4"/>
+</svg>
