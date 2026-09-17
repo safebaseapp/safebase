@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { toolboxData } from "@/lib/toolbox/toolbox-data";
+import { premiumMasterSlugSet } from "@/lib/toolbox/premium-master-slugs";
 
 type Locale = "tr" | "en";
 
@@ -670,7 +671,7 @@ export default function ToolboxLibraryClient({
 
     const isLegacyToolbox = baseSlugs.has(item.slug);
 
-    if (isLegacyToolbox) {
+    if (isLegacyToolbox || premiumMasterSlugSet.has(item.slug)) {
       return `/downloads/${item.pdfSlug}-toolbox-talk-${locale}.pdf`;
     }
 

@@ -5,6 +5,7 @@ import { PDFDocument, rgb } from "pdf-lib";
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
+import { premiumMasterSlugSet } from "@/lib/toolbox/premium-master-slugs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -228,13 +229,13 @@ export async function GET(request: Request, { params }: RouteProps) {
   }
 
   /*
-    WORKING AT HEIGHT MASTER
-    ------------------------
-    Bu toolbox icin normal PDF ile logolu PDF farkli master tasarimlardir.
-    Logolu surumde sirket logosu, SERNEM markasinin sonradan kapatilmasi
-    yerine dogrudan ayrilmis ust-sol kurumsal alana yerlestirilir.
+    PREMIUM MASTER PDFs
+    -------------------
+    Normal ve logolu dokumanlar ayri master tasarimlardir. Sirket logosu,
+    SERNEM markasini sonradan kapatmak yerine ayrilmis ust-sol kurumsal
+    alana yerlestirilir.
   */
-  if (slug === "working-at-height" && logoFile && logoBlob) {
+  if (premiumMasterSlugSet.has(slug) && logoFile && logoBlob) {
     try {
       const brandedBasePath = path.join(
         process.cwd(),
@@ -311,7 +312,7 @@ export async function GET(request: Request, { params }: RouteProps) {
         },
       });
     } catch (error) {
-      console.error("Working at height branded PDF error:", error);
+      console.error("Premium master branded PDF error:", error);
 
       return NextResponse.json(
         {
