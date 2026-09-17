@@ -1,0 +1,5 @@
+<!-- Lucide life-buoy icon derivative, ISC License -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="24" cy="24" r="19"/><circle cx="24" cy="24" r="8"/>
+  <path d="M11 11l8 8M29 19l8-8M29 29l8 8M19 29l-8 8"/>
+</svg>

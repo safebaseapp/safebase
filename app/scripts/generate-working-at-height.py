@@ -37,12 +37,22 @@ from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
+from reportlab.graphics import renderPDF
+try:
+    from svglib.svglib import svg2rlg
+except ImportError:  # Allows the shared content model to be imported by DOCX tooling.
+    svg2rlg = None
 
 # --------------------------------------------------------------------------- #
 # Çıktı dizini + fontlar (v2 ile aynı DejaVu kaydı — Türkçe karakter desteği)
 # --------------------------------------------------------------------------- #
 OUT = Path("public/downloads")
 OUT.mkdir(parents=True, exist_ok=True)
+ICON_DIR = Path(__file__).resolve().parent / "assets" / "toolbox-icons"
+ICON_PNG_DIR = Path(__file__).resolve().parent / "assets" / "toolbox-icons-png"
+IMAGE_DIR = Path(__file__).resolve().parent / "assets" / "toolbox-images"
+_ICON_CACHE = {}
 
 _regular = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")
 _bold = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
@@ -77,6 +87,9 @@ PALE_GREEN = HexColor("#ECFDF5")
 PALE_RED = HexColor("#FEF2F2")
 PALE_AMBER = HexColor("#FEF3C7")
 PALE_SLATE = HexColor("#F1F5F9")
+PALE_PURPLE = HexColor("#F5F3FF")
+PURPLE = HexColor("#7C3AED")
+SAFETY_YELLOW = HexColor("#FACC15")
 
 PAGE_W, PAGE_H = A4
 MARGIN = 16 * mm
@@ -320,6 +333,238 @@ def _bullets(doc, items, marker_color=BLUE):
         doc.y -= 1.6 * mm
 
 
+def _hazard_icon(c, kind, cx, cy, color):
+    """Compact vector safety pictograms; no icon fonts or external assets."""
+    c.saveState()
+    c.setStrokeColor(color)
+    c.setFillColor(color)
+    c.setLineWidth(1.5)
+    c.setLineCap(1)
+    c.setLineJoin(1)
+
+    if kind == "fall":
+        c.circle(cx - 3 * mm, cy + 4 * mm, 1.4 * mm, fill=1, stroke=0)
+        c.line(cx - 2 * mm, cy + 2.5 * mm, cx + 1 * mm, cy - 1 * mm)
+        c.line(cx - 1 * mm, cy + 1 * mm, cx - 5 * mm, cy - 1 * mm)
+        c.line(cx + 1 * mm, cy - 1 * mm, cx + 5 * mm, cy - 4 * mm)
+        c.line(cx + 0.5 * mm, cy - 0.5 * mm, cx - 2 * mm, cy - 5 * mm)
+        c.setStrokeColor(color)
+        c.line(cx - 7 * mm, cy - 6 * mm, cx + 7 * mm, cy - 6 * mm)
+    elif kind == "fragile":
+        c.rect(cx - 7 * mm, cy - 3 * mm, 14 * mm, 6 * mm, fill=0, stroke=1)
+        p = c.beginPath()
+        p.moveTo(cx - 1 * mm, cy + 3 * mm)
+        p.lineTo(cx + 2 * mm, cy)
+        p.lineTo(cx - 1 * mm, cy - 1 * mm)
+        p.lineTo(cx + 2 * mm, cy - 3 * mm)
+        c.drawPath(p, fill=0, stroke=1)
+        c.circle(cx - 4 * mm, cy + 6 * mm, 1.2 * mm, fill=1, stroke=0)
+    elif kind == "ladder":
+        c.line(cx - 5 * mm, cy - 6 * mm, cx - 1 * mm, cy + 7 * mm)
+        c.line(cx + 2 * mm, cy - 6 * mm, cx + 6 * mm, cy + 7 * mm)
+        for off in (-3, 0, 3, 6):
+            c.line(cx - 3.8 * mm + off * .31 * mm, cy + off * mm,
+                   cx + 4.7 * mm + off * .31 * mm, cy + off * mm)
+    elif kind == "objects":
+        c.rect(cx - 6 * mm, cy + 1 * mm, 4 * mm, 4 * mm, fill=1, stroke=0)
+        c.rect(cx + 1 * mm, cy + 5 * mm, 3 * mm, 3 * mm, fill=1, stroke=0)
+        c.line(cx - 4 * mm, cy, cx - 4 * mm, cy - 4 * mm)
+        c.line(cx - 6 * mm, cy - 2 * mm, cx - 4 * mm, cy - 4 * mm)
+        c.line(cx - 2 * mm, cy - 2 * mm, cx - 4 * mm, cy - 4 * mm)
+        c.arc(cx + 1 * mm, cy - 7 * mm, cx + 8 * mm, cy, 0, 180)
+    elif kind == "mewp":
+        c.circle(cx - 4 * mm, cy - 5 * mm, 1.5 * mm, fill=0, stroke=1)
+        c.circle(cx + 5 * mm, cy - 5 * mm, 1.5 * mm, fill=0, stroke=1)
+        c.line(cx - 5 * mm, cy - 3.5 * mm, cx + 6 * mm, cy - 3.5 * mm)
+        c.line(cx, cy - 3 * mm, cx + 2 * mm, cy + 3 * mm)
+        c.rect(cx - 1 * mm, cy + 3 * mm, 7 * mm, 4 * mm, fill=0, stroke=1)
+        c.circle(cx + 2 * mm, cy + 9 * mm, 1.2 * mm, fill=1, stroke=0)
+    elif kind == "weather":
+        c.circle(cx - 3 * mm, cy + 3 * mm, 3 * mm, fill=0, stroke=1)
+        c.circle(cx + 2 * mm, cy + 4 * mm, 4 * mm, fill=0, stroke=1)
+        c.line(cx - 6 * mm, cy, cx + 6 * mm, cy)
+        for x in (-4, 0, 4):
+            c.line(cx + x * mm, cy - 2 * mm, cx + (x - 1) * mm, cy - 5 * mm)
+    elif kind == "anchor":
+        c.circle(cx, cy + 2 * mm, 5 * mm, fill=0, stroke=1)
+        c.circle(cx, cy + 2 * mm, 2 * mm, fill=0, stroke=1)
+        c.line(cx, cy - 3 * mm, cx, cy - 7 * mm)
+        c.line(cx - 4 * mm, cy - 7 * mm, cx + 4 * mm, cy - 7 * mm)
+    else:  # suspension / rescue
+        c.circle(cx, cy + 6 * mm, 1.4 * mm, fill=1, stroke=0)
+        c.line(cx, cy + 4 * mm, cx, cy - 2 * mm)
+        c.line(cx, cy + 2 * mm, cx - 4 * mm, cy)
+        c.line(cx, cy + 2 * mm, cx + 4 * mm, cy)
+        c.line(cx, cy - 2 * mm, cx - 3 * mm, cy - 6 * mm)
+        c.line(cx, cy - 2 * mm, cx + 3 * mm, cy - 6 * mm)
+        c.setStrokeColor(color)
+        c.line(cx + 7 * mm, cy + 8 * mm, cx + 7 * mm, cy - 7 * mm)
+
+    c.restoreState()
+
+
+def _hazard_cards(doc, cards):
+    """Eight consistent enterprise HSE cards using embedded SVG pictograms."""
+    c = doc.c
+    gap = 4 * mm
+    cols = 4
+    card_w = (CONTENT_W - gap * (cols - 1)) / cols
+    card_h = 31 * mm
+    rows = (len(cards) + cols - 1) // cols
+    total_h = rows * card_h + (rows - 1) * gap
+    doc.need(total_h + 2 * mm)
+    y_top = doc.y
+    for i, card in enumerate(cards):
+        row, col = divmod(i, cols)
+        x = MARGIN + col * (card_w + gap)
+        y = y_top - row * (card_h + gap)
+        c.setFillColor(CARD)
+        c.setStrokeColor(BORDER)
+        c.setLineWidth(.7)
+        c.roundRect(x, y - card_h, card_w, card_h, 1.8 * mm,
+                    fill=1, stroke=1)
+        c.setFillColor(NAVY)
+        c.roundRect(x, y - 2.0 * mm, card_w, 2.0 * mm, .8 * mm,
+                    fill=1, stroke=0)
+
+        # Small safety-yellow identifier; icon itself stays sober and monochrome.
+        c.setFillColor(SAFETY_YELLOW)
+        c.circle(x + 5 * mm, y - 6 * mm, 2.1 * mm, fill=1, stroke=0)
+        c.setFillColor(NAVY)
+        c.setFont(BOLD, 6.5)
+        c.drawCentredString(x + 5 * mm, y - 7.0 * mm, str(i + 1))
+
+        icon_name = {"ladder": "access"}.get(card[0], card[0])
+        icon_path = ICON_DIR / f"{icon_name}.svg"
+        target = 14 * mm
+        if svg2rlg is None:
+            png = ImageReader(str(ICON_PNG_DIR / f"{icon_name}.png"))
+            png_w, png_h = png.getSize()
+            scale = min(target / png_w, target / png_h)
+            draw_w, draw_h = png_w * scale, png_h * scale
+            c.drawImage(
+                png,
+                x + (card_w - draw_w) / 2,
+                y - 22 * mm,
+                width=draw_w,
+                height=draw_h,
+                preserveAspectRatio=True,
+                mask="auto",
+            )
+        else:
+            drawing = _ICON_CACHE.get(card[0])
+            if drawing is None:
+                drawing = svg2rlg(str(icon_path))
+                _ICON_CACHE[card[0]] = drawing
+            scale = min(target / drawing.width, target / drawing.height)
+            c.saveState()
+            c.translate(x + (card_w - drawing.width * scale) / 2,
+                        y - 22 * mm)
+            c.scale(scale, scale)
+            renderPDF.draw(drawing, c, 0, 0)
+            c.restoreState()
+
+        label_lines = _wrap(c, card[1], card_w - 5 * mm, 7.2, BOLD)[:2]
+        ly = y - 25.0 * mm
+        for line in label_lines:
+            c.setFillColor(NAVY)
+            c.setFont(BOLD, 7.2)
+            c.drawCentredString(x + card_w / 2, ly, line)
+            ly -= 3.6 * mm
+    doc.y = y_top - total_h - 4 * mm
+
+
+def _remember_panel(doc, title, rows):
+    c = doc.c
+    panel_h = 34 * mm
+    doc.need(panel_h + 2 * mm)
+    y = doc.y
+    c.setFillColor(NAVY)
+    c.roundRect(MARGIN, y - panel_h, CONTENT_W, panel_h, 3 * mm,
+                fill=1, stroke=0)
+    _shield(c, MARGIN + 8 * mm, y - 5 * mm, 7.5 * mm, outer=white, inner=BLUE)
+    _text(c, title, MARGIN + 17 * mm, y - 8 * mm, 9.5, BOLD, white)
+    col_w = (CONTENT_W - 20 * mm) / 3
+    for i, (letter, textval) in enumerate(rows):
+        col = i % 3
+        row = i // 3
+        x = MARGIN + 7 * mm + col * col_w
+        ty = y - 17 * mm - row * 9 * mm
+        c.setFillColor(BLUE)
+        c.circle(x + 3 * mm, ty + 1.5 * mm, 2.7 * mm, fill=1, stroke=0)
+        c.setFillColor(white)
+        c.setFont(BOLD, 8)
+        c.drawCentredString(x + 3 * mm, ty - .8 * mm, letter)
+        _text(c, textval, x + 8 * mm, ty, 7.6, REGULAR, HexColor("#E2E8F0"))
+    doc.y = y - panel_h - 3 * mm
+
+
+def _metric_strip(doc, title, metrics):
+    """Three auditable field thresholds; fills the overview page meaningfully."""
+    c = doc.c
+    panel_h = 40 * mm
+    doc.need(panel_h + 2 * mm)
+    y = doc.y
+    _text(c, title, MARGIN, y - 2 * mm, 9.5, BOLD, NAVY)
+    y -= 7 * mm
+    gap = 4 * mm
+    card_w = (CONTENT_W - 2 * gap) / 3
+    colors = [(BLUE, PALE_BLUE), (GREEN, PALE_GREEN), (AMBER, PALE_AMBER)]
+    for i, (value, label) in enumerate(metrics):
+        x = MARGIN + i * (card_w + gap)
+        accent, fill = colors[i]
+        c.setFillColor(fill)
+        c.setStrokeColor(BORDER)
+        c.setLineWidth(.55)
+        c.roundRect(x, y - 29 * mm, card_w, 29 * mm, 2.6 * mm,
+                    fill=1, stroke=1)
+        c.setFillColor(accent)
+        c.roundRect(x, y - 29 * mm, 3 * mm, 29 * mm, 1.2 * mm,
+                    fill=1, stroke=0)
+        _text(c, value, x + 8 * mm, y - 11 * mm, 15, BOLD, accent)
+        for n, line in enumerate(_wrap(c, label, card_w - 12 * mm, 7.4, REGULAR)[:2]):
+            _text(c, line, x + 8 * mm, y - 18 * mm - n * 4 * mm,
+                  7.4, REGULAR, SLATE)
+    doc.y = y - 32 * mm
+
+
+def _photo_panel(doc, title, caption, filename):
+    """Premium documentary image panel with preserved aspect ratio."""
+    c = doc.c
+    img = ImageReader(str(IMAGE_DIR / filename))
+    source_w, source_h = img.getSize()
+    # Fit the real remaining page space instead of forcing a new page.
+    available_h = doc.y - BOTTOM_LIMIT - 17 * mm
+    if available_h < 34 * mm:
+        doc.new_page()
+        available_h = doc.y - BOTTOM_LIMIT - 17 * mm
+    img_h = min(48 * mm, available_h)
+    img_w = img_h * source_w / source_h
+    if img_w > CONTENT_W:
+        img_w = CONTENT_W
+        img_h = img_w * source_h / source_w
+    y = doc.y
+
+    c.setFillColor(NAVY)
+    c.roundRect(MARGIN, y - 9 * mm, CONTENT_W, 9 * mm, 2 * mm,
+                fill=1, stroke=0)
+    c.setFillColor(SAFETY_YELLOW)
+    c.rect(MARGIN, y - 9 * mm, 3 * mm, 9 * mm, fill=1, stroke=0)
+    _text(c, title, MARGIN + 7 * mm, y - 6.1 * mm, 9, BOLD, white)
+
+    image_x = MARGIN + (CONTENT_W - img_w) / 2
+    image_y = y - 10.5 * mm - img_h
+    c.setStrokeColor(BORDER)
+    c.setLineWidth(.7)
+    c.roundRect(image_x - .8 * mm, image_y - .8 * mm,
+                img_w + 1.6 * mm, img_h + 1.6 * mm, 1.5 * mm,
+                fill=0, stroke=1)
+    c.drawImage(img, image_x, image_y, width=img_w, height=img_h,
+                preserveAspectRatio=True, mask="auto")
+    _text(c, caption, image_x, image_y - 4.2 * mm, 7.1, REGULAR, MUTE)
+    doc.y = image_y - 7 * mm
+
+
 def _tiers(doc, tiers):
     """Kontrol hiyerarşisi — 4 kademeli renkli kartlar."""
     c = doc.c
@@ -404,28 +649,50 @@ def _checklist(doc, items):
 
 
 def _standards(doc, items):
+    """Compact 2x2 reference cards that translate standards into field action."""
     c = doc.c
-    lines = [_wrap(c, it, CONTENT_W - 12 * mm, 8.2, REGULAR) for it in items]
-    n = sum(len(l) for l in lines)
-    box_h = 6 * mm + n * 4.3 * mm + 4 * mm
-    doc.need(box_h + 2 * mm)
-    y = doc.y
-    c.setFillColor(PALE_SLATE)
-    c.roundRect(MARGIN, y - box_h, CONTENT_W, box_h, 2.2 * mm, fill=1, stroke=0)
-    c.setStrokeColor(BORDER)
-    c.setLineWidth(0.6)
-    c.roundRect(MARGIN, y - box_h, CONTENT_W, box_h, 2.2 * mm, fill=0, stroke=1)
-    ty = y - 7 * mm
-    for group in lines:
-        c.setFillColor(BLUE)
-        c.circle(MARGIN + 7 * mm, ty + 1.3 * mm, 0.9 * mm, fill=1, stroke=0)
-        first = True
-        for line in group:
-            _text(c, line, MARGIN + 10 * mm, ty, 8.2, REGULAR,
-                  DARK if first else MUTE)
-            ty -= 4.3 * mm
-            first = False
-    doc.y = y - box_h - 3 * mm
+    gap = 4 * mm
+    card_w = (CONTENT_W - gap) / 2
+    prepared = []
+    for item in items:
+        body = _wrap(c, item["body"], card_w - 11 * mm, 7.4, REGULAR)
+        prepared.append((item["code"], item["title"], body))
+
+    row_heights = []
+    for row in range(2):
+        row_items = prepared[row * 2:row * 2 + 2]
+        max_lines = max(len(item[2]) for item in row_items)
+        row_heights.append(14 * mm + max_lines * 3.8 * mm)
+
+    total_h = sum(row_heights) + gap
+    doc.need(total_h + 2 * mm)
+    top = doc.y
+    accents = [BLUE, GREEN, AMBER, SLATE]
+    fills = [PALE_BLUE, PALE_GREEN, PALE_AMBER, PALE_SLATE]
+
+    idx = 0
+    for row, card_h in enumerate(row_heights):
+        row_top = top - sum(row_heights[:row]) - row * gap
+        for col in range(2):
+            code, title, body_lines = prepared[idx]
+            x = MARGIN + col * (card_w + gap)
+            accent = accents[idx]
+            c.setFillColor(fills[idx])
+            c.setStrokeColor(BORDER)
+            c.setLineWidth(.55)
+            c.roundRect(x, row_top - card_h, card_w, card_h, 2.2 * mm,
+                        fill=1, stroke=1)
+            c.setFillColor(accent)
+            c.roundRect(x, row_top - card_h, 2.5 * mm, card_h, 1.1 * mm,
+                        fill=1, stroke=0)
+            _text(c, code, x + 6 * mm, row_top - 6 * mm, 7, BOLD, accent)
+            _text(c, title, x + 6 * mm, row_top - 10.5 * mm, 8.2, BOLD, NAVY)
+            ty = row_top - 15 * mm
+            for line in body_lines:
+                _text(c, line, x + 6 * mm, ty, 7.4, REGULAR, SLATE)
+                ty -= 3.8 * mm
+            idx += 1
+    doc.y = top - total_h - 3 * mm
 
 
 def _attendance(doc, meta):
@@ -433,9 +700,10 @@ def _attendance(doc, meta):
     fields = meta["att_fields"]
     headers = meta["att_headers"]
     rows = 12
-    row_h = 8.4 * mm
+    # Generous handwritten sign-off rows on the dedicated approval sheet.
+    row_h = 11.5 * mm
     # üst bilgi alanı (2x2) + tablo başlığı + satırlar
-    info_h = 16 * mm
+    info_h = 18 * mm
     table_h = 8 * mm + rows * row_h
     total = info_h + table_h + 4 * mm
     doc.need(total)
@@ -446,8 +714,8 @@ def _attendance(doc, meta):
     positions = [
         (MARGIN, y - 6 * mm),
         (MARGIN + fw + 6 * mm, y - 6 * mm),
-        (MARGIN, y - 14 * mm),
-        (MARGIN + fw + 6 * mm, y - 14 * mm),
+        (MARGIN, y - 15.5 * mm),
+        (MARGIN + fw + 6 * mm, y - 15.5 * mm),
     ]
     for (label, (fx, fy)) in zip(fields, positions):
         _text(c, label + ":", fx, fy, 8, BOLD, SLATE)
@@ -523,6 +791,22 @@ def content(lang):
                 "Uygun olmayan veya yetersiz dayanımlı ankraj noktaları.",
                 "Düşüş sonrası askıda kalma (suspension trauma) ve yetersiz kurtarma.",
             ],
+            "hazard_cards": [
+                ("fall", "KENARDAN DÜŞME"),
+                ("fragile", "KIRILGAN YÜZEY"),
+                ("ladder", "GÜVENSİZ ERİŞİM"),
+                ("objects", "DÜŞEN CİSİM"),
+                ("mewp", "MEWP / PLATFORM"),
+                ("weather", "HAVA KOŞULLARI"),
+                ("anchor", "ANKRAJ HATASI"),
+                ("rescue", "ASKIDA KALMA"),
+            ],
+            "metric_title": "SAHADA DOĞRULANACAK KRİTİK DEĞERLER",
+            "metrics": [
+                ("1,8 m", "OSHA inşaat düşme koruması eşiği"),
+                ("1,2 m", "OSHA genel sanayi koruma eşiği"),
+                ("22 kN", "Çalışan başına ankraj dayanımı"),
+            ],
             "s_controls": "KRİTİK KONTROL ÖNLEMLERİ (KONTROL HİYERARŞİSİ)",
             "tiers": [
                 {
@@ -579,14 +863,60 @@ def content(lang):
                 "Kurtarma planı ve ekipmanı hazır",
                 "Personel yetkin ve bilgilendirildi",
             ],
-            "s_standards": "STANDARTLAR VE REFERANSLAR",
+            "s_standards": "STANDARTLAR VE SAHA GEREKLİLİKLERİ",
+            "standards_intro": (
+                "Bu referanslar yalnızca yasal eşikleri göstermez; sahadaki güvenli çalışma düzeninin nasıl kurulacağını da tanımlar. "
+                "Yerel mevzuat veya işveren kuralı daha sıkıysa her zaman daha yüksek standart uygulanır."
+            ),
             "standards": [
-                "OSHA 29 CFR 1926 Subpart M — Fall Protection (inşaat); 1,8 m (6 ft) eşik.",
-                "OSHA 29 CFR 1910 Subpart D — Walking-Working Surfaces (genel sanayi); 1,2 m (4 ft) eşik.",
-                "ISO 45001:2018, Madde 8.1.2 — Kontrol Hiyerarşisi (Elemine et → İkame → Mühendislik → Yönetsel → KKD).",
-                "IOSH ve NEBOSH iyi uygulama rehberliği ile uyumludur.",
+                {
+                    "code": "OSHA 1926 SUBPART M",
+                    "title": "İNŞAATTA DÜŞME KORUMASI",
+                    "body": "1,8 m ve üzerinde açık kenarları, zemin boşluklarını ve çalışma platformlarını korkuluk, kapak veya kişisel düşüş durdurma sistemi ile koruyun.",
+                },
+                {
+                    "code": "OSHA 1910 SUBPART D",
+                    "title": "YÜRÜME-ÇALIŞMA YÜZEYLERİ",
+                    "body": "Genel sanayide 1,2 m ve üzerindeki düşme risklerini kontrol edin. Erişim yollarını, merdivenleri, açıklıkları ve yüzey bütünlüğünü işe başlamadan doğrulayın.",
+                },
+                {
+                    "code": "ISO 45001:2018 · 8.1.2",
+                    "title": "KONTROL HİYERARŞİSİ",
+                    "body": "Önce yüksekte çalışmayı ortadan kaldırın. Ardından kolektif korumayı seçin; kişisel düşüş durdurma sistemi ve KKD son savunma hattıdır.",
+                },
+                {
+                    "code": "SAHA İYİ UYGULAMASI",
+                    "title": "YETKİNLİK VE KURTARMA",
+                    "body": "Etiketli iskele, doğrulanmış ankraj, ekipman ön kullanım kontrolü, bariyerli alt bölge ve işe özel uygulanabilir kurtarma planı olmadan çalışmaya başlamayın.",
+                },
+            ],
+            "s_evidence": "İŞE BAŞLAMADAN ÖNCE ASGARİ KANITLAR",
+            "standards_evidence": [
+                "Onaylı çalışma izni ve göreve özel risk değerlendirmesi",
+                "Geçerli iskele etiketi veya platform muayene kaydı",
+                "Ankraj seçimi ve gerekli dayanım doğrulaması",
+                "Emniyet kemeri, lanyard / SRL ön kullanım kontrolü",
+                "Alt bölge bariyeri ve düşen cisim kontrolü",
+                "İşe özel kurtarma planı, ekipmanı ve sorumlu kişiler",
+            ],
+            "s_discussion": "SÜPERVİZÖR KONUŞMA NOKTALARI",
+            "standards_discussion": [
+                "Bu iş zeminde veya uzaktan yöntemle yapılabilir mi?",
+                "Kolektif koruma neden kişisel düşüş durdurmadan önce gelir?",
+                "Bir düşüş sonrası askıda kalan kişiyi kim, nasıl ve ne kadar sürede kurtaracak?",
             ],
             "s_attendance": "KATILIM VE ONAY",
+            "remember_title": "HATIRLA — SERNEM",
+            "remember": [
+                ("S", "Dur ve düşün"),
+                ("E", "Riski değerlendir"),
+                ("R", "Ortadan kaldır / azalt"),
+                ("N", "Asla varsayma"),
+                ("E", "Korumayı doğrula"),
+                ("M", "İzle ve iletişim kur"),
+            ],
+            "photo_title": "GÜVENLİ YÜKSEKTE ÇALIŞMA DÜZENİ",
+            "photo_caption": "Tam korkuluk · Baş üstü ankraj · SRL · Bağlı aletler · Bariyerli alt bölge · Hazır kurtarma",
             "att_fields": ["Proje / Saha", "Tarih", "Konuşmayı yapan", "Çalışma alanı"],
             "att_headers": ["No", "Ad Soyad", "Firma / Görev", "İmza"],
         }
@@ -624,6 +954,22 @@ def content(lang):
             "Adverse weather (wind, ice), slippery surfaces and poor lighting.",
             "Unapproved or inadequately rated anchor points.",
             "Suspension trauma after a fall and inadequate rescue provision.",
+        ],
+        "hazard_cards": [
+            ("fall", "FALL FROM HEIGHT"),
+            ("fragile", "FRAGILE SURFACE"),
+            ("ladder", "UNSAFE ACCESS"),
+            ("objects", "FALLING OBJECTS"),
+            ("mewp", "MEWP / PLATFORM"),
+            ("weather", "WEATHER"),
+            ("anchor", "ANCHOR FAILURE"),
+            ("rescue", "SUSPENSION"),
+        ],
+        "metric_title": "CRITICAL VALUES TO VERIFY IN THE FIELD",
+        "metrics": [
+            ("1.8 m", "OSHA construction fall-protection trigger"),
+            ("1.2 m", "OSHA general-industry protection trigger"),
+            ("22 kN", "Anchor capacity required per worker"),
         ],
         "s_controls": "CRITICAL CONTROL MEASURES (HIERARCHY OF CONTROLS)",
         "tiers": [
@@ -681,14 +1027,60 @@ def content(lang):
             "Rescue plan and equipment ready",
             "Personnel competent and briefed",
         ],
-        "s_standards": "STANDARDS AND REFERENCES",
+        "s_standards": "STANDARDS AND FIELD REQUIREMENTS",
+        "standards_intro": (
+            "These references do more than define legal thresholds; they establish how a safe work-at-height system is built in the field. "
+            "Where local law or the employer rule is stricter, always apply the higher standard."
+        ),
         "standards": [
-            "OSHA 29 CFR 1926 Subpart M — Fall Protection (construction); 1.8 m (6 ft) trigger.",
-            "OSHA 29 CFR 1910 Subpart D — Walking-Working Surfaces (general industry); 1.2 m (4 ft) trigger.",
-            "ISO 45001:2018, Clause 8.1.2 — Hierarchy of Controls (Eliminate \u2192 Substitute \u2192 Engineering \u2192 Administrative \u2192 PPE).",
-            "Aligned with IOSH and NEBOSH good-practice guidance.",
+            {
+                "code": "OSHA 1926 SUBPART M",
+                "title": "CONSTRUCTION FALL PROTECTION",
+                "body": "At 1.8 m (6 ft) or more, protect open edges, floor openings and work platforms with guardrails, covers or a personal fall-arrest system.",
+            },
+            {
+                "code": "OSHA 1910 SUBPART D",
+                "title": "WALKING-WORKING SURFACES",
+                "body": "In general industry, control fall exposure at 1.2 m (4 ft) or more. Verify access routes, ladders, openings and surface integrity before work starts.",
+            },
+            {
+                "code": "ISO 45001:2018 · 8.1.2",
+                "title": "HIERARCHY OF CONTROLS",
+                "body": "Eliminate work at height first. Then prioritise collective protection; personal fall arrest and PPE are the final lines of defence.",
+            },
+            {
+                "code": "FIELD GOOD PRACTICE",
+                "title": "COMPETENCE AND RESCUE",
+                "body": "Do not start without a tagged scaffold, verified anchor, pre-use equipment checks, a barricaded drop zone and a workable task-specific rescue plan.",
+            },
+        ],
+        "s_evidence": "MINIMUM EVIDENCE BEFORE START",
+        "standards_evidence": [
+            "Approved permit to work and task-specific risk assessment",
+            "Valid scaffold tag or platform inspection record",
+            "Anchor selection and required strength verification",
+            "Pre-use inspection of harness, lanyard / SRL",
+            "Drop-zone barricade and falling-object controls",
+            "Task-specific rescue plan, equipment and named responders",
+        ],
+        "s_discussion": "SUPERVISOR DISCUSSION POINTS",
+        "standards_discussion": [
+            "Can this task be completed from ground level or by a remote method?",
+            "Why must collective protection come before personal fall arrest?",
+            "After a fall, who will rescue the suspended person, how, and within what time?",
         ],
         "s_attendance": "ATTENDANCE AND APPROVAL",
+        "remember_title": "REMEMBER — SERNEM",
+        "remember": [
+            ("S", "Stop and think"),
+            ("E", "Evaluate the risk"),
+            ("R", "Remove or reduce"),
+            ("N", "Never assume"),
+            ("E", "Ensure protection"),
+            ("M", "Monitor and communicate"),
+        ],
+        "photo_title": "SAFE WORK AT HEIGHT SETUP",
+        "photo_caption": "Full guardrails · Overhead anchor · SRL · Tethered tools · Barricaded drop zone · Rescue ready",
         "att_fields": ["Project / Site", "Date", "Presented by", "Work area"],
         "att_headers": ["No", "Full Name", "Company / Role", "Signature"],
     }
@@ -697,8 +1089,9 @@ def content(lang):
 # --------------------------------------------------------------------------- #
 # Doküman oluşturma
 # --------------------------------------------------------------------------- #
-def build(variant, lang, filename):
-    meta = content(lang)
+def build_content(variant, meta, filename):
+    """Render any toolbox content that follows the premium four-page schema."""
+    meta = dict(meta)
     meta["variant"] = variant
 
     c = canvas.Canvas(str(OUT / filename), pagesize=A4)
@@ -711,8 +1104,35 @@ def build(variant, lang, filename):
     doc.gap(2 * mm)
 
     _section_title(doc, meta["s_hazards"], RED)
-    _bullets(doc, meta["hazards"], marker_color=RED)
+    _hazard_cards(doc, meta["hazard_cards"])
+    _metric_strip(doc, meta["metric_title"], meta["metrics"])
+    _remember_panel(doc, meta["remember_title"], meta["remember"])
+
+    # Four intentional compositions: overview, standards, controls, sign-off.
+    doc.new_page()
+
+    _section_title(doc, meta["s_standards"], SLATE, keep=70 * mm)
+    _paragraph(doc, meta["standards_intro"], size=8.5, leading=4.4 * mm)
+    doc.gap(2 * mm)
+    _standards(doc, meta["standards"])
     doc.gap(1 * mm)
+
+    _section_title(doc, meta["s_evidence"], BLUE)
+    _checklist(doc, meta["standards_evidence"])
+    doc.gap(1 * mm)
+
+    _section_title(doc, meta["s_discussion"], GREEN)
+    _bullets(doc, meta["standards_discussion"], marker_color=GREEN)
+    doc.gap(1 * mm)
+
+    _photo_panel(
+        doc,
+        meta["photo_title"],
+        meta["photo_caption"],
+        meta.get("photo_file", "working-at-height-safe-setup.jpg"),
+    )
+
+    doc.new_page()
 
     _section_title(doc, meta["s_controls"], GREEN)
     _tiers(doc, meta["tiers"])
@@ -723,11 +1143,9 @@ def build(variant, lang, filename):
 
     _section_title(doc, meta["s_checklist"], BLUE)
     _checklist(doc, meta["checklist"])
-    doc.gap(2 * mm)
-
-    _section_title(doc, meta["s_standards"], SLATE)
-    _standards(doc, meta["standards"])
     doc.gap(1 * mm)
+
+    doc.new_page()
 
     _section_title(doc, meta["s_attendance"], NAVY, keep=78 * mm)
     _attendance(doc, meta)
@@ -735,6 +1153,10 @@ def build(variant, lang, filename):
     c.showPage()
     c.save()
     print(f"  ✓ {filename}")
+
+
+def build(variant, lang, filename):
+    build_content(variant, content(lang), filename)
 
 
 def main():

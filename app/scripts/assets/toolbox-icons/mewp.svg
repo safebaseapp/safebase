@@ -1,0 +1,5 @@
+<!-- Lucide-inspired, ISC License -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="39" r="4"/><circle cx="35" cy="39" r="4"/>
+  <path d="M8 35h31M20 35l8-17M28 18h13v10H25M34 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM34 12v6"/>
+</svg>
