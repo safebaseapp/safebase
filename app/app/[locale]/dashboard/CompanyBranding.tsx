@@ -34,6 +34,14 @@ export default function CompanyBranding({
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [projectName, setProjectName] = useState("");
+  const [siteName, setSiteName] = useState("");
+  const [workArea, setWorkArea] = useState("");
+  const [presentedBy, setPresentedBy] = useState("");
+  const [revision, setRevision] = useState("00");
+  const [isProfileLoading, setIsProfileLoading] = useState(isPremium);
+  const [isProfileSaving, setIsProfileSaving] = useState(false);
+
   useEffect(() => {
     if (!isPremium) {
       setIsLoading(false);
@@ -93,6 +101,101 @@ export default function CompanyBranding({
 
     void loadLogo();
   }, [isPremium, isTurkish, supabase, userId]);
+
+  useEffect(() => {
+    if (!isPremium) {
+      setIsProfileLoading(false);
+      return;
+    }
+
+    async function loadDocumentProfile() {
+      setIsProfileLoading(true);
+
+      try {
+        const profilePath = `${userId}/document-profile.json`;
+
+        const { data, error } = await supabase.storage
+          .from(BUCKET_NAME)
+          .download(profilePath);
+
+        if (error) {
+          setIsProfileLoading(false);
+          return;
+        }
+
+        const profile = JSON.parse(await data.text()) as {
+          projectName?: string;
+          siteName?: string;
+          workArea?: string;
+          presentedBy?: string;
+          revision?: string;
+        };
+
+        setProjectName(profile.projectName ?? "");
+        setSiteName(profile.siteName ?? "");
+        setWorkArea(profile.workArea ?? "");
+        setPresentedBy(profile.presentedBy ?? "");
+        setRevision(profile.revision ?? "00");
+      } catch (error) {
+        console.error("Document profile load error:", error);
+      } finally {
+        setIsProfileLoading(false);
+      }
+    }
+
+    void loadDocumentProfile();
+  }, [isPremium, supabase, userId]);
+
+  async function handleProfileSave() {
+    setMessage("");
+    setErrorMessage("");
+
+    try {
+      setIsProfileSaving(true);
+
+      const profile = {
+        projectName: projectName.trim(),
+        siteName: siteName.trim(),
+        workArea: workArea.trim(),
+        presentedBy: presentedBy.trim(),
+        revision: revision.trim() || "00",
+        updatedAt: new Date().toISOString(),
+      };
+
+      const blob = new Blob(
+        [JSON.stringify(profile, null, 2)],
+        { type: "image/png" },
+      );
+
+      const { error } = await supabase.storage
+        .from(BUCKET_NAME)
+        .upload(`${userId}/document-profile.json`, blob, {
+          contentType: "image/png",
+          cacheControl: "0",
+          upsert: true,
+        });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      setMessage(
+        isTurkish
+          ? "Doküman profili başarıyla kaydedildi."
+          : "Document profile saved successfully.",
+      );
+    } catch (error) {
+      console.error("Document profile save error:", error);
+
+      setErrorMessage(
+        isTurkish
+          ? "Doküman profili kaydedilemedi."
+          : "The document profile could not be saved.",
+      );
+    } finally {
+      setIsProfileSaving(false);
+    }
+  }
 
   async function removeExistingLogos() {
     const { data, error } = await supabase.storage
@@ -438,18 +541,158 @@ export default function CompanyBranding({
             )}
           </div>
 
-          <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-950/50 p-5">
-            <p className="text-sm font-semibold text-white">
-              {isTurkish
-                ? "Doküman kullanımı"
-                : "Document usage"}
-            </p>
+          <div className="mt-8 border-t border-slate-800 pt-8">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-400">
+                  {isTurkish ? "Doküman profili" : "Document profile"}
+                </p>
 
-            <p className="mt-2 text-sm leading-6 text-slate-400">
-              {isTurkish
-                ? "Yüklediğiniz logo sonraki aşamada premium Toolbox Talk PDF'lerine otomatik olarak eklenecek."
-                : "Your uploaded logo will be automatically added to premium Toolbox Talk PDFs in the next stage."}
-            </p>
+                <h3 className="mt-2 text-xl font-bold text-white">
+                  {isTurkish
+                    ? "Varsayılan proje bilgileri"
+                    : "Default project information"}
+                </h3>
+
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
+                  {isTurkish
+                    ? "Bu bilgiler Premium HSE dokümanlarınızda otomatik kullanılacak. Gerektiğinde daha sonra değiştirebilirsiniz."
+                    : "These details will be used automatically in your Premium HSE documents. You can update them whenever required."}
+                </p>
+              </div>
+
+              <span className="text-xs font-semibold text-slate-500">
+                {isTurkish ? "Kullanıcıya özel" : "User specific"}
+              </span>
+            </div>
+
+            {isProfileLoading ? (
+              <div className="mt-6 flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/50 px-4 py-4">
+                <div className="h-5 w-5 animate-spin rounded-full border-2 border-slate-700 border-t-blue-400" />
+                <span className="text-sm text-slate-400">
+                  {isTurkish
+                    ? "Doküman profili yükleniyor..."
+                    : "Loading document profile..."}
+                </span>
+              </div>
+            ) : (
+              <>
+                <div className="mt-6 grid gap-4 md:grid-cols-2">
+                  <label className="block">
+                    <span className="text-sm font-semibold text-slate-300">
+                      {isTurkish ? "Proje" : "Project"}
+                    </span>
+                    <input
+                      type="text"
+                      value={projectName}
+                      onChange={(event) => setProjectName(event.target.value)}
+                      placeholder={
+                        isTurkish
+                          ? "Örn. MOL Polyol Project"
+                          : "e.g. MOL Polyol Project"
+                      }
+                      maxLength={80}
+                      className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="text-sm font-semibold text-slate-300">
+                      {isTurkish ? "Saha / Lokasyon" : "Site / Location"}
+                    </span>
+                    <input
+                      type="text"
+                      value={siteName}
+                      onChange={(event) => setSiteName(event.target.value)}
+                      placeholder={
+                        isTurkish
+                          ? "Örn. Tiszaújváros"
+                          : "e.g. Tiszaújváros"
+                      }
+                      maxLength={80}
+                      className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="text-sm font-semibold text-slate-300">
+                      {isTurkish ? "Çalışma Alanı" : "Work Area"}
+                    </span>
+                    <input
+                      type="text"
+                      value={workArea}
+                      onChange={(event) => setWorkArea(event.target.value)}
+                      placeholder={
+                        isTurkish
+                          ? "Örn. OCU / Pipe Rack"
+                          : "e.g. OCU / Pipe Rack"
+                      }
+                      maxLength={80}
+                      className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="text-sm font-semibold text-slate-300">
+                      {isTurkish ? "Sunumu Yapan" : "Presented By"}
+                    </span>
+                    <input
+                      type="text"
+                      value={presentedBy}
+                      onChange={(event) => setPresentedBy(event.target.value)}
+                      placeholder={
+                        isTurkish
+                          ? "Örn. HSE Supervisor"
+                          : "e.g. HSE Supervisor"
+                      }
+                      maxLength={80}
+                      className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500"
+                    />
+                  </label>
+                </div>
+
+                <div className="mt-4 grid gap-4 sm:grid-cols-[180px_1fr] sm:items-end">
+                  <label className="block">
+                    <span className="text-sm font-semibold text-slate-300">
+                      {isTurkish ? "Revizyon" : "Revision"}
+                    </span>
+                    <input
+                      type="text"
+                      value={revision}
+                      onChange={(event) => setRevision(event.target.value)}
+                      placeholder="00"
+                      maxLength={10}
+                      className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-blue-500"
+                    />
+                  </label>
+
+                  <div className="flex sm:justify-end">
+                    <button
+                      type="button"
+                      onClick={handleProfileSave}
+                      disabled={isProfileSaving}
+                      className="inline-flex min-w-[190px] items-center justify-center rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {isProfileSaving
+                        ? isTurkish
+                          ? "Kaydediliyor..."
+                          : "Saving..."
+                        : isTurkish
+                          ? "Doküman Profilini Kaydet"
+                          : "Save Document Profile"}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="mt-5 rounded-xl border border-blue-500/15 bg-blue-500/5 px-4 py-3">
+                  <p className="text-sm leading-6 text-slate-400">
+                    {isTurkish
+                      ? "Logo ve bu proje bilgileri, Premium Toolbox Talk PDF'lerinde şirket dokümanı görünümü oluşturmak için kullanılacak."
+                      : "Your logo and these project details will be used to create a company-document appearance in Premium Toolbox Talk PDFs."}
+                  </p>
+                </div>
+              </>
+            )}
           </div>
 
           {message && (

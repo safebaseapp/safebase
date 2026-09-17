@@ -1,0 +1,2205 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+
+type Locale = "tr" | "en";
+type Status = "open" | "in_progress" | "closed";
+type Risk = "low" | "medium" | "high" | "critical";
+type ObservationType =
+  | "positive"
+  | "unsafe_act"
+  | "unsafe_condition";
+
+type Observation = {
+  id: string;
+  reference_no?: string | null;
+  user_id: string;
+  observation_date: string;
+  project_name: string | null;
+  location: string | null;
+  company_name: string | null;
+  observation_type: ObservationType;
+  category: string;
+  risk_level: Risk;
+  title: string;
+  description: string;
+  corrective_action: string | null;
+  responsible_person: string | null;
+  target_date: string | null;
+  status: Status;
+  photo_url?: string | null;
+  created_at: string;
+  updated_at?: string | null;
+  closed_at?: string | null;
+};
+
+type Props = {
+  locale: Locale;
+  userId: string;
+  initialObservations: Observation[];
+};
+
+type SortKey =
+  | "date"
+  | "risk"
+  | "due"
+  | "status";
+
+function startOfToday() {
+  const d = new Date();
+  return new Date(
+    d.getFullYear(),
+    d.getMonth(),
+    d.getDate(),
+  );
+}
+
+function isOverdue(item: Observation) {
+  if (
+    item.status === "closed" ||
+    !item.target_date
+  ) {
+    return false;
+  }
+
+  return (
+    new Date(item.target_date) <
+    startOfToday()
+  );
+}
+
+function unique(values: Array<string | null>) {
+  return Array.from(
+    new Set(
+      values
+        .filter(
+          (x): x is string =>
+            Boolean(x?.trim()),
+        )
+        .map((x) => x.trim()),
+    ),
+  ).sort();
+}
+
+function typeLabel(type: ObservationType) {
+  if (type === "positive") return "Positive";
+  if (type === "unsafe_act") return "Unsafe Act";
+  return "Unsafe Condition";
+}
+
+function statusLabel(status: Status) {
+  if (status === "open") return "Open";
+  if (status === "in_progress") {
+    return "In Progress";
+  }
+  return "Closed";
+}
+
+function formatDate(value?: string | null) {
+  if (!value) return "—";
+
+  const d = new Date(value);
+
+  if (Number.isNaN(d.getTime())) {
+    return value;
+  }
+
+  return d.toLocaleDateString(
+    "en-GB",
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    },
+  );
+}
+
+function riskWeight(risk: Risk) {
+  if (risk === "critical") return 4;
+  if (risk === "high") return 3;
+  if (risk === "medium") return 2;
+  return 1;
+}
+
+function statusWeight(status: Status) {
+  if (status === "open") return 3;
+  if (status === "in_progress") return 2;
+  return 1;
+}
+
+function observationRef(
+  item: Observation,
+  index = 0,
+) {
+  if (item.reference_no) {
+    return item.reference_no;
+  }
+
+  const year =
+    item.observation_date?.slice(0, 4) ||
+    String(new Date().getFullYear());
+
+  return `OBS-${year}-${String(
+    index + 1,
+  ).padStart(6, "0")}`;
+}
+
+function dueState(item: Observation) {
+  if (
+    item.status === "closed" ||
+    !item.target_date
+  ) {
+    return {
+      label: "",
+      overdue: false,
+      urgent: false,
+    };
+  }
+
+  const today = startOfToday();
+  const due = new Date(
+    `${item.target_date}T00:00:00`,
+  );
+
+  const diff = Math.ceil(
+    (due.getTime() - today.getTime()) /
+      86400000,
+  );
+
+  if (diff < 0) {
+    const days = Math.abs(diff);
+
+    return {
+      label:
+        days === 1
+          ? "1 day overdue"
+          : `${days} days overdue`,
+      overdue: true,
+      urgent: true,
+    };
+  }
+
+  if (diff === 0) {
+    return {
+      label: "Due today",
+      overdue: false,
+      urgent: true,
+    };
+  }
+
+  return {
+    label:
+      diff === 1
+        ? "1 day left"
+        : `${diff} days left`,
+    overdue: false,
+    urgent: diff <= 3,
+  };
+}
+
+export default function ObservationFollowUpClient({
+  locale,
+  userId,
+  initialObservations,
+}: Props) {
+  const isTurkish = locale === "tr";
+
+  const [observations, setObservations] =
+    useState<Observation[]>(
+      initialObservations,
+    );
+
+  const [search, setSearch] =
+    useState("");
+
+  const [statusFilter, setStatusFilter] =
+    useState("all");
+
+  const [riskFilter, setRiskFilter] =
+    useState("all");
+
+  const [companyFilter, setCompanyFilter] =
+    useState("all");
+
+  const [projectFilter, setProjectFilter] =
+    useState("all");
+
+  const [categoryFilter, setCategoryFilter] =
+    useState("all");
+
+  const [responsibleFilter, setResponsibleFilter] =
+    useState("all");
+
+  const [sortKey, setSortKey] =
+    useState<SortKey>("risk");
+
+  const [editing, setEditing] =
+    useState<Observation | null>(null);
+
+  const [selected, setSelected] =
+    useState<Observation | null>(null);
+
+  const [savingId, setSavingId] =
+    useState<string | null>(null);
+
+  const [message, setMessage] =
+    useState("");
+
+  const companyOptions = useMemo(
+    () =>
+      unique(
+        observations.map(
+          (x) => x.company_name,
+        ),
+      ),
+    [observations],
+  );
+
+  const projectOptions = useMemo(
+    () =>
+      unique(
+        observations.map(
+          (x) => x.project_name,
+        ),
+      ),
+    [observations],
+  );
+
+  const categoryOptions = useMemo(
+    () =>
+      unique(
+        observations.map(
+          (x) => x.category,
+        ),
+      ),
+    [observations],
+  );
+
+  const responsibleOptions = useMemo(
+    () =>
+      unique(
+        observations.map(
+          (x) => x.responsible_person,
+        ),
+      ),
+    [observations],
+  );
+
+  const filtered = useMemo(() => {
+    const q =
+      search.trim().toLowerCase();
+
+    const result =
+      observations.filter((item) => {
+        if (
+          statusFilter !== "all" &&
+          item.status !== statusFilter
+        ) {
+          return false;
+        }
+
+        if (
+          riskFilter !== "all" &&
+          item.risk_level !== riskFilter
+        ) {
+          return false;
+        }
+
+        if (
+          companyFilter !== "all" &&
+          item.company_name !== companyFilter
+        ) {
+          return false;
+        }
+
+        if (
+          projectFilter !== "all" &&
+          item.project_name !== projectFilter
+        ) {
+          return false;
+        }
+
+        if (
+          categoryFilter !== "all" &&
+          item.category !== categoryFilter
+        ) {
+          return false;
+        }
+
+        if (
+          responsibleFilter !== "all" &&
+          item.responsible_person !==
+            responsibleFilter
+        ) {
+          return false;
+        }
+
+        if (!q) return true;
+
+        const haystack = [
+          item.reference_no,
+          item.title,
+          item.description,
+          item.corrective_action,
+          item.responsible_person,
+          item.company_name,
+          item.project_name,
+          item.location,
+          item.category,
+          item.risk_level,
+          item.status,
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+
+        return haystack.includes(q);
+      });
+
+    return [...result].sort((a, b) => {
+      if (sortKey === "risk") {
+        return (
+          riskWeight(b.risk_level) -
+          riskWeight(a.risk_level)
+        );
+      }
+
+      if (sortKey === "status") {
+        return (
+          statusWeight(b.status) -
+          statusWeight(a.status)
+        );
+      }
+
+      if (sortKey === "due") {
+        if (!a.target_date) return 1;
+        if (!b.target_date) return -1;
+
+        return (
+          new Date(a.target_date).getTime() -
+          new Date(b.target_date).getTime()
+        );
+      }
+
+      return (
+        new Date(
+          b.observation_date,
+        ).getTime() -
+        new Date(
+          a.observation_date,
+        ).getTime()
+      );
+    });
+  }, [
+    observations,
+    search,
+    statusFilter,
+    riskFilter,
+    companyFilter,
+    projectFilter,
+    categoryFilter,
+    responsibleFilter,
+    sortKey,
+  ]);
+
+  const stats = useMemo(() => {
+    const open =
+      observations.filter(
+        (x) => x.status === "open",
+      ).length;
+
+    const inProgress =
+      observations.filter(
+        (x) =>
+          x.status === "in_progress",
+      ).length;
+
+    const closed =
+      observations.filter(
+        (x) => x.status === "closed",
+      ).length;
+
+    const overdue =
+      observations.filter(
+        isOverdue,
+      ).length;
+
+    const criticalOpen =
+      observations.filter(
+        (x) =>
+          x.status !== "closed" &&
+          x.risk_level === "critical",
+      ).length;
+
+    const highOpen =
+      observations.filter(
+        (x) =>
+          x.status !== "closed" &&
+          x.risk_level === "high",
+      ).length;
+
+    const closureRate =
+      observations.length > 0
+        ? Math.round(
+            (closed /
+              observations.length) *
+              100,
+          )
+        : 0;
+
+    return {
+      total: observations.length,
+      open,
+      inProgress,
+      closed,
+      overdue,
+      criticalOpen,
+      highOpen,
+      closureRate,
+    };
+  }, [observations]);
+
+  function clearFilters() {
+    setSearch("");
+    setStatusFilter("all");
+    setRiskFilter("all");
+    setCompanyFilter("all");
+    setProjectFilter("all");
+    setCategoryFilter("all");
+    setResponsibleFilter("all");
+    setSortKey("risk");
+  }
+
+  async function changeStatus(
+    item: Observation,
+    status: Status,
+  ) {
+    setSavingId(item.id);
+    setMessage("");
+
+    const supabase = createClient();
+
+    const now =
+      new Date().toISOString();
+
+    const { error } = await supabase
+      .from("hse_observations")
+      .update({
+        status,
+        updated_at: now,
+        closed_at:
+          status === "closed"
+            ? now
+            : null,
+      })
+      .eq("id", item.id)
+      .eq("user_id", userId);
+
+    if (error) {
+      setMessage(
+        isTurkish
+          ? `Durum güncellenemedi: ${error.message}`
+          : `Status update failed: ${error.message}`,
+      );
+
+      setSavingId(null);
+      return;
+    }
+
+    const updatedItem = {
+      ...item,
+      status,
+      updated_at: now,
+      closed_at:
+        status === "closed"
+          ? now
+          : null,
+    };
+
+    setObservations((current) =>
+      current.map((x) =>
+        x.id === item.id
+          ? updatedItem
+          : x,
+      ),
+    );
+
+    if (selected?.id === item.id) {
+      setSelected(updatedItem);
+    }
+
+    setSavingId(null);
+  }
+
+  async function saveEdit() {
+    if (!editing) return;
+
+    if (
+      !editing.title.trim() ||
+      !editing.description.trim()
+    ) {
+      setMessage(
+        isTurkish
+          ? "Başlık ve açıklama zorunludur."
+          : "Title and description are required.",
+      );
+      return;
+    }
+
+    setSavingId(editing.id);
+    setMessage("");
+
+    const supabase = createClient();
+    const now =
+      new Date().toISOString();
+
+    const payload = {
+      observation_date:
+        editing.observation_date,
+
+      project_name:
+        editing.project_name?.trim() ||
+        null,
+
+      company_name:
+        editing.company_name?.trim() ||
+        null,
+
+      location:
+        editing.location?.trim() ||
+        null,
+
+      observation_type:
+        editing.observation_type,
+
+      category:
+        editing.category,
+
+      risk_level:
+        editing.risk_level,
+
+      title:
+        editing.title.trim(),
+
+      description:
+        editing.description.trim(),
+
+      corrective_action:
+        editing.corrective_action?.trim() ||
+        null,
+
+      responsible_person:
+        editing.responsible_person?.trim() ||
+        null,
+
+      target_date:
+        editing.target_date || null,
+
+      updated_at: now,
+    };
+
+    const { error } = await supabase
+      .from("hse_observations")
+      .update(payload)
+      .eq("id", editing.id)
+      .eq("user_id", userId);
+
+    if (error) {
+      setMessage(
+        isTurkish
+          ? `Gözlem güncellenemedi: ${error.message}`
+          : `Observation update failed: ${error.message}`,
+      );
+
+      setSavingId(null);
+      return;
+    }
+
+    const updated = {
+      ...editing,
+      ...payload,
+    };
+
+    setObservations((current) =>
+      current.map((x) =>
+        x.id === editing.id
+          ? updated
+          : x,
+      ),
+    );
+
+    if (selected?.id === editing.id) {
+      setSelected(updated);
+    }
+
+    setEditing(null);
+
+    setMessage(
+      isTurkish
+        ? "Gözlem güncellendi."
+        : "Observation updated.",
+    );
+
+    setSavingId(null);
+  }
+
+  async function deleteObservation(
+    item: Observation,
+  ) {
+    const confirmed = window.confirm(
+      isTurkish
+        ? `"${item.title}" gözlemini kalıcı olarak silmek istediğinize emin misiniz?`
+        : `Are you sure you want to permanently delete "${item.title}"?`,
+    );
+
+    if (!confirmed) return;
+
+    setSavingId(item.id);
+    setMessage("");
+
+    const supabase = createClient();
+
+    const { error } = await supabase
+      .from("hse_observations")
+      .delete()
+      .eq("id", item.id)
+      .eq("user_id", userId);
+
+    if (error) {
+      setMessage(
+        isTurkish
+          ? `Silme başarısız: ${error.message}`
+          : `Delete failed: ${error.message}`,
+      );
+
+      setSavingId(null);
+      return;
+    }
+
+    setObservations((current) =>
+      current.filter(
+        (x) => x.id !== item.id,
+      ),
+    );
+
+    setSelected(null);
+
+    setMessage(
+      isTurkish
+        ? "Gözlem silindi."
+        : "Observation deleted.",
+    );
+
+    setSavingId(null);
+  }
+
+  async function exportExcel() {
+    const XLSX =
+      await import("xlsx");
+
+    const mapRow = (
+      item: Observation,
+      index: number,
+    ) => ({
+      Reference:
+        item.reference_no ??
+        observationRef(item, index),
+      Date: item.observation_date,
+      Project:
+        item.project_name ?? "",
+      Company:
+        item.company_name ?? "",
+      Location:
+        item.location ?? "",
+      Type:
+        typeLabel(
+          item.observation_type,
+        ),
+      Category:
+        item.category,
+      Risk:
+        item.risk_level.toUpperCase(),
+      Finding:
+        item.title,
+      Description:
+        item.description,
+      Corrective_Action:
+        item.corrective_action ?? "",
+      Responsible:
+        item.responsible_person ?? "",
+      Target_Date:
+        item.target_date ?? "",
+      Status:
+        statusLabel(item.status),
+      Overdue:
+        isOverdue(item)
+          ? "YES"
+          : "NO",
+      Closed_Date:
+        item.closed_at ?? "",
+    });
+
+    const allRows =
+      observations.map(mapRow);
+
+    const wb =
+      XLSX.utils.book_new();
+
+    const summary =
+      XLSX.utils.aoa_to_sheet([
+        [
+          "SERNEM HSE ACTION REGISTER",
+        ],
+        [],
+        ["Total", stats.total],
+        ["Open", stats.open],
+        [
+          "In Progress",
+          stats.inProgress,
+        ],
+        ["Overdue", stats.overdue],
+        [
+          "Critical Open",
+          stats.criticalOpen,
+        ],
+        [
+          "High Open",
+          stats.highOpen,
+        ],
+        [
+          "Closed",
+          stats.closed,
+        ],
+        [
+          "Closure Rate",
+          `${stats.closureRate}%`,
+        ],
+        [],
+        [
+          "Generated",
+          new Date().toLocaleString(),
+        ],
+      ]);
+
+    const allSheet =
+      XLSX.utils.json_to_sheet(
+        allRows,
+      );
+
+    const openSheet =
+      XLSX.utils.json_to_sheet(
+        observations
+          .filter(
+            (x) =>
+              x.status !== "closed",
+          )
+          .map(mapRow),
+      );
+
+    const overdueSheet =
+      XLSX.utils.json_to_sheet(
+        observations
+          .filter(isOverdue)
+          .map(mapRow),
+      );
+
+    const closedSheet =
+      XLSX.utils.json_to_sheet(
+        observations
+          .filter(
+            (x) =>
+              x.status === "closed",
+          )
+          .map(mapRow),
+      );
+
+    const widths = [
+      { wch: 18 },
+      { wch: 12 },
+      { wch: 18 },
+      { wch: 18 },
+      { wch: 18 },
+      { wch: 20 },
+      { wch: 22 },
+      { wch: 12 },
+      { wch: 30 },
+      { wch: 42 },
+      { wch: 42 },
+      { wch: 24 },
+      { wch: 14 },
+      { wch: 16 },
+      { wch: 12 },
+      { wch: 18 },
+    ];
+
+    for (const sheet of [
+      allSheet,
+      openSheet,
+      overdueSheet,
+      closedSheet,
+    ]) {
+      sheet["!cols"] = widths;
+
+      sheet["!autofilter"] = {
+        ref:
+          sheet["!ref"] ??
+          "A1:P1",
+      };
+    }
+
+    summary["!cols"] = [
+      { wch: 24 },
+      { wch: 30 },
+    ];
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      summary,
+      "Summary",
+    );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      allSheet,
+      "Action Register",
+    );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      openSheet,
+      "Open Actions",
+    );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      overdueSheet,
+      "Overdue Actions",
+    );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      closedSheet,
+      "Closed Actions",
+    );
+
+    XLSX.writeFile(
+      wb,
+      `SERNEM-HSE-Action-Register-${new Date()
+        .toISOString()
+        .slice(0, 10)}.xlsx`,
+    );
+  }
+
+  const riskClass = (risk: Risk) => {
+    if (risk === "critical") {
+      return "border-red-500/30 bg-red-500/10 text-red-300";
+    }
+
+    if (risk === "high") {
+      return "border-orange-500/30 bg-orange-500/10 text-orange-300";
+    }
+
+    if (risk === "medium") {
+      return "border-amber-500/30 bg-amber-500/10 text-amber-300";
+    }
+
+    return "border-emerald-500/30 bg-emerald-500/10 text-emerald-300";
+  };
+
+  const statusClass = (status: Status) => {
+    if (status === "closed") {
+      return "border-emerald-500/25 bg-emerald-500/10 text-emerald-300";
+    }
+
+    if (status === "in_progress") {
+      return "border-amber-500/25 bg-amber-500/10 text-amber-300";
+    }
+
+    return "border-blue-500/25 bg-blue-500/10 text-blue-300";
+  };
+
+  return (
+    <main className="min-h-screen bg-[#020817] text-white">
+      <div className="mx-auto max-w-[1680px] px-4 py-6 sm:px-6 lg:px-8">
+
+        <section className="rounded-[24px] border border-blue-400/15 bg-gradient-to-r from-[#06152b] via-[#071a33] to-[#082747] px-6 py-5">
+          <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="text-[10px] font-black uppercase tracking-[0.24em] text-blue-400">
+                  SERNEM • ACTION CONTROL CENTER
+                </p>
+
+                <span className="rounded-full border border-slate-700 bg-black/20 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-slate-400">
+                  Live Data
+                </span>
+              </div>
+
+              <h1 className="mt-2 text-3xl font-black">
+                HSE Action Register
+              </h1>
+
+              <p className="mt-2 max-w-3xl text-sm text-slate-400">
+                {isTurkish
+                  ? "Saha gözlemlerini, düzeltici aksiyonları, sorumluları ve kapanış durumlarını tek merkezden yönetin."
+                  : "Control field observations, corrective actions, owners, due dates and closure status from one register."}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <a
+                href={`/${locale}/hse-performance`}
+                className="rounded-xl border border-slate-700 bg-slate-950/40 px-4 py-3 text-xs font-black text-slate-200 transition hover:border-blue-400/30 hover:text-blue-300"
+              >
+                ← KPI Dashboard
+              </a>
+
+              <button
+                type="button"
+                onClick={exportExcel}
+                className="rounded-xl border border-blue-400/30 bg-blue-600 px-4 py-3 text-xs font-black text-white shadow-lg shadow-blue-950/30 transition hover:bg-blue-500"
+              >
+                ↓ Export Follow-up
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+          {[
+            [
+              "TOTAL OBSERVATIONS",
+              stats.total,
+              "text-blue-300",
+              "All recorded findings",
+            ],
+            [
+              "OPEN ACTIONS",
+              stats.open,
+              "text-blue-300",
+              "Open records requiring action",
+            ],
+            [
+              "IN PROGRESS",
+              stats.inProgress,
+              "text-amber-300",
+              "Actions currently being managed",
+            ],
+            [
+              "OVERDUE",
+              stats.overdue,
+              "text-red-300",
+              "Past target date",
+            ],
+            [
+              "CRITICAL OPEN",
+              stats.criticalOpen,
+              "text-red-300",
+              "Immediate priority",
+            ],
+            [
+              "HIGH OPEN",
+              stats.highOpen,
+              "text-orange-300",
+              "High-priority actions",
+            ],
+            [
+              "CLOSURE RATE",
+              `${stats.closureRate}%`,
+              "text-emerald-300",
+              `${stats.closed} of ${stats.total} closed`,
+            ],
+          ].map(
+            ([
+              label,
+              value,
+              color,
+              sub,
+            ]) => (
+              <div
+                key={String(label)}
+                className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4"
+              >
+                <p className="text-[9px] font-black uppercase tracking-[0.16em] text-slate-500">
+                  {label}
+                </p>
+
+                <p
+                  className={`mt-2 text-2xl font-black ${color}`}
+                >
+                  {value}
+                </p>
+
+                <p className="mt-1 text-[10px] text-slate-600">
+                  {sub}
+                </p>
+              </div>
+            ),
+          )}
+        </section>
+
+        <section className="mt-4 rounded-[22px] border border-slate-800 bg-slate-900/65 p-4">
+          <div className="flex flex-col gap-3 xl:flex-row xl:items-center">
+            <div className="min-w-0 flex-1">
+              <input
+                value={search}
+                onChange={(e) =>
+                  setSearch(
+                    e.target.value,
+                  )
+                }
+                placeholder={
+                  isTurkish
+                    ? "OBS no, bulgu, aksiyon, firma veya sorumlu ara..."
+                    : "Search OBS no, finding, action, company or owner..."
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm outline-none transition placeholder:text-slate-600 focus:border-blue-500/50"
+              />
+            </div>
+
+            <div className="grid gap-2 sm:grid-cols-2 xl:flex">
+              <select
+                value={statusFilter}
+                onChange={(e) =>
+                  setStatusFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  All Statuses
+                </option>
+                <option value="open">
+                  Open
+                </option>
+                <option value="in_progress">
+                  In Progress
+                </option>
+                <option value="closed">
+                  Closed
+                </option>
+              </select>
+
+              <select
+                value={riskFilter}
+                onChange={(e) =>
+                  setRiskFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  All Risks
+                </option>
+                <option value="critical">
+                  Critical
+                </option>
+                <option value="high">
+                  High
+                </option>
+                <option value="medium">
+                  Medium
+                </option>
+                <option value="low">
+                  Low
+                </option>
+              </select>
+
+              <select
+                value={categoryFilter}
+                onChange={(e) =>
+                  setCategoryFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  All Categories
+                </option>
+
+                {categoryOptions.map(
+                  (item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ),
+                )}
+              </select>
+
+              <select
+                value={companyFilter}
+                onChange={(e) =>
+                  setCompanyFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  All Companies
+                </option>
+
+                {companyOptions.map(
+                  (item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ),
+                )}
+              </select>
+
+              <select
+                value={projectFilter}
+                onChange={(e) =>
+                  setProjectFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  All Projects
+                </option>
+
+                {projectOptions.map(
+                  (item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ),
+                )}
+              </select>
+
+              <select
+                value={responsibleFilter}
+                onChange={(e) =>
+                  setResponsibleFilter(
+                    e.target.value,
+                  )
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-xs font-bold"
+              >
+                <option value="all">
+                  All Owners
+                </option>
+
+                {responsibleOptions.map(
+                  (item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ),
+                )}
+              </select>
+
+              <select
+                value={sortKey}
+                onChange={(e) =>
+                  setSortKey(
+                    e.target
+                      .value as SortKey,
+                  )
+                }
+                className="rounded-xl border border-blue-500/20 bg-blue-500/[0.06] px-3 py-3 text-xs font-bold text-blue-200"
+              >
+                <option value="risk">
+                  Sort: Risk
+                </option>
+                <option value="date">
+                  Sort: Date
+                </option>
+                <option value="due">
+                  Sort: Due Date
+                </option>
+                <option value="status">
+                  Sort: Status
+                </option>
+              </select>
+
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="rounded-xl border border-slate-700 px-3 py-3 text-xs font-black text-slate-400 transition hover:text-white"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-[10px] uppercase tracking-[0.14em] text-slate-600">
+              Showing{" "}
+              <span className="font-black text-slate-300">
+                {filtered.length}
+              </span>{" "}
+              of{" "}
+              <span className="font-black text-slate-300">
+                {observations.length}
+              </span>{" "}
+              observations
+            </p>
+
+            {message && (
+              <p className="text-xs text-blue-300">
+                {message}
+              </p>
+            )}
+          </div>
+        </section>
+
+        <section className="mt-4 overflow-hidden rounded-[22px] border border-slate-800 bg-slate-900/65">
+          <div className="hidden overflow-x-auto xl:block">
+            <table className="w-full min-w-[1550px] text-left text-xs">
+              <thead className="bg-[#07182d]">
+                <tr className="text-[9px] font-black uppercase tracking-[0.14em] text-slate-500">
+                  <th className="px-4 py-4">
+                    Reference
+                  </th>
+                  <th className="px-4 py-4">
+                    Finding
+                  </th>
+                  <th className="px-4 py-4">
+                    Project
+                  </th>
+                  <th className="px-4 py-4">
+                    Company
+                  </th>
+                  <th className="px-4 py-4">
+                    Category
+                  </th>
+                  <th className="px-4 py-4">
+                    Risk
+                  </th>
+                  <th className="px-4 py-4">
+                    Corrective Action
+                  </th>
+                  <th className="px-4 py-4">
+                    Owner / Due
+                  </th>
+                  <th className="px-4 py-4">
+                    Status
+                  </th>
+                  <th className="px-4 py-4 text-right">
+                    Manage
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {filtered.map(
+                  (item) => {
+                    const originalIndex =
+                      observations.findIndex(
+                        (x) =>
+                          x.id === item.id,
+                      );
+
+                    const ref =
+                      observationRef(
+                        item,
+                        originalIndex >= 0
+                          ? originalIndex
+                          : 0,
+                      );
+
+                    const overdue =
+                      isOverdue(item);
+
+                    return (
+                      <tr
+                        key={item.id}
+                        className={`border-t border-slate-800/90 align-top transition hover:bg-blue-500/[0.025] ${
+                          item.risk_level ===
+                          "critical"
+                            ? "bg-red-500/[0.025]"
+                            : item.risk_level ===
+                                "high"
+                              ? "bg-orange-500/[0.015]"
+                              : ""
+                        }`}
+                      >
+                        <td className="px-4 py-4">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setSelected(
+                                item,
+                              )
+                            }
+                            className="font-mono text-[10px] font-black text-blue-300 transition hover:text-blue-200"
+                          >
+                            {ref}
+                          </button>
+
+                          <p className="mt-1 text-[10px] text-slate-600">
+                            {formatDate(
+                              item.observation_date,
+                            )}
+                          </p>
+                        </td>
+
+                        <td className="max-w-[280px] px-4 py-4">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setSelected(
+                                item,
+                              )
+                            }
+                            className="text-left"
+                          >
+                            <p className="font-black text-slate-100 hover:text-blue-300">
+                              {item.title}
+                            </p>
+
+                            <p className="mt-1 line-clamp-2 leading-5 text-slate-500">
+                              {
+                                item.description
+                              }
+                            </p>
+                          </button>
+                        </td>
+
+                        <td className="px-4 py-4">
+                          <p className="font-bold">
+                            {item.project_name ??
+                              "—"}
+                          </p>
+
+                          <p className="mt-1 text-[10px] text-slate-600">
+                            {item.location ??
+                              "No location"}
+                          </p>
+                        </td>
+
+                        <td className="px-4 py-4 text-slate-300">
+                          {item.company_name ??
+                            "—"}
+                        </td>
+
+                        <td className="px-4 py-4">
+                          <span className="rounded-lg border border-slate-700 bg-slate-950/50 px-2 py-1 text-[10px] font-bold text-slate-300">
+                            {item.category}
+                          </span>
+                        </td>
+
+                        <td className="px-4 py-4">
+                          <span
+                            className={`inline-flex rounded-full border px-2.5 py-1 text-[9px] font-black uppercase ${riskClass(
+                              item.risk_level,
+                            )}`}
+                          >
+                            {
+                              item.risk_level
+                            }
+                          </span>
+                        </td>
+
+                        <td className="max-w-[310px] px-4 py-4">
+                          <p className="line-clamp-3 leading-5 text-slate-400">
+                            {item.corrective_action ??
+                              "No corrective action assigned"}
+                          </p>
+                        </td>
+
+                        <td className="px-4 py-4">
+                          <p className="font-black text-slate-200">
+                            {item.responsible_person ??
+                              "Unassigned"}
+                          </p>
+
+                          <p
+                            className={`mt-1 text-[10px] ${
+                              overdue
+                                ? "font-black text-red-300"
+                                : "text-slate-500"
+                            }`}
+                          >
+                            Due:{" "}
+                            {formatDate(
+                              item.target_date,
+                            )}
+                          </p>
+
+                          {(() => {
+                            const due = dueState(item);
+
+                            if (!due.label) {
+                              return null;
+                            }
+
+                            return (
+                              <span
+                                className={`mt-2 inline-flex rounded-md px-2 py-1 text-[9px] font-black ${
+                                  due.overdue
+                                    ? "bg-red-500/10 text-red-300"
+                                    : due.urgent
+                                      ? "bg-amber-500/10 text-amber-300"
+                                      : "bg-emerald-500/10 text-emerald-300"
+                                }`}
+                              >
+                                {due.label}
+                              </span>
+                            );
+                          })()}
+                        </td>
+
+                        <td className="px-4 py-4">
+                          <select
+                            value={
+                              item.status
+                            }
+                            disabled={
+                              savingId ===
+                              item.id
+                            }
+                            onChange={(e) =>
+                              changeStatus(
+                                item,
+                                e.target
+                                  .value as Status,
+                              )
+                            }
+                            className={`rounded-xl border px-3 py-2 text-[10px] font-black ${statusClass(
+                              item.status,
+                            )}`}
+                          >
+                            <option value="open">
+                              Open
+                            </option>
+
+                            <option value="in_progress">
+                              In Progress
+                            </option>
+
+                            <option value="closed">
+                              Closed
+                            </option>
+                          </select>
+
+                          {item.status === "closed" &&
+                            item.closed_at && (
+                              <p className="mt-2 text-[9px] font-bold text-emerald-400/70">
+                                Closed{" "}
+                                {formatDate(
+                                  item.closed_at,
+                                )}
+                              </p>
+                            )}
+                        </td>
+
+                        <td className="px-4 py-4 text-right">
+                          <div className="flex justify-end gap-2">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setSelected(
+                                  item,
+                                )
+                              }
+                              className="rounded-lg border border-slate-700 bg-slate-950/50 px-3 py-2 text-[10px] font-black text-slate-300 transition hover:border-blue-500/30 hover:text-blue-300"
+                            >
+                              View
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setEditing({
+                                  ...item,
+                                })
+                              }
+                              className="rounded-lg border border-blue-500/25 bg-blue-500/10 px-3 py-2 text-[10px] font-black text-blue-300"
+                            >
+                              Edit
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  },
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="space-y-3 p-3 xl:hidden">
+            {filtered.map(
+              (item) => {
+                const originalIndex =
+                  observations.findIndex(
+                    (x) =>
+                      x.id === item.id,
+                  );
+
+                return (
+                  <article
+                    key={item.id}
+                    className={`rounded-2xl border p-4 ${
+                      item.risk_level ===
+                      "critical"
+                        ? "border-red-500/20 bg-red-500/[0.035]"
+                        : "border-slate-800 bg-slate-950/55"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setSelected(
+                              item,
+                            )
+                          }
+                          className="font-mono text-[9px] font-black text-blue-300"
+                        >
+                          {observationRef(
+                            item,
+                            originalIndex >= 0
+                              ? originalIndex
+                              : 0,
+                          )}
+                        </button>
+
+                        <h3 className="mt-1 font-black">
+                          {item.title}
+                        </h3>
+                      </div>
+
+                      <span
+                        className={`rounded-full border px-2 py-1 text-[8px] font-black uppercase ${riskClass(
+                          item.risk_level,
+                        )}`}
+                      >
+                        {
+                          item.risk_level
+                        }
+                      </span>
+                    </div>
+
+                    <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-400">
+                      {item.corrective_action ??
+                        item.description}
+                    </p>
+
+                    <div className="mt-4 grid grid-cols-2 gap-2 text-[10px]">
+                      <div className="rounded-xl border border-slate-800 bg-black/20 p-3">
+                        <p className="text-slate-600">
+                          Responsible
+                        </p>
+                        <p className="mt-1 font-black">
+                          {item.responsible_person ??
+                            "Unassigned"}
+                        </p>
+                      </div>
+
+                      <div className="rounded-xl border border-slate-800 bg-black/20 p-3">
+                        <p className="text-slate-600">
+                          Due
+                        </p>
+                        <p
+                          className={`mt-1 font-black ${
+                            isOverdue(
+                              item,
+                            )
+                              ? "text-red-300"
+                              : ""
+                          }`}
+                        >
+                          {formatDate(
+                            item.target_date,
+                          )}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 grid grid-cols-2 gap-2">
+                      <select
+                        value={
+                          item.status
+                        }
+                        onChange={(e) =>
+                          changeStatus(
+                            item,
+                            e.target
+                              .value as Status,
+                          )
+                        }
+                        className={`rounded-xl border px-3 py-3 text-xs font-black ${statusClass(
+                          item.status,
+                        )}`}
+                      >
+                        <option value="open">
+                          Open
+                        </option>
+                        <option value="in_progress">
+                          In Progress
+                        </option>
+                        <option value="closed">
+                          Closed
+                        </option>
+                      </select>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setSelected(
+                            item,
+                          )
+                        }
+                        className="rounded-xl border border-blue-500/25 bg-blue-500/10 px-3 py-3 text-xs font-black text-blue-300"
+                      >
+                        View Details
+                      </button>
+                    </div>
+                  </article>
+                );
+              },
+            )}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="px-6 py-20 text-center">
+              <p className="text-sm font-bold text-slate-400">
+                No observations found.
+              </p>
+
+              <p className="mt-2 text-xs text-slate-600">
+                Try changing or clearing the filters.
+              </p>
+            </div>
+          )}
+        </section>
+      </div>
+
+      {selected && (
+        <div
+          className="fixed inset-0 z-[500] flex justify-end bg-black/65 backdrop-blur-sm"
+          onMouseDown={(e) => {
+            if (
+              e.target ===
+              e.currentTarget
+            ) {
+              setSelected(null);
+            }
+          }}
+        >
+          <aside className="h-full w-full max-w-xl overflow-y-auto border-l border-slate-800 bg-[#06101e] shadow-2xl">
+            <div className="sticky top-0 z-10 border-b border-slate-800 bg-[#06101e]/95 px-6 py-5 backdrop-blur">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-mono text-[10px] font-black uppercase tracking-[0.15em] text-blue-400">
+                    {observationRef(selected)}
+                  </p>
+
+                  <h2 className="mt-2 text-xl font-black">
+                    {selected.title}
+                  </h2>
+
+                  <p className="mt-1 text-xs text-slate-500">
+                    Observation Detail • Live Action Record
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelected(null)
+                  }
+                  className="h-10 w-10 rounded-xl border border-slate-700 bg-slate-900 text-xl"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-5 p-6">
+              <div className="flex flex-wrap gap-2">
+                <span
+                  className={`rounded-full border px-3 py-1.5 text-[9px] font-black uppercase ${riskClass(
+                    selected.risk_level,
+                  )}`}
+                >
+                  {selected.risk_level}
+                </span>
+
+                <span
+                  className={`rounded-full border px-3 py-1.5 text-[9px] font-black uppercase ${statusClass(
+                    selected.status,
+                  )}`}
+                >
+                  {statusLabel(
+                    selected.status,
+                  )}
+                </span>
+
+                {isOverdue(
+                  selected,
+                ) && (
+                  <span className="rounded-full border border-red-500/25 bg-red-500/10 px-3 py-1.5 text-[9px] font-black uppercase text-red-300">
+                    Overdue
+                  </span>
+                )}
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  [
+                    "Project",
+                    selected.project_name ??
+                      "—",
+                  ],
+                  [
+                    "Company",
+                    selected.company_name ??
+                      "—",
+                  ],
+                  [
+                    "Location",
+                    selected.location ??
+                      "—",
+                  ],
+                  [
+                    "Category",
+                    selected.category,
+                  ],
+                  [
+                    "Responsible",
+                    selected.responsible_person ??
+                      "Unassigned",
+                  ],
+                  [
+                    "Due Date",
+                    formatDate(
+                      selected.target_date,
+                    ),
+                  ],
+                ].map(
+                  ([label, value]) => (
+                    <div
+                      key={label}
+                      className="rounded-xl border border-slate-800 bg-slate-900/50 p-4"
+                    >
+                      <p className="text-[9px] font-black uppercase tracking-[0.13em] text-slate-600">
+                        {label}
+                      </p>
+                      <p className="mt-2 text-sm font-bold text-slate-200">
+                        {value}
+                      </p>
+                    </div>
+                  ),
+                )}
+              </div>
+
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-5">
+                <p className="text-[9px] font-black uppercase tracking-[0.14em] text-slate-500">
+                  Finding Description
+                </p>
+
+                <p className="mt-3 text-sm leading-7 text-slate-300">
+                  {
+                    selected.description
+                  }
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-blue-500/15 bg-blue-500/[0.045] p-5">
+                <p className="text-[9px] font-black uppercase tracking-[0.14em] text-blue-400">
+                  Corrective Action
+                </p>
+
+                <p className="mt-3 text-sm leading-7 text-slate-300">
+                  {selected.corrective_action ??
+                    "No corrective action has been assigned."}
+                </p>
+
+                {dueState(selected).label && (
+                  <div className="mt-4 flex items-center justify-between rounded-xl border border-slate-800 bg-black/20 px-4 py-3">
+                    <span className="text-[10px] font-bold text-slate-500">
+                      Action deadline
+                    </span>
+
+                    <span
+                      className={`text-[10px] font-black ${
+                        dueState(selected).overdue
+                          ? "text-red-300"
+                          : dueState(selected).urgent
+                            ? "text-amber-300"
+                            : "text-emerald-300"
+                      }`}
+                    >
+                      {dueState(selected).label}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <div className="rounded-2xl border border-slate-800 p-5">
+                <p className="text-[9px] font-black uppercase tracking-[0.14em] text-slate-500">
+                  Action Status
+                </p>
+
+                <select
+                  value={
+                    selected.status
+                  }
+                  onChange={(e) =>
+                    changeStatus(
+                      selected,
+                      e.target
+                        .value as Status,
+                    )
+                  }
+                  className={`mt-3 w-full rounded-xl border px-4 py-3 text-sm font-black ${statusClass(
+                    selected.status,
+                  )}`}
+                >
+                  <option value="open">
+                    Open
+                  </option>
+
+                  <option value="in_progress">
+                    In Progress
+                  </option>
+
+                  <option value="closed">
+                    Closed
+                  </option>
+                </select>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <p className="text-slate-600">
+                    Observation Date
+                  </p>
+                  <p className="mt-1 font-bold">
+                    {formatDate(
+                      selected.observation_date,
+                    )}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-slate-600">
+                    Created
+                  </p>
+                  <p className="mt-1 font-bold">
+                    {formatDate(
+                      selected.created_at,
+                    )}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-slate-600">
+                    Last Updated
+                  </p>
+                  <p className="mt-1 font-bold">
+                    {formatDate(
+                      selected.updated_at,
+                    )}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-slate-600">
+                    Closed Date
+                  </p>
+                  <p className="mt-1 font-bold">
+                    {formatDate(
+                      selected.closed_at,
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3 border-t border-slate-800 pt-5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEditing({
+                      ...selected,
+                    });
+                    setSelected(null);
+                  }}
+                  className="flex-1 rounded-xl bg-blue-600 px-4 py-3 text-sm font-black hover:bg-blue-500"
+                >
+                  Edit Observation
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    deleteObservation(
+                      selected,
+                    )
+                  }
+                  className="rounded-xl border border-red-500/25 bg-red-500/[0.06] px-4 py-3 text-sm font-black text-red-300"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      )}
+
+      {editing && (
+        <div className="fixed inset-0 z-[600] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+          <div className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[26px] border border-slate-700 bg-[#07111f] p-6 shadow-2xl">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-blue-400">
+                  Observation Editor
+                </p>
+
+                <h2 className="mt-2 text-2xl font-black">
+                  Edit Observation
+                </h2>
+              </div>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setEditing(null)
+                }
+                className="h-10 w-10 rounded-xl border border-slate-700 bg-slate-900 text-xl"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="mt-6 grid gap-3 md:grid-cols-2">
+              <input
+                type="date"
+                value={
+                  editing.observation_date
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    observation_date:
+                      e.target.value,
+                  })
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <select
+                value={
+                  editing.risk_level
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    risk_level:
+                      e.target
+                        .value as Risk,
+                  })
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              >
+                <option value="low">
+                  Low
+                </option>
+                <option value="medium">
+                  Medium
+                </option>
+                <option value="high">
+                  High
+                </option>
+                <option value="critical">
+                  Critical
+                </option>
+              </select>
+
+              <input
+                value={
+                  editing.project_name ??
+                  ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    project_name:
+                      e.target.value,
+                  })
+                }
+                placeholder="Project"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <input
+                value={
+                  editing.company_name ??
+                  ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    company_name:
+                      e.target.value,
+                  })
+                }
+                placeholder="Company"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <input
+                value={
+                  editing.location ?? ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    location:
+                      e.target.value,
+                  })
+                }
+                placeholder="Location"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <input
+                value={
+                  editing.category
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    category:
+                      e.target.value,
+                  })
+                }
+                placeholder="Category"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <input
+                value={editing.title}
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    title:
+                      e.target.value,
+                  })
+                }
+                placeholder="Title"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm md:col-span-2"
+              />
+
+              <textarea
+                rows={4}
+                value={
+                  editing.description
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    description:
+                      e.target.value,
+                  })
+                }
+                placeholder="Description"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm md:col-span-2"
+              />
+
+              <textarea
+                rows={3}
+                value={
+                  editing.corrective_action ??
+                  ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    corrective_action:
+                      e.target.value,
+                  })
+                }
+                placeholder="Corrective Action"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm md:col-span-2"
+              />
+
+              <input
+                value={
+                  editing.responsible_person ??
+                  ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    responsible_person:
+                      e.target.value,
+                  })
+                }
+                placeholder="Responsible Person"
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <input
+                type="date"
+                value={
+                  editing.target_date ??
+                  ""
+                }
+                onChange={(e) =>
+                  setEditing({
+                    ...editing,
+                    target_date:
+                      e.target.value,
+                  })
+                }
+                className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+            </div>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={() =>
+                  setEditing(null)
+                }
+                className="rounded-xl border border-slate-700 px-5 py-3 font-black text-slate-300"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                onClick={saveEdit}
+                disabled={
+                  savingId ===
+                  editing.id
+                }
+                className="rounded-xl bg-blue-600 px-6 py-3 font-black text-white hover:bg-blue-500"
+              >
+                {savingId ===
+                editing.id
+                  ? "Saving..."
+                  : "Save Changes"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
+  );
+}

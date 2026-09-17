@@ -1,0 +1,10 @@
+.next
+**/.next/**
+node_modules
+**/node_modules/**
+backups
+backups/**
+**/backups/**
+*.tar.gz
+**/*.tar.gz
+.git

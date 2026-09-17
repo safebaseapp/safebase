@@ -4,6 +4,13 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    "/*": [
+      "./public/fonts/DejaVuSans.ttf",
+      "./public/fonts/DejaVuSans-Bold.ttf",
+    ],
+  },
+
   experimental: {
     serverActions: {
       allowedOrigins: [

@@ -1,0 +1,8 @@
+.next
+node_modules
+.git
+backups
+*.backup*
+.final-*
+.serial-*
+.pack*

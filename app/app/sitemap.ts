@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { toolboxData } from "@/lib/toolbox/toolbox-data";
 import { allRiskActivities } from "@/lib/risk-library/all-activities";
+import { safetySigns } from "@/lib/safety-signs/data";
 
 const baseUrl = "https://www.sernem.com";
 
@@ -21,6 +22,8 @@ const publicRoutes = [
   "/tools/quick-risk-assessment",
   "/tools/method-statement",
 
+  "/risk-assessment",
+
   "/knowledge-base",
   "/knowledge-base/chemical-safety",
   "/knowledge-base/confined-space",
@@ -40,16 +43,21 @@ const publicRoutes = [
   "/posters",
   "/safety-signs",
   "/toolbox",
+
+  "/checklists",
+  "/checklists/working-at-height",
+  "/checklists/hot-work",
+  "/checklists/loto",
+  "/checklists/scaffolding",
+  "/checklists/confined-space",
+  "/checklists/lifting",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const locales = ["tr", "en"] as const;
-  const now = new Date();
-
   const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     publicRoutes.map((route) => ({
       url: `${baseUrl}/${locale}${route}`,
-      lastModified: now,
       changeFrequency: route === "" ? "weekly" : "monthly",
       priority:
         route === ""
@@ -63,7 +71,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const toolboxPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     toolboxData.map((toolbox) => ({
       url: `${baseUrl}/${locale}/toolbox/${toolbox.slug}`,
-      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     }))
@@ -73,9 +80,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     (locale) =>
       allRiskActivities.map((activity) => ({
         url: `${baseUrl}/${locale}/risk-assessment/${activity.id}`,
-        lastModified: now,
-        changeFrequency: "monthly",
+          changeFrequency: "monthly",
         priority: 0.85,
+      }))
+  );
+
+
+  const safetySignPages: MetadataRoute.Sitemap = locales.flatMap(
+    (locale) =>
+      safetySigns.map((sign) => ({
+        url: `${baseUrl}/${locale}/safety-signs/${sign.slug}`,
+          changeFrequency: "monthly",
+        priority: 0.8,
       }))
   );
 
@@ -83,5 +99,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...toolboxPages,
     ...riskAssessmentPages,
+    ...safetySignPages,
   ];
 }

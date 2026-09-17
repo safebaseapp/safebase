@@ -1,3 +1,4 @@
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PosterMaster from "@/components/posters-v4/PosterMasterV4";
@@ -71,6 +72,8 @@ export default async function PosterDetailPage({
   const isEmbed = embed === "1";
 
   return (
+    <>
+      <ActivityTracker eventName="poster_detail_open" />
     <>
       <style
         dangerouslySetInnerHTML={{
@@ -217,6 +220,7 @@ export default async function PosterDetailPage({
           </div>
         </div>
       </main>
+    </>
     </>
   );
 }

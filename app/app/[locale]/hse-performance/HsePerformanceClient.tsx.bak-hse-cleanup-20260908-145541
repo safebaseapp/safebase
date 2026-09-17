@@ -1,0 +1,1724 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+import HseReportingPanel from "./HseReportingPanel";
+
+
+type Locale = "tr" | "en";
+
+type Observation = {
+  id: string;
+  user_id: string;
+  observation_date: string;
+  project_name: string | null;
+  location: string | null;
+  company_name: string | null;
+
+  observation_type:
+    | "positive"
+    | "unsafe_act"
+    | "unsafe_condition";
+
+  category: string;
+
+  risk_level:
+    | "low"
+    | "medium"
+    | "high"
+    | "critical";
+
+  title: string;
+  description: string;
+
+  corrective_action: string | null;
+  responsible_person: string | null;
+  target_date: string | null;
+
+  status:
+    | "open"
+    | "in_progress"
+    | "closed";
+
+  created_at: string;
+  closed_at?: string | null;
+};
+
+type Props = {
+  locale: Locale;
+  userId: string;
+  initialObservations: Observation[];
+};
+
+const categories = [
+  "Working at Height",
+  "Hot Work",
+  "PPE",
+  "Housekeeping",
+  "Scaffolding",
+  "Lifting",
+  "Electrical",
+  "Excavation",
+  "Confined Space",
+  "Mobile Equipment",
+  "Chemical Safety",
+  "Other",
+];
+
+function unique(values: Array<string | null>) {
+  return Array.from(
+    new Set(
+      values
+        .filter((x): x is string => Boolean(x))
+        .map((x) => x.trim())
+        .filter(Boolean),
+    ),
+  ).sort();
+}
+
+function startOfToday() {
+  const now = new Date();
+  return new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+  );
+}
+
+function isOverdue(item: Observation) {
+  if (
+    item.status === "closed" ||
+    !item.target_date
+  ) {
+    return false;
+  }
+
+  return new Date(item.target_date) < startOfToday();
+}
+
+function monthKey(date: string) {
+  const d = new Date(date);
+
+  return `${d.getFullYear()}-${String(
+    d.getMonth() + 1,
+  ).padStart(2, "0")}`;
+}
+
+function monthLabel(key: string, locale: Locale) {
+  const [year, month] = key.split("-").map(Number);
+
+  return new Intl.DateTimeFormat(
+    locale === "tr" ? "tr-TR" : "en-US",
+    {
+      month: "short",
+    },
+  ).format(new Date(year, month - 1, 1));
+}
+
+export default function HsePerformanceClient({
+  locale,
+  userId,
+  initialObservations,
+}: Props) {
+  const isTurkish = locale === "tr";
+
+  const [observations, setObservations] =
+    useState<Observation[]>(initialObservations);
+
+  const [saving, setSaving] = useState(false);
+  const [closingId, setClosingId] =
+    useState<string | null>(null);
+
+  const [message, setMessage] = useState("");
+
+  const [actionTab, setActionTab] =
+    useState<"open" | "overdue" | "closed">(
+      "open",
+    );
+
+  const [filters, setFilters] = useState({
+    project: "all",
+    company: "all",
+    type: "all",
+    risk: "all",
+  });
+
+  const [form, setForm] = useState({
+    observation_date:
+      new Date().toISOString().slice(0, 10),
+
+    project_name: "",
+    location: "",
+    company_name: "",
+
+    observation_type: "unsafe_condition",
+    category: "Working at Height",
+    risk_level: "medium",
+
+    title: "",
+    description: "",
+
+    corrective_action: "",
+    responsible_person: "",
+    target_date: "",
+  });
+
+  const projectOptions = useMemo(
+    () =>
+      unique(
+        observations.map(
+          (x) => x.project_name,
+        ),
+      ),
+    [observations],
+  );
+
+  const companyOptions = useMemo(
+    () =>
+      unique(
+        observations.map(
+          (x) => x.company_name,
+        ),
+      ),
+    [observations],
+  );
+
+  const filteredObservations =
+    useMemo(() => {
+      return observations.filter((item) => {
+        if (
+          filters.project !== "all" &&
+          item.project_name !== filters.project
+        ) {
+          return false;
+        }
+
+        if (
+          filters.company !== "all" &&
+          item.company_name !== filters.company
+        ) {
+          return false;
+        }
+
+        if (
+          filters.type !== "all" &&
+          item.observation_type !== filters.type
+        ) {
+          return false;
+        }
+
+        if (
+          filters.risk !== "all" &&
+          item.risk_level !== filters.risk
+        ) {
+          return false;
+        }
+
+        return true;
+      });
+    }, [observations, filters]);
+
+  const stats = useMemo(() => {
+    const total =
+      filteredObservations.length;
+
+    const positive =
+      filteredObservations.filter(
+        (x) =>
+          x.observation_type ===
+          "positive",
+      ).length;
+
+    const unsafeAct =
+      filteredObservations.filter(
+        (x) =>
+          x.observation_type ===
+          "unsafe_act",
+      ).length;
+
+    const unsafeCondition =
+      filteredObservations.filter(
+        (x) =>
+          x.observation_type ===
+          "unsafe_condition",
+      ).length;
+
+    const open =
+      filteredObservations.filter(
+        (x) => x.status !== "closed",
+      );
+
+    const closed =
+      filteredObservations.filter(
+        (x) => x.status === "closed",
+      );
+
+    const overdue =
+      filteredObservations.filter(
+        isOverdue,
+      );
+
+    const criticalOpen = open.filter(
+      (x) =>
+        x.risk_level === "critical",
+    ).length;
+
+    const highOpen = open.filter(
+      (x) => x.risk_level === "high",
+    ).length;
+
+    const closureRate =
+      open.length + closed.length === 0
+        ? 0
+        : Math.round(
+            (closed.length /
+              (open.length +
+                closed.length)) *
+              100,
+          );
+
+    const positiveRate =
+      total === 0
+        ? 0
+        : Math.round(
+            (positive / total) * 100,
+          );
+
+    let score = 100;
+
+    score -= criticalOpen * 30;
+    score -= highOpen * 14;
+    score -= overdue.length * 18;
+    score -=
+      open.filter(
+        (x) => x.risk_level === "medium",
+      ).length * 4;
+
+    score += Math.min(
+      8,
+      Math.round(positiveRate / 10),
+    );
+
+    if (closureRate >= 90) score += 5;
+    if (closureRate < 50 && open.length > 2) {
+      score -= 8;
+    }
+
+    score = Math.max(
+      0,
+      Math.min(100, score),
+    );
+
+    // HSE guardrails:
+    // Open HIGH risk cannot be rated Excellent.
+    // Open CRITICAL risk forces Needs Attention or worse.
+    if (criticalOpen > 0) {
+      score = Math.min(score, 54);
+    } else if (highOpen > 0) {
+      score = Math.min(score, 79);
+    }
+
+    // Any overdue action prevents an A rating.
+    if (overdue.length > 0) {
+      score = Math.min(score, 74);
+    }
+
+    const grade =
+      score >= 85
+        ? "A"
+        : score >= 70
+          ? "B"
+          : score >= 55
+            ? "C"
+            : "D";
+
+    return {
+      total,
+      positive,
+      unsafeAct,
+      unsafeCondition,
+
+      open: open.length,
+      closed: closed.length,
+      overdue: overdue.length,
+
+      closureRate,
+      positiveRate,
+
+      criticalOpen,
+      highOpen,
+
+      score,
+      grade,
+    };
+  }, [filteredObservations]);
+
+  const categoryData =
+    useMemo(() => {
+      const counts = new Map<
+        string,
+        number
+      >();
+
+      for (const item of filteredObservations) {
+        counts.set(
+          item.category,
+          (counts.get(item.category) ?? 0) +
+            1,
+        );
+      }
+
+      return Array.from(counts.entries())
+        .map(([name, count]) => ({
+          name,
+          count,
+          percentage:
+            stats.total === 0
+              ? 0
+              : Math.round(
+                  (count / stats.total) *
+                    100,
+                ),
+        }))
+        .sort(
+          (a, b) =>
+            b.count - a.count,
+        )
+        .slice(0, 6);
+    }, [
+      filteredObservations,
+      stats.total,
+    ]);
+
+  const monthlyTrend =
+    useMemo(() => {
+      const months: string[] = [];
+
+      const now = new Date();
+
+      for (let i = 5; i >= 0; i--) {
+        const d = new Date(
+          now.getFullYear(),
+          now.getMonth() - i,
+          1,
+        );
+
+        months.push(
+          `${d.getFullYear()}-${String(
+            d.getMonth() + 1,
+          ).padStart(2, "0")}`,
+        );
+      }
+
+      return months.map((key) => {
+        const items =
+          filteredObservations.filter(
+            (x) =>
+              monthKey(
+                x.observation_date,
+              ) === key,
+          );
+
+        return {
+          key,
+          label: monthLabel(key, locale),
+
+          total: items.length,
+
+          positive:
+            items.filter(
+              (x) =>
+                x.observation_type ===
+                "positive",
+            ).length,
+
+          unsafe:
+            items.filter(
+              (x) =>
+                x.observation_type !==
+                "positive",
+            ).length,
+        };
+      });
+    }, [
+      filteredObservations,
+      locale,
+    ]);
+
+  const maxTrend = Math.max(
+    1,
+    ...monthlyTrend.map((x) => x.total),
+  );
+
+  const donut = useMemo(() => {
+    if (stats.total === 0) {
+      return {
+        positiveDeg: 0,
+        actDeg: 0,
+      };
+    }
+
+    const positiveDeg =
+      (stats.positive /
+        stats.total) *
+      360;
+
+    const actDeg =
+      positiveDeg +
+      (stats.unsafeAct /
+        stats.total) *
+        360;
+
+    return {
+      positiveDeg,
+      actDeg,
+    };
+  }, [stats]);
+
+  const visibleActions =
+    useMemo(() => {
+      return filteredObservations
+        .filter((item) => {
+          if (actionTab === "closed") {
+            return (
+              item.status === "closed"
+            );
+          }
+
+          if (actionTab === "overdue") {
+            return isOverdue(item);
+          }
+
+          return (
+            item.status !== "closed"
+          );
+        })
+        .sort((a, b) => {
+          const riskWeight = {
+            critical: 4,
+            high: 3,
+            medium: 2,
+            low: 1,
+          };
+
+          return (
+            riskWeight[b.risk_level] -
+            riskWeight[a.risk_level]
+          );
+        });
+    }, [
+      filteredObservations,
+      actionTab,
+    ]);
+
+  async function saveObservation() {
+    if (
+      !form.title.trim() ||
+      !form.description.trim()
+    ) {
+      setMessage(
+        isTurkish
+          ? "Başlık ve açıklama zorunludur."
+          : "Title and description are required.",
+      );
+
+      return;
+    }
+
+    setSaving(true);
+    setMessage("");
+
+    const supabase = createClient();
+
+    const payload = {
+      user_id: userId,
+
+      observation_date:
+        form.observation_date,
+
+      project_name:
+        form.project_name.trim() ||
+        null,
+
+      location:
+        form.location.trim() ||
+        null,
+
+      company_name:
+        form.company_name.trim() ||
+        null,
+
+      observation_type:
+        form.observation_type,
+
+      category: form.category,
+
+      risk_level:
+        form.risk_level,
+
+      title: form.title.trim(),
+
+      description:
+        form.description.trim(),
+
+      corrective_action:
+        form.corrective_action.trim() ||
+        null,
+
+      responsible_person:
+        form.responsible_person.trim() ||
+        null,
+
+      target_date:
+        form.target_date || null,
+
+      status: "open",
+    };
+
+    const { data, error } =
+      await supabase
+        .from("hse_observations")
+        .insert(payload)
+        .select("*")
+        .single();
+
+    if (error || !data) {
+      setMessage(
+        isTurkish
+          ? `Kayıt başarısız: ${
+              error?.message ?? ""
+            }`
+          : `Save failed: ${
+              error?.message ?? ""
+            }`,
+      );
+
+      setSaving(false);
+      return;
+    }
+
+    setObservations((current) => [
+      data as Observation,
+      ...current,
+    ]);
+
+    setForm((current) => ({
+      ...current,
+      title: "",
+      description: "",
+      corrective_action: "",
+      responsible_person: "",
+      target_date: "",
+    }));
+
+    setMessage(
+      isTurkish
+        ? "Gözlem kaydedildi."
+        : "Observation saved.",
+    );
+
+    setSaving(false);
+  }
+
+  async function closeAction(
+    item: Observation,
+  ) {
+    if (item.status === "closed") {
+      return;
+    }
+
+    setClosingId(item.id);
+
+    const supabase = createClient();
+
+    const now =
+      new Date().toISOString();
+
+    const { error } = await supabase
+      .from("hse_observations")
+      .update({
+        status: "closed",
+        closed_at: now,
+        updated_at: now,
+      })
+      .eq("id", item.id)
+      .eq("user_id", userId);
+
+    if (error) {
+      setMessage(
+        isTurkish
+          ? `Aksiyon kapatılamadı: ${error.message}`
+          : `Action could not be closed: ${error.message}`,
+      );
+
+      setClosingId(null);
+      return;
+    }
+
+    setObservations((current) =>
+      current.map((x) =>
+        x.id === item.id
+          ? {
+              ...x,
+              status: "closed",
+              closed_at: now,
+            }
+          : x,
+      ),
+    );
+
+    setMessage(
+      isTurkish
+        ? "Aksiyon kapatıldı."
+        : "Action closed.",
+    );
+
+    setClosingId(null);
+  }
+
+  const gradeText =
+    stats.grade === "A"
+      ? isTurkish
+        ? "Mükemmel"
+        : "Excellent"
+      : stats.grade === "B"
+        ? isTurkish
+          ? "İyi"
+          : "Good"
+        : stats.grade === "C"
+          ? isTurkish
+            ? "Dikkat Gerekli"
+            : "Needs Attention"
+          : isTurkish
+            ? "Kritik"
+            : "Critical";
+
+  return (
+    <main className="min-h-screen bg-[#020817] text-white">
+      <div className="mx-auto max-w-[1560px] px-4 py-7 sm:px-6 lg:px-8">
+
+        {/* HERO */}
+        <section className="relative mb-5 overflow-hidden rounded-[28px] border border-blue-400/15 bg-gradient-to-r from-[#06152b] via-[#071a33] to-[#082747] p-6 shadow-2xl shadow-black/30">
+          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
+
+          <div className="relative flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-blue-400">
+                SERNEM HSE PERFORMANCE
+              </p>
+
+              <h1 className="mt-3 text-3xl font-black sm:text-4xl">
+                {isTurkish
+                  ? "Saha Gözlemleri & KPI"
+                  : "Observations & KPI"}
+              </h1>
+
+              <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-400">
+                {isTurkish
+                  ? "Saha gözlemlerini kaydedin, aksiyonları takip edin ve HSE performansını gerçek verilerle yönetin."
+                  : "Capture observations, track corrective actions and manage HSE performance with live data."}
+              </p>
+
+          <a
+            href={`/${locale}/hse-performance/observations`}
+            className="mt-5 inline-flex items-center justify-center rounded-xl border border-blue-400/25 bg-blue-500/10 px-4 py-3 text-sm font-black text-blue-200 transition hover:bg-blue-500/20"
+          >
+            {isTurkish
+              ? "Observation Follow-up →"
+              : "Observation Follow-up →"}
+          </a>
+
+            </div>
+
+            {/* FILTERS */}
+            <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+              <select
+                value={filters.project}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    project:
+                      e.target.value,
+                  })
+                }
+                className="rounded-xl border border-white/10 bg-slate-950/70 px-3 py-2.5 text-xs font-bold text-slate-300"
+              >
+                <option value="all">
+                  {isTurkish
+                    ? "Tüm Projeler"
+                    : "All Projects"}
+                </option>
+
+                {projectOptions.map(
+                  (item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ),
+                )}
+              </select>
+
+              <select
+                value={filters.company}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    company:
+                      e.target.value,
+                  })
+                }
+                className="rounded-xl border border-white/10 bg-slate-950/70 px-3 py-2.5 text-xs font-bold text-slate-300"
+              >
+                <option value="all">
+                  {isTurkish
+                    ? "Tüm Firmalar"
+                    : "All Companies"}
+                </option>
+
+                {companyOptions.map(
+                  (item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ),
+                )}
+              </select>
+
+              <select
+                value={filters.type}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    type:
+                      e.target.value,
+                  })
+                }
+                className="rounded-xl border border-white/10 bg-slate-950/70 px-3 py-2.5 text-xs font-bold text-slate-300"
+              >
+                <option value="all">
+                  {isTurkish
+                    ? "Tüm Gözlemler"
+                    : "All Types"}
+                </option>
+
+                <option value="positive">
+                  Positive
+                </option>
+
+                <option value="unsafe_act">
+                  Unsafe Act
+                </option>
+
+                <option value="unsafe_condition">
+                  Unsafe Condition
+                </option>
+              </select>
+
+              <select
+                value={filters.risk}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    risk: e.target.value,
+                  })
+                }
+                className="rounded-xl border border-white/10 bg-slate-950/70 px-3 py-2.5 text-xs font-bold text-slate-300"
+              >
+                <option value="all">
+                  {isTurkish
+                    ? "Tüm Riskler"
+                    : "All Risks"}
+                </option>
+
+                <option value="low">
+                  Low
+                </option>
+
+                <option value="medium">
+                  Medium
+                </option>
+
+                <option value="high">
+                  High
+                </option>
+
+                <option value="critical">
+                  Critical
+                </option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        {/* KPI CARDS */}
+        <section className="mb-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {[
+            {
+              label: isTurkish
+                ? "Toplam Gözlem"
+                : "Total Observations",
+              value: stats.total,
+              color: "text-blue-300",
+              small: `${stats.positiveRate}% positive`,
+            },
+
+            {
+              label: isTurkish
+                ? "Pozitif Gözlem"
+                : "Positive",
+              value: stats.positive,
+              color: "text-emerald-300",
+              small: `${stats.positiveRate}%`,
+            },
+
+            {
+              label: isTurkish
+                ? "Güvensiz Davranış"
+                : "Unsafe Acts",
+              value: stats.unsafeAct,
+              color: "text-orange-300",
+              small:
+                stats.total === 0
+                  ? "0%"
+                  : `${Math.round(
+                      (stats.unsafeAct /
+                        stats.total) *
+                        100,
+                    )}%`,
+            },
+
+            {
+              label: isTurkish
+                ? "Güvensiz Durum"
+                : "Unsafe Conditions",
+              value: stats.unsafeCondition,
+              color: "text-red-300",
+              small:
+                stats.total === 0
+                  ? "0%"
+                  : `${Math.round(
+                      (stats.unsafeCondition /
+                        stats.total) *
+                        100,
+                    )}%`,
+            },
+          ].map((card) => (
+            <article
+              key={card.label}
+              className="rounded-2xl border border-slate-800 bg-slate-900/75 p-5 shadow-lg shadow-black/10"
+            >
+              <p className="text-[11px] font-black uppercase tracking-[0.16em] text-slate-500">
+                {card.label}
+              </p>
+
+              <div className="mt-3 flex items-end justify-between gap-4">
+                <p
+                  className={`text-4xl font-black ${card.color}`}
+                >
+                  {card.value}
+                </p>
+
+                <p className="text-xs font-bold text-slate-500">
+                  {card.small}
+                </p>
+              </div>
+            </article>
+          ))}
+        </section>
+
+        {/* MAIN GRID */}
+        <div className="grid gap-5 xl:grid-cols-[0.82fr_1.45fr_0.95fr]">
+
+          {/* OBSERVATION FORM */}
+          <section className="rounded-[26px] border border-slate-800 bg-slate-900/80 p-5">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
+              01
+            </p>
+
+            <h2 className="mt-2 text-xl font-black">
+              {isTurkish
+                ? "Yeni Gözlem Ekle"
+                : "Add Observation"}
+            </h2>
+
+            <div className="mt-5 space-y-3">
+
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  type="date"
+                  value={form.observation_date}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      observation_date:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                />
+
+                <select
+                  value={form.risk_level}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      risk_level:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                >
+                  <option value="low">
+                    Low
+                  </option>
+
+                  <option value="medium">
+                    Medium
+                  </option>
+
+                  <option value="high">
+                    High
+                  </option>
+
+                  <option value="critical">
+                    Critical
+                  </option>
+                </select>
+              </div>
+
+              <input
+                placeholder={
+                  isTurkish
+                    ? "Proje"
+                    : "Project"
+                }
+                value={form.project_name}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    project_name:
+                      e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  placeholder={
+                    isTurkish
+                      ? "Firma"
+                      : "Company"
+                  }
+                  value={form.company_name}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      company_name:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                />
+
+                <input
+                  placeholder={
+                    isTurkish
+                      ? "Lokasyon"
+                      : "Location"
+                  }
+                  value={form.location}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      location:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                />
+              </div>
+
+              <select
+                value={form.observation_type}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    observation_type:
+                      e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              >
+                <option value="positive">
+                  Positive
+                </option>
+
+                <option value="unsafe_act">
+                  Unsafe Act
+                </option>
+
+                <option value="unsafe_condition">
+                  Unsafe Condition
+                </option>
+              </select>
+
+              <select
+                value={form.category}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    category:
+                      e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              >
+                {categories.map((category) => (
+                  <option
+                    key={category}
+                    value={category}
+                  >
+                    {category}
+                  </option>
+                ))}
+              </select>
+
+              <input
+                placeholder={
+                  isTurkish
+                    ? "Gözlem başlığı"
+                    : "Observation title"
+                }
+                value={form.title}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    title: e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <textarea
+                rows={3}
+                placeholder={
+                  isTurkish
+                    ? "Açıklama"
+                    : "Description"
+                }
+                value={form.description}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    description:
+                      e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <textarea
+                rows={2}
+                placeholder={
+                  isTurkish
+                    ? "Alınacak aksiyon"
+                    : "Corrective action"
+                }
+                value={form.corrective_action}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    corrective_action:
+                      e.target.value,
+                  })
+                }
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  placeholder={
+                    isTurkish
+                      ? "Sorumlu kişi"
+                      : "Responsible"
+                  }
+                  value={form.responsible_person}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      responsible_person:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                />
+
+                <input
+                  type="date"
+                  value={form.target_date}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      target_date:
+                        e.target.value,
+                    })
+                  }
+                  className="rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={saveObservation}
+                disabled={saving}
+                className="w-full rounded-xl bg-blue-600 px-4 py-3 font-black transition hover:bg-blue-500 disabled:opacity-50"
+              >
+                {saving
+                  ? isTurkish
+                    ? "Kaydediliyor..."
+                    : "Saving..."
+                  : isTurkish
+                    ? "Gözlemi Kaydet"
+                    : "Save Observation"}
+              </button>
+
+              {message && (
+                <p className="text-xs text-slate-400">
+                  {message}
+                </p>
+              )}
+            </div>
+          </section>
+
+          {/* KPI CENTER */}
+          <section className="rounded-[26px] border border-slate-800 bg-slate-900/80 p-5">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
+              02
+            </p>
+
+            <h2 className="mt-2 text-xl font-black">
+              KPI Dashboard
+            </h2>
+
+            <div className="mt-5 grid gap-4 md:grid-cols-2">
+
+              {/* DONUT */}
+              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+                <p className="text-sm font-black">
+                  {isTurkish
+                    ? "Gözlem Dağılımı"
+                    : "Observation Distribution"}
+                </p>
+
+                <div className="mt-5 flex items-center gap-6">
+                  <div
+                    className="relative h-32 w-32 shrink-0 rounded-full"
+                    style={{
+                      background:
+                        stats.total === 0
+                          ? "#1e293b"
+                          : `conic-gradient(
+                              #10b981 0deg ${donut.positiveDeg}deg,
+                              #f59e0b ${donut.positiveDeg}deg ${donut.actDeg}deg,
+                              #ef4444 ${donut.actDeg}deg 360deg
+                            )`,
+                    }}
+                  >
+                    <div className="absolute inset-[20px] flex flex-col items-center justify-center rounded-full bg-[#07111f]">
+                      <span className="text-2xl font-black">
+                        {stats.total}
+                      </span>
+
+                      <span className="text-[9px] uppercase tracking-wider text-slate-500">
+                        {isTurkish
+                          ? "Gözlem"
+                          : "Total"}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 text-xs">
+                    <p className="flex items-center gap-2">
+                      <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                      Positive
+                      <b className="ml-auto">
+                        {stats.positive}
+                      </b>
+                    </p>
+
+                    <p className="flex items-center gap-2">
+                      <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
+                      Unsafe Act
+                      <b className="ml-auto">
+                        {stats.unsafeAct}
+                      </b>
+                    </p>
+
+                    <p className="flex items-center gap-2">
+                      <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
+                      Unsafe Condition
+                      <b className="ml-auto">
+                        {stats.unsafeCondition}
+                      </b>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* PERFORMANCE */}
+              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+                <p className="text-sm font-black">
+                  {isTurkish
+                    ? "Performans Seviyesi"
+                    : "Performance Level"}
+                </p>
+
+                <div className="mt-5 flex items-center gap-5">
+                  <div
+                    className={`flex h-24 w-24 shrink-0 items-center justify-center rounded-full border text-4xl font-black ${
+                      stats.grade === "A"
+                        ? "border-emerald-400/40 bg-emerald-500/10 text-emerald-300"
+                        : stats.grade === "B"
+                          ? "border-lime-400/40 bg-lime-500/10 text-lime-300"
+                          : stats.grade === "C"
+                            ? "border-amber-400/40 bg-amber-500/10 text-amber-300"
+                            : "border-red-400/40 bg-red-500/10 text-red-300"
+                    }`}
+                  >
+                    {stats.grade}
+                  </div>
+
+                  <div>
+                    <p className="text-xl font-black">
+                      {gradeText}
+                    </p>
+
+                    <p className="mt-1 text-sm text-slate-500">
+                      Score {stats.score}/100
+                    </p>
+
+                    <div className="mt-3 space-y-1 text-[11px] text-slate-500">
+                      <p>
+                        High open:{" "}
+                        {stats.highOpen}
+                      </p>
+
+                      <p>
+                        Critical open:{" "}
+                        {stats.criticalOpen}
+                      </p>
+
+                      <p>
+                        Overdue:{" "}
+                        {stats.overdue}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* MONTHLY TREND */}
+              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 md:col-span-2">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-black">
+                    {isTurkish
+                      ? "6 Aylık Trend"
+                      : "6-Month Trend"}
+                  </p>
+
+                  <div className="flex gap-3 text-[10px] text-slate-500">
+                    <span>
+                      <b className="text-blue-400">
+                        ●
+                      </b>{" "}
+                      Total
+                    </span>
+
+                    <span>
+                      <b className="text-emerald-400">
+                        ●
+                      </b>{" "}
+                      Positive
+                    </span>
+
+                    <span>
+                      <b className="text-red-400">
+                        ●
+                      </b>{" "}
+                      Unsafe
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex h-44 items-end gap-4 border-b border-slate-800 px-2">
+                  {monthlyTrend.map((item) => (
+                    <div
+                      key={item.key}
+                      className="flex min-w-0 flex-1 flex-col items-center justify-end"
+                    >
+                      <div className="flex h-32 items-end gap-1">
+                        <div
+                          className="w-3 rounded-t bg-blue-500"
+                          style={{
+                            height: `${Math.max(
+                              item.total === 0
+                                ? 0
+                                : 7,
+                              (item.total /
+                                maxTrend) *
+                                100,
+                            )}%`,
+                          }}
+                        />
+
+                        <div
+                          className="w-3 rounded-t bg-emerald-500"
+                          style={{
+                            height: `${Math.max(
+                              item.positive === 0
+                                ? 0
+                                : 7,
+                              (item.positive /
+                                maxTrend) *
+                                100,
+                            )}%`,
+                          }}
+                        />
+
+                        <div
+                          className="w-3 rounded-t bg-red-500"
+                          style={{
+                            height: `${Math.max(
+                              item.unsafe === 0
+                                ? 0
+                                : 7,
+                              (item.unsafe /
+                                maxTrend) *
+                                100,
+                            )}%`,
+                          }}
+                        />
+                      </div>
+
+                      <span className="mt-3 text-[10px] font-bold uppercase text-slate-500">
+                        {item.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ACTION RATE */}
+              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+                <p className="text-sm font-black">
+                  {isTurkish
+                    ? "Aksiyon Durumu"
+                    : "Action Status"}
+                </p>
+
+                <div className="mt-5">
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <p className="text-4xl font-black text-emerald-400">
+                        {stats.closureRate}%
+                      </p>
+
+                      <p className="mt-1 text-xs text-slate-500">
+                        {isTurkish
+                          ? "Kapanma oranı"
+                          : "Closure rate"}
+                      </p>
+                    </div>
+
+                    <div className="space-y-1 text-right text-xs">
+                      <p className="text-blue-300">
+                        Open {stats.open}
+                      </p>
+
+                      <p className="text-red-300">
+                        Overdue{" "}
+                        {stats.overdue}
+                      </p>
+
+                      <p className="text-emerald-300">
+                        Closed{" "}
+                        {stats.closed}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-800">
+                    <div
+                      className="h-full rounded-full bg-emerald-500 transition-all"
+                      style={{
+                        width: `${stats.closureRate}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* CATEGORIES */}
+              <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+                <p className="text-sm font-black">
+                  {isTurkish
+                    ? "En Çok Görülen Kategoriler"
+                    : "Top Categories"}
+                </p>
+
+                <div className="mt-4 space-y-3">
+                  {categoryData.length === 0 && (
+                    <p className="py-6 text-center text-xs text-slate-500">
+                      No data
+                    </p>
+                  )}
+
+                  {categoryData.map((item) => (
+                    <div key={item.name}>
+                      <div className="mb-1.5 flex items-center justify-between text-[11px]">
+                        <span className="truncate text-slate-400">
+                          {item.name}
+                        </span>
+
+                        <b className="text-slate-300">
+                          {item.percentage}%
+                        </b>
+                      </div>
+
+                      <div className="h-1.5 overflow-hidden rounded-full bg-slate-800">
+                        <div
+                          className="h-full rounded-full bg-blue-500"
+                          style={{
+                            width: `${item.percentage}%`,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* RECENT */}
+            <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+              <p className="text-sm font-black">
+                {isTurkish
+                  ? "Son Gözlemler"
+                  : "Recent Observations"}
+              </p>
+
+              <div className="mt-4 grid gap-3 lg:grid-cols-2">
+                {filteredObservations
+                  .slice(0, 6)
+                  .map((item) => (
+                    <article
+                      key={item.id}
+                      className="rounded-xl border border-slate-800 bg-slate-900/65 p-4"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="min-w-0">
+                          <p className="truncate font-bold">
+                            {item.title}
+                          </p>
+
+                          <p className="mt-1 text-xs text-slate-500">
+                            {item.company_name ||
+                              "—"}{" "}
+                            •{" "}
+                            {item.project_name ||
+                              "—"}
+                          </p>
+
+                          <p className="mt-2 text-[11px] text-slate-600">
+                            {item.category}
+                          </p>
+                        </div>
+
+                        <span className="rounded-full border border-slate-700 px-2 py-1 text-[10px] font-black uppercase text-slate-300">
+                          {item.risk_level}
+                        </span>
+                      </div>
+                    </article>
+                  ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ACTION TRACKING */}
+          <aside className="rounded-[26px] border border-slate-800 bg-slate-900/80 p-5">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
+              03
+            </p>
+
+            <h2 className="mt-2 text-xl font-black">
+              {isTurkish
+                ? "Aksiyon Takibi"
+                : "Action Tracking"}
+            </h2>
+
+            <div className="mt-5 grid grid-cols-3 gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  setActionTab("open")
+                }
+                className={`rounded-xl p-3 text-center text-xs font-black ${
+                  actionTab === "open"
+                    ? "bg-blue-600 text-white"
+                    : "border border-blue-500/20 bg-blue-500/5 text-blue-300"
+                }`}
+              >
+                {isTurkish ? "Açık" : "Open"}
+
+                <div className="mt-1 text-xl">
+                  {stats.open}
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setActionTab("overdue")
+                }
+                className={`rounded-xl p-3 text-center text-xs font-black ${
+                  actionTab === "overdue"
+                    ? "bg-red-600 text-white"
+                    : "border border-red-500/25 bg-red-500/5 text-red-300"
+                }`}
+              >
+                {isTurkish
+                  ? "Gecikmiş"
+                  : "Overdue"}
+
+                <div className="mt-1 text-xl">
+                  {stats.overdue}
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setActionTab("closed")
+                }
+                className={`rounded-xl p-3 text-center text-xs font-black ${
+                  actionTab === "closed"
+                    ? "bg-emerald-600 text-white"
+                    : "border border-emerald-500/25 bg-emerald-500/5 text-emerald-300"
+                }`}
+              >
+                {isTurkish
+                  ? "Kapalı"
+                  : "Closed"}
+
+                <div className="mt-1 text-xl">
+                  {stats.closed}
+                </div>
+              </button>
+            </div>
+
+            <div className="mt-5 max-h-[860px] space-y-3 overflow-y-auto pr-1">
+              {visibleActions.length === 0 && (
+                <div className="rounded-2xl border border-dashed border-slate-700 px-4 py-10 text-center text-sm text-slate-500">
+                  {isTurkish
+                    ? "Bu durumda aksiyon bulunmuyor."
+                    : "No actions in this status."}
+                </div>
+              )}
+
+              {visibleActions.map((item) => (
+                <article
+                  key={item.id}
+                  className={`rounded-2xl border p-4 ${
+                    isOverdue(item)
+                      ? "border-red-500/30 bg-red-500/[0.04]"
+                      : "border-slate-800 bg-slate-950/60"
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="font-bold">
+                        {item.corrective_action ||
+                          item.title}
+                      </p>
+
+                      <p className="mt-2 text-xs uppercase tracking-wide text-slate-500">
+                        {item.responsible_person ||
+                          (isTurkish
+                            ? "Sorumlu atanmadı"
+                            : "Unassigned")}
+                      </p>
+
+                      {item.target_date && (
+                        <p
+                          className={`mt-1 text-xs ${
+                            isOverdue(item)
+                              ? "font-bold text-red-300"
+                              : "text-slate-500"
+                          }`}
+                        >
+                          {isTurkish
+                            ? "Hedef:"
+                            : "Due:"}{" "}
+                          {item.target_date}
+                        </p>
+                      )}
+                    </div>
+
+                    <span
+                      className={`rounded-full px-2 py-1 text-[10px] font-black uppercase ${
+                        item.risk_level ===
+                        "critical"
+                          ? "bg-red-500/20 text-red-300"
+                          : item.risk_level ===
+                              "high"
+                            ? "bg-orange-500/15 text-orange-300"
+                            : item.risk_level ===
+                                "medium"
+                              ? "bg-amber-500/15 text-amber-300"
+                              : "bg-emerald-500/10 text-emerald-300"
+                      }`}
+                    >
+                      {item.risk_level}
+                    </span>
+                  </div>
+
+                  {item.status !== "closed" && (
+                    <button
+                      type="button"
+                      disabled={
+                        closingId === item.id
+                      }
+                      onClick={() =>
+                        closeAction(item)
+                      }
+                      className="mt-4 w-full rounded-xl border border-emerald-400/25 bg-emerald-500/10 px-3 py-2.5 text-xs font-black text-emerald-300 transition hover:bg-emerald-500/20 disabled:opacity-50"
+                    >
+                      {closingId === item.id
+                        ? isTurkish
+                          ? "Kapatılıyor..."
+                          : "Closing..."
+                        : isTurkish
+                          ? "✓ Aksiyonu Kapat"
+                          : "✓ Close Action"}
+                    </button>
+                  )}
+                </article>
+              ))}
+            </div>
+          </aside>
+        </div>
+        <HseReportingPanel
+          locale={locale}
+          observations={filteredObservations}
+        />
+      </div>
+    </main>
+  );
+}

@@ -6,7 +6,7 @@ import { createClient } from "../../../utils/supabase/client";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ProductExplorer from "./ProductExplorer";
 import SernemLogo from "./SernemLogo";
-
+ 
 type Props = {
   locale: "tr" | "en";
 };
@@ -168,10 +168,18 @@ export default function LocalizedNavbar({ locale }: Props) {
     {
       href: "/posters",
       icon: "▧",
-      title: isTurkish ? "Poster & Levhalar" : "Posters & Signs",
+      title: isTurkish ? "Posterler" : "Posters",
       description: isTurkish
-        ? "Profesyonel saha posterleri ve güvenlik levhaları."
-        : "Professional field posters and safety signs.",
+        ? "Profesyonel ve yazdırılabilir HSE saha posterleri."
+        : "Professional printable HSE field posters.",
+    },
+    {
+      href: "/safety-signs",
+      icon: "!",
+      title: isTurkish ? "Güvenlik Levhaları" : "Safety Signs",
+      description: isTurkish
+        ? "A4, A3 ve PNG formatlarında güvenlik levhaları."
+        : "Safety signs available in A4, A3 and PNG formats.",
     },
     {
       href: "/downloads",
@@ -289,6 +297,24 @@ export default function LocalizedNavbar({ locale }: Props) {
               </div>
             )}
           </div>
+
+          {isAuthenticated && (
+            <Link
+              href="/hse-performance"
+              onClick={closeDropdowns}
+              className="relative inline-flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-[13px] font-bold text-slate-300 transition duration-200 hover:bg-cyan-500/[0.07] hover:text-white after:absolute after:bottom-0 after:left-4 after:right-4 after:h-px after:scale-x-0 after:bg-cyan-400 after:transition-transform hover:after:scale-x-100"
+            >
+              <span className="flex h-6 w-6 items-center justify-center rounded-md border border-cyan-400/15 bg-cyan-500/[0.06] text-[11px] font-black text-cyan-300">
+                ◫
+              </span>
+
+              <span>
+                {isTurkish
+                  ? "HSE Performans"
+                  : "HSE Performance"}
+              </span>
+            </Link>
+          )}
 
           {/* RESOURCES */}
           <div className="relative">
@@ -409,6 +435,16 @@ export default function LocalizedNavbar({ locale }: Props) {
 
           {isAuthenticated ? (
             <div className="flex items-center gap-1 lg:hidden">
+              {isOwner && (
+                <Link
+                  href="/admin"
+                  onClick={closeMenu}
+                  className="inline-flex h-10 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] px-2.5 text-[11px] font-black text-violet-200 transition hover:border-violet-400/40 hover:bg-violet-500/[0.14]"
+                >
+                  Admin
+                </Link>
+              )}
+
               <Link
                 href="/account"
                 onClick={closeDropdowns}

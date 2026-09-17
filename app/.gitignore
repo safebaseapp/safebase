@@ -44,3 +44,11 @@ next-env.d.ts
 *.backup-before-*
 __pycache__/
 *.pyc
+
+# Local SERNEM backups
+backups/*.tar.gz
+*.backup-*
+
+# SERNEM local backups
+backups/*.tar.gz
+*.backup-*

@@ -276,7 +276,7 @@ export default async function AdminUsersPage({ params }: Props) {
                           href={`/${locale}/admin/users/${profile.id}`}
                           className="inline-flex rounded-xl border border-blue-400/20 bg-blue-500/10 px-4 py-2 text-sm font-black text-blue-300 transition hover:border-blue-400/40 hover:bg-blue-500/20 hover:text-blue-200"
                         >
-                          {isTurkish ? "Düzenle" : "Edit"}
+                          {isTurkish ? "Detaylar" : "Details"} →
                         </Link>
                       </td>
                     </tr>

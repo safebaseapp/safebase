@@ -1,0 +1,976 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
+type Locale = "tr" | "en";
+
+type Observation = {
+  id: string;
+  observation_date: string;
+  project_name: string | null;
+  location: string | null;
+  company_name: string | null;
+  observation_type:
+    | "positive"
+    | "unsafe_act"
+    | "unsafe_condition";
+  category: string;
+  risk_level:
+    | "low"
+    | "medium"
+    | "high"
+    | "critical";
+  title: string;
+  description: string;
+  corrective_action: string | null;
+  responsible_person: string | null;
+  target_date: string | null;
+  status:
+    | "open"
+    | "in_progress"
+    | "closed";
+  created_at: string;
+  closed_at?: string | null;
+};
+
+type Props = {
+  locale: Locale;
+  observations: Observation[];
+};
+
+function startOfToday() {
+  const d = new Date();
+  return new Date(
+    d.getFullYear(),
+    d.getMonth(),
+    d.getDate(),
+  );
+}
+
+function isOverdue(item: Observation) {
+  if (
+    item.status === "closed" ||
+    !item.target_date
+  ) {
+    return false;
+  }
+
+  return (
+    new Date(item.target_date) <
+    startOfToday()
+  );
+}
+
+function isoDate(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+
+function escapeHtml(value: unknown) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+export default function HseReportingPanel({
+  locale,
+  observations,
+}: Props) {
+  const isTurkish = locale === "tr";
+
+  const today = new Date();
+
+  const weekStart = new Date(today);
+  weekStart.setDate(
+    today.getDate() -
+      ((today.getDay() + 6) % 7),
+  );
+
+  const monthStart = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    1,
+  );
+
+  const [reportType, setReportType] =
+    useState<
+      "weekly" | "monthly" | "custom"
+    >("weekly");
+
+  const [startDate, setStartDate] =
+    useState(isoDate(weekStart));
+
+  const [endDate, setEndDate] =
+    useState(isoDate(today));
+
+  function chooseReportType(
+    type: "weekly" | "monthly" | "custom",
+  ) {
+    setReportType(type);
+
+    if (type === "weekly") {
+      setStartDate(isoDate(weekStart));
+      setEndDate(isoDate(today));
+    }
+
+    if (type === "monthly") {
+      setStartDate(isoDate(monthStart));
+      setEndDate(isoDate(today));
+    }
+  }
+
+  const reportData = useMemo(() => {
+    return observations.filter((item) => {
+      const date = item.observation_date;
+
+      return (
+        date >= startDate &&
+        date <= endDate
+      );
+    });
+  }, [
+    observations,
+    startDate,
+    endDate,
+  ]);
+
+  const stats = useMemo(() => {
+    const total = reportData.length;
+
+    const positive = reportData.filter(
+      (x) =>
+        x.observation_type === "positive",
+    ).length;
+
+    const unsafeAct = reportData.filter(
+      (x) =>
+        x.observation_type === "unsafe_act",
+    ).length;
+
+    const unsafeCondition =
+      reportData.filter(
+        (x) =>
+          x.observation_type ===
+          "unsafe_condition",
+      ).length;
+
+    const open = reportData.filter(
+      (x) => x.status !== "closed",
+    );
+
+    const closed = reportData.filter(
+      (x) => x.status === "closed",
+    );
+
+    const overdue = reportData.filter(
+      isOverdue,
+    );
+
+    const critical = open.filter(
+      (x) =>
+        x.risk_level === "critical",
+    );
+
+    const high = open.filter(
+      (x) => x.risk_level === "high",
+    );
+
+    const closureRate =
+      open.length + closed.length === 0
+        ? 0
+        : Math.round(
+            (closed.length /
+              (open.length +
+                closed.length)) *
+              100,
+          );
+
+    return {
+      total,
+      positive,
+      unsafeAct,
+      unsafeCondition,
+      open: open.length,
+      closed: closed.length,
+      overdue: overdue.length,
+      critical: critical.length,
+      high: high.length,
+      closureRate,
+    };
+  }, [reportData]);
+
+  const categories = useMemo(() => {
+    const map = new Map<
+      string,
+      number
+    >();
+
+    for (const item of reportData) {
+      map.set(
+        item.category,
+        (map.get(item.category) ?? 0) + 1,
+      );
+    }
+
+    return Array.from(map.entries())
+      .map(([name, count]) => ({
+        name,
+        count,
+        pct:
+          stats.total === 0
+            ? 0
+            : Math.round(
+                (count / stats.total) *
+                  100,
+              ),
+      }))
+      .sort(
+        (a, b) => b.count - a.count,
+      );
+  }, [reportData, stats.total]);
+
+  const managementSummary =
+    useMemo(() => {
+      if (stats.total === 0) {
+        return isTurkish
+          ? "Seçilen dönem için kayıtlı saha gözlemi bulunmamaktadır."
+          : "No field observations were recorded for the selected reporting period.";
+      }
+
+      const unsafe =
+        stats.unsafeAct +
+        stats.unsafeCondition;
+
+      if (stats.critical > 0) {
+        return isTurkish
+          ? `Seçilen dönemde ${stats.total} gözlem kaydedildi. ${stats.critical} açık kritik bulgu bulunuyor. Kritik aksiyonların öncelikli olarak kapatılması ve saha kontrollerinin artırılması önerilir.`
+          : `${stats.total} observations were recorded. ${stats.critical} critical finding remains open. Immediate closure of critical actions and increased field verification are recommended.`;
+      }
+
+      if (stats.overdue > 0) {
+        return isTurkish
+          ? `Seçilen dönemde ${stats.total} gözlem kaydedildi. ${unsafe} güvensiz bulgu ve ${stats.overdue} gecikmiş aksiyon bulunmaktadır. Aksiyon kapanış performansının geliştirilmesi önerilir.`
+          : `${stats.total} observations were recorded, including ${unsafe} unsafe findings and ${stats.overdue} overdue actions. Improvement in action closure performance is recommended.`;
+      }
+
+      return isTurkish
+        ? `Seçilen dönemde ${stats.total} gözlem kaydedildi. Aksiyon kapanma oranı %${stats.closureRate}. Mevcut performansın korunması ve pozitif gözlem oranının artırılması önerilir.`
+        : `${stats.total} observations were recorded. Action closure rate is ${stats.closureRate}%. Maintain current performance and continue increasing positive observations.`;
+    }, [stats, isTurkish]);
+
+  async function exportExcel() {
+    const XLSX = await import("xlsx");
+
+    const rows = reportData.map(
+      (item, index) => ({
+        No: index + 1,
+        Date: item.observation_date,
+        Project:
+          item.project_name ?? "",
+        Company:
+          item.company_name ?? "",
+        Location:
+          item.location ?? "",
+        Type:
+          item.observation_type,
+        Category: item.category,
+        Risk: item.risk_level,
+        Title: item.title,
+        Description:
+          item.description,
+        Corrective_Action:
+          item.corrective_action ?? "",
+        Responsible:
+          item.responsible_person ?? "",
+        Target_Date:
+          item.target_date ?? "",
+        Status: item.status,
+        Overdue: isOverdue(item)
+          ? "YES"
+          : "NO",
+      }),
+    );
+
+    const summaryRows = [
+      ["SERNEM HSE REPORT"],
+      [],
+      ["Period", `${startDate} - ${endDate}`],
+      ["Total Observations", stats.total],
+      ["Positive", stats.positive],
+      ["Unsafe Acts", stats.unsafeAct],
+      [
+        "Unsafe Conditions",
+        stats.unsafeCondition,
+      ],
+      ["Open Actions", stats.open],
+      ["Overdue Actions", stats.overdue],
+      ["Closed Actions", stats.closed],
+      [
+        "Closure Rate",
+        `${stats.closureRate}%`,
+      ],
+      [
+        "Open Critical",
+        stats.critical,
+      ],
+      ["Open High", stats.high],
+      [],
+      ["Management Summary"],
+      [managementSummary],
+    ];
+
+    const wb =
+      XLSX.utils.book_new();
+
+    const summarySheet =
+      XLSX.utils.aoa_to_sheet(
+        summaryRows,
+      );
+
+    const dataSheet =
+      XLSX.utils.json_to_sheet(rows);
+
+    const categorySheet =
+      XLSX.utils.json_to_sheet(
+        categories.map((x) => ({
+          Category: x.name,
+          Count: x.count,
+          Percentage: `${x.pct}%`,
+        })),
+      );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      summarySheet,
+      "Summary",
+    );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      dataSheet,
+      "Observations",
+    );
+
+    XLSX.utils.book_append_sheet(
+      wb,
+      categorySheet,
+      "Categories",
+    );
+
+    XLSX.writeFile(
+      wb,
+      `SERNEM-HSE-Report-${startDate}-${endDate}.xlsx`,
+    );
+  }
+
+  function printPdf() {
+    const topCategories =
+      categories
+        .slice(0, 6)
+        .map(
+          (x) => `
+            <tr>
+              <td>${escapeHtml(
+                x.name,
+              )}</td>
+              <td>${x.count}</td>
+              <td>${x.pct}%</td>
+            </tr>
+          `,
+        )
+        .join("");
+
+    const criticalRows =
+      reportData
+        .filter(
+          (x) =>
+            x.status !== "closed" &&
+            (x.risk_level ===
+              "critical" ||
+              x.risk_level === "high"),
+        )
+        .slice(0, 10)
+        .map(
+          (x) => `
+            <tr>
+              <td>${escapeHtml(
+                x.title,
+              )}</td>
+              <td>${escapeHtml(
+                x.risk_level.toUpperCase(),
+              )}</td>
+              <td>${escapeHtml(
+                x.responsible_person ??
+                  "—",
+              )}</td>
+              <td>${escapeHtml(
+                x.target_date ?? "—",
+              )}</td>
+            </tr>
+          `,
+        )
+        .join("");
+
+    const html = `
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>SERNEM HSE Report</title>
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #102033;
+    background: #fff;
+  }
+
+  .page {
+    padding: 38px 42px;
+  }
+
+  .header {
+    background: #06152b;
+    color: white;
+    padding: 28px;
+    border-radius: 18px;
+  }
+
+  .brand {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 3px;
+  }
+
+  .subtitle {
+    color: #72b8ff;
+    margin-top: 5px;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .period {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #c4d3e5;
+  }
+
+  .grid {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 12px;
+  }
+
+  .card {
+    border: 1px solid #d9e4ef;
+    border-radius: 14px;
+    padding: 18px;
+  }
+
+  .card small {
+    display: block;
+    color: #64748b;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+
+  .card strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 27px;
+  }
+
+  h2 {
+    margin-top: 30px;
+    font-size: 17px;
+  }
+
+  .summary {
+    background: #eef6ff;
+    border-left: 5px solid #2563eb;
+    padding: 18px;
+    border-radius: 10px;
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+  }
+
+  th {
+    background: #06152b;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    font-size: 11px;
+  }
+
+  td {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px;
+    font-size: 11px;
+  }
+
+  .footer {
+    margin-top: 35px;
+    padding-top: 12px;
+    border-top: 1px solid #dbe4ef;
+    color: #64748b;
+    font-size: 9px;
+  }
+
+  @media print {
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    .page {
+      padding: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="header">
+    <div class="brand">SERNEM</div>
+    <div class="subtitle">
+      HSE PERFORMANCE REPORT
+    </div>
+
+    <div class="period">
+      ${escapeHtml(
+        startDate,
+      )} — ${escapeHtml(endDate)}
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <small>Total Observations</small>
+      <strong>${stats.total}</strong>
+    </div>
+
+    <div class="card">
+      <small>Positive</small>
+      <strong>${stats.positive}</strong>
+    </div>
+
+    <div class="card">
+      <small>Unsafe</small>
+      <strong>${
+        stats.unsafeAct +
+        stats.unsafeCondition
+      }</strong>
+    </div>
+
+    <div class="card">
+      <small>Closure Rate</small>
+      <strong>${stats.closureRate}%</strong>
+    </div>
+
+  </div>
+
+  <h2>Management Summary</h2>
+
+  <div class="summary">
+    ${escapeHtml(
+      managementSummary,
+    )}
+  </div>
+
+  <h2>Action Performance</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <small>Open</small>
+      <strong>${stats.open}</strong>
+    </div>
+
+    <div class="card">
+      <small>Overdue</small>
+      <strong>${stats.overdue}</strong>
+    </div>
+
+    <div class="card">
+      <small>Closed</small>
+      <strong>${stats.closed}</strong>
+    </div>
+
+    <div class="card">
+      <small>Critical Open</small>
+      <strong>${stats.critical}</strong>
+    </div>
+
+  </div>
+
+  <h2>Category Distribution</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Count</th>
+        <th>%</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      ${
+        topCategories ||
+        `<tr><td colspan="3">No data</td></tr>`
+      }
+    </tbody>
+  </table>
+
+  <h2>Priority Findings</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Finding</th>
+        <th>Risk</th>
+        <th>Responsible</th>
+        <th>Due</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      ${
+        criticalRows ||
+        `<tr><td colspan="4">No open High / Critical findings</td></tr>`
+      }
+    </tbody>
+  </table>
+
+  <div class="footer">
+    Generated by SERNEM HSE Management Platform
+  </div>
+
+</div>
+
+<script>
+window.onload = () => {
+  setTimeout(() => {
+    window.print();
+  }, 300);
+};
+</script>
+
+</body>
+</html>
+`;
+
+    const win = window.open(
+      "",
+      "_blank",
+      "noopener,noreferrer",
+    );
+
+    if (!win) {
+      return;
+    }
+
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+  }
+
+  return (
+    <section className="mt-6 overflow-hidden rounded-[28px] border border-slate-800 bg-slate-900/80">
+      <div className="border-b border-slate-800 bg-gradient-to-r from-[#07182d] to-[#0a2948] p-6">
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-400">
+          04 • REPORTING
+        </p>
+
+        <div className="mt-2 flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
+          <div>
+            <h2 className="text-2xl font-black">
+              {isTurkish
+                ? "Otomatik HSE Raporlama"
+                : "Automated HSE Reporting"}
+            </h2>
+
+            <p className="mt-2 text-sm text-slate-400">
+              {isTurkish
+                ? "Haftalık veya aylık performans raporlarını gerçek saha verilerinden oluşturun."
+                : "Generate weekly or monthly performance reports from live field data."}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={printPdf}
+              className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-black text-white transition hover:bg-blue-500"
+            >
+              PDF Report
+            </button>
+
+            <button
+              type="button"
+              onClick={exportExcel}
+              className="rounded-xl border border-emerald-400/25 bg-emerald-500/10 px-5 py-3 text-sm font-black text-emerald-300 transition hover:bg-emerald-500/20"
+            >
+              Excel .xlsx
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-5 p-6 xl:grid-cols-[0.75fr_1.25fr]">
+
+        <div>
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              [
+                "weekly",
+                isTurkish
+                  ? "Haftalık"
+                  : "Weekly",
+              ],
+              [
+                "monthly",
+                isTurkish
+                  ? "Aylık"
+                  : "Monthly",
+              ],
+              [
+                "custom",
+                isTurkish
+                  ? "Özel"
+                  : "Custom",
+              ],
+            ].map(([type, label]) => (
+              <button
+                key={type}
+                type="button"
+                onClick={() =>
+                  chooseReportType(
+                    type as
+                      | "weekly"
+                      | "monthly"
+                      | "custom",
+                  )
+                }
+                className={`rounded-xl px-3 py-3 text-xs font-black ${
+                  reportType === type
+                    ? "bg-blue-600 text-white"
+                    : "border border-slate-700 bg-slate-950/60 text-slate-400"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <div>
+              <label className="mb-2 block text-[10px] font-black uppercase tracking-[0.15em] text-slate-500">
+                {isTurkish
+                  ? "Başlangıç"
+                  : "Start"}
+              </label>
+
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => {
+                  setReportType("custom");
+                  setStartDate(
+                    e.target.value,
+                  );
+                }}
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-[10px] font-black uppercase tracking-[0.15em] text-slate-500">
+                {isTurkish
+                  ? "Bitiş"
+                  : "End"}
+              </label>
+
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => {
+                  setReportType("custom");
+                  setEndDate(
+                    e.target.value,
+                  );
+                }}
+                className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm"
+              />
+            </div>
+          </div>
+
+          <div className="mt-5 rounded-2xl border border-blue-500/20 bg-blue-500/[0.05] p-5">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-blue-400">
+              {isTurkish
+                ? "Yönetici Özeti"
+                : "Management Summary"}
+            </p>
+
+            <p className="mt-3 text-sm leading-7 text-slate-300">
+              {managementSummary}
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {[
+              [
+                isTurkish
+                  ? "Toplam"
+                  : "Total",
+                stats.total,
+                "text-blue-300",
+              ],
+              [
+                "Positive",
+                stats.positive,
+                "text-emerald-300",
+              ],
+              [
+                isTurkish
+                  ? "Açık"
+                  : "Open",
+                stats.open,
+                "text-orange-300",
+              ],
+              [
+                isTurkish
+                  ? "Kapanma"
+                  : "Closure",
+                `${stats.closureRate}%`,
+                "text-emerald-300",
+              ],
+            ].map(
+              ([label, value, color]) => (
+                <div
+                  key={String(label)}
+                  className="rounded-2xl border border-slate-800 bg-slate-950/60 p-4"
+                >
+                  <p className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-500">
+                    {label}
+                  </p>
+
+                  <p
+                    className={`mt-2 text-3xl font-black ${color}`}
+                  >
+                    {value}
+                  </p>
+                </div>
+              ),
+            )}
+          </div>
+
+          <div className="mt-4 grid gap-4 lg:grid-cols-2">
+            <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+              <p className="text-sm font-black">
+                {isTurkish
+                  ? "Kategori Dağılımı"
+                  : "Category Distribution"}
+              </p>
+
+              <div className="mt-4 space-y-3">
+                {categories
+                  .slice(0, 6)
+                  .map((item) => (
+                    <div
+                      key={item.name}
+                    >
+                      <div className="flex justify-between text-xs">
+                        <span className="text-slate-400">
+                          {item.name}
+                        </span>
+
+                        <b>
+                          {item.count} •{" "}
+                          {item.pct}%
+                        </b>
+                      </div>
+
+                      <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-slate-800">
+                        <div
+                          className="h-full rounded-full bg-blue-500"
+                          style={{
+                            width: `${item.pct}%`,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+              <p className="text-sm font-black">
+                {isTurkish
+                  ? "Öncelikli Bulgular"
+                  : "Priority Findings"}
+              </p>
+
+              <div className="mt-4 space-y-3">
+                {reportData
+                  .filter(
+                    (x) =>
+                      x.status !==
+                        "closed" &&
+                      (x.risk_level ===
+                        "critical" ||
+                        x.risk_level ===
+                          "high"),
+                  )
+                  .slice(0, 5)
+                  .map((item) => (
+                    <div
+                      key={item.id}
+                      className="rounded-xl border border-red-500/15 bg-red-500/[0.04] p-3"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="text-sm font-bold">
+                          {item.title}
+                        </p>
+
+                        <span className="rounded-full bg-red-500/15 px-2 py-1 text-[9px] font-black uppercase text-red-300">
+                          {item.risk_level}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+
+                {stats.high +
+                  stats.critical ===
+                  0 && (
+                  <p className="py-8 text-center text-xs text-slate-500">
+                    {isTurkish
+                      ? "Açık High / Critical bulgu yok."
+                      : "No open High / Critical findings."}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

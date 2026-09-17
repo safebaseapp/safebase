@@ -1,7 +1,9 @@
 "use client";
+import { trackUserEvent } from "@/lib/analytics/track-user-event";
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import { riskLibraryPack01 } from "@/lib/risk-library/pack-01";
 import { riskLibraryPack02 } from "@/lib/risk-library/pack-02";
 import { riskLibraryPack03 } from "@/lib/risk-library/pack-03";
@@ -9,6 +11,7 @@ import { riskLibraryPack04 } from "@/lib/risk-library/pack-04";
 import { riskLibraryPack05 } from "@/lib/risk-library/pack-05";
 import { createClient } from "@/utils/supabase/client";
 import PrintButton from "@/components/ui/PrintButton";
+import { trackEvent } from "@/lib/analytics";
 
 type RiskLevel = {
   labelTr: string;
@@ -246,6 +249,16 @@ const saveRiskAssessment = async () => {
 
         if (error) throw error;
 
+        void trackUserEvent(
+          "risk_assessment_updated",
+          {
+            assessment_id: savedAssessmentId,
+            project_name: projectName || null,
+            document_no: documentNo || null,
+            risk_item_count: riskItems.length,
+          }
+        );
+
         setSaveAssessmentMessage("Risk analizi güncellendi.");
       } else {
         const { data, error } = await supabase
@@ -257,6 +270,17 @@ const saveRiskAssessment = async () => {
         if (error) throw error;
 
         setSavedAssessmentId(data.id);
+
+        void trackUserEvent(
+          "risk_assessment_saved",
+          {
+            assessment_id: data.id,
+            project_name: projectName || null,
+            document_no: documentNo || null,
+            risk_item_count: riskItems.length,
+          }
+        );
+
         setSaveAssessmentMessage("Risk analizi kaydedildi.");
       }
     } catch (error) {
@@ -300,6 +324,13 @@ const duplicateRiskItem = (id: string) => {
 
   /* SERNEM_RISK_PRINT_HANDLER_START */
   const handlePrintRiskAssessment = () => {
+    trackEvent("pdf_downloaded", {
+      document_type: "risk_assessment",
+      locale,
+      risk_count: riskItems.length,
+      source: "quick_risk_assessment",
+    });
+
     window.print();
   };
   /* SERNEM_RISK_PRINT_HANDLER_END */
@@ -433,6 +464,14 @@ const duplicateRiskItem = (id: string) => {
 
     if (selectedEntries.length === 0) return;
 
+    trackEvent("risk_assessment_started", {
+      locale: lang,
+      activity_id: selectedLibraryTemplate.id,
+      activity_name: loadedRiskTemplateName,
+      risk_count: selectedEntries.length,
+      source: "risk_library",
+    });
+
     const generated: RiskRegisterItem[] =
       selectedEntries.map((entry) => {
         const suggestedScore = getSuggestedLibraryScore(entry);
@@ -491,7 +530,8 @@ const duplicateRiskItem = (id: string) => {
 
 
 
-  const [locale, setLocale] = useState<"tr" | "en">("en");
+  const { locale: routeLocale } = use(params);
+  const locale: "tr" | "en" = routeLocale === "tr" ? "tr" : "en";
   const [activity, setActivity] = useState("");
   const [hazard, setHazard] = useState("");
   const [existingControls, setExistingControls] = useState("");
@@ -500,12 +540,6 @@ const duplicateRiskItem = (id: string) => {
   const [showResult, setShowResult] = useState(false);
   const [isLoadingLibraryActivity, setIsLoadingLibraryActivity] = useState(false);
   const [libraryActivityLoaded, setLibraryActivityLoaded] = useState(false);
-
-  useEffect(() => {
-    params.then(({ locale }) => {
-      setLocale(locale === "tr" ? "tr" : "en");
-    });
-  }, [params]);
 
   const isTurkish = locale === "tr";
 
@@ -703,6 +737,13 @@ const duplicateRiskItem = (id: string) => {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setShowResult(true);
+
+    void trackUserEvent(
+      "risk_assessment_calculated",
+      {
+        tool: "quick-risk-assessment",
+      }
+    );
   }
 
   function handleReset() {
@@ -716,6 +757,7 @@ const duplicateRiskItem = (id: string) => {
 
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-12 text-white">
+      <ActivityTracker eventName="risk_assessment_open" />
 
       {/* SERNEM_RISK_HEADER_UI_START */}
       <section className="mb-8 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/70 shadow-xl">
@@ -723,7 +765,7 @@ const duplicateRiskItem = (id: string) => {
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-emerald-400">
-                SERNEM Risk Assessment
+                {isTurkish ? "SERNEM RİSK DEĞERLENDİRMESİ" : "SERNEM RISK ASSESSMENT"}
               </p>
 
               <h2 className="mt-1 text-2xl font-black text-white">
@@ -858,7 +900,7 @@ const duplicateRiskItem = (id: string) => {
 
           <button
             type="button"
-            onClick={() => window.print()}
+            onClick={handlePrintRiskAssessment}
             className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 px-7 py-4 text-base font-black text-white shadow-[0_12px_35px_rgba(37,99,235,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(34,211,238,0.35)]"
           >
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-xl">
@@ -917,7 +959,7 @@ const duplicateRiskItem = (id: string) => {
 
           <label>
             <span className="mb-2 block text-xs font-black uppercase tracking-wider text-slate-400">
-              {isTurkish ? "Asset / Alan" : "Asset / Area"}
+              {isTurkish ? "Ünite / Alan" : "Asset / Area"}
             </span>
 
             <input

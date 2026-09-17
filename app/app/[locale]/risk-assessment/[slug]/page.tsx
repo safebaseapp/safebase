@@ -84,6 +84,14 @@ export default async function RiskAssessmentActivityPage({
   const categoryName = activity.category[locale];
   const hazardCount = activity.items.length;
 
+  const relatedActivities = allRiskActivities
+    .filter(
+      (item) =>
+        item.id !== activity.id &&
+        item.category[locale] === activity.category[locale],
+    )
+    .slice(0, 6);
+
   return (
     <>
 
@@ -209,13 +217,13 @@ export default async function RiskAssessmentActivityPage({
               </p>
             </div>
 
-            <div className="mt-8 space-y-6">
+            <div className="mt-8 space-y-4">
               {activity.items.map((item, index) => (
                 <article
                   key={`${activity.id}-${index}`}
-                  className="overflow-hidden rounded-3xl border border-white/10 bg-[#07101f] shadow-xl shadow-black/10 transition hover:border-blue-400/20"
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-[#07101f] shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:border-blue-400/30"
                 >
-                  <div className="flex items-start gap-4 border-b border-white/10 bg-gradient-to-r from-blue-500/[0.08] to-transparent px-6 py-5">
+                  <div className="flex items-start gap-4 border-b border-white/10 bg-gradient-to-r from-blue-500/[0.08] to-transparent px-5 py-4 sm:px-6">
                     <span className="flex h-10 min-w-10 items-center justify-center rounded-xl bg-blue-500/15 font-bold text-blue-300">
                       {String(index + 1).padStart(2, "0")}
                     </span>
@@ -224,7 +232,7 @@ export default async function RiskAssessmentActivityPage({
                       <div className="text-xs font-bold uppercase tracking-[0.16em] text-blue-300/70">
                         {isTr ? "Tehlike" : "Hazard"}
                       </div>
-                      <h3 className="mt-1 text-xl font-bold">
+                      <h3 className="mt-1 text-lg font-bold sm:text-xl">
                         {item.hazard[locale]}
                       </h3>
                     </div>
@@ -257,6 +265,70 @@ export default async function RiskAssessmentActivityPage({
               ))}
             </div>
           </div>
+
+          {relatedActivities.length > 0 && (
+            <section className="mt-14 border-t border-white/10 pt-12">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+                <div className="max-w-3xl">
+                  <div className="text-xs font-bold uppercase tracking-[0.18em] text-blue-400">
+                    {isTr ? "İlgili Risk Değerlendirmeleri" : "Related Risk Assessments"}
+                  </div>
+
+                  <h2 className="mt-3 text-3xl font-black tracking-tight">
+                    {isTr
+                      ? `${categoryName} kategorisindeki diğer çalışmalar`
+                      : `More from ${categoryName}`}
+                  </h2>
+
+                  <p className="mt-3 max-w-2xl leading-7 text-slate-400">
+                    {isTr
+                      ? "Benzer faaliyetlerdeki tehlikeleri ve kontrol önlemlerini inceleyerek risk kütüphanesinde ilerleyin."
+                      : "Explore related activities, hazards and control measures from the same HSE risk category."}
+                  </p>
+                </div>
+
+                <Link
+                  href={`/${locale}/risk-assessment`}
+                  className="inline-flex w-fit items-center justify-center rounded-xl border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-white transition hover:border-blue-400/40 hover:bg-blue-500/10"
+                >
+                  {isTr ? "Risk Kütüphanesini Aç →" : "Explore Risk Library →"}
+                </Link>
+              </div>
+
+              <div className="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {relatedActivities.map((related) => (
+                  <Link
+                    key={related.id}
+                    href={`/${locale}/risk-assessment/${related.id}`}
+                    className="group rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.055] to-white/[0.02] p-5 transition hover:-translate-y-1 hover:border-blue-400/30 hover:bg-blue-500/[0.06]"
+                  >
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="rounded-lg border border-blue-400/20 bg-blue-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-blue-300">
+                        {related.category[locale]}
+                      </span>
+
+                      <span className="text-sm text-slate-500 transition group-hover:translate-x-1 group-hover:text-blue-300">
+                        →
+                      </span>
+                    </div>
+
+                    <h3 className="mt-4 text-lg font-bold text-white">
+                      {related.activity[locale]}
+                    </h3>
+
+                    <div className="mt-3 flex items-center justify-between text-sm text-slate-400">
+                      <span>
+                        {related.items.length} {isTr ? "tehlike" : "hazards"}
+                      </span>
+                      <span className="font-semibold text-blue-300">
+                        {isTr ? "İncele" : "View"}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           <div className="mt-14 overflow-hidden rounded-3xl border border-blue-400/20 bg-gradient-to-br from-blue-500/15 via-blue-500/[0.06] to-transparent p-8 sm:p-10">
             <div className="max-w-3xl">
@@ -307,7 +379,7 @@ function InfoBlock({
   accent?: boolean;
 }) {
   return (
-    <div className="border-b border-white/10 p-6 md:border-r">
+    <div className="border-b border-white/10 p-5 md:border-r sm:p-6">
       <div
         className={`text-xs font-bold uppercase tracking-[0.14em] ${
           accent ? "text-blue-300/70" : "text-slate-500"

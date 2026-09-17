@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+import { toolboxData } from "@/lib/toolbox/toolbox-data";
 
 type Locale = "tr" | "en";
 
@@ -35,7 +37,7 @@ type ToolboxItem = {
   hasPdf?: boolean;
 };
 
-const toolboxItems: ToolboxItem[] = [
+const baseToolboxItems: ToolboxItem[] = [
   {
     slug: "working-at-height",
     pdfSlug: "working-at-height",
@@ -55,7 +57,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "scaffold-safety",
     pdfSlug: "scaffold-safety",
     icon: "🏗️",
-    category: "scaffolding",
+    category: "work-at-height",
     title: {
       tr: "İskele Güvenliği Toolbox Talk",
       en: "Scaffold Safety Toolbox Talk",
@@ -85,7 +87,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "hot-work",
     pdfSlug: "hot-work",
     icon: "🔥",
-    category: "hot-work",
+    category: "hot-work-fire",
     title: {
       tr: "Sıcak Çalışma Toolbox Talk",
       en: "Hot Work Toolbox Talk",
@@ -100,7 +102,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "loto",
     pdfSlug: "loto",
     icon: "🔒",
-    category: "loto",
+    category: "electrical-loto",
     title: {
       tr: "LOTO Toolbox Talk",
       en: "LOTO Toolbox Talk",
@@ -115,7 +117,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "confined-space",
     pdfSlug: "confined-space",
     icon: "⚠️",
-    category: "confined-space",
+    category: "confined-gas",
     title: {
       tr: "Kapalı Alan Toolbox Talk",
       en: "Confined Space Toolbox Talk",
@@ -130,7 +132,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "electrical-safety",
     pdfSlug: "electrical-safety",
     icon: "⚡",
-    category: "electrical",
+    category: "electrical-loto",
     title: {
       tr: "Elektrik Güvenliği Toolbox Talk",
       en: "Electrical Safety Toolbox Talk",
@@ -145,7 +147,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "excavation-safety",
     pdfSlug: "excavation-safety",
     icon: "🚧",
-    category: "excavation",
+    category: "confined-gas",
     title: {
       tr: "Kazı Güvenliği Toolbox Talk",
       en: "Excavation Safety Toolbox Talk",
@@ -160,7 +162,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "lifting-operations",
     pdfSlug: "lifting-operations",
     icon: "🏗️",
-    category: "lifting",
+    category: "lifting-rigging",
     title: {
       tr: "Kaldırma Operasyonları Toolbox Talk",
       en: "Lifting Operations Toolbox Talk",
@@ -174,7 +176,7 @@ const toolboxItems: ToolboxItem[] = [
   {
     slug: "crane-banksman-safety",
     icon: "🚦",
-    category: "lifting",
+    category: "lifting-rigging",
     title: {
       tr: "Vinç İşaretçisi Toolbox Talk",
       en: "Crane Banksman Toolbox Talk",
@@ -191,7 +193,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "mobile-equipment-safety",
     pdfSlug: "mobile-equipment-safety",
     icon: "🚜",
-    category: "mobile-equipment",
+    category: "lifting-rigging",
     title: {
       tr: "Mobil Ekipman Toolbox Talk",
       en: "Mobile Equipment Toolbox Talk",
@@ -206,7 +208,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "forklift-safety",
     pdfSlug: "forklift-safety",
     icon: "🚜",
-    category: "mobile-equipment",
+    category: "lifting-rigging",
     title: {
       tr: "Forklift Güvenliği Toolbox Talk",
       en: "Forklift Safety Toolbox Talk",
@@ -221,7 +223,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "ppe-safety",
     pdfSlug: "ppe-safety",
     icon: "🦺",
-    category: "ppe",
+    category: "general-site",
     title: {
       tr: "KKD Toolbox Talk",
       en: "PPE Toolbox Talk",
@@ -236,7 +238,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "hand-power-tools",
     pdfSlug: "hand-power-tools",
     icon: "🛠️",
-    category: "tools",
+    category: "electrical-loto",
     title: {
       tr: "El Aletleri Toolbox Talk",
       en: "Hand and Power Tools Toolbox Talk",
@@ -266,7 +268,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "housekeeping",
     pdfSlug: "housekeeping",
     icon: "🧹",
-    category: "housekeeping",
+    category: "general-site",
     title: {
       tr: "Housekeeping Toolbox Talk",
       en: "Housekeeping Toolbox Talk",
@@ -281,7 +283,7 @@ const toolboxItems: ToolboxItem[] = [
     slug: "fire-safety",
     pdfSlug: "fire-safety",
     icon: "🧯",
-    category: "fire-safety",
+    category: "hot-work-fire",
     title: {
       tr: "Yangın Güvenliği Toolbox Talk",
       en: "Fire Safety Toolbox Talk",
@@ -295,7 +297,7 @@ const toolboxItems: ToolboxItem[] = [
   {
     slug: "chemical-safety",
     icon: "🧪",
-    category: "chemical",
+    category: "hot-work-fire",
     title: {
       tr: "Kimyasal Güvenlik Toolbox Talk",
       en: "Chemical Safety Toolbox Talk",
@@ -311,7 +313,7 @@ const toolboxItems: ToolboxItem[] = [
   {
     slug: "dropped-objects",
     icon: "📦",
-    category: "dropped-objects",
+    category: "work-at-height",
     title: {
       tr: "Düşen Cisimler Toolbox Talk",
       en: "Dropped Objects Toolbox Talk",
@@ -327,7 +329,7 @@ const toolboxItems: ToolboxItem[] = [
   {
     slug: "manual-handling",
     icon: "📦",
-    category: "manual-handling",
+    category: "ptw-control",
     title: {
       tr: "Elle Taşıma Toolbox Talk",
       en: "Manual Handling Toolbox Talk",
@@ -342,24 +344,230 @@ const toolboxItems: ToolboxItem[] = [
   },
 ];
 
+const baseSlugs = new Set(baseToolboxItems.map((item) => item.slug));
+
+function getAutoCategory(slug: string) {
+  // 01 — Working at Height & Scaffolding
+  if ([
+    "working-at-height",
+    "safety-harness",
+    "scaffold-safety",
+    "ladder-safety",
+    "dropped-objects",
+    "dropped-object-prevention-zones",
+    "temporary-work-platforms",
+    "working-near-open-edges",
+    "scaffold-modification-control",
+    "working-over-water",
+  ].includes(slug)) return "height-scaffold";
+
+  // 02 — Lifting & Rigging Operations
+  if ([
+    "lifting-operations",
+    "crane-banksman-safety",
+    "man-basket-personnel-lifting",
+    "crane-outrigger-setup",
+    "rigging-inspection",
+    "tag-line-safety",
+    "load-stability-center-of-gravity",
+  ].includes(slug)) return "lifting-rigging";
+
+  // 03 — Mobile Equipment & Traffic Safety
+  if ([
+    "mobile-equipment-safety",
+    "forklift-safety",
+    "forklift-loading-unloading",
+    "vehicle-pedestrian-interface",
+  ].includes(slug)) return "mobile-traffic";
+
+  // 04 — Electrical Safety & LOTO
+  if ([
+    "electrical-safety",
+    "loto",
+    "temporary-electrical-installations",
+    "battery-charging",
+    "overhead-power-lines",
+    "portable-generator-safety",
+    "extension-leads-cable-management",
+    "stored-energy-hydraulic-systems",
+  ].includes(slug)) return "electrical-loto";
+
+  // 05 — Hot Work & Fire Safety
+  if ([
+    "hot-work",
+    "fire-safety",
+    "grinding-cutting-safety",
+    "welding-fumes",
+  ].includes(slug)) return "hotwork-fire";
+
+  // 06 — Chemical & Hazardous Materials
+  if ([
+    "chemical-safety",
+    "chemical-transfer-decanting",
+    "spill-response",
+    "hazardous-waste-handling",
+    "painting-coating-safety",
+  ].includes(slug)) return "chemical-hazmat";
+
+  // 07 — Confined Space & Gas Safety
+  if ([
+    "confined-space",
+    "gas-testing-atmospheric-monitoring",
+    "compressed-gas-cylinders",
+    "nitrogen-inert-gas-safety",
+  ].includes(slug)) return "confined-gas";
+
+  // 08 — Excavation & Groundworks
+  if ([
+    "excavation-safety",
+    "underground-services",
+  ].includes(slug)) return "excavation-groundworks";
+
+  // 09 — Tools, Machinery & Pressure Systems
+  if ([
+    "hand-power-tools",
+    "pressure-testing",
+    "high-pressure-water-jetting",
+    "flange-joint-integrity",
+    "hose-coupling-safety",
+    "abrasive-blasting-safety",
+  ].includes(slug)) return "tools-machinery";
+
+  // 10 — PPE & Occupational Health
+  if ([
+    "ppe-safety",
+    "heat-stress",
+    "cold-stress",
+    "noise-hearing-protection",
+    "respiratory-protection",
+    "eye-face-protection",
+    "hand-injury-prevention",
+  ].includes(slug)) return "ppe-health";
+
+  // 11 — Permit to Work & Operational Control
+  if ([
+    "permit-to-work",
+    "simultaneous-operations",
+    "stop-work-authority",
+    "line-breaking-process-opening",
+    "barricading-exclusion-zones",
+  ].includes(slug)) return "ptw-control";
+
+  // 12 — General Site Safety & Human Factors
+  return "general-site";
+}
+function getAutoIcon(slug: string) {
+  if (slug.includes("stored-energy-hydraulic-systems")) return "🔋";
+  if (slug.includes("high-pressure-water-jetting")) return "💦";
+  if (slug.includes("flange-joint-integrity")) return "🔩";
+  if (slug.includes("chemical-transfer-decanting")) return "🧪";
+  if (slug.includes("spill-response")) return "🧽";
+  if (slug.includes("hazardous-waste-handling")) return "☣️";
+  if (slug.includes("portable-generator-safety")) return "⚡";
+  if (slug.includes("extension-leads-cable-management")) return "🔌";
+  if (slug.includes("demolition-dismantling")) return "🔨";
+  if (slug.includes("working-over-water")) return "🛟";
+  if (slug.includes("dropped-object-prevention-zones")) return "🪖";
+  if (slug.includes("temporary-work-platforms")) return "🪜";
+  if (slug.includes("working-near-open-edges")) return "🕳️";
+  if (slug.includes("scaffold-modification-control")) return "🏗️";
+  if (slug.includes("man-basket-personnel-lifting")) return "👷";
+  if (slug.includes("crane-outrigger-setup")) return "🚧";
+  if (slug.includes("rigging-inspection")) return "🪝";
+  if (slug.includes("tag-line-safety")) return "🪢";
+  if (slug.includes("load-stability-center-of-gravity")) return "⚖️";
+  if (slug.includes("forklift-loading-unloading")) return "📦";
+  if (slug.includes("barricading-exclusion-zones")) return "🚧";
+  if (slug.includes("overhead-power-lines")) return "⚡";
+  if (slug.includes("underground-services")) return "🕳️";
+  if (slug.includes("line-breaking-process-opening")) return "🔧";
+  if (slug.includes("nitrogen-inert-gas-safety")) return "💨";
+  if (slug.includes("steam-hot-surfaces")) return "♨️";
+  if (slug.includes("hose-coupling-safety")) return "🔗";
+  if (slug.includes("abrasive-blasting-safety")) return "🥽";
+  if (slug.includes("painting-coating-safety")) return "🎨";
+  if (slug.includes("lightning-severe-weather")) return "🌩️";
+
+  if (slug.includes("line-of-fire")) return "🎯";
+  if (slug.includes("pinch")) return "✋";
+  if (slug.includes("slips")) return "⚠️";
+  if (slug.includes("vehicle")) return "🚧";
+  if (slug.includes("compressed-gas")) return "🧯";
+  if (slug.includes("pressure")) return "🧪";
+  if (slug.includes("grinding")) return "⚙️";
+  if (slug.includes("welding")) return "🔥";
+  if (slug.includes("heat")) return "☀️";
+  if (slug.includes("cold")) return "❄️";
+  if (slug.includes("noise")) return "🎧";
+  if (slug.includes("respiratory")) return "😷";
+  if (slug.includes("eye-face")) return "🥽";
+  if (slug.includes("hand-injury")) return "🧤";
+  if (slug.includes("electrical")) return "⚡";
+  if (slug.includes("battery")) return "🔋";
+  if (slug.includes("gas-testing")) return "📟";
+  if (slug.includes("permit")) return "📋";
+  if (slug.includes("simultaneous")) return "🔄";
+  if (slug.includes("stop-work")) return "🛑";
+
+  return "🦺";
+}
+
+const autoToolboxItems: ToolboxItem[] = toolboxData
+  .filter((record) => !baseSlugs.has(record.slug))
+  .map((record) => ({
+    slug: record.slug,
+    icon: getAutoIcon(record.slug),
+    category: getAutoCategory(record.slug),
+    title: {
+      tr: record.tr.title ?? record.slug,
+      en: record.en.title ?? record.slug,
+    },
+    description: {
+      tr:
+        typeof record.tr.objective === "string"
+          ? record.tr.objective
+          : "Sahada kullanıma hazır profesyonel toolbox talk.",
+      en:
+        typeof record.en.objective === "string"
+          ? record.en.objective
+          : "Professional site-ready toolbox talk.",
+    },
+    duration: "8–10",
+    hasPdf: true,
+    pdfSlug: record.slug,
+  }));
+
+const toolboxItems: ToolboxItem[] = [
+  ...baseToolboxItems,
+  ...autoToolboxItems,
+];
+
 const categories = [
   { id: "all", tr: "Tüm Konular", en: "All Topics", icon: "▦" },
-  { id: "work-at-height", tr: "Yüksekte Çalışma", en: "Work at Height", icon: "🏗️" },
-  { id: "scaffolding", tr: "İskele", en: "Scaffolding", icon: "🪜" },
-  { id: "hot-work", tr: "Sıcak İş", en: "Hot Work", icon: "🔥" },
-  { id: "loto", tr: "LOTO", en: "LOTO", icon: "🔒" },
-  { id: "confined-space", tr: "Kapalı Alan", en: "Confined Space", icon: "⚠️" },
-  { id: "electrical", tr: "Elektrik", en: "Electrical", icon: "⚡" },
-  { id: "excavation", tr: "Kazı", en: "Excavation", icon: "🚧" },
-  { id: "lifting", tr: "Kaldırma", en: "Lifting", icon: "🏗️" },
-  { id: "mobile-equipment", tr: "Mobil Ekipman", en: "Mobile Equipment", icon: "🚜" },
-  { id: "ppe", tr: "KKD", en: "PPE", icon: "🦺" },
-  { id: "tools", tr: "El Aletleri", en: "Tools", icon: "🛠️" },
-  { id: "housekeeping", tr: "Housekeeping", en: "Housekeeping", icon: "🧹" },
-  { id: "fire-safety", tr: "Yangın", en: "Fire Safety", icon: "🧯" },
-  { id: "chemical", tr: "Kimyasal", en: "Chemical", icon: "🧪" },
-  { id: "dropped-objects", tr: "Düşen Cisimler", en: "Dropped Objects", icon: "📦" },
-  { id: "manual-handling", tr: "Elle Taşıma", en: "Manual Handling", icon: "📦" },
+
+  { id: "work-at-height", tr: "Yüksekte Çalışma & İskele", en: "Working at Height & Scaffolding", icon: "🏗️" },
+
+  { id: "lifting-rigging", tr: "Kaldırma & Rigging Operasyonları", en: "Lifting & Rigging Operations", icon: "🏗️" },
+
+  { id: "mobile-traffic", tr: "Mobil Ekipman & Trafik Güvenliği", en: "Mobile Equipment & Traffic Safety", icon: "🚜" },
+
+  { id: "electrical-loto", tr: "Elektrik Güvenliği & LOTO", en: "Electrical Safety & LOTO", icon: "⚡" },
+
+  { id: "hot-work-fire", tr: "Sıcak İş & Yangın Güvenliği", en: "Hot Work & Fire Safety", icon: "🔥" },
+
+  { id: "chemical-hazmat", tr: "Kimyasal & Tehlikeli Maddeler", en: "Chemical & Hazardous Materials", icon: "🧪" },
+
+  { id: "confined-gas", tr: "Kapalı Alan & Gaz Güvenliği", en: "Confined Space & Gas Safety", icon: "☣️" },
+
+  { id: "excavation-groundworks", tr: "Kazı & Zemin İşleri", en: "Excavation & Groundworks", icon: "🚧" },
+
+  { id: "tools-machinery", tr: "El Aletleri, Makine & Basınçlı Sistemler", en: "Tools, Machinery & Pressure Systems", icon: "🔧" },
+
+  { id: "ppe-health", tr: "KKD & Mesleki Sağlık", en: "PPE & Occupational Health", icon: "🦺" },
+
+  { id: "ptw-control", tr: "Çalışma İzni & Operasyonel Kontrol", en: "Permit to Work & Operational Control", icon: "📋" },
+
+  { id: "general-site", tr: "Genel Saha Güvenliği & İnsan Faktörleri", en: "General Site Safety & Human Factors", icon: "⚠️" },
 ];
 
 export default function ToolboxLibraryClient({
@@ -419,12 +627,54 @@ export default function ToolboxLibraryClient({
     });
   }, [category, controlMap, isTurkish, query]);
 
+  async function trackDownload(
+    item: ToolboxItem,
+    mode: "standard" | "branded"
+  ) {
+    try {
+      const supabase = createClient();
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (!user) return;
+
+      const { error } = await supabase
+        .from("user_activity_events")
+        .insert({
+          user_id: user.id,
+          event_name: "pdf_download",
+          path: `/toolbox/${item.slug}`,
+          metadata: {
+            resource_type: "toolbox",
+            slug: item.slug,
+            pdf_slug: item.pdfSlug ?? null,
+            locale,
+            mode,
+          },
+        });
+
+      if (error) {
+        console.error("Toolbox PDF tracking error:", error);
+      }
+    } catch (error) {
+      console.error("Toolbox PDF tracking error:", error);
+    }
+  }
+
   function getPdfHref(item: ToolboxItem) {
     if (item.hasPdf === false || !item.pdfSlug) {
       return null;
     }
 
-    return `/downloads/${item.pdfSlug}-toolbox-talk-${locale}.pdf`;
+    const isLegacyToolbox = baseSlugs.has(item.slug);
+
+    if (isLegacyToolbox) {
+      return `/downloads/${item.pdfSlug}-toolbox-talk-${locale}.pdf`;
+    }
+
+    return `/api/toolbox/${item.pdfSlug}/pdf?locale=${locale}`;
   }
 
   return (
@@ -672,30 +922,12 @@ export default function ToolboxLibraryClient({
                     </div>
 
                     <div className="mt-7 grid grid-cols-2 gap-3 xl:grid-cols-3">
-                      {isPremium ? (
-                        <Link
-                          href={toolboxHref}
-                          className="inline-flex items-center justify-center gap-2 rounded-2xl border border-violet-400/20 bg-violet-500/[0.08] px-4 py-4 text-sm font-black text-violet-200 transition hover:bg-violet-500/[0.14]"
-                        >
-                          🔒 {isTurkish ? "Önizle" : "Preview"}
-                        </Link>
-                      ) : pdfHref ? (
-                        <a
-                          href={pdfHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-sm font-black text-white transition hover:border-white/20 hover:bg-white/[0.08]"
-                        >
-                          {isTurkish ? "Önizleme" : "Preview"}
-                        </a>
-                      ) : (
-                        <Link
-                          href={toolboxHref}
-                          className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-sm font-black text-white transition hover:border-white/20 hover:bg-white/[0.08]"
-                        >
-                          {isTurkish ? "Önizleme" : "Preview"}
-                        </Link>
-                      )}
+                      <Link
+                        href={toolboxHref}
+                        className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-4 text-sm font-black text-white transition hover:border-white/20 hover:bg-white/[0.08]"
+                      >
+                        {isTurkish ? "Önizleme" : "Preview"}
+                      </Link>
 
                       {isPremium ? (
                         <Link
@@ -708,6 +940,9 @@ export default function ToolboxLibraryClient({
                         <a
                           href={pdfHref}
                           download
+                          onClick={() => {
+                            void trackDownload(item, "standard");
+                          }}
                           className="inline-flex items-center justify-center gap-2 rounded-2xl bg-blue-600 px-4 py-4 text-sm font-black text-white shadow-xl shadow-blue-600/20 transition hover:-translate-y-1 hover:bg-blue-500"
                         >
                           ↓ {isTurkish ? "İndir" : "Download"}
@@ -721,6 +956,9 @@ export default function ToolboxLibraryClient({
                       {pdfHref && item.pdfSlug ? (
                         <a
                           href={`/api/premium/toolbox/${item.pdfSlug}?locale=${locale}`}
+                          onClick={() => {
+                            void trackDownload(item, "branded");
+                          }}
                           className="col-span-2 inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-4 text-sm font-black text-emerald-300 transition hover:-translate-y-1 hover:bg-emerald-400/20 xl:col-span-1"
                         >
                           🔒{" "}

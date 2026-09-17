@@ -1,3 +1,4 @@
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 import Link from "next/link";
 import {hasLocale} from "next-intl";
 import {notFound} from "next/navigation";
@@ -27,7 +28,7 @@ export default async function LocalizedToolsPage({params}: Props) {
     },
     {
       icon: "📈",
-      title: "TRIR Calculator",
+      title: isTurkish ? "TRIR Hesaplayıcı" : "TRIR Calculator",
       description: isTurkish
         ? "Kaydedilebilir vakalar ve toplam çalışma saatlerini kullanarak Toplam Kaydedilebilir Olay Oranını hesaplayın."
         : "Calculate the Total Recordable Incident Rate using recordable cases and total hours worked.",
@@ -35,7 +36,7 @@ export default async function LocalizedToolsPage({params}: Props) {
     },
     {
       icon: "🦺",
-      title: "LTIFR Calculator",
+      title: isTurkish ? "LTIFR Hesaplayıcı" : "LTIFR Calculator",
       description: isTurkish
         ? "Kayıp zamanlı yaralanmalar ve toplam çalışma saatlerini kullanarak Kayıp Zamanlı Yaralanma Sıklık Oranını hesaplayın."
         : "Calculate the Lost Time Injury Frequency Rate using lost time injuries and total hours worked.",
@@ -76,6 +77,8 @@ export default async function LocalizedToolsPage({params}: Props) {
   ];
 
   return (
+    <>
+      <ActivityTracker eventName="tools_open" />
     <main className="min-h-screen bg-slate-950 px-6 py-16 text-white">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
@@ -135,5 +138,6 @@ export default async function LocalizedToolsPage({params}: Props) {
         </div>
       </div>
     </main>
+    </>
   );
 }
