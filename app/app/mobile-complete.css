@@ -1,0 +1,80 @@
+/* SERNEM mobile-complete-pass: defensive responsive rules shared across legacy and new pages. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  body {
+    min-width: 0;
+  }
+
+  main,
+  section,
+  article,
+  aside,
+  header,
+  footer,
+  nav,
+  div {
+    min-width: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  a,
+  button,
+  label,
+  span {
+    overflow-wrap: anywhere;
+  }
+
+  table {
+    max-width: 100%;
+  }
+
+  .sernem-mobile-scroll,
+  [data-mobile-scroll="true"] {
+    width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  [role="dialog"] {
+    max-height: calc(100dvh - 1rem);
+    max-width: calc(100vw - 1rem);
+    overflow: auto;
+  }
+
+  a[class*="rounded"],
+  button[class*="rounded"] {
+    touch-action: manipulation;
+  }
+}
+
+@supports (padding: max(0px)) {
+  @media (max-width: 767px) {
+    body {
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+  }
+}
