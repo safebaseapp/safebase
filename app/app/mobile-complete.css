@@ -19,13 +19,11 @@ button {
   max-width: 100%;
 }
 
-@keyframes sernem-mobile-product-depth {
-  from { translate: 0 10px; }
-  to { translate: 0 0; }
-}
-
-@keyframes sernem-mobile-video-depth {
-  to { transform: translateY(14px) scale(1.02); }
+/* Keep the homepage HSE dashboard visually anchored while scrolling. */
+[class*="homepage_dashboard__"] {
+  animation: none !important;
+  transform: none !important;
+  translate: 0 0 !important;
 }
 
 @media (max-width: 767px) {
@@ -76,17 +74,6 @@ button {
   a[class*="rounded"],
   button[class*="rounded"] {
     touch-action: manipulation;
-  }
-}
-
-@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
-  [class*="homepage_dashboard__"] {
-    animation-name: sernem-mobile-product-depth !important;
-    animation-range: entry 0% entry 55% !important;
-  }
-
-  [class*="homepage_heroVideo__"] {
-    animation-name: sernem-mobile-video-depth !important;
   }
 }
 
