@@ -15,6 +15,7 @@ const publicRoutes = [
   "/cookies",
   "/how-it-works",
   "/upgrade",
+  "/pricing",
 
   "/tools",
   "/tools/ltifr",
@@ -64,9 +65,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority:
         route === ""
           ? 1
-          : route.startsWith("/tools/")
+          : route === "/pricing" || route === "/upgrade"
             ? 0.9
-            : 0.8,
+            : route.startsWith("/tools/")
+              ? 0.9
+              : 0.8,
     }))
   );
 
