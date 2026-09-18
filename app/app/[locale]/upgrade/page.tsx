@@ -146,17 +146,22 @@ export default async function UpgradePage({ params }: Props) {
                   {isTurkish ? "PREMIUM ÜYELİK" : "PREMIUM MEMBERSHIP"}
                 </p>
 
-                <div className="mt-5 flex items-end gap-2">
+                <div className="mt-5 flex flex-wrap items-end gap-x-3 gap-y-2">
+                  <span className="pb-1 text-xl font-bold text-slate-500 line-through">€14.99</span>
                   <span className="text-5xl font-black">€9.99</span>
                   <span className="pb-1 text-slate-400">
                     / {isTurkish ? "ay" : "month"}
                   </span>
                 </div>
 
+                <div className="mt-3 inline-flex rounded-full border border-amber-400/25 bg-amber-400/[0.08] px-3 py-1 text-[11px] font-black tracking-[0.08em] text-amber-200">
+                  {isTurkish ? "LANSMANA ÖZEL FİYAT" : "LAUNCH OFFER"}
+                </div>
+
                 <p className="mt-4 text-sm leading-6 text-slate-400">
                   {isTurkish
-                    ? "Fiyatı ve hangi özelliklerin Premium olduğunu satın almadan önce açıkça görebilirsiniz."
-                    : "You can see the price and exactly what Premium includes before purchasing."}
+                    ? "Lansman döneminde Premium erişim €9.99 / ay. Dahil olan özellikleri satın almadan önce açıkça görebilirsiniz."
+                    : "Premium is €9.99 / month during the launch period. You can see exactly what is included before purchasing."}
                 </p>
 
                 <TrackedCheckoutLink
