@@ -1,6 +1,7 @@
 import { posters } from "@/app/[locale]/posters/poster-data";
 import { safetySigns } from "@/lib/safety-signs/data";
 import { allGuides } from "@/app/[locale]/knowledge-base/data/guides/all-guides";
+import { toolboxData } from "@/lib/toolbox/toolbox-data";
 
 export type ResourceCategory =
   | "toolbox-talks"
@@ -402,6 +403,61 @@ export const RESOURCE_ITEMS: ResourceItem[] = [
       en: "/downloads/manual-handling-toolbox-talk-en.pdf",
     },
   },
+
+
+  // TOOLBOX TALKS — automatically synced from toolboxData
+  ...toolboxData
+    .filter(
+      (record) =>
+        !new Set([
+          "chemical-safety",
+          "confined-space",
+          "crane-banksman-safety",
+          "dropped-objects",
+          "electrical-safety",
+          "excavation-safety",
+          "fire-safety",
+          "forklift-safety",
+          "hand-power-tools",
+          "hot-work",
+          "housekeeping",
+          "ladder-safety",
+          "lifting-operations",
+          "loto",
+          "mobile-equipment-safety",
+          "ppe-safety",
+          "safety-harness",
+          "scaffold-safety",
+          "working-at-height",
+          "manual-handling",
+        ]).has(record.slug)
+    )
+    .map(
+      (record): ResourceItem => ({
+        id: `toolbox-${record.slug}`,
+        title: {
+          tr: record.tr.title ?? record.slug,
+          en: record.en.title ?? record.slug,
+        },
+        description: {
+          tr:
+            typeof record.tr.objective === "string"
+              ? record.tr.objective
+              : "Sahada kullanıma hazır profesyonel toolbox talk.",
+          en:
+            typeof record.en.objective === "string"
+              ? record.en.objective
+              : "Professional site-ready toolbox talk.",
+        },
+        category: "toolbox-talks",
+        icon: "🧰",
+        format: "PDF",
+        pdfUrl: {
+          tr: `/api/toolbox/${record.slug}/pdf?locale=tr`,
+          en: `/api/toolbox/${record.slug}/pdf?locale=en`,
+        },
+      })
+    ),
 
   // POSTERS — live SERNEM poster library
   ...posters

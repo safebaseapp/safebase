@@ -360,7 +360,7 @@ function getAutoCategory(slug: string) {
     "working-near-open-edges",
     "scaffold-modification-control",
     "working-over-water",
-  ].includes(slug)) return "height-scaffold";
+  ].includes(slug)) return "work-at-height";
 
   // 02 — Lifting & Rigging Operations
   if ([
@@ -399,7 +399,7 @@ function getAutoCategory(slug: string) {
     "fire-safety",
     "grinding-cutting-safety",
     "welding-fumes",
-  ].includes(slug)) return "hotwork-fire";
+  ].includes(slug)) return "hot-work-fire";
 
   // 06 — Chemical & Hazardous Materials
   if ([
