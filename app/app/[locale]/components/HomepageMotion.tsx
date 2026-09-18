@@ -10,6 +10,17 @@ export function HomepageMotion({ children }: { children: ReactNode }) {
   useEffect(() => {
     const node = root.current;
     if (!node) return;
+
+    // The HSE dashboard previously used CSS view-timeline/productDepth motion.
+    // Keep the dashboard completely stationary on every viewport.
+    const dashboard = node.querySelector<HTMLElement>('[class*="dashboard"]');
+    if (dashboard) {
+      dashboard.style.setProperty("animation", "none", "important");
+      dashboard.style.setProperty("animation-timeline", "auto", "important");
+      dashboard.style.setProperty("transform", "none", "important");
+      dashboard.style.setProperty("translate", "none", "important");
+    }
+
     const preference = matchMedia("(prefers-reduced-motion: reduce)");
     const videos = Array.from(node.querySelectorAll("video"));
     const visibility = new Map<HTMLVideoElement, boolean>();
