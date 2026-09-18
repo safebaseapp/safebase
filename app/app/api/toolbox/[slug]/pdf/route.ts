@@ -5,6 +5,7 @@ import sharp from "sharp";
 
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf";
+import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -27,6 +28,22 @@ export async function GET(
         ? "tr"
         : "en";
 
+    const { user, profile } = await getCurrentAccessProfile();
+    const nextPath = `/api/toolbox/${encodeURIComponent(slug)}/pdf?locale=${locale}`;
+
+    if (!user || !profile) {
+      const loginUrl = new URL(`/${locale}/login`, request.url);
+      loginUrl.searchParams.set("next", nextPath);
+      return Response.redirect(loginUrl, 307);
+    }
+
+    if (profile.status === "suspended") {
+      return Response.redirect(
+        new URL(`/${locale}/account-suspended`, request.url),
+        307,
+      );
+    }
+
     const toolbox = getToolboxBySlug(slug);
 
     if (!toolbox) {
@@ -35,11 +52,6 @@ export async function GET(
       });
     }
 
-    /*
-     * STANDARD PDF
-     * Firma logosu KULLANILMAZ.
-     * Sadece SERNEM logosu kullanılır.
-     */
     const logoPath = path.join(
       process.cwd(),
       "public",
