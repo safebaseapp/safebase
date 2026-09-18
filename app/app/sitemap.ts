@@ -13,6 +13,9 @@ const publicRoutes = [
   "/privacy",
   "/terms",
   "/cookies",
+  "/how-it-works",
+  "/upgrade",
+  "/pricing",
 
   "/tools",
   "/tools/ltifr",
@@ -62,9 +65,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority:
         route === ""
           ? 1
-          : route.startsWith("/tools/")
+          : route === "/pricing" || route === "/upgrade"
             ? 0.9
-            : 0.8,
+            : route.startsWith("/tools/")
+              ? 0.9
+              : 0.8,
     }))
   );
 
@@ -80,17 +85,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     (locale) =>
       allRiskActivities.map((activity) => ({
         url: `${baseUrl}/${locale}/risk-assessment/${activity.id}`,
-          changeFrequency: "monthly",
+        changeFrequency: "monthly",
         priority: 0.85,
       }))
   );
-
 
   const safetySignPages: MetadataRoute.Sitemap = locales.flatMap(
     (locale) =>
       safetySigns.map((sign) => ({
         url: `${baseUrl}/${locale}/safety-signs/${sign.slug}`,
-          changeFrequency: "monthly",
+        changeFrequency: "monthly",
         priority: 0.8,
       }))
   );
