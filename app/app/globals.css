@@ -38,6 +38,96 @@ input[type="number"] {
 }
 
 /* =========================================================
+   SERNEM MOBILE POLISH
+   ========================================================= */
+@media (max-width: 639px) {
+  /* Keep the top navigation compact: logo + language + menu. */
+  nav > div:first-child {
+    gap: 0.5rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  nav > div:first-child > a:first-child {
+    margin-left: 0 !important;
+    gap: 0.5rem !important;
+    padding-right: 0 !important;
+  }
+
+  nav > div:first-child > a:first-child > div:last-child {
+    display: none !important;
+  }
+
+  nav > div:first-child > div:last-child {
+    gap: 0.35rem !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  nav a[href$="/admin"],
+  nav a[href$="/account"],
+  nav button[aria-label="Çıkış Yap"],
+  nav button[aria-label="Sign Out"] {
+    display: none !important;
+  }
+
+  /* Download Center hero: prevent the title from sitting under mobile browser chrome. */
+  main.bg-\[\#020712\] > section:first-child > div:last-child {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 2.25rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  main.bg-\[\#020712\] > section:first-child h1 {
+    margin-top: 1.25rem !important;
+    font-size: 2.45rem !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.045em !important;
+  }
+
+  main.bg-\[\#020712\] > section:first-child h1 + p {
+    margin-top: 1rem !important;
+    font-size: 0.98rem !important;
+    line-height: 1.75 !important;
+  }
+
+  main.bg-\[\#020712\] > section:first-child input[type="search"] {
+    min-width: 0 !important;
+    font-size: 0.875rem !important;
+  }
+
+  main.bg-\[\#020712\] > section:first-child input[type="search"]::placeholder {
+    text-overflow: ellipsis;
+  }
+
+  /* Category pills become a stable two-column mobile grid. */
+  main.bg-\[\#020712\] > section:first-child div.mt-8.flex.flex-wrap {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.75rem !important;
+  }
+
+  main.bg-\[\#020712\] > section:first-child div.mt-8.flex.flex-wrap > button {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    white-space: normal !important;
+  }
+
+  main.bg-\[\#020712\] > section:first-child div.mt-8.flex.flex-wrap > button:first-child:last-child,
+  main.bg-\[\#020712\] > section:first-child div.mt-8.flex.flex-wrap > button:last-child:nth-child(odd) {
+    grid-column: span 2 / span 2;
+  }
+
+  /* Leave breathing room above iOS/Android browser bars. */
+  main.bg-\[\#020712\] {
+    padding-bottom: max(5rem, env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* =========================================================
    SERNEM INSPECTION REPORT — PRINT PAGINATION
    ========================================================= */
 @media print {
