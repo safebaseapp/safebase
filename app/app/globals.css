@@ -64,13 +64,6 @@ input[type="number"] {
     padding-left: 0 !important;
   }
 
-  nav a[href$="/admin"],
-  nav a[href$="/account"],
-  nav button[aria-label="Çıkış Yap"],
-  nav button[aria-label="Sign Out"] {
-    display: none !important;
-  }
-
   /* Download Center hero: prevent the title from sitting under mobile browser chrome. */
   main.bg-\[\#020712\] > section:first-child > div:last-child {
     padding-left: 1rem !important;
@@ -124,6 +117,18 @@ input[type="number"] {
   /* Leave breathing room above iOS/Android browser bars. */
   main.bg-\[\#020712\] {
     padding-bottom: max(5rem, env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* Mobile authentication is rendered by MobileAuthBar below the navbar.
+   Hide the older duplicated navbar auth actions on phones/tablets. */
+@media (max-width: 1023px) {
+  nav a[href$="/admin"],
+  nav a[href$="/account"],
+  nav a[href$="/login"],
+  nav button[aria-label="Çıkış Yap"],
+  nav button[aria-label="Sign Out"] {
+    display: none !important;
   }
 }
 
