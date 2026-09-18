@@ -4,6 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
 import LocalizedNavbar from "./components/LocalizedNavbar";
+import DesktopPremiumBar from "./components/DesktopPremiumBar";
 import MobileAuthBar from "./components/MobileAuthBar";
 
 type Props = {
@@ -61,6 +62,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider>
       <LocalizedNavbar locale={safeLocale} />
+      <DesktopPremiumBar locale={safeLocale} />
       <MobileAuthBar locale={safeLocale} />
       {children}
     </NextIntlClientProvider>
