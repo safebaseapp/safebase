@@ -33,7 +33,7 @@ export default function MobileAuthBar({ locale }: Props) {
       setIsLoading(false);
     };
 
-    syncUser();
+    void syncUser();
 
     const {
       data: { subscription },
@@ -63,10 +63,19 @@ export default function MobileAuthBar({ locale }: Props) {
   }
 
   return (
-    <div className="border-b border-white/[0.07] bg-[#020817] px-4 py-2 lg:hidden">
-      <div className="mx-auto flex max-w-7xl items-center justify-end gap-2">
+    <div className="border-b border-white/[0.07] bg-[#020817] px-3 py-2 lg:hidden">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-end gap-2">
+        <Link
+          href={`/${locale}/upgrade`}
+          className="inline-flex h-9 items-center justify-center gap-1.5 rounded-xl border border-amber-400/25 bg-amber-400/[0.08] px-3 text-[11px] font-black text-amber-200 shadow-[0_8px_22px_rgba(245,158,11,.08)]"
+        >
+          <span>★</span>
+          <span>Premium</span>
+          <span className="text-amber-300">€9.99</span>
+        </Link>
+
         {isLoading ? (
-          <div className="h-9 w-28 animate-pulse rounded-xl bg-white/[0.05]" />
+          <div className="h-9 w-24 animate-pulse rounded-xl bg-white/[0.05]" />
         ) : isAuthenticated ? (
           <>
             {isOwner && (
@@ -97,16 +106,16 @@ export default function MobileAuthBar({ locale }: Props) {
           <>
             <Link
               href={`/${locale}/login`}
-              className="inline-flex h-9 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-600 px-4 text-xs font-black text-white shadow-[0_8px_22px_rgba(37,99,235,.18)]"
+              className="inline-flex h-9 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-600 px-3 text-xs font-black text-white shadow-[0_8px_22px_rgba(37,99,235,.18)]"
             >
-              {isTurkish ? "Giriş Yap" : "Sign in"}
+              {isTurkish ? "Giriş" : "Sign in"}
             </Link>
 
             <Link
               href={`/${locale}/register`}
-              className="inline-flex h-9 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.03] px-4 text-xs font-black text-slate-200"
+              className="inline-flex h-9 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.03] px-3 text-xs font-black text-slate-200"
             >
-              {isTurkish ? "Kayıt Ol" : "Sign up"}
+              {isTurkish ? "Kayıt" : "Sign up"}
             </Link>
           </>
         )}
