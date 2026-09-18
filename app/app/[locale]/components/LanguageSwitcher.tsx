@@ -26,7 +26,7 @@ export default function LanguageSwitcher({locale}: Props) {
         type="button"
         onClick={() => changeLocale("tr")}
         disabled={isPending}
-        className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
+        className={`rounded-lg px-2 py-1.5 text-xs font-semibold transition sm:px-3 sm:py-2 sm:text-sm ${
           locale === "tr"
             ? "bg-blue-600 text-white"
             : "text-slate-300 hover:bg-white/10 hover:text-white"
@@ -40,7 +40,7 @@ export default function LanguageSwitcher({locale}: Props) {
         type="button"
         onClick={() => changeLocale("en")}
         disabled={isPending}
-        className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
+        className={`rounded-lg px-2 py-1.5 text-xs font-semibold transition sm:px-3 sm:py-2 sm:text-sm ${
           locale === "en"
             ? "bg-blue-600 text-white"
             : "text-slate-300 hover:bg-white/10 hover:text-white"
