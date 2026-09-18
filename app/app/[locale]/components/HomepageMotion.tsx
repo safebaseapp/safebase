@@ -6,6 +6,7 @@ import s from "./homepage.module.css";
 export function HomepageMotion({ children }: { children: ReactNode }) {
   const root = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
+
   useEffect(() => {
     const node = root.current;
     if (!node) return;
@@ -34,6 +35,97 @@ export function HomepageMotion({ children }: { children: ReactNode }) {
     sync();
     return () => { observer.disconnect(); videoObserver.disconnect(); preference.removeEventListener("change", sync); document.removeEventListener("visibilitychange", sync); videos.forEach(video => video.pause()); };
   }, [paused]);
+
+  useEffect(() => {
+    const node = root.current;
+    if (!node) return;
+
+    const premiumSection = node.querySelector<HTMLElement>('section[class*="premium"]');
+    if (!premiumSection) return;
+
+    const locale = window.location.pathname.startsWith("/tr") ? "tr" : "en";
+    const upgradeHref = `/${locale}/upgrade`;
+    const cleanups: Array<() => void> = [];
+
+    const cta = premiumSection.querySelector<HTMLAnchorElement>('a[href$="/upgrade"]');
+    if (cta && !premiumSection.querySelector('[data-sernem-premium-price="true"]')) {
+      const price = document.createElement("div");
+      price.dataset.sernemPremiumPrice = "true";
+      price.setAttribute("aria-label", locale === "tr" ? "SERNEM Premium lansman fiyatı" : "SERNEM Premium launch price");
+      price.style.marginTop = "14px";
+      price.style.display = "flex";
+      price.style.flexWrap = "wrap";
+      price.style.alignItems = "center";
+      price.style.gap = "8px";
+      price.style.fontSize = "13px";
+      price.style.lineHeight = "1.5";
+      price.style.color = "#cbd5e1";
+
+      const oldPrice = document.createElement("span");
+      oldPrice.textContent = "€14.99";
+      oldPrice.style.textDecoration = "line-through";
+      oldPrice.style.opacity = "0.58";
+
+      const currentPrice = document.createElement("strong");
+      currentPrice.textContent = locale === "tr" ? "€9.99 / ay" : "€9.99 / month";
+      currentPrice.style.color = "#f5c768";
+      currentPrice.style.fontSize = "15px";
+      currentPrice.style.fontWeight = "800";
+
+      const badge = document.createElement("span");
+      badge.textContent = locale === "tr" ? "Lansmana özel" : "Launch offer";
+      badge.style.border = "1px solid rgba(245,199,104,.35)";
+      badge.style.background = "rgba(245,199,104,.08)";
+      badge.style.color = "#f5c768";
+      badge.style.borderRadius = "999px";
+      badge.style.padding = "3px 8px";
+      badge.style.fontSize = "10px";
+      badge.style.fontWeight = "800";
+      badge.style.letterSpacing = ".04em";
+
+      price.append(oldPrice, currentPrice, badge);
+      cta.insertAdjacentElement("afterend", price);
+      cleanups.push(() => price.remove());
+    }
+
+    const benefitRows = Array.from(
+      premiumSection.querySelectorAll<HTMLElement>('[class*="premiumBenefits"] > div'),
+    );
+
+    benefitRows.forEach((row) => {
+      row.tabIndex = 0;
+      row.setAttribute("role", "link");
+      row.setAttribute(
+        "aria-label",
+        `${row.textContent?.trim() || (locale === "tr" ? "Premium özelliği" : "Premium feature")} — ${locale === "tr" ? "Premium detaylarını aç" : "Open Premium details"}`,
+      );
+      row.style.cursor = "pointer";
+
+      const goToPremium = () => {
+        window.location.assign(upgradeHref);
+      };
+      const onKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          goToPremium();
+        }
+      };
+
+      row.addEventListener("click", goToPremium);
+      row.addEventListener("keydown", onKeyDown);
+      cleanups.push(() => {
+        row.removeEventListener("click", goToPremium);
+        row.removeEventListener("keydown", onKeyDown);
+        row.removeAttribute("role");
+        row.removeAttribute("tabindex");
+        row.removeAttribute("aria-label");
+        row.style.removeProperty("cursor");
+      });
+    });
+
+    return () => cleanups.forEach((cleanup) => cleanup());
+  }, []);
+
   return <div ref={root} className={s.home} data-paused={paused}>{children}<button className={s.motionControl} type="button" aria-pressed={paused} onClick={() => setPaused(value => !value)} aria-label={paused ? "Play background videos / Videoları oynat" : "Pause background videos / Videoları duraklat"}>{paused ? "▶" : "Ⅱ"}<span> VIDEO</span></button></div>;
 }
 
