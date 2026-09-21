@@ -1,0 +1,40 @@
+/* Keep the complete desktop navigation readable around the xl breakpoint. */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  nav[class*="z-50"] > div {
+    gap: 0.25rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  /* Never let the SERNEM brand collapse into the first Dashboard item. */
+  nav[class*="z-50"] > div > a:first-child {
+    flex-shrink: 0 !important;
+    gap: 0.55rem !important;
+    padding-right: 0.45rem !important;
+  }
+
+  nav[class*="z-50"] > div > a:first-child > div:last-child {
+    display: flex !important;
+    min-width: 5.4rem !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    line-height: 1.05 !important;
+  }
+
+  nav[class*="z-50"] > div > a:first-child > div:last-child > div:last-child {
+    margin-top: 0.2rem !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Give the full navigation enough room without changing its desktop design. */
+  nav[class*="z-50"] > div > div:nth-child(2) {
+    gap: 0 !important;
+  }
+
+  nav[class*="z-50"] > div > div:nth-child(2) > a,
+  nav[class*="z-50"] > div > div:nth-child(2) > div > button {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    font-size: 12px !important;
+  }
+}
