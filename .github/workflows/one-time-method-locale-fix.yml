@@ -1,0 +1,71 @@
+name: One-time Method Statement locale repair
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/one-time-method-locale-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Patch locale handling
+        shell: python
+        run: |
+          from pathlib import Path
+
+          target = Path("app/app/[locale]/tools/method-statement/page.tsx")
+          text = target.read_text(encoding="utf-8")
+
+          old_locale_state = '  const [locale, setLocale] = useState("en");'
+          new_locale_state = '  const { locale } = use(params);'
+          old_effect = '''  useEffect(() => {
+            params.then(({ locale: currentLocale }) => {
+              setLocale(currentLocale);
+            });
+          }, [params]);
+
+'''
+
+          if old_locale_state not in text:
+              raise SystemExit("Expected locale state marker was not found; refusing unsafe patch.")
+          if old_effect not in text:
+              raise SystemExit("Expected locale effect marker was not found; refusing unsafe patch.")
+
+          text = text.replace(
+              'import { useEffect, useState } from "react";',
+              'import { useEffect, useState, use } from "react";',
+              1,
+          )
+          text = text.replace(old_locale_state, new_locale_state, 1)
+          text = text.replace(old_effect, "", 1)
+
+          target.write_text(text, encoding="utf-8")
+
+      - name: Validate patch
+        run: |
+          git diff --check
+          grep -F 'const { locale } = use(params);' 'app/app/[locale]/tools/method-statement/page.tsx'
+          if grep -F 'const [locale, setLocale] = useState("en");' 'app/app/[locale]/tools/method-statement/page.tsx'; then
+            echo 'Old locale state is still present.'
+            exit 1
+          fi
+
+      - name: Commit repair
+        run: |
+          git config user.name "SERNEM Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add 'app/app/[locale]/tools/method-statement/page.tsx'
+          git commit -m "Fix Method Statement locale on initial render"
+          git push origin main
