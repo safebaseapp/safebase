@@ -1,16 +1,28 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { createClient } from "../../../utils/supabase/client";
 
 type Props = {
   locale: "tr" | "en";
+  nextPath?: string;
+  downloadIntent?: boolean;
 };
 
-export default function LoginForm({ locale }: Props) {
-  const router = useRouter();
+function sanitizeNextPath(value?: string | null) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) {
+    return undefined;
+  }
+
+  return value;
+}
+
+export default function LoginForm({
+  locale,
+  nextPath,
+  downloadIntent = false,
+}: Props) {
   const supabase = createClient();
   const isTurkish = locale === "tr";
 
@@ -18,6 +30,46 @@ export default function LoginForm({ locale }: Props) {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const safeNextPath = useMemo(
+    () => sanitizeNextPath(nextPath),
+    [nextPath],
+  );
+
+  const registerHref = useMemo(() => {
+    const url = new URL(`/${locale}/register`, window.location.origin);
+
+    if (safeNextPath) {
+      url.searchParams.set("next", safeNextPath);
+    }
+
+    if (downloadIntent) {
+      url.searchParams.set("intent", "download");
+    }
+
+    return `${url.pathname}${url.search}`;
+  }, [downloadIntent, locale, safeNextPath]);
+
+  useEffect(() => {
+    if (safeNextPath) {
+      window.localStorage.setItem("sernem_post_auth_next", safeNextPath);
+    }
+
+    const redirectAuthenticatedUser = async () => {
+      if (!safeNextPath) return;
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user) {
+        window.localStorage.removeItem("sernem_post_auth_next");
+        window.location.assign(safeNextPath);
+      }
+    };
+
+    void redirectAuthenticatedUser();
+  }, [safeNextPath, supabase]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -40,8 +92,13 @@ export default function LoginForm({ locale }: Props) {
       return;
     }
 
-    router.push(`/${locale}/dashboard`);
-    router.refresh();
+    const storedNextPath = sanitizeNextPath(
+      window.localStorage.getItem("sernem_post_auth_next"),
+    );
+    const destination = safeNextPath ?? storedNextPath ?? `/${locale}/dashboard`;
+
+    window.localStorage.removeItem("sernem_post_auth_next");
+    window.location.assign(destination);
   }
 
   return (
@@ -76,11 +133,11 @@ export default function LoginForm({ locale }: Props) {
           </label>
 
           <Link
-  href={`/${locale}/forgot-password`}
-  className="text-xs font-semibold text-blue-400 transition hover:text-blue-300"
->
-  {isTurkish ? "Şifremi unuttum" : "Forgot password?"}
-</Link>
+            href={`/${locale}/forgot-password`}
+            className="text-xs font-semibold text-blue-400 transition hover:text-blue-300"
+          >
+            {isTurkish ? "Şifremi unuttum" : "Forgot password?"}
+          </Link>
         </div>
 
         <input
@@ -111,18 +168,42 @@ export default function LoginForm({ locale }: Props) {
           ? isTurkish
             ? "Giriş yapılıyor..."
             : "Signing in..."
-          : isTurkish
-            ? "Giriş yap"
-            : "Sign in"}
+          : downloadIntent
+            ? isTurkish
+              ? "Giriş yap ve PDF'ye devam et"
+              : "Sign in and continue to PDF"
+            : isTurkish
+              ? "Giriş yap"
+              : "Sign in"}
       </button>
+
+      {downloadIntent && (
+        <div className="grid grid-cols-3 gap-2 text-center text-[11px] font-bold text-slate-400">
+          <span className="rounded-lg border border-white/10 bg-white/[0.03] px-2 py-2">
+            {isTurkish ? "Ücretsiz" : "Free"}
+          </span>
+          <span className="rounded-lg border border-white/10 bg-white/[0.03] px-2 py-2">
+            {isTurkish ? "Kart yok" : "No card"}
+          </span>
+          <span className="rounded-lg border border-white/10 bg-white/[0.03] px-2 py-2">
+            {isTurkish ? "Hızlı erişim" : "Instant access"}
+          </span>
+        </div>
+      )}
 
       <p className="text-center text-sm text-slate-400">
         {isTurkish ? "Henüz hesabın yok mu?" : "Don't have an account yet?"}{" "}
         <Link
-          href={`/${locale}/register`}
+          href={registerHref}
           className="font-semibold text-blue-400 transition hover:text-blue-300"
         >
-          {isTurkish ? "Hesap oluştur" : "Create account"}
+          {downloadIntent
+            ? isTurkish
+              ? "Ücretsiz hesap oluştur ve indir"
+              : "Create a free account and download"
+            : isTurkish
+              ? "Hesap oluştur"
+              : "Create account"}
         </Link>
       </p>
     </form>
