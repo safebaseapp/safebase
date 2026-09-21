@@ -2,7 +2,7 @@
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import MethodStatementPrint from "./MethodStatementPrint";
 import PrintButton from "@/components/ui/PrintButton";
 import { trackEvent } from "@/lib/analytics";
@@ -40,7 +40,7 @@ export default function MethodStatementPage({ params }: Props) {
     }, 1800);
   };
 
-  const [locale, setLocale] = useState("en");
+  const { locale } = use(params);
   const [loadedTemplate, setLoadedTemplate] = useState<string | null>(null);
 
   const [projectName, setProjectName] = useState("");
@@ -71,12 +71,6 @@ export default function MethodStatementPage({ params }: Props) {
   const [methodSteps, setMethodSteps] = useState<MethodStep[]>([
     createMethodStep(),
   ]);
-
-  useEffect(() => {
-    params.then(({ locale: currentLocale }) => {
-      setLocale(currentLocale);
-    });
-  }, [params]);
 
   const isTurkish = locale === "tr";
 
