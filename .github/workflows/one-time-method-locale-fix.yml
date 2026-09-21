@@ -21,8 +21,8 @@ jobs:
           fetch-depth: 0
 
       - name: Patch locale handling
-        shell: python
         run: |
+          python3 - <<'PY'
           from pathlib import Path
 
           target = Path("app/app/[locale]/tools/method-statement/page.tsx")
@@ -52,6 +52,7 @@ jobs:
           text = text.replace(old_effect, "", 1)
 
           target.write_text(text, encoding="utf-8")
+          PY
 
       - name: Validate patch
         run: |
