@@ -1,0 +1,77 @@
+name: Method Statement locale v2 patch
+
+on:
+  push:
+    branches:
+      - fix/method-locale-v2
+    paths:
+      - .github/workflows/method-locale-v2.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout patch branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/method-locale-v2
+          fetch-depth: 0
+
+      - name: Patch locale resolution
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          target = Path('app/app/[locale]/tools/method-statement/page.tsx')
+          text = target.read_text(encoding='utf-8')
+
+          old_import = 'import { useEffect, useState } from "react";'
+          new_import = 'import { useEffect, useState, use } from "react";'
+          old_state = '  const [locale, setLocale] = useState("en");'
+          new_state = '  const { locale } = use(params);'
+          old_effect = '''  useEffect(() => {\n    params.then(({ locale: currentLocale }) => {\n      setLocale(currentLocale);\n    });\n  }, [params]);\n\n'''
+
+          if new_state in text and old_state not in text:
+              print('Locale resolution is already patched.')
+          else:
+              if old_import not in text:
+                  raise SystemExit('Expected React import not found; refusing unsafe patch.')
+              if old_state not in text:
+                  raise SystemExit('Expected locale state not found; refusing unsafe patch.')
+              if old_effect not in text:
+                  raise SystemExit('Expected locale effect not found; refusing unsafe patch.')
+
+              text = text.replace(old_import, new_import, 1)
+              text = text.replace(old_state, new_state, 1)
+              text = text.replace(old_effect, '', 1)
+              target.write_text(text, encoding='utf-8')
+              print('Patched Method Statement locale resolution.')
+          PY
+
+      - name: Validate patch
+        shell: bash
+        run: |
+          git diff --check
+          grep -F 'import { useEffect, useState, use } from "react";' 'app/app/[locale]/tools/method-statement/page.tsx'
+          grep -F 'const { locale } = use(params);' 'app/app/[locale]/tools/method-statement/page.tsx'
+          if grep -F 'const [locale, setLocale] = useState("en");' 'app/app/[locale]/tools/method-statement/page.tsx'; then
+            echo 'Legacy locale state still exists.'
+            exit 1
+          fi
+
+      - name: Commit patched source
+        shell: bash
+        run: |
+          git config user.name "SERNEM Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add 'app/app/[locale]/tools/method-statement/page.tsx'
+          if git diff --cached --quiet; then
+            echo 'No source change required.'
+            exit 0
+          fi
+          git commit -m 'Fix Method Statement locale before initial render'
+          git push origin HEAD:fix/method-locale-v2
