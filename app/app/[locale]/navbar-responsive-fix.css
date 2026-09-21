@@ -1,0 +1,19 @@
+/* Prevent the full desktop navigation from squeezing the SERNEM brand block.
+   At xl widths the right-side account/language/explore actions remain available,
+   while the full nav waits until 2xl. */
+@media (min-width: 1280px) and (max-width: 1535.98px) {
+  nav > div > a:first-child {
+    flex-shrink: 0 !important;
+    min-width: 168px;
+  }
+
+  nav .xl\:flex {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  nav > div > a:first-child {
+    flex-shrink: 0 !important;
+  }
+}
