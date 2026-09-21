@@ -1,0 +1,86 @@
+/*
+ * Topic-specific card visuals.
+ * The legacy library data reuses several emoji fallbacks across unrelated topics.
+ * These rules make all 70 published Toolbox cards visually distinct without
+ * coupling the content data to presentation-only artwork.
+ */
+
+article:has(a[href*="/toolbox/"]) > div:nth-of-type(2) > div:first-child {
+  font-size: 0;
+}
+
+article:has(a[href*="/toolbox/"]) > div:nth-of-type(2) > div:first-child::before {
+  font-size: 1.875rem;
+  line-height: 1;
+}
+
+article:has(a[href$="/toolbox/abrasive-blasting-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🥽"; }
+article:has(a[href$="/toolbox/battery-charging"]) > div:nth-of-type(2) > div:first-child::before { content: "🔋"; }
+article:has(a[href$="/toolbox/chemical-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🧪"; }
+article:has(a[href$="/toolbox/compressed-gas-cylinders"]) > div:nth-of-type(2) > div:first-child::before { content: "🧯"; }
+article:has(a[href$="/toolbox/confined-space"]) > div:nth-of-type(2) > div:first-child::before { content: "🕳️"; }
+article:has(a[href$="/toolbox/crane-banksman-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🚩"; }
+article:has(a[href$="/toolbox/crane-outrigger-setup"]) > div:nth-of-type(2) > div:first-child::before { content: "🏗️"; }
+article:has(a[href$="/toolbox/dropped-object-prevention-zones"]) > div:nth-of-type(2) > div:first-child::before { content: "⛔"; }
+article:has(a[href$="/toolbox/dropped-objects"]) > div:nth-of-type(2) > div:first-child::before { content: "📦"; }
+article:has(a[href$="/toolbox/electrical-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "⚡"; }
+article:has(a[href$="/toolbox/excavation-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "⛏️"; }
+article:has(a[href$="/toolbox/extension-leads-cable-management"]) > div:nth-of-type(2) > div:first-child::before { content: "🔌"; }
+article:has(a[href$="/toolbox/fire-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🚒"; }
+article:has(a[href$="/toolbox/forklift-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🚜"; }
+article:has(a[href$="/toolbox/gas-testing-atmospheric-monitoring"]) > div:nth-of-type(2) > div:first-child::before { content: "📟"; }
+article:has(a[href$="/toolbox/grinding-cutting-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "⚙️"; }
+article:has(a[href$="/toolbox/hand-power-tools"]) > div:nth-of-type(2) > div:first-child::before { content: "🛠️"; }
+article:has(a[href$="/toolbox/heat-stress"]) > div:nth-of-type(2) > div:first-child::before { content: "☀️"; }
+article:has(a[href$="/toolbox/high-pressure-water-jetting"]) > div:nth-of-type(2) > div:first-child::before { content: "💦"; }
+article:has(a[href$="/toolbox/hot-work"]) > div:nth-of-type(2) > div:first-child::before { content: "🔥"; }
+article:has(a[href$="/toolbox/housekeeping"]) > div:nth-of-type(2) > div:first-child::before { content: "🧹"; }
+article:has(a[href$="/toolbox/ladder-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🪜"; }
+article:has(a[href$="/toolbox/lifting-operations"]) > div:nth-of-type(2) > div:first-child::before { content: "🪝"; }
+article:has(a[href$="/toolbox/line-breaking-process-opening"]) > div:nth-of-type(2) > div:first-child::before { content: "🔧"; }
+article:has(a[href$="/toolbox/loto"]) > div:nth-of-type(2) > div:first-child::before { content: "🔒"; }
+article:has(a[href$="/toolbox/man-basket-personnel-lifting"]) > div:nth-of-type(2) > div:first-child::before { content: "🛗"; }
+article:has(a[href$="/toolbox/manual-handling"]) > div:nth-of-type(2) > div:first-child::before { content: "🏋️"; }
+article:has(a[href$="/toolbox/mobile-equipment-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🚧"; }
+article:has(a[href$="/toolbox/noise-hearing-protection"]) > div:nth-of-type(2) > div:first-child::before { content: "🎧"; }
+article:has(a[href$="/toolbox/permit-to-work"]) > div:nth-of-type(2) > div:first-child::before { content: "📋"; }
+article:has(a[href$="/toolbox/pinch-points"]) > div:nth-of-type(2) > div:first-child::before { content: "🤏"; }
+article:has(a[href$="/toolbox/ppe-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🦺"; }
+article:has(a[href$="/toolbox/pressure-testing"]) > div:nth-of-type(2) > div:first-child::before { content: "🧭"; }
+article:has(a[href$="/toolbox/respiratory-protection"]) > div:nth-of-type(2) > div:first-child::before { content: "😷"; }
+article:has(a[href$="/toolbox/rigging-inspection"]) > div:nth-of-type(2) > div:first-child::before { content: "🔍"; }
+article:has(a[href$="/toolbox/scaffold-modification-control"]) > div:nth-of-type(2) > div:first-child::before { content: "🧱"; }
+article:has(a[href$="/toolbox/simultaneous-operations"]) > div:nth-of-type(2) > div:first-child::before { content: "🔄"; }
+article:has(a[href$="/toolbox/spill-response"]) > div:nth-of-type(2) > div:first-child::before { content: "🧽"; }
+article:has(a[href$="/toolbox/stored-energy-hydraulic-systems"]) > div:nth-of-type(2) > div:first-child::before { content: "💥"; }
+article:has(a[href$="/toolbox/temporary-work-platforms"]) > div:nth-of-type(2) > div:first-child::before { content: "🛤️"; }
+article:has(a[href$="/toolbox/vehicle-pedestrian-interface"]) > div:nth-of-type(2) > div:first-child::before { content: "🚶"; }
+article:has(a[href$="/toolbox/working-at-height"]) > div:nth-of-type(2) > div:first-child::before { content: "🧗"; }
+article:has(a[href$="/toolbox/working-near-open-edges"]) > div:nth-of-type(2) > div:first-child::before { content: "⚠️"; }
+article:has(a[href$="/toolbox/working-over-water"]) > div:nth-of-type(2) > div:first-child::before { content: "🛟"; }
+article:has(a[href$="/toolbox/safety-harness"]) > div:nth-of-type(2) > div:first-child::before { content: "🪢"; }
+article:has(a[href$="/toolbox/scaffold-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🏢"; }
+article:has(a[href$="/toolbox/line-of-fire"]) > div:nth-of-type(2) > div:first-child::before { content: "🎯"; }
+article:has(a[href$="/toolbox/slips-trips-falls"]) > div:nth-of-type(2) > div:first-child::before { content: "👣"; }
+article:has(a[href$="/toolbox/welding-fumes"]) > div:nth-of-type(2) > div:first-child::before { content: "🌫️"; }
+article:has(a[href$="/toolbox/cold-stress"]) > div:nth-of-type(2) > div:first-child::before { content: "❄️"; }
+article:has(a[href$="/toolbox/eye-face-protection"]) > div:nth-of-type(2) > div:first-child::before { content: "👓"; }
+article:has(a[href$="/toolbox/hand-injury-prevention"]) > div:nth-of-type(2) > div:first-child::before { content: "🧤"; }
+article:has(a[href$="/toolbox/temporary-electrical-installations"]) > div:nth-of-type(2) > div:first-child::before { content: "🔀"; }
+article:has(a[href$="/toolbox/stop-work-authority"]) > div:nth-of-type(2) > div:first-child::before { content: "🛑"; }
+article:has(a[href$="/toolbox/barricading-exclusion-zones"]) > div:nth-of-type(2) > div:first-child::before { content: "🚫"; }
+article:has(a[href$="/toolbox/overhead-power-lines"]) > div:nth-of-type(2) > div:first-child::before { content: "🗼"; }
+article:has(a[href$="/toolbox/underground-services"]) > div:nth-of-type(2) > div:first-child::before { content: "🚇"; }
+article:has(a[href$="/toolbox/nitrogen-inert-gas-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "💨"; }
+article:has(a[href$="/toolbox/steam-hot-surfaces"]) > div:nth-of-type(2) > div:first-child::before { content: "♨️"; }
+article:has(a[href$="/toolbox/hose-coupling-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🔗"; }
+article:has(a[href$="/toolbox/painting-coating-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🎨"; }
+article:has(a[href$="/toolbox/lightning-severe-weather"]) > div:nth-of-type(2) > div:first-child::before { content: "🌩️"; }
+article:has(a[href$="/toolbox/tag-line-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "🧵"; }
+article:has(a[href$="/toolbox/load-stability-center-of-gravity"]) > div:nth-of-type(2) > div:first-child::before { content: "⚖️"; }
+article:has(a[href$="/toolbox/forklift-loading-unloading"]) > div:nth-of-type(2) > div:first-child::before { content: "🚚"; }
+article:has(a[href$="/toolbox/flange-joint-integrity"]) > div:nth-of-type(2) > div:first-child::before { content: "🔩"; }
+article:has(a[href$="/toolbox/chemical-transfer-decanting"]) > div:nth-of-type(2) > div:first-child::before { content: "🧴"; }
+article:has(a[href$="/toolbox/hazardous-waste-handling"]) > div:nth-of-type(2) > div:first-child::before { content: "☣️"; }
+article:has(a[href$="/toolbox/portable-generator-safety"]) > div:nth-of-type(2) > div:first-child::before { content: "⛽"; }
+article:has(a[href$="/toolbox/demolition-dismantling"]) > div:nth-of-type(2) > div:first-child::before { content: "🏚️"; }
