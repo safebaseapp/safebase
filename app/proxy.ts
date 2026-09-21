@@ -1,8 +1,25 @@
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "./utils/supabase/proxy";
 
 export async function proxy(request: NextRequest) {
-  const firstSegment = request.nextUrl.pathname.split("/")[1];
+  const { pathname } = request.nextUrl;
+
+  const toolboxPdfMatch = pathname.match(
+    /^\/downloads\/(.+)-toolbox-talk-(tr|en)\.pdf$/i,
+  );
+
+  if (toolboxPdfMatch) {
+    const [, slug, fileLocale] = toolboxPdfMatch;
+    const protectedUrl = request.nextUrl.clone();
+
+    protectedUrl.pathname = `/api/toolbox/${encodeURIComponent(slug)}/pdf`;
+    protectedUrl.search = "";
+    protectedUrl.searchParams.set("locale", fileLocale.toLowerCase());
+
+    return NextResponse.redirect(protectedUrl, 307);
+  }
+
+  const firstSegment = pathname.split("/")[1];
   const locale = firstSegment === "tr" ? "tr" : "en";
 
   const requestHeaders = new Headers(request.headers);
