@@ -22,10 +22,14 @@ export default function ToolboxActions({
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const loginHref = useMemo(
-    () => `/${locale}/login?next=${encodeURIComponent(pdfHref)}`,
-    [locale, pdfHref],
-  );
+  const loginHref = useMemo(() => {
+    const params = new URLSearchParams({
+      next: pdfHref,
+      intent: "download",
+    });
+
+    return `/${locale}/login?${params.toString()}`;
+  }, [locale, pdfHref]);
 
   useEffect(() => {
     const supabase = createClient();
@@ -78,7 +82,7 @@ export default function ToolboxActions({
             href={loginHref}
             className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-center text-sm font-black text-white transition hover:-translate-y-1 hover:bg-blue-500 sm:w-auto"
           >
-            🔒 {isTurkish ? "PDF için ücretsiz giriş yap" : "Sign in free for PDF"}
+            🔒 {isTurkish ? "Ücretsiz PDF — giriş yap ve indir" : "Free PDF — sign in to download"}
           </Link>
         )}
 
@@ -91,9 +95,13 @@ export default function ToolboxActions({
       </div>
 
       <p className="mt-2 text-xs leading-5 text-slate-400">
-        {isTurkish
-          ? "Önizleme herkese açık. Standart PDF indirmek için ücretsiz SERNEM hesabı gerekir."
-          : "Preview is public. A free SERNEM account is required to download the standard PDF."}
+        {isAuthenticated
+          ? isTurkish
+            ? "Standart PDF hesabınla indirilmeye hazır."
+            : "Your standard PDF is ready to download with your account."
+          : isTurkish
+            ? "Önizleme herkese açık • Ücretsiz hesap • Kredi kartı gerekmez • Girişten sonra PDF'ye otomatik dönersin."
+            : "Preview is public • Free account • No card required • After sign-in, you return automatically to the PDF."}
       </p>
     </div>
   );
