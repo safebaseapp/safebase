@@ -18,6 +18,7 @@ import { generateAssessment } from "@/lib/api/assessmentClient";
 import type { ProfessionalAssessmentOutput } from "@/lib/ai/assessmentTypes";
 import { createClient } from "../../../../utils/supabase/client";
 import { isAdminUser } from "@/lib/auth/access";
+import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 export default function LiftingChecklist({ locale }: Props) {
   const t = labels[locale];
@@ -469,7 +470,9 @@ export default function LiftingChecklist({ locale }: Props) {
     void generateAiAssessment();
   }
 
-  function printInspection() {
+  async function printInspection() {
+    if (!(await requirePrintAuth(locale))) return;
+
     trackEvent("pdf_downloaded", {
       document_type: "lifting_inspection",
       locale,

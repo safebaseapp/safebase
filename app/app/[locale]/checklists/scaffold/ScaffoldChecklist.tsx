@@ -11,6 +11,7 @@ import { generateAssessment } from "@/lib/api/assessmentClient";
 import type { ProfessionalAssessmentOutput } from "@/lib/ai/assessmentTypes";
 import { createClient } from "../../../../utils/supabase/client";
 import { isAdminUser } from "@/lib/auth/access";
+import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 import PremiumAssessmentButton from "../components/PremiumAssessmentButton";
 import ChecklistAnalysisPanel from "../components/ChecklistAnalysisPanel";
 import {
@@ -469,7 +470,9 @@ export default function ScaffoldChecklist({ locale }: Props) {
     void generateAiAssessment();
   }
 
-  function printInspection() {
+  async function printInspection() {
+    if (!(await requirePrintAuth(locale))) return;
+
     trackEvent("pdf_downloaded", {
       document_type: "scaffold_inspection",
       locale,

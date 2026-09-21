@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 type PrintButtonProps = {
   label?: string;
@@ -23,15 +24,16 @@ export default function PrintButton({
     setIsPreparing(true);
 
     setTimeout(() => {
-      if (onClick) {
-        onClick();
-      } else {
-        window.print();
-      }
+      void requirePrintAuth().then((isAuthenticated) => {
+        if (!isAuthenticated) return;
 
-      setTimeout(() => {
-        setIsPreparing(false);
-      }, 500);
+        if (onClick) onClick();
+        else window.print();
+
+        setTimeout(() => {
+          setIsPreparing(false);
+        }, 500);
+      });
     }, 250);
   };
 

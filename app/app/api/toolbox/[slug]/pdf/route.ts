@@ -29,7 +29,7 @@ export async function GET(
         : "en";
 
     const { user, profile } = await getCurrentAccessProfile();
-    const nextPath = `/api/toolbox/${encodeURIComponent(slug)}/pdf?locale=${locale}`;
+    const nextPath = `${request.nextUrl.pathname}${request.nextUrl.search}`;
 
     if (!user || !profile) {
       const loginUrl = new URL(`/${locale}/login`, request.url);

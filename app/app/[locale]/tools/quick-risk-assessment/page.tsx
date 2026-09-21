@@ -12,6 +12,7 @@ import { riskLibraryPack05 } from "@/lib/risk-library/pack-05";
 import { createClient } from "@/utils/supabase/client";
 import PrintButton from "@/components/ui/PrintButton";
 import { trackEvent } from "@/lib/analytics";
+import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 type RiskLevel = {
   labelTr: string;
@@ -323,7 +324,9 @@ const duplicateRiskItem = (id: string) => {
 
 
   /* SERNEM_RISK_PRINT_HANDLER_START */
-  const handlePrintRiskAssessment = () => {
+  const handlePrintRiskAssessment = async () => {
+    if (!(await requirePrintAuth(locale))) return;
+
     trackEvent("pdf_downloaded", {
       document_type: "risk_assessment",
       locale,

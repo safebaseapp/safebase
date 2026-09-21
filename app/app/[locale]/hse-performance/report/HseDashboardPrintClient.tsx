@@ -14,6 +14,7 @@ import {
 } from "@/lib/hse-metrics";
 
 import { createClient } from "@/utils/supabase/client";
+import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 type Locale = "tr" | "en";
 
@@ -566,7 +567,9 @@ export default function HseDashboardPrintClient({
     const timer =
       window.setTimeout(() => {
         setAutoPrintDone(true);
-        window.print();
+        void requirePrintAuth(locale).then((isAuthenticated) => {
+          if (isAuthenticated) window.print();
+        });
       }, 500);
 
     return () => {
@@ -956,9 +959,11 @@ export default function HseDashboardPrintClient({
 
           <button
             type="button"
-            onClick={() =>
-              window.print()
-            }
+            onClick={() => {
+              void requirePrintAuth(locale).then((isAuthenticated) => {
+                if (isAuthenticated) window.print();
+              });
+            }}
             className="rounded-xl bg-[#0b4ea2] px-6 py-3 text-sm font-black text-white"
           >
             {isTurkish

@@ -473,12 +473,12 @@ function getAutoIcon(slug: string) {
   if (slug.includes("working-near-open-edges")) return "🕳️";
   if (slug.includes("scaffold-modification-control")) return "🏗️";
   if (slug.includes("man-basket-personnel-lifting")) return "👷";
-  if (slug.includes("crane-outrigger-setup")) return "🚧";
+  if (slug.includes("crane-outrigger-setup")) return "🛞";
   if (slug.includes("rigging-inspection")) return "🪝";
   if (slug.includes("tag-line-safety")) return "🪢";
   if (slug.includes("load-stability-center-of-gravity")) return "⚖️";
   if (slug.includes("forklift-loading-unloading")) return "📦";
-  if (slug.includes("barricading-exclusion-zones")) return "🚧";
+  if (slug.includes("barricading-exclusion-zones")) return "🚫";
   if (slug.includes("overhead-power-lines")) return "⚡";
   if (slug.includes("underground-services")) return "🕳️";
   if (slug.includes("line-breaking-process-opening")) return "🔧";
@@ -492,7 +492,7 @@ function getAutoIcon(slug: string) {
   if (slug.includes("line-of-fire")) return "🎯";
   if (slug.includes("pinch")) return "✋";
   if (slug.includes("slips")) return "⚠️";
-  if (slug.includes("vehicle")) return "🚧";
+  if (slug.includes("vehicle")) return "🚶";
   if (slug.includes("compressed-gas")) return "🧯";
   if (slug.includes("pressure")) return "🧪";
   if (slug.includes("grinding")) return "⚙️";
@@ -510,7 +510,7 @@ function getAutoIcon(slug: string) {
   if (slug.includes("simultaneous")) return "🔄";
   if (slug.includes("stop-work")) return "🛑";
 
-  return "🦺";
+  throw new Error(`Missing Toolbox icon mapping for slug: ${slug}`);
 }
 
 const autoToolboxItems: ToolboxItem[] = toolboxData
@@ -940,7 +940,6 @@ export default function ToolboxLibraryClient({
                       ) : pdfHref ? (
                         <a
                           href={pdfHref}
-                          download
                           onClick={() => {
                             void trackDownload(item, "standard");
                           }}

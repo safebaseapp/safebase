@@ -1,5 +1,7 @@
 "use client";
 
+import { requirePrintAuth } from "@/lib/auth/require-print-auth";
+
 export default function PrintButton({
   label,
 }: {
@@ -8,7 +10,11 @@ export default function PrintButton({
   return (
     <button
       type="button"
-      onClick={() => window.print()}
+      onClick={() => {
+        void requirePrintAuth().then((isAuthenticated) => {
+          if (isAuthenticated) window.print();
+        });
+      }}
       className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-400/30 bg-blue-500/10 px-6 py-3 text-sm font-semibold text-blue-200 transition hover:border-blue-400/50 hover:bg-blue-500/20"
     >
       <svg
