@@ -26,6 +26,49 @@ button {
   translate: 0 0 !important;
 }
 
+/*
+  Desktop navigation guard.
+  Around the xl breakpoint the complete menu is just wide enough to squeeze
+  the brand and the first Dashboard item together. Keep the brand stable and
+  tighten only the top navigation until the viewport has more room.
+*/
+@media (min-width: 1280px) and (max-width: 1439px) {
+  nav[class*="z-50"] > div {
+    gap: 0.35rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  nav[class*="z-50"] > div > a:first-child {
+    flex-shrink: 0 !important;
+    padding-right: 0.5rem !important;
+    gap: 0.6rem !important;
+  }
+
+  nav[class*="z-50"] > div > a:first-child > div:last-child {
+    display: flex !important;
+    min-width: 5.5rem !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    line-height: 1.05 !important;
+  }
+
+  nav[class*="z-50"] > div > a:first-child > div:last-child > div:last-child {
+    margin-top: 0.25rem !important;
+    line-height: 1.15 !important;
+  }
+
+  nav[class*="z-50"] > div > div:nth-child(2) {
+    gap: 0.125rem !important;
+  }
+
+  nav[class*="z-50"] > div > div:nth-child(2) > a,
+  nav[class*="z-50"] > div > div:nth-child(2) > div > button {
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+  }
+}
+
 @media (max-width: 767px) {
   body {
     min-width: 0;
