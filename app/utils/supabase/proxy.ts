@@ -25,10 +25,10 @@ export async function updateSession(
           });
 
           response = NextResponse.next({
-    request: {
-      headers: requestHeaders ?? request.headers,
-    },
-  });
+            request: {
+              headers: requestHeaders ?? request.headers,
+            },
+          });
 
           cookiesToSet.forEach(({ name, value, options }) => {
             response.cookies.set(name, value, options);
@@ -38,7 +38,10 @@ export async function updateSession(
     },
   );
 
-  await supabase.auth.getClaims();
+  const { data: claimsData } = await supabase.auth.getClaims();
 
-  return response;
+  return {
+    response,
+    isAuthenticated: Boolean(claimsData?.claims?.sub),
+  };
 }
