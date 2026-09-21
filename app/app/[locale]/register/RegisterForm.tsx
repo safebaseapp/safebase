@@ -1,15 +1,29 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { createClient } from "../../../utils/supabase/client";
 
 type Props = {
   locale: "tr" | "en";
+  nextPath?: string;
+  downloadIntent?: boolean;
 };
 
-export default function RegisterForm({ locale }: Props) {
-  const supabase = createClient();
+function sanitizeNextPath(value?: string | null) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) {
+    return undefined;
+  }
+
+  return value;
+}
+
+export default function RegisterForm({
+  locale,
+  nextPath,
+  downloadIntent = false,
+}: Props) {
+  const supabase = useMemo(() => createClient(), []);
   const isTurkish = locale === "tr";
 
   const [fullName, setFullName] = useState("");
@@ -19,6 +33,32 @@ export default function RegisterForm({ locale }: Props) {
   const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const safeNextPath = useMemo(
+    () => sanitizeNextPath(nextPath),
+    [nextPath],
+  );
+
+  const loginHref = useMemo(() => {
+    const params = new URLSearchParams();
+
+    if (safeNextPath) {
+      params.set("next", safeNextPath);
+    }
+
+    if (downloadIntent) {
+      params.set("intent", "download");
+    }
+
+    const query = params.toString();
+    return `/${locale}/login${query ? `?${query}` : ""}`;
+  }, [downloadIntent, locale, safeNextPath]);
+
+  useEffect(() => {
+    if (safeNextPath) {
+      window.localStorage.setItem("sernem_post_auth_next", safeNextPath);
+    }
+  }, [safeNextPath]);
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -26,13 +66,26 @@ export default function RegisterForm({ locale }: Props) {
     setSuccessMessage("");
     setIsLoading(true);
 
-    const emailRedirectTo = `${window.location.origin}/${locale}/dashboard`;
+    if (safeNextPath) {
+      window.localStorage.setItem("sernem_post_auth_next", safeNextPath);
+    }
 
-    const { error } = await supabase.auth.signUp({
+    const redirectUrl = new URL(`/${locale}/dashboard`, window.location.origin);
+
+    if (safeNextPath) {
+      redirectUrl.pathname = `/${locale}/login`;
+      redirectUrl.searchParams.set("next", safeNextPath);
+      if (downloadIntent) {
+        redirectUrl.searchParams.set("intent", "download");
+      }
+      redirectUrl.searchParams.set("confirmed", "1");
+    }
+
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo,
+        emailRedirectTo: redirectUrl.toString(),
         data: {
           full_name: fullName.trim(),
         },
@@ -52,10 +105,21 @@ export default function RegisterForm({ locale }: Props) {
       return;
     }
 
+    if (data.session) {
+      const destination = safeNextPath ?? `/${locale}/dashboard`;
+      window.localStorage.removeItem("sernem_post_auth_next");
+      window.location.assign(destination);
+      return;
+    }
+
     setSuccessMessage(
-      isTurkish
-        ? "Hesabın oluşturuldu. E-posta adresine gönderilen doğrulama bağlantısını kontrol et."
-        : "Your account was created. Check your email for the confirmation link.",
+      downloadIntent
+        ? isTurkish
+          ? "Hesabın oluşturuldu. E-postanı doğrula; ardından giriş yaptığında istediğin dokümana kaldığın yerden devam edeceksin."
+          : "Your account was created. Verify your email; after signing in, you will continue directly to the document you requested."
+        : isTurkish
+          ? "Hesabın oluşturuldu. E-posta adresine gönderilen doğrulama bağlantısını kontrol et."
+          : "Your account was created. Check your email for the confirmation link.",
     );
 
     setFullName("");
@@ -155,15 +219,27 @@ export default function RegisterForm({ locale }: Props) {
           ? isTurkish
             ? "Hesap oluşturuluyor..."
             : "Creating account..."
-          : isTurkish
-            ? "Ücretsiz hesap oluştur"
-            : "Create free account"}
+          : downloadIntent
+            ? isTurkish
+              ? "Ücretsiz hesap oluştur ve indir"
+              : "Create free account and download"
+            : isTurkish
+              ? "Ücretsiz hesap oluştur"
+              : "Create free account"}
       </button>
+
+      {downloadIntent && (
+        <p className="text-center text-xs font-semibold text-slate-500">
+          {isTurkish
+            ? "Ücretsiz • Kredi kartı gerekmez • Standart PDF erişimi"
+            : "Free • No credit card • Standard PDF access"}
+        </p>
+      )}
 
       <p className="text-center text-sm text-slate-400">
         {isTurkish ? "Zaten hesabın var mı?" : "Already have an account?"}{" "}
         <Link
-          href={`/${locale}/login`}
+          href={loginHref}
           className="font-semibold text-blue-400 transition hover:text-blue-300"
         >
           {isTurkish ? "Giriş yap" : "Sign in"}
