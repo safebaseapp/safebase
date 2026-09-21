@@ -6,9 +6,22 @@ import LoginForm from "./LoginForm";
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams?: Promise<{
+    next?: string;
+    intent?: string;
+    confirmed?: string;
+  }>;
 };
 
-export default async function LoginPage({ params }: Props) {
+function sanitizeNextPath(value?: string) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) {
+    return undefined;
+  }
+
+  return value;
+}
+
+export default async function LoginPage({ params, searchParams }: Props) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
@@ -17,6 +30,16 @@ export default async function LoginPage({ params }: Props) {
 
   const safeLocale = locale as "tr" | "en";
   const isTurkish = safeLocale === "tr";
+  const query = searchParams ? await searchParams : undefined;
+  const nextPath = sanitizeNextPath(query?.next);
+  const isDownloadIntent =
+    query?.intent === "download" ||
+    Boolean(
+      nextPath &&
+        (nextPath.includes(".pdf") ||
+          nextPath.startsWith("/downloads/") ||
+          nextPath.startsWith("/api/")),
+    );
 
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-10 text-white">
@@ -40,20 +63,48 @@ export default async function LoginPage({ params }: Props) {
 
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-blue-400">
-                {isTurkish ? "Güvenli çalışma alanın" : "Your safety workspace"}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "İndirmeni tamamla"
+                    : "Complete your download"
+                  : isTurkish
+                    ? "Güvenli çalışma alanın"
+                    : "Your safety workspace"}
               </p>
 
               <h2 className="mt-5 max-w-lg text-4xl font-bold leading-tight">
-                {isTurkish
-                  ? "Denetimlerini ve HSE kaynaklarını tek merkezden yönet."
-                  : "Manage inspections and HSE resources from one place."}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "Ücretsiz giriş yap, profesyonel HSE dokümanını hemen indir."
+                    : "Sign in free and download your professional HSE document instantly."
+                  : isTurkish
+                    ? "Denetimlerini ve HSE kaynaklarını tek merkezden yönet."
+                    : "Manage inspections and HSE resources from one place."}
               </h2>
 
               <p className="mt-5 max-w-md leading-7 text-slate-400">
-                {isTurkish
-                  ? "Kontrol listelerine, AI değerlendirmelerine ve profesyonel güvenlik kaynaklarına hesabın üzerinden ulaş."
-                  : "Access checklists, AI assessments and professional safety resources through your account."}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "Kredi kartı gerekmez. Giriş yaptıktan sonra otomatik olarak kaldığın dokümana döneceksin."
+                    : "No card required. After signing in, you will automatically return to the document you requested."
+                  : isTurkish
+                    ? "Kontrol listelerine, AI değerlendirmelerine ve profesyonel güvenlik kaynaklarına hesabın üzerinden ulaş."
+                    : "Access checklists, AI assessments and professional safety resources through your account."}
               </p>
+
+              {isDownloadIntent && (
+                <div className="mt-7 flex flex-wrap gap-3 text-xs font-bold text-slate-300">
+                  <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-2 text-emerald-300">
+                    ✓ {isTurkish ? "Ücretsiz" : "Free"}
+                  </span>
+                  <span className="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-2 text-blue-300">
+                    ✓ {isTurkish ? "Kart gerekmez" : "No card required"}
+                  </span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-slate-300">
+                    ✓ {isTurkish ? "Anında devam" : "Instant return"}
+                  </span>
+                </div>
+              )}
             </div>
 
             <p className="text-sm text-slate-500">Safety without borders.</p>
@@ -69,21 +120,41 @@ export default async function LoginPage({ params }: Props) {
 
             <div className="mt-10">
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-blue-400">
-                {isTurkish ? "SERNEM hesabı" : "SERNEM account"}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "Ücretsiz PDF erişimi"
+                    : "Free PDF access"
+                  : isTurkish
+                    ? "SERNEM hesabı"
+                    : "SERNEM account"}
               </p>
 
               <h1 className="mt-3 text-3xl font-bold">
-                {isTurkish ? "Tekrar hoş geldin" : "Welcome back"}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "Giriş yap ve indirmeye devam et"
+                    : "Sign in and continue your download"
+                  : isTurkish
+                    ? "Tekrar hoş geldin"
+                    : "Welcome back"}
               </h1>
 
               <p className="mt-3 text-slate-400">
-                {isTurkish
-                  ? "Çalışma alanına devam etmek için giriş yap."
-                  : "Sign in to continue to your workspace."}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "Girişten sonra seni otomatik olarak istediğin dokümana geri götüreceğiz."
+                    : "After signing in, we will automatically return you to the document you requested."
+                  : isTurkish
+                    ? "Çalışma alanına devam etmek için giriş yap."
+                    : "Sign in to continue to your workspace."}
               </p>
             </div>
 
-            <LoginForm locale={safeLocale} />
+            <LoginForm
+              locale={safeLocale}
+              nextPath={nextPath}
+              downloadIntent={isDownloadIntent}
+            />
           </section>
         </div>
       </div>
