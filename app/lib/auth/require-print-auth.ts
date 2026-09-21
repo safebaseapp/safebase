@@ -15,6 +15,7 @@ export async function requirePrintAuth(locale?: "tr" | "en") {
     "next",
     `${window.location.pathname}${window.location.search}`,
   );
+  loginUrl.searchParams.set("intent", "download");
   window.location.assign(loginUrl.toString());
   return false;
 }
