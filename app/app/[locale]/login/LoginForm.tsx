@@ -18,6 +18,34 @@ function sanitizeNextPath(value?: string | null) {
   return value;
 }
 
+function getPostDownloadReturnPath(
+  destination: string,
+  locale: "tr" | "en",
+) {
+  const premiumToolboxMatch = destination.match(
+    /^\/api\/premium\/toolbox\/([^/?#]+)/,
+  );
+  if (premiumToolboxMatch) {
+    return `/${locale}/toolbox/${decodeURIComponent(premiumToolboxMatch[1])}`;
+  }
+
+  const standardToolboxMatch = destination.match(
+    /^\/api\/toolbox\/([^/?#]+)\/pdf/,
+  );
+  if (standardToolboxMatch) {
+    return `/${locale}/toolbox/${decodeURIComponent(standardToolboxMatch[1])}`;
+  }
+
+  const staticToolboxMatch = destination.match(
+    /^\/downloads\/(.+)-toolbox-talk-(?:tr|en)\.pdf(?:\?.*)?$/i,
+  );
+  if (staticToolboxMatch) {
+    return `/${locale}/toolbox/${decodeURIComponent(staticToolboxMatch[1])}`;
+  }
+
+  return `/${locale}/downloads`;
+}
+
 export default function LoginForm({
   locale,
   nextPath,
@@ -65,12 +93,20 @@ export default function LoginForm({
 
       if (user) {
         window.localStorage.removeItem("sernem_post_auth_next");
+
+        if (downloadIntent) {
+          const returnPath = getPostDownloadReturnPath(safeNextPath, locale);
+          window.setTimeout(() => {
+            window.location.replace(returnPath);
+          }, 1200);
+        }
+
         window.location.assign(safeNextPath);
       }
     };
 
     void redirectAuthenticatedUser();
-  }, [safeNextPath, supabase]);
+  }, [downloadIntent, locale, safeNextPath, supabase]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -99,6 +135,15 @@ export default function LoginForm({
     const destination = safeNextPath ?? storedNextPath ?? `/${locale}/dashboard`;
 
     window.localStorage.removeItem("sernem_post_auth_next");
+
+    if (downloadIntent && destination !== `/${locale}/dashboard`) {
+      const returnPath = getPostDownloadReturnPath(destination, locale);
+
+      window.setTimeout(() => {
+        window.location.replace(returnPath);
+      }, 1200);
+    }
+
     window.location.assign(destination);
   }
 
