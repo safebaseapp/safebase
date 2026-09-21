@@ -6,9 +6,21 @@ import RegisterForm from "./RegisterForm";
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams?: Promise<{
+    next?: string;
+    intent?: string;
+  }>;
 };
 
-export default async function RegisterPage({ params }: Props) {
+function sanitizeNextPath(value?: string) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) {
+    return undefined;
+  }
+
+  return value;
+}
+
+export default async function RegisterPage({ params, searchParams }: Props) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
@@ -17,6 +29,16 @@ export default async function RegisterPage({ params }: Props) {
 
   const safeLocale = locale as "tr" | "en";
   const isTurkish = safeLocale === "tr";
+  const query = searchParams ? await searchParams : undefined;
+  const nextPath = sanitizeNextPath(query?.next);
+  const isDownloadIntent =
+    query?.intent === "download" ||
+    Boolean(
+      nextPath &&
+        (nextPath.includes(".pdf") ||
+          nextPath.startsWith("/downloads/") ||
+          nextPath.startsWith("/api/")),
+    );
 
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-10 text-white">
@@ -40,30 +62,55 @@ export default async function RegisterPage({ params }: Props) {
 
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-blue-400">
-                {isTurkish
-                  ? "Ücretsiz hesabını oluştur"
-                  : "Create your free account"}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "Ücretsiz indir"
+                    : "Download free"
+                  : isTurkish
+                    ? "Ücretsiz hesabını oluştur"
+                    : "Create your free account"}
               </p>
 
               <h2 className="mt-5 max-w-lg text-4xl font-bold leading-tight">
-                {isTurkish
-                  ? "Daha güvenli iş yerleri için dijital çalışma alanını oluştur."
-                  : "Build your digital workspace for safer workplaces."}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "Hesabını oluştur, istediğin HSE dokümanına kaldığın yerden devam et."
+                    : "Create your account and continue straight to the HSE document you requested."
+                  : isTurkish
+                    ? "Daha güvenli iş yerleri için dijital çalışma alanını oluştur."
+                    : "Build your digital workspace for safer workplaces."}
               </h2>
 
               <ul className="mt-7 space-y-4 text-slate-300">
                 <li>
                   ✓{" "}
-                  {isTurkish
-                    ? "Profesyonel HSE araçları"
-                    : "Professional HSE tools"}
+                  {isDownloadIntent
+                    ? isTurkish
+                      ? "Ücretsiz standart PDF indirmeleri"
+                      : "Free standard PDF downloads"
+                    : isTurkish
+                      ? "Profesyonel HSE araçları"
+                      : "Professional HSE tools"}
                 </li>
                 <li>
                   ✓{" "}
-                  {isTurkish ? "AI destekli rehberlik" : "AI-powered guidance"}
+                  {isDownloadIntent
+                    ? isTurkish
+                      ? "Kredi kartı gerekmez"
+                      : "No credit card required"
+                    : isTurkish
+                      ? "AI destekli rehberlik"
+                      : "AI-powered guidance"}
                 </li>
                 <li>
-                  ✓ {isTurkish ? "Kişisel dashboard" : "Personal dashboard"}
+                  ✓{" "}
+                  {isDownloadIntent
+                    ? isTurkish
+                      ? "Doğrulama sonrası indirmene geri dön"
+                      : "Return to your download after verification"
+                    : isTurkish
+                      ? "Kişisel dashboard"
+                      : "Personal dashboard"}
                 </li>
               </ul>
             </div>
@@ -81,21 +128,41 @@ export default async function RegisterPage({ params }: Props) {
 
             <div className="mt-7">
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-blue-400">
-                {isTurkish ? "SERNEM'e katıl" : "Join SERNEM"}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "Ücretsiz PDF erişimi"
+                    : "Free PDF access"
+                  : isTurkish
+                    ? "SERNEM'e katıl"
+                    : "Join SERNEM"}
               </p>
 
               <h1 className="mt-3 text-3xl font-bold">
-                {isTurkish ? "Hesabını oluştur" : "Create your account"}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "Ücretsiz hesap oluştur ve indir"
+                    : "Create a free account and download"
+                  : isTurkish
+                    ? "Hesabını oluştur"
+                    : "Create your account"}
               </h1>
 
               <p className="mt-3 text-slate-400">
-                {isTurkish
-                  ? "Başlamak yalnızca birkaç saniye sürer."
-                  : "It only takes a few seconds to get started."}
+                {isDownloadIntent
+                  ? isTurkish
+                    ? "Kart bilgisi istemiyoruz. Hesabını doğruladıktan sonra dokümanına devam edebilirsin."
+                    : "No card details required. After verifying your account, you can continue to your document."
+                  : isTurkish
+                    ? "Başlamak yalnızca birkaç saniye sürer."
+                    : "It only takes a few seconds to get started."}
               </p>
             </div>
 
-            <RegisterForm locale={safeLocale} />
+            <RegisterForm
+              locale={safeLocale}
+              nextPath={nextPath}
+              downloadIntent={isDownloadIntent}
+            />
           </section>
         </div>
       </div>
