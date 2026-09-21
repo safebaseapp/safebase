@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
 import LocalizedNavbar from "./components/LocalizedNavbar";
 import MobileAuthBar from "./components/MobileAuthBar";
+import "./navbar-responsive-fix.css";
 
 type Props = {
   children: React.ReactNode;
