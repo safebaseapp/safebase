@@ -23,7 +23,7 @@ export default function LoginForm({
   nextPath,
   downloadIntent = false,
 }: Props) {
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
   const isTurkish = locale === "tr";
 
   const [email, setEmail] = useState("");
@@ -37,17 +37,18 @@ export default function LoginForm({
   );
 
   const registerHref = useMemo(() => {
-    const url = new URL(`/${locale}/register`, window.location.origin);
+    const params = new URLSearchParams();
 
     if (safeNextPath) {
-      url.searchParams.set("next", safeNextPath);
+      params.set("next", safeNextPath);
     }
 
     if (downloadIntent) {
-      url.searchParams.set("intent", "download");
+      params.set("intent", "download");
     }
 
-    return `${url.pathname}${url.search}`;
+    const query = params.toString();
+    return `/${locale}/register${query ? `?${query}` : ""}`;
   }, [downloadIntent, locale, safeNextPath]);
 
   useEffect(() => {
