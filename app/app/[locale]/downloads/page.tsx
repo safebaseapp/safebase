@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import DownloadsClient from "./DownloadsClient";
+import ProtectedDownloadNavigationGuard from "./ProtectedDownloadNavigationGuard";
 
 type Props = {
   params: Promise<{
@@ -131,5 +132,10 @@ export default async function DownloadsPage({
     );
   }
 
-  return <DownloadsClient />;
+  return (
+    <>
+      <ProtectedDownloadNavigationGuard />
+      <DownloadsClient />
+    </>
+  );
 }
