@@ -20,6 +20,7 @@ import {
 } from "../../../../lib/ai/analyzeChecklist";
 import type { Answer, CorrectiveAction, Props } from "./types";
 import PrintButton from "@/components/ui/PrintButton";
+import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 export default function HotWorkChecklist({ locale }: Props) {
   const t = labels[locale];
@@ -437,7 +438,9 @@ export default function HotWorkChecklist({ locale }: Props) {
     void generateAiAssessment();
   }
 
-  function printInspection() {
+  async function printInspection() {
+    if (!(await requirePrintAuth(locale))) return;
+
     trackEvent("pdf_downloaded", {
       document_type: "hot_work_inspection",
       locale,

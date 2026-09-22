@@ -5,7 +5,9 @@ import sharp from "sharp";
 
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf";
+import { premiumMasterSlugSet } from "@/lib/toolbox/premium-master-slugs";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
+import { createClient } from "@/utils/supabase/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -29,7 +31,7 @@ export async function GET(
         : "en";
 
     const { user, profile } = await getCurrentAccessProfile();
-    const nextPath = `/api/toolbox/${encodeURIComponent(slug)}/pdf?locale=${locale}`;
+    const nextPath = `${request.nextUrl.pathname}${request.nextUrl.search}`;
 
     if (!user || !profile) {
       const loginUrl = new URL(`/${locale}/login`, request.url);
@@ -50,6 +52,17 @@ export async function GET(
       return new Response("Toolbox not found.", {
         status: 404,
       });
+    }
+
+    if (
+      premiumMasterSlugSet.has(slug) &&
+      profile.plan !== "premium" &&
+      profile.role !== "admin"
+    ) {
+      return Response.redirect(
+        new URL(`/${locale}/upgrade`, request.url),
+        307,
+      );
     }
 
     const logoPath = path.join(
@@ -74,6 +87,25 @@ export async function GET(
         revision: "00",
       },
     });
+
+    const supabase = await createClient();
+    const { error: activityError } = await supabase
+      .from("user_activity_events")
+      .insert({
+        user_id: user.id,
+        event_name: "pdf_download",
+        path: request.url,
+        metadata: {
+          resource_type: "toolbox",
+          slug,
+          locale,
+          mode: "standard",
+        },
+      });
+
+    if (activityError) {
+      console.error("PDF activity tracking error:", activityError);
+    }
 
     const localized =
       locale === "tr"

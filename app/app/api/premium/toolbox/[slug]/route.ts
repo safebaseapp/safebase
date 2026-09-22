@@ -77,11 +77,12 @@ export async function GET(request: Request, { params }: RouteProps) {
   } = await supabase.auth.getUser();
 
   if (!user) {
+    const nextPath = `${new URL(request.url).pathname}${new URL(request.url).search}`;
+    const loginUrl = createSafeUrl(request, `/${locale}/login`);
+    loginUrl.searchParams.set("next", nextPath);
+
     return NextResponse.redirect(
-      createSafeUrl(
-        request,
-        `/${locale}/login?next=/${locale}/toolbox`,
-      ),
+      loginUrl,
     );
   }
 

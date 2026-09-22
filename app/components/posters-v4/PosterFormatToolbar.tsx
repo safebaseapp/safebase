@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import PrintButton from "@/components/ui/PrintButton";
+import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 type Props = {
   locale: "tr" | "en";
@@ -22,7 +23,9 @@ export default function PosterFormatToolbar({ locale }: Props) {
     });
   }
 
-  function printPoster(size: "a4" | "a3") {
+  async function printPoster(size: "a4" | "a3") {
+    if (!(await requirePrintAuth(locale))) return;
+
     selectSize(size);
 
     window.setTimeout(() => {
@@ -74,7 +77,11 @@ export default function PosterFormatToolbar({ locale }: Props) {
 
       <button
         type="button"
-        onClick={() => window.print()}
+        onClick={() => {
+          void requirePrintAuth(locale).then((isAuthenticated) => {
+            if (isAuthenticated) window.print();
+          });
+        }}
         className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-800 transition hover:border-blue-400 hover:text-blue-600"
       >
         🖨 {isTurkish ? "Yazdır" : "Print"}

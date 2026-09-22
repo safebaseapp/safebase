@@ -1,4 +1,5 @@
 import ActivityTracker from "@/components/analytics/ActivityTracker";
+import type { Metadata } from "next";
 import { createClient } from "@/utils/supabase/server";
 import ToolboxLibraryClient from "./ToolboxLibraryClient";
 
@@ -7,6 +8,25 @@ type Props = {
     locale: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const canonical = `https://www.sernem.com/${locale}/toolbox`;
+
+  return {
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://www.sernem.com/tr/toolbox",
+        en: "https://www.sernem.com/en/toolbox",
+        "x-default": "https://www.sernem.com/en/toolbox",
+      },
+    },
+  };
+}
 
 export type ToolboxContentControl = {
   slug: string;

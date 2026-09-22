@@ -2,10 +2,11 @@
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState, use } from "react";
 import MethodStatementPrint from "./MethodStatementPrint";
 import PrintButton from "@/components/ui/PrintButton";
 import { trackEvent } from "@/lib/analytics";
+import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -30,6 +31,8 @@ const createMethodStep = (): MethodStep => ({
 
 
 export default function MethodStatementPage({ params }: Props) {
+  const { locale: routeLocale } = use(params);
+  const locale: "tr" | "en" = routeLocale === "tr" ? "tr" : "en";
   const [loadedTemplateButton, setLoadedTemplateButton] = useState<string | null>(null);
   const [activeTemplateName, setActiveTemplateName] = useState<string | null>(null);
 
@@ -40,7 +43,6 @@ export default function MethodStatementPage({ params }: Props) {
     }, 1800);
   };
 
-  const [locale, setLocale] = useState("en");
   const [loadedTemplate, setLoadedTemplate] = useState<string | null>(null);
 
   const [projectName, setProjectName] = useState("");
@@ -72,15 +74,15 @@ export default function MethodStatementPage({ params }: Props) {
     createMethodStep(),
   ]);
 
-  useEffect(() => {
-    params.then(({ locale: currentLocale }) => {
-      setLocale(currentLocale);
-    });
-  }, [params]);
-
   const isTurkish = locale === "tr";
 
-  const handlePrintMethodStatement = () => {
+  const setLocalizedTemplateName = (english: string, turkish: string) => {
+    setActiveTemplateName(isTurkish ? turkish : english);
+  };
+
+  const handlePrintMethodStatement = async () => {
+    if (!(await requirePrintAuth(locale))) return;
+
     trackEvent("pdf_downloaded", {
       document_type: "method_statement",
       locale,
@@ -3977,7 +3979,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadWorkingAtHeightTemplate();
                 showLoadedButtonFeedback("template-1");
-                setActiveTemplateName("Working At Height");
+                setLocalizedTemplateName("Working At Height", "Yüksekte Çalışma");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4019,14 +4021,14 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadHotWorkTemplate();
                 showLoadedButtonFeedback("template-2");
-                setActiveTemplateName("Hot Work");
+                setLocalizedTemplateName("Hot Work", "Sıcak Çalışma");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
                     block: "start"
                   });
                 }, 500);
-                setActiveTemplateName("Sıcak Çalışma");
+                setLocalizedTemplateName("Sıcak Çalışma", "Sıcak Çalışma");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4066,14 +4068,14 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadConfinedSpaceTemplate();
                 showLoadedButtonFeedback("template-3");
-                setActiveTemplateName("Confined Space");
+                setLocalizedTemplateName("Confined Space", "Kapalı Alana Giriş");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
                     block: "start"
                   });
                 }, 500);
-                setActiveTemplateName("Kapalı Alana Giriş");
+                setLocalizedTemplateName("Confined Space", "Kapalı Alana Giriş");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4115,14 +4117,14 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadLotoTemplate();
                 showLoadedButtonFeedback("template-4");
-                setActiveTemplateName("Loto");
+                setLocalizedTemplateName("Loto", "LOTO / Enerji İzolasyonu");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
                     block: "start"
                   });
                 }, 500);
-                setActiveTemplateName("LOTO / Enerji İzolasyonu");
+                setLocalizedTemplateName("Loto", "LOTO / Enerji İzolasyonu");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4163,7 +4165,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadLiftingTemplate();
                 showLoadedButtonFeedback("template-5");
-                setActiveTemplateName("Lifting");
+                setLocalizedTemplateName("Lifting", "Kaldırma Operasyonları");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4213,7 +4215,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadScaffoldingTemplate();
                 showLoadedButtonFeedback("template-6");
-                setActiveTemplateName("Scaffolding");
+                setLocalizedTemplateName("Scaffolding", "İskele Kurulum / Söküm");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4263,7 +4265,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadExcavationTemplate();
                 showLoadedButtonFeedback("template-7");
-                setActiveTemplateName("Excavation");
+                setLocalizedTemplateName("Excavation", "Kazı Çalışmaları");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4311,7 +4313,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadElectricalTemplate();
                 showLoadedButtonFeedback("template-8");
-                setActiveTemplateName("Electrical");
+                setLocalizedTemplateName("Electrical", "Elektrik Çalışmaları");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4359,7 +4361,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadGrindingCuttingTemplate();
                 showLoadedButtonFeedback("template-9");
-                setActiveTemplateName("Grinding Cutting");
+                setLocalizedTemplateName("Grinding Cutting", "Taşlama / Kesme");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4402,7 +4404,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadPipingTemplate();
                 showLoadedButtonFeedback("template-10");
-                setActiveTemplateName("Piping");
+                setLocalizedTemplateName("Piping", "Boru / Piping Çalışmaları");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4450,14 +4452,14 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadHydrotestTemplate();
                 showLoadedButtonFeedback("template-11");
-                setActiveTemplateName("Hydrotest");
+                setLocalizedTemplateName("Hydrotest", "Hidrostatik Test");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
                     block: "start"
                   });
                 }, 500);
-                setActiveTemplateName("Hidrostatik Test");
+                setLocalizedTemplateName("Hydrotest", "Hidrostatik Test");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4500,7 +4502,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadAirBlowingTemplate();
                 showLoadedButtonFeedback("template-12");
-                setActiveTemplateName("Air Blowing");
+                setLocalizedTemplateName("Air Blowing", "Hava Üfleme");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4548,7 +4550,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadPaintingCoatingTemplate();
                 showLoadedButtonFeedback("template-13");
-                setActiveTemplateName("Painting Coating");
+                setLocalizedTemplateName("Painting Coating", "Boya / Kaplama");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4591,7 +4593,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadInsulationTemplate();
                 showLoadedButtonFeedback("template-14");
-                setActiveTemplateName("Insulation");
+                setLocalizedTemplateName("Insulation", "İzolasyon");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4634,7 +4636,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadMobileEquipmentTemplate();
                 showLoadedButtonFeedback("template-15");
-                setActiveTemplateName("Mobile Equipment");
+                setLocalizedTemplateName("Mobile Equipment", "Mobil Ekipman");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4677,7 +4679,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadLadderUseTemplate();
                 showLoadedButtonFeedback("template-16");
-                setActiveTemplateName("Ladder Use");
+                setLocalizedTemplateName("Ladder Use", "Merdiven Kullanımı");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4715,7 +4717,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadMewpTemplate();
                 showLoadedButtonFeedback("template-17");
-                setActiveTemplateName("Mewp");
+                setLocalizedTemplateName("MEWP Operations", "MEWP Çalışmaları");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4753,7 +4755,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadManualHandlingTemplate();
                 showLoadedButtonFeedback("template-18");
-                setActiveTemplateName("Manual Handling");
+                setLocalizedTemplateName("Manual Handling", "Elle Taşıma");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4791,7 +4793,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadChemicalHandlingTemplate();
                 showLoadedButtonFeedback("template-19");
-                setActiveTemplateName("Chemical Handling");
+                setLocalizedTemplateName("Chemical Handling", "Kimyasal Elleçleme");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",
@@ -4834,7 +4836,7 @@ export default function MethodStatementPage({ params }: Props) {
               onClick={() => {
                 loadCompressedGasTemplate();
                 showLoadedButtonFeedback("template-20");
-                setActiveTemplateName("Compressed Gas");
+                setLocalizedTemplateName("Compressed Gas", "Basınçlı Gaz");
                 window.setTimeout(() => {
                   document.getElementById("method-statement-editor-target")?.scrollIntoView({
                     behavior: "smooth",

@@ -8,6 +8,7 @@ import {
   type ToolboxLocalizedContent,
 } from "@/lib/toolbox/toolbox-data";
 import { getContentAccess } from "@/lib/content/get-content-access";
+import { getToolboxStandardPdfHref } from "@/lib/toolbox/standard-pdf";
 
 type Props = {
   params: Promise<{
@@ -303,7 +304,7 @@ export default async function ToolboxDetailPage({ params }: Props) {
                   : "Back to Toolbox Library"
               }
               libraryHref={`/${locale}/toolbox`}
-              pdfHref={`/api/toolbox/${slug}/pdf?locale=${locale}`}
+              pdfHref={getToolboxStandardPdfHref(slug, locale)}
             />
           </div>
         </div>

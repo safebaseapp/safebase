@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { premiumMasterSlugSet } from "./lib/toolbox/premium-master-slugs";
 import { updateSession } from "./utils/supabase/proxy";
 
 function resolveLocale(request: NextRequest): "tr" | "en" {
@@ -40,7 +41,9 @@ export async function proxy(request: NextRequest) {
     const [, slug, fileLocale] = toolboxPdfMatch;
     const protectedUrl = request.nextUrl.clone();
 
-    protectedUrl.pathname = `/api/toolbox/${encodeURIComponent(slug)}/pdf`;
+    protectedUrl.pathname = premiumMasterSlugSet.has(slug)
+      ? `/api/premium/toolbox/${encodeURIComponent(slug)}`
+      : `/api/toolbox/${encodeURIComponent(slug)}/pdf`;
     protectedUrl.search = "";
     protectedUrl.searchParams.set("locale", fileLocale.toLowerCase());
 
