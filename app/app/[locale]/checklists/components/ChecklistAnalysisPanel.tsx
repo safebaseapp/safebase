@@ -6,6 +6,7 @@ type Props = {
   locale: Locale;
   analysis: ChecklistAnalysisResult | null;
   showPermitReadiness?: boolean;
+  showInternalFindingIds?: boolean;
 };
 
 type MetricCardProps = {
@@ -26,12 +27,18 @@ export default function ChecklistAnalysisPanel({
   locale,
   analysis,
   showPermitReadiness = true,
+  showInternalFindingIds = true,
 }: Props) {
   if (!analysis) {
     return null;
   }
 
   const isTurkish = locale === "tr";
+
+  const riskLabel = (risk: string) => {
+    if (!isTurkish) return risk;
+    return { Low: "Düşük", Medium: "Orta", High: "Yüksek", Critical: "Kritik" }[risk] ?? risk;
+  };
 
   const decisionClasses =
     analysis.workDecision === "Stop Work"
@@ -49,11 +56,11 @@ export default function ChecklistAnalysisPanel({
         : "🛑 STOP WORK"
       : analysis.workDecision === "Incomplete Assessment"
         ? isTurkish
-          ? "⚠️ DEĞERLENDİRME EKSİK"
+          ? "⚠️ DEĞERLENDİRME TAMAMLANMADI"
           : "⚠️ ASSESSMENT INCOMPLETE"
         : analysis.workDecision === "Proceed With Conditions"
           ? isTurkish
-            ? "🟠 KOŞULLU DEVAM"
+            ? "🟠 KONTROLLERLE DEVAM"
             : "🟠 PROCEED WITH CONDITIONS"
           : isTurkish
             ? "✅ ÇALIŞMA DEVAM EDEBİLİR"
@@ -134,7 +141,7 @@ export default function ChecklistAnalysisPanel({
             <p
               className={`mt-2 text-3xl font-bold ${riskClass} print:text-black`}
             >
-              {analysis.overallRisk}
+              {riskLabel(analysis.overallRisk)}
             </p>
           </div>
 
@@ -275,7 +282,9 @@ export default function ChecklistAnalysisPanel({
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-red-300 print:text-red-700">
-                        {finding.id}
+                        {showInternalFindingIds
+                          ? finding.id
+                          : `${isTurkish ? "Madde" : "Item"} ${analysis.findings.indexOf(finding) + 1}`}
                       </p>
 
                       <h4 className="mt-2 font-bold leading-7">
@@ -283,8 +292,8 @@ export default function ChecklistAnalysisPanel({
                       </h4>
                     </div>
 
-                    <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-200 print:bg-white print:text-red-700">
-                      {finding.riskLevel}
+                      <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-200 print:bg-white print:text-red-700">
+                      {riskLabel(finding.riskLevel)}
                     </span>
                   </div>
 

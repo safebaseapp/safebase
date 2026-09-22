@@ -29,17 +29,20 @@ IMPORTANT RULES:
 7. Do not claim that work is safe when unresolved Critical or High findings exist.
 8. Keep the report professional, concise and suitable for an HSE manager.
 9. Produce a complete management assessment, not a short narrative.
-10. Return valid JSON only.
-11. Do not include markdown, code fences or additional commentary.
+10. If assessmentStatus is Partial or completionRate is below 100, the work decision must be HOLD and no approval may be stated. Show provisional risk separately from the incomplete final decision.
+11. Return valid JSON only.
+12. Do not include markdown, code fences or additional commentary.
 `.trim();
 
 function getLanguageInstruction(language: ProfessionalAssessmentInput["language"]) {
   if (language === "tr") {
     return `
 Write the complete assessment in professional Turkish.
+Every prose field, action, role, rationale, risk explanation and conclusion must be written in Turkish. Keep only the required enum/API values in their supplied stable form.
 
 Keep these final recommendation values exactly as provided:
 - APPROVED
+- HOLD
 - PROCEED WITH CONDITIONS
 - STOP WORK
 `.trim();
@@ -47,9 +50,11 @@ Keep these final recommendation values exactly as provided:
 
   return `
 Write the complete assessment in professional English.
+Every prose field, action, role, rationale, risk explanation and conclusion must be written in English.
 
 Keep these final recommendation values exactly as provided:
 - APPROVED
+- HOLD
 - PROCEED WITH CONDITIONS
 - STOP WORK
 `.trim();
@@ -155,7 +160,7 @@ Name roles and responsibilities only when supported by supplied responsible-pers
 Identify patterns only when supported by multiple supplied findings or recurring control themes.
 
 11. Permit / Readiness Status
-Report permit/readiness status only when relevant to the inspection context. Otherwise return null.
+Report permit/readiness status only when permitRelevant is true in the inspection context. Otherwise return null and do not mention permits or readiness.
 
 12. Recommended Follow-Up Inspection
 Specify what should be re-inspected and when, based on confirmed findings.

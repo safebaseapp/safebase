@@ -74,7 +74,7 @@ export default function MobileAuthBar({ locale }: Props) {
                 href={`/${locale}/admin`}
                 className="inline-flex h-9 items-center justify-center rounded-xl border border-violet-400/20 bg-violet-500/[0.08] px-3 text-xs font-black text-violet-200"
               >
-                Admin
+                {isTurkish ? "Yönetim" : "Admin"}
               </Link>
             )}
 

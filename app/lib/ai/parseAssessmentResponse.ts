@@ -5,6 +5,7 @@ import type {
 
 const VALID_DECISIONS: AssessmentWorkDecision[] = [
   "APPROVED",
+  "HOLD",
   "PROCEED WITH CONDITIONS",
   "STOP WORK",
 ];

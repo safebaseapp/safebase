@@ -303,6 +303,9 @@ function buildSummary(
 ): string {
   const completedItems = totalItems - unansweredItems;
   const isPartial = unansweredItems > 0;
+  const displayRisk = locale === "tr"
+    ? { Low: "Düşük", Medium: "Orta", High: "Yüksek", Critical: "Kritik" }[overallRisk]
+    : overallRisk;
 
   if (locale === "tr") {
     return [
@@ -310,7 +313,7 @@ function buildSummary(
         ? `Bu, tamamlanan ${completedItems}/${totalItems} maddeye dayalı kısmi bir değerlendirmedir.`
         : "Tüm kontrol maddelerine dayalı nihai değerlendirme tamamlandı.",
       `Güvenlik skoru ${score}/100 olarak hesaplandı.`,
-      `Genel risk seviyesi: ${overallRisk}.`,
+      `Genel risk seviyesi: ${displayRisk}.`,
       `${nonCompliantItems} uygunsuzluk ve ${criticalFindings} kritik bulgu tespit edildi.`,
     ].join(" ");
   }
