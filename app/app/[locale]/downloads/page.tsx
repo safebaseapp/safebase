@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import DownloadsClient from "./DownloadsClient";
@@ -7,6 +8,42 @@ type Props = {
     locale: string;
   }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: "tr" | "en" = rawLocale === "tr" ? "tr" : "en";
+  const isTurkish = locale === "tr";
+
+  const title = isTurkish
+    ? "Ücretsiz İSG PDF, Toolbox ve Kontrol Listeleri | SERNEM"
+    : "Free HSE PDFs, Toolbox Talks & Checklists | SERNEM";
+
+  const description = isTurkish
+    ? "Toolbox Talk, İSG posterleri, güvenlik levhaları, kontrol listeleri ve profesyonel HSE rehberlerini tek merkezden ücretsiz inceleyin ve indirin."
+    : "Access free HSE PDFs, Toolbox Talks, safety posters, signs, checklists and professional safety guides from the SERNEM Resource Center.";
+
+  const canonical = `https://www.sernem.com/${locale}/downloads`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: {
+        en: "https://www.sernem.com/en/downloads",
+        tr: "https://www.sernem.com/tr/downloads",
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      siteName: "SERNEM",
+      type: "website",
+      locale: isTurkish ? "tr_TR" : "en_US",
+    },
+  };
+}
 
 export default async function DownloadsPage({
   params,
@@ -33,9 +70,6 @@ export default async function DownloadsPage({
     );
   }
 
-  // Fail-safe:
-  // DB veya kayıt problemi olursa çalışan Downloads
-  // sistemini yanlışlıkla kapatmıyoruz.
   const downloadsEnabled =
     featureFlag?.enabled ?? true;
 
