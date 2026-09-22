@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { createClient } from "../../../utils/supabase/client";
+import { trackEvent } from "@/lib/analytics/track";
 
 type Props = {
   locale: "tr" | "en";
@@ -57,7 +58,13 @@ export default function RegisterForm({
     if (safeNextPath) {
       window.localStorage.setItem("sernem_post_auth_next", safeNextPath);
     }
-  }, [safeNextPath]);
+
+    trackEvent("register_view", {
+      locale,
+      download_intent: downloadIntent,
+      destination: safeNextPath,
+    });
+  }, [downloadIntent, locale, safeNextPath]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -69,6 +76,12 @@ export default function RegisterForm({
     if (safeNextPath) {
       window.localStorage.setItem("sernem_post_auth_next", safeNextPath);
     }
+
+    trackEvent("signup_submitted", {
+      locale,
+      download_intent: downloadIntent,
+      destination: safeNextPath,
+    });
 
     const redirectUrl = new URL(`/${locale}/dashboard`, window.location.origin);
 
@@ -95,6 +108,12 @@ export default function RegisterForm({
     if (error) {
       console.error("Supabase signup error:", error);
 
+      trackEvent("signup_failed", {
+        locale,
+        download_intent: downloadIntent,
+        error_code: error.code ?? "unknown",
+      });
+
       setErrorMessage(
         isTurkish
           ? `Hesap oluşturulamadı: ${error.message}`
@@ -107,10 +126,25 @@ export default function RegisterForm({
 
     if (data.session) {
       const destination = safeNextPath ?? `/${locale}/dashboard`;
+
+      trackEvent("signup_success", {
+        locale,
+        download_intent: downloadIntent,
+        confirmation_required: false,
+        destination,
+      });
+
       window.localStorage.removeItem("sernem_post_auth_next");
       window.location.assign(destination);
       return;
     }
+
+    trackEvent("signup_success", {
+      locale,
+      download_intent: downloadIntent,
+      confirmation_required: true,
+      destination: safeNextPath,
+    });
 
     setSuccessMessage(
       downloadIntent
