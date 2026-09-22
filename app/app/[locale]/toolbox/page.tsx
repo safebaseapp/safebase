@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import { createClient } from "@/utils/supabase/server";
 import ToolboxLibraryClient from "./ToolboxLibraryClient";
@@ -15,6 +16,42 @@ export type ToolboxContentControl = {
   accessLevel: "free" | "premium";
   featured: boolean;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: "tr" | "en" = rawLocale === "tr" ? "tr" : "en";
+  const isTurkish = locale === "tr";
+
+  const title = isTurkish
+    ? "70 Ücretsiz Toolbox Talk ve İSG PDF | SERNEM"
+    : "70 Free Toolbox Talks & Safety PDFs | SERNEM";
+
+  const description = isTurkish
+    ? "Yüksekte çalışma, sıcak çalışma, iskele, LOTO, kaldırma operasyonları ve daha fazlası için 70 saha uyumlu Toolbox Talk içeriğini ücretsiz inceleyin ve PDF olarak indirin."
+    : "Browse 70 field-ready Toolbox Talks covering working at height, hot work, scaffolding, LOTO, lifting operations and more. Preview and download practical safety PDFs.";
+
+  const canonical = `https://www.sernem.com/${locale}/toolbox`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: {
+        en: "https://www.sernem.com/en/toolbox",
+        tr: "https://www.sernem.com/tr/toolbox",
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      siteName: "SERNEM",
+      type: "website",
+      locale: isTurkish ? "tr_TR" : "en_US",
+    },
+  };
+}
 
 export default async function ToolboxLibraryPage({ params }: Props) {
   const { locale: rawLocale } = await params;
