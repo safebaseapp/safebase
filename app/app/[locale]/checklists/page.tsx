@@ -368,6 +368,15 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
               );
             })}
           </div>
+
+          <div className="mt-10 text-center">
+            <Link
+              href={`/${locale}/checklists/all`}
+              className="inline-flex rounded-xl border border-blue-500/40 bg-blue-500/10 px-5 py-3 font-semibold text-blue-200 transition hover:border-blue-400 hover:bg-blue-500/20"
+            >
+              {isTurkish ? "Tüm Denetimleri Gör" : "View All Inspections"}
+            </Link>
+          </div>
         </div>
       </section>
     </main>
