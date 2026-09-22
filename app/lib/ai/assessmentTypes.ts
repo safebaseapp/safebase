@@ -27,6 +27,42 @@ export type AssessmentRecommendation = {
   priority?: number;
 };
 
+export type InspectionAssessmentContext = {
+  inspectionType: string;
+  company: string;
+  project: string;
+  location: string;
+  completionPercentage: number;
+  complianceScore: number;
+  criticalFindings: unknown[];
+  nonConformities: unknown[];
+  remarks: { id: string; text: string }[];
+  correctiveActions: string[];
+  responsiblePersons: string[];
+  targetDates: string[];
+  inspectionSpecificCriticalControls: string[];
+  failedAnswers?: {
+    id: string;
+    question: string;
+    answer: string;
+    remarks?: string;
+  }[];
+};
+
+export type ManagementAction = {
+  priority: number;
+  action: string;
+  owner: string;
+  timing: string;
+  reason: string;
+  reference?: string;
+};
+
+export type ResponsibleRole = {
+  role: string;
+  responsibility: string;
+};
+
 export type ProfessionalAssessmentInput = {
   workType: string;
   language: AssessmentLanguage;
@@ -48,9 +84,28 @@ export type ProfessionalAssessmentInput = {
   findings: AssessmentFinding[];
   recommendations: AssessmentRecommendation[];
   references: string[];
+  inspectionContext?: InspectionAssessmentContext;
 };
 
 export type ProfessionalAssessmentOutput = {
+  executiveSummary: string;
+  overallRiskRating: {
+    level: AssessmentRiskLevel;
+    rationale: string;
+  };
+  workDecision: AssessmentWorkDecision;
+  topCriticalRisks: string[];
+  criticalControlFailures: string[];
+  immediateActions: ManagementAction[];
+  shortTermActions: ManagementAction[];
+  managementActions: ManagementAction[];
+  responsibleRoles: ResponsibleRole[];
+  repeatedSystemicWeaknesses: string[];
+  permitReadinessStatus: string | null;
+  recommendedFollowUpInspection: string;
+  managementConclusion: string;
+
+  // Kept for the existing six inspection renderers.
   executiveAssessment: string;
   positiveFindings: string[];
   criticalConcerns: string[];

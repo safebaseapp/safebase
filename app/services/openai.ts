@@ -44,6 +44,112 @@ export async function generateProfessionalAssessment(
           type: "object",
           additionalProperties: false,
           properties: {
+            executiveSummary: {
+              type: "string",
+            },
+            overallRiskRating: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                level: {
+                  type: "string",
+                  enum: ["Low", "Medium", "High", "Critical"],
+                },
+                rationale: {
+                  type: "string",
+                },
+              },
+              required: ["level", "rationale"],
+            },
+            workDecision: {
+              type: "string",
+              enum: [
+                "APPROVED",
+                "PROCEED WITH CONDITIONS",
+                "STOP WORK",
+              ],
+            },
+            topCriticalRisks: {
+              type: "array",
+              items: { type: "string" },
+            },
+            criticalControlFailures: {
+              type: "array",
+              items: { type: "string" },
+            },
+            immediateActions: {
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                properties: {
+                  priority: { type: "integer", minimum: 1 },
+                  action: { type: "string" },
+                  owner: { type: "string" },
+                  timing: { type: "string" },
+                  reason: { type: "string" },
+                  reference: { type: "string" },
+                },
+                required: ["priority", "action", "owner", "timing", "reason", "reference"],
+              },
+            },
+            shortTermActions: {
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                properties: {
+                  priority: { type: "integer", minimum: 1 },
+                  action: { type: "string" },
+                  owner: { type: "string" },
+                  timing: { type: "string" },
+                  reason: { type: "string" },
+                  reference: { type: "string" },
+                },
+                required: ["priority", "action", "owner", "timing", "reason", "reference"],
+              },
+            },
+            managementActions: {
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                properties: {
+                  priority: { type: "integer", minimum: 1 },
+                  action: { type: "string" },
+                  owner: { type: "string" },
+                  timing: { type: "string" },
+                  reason: { type: "string" },
+                  reference: { type: "string" },
+                },
+                required: ["priority", "action", "owner", "timing", "reason", "reference"],
+              },
+            },
+            responsibleRoles: {
+              type: "array",
+              items: {
+                type: "object",
+                additionalProperties: false,
+                properties: {
+                  role: { type: "string" },
+                  responsibility: { type: "string" },
+                },
+                required: ["role", "responsibility"],
+              },
+            },
+            repeatedSystemicWeaknesses: {
+              type: "array",
+              items: { type: "string" },
+            },
+            permitReadinessStatus: {
+              anyOf: [{ type: "string" }, { type: "null" }],
+            },
+            recommendedFollowUpInspection: {
+              type: "string",
+            },
+            managementConclusion: {
+              type: "string",
+            },
             executiveAssessment: {
               type: "string",
             },
@@ -112,6 +218,19 @@ export async function generateProfessionalAssessment(
             },
           },
           required: [
+            "executiveSummary",
+            "overallRiskRating",
+            "workDecision",
+            "topCriticalRisks",
+            "criticalControlFailures",
+            "immediateActions",
+            "shortTermActions",
+            "managementActions",
+            "responsibleRoles",
+            "repeatedSystemicWeaknesses",
+            "permitReadinessStatus",
+            "recommendedFollowUpInspection",
+            "managementConclusion",
             "executiveAssessment",
             "positiveFindings",
             "criticalConcerns",

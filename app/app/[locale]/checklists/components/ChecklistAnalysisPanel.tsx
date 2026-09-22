@@ -5,6 +5,7 @@ type Locale = "tr" | "en";
 type Props = {
   locale: Locale;
   analysis: ChecklistAnalysisResult | null;
+  showPermitReadiness?: boolean;
 };
 
 type MetricCardProps = {
@@ -24,6 +25,7 @@ function MetricCard({ label, value }: MetricCardProps) {
 export default function ChecklistAnalysisPanel({
   locale,
   analysis,
+  showPermitReadiness = true,
 }: Props) {
   if (!analysis) {
     return null;
@@ -113,7 +115,7 @@ export default function ChecklistAnalysisPanel({
           </div>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <div className={`mt-8 grid gap-4 sm:grid-cols-2 ${showPermitReadiness ? "xl:grid-cols-5" : "xl:grid-cols-4"}`}>
           <MetricCard
             label={isTurkish ? "Tamamlanma" : "Completion"}
             value={`${analysis.completionRate}%`}
@@ -148,7 +150,8 @@ export default function ChecklistAnalysisPanel({
         </div>
       </div>
 
-      <div className="p-7 sm:p-8">
+        <div className="p-7 sm:p-8">
+          {showPermitReadiness && (
         <div className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
@@ -197,6 +200,7 @@ export default function ChecklistAnalysisPanel({
             />
           </div>
         </div>
+          )}
 
         <div className="mt-7 grid gap-6 lg:grid-cols-2">
           <article className="rounded-2xl border border-slate-700 bg-slate-950 p-6 print:border-slate-300 print:bg-white">
