@@ -28,8 +28,9 @@ IMPORTANT RULES:
 6. Clearly distinguish confirmed findings from possible consequences.
 7. Do not claim that work is safe when unresolved Critical or High findings exist.
 8. Keep the report professional, concise and suitable for an HSE manager.
-9. Return valid JSON only.
-10. Do not include markdown, code fences or additional commentary.
+9. Produce a complete management assessment, not a short narrative.
+10. Return valid JSON only.
+11. Do not include markdown, code fences or additional commentary.
 `.trim();
 
 function getLanguageInstruction(language: ProfessionalAssessmentInput["language"]) {
@@ -56,6 +57,22 @@ Keep these final recommendation values exactly as provided:
 
 function getOutputSchema(): ProfessionalAssessmentOutput {
   return {
+    executiveSummary: "",
+    overallRiskRating: {
+      level: "Critical",
+      rationale: "",
+    },
+    workDecision: "STOP WORK",
+    topCriticalRisks: [],
+    criticalControlFailures: [],
+    immediateActions: [],
+    shortTermActions: [],
+    managementActions: [],
+    responsibleRoles: [],
+    repeatedSystemicWeaknesses: [],
+    permitReadinessStatus: null,
+    recommendedFollowUpInspection: "",
+    managementConclusion: "",
     executiveAssessment: "",
     positiveFindings: [],
     criticalConcerns: [],
@@ -91,6 +108,7 @@ export function buildAssessmentPrompt(
     findings: input.findings,
     recommendations: input.recommendations,
     references: input.references,
+    inspectionContext: input.inspectionContext,
   };
 
   return `
@@ -106,25 +124,61 @@ ${JSON.stringify(assessmentData, null, 2)}
 
 REQUIRED REPORT CONTENT:
 
-1. Executive Assessment
-Summarize the assessment status, overall risk, completion level, permit readiness and work decision.
+1. Executive Summary
+Summarize the inspection type, company/project/location when supplied, completion level, compliance score, overall risk and work decision.
 
-2. Positive Findings
+2. Overall Risk Rating
+Use the rule-engine overall risk level exactly and explain the rating using only confirmed findings.
+
+3. Work Decision
+The work decision must exactly match the rule-engine decision.
+
+4. Top Critical Risks
+List the most important confirmed Critical and High risks first.
+
+5. Critical Control Failures
+List failed critical controls by name. Do not invent failures.
+
+6. Immediate Actions (0–24 hours)
+Prioritize containment, stop-work, escalation and urgent corrective actions.
+
+7. Short-Term Actions (1–7 days)
+List practical actions to close findings and verify controls.
+
+8. Management Actions
+List system-level actions for leadership, assurance, competency, resources and follow-up.
+
+9. Responsible Roles
+Name roles and responsibilities only when supported by supplied responsible-person or finding data; otherwise identify the accountable HSE or operational role without inventing a person.
+
+10. Repeated / Systemic Weaknesses
+Identify patterns only when supported by multiple supplied findings or recurring control themes.
+
+11. Permit / Readiness Status
+Report permit/readiness status only when relevant to the inspection context. Otherwise return null.
+
+12. Recommended Follow-Up Inspection
+Specify what should be re-inspected and when, based on confirmed findings.
+
+13. Management Conclusion
+Provide a concise management conclusion tied to the unchanged work decision.
+
+14. Positive Findings
 List only confirmed positive or satisfactory controls found in the supplied data.
 If no confirmed positive findings are supplied, return an empty array.
 
-3. Critical Concerns
+15. Critical Concerns
 List unresolved Critical and High concerns first.
 Do not invent concerns that are not present in the supplied findings.
 
-4. Operational Risk
+16. Operational Risk
 Explain the operational meaning of the confirmed findings and the current work decision.
 
-5. Potential Consequences
+17. Potential Consequences
 List realistic potential consequences arising from the confirmed hazards.
 Do not present possible consequences as confirmed incidents.
 
-6. Priority Actions
+18. Priority Actions
 Order actions by safety priority.
 Critical controls must come before High, Medium and Low controls.
 Every action must include:
@@ -133,10 +187,10 @@ Every action must include:
 - reason
 - reference when available
 
-7. Applicable Standards
+19. Applicable Standards
 Use only standards or references contained in the supplied data.
 
-8. Final Recommendation
+20. Final Recommendation
 The finalRecommendation value must exactly match this rule-engine decision:
 
 ${input.workDecision}

@@ -644,3 +644,30 @@ export function analyzeLiftingChecklist(
     recommendations,
   };
 }
+
+export function analyzeInspectionChecklist(
+  document: ChecklistDocument,
+  answers: ChecklistAnswer[],
+  locale: SupportedLocale = "en",
+): ChecklistAnalysisResult {
+  const result = analyzeChecklist(document, answers, locale);
+  const activity = document.title[locale].replace(/\s+Inspection Checklist$/i, "");
+
+  const recommendations = result.recommendations.map((recommendation) => {
+    if (locale === "tr") {
+      return recommendation
+        .replace("sıcak çalışmayı", `${activity} faaliyetini`)
+        .replace("sıcak çalışma", `${activity} faaliyeti`)
+        .replace("çalışma izni", `${activity} faaliyeti`);
+    }
+
+    return recommendation
+      .replace("hot work", activity.toLowerCase())
+      .replace("Hot work", activity);
+  });
+
+  return {
+    ...result,
+    recommendations: [...new Set(recommendations)],
+  };
+}

@@ -68,6 +68,37 @@ function validatePriorityActions(
   });
 }
 
+function validateManagementActions(
+  value: unknown,
+): value is ProfessionalAssessmentOutput["immediateActions"] {
+  if (!Array.isArray(value)) return false;
+
+  return value.every((item) => {
+    if (!item || typeof item !== "object") return false;
+    const action = item as Record<string, unknown>;
+    return (
+      typeof action.priority === "number" &&
+      Number.isInteger(action.priority) &&
+      action.priority > 0 &&
+      typeof action.action === "string" &&
+      action.action.trim().length > 0 &&
+      typeof action.owner === "string" &&
+      typeof action.timing === "string" &&
+      typeof action.reason === "string" &&
+      action.reason.trim().length > 0 &&
+      (action.reference === undefined || typeof action.reference === "string")
+    );
+  });
+}
+
+function validateResponsibleRoles(value: unknown): value is ProfessionalAssessmentOutput["responsibleRoles"] {
+  return Array.isArray(value) && value.every((item) => {
+    if (!item || typeof item !== "object") return false;
+    const role = item as Record<string, unknown>;
+    return typeof role.role === "string" && typeof role.responsibility === "string";
+  });
+}
+
 function validateAssessmentOutput(
   value: unknown,
 ): value is ProfessionalAssessmentOutput {
@@ -76,8 +107,31 @@ function validateAssessmentOutput(
   }
 
   const assessment = value as Record<string, unknown>;
+  const riskRating = assessment.overallRiskRating as Record<string, unknown> | null;
+  const riskLevel = riskRating?.level;
+  const riskRationale = riskRating?.rationale;
 
   return (
+    typeof assessment.executiveSummary === "string" &&
+    assessment.executiveSummary.trim().length > 0 &&
+    riskRating !== null &&
+    typeof riskLevel === "string" &&
+    ["Low", "Medium", "High", "Critical"].includes(riskLevel) &&
+    typeof riskRationale === "string" &&
+    riskRationale.trim().length > 0 &&
+    isValidWorkDecision(assessment.workDecision) &&
+    isStringArray(assessment.topCriticalRisks) &&
+    isStringArray(assessment.criticalControlFailures) &&
+    validateManagementActions(assessment.immediateActions) &&
+    validateManagementActions(assessment.shortTermActions) &&
+    validateManagementActions(assessment.managementActions) &&
+    validateResponsibleRoles(assessment.responsibleRoles) &&
+    isStringArray(assessment.repeatedSystemicWeaknesses) &&
+    (assessment.permitReadinessStatus === null || typeof assessment.permitReadinessStatus === "string") &&
+    typeof assessment.recommendedFollowUpInspection === "string" &&
+    assessment.recommendedFollowUpInspection.trim().length > 0 &&
+    typeof assessment.managementConclusion === "string" &&
+    assessment.managementConclusion.trim().length > 0 &&
     typeof assessment.executiveAssessment === "string" &&
     assessment.executiveAssessment.trim().length > 0 &&
     isStringArray(assessment.positiveFindings) &&
@@ -109,7 +163,10 @@ export function parseAssessmentResponse(
     throw new Error("AI response does not match the required assessment schema.");
   }
 
-  if (parsed.finalRecommendation !== expectedDecision) {
+  if (
+    parsed.workDecision !== expectedDecision ||
+    parsed.finalRecommendation !== expectedDecision
+  ) {
     throw new Error(
       "AI final recommendation does not match the SERNEM rule-engine decision.",
     );
@@ -117,6 +174,45 @@ export function parseAssessmentResponse(
 
   return {
     ...parsed,
+    executiveSummary: parsed.executiveSummary.trim(),
+    overallRiskRating: {
+      level: parsed.overallRiskRating.level,
+      rationale: parsed.overallRiskRating.rationale.trim(),
+    },
+    topCriticalRisks: parsed.topCriticalRisks.map((item) => item.trim()).filter(Boolean),
+    criticalControlFailures: parsed.criticalControlFailures.map((item) => item.trim()).filter(Boolean),
+    immediateActions: parsed.immediateActions.map((item) => ({
+      ...item,
+      action: item.action.trim(),
+      owner: item.owner.trim(),
+      timing: item.timing.trim(),
+      reason: item.reason.trim(),
+      reference: item.reference?.trim() || undefined,
+    })),
+    shortTermActions: parsed.shortTermActions.map((item) => ({
+      ...item,
+      action: item.action.trim(),
+      owner: item.owner.trim(),
+      timing: item.timing.trim(),
+      reason: item.reason.trim(),
+      reference: item.reference?.trim() || undefined,
+    })),
+    managementActions: parsed.managementActions.map((item) => ({
+      ...item,
+      action: item.action.trim(),
+      owner: item.owner.trim(),
+      timing: item.timing.trim(),
+      reason: item.reason.trim(),
+      reference: item.reference?.trim() || undefined,
+    })),
+    responsibleRoles: parsed.responsibleRoles.map((item) => ({
+      role: item.role.trim(),
+      responsibility: item.responsibility.trim(),
+    })),
+    repeatedSystemicWeaknesses: parsed.repeatedSystemicWeaknesses.map((item) => item.trim()).filter(Boolean),
+    permitReadinessStatus: parsed.permitReadinessStatus?.trim() || null,
+    recommendedFollowUpInspection: parsed.recommendedFollowUpInspection.trim(),
+    managementConclusion: parsed.managementConclusion.trim(),
     positiveFindings: parsed.positiveFindings
       .map((item) => item.trim())
       .filter(Boolean),

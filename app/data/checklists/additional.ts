@@ -2,6 +2,41 @@ import type { ChecklistDocument, ChecklistItem, LocalizedText } from "./hot-work
 
 const standards = ["ISO 45001", "Applicable local legislation and site procedures"];
 
+const professionalControls = [
+  [
+    "The task-specific risk assessment and method statement are current and available.",
+    "İşe özel risk değerlendirmesi ve çalışma yöntemi güncel ve erişilebilir.",
+  ],
+  [
+    "Workers and supervisors are competent, briefed and authorized for the activity.",
+    "Çalışanlar ve saha sorumluları faaliyet için yetkin, bilgilendirilmiş ve yetkilidir.",
+  ],
+  [
+    "Required PPE and task-specific protective equipment are available and used.",
+    "Gerekli KKD ve işe özel koruyucu ekipman mevcut ve kullanılıyor.",
+  ],
+  [
+    "Emergency arrangements, contacts and access routes are known and available.",
+    "Acil durum düzenlemeleri, iletişim bilgileri ve erişim yolları biliniyor ve mevcut.",
+  ],
+  [
+    "The work area is controlled against unauthorized access and changing conditions.",
+    "Çalışma alanı yetkisiz erişime ve değişen koşullara karşı kontrol ediliyor.",
+  ],
+  [
+    "Relevant records, inspections, permits or certificates are current and traceable.",
+    "İlgili kayıtlar, kontroller, izinler veya sertifikalar güncel ve izlenebilir.",
+  ],
+  [
+    "Changes in scope, people, equipment or conditions are reviewed before work continues.",
+    "Kapsam, çalışan, ekipman veya koşullardaki değişiklikler çalışma sürmeden önce gözden geçiriliyor.",
+  ],
+  [
+    "Findings have an assigned owner, target date and closeout verification.",
+    "Bulguların sorumlusu, hedef tarihi ve kapatma doğrulaması bulunuyor.",
+  ],
+] as const;
+
 function text(en: string, tr: string): LocalizedText {
   return { en, tr };
 }
@@ -50,7 +85,14 @@ function createChecklist(
       "This checklist supports field verification and does not replace legislation, risk assessments, permits or site procedures.",
       "Bu kontrol listesi saha doğrulamasını destekler; mevzuatın, risk değerlendirmelerinin, izinlerin veya saha prosedürlerinin yerine geçmez.",
     ),
-    sections: [{ id: `${slug}-controls`, title: sectionTitle, items }],
+    sections: [
+      { id: `${slug}-controls`, title: sectionTitle, items: items.slice(0, 8) },
+      {
+        id: `${slug}-management`,
+        title: text("Management, Emergency and Closeout", "Yönetim, Acil Durum ve Kapatma"),
+        items: items.slice(8),
+      },
+    ],
   };
 }
 
@@ -84,10 +126,10 @@ export const additionalChecklists: ChecklistDocument[] = definitions.map((defini
     text(enDescription, trDescription),
     text(enCategory, trCategory),
     text(enSection, trSection),
-    itemTexts.map((requirement, itemIndex) => item(
+    [...itemTexts.map((requirement) => [requirement, requirement] as const), ...professionalControls].map(([requirement, turkishRequirement], itemIndex) => item(
       `${slug.toUpperCase().replaceAll("-", "_")}-${String(itemIndex + 1).padStart(3, "0")}`,
       requirement,
-      requirement,
+      turkishRequirement,
       itemIndex < 2,
       itemIndex < 2 ? "High" : itemIndex < 5 ? "Medium" : "Low",
     )),

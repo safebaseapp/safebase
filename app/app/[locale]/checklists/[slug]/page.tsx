@@ -2,7 +2,7 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../../../i18n/routing";
 import { getChecklistBySlug } from "../../../../data/checklists/registry";
-import GenericChecklist from "../components/GenericChecklist";
+import ProfessionalInspectionChecklist from "../components/ProfessionalInspectionChecklist";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -11,5 +11,5 @@ export default async function GenericChecklistPage({ params }: Props) {
   if (!hasLocale(routing.locales, locale)) notFound();
   const checklist = getChecklistBySlug(slug);
   if (!checklist || ["work-at-height", "hot-work", "loto", "scaffold", "confined-space", "lifting"].includes(slug)) notFound();
-  return <GenericChecklist document={checklist} locale={locale === "tr" ? "tr" : "en"} />;
+  return <ProfessionalInspectionChecklist checklistDocument={checklist} locale={locale === "tr" ? "tr" : "en"} />;
 }
