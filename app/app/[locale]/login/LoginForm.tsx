@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { createClient } from "../../../utils/supabase/client";
+import { trackEvent } from "@/lib/analytics/track";
 
 type Props = {
   locale: "tr" | "en";
@@ -84,6 +85,12 @@ export default function LoginForm({
       window.localStorage.setItem("sernem_post_auth_next", safeNextPath);
     }
 
+    trackEvent("login_view", {
+      locale,
+      download_intent: downloadIntent,
+      destination: safeNextPath,
+    });
+
     const redirectAuthenticatedUser = async () => {
       if (!safeNextPath) return;
 
@@ -95,6 +102,12 @@ export default function LoginForm({
         window.localStorage.removeItem("sernem_post_auth_next");
 
         if (downloadIntent) {
+          trackEvent("download_resumed", {
+            locale,
+            destination: safeNextPath,
+            source: "existing_session",
+          });
+
           const returnPath = getPostDownloadReturnPath(safeNextPath, locale);
           window.setTimeout(() => {
             window.location.replace(returnPath);
@@ -114,12 +127,24 @@ export default function LoginForm({
     setErrorMessage("");
     setIsLoading(true);
 
+    trackEvent("login_submitted", {
+      locale,
+      download_intent: downloadIntent,
+      destination: safeNextPath,
+    });
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
+      trackEvent("login_failed", {
+        locale,
+        download_intent: downloadIntent,
+        error_code: error.code ?? "unknown",
+      });
+
       setErrorMessage(
         isTurkish
           ? "Giriş başarısız. E-posta adresini ve şifreni kontrol et."
@@ -134,9 +159,21 @@ export default function LoginForm({
     );
     const destination = safeNextPath ?? storedNextPath ?? `/${locale}/dashboard`;
 
+    trackEvent("login_success", {
+      locale,
+      download_intent: downloadIntent,
+      destination,
+    });
+
     window.localStorage.removeItem("sernem_post_auth_next");
 
     if (downloadIntent && destination !== `/${locale}/dashboard`) {
+      trackEvent("download_resumed", {
+        locale,
+        destination,
+        source: "login_success",
+      });
+
       const returnPath = getPostDownloadReturnPath(destination, locale);
 
       window.setTimeout(() => {
