@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import DownloadsClient from "./DownloadsClient";
@@ -7,6 +8,25 @@ type Props = {
     locale: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const canonical = `https://www.sernem.com/${locale}/downloads`;
+
+  return {
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://www.sernem.com/tr/downloads",
+        en: "https://www.sernem.com/en/downloads",
+        "x-default": "https://www.sernem.com/en/downloads",
+      },
+    },
+  };
+}
 
 export default async function DownloadsPage({
   params,

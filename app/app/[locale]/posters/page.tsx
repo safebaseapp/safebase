@@ -1,4 +1,5 @@
 import ActivityTracker from "@/components/analytics/ActivityTracker";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import PosterLibraryClient from "./PosterLibraryClient";
@@ -8,6 +9,25 @@ type Props = {
     locale: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const canonical = `https://www.sernem.com/${locale}/posters`;
+
+  return {
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://www.sernem.com/tr/posters",
+        en: "https://www.sernem.com/en/posters",
+        "x-default": "https://www.sernem.com/en/posters",
+      },
+    },
+  };
+}
 
 export type PosterContentControl = {
   slug: string;

@@ -43,6 +43,7 @@ const publicRoutes = [
   "/posters",
   "/safety-signs",
   "/toolbox",
+  "/downloads",
 
   "/checklists",
   "/checklists/working-at-height",
