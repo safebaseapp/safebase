@@ -8,6 +8,7 @@ export type AssessmentRiskLevel =
 
 export type AssessmentWorkDecision =
   | "APPROVED"
+  | "HOLD"
   | "PROCEED WITH CONDITIONS"
   | "STOP WORK";
 
@@ -41,6 +42,7 @@ export type InspectionAssessmentContext = {
   responsiblePersons: string[];
   targetDates: string[];
   inspectionSpecificCriticalControls: string[];
+  permitRelevant?: boolean;
   failedAnswers?: {
     id: string;
     question: string;

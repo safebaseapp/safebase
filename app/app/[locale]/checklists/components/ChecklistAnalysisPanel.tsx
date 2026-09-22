@@ -6,6 +6,7 @@ type Props = {
   locale: Locale;
   analysis: ChecklistAnalysisResult | null;
   showPermitReadiness?: boolean;
+  showInternalFindingIds?: boolean;
 };
 
 type MetricCardProps = {
@@ -26,6 +27,7 @@ export default function ChecklistAnalysisPanel({
   locale,
   analysis,
   showPermitReadiness = true,
+  showInternalFindingIds = true,
 }: Props) {
   if (!analysis) {
     return null;
@@ -54,11 +56,11 @@ export default function ChecklistAnalysisPanel({
         : "🛑 STOP WORK"
       : analysis.workDecision === "Incomplete Assessment"
         ? isTurkish
-          ? "⚠️ DEĞERLENDİRME EKSİK"
+          ? "⚠️ DEĞERLENDİRME TAMAMLANMADI"
           : "⚠️ ASSESSMENT INCOMPLETE"
         : analysis.workDecision === "Proceed With Conditions"
           ? isTurkish
-            ? "🟠 KOŞULLU DEVAM"
+            ? "🟠 KONTROLLERLE DEVAM"
             : "🟠 PROCEED WITH CONDITIONS"
           : isTurkish
             ? "✅ ÇALIŞMA DEVAM EDEBİLİR"
@@ -280,7 +282,9 @@ export default function ChecklistAnalysisPanel({
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-red-300 print:text-red-700">
-                        {finding.id}
+                        {showInternalFindingIds
+                          ? finding.id
+                          : `${isTurkish ? "Madde" : "Item"} ${analysis.findings.indexOf(finding) + 1}`}
                       </p>
 
                       <h4 className="mt-2 font-bold leading-7">

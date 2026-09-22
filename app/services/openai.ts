@@ -65,6 +65,7 @@ export async function generateProfessionalAssessment(
               type: "string",
               enum: [
                 "APPROVED",
+                "HOLD",
                 "PROCEED WITH CONDITIONS",
                 "STOP WORK",
               ],
@@ -212,6 +213,7 @@ export async function generateProfessionalAssessment(
               type: "string",
               enum: [
                 "APPROVED",
+                "HOLD",
                 "PROCEED WITH CONDITIONS",
                 "STOP WORK",
               ],

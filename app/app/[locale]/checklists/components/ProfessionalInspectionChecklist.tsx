@@ -238,11 +238,17 @@ export default function ProfessionalInspectionChecklist({
     try {
       const workDecision = analysis.workDecision === "Stop Work"
         ? "STOP WORK"
+        : analysis.workDecision === "Incomplete Assessment"
+          ? "HOLD"
         : analysis.workDecision === "Proceed With Conditions"
           ? "PROCEED WITH CONDITIONS"
           : "APPROVED";
       const responsiblePersons = [...new Set(findings.map((item) => correctiveActions[item.id]?.responsible).filter(Boolean))];
       const targetDates = [...new Set(findings.map((item) => correctiveActions[item.id]?.targetDate).filter(Boolean))];
+      const findingLabel = (findingId: string) => {
+        const index = items.findIndex((item) => item.id === findingId);
+        return `${isTurkish ? "Madde" : "Item"} ${index + 1}`;
+      };
 
       const result = await generateAssessment({
         workType: analysis.checklistTitle,
@@ -260,7 +266,7 @@ export default function ProfessionalInspectionChecklist({
           low: analysis.severityBreakdown.Low,
         },
         findings: analysis.findings.map((finding) => ({
-          id: finding.id,
+          id: findingLabel(finding.id),
           title: finding.requirement,
           description: finding.guidance,
           severity: finding.riskLevel as "Low" | "Medium" | "High" | "Critical",
@@ -276,18 +282,19 @@ export default function ProfessionalInspectionChecklist({
           location: details.location,
           completionPercentage: analysis.completionRate,
           complianceScore: analysis.score,
-          criticalFindings: analysis.criticalFindings,
-          nonConformities: analysis.findings,
+          criticalFindings: analysis.criticalFindings.map((finding) => ({ ...finding, id: findingLabel(finding.id) })),
+          nonConformities: analysis.findings.map((finding) => ({ ...finding, id: findingLabel(finding.id) })),
           remarks: [
-            ...analysis.findings.map((finding) => ({ id: finding.id, text: remarks[finding.id] ?? "" })),
+            ...analysis.findings.map((finding) => ({ id: findingLabel(finding.id), text: remarks[finding.id] ?? "" })),
             { id: "inspection-comments", text: comments },
           ],
           correctiveActions: analysis.findings.map((finding) => correctiveActions[finding.id]?.action || finding.correctiveAction),
           responsiblePersons,
           targetDates,
           inspectionSpecificCriticalControls: items.filter((item) => item.critical).map((item) => item.requirement[locale]),
+          permitRelevant: false,
           failedAnswers: analysis.findings.map((finding) => ({
-            id: finding.id,
+            id: findingLabel(finding.id),
             question: finding.requirement,
             answer: finding.answer,
             remarks: finding.remarks,
@@ -357,10 +364,14 @@ export default function ProfessionalInspectionChecklist({
     if (!isTurkish) return decision;
     return {
       APPROVED: "ONAYLANDI",
+      HOLD: "BEKLET",
       "STOP WORK": "ÇALIŞMAYI DURDUR",
       "PROCEED WITH CONDITIONS": "KONTROLLERLE DEVAM",
     }[decision] ?? decision;
   };
+  const assessmentStatusLabel = analysis?.assessmentStatus === "Partial"
+    ? (isTurkish ? "DEĞERLENDİRME TAMAMLANMADI" : "ASSESSMENT INCOMPLETE")
+    : (isTurkish ? "TAM DEĞERLENDİRME" : "COMPLETE ASSESSMENT");
 
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-8 text-white sm:px-6 sm:py-12">
@@ -451,12 +462,15 @@ export default function ProfessionalInspectionChecklist({
           <button type="button" onClick={resetInspection} className="rounded-2xl border border-slate-700 bg-slate-900 px-6 py-4 font-semibold text-slate-300 transition hover:border-slate-500 hover:text-white">{isTurkish ? "Denetimi sıfırla" : "Reset Inspection"}</button>
         </div>
 
-        <div data-checklist-analysis className="scroll-mt-8"><ChecklistAnalysisPanel locale={locale} analysis={analysis} showPermitReadiness={false} /></div>
+        <div data-checklist-analysis className="scroll-mt-8"><ChecklistAnalysisPanel locale={locale} analysis={analysis} showPermitReadiness={false} showInternalFindingIds={false} /></div>
         {assessment && (
           <section data-ai-assessment className="mt-8 space-y-6 rounded-2xl border border-blue-500/30 bg-blue-500/5 p-6">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-400">AI {isTurkish ? "Yönetim Değerlendirmesi" : "Management Assessment"}</p>
-              <h2 className="mt-3 text-2xl font-bold">{displayDecision(assessment.workDecision)}</h2>
+              <div className="mt-3 flex flex-wrap items-center gap-3">
+                <h2 className="text-2xl font-bold">{displayDecision(assessment.workDecision)}</h2>
+                <span className="rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1 text-xs font-bold text-amber-200">{assessmentStatusLabel}</span>
+              </div>
               <p className="mt-3 leading-7 text-slate-300">{assessment.executiveSummary}</p>
             </div>
 
@@ -469,7 +483,6 @@ export default function ProfessionalInspectionChecklist({
               <article className="rounded-xl border border-slate-700 bg-slate-950/60 p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">{isTurkish ? "İş kararı" : "Work Decision"}</p>
                 <p className="mt-2 text-2xl font-black text-amber-300">{displayDecision(assessment.workDecision)}</p>
-                {assessment.permitReadinessStatus && <p className="mt-2 text-sm text-slate-300">{assessment.permitReadinessStatus}</p>}
               </article>
             </div>
 
