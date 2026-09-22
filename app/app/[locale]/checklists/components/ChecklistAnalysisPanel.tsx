@@ -33,6 +33,11 @@ export default function ChecklistAnalysisPanel({
 
   const isTurkish = locale === "tr";
 
+  const riskLabel = (risk: string) => {
+    if (!isTurkish) return risk;
+    return { Low: "Düşük", Medium: "Orta", High: "Yüksek", Critical: "Kritik" }[risk] ?? risk;
+  };
+
   const decisionClasses =
     analysis.workDecision === "Stop Work"
       ? "border-red-500/40 bg-red-500/10 text-red-100"
@@ -134,7 +139,7 @@ export default function ChecklistAnalysisPanel({
             <p
               className={`mt-2 text-3xl font-bold ${riskClass} print:text-black`}
             >
-              {analysis.overallRisk}
+              {riskLabel(analysis.overallRisk)}
             </p>
           </div>
 
@@ -283,8 +288,8 @@ export default function ChecklistAnalysisPanel({
                       </h4>
                     </div>
 
-                    <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-200 print:bg-white print:text-red-700">
-                      {finding.riskLevel}
+                      <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-200 print:bg-white print:text-red-700">
+                      {riskLabel(finding.riskLevel)}
                     </span>
                   </div>
 

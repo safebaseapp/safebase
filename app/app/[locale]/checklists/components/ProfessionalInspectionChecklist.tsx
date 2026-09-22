@@ -349,6 +349,18 @@ export default function ProfessionalInspectionChecklist({
     { title: isTurkish ? "Kısa Vadeli Faaliyetler (1–7 gün)" : "Short-Term Actions (1–7 days)", actions: assessment.shortTermActions },
     { title: isTurkish ? "Yönetim Faaliyetleri" : "Management Actions", actions: assessment.managementActions },
   ] : [];
+  const displayRiskLevel = (level: string) => {
+    if (!isTurkish) return level;
+    return { Low: "Düşük", Medium: "Orta", High: "Yüksek", Critical: "Kritik" }[level] ?? level;
+  };
+  const displayDecision = (decision: string) => {
+    if (!isTurkish) return decision;
+    return {
+      APPROVED: "ONAYLANDI",
+      "STOP WORK": "ÇALIŞMAYI DURDUR",
+      "PROCEED WITH CONDITIONS": "KONTROLLERLE DEVAM",
+    }[decision] ?? decision;
+  };
 
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-8 text-white sm:px-6 sm:py-12">
@@ -396,14 +408,22 @@ export default function ProfessionalInspectionChecklist({
             <section key={section.id} className="rounded-2xl border border-slate-800 bg-slate-900 p-5 sm:p-7">
               <h2 className="text-xl font-bold">{section.title[locale]}</h2>
               <div className="mt-5 space-y-6">
-                {section.items.map((item) => {
+                {section.items.map((item, itemIndex) => {
                   const selected = answers[item.id];
                   const action = correctiveActions[item.id];
                   return (
                     <article key={item.id} className="border-b border-slate-800 pb-6 last:border-0 last:pb-0">
-                      <div className="flex items-start justify-between gap-3"><div className="flex gap-3"><span className="text-xs font-bold text-blue-400">{item.id}</span><h3 className="font-semibold leading-6">{item.requirement[locale]}</h3></div>{item.critical && <span className="shrink-0 rounded-full border border-red-500/30 px-2 py-1 text-[10px] font-bold uppercase text-red-300">{isTurkish ? "Kritik" : "Critical"}</span>}</div>
-                      <div className="mt-4 grid grid-cols-3 gap-2">
-                        {(["Yes", "No", "N/A"] as const).map((answer) => <button key={answer} type="button" onClick={() => updateAnswer(item.id, answer)} className={`min-h-11 rounded-lg border px-2 text-sm font-semibold transition ${selected === answer ? answer === "No" ? "border-red-400 bg-red-500/20 text-red-200" : "border-blue-400 bg-blue-500/20 text-blue-200" : "border-slate-700 text-slate-400 hover:border-slate-500"}`}>{isTurkish ? answer === "Yes" ? "Evet" : answer === "No" ? "Hayır" : "Uygulanamaz" : answer}</button>)}
+                      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                        <div className="flex min-w-0 gap-4">
+                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-500/15 text-sm font-bold text-blue-300">{itemIndex + 1}</span>
+                          <div>
+                            <h3 className="font-semibold leading-6">{item.requirement[locale]}</h3>
+                            {item.critical && <span className="mt-2 inline-flex rounded-full border border-red-500/30 px-2 py-1 text-[10px] font-bold uppercase text-red-300">{isTurkish ? "Kritik" : "Critical"}</span>}
+                          </div>
+                        </div>
+                        <div className="grid w-full grid-cols-3 gap-2 lg:w-auto lg:min-w-72">
+                          {(["Yes", "No", "N/A"] as const).map((answer) => <button key={answer} type="button" onClick={() => updateAnswer(item.id, answer)} className={`min-h-11 rounded-lg border px-3 text-sm font-semibold transition ${selected === answer ? answer === "No" ? "border-red-400 bg-red-500/20 text-red-200" : "border-blue-400 bg-blue-500/20 text-blue-200" : "border-slate-700 text-slate-400 hover:border-slate-500"}`}>{isTurkish ? answer === "Yes" ? "Evet" : answer === "No" ? "Hayır" : "Uygulanamaz" : answer}</button>)}
+                        </div>
                       </div>
                       {selected === "No" && <div className="mt-4 grid gap-4 rounded-xl border border-red-500/20 bg-red-500/5 p-4 sm:grid-cols-2"><label className="text-sm font-semibold text-slate-300 sm:col-span-2">{isTurkish ? "Bulgu / not" : "Finding / remarks"}<textarea value={remarks[item.id] ?? ""} onChange={(event) => setRemarks((current) => ({ ...current, [item.id]: event.target.value }))} rows={2} className="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 p-3 font-normal text-white outline-none focus:border-blue-500" /></label><label className="text-sm font-semibold text-slate-300 sm:col-span-2">{isTurkish ? "Düzeltici faaliyet" : "Corrective action"}<textarea value={action?.action ?? ""} onChange={(event) => updateAction(item.id, "action", event.target.value)} placeholder={item.correctiveAction[locale]} rows={2} className="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 p-3 font-normal text-white outline-none focus:border-blue-500" /></label><label className="text-sm font-semibold text-slate-300">{isTurkish ? "Sorumlu kişi" : "Responsible person"}<input value={action?.responsible ?? ""} onChange={(event) => updateAction(item.id, "responsible", event.target.value)} className="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-3 font-normal text-white outline-none focus:border-blue-500" /></label><label className="text-sm font-semibold text-slate-300">{isTurkish ? "Hedef tarih" : "Target date"}<input type="date" value={action?.targetDate ?? ""} onChange={(event) => updateAction(item.id, "targetDate", event.target.value)} className="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-3 font-normal text-white outline-none focus:border-blue-500" /></label><label className="text-sm font-semibold text-slate-300">{isTurkish ? "Öncelik" : "Priority"}<select value={action?.priority ?? "medium"} onChange={(event) => updateAction(item.id, "priority", event.target.value as ActionPriority)} className="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-3 font-normal text-white outline-none focus:border-blue-500"><option value="low">{isTurkish ? "Düşük" : "Low"}</option><option value="medium">{isTurkish ? "Orta" : "Medium"}</option><option value="high">{isTurkish ? "Yüksek" : "High"}</option><option value="critical">{isTurkish ? "Kritik" : "Critical"}</option></select></label><label className="text-sm font-semibold text-slate-300">{isTurkish ? "Durum" : "Status"}<select value={action?.status ?? "open"} onChange={(event) => updateAction(item.id, "status", event.target.value as ActionStatus)} className="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-3 font-normal text-white outline-none focus:border-blue-500"><option value="open">{isTurkish ? "Açık" : "Open"}</option><option value="progress">{isTurkish ? "Devam ediyor" : "In progress"}</option><option value="closed">{isTurkish ? "Kapalı" : "Closed"}</option></select></label></div>}
                     </article>
@@ -436,19 +456,19 @@ export default function ProfessionalInspectionChecklist({
           <section data-ai-assessment className="mt-8 space-y-6 rounded-2xl border border-blue-500/30 bg-blue-500/5 p-6">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-blue-400">AI {isTurkish ? "Yönetim Değerlendirmesi" : "Management Assessment"}</p>
-              <h2 className="mt-3 text-2xl font-bold">{assessment.workDecision}</h2>
+              <h2 className="mt-3 text-2xl font-bold">{displayDecision(assessment.workDecision)}</h2>
               <p className="mt-3 leading-7 text-slate-300">{assessment.executiveSummary}</p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <article className="rounded-xl border border-slate-700 bg-slate-950/60 p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">{isTurkish ? "Genel risk derecesi" : "Overall Risk Rating"}</p>
-                <p className="mt-2 text-2xl font-black text-red-300">{assessment.overallRiskRating.level}</p>
+                <p className="mt-2 text-2xl font-black text-red-300">{displayRiskLevel(assessment.overallRiskRating.level)}</p>
                 <p className="mt-2 text-sm leading-6 text-slate-300">{assessment.overallRiskRating.rationale}</p>
               </article>
               <article className="rounded-xl border border-slate-700 bg-slate-950/60 p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">{isTurkish ? "İş kararı" : "Work Decision"}</p>
-                <p className="mt-2 text-2xl font-black text-amber-300">{assessment.workDecision}</p>
+                <p className="mt-2 text-2xl font-black text-amber-300">{displayDecision(assessment.workDecision)}</p>
                 {assessment.permitReadinessStatus && <p className="mt-2 text-sm text-slate-300">{assessment.permitReadinessStatus}</p>}
               </article>
             </div>
@@ -456,7 +476,7 @@ export default function ProfessionalInspectionChecklist({
             {riskSections.map(({ title, values }) => (
               <article key={title} className="rounded-xl border border-slate-700 bg-slate-950/60 p-5">
                 <h3 className="font-bold">{title}</h3>
-                {values.length > 0 ? <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-300">{values.map((value) => <li key={value}>• {value}</li>)}</ul> : <p className="mt-3 text-sm text-slate-500">{isTurkish ? "Kayıt yok" : "None recorded"}</p>}
+                {values.length > 0 ? <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-300">{values.map((value, index) => <li key={`${title}-${index}-${value}`}>• {value}</li>)}</ul> : <p className="mt-3 text-sm text-slate-500">{isTurkish ? "Kayıt yok" : "None recorded"}</p>}
               </article>
             ))}
 
@@ -470,7 +490,7 @@ export default function ProfessionalInspectionChecklist({
             </div>
 
             <div className="grid gap-5 lg:grid-cols-2">
-              <article className="rounded-xl border border-slate-700 bg-slate-950/60 p-5"><h3 className="font-bold">{isTurkish ? "Sorumlu Roller" : "Responsible Roles"}</h3><div className="mt-3 space-y-3 text-sm text-slate-300">{assessment.responsibleRoles.map((role) => <p key={role.role}><strong>{role.role}:</strong> {role.responsibility}</p>)}</div></article>
+              <article className="rounded-xl border border-slate-700 bg-slate-950/60 p-5"><h3 className="font-bold">{isTurkish ? "Sorumlu Roller" : "Responsible Roles"}</h3><div className="mt-3 space-y-3 text-sm text-slate-300">{assessment.responsibleRoles.map((role, index) => <p key={`${role.role}-${index}`}><strong>{role.role}:</strong> {role.responsibility}</p>)}</div></article>
               <article className="rounded-xl border border-slate-700 bg-slate-950/60 p-5"><h3 className="font-bold">{isTurkish ? "Önerilen Takip Denetimi" : "Recommended Follow-Up Inspection"}</h3><p className="mt-3 text-sm leading-6 text-slate-300">{assessment.recommendedFollowUpInspection}</p></article>
             </div>
 
@@ -478,7 +498,7 @@ export default function ProfessionalInspectionChecklist({
           </section>
         )}
 
-        <footer className="mt-10 border-t border-slate-800 py-8 text-sm leading-6 text-slate-500 print:border-slate-300 print:text-slate-700"><p>{checklistDocument.disclaimer[locale]}</p><p className="mt-3 font-semibold">Generated with SERNEM</p></footer>
+        <footer className="mt-10 border-t border-slate-800 py-8 text-sm leading-6 text-slate-500 print:border-slate-300 print:text-slate-700"><p>{checklistDocument.disclaimer[locale]}</p><p className="mt-3 font-semibold">{isTurkish ? "SERNEM ile oluşturuldu" : "Generated with SERNEM"}</p></footer>
       </div>
     </main>
   );

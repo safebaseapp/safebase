@@ -37,6 +37,7 @@ function getLanguageInstruction(language: ProfessionalAssessmentInput["language"
   if (language === "tr") {
     return `
 Write the complete assessment in professional Turkish.
+Every prose field, action, role, rationale, risk explanation and conclusion must be written in Turkish. Keep only the required enum/API values in their supplied stable form.
 
 Keep these final recommendation values exactly as provided:
 - APPROVED
@@ -47,6 +48,7 @@ Keep these final recommendation values exactly as provided:
 
   return `
 Write the complete assessment in professional English.
+Every prose field, action, role, rationale, risk explanation and conclusion must be written in English.
 
 Keep these final recommendation values exactly as provided:
 - APPROVED

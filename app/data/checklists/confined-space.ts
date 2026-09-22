@@ -11,6 +11,7 @@ const turkishItemMap = new Map(
 const sectionMap = new Map<
   string,
   {
+    id: string;
     title: {
       en: string;
       tr: string;
@@ -48,6 +49,7 @@ for (const englishItem of englishItems) {
 
   if (!sectionMap.has(englishItem.section)) {
     sectionMap.set(englishItem.section, {
+      id: `confined-space-${englishItem.section.toLowerCase().replaceAll(" ", "-")}`,
       title: {
         en: englishItem.section,
         tr: turkishItem.section,
@@ -100,6 +102,27 @@ for (const englishItem of englishItems) {
 
 export const confinedSpaceChecklist = {
   id: "confined-space-entry",
+  slug: "confined-space-entry",
+
+  category: {
+    en: "High Risk Work",
+    tr: "Yüksek Riskli İşler",
+  },
+
+  description: {
+    en: "Review atmospheric testing, rescue readiness, communication and entry controls before confined-space work.",
+    tr: "Kapalı alan çalışması öncesinde atmosfer ölçümünü, kurtarma hazırlığını, iletişimi ve giriş kontrollerini inceleyin.",
+  },
+
+  version: "1.0",
+  revision: "0",
+  status: "approved",
+  responseOptions: ["yes", "no", "na"],
+  standards: ["OSHA 29 CFR 1910.146", "ISO 45001"],
+  disclaimer: {
+    en: "This checklist supports confined-space field verification but does not replace legislation, permits, risk assessments or site procedures.",
+    tr: "Bu kontrol listesi kapalı alan saha doğrulamasını destekler; mevzuatın, izinlerin, risk değerlendirmelerinin veya saha prosedürlerinin yerine geçmez.",
+  },
 
   title: {
     en: "Confined Space Entry Safety Checklist",
