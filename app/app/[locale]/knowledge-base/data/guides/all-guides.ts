@@ -39,6 +39,11 @@ if (allGuides.length !== 100) {
   throw new Error(`SERNEM knowledge base expected 100 guides, received ${allGuides.length}.`);
 }
 
+const uniqueGuideSlugs = new Set(allGuides.map((guide) => guide.slug));
+if (uniqueGuideSlugs.size !== allGuides.length) {
+  throw new Error("SERNEM knowledge base contains duplicate guide slugs.");
+}
+
 export function getGuideBySlug(slug: string) {
   return allGuides.find((guide) => guide.slug === slug);
 }
