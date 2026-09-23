@@ -73,6 +73,9 @@ export default function GuideTemplate({
   const requiredPPE = guide.requiredPPE?.[language] ?? [];
   const commonMistakes = guide.commonMistakes?.[language] ?? [];
   const checklist = guide.checklist?.[language] ?? [];
+  const visibleReferences = guide.references.filter((reference) =>
+    reference.trim().toUpperCase().startsWith("OSHA"),
+  );
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -99,7 +102,7 @@ export default function GuideTemplate({
 
           <div className="mt-8 flex flex-wrap gap-3">
             <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-slate-300">
-              {guide.standard ?? "OSHA"}
+              OSHA
             </span>
 
             <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-slate-300">
@@ -236,22 +239,24 @@ export default function GuideTemplate({
           </article>
         ) : null}
 
-        <article className="rounded-3xl border border-emerald-400/20 bg-emerald-400/5 p-8">
-          <h2 className="text-3xl font-black">
-            {isTurkish ? "OSHA Referansları" : "OSHA References"}
-          </h2>
+        {visibleReferences.length > 0 ? (
+          <article className="rounded-3xl border border-emerald-400/20 bg-emerald-400/5 p-8">
+            <h2 className="text-3xl font-black">
+              {isTurkish ? "OSHA Referansları" : "OSHA References"}
+            </h2>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            {guide.references.map((reference) => (
-              <span
-                key={reference}
-                className="rounded-lg border border-emerald-400/20 bg-slate-950/50 px-4 py-3 font-bold text-emerald-300"
-              >
-                {reference}
-              </span>
-            ))}
-          </div>
-        </article>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {visibleReferences.map((reference) => (
+                <span
+                  key={reference}
+                  className="rounded-lg border border-emerald-400/20 bg-slate-950/50 px-4 py-3 font-bold text-emerald-300"
+                >
+                  {reference}
+                </span>
+              ))}
+            </div>
+          </article>
+        ) : null}
 
         {guide.relatedGuides && guide.relatedGuides.length > 0 ? (
           <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
