@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { inspectionCatalog } from "../../../data/checklists/registry";
 import type { Locale } from "./hot-work/types";
+import { getCardVisualStyle, getInspectionCardVisual } from "@/lib/visual/content-card-visuals";
 
 type ContentControl = {
   accessLevel: "free" | "premium";
@@ -88,7 +89,7 @@ export default function InspectionLibraryClient({
           <div className="mt-7 flex flex-wrap gap-3 text-sm text-slate-300">
             <span className="rounded-full border border-slate-700 bg-slate-900 px-4 py-2">{visibleInspections.length} {isTurkish ? "denetim" : "inspections"}</span>
             <span className="rounded-full border border-slate-700 bg-slate-900 px-4 py-2">{isTurkish ? "Mobil uyumlu" : "Mobile responsive"}</span>
-            <span className="rounded-full border border-slate-700 bg-slate-900 px-4 py-2">{isTurkish ? "TR / EN" : "TR / EN"}</span>
+            <span className="rounded-full border border-slate-700 bg-slate-900 px-4 py-2">TR / EN</span>
           </div>
         </header>
 
@@ -116,8 +117,15 @@ export default function InspectionLibraryClient({
                   const isPremium = control?.accessLevel === "premium";
                   const inspectionHref = `/${locale}/checklists/${inspection.slug}`;
                   const href = isPremium ? `/${locale}/upgrade?next=${encodeURIComponent(inspectionHref)}` : inspectionHref;
+                  const visual = getInspectionCardVisual(inspection.slug);
                   return (
-                    <Link key={inspection.slug} href={href} className="group flex min-h-64 flex-col rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-blue-500/60 hover:shadow-xl hover:shadow-blue-950/20">
+                    <Link
+                      key={inspection.slug}
+                      href={href}
+                      style={getCardVisualStyle(visual)}
+                      data-visual-key={visual.key}
+                      className="group flex min-h-64 flex-col rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-blue-500/60 hover:shadow-xl hover:shadow-blue-950/20"
+                    >
                       <div className="flex items-start justify-between gap-3">
                         <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-2xl" aria-hidden="true">{inspectionIcons[inspection.slug] ?? "◈"}</span>
                         {isPremium && <span className="rounded-full border border-violet-400/30 bg-violet-500/10 px-2 py-1 text-[10px] font-bold uppercase text-violet-300">Premium</span>}
