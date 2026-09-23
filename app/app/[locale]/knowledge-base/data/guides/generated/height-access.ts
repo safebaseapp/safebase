@@ -1,0 +1,101 @@
+import { buildGeneratedGuide, commonFamilies, type GuideBlueprint, type Pair } from "./factory";
+
+const P = (en: string, tr: string): Pair => ({ en, tr });
+const H = commonFamilies.height;
+
+const blueprints: GuideBlueprint[] = [
+  {
+    slug: "fall-protection-systems",
+    title: P("Fall Protection Systems", "Düşüş Koruma Sistemleri"),
+    focus: P("selecting and using fall-prevention, restraint and fall-arrest systems", "düşme önleme, kısıtlama ve düşüş durdurma sistemlerinin seçimi ve kullanımı"),
+    family: H,
+    osha: ["OSHA 1926 Subpart M", "OSHA 1910.28", "OSHA 1910.140"],
+    hazards: [P("Incorrect system selection for the exposure", "Maruziyete uygun olmayan sistem seçimi"), P("Insufficient fall clearance or swing-fall exposure", "Yetersiz düşüş açıklığı veya sallanarak düşme riski")],
+    controls: [P("Choose prevention or restraint before fall arrest where practical.", "Mümkün olduğunda düşüş durdurmadan önce düşmeyi önleme veya kısıtlama yöntemini seçin."), P("Verify anchorage, connector compatibility and fall clearance as one complete system.", "Ankraj, bağlantı uyumu ve düşüş açıklığını tek bir sistem olarak doğrulayın.")],
+    ppe: [P("Full-body harness when personal fall arrest is required", "Kişisel düşüş durdurma gerektiğinde tam vücut kemeri")],
+  },
+  {
+    slug: "anchor-points-lifelines",
+    title: P("Anchor Points & Lifelines", "Ankraj Noktaları ve Yaşam Hatları"),
+    focus: P("verification, positioning and use of anchor points and lifeline systems", "ankraj noktaları ve yaşam hattı sistemlerinin doğrulanması, konumlandırılması ve kullanımı"),
+    family: H,
+    osha: ["OSHA 1926.502", "OSHA 1910.140"],
+    hazards: [P("Connection to non-approved structural elements", "Onaysız yapısal elemanlara bağlantı"), P("Lifeline damage, sharp-edge contact or incompatible connectors", "Yaşam hattı hasarı, keskin kenar teması veya uyumsuz bağlantılar")],
+    controls: [P("Use only designated or verified anchorage suitable for the intended fall-protection system.", "Yalnız amaçlanan düşüş koruma sistemi için uygun olduğu doğrulanmış ankraj kullanın."), P("Position anchor and lifeline systems to reduce free fall, swing fall and edge loading.", "Ankraj ve yaşam hattını serbest düşüş, sallanma ve kenar yükünü azaltacak şekilde konumlandırın.")],
+  },
+  {
+    slug: "full-body-harness-inspection",
+    title: P("Full-Body Harness Inspection", "Tam Vücut Emniyet Kemeri Kontrolü"),
+    focus: P("pre-use inspection, fit and removal-from-service criteria for full-body harnesses", "tam vücut emniyet kemerlerinde kullanım öncesi kontrol, doğru ayar ve kullanım dışı bırakma kriterleri"),
+    family: H,
+    osha: ["OSHA 1926.502", "OSHA 1910.140"],
+    hazards: [P("Cut, burned, chemically damaged or degraded webbing", "Kesilmiş, yanmış, kimyasal etkilenmiş veya bozulmuş kolonlar"), P("Loose fit, incorrect buckling or damaged hardware", "Gevşek ayar, yanlış toka kullanımı veya hasarlı metal parçalar")],
+    controls: [P("Inspect webbing, stitching, labels, D-rings and buckles before every use.", "Her kullanım öncesi kolon, dikiş, etiket, D-halkası ve tokaları kontrol edin."), P("Remove any harness involved in a fall or showing uncertain damage from service pending competent evaluation.", "Düşüşe maruz kalmış veya hasarı şüpheli kemeri yetkin değerlendirme yapılana kadar kullanımdan çıkarın.")],
+    ppe: [P("Correctly fitted full-body harness", "Doğru ayarlanmış tam vücut emniyet kemeri")],
+  },
+  {
+    slug: "lanyard-srl-safety",
+    title: P("Lanyard & Self-Retracting Lifeline Safety", "Lanyard ve Geri Sarımlı Düşüş Durdurucu Güvenliği"),
+    focus: P("safe selection, connection and inspection of lanyards and self-retracting lifelines", "lanyard ve geri sarımlı düşüş durdurucuların güvenli seçimi, bağlantısı ve kontrolü"),
+    family: H,
+    osha: ["OSHA 1926.502", "OSHA 1910.140"],
+    hazards: [P("Incorrect connector orientation or incompatible hook connection", "Yanlış bağlantı yönü veya uyumsuz kanca bağlantısı"), P("Using equipment across sharp edges or outside its rated configuration", "Ekipmanı keskin kenarda veya onaylı konfigürasyonu dışında kullanmak")],
+    controls: [P("Match the connector and device to the anchorage, edge condition and expected fall distance.", "Bağlantı ve cihazı ankraj, kenar koşulu ve beklenen düşüş mesafesine göre seçin."), P("Inspect locking action, housing, line, energy absorber and connectors before use.", "Kullanım öncesi kilitleme hareketi, gövde, hat, enerji emici ve bağlantıları kontrol edin.")],
+  },
+  {
+    slug: "ladder-safety",
+    title: P("Ladder Safety", "Merdiven Güvenliği"),
+    focus: P("selection, positioning, inspection and safe use of portable and fixed ladders", "taşınabilir ve sabit merdivenlerin seçimi, konumlandırılması, kontrolü ve güvenli kullanımı"),
+    family: H,
+    osha: ["OSHA 1926.1053", "OSHA 1910.23"],
+    hazards: [P("Ladder movement, slip or unstable footing", "Merdiven kayması, hareketi veya dengesiz zemin"), P("Overreaching or loss of three-point contact", "Aşırı uzanma veya üç nokta temasının kaybı")],
+    controls: [P("Select a ladder of suitable type, length and duty rating for the task.", "İş için uygun tip, uzunluk ve kapasitede merdiven seçin."), P("Set the ladder on stable footing, secure it where needed and maintain three-point contact.", "Merdiveni sağlam zemine kurun, gerektiğinde sabitleyin ve üç nokta temasını koruyun.")],
+  },
+  {
+    slug: "mewp-safety",
+    title: P("MEWP / Aerial Lift Safety", "MEWP / Personel Yükseltici Platform Güvenliği"),
+    focus: P("planning and operating mobile elevating work platforms and aerial lifts", "mobil yükseltici çalışma platformları ve personel yükselticilerin planlanması ve işletilmesi"),
+    family: H,
+    osha: ["OSHA 1926.453", "OSHA 1926.454"],
+    hazards: [P("Tip-over from poor ground conditions, slope or overloading", "Kötü zemin, eğim veya aşırı yük nedeniyle devrilme"), P("Crushing between platform and overhead structures", "Platform ile üst yapı arasında sıkışma")],
+    controls: [P("Complete pre-use inspection, ground assessment and function checks before operation.", "Kullanım öncesi kontrol, zemin değerlendirmesi ve fonksiyon testlerini tamamlayın."), P("Keep within rated load and operating envelope and control overhead, traffic and entrapment hazards.", "Kapasite ve çalışma zarfı içinde kalın; üst engel, trafik ve sıkışma tehlikelerini kontrol edin.")],
+  },
+  {
+    slug: "roof-work-safety",
+    title: P("Roof Work Safety", "Çatı Çalışması Güvenliği"),
+    focus: P("planning work on roofs with edges, openings, access and weather exposure", "kenar, açıklık, erişim ve hava koşulu maruziyeti bulunan çatı çalışmalarının planlanması"),
+    family: H,
+    osha: ["OSHA 1926.501", "OSHA 1926.502"],
+    hazards: [P("Unprotected roof edges and openings", "Korumasız çatı kenarları ve açıklıkları"), P("Slippery surfaces, wind and changing weather", "Kaygan yüzeyler, rüzgâr ve değişen hava koşulları")],
+    controls: [P("Plan safe access and protect roof edges and openings before the work area is occupied.", "Çalışma alanına girilmeden güvenli erişimi planlayın; kenar ve açıklıkları koruyun."), P("Monitor weather and roof condition and stop when traction, visibility or wind makes work unsafe.", "Hava ve çatı durumunu izleyin; tutunma, görüş veya rüzgâr işi güvensiz hale getirirse durdurun.")],
+  },
+  {
+    slug: "fragile-roof-safety",
+    title: P("Fragile Roof Safety", "Kırılgan Çatı Güvenliği"),
+    focus: P("identifying and controlling fragile roofing, skylights and weak surfaces", "kırılgan çatı, ışıklık ve zayıf yüzeylerin belirlenmesi ve kontrolü"),
+    family: H,
+    osha: ["OSHA 1926.501", "OSHA 1926.502"],
+    hazards: [P("Falling through skylights or non-load-bearing roof panels", "Işıklık veya yük taşımayan çatı panellerinden düşme"), P("Hidden deterioration not visible from the walking surface", "Yürüme yüzeyinden görülmeyen gizli bozulmalar")],
+    controls: [P("Treat uncertain roof surfaces and skylights as fragile until verified otherwise.", "Aksi doğrulanana kadar şüpheli çatı yüzeyi ve ışıklıkları kırılgan kabul edin."), P("Use protected walkways, covers, guardrails or suitable personal fall protection to prevent access to fragile zones.", "Kırılgan bölgelere erişimi önlemek için korumalı yürüyüş yolu, kapak, korkuluk veya uygun kişisel düşüş koruması kullanın.")],
+  },
+  {
+    slug: "edge-protection-guardrails",
+    title: P("Edge Protection & Guardrails", "Kenar Koruması ve Korkuluklar"),
+    focus: P("design intent, inspection and field use of guardrail and edge-protection systems", "korkuluk ve kenar koruma sistemlerinin saha kullanımı, kontrolü ve işlevinin doğrulanması"),
+    family: H,
+    osha: ["OSHA 1926.501", "OSHA 1926.502"],
+    hazards: [P("Missing, incomplete or weakened guardrail components", "Eksik, tamamlanmamış veya zayıflamış korkuluk elemanları"), P("Open edges created temporarily during material movement or installation", "Malzeme hareketi veya montaj sırasında geçici olarak oluşan açık kenarlar")],
+    controls: [P("Inspect top rails, midrails, posts, toe protection and fixings before relying on the system.", "Sisteme güvenmeden üst korkuluk, ara korkuluk, dikme, topuk koruması ve bağlantıları kontrol edin."), P("Use controlled temporary protection whenever permanent edge protection is removed.", "Kalıcı kenar koruması çıkarıldığında kontrollü geçici koruma kullanın.")],
+  },
+  {
+    slug: "dropped-object-prevention",
+    title: P("Dropped Object Prevention", "Düşen Cisimlerin Önlenmesi"),
+    focus: P("preventing tools, materials and components from falling from elevated work areas", "yüksek çalışma alanlarından alet, malzeme ve parçaların düşmesinin önlenmesi"),
+    family: H,
+    osha: ["OSHA 1926.501(c)", "OSHA 1926.502(j)"],
+    hazards: [P("Unsecured hand tools and small components", "Sabitlememiş el aletleri ve küçük parçalar"), P("Materials stored near edges or openings", "Kenar veya açıklık yakınında depolanan malzemeler")],
+    controls: [P("Secure tools and loose components with suitable retention methods where practical.", "Mümkün olduğunda alet ve gevşek parçaları uygun sabitleme yöntemleriyle emniyete alın."), P("Use toe boards, debris containment and exclusion zones to protect people below.", "Aşağıdaki kişileri korumak için topuk levhası, döküntü tutma ve yasaklı bölge kullanın.")],
+  },
+];
+
+export const generatedHeightAccessGuides = blueprints.map(buildGeneratedGuide);
