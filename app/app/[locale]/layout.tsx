@@ -8,6 +8,7 @@ import MobileAuthBar from "./components/MobileAuthBar";
 import MobileQuickNav from "./components/MobileQuickNav";
 import "./navbar-responsive-fix.css";
 import "./core-content-visual-system.css";
+import "./core-content-image-cards.css";
 
 type Props = {
   children: React.ReactNode;
