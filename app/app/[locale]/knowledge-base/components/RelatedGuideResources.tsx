@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { posters } from "@/app/[locale]/posters/poster-data";
 import { inspectionCatalog } from "@/data/checklists/registry";
+import { findSafetyPackForText } from "@/lib/safety-pack/data";
 import { toolboxData } from "@/lib/toolbox/toolbox-data";
 import type { SafetyGuide } from "./GuideTemplate";
 
@@ -68,6 +69,7 @@ export default function RelatedGuideResources({
 }) {
   const isTurkish = locale === "tr";
   const seed = `${guide.slug} ${guide.title.en} ${guide.category.en}`;
+  const safetyPack = findSafetyPackForText(seed);
   const cards: ResourceCard[] = [];
 
   const inspection = bestMatch(
@@ -118,7 +120,7 @@ export default function RelatedGuideResources({
     });
   }
 
-  if (cards.length === 0) return null;
+  if (cards.length === 0 && !safetyPack) return null;
 
   return (
     <article className="rounded-3xl border border-cyan-400/20 bg-cyan-400/[0.05] p-8">
@@ -133,24 +135,49 @@ export default function RelatedGuideResources({
           ? "Aynı konuya ait denetim, toolbox ve posterleri tek akışta kullanın."
           : "Continue with the matching inspection, toolbox talk and poster for the same topic."}
       </p>
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {cards.map((card) => (
-          <Link
-            key={card.href}
-            href={card.href}
-            className="group rounded-2xl border border-white/10 bg-slate-950/45 p-5 transition hover:-translate-y-1 hover:border-cyan-300/35"
-          >
-            <span className="text-xs font-black uppercase tracking-[0.12em] text-cyan-300">
-              {card.eyebrow}
-            </span>
-            <h3 className="mt-3 text-lg font-black text-white">{card.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-slate-400">{card.description}</p>
-            <span className="mt-5 inline-flex font-black text-cyan-300 transition group-hover:translate-x-1">
-              {isTurkish ? "Aç" : "Open"} →
-            </span>
-          </Link>
-        ))}
-      </div>
+
+      {safetyPack ? (
+        <Link
+          href={`/${locale}/safety-pack/${safetyPack.slug}`}
+          className="mt-6 flex flex-col gap-3 rounded-2xl border border-emerald-400/25 bg-emerald-400/[0.08] p-5 transition hover:border-emerald-300/45 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div>
+            <span className="text-xs font-black uppercase tracking-[0.13em] text-emerald-300">Safety Pack</span>
+            <h3 className="mt-2 text-xl font-black text-white">
+              {safetyPack.icon} {safetyPack.title[locale]}
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-slate-400">
+              {isTurkish
+                ? "Rehber + toolbox + denetim + poster + risk analizi + Method Statement + levhalar."
+                : "Guide + toolbox + inspection + poster + risk assessment + Method Statement + signs."}
+            </p>
+          </div>
+          <span className="shrink-0 font-black text-emerald-300">
+            {isTurkish ? "Tam paketi aç" : "Open full pack"} →
+          </span>
+        </Link>
+      ) : null}
+
+      {cards.length > 0 ? (
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {cards.map((card) => (
+            <Link
+              key={card.href}
+              href={card.href}
+              className="group rounded-2xl border border-white/10 bg-slate-950/45 p-5 transition hover:-translate-y-1 hover:border-cyan-300/35"
+            >
+              <span className="text-xs font-black uppercase tracking-[0.12em] text-cyan-300">
+                {card.eyebrow}
+              </span>
+              <h3 className="mt-3 text-lg font-black text-white">{card.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-400">{card.description}</p>
+              <span className="mt-5 inline-flex font-black text-cyan-300 transition group-hover:translate-x-1">
+                {isTurkish ? "Aç" : "Open"} →
+              </span>
+            </Link>
+          ))}
+        </div>
+      ) : null}
     </article>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
+import SafetyPackPromo from "@/components/safety-pack/SafetyPackPromo";
 import DownloadsClient from "./DownloadsClient";
 
 type Props = {
@@ -53,9 +54,6 @@ export default async function DownloadsPage({
     );
   }
 
-  // Fail-safe:
-  // DB veya kayıt problemi olursa çalışan Downloads
-  // sistemini yanlışlıkla kapatmıyoruz.
   const downloadsEnabled =
     featureFlag?.enabled ?? true;
 
@@ -117,5 +115,10 @@ export default async function DownloadsPage({
     );
   }
 
-  return <DownloadsClient />;
+  return (
+    <>
+      <SafetyPackPromo locale={locale} compact />
+      <DownloadsClient />
+    </>
+  );
 }

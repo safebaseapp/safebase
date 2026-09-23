@@ -1,105 +1,159 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { growthTopics } from "@/lib/growth/relatedTopics";
+import { safetyPacks } from "@/lib/safety-pack/data";
 
 type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ topic?: string }>;
 };
 
-export default async function SafetyPackPage({ params, searchParams }: Props) {
-  const { locale } = await params;
-  const { topic: requestedTopic } = await searchParams;
-
-  if (locale !== "tr" && locale !== "en") notFound();
-
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
   const isTurkish = locale === "tr";
-  const topic = growthTopics.find((item) => item.key === requestedTopic) ?? growthTopics[0];
+  const canonical = `https://www.sernem.com/${locale}/safety-pack`;
+  const title = isTurkish ? "HSE Safety Pack'leri | SERNEM" : "HSE Safety Packs | SERNEM";
+  const description = isTurkish
+    ? "Yüksek riskli işler için rehber, toolbox, denetim, poster, risk analizi, Method Statement ve güvenlik levhalarını tek saha paketinde kullanın."
+    : "Use guides, toolbox talks, inspections, posters, risk assessments, Method Statements and safety signs in one field pack for high-risk work.";
 
-  const tools = [
-    topic.posterSlug && {
-      number: "01",
-      label: isTurkish ? "Poster" : "Poster",
-      description: isTurkish ? "Sahada hızlı görsel hatırlatma." : "Fast visual reminder for the field.",
-      href: `/${locale}/posters/${topic.posterSlug}`,
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://www.sernem.com/tr/safety-pack",
+        en: "https://www.sernem.com/en/safety-pack",
+        "x-default": "https://www.sernem.com/en/safety-pack",
+      },
     },
-    topic.checklistSlug && {
-      number: "02",
-      label: isTurkish ? "Denetim" : "Inspection",
-      description: isTurkish ? "Kontrolleri sahada doğrula ve bulguları kaydet." : "Verify controls in the field and record findings.",
-      href: `/${locale}/checklists/${topic.checklistSlug}`,
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      siteName: "SERNEM",
+      type: "website",
+      locale: isTurkish ? "tr_TR" : "en_US",
     },
-    topic.guideSlug && {
-      number: "03",
-      label: isTurkish ? "Uygulama Rehberi" : "Practice Guide",
-      description: isTurkish ? "Kontrol mantığını ve iyi uygulamaları incele." : "Review control logic and good practices.",
-      href: `/${locale}/knowledge-base/${topic.guideSlug}`,
-    },
-  ].filter(Boolean) as { number: string; label: string; description: string; href: string }[];
+    twitter: { card: "summary_large_image", title, description },
+    robots: { index: true, follow: true },
+  };
+}
+
+export default async function SafetyPackLandingPage({ params }: Props) {
+  const { locale: rawLocale } = await params;
+  if (rawLocale !== "tr" && rawLocale !== "en") notFound();
+  const locale = rawLocale;
+  const isTurkish = locale === "tr";
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: isTurkish ? "SERNEM HSE Safety Pack'leri" : "SERNEM HSE Safety Packs",
+    url: `https://www.sernem.com/${locale}/safety-pack`,
+    hasPart: safetyPacks.map((pack) => ({
+      "@type": "WebPage",
+      name: pack.title[locale],
+      url: `https://www.sernem.com/${locale}/safety-pack/${pack.slug}`,
+    })),
+  };
 
   return (
-    <main className="min-h-screen bg-[#020712] px-4 py-10 text-white sm:px-6 sm:py-14">
-      <div className="mx-auto max-w-6xl">
-        <div className="rounded-[32px] border border-white/10 bg-gradient-to-br from-emerald-500/10 via-slate-900 to-blue-500/10 p-7 sm:p-10">
-          <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-400">SERNEM Safety Pack</p>
-          <h1 className="mt-4 max-w-4xl text-4xl font-black tracking-tight sm:text-6xl">
-            {isTurkish ? "Bir faaliyeti seç. İlgili HSE akışını tek yerden tamamla." : "Choose an activity. Complete the matching HSE workflow from one place."}
+    <main className="min-h-screen bg-[#020712] text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+
+      <section className="relative overflow-hidden border-b border-white/[0.07]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_10%,rgba(37,99,235,.20),transparent_38%),radial-gradient(circle_at_80%_35%,rgba(6,182,212,.10),transparent_34%)]" />
+        <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
+          <Link href={`/${locale}/downloads`} className="text-sm font-black text-blue-400 transition hover:text-blue-300">
+            ← {isTurkish ? "HSE Kaynak Merkezi" : "HSE Resource Center"}
+          </Link>
+
+          <div className="mt-10 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.08] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-emerald-300">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,.9)]" />
+            SERNEM Safety Packs
+          </div>
+
+          <h1 className="mt-6 max-w-5xl text-5xl font-black tracking-[-0.055em] sm:text-6xl lg:text-7xl">
+            {isTurkish ? "Bir iş. Tek tam HSE paketi." : "One task. One complete HSE pack."}
           </h1>
-          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg">
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-400">
             {isTurkish
-              ? "Safety Pack şu anda SERNEM’deki mevcut profesyonel kaynakları aynı faaliyet altında birleştirir. Yeni üretim motoru daha sonra bu akışın üzerine eklenecek."
-              : "Safety Pack currently brings SERNEM’s existing professional resources together under one activity. The document-generation engine will be added on top of this workflow later."}
+              ? "Sahadaki kritik bir işi seçin. SERNEM ilgili rehberi, toolbox talk'ı, denetimi, posteri, risk analizini, Method Statement aracını ve güvenlik levhalarını tek iş akışında birleştirsin."
+              : "Choose a critical field activity. SERNEM brings the related guide, toolbox talk, inspection, poster, risk assessment, Method Statement tool and safety signs into one workflow."}
+          </p>
+
+          <div className="mt-10 grid max-w-4xl gap-3 sm:grid-cols-4">
+            {[
+              ["9", isTurkish ? "yüksek risk paketi" : "high-risk packs"],
+              ["7", isTurkish ? "kaynak türü" : "resource types"],
+              ["TR / EN", isTurkish ? "iki dil" : "two languages"],
+              ["1", isTurkish ? "saha akışı" : "field workflow"],
+            ].map(([value, label]) => (
+              <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+                <strong className="text-2xl font-black">{value}</strong>
+                <p className="mt-1 text-xs font-bold text-slate-500">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8 lg:py-20">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-300">
+              {isTurkish ? "Saha paketleri" : "Field-ready packs"}
+            </p>
+            <h2 className="mt-2 text-3xl font-black">{isTurkish ? "İşinizi seçin" : "Choose the activity"}</h2>
+          </div>
+          <p className="max-w-xl text-sm leading-6 text-slate-500">
+            {isTurkish
+              ? "Her paket mevcut SERNEM kaynaklarını tekrar kopyalamadan doğru sırada birbirine bağlar."
+              : "Each pack connects existing SERNEM resources in the right order without duplicating the source content."}
           </p>
         </div>
 
-        <section className="mt-8">
-          <h2 className="text-sm font-black uppercase tracking-[0.18em] text-slate-400">
-            {isTurkish ? "Faaliyet seç" : "Choose activity"}
-          </h2>
-          <div className="mt-4 flex flex-wrap gap-3">
-            {growthTopics.map((item) => (
-              <Link
-                key={item.key}
-                href={`/${locale}/safety-pack?topic=${item.key}`}
-                className={`rounded-full border px-4 py-2 text-sm font-bold transition ${
-                  item.key === topic.key
-                    ? "border-emerald-400 bg-emerald-400 text-slate-950"
-                    : "border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-500"
-                }`}
-              >
-                {item.labels[locale]}
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-8 grid gap-4 md:grid-cols-3">
-          {tools.map((tool) => (
+        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {safetyPacks.map((pack, index) => (
             <Link
-              key={tool.href}
-              href={tool.href}
-              className="group rounded-3xl border border-slate-800 bg-slate-900/70 p-6 transition hover:-translate-y-1 hover:border-emerald-400/40"
+              key={pack.slug}
+              href={`/${locale}/safety-pack/${pack.slug}`}
+              className="group flex min-h-[300px] flex-col rounded-[28px] border border-white/10 bg-gradient-to-b from-white/[0.055] to-white/[0.025] p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:shadow-[0_24px_70px_rgba(8,145,178,.08)]"
             >
-              <span className="text-4xl font-black text-slate-800 group-hover:text-emerald-500/30">{tool.number}</span>
-              <h2 className="mt-6 text-xl font-black">{tool.label}</h2>
-              <p className="mt-3 text-sm leading-6 text-slate-400">{tool.description}</p>
-              <p className="mt-6 text-sm font-black text-emerald-400">{isTurkish ? "Aç" : "Open"} →</p>
+              <div className="flex items-start justify-between gap-4">
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/15 bg-cyan-400/[0.08] text-2xl">{pack.icon}</span>
+                <span className="rounded-full border border-white/10 bg-slate-950/50 px-3 py-1 text-xs font-black text-slate-500">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <p className="mt-6 text-xs font-black uppercase tracking-[0.14em] text-cyan-300">Safety Pack</p>
+              <h3 className="mt-2 text-2xl font-black">{pack.title[locale]}</h3>
+              <p className="mt-4 flex-1 leading-7 text-slate-400">{pack.description[locale]}</p>
+              <span className="mt-6 inline-flex font-black text-blue-400 transition group-hover:translate-x-1 group-hover:text-cyan-300">
+                {isTurkish ? "Tam paketi aç" : "Open complete pack"} →
+              </span>
             </Link>
           ))}
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-8 rounded-3xl border border-blue-500/20 bg-blue-500/5 p-6 sm:p-8">
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-300">Next</p>
-          <h2 className="mt-2 text-2xl font-black">
-            {isTurkish ? "Bir sonraki sürüm: tek tıkla tam doküman paketi" : "Next release: full document pack in one click"}
-          </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-400">
-            {isTurkish
-              ? "Risk Assessment, Method Statement, Toolbox, Inspection ve saha materyallerini aynı proje bilgileri ve şirket markasıyla birleştiren üretim akışı bu omurgaya bağlanacak."
-              : "The generation workflow will connect Risk Assessment, Method Statement, Toolbox, Inspection and field materials using the same project data and company branding."}
-          </p>
-        </section>
-      </div>
+      <section className="border-t border-white/[0.07] bg-white/[0.02]">
+        <div className="mx-auto grid max-w-7xl gap-5 px-6 py-14 lg:grid-cols-3 lg:px-8">
+          {[
+            ["01", isTurkish ? "Hazırlan" : "Prepare", isTurkish ? "Rehberi okuyun ve risk analizini açın." : "Review the guide and open the risk assessment."],
+            ["02", isTurkish ? "Ekibi hazırla" : "Brief the team", isTurkish ? "Toolbox talk ve saha posterini kullanın." : "Use the toolbox talk and field poster."],
+            ["03", isTurkish ? "Doğrula ve belgele" : "Verify & document", isTurkish ? "Denetimi tamamlayın ve Method Statement'ı hazırlayın." : "Complete the inspection and prepare the Method Statement."],
+          ].map(([number, title, text]) => (
+            <div key={number} className="rounded-3xl border border-white/10 bg-slate-950/60 p-6">
+              <span className="text-sm font-black text-cyan-300">{number}</span>
+              <h3 className="mt-3 text-xl font-black">{title}</h3>
+              <p className="mt-3 leading-7 text-slate-400">{text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

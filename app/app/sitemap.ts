@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { toolboxData } from "@/lib/toolbox/toolbox-data";
 import { allRiskActivities } from "@/lib/risk-library/all-activities";
 import { safetySigns } from "@/lib/safety-signs/data";
+import { safetyPacks } from "@/lib/safety-pack/data";
 import { allGuides } from "@/app/[locale]/knowledge-base/data/guides/all-guides";
 import { inspectionCatalog } from "@/data/checklists/registry";
 
@@ -31,6 +32,7 @@ const publicRoutes = [
   "/toolbox",
   "/downloads",
   "/checklists",
+  "/safety-pack",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -43,9 +45,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority:
         route === ""
           ? 1
-          : route.startsWith("/tools/")
+          : route === "/safety-pack" || route.startsWith("/tools/")
             ? 0.9
             : 0.8,
+    })),
+  );
+
+  const safetyPackPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+    safetyPacks.map((pack) => ({
+      url: `${baseUrl}/${locale}/safety-pack/${pack.slug}`,
+      changeFrequency: "monthly",
+      priority: 0.9,
     })),
   );
 
@@ -92,6 +102,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticPages,
+    ...safetyPackPages,
     ...guidePages,
     ...checklistPages,
     ...toolboxPages,
