@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { getCardVisualStyle, getGuideCardVisual } from "@/lib/visual/content-card-visuals";
 
 type GuideCard = {
   slug: string;
@@ -108,25 +109,30 @@ export default function GuideDirectoryClient({ locale, guides }: Props) {
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((guide) => (
-            <Link
-              key={guide.slug}
-              href={`/${locale}/knowledge-base/${guide.slug}`}
-              className="group flex min-h-[285px] flex-col rounded-[26px] border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:border-blue-400/30 hover:bg-white/[0.065] hover:shadow-2xl hover:shadow-blue-950/20"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-black text-emerald-300">OSHA</span>
-                <span className="text-xs font-bold text-slate-500">{guide.readTime} {isTurkish ? "dk" : "min"}</span>
-              </div>
-              <p className="mt-6 text-xs font-black uppercase tracking-[0.14em] text-blue-400">{guide.category}</p>
-              <h2 className="mt-3 text-2xl font-black leading-tight text-white group-hover:text-blue-100">{guide.title}</h2>
-              <p className="mt-4 flex-1 text-sm leading-6 text-slate-400">{guide.description}</p>
-              <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-sm font-bold">
-                <span className="text-slate-500">{guide.riskLevel ?? (isTurkish ? "Saha Rehberi" : "Field Guide")}</span>
-                <span className="text-blue-300 transition group-hover:translate-x-1">{isTurkish ? "Aç" : "Open"} →</span>
-              </div>
-            </Link>
-          ))}
+          {filtered.map((guide) => {
+            const visual = getGuideCardVisual(guide.slug, guide.category, guide.title);
+            return (
+              <Link
+                key={guide.slug}
+                href={`/${locale}/knowledge-base/${guide.slug}`}
+                style={getCardVisualStyle(visual)}
+                data-visual-key={visual.key}
+                className="group flex min-h-[285px] flex-col rounded-[26px] border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:border-blue-400/30 hover:bg-white/[0.065] hover:shadow-2xl hover:shadow-blue-950/20"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-black text-emerald-300">OSHA</span>
+                  <span className="text-xs font-bold text-slate-500">{guide.readTime} {isTurkish ? "dk" : "min"}</span>
+                </div>
+                <p className="mt-6 text-xs font-black uppercase tracking-[0.14em] text-blue-400">{guide.category}</p>
+                <h2 className="mt-3 text-2xl font-black leading-tight text-white group-hover:text-blue-100">{guide.title}</h2>
+                <p className="mt-4 flex-1 text-sm leading-6 text-slate-400">{guide.description}</p>
+                <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-sm font-bold">
+                  <span className="text-slate-500">{guide.riskLevel ?? (isTurkish ? "Saha Rehberi" : "Field Guide")}</span>
+                  <span className="text-blue-300 transition group-hover:translate-x-1">{isTurkish ? "Aç" : "Open"} →</span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
         {filtered.length === 0 ? (

@@ -1,0 +1,50 @@
+/* SERNEM Toolbox spot fixes — Package 1.3
+   Toolbox already works well; this file only corrects the small set of generic/fallback subjects. */
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/line-of-fire']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/pinch']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/barricading-exclusion']) {
+  --svc-image: url('https://images.pexels.com/photos/8960991/pexels-photo-8960991.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 42%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/slips']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/housekeeping']) {
+  --svc-image: url('https://images.pexels.com/photos/4481329/pexels-photo-4481329.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 40%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/vehicle-pedestrian']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/reversing']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/traffic']) {
+  --svc-image: url('https://images.pexels.com/photos/11454241/pexels-photo-11454241.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 44%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/demolition']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/dismantling']) {
+  --svc-image: url('https://images.pexels.com/photos/5579584/pexels-photo-5579584.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 42%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/manual-handling']) {
+  --svc-image: url('https://images.pexels.com/photos/36552175/pexels-photo-36552175.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 42%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/steam-hot-surfaces']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/pressure-testing']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/high-pressure-water']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/flange-joint']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hose-coupling']) {
+  --svc-image: url('https://images.pexels.com/photos/2995864/pexels-photo-2995864.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 45%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/lightning-severe-weather']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/heat-stress']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/cold-stress']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/noise-hearing']) {
+  --svc-image: url('https://images.pexels.com/photos/35082106/pexels-photo-35082106.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 40%;
+}

@@ -11,6 +11,7 @@ import "./core-content-visual-system.css";
 import "./core-content-image-cards.css";
 import "./topic-match-refinement.css";
 import "./topic-match-refinement-supplement.css";
+import "./toolbox-visual-spot-fixes.css";
 
 type Props = {
   children: React.ReactNode;
