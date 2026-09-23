@@ -1,0 +1,402 @@
+/* SERNEM Core Content Visual System v1
+   Package 1: Toolbox, Inspections and Guides.
+   Visual-only layer: no route, content, auth or download behavior changes. */
+
+/* ---------- Shared topic palette ---------- */
+article[class*='min-h-[560px]'],
+a[href*='/checklists/'][class*='min-h-64'],
+a[href*='/knowledge-base/'][class*='min-h-'] {
+  --sv-accent: 59 130 246;
+  --sv-accent-2: 34 211 238;
+  --sv-surface: 11 18 38;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgb(var(--sv-accent) / 0.24) !important;
+  background:
+    radial-gradient(circle at 12% 0%, rgb(var(--sv-accent) / 0.15), transparent 34%),
+    radial-gradient(circle at 100% 100%, rgb(var(--sv-accent-2) / 0.07), transparent 34%),
+    linear-gradient(155deg, rgb(15 23 48 / 0.98), rgb(7 12 29 / 0.99)) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.035),
+    0 18px 50px rgb(0 0 0 / 0.16);
+}
+
+article[class*='min-h-[560px]']::before,
+a[href*='/checklists/'][class*='min-h-64']::before,
+a[href*='/knowledge-base/'][class*='min-h-']::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 2px;
+  z-index: 0;
+  opacity: 0.9;
+  background: linear-gradient(90deg, rgb(var(--sv-accent) / 0.9), rgb(var(--sv-accent-2) / 0.55), transparent 72%);
+}
+
+article[class*='min-h-[560px]']::after,
+a[href*='/checklists/'][class*='min-h-64']::after,
+a[href*='/knowledge-base/'][class*='min-h-']::after {
+  content: '';
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  right: -90px;
+  top: -100px;
+  z-index: 0;
+  border-radius: 999px;
+  background: rgb(var(--sv-accent) / 0.09);
+  filter: blur(34px);
+  pointer-events: none;
+}
+
+article[class*='min-h-[560px]'] > *,
+a[href*='/checklists/'][class*='min-h-64'] > *,
+a[href*='/knowledge-base/'][class*='min-h-'] > * {
+  position: relative;
+  z-index: 1;
+}
+
+article[class*='min-h-[560px]']:hover,
+a[href*='/checklists/'][class*='min-h-64']:hover,
+a[href*='/knowledge-base/'][class*='min-h-']:hover {
+  border-color: rgb(var(--sv-accent) / 0.58) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    0 24px 70px rgb(var(--sv-accent) / 0.12),
+    0 22px 60px rgb(0 0 0 / 0.28) !important;
+}
+
+/* ---------- Toolbox card polish ---------- */
+article[class*='min-h-[560px]'] {
+  transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease, background 260ms ease !important;
+}
+
+article[class*='min-h-[560px]'] > div:nth-of-type(2) > div:first-child {
+  border-color: rgb(var(--sv-accent) / 0.28) !important;
+  background:
+    linear-gradient(145deg, rgb(var(--sv-accent) / 0.17), rgb(255 255 255 / 0.035)) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    0 10px 28px rgb(var(--sv-accent) / 0.08);
+}
+
+article[class*='min-h-[560px]'] p[class*='uppercase'][class*='tracking'] {
+  color: rgb(var(--sv-accent-2)) !important;
+}
+
+article[class*='min-h-[560px]'] h2 {
+  text-wrap: balance;
+}
+
+/* Toolbox: Work at height / scaffolding */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/working-at-height']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/safety-harness']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/scaffold']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/ladder']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/dropped-object']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/temporary-work-platform']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/working-near-open-edge']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/working-over-water']) {
+  --sv-accent: 14 165 233;
+  --sv-accent-2: 103 232 249;
+}
+
+/* Toolbox: Lifting / rigging */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/lifting']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/crane']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/rigging']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/man-basket']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/tag-line']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/load-stability']) {
+  --sv-accent: 99 102 241;
+  --sv-accent-2: 167 139 250;
+}
+
+/* Toolbox: Mobile equipment / traffic */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/mobile-equipment']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/forklift']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/vehicle-pedestrian']) {
+  --sv-accent: 6 182 212;
+  --sv-accent-2: 45 212 191;
+}
+
+/* Toolbox: Electrical / LOTO */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/electrical']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/loto']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/temporary-electrical']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/battery']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/overhead-power']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/generator']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/extension-lead']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/stored-energy']) {
+  --sv-accent: 245 158 11;
+  --sv-accent-2: 250 204 21;
+}
+
+/* Toolbox: Hot work / fire */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hot-work']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/fire-safety']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/grinding']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/welding']) {
+  --sv-accent: 249 115 22;
+  --sv-accent-2: 251 191 36;
+}
+
+/* Toolbox: Chemical / hazardous materials */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/chemical']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/spill']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hazardous-waste']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/painting-coating']) {
+  --sv-accent: 16 185 129;
+  --sv-accent-2: 52 211 153;
+}
+
+/* Toolbox: Confined space / gas */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/confined-space']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/gas-testing']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/compressed-gas']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/nitrogen']) {
+  --sv-accent: 20 184 166;
+  --sv-accent-2: 94 234 212;
+}
+
+/* Toolbox: Excavation */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/excavation']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/underground-services']) {
+  --sv-accent: 217 119 6;
+  --sv-accent-2: 251 191 36;
+}
+
+/* Toolbox: Tools / machinery / pressure */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hand-power-tools']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/pressure']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/water-jetting']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/flange']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hose']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/abrasive-blasting']) {
+  --sv-accent: 100 116 139;
+  --sv-accent-2: 148 163 184;
+}
+
+/* Toolbox: PPE / occupational health */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/ppe']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/heat-stress']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/cold-stress']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/noise']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/respiratory']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/eye-face']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hand-injury']) {
+  --sv-accent: 34 197 94;
+  --sv-accent-2: 134 239 172;
+}
+
+/* Toolbox: PTW / operational control */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/permit']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/simultaneous']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/stop-work']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/line-breaking']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/barricading']) {
+  --sv-accent: 139 92 246;
+  --sv-accent-2: 196 181 253;
+}
+
+/* ---------- Inspection cards ---------- */
+a[href*='/checklists/'][class*='min-h-64'] {
+  min-height: 18rem !important;
+  padding: 1.45rem !important;
+  border-radius: 1.35rem !important;
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease !important;
+}
+
+a[href*='/checklists/'][class*='min-h-64'] > div:first-child > span:first-child {
+  border: 1px solid rgb(var(--sv-accent) / 0.22);
+  background: linear-gradient(145deg, rgb(var(--sv-accent) / 0.18), rgb(255 255 255 / 0.03)) !important;
+  box-shadow: 0 10px 26px rgb(var(--sv-accent) / 0.08);
+}
+
+a[href*='/checklists/'][class*='min-h-64'] > p[class*='uppercase'] {
+  color: rgb(var(--sv-accent-2)) !important;
+}
+
+a[href*='/checklists/'][class*='min-h-64'] > span:last-child {
+  color: rgb(var(--sv-accent-2)) !important;
+}
+
+/* Inspection topic accents */
+a[href*='/checklists/work-at-height'],
+a[href*='/checklists/scaffold'] { --sv-accent: 14 165 233; --sv-accent-2: 103 232 249; }
+a[href*='/checklists/hot-work'],
+a[href*='/checklists/fire-safety'] { --sv-accent: 249 115 22; --sv-accent-2: 251 191 36; }
+a[href*='/checklists/loto'],
+a[href*='/checklists/electrical-safety'],
+a[href*='/checklists/temporary-power'] { --sv-accent: 245 158 11; --sv-accent-2: 250 204 21; }
+a[href*='/checklists/confined-space'] { --sv-accent: 20 184 166; --sv-accent-2: 94 234 212; }
+a[href*='/checklists/lifting'] { --sv-accent: 99 102 241; --sv-accent-2: 167 139 250; }
+a[href*='/checklists/excavation'] { --sv-accent: 217 119 6; --sv-accent-2: 251 191 36; }
+a[href*='/checklists/chemical-safety'],
+a[href*='/checklists/environmental'] { --sv-accent: 16 185 129; --sv-accent-2: 52 211 153; }
+a[href*='/checklists/mobile-equipment'],
+a[href*='/checklists/vehicle-traffic'] { --sv-accent: 6 182 212; --sv-accent-2: 45 212 191; }
+a[href*='/checklists/hand-tools'],
+a[href*='/checklists/power-tools'] { --sv-accent: 100 116 139; --sv-accent-2: 203 213 225; }
+a[href*='/checklists/ppe'],
+a[href*='/checklists/first-aid'],
+a[href*='/checklists/welfare'] { --sv-accent: 34 197 94; --sv-accent-2: 134 239 172; }
+a[href*='/checklists/simops'],
+a[href*='/checklists/safety-observation'] { --sv-accent: 139 92 246; --sv-accent-2: 196 181 253; }
+
+/* ---------- Guide cards ---------- */
+a[href*='/knowledge-base/'][class*='min-h-'] {
+  min-height: 19rem !important;
+  border-radius: 1.55rem !important;
+  padding: 1.55rem !important;
+  transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease !important;
+}
+
+a[href*='/knowledge-base/'][class*='min-h-'] > p[class*='uppercase'] {
+  color: rgb(var(--sv-accent-2)) !important;
+}
+
+a[href*='/knowledge-base/'][class*='min-h-'] > div:last-child > span:last-child {
+  color: rgb(var(--sv-accent-2)) !important;
+}
+
+a[href*='/knowledge-base/'][class*='min-h-'] h2 {
+  text-wrap: balance;
+}
+
+/* Guide topic accents: slug families intentionally broad so the 100-guide library inherits the system automatically. */
+a[href*='/knowledge-base/working-at-height'],
+a[href*='/knowledge-base/fall-'],
+a[href*='/knowledge-base/anchor'],
+a[href*='/knowledge-base/harness'],
+a[href*='/knowledge-base/lanyard'],
+a[href*='/knowledge-base/ladder'],
+a[href*='/knowledge-base/mewp'],
+a[href*='/knowledge-base/roof'],
+a[href*='/knowledge-base/edge-protection'],
+a[href*='/knowledge-base/dropped-object'],
+a[href*='/knowledge-base/scaffold'] { --sv-accent: 14 165 233; --sv-accent-2: 103 232 249; }
+
+a[href*='/knowledge-base/crane'],
+a[href*='/knowledge-base/rigging'],
+a[href*='/knowledge-base/sling'],
+a[href*='/knowledge-base/shackle'],
+a[href*='/knowledge-base/chain-block'],
+a[href*='/knowledge-base/hoist'],
+a[href*='/knowledge-base/lifting-plan'],
+a[href*='/knowledge-base/banksman'],
+a[href*='/knowledge-base/suspended-load'] { --sv-accent: 99 102 241; --sv-accent-2: 167 139 250; }
+
+a[href*='/knowledge-base/forklift'],
+a[href*='/knowledge-base/telehandler'],
+a[href*='/knowledge-base/traffic'],
+a[href*='/knowledge-base/reversing-vehicle'],
+a[href*='/knowledge-base/pedestrian'] { --sv-accent: 6 182 212; --sv-accent-2: 45 212 191; }
+
+a[href*='/knowledge-base/electrical'],
+a[href*='/knowledge-base/arc-flash'],
+a[href*='/knowledge-base/portable-electrical'],
+a[href*='/knowledge-base/temporary-electrical'],
+a[href*='/knowledge-base/isolation-verification'],
+a[href*='/knowledge-base/zero-energy'],
+a[href*='/knowledge-base/loto'],
+a[href*='/knowledge-base/stored-energy'],
+a[href*='/knowledge-base/machine-guarding'] { --sv-accent: 245 158 11; --sv-accent-2: 250 204 21; }
+
+a[href*='/knowledge-base/hot-work'],
+a[href*='/knowledge-base/welding'],
+a[href*='/knowledge-base/gas-cutting'],
+a[href*='/knowledge-base/fire-watch'],
+a[href*='/knowledge-base/fire-'],
+a[href*='/knowledge-base/flammable'],
+a[href*='/knowledge-base/combustible-dust'],
+a[href*='/knowledge-base/grinding'] { --sv-accent: 249 115 22; --sv-accent-2: 251 191 36; }
+
+a[href*='/knowledge-base/confined-space'],
+a[href*='/knowledge-base/gas-testing'],
+a[href*='/knowledge-base/ventilation'],
+a[href*='/knowledge-base/oxygen-deficiency'],
+a[href*='/knowledge-base/h2s'],
+a[href*='/knowledge-base/explosive-atmosphere'],
+a[href*='/knowledge-base/attendant'],
+a[href*='/knowledge-base/entry-supervisor'] { --sv-accent: 20 184 166; --sv-accent-2: 94 234 212; }
+
+a[href*='/knowledge-base/excavation'],
+a[href*='/knowledge-base/trench'],
+a[href*='/knowledge-base/shoring'],
+a[href*='/knowledge-base/underground-services'],
+a[href*='/knowledge-base/spoil-pile'] { --sv-accent: 217 119 6; --sv-accent-2: 251 191 36; }
+
+a[href*='/knowledge-base/chemical'],
+a[href*='/knowledge-base/sds'],
+a[href*='/knowledge-base/ghs'],
+a[href*='/knowledge-base/spill-response'] { --sv-accent: 16 185 129; --sv-accent-2: 52 211 153; }
+
+a[href*='/knowledge-base/ppe'],
+a[href*='/knowledge-base/respiratory'],
+a[href*='/knowledge-base/hearing'],
+a[href*='/knowledge-base/eye-face'],
+a[href*='/knowledge-base/heat-stress'] { --sv-accent: 34 197 94; --sv-accent-2: 134 239 172; }
+
+a[href*='/knowledge-base/hand-tool'],
+a[href*='/knowledge-base/power-tool'],
+a[href*='/knowledge-base/magnetic-drill'],
+a[href*='/knowledge-base/cutting-disc'],
+a[href*='/knowledge-base/abrasive-wheel'],
+a[href*='/knowledge-base/compressed-air'],
+a[href*='/knowledge-base/pressure-testing'],
+a[href*='/knowledge-base/line-breaking'] { --sv-accent: 100 116 139; --sv-accent-2: 203 213 225; }
+
+a[href*='/knowledge-base/permit-to-work'],
+a[href*='/knowledge-base/jsa'],
+a[href*='/knowledge-base/take-5'],
+a[href*='/knowledge-base/stop-work'],
+a[href*='/knowledge-base/simops'],
+a[href*='/knowledge-base/contractor-safety'],
+a[href*='/knowledge-base/incident-reporting'],
+a[href*='/knowledge-base/near-miss'],
+a[href*='/knowledge-base/safety-observation'] { --sv-accent: 139 92 246; --sv-accent-2: 196 181 253; }
+
+/* ---------- Library-level polish ---------- */
+main:has(article[class*='min-h-[560px]']) aside,
+main:has(a[href*='/checklists/'][class*='min-h-64']) header,
+main:has(a[href*='/knowledge-base/'][class*='min-h-']) section > div[class*='rounded-3xl'] {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.03);
+}
+
+main:has(article[class*='min-h-[560px]']) input,
+main:has(a[href*='/checklists/'][class*='min-h-64']) input,
+main:has(a[href*='/checklists/'][class*='min-h-64']) select,
+main:has(a[href*='/knowledge-base/'][class*='min-h-']) input {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.025), 0 10px 30px rgb(0 0 0 / 0.08);
+}
+
+@media (max-width: 767px) {
+  article[class*='min-h-[560px]'],
+  a[href*='/checklists/'][class*='min-h-64'],
+  a[href*='/knowledge-base/'][class*='min-h-'] {
+    border-radius: 1.35rem !important;
+  }
+
+  article[class*='min-h-[560px]'] {
+    min-height: 0 !important;
+    padding: 1.3rem !important;
+  }
+
+  a[href*='/checklists/'][class*='min-h-64'],
+  a[href*='/knowledge-base/'][class*='min-h-'] {
+    min-height: 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  article[class*='min-h-[560px]'],
+  a[href*='/checklists/'][class*='min-h-64'],
+  a[href*='/knowledge-base/'][class*='min-h-'] {
+    transition: none !important;
+    transform: none !important;
+  }
+}

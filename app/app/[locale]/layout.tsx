@@ -7,6 +7,7 @@ import LocalizedNavbar from "./components/LocalizedNavbar";
 import MobileAuthBar from "./components/MobileAuthBar";
 import MobileQuickNav from "./components/MobileQuickNav";
 import "./navbar-responsive-fix.css";
+import "./core-content-visual-system.css";
 
 type Props = {
   children: React.ReactNode;
