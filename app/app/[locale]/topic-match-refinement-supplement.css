@@ -1,0 +1,54 @@
+/* SERNEM v1.2 exact-match supplement.
+   Covers generated guide slugs that do not share the obvious family keyword. */
+
+a[href*='/knowledge-base/safety-data-sheets'] {
+  --svc-image: var(--sv-photo-chemical);
+  --svc-position: center 40%;
+}
+
+a[href*='/knowledge-base/hydrogen-sulfide-safety'] {
+  --svc-image: var(--sv-photo-confined);
+  --svc-position: center 38%;
+}
+
+a[href*='/knowledge-base/toolbox-talk-best-practices'],
+a[href*='/knowledge-base/job-safety-analysis'] {
+  --svc-image: var(--sv-photo-inspection);
+  --svc-position: center 40%;
+}
+
+a[href*='/knowledge-base/fatigue-management'] {
+  --svc-image: var(--sv-photo-safety-team);
+  --svc-position: center 42%;
+}
+
+a[href*='/knowledge-base/first-aid-at-work'] {
+  --svc-image: var(--sv-photo-first-aid);
+  --svc-position: center 46%;
+}
+
+a[href*='/knowledge-base/safety-observation-programs'],
+a[href*='/knowledge-base/incident-reporting'],
+a[href*='/knowledge-base/near-miss-reporting'],
+a[href*='/knowledge-base/contractor-safety-management'],
+a[href*='/knowledge-base/simops-safety'] {
+  --svc-image: var(--sv-photo-inspection);
+  --svc-position: center 40%;
+}
+
+a[href*='/knowledge-base/pedestrian-vehicle-segregation'],
+a[href*='/knowledge-base/reversing-vehicle-safety'],
+a[href*='/knowledge-base/traffic-management'] {
+  --svc-image: var(--sv-photo-forklift);
+  --svc-position: center 45%;
+}
+
+a[href*='/knowledge-base/emergency-response-planning'] {
+  --svc-image: var(--sv-photo-fire);
+  --svc-position: center 42%;
+}
+
+a[href*='/knowledge-base/housekeeping-safety'] {
+  --svc-image: var(--sv-photo-warehouse);
+  --svc-position: center 38%;
+}

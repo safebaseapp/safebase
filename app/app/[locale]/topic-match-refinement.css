@@ -1,0 +1,277 @@
+/* SERNEM Visual Topic Match Refinement v1.2
+   Exact -> subtopic -> family visual matching for Toolbox, Inspections and Guides.
+   Real Pexels photography only. Imported after the v2 image-card layer so these rules
+   deliberately override broad family fallbacks when a more relevant subject exists. */
+
+:root {
+  --sv-photo-height: url('https://images.pexels.com/photos/13093933/pexels-photo-13093933.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-scaffold: url('https://images.pexels.com/photos/33320793/pexels-photo-33320793.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-ladder: url('https://images.pexels.com/photos/12956301/pexels-photo-12956301.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-crane: url('https://images.pexels.com/photos/4311990/pexels-photo-4311990.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-crane-work: url('https://images.pexels.com/photos/12233662/pexels-photo-12233662.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-forklift: url('https://images.pexels.com/photos/1267324/pexels-photo-1267324.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-mobile-equipment: url('https://images.pexels.com/photos/11454241/pexels-photo-11454241.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-manual-handling: url('https://images.pexels.com/photos/36552175/pexels-photo-36552175.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-warehouse: url('https://images.pexels.com/photos/4481329/pexels-photo-4481329.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-hot-work: url('https://images.pexels.com/photos/35136696/pexels-photo-35136696.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-fire: url('https://images.pexels.com/photos/34206461/pexels-photo-34206461.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-loto: url('https://images.pexels.com/photos/15049671/pexels-photo-15049671.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-electrical: url('https://images.pexels.com/photos/10871585/pexels-photo-10871585.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-confined: url('https://images.pexels.com/photos/1267312/pexels-photo-1267312.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-gas-cylinder: url('https://images.pexels.com/photos/28996859/pexels-photo-28996859.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-excavation: url('https://images.pexels.com/photos/5579584/pexels-photo-5579584.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-chemical: url('https://images.pexels.com/photos/20379378/pexels-photo-20379378.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-respiratory: url('https://images.pexels.com/photos/6474117/pexels-photo-6474117.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-tools: url('https://images.pexels.com/photos/7562955/pexels-photo-7562955.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-machinery: url('https://images.pexels.com/photos/2995864/pexels-photo-2995864.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-inspection: url('https://images.pexels.com/photos/8960991/pexels-photo-8960991.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-factory-inspection: url('https://images.pexels.com/photos/19895915/pexels-photo-19895915.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-first-aid: url('https://images.pexels.com/photos/10395785/pexels-photo-10395785.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-environmental: url('https://images.pexels.com/photos/17166070/pexels-photo-17166070.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-ppe: url('https://images.pexels.com/photos/17993024/pexels-photo-17993024.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --sv-photo-safety-team: url('https://images.pexels.com/photos/35082106/pexels-photo-35082106.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+/* ---------------- TOOLBOX: exact and subtopic overrides ---------------- */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/working-at-height']) { --svc-image: var(--sv-photo-height); --svc-position: center 34%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/scaffold-safety']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/scaffold-modification']) { --svc-image: var(--sv-photo-scaffold); --svc-position: center 40%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/ladder-safety']) { --svc-image: var(--sv-photo-ladder); --svc-position: center 42%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/safety-harness']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/lanyard']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/anchor']) { --svc-image: var(--sv-photo-height); --svc-position: center 28%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/dropped-object']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/working-near-open-edge']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/temporary-work-platform']) { --svc-image: var(--sv-photo-scaffold); --svc-position: center 45%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/crane-banksman']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/banksman']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/signalman']) { --svc-image: var(--sv-photo-crane); --svc-position: center 38%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/lifting-operations']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/crane-outrigger']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/man-basket']) { --svc-image: var(--sv-photo-crane-work); --svc-position: center 42%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/rigging-inspection']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/tag-line']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/load-stability']) { --svc-image: var(--sv-photo-crane-work); --svc-position: center 48%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/forklift-safety']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/forklift-loading']) { --svc-image: var(--sv-photo-forklift); --svc-position: center 45%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/mobile-equipment-safety']) { --svc-image: var(--sv-photo-mobile-equipment); --svc-position: center 44%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/vehicle-pedestrian']) { --svc-image: var(--sv-photo-inspection); --svc-position: center 50%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/manual-handling']) { --svc-image: var(--sv-photo-manual-handling); --svc-position: center 42%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/housekeeping']) { --svc-image: var(--sv-photo-warehouse); --svc-position: center 38%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/loto']) { --svc-image: var(--sv-photo-loto); --svc-position: center 47%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/electrical-safety']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/temporary-electrical']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/overhead-power']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/portable-generator']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/extension-lead']) { --svc-image: var(--sv-photo-electrical); --svc-position: center 35%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/stored-energy-hydraulic']) { --svc-image: var(--sv-photo-machinery); --svc-position: center 44%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hot-work']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/grinding']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/welding']) { --svc-image: var(--sv-photo-hot-work); --svc-position: center 40%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/fire-safety']) { --svc-image: var(--sv-photo-fire); --svc-position: center 42%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/confined-space']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/gas-testing']) { --svc-image: var(--sv-photo-confined); --svc-position: center 38%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/compressed-gas']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/nitrogen-inert-gas']) { --svc-image: var(--sv-photo-gas-cylinder); --svc-position: center 45%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/chemical-safety']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/chemical-transfer']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/spill-response']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hazardous-waste']) { --svc-image: var(--sv-photo-chemical); --svc-position: center 40%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/painting-coating']) { --svc-image: var(--sv-photo-respiratory); --svc-position: center 42%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/excavation']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/underground-services']) { --svc-image: var(--sv-photo-excavation); --svc-position: center 42%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hand-power-tools']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/grinding-cutting']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/abrasive-blasting']) { --svc-image: var(--sv-photo-tools); --svc-position: center 44%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/pressure-testing']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/high-pressure-water']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/flange-joint']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hose-coupling']) { --svc-image: var(--sv-photo-machinery); --svc-position: center 45%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/ppe-safety']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/eye-face']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hand-injury']) { --svc-image: var(--sv-photo-ppe); --svc-position: center 36%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/respiratory-protection']) { --svc-image: var(--sv-photo-respiratory); --svc-position: center 38%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/heat-stress']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/cold-stress']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/noise-hearing']) { --svc-image: var(--sv-photo-safety-team); --svc-position: center 40%; }
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/permit-to-work']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/simultaneous-operations']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/stop-work-authority']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/barricading-exclusion']) { --svc-image: var(--sv-photo-inspection); --svc-position: center 40%; }
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/line-breaking']) { --svc-image: var(--sv-photo-machinery); --svc-position: center 42%; }
+
+/* ---------------- INSPECTIONS: every catalog card gets a specific visual ---------------- */
+a[href*='/checklists/work-at-height'] { --svc-image: var(--sv-photo-height); --svc-position: center 34%; }
+a[href*='/checklists/scaffold'] { --svc-image: var(--sv-photo-scaffold); --svc-position: center 40%; }
+a[href*='/checklists/hot-work'] { --svc-image: var(--sv-photo-hot-work); --svc-position: center 40%; }
+a[href*='/checklists/loto'] { --svc-image: var(--sv-photo-loto); --svc-position: center 47%; }
+a[href*='/checklists/confined-space'] { --svc-image: var(--sv-photo-confined); --svc-position: center 38%; }
+a[href*='/checklists/lifting'] { --svc-image: var(--sv-photo-crane-work); --svc-position: center 42%; }
+a[href*='/checklists/excavation'] { --svc-image: var(--sv-photo-excavation); --svc-position: center 42%; }
+a[href*='/checklists/simops'] { --svc-image: var(--sv-photo-inspection); --svc-position: center 40%; }
+a[href*='/checklists/electrical-safety'],
+a[href*='/checklists/temporary-power'] { --svc-image: var(--sv-photo-electrical); --svc-position: center 35%; }
+a[href*='/checklists/hand-tools'],
+a[href*='/checklists/power-tools'] { --svc-image: var(--sv-photo-tools); --svc-position: center 44%; }
+a[href*='/checklists/mobile-equipment'] { --svc-image: var(--sv-photo-mobile-equipment); --svc-position: center 44%; }
+a[href*='/checklists/fire-safety'] { --svc-image: var(--sv-photo-fire); --svc-position: center 42%; }
+a[href*='/checklists/ppe'] { --svc-image: var(--sv-photo-ppe); --svc-position: center 36%; }
+a[href*='/checklists/housekeeping'] { --svc-image: var(--sv-photo-warehouse); --svc-position: center 38%; }
+a[href*='/checklists/manual-handling'] { --svc-image: var(--sv-photo-manual-handling); --svc-position: center 42%; }
+a[href*='/checklists/chemical-safety'] { --svc-image: var(--sv-photo-chemical); --svc-position: center 40%; }
+a[href*='/checklists/vehicle-traffic'] { --svc-image: var(--sv-photo-forklift); --svc-position: center 45%; }
+a[href*='/checklists/safety-observation'] { --svc-image: var(--sv-photo-inspection); --svc-position: center 40%; }
+a[href*='/checklists/emergency-preparedness'] { --svc-image: var(--sv-photo-fire); --svc-position: center 42%; }
+a[href*='/checklists/first-aid'] { --svc-image: var(--sv-photo-first-aid); --svc-position: center 46%; }
+a[href*='/checklists/environmental'] { --svc-image: var(--sv-photo-environmental); --svc-position: center 42%; }
+a[href*='/checklists/welfare'] { --svc-image: var(--sv-photo-safety-team); --svc-position: center 42%; }
+
+/* ---------------- GUIDES: exact/subtopic-first mapping ---------------- */
+/* Work at height */
+a[href*='/knowledge-base/working-at-height'],
+a[href*='/knowledge-base/fall-protection'],
+a[href*='/knowledge-base/anchor-point'],
+a[href*='/knowledge-base/lifeline'],
+a[href*='/knowledge-base/harness'],
+a[href*='/knowledge-base/lanyard'],
+a[href*='/knowledge-base/srl'],
+a[href*='/knowledge-base/mewp'],
+a[href*='/knowledge-base/roof-work'],
+a[href*='/knowledge-base/fragile-roof'],
+a[href*='/knowledge-base/edge-protection'],
+a[href*='/knowledge-base/dropped-object'] { --svc-image: var(--sv-photo-height); --svc-position: center 34%; }
+a[href*='/knowledge-base/ladder-safety'] { --svc-image: var(--sv-photo-ladder); --svc-position: center 42%; }
+a[href*='/knowledge-base/scaffold'] { --svc-image: var(--sv-photo-scaffold); --svc-position: center 40%; }
+
+/* Lifting, rigging and mobile plant */
+a[href*='/knowledge-base/crane'],
+a[href*='/knowledge-base/lifting-plan'],
+a[href*='/knowledge-base/banksman'],
+a[href*='/knowledge-base/signalman'],
+a[href*='/knowledge-base/suspended-load'],
+a[href*='/knowledge-base/rigging'],
+a[href*='/knowledge-base/sling'],
+a[href*='/knowledge-base/shackle'],
+a[href*='/knowledge-base/chain-block'],
+a[href*='/knowledge-base/hoist'] { --svc-image: var(--sv-photo-crane-work); --svc-position: center 42%; }
+a[href*='/knowledge-base/forklift'] { --svc-image: var(--sv-photo-forklift); --svc-position: center 45%; }
+a[href*='/knowledge-base/telehandler'],
+a[href*='/knowledge-base/mobile-equipment'] { --svc-image: var(--sv-photo-mobile-equipment); --svc-position: center 44%; }
+
+/* Electrical and energy */
+a[href*='/knowledge-base/electrical-safety'],
+a[href*='/knowledge-base/arc-flash'],
+a[href*='/knowledge-base/portable-electrical'],
+a[href*='/knowledge-base/temporary-electrical'],
+a[href*='/knowledge-base/electrical-isolation'],
+a[href*='/knowledge-base/zero-energy'] { --svc-image: var(--sv-photo-electrical); --svc-position: center 35%; }
+a[href*='/knowledge-base/loto'] { --svc-image: var(--sv-photo-loto); --svc-position: center 47%; }
+a[href*='/knowledge-base/machine-guard'],
+a[href*='/knowledge-base/stored-energy'],
+a[href*='/knowledge-base/pneumatic'],
+a[href*='/knowledge-base/hydraulic'] { --svc-image: var(--sv-photo-machinery); --svc-position: center 44%; }
+
+/* Hot work and fire */
+a[href*='/knowledge-base/hot-work'],
+a[href*='/knowledge-base/welding'],
+a[href*='/knowledge-base/gas-cutting'],
+a[href*='/knowledge-base/spark'],
+a[href*='/knowledge-base/grinding'] { --svc-image: var(--sv-photo-hot-work); --svc-position: center 40%; }
+a[href*='/knowledge-base/fire-watch'],
+a[href*='/knowledge-base/fire-extinguisher'],
+a[href*='/knowledge-base/fire-safety'],
+a[href*='/knowledge-base/flammable'],
+a[href*='/knowledge-base/combustible-dust'] { --svc-image: var(--sv-photo-fire); --svc-position: center 42%; }
+a[href*='/knowledge-base/gas-cylinder'],
+a[href*='/knowledge-base/oxygen-fuel-gas'] { --svc-image: var(--sv-photo-gas-cylinder); --svc-position: center 45%; }
+
+/* Confined space and atmosphere */
+a[href*='/knowledge-base/confined-space'],
+a[href*='/knowledge-base/gas-testing'],
+a[href*='/knowledge-base/ventilation'],
+a[href*='/knowledge-base/entry-supervisor'],
+a[href*='/knowledge-base/attendant'],
+a[href*='/knowledge-base/oxygen-deficiency'],
+a[href*='/knowledge-base/h2s'],
+a[href*='/knowledge-base/lel'] { --svc-image: var(--sv-photo-confined); --svc-position: center 38%; }
+a[href*='/knowledge-base/confined-space-rescue'] { --svc-image: var(--sv-photo-fire); --svc-position: center 42%; }
+
+/* Excavation and groundworks */
+a[href*='/knowledge-base/excavation'],
+a[href*='/knowledge-base/trench'],
+a[href*='/knowledge-base/shoring'],
+a[href*='/knowledge-base/underground-services'],
+a[href*='/knowledge-base/spoil-pile'] { --svc-image: var(--sv-photo-excavation); --svc-position: center 42%; }
+
+/* Tools, workshop and maintenance */
+a[href*='/knowledge-base/hand-tool'],
+a[href*='/knowledge-base/power-tool'],
+a[href*='/knowledge-base/magnetic-drill'],
+a[href*='/knowledge-base/cutting-disc'],
+a[href*='/knowledge-base/abrasive-wheel'],
+a[href*='/knowledge-base/grinding'] { --svc-image: var(--sv-photo-tools); --svc-position: center 44%; }
+a[href*='/knowledge-base/compressed-air'],
+a[href*='/knowledge-base/pressure-testing'],
+a[href*='/knowledge-base/line-breaking'] { --svc-image: var(--sv-photo-machinery); --svc-position: center 44%; }
+
+/* Chemical, PPE and occupational health */
+a[href*='/knowledge-base/chemical-safety'],
+a[href*='/knowledge-base/sds'],
+a[href*='/knowledge-base/ghs'],
+a[href*='/knowledge-base/chemical-storage'],
+a[href*='/knowledge-base/spill-response'] { --svc-image: var(--sv-photo-chemical); --svc-position: center 40%; }
+a[href*='/knowledge-base/respiratory'] { --svc-image: var(--sv-photo-respiratory); --svc-position: center 38%; }
+a[href*='/knowledge-base/ppe'],
+a[href*='/knowledge-base/hearing'],
+a[href*='/knowledge-base/eye-face'] { --svc-image: var(--sv-photo-ppe); --svc-position: center 36%; }
+a[href*='/knowledge-base/heat-stress'] { --svc-image: var(--sv-photo-safety-team); --svc-position: center 42%; }
+
+/* Operational control and management */
+a[href*='/knowledge-base/permit-to-work'],
+a[href*='/knowledge-base/jsa'],
+a[href*='/knowledge-base/take-5'],
+a[href*='/knowledge-base/stop-work'],
+a[href*='/knowledge-base/simops'],
+a[href*='/knowledge-base/contractor-safety'],
+a[href*='/knowledge-base/safety-observation'] { --svc-image: var(--sv-photo-inspection); --svc-position: center 40%; }
+a[href*='/knowledge-base/manual-handling'] { --svc-image: var(--sv-photo-manual-handling); --svc-position: center 42%; }
+a[href*='/knowledge-base/housekeeping'] { --svc-image: var(--sv-photo-warehouse); --svc-position: center 38%; }
+a[href*='/knowledge-base/traffic-management'],
+a[href*='/knowledge-base/pedestrian-vehicle'],
+a[href*='/knowledge-base/reversing-vehicle'] { --svc-image: var(--sv-photo-forklift); --svc-position: center 45%; }
+a[href*='/knowledge-base/emergency-response'] { --svc-image: var(--sv-photo-fire); --svc-position: center 42%; }
+a[href*='/knowledge-base/first-aid'] { --svc-image: var(--sv-photo-first-aid); --svc-position: center 46%; }
+a[href*='/knowledge-base/incident-reporting'],
+a[href*='/knowledge-base/near-miss'] { --svc-image: var(--sv-photo-inspection); --svc-position: center 40%; }
+
+/* Readability: photo is the context, never the competitor. */
+article[class*='min-h-[560px]'],
+a[href*='/checklists/'][class*='min-h-64'],
+a[href*='/knowledge-base/'][class*='min-h-'] {
+  background-image:
+    linear-gradient(180deg, rgb(2 7 18 / .10) 0%, rgb(2 7 18 / .50) 29%, rgb(2 7 18 / .86) 60%, rgb(2 7 18 / .985) 82%, rgb(2 7 18 / .998) 100%),
+    radial-gradient(circle at 14% 8%, rgb(var(--sv-accent) / .20), transparent 32%),
+    var(--svc-image) !important;
+}
+
+@media (max-width: 767px) {
+  article[class*='min-h-[560px]'],
+  a[href*='/checklists/'][class*='min-h-64'],
+  a[href*='/knowledge-base/'][class*='min-h-'] {
+    background-image:
+      linear-gradient(180deg, rgb(2 7 18 / .22) 0%, rgb(2 7 18 / .64) 28%, rgb(2 7 18 / .91) 58%, rgb(2 7 18 / .995) 82%, #020712 100%),
+      radial-gradient(circle at 14% 8%, rgb(var(--sv-accent) / .18), transparent 30%),
+      var(--svc-image) !important;
+  }
+}
