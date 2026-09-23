@@ -3,6 +3,7 @@ import { toolboxData } from "@/lib/toolbox/toolbox-data";
 import { allRiskActivities } from "@/lib/risk-library/all-activities";
 import { safetySigns } from "@/lib/safety-signs/data";
 import { allGuides } from "@/app/[locale]/knowledge-base/data/guides/all-guides";
+import { inspectionCatalog } from "@/data/checklists/registry";
 
 const baseUrl = "https://www.sernem.com";
 
@@ -29,14 +30,7 @@ const publicRoutes = [
   "/safety-signs",
   "/toolbox",
   "/downloads",
-
   "/checklists",
-  "/checklists/working-at-height",
-  "/checklists/hot-work",
-  "/checklists/loto",
-  "/checklists/scaffolding",
-  "/checklists/confined-space",
-  "/checklists/lifting",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -58,6 +52,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const guidePages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     allGuides.map((guide) => ({
       url: `${baseUrl}/${locale}/knowledge-base/${guide.slug}`,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    })),
+  );
+
+  const checklistPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+    inspectionCatalog.map((entry) => ({
+      url: `${baseUrl}/${locale}/checklists/${entry.slug}`,
       changeFrequency: "monthly",
       priority: 0.85,
     })),
@@ -91,6 +93,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticPages,
     ...guidePages,
+    ...checklistPages,
     ...toolboxPages,
     ...riskAssessmentPages,
     ...safetySignPages,

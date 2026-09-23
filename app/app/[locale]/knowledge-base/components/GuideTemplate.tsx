@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { allGuides } from "../data/guides/all-guides";
+import RelatedGuideResources from "./RelatedGuideResources";
 
 export type LocalizedText = {
   en: string;
@@ -241,6 +242,8 @@ export default function GuideTemplate({
             </div>
           </article>
         ) : null}
+
+        <RelatedGuideResources locale={language} guide={guide} />
 
         <article className="rounded-3xl border border-blue-400/20 bg-blue-600/10 p-8">
           <h2 className="text-3xl font-black">{isTurkish ? "Daha Fazla Rehberlik mi Gerekiyor?" : "Need More Guidance?"}</h2>

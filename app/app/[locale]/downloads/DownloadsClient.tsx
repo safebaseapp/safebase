@@ -96,6 +96,26 @@ export default function DownloadsClient() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
 
+  const liveResources = useMemo<ResourceItem[]>(() => {
+    const inspectionResources: ResourceItem[] = inspectionCatalog.map((entry) => ({
+      id: `inspection-${entry.slug}`,
+      title: entry.title,
+      description: entry.description,
+      category: "checklists",
+      icon: "📋",
+      format: "WEB",
+      href: {
+        tr: `/tr/checklists/${entry.slug}`,
+        en: `/en/checklists/${entry.slug}`,
+      },
+    }));
+
+    return [
+      ...RESOURCE_ITEMS.filter((item) => item.category !== "checklists"),
+      ...inspectionResources,
+    ];
+  }, []);
+
   const categories = useMemo(() => {
     const definitions: Array<{
       id: CategoryFilter;
@@ -115,19 +135,17 @@ export default function DownloadsClient() {
       ...category,
       count:
         category.id === "all"
-          ? RESOURCE_ITEMS.length
-          : category.id === "checklists"
-            ? inspectionCatalog.length
-            : RESOURCE_ITEMS.filter((item) => item.category === category.id).length,
+          ? liveResources.length
+          : liveResources.filter((item) => item.category === category.id).length,
     }));
-  }, []);
+  }, [liveResources]);
 
   const filteredResources = useMemo(() => {
     const normalized = search
       .trim()
       .toLocaleLowerCase(isTurkish ? "tr-TR" : "en-US");
 
-    return RESOURCE_ITEMS.filter((item) => {
+    return liveResources.filter((item) => {
       const categoryMatches = activeCategory === "all" || item.category === activeCategory;
       const searchable = [
         item.title.tr,
@@ -140,12 +158,12 @@ export default function DownloadsClient() {
 
       return categoryMatches && (!normalized || searchable.includes(normalized));
     });
-  }, [activeCategory, isTurkish, search]);
+  }, [activeCategory, isTurkish, liveResources, search]);
 
   const featuredResources = useMemo(() => {
-    const featured = RESOURCE_ITEMS.filter((item) => item.featured);
+    const featured = liveResources.filter((item) => item.featured);
     return featured.slice(0, 4);
-  }, []);
+  }, [liveResources]);
 
   const featuredAccent = (item: ResourceItem) => {
     if (item.id === "chemical-safety-toolbox") {
@@ -209,6 +227,8 @@ export default function DownloadsClient() {
     if (item.href && !item.pdfUrl && !item.docxUrl) {
       if (item.category === "safety-signs") return isTurkish ? "Levhayı Aç" : "Open Sign";
       if (item.category === "posters") return isTurkish ? "Posteri Aç" : "Open Poster";
+      if (item.category === "checklists") return isTurkish ? "Denetimi Aç" : "Open Inspection";
+      if (item.category === "guides") return isTurkish ? "Rehberi Aç" : "Open Guide";
       return isTurkish ? "Kaynağı Aç" : "Open Resource";
     }
 
@@ -298,7 +318,7 @@ export default function DownloadsClient() {
             <div className="flex items-center gap-4 p-6 lg:border-r lg:border-white/[0.08]">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-2xl">📄</div>
               <div>
-                <p className="text-2xl font-black">{RESOURCE_ITEMS.length}</p>
+                <p className="text-2xl font-black">{liveResources.length}</p>
                 <p className="text-xs font-bold text-slate-500">{isTurkish ? "Yayınlanmış Kaynak" : "Published Resources"}</p>
               </div>
             </div>
@@ -379,7 +399,7 @@ export default function DownloadsClient() {
                       {downloadUrl(item) && (
                         <a href={downloadUrl(item)} {...(!item.href ? { download: true } : {})} className={`inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-black text-white transition ${accent.button}`}>
                           <DownloadIcon />
-                          {isTurkish ? "İndir" : "Download"}
+                          {downloadText(item)}
                         </a>
                       )}
                     </div>
@@ -409,8 +429,7 @@ export default function DownloadsClient() {
             </div>
 
             <span className="text-sm font-black text-blue-400">
-              {activeCategory === "checklists" ? inspectionCatalog.length : filteredResources.length}{" "}
-              {isTurkish ? "kaynak" : "resources"}
+              {filteredResources.length} {isTurkish ? "kaynak" : "resources"}
             </span>
           </div>
 
@@ -422,8 +441,8 @@ export default function DownloadsClient() {
                 </p>
                 <p className="mt-1 text-xs leading-5 text-slate-400">
                   {isTurkish
-                    ? "Tüm güncel denetimler Denetim Kütüphanesi üzerinden açılır. Aşağıdaki indirilebilir PDF'ler mevcut belge paketleridir."
-                    : "All current inspections are available in the Inspection Library. Downloadable PDFs below are the existing document packs."}
+                    ? "Tüm güncel denetimler doğrudan bu kütüphaneden açılır ve sahada kullanılabilir."
+                    : "All current inspections can be opened directly from this library and used in the field."}
                 </p>
               </div>
               <Link href={`/${locale}/checklists`} className="mt-4 inline-flex shrink-0 items-center justify-center rounded-xl bg-cyan-600 px-5 py-3 text-sm font-black text-white transition hover:bg-cyan-500 sm:mt-0">
@@ -437,6 +456,8 @@ export default function DownloadsClient() {
               {filteredResources.map((item) => {
                 const meta = categoryMeta[item.category];
                 const rowAccent = resourceAccent(item);
+                const isOpenableResource =
+                  (item.category === "guides" || item.category === "checklists") && Boolean(item.href);
                 return (
                   <article key={item.id} className="group flex min-h-[82px] items-center gap-4 rounded-xl border border-white/[0.08] bg-gradient-to-r from-[#081321] to-[#06101c] px-4 py-3 transition hover:border-blue-400/25 hover:bg-[#0a1426]">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/[0.06] bg-white/[0.04] text-xl">{item.icon}</div>
@@ -452,9 +473,15 @@ export default function DownloadsClient() {
                     <span className="hidden shrink-0 rounded-full border border-white/10 bg-white/[0.035] px-3 py-1 text-[10px] font-black text-slate-400 sm:block">{item.format}</span>
 
                     <div className="flex shrink-0 gap-2">
-                      {item.category === "guides" && item.href ? (
-                        <a href={item.href[locale]} className="inline-flex h-9 items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 text-xs font-black text-white transition hover:bg-blue-500">
-                          {isTurkish ? "Rehberi Aç" : "Open Guide"}
+                      {isOpenableResource && item.href ? (
+                        <a href={item.href[locale]} className={`inline-flex h-9 items-center justify-center gap-2 rounded-lg px-4 text-xs font-black text-white transition ${rowAccent}`}>
+                          {item.category === "checklists"
+                            ? isTurkish
+                              ? "Denetimi Aç"
+                              : "Open Inspection"
+                            : isTurkish
+                              ? "Rehberi Aç"
+                              : "Open Guide"}
                           <ArrowIcon />
                         </a>
                       ) : (
@@ -468,7 +495,7 @@ export default function DownloadsClient() {
                           {downloadUrl(item) && (
                             <a href={downloadUrl(item)} {...(!item.href ? { download: true } : {})} title={downloadText(item)} className={`inline-flex h-9 items-center justify-center gap-2 rounded-lg px-3 text-xs font-black text-white transition ${rowAccent}`}>
                               <DownloadIcon />
-                              <span className="hidden xl:inline">{isTurkish ? "İndir" : "Download"}</span>
+                              <span className="hidden xl:inline">{downloadText(item)}</span>
                             </a>
                           )}
                         </>

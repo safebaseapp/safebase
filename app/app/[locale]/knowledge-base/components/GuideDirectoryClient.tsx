@@ -86,11 +86,11 @@ export default function GuideDirectoryClient({ locale, guides }: Props) {
             </div>
           </div>
 
-          <div className="mt-5 flex gap-2 overflow-x-auto pb-2">
+          <div className="mt-5 flex flex-wrap gap-2">
             <button
               type="button"
               onClick={() => setCategory("all")}
-              className={`shrink-0 rounded-full border px-4 py-2 text-sm font-bold ${category === "all" ? "border-blue-400 bg-blue-600 text-white" : "border-white/10 bg-slate-900 text-slate-400"}`}
+              className={`rounded-full border px-4 py-2 text-sm font-bold ${category === "all" ? "border-blue-400 bg-blue-600 text-white" : "border-white/10 bg-slate-900 text-slate-400"}`}
             >
               {isTurkish ? "Tümü" : "All"}
             </button>
@@ -99,7 +99,7 @@ export default function GuideDirectoryClient({ locale, guides }: Props) {
                 key={item}
                 type="button"
                 onClick={() => setCategory(item)}
-                className={`shrink-0 rounded-full border px-4 py-2 text-sm font-bold ${category === item ? "border-blue-400 bg-blue-600 text-white" : "border-white/10 bg-slate-900 text-slate-400"}`}
+                className={`rounded-full border px-4 py-2 text-sm font-bold ${category === item ? "border-blue-400 bg-blue-600 text-white" : "border-white/10 bg-slate-900 text-slate-400"}`}
               >
                 {item}
               </button>

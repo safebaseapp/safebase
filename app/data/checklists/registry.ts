@@ -69,6 +69,19 @@ export const inspectionCatalog = allChecklists.map((document) => {
   };
 });
 
+if (inspectionCatalog.length !== 24) {
+  throw new Error(`SERNEM inspection catalog expected 24 checklists, received ${inspectionCatalog.length}.`);
+}
+
+const checklistSlugs = inspectionCatalog.map((entry) => entry.slug.trim());
+if (checklistSlugs.some((slug) => !slug)) {
+  throw new Error("SERNEM inspection catalog contains an empty checklist slug.");
+}
+
+if (new Set(checklistSlugs).size !== checklistSlugs.length) {
+  throw new Error("SERNEM inspection catalog contains duplicate checklist slugs.");
+}
+
 export const featuredChecklistSlugs = [
   "work-at-height",
   "hot-work",
@@ -78,6 +91,10 @@ export const featuredChecklistSlugs = [
   "lifting",
 ] as const;
 
+export function getChecklistEntryBySlug(slug: string) {
+  return inspectionCatalog.find((entry) => entry.slug === slug);
+}
+
 export function getChecklistBySlug(slug: string) {
-  return inspectionCatalog.find((entry) => entry.slug === slug)?.document;
+  return getChecklistEntryBySlug(slug)?.document;
 }
