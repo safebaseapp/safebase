@@ -10,6 +10,7 @@ import "./navbar-responsive-fix.css";
 import "./core-content-visual-system.css";
 import "./core-content-image-cards.css";
 import "./topic-match-refinement.css";
+import "./topic-match-refinement-supplement.css";
 
 type Props = {
   children: React.ReactNode;
