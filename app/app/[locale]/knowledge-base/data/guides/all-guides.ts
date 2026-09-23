@@ -13,9 +13,10 @@ import { fireSafetyGuide } from "./fire-safety";
 import { craneSafetyGuide } from "./crane-safety";
 import { chemicalSafetyGuide } from "./chemical-safety";
 import { permitToWorkGuide } from "./permit-to-work";
-
 import { manualHandlingGuide } from "./manual-handling";
-export const allGuides: SafetyGuide[] = [
+import { generatedGuides } from "./generated";
+
+const coreGuides: SafetyGuide[] = [
   manualHandlingGuide,
   permitToWorkGuide,
   workingAtHeightGuide,
@@ -31,6 +32,12 @@ export const allGuides: SafetyGuide[] = [
   craneSafetyGuide,
   chemicalSafetyGuide,
 ];
+
+export const allGuides: SafetyGuide[] = [...coreGuides, ...generatedGuides];
+
+if (allGuides.length !== 100) {
+  throw new Error(`SERNEM knowledge base expected 100 guides, received ${allGuides.length}.`);
+}
 
 export function getGuideBySlug(slug: string) {
   return allGuides.find((guide) => guide.slug === slug);
