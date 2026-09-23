@@ -1,0 +1,407 @@
+/* SERNEM Visual System v2 — Cinematic Image Cards
+   Package 1.1: Toolbox, Inspection and Guide libraries.
+   Uses real Pexels field photography already approved for SERNEM Safety Packs.
+   This layer is visual-only and intentionally leaves routes, auth, downloads and content behavior untouched. */
+
+/* ---------- Shared image-card treatment ---------- */
+article[class*='min-h-[560px]'],
+a[href*='/checklists/'][class*='min-h-64'],
+a[href*='/knowledge-base/'][class*='min-h-'] {
+  --svc-image: url('https://images.pexels.com/photos/7739856/pexels-photo-7739856.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center;
+  background:
+    linear-gradient(180deg, rgb(2 7 18 / .12) 0%, rgb(2 7 18 / .46) 30%, rgb(2 7 18 / .82) 58%, rgb(2 7 18 / .97) 80%, rgb(2 7 18 / .995) 100%),
+    radial-gradient(circle at 14% 8%, rgb(var(--sv-accent) / .24), transparent 34%),
+    var(--svc-image) var(--svc-position) / cover no-repeat !important;
+  border-color: rgb(var(--sv-accent) / .34) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / .07),
+    inset 0 -90px 120px rgb(0 0 0 / .20),
+    0 20px 55px rgb(0 0 0 / .28) !important;
+}
+
+article[class*='min-h-[560px]']::after,
+a[href*='/checklists/'][class*='min-h-64']::after,
+a[href*='/knowledge-base/'][class*='min-h-']::after {
+  width: 260px !important;
+  height: 260px !important;
+  right: -115px !important;
+  top: -135px !important;
+  background: rgb(var(--sv-accent) / .18) !important;
+  filter: blur(52px) !important;
+}
+
+article[class*='min-h-[560px]']:hover,
+a[href*='/checklists/'][class*='min-h-64']:hover,
+a[href*='/knowledge-base/'][class*='min-h-']:hover {
+  border-color: rgb(var(--sv-accent) / .70) !important;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / .09),
+    inset 0 -100px 140px rgb(0 0 0 / .24),
+    0 30px 85px rgb(var(--sv-accent) / .16),
+    0 25px 70px rgb(0 0 0 / .40) !important;
+}
+
+article[class*='min-h-[560px]'] h2,
+a[href*='/checklists/'][class*='min-h-64'] h3,
+a[href*='/knowledge-base/'][class*='min-h-'] h2 {
+  text-shadow: 0 2px 20px rgb(0 0 0 / .72);
+}
+
+article[class*='min-h-[560px]'] p,
+a[href*='/checklists/'][class*='min-h-64'] p,
+a[href*='/knowledge-base/'][class*='min-h-'] p {
+  text-shadow: 0 1px 14px rgb(0 0 0 / .52);
+}
+
+/* ---------- Toolbox: make the existing action-heavy card feel like a Safety Pack ---------- */
+article[class*='min-h-[560px]'] {
+  background-position: var(--svc-position) !important;
+  transition: transform 320ms ease, border-color 320ms ease, box-shadow 320ms ease, background-size 700ms ease !important;
+}
+
+article[class*='min-h-[560px]'] > div:nth-of-type(2) > div:first-child {
+  border-color: rgb(var(--sv-accent) / .40) !important;
+  background: rgb(2 7 18 / .58) !important;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 34px rgb(0 0 0 / .28), inset 0 1px 0 rgb(255 255 255 / .08) !important;
+}
+
+article[class*='min-h-[560px]'] > div[class*='mt-auto'] {
+  margin-left: -0.35rem;
+  margin-right: -0.35rem;
+  margin-bottom: -0.35rem;
+  padding: .95rem .35rem .35rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(180deg, rgb(2 7 18 / .16), rgb(2 7 18 / .66));
+  backdrop-filter: blur(8px);
+}
+
+/* Toolbox topic photography */
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/working-at-height']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/safety-harness']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/scaffold']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/ladder']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/dropped-object']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/temporary-work-platform']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/working-near-open-edge']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/working-over-water']) {
+  --svc-image: url('https://images.pexels.com/photos/13093933/pexels-photo-13093933.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 34%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/lifting']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/crane']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/rigging']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/man-basket']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/tag-line']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/load-stability']) {
+  --svc-image: url('https://images.pexels.com/photos/33320793/pexels-photo-33320793.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 38%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/mobile-equipment']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/forklift']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/vehicle-pedestrian']) {
+  --svc-image: url('https://images.pexels.com/photos/5579584/pexels-photo-5579584.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 42%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/electrical']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/loto']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/temporary-electrical']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/battery']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/overhead-power']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/generator']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/extension-lead']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/stored-energy']) {
+  --svc-image: url('https://images.pexels.com/photos/10871585/pexels-photo-10871585.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 35%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hot-work']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/fire-safety']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/grinding']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/welding']) {
+  --svc-image: url('https://images.pexels.com/photos/35136696/pexels-photo-35136696.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 40%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/chemical']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/spill']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hazardous-waste']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/painting-coating']) {
+  --svc-image: url('https://images.pexels.com/photos/20379378/pexels-photo-20379378.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 38%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/confined-space']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/gas-testing']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/compressed-gas']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/nitrogen']) {
+  --svc-image: url('https://images.pexels.com/photos/1267312/pexels-photo-1267312.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 38%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/excavation']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/underground-services']) {
+  --svc-image: url('https://images.pexels.com/photos/5579584/pexels-photo-5579584.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 42%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hand-power-tools']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/pressure']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/water-jetting']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/flange']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hose']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/abrasive-blasting']) {
+  --svc-image: url('https://images.pexels.com/photos/35136696/pexels-photo-35136696.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 42%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/ppe']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/heat-stress']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/cold-stress']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/noise']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/respiratory']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/eye-face']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/hand-injury']) {
+  --svc-image: url('https://images.pexels.com/photos/34206461/pexels-photo-34206461.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 38%;
+}
+
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/permit']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/simultaneous']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/stop-work']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/line-breaking']),
+article[class*='min-h-[560px]']:has(a[href*='/toolbox/barricading']) {
+  --svc-image: url('https://images.pexels.com/photos/7739856/pexels-photo-7739856.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 38%;
+}
+
+/* ---------- Inspection cards ---------- */
+a[href*='/checklists/'][class*='min-h-64'] {
+  min-height: 22rem !important;
+  padding: 1.75rem !important;
+}
+
+a[href*='/checklists/'][class*='min-h-64'] > div:first-child > span:first-child {
+  background: rgb(2 7 18 / .58) !important;
+  border-color: rgb(var(--sv-accent) / .42) !important;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 32px rgb(0 0 0 / .28) !important;
+}
+
+a[href*='/checklists/work-at-height'],
+a[href*='/checklists/scaffold'] {
+  --svc-image: url('https://images.pexels.com/photos/33320793/pexels-photo-33320793.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 40%;
+}
+
+a[href*='/checklists/hot-work'] {
+  --svc-image: url('https://images.pexels.com/photos/35136696/pexels-photo-35136696.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+a[href*='/checklists/fire-safety'],
+a[href*='/checklists/emergency-preparedness'] {
+  --svc-image: url('https://images.pexels.com/photos/34206461/pexels-photo-34206461.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+a[href*='/checklists/loto'] {
+  --svc-image: url('https://images.pexels.com/photos/15049671/pexels-photo-15049671.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+a[href*='/checklists/electrical-safety'],
+a[href*='/checklists/temporary-power'] {
+  --svc-image: url('https://images.pexels.com/photos/10871585/pexels-photo-10871585.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+a[href*='/checklists/confined-space'] {
+  --svc-image: url('https://images.pexels.com/photos/1267312/pexels-photo-1267312.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+a[href*='/checklists/lifting'] {
+  --svc-image: url('https://images.pexels.com/photos/33320793/pexels-photo-33320793.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+a[href*='/checklists/excavation'],
+a[href*='/checklists/mobile-equipment'],
+a[href*='/checklists/vehicle-traffic'] {
+  --svc-image: url('https://images.pexels.com/photos/5579584/pexels-photo-5579584.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+a[href*='/checklists/chemical-safety'],
+a[href*='/checklists/environmental'] {
+  --svc-image: url('https://images.pexels.com/photos/20379378/pexels-photo-20379378.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+a[href*='/checklists/hand-tools'],
+a[href*='/checklists/power-tools'] {
+  --svc-image: url('https://images.pexels.com/photos/35136696/pexels-photo-35136696.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+a[href*='/checklists/ppe'],
+a[href*='/checklists/first-aid'],
+a[href*='/checklists/welfare'] {
+  --svc-image: url('https://images.pexels.com/photos/34206461/pexels-photo-34206461.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+a[href*='/checklists/simops'],
+a[href*='/checklists/safety-observation'],
+a[href*='/checklists/housekeeping'] {
+  --svc-image: url('https://images.pexels.com/photos/7739856/pexels-photo-7739856.jpeg?auto=compress&cs=tinysrgb&w=1400');
+}
+
+/* ---------- Guide cards ---------- */
+a[href*='/knowledge-base/'][class*='min-h-'] {
+  min-height: 22rem !important;
+  padding: 1.8rem !important;
+}
+
+/* Height / access */
+a[href*='/knowledge-base/working-at-height'],
+a[href*='/knowledge-base/fall-protection'],
+a[href*='/knowledge-base/anchor'],
+a[href*='/knowledge-base/harness'],
+a[href*='/knowledge-base/lanyard'],
+a[href*='/knowledge-base/ladder'],
+a[href*='/knowledge-base/mewp'],
+a[href*='/knowledge-base/roof'],
+a[href*='/knowledge-base/edge-protection'],
+a[href*='/knowledge-base/dropped-object'],
+a[href*='/knowledge-base/scaffold'] {
+  --svc-image: url('https://images.pexels.com/photos/13093933/pexels-photo-13093933.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 36%;
+}
+
+/* Confined space / atmosphere */
+a[href*='/knowledge-base/confined-space'],
+a[href*='/knowledge-base/gas-testing'],
+a[href*='/knowledge-base/ventilation'],
+a[href*='/knowledge-base/oxygen-deficiency'],
+a[href*='/knowledge-base/h2s'],
+a[href*='/knowledge-base/lel'] {
+  --svc-image: url('https://images.pexels.com/photos/1267312/pexels-photo-1267312.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 38%;
+}
+
+/* Hot work / fire */
+a[href*='/knowledge-base/hot-work'],
+a[href*='/knowledge-base/welding'],
+a[href*='/knowledge-base/gas-cutting'],
+a[href*='/knowledge-base/fire-watch'],
+a[href*='/knowledge-base/gas-cylinder'],
+a[href*='/knowledge-base/spark'],
+a[href*='/knowledge-base/flammable'],
+a[href*='/knowledge-base/combustible-dust'],
+a[href*='/knowledge-base/fire-extinguisher'],
+a[href*='/knowledge-base/fire-safety'],
+a[href*='/knowledge-base/grinding'] {
+  --svc-image: url('https://images.pexels.com/photos/35136696/pexels-photo-35136696.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 40%;
+}
+
+/* Electrical / isolation / machinery energy */
+a[href*='/knowledge-base/loto'],
+a[href*='/knowledge-base/electrical'],
+a[href*='/knowledge-base/arc-flash'],
+a[href*='/knowledge-base/portable-electrical'],
+a[href*='/knowledge-base/temporary-electrical'],
+a[href*='/knowledge-base/zero-energy'],
+a[href*='/knowledge-base/machine-guarding'],
+a[href*='/knowledge-base/stored-energy'],
+a[href*='/knowledge-base/pneumatic'],
+a[href*='/knowledge-base/hydraulic'] {
+  --svc-image: url('https://images.pexels.com/photos/10871585/pexels-photo-10871585.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 36%;
+}
+
+/* Excavation / groundworks */
+a[href*='/knowledge-base/excavation'],
+a[href*='/knowledge-base/trench'],
+a[href*='/knowledge-base/shoring'],
+a[href*='/knowledge-base/underground-services'],
+a[href*='/knowledge-base/spoil-pile'] {
+  --svc-image: url('https://images.pexels.com/photos/5579584/pexels-photo-5579584.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 42%;
+}
+
+/* Lifting / rigging */
+a[href*='/knowledge-base/crane'],
+a[href*='/knowledge-base/rigging'],
+a[href*='/knowledge-base/sling'],
+a[href*='/knowledge-base/shackle'],
+a[href*='/knowledge-base/chain-block'],
+a[href*='/knowledge-base/forklift'],
+a[href*='/knowledge-base/telehandler'],
+a[href*='/knowledge-base/mobile-crane'],
+a[href*='/knowledge-base/lifting-plan'],
+a[href*='/knowledge-base/banksman'],
+a[href*='/knowledge-base/suspended-load'] {
+  --svc-image: url('https://images.pexels.com/photos/33320793/pexels-photo-33320793.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 40%;
+}
+
+/* Chemical / PPE / occupational health */
+a[href*='/knowledge-base/chemical'],
+a[href*='/knowledge-base/sds'],
+a[href*='/knowledge-base/ghs'],
+a[href*='/knowledge-base/spill-response'],
+a[href*='/knowledge-base/respiratory'],
+a[href*='/knowledge-base/hearing'],
+a[href*='/knowledge-base/eye-face'],
+a[href*='/knowledge-base/heat-stress'],
+a[href*='/knowledge-base/ppe'] {
+  --svc-image: url('https://images.pexels.com/photos/20379378/pexels-photo-20379378.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 38%;
+}
+
+/* General control / emergency / human factors */
+a[href*='/knowledge-base/permit-to-work'],
+a[href*='/knowledge-base/toolbox-talk'],
+a[href*='/knowledge-base/jsa'],
+a[href*='/knowledge-base/take-5'],
+a[href*='/knowledge-base/stop-work'],
+a[href*='/knowledge-base/housekeeping'],
+a[href*='/knowledge-base/traffic-management'],
+a[href*='/knowledge-base/reversing-vehicle'],
+a[href*='/knowledge-base/emergency-response'],
+a[href*='/knowledge-base/first-aid'],
+a[href*='/knowledge-base/incident-reporting'],
+a[href*='/knowledge-base/near-miss'],
+a[href*='/knowledge-base/safety-observation'],
+a[href*='/knowledge-base/fatigue'],
+a[href*='/knowledge-base/simops'],
+a[href*='/knowledge-base/contractor-safety'],
+a[href*='/knowledge-base/manual-handling'] {
+  --svc-image: url('https://images.pexels.com/photos/7739856/pexels-photo-7739856.jpeg?auto=compress&cs=tinysrgb&w=1400');
+  --svc-position: center 38%;
+}
+
+/* Tablet/mobile: keep text legible and avoid giant cards. */
+@media (max-width: 767px) {
+  article[class*='min-h-[560px]'] {
+    min-height: 520px !important;
+    background:
+      linear-gradient(180deg, rgb(2 7 18 / .20) 0%, rgb(2 7 18 / .58) 26%, rgb(2 7 18 / .90) 55%, rgb(2 7 18 / .99) 76%, rgb(2 7 18 / 1) 100%),
+      radial-gradient(circle at 14% 8%, rgb(var(--sv-accent) / .22), transparent 32%),
+      var(--svc-image) var(--svc-position) / cover no-repeat !important;
+  }
+
+  a[href*='/checklists/'][class*='min-h-64'],
+  a[href*='/knowledge-base/'][class*='min-h-'] {
+    min-height: 20rem !important;
+    background:
+      linear-gradient(180deg, rgb(2 7 18 / .20) 0%, rgb(2 7 18 / .62) 34%, rgb(2 7 18 / .95) 72%, rgb(2 7 18 / 1) 100%),
+      radial-gradient(circle at 14% 8%, rgb(var(--sv-accent) / .20), transparent 32%),
+      var(--svc-image) var(--svc-position) / cover no-repeat !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  article[class*='min-h-[560px]'],
+  a[href*='/checklists/'][class*='min-h-64'],
+  a[href*='/knowledge-base/'][class*='min-h-'] {
+    transition: none !important;
+  }
+}
