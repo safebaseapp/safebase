@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { allGuides } from "../data/guides/all-guides";
 
 export type LocalizedText = {
   en: string;
@@ -77,6 +78,22 @@ export default function GuideTemplate({
     reference.trim().toUpperCase().startsWith("OSHA"),
   );
 
+  const relatedGuides: RelatedGuide[] =
+    guide.relatedGuides && guide.relatedGuides.length > 0
+      ? guide.relatedGuides
+      : allGuides
+          .filter(
+            (candidate) =>
+              candidate.slug !== guide.slug &&
+              candidate.category.en === guide.category.en,
+          )
+          .slice(0, 3)
+          .map((candidate) => ({
+            slug: candidate.slug,
+            title: candidate.title,
+            icon: "↗",
+          }));
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <section className="border-b border-white/10 bg-gradient-to-b from-blue-950/40 to-slate-950">
@@ -123,43 +140,27 @@ export default function GuideTemplate({
           <h2 className="text-3xl font-black">
             {isTurkish ? "Genel Bakış" : "Overview"}
           </h2>
-
-          <p className="mt-5 leading-8 text-slate-400">
-            {guide.overview[language]}
-          </p>
+          <p className="mt-5 leading-8 text-slate-400">{guide.overview[language]}</p>
         </article>
 
         <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
           <h2 className="text-3xl font-black">
             {isTurkish ? "Başlıca Tehlikeler" : "Main Hazards"}
           </h2>
-
           <ul className="mt-6 grid gap-3 sm:grid-cols-2">
             {hazards.map((hazard) => (
-              <li
-                key={hazard}
-                className="rounded-xl border border-white/10 bg-slate-900/60 px-4 py-3 text-slate-300"
-              >
-                • {hazard}
-              </li>
+              <li key={hazard} className="rounded-xl border border-white/10 bg-slate-900/60 px-4 py-3 text-slate-300">• {hazard}</li>
             ))}
           </ul>
         </article>
 
         {requiredPPE.length > 0 ? (
           <article className="rounded-3xl border border-violet-400/20 bg-violet-400/5 p-8">
-            <h2 className="text-3xl font-black">
-              {isTurkish ? "Gerekli KKD" : "Required PPE"}
-            </h2>
-
+            <h2 className="text-3xl font-black">{isTurkish ? "Gerekli KKD" : "Required PPE"}</h2>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {requiredPPE.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 rounded-xl border border-violet-400/15 bg-slate-950/40 px-4 py-4 text-slate-300"
-                >
-                  <span className="font-black text-violet-300">✓</span>
-                  <span>{item}</span>
+                <li key={item} className="flex items-start gap-3 rounded-xl border border-violet-400/15 bg-slate-950/40 px-4 py-4 text-slate-300">
+                  <span className="font-black text-violet-300">✓</span><span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -167,20 +168,11 @@ export default function GuideTemplate({
         ) : null}
 
         <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-          <h2 className="text-3xl font-black">
-            {isTurkish ? "Temel Kontroller" : "Essential Controls"}
-          </h2>
-
+          <h2 className="text-3xl font-black">{isTurkish ? "Temel Kontroller" : "Essential Controls"}</h2>
           <ol className="mt-6 space-y-4">
             {controls.map((control, index) => (
-              <li
-                key={control}
-                className="flex gap-4 rounded-xl border border-white/10 bg-slate-900/60 p-4"
-              >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 font-black">
-                  {index + 1}
-                </span>
-
+              <li key={control} className="flex gap-4 rounded-xl border border-white/10 bg-slate-900/60 p-4">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 font-black">{index + 1}</span>
                 <span className="pt-1 text-slate-300">{control}</span>
               </li>
             ))}
@@ -189,18 +181,11 @@ export default function GuideTemplate({
 
         {commonMistakes.length > 0 ? (
           <article className="rounded-3xl border border-amber-400/20 bg-amber-400/5 p-8">
-            <h2 className="text-3xl font-black">
-              {isTurkish ? "Yaygın Hatalar" : "Common Mistakes"}
-            </h2>
-
+            <h2 className="text-3xl font-black">{isTurkish ? "Yaygın Hatalar" : "Common Mistakes"}</h2>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {commonMistakes.map((mistake) => (
-                <li
-                  key={mistake}
-                  className="flex items-start gap-3 rounded-xl border border-amber-400/15 bg-slate-950/40 px-4 py-4 text-slate-300"
-                >
-                  <span className="font-black text-amber-400">×</span>
-                  <span>{mistake}</span>
+                <li key={mistake} className="flex items-start gap-3 rounded-xl border border-amber-400/15 bg-slate-950/40 px-4 py-4 text-slate-300">
+                  <span className="font-black text-amber-400">×</span><span>{mistake}</span>
                 </li>
               ))}
             </ul>
@@ -209,18 +194,11 @@ export default function GuideTemplate({
 
         {guide.checklist && checklist.length > 0 ? (
           <article className="rounded-3xl border border-blue-400/20 bg-blue-500/5 p-8">
-            <h2 className="text-3xl font-black">
-              {guide.checklist.title[language]}
-            </h2>
-
+            <h2 className="text-3xl font-black">{guide.checklist.title[language]}</h2>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {checklist.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 rounded-xl border border-blue-400/15 bg-slate-950/40 px-4 py-4 text-slate-300"
-                >
-                  <span className="font-black text-emerald-400">✓</span>
-                  <span>{item}</span>
+                <li key={item} className="flex items-start gap-3 rounded-xl border border-blue-400/15 bg-slate-950/40 px-4 py-4 text-slate-300">
+                  <span className="font-black text-emerald-400">✓</span><span>{item}</span>
                 </li>
               ))}
             </ul>
@@ -229,43 +207,27 @@ export default function GuideTemplate({
 
         {guide.emergencySection ? (
           <article className="rounded-3xl border border-rose-400/20 bg-rose-400/5 p-8">
-            <h2 className="text-3xl font-black">
-              {guide.emergencySection.title[language]}
-            </h2>
-
-            <p className="mt-5 leading-8 text-slate-400">
-              {guide.emergencySection.content[language]}
-            </p>
+            <h2 className="text-3xl font-black">{guide.emergencySection.title[language]}</h2>
+            <p className="mt-5 leading-8 text-slate-400">{guide.emergencySection.content[language]}</p>
           </article>
         ) : null}
 
         {visibleReferences.length > 0 ? (
           <article className="rounded-3xl border border-emerald-400/20 bg-emerald-400/5 p-8">
-            <h2 className="text-3xl font-black">
-              {isTurkish ? "OSHA Referansları" : "OSHA References"}
-            </h2>
-
+            <h2 className="text-3xl font-black">{isTurkish ? "OSHA Referansları" : "OSHA References"}</h2>
             <div className="mt-6 flex flex-wrap gap-3">
               {visibleReferences.map((reference) => (
-                <span
-                  key={reference}
-                  className="rounded-lg border border-emerald-400/20 bg-slate-950/50 px-4 py-3 font-bold text-emerald-300"
-                >
-                  {reference}
-                </span>
+                <span key={reference} className="rounded-lg border border-emerald-400/20 bg-slate-950/50 px-4 py-3 font-bold text-emerald-300">{reference}</span>
               ))}
             </div>
           </article>
         ) : null}
 
-        {guide.relatedGuides && guide.relatedGuides.length > 0 ? (
+        {relatedGuides.length > 0 ? (
           <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-            <h2 className="text-3xl font-black">
-              {isTurkish ? "İlgili Rehberler" : "Related Guides"}
-            </h2>
-
+            <h2 className="text-3xl font-black">{isTurkish ? "İlgili Rehberler" : "Related Guides"}</h2>
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              {guide.relatedGuides.map((relatedGuide) => (
+              {relatedGuides.map((relatedGuide) => (
                 <Link
                   key={relatedGuide.slug}
                   href={`/${language}/knowledge-base/${relatedGuide.slug}`}
@@ -273,9 +235,7 @@ export default function GuideTemplate({
                 >
                   <span className="mr-2">{relatedGuide.icon}</span>
                   {relatedGuide.title[language]}
-                  <span className="ml-2 inline-block transition group-hover:translate-x-1">
-                    →
-                  </span>
+                  <span className="ml-2 inline-block transition group-hover:translate-x-1">→</span>
                 </Link>
               ))}
             </div>
@@ -283,20 +243,10 @@ export default function GuideTemplate({
         ) : null}
 
         <article className="rounded-3xl border border-blue-400/20 bg-blue-600/10 p-8">
-          <h2 className="text-3xl font-black">
-            {isTurkish
-              ? "Daha Fazla Rehberlik mi Gerekiyor?"
-              : "Need More Guidance?"}
-          </h2>
-
-          <p className="mt-4 max-w-2xl leading-7 text-slate-400">
-            {guide.aiText[language]}
-          </p>
-
+          <h2 className="text-3xl font-black">{isTurkish ? "Daha Fazla Rehberlik mi Gerekiyor?" : "Need More Guidance?"}</h2>
+          <p className="mt-4 max-w-2xl leading-7 text-slate-400">{guide.aiText[language]}</p>
           <Link
-            href={`/${language}/ai-assistant?topic=${encodeURIComponent(
-              guide.title.en,
-            )}`}
+            href={`/${language}/ai-assistant?topic=${encodeURIComponent(guide.title.en)}`}
             className="mt-6 inline-flex rounded-xl bg-blue-600 px-6 py-4 font-black text-white transition hover:bg-blue-500"
           >
             {isTurkish ? "SERNEM AI'a Sor" : "Ask SERNEM AI"} →
