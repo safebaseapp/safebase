@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { toolboxData } from "@/lib/toolbox/toolbox-data";
 import { allRiskActivities } from "@/lib/risk-library/all-activities";
 import { safetySigns } from "@/lib/safety-signs/data";
+import { allGuides } from "@/app/[locale]/knowledge-base/data/guides/all-guides";
 
 const baseUrl = "https://www.sernem.com";
 
@@ -23,23 +24,7 @@ const publicRoutes = [
   "/tools/method-statement",
 
   "/risk-assessment",
-
   "/knowledge-base",
-  "/knowledge-base/chemical-safety",
-  "/knowledge-base/confined-space",
-  "/knowledge-base/crane-safety",
-  "/knowledge-base/electrical-safety",
-  "/knowledge-base/excavation",
-  "/knowledge-base/fire-safety",
-  "/knowledge-base/grinding",
-  "/knowledge-base/hot-work",
-  "/knowledge-base/loto",
-  "/knowledge-base/manual-handling",
-  "/knowledge-base/permit-to-work",
-  "/knowledge-base/ppe",
-  "/knowledge-base/scaffolding",
-  "/knowledge-base/working-at-height",
-
   "/posters",
   "/safety-signs",
   "/toolbox",
@@ -56,6 +41,7 @@ const publicRoutes = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const locales = ["tr", "en"] as const;
+
   const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     publicRoutes.map((route) => ({
       url: `${baseUrl}/${locale}${route}`,
@@ -66,7 +52,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
           : route.startsWith("/tools/")
             ? 0.9
             : 0.8,
-    }))
+    })),
+  );
+
+  const guidePages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+    allGuides.map((guide) => ({
+      url: `${baseUrl}/${locale}/knowledge-base/${guide.slug}`,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    })),
   );
 
   const toolboxPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
@@ -74,30 +68,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/${locale}/toolbox/${toolbox.slug}`,
       changeFrequency: "monthly",
       priority: 0.8,
-    }))
+    })),
   );
 
   const riskAssessmentPages: MetadataRoute.Sitemap = locales.flatMap(
     (locale) =>
       allRiskActivities.map((activity) => ({
         url: `${baseUrl}/${locale}/risk-assessment/${activity.id}`,
-          changeFrequency: "monthly",
+        changeFrequency: "monthly",
         priority: 0.85,
-      }))
+      })),
   );
 
-
-  const safetySignPages: MetadataRoute.Sitemap = locales.flatMap(
-    (locale) =>
-      safetySigns.map((sign) => ({
-        url: `${baseUrl}/${locale}/safety-signs/${sign.slug}`,
-          changeFrequency: "monthly",
-        priority: 0.8,
-      }))
+  const safetySignPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+    safetySigns.map((sign) => ({
+      url: `${baseUrl}/${locale}/safety-signs/${sign.slug}`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    })),
   );
 
   return [
     ...staticPages,
+    ...guidePages,
     ...toolboxPages,
     ...riskAssessmentPages,
     ...safetySignPages,
