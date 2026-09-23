@@ -10,11 +10,15 @@ type Locale = "tr" | "en";
 type Props = {
   locale: Locale;
   poster: PosterDefinition;
+  qrPath?: string;
+  companyLogoUrl?: string | null;
 };
 
 export default function PosterMasterV4({
   locale,
   poster,
+  qrPath,
+  companyLogoUrl,
 }: Props) {
   return (
     <div
@@ -41,6 +45,8 @@ export default function PosterMasterV4({
         <Header
           locale={locale}
           poster={poster}
+          qrPath={qrPath}
+          companyLogoUrl={companyLogoUrl}
         />
 
         <PreJobStrip

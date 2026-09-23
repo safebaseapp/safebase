@@ -1,7 +1,7 @@
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import PosterMaster from "@/components/posters-v4/PosterMasterV4";
+import PosterBrandingCanvas from "@/components/posters-v4/PosterBrandingCanvas";
 import PosterFormatToolbar from "@/components/posters-v4/PosterFormatToolbar";
 import { workingAtHeightPoster } from "@/lib/posters-v2/working-at-height";
 import { ladderSafetyPoster } from "@/lib/posters-v2/ladder-safety";
@@ -27,6 +27,7 @@ type Props = {
   searchParams: Promise<{
     size?: string;
     embed?: string;
+    brand?: string;
   }>;
 };
 
@@ -35,7 +36,7 @@ export default async function PosterDetailPage({
   searchParams,
 }: Props) {
   const { locale, slug } = await params;
-  const { size, embed } = await searchParams;
+  const { size, embed, brand } = await searchParams;
 
   if (locale !== "tr" && locale !== "en") {
     notFound();
@@ -43,7 +44,7 @@ export default async function PosterDetailPage({
 
   const posterDefinitions = {
     "working-at-height-rules": workingAtHeightPoster,
-  "ladder-safety-rules": ladderSafetyPoster,
+    "ladder-safety-rules": ladderSafetyPoster,
     "housekeeping-safety-rules": housekeepingSafetyPoster,
     "excavation-safety-rules": excavationSafetyPoster,
     "chemical-safety-rules": chemicalSafetyPoster,
@@ -70,11 +71,12 @@ export default async function PosterDetailPage({
   const isA4 = posterSize === "a4";
   const isTurkish = locale === "tr";
   const isEmbed = embed === "1";
+  const showBranding = brand === "1";
+  const qrPath = `/posters/sernem-qr-${locale}.png`;
 
   return (
     <>
       <ActivityTracker eventName="poster_detail_open" />
-    <>
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -101,9 +103,12 @@ export default async function PosterDetailPage({
               #poster-print-area,
               #poster-print-area * {
                 visibility: visible;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
               }
 
-              #poster-controls {
+              #poster-controls,
+              .sernem-mobile-auth-bar {
                 display: none !important;
               }
 
@@ -141,6 +146,10 @@ export default async function PosterDetailPage({
                 margin: 0 !important;
                 box-shadow: none !important;
               }
+
+              #poster-print-area .sernem-poster-header {
+                display: grid !important;
+              }
             }
           `,
         }}
@@ -154,38 +163,38 @@ export default async function PosterDetailPage({
         }
       >
         {!isEmbed && (
-        <div
-          id="poster-controls"
-          className="mx-auto mb-8 max-w-5xl rounded-[28px] border border-slate-300 bg-white p-6 shadow-xl print:hidden"
-        >
-          <Link
-            href={`/${locale}/posters`}
-            className="text-sm font-black text-blue-600 hover:text-slate-950"
+          <div
+            id="poster-controls"
+            className="mx-auto mb-8 max-w-5xl rounded-[28px] border border-slate-300 bg-white p-6 shadow-xl print:hidden"
           >
-            ← {isTurkish ? "Poster Kütüphanesi" : "Poster Library"}
-          </Link>
+            <Link
+              href={`/${locale}/posters`}
+              className="text-sm font-black text-blue-600 hover:text-slate-950"
+            >
+              ← {isTurkish ? "Poster Kütüphanesi" : "Poster Library"}
+            </Link>
 
-          <div className="mt-5 text-center">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-600">
-              {selectedPoster.code} • SERNEM Pro Series
-            </p>
+            <div className="mt-5 text-center">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-600">
+                {selectedPoster.code} • SERNEM Pro Series
+              </p>
 
-            <h1 className="mt-3 text-3xl font-black text-slate-950">
-              {selectedPoster.title[locale]}
-            </h1>
+              <h1 className="mt-3 text-3xl font-black text-slate-950">
+                {selectedPoster.title[locale]}
+              </h1>
 
-            <p className="mt-2 text-sm font-semibold text-slate-600">
-              {isTurkish ? "Seçili boyut" : "Selected size"}:{" "}
-              <span className="font-black">
-                {posterSize.toUpperCase()}
-              </span>
-            </p>
+              <p className="mt-2 text-sm font-semibold text-slate-600">
+                {isTurkish ? "Seçili boyut" : "Selected size"}: {" "}
+                <span className="font-black">
+                  {posterSize.toUpperCase()}
+                </span>
+              </p>
+            </div>
+
+            <div className="mt-6">
+              <PosterFormatToolbar locale={locale} />
+            </div>
           </div>
-
-          <div className="mt-6">
-            <PosterFormatToolbar locale={locale} />
-          </div>
-        </div>
         )}
 
         <div
@@ -212,15 +221,16 @@ export default async function PosterDetailPage({
                 isA4 ? "scale-[0.7070707]" : ""
               }`}
             >
-              <PosterMaster
+              <PosterBrandingCanvas
                 locale={locale}
                 poster={selectedPoster}
+                qrPath={qrPath}
+                showBranding={showBranding}
               />
             </div>
           </div>
         </div>
       </main>
-    </>
     </>
   );
 }

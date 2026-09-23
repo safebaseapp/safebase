@@ -5,13 +5,21 @@ type Locale = "tr" | "en";
 type Props = {
   locale: Locale;
   poster: PosterDefinition;
+  qrPath?: string;
+  companyLogoUrl?: string | null;
 };
 
-export default function Header({ locale, poster }: Props) {
+export default function Header({
+  locale,
+  poster,
+  qrPath,
+  companyLogoUrl,
+}: Props) {
   const isTurkish = locale === "tr";
+  const resolvedQrPath = qrPath ?? `/posters/sernem-qr-${locale}.png`;
 
   return (
-    <header className="grid grid-cols-[1fr_265px] gap-5 rounded-[24px] border border-slate-300 bg-white p-6 shadow-sm">
+    <div className="sernem-poster-header grid grid-cols-[1fr_265px] gap-5 rounded-[24px] border border-slate-300 bg-white p-6 shadow-sm">
       <div>
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full bg-red-600 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-white">
@@ -27,16 +35,28 @@ export default function Header({ locale, poster }: Props) {
           </span>
         </div>
 
-        <div className="mt-5">
-          <p className="text-[40px] font-black leading-none">
-            <span className="text-emerald-600">SERNEM</span>
-          </p>
+        <div className="mt-5 flex items-center justify-between gap-5">
+          <div>
+            <p className="text-[40px] font-black leading-none">
+              <span className="text-emerald-600">SERNEM</span>
+            </p>
 
-          <p className="mt-2 text-[10px] font-black uppercase tracking-[0.22em] text-slate-500">
-            {isTurkish
-              ? "İş Sağlığı ve Güvenliği Kaynakları"
-              : "Health and Safety Resources"}
-          </p>
+            <p className="mt-2 text-[10px] font-black uppercase tracking-[0.22em] text-slate-500">
+              {isTurkish
+                ? "İş Sağlığı ve Güvenliği Kaynakları"
+                : "Health and Safety Resources"}
+            </p>
+          </div>
+
+          {companyLogoUrl && (
+            <div className="flex h-[60px] min-w-[150px] max-w-[210px] items-center justify-center rounded-2xl border border-slate-200 bg-white px-4 py-2">
+              <img
+                src={companyLogoUrl}
+                alt={isTurkish ? "Şirket logosu" : "Company logo"}
+                className="max-h-[48px] max-w-[180px] object-contain"
+              />
+            </div>
+          )}
         </div>
 
         <h1 className="mt-6 max-w-[760px] text-[50px] font-black uppercase leading-[0.94] tracking-[-0.035em] text-slate-950">
@@ -123,8 +143,8 @@ export default function Header({ locale, poster }: Props) {
         <div className="mt-5 flex items-center gap-4">
           <div className="rounded-xl bg-white p-2">
             <img
-              src="/posters/sernem-qr.png"
-              alt="SERNEM QR"
+              src={resolvedQrPath}
+              alt={isTurkish ? "SERNEM poster QR kodu" : "SERNEM poster QR code"}
               className="h-[78px] w-[78px]"
             />
           </div>
@@ -136,12 +156,12 @@ export default function Header({ locale, poster }: Props) {
 
             <p className="mt-2 text-[10px] font-bold leading-4 text-slate-300">
               {isTurkish
-                ? "Checklist, toolbox ve profesyonel rehberler"
-                : "Checklists, toolbox talks and professional guides"}
+                ? "Dijital poster kütüphanesini açın"
+                : "Open the digital poster library"}
             </p>
           </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 }

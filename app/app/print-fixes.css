@@ -1,0 +1,32 @@
+/* SERNEM cross-module print safeguards */
+
+@media print {
+  .sernem-mobile-auth-bar {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  /* Let premium AI assessment use remaining space instead of forcing a blank page. */
+  .sernem-print-document .sernem-premium-section {
+    break-before: auto !important;
+    page-break-before: auto !important;
+  }
+
+  .sernem-print-document .sernem-premium-section .sernem-report-list {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  .sernem-print-document .sernem-premium-section .sernem-report-list li {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Poster headers are document content, not website chrome. */
+  #poster-print-area .sernem-poster-header {
+    display: grid !important;
+  }
+}

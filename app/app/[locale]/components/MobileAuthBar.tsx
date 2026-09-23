@@ -63,7 +63,7 @@ export default function MobileAuthBar({ locale }: Props) {
   }
 
   return (
-    <div className="border-b border-white/[0.07] bg-[#020817] px-4 py-2 lg:hidden">
+    <div className="sernem-mobile-auth-bar border-b border-white/[0.07] bg-[#020817] px-4 py-2 lg:hidden print:hidden">
       <div className="mx-auto flex max-w-7xl items-center justify-end gap-2">
         {isLoading ? (
           <div className="h-9 w-28 animate-pulse rounded-xl bg-white/[0.05]" />
