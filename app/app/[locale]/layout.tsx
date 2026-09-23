@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
 import LocalizedNavbar from "./components/LocalizedNavbar";
 import MobileAuthBar from "./components/MobileAuthBar";
+import MobileQuickNav from "./components/MobileQuickNav";
 import "./navbar-responsive-fix.css";
 
 type Props = {
@@ -63,6 +64,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider>
       <LocalizedNavbar locale={safeLocale} />
       <MobileAuthBar locale={safeLocale} />
+      <MobileQuickNav locale={safeLocale} />
       {children}
     </NextIntlClientProvider>
   );
