@@ -29,48 +29,120 @@ const legacySummaries: Record<string, LegacySummary> = {
   "working-at-height": {
     slug: "work-at-height",
     category: { en: "High Risk Work", tr: "Yüksek Riskli İşler" },
-    description: { en: "Inspect fall protection, access and rescue controls before work starts.", tr: "Çalışma başlamadan önce düşmeye karşı koruma, erişim ve kurtarma kontrollerini inceleyin." },
+    description: {
+      en: "Inspect fall protection, access and rescue controls before work starts.",
+      tr: "Çalışma başlamadan önce düşmeye karşı koruma, erişim ve kurtarma kontrollerini inceleyin.",
+    },
   },
   "hot-work": {
     slug: "hot-work",
     category: { en: "Permit to Work", tr: "Çalışma İzni" },
-    description: { en: "Verify permits, fire prevention controls and gas testing before hot work.", tr: "Sıcak çalışma öncesinde izinleri, yangın önlemlerini ve gaz ölçümünü doğrulayın." },
+    description: {
+      en: "Verify permits, fire prevention controls and gas testing before hot work.",
+      tr: "Sıcak çalışma öncesinde izinleri, yangın önlemlerini ve gaz ölçümünü doğrulayın.",
+    },
   },
   loto: {
     slug: "loto",
     category: { en: "Energy Control", tr: "Enerji Kontrolü" },
-    description: { en: "Confirm energy isolation, lock application and zero-energy verification.", tr: "Enerji izolasyonunu, kilit uygulamasını ve sıfır enerji doğrulamasını kontrol edin." },
+    description: {
+      en: "Confirm energy isolation, lock application and zero-energy verification.",
+      tr: "Enerji izolasyonunu, kilit uygulamasını ve sıfır enerji doğrulamasını kontrol edin.",
+    },
   },
   scaffolding: {
     slug: "scaffold",
     category: { en: "Temporary Structures", tr: "Geçici Yapılar" },
-    description: { en: "Check scaffold access, platforms, guardrails, tags and foundations.", tr: "İskele erişimini, platformları, korkulukları, etiketleri ve temelleri kontrol edin." },
+    description: {
+      en: "Check scaffold access, platforms, guardrails, tags and foundations.",
+      tr: "İskele erişimini, platformları, korkulukları, etiketleri ve temelleri kontrol edin.",
+    },
   },
   "confined-space": {
     slug: "confined-space",
     category: { en: "High Risk Work", tr: "Yüksek Riskli İşler" },
-    description: { en: "Review atmospheric testing, rescue readiness and entry controls.", tr: "Atmosfer ölçümünü, kurtarma hazırlığını ve giriş kontrollerini inceleyin." },
+    description: {
+      en: "Review atmospheric testing, rescue readiness and entry controls.",
+      tr: "Atmosfer ölçümünü, kurtarma hazırlığını ve giriş kontrollerini inceleyin.",
+    },
+  },
+  "confined-space-entry": {
+    slug: "confined-space",
+    category: { en: "High Risk Work", tr: "Yüksek Riskli İşler" },
+    description: {
+      en: "Review atmospheric testing, rescue readiness and entry controls.",
+      tr: "Atmosfer ölçümünü, kurtarma hazırlığını ve giriş kontrollerini inceleyin.",
+    },
   },
   lifting: {
     slug: "lifting",
     category: { en: "Lifting", tr: "Kaldırma İşleri" },
-    description: { en: "Inspect lifting plans, rigging, exclusion zones and crane setup.", tr: "Kaldırma planlarını, sapanları, bariyerli alanları ve vinç kurulumunu inceleyin." },
+    description: {
+      en: "Inspect lifting plans, rigging, exclusion zones and crane setup.",
+      tr: "Kaldırma planlarını, sapanları, bariyerli alanları ve vinç kurulumunu inceleyin.",
+    },
   },
 };
 
-export const inspectionCatalog = allChecklists.map((document) => {
-  const fallback = legacySummaries[document.id];
+const canonicalSlugByLegacyValue: Record<string, string> = {
+  "working-at-height": "work-at-height",
+  scaffolding: "scaffold",
+  "confined-space-entry": "confined-space",
+};
+
+const fallbackDisclaimer: LocalizedSummary = {
+  en: "This checklist supports field verification and does not replace applicable legislation, approved risk assessments, permits or site procedures.",
+  tr: "Bu kontrol listesi saha doğrulamasını destekler; yürürlükteki mevzuatın, onaylı risk değerlendirmelerinin, izinlerin veya saha prosedürlerinin yerine geçmez.",
+};
+
+function normalizeChecklistDocument(source: ChecklistDocument): ChecklistDocument {
+  const rawSlug = source.slug || source.id;
+  const fallback = legacySummaries[source.id] ?? legacySummaries[rawSlug];
+  const canonicalSlug =
+    canonicalSlugByLegacyValue[rawSlug] ??
+    canonicalSlugByLegacyValue[source.id] ??
+    fallback?.slug ??
+    rawSlug;
+
+  return {
+    ...source,
+    slug: canonicalSlug,
+    description:
+      source.description ??
+      fallback?.description ?? {
+        en: "Structured field inspection checklist.",
+        tr: "Yapılandırılmış saha denetim kontrol listesi.",
+      },
+    category:
+      source.category ??
+      fallback?.category ?? {
+        en: "Inspection",
+        tr: "Denetim",
+      },
+    version: source.version ?? "1.0",
+    revision: source.revision ?? "0",
+    status: source.status ?? "approved",
+    responseOptions: source.responseOptions ?? ["yes", "no", "na"],
+    standards: source.standards ?? [],
+    disclaimer: source.disclaimer ?? fallbackDisclaimer,
+  };
+}
+
+export const inspectionCatalog = allChecklists.map((sourceDocument) => {
+  const document = normalizeChecklistDocument(sourceDocument);
   return {
     document,
-    slug: document.slug ?? fallback?.slug ?? document.id,
+    slug: document.slug,
     title: document.title,
-    category: document.category ?? fallback?.category ?? { en: "Inspection", tr: "Denetim" },
-    description: document.description ?? fallback?.description ?? { en: "Structured field inspection checklist.", tr: "Yapılandırılmış saha denetim kontrol listesi." },
+    category: document.category,
+    description: document.description,
   };
 });
 
 if (inspectionCatalog.length !== 24) {
-  throw new Error(`SERNEM inspection catalog expected 24 checklists, received ${inspectionCatalog.length}.`);
+  throw new Error(
+    `SERNEM inspection catalog expected 24 checklists, received ${inspectionCatalog.length}.`,
+  );
 }
 
 const checklistSlugs = inspectionCatalog.map((entry) => entry.slug.trim());
@@ -92,7 +164,8 @@ export const featuredChecklistSlugs = [
 ] as const;
 
 export function getChecklistEntryBySlug(slug: string) {
-  return inspectionCatalog.find((entry) => entry.slug === slug);
+  const canonicalSlug = canonicalSlugByLegacyValue[slug] ?? slug;
+  return inspectionCatalog.find((entry) => entry.slug === canonicalSlug);
 }
 
 export function getChecklistBySlug(slug: string) {
