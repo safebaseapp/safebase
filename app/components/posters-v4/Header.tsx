@@ -40,13 +40,19 @@ export default function Header({
           </span>
         </div>
 
-        <div className="mt-5 flex min-h-[72px] items-center">
+        <div
+          className={
+            companyLogoUrl
+              ? "mt-4 flex min-h-[112px] items-center"
+              : "mt-5 flex min-h-[72px] items-center"
+          }
+        >
           {companyLogoUrl ? (
-            <div className="inline-flex min-h-[72px] min-w-[220px] max-w-[390px] items-center justify-start rounded-2xl border border-slate-200 bg-white px-5 py-3 shadow-sm">
+            <div className="inline-flex min-h-[104px] min-w-[300px] max-w-[520px] items-center justify-start rounded-[22px] border border-slate-200 bg-white px-6 py-4 shadow-sm">
               <img
                 src={companyLogoUrl}
                 alt={isTurkish ? "Şirket logosu" : "Company logo"}
-                className="max-h-[64px] max-w-[350px] object-contain object-left"
+                className="max-h-[92px] max-w-[470px] object-contain object-left"
               />
             </div>
           ) : (
@@ -64,7 +70,7 @@ export default function Header({
           )}
         </div>
 
-        <h1 className="mt-6 max-w-[760px] text-[50px] font-black uppercase leading-[0.94] tracking-[-0.035em] text-slate-950">
+        <h1 className={`${companyLogoUrl ? "mt-4" : "mt-6"} max-w-[760px] text-[50px] font-black uppercase leading-[0.94] tracking-[-0.035em] text-slate-950`}>
           {poster.title[locale].split("CRITICAL").map((part, i, arr) => (
             <span key={`title-part-${i}`}>
               {part}
