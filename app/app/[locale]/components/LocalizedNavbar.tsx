@@ -88,6 +88,12 @@ export default function LocalizedNavbar({ locale }: Props) {
       description: isTurkish ? "Rehber, toolbox, denetim ve araçları tek saha akışında birleştirin." : "Connect guides, toolbox talks, inspections and tools in one field workflow.",
     },
     {
+      href: "/ppe-standards",
+      icon: "◈",
+      title: isTurkish ? "KKD Standartları" : "PPE Standards",
+      description: isTurkish ? "EN/EN ISO kodlarını, sınıfları ve saha kontrollerini ürün üzerinden okuyun." : "Read EN/EN ISO codes, classes and field checks directly from PPE products.",
+    },
+    {
       href: "/tools/risk-matrix",
       icon: "▦",
       title: isTurkish ? "Risk Matrisi" : "Risk Matrix",

@@ -4,6 +4,7 @@ import { allRiskActivities } from "@/lib/risk-library/all-activities";
 import { safetySigns } from "@/lib/safety-signs/data";
 import { safetyPacks } from "@/lib/safety-pack/data";
 import { allGuides } from "@/app/[locale]/knowledge-base/data/guides/all-guides";
+import { ppeStandards } from "@/app/[locale]/ppe-standards/data";
 import { inspectionCatalog } from "@/data/checklists/registry";
 
 const baseUrl = "https://www.sernem.com";
@@ -16,7 +17,6 @@ const publicRoutes = [
   "/privacy",
   "/terms",
   "/cookies",
-
   "/tools",
   "/tools/ltifr",
   "/tools/trir",
@@ -24,9 +24,9 @@ const publicRoutes = [
   "/tools/risk-matrix",
   "/tools/quick-risk-assessment",
   "/tools/method-statement",
-
   "/risk-assessment",
   "/knowledge-base",
+  "/ppe-standards",
   "/posters",
   "/safety-signs",
   "/toolbox",
@@ -45,7 +45,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority:
         route === ""
           ? 1
-          : route === "/safety-pack" || route.startsWith("/tools/")
+          : route === "/ppe-standards" ||
+              route === "/safety-pack" ||
+              route.startsWith("/tools/")
             ? 0.9
             : 0.8,
     })),
@@ -64,6 +66,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/${locale}/knowledge-base/${guide.slug}`,
       changeFrequency: "monthly",
       priority: 0.85,
+    })),
+  );
+
+  const ppeStandardPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+    ppeStandards.map((standard) => ({
+      url: `${baseUrl}/${locale}/ppe-standards/${standard.slug}`,
+      changeFrequency: "monthly",
+      priority: 0.9,
     })),
   );
 
@@ -104,6 +114,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...safetyPackPages,
     ...guidePages,
+    ...ppeStandardPages,
     ...checklistPages,
     ...toolboxPages,
     ...riskAssessmentPages,
