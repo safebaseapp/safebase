@@ -34,6 +34,7 @@ export default function PosterBrandingCanvas({
         return;
       }
 
+      setCompanyLogoUrl(null);
       setIsBrandingReady(false);
 
       try {
@@ -95,7 +96,10 @@ export default function PosterBrandingCanvas({
   }, [showBranding]);
 
   return (
-    <div data-poster-branding-ready={isBrandingReady ? "true" : "false"}>
+    <div
+      data-poster-branding-ready={isBrandingReady ? "true" : "false"}
+      data-poster-company-logo={companyLogoUrl ? "true" : "false"}
+    >
       <PosterMasterV4
         locale={locale}
         poster={poster}
