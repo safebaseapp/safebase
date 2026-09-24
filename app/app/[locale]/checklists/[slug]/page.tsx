@@ -1,3 +1,4 @@
+import "../sernem-report-v2.css";
 import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
 import { notFound, redirect } from "next/navigation";
