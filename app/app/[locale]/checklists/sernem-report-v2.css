@@ -1,0 +1,231 @@
+/* SERNEM Inspection Report V2 — print-only executive report polish */
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm 10mm;
+  }
+
+  .sernem-related-resources {
+    display: none !important;
+  }
+
+  .sernem-print-document.sernem-print-document {
+    width: 100% !important;
+    max-width: none !important;
+    color: #071a38 !important;
+    background: #ffffff !important;
+  }
+
+  .sernem-print-document .sernem-report-header {
+    margin: 0 0 5mm !important;
+    padding: 5mm 6mm !important;
+    border: 0 !important;
+    border-bottom: 2.2mm solid #11b5c6 !important;
+    border-radius: 3mm !important;
+    background: #061a38 !important;
+    color: #ffffff !important;
+  }
+
+  .sernem-print-document .sernem-brand {
+    font-size: 20pt !important;
+    letter-spacing: .1em !important;
+  }
+
+  .sernem-print-document .sernem-brand-subtitle {
+    color: #c7d9ee !important;
+  }
+
+  .sernem-print-document .sernem-report-badge {
+    border-color: #2dd4bf !important;
+    background: #0d3156 !important;
+    color: #e6fffb !important;
+  }
+
+  .sernem-print-document .sernem-report-cover {
+    display: flex !important;
+    min-height: 236mm !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 10mm !important;
+    border: 1px solid #cbd8e6 !important;
+    border-radius: 4mm !important;
+    background: linear-gradient(145deg, #f8fbff 0%, #ffffff 62%, #f1f8fb 100%) !important;
+    break-after: page !important;
+    page-break-after: always !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .sernem-print-document .sernem-report-category {
+    margin-bottom: 3mm !important;
+    color: #0891b2 !important;
+    font-size: 8pt !important;
+    letter-spacing: .16em !important;
+  }
+
+  .sernem-print-document .sernem-report-cover h1 {
+    max-width: 165mm !important;
+    font-size: 27pt !important;
+    line-height: 1.04 !important;
+    letter-spacing: -.025em !important;
+  }
+
+  .sernem-print-document .sernem-report-description {
+    margin-top: 4mm !important;
+    max-width: 160mm !important;
+    font-size: 9.5pt !important;
+    line-height: 1.55 !important;
+  }
+
+  .sernem-print-document .sernem-meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 2.5mm !important;
+    margin-top: 10mm !important;
+  }
+
+  .sernem-print-document .sernem-meta-grid > div {
+    min-height: 17mm !important;
+    padding: 3.5mm !important;
+    border-color: #c7d5e5 !important;
+    background: #ffffff !important;
+  }
+
+  .sernem-print-document .sernem-kpi-grid {
+    gap: 2.5mm !important;
+    margin-top: 4mm !important;
+  }
+
+  .sernem-print-document .sernem-kpi-grid > div {
+    padding: 3.5mm !important;
+    background: #f4f9fd !important;
+  }
+
+  .sernem-print-document .sernem-kpi-grid strong {
+    font-size: 17pt !important;
+  }
+
+  .sernem-print-document .sernem-decision-banner {
+    margin-top: 4mm !important;
+    padding: 4mm 4.5mm !important;
+    background: #ffffff !important;
+  }
+
+  .sernem-print-document .sernem-report-section {
+    margin-top: 0 !important;
+    padding-top: 4mm !important;
+  }
+
+  .sernem-print-document .sernem-section-heading {
+    margin-bottom: 3mm !important;
+    padding-bottom: 2.5mm !important;
+    border-bottom-color: #0891b2 !important;
+  }
+
+  .sernem-print-document .sernem-section-heading > span {
+    background: #061a38 !important;
+  }
+
+  .sernem-print-document .sernem-section-heading h2 {
+    font-size: 14pt !important;
+  }
+
+  .sernem-print-document .sernem-check-section {
+    margin-top: 3mm !important;
+  }
+
+  .sernem-print-document .sernem-check-section > h3 {
+    margin-bottom: 1.5mm !important;
+    padding: 2.2mm 3mm !important;
+    border-left: 3px solid #0ea5a8 !important;
+    border-radius: 1.5mm !important;
+    background: #edf6f8 !important;
+    color: #123c55 !important;
+  }
+
+  .sernem-print-document .sernem-check-row {
+    padding: 2mm 0 !important;
+  }
+
+  .sernem-print-document .sernem-check-row.has-finding {
+    margin: 1.7mm 0 !important;
+    padding: 2.5mm !important;
+    border-left-width: 4px !important;
+    background: #fff7f8 !important;
+  }
+
+  .sernem-print-document .sernem-check-main {
+    grid-template-columns: 7mm minmax(0, 1fr) 25mm !important;
+    gap: 2.2mm !important;
+  }
+
+  .sernem-print-document .sernem-item-number {
+    width: 6.5mm !important;
+    height: 6.5mm !important;
+    background: #e8f4f7 !important;
+    color: #075d6c !important;
+  }
+
+  .sernem-print-document .sernem-check-copy strong {
+    font-size: 8pt !important;
+    line-height: 1.32 !important;
+  }
+
+  .sernem-print-document .sernem-answer {
+    padding: 1.3mm 1.8mm !important;
+  }
+
+  .sernem-print-document .sernem-finding-box {
+    margin-left: 9mm !important;
+    gap: 2mm !important;
+    padding-top: 2mm !important;
+  }
+
+  .sernem-print-document .sernem-analysis-summary,
+  .sernem-print-document .sernem-premium-hero,
+  .sernem-print-document .sernem-premium-grid > div,
+  .sernem-print-document .sernem-report-list {
+    border-color: #cbd8e6 !important;
+    background: #f8fbfd !important;
+  }
+
+  .sernem-print-document .sernem-premium-section {
+    break-before: page !important;
+    page-break-before: always !important;
+    padding-top: 0 !important;
+  }
+
+  .sernem-print-document .sernem-premium-hero {
+    padding: 6mm !important;
+    border: 1.5px solid #c4b5fd !important;
+    border-left: 4px solid #7c3aed !important;
+    background: #faf8ff !important;
+  }
+
+  .sernem-print-document .sernem-premium-hero > strong {
+    font-size: 17pt !important;
+  }
+
+  .sernem-print-document .sernem-premium-grid {
+    grid-template-columns: 1fr 1.6fr !important;
+  }
+
+  .sernem-print-document .sernem-report-list {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  .sernem-print-document .sernem-report-list li {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .sernem-print-document .sernem-report-footer {
+    margin-top: 6mm !important;
+    padding: 3mm 0 0 !important;
+    border-top: 1px solid #9fb2c8 !important;
+    color: #667a91 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
