@@ -66,7 +66,17 @@ export default function RelatedInspectionResources({
   checklist: ChecklistDocument;
 }) {
   const isTurkish = locale === "tr";
-  const seed = `${checklist.slug} ${checklist.title.en} ${checklist.category.en}`;
+  const seed = [
+    checklist.slug,
+    checklist.title?.en,
+    checklist.category?.en,
+    checklist.description?.en,
+  ]
+    .filter((value): value is string => Boolean(value))
+    .join(" ");
+
+  if (!seed.trim()) return null;
+
   const safetyPack = findSafetyPackForText(seed);
   const cards: Candidate[] = [];
 
@@ -127,7 +137,9 @@ export default function RelatedInspectionResources({
           SERNEM Workflow
         </p>
         <h2 className="mt-3 text-2xl font-black sm:text-3xl">
-          {isTurkish ? "Bu denetimle bağlantılı HSE kaynakları" : "HSE resources connected to this inspection"}
+          {isTurkish
+            ? "Bu denetimle bağlantılı HSE kaynakları"
+            : "HSE resources connected to this inspection"}
         </h2>
 
         {safetyPack ? (
@@ -136,7 +148,9 @@ export default function RelatedInspectionResources({
             className="mt-6 flex flex-col gap-3 rounded-2xl border border-emerald-400/25 bg-emerald-400/[0.08] p-5 transition hover:border-emerald-300/45 sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
-              <span className="text-xs font-black uppercase tracking-[0.13em] text-emerald-300">Safety Pack</span>
+              <span className="text-xs font-black uppercase tracking-[0.13em] text-emerald-300">
+                Safety Pack
+              </span>
               <h3 className="mt-2 text-xl font-black text-white">
                 {safetyPack.icon} {safetyPack.title[locale]}
               </h3>

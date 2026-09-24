@@ -17,6 +17,7 @@ export default function Header({
 }: Props) {
   const isTurkish = locale === "tr";
   const resolvedQrPath = qrPath ?? `/posters/sernem-qr-${locale}.png`;
+  const isCompanyBranded = Boolean(companyLogoUrl);
 
   return (
     <div className="sernem-poster-header grid grid-cols-[1fr_265px] gap-5 rounded-[24px] border border-slate-300 bg-white p-6 shadow-sm">
@@ -27,7 +28,11 @@ export default function Header({
           </span>
 
           <span className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-slate-700">
-            SERNEM Pro Series
+            {isCompanyBranded
+              ? isTurkish
+                ? "Premium Şirket Sürümü"
+                : "Premium Company Edition"
+              : "SERNEM Pro Series"}
           </span>
 
           <span className="rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-emerald-700">
@@ -35,26 +40,26 @@ export default function Header({
           </span>
         </div>
 
-        <div className="mt-5 flex items-center justify-between gap-5">
-          <div>
-            <p className="text-[40px] font-black leading-none">
-              <span className="text-emerald-600">SERNEM</span>
-            </p>
-
-            <p className="mt-2 text-[10px] font-black uppercase tracking-[0.22em] text-slate-500">
-              {isTurkish
-                ? "İş Sağlığı ve Güvenliği Kaynakları"
-                : "Health and Safety Resources"}
-            </p>
-          </div>
-
-          {companyLogoUrl && (
-            <div className="flex h-[60px] min-w-[150px] max-w-[210px] items-center justify-center rounded-2xl border border-slate-200 bg-white px-4 py-2">
+        <div className="mt-5 flex min-h-[72px] items-center">
+          {companyLogoUrl ? (
+            <div className="inline-flex min-h-[72px] min-w-[220px] max-w-[390px] items-center justify-start rounded-2xl border border-slate-200 bg-white px-5 py-3 shadow-sm">
               <img
                 src={companyLogoUrl}
                 alt={isTurkish ? "Şirket logosu" : "Company logo"}
-                className="max-h-[48px] max-w-[180px] object-contain"
+                className="max-h-[64px] max-w-[350px] object-contain object-left"
               />
+            </div>
+          ) : (
+            <div>
+              <p className="text-[40px] font-black leading-none">
+                <span className="text-emerald-600">SERNEM</span>
+              </p>
+
+              <p className="mt-2 text-[10px] font-black uppercase tracking-[0.22em] text-slate-500">
+                {isTurkish
+                  ? "İş Sağlığı ve Güvenliği Kaynakları"
+                  : "Health and Safety Resources"}
+              </p>
             </div>
           )}
         </div>
@@ -63,7 +68,9 @@ export default function Header({
           {poster.title[locale].split("CRITICAL").map((part, i, arr) => (
             <span key={`title-part-${i}`}>
               {part}
-              {i < arr.length - 1 && <span className="text-red-600">CRITICAL</span>}
+              {i < arr.length - 1 && (
+                <span className="text-red-600">CRITICAL</span>
+              )}
             </span>
           ))}
         </h1>
@@ -85,16 +92,16 @@ export default function Header({
               : poster.code === "SRN-FIRE-001"
                 ? "OSHA 1910 Subpart L"
                 : poster.code === "SRN-LOTO-001"
-                ? "OSHA 29 CFR 1910.147"
-                : poster.code === "SRN-EL-001"
-                ? "OSHA 1910 Subpart S"
-                : poster.code === "SRN-CS-001"
-                ? "OSHA 29 CFR 1910.146"
-                : poster.code === "SRN-HW-001"
-                  ? "OSHA 1910.252 / 1926.352"
-                  : poster.code === "SRN-SCF-001"
-                    ? "OSHA 1926.451"
-                    : "OSHA 29 CFR 1926"}
+                  ? "OSHA 29 CFR 1910.147"
+                  : poster.code === "SRN-EL-001"
+                    ? "OSHA 1910 Subpart S"
+                    : poster.code === "SRN-CS-001"
+                      ? "OSHA 29 CFR 1910.146"
+                      : poster.code === "SRN-HW-001"
+                        ? "OSHA 1910.252 / 1926.352"
+                        : poster.code === "SRN-SCF-001"
+                          ? "OSHA 1926.451"
+                          : "OSHA 29 CFR 1926"}
           </span>
 
           <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[8px] font-black uppercase tracking-[0.14em] text-slate-600">
@@ -103,16 +110,16 @@ export default function Header({
               : poster.code === "SRN-FIRE-001"
                 ? "Alarm • Evacuation • Extinguishers"
                 : poster.code === "SRN-LOTO-001"
-                ? "Hazardous Energy Control"
-                : poster.code === "SRN-EL-001"
-                ? "LOTO • Shock • Arc Flash"
-                : poster.code === "SRN-CS-001"
-                ? "Permit Space • Atmospheric Testing"
-                : poster.code === "SRN-HW-001"
-                  ? "Hot Work • Fire Prevention"
-                  : poster.code === "SRN-SCF-001"
-                    ? "OSHA Subpart L"
-                    : "EN 361 • EN 365 • EN 795"}
+                  ? "Hazardous Energy Control"
+                  : poster.code === "SRN-EL-001"
+                    ? "LOTO • Shock • Arc Flash"
+                    : poster.code === "SRN-CS-001"
+                      ? "Permit Space • Atmospheric Testing"
+                      : poster.code === "SRN-HW-001"
+                        ? "Hot Work • Fire Prevention"
+                        : poster.code === "SRN-SCF-001"
+                          ? "OSHA Subpart L"
+                          : "EN 361 • EN 365 • EN 795"}
           </span>
 
           <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[8px] font-black uppercase tracking-[0.14em] text-slate-600">

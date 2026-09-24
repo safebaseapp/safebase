@@ -67,7 +67,7 @@ export default async function PosterDetailPage({
     notFound();
   }
 
-  const posterSize = size === "a4" ? "a4" : "a3";
+  const posterSize = size === "a3" ? "a3" : "a4";
   const isA4 = posterSize === "a4";
   const isTurkish = locale === "tr";
   const isEmbed = embed === "1";
@@ -185,9 +185,7 @@ export default async function PosterDetailPage({
 
               <p className="mt-2 text-sm font-semibold text-slate-600">
                 {isTurkish ? "Seçili boyut" : "Selected size"}: {" "}
-                <span className="font-black">
-                  {posterSize.toUpperCase()}
-                </span>
+                <span className="font-black">{posterSize.toUpperCase()}</span>
               </p>
             </div>
 
