@@ -29,7 +29,7 @@ IMPORTANT RULES:
 7. Do not claim that work is safe when unresolved Critical or High findings exist.
 8. Keep the report professional, concise and suitable for an HSE manager.
 9. Produce a complete management assessment, not a short narrative.
-10. If assessmentStatus is Partial or completionRate is below 100, the work decision must be HOLD and no approval may be stated. Show provisional risk separately from the incomplete final decision.
+10. If assessmentStatus is Partial or completionRate is below 100, clearly state that the assessment is incomplete, but NEVER replace or downgrade the supplied rule-engine workDecision. A partial inspection may still be STOP WORK when confirmed critical findings require it. The workDecision and finalRecommendation must exactly match the supplied value.
 11. Return valid JSON only.
 12. Do not include markdown, code fences or additional commentary.
 `.trim();
