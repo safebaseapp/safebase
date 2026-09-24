@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { isAdminUser } from "@/lib/auth/access";
@@ -14,19 +14,24 @@ type Props = {
 type PremiumState = "loading" | "premium" | "free";
 type PosterSize = "a4" | "a3";
 type ExportMode = "standard" | "branded" | null;
+type RequestedDownload = Exclude<ExportMode, null>;
 
 function sleep(ms: number) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
 async function waitForPosterAssets() {
-  for (let attempt = 0; attempt < 30; attempt += 1) {
+  for (let attempt = 0; attempt < 50; attempt += 1) {
     const pendingBranding = document.querySelector(
       '[data-poster-branding-ready="false"]',
     );
 
     if (!pendingBranding) break;
     await sleep(100);
+  }
+
+  if (document.fonts?.ready) {
+    await document.fonts.ready;
   }
 
   const images = Array.from(
@@ -48,12 +53,18 @@ async function waitForPosterAssets() {
         }),
     ),
   );
+
+  await new Promise<void>((resolve) => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => resolve());
+    });
+  });
 }
 
 async function waitForPosterLayout(size: PosterSize) {
   const expectedWidth = size === "a4" ? 794 : 1123;
 
-  for (let attempt = 0; attempt < 30; attempt += 1) {
+  for (let attempt = 0; attempt < 50; attempt += 1) {
     const poster = document.getElementById("poster-print-area");
     if (poster && Math.abs(poster.clientWidth - expectedWidth) <= 3) {
       return poster;
@@ -70,10 +81,13 @@ export default function PosterFormatToolbar({ locale }: Props) {
   const searchParams = useSearchParams();
 
   const isTurkish = locale === "tr";
-  const selectedSize: PosterSize = searchParams.get("size") === "a3" ? "a3" : "a4";
+  const selectedSize: PosterSize =
+    searchParams.get("size") === "a3" ? "a3" : "a4";
   const brandedPoster = searchParams.get("brand") === "1";
+  const requestedDownload = searchParams.get("download");
   const [premiumState, setPremiumState] = useState<PremiumState>("loading");
   const [exportMode, setExportMode] = useState<ExportMode>(null);
+  const handledDownload = useRef<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -116,7 +130,7 @@ export default function PosterFormatToolbar({ locale }: Props) {
     };
   }, []);
 
-  function updateQuery(updates: Record<string, string | null>) {
+  function replaceQuery(updates: Record<string, string | null>) {
     const params = new URLSearchParams(searchParams.toString());
 
     Object.entries(updates).forEach(([key, value]) => {
@@ -131,27 +145,97 @@ export default function PosterFormatToolbar({ locale }: Props) {
   }
 
   function selectSize(size: PosterSize) {
-    updateQuery({ size });
+    if (exportMode) return;
+    replaceQuery({ size, download: null });
   }
 
-  async function waitForQueryState(size: PosterSize, branded: boolean) {
-    for (let attempt = 0; attempt < 30; attempt += 1) {
-      const current = new URLSearchParams(window.location.search);
-      const sizeReady = current.get("size") === size;
-      const brandReady = branded
-        ? current.get("brand") === "1"
-        : current.get("brand") !== "1";
-
-      if (sizeReady && brandReady) break;
-      await sleep(50);
+  useEffect(() => {
+    if (requestedDownload !== "standard" && requestedDownload !== "branded") {
+      handledDownload.current = null;
+      return;
     }
 
-    // Give React one paint cycle after the URL state changes so the poster
-    // renderer and optional branding layer are synchronized before capture.
-    await sleep(150);
-  }
+    const mode = requestedDownload as RequestedDownload;
+    const expectedBranding = mode === "branded";
+    if (brandedPoster !== expectedBranding) return;
 
-  async function savePosterPdf(size: PosterSize, branded: boolean) {
+    const requestKey = `${mode}:${selectedSize}:${brandedPoster ? "brand" : "standard"}`;
+    if (handledDownload.current === requestKey) return;
+    handledDownload.current = requestKey;
+
+    let cancelled = false;
+
+    async function runPreparedExport() {
+      setExportMode(mode);
+
+      try {
+        const poster = await waitForPosterLayout(selectedSize);
+        await waitForPosterAssets();
+
+        if (cancelled) return;
+
+        if (!poster) {
+          throw new Error("Poster export area was not found.");
+        }
+
+        if (
+          mode === "branded" &&
+          !document.querySelector('[data-poster-company-logo="true"]')
+        ) {
+          window.alert(
+            isTurkish
+              ? "Logolu PDF için önce Dashboard'dan şirket logonuzu yükleyin."
+              : "Upload your company logo from the Dashboard before creating a branded PDF.",
+          );
+          return;
+        }
+
+        const slug =
+          pathname.split("/").filter(Boolean).at(-1) ?? "sernem-poster";
+
+        await exportPosterPdf({
+          element: poster,
+          size: selectedSize,
+          filename:
+            mode === "branded"
+              ? `${slug}-company-branded`
+              : `sernem-${slug}`,
+        });
+      } catch (error) {
+        console.error("Poster PDF export failed:", error);
+        window.alert(
+          isTurkish
+            ? "PDF oluşturulamadı. Sayfayı yenilemeden tekrar deneyebilirsiniz."
+            : "The PDF could not be created. You can try again without refreshing the page.",
+        );
+      } finally {
+        if (!cancelled) {
+          setExportMode(null);
+          const params = new URLSearchParams(window.location.search);
+          params.delete("download");
+          const query = params.toString();
+          router.replace(query ? `${pathname}?${query}` : pathname, {
+            scroll: false,
+          });
+        }
+      }
+    }
+
+    void runPreparedExport();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    brandedPoster,
+    isTurkish,
+    pathname,
+    requestedDownload,
+    router,
+    selectedSize,
+  ]);
+
+  async function startDownload(branded: boolean) {
     if (exportMode) return;
     if (!(await requirePrintAuth(locale))) return;
 
@@ -162,44 +246,17 @@ export default function PosterFormatToolbar({ locale }: Props) {
       return;
     }
 
-    setExportMode(branded ? "branded" : "standard");
-
-    try {
-      updateQuery({ size, brand: branded ? "1" : null });
-      await waitForQueryState(size, branded);
-
-      const poster = await waitForPosterLayout(size);
-      await waitForPosterAssets();
-      await sleep(100);
-
-      if (!poster) {
-        throw new Error("Poster export area was not found.");
-      }
-
-      const slug = pathname.split("/").filter(Boolean).at(-1) ?? "sernem-poster";
-      await exportPosterPdf({
-        element: poster,
-        size,
-        filename: branded ? `sernem-${slug}-branded` : `sernem-${slug}`,
-      });
-    } catch (error) {
-      console.error("Poster PDF export failed:", error);
-      window.alert(
-        isTurkish
-          ? "PDF oluşturulamadı. Lütfen sayfayı yenileyip tekrar deneyin."
-          : "The PDF could not be created. Please refresh the page and try again.",
-      );
-    } finally {
-      setExportMode(null);
-    }
+    replaceQuery({
+      size: selectedSize,
+      brand: branded ? "1" : null,
+      download: branded ? "branded" : "standard",
+    });
   }
 
   async function printCurrentPoster() {
     if (exportMode) return;
     if (!(await requirePrintAuth(locale))) return;
 
-    updateQuery({ size: selectedSize });
-    await waitForQueryState(selectedSize, brandedPoster);
     await waitForPosterAssets();
     window.print();
   }
@@ -229,7 +286,7 @@ export default function PosterFormatToolbar({ locale }: Props) {
 
       <button
         type="button"
-        onClick={() => void savePosterPdf(selectedSize, false)}
+        onClick={() => void startDownload(false)}
         disabled={Boolean(exportMode)}
         className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-500 disabled:cursor-wait disabled:opacity-60"
       >
@@ -244,7 +301,7 @@ export default function PosterFormatToolbar({ locale }: Props) {
 
       <button
         type="button"
-        onClick={() => void savePosterPdf(selectedSize, true)}
+        onClick={() => void startDownload(true)}
         disabled={premiumState === "loading" || Boolean(exportMode)}
         className="rounded-xl border border-amber-300 bg-amber-50 px-5 py-3 text-sm font-black text-amber-900 transition hover:-translate-y-0.5 hover:bg-amber-100 disabled:cursor-wait disabled:opacity-60"
       >
