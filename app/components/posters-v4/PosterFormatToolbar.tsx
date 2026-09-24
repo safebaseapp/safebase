@@ -13,6 +13,7 @@ type Props = {
 
 type PremiumState = "loading" | "premium" | "free";
 type PosterSize = "a4" | "a3";
+type ExportMode = "standard" | "branded" | null;
 
 function sleep(ms: number) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
@@ -69,10 +70,10 @@ export default function PosterFormatToolbar({ locale }: Props) {
   const searchParams = useSearchParams();
 
   const isTurkish = locale === "tr";
-  const selectedSize = searchParams.get("size") === "a4" ? "a4" : "a3";
+  const selectedSize: PosterSize = searchParams.get("size") === "a3" ? "a3" : "a4";
   const brandedPoster = searchParams.get("brand") === "1";
   const [premiumState, setPremiumState] = useState<PremiumState>("loading");
-  const [isExporting, setIsExporting] = useState<PosterSize | null>(null);
+  const [exportMode, setExportMode] = useState<ExportMode>(null);
 
   useEffect(() => {
     let active = true;
@@ -133,27 +134,39 @@ export default function PosterFormatToolbar({ locale }: Props) {
     updateQuery({ size });
   }
 
-  function toggleBranding() {
-    if (premiumState === "loading") return;
+  async function waitForQueryState(size: PosterSize, branded: boolean) {
+    for (let attempt = 0; attempt < 30; attempt += 1) {
+      const current = new URLSearchParams(window.location.search);
+      const sizeReady = current.get("size") === size;
+      const brandReady = branded
+        ? current.get("brand") === "1"
+        : current.get("brand") !== "1";
 
-    if (premiumState !== "premium") {
-      router.push(`/${locale}/upgrade`);
+      if (sizeReady && brandReady) break;
+      await sleep(50);
+    }
+
+    // Give React one paint cycle after the URL state changes so the poster
+    // renderer and optional branding layer are synchronized before capture.
+    await sleep(150);
+  }
+
+  async function savePosterPdf(size: PosterSize, branded: boolean) {
+    if (exportMode) return;
+    if (!(await requirePrintAuth(locale))) return;
+
+    if (branded && premiumState !== "premium") {
+      if (premiumState !== "loading") {
+        router.push(`/${locale}/upgrade`);
+      }
       return;
     }
 
-    updateQuery({ brand: brandedPoster ? null : "1" });
-  }
-
-  async function savePosterPdf(size: PosterSize) {
-    if (isExporting) return;
-    if (!(await requirePrintAuth(locale))) return;
-
-    setIsExporting(size);
+    setExportMode(branded ? "branded" : "standard");
 
     try {
-      if (selectedSize !== size) {
-        selectSize(size);
-      }
+      updateQuery({ size, brand: branded ? "1" : null });
+      await waitForQueryState(size, branded);
 
       const poster = await waitForPosterLayout(size);
       await waitForPosterAssets();
@@ -167,7 +180,7 @@ export default function PosterFormatToolbar({ locale }: Props) {
       await exportPosterPdf({
         element: poster,
         size,
-        filename: `sernem-${slug}`,
+        filename: branded ? `sernem-${slug}-branded` : `sernem-${slug}`,
       });
     } catch (error) {
       console.error("Poster PDF export failed:", error);
@@ -177,96 +190,84 @@ export default function PosterFormatToolbar({ locale }: Props) {
           : "The PDF could not be created. Please refresh the page and try again.",
       );
     } finally {
-      setIsExporting(null);
+      setExportMode(null);
     }
   }
 
   async function printCurrentPoster() {
+    if (exportMode) return;
     if (!(await requirePrintAuth(locale))) return;
 
+    updateQuery({ size: selectedSize });
+    await waitForQueryState(selectedSize, brandedPoster);
     await waitForPosterAssets();
     window.print();
   }
 
-  const exportLabel = (size: PosterSize) => {
-    if (isExporting === size) {
-      return isTurkish ? "PDF hazırlanıyor..." : "Preparing PDF...";
-    }
-    return isTurkish ? `${size.toUpperCase()} PDF Kaydet` : `Save ${size.toUpperCase()} PDF`;
-  };
-
   return (
     <div className="flex flex-wrap items-center justify-center gap-3">
-      <button
-        type="button"
-        onClick={() => selectSize("a4")}
-        className={`rounded-xl border px-5 py-3 text-sm font-black transition ${
-          selectedSize === "a4"
-            ? "border-blue-500 bg-blue-600 text-white"
-            : "border-slate-300 bg-white text-slate-800 hover:border-blue-400"
-        }`}
+      <div
+        className="inline-flex rounded-xl border border-slate-300 bg-white p-1"
+        aria-label={isTurkish ? "Poster boyutu" : "Poster size"}
       >
-        A4 {isTurkish ? "Önizleme" : "Preview"}
-      </button>
+        {(["a4", "a3"] as const).map((size) => (
+          <button
+            key={size}
+            type="button"
+            onClick={() => selectSize(size)}
+            disabled={Boolean(exportMode)}
+            className={`rounded-lg px-4 py-2 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
+              selectedSize === size
+                ? "bg-slate-950 text-white"
+                : "text-slate-700 hover:bg-slate-100"
+            }`}
+          >
+            {size.toUpperCase()}
+          </button>
+        ))}
+      </div>
 
       <button
         type="button"
-        onClick={() => void savePosterPdf("a4")}
-        disabled={Boolean(isExporting)}
+        onClick={() => void savePosterPdf(selectedSize, false)}
+        disabled={Boolean(exportMode)}
         className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-500 disabled:cursor-wait disabled:opacity-60"
       >
-        ↓ {exportLabel("a4")}
+        ↓ {exportMode === "standard"
+          ? isTurkish
+            ? "PDF hazırlanıyor..."
+            : "Preparing PDF..."
+          : isTurkish
+            ? "PDF İndir"
+            : "Download PDF"}
       </button>
 
       <button
         type="button"
-        onClick={() => selectSize("a3")}
-        className={`rounded-xl border px-5 py-3 text-sm font-black transition ${
-          selectedSize === "a3"
-            ? "border-emerald-500 bg-emerald-600 text-white"
-            : "border-slate-300 bg-white text-slate-800 hover:border-emerald-400"
-        }`}
-      >
-        A3 {isTurkish ? "Önizleme" : "Preview"}
-      </button>
-
-      <button
-        type="button"
-        onClick={() => void savePosterPdf("a3")}
-        disabled={Boolean(isExporting)}
-        className="rounded-xl bg-slate-950 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-slate-800 disabled:cursor-wait disabled:opacity-60"
-      >
-        ↓ {exportLabel("a3")}
-      </button>
-
-      <button
-        type="button"
-        onClick={toggleBranding}
-        disabled={premiumState === "loading" || Boolean(isExporting)}
-        className={`rounded-xl border px-5 py-3 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
-          brandedPoster && premiumState === "premium"
-            ? "border-amber-400 bg-amber-400 text-slate-950"
-            : "border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100"
-        }`}
+        onClick={() => void savePosterPdf(selectedSize, true)}
+        disabled={premiumState === "loading" || Boolean(exportMode)}
+        className="rounded-xl border border-amber-300 bg-amber-50 px-5 py-3 text-sm font-black text-amber-900 transition hover:-translate-y-0.5 hover:bg-amber-100 disabled:cursor-wait disabled:opacity-60"
       >
         {premiumState === "premium"
-          ? brandedPoster
-            ? `✓ ${isTurkish ? "Logolu Poster" : "Branded Poster"}`
-            : `🏢 ${isTurkish ? "Şirket Logosu Ekle" : "Add Company Logo"}`
+          ? exportMode === "branded"
+            ? isTurkish
+              ? "Logolu PDF hazırlanıyor..."
+              : "Preparing branded PDF..."
+            : `🏢 ${isTurkish ? "Logolu İndir" : "Download Branded"}`
           : premiumState === "loading"
             ? isTurkish
-              ? "Logo kontrol ediliyor..."
-              : "Checking branding..."
-            : `🔒 ${isTurkish ? "Logolu Poster · Premium" : "Branded Poster · Premium"}`}
+              ? "Premium kontrol ediliyor..."
+              : "Checking Premium..."
+            : `🔒 ${isTurkish ? "Logolu İndir · Premium" : "Branded Download · Premium"}`}
       </button>
 
       <button
         type="button"
         onClick={() => void printCurrentPoster()}
-        disabled={Boolean(isExporting)}
+        disabled={Boolean(exportMode)}
         className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-800 transition hover:border-blue-400 hover:text-blue-600 disabled:cursor-wait disabled:opacity-60"
       >
-        🖨 {isTurkish ? "Yazdır" : "Print"}
+        🖨 {isTurkish ? "Yazdır" : "Print"} · {selectedSize.toUpperCase()}
       </button>
     </div>
   );

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { hasLocale } from "next-intl";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { routing } from "../../../../i18n/routing";
 import {
   featuredChecklistSlugs,
@@ -12,6 +12,16 @@ import ProfessionalInspectionChecklist from "../components/ProfessionalInspectio
 import RelatedInspectionResources from "../components/RelatedInspectionResources";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
+
+const legacyChecklistAliases: Record<string, string> = {
+  "working-at-height": "work-at-height",
+  "confined-space-entry": "confined-space",
+  scaffolding: "scaffold",
+};
+
+function resolveChecklistSlug(slug: string) {
+  return legacyChecklistAliases[slug] ?? slug;
+}
 
 export function generateStaticParams() {
   const featured = new Set<string>(featuredChecklistSlugs);
@@ -25,7 +35,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: rawLocale, slug } = await params;
   const locale = rawLocale === "tr" ? "tr" : "en";
-  const entry = getChecklistEntryBySlug(slug);
+  const resolvedSlug = resolveChecklistSlug(slug);
+  const entry = getChecklistEntryBySlug(resolvedSlug);
 
   if (!entry) return {};
 
@@ -68,8 +79,16 @@ export default async function GenericChecklistPage({ params }: Props) {
   const { locale, slug } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
 
-  const checklist = getChecklistBySlug(slug);
-  if (!checklist || (featuredChecklistSlugs as readonly string[]).includes(slug)) {
+  const resolvedSlug = resolveChecklistSlug(slug);
+  if (resolvedSlug !== slug) {
+    redirect(`/${locale}/checklists/${resolvedSlug}`);
+  }
+
+  const checklist = getChecklistBySlug(resolvedSlug);
+  if (
+    !checklist ||
+    (featuredChecklistSlugs as readonly string[]).includes(resolvedSlug)
+  ) {
     notFound();
   }
 
