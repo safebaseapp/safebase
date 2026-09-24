@@ -131,7 +131,7 @@ export default function RelatedInspectionResources({
   if (cards.length === 0 && !safetyPack) return null;
 
   return (
-    <section className="bg-slate-950 px-6 pb-20 pt-4 text-white">
+    <section className="sernem-related-resources bg-slate-950 px-6 pb-20 pt-4 text-white print:hidden">
       <div className="mx-auto max-w-6xl rounded-[28px] border border-white/10 bg-white/[0.04] p-6 sm:p-8">
         <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
           SERNEM Workflow
