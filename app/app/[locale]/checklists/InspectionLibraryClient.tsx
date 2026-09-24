@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { inspectionCatalog } from "../../../data/checklists/registry";
 import type { Locale } from "./hot-work/types";
@@ -119,7 +118,7 @@ export default function InspectionLibraryClient({
                   const href = isPremium ? `/${locale}/upgrade?next=${encodeURIComponent(inspectionHref)}` : inspectionHref;
                   const visual = getInspectionCardVisual(inspection.slug);
                   return (
-                    <Link
+                    <a
                       key={inspection.slug}
                       href={href}
                       style={getCardVisualStyle(visual)}
@@ -138,7 +137,7 @@ export default function InspectionLibraryClient({
                         <div><p className="text-slate-500">{isTurkish ? "Süre" : "Duration"}</p><p className="mt-1 font-medium text-slate-300">{getDuration(inspection.document.sections.flatMap((section) => section.items).length, locale)}</p></div>
                       </div>
                       <span className="mt-5 font-semibold text-blue-400 transition group-hover:translate-x-1">{isPremium ? (isTurkish ? "Premium ile aç →" : "Unlock with Premium →") : (isTurkish ? "Denetimi başlat →" : "Start inspection →")}</span>
-                    </Link>
+                    </a>
                   );
                 })}
               </div>
