@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { jsPDF } from "jspdf";
+import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 type Props = {
   signCode: string;
@@ -63,18 +64,9 @@ export default function SignDownloadButtons({
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, width, height);
 
-    /*
-      SignRenderer oranı:
-      üst ikon alanı %72
-      alt başlık alanı %28
-    */
     const iconAreaHeight = Math.round(height * 0.72);
     const titleAreaHeight = height - iconAreaHeight;
 
-    /*
-      SVG'yi fetch edip Image olarak canvas'a çiziyoruz.
-      Böylece public/ altındaki mevcut ISO levhasının aynısı kullanılır.
-    */
     const response = await fetch(svgImage.src);
 
     if (!response.ok) {
@@ -118,11 +110,6 @@ export default function SignDownloadButtons({
       URL.revokeObjectURL(svgUrl);
     }
 
-    /*
-      Alt başlık alanının rengini mevcut DOM'dan alıyoruz.
-      Böylece prohibition / warning / mandatory vb.
-      SignRenderer görünümüyle aynı kalır.
-    */
     const titleContainer = element.children[1] as HTMLElement | undefined;
 
     if (!titleContainer) {
@@ -218,6 +205,9 @@ export default function SignDownloadButtons({
   }
 
   async function run(type: "a4" | "a3" | "png") {
+    const resolvedLocale = locale === "tr" ? "tr" : "en";
+    if (!(await requirePrintAuth(resolvedLocale))) return;
+
     try {
       setLoading(type);
 
@@ -244,7 +234,7 @@ export default function SignDownloadButtons({
       <button
         type="button"
         disabled={loading !== null}
-        onClick={() => run("a4")}
+        onClick={() => void run("a4")}
         className="w-full rounded-xl bg-blue-600 px-5 py-4 font-black text-white transition hover:bg-blue-700 disabled:cursor-wait disabled:opacity-60"
       >
         {loading === "a4" ? "PDF..." : "A4 PDF"}
@@ -253,7 +243,7 @@ export default function SignDownloadButtons({
       <button
         type="button"
         disabled={loading !== null}
-        onClick={() => run("a3")}
+        onClick={() => void run("a3")}
         className="w-full rounded-xl bg-emerald-600 px-5 py-4 font-black text-white transition hover:bg-emerald-700 disabled:cursor-wait disabled:opacity-60"
       >
         {loading === "a3" ? "PDF..." : "A3 PDF"}
@@ -262,7 +252,7 @@ export default function SignDownloadButtons({
       <button
         type="button"
         disabled={loading !== null}
-        onClick={() => run("png")}
+        onClick={() => void run("png")}
         className="w-full rounded-xl border border-slate-300 px-5 py-4 font-black text-slate-900 transition hover:bg-slate-50 disabled:cursor-wait disabled:opacity-60"
       >
         {loading === "png" ? "PNG..." : "PNG"}
