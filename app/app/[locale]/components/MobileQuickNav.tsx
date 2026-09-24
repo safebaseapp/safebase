@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
+  Activity,
   Bot,
   Calculator,
   ChevronDown,
@@ -11,6 +12,7 @@ import {
   FileText,
   Gauge,
   Grid3X3,
+  HardHat,
   Images,
   Layers3,
   MessageSquareText,
@@ -50,6 +52,11 @@ export default function MobileQuickNav({ locale }: Props) {
       title: "Method Statement",
     },
     {
+      href: `/${locale}/ppe-standards`,
+      icon: HardHat,
+      title: isTurkish ? "KKD Standartları" : "PPE Standards",
+    },
+    {
       href: `/${locale}/tools/simops`,
       icon: Layers3,
       title: "SIMOPS",
@@ -68,6 +75,11 @@ export default function MobileQuickNav({ locale }: Props) {
       href: `/${locale}/tools/ltifr`,
       icon: Calculator,
       title: "LTIFR",
+    },
+    {
+      href: `/${locale}/tools/severity-rate`,
+      icon: Activity,
+      title: isTurkish ? "Şiddet Oranı" : "Severity Rate",
     },
   ];
 
