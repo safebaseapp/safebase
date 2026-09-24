@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { isAdminUser } from "@/lib/auth/access";
 import { requirePrintAuth } from "@/lib/auth/require-print-auth";
-import { exportPosterPdf } from "@/lib/posters/export-poster-pdf";
 
 type Props = {
   locale: "tr" | "en";
@@ -13,8 +13,6 @@ type Props = {
 
 type PremiumState = "loading" | "premium" | "free";
 type PosterSize = "a4" | "a3";
-type ExportMode = "standard" | "branded" | null;
-type RequestedDownload = Exclude<ExportMode, null>;
 
 function sleep(ms: number) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
@@ -25,7 +23,6 @@ async function waitForPosterAssets() {
     const pendingBranding = document.querySelector(
       '[data-poster-branding-ready="false"]',
     );
-
     if (!pendingBranding) break;
     await sleep(100);
   }
@@ -46,7 +43,6 @@ async function waitForPosterAssets() {
             resolve();
             return;
           }
-
           const done = () => resolve();
           image.addEventListener("load", done, { once: true });
           image.addEventListener("error", done, { once: true });
@@ -61,33 +57,18 @@ async function waitForPosterAssets() {
   });
 }
 
-async function waitForPosterLayout(size: PosterSize) {
-  const expectedWidth = size === "a4" ? 794 : 1123;
-
-  for (let attempt = 0; attempt < 50; attempt += 1) {
-    const poster = document.getElementById("poster-print-area");
-    if (poster && Math.abs(poster.clientWidth - expectedWidth) <= 3) {
-      return poster;
-    }
-    await sleep(100);
-  }
-
-  return document.getElementById("poster-print-area");
-}
-
 export default function PosterFormatToolbar({ locale }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const isTurkish = locale === "tr";
   const selectedSize: PosterSize =
     searchParams.get("size") === "a3" ? "a3" : "a4";
   const brandedPoster = searchParams.get("brand") === "1";
-  const requestedDownload = searchParams.get("download");
+
   const [premiumState, setPremiumState] = useState<PremiumState>("loading");
-  const [exportMode, setExportMode] = useState<ExportMode>(null);
-  const handledDownload = useRef<string | null>(null);
+  const [isSwitchingMode, setIsSwitchingMode] = useState(false);
+  const [brandingNotice, setBrandingNotice] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -124,7 +105,6 @@ export default function PosterFormatToolbar({ locale }: Props) {
     }
 
     void resolvePremium();
-
     return () => {
       active = false;
     };
@@ -132,200 +112,174 @@ export default function PosterFormatToolbar({ locale }: Props) {
 
   function replaceQuery(updates: Record<string, string | null>) {
     const params = new URLSearchParams(searchParams.toString());
-
     Object.entries(updates).forEach(([key, value]) => {
       if (value === null) params.delete(key);
       else params.set(key, value);
     });
-
     const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname, {
-      scroll: false,
-    });
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
   }
 
   function selectSize(size: PosterSize) {
-    if (exportMode) return;
-    replaceQuery({ size, download: null });
+    if (isSwitchingMode) return;
+    replaceQuery({ size });
   }
 
-  useEffect(() => {
-    if (requestedDownload !== "standard" && requestedDownload !== "branded") {
-      handledDownload.current = null;
+  async function selectPosterMode(branded: boolean) {
+    if (isSwitchingMode) return;
+    if (!(await requirePrintAuth(locale))) return;
+
+    setBrandingNotice(null);
+
+    if (!branded) {
+      replaceQuery({ brand: null });
       return;
     }
 
-    const mode = requestedDownload as RequestedDownload;
-    const expectedBranding = mode === "branded";
-    if (brandedPoster !== expectedBranding) return;
+    if (premiumState !== "premium") {
+      if (premiumState !== "loading") {
+        router.push(`/${locale}/upgrade?next=${encodeURIComponent(pathname)}`);
+      }
+      return;
+    }
 
-    const requestKey = `${mode}:${selectedSize}:${brandedPoster ? "brand" : "standard"}`;
-    if (handledDownload.current === requestKey) return;
-    handledDownload.current = requestKey;
+    setIsSwitchingMode(true);
+    replaceQuery({ brand: "1" });
 
-    let cancelled = false;
-
-    async function runPreparedExport() {
-      setExportMode(mode);
-
-      try {
-        const poster = await waitForPosterLayout(selectedSize);
-        await waitForPosterAssets();
-
-        if (cancelled) return;
-
-        if (!poster) {
-          throw new Error("Poster export area was not found.");
-        }
-
-        if (
-          mode === "branded" &&
-          !document.querySelector('[data-poster-company-logo="true"]')
-        ) {
-          window.alert(
-            isTurkish
-              ? "Logolu PDF için önce Dashboard'dan şirket logonuzu yükleyin."
-              : "Upload your company logo from the Dashboard before creating a branded PDF.",
-          );
-          return;
-        }
-
-        const slug =
-          pathname.split("/").filter(Boolean).at(-1) ?? "sernem-poster";
-
-        await exportPosterPdf({
-          element: poster,
-          size: selectedSize,
-          filename:
-            mode === "branded"
-              ? `${slug}-company-branded`
-              : `sernem-${slug}`,
-        });
-      } catch (error) {
-        console.error("Poster PDF export failed:", error);
-        window.alert(
-          isTurkish
-            ? "PDF oluşturulamadı. Sayfayı yenilemeden tekrar deneyebilirsiniz."
-            : "The PDF could not be created. You can try again without refreshing the page.",
+    try {
+      for (let attempt = 0; attempt < 50; attempt += 1) {
+        await sleep(100);
+        const brandingRoot = document.querySelector(
+          "[data-poster-branding-ready]",
         );
-      } finally {
-        if (!cancelled) {
-          setExportMode(null);
+        if (brandingRoot?.getAttribute("data-poster-branding-ready") !== "true") {
+          continue;
+        }
+
+        const hasCompanyLogo =
+          brandingRoot.getAttribute("data-poster-company-logo") === "true";
+
+        if (!hasCompanyLogo) {
+          setBrandingNotice(
+            isTurkish
+              ? "Şirket logolu sürüm için önce Dashboard'dan logonuzu yükleyin."
+              : "Upload your company logo in the Dashboard before using company branding.",
+          );
+
           const params = new URLSearchParams(window.location.search);
-          params.delete("download");
+          params.delete("brand");
           const query = params.toString();
           router.replace(query ? `${pathname}?${query}` : pathname, {
             scroll: false,
           });
         }
+        break;
       }
+    } finally {
+      setIsSwitchingMode(false);
     }
-
-    void runPreparedExport();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [
-    brandedPoster,
-    isTurkish,
-    pathname,
-    requestedDownload,
-    router,
-    selectedSize,
-  ]);
-
-  async function startDownload(branded: boolean) {
-    if (exportMode) return;
-    if (!(await requirePrintAuth(locale))) return;
-
-    if (branded && premiumState !== "premium") {
-      if (premiumState !== "loading") {
-        router.push(`/${locale}/upgrade`);
-      }
-      return;
-    }
-
-    replaceQuery({
-      size: selectedSize,
-      brand: branded ? "1" : null,
-      download: branded ? "branded" : "standard",
-    });
   }
 
   async function printCurrentPoster() {
-    if (exportMode) return;
+    if (isSwitchingMode) return;
     if (!(await requirePrintAuth(locale))) return;
 
     await waitForPosterAssets();
+
+    if (
+      brandedPoster &&
+      !document.querySelector('[data-poster-company-logo="true"]')
+    ) {
+      setBrandingNotice(
+        isTurkish
+          ? "Şirket logolu sürüm için önce Dashboard'dan logonuzu yükleyin."
+          : "Upload your company logo in the Dashboard before printing the company-branded version.",
+      );
+      return;
+    }
+
     window.print();
   }
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3">
-      <div
-        className="inline-flex rounded-xl border border-slate-300 bg-white p-1"
-        aria-label={isTurkish ? "Poster boyutu" : "Poster size"}
-      >
-        {(["a4", "a3"] as const).map((size) => (
-          <button
-            key={size}
-            type="button"
-            onClick={() => selectSize(size)}
-            disabled={Boolean(exportMode)}
-            className={`rounded-lg px-4 py-2 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
-              selectedSize === size
-                ? "bg-slate-950 text-white"
-                : "text-slate-700 hover:bg-slate-100"
-            }`}
-          >
-            {size.toUpperCase()}
-          </button>
-        ))}
+    <div className="space-y-3">
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        <div
+          className="inline-flex rounded-xl border border-slate-300 bg-white p-1"
+          aria-label={isTurkish ? "Poster boyutu" : "Poster size"}
+        >
+          {(["a4", "a3"] as const).map((size) => (
+            <button
+              key={size}
+              type="button"
+              onClick={() => selectSize(size)}
+              disabled={isSwitchingMode}
+              className={`rounded-lg px-4 py-2 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
+                selectedSize === size
+                  ? "bg-slate-950 text-white"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
+            >
+              {size.toUpperCase()}
+            </button>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => void selectPosterMode(false)}
+          disabled={isSwitchingMode}
+          aria-pressed={!brandedPoster}
+          className={`rounded-xl px-5 py-3 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
+            !brandedPoster
+              ? "bg-blue-600 text-white shadow-sm"
+              : "border border-slate-300 bg-white text-slate-800 hover:border-blue-400 hover:text-blue-600"
+          }`}
+        >
+          PDF
+        </button>
+
+        <button
+          type="button"
+          onClick={() => void selectPosterMode(true)}
+          disabled={premiumState === "loading" || isSwitchingMode}
+          aria-pressed={brandedPoster}
+          className={`rounded-xl border px-5 py-3 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
+            brandedPoster
+              ? "border-amber-400 bg-amber-400 text-slate-950 shadow-sm"
+              : "border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100"
+          }`}
+        >
+          {premiumState === "premium"
+            ? `🏢 ${isTurkish ? "Logolu · Premium" : "Branded · Premium"}`
+            : premiumState === "loading"
+              ? isTurkish
+                ? "Premium kontrol ediliyor..."
+                : "Checking Premium..."
+              : `🔒 ${isTurkish ? "Logolu · Premium" : "Branded · Premium"}`}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => void printCurrentPoster()}
+          disabled={isSwitchingMode}
+          className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-800 transition hover:border-blue-400 hover:text-blue-600 disabled:cursor-wait disabled:opacity-60"
+        >
+          🖨 {isTurkish ? "Yazdır" : "Print"} · {selectedSize.toUpperCase()}
+        </button>
       </div>
 
-      <button
-        type="button"
-        onClick={() => void startDownload(false)}
-        disabled={Boolean(exportMode)}
-        className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-blue-500 disabled:cursor-wait disabled:opacity-60"
-      >
-        ↓ {exportMode === "standard"
-          ? isTurkish
-            ? "PDF hazırlanıyor..."
-            : "Preparing PDF..."
-          : isTurkish
-            ? "PDF İndir"
-            : "Download PDF"}
-      </button>
-
-      <button
-        type="button"
-        onClick={() => void startDownload(true)}
-        disabled={premiumState === "loading" || Boolean(exportMode)}
-        className="rounded-xl border border-amber-300 bg-amber-50 px-5 py-3 text-sm font-black text-amber-900 transition hover:-translate-y-0.5 hover:bg-amber-100 disabled:cursor-wait disabled:opacity-60"
-      >
-        {premiumState === "premium"
-          ? exportMode === "branded"
-            ? isTurkish
-              ? "Logolu PDF hazırlanıyor..."
-              : "Preparing branded PDF..."
-            : `🏢 ${isTurkish ? "Logolu İndir" : "Download Branded"}`
-          : premiumState === "loading"
-            ? isTurkish
-              ? "Premium kontrol ediliyor..."
-              : "Checking Premium..."
-            : `🔒 ${isTurkish ? "Logolu İndir · Premium" : "Branded Download · Premium"}`}
-      </button>
-
-      <button
-        type="button"
-        onClick={() => void printCurrentPoster()}
-        disabled={Boolean(exportMode)}
-        className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-800 transition hover:border-blue-400 hover:text-blue-600 disabled:cursor-wait disabled:opacity-60"
-      >
-        🖨 {isTurkish ? "Yazdır" : "Print"} · {selectedSize.toUpperCase()}
-      </button>
+      {brandingNotice ? (
+        <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-center text-sm font-semibold text-amber-950 sm:flex-row">
+          <span>{brandingNotice}</span>
+          <Link
+            href={`/${locale}/dashboard`}
+            className="font-black text-blue-700 underline underline-offset-2"
+          >
+            {isTurkish ? "Logo ayarlarını aç" : "Open branding settings"}
+          </Link>
+        </div>
+      ) : null}
     </div>
   );
 }
