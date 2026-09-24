@@ -73,6 +73,8 @@ export default async function PosterDetailPage({
   const isEmbed = embed === "1";
   const showBranding = brand === "1";
   const qrPath = `/posters/sernem-qr-${locale}.png`;
+  const printWidth = isA4 ? "210mm" : "297mm";
+  const printHeight = isA4 ? "297mm" : "420mm";
 
   return (
     <>
@@ -88,8 +90,33 @@ export default async function PosterDetailPage({
             @media print {
               html,
               body {
-                width: ${isA4 ? "210mm" : "297mm"} !important;
-                height: ${isA4 ? "297mm" : "420mm"} !important;
+                width: ${printWidth} !important;
+                min-width: ${printWidth} !important;
+                max-width: ${printWidth} !important;
+                height: ${printHeight} !important;
+                min-height: ${printHeight} !important;
+                max-height: ${printHeight} !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+                background: white !important;
+              }
+
+              nav,
+              [role="navigation"],
+              body > header,
+              body > footer,
+              #poster-controls,
+              .sernem-mobile-auth-bar {
+                display: none !important;
+              }
+
+              main {
+                position: fixed !important;
+                inset: 0 !important;
+                width: ${printWidth} !important;
+                height: ${printHeight} !important;
+                min-height: 0 !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 overflow: hidden !important;
@@ -107,25 +134,28 @@ export default async function PosterDetailPage({
                 print-color-adjust: exact !important;
               }
 
-              #poster-controls,
-              .sernem-mobile-auth-bar {
-                display: none !important;
-              }
-
               #poster-print-area {
-                position: absolute !important;
-                inset: 0 !important;
-                width: ${isA4 ? "210mm" : "297mm"} !important;
-                height: ${isA4 ? "297mm" : "420mm"} !important;
+                position: fixed !important;
+                left: 0 !important;
+                top: 0 !important;
+                right: auto !important;
+                bottom: auto !important;
+                width: ${printWidth} !important;
+                height: ${printHeight} !important;
+                max-height: ${printHeight} !important;
                 margin: 0 !important;
+                padding: 0 !important;
                 overflow: hidden !important;
                 box-shadow: none !important;
+                break-after: avoid !important;
+                page-break-after: avoid !important;
               }
 
               #poster-size-frame {
                 position: relative !important;
-                width: ${isA4 ? "210mm" : "297mm"} !important;
-                height: ${isA4 ? "297mm" : "420mm"} !important;
+                width: ${printWidth} !important;
+                height: ${printHeight} !important;
+                max-height: ${printHeight} !important;
                 overflow: hidden !important;
               }
 
@@ -176,7 +206,11 @@ export default async function PosterDetailPage({
 
             <div className="mt-5 text-center">
               <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-600">
-                {selectedPoster.code} • SERNEM Pro Series
+                {selectedPoster.code} • {showBranding
+                  ? isTurkish
+                    ? "Premium Şirket Sürümü"
+                    : "Premium Company Edition"
+                  : "SERNEM Pro Series"}
               </p>
 
               <h1 className="mt-3 text-3xl font-black text-slate-950">

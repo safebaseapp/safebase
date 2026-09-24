@@ -1,37 +1,40 @@
+import "../sernem-report-v2.css";
 import type { Metadata } from "next";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../../../i18n/routing";
+import { getChecklistEntryBySlug } from "@/data/checklists/registry";
+import ProfessionalInspectionChecklist from "../components/ProfessionalInspectionChecklist";
 import {
   buildChecklistMetadata,
   FeaturedChecklistResources,
 } from "../components/FeaturedChecklistSupport";
-import LotoChecklist from "./LotoChecklist";
 
-type Props = {
-  params: Promise<{ locale: string }>;
-};
+type Props = { params: Promise<{ locale: string }> };
+const SLUG = "loto";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return buildChecklistMetadata("loto", locale);
+  return buildChecklistMetadata(SLUG, locale);
 }
 
 export default async function LotoChecklistPage({ params }: Props) {
   const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
+  const entry = getChecklistEntryBySlug(SLUG);
+  if (!entry) notFound();
   const resolvedLocale = locale === "tr" ? "tr" : "en";
 
   return (
     <>
       <ActivityTracker eventName="checklist_detail_open" />
-      <LotoChecklist locale={resolvedLocale} />
-      <FeaturedChecklistResources slug="loto" locale={resolvedLocale} />
+      <ProfessionalInspectionChecklist
+        checklistDocument={entry.document}
+        locale={resolvedLocale}
+      />
+      <FeaturedChecklistResources slug={SLUG} locale={resolvedLocale} />
     </>
   );
 }
