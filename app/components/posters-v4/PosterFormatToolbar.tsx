@@ -147,14 +147,27 @@ export default function PosterFormatToolbar({ locale }: Props) {
     replaceQuery({ brand: "1" });
 
     try {
+      let brandedRootReady = false;
+
       for (let attempt = 0; attempt < 50; attempt += 1) {
         await sleep(100);
+
+        // Important: wait for the NEW branded server render. The previous
+        // standard poster is already marked ready=true and must not be used
+        // to decide whether a company logo exists.
         const brandingRoot = document.querySelector(
-          "[data-poster-branding-ready]",
+          '[data-poster-branding-mode="branded"]',
         );
-        if (brandingRoot?.getAttribute("data-poster-branding-ready") !== "true") {
+
+        if (!brandingRoot) {
           continue;
         }
+
+        if (brandingRoot.getAttribute("data-poster-branding-ready") !== "true") {
+          continue;
+        }
+
+        brandedRootReady = true;
 
         const hasCompanyLogo =
           brandingRoot.getAttribute("data-poster-company-logo") === "true";
@@ -162,18 +175,19 @@ export default function PosterFormatToolbar({ locale }: Props) {
         if (!hasCompanyLogo) {
           setBrandingNotice(
             isTurkish
-              ? "Şirket logolu sürüm için önce Dashboard'dan logonuzu yükleyin."
-              : "Upload your company logo in the Dashboard before using company branding.",
+              ? "Şirket logolu sürüm için Dashboard'daki kayıtlı logo yüklenemedi. Logo ayarlarını kontrol edip tekrar deneyin."
+              : "The saved company logo could not be loaded for the branded version. Check branding settings and try again.",
           );
-
-          const params = new URLSearchParams(window.location.search);
-          params.delete("brand");
-          const query = params.toString();
-          router.replace(query ? `${pathname}?${query}` : pathname, {
-            scroll: false,
-          });
         }
         break;
+      }
+
+      if (!brandedRootReady) {
+        setBrandingNotice(
+          isTurkish
+            ? "Logolu poster hazırlanamadı. Lütfen tekrar deneyin."
+            : "The branded poster could not be prepared. Please try again.",
+        );
       }
     } finally {
       setIsSwitchingMode(false);
@@ -186,16 +200,22 @@ export default function PosterFormatToolbar({ locale }: Props) {
 
     await waitForPosterAssets();
 
-    if (
-      brandedPoster &&
-      !document.querySelector('[data-poster-company-logo="true"]')
-    ) {
-      setBrandingNotice(
-        isTurkish
-          ? "Şirket logolu sürüm için önce Dashboard'dan logonuzu yükleyin."
-          : "Upload your company logo in the Dashboard before printing the company-branded version.",
+    if (brandedPoster) {
+      const brandedRoot = document.querySelector(
+        '[data-poster-branding-mode="branded"][data-poster-branding-ready="true"]',
       );
-      return;
+
+      if (
+        !brandedRoot ||
+        brandedRoot.getAttribute("data-poster-company-logo") !== "true"
+      ) {
+        setBrandingNotice(
+          isTurkish
+            ? "Kayıtlı şirket logosu logolu postere yüklenemedi. Logo ayarlarını kontrol edip tekrar deneyin."
+            : "The saved company logo could not be loaded into the branded poster. Check branding settings and try again.",
+        );
+        return;
+      }
     }
 
     window.print();

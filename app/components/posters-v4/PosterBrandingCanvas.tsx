@@ -97,6 +97,7 @@ export default function PosterBrandingCanvas({
 
   return (
     <div
+      data-poster-branding-mode={showBranding ? "branded" : "standard"}
       data-poster-branding-ready={isBrandingReady ? "true" : "false"}
       data-poster-company-logo={companyLogoUrl ? "true" : "false"}
     >
