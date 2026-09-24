@@ -1,3 +1,4 @@
+import "../sernem-report-v2.css";
 import type { Metadata } from "next";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import { hasLocale } from "next-intl";
