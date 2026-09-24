@@ -164,17 +164,15 @@ export function parseAssessmentResponse(
     throw new Error("AI response does not match the required assessment schema.");
   }
 
-  if (
-    parsed.workDecision !== expectedDecision ||
-    parsed.finalRecommendation !== expectedDecision
-  ) {
-    throw new Error(
-      "AI final recommendation does not match the SERNEM rule-engine decision.",
-    );
-  }
-
+  // The SERNEM rule engine is authoritative for the work decision.
+  // If the model echoes a different enum, normalize it instead of failing the
+  // entire assessment. This prevents partial inspections with confirmed
+  // critical findings from being rejected when the model tries to downgrade
+  // STOP WORK to HOLD.
   return {
     ...parsed,
+    workDecision: expectedDecision,
+    finalRecommendation: expectedDecision,
     executiveSummary: parsed.executiveSummary.trim(),
     overallRiskRating: {
       level: parsed.overallRiskRating.level,
