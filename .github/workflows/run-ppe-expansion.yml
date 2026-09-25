@@ -25,7 +25,9 @@ jobs:
           lines=[]
           for line in code.splitlines():
               lines.append(line[10:] if line.startswith('          ') else line)
-          exec('\n'.join(lines), {})
+          code='\n'.join(lines)
+          code=code.replace("insert_before(data, ']\\n", "insert_before(data, '];\\n")
+          exec(code, {})
           PY
       - name: Build
         working-directory: app
