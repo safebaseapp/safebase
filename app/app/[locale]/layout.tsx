@@ -4,9 +4,11 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
 import LocalizedNavbar from "./components/LocalizedNavbar";
+import NavbarLegacyPremiumCleanup from "./components/NavbarLegacyPremiumCleanup";
 import MobileAuthBar from "./components/MobileAuthBar";
 import MobileQuickNav from "./components/MobileQuickNav";
 import "./navbar-responsive-fix.css";
+import "./premium-live-polish.css";
 import "./core-content-visual-system.css";
 import "./core-content-image-cards.css";
 import "./topic-match-refinement.css";
@@ -68,6 +70,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider>
       <LocalizedNavbar locale={safeLocale} />
+      <NavbarLegacyPremiumCleanup />
       <MobileAuthBar locale={safeLocale} />
       <MobileQuickNav locale={safeLocale} />
       {children}
