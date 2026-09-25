@@ -1,0 +1,84 @@
+name: Apply approved PPE visuals final
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.ppe-approved-final/**'
+      - '.github/workflows/apply-ppe-approved-final.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install approved PPE images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p app/public/ppe-standards/approved
+          unzip -o .ppe-approved-final/set1.zip -d app/public/ppe-standards/approved
+          unzip -o .ppe-approved-final/set2.zip -d app/public/ppe-standards/approved
+          unzip -o .ppe-approved-final/set3.zip -d app/public/ppe-standards/approved
+          unzip -o .ppe-approved-final/set4.zip -d app/public/ppe-standards/approved
+
+      - name: Point PPE standards to approved visuals only
+        shell: bash
+        run: |
+          cat > 'app/app/[locale]/ppe-standards/visual-data.ts' <<'EOF'
+          export type PPEImageRef=number|string;
+          export type PPEVisual={photo:PPEImageRef;scenes:PPEImageRef[];glow:string;alt:{tr:string;en:string}};
+
+          const approved=(file:string)=>`/ppe-standards/approved/${file}`;
+
+          export const ppeVisuals:Record<string,PPEVisual>={
+           'EN 397':{photo:approved('en-397.jpg'),scenes:[approved('en-397.jpg'),approved('en-397.jpg'),approved('en-397.jpg')],glow:'#f59e0b',alt:{tr:'Endüstriyel koruyucu baret',en:'Industrial protective safety helmet'}},
+           'EN 361':{photo:approved('en-361.jpg'),scenes:[approved('en-361.jpg'),approved('en-361.jpg'),approved('en-361.jpg')],glow:'#2563eb',alt:{tr:'Tam vücut emniyet kemeri',en:'Full-body fall-arrest harness'}},
+           'EN 355':{photo:approved('en-355.jpg'),scenes:[approved('en-355.jpg'),approved('en-355.jpg'),approved('en-355.jpg')],glow:'#0891b2',alt:{tr:'Şok emicili lanyard',en:'Shock-absorbing lanyard'}},
+           'EN 362':{photo:approved('en-362.jpg'),scenes:[approved('en-362.jpg'),approved('en-362.jpg'),approved('en-362.jpg')],glow:'#475569',alt:{tr:'Karabina ve düşüş koruma bağlantı elemanı',en:'Fall-protection connector and carabiner'}},
+           'EN 166':{photo:approved('en-166.jpg'),scenes:[approved('en-166.jpg'),approved('en-166.jpg'),approved('en-166.jpg')],glow:'#0284c7',alt:{tr:'Koruyucu iş gözlüğü',en:'Protective safety eyewear'}},
+           'EN 388':{photo:approved('en-388.jpg'),scenes:[approved('en-388.jpg'),approved('en-388.jpg'),approved('en-388.jpg')],glow:'#ea580c',alt:{tr:'Mekanik risklere karşı koruyucu eldiven',en:'Protective gloves for mechanical risks'}},
+           'EN ISO 374':{photo:approved('en-iso-374.jpg'),scenes:[approved('en-iso-374.jpg'),approved('en-iso-374.jpg'),approved('en-iso-374.jpg')],glow:'#059669',alt:{tr:'Kimyasal koruyucu eldiven',en:'Chemical protective gloves'}},
+           'EN 149':{photo:approved('en-149.jpg'),scenes:[approved('en-149.jpg'),approved('en-149.jpg'),approved('en-149.jpg')],glow:'#4f46e5',alt:{tr:'Filtreli yarım yüz maskesi',en:'Filtering half-mask respirator'}},
+           'EN 352':{photo:approved('en-352.jpg'),scenes:[approved('en-352.jpg'),approved('en-352.jpg'),approved('en-352.jpg')],glow:'#7c3aed',alt:{tr:'Endüstriyel işitme koruyucu kulaklık',en:'Industrial hearing-protection earmuffs'}},
+           'EN ISO 20345':{photo:approved('en-iso-20345.jpg'),scenes:[approved('en-iso-20345.jpg'),approved('en-iso-20345.jpg'),approved('en-iso-20345.jpg')],glow:'#27272a',alt:{tr:'Endüstriyel koruyucu iş ayakkabısı',en:'Industrial safety footwear'}},
+           'EN ISO 21420':{photo:approved('en-iso-21420.jpg'),scenes:[approved('en-iso-21420.jpg'),approved('en-iso-21420.jpg'),approved('en-iso-21420.jpg')],glow:'#ea580c',alt:{tr:'Koruyucu eldiven ve ürün işaretleri',en:'Protective glove and product markings'}},
+           'EN 407':{photo:approved('en-407.jpg'),scenes:[approved('en-407.jpg'),approved('en-407.jpg'),approved('en-407.jpg')],glow:'#dc2626',alt:{tr:'Isıya dayanıklı koruyucu eldiven',en:'Heat-resistant protective gloves'}},
+           'EN ISO 11611':{photo:approved('en-iso-11611.jpg'),scenes:[approved('en-iso-11611.jpg'),approved('en-iso-11611.jpg'),approved('en-iso-11611.jpg')],glow:'#f97316',alt:{tr:'Kaynak işinde koruyucu giysi',en:'Protective clothing for welding'}},
+           'EN ISO 11612':{photo:approved('en-iso-11612.jpg'),scenes:[approved('en-iso-11612.jpg'),approved('en-iso-11612.jpg'),approved('en-iso-11612.jpg')],glow:'#ef4444',alt:{tr:'Isı ve aleve karşı koruyucu giysi',en:'Protective clothing against heat and flame'}},
+           'EN ISO 20471':{photo:approved('en-iso-20471.jpg'),scenes:[approved('en-iso-20471.jpg'),approved('en-iso-20471.jpg'),approved('en-iso-20471.jpg')],glow:'#eab308',alt:{tr:'Yüksek görünürlüklü koruyucu giysi',en:'High-visibility protective clothing'}},
+           'EN IEC 61482-2':{photo:approved('en-iec-61482-2.jpg'),scenes:[approved('en-iec-61482-2.jpg'),approved('en-iec-61482-2.jpg'),approved('en-iec-61482-2.jpg')],glow:'#f59e0b',alt:{tr:'Elektrik arkına karşı koruyucu giysi',en:'Arc-flash protective clothing'}},
+           'EN 1149-5':{photo:approved('en-1149-5.jpg'),scenes:[approved('en-1149-5.jpg'),approved('en-1149-5.jpg'),approved('en-1149-5.jpg')],glow:'#0d9488',alt:{tr:'Elektrostatik koruyucu giysi',en:'Electrostatic protective clothing'}},
+           'EN 50365':{photo:approved('en-50365.jpg'),scenes:[approved('en-50365.jpg'),approved('en-50365.jpg'),approved('en-50365.jpg')],glow:'#eab308',alt:{tr:'Elektriksel yalıtımlı koruyucu baret',en:'Electrically insulating protective helmet'}},
+           'EN 60903':{photo:approved('en-60903.jpg'),scenes:[approved('en-60903.jpg'),approved('en-60903.jpg'),approved('en-60903.jpg')],glow:'#2563eb',alt:{tr:'Elektrik işi için yalıtkan kauçuk eldiven',en:'Insulating rubber gloves for electrical work'}},
+           'EN 136':{photo:approved('en-136.jpg'),scenes:[approved('en-136.jpg'),approved('en-136.jpg'),approved('en-136.jpg')],glow:'#0f766e',alt:{tr:'Tam yüz solunum koruyucu maske',en:'Full-face respiratory protective mask'}},
+          };
+
+          export const pexels=(id:PPEImageRef,w=1400)=>typeof id==='string'?id:`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
+          export const getPPEVisual=(code:string)=>ppeVisuals[code]??ppeVisuals['EN 397'];
+          EOF
+
+      - name: Remove temporary binary staging
+        shell: bash
+        run: |
+          rm -rf .ppe-approved-final .ppe-approved
+
+      - name: Commit approved PPE visual set
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git commit -m 'apply approved PPE visuals'
+          git push
