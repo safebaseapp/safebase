@@ -19,7 +19,17 @@ const theme:Record<string,{label:{tr:string;en:string};accent:string;soft:string
  'EN ISO 374':{label:{tr:'Kimyasal Koruma',en:'Chemical Protection'},accent:'bg-emerald-600',soft:'bg-emerald-50',line:'border-emerald-200'},
  'EN 149':{label:{tr:'Solunum Koruma',en:'Respiratory Protection'},accent:'bg-indigo-600',soft:'bg-indigo-50',line:'border-indigo-200'},
  'EN 352':{label:{tr:'İşitme Koruma',en:'Hearing Protection'},accent:'bg-violet-600',soft:'bg-violet-50',line:'border-violet-200'},
- 'EN ISO 20345':{label:{tr:'Ayak Koruma',en:'Foot Protection'},accent:'bg-zinc-800',soft:'bg-zinc-100',line:'border-zinc-300'}
+ 'EN ISO 20345':{label:{tr:'Ayak Koruma',en:'Foot Protection'},accent:'bg-zinc-800',soft:'bg-zinc-100',line:'border-zinc-300'},
+ 'EN ISO 21420':{label:{tr:'El Koruma',en:'Hand Protection'},accent:'bg-orange-600',soft:'bg-orange-50',line:'border-orange-200'},
+ 'EN 407':{label:{tr:'El Koruma',en:'Hand Protection'},accent:'bg-red-600',soft:'bg-red-50',line:'border-red-200'},
+ 'EN ISO 11611':{label:{tr:'Koruyucu Giysi',en:'Protective Clothing'},accent:'bg-orange-600',soft:'bg-orange-50',line:'border-orange-200'},
+ 'EN ISO 11612':{label:{tr:'Koruyucu Giysi',en:'Protective Clothing'},accent:'bg-red-700',soft:'bg-red-50',line:'border-red-200'},
+ 'EN ISO 20471':{label:{tr:'Yüksek Görünürlük',en:'High Visibility'},accent:'bg-yellow-500',soft:'bg-yellow-50',line:'border-yellow-200'},
+ 'EN IEC 61482-2':{label:{tr:'Elektrik Arkı',en:'Electric Arc'},accent:'bg-amber-600',soft:'bg-amber-50',line:'border-amber-200'},
+ 'EN 1149-5':{label:{tr:'Elektrostatik Koruma',en:'Electrostatic Protection'},accent:'bg-teal-700',soft:'bg-teal-50',line:'border-teal-200'},
+ 'EN 50365':{label:{tr:'Baş / Elektrik Koruma',en:'Head / Electrical Protection'},accent:'bg-yellow-600',soft:'bg-yellow-50',line:'border-yellow-200'},
+ 'EN 60903':{label:{tr:'El / Elektrik Koruma',en:'Hand / Electrical Protection'},accent:'bg-blue-700',soft:'bg-blue-50',line:'border-blue-200'},
+ 'EN 136':{label:{tr:'Solunum Koruma',en:'Respiratory Protection'},accent:'bg-teal-700',soft:'bg-teal-50',line:'border-teal-200'}
 };
 
 const toolboxByCode:Record<string,string>={
