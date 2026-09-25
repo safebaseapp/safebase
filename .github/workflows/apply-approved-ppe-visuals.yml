@@ -1,0 +1,74 @@
+name: Apply approved PPE visuals
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.ppe-approved/**'
+      - '.github/workflows/apply-approved-ppe-visuals.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: ${{ !contains(github.event.head_commit.message, '[ppe-applied]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install approved PPE images
+        run: |
+          set -e
+          mkdir -p app/public/ppe-standards/approved
+          unzip -o .ppe-approved/set1.zip -d app/public/ppe-standards/approved
+          unzip -o .ppe-approved/set2.zip -d app/public/ppe-standards/approved
+          unzip -o .ppe-approved/set3.zip -d app/public/ppe-standards/approved
+          rm -rf .ppe-approved
+
+      - name: Point PPE standards to approved visuals only
+        run: |
+          cat > 'app/app/[locale]/ppe-standards/visual-data.ts' <<'EOF'
+          export type PPEImageRef=number|string;
+          export type PPEVisual={photo:PPEImageRef;scenes:PPEImageRef[];glow:string;alt:{tr:string;en:string}};
+
+          const img=(name:string)=>`/ppe-standards/approved/${name}`;
+          const approved=(name:string,glow:string,tr:string,en:string):PPEVisual=>({photo:img(name),scenes:[img(name),img(name),img(name)],glow,alt:{tr,en}});
+
+          export const ppeVisuals:Record<string,PPEVisual>={
+           'EN 397':approved('en-397.jpg','#f59e0b','Endüstriyel koruyucu baret','Industrial protective safety helmet'),
+           'EN 361':approved('en-361.jpg','#2563eb','Tam vücut emniyet kemeri','Full-body fall-arrest harness'),
+           'EN 355':approved('en-355.jpg','#0891b2','Şok emicili lanyard','Shock-absorbing lanyard'),
+           'EN 362':approved('en-362.jpg','#475569','Karabina ve düşüş koruma bağlantı elemanı','Fall-protection connector and carabiner'),
+           'EN 166':approved('en-166.jpg','#0284c7','Koruyucu iş gözlüğü','Protective safety eyewear'),
+           'EN 388':approved('en-388.jpg','#ea580c','Mekanik risklere karşı koruyucu iş eldiveni','Mechanical-risk protective gloves'),
+           'EN ISO 374':approved('en-iso-374.jpg','#059669','Kimyasal koruyucu eldiven','Chemical protective gloves'),
+           'EN 149':approved('en-149.jpg','#4f46e5','Partiküllere karşı filtreli yarım maske','Filtering half-mask respirator'),
+           'EN 352':approved('en-352.jpg','#7c3aed','Endüstriyel işitme koruyucu kulaklık','Industrial hearing-protection earmuffs'),
+           'EN ISO 20345':approved('en-iso-20345.jpg','#27272a','Endüstriyel koruyucu iş ayakkabısı','Industrial protective safety footwear'),
+           'EN ISO 21420':approved('en-iso-21420.jpg','#ea580c','Koruyucu iş eldiveni ve ürün işaretleri','Protective work glove and product markings'),
+           'EN 407':approved('en-407.jpg','#dc2626','Isıya dayanıklı koruyucu eldiven','Heat-resistant protective gloves'),
+           'EN ISO 11611':approved('en-iso-11611.jpg','#f97316','Kaynak işi için koruyucu giysi','Protective clothing for welding'),
+           'EN ISO 11612':approved('en-iso-11612.jpg','#ef4444','Isı ve aleve karşı koruyucu giysi','Protective clothing against heat and flame'),
+           'EN ISO 20471':approved('en-iso-20471.jpg','#eab308','Yüksek görünürlüklü koruyucu giysi','High-visibility protective clothing'),
+           'EN IEC 61482-2':approved('en-iec-61482-2.jpg','#f59e0b','Elektrik arkına karşı koruyucu giysi','Arc-flash protective clothing'),
+           'EN 1149-5':approved('en-1149-5.jpg','#0d9488','Elektrostatik koruyucu giysi','Electrostatic protective clothing'),
+           'EN 50365':approved('en-50365.jpg','#eab308','Elektriksel yalıtımlı koruyucu baret','Electrically insulating protective helmet'),
+           'EN 60903':approved('en-60903.jpg','#2563eb','Elektrik işi için yalıtkan kauçuk eldiven','Insulating rubber gloves for electrical work'),
+           'EN 136':approved('en-136.jpg','#0f766e','Tam yüz solunum koruyucu maske','Full-face respiratory protective mask'),
+          };
+
+          export const pexels=(id:PPEImageRef,w=1400)=>typeof id==='string'?id:`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
+          export const getPPEVisual=(code:string)=>ppeVisuals[code]??ppeVisuals['EN 397'];
+          EOF
+
+      - name: Commit approved PPE visual set
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/public/ppe-standards/approved 'app/app/[locale]/ppe-standards/visual-data.ts' .ppe-approved || true
+          git diff --cached --quiet && exit 0
+          git commit -m 'apply approved PPE visuals [ppe-applied]'
+          git push
