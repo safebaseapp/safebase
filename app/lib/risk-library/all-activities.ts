@@ -11,3 +11,9 @@ export const allRiskActivities = [
   ...riskLibraryPack04,
   ...riskLibraryPack05,
 ];
+
+export const riskActivityCount = allRiskActivities.length;
+export const riskHazardCount = allRiskActivities.reduce(
+  (total, activity) => total + activity.items.length,
+  0,
+);

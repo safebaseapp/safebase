@@ -49,7 +49,12 @@ export default function MobileQuickNav({ locale }: Props) {
     {
       href: `/${locale}/tools/method-statement`,
       icon: FileText,
-      title: "Method Statement",
+      title: isTurkish ? "Çalışma Yöntemi" : "Method Statement",
+    },
+    {
+      href: `/${locale}/safety-pack`,
+      icon: Sparkles,
+      title: isTurkish ? "Saha Güvenlik Paketleri" : "Safety Packs",
     },
     {
       href: `/${locale}/ppe-standards`,
@@ -87,7 +92,7 @@ export default function MobileQuickNav({ locale }: Props) {
     {
       href: `/${locale}/safety-pack`,
       icon: Sparkles,
-      title: "Safety Packs",
+      title: isTurkish ? "Saha Güvenlik Paketleri" : "Safety Packs",
     },
     {
       href: `/${locale}/checklists`,
@@ -102,7 +107,7 @@ export default function MobileQuickNav({ locale }: Props) {
     {
       href: `/${locale}/toolbox`,
       icon: MessageSquareText,
-      title: "Toolbox Talk",
+      title: isTurkish ? "Toolbox Konuşmaları" : "Toolbox Talks",
     },
     {
       href: `/${locale}/posters`,
@@ -154,7 +159,7 @@ export default function MobileQuickNav({ locale }: Props) {
           className="inline-flex h-10 shrink-0 items-center gap-2 rounded-xl border border-cyan-400/20 bg-cyan-500/[0.07] px-3.5 text-xs font-black text-cyan-100"
         >
           <Sparkles size={15} />
-          Safety Packs
+          {isTurkish ? "Saha Paketleri" : "Safety Packs"}
         </Link>
 
         <Link

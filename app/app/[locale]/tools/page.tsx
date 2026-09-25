@@ -1,5 +1,6 @@
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import SafetyPackPromo from "@/components/safety-pack/SafetyPackPromo";
+import {riskActivityCount, riskHazardCount} from "@/lib/risk-library/all-activities";
 import Link from "next/link";
 import {hasLocale} from "next-intl";
 import {notFound} from "next/navigation";
@@ -20,52 +21,76 @@ export default async function LocalizedToolsPage({params}: Props) {
 
   const tools = [
     {
-      icon: "📊",
-      title: isTurkish ? "Risk Matrisi" : "Risk Matrix",
+      icon: "◇",
+      title: isTurkish ? "Risk Analizi" : "Risk Assessment",
       description: isTurkish
-        ? "İşyeri risklerini olasılık ve şiddet değerlerini kullanarak değerlendirin."
-        : "Evaluate risk levels using likelihood and severity values.",
-      href: "/tools/risk-matrix",
-    },
-    {
-      icon: "📈",
-      title: isTurkish ? "TRIR Hesaplayıcı" : "TRIR Calculator",
-      description: isTurkish
-        ? "Kaydedilebilir vakalar ve toplam çalışma saatlerini kullanarak Toplam Kaydedilebilir Olay Oranını hesaplayın."
-        : "Calculate the Total Recordable Incident Rate using recordable cases and total hours worked.",
-      href: "/tools/trir",
-    },
-    {
-      icon: "🦺",
-      title: isTurkish ? "LTIFR Hesaplayıcı" : "LTIFR Calculator",
-      description: isTurkish
-        ? "Kayıp zamanlı yaralanmalar ve toplam çalışma saatlerini kullanarak Kayıp Zamanlı Yaralanma Sıklık Oranını hesaplayın."
-        : "Calculate the Lost Time Injury Frequency Rate using lost time injuries and total hours worked.",
-      href: "/tools/ltifr",
-    },
-    {
-      icon: "📉",
-      title: isTurkish ? "Şiddet Oranı Hesaplayıcı" : "Severity Rate Calculator",
-      description: isTurkish
-        ? "Kayıp iş günü ve toplam çalışma saati verilerini kullanarak yaralanma şiddet oranını hesaplayın."
-        : "Calculate injury severity using lost workdays and total hours worked.",
-      href: "/tools/severity-rate",
-    },
-    {
-      icon: "⚡",
-      title: isTurkish ? "Hızlı Risk Analizi" : "Quick Risk Assessment",
-      description: isTurkish
-        ? "100 faaliyet ve 900 hazır risk ile profesyonel HIRARC risk değerlendirmenizi hızlıca oluşturun."
-        : "Build a professional HIRARC risk assessment quickly with 100 activities and 900 ready-to-use risks.",
+        ? `${riskActivityCount} faaliyet ve ${riskHazardCount} hazır tehlike kaydıyla profesyonel HIRARC risk değerlendirmesi oluşturun.`
+        : `Build professional HIRARC risk assessments with ${riskActivityCount} activities and ${riskHazardCount} ready-to-use hazard records.`,
       href: "/tools/quick-risk-assessment",
     },
     {
-      icon: "📄",
-      title: isTurkish ? "Method Statement Oluşturucu" : "Method Statement Generator",
+      icon: "▤",
+      title: isTurkish ? "Çalışma Yöntemi" : "Method Statement",
       description: isTurkish
-        ? "20 hazır profesyonel çalışma yöntemi şablonunu düzenleyin ve sahaya hazır PDF dokümanları oluşturun."
-        : "Customize 20 ready-to-use professional work method templates and generate site-ready PDF documents.",
+        ? "Hazır profesyonel şablonları düzenleyin ve sahaya uygun çalışma yöntemi dokümanları oluşturun."
+        : "Customize professional templates and generate field-ready method statement documents.",
       href: "/tools/method-statement",
+    },
+    {
+      icon: "◆",
+      title: isTurkish ? "Saha Güvenlik Paketleri" : "Safety Packs",
+      description: isTurkish
+        ? "Rehber, toolbox, denetim ve araçları tek saha akışında bir araya getirin."
+        : "Connect guides, toolbox talks, inspections and tools in one field workflow.",
+      href: "/safety-pack",
+    },
+    {
+      icon: "◈",
+      title: isTurkish ? "KKD Standartları" : "PPE Standards",
+      description: isTurkish
+        ? "EN ve EN ISO kodlarını, ürün sınıflarını ve saha kontrol noktalarını inceleyin."
+        : "Review EN and EN ISO codes, product classes and practical field checks.",
+      href: "/ppe-standards",
+    },
+    {
+      icon: "▦",
+      title: isTurkish ? "Risk Matrisi" : "Risk Matrix",
+      description: isTurkish
+        ? "Olasılık ve şiddet değerlerini kullanarak risk seviyesini hesaplayın."
+        : "Calculate risk levels using likelihood and severity values.",
+      href: "/tools/risk-matrix",
+    },
+    {
+      icon: "↗",
+      title: "TRIR",
+      description: isTurkish
+        ? "Toplam Kaydedilebilir Olay Oranını çalışma saatleri ve kaydedilebilir vakalarla hesaplayın."
+        : "Calculate Total Recordable Incident Rate from recordable cases and hours worked.",
+      href: "/tools/trir",
+    },
+    {
+      icon: "⌁",
+      title: "LTIFR",
+      description: isTurkish
+        ? "Kayıp zamanlı yaralanma sıklık oranını toplam çalışma saatleriyle hesaplayın."
+        : "Calculate Lost Time Injury Frequency Rate from lost-time injuries and hours worked.",
+      href: "/tools/ltifr",
+    },
+    {
+      icon: "⚡",
+      title: isTurkish ? "Şiddet Oranı" : "Severity Rate",
+      description: isTurkish
+        ? "Kayıp iş günlerinin iş kazası performansına etkisini ölçün."
+        : "Measure the severity impact of lost workdays on safety performance.",
+      href: "/tools/severity-rate",
+    },
+    {
+      icon: "◎",
+      title: "SIMOPS",
+      description: isTurkish
+        ? "Eş zamanlı operasyonları, arayüzleri ve çalışma çakışmalarını yönetin."
+        : "Manage simultaneous operations, interfaces and work conflicts.",
+      href: "/tools/simops",
     },
   ];
 
@@ -85,15 +110,15 @@ export default async function LocalizedToolsPage({params}: Props) {
 
             <p className="mt-5 text-lg leading-8 text-slate-400">
               {isTurkish
-                ? "Risk değerlendirmesi, performans hesaplamaları ve profesyonel HSE dokümantasyonu için pratik araçlar."
-                : "Practical tools for risk assessment, performance calculations and professional HSE documentation."}
+                ? "Risk değerlendirmesi, dokümantasyon, standartlar ve HSE performansı için dokuz saha aracı."
+                : "Nine field-ready tools for risk assessment, documentation, standards and HSE performance."}
             </p>
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {tools.map((tool) => (
               <Link
-                key={tool.title}
+                key={tool.href}
                 href={`/${locale}${tool.href}`}
                 className="group rounded-3xl border border-slate-800 bg-slate-900 p-7 transition duration-300 hover:-translate-y-1 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-950/20"
               >
@@ -108,9 +133,7 @@ export default async function LocalizedToolsPage({params}: Props) {
                 <p className="mt-3 leading-7 text-slate-400">{tool.description}</p>
 
                 <div className="mt-6 font-semibold text-blue-400 transition group-hover:translate-x-1">
-                  {tool.href === "/tools/method-statement"
-                    ? isTurkish ? "Aracı Aç →" : "Open Tool →"
-                    : isTurkish ? "Aracı Aç →" : "Open Tool →"}
+                  {isTurkish ? "Aracı Aç →" : "Open Tool →"}
                 </div>
               </Link>
             ))}
