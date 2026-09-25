@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   expand:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,11 +19,13 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import textwrap
           s=Path('.github/workflows/expand-ppe-standards.yml').read_text()
           start="python3 - <<'PY'\n"
           code=s.split(start,1)[1].split("\n          PY",1)[0]
-          exec(textwrap.dedent(code), {})
+          lines=[]
+          for line in code.splitlines():
+              lines.append(line[10:] if line.startswith('          ') else line)
+          exec('\n'.join(lines), {})
           PY
       - name: Build
         working-directory: app
