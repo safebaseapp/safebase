@@ -28,6 +28,19 @@ jobs:
           code='\n'.join(lines)
           code=code.replace("insert_before(data, ']\\n", "insert_before(data, '];\\n")
           exec(code, {})
+
+          root=Path('app/app/[locale]/ppe-standards')
+          fixes={
+              root/'data.ts':[("}}\n\n{slug:'en-iso-21420", "}},\n{slug:'en-iso-21420")],
+              root/'tech-data.ts':[("}\n\n'EN ISO 21420':", "},\n'EN ISO 21420':")],
+              root/'experience-data.ts':[("  }\n\n  'EN ISO 21420':", "  },\n  'EN ISO 21420':")],
+              root/'visual-data.ts':[("}}\n\n 'EN ISO 21420':", "}},\n 'EN ISO 21420':")],
+          }
+          for path,repls in fixes.items():
+              txt=path.read_text()
+              for old,new in repls:
+                  txt=txt.replace(old,new,1)
+              path.write_text(txt)
           PY
       - name: Build
         working-directory: app
