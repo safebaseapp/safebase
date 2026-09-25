@@ -272,6 +272,15 @@ export default function LocalizedNavbar({ locale }: Props) {
         <div className="flex shrink-0 items-center gap-2 border-l border-white/[0.08] pl-4 sm:gap-2.5">
           <LanguageSwitcher locale={locale} />
 
+          <Link
+            href="/upgrade"
+            onClick={closeDropdowns}
+            className="hidden h-11 items-center justify-center rounded-xl border border-amber-300/15 bg-amber-300/[0.035] px-3.5 text-[12px] font-bold text-amber-100/90 transition hover:border-amber-300/25 hover:bg-amber-300/[0.07] hover:text-amber-50 lg:inline-flex"
+          >
+            <span className="mr-1.5 text-[11px] text-amber-300">✦</span>
+            Premium
+          </Link>
+
           {!isAuthLoading && (
             <>
               {isAuthenticated ? (
