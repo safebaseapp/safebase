@@ -24,8 +24,8 @@ export async function generateMetadata({
     : "Risk Assessment Library | SERNEM";
 
   const description = isTr
-    ? "Faaliyete özel hazır tehlikeler, sonuçlar ve kontrol önlemleri içeren profesyonel SERNEM Risk Değerlendirme Kütüphanesini keşfedin."
-    : "Explore the SERNEM Risk Assessment Library with activity-specific hazards, consequences and practical HSE control measures.";
+    ? "Faaliyete özel tehlikeleri, başlangıç riskini, mevcut ve ilave kontrol önlemlerini, kalan riski ve risk seviyesini birlikte inceleyin."
+    : "Review activity-specific hazards, initial risk, existing and additional controls, residual risk and risk levels in the SERNEM Risk Assessment Library.";
 
   return {
     title,
@@ -84,9 +84,15 @@ export default async function RiskAssessmentLibraryPage({
 
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
               {isTr
-                ? "Saha faaliyetlerine özel hazırlanmış tehlikeleri, sonuçları, risk altındaki kişileri ve kontrol önlemlerini tek bir profesyonel HSE kütüphanesinde inceleyin."
-                : "Explore activity-specific hazards, consequences, persons at risk and control measures in one professional HSE risk library."}
+                ? "Saha faaliyetlerine özel hazırlanmış tehlikeleri ve sonuçları inceleyin; her faaliyet için başlangıç riskini, mevcut ve ilave kontrol önlemlerini, kalan riski ve risk seviyesini birlikte değerlendirin."
+                : "Review activity-specific hazards and consequences, then evaluate initial risk, existing and additional controls, residual risk and the remaining risk level for each activity."}
             </p>
+
+            <div className="mt-5 max-w-3xl rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-4 text-sm leading-6 text-slate-400">
+              {isTr
+                ? "Akış: Tehlikeyi tanımla → başlangıç riskini değerlendir → mevcut ve ilave kontrolleri gözden geçir → kalan riski ve kalan önceliği doğrula."
+                : "Workflow: identify the hazard → assess initial risk → review existing and additional controls → verify residual risk and the remaining priority."}
+            </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
