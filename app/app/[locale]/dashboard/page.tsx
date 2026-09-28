@@ -21,6 +21,7 @@ type RecentWorkItem = {
   id: string;
   title: string;
   type: string;
+  format: string;
   code: string;
   date: string;
   status: string;
@@ -55,22 +56,86 @@ function formatDate(value: string | null | undefined, locale: string) {
 function resourceType(path: string | null, isTurkish: boolean) {
   const value = (path || "").toLowerCase();
   if (value.includes("toolbox")) return { label: "Toolbox", code: "TB" };
-  if (value.includes("poster")) return { label: isTurkish ? "Poster" : "Poster", code: "PO" };
+  if (value.includes("method-statement")) return { label: "Method Statement", code: "MS" };
+  if (value.includes("poster")) return { label: "Poster", code: "PO" };
   if (value.includes("safety-sign")) return { label: isTurkish ? "Güvenlik Levhası" : "Safety Sign", code: "SS" };
-  if (value.includes("checklist")) return { label: isTurkish ? "Denetim" : "Inspection", code: "FC" };
+  if (value.includes("checklist")) return { label: isTurkish ? "Denetim" : "Inspection", code: "CL" };
   if (value.includes("knowledge-base") || value.includes("guide")) return { label: isTurkish ? "Rehber" : "Guide", code: "GD" };
   if (value.includes(".pdf")) return { label: "PDF", code: "PDF" };
   if (value.includes(".doc")) return { label: "DOCX", code: "DOC" };
   return { label: isTurkish ? "Kaynak" : "Resource", code: "DL" };
 }
 
-function activityLabel(eventName: string, isTurkish: boolean) {
-  const [actionRaw, titleRaw] = eventName.split("|", 2);
+function resourceFormat(path: string | null, recordedFormat?: string) {
+  if (recordedFormat && recordedFormat !== "WEB") return recordedFormat;
+  const value = (path || "").toLowerCase();
+  if (value.includes(".pdf")) return "PDF";
+  if (value.includes(".docx") || value.includes(".doc")) return "DOCX";
+  if (value.includes(".xlsx") || value.includes(".xls")) return "XLSX";
+  if (value.includes(".png")) return "PNG";
+  if (value.includes(".jpg") || value.includes(".jpeg")) return "JPG";
+  if (value.includes(".zip")) return "ZIP";
+  return recordedFormat || "WEB";
+}
+
+function pathTitle(path: string | null, isTurkish: boolean) {
+  if (!path) return isTurkish ? "HSE kaynağı" : "HSE resource";
+
+  try {
+    const cleaned = decodeURIComponent(path.split("?")[0].split("#")[0]);
+    const last = cleaned.split("/").filter(Boolean).pop() || "";
+    const withoutExtension = last.replace(/\.(pdf|docx?|xlsx?|png|jpe?g|zip)$/i, "");
+    const normalized = withoutExtension
+      .replace(/^download[-_]?/i, "")
+      .replace(/[-_]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (!normalized || /^(download|open|preview|route|file)$/i.test(normalized)) {
+      return isTurkish ? "HSE kaynağı" : "HSE resource";
+    }
+
+    return normalized.replace(/\b\w/g, (char) => char.toUpperCase()).slice(0, 100);
+  } catch {
+    return isTurkish ? "HSE kaynağı" : "HSE resource";
+  }
+}
+
+function activityLabel(eventName: string, path: string | null, isTurkish: boolean) {
+  const [actionRaw = "resource_open", titleRaw = "", formatRaw = ""] = eventName.split("|");
   const action = actionRaw.replace("resource_", "");
-  const title = titleRaw?.trim() || (isTurkish ? "HSE kaynağı" : "HSE resource");
-  if (action === "download") return { title, status: isTurkish ? "İndirildi" : "Downloaded", tone: "text-emerald-300" };
-  if (action === "preview") return { title, status: isTurkish ? "Önizlendi" : "Previewed", tone: "text-cyan-300" };
-  return { title, status: isTurkish ? "Açıldı" : "Opened", tone: "text-blue-300" };
+  const genericTitle = /^(↓\s*)?(download|indir|open|aç|preview|önizle|resource|kaynak)$/i;
+  const rawTitle = titleRaw.trim();
+  const title = !rawTitle || genericTitle.test(rawTitle)
+    ? pathTitle(path, isTurkish)
+    : rawTitle;
+
+  const format = resourceFormat(path, formatRaw.trim());
+
+  if (action === "download") {
+    return {
+      title,
+      format,
+      status: isTurkish ? "İndirildi" : "Downloaded",
+      tone: "text-emerald-300",
+    };
+  }
+
+  if (action === "preview") {
+    return {
+      title,
+      format,
+      status: isTurkish ? "Önizlendi" : "Previewed",
+      tone: "text-cyan-300",
+    };
+  }
+
+  return {
+    title,
+    format,
+    status: isTurkish ? "Açıldı" : "Opened",
+    tone: "text-blue-300",
+  };
 }
 
 export default async function DashboardPage({ params }: Props) {
@@ -155,6 +220,7 @@ export default async function DashboardPage({ params }: Props) {
       id: `risk-${assessment.id}`,
       title: assessment.title || assessment.document_no || (isTurkish ? "Risk Analizi" : "Risk Assessment"),
       type: isTurkish ? "Risk Analizi" : "Risk Assessment",
+      format: "WEB",
       code: "RA",
       date: assessment.updated_at,
       status: isTurkish ? "Kaydedildi" : "Saved",
@@ -162,13 +228,14 @@ export default async function DashboardPage({ params }: Props) {
       href: `/${locale}/tools/quick-risk-assessment?assessment=${assessment.id}`,
     })),
     ...activityEvents.map((event) => {
-      const detail = activityLabel(event.event_name, isTurkish);
+      const detail = activityLabel(event.event_name, event.path, isTurkish);
       const type = resourceType(event.path, isTurkish);
       const href = event.path?.startsWith(`/${locale}/`) ? event.path : undefined;
       return {
         id: `activity-${event.id}`,
         title: detail.title,
         type: type.label,
+        format: detail.format,
         code: type.code,
         date: event.created_at,
         status: detail.status,
@@ -248,9 +315,12 @@ export default async function DashboardPage({ params }: Props) {
         <div className="min-w-0 flex-1">
           <div className="mb-4 hidden items-center rounded-2xl border border-slate-800 bg-[#071423] px-4 py-3 sm:flex"><span className="mr-3 text-slate-600">⌕</span><span className="truncate text-sm text-slate-500">{isTurkish ? "Ara… doküman, araç, şablon veya HSE kaydı" : "Search… document, tool, template or HSE record"}</span><span className="ml-auto rounded-lg border border-slate-800 bg-slate-950/60 px-2 py-1 text-[10px] font-black text-slate-500">{locale.toUpperCase()}</span></div>
 
-          <section className="relative overflow-hidden rounded-[24px] border border-blue-900/60 bg-gradient-to-r from-[#08172a] via-[#0b2244] to-[#0d3971] p-5 shadow-2xl shadow-blue-950/20 sm:rounded-[30px] sm:p-8">
-            <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-blue-400/20 blur-3xl" />
-            <div className="relative grid gap-6 lg:grid-cols-[1.5fr_.5fr] lg:items-center"><div><div className="inline-flex rounded-full border border-cyan-300/20 bg-cyan-400/[0.06] px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.20em] text-cyan-200">SERNEM WORKSPACE</div><h1 className="mt-3 text-[28px] font-black leading-tight tracking-tight sm:text-4xl xl:text-5xl">{isTurkish ? "Hoş geldin, " : "Welcome, "}<span className="text-blue-300">{firstName}</span><span className="ml-2">👋</span></h1><p className="mt-3 max-w-3xl text-[13px] leading-5 text-blue-100/65 sm:text-base">{isTurkish ? "HSE süreçlerini tek merkezden yönet, riskleri azalt ve saha performansını gerçek verilerle takip et." : "Manage HSE processes from one command center, reduce risk and track field performance with real data."}</p></div><div className="hidden lg:flex justify-center text-6xl font-black text-blue-200/80">S</div></div>
+          <section className="relative isolate overflow-hidden rounded-[24px] border border-blue-900/60 bg-[#071526] p-5 shadow-2xl shadow-blue-950/20 sm:rounded-[30px] sm:p-8">
+            <div className="absolute inset-0 -z-30 bg-cover bg-center opacity-65" style={{ backgroundImage: "url('/images/sernem-hero-refinery.png')" }} aria-hidden="true" />
+            <div className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(3,9,18,.96)_0%,rgba(5,17,34,.90)_46%,rgba(7,36,74,.66)_76%,rgba(7,44,91,.72)_100%)]" aria-hidden="true" />
+            <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(2,8,20,.10)_0%,rgba(2,8,20,.28)_58%,rgba(2,8,20,.62)_100%)]" aria-hidden="true" />
+            <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-blue-400/15 blur-3xl" />
+            <div className="relative grid gap-6 lg:grid-cols-[1.5fr_.5fr] lg:items-center"><div><div className="inline-flex rounded-full border border-cyan-300/20 bg-slate-950/35 px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.20em] text-cyan-200 backdrop-blur-sm">SERNEM WORKSPACE</div><h1 className="mt-3 text-[28px] font-black leading-tight tracking-tight drop-shadow-[0_3px_20px_rgba(0,0,0,.45)] sm:text-4xl xl:text-5xl">{isTurkish ? "Hoş geldin, " : "Welcome, "}<span className="text-blue-300">{firstName}</span><span className="ml-2">👋</span></h1><p className="mt-3 max-w-3xl text-[13px] leading-5 text-blue-100/75 sm:text-base">{isTurkish ? "HSE süreçlerini tek merkezden yönet, riskleri azalt ve saha performansını gerçek verilerle takip et." : "Manage HSE processes from one command center, reduce risk and track field performance with real data."}</p></div><div className="hidden lg:flex justify-center text-6xl font-black text-blue-100/70 drop-shadow-[0_8px_30px_rgba(0,0,0,.55)]">S</div></div>
           </section>
 
           {hoursMismatch && <div className="mt-3 rounded-2xl border border-amber-400/20 bg-amber-500/[0.06] px-4 py-3 text-xs text-amber-100">⚠ {isTurkish ? `Çalışılan saatleri kontrol edin: Tüm Projeler ${formatNumber(workedHours, locale)}, proje toplamı ${formatNumber(projectHours, locale)}.` : `Review worked hours: All Projects ${formatNumber(workedHours, locale)}, project total ${formatNumber(projectHours, locale)}.`}</div>}
@@ -268,7 +338,7 @@ export default async function DashboardPage({ params }: Props) {
               {recentWork.length > 0 ? (
                 <div className="divide-y divide-slate-800/80">
                   {recentWork.map((item) => {
-                    const content = <><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-blue-500/20 bg-blue-500/[0.07] text-[9px] font-black text-blue-300">{item.code}</span><div className="min-w-0 flex-1"><p className="truncate text-xs font-black text-slate-200 sm:text-sm">{item.title}</p><p className="mt-0.5 text-[9px] text-slate-600">{item.type} · {formatDate(item.date, locale)}</p></div><span className={`shrink-0 text-[9px] font-black uppercase ${item.statusTone}`}>{item.status}</span></>;
+                    const content = <><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-blue-500/20 bg-blue-500/[0.07] text-[9px] font-black text-blue-300">{item.code}</span><div className="min-w-0 flex-1"><p className="truncate text-xs font-black text-slate-200 sm:text-sm">{item.title}</p><p className="mt-0.5 text-[9px] text-slate-600">{item.type} · {item.format} · {formatDate(item.date, locale)}</p></div><span className={`shrink-0 text-[9px] font-black uppercase ${item.statusTone}`}>{item.status}</span></>;
                     return item.href ? <Link key={item.id} href={item.href} className="flex items-center gap-3 px-4 py-3 transition hover:bg-white/[0.025]">{content}</Link> : <div key={item.id} className="flex items-center gap-3 px-4 py-3">{content}</div>;
                   })}
                 </div>
@@ -284,7 +354,7 @@ export default async function DashboardPage({ params }: Props) {
             <section className="rounded-[24px] border border-slate-800 bg-[#071423] p-4"><div className="flex items-center justify-between"><div><p className="text-[9px] font-black uppercase tracking-[0.18em] text-amber-300">WORKSPACE PLAN</p><p className="mt-1 text-xl font-black">{isPremium ? "Premium" : "Free"}</p></div><span className="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-2 py-1 text-[9px] font-black text-emerald-300">{isPremium ? "ACTIVE" : "FREE"}</span></div><div className="mt-3 space-y-1 text-[10px] text-slate-400"><p>✓ {isTurkish ? "Temel KPI ve saha takibi" : "Core KPI and field tracking"}</p><p>✓ {isTurkish ? "Raporlar ve gelişmiş export" : "Reports and advanced export"}</p><p>✓ {isTurkish ? "Trend analizi" : "Trend analysis"}</p></div><Link href={`/${locale}/hse-performance`} className="mt-3 flex h-10 items-center justify-center rounded-xl border border-blue-500/25 bg-blue-500/[0.07] text-xs font-black text-blue-300">HSE Performance →</Link></section>
           </div>
 
-          <section className="mt-4 rounded-[24px] border border-cyan-400/15 bg-gradient-to-r from-[#071423] via-[#081a2c] to-[#071423] p-4"><div className="flex items-center justify-between gap-4"><div><p className="text-[9px] font-black uppercase tracking-[0.18em] text-cyan-300">LIVE HSE</p><h2 className="mt-1 font-black">HSE Performance</h2><p className="mt-1 text-[10px] text-slate-500">{isTurkish ? `${hseTotal} saha kaydı · ${hseClosed} kapalı · ${hseOpen} açık` : `${hseTotal} field records · ${hseClosed} closed · ${hseOpen} open`}</p></div><Link href={`/${locale}/hse-performance`} className="shrink-0 rounded-xl bg-cyan-500 px-3 py-2 text-[10px] font-black text-slate-950">{isTurkish ? "Command Center →" : "Command Center →"}</Link></div></section>
+          <section className="mt-4 rounded-[24px] border border-cyan-400/15 bg-gradient-to-r from-[#071423] via-[#081a2c] to-[#071423] p-4"><div className="flex items-center justify-between gap-4"><div><p className="text-[9px] font-black uppercase tracking-[0.18em] text-cyan-300">LIVE HSE</p><h2 className="mt-1 font-black">HSE Performance</h2><p className="mt-1 text-[10px] text-slate-500">{isTurkish ? `${hseTotal} saha kaydı · ${hseClosed} kapalı · ${hseOpen} açık` : `${hseTotal} field records · ${hseClosed} closed · ${hseOpen} open`}</p></div><Link href={`/${locale}/hse-performance`} className="shrink-0 rounded-xl bg-cyan-500 px-3 py-2 text-[10px] font-black text-slate-950">Command Center →</Link></div></section>
 
           <section className="mt-4 rounded-[24px] border border-slate-800 bg-[#071423] p-4"><div className="flex items-center justify-between gap-3"><div><h2 className="font-black">{isTurkish ? "Risk Analizlerim" : "My Risk Assessments"}</h2><p className="text-[10px] text-slate-600">{isTurkish ? "Kaydettiğiniz profesyonel risk değerlendirmeleri" : "Saved professional risk assessments"}</p></div><Link href={`/${locale}/tools/quick-risk-assessment`} className="rounded-xl bg-blue-600 px-3 py-2 text-[10px] font-black text-white">+ {isTurkish ? "Yeni" : "New"}</Link></div>{riskAssessments.length > 0 ? <div className="mt-3 grid gap-2 md:grid-cols-2">{riskAssessments.map((assessment) => { const riskCount = Array.isArray(assessment.risk_items) ? assessment.risk_items.length : 0; return <article key={assessment.id} className="rounded-2xl border border-slate-800 bg-slate-950/35 p-3"><div className="flex justify-between gap-3"><div className="min-w-0"><p className="truncate text-xs font-black text-slate-200">{assessment.title || assessment.document_no || (isTurkish ? "Risk Analizi" : "Risk Assessment")}</p><p className="mt-0.5 truncate text-[9px] text-slate-600">{assessment.project_name || (isTurkish ? "Proje belirtilmedi" : "No project")}</p></div><span className="text-[9px] font-black text-emerald-300">{riskCount} risk</span></div><div className="mt-3 flex flex-wrap gap-2"><Link href={`/${locale}/tools/quick-risk-assessment?assessment=${assessment.id}`} className="rounded-lg border border-blue-500/25 bg-blue-500/[0.06] px-2.5 py-1.5 text-[9px] font-black text-blue-300">{isTurkish ? "Aç" : "Open"}</Link><RiskAssessmentActions assessmentId={assessment.id} locale={locale} /></div></article>; })}</div> : <div className="mt-3 rounded-xl border border-dashed border-slate-800 px-4 py-5 text-center text-xs font-bold text-slate-600">{isTurkish ? "Henüz kayıtlı risk analizi yok" : "No saved risk assessments yet"}</div>}</section>
 
