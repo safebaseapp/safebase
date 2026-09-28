@@ -23,12 +23,12 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          from textwrap import dedent
           src=Path('.github/workflows/apply-ppe-standards-30.yml').read_text()
           marker="          python - <<'PY'\n"
           start=src.index(marker)+len(marker)
           end=src.index("\n          PY\n",start)
-          code=dedent(src[start:end])
+          lines=src[start:end].splitlines()
+          code='\n'.join(line[10:] if line.startswith('          ') else line for line in lines)
           exec(compile(code,'ppe30-staged.py','exec'))
           PY
       - name: Commit the package
