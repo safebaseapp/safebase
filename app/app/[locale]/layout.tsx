@@ -17,6 +17,7 @@ import "./core-content-image-cards.css";
 import "./topic-match-refinement.css";
 import "./topic-match-refinement-supplement.css";
 import "./toolbox-visual-spot-fixes.css";
+import "./public-pages-polish.css";
 
 type Props = {
   children: React.ReactNode;
@@ -56,18 +57,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: Props) {
+export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
+  if (!hasLocale(routing.locales, locale)) notFound();
 
   setRequestLocale(locale);
-
   const safeLocale = locale as "tr" | "en";
 
   return (
