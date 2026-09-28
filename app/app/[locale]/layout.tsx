@@ -9,6 +9,7 @@ import MobileAuthBar from "./components/MobileAuthBar";
 import MobileQuickNav from "./components/MobileQuickNav";
 import UserActivityCapture from "./components/UserActivityCapture";
 import DashboardReturnBar from "./components/DashboardReturnBar";
+import WorkspaceUxEnhancer from "./components/WorkspaceUxEnhancer";
 import "./navbar-responsive-fix.css";
 import "./premium-live-polish.css";
 import "./core-content-visual-system.css";
@@ -77,6 +78,7 @@ export default async function LocaleLayout({
       <MobileQuickNav locale={safeLocale} />
       <UserActivityCapture />
       <DashboardReturnBar locale={safeLocale} />
+      <WorkspaceUxEnhancer locale={safeLocale} />
       {children}
     </NextIntlClientProvider>
   );
