@@ -3,6 +3,12 @@ export type PPEVisual={photo:PPEImageRef;scenes:PPEImageRef[];glow:string;alt:{t
 
 const en355ShockAbsorber='https://commons.wikimedia.org/wiki/Special:Redirect/file/PetzlScorpioShockAbsorber.jpg?width=1600';
 const en355Lanyard='https://commons.wikimedia.org/wiki/Special:Redirect/file/ViaFerrataLanyardPetzlScorpio.jpg?width=1600';
+const en1731MeshForestry='https://imagevault.sca.com/publishedmedia/3t0i4tz0cbwer6tyl02x/R-jning_i_skogen_2544.jpg';
+const en1731MeshBrush='https://www.heatleys.com.au/media/catalog/product/5/8/58804f79cdb7cc560b15a61f8007fe88aa7393aa_6c32.jpg?bg-color=255%2C255%2C255&canvas=506%3A506&fit=bounds&height=506&quality=80&width=506';
+const en1731MeshLandscaping='https://www.beselettronica.com/userfiles/visietra-ptotettiva-sicurezza-giardinaggio-casco.jpg';
+const en812BumpWarehouse='https://cdn11.bigcommerce.com/s-eokud1lf5m/images/stencil/1280x1280/products/880/10839/bump-cap-warehouse-low-clearance-lifestyle__40863.1781923431.webp?c=1';
+const en812BumpWorker='https://mstore.co.uk/cdn/shop/files/41dc4cac_2F65154825f54a0416b100007f_2FENB00011XZ_A_I_SR_ENH_SyntisNavyBlue.jpg?v=1749805885&width=1445';
+const en812BumpHandling='https://www.ishn.com/ext/resources/Issues/2018/09-September/ISHN0918_F10_pic.webp?t=1535569446';
 
 // PPE hero visual audit — 2026-09-28
 // Rules: the PPE type/hazard must be obvious at first glance, avoid misleading
@@ -34,8 +40,8 @@ export const ppeVisuals:Record<string,PPEVisual>={
  'EN 169':{photo:14528645,scenes:[14528645,2950117,4561615],glow:'#fb923c',alt:{tr:'Kaynak filtresi ve kaynak siperi lens bölgesi yakın planı',en:'Close-up of welding protector and filter-lens area'}},
  'EN 170':{photo:8821002,scenes:[8821002,9242282,17842695],glow:'#0ea5e9',alt:{tr:'Endüstriyel ortamda UV filtreli koruyucu gözlük kullanan çalışan',en:'Worker using protective eyewear for occupational UV-filter applications'}},
  'EN 172':{photo:30462810,scenes:[30462810,17993024,31983878],glow:'#eab308',alt:{tr:'Güneş parlamalı açık saha ortamında koyu lensli endüstriyel göz koruması',en:'Tinted occupational eye protection in a bright outdoor work environment'}},
- 'EN 1731':{photo:28786718,scenes:[28786718,8489862,4206046],glow:'#65a30d',alt:{tr:'Ormancılık çalışmasında yüz koruyucu kullanan çalışan',en:'Forestry worker using face protection during vegetation cutting'}},
- 'EN 812':{photo:6169166,scenes:[6169166,4483865,4483864],glow:'#64748b',alt:{tr:'Depo ortamında endüstriyel darbe başlığı tipi baş koruması kullanan çalışan',en:'Warehouse worker in cap-style head protection for low-clearance bump hazards'}},
+ 'EN 1731':{photo:en1731MeshForestry,scenes:[en1731MeshForestry,en1731MeshBrush,en1731MeshLandscaping],glow:'#65a30d',alt:{tr:'Ormancılık çalışmasında mesh yüz siperi kullanan çalışan',en:'Forestry worker using a mesh face shield during vegetation cutting'}},
+ 'EN 812':{photo:en812BumpWarehouse,scenes:[en812BumpWarehouse,en812BumpWorker,en812BumpHandling],glow:'#64748b',alt:{tr:'Düşük açıklıklı depo ortamında endüstriyel darbe başlığı kullanan çalışan',en:'Warehouse worker wearing an industrial bump cap in a low-clearance work area'}},
  'EN 12492':{photo:37818741,scenes:[37818741,13227676,35559603],glow:'#2563eb',alt:{tr:'İple erişim ve yüksekte çalışma bağlamında çene bağlı tırmanış tipi baret',en:'Chinstrap climbing-style helmet in a rope-access and height-work context'}},
  'EN 405':{photo:5493657,scenes:[5493657,5493660,10088317],glow:'#7c3aed',alt:{tr:'Gaz ve kombine filtreli yarım maske kullanan endüstriyel çalışan',en:'Industrial worker using a filtering half mask for gas or combined-filter protection'}},
  'EN 143':{photo:4981771,scenes:[4981771,8487792,8487777],glow:'#0f766e',alt:{tr:'Partikül filtreli solunum koruması kullanan çalışan',en:'Worker using particulate-filter respiratory protection'}},
