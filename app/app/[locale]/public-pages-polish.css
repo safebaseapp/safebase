@@ -1,0 +1,185 @@
+body[data-sernem-public-page] main {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 14%, rgba(37,99,235,.14), transparent 30%),
+    radial-gradient(circle at 18% 64%, rgba(6,182,212,.07), transparent 26%),
+    linear-gradient(180deg, #020817 0%, #030b19 48%, #020712 100%);
+}
+
+body[data-sernem-public-page] main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(148,163,184,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148,163,184,.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), transparent 72%);
+}
+
+body[data-sernem-public-page] main > section:first-child {
+  position: relative;
+  isolation: isolate;
+  min-height: 430px;
+  display: flex;
+  align-items: center;
+  border-bottom-color: rgba(96,165,250,.14) !important;
+}
+
+body[data-sernem-public-page] main > section:first-child::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: url('/images/sernem-hero-refinery.png');
+  background-size: cover;
+  background-position: center 42%;
+  opacity: .23;
+  filter: saturate(.85) contrast(1.08);
+}
+
+body[data-sernem-public-page] main > section:first-child::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(2,8,23,.98) 0%, rgba(2,8,23,.92) 46%, rgba(2,8,23,.66) 76%, rgba(2,8,23,.82) 100%),
+    linear-gradient(180deg, rgba(2,8,23,.12), rgba(2,8,23,.8));
+}
+
+body[data-sernem-public-page] main > section:first-child > div {
+  position: relative;
+  z-index: 2;
+}
+
+body[data-sernem-public-page] main > section:first-child h1 {
+  text-shadow: 0 18px 60px rgba(0,0,0,.45);
+  max-width: 980px;
+}
+
+body[data-sernem-public-page] main > section:first-child p {
+  color: rgb(186 201 222 / .9) !important;
+}
+
+body[data-sernem-public-page] main > section:nth-child(2) {
+  position: relative;
+  z-index: 2;
+}
+
+body[data-sernem-public-page] main > section:nth-child(2) > div,
+body[data-sernem-public-page] main details,
+body[data-sernem-public-page] main article {
+  backdrop-filter: blur(10px);
+}
+
+body[data-sernem-public-page] main .rounded-3xl,
+body[data-sernem-public-page] main .rounded-2xl {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025), 0 18px 50px rgba(0,0,0,.08);
+}
+
+body[data-sernem-public-page="faq"] main details {
+  background: linear-gradient(135deg, rgba(15,23,42,.78), rgba(7,18,34,.72)) !important;
+  border-color: rgba(148,163,184,.13) !important;
+  transition: border-color .2s ease, transform .2s ease, background .2s ease;
+}
+
+body[data-sernem-public-page="faq"] main details:hover {
+  border-color: rgba(96,165,250,.28) !important;
+  transform: translateY(-1px);
+}
+
+body[data-sernem-public-page="faq"] main details[open] {
+  border-color: rgba(34,211,238,.24) !important;
+  background: linear-gradient(135deg, rgba(8,47,73,.28), rgba(7,18,34,.82)) !important;
+}
+
+body[data-sernem-public-page="contact"] main section:nth-child(2) .rounded-3xl:first-child {
+  background: linear-gradient(145deg, rgba(37,99,235,.11), rgba(7,18,34,.72)) !important;
+  border-color: rgba(96,165,250,.22) !important;
+}
+
+body[data-sernem-public-page="about"] main section:nth-child(2) .grid.md\:grid-cols-3 > div {
+  background: linear-gradient(145deg, rgba(15,23,42,.78), rgba(7,18,34,.74)) !important;
+  border-color: rgba(148,163,184,.13) !important;
+}
+
+.sernem-native-filterbar {
+  position: relative !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px !important;
+  border: 1px solid rgba(71,85,105,.65) !important;
+  border-radius: 16px !important;
+  background: rgba(6,21,36,.92) !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,.12) !important;
+}
+
+.sernem-period-label {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  color: #64748b;
+  margin-left: 4px;
+}
+
+.sernem-period-value {
+  font-size: 12px;
+  font-weight: 900;
+  color: #e2e8f0;
+  margin-right: -4px;
+}
+
+.sernem-native-month,
+.sernem-native-project {
+  min-height: 40px !important;
+  border: 1px solid rgba(71,85,105,.8) !important;
+  border-radius: 12px !important;
+  background: #07111f !important;
+  color: #e2e8f0 !important;
+  padding: 8px 12px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  outline: none !important;
+}
+
+.sernem-native-month {
+  min-width: 150px !important;
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+.sernem-native-project {
+  min-width: 170px !important;
+  cursor: pointer;
+}
+
+.sernem-native-month:focus,
+.sernem-native-project:focus {
+  border-color: rgba(59,130,246,.75) !important;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.10) !important;
+}
+
+@media (max-width: 640px) {
+  body[data-sernem-public-page] main > section:first-child {
+    min-height: 360px;
+  }
+  body[data-sernem-public-page] main > section:first-child::before {
+    background-position: 62% center;
+    opacity: .18;
+  }
+  .sernem-native-filterbar {
+    align-items: stretch !important;
+  }
+  .sernem-period-value {
+    width: 100%;
+  }
+  .sernem-native-month,
+  .sernem-native-project {
+    flex: 1 1 145px;
+  }
+}
