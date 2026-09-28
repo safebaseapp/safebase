@@ -26,9 +26,20 @@ export const ppeVisuals:Record<string,PPEVisual>={
  'EN ISO 20471':{photo:19927813,scenes:[19927813,8082525,8487397],glow:'#eab308',alt:{tr:'Gece çalışma ortamında yüksek görünürlüklü reflektif giysi kullanan çalışanlar',en:'Workers wearing high-visibility reflective clothing in a night work environment'}},
  'EN IEC 61482-2':{photo:21812146,scenes:[21812146,10871737,35082106],glow:'#f59e0b',alt:{tr:'Elektrik panosu üzerinde koruyucu iş giysisi ve KKD ile çalışan elektrik teknisyeni',en:'Electrical technician in protective workwear and PPE at an electrical control panel'}},
  'EN 1149-5':{photo:35082106,scenes:[35082106,16368417,32407071],glow:'#0d9488',alt:{tr:'Endüstriyel tesiste tam koruyucu iş giysisi kullanan çalışan',en:'Industrial worker wearing full protective work clothing in a factory setting'}},
- 'EN 50365':{photo:21812146,scenes:[21812146,21812143,36673276],glow:'#eab308',alt:{tr:'Elektrik tesisinde koruyucu baret kullanan elektrik çalışanı',en:'Electrical worker wearing a protective helmet at an electrical installation'}},
+ 'EN 50365':{photo:17842834,scenes:[17842834,7359568,7359566],glow:'#eab308',alt:{tr:'Elektrik panosu yanında elektriksel koruyucu baret kullanan teknisyen',en:'Electrical technician wearing a protective helmet beside switchgear'}},
  'EN 60903':{photo:10871737,scenes:[10871737,8853523,21812143],glow:'#2563eb',alt:{tr:'Elektrik panosunda koruyucu eldiven kullanan teknisyen yakın planı',en:'Close-up of a technician using protective gloves at an electrical panel'}},
  'EN 136':{photo:6474117,scenes:[6474117,6804257,17109813],glow:'#0f766e',alt:{tr:'Tam yüz solunum maskesi ve koruyucu giysi kullanan endüstriyel çalışan',en:'Industrial worker wearing a full-face respirator and protective clothing'}},
+
+ 'EN 175':{photo:8195876,scenes:[8195876,17294316,9130186],glow:'#f97316',alt:{tr:'Kaynak sırasında göz ve yüz siperi kullanan çalışan',en:'Welder using dedicated eye and face protection during welding'}},
+ 'EN 169':{photo:14528645,scenes:[14528645,2950117,4561615],glow:'#fb923c',alt:{tr:'Kaynak filtresi ve kaynak siperi lens bölgesi yakın planı',en:'Close-up of welding protector and filter-lens area'}},
+ 'EN 170':{photo:8821002,scenes:[8821002,9242282,17842695],glow:'#0ea5e9',alt:{tr:'Endüstriyel ortamda UV filtreli koruyucu gözlük kullanan çalışan',en:'Worker using protective eyewear for occupational UV-filter applications'}},
+ 'EN 172':{photo:30462810,scenes:[30462810,17993024,31983878],glow:'#eab308',alt:{tr:'Güneş parlamalı açık saha ortamında koyu lensli endüstriyel göz koruması',en:'Tinted occupational eye protection in a bright outdoor work environment'}},
+ 'EN 1731':{photo:28786718,scenes:[28786718,8489862,4206046],glow:'#65a30d',alt:{tr:'Ormancılık çalışmasında yüz koruyucu kullanan çalışan',en:'Forestry worker using face protection during vegetation cutting'}},
+ 'EN 812':{photo:6169166,scenes:[6169166,4483865,4483864],glow:'#64748b',alt:{tr:'Depo ortamında endüstriyel darbe başlığı tipi baş koruması kullanan çalışan',en:'Warehouse worker in cap-style head protection for low-clearance bump hazards'}},
+ 'EN 12492':{photo:37818741,scenes:[37818741,13227676,35559603],glow:'#2563eb',alt:{tr:'İple erişim ve yüksekte çalışma bağlamında çene bağlı tırmanış tipi baret',en:'Chinstrap climbing-style helmet in a rope-access and height-work context'}},
+ 'EN 405':{photo:5493657,scenes:[5493657,5493660,10088317],glow:'#7c3aed',alt:{tr:'Gaz ve kombine filtreli yarım maske kullanan endüstriyel çalışan',en:'Industrial worker using a filtering half mask for gas or combined-filter protection'}},
+ 'EN 143':{photo:4981771,scenes:[4981771,8487792,8487777],glow:'#0f766e',alt:{tr:'Partikül filtreli solunum koruması kullanan çalışan',en:'Worker using particulate-filter respiratory protection'}},
+ 'EN 14387':{photo:9537274,scenes:[9537274,14274388,11993162],glow:'#334155',alt:{tr:'Gaz ve kombine filtre kartuşu bulunan solunum koruyucu yakın planı',en:'Close-up of respiratory protection with gas or combined filter cartridge'}},
 };
 
 export const pexels=(id:PPEImageRef,w=1400)=>typeof id==='string'?id:`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
