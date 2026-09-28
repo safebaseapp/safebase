@@ -7,6 +7,7 @@ import LocalizedNavbar from "./components/LocalizedNavbar";
 import NavbarLegacyPremiumCleanup from "./components/NavbarLegacyPremiumCleanup";
 import MobileAuthBar from "./components/MobileAuthBar";
 import MobileQuickNav from "./components/MobileQuickNav";
+import UserActivityCapture from "./components/UserActivityCapture";
 import "./navbar-responsive-fix.css";
 import "./premium-live-polish.css";
 import "./core-content-visual-system.css";
@@ -73,6 +74,7 @@ export default async function LocaleLayout({
       <NavbarLegacyPremiumCleanup />
       <MobileAuthBar locale={safeLocale} />
       <MobileQuickNav locale={safeLocale} />
+      <UserActivityCapture />
       {children}
     </NextIntlClientProvider>
   );
