@@ -36,17 +36,24 @@ export default function WorkspaceUxEnhancer({ locale }: Props) {
     const cleanups: Array<() => void> = [];
 
     if (pathname.endsWith("/dashboard")) {
-      const searchHost = Array.from(document.querySelectorAll<HTMLDivElement>("div")).find((node) => {
+      const searchText = Array.from(document.querySelectorAll<HTMLSpanElement>("main span")).find((node) => {
         const text = node.textContent?.replace(/\s+/g, " ").trim() ?? "";
-        const matches = text.includes("Ara… doküman") || text.includes("Search… document");
-        return matches && node.children.length <= 4;
+        return text.startsWith("Ara… doküman") || text.startsWith("Search… document");
       });
 
-      if (searchHost && searchHost.dataset.commandSearch !== "ready") {
-        searchHost.dataset.commandSearch = "ready";
-        searchHost.innerHTML = "";
-        searchHost.style.position = "relative";
-        searchHost.style.display = "flex";
+      const searchHost = searchText?.parentElement instanceof HTMLDivElement
+        ? searchText.parentElement
+        : null;
+
+      const safeSearchHost = searchHost && !searchHost.querySelector("section, aside, article, main")
+        ? searchHost
+        : null;
+
+      if (safeSearchHost && safeSearchHost.dataset.commandSearch !== "ready") {
+        safeSearchHost.dataset.commandSearch = "ready";
+        safeSearchHost.innerHTML = "";
+        safeSearchHost.style.position = "relative";
+        safeSearchHost.style.display = "flex";
 
         const icon = document.createElement("span");
         icon.textContent = "⌕";
@@ -125,14 +132,14 @@ export default function WorkspaceUxEnhancer({ locale }: Props) {
           }
         };
         const onDocumentClick = (event: MouseEvent) => {
-          if (!searchHost.contains(event.target as Node)) dropdown.classList.add("hidden");
+          if (!safeSearchHost.contains(event.target as Node)) dropdown.classList.add("hidden");
         };
 
         input.addEventListener("input", onInput);
         input.addEventListener("focus", onFocus);
         input.addEventListener("keydown", onKey);
         document.addEventListener("click", onDocumentClick);
-        searchHost.append(icon, input, key, dropdown);
+        safeSearchHost.append(icon, input, key, dropdown);
 
         cleanups.push(() => {
           input.removeEventListener("input", onInput);
