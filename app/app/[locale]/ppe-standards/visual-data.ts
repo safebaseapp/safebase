@@ -3,6 +3,10 @@ export type PPEVisual={photo:PPEImageRef;scenes:PPEImageRef[];glow:string;alt:{t
 
 const en355ShockAbsorber='https://commons.wikimedia.org/wiki/Special:Redirect/file/PetzlScorpioShockAbsorber.jpg?width=1600';
 const en355Lanyard='https://commons.wikimedia.org/wiki/Special:Redirect/file/ViaFerrataLanyardPetzlScorpio.jpg?width=1600';
+const en1731MeshVisor='https://www.acmetools.com/dw/image/v2/BHBS_PRD/on/demandware.static/-/Sites-acme-catalog-m-en/default/dwb3c2ead5/images/images/catalog/product/S0000000003031/klein-tools-face-shield%2C-mesh-60474-bottom-planogram.jpg';
+const en812BumpCap='https://mstore.co.uk/cdn/shop/files/41dc4cac_2F65154825f54a0416b100007d_2FENB00011XZ_A_I_FL_ENH_SyntisNavyBlue.jpg?crop=center&height=1000&v=1749805885&width=1000';
+const en405HalfMask='https://commons.wikimedia.org/wiki/Special:Redirect/file/P100_ovm_respirator.jpg?width=1600';
+const en14387Filter='https://commons.wikimedia.org/wiki/Special:Redirect/file/ABEK2HgP3%20Filter.png?width=1600';
 
 // PPE hero visual audit — 2026-09-28
 // Rules: the PPE type/hazard must be obvious at first glance, avoid misleading
@@ -33,13 +37,13 @@ export const ppeVisuals:Record<string,PPEVisual>={
  'EN 175':{photo:8195876,scenes:[8195876,17294316,9130186],glow:'#f97316',alt:{tr:'Kaynak sırasında göz ve yüz siperi kullanan çalışan',en:'Welder using dedicated eye and face protection during welding'}},
  'EN 169':{photo:14528645,scenes:[14528645,2950117,4561615],glow:'#fb923c',alt:{tr:'Kaynak filtresi ve kaynak siperi lens bölgesi yakın planı',en:'Close-up of welding protector and filter-lens area'}},
  'EN 170':{photo:8820998,scenes:[8820998,9242282,32845660],glow:'#0ea5e9',alt:{tr:'Endüstriyel ortamda koruyucu UV filtreli iş gözlüğü kullanan çalışan',en:'Industrial worker wearing occupational UV-filter protective safety eyewear'}},
- 'EN 172':{photo:36233373,scenes:[36233373,32845660,9242291],glow:'#eab308',alt:{tr:'Açık saha çalışmasında koyu lensli endüstriyel koruyucu gözlük kullanan çalışan',en:'Outdoor worker wearing tinted occupational protective safety eyewear'}},
- 'EN 1731':{photo:9057191,scenes:[9057191,8489862,4206046],glow:'#65a30d',alt:{tr:'Ormancılık çalışmasında yüz ve göz koruması kullanan çalışan',en:'Forestry worker using dedicated face and eye protection during chainsaw work'}},
- 'EN 812':{photo:6720526,scenes:[6720526,11484622,31199536],glow:'#64748b',alt:{tr:'Endüstriyel bakım ortamında koruyucu iş başlığı kullanan çalışan',en:'Industrial maintenance worker wearing cap-style protective headwear'}},
- 'EN 12492':{photo:35559603,scenes:[35559603,37818741,37928993],glow:'#2563eb',alt:{tr:'İple erişim çalışmasında çene bağlı tırmanış tipi baret kullanan profesyonel çalışan',en:'Professional rope-access worker wearing a chinstrap climbing-style helmet'}},
- 'EN 405':{photo:9537274,scenes:[9537274,14274388,11993162],glow:'#7c3aed',alt:{tr:'Kartuş filtreli yarım yüz solunum maskesi yakın planı',en:'Close-up of a cartridge-filter half-face respirator'}},
+ 'EN 172':{photo:17993024,scenes:[17993024,32407071,9242291],glow:'#eab308',alt:{tr:'Güneşli açık saha ortamında koruyucu gözlük kullanan endüstriyel çalışan',en:'Industrial worker wearing occupational protective eyewear in bright outdoor sunlight'}},
+ 'EN 1731':{photo:en1731MeshVisor,scenes:[en1731MeshVisor,9057191,4206046],glow:'#65a30d',alt:{tr:'Ormancılık çalışmasında mesh yüz siperi ve göz koruması kullanan çalışan',en:'Forestry worker wearing a clearly visible mesh face shield and eye protection'}},
+ 'EN 812':{photo:en812BumpCap,scenes:[en812BumpCap,6720526,11484622],glow:'#64748b',alt:{tr:'Bakım işinde endüstriyel darbe başlığı kullanan teknisyen',en:'Maintenance technician clearly wearing an industrial bump cap'}},
+ 'EN 12492':{photo:11843610,scenes:[11843610,37818741,35559603],glow:'#2563eb',alt:{tr:'İple erişim çalışmasında çene bağlı koruyucu baret kullanan çalışan',en:'Rope-access worker wearing a visible protective helmet with chinstrap'}},
+ 'EN 405':{photo:en405HalfMask,scenes:[en405HalfMask,9537274,14274388],glow:'#7c3aed',alt:{tr:'Gaz ve partiküller için kombine kartuşlu yarım yüz respiratörü yakın planı',en:'Close-up of a half-face air-purifying respirator with combination gas and particulate cartridges'}},
  'EN 143':{photo:4981771,scenes:[4981771,8487792,8487777],glow:'#0f766e',alt:{tr:'Partikül filtreli solunum koruması kullanan çalışan',en:'Worker using particulate-filter respiratory protection'}},
- 'EN 14387':{photo:9537274,scenes:[9537274,14274388,11993162],glow:'#334155',alt:{tr:'Gaz ve kombine filtre kartuşu bulunan solunum koruyucu yakın planı',en:'Close-up of respiratory protection with gas or combined filter cartridge'}},
+ 'EN 14387':{photo:en14387Filter,scenes:[en14387Filter,en405HalfMask,9537274],glow:'#334155',alt:{tr:'Gaz ve kombine solunum filtresinin kartuş ve filtre yapısı yakın planı',en:'Close-up of a gas and combined respiratory filter cartridge and filter structure'}},
 };
 
 export const pexels=(id:PPEImageRef,w=1400)=>typeof id==='string'?id:`https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
