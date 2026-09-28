@@ -36,7 +36,11 @@ export default function MobileQuickNav({ locale }: Props) {
     setOpenPanel(null);
   }, [pathname]);
 
-  if (pathname?.includes("/login") || pathname?.includes("/register")) {
+  if (
+    pathname?.includes("/login") ||
+    pathname?.includes("/register") ||
+    pathname?.includes("/dashboard")
+  ) {
     return null;
   }
 
