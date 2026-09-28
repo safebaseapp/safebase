@@ -58,7 +58,11 @@ export default function MobileAuthBar({ locale }: Props) {
     router.refresh();
   }
 
-  if (pathname?.includes("/login") || pathname?.includes("/register")) {
+  if (
+    pathname?.includes("/login") ||
+    pathname?.includes("/register") ||
+    pathname?.includes("/dashboard")
+  ) {
     return null;
   }
 
