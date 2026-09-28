@@ -29,7 +29,17 @@ const theme:Record<string,{label:{tr:string;en:string};accent:string;soft:string
  'EN 1149-5':{label:{tr:'Elektrostatik Koruma',en:'Electrostatic Protection'},accent:'bg-teal-700',soft:'bg-teal-50',line:'border-teal-200'},
  'EN 50365':{label:{tr:'Baş / Elektrik Koruma',en:'Head / Electrical Protection'},accent:'bg-yellow-600',soft:'bg-yellow-50',line:'border-yellow-200'},
  'EN 60903':{label:{tr:'El / Elektrik Koruma',en:'Hand / Electrical Protection'},accent:'bg-blue-700',soft:'bg-blue-50',line:'border-blue-200'},
- 'EN 136':{label:{tr:'Solunum Koruma',en:'Respiratory Protection'},accent:'bg-teal-700',soft:'bg-teal-50',line:'border-teal-200'}
+ 'EN 136':{label:{tr:'Solunum Koruma',en:'Respiratory Protection'},accent:'bg-teal-700',soft:'bg-teal-50',line:'border-teal-200'},
+ 'EN 175':{label:{tr:'Göz / Yüz Koruma',en:'Eye / Face Protection'},accent:'bg-orange-600',soft:'bg-orange-50',line:'border-orange-200'},
+ 'EN 169':{label:{tr:'Göz Koruma',en:'Eye Protection'},accent:'bg-orange-500',soft:'bg-orange-50',line:'border-orange-200'},
+ 'EN 170':{label:{tr:'Göz Koruma',en:'Eye Protection'},accent:'bg-sky-600',soft:'bg-sky-50',line:'border-sky-200'},
+ 'EN 172':{label:{tr:'Göz Koruma',en:'Eye Protection'},accent:'bg-amber-500',soft:'bg-amber-50',line:'border-amber-200'},
+ 'EN 1731':{label:{tr:'Göz / Yüz Koruma',en:'Eye / Face Protection'},accent:'bg-lime-700',soft:'bg-lime-50',line:'border-lime-200'},
+ 'EN 812':{label:{tr:'Baş Koruma',en:'Head Protection'},accent:'bg-slate-700',soft:'bg-slate-100',line:'border-slate-300'},
+ 'EN 12492':{label:{tr:'Baş Koruma',en:'Head Protection'},accent:'bg-blue-700',soft:'bg-blue-50',line:'border-blue-200'},
+ 'EN 405':{label:{tr:'Solunum Koruma',en:'Respiratory Protection'},accent:'bg-violet-700',soft:'bg-violet-50',line:'border-violet-200'},
+ 'EN 143':{label:{tr:'Solunum Koruma',en:'Respiratory Protection'},accent:'bg-teal-700',soft:'bg-teal-50',line:'border-teal-200'},
+ 'EN 14387':{label:{tr:'Solunum Koruma',en:'Respiratory Protection'},accent:'bg-slate-700',soft:'bg-slate-100',line:'border-slate-300'}
 };
 
 const toolboxByCode:Record<string,string>={
