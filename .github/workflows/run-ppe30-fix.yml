@@ -1,0 +1,43 @@
+name: Run PPE 30 expansion safely
+
+on:
+  push:
+    branches:
+      - feat/ppe-standards-30
+    paths:
+      - '.github/workflows/run-ppe30-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/ppe-standards-30
+          fetch-depth: 0
+      - name: Apply staged PPE expansion script
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from textwrap import dedent
+          src=Path('.github/workflows/apply-ppe-standards-30.yml').read_text()
+          marker="          python - <<'PY'\n"
+          start=src.index(marker)+len(marker)
+          end=src.index("\n          PY\n",start)
+          code=dedent(src[start:end])
+          exec(compile(code,'ppe30-staged.py','exec'))
+          PY
+      - name: Commit the package
+        shell: bash
+        run: |
+          rm -f .github/workflows/apply-ppe-standards-30.yml .github/workflows/run-ppe30-fix.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m 'expand PPE standards library to 30 [ppe30-applied]'
+          git push origin HEAD:feat/ppe-standards-30
