@@ -344,21 +344,51 @@
     top: auto;
     left: 50%;
     right: auto;
-    bottom: calc(env(safe-area-inset-bottom) + 78px);
+    bottom: calc(env(safe-area-inset-bottom) + 66px);
     transform: translateX(-50%);
     z-index: 90;
     box-shadow: 0 18px 48px rgba(0,0,0,.50);
   }
-  .sernem-answer-mode button { padding: 7px 9px; font-size: 9px; }
+  .sernem-answer-mode button { padding: 6px 8px; font-size: 9px; }
   .sernem-brief-top { align-items: flex-start; flex-direction: column; }
   .sernem-brief-badges { justify-content: flex-start; }
   .sernem-brief-grid,
   .sernem-detail-grid { grid-template-columns: 1fr; }
+  .sernem-followup-panel { margin-bottom: 12px; border-radius: 16px; }
+  .sernem-followup-header { padding: 13px 14px 10px; }
+  .sernem-followup-title { font-size: 13px; }
+  .sernem-followup-list { gap: 7px; padding: 10px; }
   .sernem-followup-question {
-    grid-template-columns: 28px minmax(0,1fr);
+    grid-template-columns: 26px minmax(0,1fr);
+    gap: 8px;
+    padding: 9px 10px;
   }
+  .sernem-followup-number { width: 26px; height: 26px; }
   .sernem-followup-action {
     grid-column: 2;
     justify-self: start;
+  }
+
+  /* Keep the mobile composer compact so it does not cover the answer. */
+  .sernem-ai-route main > div > section > div.absolute.bottom-0 {
+    padding: 9px 10px calc(9px + env(safe-area-inset-bottom));
+  }
+  .sernem-ai-route main > div > section > div.absolute.bottom-0 form {
+    border-radius: 14px;
+    padding: 4px;
+  }
+  .sernem-ai-route main > div > section > div.absolute.bottom-0 textarea {
+    min-height: 40px;
+    padding: 9px 10px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+  .sernem-ai-route main > div > section > div.absolute.bottom-0 button[type="submit"] {
+    width: 46px;
+    height: 42px;
+    border-radius: 11px;
+  }
+  .sernem-ai-route main > div > section > div.relative.z-10 {
+    padding-bottom: 76px;
   }
 }
