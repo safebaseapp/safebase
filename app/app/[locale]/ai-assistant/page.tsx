@@ -3,8 +3,10 @@ import Link from "next/link";
 import AIAssistantV3 from "./AIAssistantV3";
 import AIAccountSync from "./AIAccountSync";
 import AIPersonaEnhancer from "./AIPersonaEnhancer";
+import AIAnswerModeEnhancer from "./AIAnswerModeEnhancer";
 import "./ai-persona-hotfix.css";
 import "./ai-modal-stability.css";
+import "./ai-answer-engine.css";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 import { isAdminUser } from "@/lib/auth/access";
 import { createClient } from "@/utils/supabase/server";
@@ -164,6 +166,7 @@ export default async function AIAssistantPage({ params }: Props) {
         initialUsage={initialUsage}
       />
       <AIPersonaEnhancer locale={locale} />
+      <AIAnswerModeEnhancer locale={locale} />
       <AIAssistantV3 locale={locale} access={access} />
     </div>
   );
