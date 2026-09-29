@@ -88,6 +88,97 @@ function markAnswerBlocks(body: HTMLElement, nativeAnswer: HTMLElement) {
   });
 }
 
+function primeComposer(root: HTMLElement, question: string, tr: boolean) {
+  const textareas = Array.from(root.querySelectorAll<HTMLTextAreaElement>("textarea"));
+  const textarea = textareas[textareas.length - 1];
+  if (!textarea) return;
+
+  const prefix = tr
+    ? `Şu saha bilgisini ekliyorum — ${question}\nCevabım: `
+    : `Adding this field detail — ${question}\nMy answer: `;
+
+  const setter = Object.getOwnPropertyDescriptor(
+    HTMLTextAreaElement.prototype,
+    "value",
+  )?.set;
+  setter?.call(textarea, prefix);
+  textarea.dispatchEvent(new Event("input", { bubbles: true }));
+  textarea.focus();
+  textarea.setSelectionRange(prefix.length, prefix.length);
+  textarea.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function createFollowUpPanel(
+  root: HTMLElement,
+  data: CopilotResponse,
+  tr: boolean,
+) {
+  const questions = (data.clarificationQuestions ?? []).filter(Boolean).slice(0, 4);
+  if (!questions.length) return null;
+
+  const panel = document.createElement("section");
+  panel.className = "sernem-followup-panel";
+
+  const header = document.createElement("div");
+  header.className = "sernem-followup-header";
+
+  const eyebrow = document.createElement("p");
+  eyebrow.className = "sernem-followup-eyebrow";
+  eyebrow.textContent = tr ? "AKILLI TAKİP" : "SMART FOLLOW-UP";
+
+  const title = document.createElement("h3");
+  title.className = "sernem-followup-title";
+  title.textContent = tr
+    ? "Saha kararını netleştirmek için eksik bilgileri tamamla"
+    : "Complete the missing field details to sharpen the decision";
+
+  const description = document.createElement("p");
+  description.className = "sernem-followup-description";
+  description.textContent = tr
+    ? "Bir soruya dokun; Aslan AI cevabını mevcut konuşmanın devamı olarak kullanır."
+    : "Tap a question; your answer continues the same work context.";
+
+  header.append(eyebrow, title, description);
+  panel.appendChild(header);
+
+  const list = document.createElement("div");
+  list.className = "sernem-followup-list";
+
+  questions.forEach((question, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "sernem-followup-question";
+    button.setAttribute("aria-label", question);
+
+    const number = document.createElement("span");
+    number.className = "sernem-followup-number";
+    number.textContent = String(index + 1).padStart(2, "0");
+
+    const text = document.createElement("span");
+    text.className = "sernem-followup-question-text";
+    text.textContent = question;
+
+    const action = document.createElement("span");
+    action.className = "sernem-followup-action";
+    action.textContent = tr ? "Yanıtla →" : "Answer →";
+
+    button.append(number, text, action);
+    button.addEventListener("click", () => primeComposer(root, question, tr));
+    list.appendChild(button);
+  });
+
+  panel.appendChild(list);
+
+  const note = document.createElement("div");
+  note.className = "sernem-followup-note";
+  note.innerHTML = tr
+    ? "<span>✓</span> Aynı iş senaryosu korunur · yalnızca gönderdiğinde yeni AI çağrısı yapılır"
+    : "<span>✓</span> Same work scenario is retained · a new AI call happens only when you send";
+  panel.appendChild(note);
+
+  return panel;
+}
+
 function createDetailedExtension(data: CopilotResponse, tr: boolean) {
   const extension = document.createElement("section");
   extension.className = "sernem-detail-extension";
@@ -149,6 +240,7 @@ function injectDecisionBrief(root: HTMLElement, data: CopilotResponse, locale: "
 
   body.querySelector(".sernem-decision-brief")?.remove();
   body.querySelector(".sernem-detail-extension")?.remove();
+  body.querySelector(".sernem-followup-panel")?.remove();
 
   const nativeAnswer = Array.from(body.children).find((child) => {
     if (!(child instanceof HTMLElement)) return false;
@@ -226,6 +318,9 @@ function injectDecisionBrief(root: HTMLElement, data: CopilotResponse, locale: "
   panel.appendChild(note);
 
   body.insertBefore(panel, nativeAnswer);
+
+  const followUp = createFollowUpPanel(root, data, tr);
+  if (followUp) panel.insertAdjacentElement("afterend", followUp);
 
   const detailed = createDetailedExtension(data, tr);
   if (detailed) nativeAnswer.insertAdjacentElement("afterend", detailed);
