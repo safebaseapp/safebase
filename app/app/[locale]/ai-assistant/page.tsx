@@ -7,9 +7,11 @@ import AIAnswerModeEnhancer from "./AIAnswerModeEnhancer";
 import AIWorkflowRouter from "./AIWorkflowRouter";
 import AIShortAnswerDisplayFix from "./AIShortAnswerDisplayFix";
 import AIStopWorkStatusFix from "./AIStopWorkStatusFix";
+import AISourcesTrustLayer from "./AISourcesTrustLayer";
 import "./ai-persona-hotfix.css";
 import "./ai-modal-stability.css";
 import "./ai-answer-engine.css";
+import "./ai-trust-layer.css";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 import { isAdminUser } from "@/lib/auth/access";
 import { createClient } from "@/utils/supabase/server";
@@ -173,6 +175,7 @@ export default async function AIAssistantPage({ params }: Props) {
       <AIStopWorkStatusFix locale={locale} />
       <AIShortAnswerDisplayFix locale={locale} />
       <AIWorkflowRouter locale={locale} />
+      <AISourcesTrustLayer locale={locale} />
       <AIAssistantV3 locale={locale} access={access} />
     </div>
   );
