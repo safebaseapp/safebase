@@ -27,7 +27,8 @@ function fieldStatus(risk: CopilotResponse["riskLevel"], tr: boolean) {
 function createList(
   title: string,
   items: string[],
-  tone: "blue" | "red" | "amber",
+  tone: "blue" | "red" | "amber" | "green" = "blue",
+  maxItems = 4,
 ) {
   if (!items.length) return null;
   const section = document.createElement("section");
@@ -39,7 +40,7 @@ function createList(
   section.appendChild(heading);
 
   const list = document.createElement("ul");
-  items.slice(0, 4).forEach((item) => {
+  items.slice(0, maxItems).forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
     list.appendChild(li);
@@ -48,11 +49,91 @@ function createList(
   return section;
 }
 
-function injectDecisionBrief(
-  root: HTMLElement,
-  data: CopilotResponse,
-  locale: "tr" | "en",
-) {
+function classifyAnswerSections(root: HTMLElement) {
+  const map: Record<string, string> = {
+    "ana tehlikeler": "hse-section-hazards",
+    "main hazards": "hse-section-hazards",
+    "kritik kontroller": "hse-section-controls",
+    "critical controls": "hse-section-controls",
+    "gerekli kkd": "hse-section-ppe",
+    "required ppe": "hse-section-ppe",
+    "izinler ve dokümanlar": "hse-section-permits",
+    "permits & documents": "hse-section-permits",
+    "çalışmayı durdurma koşulları": "hse-section-stop",
+    "stop work conditions": "hse-section-stop",
+    "uygulanabilir standartlar": "hse-section-standards",
+    "applicable standards": "hse-section-standards",
+  };
+
+  root.querySelectorAll<HTMLElement>("article section").forEach((section) => {
+    const heading = section.querySelector("h3")?.textContent?.trim().toLowerCase();
+    if (!heading) return;
+    const className = map[heading];
+    if (className) section.classList.add("hse-answer-section", className);
+  });
+}
+
+function markAnswerBlocks(body: HTMLElement, nativeAnswer: HTMLElement) {
+  nativeAnswer.classList.add("sernem-native-answer");
+
+  Array.from(body.children).forEach((child) => {
+    if (!(child instanceof HTMLElement) || child === nativeAnswer) return;
+    const text = child.textContent?.trim().toLowerCase() ?? "";
+    if (text.includes("kaynaklar") || text.startsWith("sources")) {
+      child.classList.add("hse-sources-block");
+    }
+    if (text.includes("önerilen safety pack") || text.includes("recommended safety pack")) {
+      child.classList.add("hse-safety-pack-block");
+    }
+  });
+}
+
+function createDetailedExtension(data: CopilotResponse, tr: boolean) {
+  const extension = document.createElement("section");
+  extension.className = "sernem-detail-extension";
+
+  const label = document.createElement("div");
+  label.className = "sernem-detail-label";
+  label.textContent = tr ? "DETAYLI SAHA İNCELEMESİ" : "DETAILED FIELD REVIEW";
+  extension.appendChild(label);
+
+  const grid = document.createElement("div");
+  grid.className = "sernem-detail-grid";
+
+  const blocks = [
+    createList(tr ? "Çalışma öncesi" : "Before starting", data.beforeStarting ?? [], "blue", 8),
+    createList(tr ? "Çalışma sırasında" : "During work", data.duringWork ?? [], "green", 8),
+    createList(tr ? "İş tamamlandığında" : "After completion", data.afterCompletion ?? [], "green", 8),
+    createList(tr ? "Yaygın hatalar" : "Common failures", data.commonFailures ?? [], "red", 8),
+    createList(tr ? "Hızlı kontrol listesi" : "Quick checklist", data.quickChecklist ?? [], "amber", 10),
+  ];
+
+  blocks.forEach((block) => {
+    if (block) grid.appendChild(block);
+  });
+
+  if (grid.childElementCount) extension.appendChild(grid);
+
+  if (data.recommendation) {
+    const recommendation = document.createElement("div");
+    recommendation.className = "sernem-detail-recommendation";
+
+    const title = document.createElement("p");
+    title.className = "sernem-detail-recommendation-title";
+    title.textContent = tr ? "HSE önerisi" : "HSE recommendation";
+
+    const text = document.createElement("p");
+    text.className = "sernem-detail-recommendation-text";
+    text.textContent = data.recommendation;
+
+    recommendation.append(title, text);
+    extension.appendChild(recommendation);
+  }
+
+  return extension.childElementCount > 1 ? extension : null;
+}
+
+function injectDecisionBrief(root: HTMLElement, data: CopilotResponse, locale: "tr" | "en") {
   const tr = locale === "tr";
   const assistantArticles = Array.from(
     root.querySelectorAll<HTMLElement>("article"),
@@ -67,6 +148,15 @@ function injectDecisionBrief(
   if (!body) return false;
 
   body.querySelector(".sernem-decision-brief")?.remove();
+  body.querySelector(".sernem-detail-extension")?.remove();
+
+  const nativeAnswer = Array.from(body.children).find((child) => {
+    if (!(child instanceof HTMLElement)) return false;
+    return child.classList.contains("mt-4") && Boolean(child.querySelector("h2"));
+  }) as HTMLElement | undefined;
+  if (!nativeAnswer) return false;
+
+  markAnswerBlocks(body, nativeAnswer);
 
   const panel = document.createElement("section");
   panel.className = "sernem-decision-brief";
@@ -108,16 +198,19 @@ function injectDecisionBrief(
     tr ? "İlk kritik kontroller" : "Top critical controls",
     data.criticalControls ?? [],
     "blue",
+    4,
   );
   const stops = createList(
     tr ? "Durdurma tetikleyicileri" : "Stop-work triggers",
     data.stopWorkConditions ?? [],
     "red",
+    4,
   );
   const missing = createList(
     tr ? "Eksik / doğrulanacak bilgi" : "Missing / verify",
     data.clarificationQuestions ?? [],
     "amber",
+    4,
   );
 
   [controls, stops, missing].forEach((node) => {
@@ -132,34 +225,14 @@ function injectDecisionBrief(
     : "Preliminary field guidance; verify site conditions, permits and competent-person controls.";
   panel.appendChild(note);
 
-  const copilotBlock = body.querySelector(":scope > .mt-4");
-  if (copilotBlock) body.insertBefore(panel, copilotBlock);
-  else body.appendChild(panel);
+  body.insertBefore(panel, nativeAnswer);
+
+  const detailed = createDetailedExtension(data, tr);
+  if (detailed) nativeAnswer.insertAdjacentElement("afterend", detailed);
+
+  classifyAnswerSections(root);
+  markAnswerBlocks(body, nativeAnswer);
   return true;
-}
-
-function classifyAnswerSections(root: HTMLElement) {
-  const map: Record<string, string> = {
-    "ana tehlikeler": "hse-section-hazards",
-    "main hazards": "hse-section-hazards",
-    "kritik kontroller": "hse-section-controls",
-    "critical controls": "hse-section-controls",
-    "gerekli kkd": "hse-section-ppe",
-    "required ppe": "hse-section-ppe",
-    "izinler ve dokümanlar": "hse-section-permits",
-    "permits & documents": "hse-section-permits",
-    "çalışmayı durdurma koşulları": "hse-section-stop",
-    "stop work conditions": "hse-section-stop",
-    "uygulanabilir standartlar": "hse-section-standards",
-    "applicable standards": "hse-section-standards",
-  };
-
-  root.querySelectorAll<HTMLElement>("article section").forEach((section) => {
-    const heading = section.querySelector("h3")?.textContent?.trim().toLowerCase();
-    if (!heading) return;
-    const className = map[heading];
-    if (className) section.classList.add("hse-answer-section", className);
-  });
 }
 
 export default function AIAnswerModeEnhancer({ locale }: Props) {
