@@ -1,1 +1,0 @@
-AI customization modal stability hotfix: avoid full-screen backdrop blur on complex AI workspace, use mobile bottom-sheet layout, preserve safe-area spacing.
