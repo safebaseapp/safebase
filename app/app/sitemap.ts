@@ -42,7 +42,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     publicRoutes.map((route) => ({
       url: `${baseUrl}/${locale}${route}`,
-      changeFrequency: route === "" ? "weekly" : "monthly",
+      changeFrequency:
+        route === "" || route === "/ai-assistant" ? "weekly" : "monthly",
       priority:
         route === ""
           ? 1
