@@ -1,0 +1,270 @@
+.sernem-ai-route {
+  background: #020711;
+  min-height: calc(100vh - 88px);
+}
+
+.sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) {
+  background-color: #06101f;
+  background-image: url("/images/sernem-hse-professional.webp");
+  background-position: 68% center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > img {
+  opacity: 0 !important;
+}
+
+@media (max-width: 1023px) {
+  .sernem-ai-route > main > div {
+    display: block !important;
+    max-width: none !important;
+    min-height: auto !important;
+  }
+
+  .sernem-ai-route main aside {
+    display: none !important;
+  }
+
+  .sernem-ai-route main > div > section {
+    overflow: visible !important;
+  }
+
+  .sernem-ai-route main > div > section > header {
+    position: sticky !important;
+    top: 0;
+    z-index: 70 !important;
+    min-height: 64px !important;
+    padding: 10px 14px !important;
+    background: rgba(2, 7, 17, 0.94) !important;
+    backdrop-filter: blur(18px);
+  }
+
+  .sernem-ai-route main > div > section > header h1 {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  .sernem-ai-route main > div > section > header > div:first-child p {
+    display: none !important;
+  }
+
+  .sernem-ai-route main > div > section > header a:last-child {
+    display: none !important;
+  }
+
+  .sernem-ai-route main > div > section > header button,
+  .sernem-ai-route main > div > section > header a {
+    min-height: 40px !important;
+    padding: 8px 11px !important;
+    font-size: 11px !important;
+    white-space: nowrap;
+  }
+
+  .sernem-ai-route main > div > section > header + div {
+    height: auto !important;
+    min-height: calc(100dvh - 190px) !important;
+    overflow: visible !important;
+    padding: 14px 12px 120px !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) {
+    min-height: 540px !important;
+    border-radius: 24px !important;
+    background-position: 72% center;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > div:nth-of-type(1) {
+    background: linear-gradient(
+      90deg,
+      #020711 0%,
+      rgba(2, 7, 17, 0.96) 38%,
+      rgba(2, 7, 17, 0.78) 68%,
+      rgba(2, 7, 17, 0.34) 100%
+    ) !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > div.relative.z-10 {
+    min-height: 540px !important;
+    max-width: 76% !important;
+    padding: 34px 28px !important;
+    justify-content: center !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) h2 {
+    max-width: 650px !important;
+    font-size: clamp(36px, 7vw, 52px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) form {
+    max-width: 100% !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) textarea {
+    font-size: 16px !important;
+  }
+
+  .sernem-ai-route article > div:last-child {
+    max-width: 88% !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .sernem-ai-route {
+    min-height: 100dvh;
+  }
+
+  .sernem-ai-route main {
+    min-height: 100dvh !important;
+  }
+
+  .sernem-ai-route main > div > section > header {
+    min-height: 58px !important;
+    padding: 8px 10px !important;
+  }
+
+  .sernem-ai-route main > div > section > header > div:last-child {
+    gap: 6px !important;
+  }
+
+  .sernem-ai-route main > div > section > header button,
+  .sernem-ai-route main > div > section > header a {
+    max-width: 165px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sernem-ai-route main > div > section > header + div {
+    min-height: auto !important;
+    padding: 10px 10px 128px !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) {
+    min-height: 650px !important;
+    border-radius: 20px !important;
+    background-position: 72% top;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > div:nth-of-type(1) {
+    background: linear-gradient(
+      180deg,
+      rgba(2, 7, 17, 0.20) 0%,
+      rgba(2, 7, 17, 0.38) 24%,
+      rgba(2, 7, 17, 0.88) 50%,
+      #020711 72%,
+      #020711 100%
+    ) !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > div.relative.z-10 {
+    min-height: 650px !important;
+    max-width: 100% !important;
+    padding: 265px 18px 24px !important;
+    justify-content: flex-start !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) h2 {
+    margin-top: 14px !important;
+    font-size: clamp(31px, 9vw, 40px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) h2 + p {
+    margin-top: 14px !important;
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) form {
+    margin-top: 20px !important;
+    border-radius: 16px !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) form textarea {
+    min-height: 48px !important;
+    padding-top: 13px !important;
+    padding-bottom: 13px !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) form button {
+    width: 48px !important;
+    height: 46px !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) .grid {
+    gap: 7px !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) .grid > div {
+    padding: 10px 11px !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) .absolute.bottom-7.right-7 {
+    display: none !important;
+  }
+
+  .sernem-ai-route h3 {
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+  }
+
+  .sernem-ai-route article {
+    gap: 8px !important;
+  }
+
+  .sernem-ai-route article > div:last-child {
+    max-width: 100% !important;
+    border-radius: 20px !important;
+    padding: 16px !important;
+  }
+
+  .sernem-ai-route article p,
+  .sernem-ai-route article li {
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  .sernem-ai-route article [class*="grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sernem-ai-route main > div > section > div.absolute.bottom-0 {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: env(safe-area-inset-bottom) !important;
+    z-index: 90 !important;
+    padding: 10px 10px calc(10px + env(safe-area-inset-bottom)) !important;
+    background: rgba(2, 7, 17, 0.96) !important;
+    box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .sernem-ai-route main > div > section > div.absolute.bottom-0 textarea {
+    font-size: 16px !important;
+    min-height: 46px !important;
+  }
+
+  .sernem-ai-route main > div > section > div.absolute.bottom-0 button {
+    width: 48px !important;
+    height: 46px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) {
+    min-height: 680px !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > div.relative.z-10 {
+    min-height: 680px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) h2 {
+    font-size: 30px !important;
+  }
+}

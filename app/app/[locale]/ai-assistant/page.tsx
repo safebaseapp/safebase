@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AIAssistantV3 from "./AIAssistantV3";
+import AIAccountSync from "./AIAccountSync";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 import { isAdminUser } from "@/lib/auth/access";
 import { createClient } from "@/utils/supabase/server";
@@ -8,6 +9,16 @@ import { createClient } from "@/utils/supabase/server";
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+type UsageMetadata = {
+  date?: unknown;
+  count?: unknown;
+};
+
+function cleanAssistantName(value: unknown) {
+  if (typeof value !== "string") return "SERNEM AI";
+  return value.trim().replace(/\s+/g, " ").slice(0, 32) || "SERNEM AI";
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: rawLocale } = await params;
@@ -111,7 +122,32 @@ export default async function AIAssistantPage({ params }: Props) {
     profile.status === "active" &&
     (isAdminUser(user) || profile.role === "admin" || profile.plan === "premium");
 
-  const access = !user ? "guest" : premium ? "premium" : "free";
+  const access: "guest" | "free" | "premium" = !user
+    ? "guest"
+    : premium
+      ? "premium"
+      : "free";
 
-  return <AIAssistantV3 locale={locale} access={access} />;
+  const metadata = (user?.user_metadata ?? {}) as Record<string, unknown>;
+  const initialName = cleanAssistantName(metadata.sernem_ai_name);
+  const usageMetadata = metadata.sernem_ai_usage as UsageMetadata | undefined;
+  const today = new Date().toISOString().slice(0, 10);
+  const rawCount = usageMetadata?.date === today ? Number(usageMetadata.count ?? 0) : 0;
+  const initialUsage = Number.isFinite(rawCount) ? Math.max(0, Math.floor(rawCount)) : 0;
+  const usageKey = `sernem-ai-usage:${access}:${today}`;
+
+  const bootstrap = JSON.stringify({ access, initialName, initialUsage, usageKey }).replace(/</g, "\\u003c");
+  const bootstrapScript = `try{const s=${bootstrap};if(s.access!=="guest"){localStorage.setItem(s.usageKey,String(s.initialUsage));localStorage.setItem("sernem-ai-custom-name",s.initialName)}}catch(e){}`;
+
+  return (
+    <div className="sernem-ai-route">
+      <script dangerouslySetInnerHTML={{ __html: bootstrapScript }} />
+      <AIAccountSync
+        access={access}
+        initialName={initialName}
+        initialUsage={initialUsage}
+      />
+      <AIAssistantV3 locale={locale} access={access} />
+    </div>
+  );
 }
