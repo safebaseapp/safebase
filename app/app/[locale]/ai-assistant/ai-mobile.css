@@ -6,8 +6,8 @@
 
 .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) {
   background-color: #06101f;
-  background-image: url("/images/sernem-hse-professional.webp");
-  background-position: 68% center;
+  background-image: url("/images/sernem-hse-hero.png");
+  background-position: 72% center;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -79,9 +79,9 @@
     background: linear-gradient(
       90deg,
       #020711 0%,
-      rgba(2, 7, 17, 0.96) 38%,
-      rgba(2, 7, 17, 0.78) 68%,
-      rgba(3, 18, 44, 0.34) 100%
+      rgba(2, 7, 17, 0.91) 34%,
+      rgba(2, 7, 17, 0.58) 60%,
+      rgba(3, 18, 44, 0.12) 100%
     ) !important;
   }
 
@@ -151,10 +151,10 @@
   .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > div:nth-of-type(1) {
     background: linear-gradient(
       180deg,
-      rgba(2, 7, 17, 0.16) 0%,
-      rgba(2, 7, 17, 0.34) 23%,
-      rgba(2, 7, 17, 0.88) 49%,
-      #020711 70%,
+      rgba(2, 7, 17, 0.08) 0%,
+      rgba(2, 7, 17, 0.22) 24%,
+      rgba(2, 7, 17, 0.80) 50%,
+      #020711 72%,
       #020711 100%
     ) !important;
   }
