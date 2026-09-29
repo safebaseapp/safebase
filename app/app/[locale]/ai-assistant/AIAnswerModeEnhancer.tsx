@@ -24,7 +24,11 @@ function fieldStatus(risk: CopilotResponse["riskLevel"], tr: boolean) {
   }
 }
 
-function createList(title: string, items: string[], tone: "blue" | "red" | "amber") {
+function createList(
+  title: string,
+  items: string[],
+  tone: "blue" | "red" | "amber",
+) {
   if (!items.length) return null;
   const section = document.createElement("section");
   section.className = `sernem-brief-column sernem-brief-${tone}`;
@@ -44,17 +48,22 @@ function createList(title: string, items: string[], tone: "blue" | "red" | "ambe
   return section;
 }
 
-function injectDecisionBrief(root: HTMLElement, data: CopilotResponse, locale: "tr" | "en") {
+function injectDecisionBrief(
+  root: HTMLElement,
+  data: CopilotResponse,
+  locale: "tr" | "en",
+) {
   const tr = locale === "tr";
-  const assistantArticles = Array.from(root.querySelectorAll<HTMLElement>("article")).filter((article) =>
-    Boolean(article.querySelector("h2")),
-  );
-  const article = assistantArticles.at(-1);
+  const assistantArticles = Array.from(
+    root.querySelectorAll<HTMLElement>("article"),
+  ).filter((article) => Boolean(article.querySelector("h2")));
+  const article = assistantArticles[assistantArticles.length - 1];
   if (!article) return false;
 
-  const body = Array.from(article.children).find((node) =>
-    node instanceof HTMLElement && node.className.includes("max-w-[92%]"),
-  ) as HTMLElement | undefined;
+  const body = Array.from(article.children).find((node) => {
+    if (!(node instanceof HTMLElement)) return false;
+    return typeof node.className === "string" && node.className.includes("max-w-[92%]");
+  }) as HTMLElement | undefined;
   if (!body) return false;
 
   body.querySelector(".sernem-decision-brief")?.remove();
@@ -75,7 +84,7 @@ function injectDecisionBrief(root: HTMLElement, data: CopilotResponse, locale: "
 
   const risk = document.createElement("span");
   risk.className = `sernem-risk-badge risk-${data.riskLevel.toLowerCase()}`;
-  risk.textContent = `${tr ? "Risk" : "Risk"}: ${data.riskLevel}`;
+  risk.textContent = `Risk: ${data.riskLevel}`;
   badges.appendChild(risk);
 
   const status = document.createElement("span");
@@ -111,7 +120,9 @@ function injectDecisionBrief(root: HTMLElement, data: CopilotResponse, locale: "
     "amber",
   );
 
-  [controls, stops, missing].forEach((node) => node && grid.appendChild(node));
+  [controls, stops, missing].forEach((node) => {
+    if (node) grid.appendChild(node);
+  });
   panel.appendChild(grid);
 
   const note = document.createElement("p");
@@ -121,7 +132,7 @@ function injectDecisionBrief(root: HTMLElement, data: CopilotResponse, locale: "
     : "Preliminary field guidance; verify site conditions, permits and competent-person controls.";
   panel.appendChild(note);
 
-  const copilotBlock = body.querySelector(".mt-4");
+  const copilotBlock = body.querySelector(":scope > .mt-4");
   if (copilotBlock) body.insertBefore(panel, copilotBlock);
   else body.appendChild(panel);
   return true;
@@ -147,9 +158,7 @@ function classifyAnswerSections(root: HTMLElement) {
     const heading = section.querySelector("h3")?.textContent?.trim().toLowerCase();
     if (!heading) return;
     const className = map[heading];
-    if (className) {
-      section.classList.add("hse-answer-section", className);
-    }
+    if (className) section.classList.add("hse-answer-section", className);
   });
 }
 
@@ -160,8 +169,12 @@ export default function AIAnswerModeEnhancer({ locale }: Props) {
   useEffect(() => {
     const root = document.querySelector<HTMLElement>(".sernem-ai-route");
     if (!root) return;
-    const saved = window.localStorage.getItem(STORAGE_KEY) as AnswerMode | null;
-    if (saved === "brief" || saved === "supervisor" || saved === "detailed") setMode(saved);
+
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    if (saved === "brief" || saved === "supervisor" || saved === "detailed") {
+      setMode(saved);
+    }
+
     setHost(root.querySelector<HTMLElement>("header"));
     classifyAnswerSections(root);
 
@@ -178,31 +191,50 @@ export default function AIAnswerModeEnhancer({ locale }: Props) {
   }, [mode]);
 
   useEffect(() => {
-    const originalFetch = window.fetch;
-    const patched: typeof window.fetch = async (...args) => {
-      const response = await originalFetch(...args);
-      const requestUrl = typeof args[0] === "string" ? args[0] : args[0] instanceof Request ? args[0].url : "";
+    const originalFetch = window.fetch.bind(window);
+
+    async function patchedFetch(
+      input: RequestInfo | URL,
+      init?: RequestInit,
+    ): Promise<Response> {
+      const response = await originalFetch(input, init);
+      const requestUrl =
+        typeof input === "string"
+          ? input
+          : input instanceof Request
+            ? input.url
+            : input.toString();
+
       if (requestUrl.includes("/api/ask") && response.ok) {
-        response.clone().json().then((payload: { data?: CopilotResponse }) => {
-          if (!payload?.data) return;
-          const root = document.querySelector<HTMLElement>(".sernem-ai-route");
-          if (!root) return;
-          let attempts = 0;
-          const place = () => {
-            attempts += 1;
-            classifyAnswerSections(root);
-            if (!injectDecisionBrief(root, payload.data!, locale) && attempts < 20) {
-              window.setTimeout(place, 60);
-            }
-          };
-          window.setTimeout(place, 30);
-        }).catch(() => undefined);
+        void response
+          .clone()
+          .json()
+          .then((payload: unknown) => {
+            const data = (payload as { data?: CopilotResponse } | null)?.data;
+            if (!data) return;
+
+            const root = document.querySelector<HTMLElement>(".sernem-ai-route");
+            if (!root) return;
+
+            let attempts = 0;
+            const place = () => {
+              attempts += 1;
+              classifyAnswerSections(root);
+              if (!injectDecisionBrief(root, data, locale) && attempts < 20) {
+                window.setTimeout(place, 60);
+              }
+            };
+            window.setTimeout(place, 30);
+          })
+          .catch(() => undefined);
       }
+
       return response;
-    };
-    window.fetch = patched;
+    }
+
+    window.fetch = patchedFetch;
     return () => {
-      if (window.fetch === patched) window.fetch = originalFetch;
+      window.fetch = originalFetch;
     };
   }, [locale]);
 
@@ -210,13 +242,28 @@ export default function AIAnswerModeEnhancer({ locale }: Props) {
 
   const tr = locale === "tr";
   const options: { id: AnswerMode; label: string; short: string }[] = [
-    { id: "brief", label: tr ? "Saha Özeti" : "Field Brief", short: tr ? "Kısa" : "Brief" },
-    { id: "supervisor", label: tr ? "Supervisor" : "Supervisor", short: "Supervisor" },
-    { id: "detailed", label: tr ? "Detaylı İnceleme" : "Detailed Review", short: tr ? "Detay" : "Detail" },
+    {
+      id: "brief",
+      label: tr ? "Saha Özeti" : "Field Brief",
+      short: tr ? "Kısa" : "Brief",
+    },
+    {
+      id: "supervisor",
+      label: "Supervisor",
+      short: "Supervisor",
+    },
+    {
+      id: "detailed",
+      label: tr ? "Detaylı İnceleme" : "Detailed Review",
+      short: tr ? "Detay" : "Detail",
+    },
   ];
 
   return createPortal(
-    <div className="sernem-answer-mode" aria-label={tr ? "Yanıt modu" : "Answer mode"}>
+    <div
+      className="sernem-answer-mode"
+      aria-label={tr ? "Yanıt modu" : "Answer mode"}
+    >
       <span className="sernem-answer-mode-label">{tr ? "Yanıt" : "Answer"}</span>
       {options.map((option) => (
         <button
