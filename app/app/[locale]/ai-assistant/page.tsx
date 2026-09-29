@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const locale = rawLocale === "tr" ? "tr" : "en";
   const isTurkish = locale === "tr";
   const canonical = `https://www.sernem.com/${locale}/ai-assistant`;
+  const socialImage = "https://www.sernem.com/images/sernem-hse-professional.webp";
 
   const title = isTurkish
     ? "SERNEM AI Asistanı | Yapay Zekâ Destekli İSG ve HSE Rehberliği"
@@ -37,6 +38,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
+    keywords: isTurkish
+      ? ["HSE AI", "İSG yapay zeka", "iş güvenliği asistanı", "risk analizi", "toolbox", "LOTO", "sıcak iş", "kapalı alan"]
+      : ["HSE AI", "safety AI assistant", "risk assessment", "toolbox talk", "LOTO", "hot work", "confined space", "PPE"],
     alternates: {
       canonical,
       languages: {
@@ -52,13 +56,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       locale: isTurkish ? "tr_TR" : "en_US",
-      images: [{ url: "https://www.sernem.com/images/sernem-hse-hero-final.png" }],
+      images: [
+        {
+          url: socialImage,
+          width: 1600,
+          height: 667,
+          alt: isTurkish
+            ? "SERNEM AI profesyonel HSE asistanı"
+            : "SERNEM AI professional HSE assistant",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["https://www.sernem.com/images/sernem-hse-hero-final.png"],
+      images: [socialImage],
     },
     robots: { index: true, follow: true },
   };
