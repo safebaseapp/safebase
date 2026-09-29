@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AIAssistant from "./AIAssistant";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
+import { isAdminUser } from "@/lib/auth/access";
 import { createClient } from "@/utils/supabase/server";
 
 type Props = {
@@ -238,7 +239,7 @@ export default async function AIAssistantPage({ params }: Props) {
     !!user &&
     !!profile &&
     profile.status === "active" &&
-    (profile.role === "admin" || profile.plan === "premium");
+    (isAdminUser(user) || profile.role === "admin" || profile.plan === "premium");
 
   if (hasPremium) {
     return <AIAssistant />;
