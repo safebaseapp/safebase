@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "../../../utils/supabase/client";
 import { trackEvent } from "../../../lib/analytics";
@@ -10,10 +10,21 @@ type Props = {
   locale: "tr" | "en";
 };
 
+function safeNextPath(value: string | null, locale: "tr" | "en") {
+  if (!value) return `/${locale}/dashboard`;
+  if (!value.startsWith(`/${locale}/`) || value.startsWith("//")) {
+    return `/${locale}/dashboard`;
+  }
+  return value;
+}
+
 export default function LoginForm({ locale }: Props) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const supabase = createClient();
   const isTurkish = locale === "tr";
+  const nextPath = safeNextPath(searchParams.get("next"), locale);
+  const nextQuery = encodeURIComponent(nextPath);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +49,7 @@ export default function LoginForm({ locale }: Props) {
     }
 
     trackEvent("login", { method: "password", locale });
-    router.push(`/${locale}/dashboard`);
+    router.push(nextPath);
     router.refresh();
   }
 
@@ -71,7 +82,7 @@ export default function LoginForm({ locale }: Props) {
 
       <p className="text-center text-sm text-slate-400">
         {isTurkish ? "Henüz hesabın yok mu?" : "Don't have an account yet?"}{" "}
-        <Link href={`/${locale}/register`} className="font-semibold text-blue-400 transition hover:text-blue-300">
+        <Link href={`/${locale}/register?next=${nextQuery}`} className="font-semibold text-blue-400 transition hover:text-blue-300">
           {isTurkish ? "Hesap oluştur" : "Create account"}
         </Link>
       </p>
