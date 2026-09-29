@@ -21,6 +21,46 @@ function hasAny(value: string, terms: string[]) {
   return terms.some((term) => value.includes(term));
 }
 
+function isSimpleKnowledgeQuestion(question: string) {
+  const q = normalize(question);
+  const wordCount = q.split(" ").filter(Boolean).length;
+
+  // Package 5 is for concise factual HSE questions only. Longer operational
+  // scenarios must continue to the structured field-assessment engine so that
+  // Field Brief / Supervisor / Detailed Review receive full risk data.
+  if (question.length > 120 || wordCount > 18) return false;
+
+  const operationalSignals = [
+    "we need to",
+    "we are",
+    "we will",
+    "we plan to",
+    "has not been",
+    "have not been",
+    "not fully applied",
+    "no fire watch",
+    "can the work start",
+    "can we start",
+    "crew",
+    "inside a confined space",
+    "yapacağız",
+    "yapacagiz",
+    "planlıyoruz",
+    "planliyoruz",
+    "planlanıyor",
+    "planlaniyor",
+    "tamamlanmadı",
+    "tamamlanmadi",
+    "uygulanmadı",
+    "uygulanmadi",
+    "başlayabilir miyiz",
+    "baslayabilir miyiz",
+    "ekip",
+  ];
+
+  return !hasAny(q, operationalSignals);
+}
+
 function buildResponse(answer: ShortAnswer) {
   return {
     version: "1.0" as const,
@@ -47,6 +87,8 @@ function buildResponse(answer: ShortAnswer) {
 }
 
 function findShortAnswer(question: string, locale: Locale): ShortAnswer | null {
+  if (!isSimpleKnowledgeQuestion(question)) return null;
+
   const q = normalize(question);
   const tr = locale === "tr";
 
@@ -111,7 +153,7 @@ function findShortAnswer(question: string, locale: Locale): ShortAnswer | null {
 
   if (
     hasAny(q, ["loto nedir", "loto ne demek", "what is loto", "what does loto mean"]) ||
-    (q === "loto" || q === "loto?")
+    q === "loto"
   ) {
     return tr
       ? {
