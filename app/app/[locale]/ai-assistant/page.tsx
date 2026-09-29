@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AIAssistantV3 from "./AIAssistantV3";
 import AIAccountSync from "./AIAccountSync";
+import AIPersonaEnhancer from "./AIPersonaEnhancer";
+import "./ai-persona-hotfix.css";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 import { isAdminUser } from "@/lib/auth/access";
 import { createClient } from "@/utils/supabase/server";
@@ -25,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const locale = rawLocale === "tr" ? "tr" : "en";
   const isTurkish = locale === "tr";
   const canonical = `https://www.sernem.com/${locale}/ai-assistant`;
-  const socialImage = "https://www.sernem.com/images/sernem-hse-professional.webp";
+  const socialImage = "https://www.sernem.com/images/sernem-hse-hero.png";
 
   const title = isTurkish
     ? "SERNEM AI Asistanı | Yapay Zekâ Destekli İSG ve HSE Rehberliği"
@@ -160,6 +162,7 @@ export default async function AIAssistantPage({ params }: Props) {
         initialName={initialName}
         initialUsage={initialUsage}
       />
+      <AIPersonaEnhancer locale={locale} />
       <AIAssistantV3 locale={locale} access={access} />
     </div>
   );
