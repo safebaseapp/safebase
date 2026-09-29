@@ -17,6 +17,7 @@ const publicRoutes = [
   "/privacy",
   "/terms",
   "/cookies",
+  "/ai-assistant",
   "/tools",
   "/tools/ltifr",
   "/tools/trir",
@@ -45,7 +46,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority:
         route === ""
           ? 1
-          : route === "/ppe-standards" ||
+          : route === "/ai-assistant" ||
+              route === "/ppe-standards" ||
               route === "/safety-pack" ||
               route.startsWith("/tools/")
             ? 0.9
