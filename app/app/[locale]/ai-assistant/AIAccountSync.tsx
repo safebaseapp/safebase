@@ -67,6 +67,53 @@ export default function AIAccountSync({ access, initialName, initialUsage }: Pro
         }
       }
 
+      // Package 5: before spending model tokens, try the conservative
+      // SERNEM knowledge short-answer engine. It only matches clear intents.
+      // The daily assistant request is still counted, while the OpenAI model
+      // call is skipped entirely for a matched knowledge answer.
+      if (typeof init?.body === "string") {
+        try {
+          const quickResponse = await nativeFetch("/api/ai/short-answer", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: init.body,
+          });
+
+          if (quickResponse.ok) {
+            const quickPayload = (await quickResponse.json().catch(() => null)) as
+              | {
+                  matched?: boolean;
+                  data?: unknown;
+                  sources?: unknown;
+                  answerKind?: string;
+                  modelTokens?: number;
+                }
+              | null;
+
+            if (quickPayload?.matched && quickPayload.data) {
+              return new Response(
+                JSON.stringify({
+                  data: quickPayload.data,
+                  sources: Array.isArray(quickPayload.sources) ? quickPayload.sources : [],
+                  answerKind: quickPayload.answerKind ?? "knowledge-short",
+                  modelTokens: quickPayload.modelTokens ?? 0,
+                }),
+                {
+                  status: 200,
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-SERNEM-Answer-Kind": "knowledge-short",
+                    "X-SERNEM-Model-Tokens": "0",
+                  },
+                },
+              );
+            }
+          }
+        } catch (error) {
+          console.warn("SERNEM short-answer preflight failed; using live AI.", error);
+        }
+      }
+
       const response = await nativeFetch(input, init);
 
       if (!response.ok) {
