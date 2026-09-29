@@ -4,6 +4,7 @@ import AIAssistantV3 from "./AIAssistantV3";
 import AIAccountSync from "./AIAccountSync";
 import AIPersonaEnhancer from "./AIPersonaEnhancer";
 import "./ai-persona-hotfix.css";
+import "./ai-modal-stability.css";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 import { isAdminUser } from "@/lib/auth/access";
 import { createClient } from "@/utils/supabase/server";
