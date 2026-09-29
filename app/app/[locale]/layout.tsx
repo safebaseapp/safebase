@@ -18,6 +18,7 @@ import "./topic-match-refinement.css";
 import "./topic-match-refinement-supplement.css";
 import "./toolbox-visual-spot-fixes.css";
 import "./public-pages-polish.css";
+import "./ai-assistant/ai-mobile.css";
 
 type Props = {
   children: React.ReactNode;
