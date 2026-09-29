@@ -3,8 +3,16 @@
   min-height: calc(100vh - 88px);
 }
 
-.sernem-ai-route img[alt="HSE professional in an industrial environment"] {
-  object-position: 68% center;
+.sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) {
+  background-color: #06101f;
+  background-image: url("/images/sernem-hse-professional.webp");
+  background-position: 68% center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > img {
+  opacity: 0 !important;
 }
 
 @media (max-width: 1023px) {
@@ -63,11 +71,7 @@
   .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) {
     min-height: 540px !important;
     border-radius: 24px !important;
-  }
-
-  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > img {
-    object-position: 72% center !important;
-    opacity: 0.68 !important;
+    background-position: 72% center;
   }
 
   .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > div:nth-of-type(1) {
@@ -140,11 +144,7 @@
   .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) {
     min-height: 650px !important;
     border-radius: 20px !important;
-  }
-
-  .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > img {
-    object-position: 72% top !important;
-    opacity: 0.8 !important;
+    background-position: 72% top;
   }
 
   .sernem-ai-route section:has(> img[alt="HSE professional in an industrial environment"]) > div:nth-of-type(1) {
