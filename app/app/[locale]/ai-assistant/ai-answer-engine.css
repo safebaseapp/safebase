@@ -125,6 +125,7 @@
 }
 .sernem-brief-red .sernem-brief-heading { color: #fca5a5; }
 .sernem-brief-amber .sernem-brief-heading { color: #fcd34d; }
+.sernem-brief-green .sernem-brief-heading { color: #6ee7b7; }
 .sernem-brief-column ul { display: grid; gap: 7px; }
 .sernem-brief-column li {
   position: relative;
@@ -145,6 +146,7 @@
 }
 .sernem-brief-red li::before { background: #f87171; }
 .sernem-brief-amber li::before { background: #fbbf24; }
+.sernem-brief-green li::before { background: #34d399; }
 .sernem-brief-note {
   border-top: 1px solid rgba(255,255,255,.055);
   padding: 10px 16px 12px;
@@ -153,12 +155,82 @@
   color: #64748b;
 }
 
-.sernem-ai-route[data-answer-mode="brief"] .hse-answer-section { display: none !important; }
-.sernem-ai-route[data-answer-mode="brief"] .sernem-decision-brief + .mt-4 > div:first-child { opacity: .72; }
-.sernem-ai-route[data-answer-mode="brief"] .sernem-brief-column li:nth-child(n+4) { display: none; }
+.sernem-detail-extension {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
 
-.sernem-ai-route[data-answer-mode="supervisor"] .hse-section-standards { display: none !important; }
+.sernem-detail-label {
+  margin-bottom: 12px;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .18em;
+  color: #93c5fd;
+}
+
+.sernem-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 12px;
+}
+
+.sernem-detail-grid .sernem-brief-column {
+  background: rgba(4,12,24,.58);
+}
+
+.sernem-detail-recommendation {
+  margin-top: 12px;
+  border: 1px solid rgba(52,211,153,.12);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(16,185,129,.045);
+}
+
+.sernem-detail-recommendation-title {
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #6ee7b7;
+}
+
+.sernem-detail-recommendation-text {
+  margin-top: 7px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: #cbd5e1;
+}
+
+/* Field Brief: one-screen decision view. */
+.sernem-ai-route[data-answer-mode="brief"] .sernem-native-answer,
+.sernem-ai-route[data-answer-mode="brief"] .sernem-detail-extension,
+.sernem-ai-route[data-answer-mode="brief"] .hse-sources-block {
+  display: none !important;
+}
+.sernem-ai-route[data-answer-mode="brief"] .sernem-brief-column li:nth-child(n+4) { display: none; }
+.sernem-ai-route[data-answer-mode="brief"] .hse-safety-pack-block {
+  margin-top: 14px !important;
+  padding-top: 14px !important;
+}
+.sernem-ai-route[data-answer-mode="brief"] .hse-safety-pack-block a:nth-child(n+4) { display: none !important; }
+
+/* Supervisor: operational content only. */
+.sernem-ai-route[data-answer-mode="supervisor"] .hse-section-standards,
+.sernem-ai-route[data-answer-mode="supervisor"] .sernem-detail-extension {
+  display: none !important;
+}
 .sernem-ai-route[data-answer-mode="supervisor"] .hse-answer-section li:nth-child(n+6) { display: none; }
+.sernem-ai-route[data-answer-mode="supervisor"] .hse-sources-block {
+  opacity: .82;
+}
+
+/* Detailed Review: full native answer + work phases + failure modes + checklist. */
+.sernem-ai-route[data-answer-mode="detailed"] .sernem-detail-extension,
+.sernem-ai-route[data-answer-mode="detailed"] .hse-section-standards,
+.sernem-ai-route[data-answer-mode="detailed"] .hse-sources-block {
+  display: block;
+}
 
 @media (max-width: 1180px) {
   .sernem-answer-mode { left: auto; right: 190px; transform: translateY(-50%); }
@@ -181,5 +253,6 @@
   .sernem-answer-mode button { padding: 7px 9px; font-size: 9px; }
   .sernem-brief-top { align-items: flex-start; flex-direction: column; }
   .sernem-brief-badges { justify-content: flex-start; }
-  .sernem-brief-grid { grid-template-columns: 1fr; }
+  .sernem-brief-grid,
+  .sernem-detail-grid { grid-template-columns: 1fr; }
 }
