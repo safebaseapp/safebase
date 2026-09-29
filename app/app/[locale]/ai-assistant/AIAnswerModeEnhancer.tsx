@@ -6,6 +6,7 @@ import type { CopilotResponse } from "@/lib/ai/copilot-types";
 
 type Props = { locale: "tr" | "en" };
 type AnswerMode = "brief" | "supervisor" | "detailed";
+type QuickActionKind = "risk" | "toolbox" | "method" | "checklist";
 
 const STORAGE_KEY = "sernem-ai-answer-mode";
 
@@ -88,24 +89,239 @@ function markAnswerBlocks(body: HTMLElement, nativeAnswer: HTMLElement) {
   });
 }
 
-function primeComposer(root: HTMLElement, question: string, tr: boolean) {
+function setComposerValue(root: HTMLElement, value: string) {
   const textareas = Array.from(root.querySelectorAll<HTMLTextAreaElement>("textarea"));
   const textarea = textareas[textareas.length - 1];
-  if (!textarea) return;
-
-  const prefix = tr
-    ? `Şu saha bilgisini ekliyorum — ${question}\nCevabım: `
-    : `Adding this field detail — ${question}\nMy answer: `;
+  if (!textarea) return null;
 
   const setter = Object.getOwnPropertyDescriptor(
     HTMLTextAreaElement.prototype,
     "value",
   )?.set;
-  setter?.call(textarea, prefix);
+  setter?.call(textarea, value);
   textarea.dispatchEvent(new Event("input", { bubbles: true }));
   textarea.focus();
-  textarea.setSelectionRange(prefix.length, prefix.length);
-  textarea.scrollIntoView({ behavior: "smooth", block: "center" });
+  textarea.setSelectionRange(value.length, value.length);
+  return textarea;
+}
+
+function primeComposer(root: HTMLElement, question: string, tr: boolean) {
+  const prefix = tr
+    ? `Şu saha bilgisini ekliyorum — ${question}\nCevabım: `
+    : `Adding this field detail — ${question}\nMy answer: `;
+
+  const textarea = setComposerValue(root, prefix);
+  textarea?.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function actionContext(data: CopilotResponse, tr: boolean) {
+  const hazards = (data.hazards ?? []).slice(0, 5).join("; ");
+  const controls = (data.criticalControls ?? []).slice(0, 5).join("; ");
+  return tr
+    ? `Mevcut saha senaryosu: ${data.title}. ${data.summary} Risk seviyesi: ${data.riskLevel}. Ana tehlikeler: ${hazards || "belirtilmedi"}. Kritik kontroller: ${controls || "belirtilmedi"}.`
+    : `Current field scenario: ${data.title}. ${data.summary} Risk level: ${data.riskLevel}. Main hazards: ${hazards || "not specified"}. Critical controls: ${controls || "not specified"}.`;
+}
+
+function actionPrompt(data: CopilotResponse, kind: QuickActionKind, tr: boolean) {
+  const context = actionContext(data, tr);
+  if (tr) {
+    switch (kind) {
+      case "risk":
+        return `${context}\nBu senaryo için profesyonel bir risk analizi taslağı hazırla. Tehlike, olası sonuç, mevcut/önerilen kontroller, sorumlu rol ve kalan risk mantığıyla saha kullanımına uygun yapılandır.`;
+      case "toolbox":
+        return `${context}\nBu senaryo için sahada ekibe verilecek kısa ve profesyonel bir toolbox talk hazırla. Kritik riskleri, işe başlamadan önce kontrolleri, çalışma sırasındaki kuralları ve stop-work koşullarını net yaz.`;
+      case "method":
+        return `${context}\nBu senaryo için method statement taslağı hazırla. Kapsam, sorumluluklar, ekipman/KKD, izinler, iş sırası, kritik kontroller, acil durum ve stop-work şartlarını yapılandır.`;
+      case "checklist":
+        return `${context}\nBu senaryo için işe başlamadan önce kullanılacak saha checklisti hazırla. Maddeler kısa, doğrulanabilir ve evet/hayır kontrolüne uygun olsun; kritik maddeleri ayrıca işaretle.`;
+    }
+  }
+
+  switch (kind) {
+    case "risk":
+      return `${context}\nCreate a professional field-ready risk assessment draft for this scenario. Structure hazards, consequences, existing/recommended controls, responsible role and residual-risk logic.`;
+    case "toolbox":
+      return `${context}\nCreate a concise field-ready toolbox talk for the crew. Cover critical risks, pre-start controls, rules during the work and clear stop-work conditions.`;
+    case "method":
+      return `${context}\nCreate a method statement draft for this scenario. Structure scope, responsibilities, equipment/PPE, permits, work sequence, critical controls, emergency arrangements and stop-work conditions.`;
+    case "checklist":
+      return `${context}\nCreate a pre-start field checklist for this scenario. Keep each item short, verifiable and suitable for yes/no checks, and clearly flag critical items.`;
+  }
+}
+
+function submitOneClickAction(
+  root: HTMLElement,
+  data: CopilotResponse,
+  kind: QuickActionKind,
+  tr: boolean,
+  button: HTMLButtonElement,
+) {
+  const prompt = actionPrompt(data, kind, tr);
+  const textarea = setComposerValue(root, prompt);
+  if (!textarea) return;
+
+  const original = button.textContent ?? "";
+  button.disabled = true;
+  button.classList.add("is-running");
+  button.textContent = tr ? "Hazırlanıyor…" : "Preparing…";
+
+  window.setTimeout(() => {
+    const form = textarea.closest("form");
+    const submit = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (submit && !submit.disabled) submit.click();
+    else form?.requestSubmit();
+
+    window.setTimeout(() => {
+      button.disabled = false;
+      button.classList.remove("is-running");
+      button.textContent = original;
+    }, 900);
+  }, 120);
+}
+
+function createCopyText(data: CopilotResponse, tr: boolean) {
+  const controls = (data.criticalControls ?? []).slice(0, 5);
+  const stops = (data.stopWorkConditions ?? []).slice(0, 5);
+  const controlText = controls.map((item) => `• ${item}`).join("\n");
+  const stopText = stops.map((item) => `• ${item}`).join("\n");
+
+  return tr
+    ? `${data.title}\nRisk: ${data.riskLevel}\n\n${data.summary}\n\nKritik Kontroller\n${controlText}\n\nÇalışmayı Durdurma Koşulları\n${stopText}`
+    : `${data.title}\nRisk: ${data.riskLevel}\n\n${data.summary}\n\nCritical Controls\n${controlText}\n\nStop Work Conditions\n${stopText}`;
+}
+
+function createQuickActions(
+  root: HTMLElement,
+  data: CopilotResponse,
+  tr: boolean,
+) {
+  const panel = document.createElement("section");
+  panel.className = "sernem-quick-actions";
+
+  const header = document.createElement("div");
+  header.className = "sernem-quick-actions-header";
+
+  const heading = document.createElement("div");
+  const eyebrow = document.createElement("p");
+  eyebrow.className = "sernem-quick-actions-eyebrow";
+  eyebrow.textContent = tr ? "TEK TIK AKSİYONLAR" : "ONE-CLICK ACTIONS";
+  const title = document.createElement("h3");
+  title.className = "sernem-quick-actions-title";
+  title.textContent = tr
+    ? "Bu saha değerlendirmesini doğrudan işe dönüştür"
+    : "Turn this field assessment directly into work";
+  heading.append(eyebrow, title);
+
+  const badge = document.createElement("span");
+  badge.className = "sernem-quick-actions-badge";
+  badge.textContent = "SERNEM WORKFLOW";
+  header.append(heading, badge);
+  panel.appendChild(header);
+
+  const grid = document.createElement("div");
+  grid.className = "sernem-quick-actions-grid";
+
+  const actions: Array<{
+    kind: QuickActionKind;
+    icon: string;
+    label: string;
+    detail: string;
+  }> = [
+    {
+      kind: "risk",
+      icon: "◇",
+      label: tr ? "Risk Analizi" : "Risk Assessment",
+      detail: tr ? "Taslağı hemen oluştur" : "Create a draft now",
+    },
+    {
+      kind: "toolbox",
+      icon: "TB",
+      label: tr ? "Toolbox Talk" : "Toolbox Talk",
+      detail: tr ? "Ekibe saha konuşması hazırla" : "Prepare the crew briefing",
+    },
+    {
+      kind: "method",
+      icon: "MS",
+      label: "Method Statement",
+      detail: tr ? "İş sırasını yapılandır" : "Structure the work sequence",
+    },
+    {
+      kind: "checklist",
+      icon: "✓",
+      label: tr ? "Saha Checklisti" : "Field Checklist",
+      detail: tr ? "Pre-start kontrol listesi" : "Pre-start verification list",
+    },
+  ];
+
+  actions.forEach((item) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "sernem-quick-action";
+
+    const icon = document.createElement("span");
+    icon.className = "sernem-quick-action-icon";
+    icon.textContent = item.icon;
+
+    const copy = document.createElement("span");
+    copy.className = "sernem-quick-action-copy";
+    const label = document.createElement("strong");
+    label.textContent = item.label;
+    const detail = document.createElement("small");
+    detail.textContent = item.detail;
+    copy.append(label, detail);
+
+    const arrow = document.createElement("span");
+    arrow.className = "sernem-quick-action-arrow";
+    arrow.textContent = "→";
+
+    button.append(icon, copy, arrow);
+    button.addEventListener("click", () =>
+      submitOneClickAction(root, data, item.kind, tr, button),
+    );
+    grid.appendChild(button);
+  });
+
+  const copyButton = document.createElement("button");
+  copyButton.type = "button";
+  copyButton.className = "sernem-quick-action sernem-copy-action";
+
+  const copyIcon = document.createElement("span");
+  copyIcon.className = "sernem-quick-action-icon";
+  copyIcon.textContent = "⧉";
+  const copyText = document.createElement("span");
+  copyText.className = "sernem-quick-action-copy";
+  const copyLabel = document.createElement("strong");
+  copyLabel.textContent = tr ? "Özeti Kopyala" : "Copy Brief";
+  const copyDetail = document.createElement("small");
+  copyDetail.textContent = tr ? "Token harcamaz" : "No token used";
+  copyText.append(copyLabel, copyDetail);
+  const copyArrow = document.createElement("span");
+  copyArrow.className = "sernem-quick-action-arrow";
+  copyArrow.textContent = "⧉";
+  copyButton.append(copyIcon, copyText, copyArrow);
+  copyButton.addEventListener("click", () => {
+    void navigator.clipboard
+      .writeText(createCopyText(data, tr))
+      .then(() => {
+        copyLabel.textContent = tr ? "Kopyalandı ✓" : "Copied ✓";
+        window.setTimeout(() => {
+          copyLabel.textContent = tr ? "Özeti Kopyala" : "Copy Brief";
+        }, 1400);
+      })
+      .catch(() => undefined);
+  });
+  grid.appendChild(copyButton);
+
+  panel.appendChild(grid);
+
+  const note = document.createElement("p");
+  note.className = "sernem-quick-actions-note";
+  note.textContent = tr
+    ? "AI ile belge oluşturan aksiyonlar mevcut günlük kullanım limitinden çalışır; Kopyala token kullanmaz."
+    : "AI document actions use your existing daily allowance; Copy uses no token.";
+  panel.appendChild(note);
+
+  return panel;
 }
 
 function createFollowUpPanel(
@@ -241,6 +457,7 @@ function injectDecisionBrief(root: HTMLElement, data: CopilotResponse, locale: "
   body.querySelector(".sernem-decision-brief")?.remove();
   body.querySelector(".sernem-detail-extension")?.remove();
   body.querySelector(".sernem-followup-panel")?.remove();
+  body.querySelector(".sernem-quick-actions")?.remove();
 
   const nativeAnswer = Array.from(body.children).find((child) => {
     if (!(child instanceof HTMLElement)) return false;
@@ -319,8 +536,11 @@ function injectDecisionBrief(root: HTMLElement, data: CopilotResponse, locale: "
 
   body.insertBefore(panel, nativeAnswer);
 
+  const actions = createQuickActions(root, data, tr);
+  panel.insertAdjacentElement("afterend", actions);
+
   const followUp = createFollowUpPanel(root, data, tr);
-  if (followUp) panel.insertAdjacentElement("afterend", followUp);
+  if (followUp) actions.insertAdjacentElement("afterend", followUp);
 
   const detailed = createDetailedExtension(data, tr);
   if (detailed) nativeAnswer.insertAdjacentElement("afterend", detailed);
