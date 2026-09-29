@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import AIAssistantV3 from "./AIAssistantV3";
 import AIAccountSync from "./AIAccountSync";
+import AIConversationMemory from "./AIConversationMemory";
 import AIPersonaEnhancer from "./AIPersonaEnhancer";
 import AIAnswerModeEnhancer from "./AIAnswerModeEnhancer";
 import AIWorkflowRouter from "./AIWorkflowRouter";
@@ -169,6 +170,11 @@ export default async function AIAssistantPage({ params }: Props) {
         access={access}
         initialName={initialName}
         initialUsage={initialUsage}
+      />
+      <AIConversationMemory
+        locale={locale}
+        access={access}
+        userScope={user?.id ?? null}
       />
       <AIPersonaEnhancer locale={locale} />
       <AIAnswerModeEnhancer locale={locale} />
