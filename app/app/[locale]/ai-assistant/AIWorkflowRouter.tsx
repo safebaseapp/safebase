@@ -12,24 +12,43 @@ type StoredContext = {
   capturedAt: string;
 };
 
-function topicSlug(text: string) {
-  const value = text.toLowerCase();
-  const groups: Array<[string, string[]]> = [
-    ["scaffolding", ["iskele", "scaffold", "scaffolding"]],
-    ["working-at-height", ["yüksekte", "yükseklik", "working at height", "fall protection"]],
-    ["hot-work", ["sıcak iş", "hot work", "kaynak", "welding", "grinding", "taşlama"]],
-    ["confined-space", ["kapalı alan", "confined space", "tank entry", "manhole"]],
-    ["loto", ["loto", "lockout", "tagout", "enerji izolasyonu"]],
-    ["excavation", ["kazı", "excavation", "trench", "hendek"]],
-    ["electrical", ["elektrik", "electrical", "havai hat", "enerji hattı", "arc flash"]],
-    ["ppe", ["kkd", "ppe", "emniyet kemeri", "harness"]],
-  ];
+type TopicKey =
+  | "scaffold"
+  | "working-at-height"
+  | "hot-work"
+  | "confined-space"
+  | "loto"
+  | "lifting"
+  | "other";
 
-  for (const [slug, keywords] of groups) {
-    if (keywords.some((keyword) => value.includes(keyword))) return slug;
-  }
-  return null;
+function topicKey(text: string): TopicKey {
+  const value = text.toLowerCase();
+
+  if (["iskele", "scaffold", "scaffolding"].some((k) => value.includes(k))) return "scaffold";
+  if (["yüksekte", "yükseklik", "working at height", "fall protection"].some((k) => value.includes(k))) return "working-at-height";
+  if (["sıcak iş", "hot work", "kaynak", "welding", "grinding", "taşlama"].some((k) => value.includes(k))) return "hot-work";
+  if (["kapalı alan", "confined space", "tank entry", "manhole"].some((k) => value.includes(k))) return "confined-space";
+  if (["loto", "lockout", "tagout", "enerji izolasyonu"].some((k) => value.includes(k))) return "loto";
+  if (["kaldırma", "lifting", "vinç", "crane", "sapan", "rigging"].some((k) => value.includes(k))) return "lifting";
+  return "other";
 }
+
+const TOOLBOX_ROUTES: Partial<Record<TopicKey, string>> = {
+  scaffold: "scaffold-safety",
+  "working-at-height": "working-at-height",
+  "hot-work": "hot-work",
+  "confined-space": "confined-space",
+  loto: "loto",
+};
+
+const CHECKLIST_ROUTES: Partial<Record<TopicKey, string>> = {
+  scaffold: "scaffold",
+  "working-at-height": "work-at-height",
+  "hot-work": "hot-work",
+  "confined-space": "confined-space",
+  loto: "loto",
+  lifting: "lifting",
+};
 
 function readLatestScenario(button: HTMLElement): StoredContext {
   const article = button.closest("article");
@@ -49,7 +68,7 @@ function readLatestScenario(button: HTMLElement): StoredContext {
 
 function destination(label: string, scenarioText: string, locale: "tr" | "en") {
   const normalized = label.toLowerCase();
-  const slug = topicSlug(scenarioText);
+  const topic = topicKey(scenarioText);
 
   if (normalized.includes("risk") || normalized.includes("analiz")) {
     return `/${locale}/tools/quick-risk-assessment?from=sernem-ai`;
@@ -58,11 +77,13 @@ function destination(label: string, scenarioText: string, locale: "tr" | "en") {
     return `/${locale}/tools/method-statement?from=sernem-ai`;
   }
   if (normalized.includes("toolbox")) {
+    const slug = TOOLBOX_ROUTES[topic];
     return slug
       ? `/${locale}/toolbox/${slug}?from=sernem-ai`
       : `/${locale}/toolbox?from=sernem-ai`;
   }
   if (normalized.includes("checklist")) {
+    const slug = CHECKLIST_ROUTES[topic];
     return slug
       ? `/${locale}/checklists/${slug}?from=sernem-ai`
       : `/${locale}/checklists?from=sernem-ai`;
