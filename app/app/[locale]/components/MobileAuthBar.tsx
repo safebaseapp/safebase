@@ -61,7 +61,8 @@ export default function MobileAuthBar({ locale }: Props) {
   if (
     pathname?.includes("/login") ||
     pathname?.includes("/register") ||
-    pathname?.includes("/dashboard")
+    pathname?.includes("/dashboard") ||
+    pathname?.includes("/ai-assistant")
   ) {
     return null;
   }
