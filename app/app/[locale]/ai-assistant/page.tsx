@@ -6,6 +6,7 @@ import AIPersonaEnhancer from "./AIPersonaEnhancer";
 import AIAnswerModeEnhancer from "./AIAnswerModeEnhancer";
 import AIWorkflowRouter from "./AIWorkflowRouter";
 import AIShortAnswerDisplayFix from "./AIShortAnswerDisplayFix";
+import AIStopWorkStatusFix from "./AIStopWorkStatusFix";
 import "./ai-persona-hotfix.css";
 import "./ai-modal-stability.css";
 import "./ai-answer-engine.css";
@@ -169,6 +170,7 @@ export default async function AIAssistantPage({ params }: Props) {
       />
       <AIPersonaEnhancer locale={locale} />
       <AIAnswerModeEnhancer locale={locale} />
+      <AIStopWorkStatusFix locale={locale} />
       <AIShortAnswerDisplayFix locale={locale} />
       <AIWorkflowRouter locale={locale} />
       <AIAssistantV3 locale={locale} access={access} />
