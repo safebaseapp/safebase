@@ -2,6 +2,7 @@ import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../../i18n/routing";
+import ActivityTracker from "@/components/analytics/ActivityTracker";
 
 const products = [
   { id: "spot", title: "Spot the Hazard", href: "spot-the-hazard", status: "live", premium: false, descTr: "Endüstriyel sahnelerde tehlikeleri bul, skor kazan ve refleksini geliştir.", descEn: "Find hazards in industrial scenes, earn a score and sharpen your safety awareness." },
@@ -21,6 +22,7 @@ export default async function LabsPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
+      <ActivityTracker eventName="labs_view" />
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="rounded-[2rem] border border-cyan-400/15 bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,.16),_transparent_38%),linear-gradient(145deg,#0f172a,#020617)] p-7 sm:p-10">
           <div className="inline-flex rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-black uppercase tracking-[.2em] text-cyan-200">SERNEM Labs</div>
