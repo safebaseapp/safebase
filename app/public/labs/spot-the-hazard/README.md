@@ -1,0 +1,1 @@
+SERNEM Labs Spot the Hazard scene assets live here. Binary scene images are added through Git blob/tree commits so image bytes remain intact. Naming: sernem-spot-<topic>-<nn>.<ext>.
