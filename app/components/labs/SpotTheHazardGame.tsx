@@ -47,6 +47,7 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
   const localResult = submitted ? scoreMultiSelectScenario(scenario, selected) : null;
   const result = serverResult ?? localResult;
   const showScene = Boolean(scenario.image) && !imageFailed;
+  const isFinalChallenge = index === total - 1;
 
   useEffect(() => {
     setImageFailed(false);
@@ -229,9 +230,20 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
                     {saved === false && <p className="mt-3 text-xs text-slate-500">{isTr ? "Sonuç gösterildi; giriş yapılmadıysa ilerleme hesaba kaydedilmez." : "Result shown; progress is not stored when there is no signed-in account."}</p>}
                   </div>
 
+                  {isFinalChallenge && (
+                    <div className="rounded-2xl border border-cyan-300/25 bg-cyan-300/10 p-5">
+                      <div className="text-lg font-black text-cyan-100">{isTr ? `${total}/${total} challenge tamamlandı` : `${total}/${total} challenges completed`}</div>
+                      <p className="mt-2 text-sm leading-6 text-slate-300">{isTr ? "Sonucun ekranda kalıyor. İstersen bu challenge'ı tekrar dene veya Labs ana sayfasına dön." : "Your final result stays on screen. Retry this challenge or return to the Labs hub when you are ready."}</p>
+                    </div>
+                  )}
+
                   <div className="flex gap-3">
                     <button type="button" onClick={resetAttempt} className="flex-1 rounded-2xl border border-white/10 px-4 py-3 text-sm font-bold text-slate-200 hover:bg-white/5">{isTr ? "Tekrar dene" : "Try again"}</button>
-                    {nextHref && <a href={nextHref} onClick={trackNextChallenge} className="flex-1 rounded-2xl bg-cyan-300 px-4 py-3 text-center text-sm font-black text-slate-950 hover:bg-cyan-200">{isTr ? "Sonraki challenge" : "Next challenge"} →</a>}
+                    {nextHref ? (
+                      <a href={nextHref} onClick={trackNextChallenge} className="flex-1 rounded-2xl bg-cyan-300 px-4 py-3 text-center text-sm font-black text-slate-950 hover:bg-cyan-200">{isTr ? "Sonraki challenge" : "Next challenge"} →</a>
+                    ) : (
+                      <a href={`/${locale}/labs`} className="flex-1 rounded-2xl bg-cyan-300 px-4 py-3 text-center text-sm font-black text-slate-950 hover:bg-cyan-200">{isTr ? "Labs'e dön" : "Back to Labs"} →</a>
+                    )}
                   </div>
                 </div>
               ) : null}
