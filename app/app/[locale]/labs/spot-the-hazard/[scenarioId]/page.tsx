@@ -24,7 +24,7 @@ export default async function SpotTheHazardScenarioPage({ params }: Props) {
       locale={labLocale}
       index={index}
       total={scenarios.length}
-      nextHref={next ? `/${locale}/labs/spot-the-hazard/${next.id}` : `/${locale}/labs`}
+      nextHref={next ? `/${locale}/labs/spot-the-hazard/${next.id}` : undefined}
     />
   );
 }
