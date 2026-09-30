@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "scenes": [
+    {"id":"sth-wah-piperack-01","file":"/labs/spot-the-hazard/sernem-spot-piperack-01.jpg","status":"prepared"},
+    {"id":"sth-hotwork-refinery-01","file":"/labs/spot-the-hazard/sernem-spot-hotwork-01.jpg","status":"pending"},
+    {"id":"sth-scaffold-platform-01","file":"/labs/spot-the-hazard/sernem-spot-scaffold-01.jpg","status":"pending"},
+    {"id":"sth-lifting-load-01","file":"/labs/spot-the-hazard/sernem-spot-lifting-01.jpg","status":"pending"},
+    {"id":"sth-confined-entry-01","file":"/labs/spot-the-hazard/sernem-spot-confined-space-01.jpg","status":"pending"}
+  ]
+}
