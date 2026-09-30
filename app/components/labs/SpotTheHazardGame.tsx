@@ -152,9 +152,9 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
                     src={scenario.image}
                     alt={scenario.title}
                     onError={() => setImageFailed(true)}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-contain object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/5 to-transparent" />
                   <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-slate-950/75 px-3 py-1 text-[11px] font-black uppercase tracking-[.18em] text-white backdrop-blur">SERNEM Original Scene</div>
                   <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
                     <h2 className="max-w-xl text-3xl font-black tracking-tight drop-shadow sm:text-4xl">{scenario.title}</h2>
