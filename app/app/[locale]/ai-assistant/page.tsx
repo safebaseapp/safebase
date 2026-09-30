@@ -13,6 +13,7 @@ import "./ai-persona-hotfix.css";
 import "./ai-modal-stability.css";
 import "./ai-answer-engine.css";
 import "./ai-trust-layer.css";
+import "./ai-mobile-launch-polish.css";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 import { isAdminUser } from "@/lib/auth/access";
 import { createClient } from "@/utils/supabase/server";
