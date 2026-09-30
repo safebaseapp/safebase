@@ -9,6 +9,7 @@ const scenarios: LabScenario[] = [
     language: "en",
     title: "Pipe Rack Maintenance",
     scenario: "A maintenance crew is working from an elevated pipe rack. Select every unsafe condition that should be addressed before work continues.",
+    image: "/labs/spot-the-hazard/piperack-320-q30.jpg",
     options: [
       { id: "no-tieoff", label: "One worker is not connected to an approved anchor point" },
       { id: "loose-tools", label: "Loose hand tools are positioned where they can fall to a lower level" },
@@ -115,6 +116,7 @@ const scenarios: LabScenario[] = [
     language: "tr",
     title: "Pipe Rack Bakım Çalışması",
     scenario: "Bir bakım ekibi yükseltilmiş pipe rack üzerinde çalışıyor. Çalışma devam etmeden önce düzeltilmesi gereken tüm güvensiz durumları seç.",
+    image: "/labs/spot-the-hazard/piperack-320-q30.jpg",
     options: [
       { id: "no-tieoff", label: "Bir çalışan uygun ankraj noktasına bağlı değil" },
       { id: "loose-tools", label: "El aletleri alt seviyeye düşebilecek şekilde bırakılmış" },
