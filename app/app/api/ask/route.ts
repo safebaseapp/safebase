@@ -106,19 +106,11 @@ export async function POST(req: Request) {
       .readdirSync(knowledgeFolder)
       .filter((file) => file.endsWith(".md"));
 
-    // Kaynak araması yalnızca güncel soru üzerinden yapılır.
-    // Önceki konuşmalar cevap bağlamında korunur ancak rehber seçimini etkilemez.
+    // Source retrieval must follow the current user question only. Conversation
+    // history remains available to the answer model, but it must not leak old
+    // scenario topics into the visible source list for a new/current question.
     const normalizedQuestion = question.toLowerCase();
-    const recentUserContext = conversationMessages
-  .filter((message) => message.role === "user")
-  .slice(-3)
-  .map((message) => message.content)
-  .join(" ");
-
-const guideSearchQuery =
-  recentUserContext.trim().length > 0
-    ? `${recentUserContext} ${question}`
-    : question;
+    const guideSearchQuery = question;
 
     const guideSearchResults = searchGuides(guideSearchQuery, 5);
 
