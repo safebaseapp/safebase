@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { LabScenario, ScenarioScore } from "@/lib/labs/types";
 import { scoreMultiSelectScenario } from "@/lib/labs/scoring";
+import { trackUserEvent } from "@/lib/analytics/track-user-event";
 
 type Props = {
   scenario: LabScenario;
@@ -45,6 +46,16 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
   const localResult = submitted ? scoreMultiSelectScenario(scenario, selected) : null;
   const result = serverResult ?? localResult;
 
+  useEffect(() => {
+    void trackUserEvent("lab_scenario_view", {
+      scenario_id: scenario.id,
+      scenario_type: scenario.type,
+      category: scenario.category,
+      difficulty: scenario.difficulty,
+      locale,
+    });
+  }, [scenario.id, scenario.type, scenario.category, scenario.difficulty, locale]);
+
   function toggle(id: string) {
     if (submitted) return;
     setSelected((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
@@ -56,6 +67,15 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
     setSaving(true);
     setSaved(null);
     setServerResult(null);
+
+    void trackUserEvent("lab_answer_submit", {
+      scenario_id: scenario.id,
+      scenario_type: scenario.type,
+      category: scenario.category,
+      difficulty: scenario.difficulty,
+      selected_count: selected.length,
+      locale,
+    });
 
     try {
       const response = await fetch("/api/labs/attempt", {
@@ -74,6 +94,22 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
       setSaved(Boolean(payload.saved));
       setFirstCompletion(payload.firstCompletion ?? null);
       setProgress(payload.progress);
+
+      if (payload.result) {
+        void trackUserEvent("lab_scenario_complete", {
+          scenario_id: scenario.id,
+          scenario_type: scenario.type,
+          category: scenario.category,
+          difficulty: scenario.difficulty,
+          score: payload.result.score,
+          correct_count: payload.result.correctCount,
+          missed_count: payload.result.missedCount,
+          incorrect_count: payload.result.incorrectCount,
+          xp_earned: payload.result.xpEarned,
+          first_completion: payload.firstCompletion ?? false,
+          locale,
+        });
+      }
     } catch {
       setSaved(false);
     } finally {
@@ -89,6 +125,14 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
     setSaved(null);
     setFirstCompletion(null);
     setProgress(undefined);
+  }
+
+  function trackNextChallenge() {
+    void trackUserEvent("lab_next_scenario", {
+      from_scenario_id: scenario.id,
+      category: scenario.category,
+      locale,
+    });
   }
 
   return (
@@ -226,7 +270,11 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
                       {isTr ? "Tekrar dene" : "Try again"}
                     </button>
                     {nextHref && (
-                      <a href={nextHref} className="flex-1 rounded-2xl bg-cyan-300 px-4 py-3 text-center text-sm font-black text-slate-950 hover:bg-cyan-200">
+                      <a
+                        href={nextHref}
+                        onClick={trackNextChallenge}
+                        className="flex-1 rounded-2xl bg-cyan-300 px-4 py-3 text-center text-sm font-black text-slate-950 hover:bg-cyan-200"
+                      >
                         {isTr ? "Sonraki challenge" : "Next challenge"} →
                       </a>
                     )}
