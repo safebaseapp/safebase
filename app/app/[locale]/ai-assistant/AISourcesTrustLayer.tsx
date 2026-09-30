@@ -11,13 +11,25 @@ function isHeadingMatch(value: string, terms: string[]) {
 
 function countSourceChips(block: HTMLElement | null) {
   if (!block) return 0;
+
   const candidates = Array.from(
     block.querySelectorAll<HTMLElement>("a, button, span"),
   ).filter((node) => {
-    const text = node.textContent?.trim() ?? "";
-    return text.length > 1 && text.length < 90;
+    const text = node.textContent?.replace(/\s+/g, " ").trim() ?? "";
+    if (text.length <= 1 || text.length >= 90) return false;
+
+    const normalized = text.toLowerCase();
+    if (normalized === "sources" || normalized === "kaynaklar") return false;
+
+    // Count the visible source chips themselves, not nested wrappers whose
+    // textContent contains several chips. This prevents inflated counts such
+    // as "23 sources" when only a handful of source badges are rendered.
+    return !node.querySelector("a, button, span");
   });
-  return new Set(candidates.map((node) => node.textContent?.trim())).size;
+
+  return new Set(
+    candidates.map((node) => node.textContent?.replace(/\s+/g, " ").trim()),
+  ).size;
 }
 
 function findSourceBlock(body: HTMLElement) {
