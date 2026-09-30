@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { LabScenario } from "@/lib/labs/types";
+import type { LabScenario, ScenarioScore } from "@/lib/labs/types";
 import { scoreMultiSelectScenario } from "@/lib/labs/scoring";
 
 type Props = {
@@ -12,21 +12,83 @@ type Props = {
   nextHref?: string;
 };
 
+type AttemptResponse = {
+  saved?: boolean;
+  authenticated?: boolean;
+  firstCompletion?: boolean;
+  awardedXp?: number;
+  result?: ScenarioScore;
+  progress?: {
+    totalXp: number;
+    level: number;
+    currentStreak: number;
+    longestStreak: number;
+    scenarioCount: number;
+  };
+};
+
 export default function SpotTheHazardGame({ scenario, locale, index, total, nextHref }: Props) {
   const isTr = locale === "tr";
   const [selected, setSelected] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [serverResult, setServerResult] = useState<ScenarioScore | null>(null);
+  const [saved, setSaved] = useState<boolean | null>(null);
+  const [firstCompletion, setFirstCompletion] = useState<boolean | null>(null);
+  const [progress, setProgress] = useState<AttemptResponse["progress"]>(undefined);
 
   const correctIds = useMemo(
     () => new Set(Array.isArray(scenario.correct_answer) ? scenario.correct_answer : [scenario.correct_answer].filter(Boolean) as string[]),
     [scenario.correct_answer],
   );
 
-  const result = submitted ? scoreMultiSelectScenario(scenario, selected) : null;
+  const localResult = submitted ? scoreMultiSelectScenario(scenario, selected) : null;
+  const result = serverResult ?? localResult;
 
   function toggle(id: string) {
     if (submitted) return;
     setSelected((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
+  }
+
+  async function submitAttempt() {
+    if (selected.length === 0 || saving) return;
+    setSubmitted(true);
+    setSaving(true);
+    setSaved(null);
+    setServerResult(null);
+
+    try {
+      const response = await fetch("/api/labs/attempt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          scenarioId: scenario.id,
+          locale,
+          selectedAnswers: selected,
+        }),
+      });
+
+      if (!response.ok) throw new Error("attempt_save_failed");
+      const payload = (await response.json()) as AttemptResponse;
+      if (payload.result) setServerResult(payload.result);
+      setSaved(Boolean(payload.saved));
+      setFirstCompletion(payload.firstCompletion ?? null);
+      setProgress(payload.progress);
+    } catch {
+      setSaved(false);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  function resetAttempt() {
+    setSelected([]);
+    setSubmitted(false);
+    setSaving(false);
+    setServerResult(null);
+    setSaved(null);
+    setFirstCompletion(null);
+    setProgress(undefined);
   }
 
   return (
@@ -37,7 +99,7 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
             ← SERNEM Labs
           </a>
           <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">
-            {isTr ? "Challenge" : "Challenge"} {index + 1}/{total}
+            Challenge {index + 1}/{total}
           </div>
         </div>
 
@@ -110,11 +172,11 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
               {!submitted ? (
                 <button
                   type="button"
-                  disabled={selected.length === 0}
-                  onClick={() => setSubmitted(true)}
+                  disabled={selected.length === 0 || saving}
+                  onClick={submitAttempt}
                   className="mt-6 w-full rounded-2xl bg-cyan-300 px-5 py-4 text-sm font-black text-slate-950 transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  {isTr ? "Cevabı kontrol et" : "Check answer"}
+                  {saving ? (isTr ? "Kontrol ediliyor..." : "Checking...") : (isTr ? "Cevabı kontrol et" : "Check answer")}
                 </button>
               ) : result ? (
                 <div className="mt-6 space-y-4">
@@ -136,12 +198,29 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
                   <div className="rounded-2xl border border-white/10 bg-white/[.04] p-5">
                     <div className="font-black">{result.perfect ? (isTr ? "Mükemmel tespit" : "Perfect identification") : (isTr ? "Öğrenme notu" : "Learning note")}</div>
                     <p className="mt-2 text-sm leading-6 text-slate-300">{scenario.explanation}</p>
+                    {firstCompletion === false && (
+                      <p className="mt-3 text-xs font-semibold text-amber-200">
+                        {isTr ? "Bu challenge daha önce tamamlandığı için tekrar XP verilmedi." : "No extra XP was awarded because this challenge was already completed."}
+                      </p>
+                    )}
+                    {progress && (
+                      <div className="mt-4 flex flex-wrap gap-2 text-xs font-bold text-slate-300">
+                        <span className="rounded-full bg-white/5 px-3 py-2">Level {progress.level}</span>
+                        <span className="rounded-full bg-white/5 px-3 py-2">{progress.totalXp} XP</span>
+                        <span className="rounded-full bg-white/5 px-3 py-2">🔥 {progress.currentStreak}</span>
+                      </div>
+                    )}
+                    {saved === false && (
+                      <p className="mt-3 text-xs text-slate-500">
+                        {isTr ? "Sonuç gösterildi; giriş yapılmadıysa ilerleme hesaba kaydedilmez." : "Result shown; progress is not stored when there is no signed-in account."}
+                      </p>
+                    )}
                   </div>
 
                   <div className="flex gap-3">
                     <button
                       type="button"
-                      onClick={() => { setSelected([]); setSubmitted(false); }}
+                      onClick={resetAttempt}
                       className="flex-1 rounded-2xl border border-white/10 px-4 py-3 text-sm font-bold text-slate-200 hover:bg-white/5"
                     >
                       {isTr ? "Tekrar dene" : "Try again"}
