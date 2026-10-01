@@ -7,8 +7,7 @@ import type { LabCategory, LabHotspot } from "@/lib/labs/types";
 
 type Props = { params: Promise<{ locale: string; scenarioId: string }> };
 
-// Restore the high-resolution Firefly scenes that produced the best visual result.
-// These are auth-free Adobe rendition links for the generated 2688x1536 assets.
+// High-resolution 2688x1536 scenes.
 const sceneByCategory: Partial<Record<LabCategory, string>> = {
   working_at_height: "https://at.adobe.com/KjYBnRUUl70MoI5T",
   hot_work: "https://at.adobe.com/LvQLFNPlFwh8sqVq",
@@ -17,8 +16,8 @@ const sceneByCategory: Partial<Record<LabCategory, string>> = {
   confined_space: "https://at.adobe.com/RIOEBt1SUNvgxxfN",
 };
 
-// Multiple hit zones may share the same hazard id. This keeps selection natural:
-// users can click the visible object/condition itself rather than a single tiny point.
+// Multiple hit zones may share one hazard id so the user can click the visible
+// condition naturally instead of hunting for a single hidden pixel.
 const hotspotsByCategory: Partial<Record<LabCategory, LabHotspot[]>> = {
   working_at_height: [
     { id: "no-tieoff", x: 60.5, y: 51, radius: 7 },
@@ -42,8 +41,6 @@ const hotspotsByCategory: Partial<Record<LabCategory, LabHotspot[]>> = {
     { id: "segregation", x: 88, y: 76, radius: 7.5 },
   ],
   scaffolding: [
-    { id: "tag", x: 34, y: 35, radius: 6 },
-    { id: "tag", x: 31, y: 45, radius: 5.5 },
     { id: "gap", x: 51.5, y: 53, radius: 7.2 },
     { id: "gap", x: 57, y: 56, radius: 6.2 },
     { id: "toe", x: 70.5, y: 67, radius: 6.5 },
