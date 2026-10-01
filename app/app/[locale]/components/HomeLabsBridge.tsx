@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ScanSearch } from "lucide-react";
+import { ArrowRight, ScanSearch, Sparkles } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
@@ -12,35 +12,69 @@ export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
   const tr = locale === "tr";
 
   return (
-    <section className="relative z-40 border-b border-cyan-300/10 bg-[#020817] text-white">
-      <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 sm:px-6 md:flex-row md:items-center md:justify-between">
-        <Link href={`/${locale}/labs`} className="group flex min-w-0 items-start gap-3 sm:items-center">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-cyan-300/20 bg-cyan-300/[0.07] text-cyan-300">
-            <ScanSearch size={18} />
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="flex flex-wrap items-center gap-2 text-[10px] font-black uppercase tracking-[0.17em] text-cyan-300">
-              SERNEM Labs
-              <span className="rounded-full border border-emerald-400/20 bg-emerald-400/[0.08] px-2 py-0.5 text-[9px] tracking-[0.12em] text-emerald-200">LIVE</span>
-            </span>
-            <span className="mt-0.5 block whitespace-normal text-[11px] font-semibold leading-4 text-slate-300 transition group-hover:text-white sm:truncate sm:text-[12px] sm:leading-normal">
-              {tr ? "Yeni: Görsel Tehlike Testi ile saha farkındalığını test et." : "New: Test field awareness with the Visual Hazard Challenge."}
-            </span>
-          </span>
-        </Link>
+    <aside className="pointer-events-none absolute right-[clamp(28px,5vw,88px)] top-[clamp(132px,12vw,188px)] z-[45] hidden w-[min(360px,28vw)] xl:block">
+      <div className="pointer-events-auto relative overflow-hidden rounded-[26px] border border-cyan-300/20 bg-[#07111f]/74 p-5 shadow-[0_26px_80px_rgba(0,0,0,.34)] backdrop-blur-2xl">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_88%_5%,rgba(34,211,238,.18),transparent_34%)]" />
 
-        <div className="grid w-full grid-cols-2 items-center gap-2 sm:flex sm:w-auto md:shrink-0">
-          <Link href={`/${locale}/labs`} className="inline-flex min-w-0 items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/[0.035] px-3 py-2.5 text-[10px] font-black text-slate-200 transition hover:border-cyan-300/25 hover:bg-cyan-300/[0.06] hover:text-white sm:gap-2 sm:px-4 sm:py-2 sm:text-[11px]">
-            <span className="sm:hidden">HSE Labs</span>
-            <span className="hidden sm:inline">{tr ? "HSE Labs'i keşfet" : "Explore HSE Labs"}</span>
-            <ArrowRight size={13} className="shrink-0" />
+        <div className="relative z-10 flex items-start justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.08] text-cyan-200 shadow-[inset_0_1px_0_rgba(255,255,255,.04)]">
+              <ScanSearch size={20} />
+            </span>
+            <div>
+              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.16em] text-cyan-200">
+                SERNEM LABS
+                <span className="rounded-full border border-emerald-400/25 bg-emerald-400/[0.09] px-2 py-1 text-[8px] tracking-[0.13em] text-emerald-200">LIVE</span>
+              </div>
+              <p className="mt-1 text-[11px] font-semibold text-slate-400">VISUAL HAZARD RECOGNITION</p>
+            </div>
+          </div>
+          <Sparkles size={16} className="mt-1 shrink-0 text-amber-300/80" />
+        </div>
+
+        <div className="relative z-10 mt-5">
+          <h2 className="text-[25px] font-black leading-[1.02] tracking-[-0.035em] text-white">
+            {tr ? "Gözünü eğit.\nSaha kararını güçlendir." : "Train your eye.\nStrengthen field judgment."}
+          </h2>
+          <p className="mt-3 text-[12px] leading-5 text-slate-300/80">
+            {tr
+              ? "Gerçek endüstriyel sahnelerde görünür tehlikeleri bul ve saha farkındalığını test et."
+              : "Find visible hazards in realistic industrial scenes and test field awareness."}
+          </p>
+        </div>
+
+        <div className="relative z-10 mt-5 grid grid-cols-3 gap-2">
+          <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2.5">
+            <b className="block text-sm font-black text-white">5</b>
+            <span className="text-[8px] font-bold uppercase tracking-[0.11em] text-slate-500">Scenes</span>
+          </div>
+          <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2.5">
+            <b className="block text-sm font-black text-white">100</b>
+            <span className="text-[8px] font-bold uppercase tracking-[0.11em] text-slate-500">Score</span>
+          </div>
+          <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2.5">
+            <b className="block text-sm font-black text-cyan-200">XP</b>
+            <span className="text-[8px] font-bold uppercase tracking-[0.11em] text-slate-500">Progress</span>
+          </div>
+        </div>
+
+        <div className="relative z-10 mt-5 flex items-center gap-2">
+          <Link
+            href={`/${locale}/labs`}
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-[11px] font-black text-white transition hover:border-cyan-300/25 hover:bg-cyan-300/[0.06]"
+          >
+            {tr ? "HSE Labs'i aç" : "Open HSE Labs"}
+            <ArrowRight size={14} />
           </Link>
-          <Link href={`/${locale}/labs/spot-the-hazard`} className="inline-flex min-w-0 items-center justify-center gap-1.5 rounded-full bg-cyan-300 px-3 py-2.5 text-[10px] font-black text-slate-950 transition hover:bg-cyan-200 sm:gap-2 sm:px-4 sm:py-2 sm:text-[11px]">
-            {tr ? "Teste başla" : "Start test"}
-            <ArrowRight size={13} className="shrink-0" />
+          <Link
+            href={`/${locale}/labs/spot-the-hazard`}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-4 py-3 text-[11px] font-black text-slate-950 shadow-[0_10px_28px_rgba(34,211,238,.16)] transition hover:bg-cyan-200"
+          >
+            {tr ? "Başla" : "Start"}
+            <ArrowRight size={14} />
           </Link>
         </div>
       </div>
-    </section>
+    </aside>
   );
 }
