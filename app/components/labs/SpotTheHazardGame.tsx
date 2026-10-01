@@ -52,7 +52,13 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
     setImageFailed(false);
     setSelected([]);
     setSubmitted(false);
+    setSaving(false);
+    setServerResult(null);
+    setSaved(null);
+    setFirstCompletion(null);
+    setProgress(undefined);
     setMissPoint(null);
+
     void trackUserEvent("lab_scenario_view", {
       scenario_id: scenario.id,
       scenario_type: scenario.type,
@@ -72,19 +78,14 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
   function markScene(event: MouseEvent<HTMLButtonElement>) {
     if (submitted || selected.length >= answerIds.length) return;
 
-    const image = event.currentTarget.querySelector("img");
-    if (!image) return;
-
-    const rect = image.getBoundingClientRect();
+    // The button shrink-wraps the image, so this rect is the actual visible scene.
+    // That keeps clicks and markers aligned even when max-height constrains the image.
+    const rect = event.currentTarget.getBoundingClientRect();
     if (!rect.width || !rect.height) return;
 
-    const clientX = event.clientX - rect.left;
-    const clientY = event.clientY - rect.top;
-    if (clientX < 0 || clientY < 0 || clientX > rect.width || clientY > rect.height) return;
-
     const point = {
-      x: (clientX / rect.width) * 100,
-      y: (clientY / rect.height) * 100,
+      x: ((event.clientX - rect.left) / rect.width) * 100,
+      y: ((event.clientY - rect.top) / rect.height) * 100,
     };
 
     const hit = hotspots.find(
@@ -139,6 +140,22 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
       setSaved(Boolean(payload.saved));
       setFirstCompletion(payload.firstCompletion ?? null);
       setProgress(payload.progress);
+
+      if (payload.result) {
+        void trackUserEvent("lab_scenario_complete", {
+          scenario_id: scenario.id,
+          scenario_type: scenario.type,
+          category: scenario.category,
+          difficulty: scenario.difficulty,
+          score: payload.result.score,
+          correct_count: payload.result.correctCount,
+          missed_count: payload.result.missedCount,
+          incorrect_count: payload.result.incorrectCount,
+          xp_earned: payload.result.xpEarned,
+          first_completion: payload.firstCompletion ?? false,
+          locale,
+        });
+      }
     } catch {
       setSaved(false);
     } finally {
@@ -157,6 +174,8 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
     setMissPoint(null);
   }
 
+  const reviewOptions = options.filter((option) => answerIds.includes(option.id));
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -166,55 +185,57 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
         </div>
 
         <section className="overflow-hidden rounded-3xl border border-white/10 bg-slate-900 shadow-2xl">
-          <div className="grid lg:grid-cols-[1.35fr_.65fr]">
-            <div className="border-b border-white/10 bg-black lg:border-b-0 lg:border-r">
+          <div className="grid items-start lg:grid-cols-[1.35fr_.65fr]">
+            <div className="border-b border-white/10 bg-black lg:sticky lg:top-6 lg:border-b-0 lg:border-r">
               {!imageFailed && scenario.image ? (
-                <div className="relative">
-                  <button
-                    type="button"
-                    onClick={markScene}
-                    disabled={submitted}
-                    className="relative block w-full cursor-crosshair disabled:cursor-default"
-                    aria-label={isTr ? "Sahnede tehlike gördüğünüz noktaya tıklayın" : "Click where you see a hazard"}
-                  >
-                    <img
-                      src={scenario.image}
-                      alt={scenario.title}
-                      onError={() => setImageFailed(true)}
-                      className="block h-auto max-h-[78vh] w-full object-contain [image-rendering:auto]"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent" />
+                <div className="flex justify-center bg-black">
+                  <div className="relative inline-block max-w-full">
+                    <button
+                      type="button"
+                      onClick={markScene}
+                      disabled={submitted}
+                      className="relative block max-w-full cursor-crosshair disabled:cursor-default"
+                      aria-label={isTr ? "Sahnede tehlike gördüğünüz noktaya tıklayın" : "Click where you see a hazard"}
+                    >
+                      <img
+                        src={scenario.image}
+                        alt={scenario.title}
+                        onError={() => setImageFailed(true)}
+                        className="block h-auto max-h-[78vh] w-auto max-w-full object-contain [image-rendering:auto]"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent" />
 
-                    {selected.map((id) => {
-                      const hotspot = hotspots.find((item) => item.id === id);
-                      if (!hotspot) return null;
-                      return (
+                      {selected.map((id) => {
+                        const hotspot = hotspots.find((item) => item.id === id);
+                        if (!hotspot) return null;
+                        return (
+                          <span
+                            key={id}
+                            className="pointer-events-none absolute h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-emerald-300 bg-emerald-400/20 shadow-[0_0_0_6px_rgba(52,211,153,.12)]"
+                            style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
+                            aria-hidden="true"
+                          >
+                            <span className="absolute inset-0 flex items-center justify-center text-lg font-black text-emerald-200">✓</span>
+                          </span>
+                        );
+                      })}
+
+                      {missPoint && !submitted && (
                         <span
-                          key={id}
-                          className="pointer-events-none absolute h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-emerald-300 bg-emerald-400/20 shadow-[0_0_0_6px_rgba(52,211,153,.12)]"
-                          style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
+                          className="pointer-events-none absolute h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-rose-400 bg-rose-500/15"
+                          style={{ left: `${missPoint.x}%`, top: `${missPoint.y}%` }}
                           aria-hidden="true"
                         >
-                          <span className="absolute inset-0 flex items-center justify-center text-lg font-black text-emerald-200">✓</span>
+                          <span className="absolute inset-0 flex items-center justify-center text-base font-black text-rose-300">×</span>
                         </span>
-                      );
-                    })}
+                      )}
+                    </button>
 
-                    {missPoint && !submitted && (
-                      <span
-                        className="pointer-events-none absolute h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-rose-400 bg-rose-500/15"
-                        style={{ left: `${missPoint.x}%`, top: `${missPoint.y}%` }}
-                        aria-hidden="true"
-                      >
-                        <span className="absolute inset-0 flex items-center justify-center text-base font-black text-rose-300">×</span>
-                      </span>
-                    )}
-                  </button>
-
-                  <div className="pointer-events-none absolute left-5 top-5 rounded-full border border-white/20 bg-slate-950/80 px-3 py-1 text-[11px] font-black uppercase tracking-[.18em]">SERNEM Original Scene</div>
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 sm:p-7">
-                    <h2 className="text-2xl font-black drop-shadow sm:text-3xl">{scenario.title}</h2>
-                    <p className="mt-2 max-w-2xl text-sm text-slate-200 drop-shadow">{scenario.scenario}</p>
+                    <div className="pointer-events-none absolute left-5 top-5 rounded-full border border-white/20 bg-slate-950/80 px-3 py-1 text-[11px] font-black uppercase tracking-[.18em]">SERNEM Original Scene</div>
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 sm:p-7">
+                      <h2 className="text-2xl font-black drop-shadow sm:text-3xl">{scenario.title}</h2>
+                      <p className="mt-2 max-w-2xl text-sm text-slate-200 drop-shadow">{scenario.scenario}</p>
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -257,7 +278,7 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
                   >
                     {saving ? (isTr ? "Kontrol ediliyor..." : "Checking...") : (isTr ? "Tespitleri değerlendir" : "Evaluate findings")}
                   </button>
-                  {selected.length > 0 && (
+                  {(selected.length > 0 || missPoint) && (
                     <button type="button" onClick={resetAttempt} className="w-full rounded-2xl border border-white/10 px-4 py-3 text-sm font-bold text-slate-300">
                       {isTr ? "İşaretleri sıfırla" : "Reset marks"}
                     </button>
@@ -275,9 +296,22 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
                     <div className="font-black">{isTr ? "Saha değerlendirmesi" : "Field review"}</div>
                     <p className="mt-2 text-sm leading-6 text-slate-300">{scenario.explanation}</p>
                     <div className="mt-4 space-y-2">
-                      {options.filter((option) => answerIds.includes(option.id)).map((option) => (
-                        <div key={option.id} className="rounded-xl border border-emerald-400/15 bg-emerald-400/5 p-3 text-sm text-slate-200">✓ {option.label}</div>
-                      ))}
+                      {reviewOptions.map((option) => {
+                        const found = selected.includes(option.id);
+                        return (
+                          <div
+                            key={option.id}
+                            className={found
+                              ? "flex items-start justify-between gap-3 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-3 text-sm text-slate-200"
+                              : "flex items-start justify-between gap-3 rounded-xl border border-rose-400/20 bg-rose-400/5 p-3 text-sm text-slate-200"}
+                          >
+                            <span>{found ? "✓" : "✕"} {option.label}</span>
+                            <span className={found ? "shrink-0 text-[10px] font-black uppercase tracking-wider text-emerald-300" : "shrink-0 text-[10px] font-black uppercase tracking-wider text-rose-300"}>
+                              {found ? (isTr ? "Bulundu" : "Found") : (isTr ? "Kaçırıldı" : "Missed")}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
                     {firstCompletion === false && <p className="mt-3 text-xs text-amber-200">{isTr ? "Bu challenge daha önce tamamlandı; tekrar XP verilmedi." : "This challenge was already completed; no repeat XP was awarded."}</p>}
                     {progress && <p className="mt-3 text-xs text-slate-400">Level {progress.level} · {progress.totalXp} XP · 🔥 {progress.currentStreak}</p>}
