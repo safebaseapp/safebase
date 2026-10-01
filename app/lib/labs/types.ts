@@ -34,6 +34,13 @@ export type LabHazard = {
   severity?: "low" | "medium" | "high" | "critical";
 };
 
+export type LabHotspot = {
+  id: string;
+  x: number;
+  y: number;
+  radius: number;
+};
+
 export type LabScenario = {
   id: string;
   type: LabScenarioType;
@@ -46,6 +53,7 @@ export type LabScenario = {
   options?: LabOption[];
   correct_answer?: string | string[];
   hazards?: LabHazard[];
+  hotspots?: LabHotspot[];
   explanation: string;
   xp: number;
   premium: boolean;
