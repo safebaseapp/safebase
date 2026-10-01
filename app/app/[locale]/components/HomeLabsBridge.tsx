@@ -1,80 +1,153 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ScanSearch, Sparkles } from "lucide-react";
+import { ArrowRight, FlaskConical, Puzzle, ScanSearch, Sparkles, Target } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+
+function LabsPuzzleMark() {
+  return (
+    <div className="flex flex-col items-center text-center">
+      <svg viewBox="0 0 180 160" className="h-28 w-32 sm:h-32 sm:w-36" aria-hidden="true">
+        <defs>
+          <linearGradient id="labsBlue" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#2f8cff" />
+            <stop offset="1" stopColor="#48cfe7" />
+          </linearGradient>
+          <linearGradient id="labsPurple" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#8b5cf6" />
+            <stop offset="1" stopColor="#c084fc" />
+          </linearGradient>
+          <linearGradient id="labsMint" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#36d6c0" />
+            <stop offset="1" stopColor="#5eead4" />
+          </linearGradient>
+        </defs>
+        <path d="M24 30c0-14 11-25 25-25h44v34c0 8 7 15 15 15s15-7 15-15V5h16c14 0 25 11 25 25v33h-34c-8 0-15 7-15 15s7 15 15 15h34v17c0 14-11 25-25 25H96v-34c0-8-7-15-15-15s-15 7-15 15v34H49c-14 0-25-11-25-25V92h34c8 0 15-7 15-15s-7-15-15-15H24V30Z" fill="url(#labsBlue)" opacity=".98" />
+        <path d="M92 71h47c14 0 25 11 25 25v31c0 14-11 25-25 25H96v-31c0-9-7-16-16-16s-16 7-16 16v31H49c-14 0-25-11-25-25v-18h33c9 0 16-7 16-16s-7-16-16-16H24v-6h42c0 9 7 16 16 16s16-7 16-16Z" fill="url(#labsPurple)" opacity=".94" />
+        <path d="M24 108h33c9 0 16-7 16-16h19v34c0 9-7 16-16 16H49c-14 0-25-11-25-25v-9Z" fill="url(#labsMint)" opacity=".92" />
+      </svg>
+      <div className="mt-1 text-[27px] font-black tracking-[-0.035em] text-white sm:text-[30px]">SERNEM</div>
+      <div className="mt-[-2px] text-[13px] font-black uppercase tracking-[0.34em] text-violet-300 sm:text-[14px]">LABS</div>
+    </div>
+  );
+}
 
 export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
   const pathname = usePathname();
   const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
-  if (!isHome) return null;
-
   const tr = locale === "tr";
+  const [mountNode, setMountNode] = useState<HTMLElement | null>(null);
 
-  return (
-    <aside className="pointer-events-none absolute right-[clamp(28px,5vw,88px)] top-[clamp(132px,12vw,188px)] z-[45] hidden w-[min(360px,28vw)] xl:block">
-      <div className="pointer-events-auto relative overflow-hidden rounded-[26px] border border-cyan-300/20 bg-[#07111f]/74 p-5 shadow-[0_26px_80px_rgba(0,0,0,.34)] backdrop-blur-2xl">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_88%_5%,rgba(34,211,238,.18),transparent_34%)]" />
+  useEffect(() => {
+    const nav = document.querySelector("nav");
+    const navItems = nav ? Array.from(nav.querySelectorAll<HTMLElement>("a,button")) : [];
+    const resourceLabel = tr ? "Kaynaklar" : "Resources";
+    const resourceItem = navItems.find((item) => item.textContent?.includes(resourceLabel));
+    const existing = nav?.querySelector<HTMLElement>("[data-sernem-labs-nav]");
 
-        <div className="relative z-10 flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.08] text-cyan-200 shadow-[inset_0_1px_0_rgba(255,255,255,.04)]">
-              <ScanSearch size={20} />
+    if (!existing && resourceItem?.parentElement) {
+      const anchor = document.createElement("a");
+      anchor.href = `/${locale}/labs`;
+      anchor.setAttribute("data-sernem-labs-nav", "true");
+      anchor.className = "relative inline-flex items-center gap-2.5 rounded-xl border border-violet-400/15 bg-violet-500/[0.045] px-3.5 py-2.5 text-[13px] font-bold text-violet-100 transition duration-200 hover:border-violet-300/30 hover:bg-violet-500/[0.10] hover:text-white";
+      anchor.innerHTML = `<span style="display:flex;height:24px;width:24px;align-items:center;justify-content:center;border-radius:7px;border:1px solid rgba(167,139,250,.28);background:rgba(139,92,246,.09);font-size:12px;color:#c4b5fd">◫</span><span>HSE Labs</span><span style="border:1px solid rgba(167,139,250,.25);border-radius:999px;padding:2px 6px;font-size:8px;letter-spacing:.08em;color:#c4b5fd">NEW</span>`;
+      resourceItem.parentElement.before(anchor);
+    }
+
+    return () => {
+      nav?.querySelector("[data-sernem-labs-nav]")?.remove();
+    };
+  }, [locale, pathname, tr]);
+
+  useEffect(() => {
+    setMountNode(null);
+    if (!isHome) return;
+
+    const hero = document.querySelector("main > section:first-child");
+    if (!hero?.parentElement) return;
+
+    document.querySelector("[data-sernem-labs-showcase-host]")?.remove();
+    const host = document.createElement("div");
+    host.setAttribute("data-sernem-labs-showcase-host", "true");
+    hero.insertAdjacentElement("afterend", host);
+    setMountNode(host);
+
+    return () => host.remove();
+  }, [isHome, pathname]);
+
+  if (!isHome || !mountNode) return null;
+
+  return createPortal(
+    <section className="relative isolate overflow-hidden border-y border-violet-400/20 bg-[#050817] text-white shadow-[inset_0_1px_0_rgba(255,255,255,.03)]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_35%,rgba(59,130,246,.18),transparent_28%),radial-gradient(circle_at_68%_35%,rgba(139,92,246,.22),transparent_30%),radial-gradient(circle_at_93%_70%,rgba(34,211,238,.12),transparent_26%),linear-gradient(110deg,rgba(2,6,23,.98),rgba(13,18,45,.94)_46%,rgba(9,12,32,.98))]" />
+      <div className="pointer-events-none absolute -left-20 top-1/2 -translate-y-1/2 text-blue-400/[0.045]"><Puzzle size={300} strokeWidth={1.1} /></div>
+      <div className="pointer-events-none absolute left-[57%] top-1/2 hidden -translate-y-1/2 text-violet-300/[0.075] lg:block"><FlaskConical size={250} strokeWidth={1.1} /></div>
+      <div className="pointer-events-none absolute right-[21%] top-8 hidden text-cyan-300/[0.06] xl:block"><Target size={150} strokeWidth={1.1} /></div>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/70 to-transparent" />
+
+      <div className="relative mx-auto grid min-h-[360px] max-w-7xl items-center gap-8 px-5 py-10 sm:px-6 md:min-h-[390px] md:py-12 lg:grid-cols-[250px_minmax(0,1fr)_360px] lg:gap-12 xl:grid-cols-[270px_minmax(0,1fr)_390px]">
+        <div className="flex items-center justify-center lg:justify-start">
+          <div className="w-full max-w-[230px] rounded-[28px] border border-white/10 bg-white/[0.035] px-6 py-6 shadow-[0_24px_70px_rgba(0,0,0,.24)] backdrop-blur-xl">
+            <LabsPuzzleMark />
+          </div>
+        </div>
+
+        <div className="min-w-0 text-center lg:text-left">
+          <div className="inline-flex items-center gap-2 rounded-full border border-violet-400/20 bg-violet-500/[0.08] px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] text-violet-200">
+            <Sparkles size={12} /> {tr ? "ETKİLEŞİMLİ HSE EĞİTİMİ" : "INTERACTIVE HSE TRAINING"}
+          </div>
+          <h2 className="mt-5 text-[38px] font-black leading-[.98] tracking-[-0.045em] text-white sm:text-[48px] lg:text-[54px]">
+            {tr ? "Gözünü eğit." : "Train your eye."}<br />
+            <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-violet-400 bg-clip-text text-transparent">
+              {tr ? "Gerçek saha kararını test et." : "Test real field judgment."}
             </span>
-            <div>
-              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.16em] text-cyan-200">
-                SERNEM LABS
-                <span className="rounded-full border border-emerald-400/25 bg-emerald-400/[0.09] px-2 py-1 text-[8px] tracking-[0.13em] text-emerald-200">LIVE</span>
-              </div>
-              <p className="mt-1 text-[11px] font-semibold text-slate-400">VISUAL HAZARD RECOGNITION</p>
-            </div>
-          </div>
-          <Sparkles size={16} className="mt-1 shrink-0 text-amber-300/80" />
-        </div>
-
-        <div className="relative z-10 mt-5">
-          <h2 className="text-[25px] font-black leading-[1.02] tracking-[-0.035em] text-white">
-            {tr ? "Gözünü eğit.\nSaha kararını güçlendir." : "Train your eye.\nStrengthen field judgment."}
           </h2>
-          <p className="mt-3 text-[12px] leading-5 text-slate-300/80">
+          <p className="mx-auto mt-5 max-w-2xl text-[14px] leading-7 text-slate-300 sm:text-[15px] lg:mx-0">
             {tr
-              ? "Gerçek endüstriyel sahnelerde görünür tehlikeleri bul ve saha farkındalığını test et."
-              : "Find visible hazards in realistic industrial scenes and test field awareness."}
+              ? "Tehlike farkındalığını, karar kalitesini ve saha refleksini geliştirmek için tasarlanmış etkileşimli HSE challenge'ları."
+              : "Interactive HSE challenges designed to strengthen hazard recognition, decision quality and field awareness."}
           </p>
-        </div>
-
-        <div className="relative z-10 mt-5 grid grid-cols-3 gap-2">
-          <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2.5">
-            <b className="block text-sm font-black text-white">5</b>
-            <span className="text-[8px] font-bold uppercase tracking-[0.11em] text-slate-500">Scenes</span>
-          </div>
-          <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2.5">
-            <b className="block text-sm font-black text-white">100</b>
-            <span className="text-[8px] font-bold uppercase tracking-[0.11em] text-slate-500">Score</span>
-          </div>
-          <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2.5">
-            <b className="block text-sm font-black text-cyan-200">XP</b>
-            <span className="text-[8px] font-bold uppercase tracking-[0.11em] text-slate-500">Progress</span>
+          <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+            <Link href={`/${locale}/labs`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-500 px-5 text-[12px] font-black text-white shadow-[0_14px_35px_rgba(99,102,241,.22)] transition hover:-translate-y-0.5 hover:brightness-110">
+              {tr ? "HSE Labs'i keşfet" : "Explore HSE Labs"}<ArrowRight size={15} />
+            </Link>
+            <Link href={`/${locale}/labs/spot-the-hazard`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-violet-300/30 bg-white/[0.025] px-5 text-[12px] font-black text-white transition hover:border-violet-300/55 hover:bg-violet-400/[0.07]">
+              {tr ? "Görsel teste başla" : "Start Visual Test"}<ArrowRight size={15} />
+            </Link>
           </div>
         </div>
 
-        <div className="relative z-10 mt-5 flex items-center gap-2">
-          <Link
-            href={`/${locale}/labs`}
-            className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-3 text-[11px] font-black text-white transition hover:border-cyan-300/25 hover:bg-cyan-300/[0.06]"
-          >
-            {tr ? "HSE Labs'i aç" : "Open HSE Labs"}
-            <ArrowRight size={14} />
-          </Link>
-          <Link
-            href={`/${locale}/labs/spot-the-hazard`}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-300 px-4 py-3 text-[11px] font-black text-slate-950 shadow-[0_10px_28px_rgba(34,211,238,.16)] transition hover:bg-cyan-200"
-          >
-            {tr ? "Başla" : "Start"}
-            <ArrowRight size={14} />
+        <div className="relative overflow-hidden rounded-[26px] border border-cyan-300/20 bg-[#07111f]/78 p-5 shadow-[0_26px_80px_rgba(0,0,0,.30)] backdrop-blur-2xl sm:p-6">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_88%_5%,rgba(34,211,238,.16),transparent_34%),radial-gradient(circle_at_10%_90%,rgba(139,92,246,.12),transparent_30%)]" />
+          <div className="relative z-10 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="grid h-11 w-11 place-items-center rounded-2xl border border-cyan-300/20 bg-cyan-300/[0.08] text-cyan-200"><ScanSearch size={20} /></span>
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-cyan-200">VISUAL TEST CHALLENGE</p>
+                <p className="mt-1 text-[10px] text-slate-500">Spot the Hazard</p>
+              </div>
+            </div>
+            <span className="rounded-full border border-emerald-400/25 bg-emerald-400/[0.09] px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.12em] text-emerald-200">LIVE</span>
+          </div>
+          <p className="relative z-10 mt-5 text-[13px] leading-6 text-slate-300">
+            {tr ? "Gerçekçi endüstriyel sahnelerde görünür tehlikeleri bul ve saha farkındalığını test et." : "Find visible hazards in realistic industrial scenes and test your field awareness."}
+          </p>
+          <div className="relative z-10 mt-5 grid grid-cols-3 gap-2">
+            {[["5", tr ? "SAHNE" : "SCENES"], ["100", tr ? "PUAN" : "SCORE"], ["XP", tr ? "İLERLEME" : "PROGRESS"]].map(([value,label]) => (
+              <div key={label} className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-3">
+                <b className={`block text-[15px] font-black ${value === "XP" ? "text-cyan-200" : "text-white"}`}>{value}</b>
+                <span className="mt-1 block text-[8px] font-bold uppercase tracking-[0.10em] text-slate-500">{label}</span>
+              </div>
+            ))}
+          </div>
+          <Link href={`/${locale}/labs/spot-the-hazard`} className="relative z-10 mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-cyan-300 px-5 text-[12px] font-black text-slate-950 shadow-[0_12px_28px_rgba(34,211,238,.16)] transition hover:bg-cyan-200">
+            {tr ? "Challenge'a başla" : "Start Challenge"}<ArrowRight size={15} />
           </Link>
         </div>
       </div>
-    </aside>
+    </section>,
+    mountNode,
   );
 }
