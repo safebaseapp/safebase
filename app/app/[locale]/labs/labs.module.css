@@ -240,6 +240,37 @@
   line-height: 1.7;
 }
 
+.panelStats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.panelStats span {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  padding: 10px 11px;
+  background: rgba(255,255,255,.025);
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.panelStats b {
+  color: #e6fbff;
+  font-size: 15px;
+  letter-spacing: -.02em;
+}
+
 .panelLink {
   position: relative;
   z-index: 1;
@@ -338,8 +369,8 @@
 }
 
 .soonCard {
-  opacity: .72;
-  filter: saturate(.68);
+  opacity: .82;
+  filter: saturate(.76);
 }
 
 .cardIndex {
