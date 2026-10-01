@@ -140,6 +140,11 @@ export default async function LabsPage({ params }: Props) {
               <p className={s.panelKicker}>VISUAL HAZARD RECOGNITION</p>
               <h2>Spot the Hazard</h2>
               <p>{isTr ? "5 endüstriyel sahne · gerçek görsel tespit · anlık saha değerlendirmesi" : "5 industrial scenes · visual findings · immediate field review"}</p>
+              <div className={s.panelStats}>
+                <span><b>5</b>{isTr ? "Sahne" : "Scenes"}</span>
+                <span><b>100</b>{isTr ? "Puan" : "Score"}</span>
+                <span><b>XP</b>{isTr ? "İlerleme" : "Progress"}</span>
+              </div>
               <Link href={`/${locale}/labs/spot-the-hazard`} className={s.panelLink}>
                 {isTr ? "Teste başla" : "Start test"} <ArrowRight size={16} />
               </Link>
