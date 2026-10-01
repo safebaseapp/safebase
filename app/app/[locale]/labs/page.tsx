@@ -1,19 +1,84 @@
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
+import { ArrowRight, LockKeyhole, ScanSearch, Sparkles } from "lucide-react";
 import { routing } from "../../../i18n/routing";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
-
-const products = [
-  { id: "spot", title: "Spot the Hazard", href: "spot-the-hazard", status: "live", premium: false, descTr: "Endüstriyel sahnelerde tehlikeleri bul, skor kazan ve refleksini geliştir.", descEn: "Find hazards in industrial scenes, earn a score and sharpen your safety awareness." },
-  { id: "brain", title: "Daily Safety Brain", status: "soon", premium: false, descTr: "Her gün kısa bir HSE challenge ile bilgini sıcak tut.", descEn: "Keep your HSE knowledge active with one short daily challenge." },
-  { id: "myth", title: "Safety Myth Buster", status: "soon", premium: false, descTr: "Sahadaki yaygın yanlış inanışları test et.", descEn: "Test common safety myths from real work situations." },
-  { id: "ppe", title: "PPE Matchmaker", status: "soon", premium: false, descTr: "İşe ve tehlikeye göre doğru PPE kombinasyonunu seç.", descEn: "Match the right PPE to the task and hazard." },
-  { id: "blind", title: "Blind Spot Test", status: "soon", premium: true, descTr: "Fark etmediğin zayıf HSE alanlarını ortaya çıkar.", descEn: "Reveal the HSE weaknesses you do not notice yourself." },
-  { id: "incident", title: "Incident Simulator", status: "soon", premium: true, descTr: "Karar ver, sonuçlarını gör ve olaylardan güvenli şekilde öğren.", descEn: "Make decisions, see the consequences and learn from incidents safely." },
-];
+import s from "./labs.module.css";
 
 type Props = { params: Promise<{ locale: string }> };
+
+type LabCard = {
+  id: string;
+  title: string;
+  subtitle: string;
+  descTr: string;
+  descEn: string;
+  href?: string;
+  active: boolean;
+  premium?: boolean;
+  index: string;
+};
+
+const products: LabCard[] = [
+  {
+    id: "spot",
+    title: "Spot the Hazard",
+    subtitle: "Visual Test Challenge",
+    descTr: "Gerçekçi endüstriyel sahneleri incele. Görselde gerçekten bulunan tehlikeleri tespit et ve saha farkındalığını test et.",
+    descEn: "Inspect realistic industrial scenes. Identify the hazards that are actually visible and test your field awareness.",
+    href: "spot-the-hazard",
+    active: true,
+    index: "01",
+  },
+  {
+    id: "incident",
+    title: "Incident Simulator",
+    subtitle: "Scenario Judgment",
+    descTr: "Olay akışında karar ver, sonuçlarını gör ve güvenli müdahale yaklaşımını geliştir.",
+    descEn: "Make decisions through an incident scenario, see the consequences and sharpen response judgment.",
+    active: false,
+    premium: true,
+    index: "02",
+  },
+  {
+    id: "brain",
+    title: "Daily Safety Brain",
+    subtitle: "Quick Challenge",
+    descTr: "Kısa günlük HSE challenge'ları ile bilgini ve saha refleksini sıcak tut.",
+    descEn: "Keep HSE knowledge and field reflexes active with short daily challenges.",
+    active: false,
+    index: "03",
+  },
+  {
+    id: "ppe",
+    title: "PPE Matchmaker",
+    subtitle: "Protection Logic",
+    descTr: "Görev ve tehlikeye göre doğru kişisel koruyucu ekipman kombinasyonunu seç.",
+    descEn: "Match tasks and hazards with the right personal protective equipment.",
+    active: false,
+    index: "04",
+  },
+  {
+    id: "myth",
+    title: "Safety Myth Buster",
+    subtitle: "Safety Truth Check",
+    descTr: "Sahada sık duyulan güvenlik inanışlarını kanıt ve iyi uygulamalarla test et.",
+    descEn: "Test common field safety beliefs against evidence and good practice.",
+    active: false,
+    index: "05",
+  },
+  {
+    id: "blind",
+    title: "Blind Spot Test",
+    subtitle: "Hidden Risk Focus",
+    descTr: "Gözden kaçan riskleri ve farkındalık boşluklarını ortaya çıkaran ileri seviye testler.",
+    descEn: "Advanced challenges designed to reveal overlooked risks and awareness gaps.",
+    active: false,
+    premium: true,
+    index: "06",
+  },
+];
 
 export default async function LabsPage({ params }: Props) {
   const { locale } = await params;
@@ -21,45 +86,131 @@ export default async function LabsPage({ params }: Props) {
   const isTr = locale === "tr";
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className={s.page}>
       <ActivityTracker eventName="labs_view" />
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border border-cyan-400/15 bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,.16),_transparent_38%),linear-gradient(145deg,#0f172a,#020617)] p-7 sm:p-10">
-          <div className="inline-flex rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-black uppercase tracking-[.2em] text-cyan-200">SERNEM Labs</div>
-          <h1 className="mt-5 max-w-4xl text-4xl font-black tracking-tight sm:text-6xl">
-            {isTr ? "HSE bilgini okuyarak değil, karar vererek geliştir." : "Build HSE skill by making decisions, not just reading."}
-          </h1>
-          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-300 sm:text-lg">
-            {isTr
-              ? "Challenge, simülasyon ve performans odaklı yeni SERNEM deneyimi. Free seni geri getirir. Premium seni geliştirir."
-              : "The new challenge, simulation and performance layer of SERNEM. Free makes you come back. Premium makes you better."}
-          </p>
-        </div>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {products.map((product) => {
-            const active = product.status === "live" && product.href;
-            const content = (
-              <div className={`h-full rounded-3xl border p-6 transition ${active ? "border-cyan-400/25 bg-slate-900 hover:-translate-y-1 hover:border-cyan-300/50" : "border-white/10 bg-slate-900/70"}`}>
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-sm font-black text-cyan-200">{product.title.slice(0, 2).toUpperCase()}</div>
-                  <div className="flex gap-2">
-                    {product.premium && <span className="rounded-full bg-amber-300/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-200">Premium</span>}
-                    <span className={`rounded-full px-2.5 py-1 text-[10px] font-black uppercase tracking-wider ${active ? "bg-emerald-300/10 text-emerald-200" : "bg-white/5 text-slate-400"}`}>
-                      {active ? (isTr ? "Oyna" : "Play") : (isTr ? "Yakında" : "Soon")}
-                    </span>
-                  </div>
-                </div>
-                <h2 className="mt-8 text-2xl font-black tracking-tight">{product.title}</h2>
-                <p className="mt-3 text-sm leading-6 text-slate-400">{isTr ? product.descTr : product.descEn}</p>
-                {active && <div className="mt-7 text-sm font-black text-cyan-300">{isTr ? "Challenge'a başla" : "Start challenge"} →</div>}
-              </div>
-            );
-
-            return active ? <Link key={product.id} href={`/${locale}/labs/${product.href}`}>{content}</Link> : <div key={product.id}>{content}</div>;
-          })}
-        </div>
+      <div className={s.background} aria-hidden="true">
+        <video
+          className={s.backgroundVideo}
+          src="/videos/sernem-refinery-hero.mp4"
+          poster="/images/sernem-hero-refinery.png"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+          preload="metadata"
+          disablePictureInPicture
+        />
+        <div className={s.videoScrim} />
+        <div className={s.videoFade} />
       </div>
+
+      <section className={s.hero} aria-labelledby="labs-title">
+        <div className={s.container}>
+          <div className={s.heroGrid}>
+            <div className={s.heroCopy}>
+              <p className={s.eyebrow}><span className={s.signal} /> SERNEM / HSE LABS</p>
+              <h1 id="labs-title">
+                {isTr ? "Gözünü eğit." : "Train your eye."}<br />
+                <em>{isTr ? "Saha kararını güçlendir." : "Strengthen field judgment."}</em>
+              </h1>
+              <p className={s.lead}>
+                {isTr
+                  ? "Gerçek endüstriyel risklerden ilham alan etkileşimli HSE challenge'ları. Tehlike farkındalığını, karar kalitesini ve saha refleksini aktif olarak test et."
+                  : "Interactive HSE challenges inspired by real industrial risk. Actively test hazard recognition, decision quality and field awareness."}
+              </p>
+              <div className={s.actions}>
+                <Link className={s.primaryAction} href={`/${locale}/labs/spot-the-hazard`}>
+                  {isTr ? "Visual Test Challenge'ı Aç" : "Open Visual Test Challenge"}
+                  <ArrowRight size={18} />
+                </Link>
+                <a className={s.secondaryAction} href="#labs-modules">
+                  {isTr ? "Modülleri Gör" : "Explore Modules"}
+                </a>
+              </div>
+            </div>
+
+            <div className={s.heroPanel}>
+              <div className={s.panelTop}>
+                <span>LAB / 001</span>
+                <span className={s.liveDot}>{isTr ? "CANLI" : "LIVE"}</span>
+              </div>
+              <div className={s.panelIcon}><ScanSearch size={32} /></div>
+              <p className={s.panelKicker}>VISUAL HAZARD RECOGNITION</p>
+              <h2>Spot the Hazard</h2>
+              <p>{isTr ? "5 endüstriyel sahne · gerçek görsel tespit · anlık saha değerlendirmesi" : "5 industrial scenes · visual findings · immediate field review"}</p>
+              <Link href={`/${locale}/labs/spot-the-hazard`} className={s.panelLink}>
+                {isTr ? "Teste başla" : "Start test"} <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+
+          <div className={s.heroFoot}>
+            <span>01 — VISUAL AWARENESS</span>
+            <span>02 — DECISION QUALITY</span>
+            <span>03 — FIELD JUDGMENT</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="labs-modules" className={s.modules}>
+        <div className={s.container}>
+          <div className={s.sectionHeading}>
+            <div>
+              <p className={s.eyebrow}><span className={s.signal} /> 01 / {isTr ? "EĞİTİM MODÜLLERİ" : "TRAINING MODULES"}</p>
+              <h2>{isTr ? "Okumaktan fazlası." : "More than reading."}<br /><em>{isTr ? "Aktif olarak test et." : "Actively tested."}</em></h2>
+            </div>
+            <p>
+              {isTr
+                ? "HSE Labs kademeli olarak açılıyor. Şu anda Visual Test Challenge canlı; diğer modüller kalite kontrolü tamamlandıkça aktif edilecek."
+                : "HSE Labs is opening in stages. The Visual Test Challenge is live now; additional modules will unlock after quality validation."}
+            </p>
+          </div>
+
+          <div className={s.grid}>
+            {products.map((product) => {
+              const card = (
+                <article className={`${s.card} ${product.active ? s.activeCard : s.soonCard}`}>
+                  <div className={s.cardTop}>
+                    <span className={s.cardIndex}>{product.index}</span>
+                    <div className={s.badges}>
+                      {product.premium && <span className={s.premiumBadge}><Sparkles size={12} /> PREMIUM</span>}
+                      <span className={product.active ? s.liveBadge : s.soonBadge}>
+                        {product.active ? (isTr ? "CANLI" : "LIVE") : (isTr ? "YAKINDA" : "COMING SOON")}
+                      </span>
+                    </div>
+                  </div>
+                  <p className={s.cardSubtitle}>{product.subtitle}</p>
+                  <h3>{product.title}</h3>
+                  <p className={s.cardDescription}>{isTr ? product.descTr : product.descEn}</p>
+                  <div className={s.cardFooter}>
+                    {product.active ? (
+                      <span>{isTr ? "Challenge'a başla" : "Start challenge"} <ArrowRight size={16} /></span>
+                    ) : (
+                      <span className={s.locked}><LockKeyhole size={15} /> {isTr ? "Geliştirme aşamasında" : "In development"}</span>
+                    )}
+                  </div>
+                </article>
+              );
+
+              return product.active && product.href ? (
+                <Link key={product.id} href={`/${locale}/labs/${product.href}`} className={s.cardLink}>{card}</Link>
+              ) : (
+                <div key={product.id} className={s.cardLink} aria-disabled="true">{card}</div>
+              );
+            })}
+          </div>
+
+          <div className={s.bottomStrip}>
+            <div>
+              <span className={s.eyebrow}>{isTr ? "SERNEM LABS / GELİŞİM" : "SERNEM LABS / DEVELOPMENT"}</span>
+              <strong>{isTr ? "Yeni modüller kontrollü şekilde açılacak." : "New modules will open deliberately."}</strong>
+            </div>
+            <p>{isTr ? "Boş veya yarım deneyim yayınlamıyoruz. Her modül saha mantığı, içerik ve kullanıcı akışı doğrulandıktan sonra canlıya alınacak." : "No empty or half-built experiences. Each module goes live only after its field logic, content and user flow are validated."}</p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
