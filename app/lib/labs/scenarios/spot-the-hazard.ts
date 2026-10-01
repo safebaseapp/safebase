@@ -47,20 +47,19 @@ const scenarios: LabScenario[] = [
     id: "sth-scaffold-platform-01-en",
     type: "spot_hazard",
     category: "scaffolding",
-    difficulty: "hard",
+    difficulty: "medium",
     language: "en",
     title: "Incomplete Scaffold Platform",
     scenario:
       "A scaffold is being used during maintenance work. Select only the unsafe conditions that are clearly visible in the image.",
     options: [
       { id: "gap", label: "The working platform contains a dangerous opening / gap" },
-      { id: "toe", label: "Toe-board protection is missing where objects could fall" },
       { id: "material", label: "Loose materials are stored close to the platform edge" },
     ],
-    correct_answer: ["gap", "toe", "material"],
+    correct_answer: ["gap", "material"],
     explanation:
-      "This scene has three unambiguous visual findings: a dangerous platform gap, missing toe-board protection and loose materials stored close to the edge. The previous scaffold-tag finding was removed because the tag status cannot be verified reliably from the image.",
-    xp: 30,
+      "Only two findings are treated as unambiguous in this image: a dangerous opening in the working platform and loose materials stored close to the edge. Toe-board and scaffold-tag findings were removed because the photograph does not support them clearly enough.",
+    xp: 20,
     premium: false,
   },
   {
@@ -151,20 +150,19 @@ const scenarios: LabScenario[] = [
     id: "sth-scaffold-platform-01-tr",
     type: "spot_hazard",
     category: "scaffolding",
-    difficulty: "hard",
+    difficulty: "medium",
     language: "tr",
     title: "Eksik İskele Platformu",
     scenario:
       "Bakım işinde kullanılan iskelede yalnızca görselde açıkça görülen güvensiz durumları seç.",
     options: [
       { id: "gap", label: "Çalışma platformunda tehlikeli açıklık / boşluk var" },
-      { id: "toe", label: "Cisim düşebilecek bölgede topuk tahtası koruması eksik" },
       { id: "material", label: "Gevşek malzemeler platform kenarına yakın tutuluyor" },
     ],
-    correct_answer: ["gap", "toe", "material"],
+    correct_answer: ["gap", "material"],
     explanation:
-      "Bu görselde üç tartışmasız tespit var: tehlikeli platform boşluğu, eksik topuk tahtası koruması ve kenara yakın gevşek malzemeler. Önceki iskele kartı maddesi, kartın statüsü fotoğraftan güvenilir şekilde okunamadığı için kaldırıldı.",
-    xp: 30,
+      "Bu fotoğrafta yalnızca iki tespit tartışmasız görünüyor: çalışma platformundaki tehlikeli açıklık ve kenara yakın bırakılan gevşek malzemeler. Topuk tahtası ve iskele kartı maddeleri fotoğraftan güvenilir biçimde doğrulanamadığı için kaldırıldı.",
+    xp: 20,
     premium: false,
   },
   {
