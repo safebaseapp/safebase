@@ -486,6 +486,7 @@
   }
 
   .heroPanel {
+    width: 100%;
     max-width: 560px;
   }
 
@@ -495,37 +496,182 @@
 }
 
 @media (max-width: 680px) {
+  .page {
+    overflow-x: clip;
+  }
+
+  .background {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 100svh;
+  }
+
+  .backgroundVideo {
+    min-height: 100%;
+    object-position: 58% center;
+    transform: scale(1.03);
+  }
+
+  .videoScrim {
+    background:
+      linear-gradient(180deg, rgba(2, 6, 23, .42) 0%, rgba(2, 6, 23, .68) 48%, rgba(2, 6, 23, .96) 100%),
+      linear-gradient(90deg, rgba(2, 6, 23, .88) 0%, rgba(2, 6, 23, .54) 100%);
+  }
+
   .container {
     width: min(100% - 22px, 1220px);
   }
 
   .hero {
-    padding-top: 62px;
+    min-height: auto;
+    padding: 52px 0 34px;
+  }
+
+  .heroGrid {
+    gap: 30px;
   }
 
   .hero h1 {
-    font-size: clamp(43px, 15vw, 62px);
+    margin-top: 18px;
+    font-size: clamp(42px, 14vw, 58px);
+    line-height: .96;
+  }
+
+  .lead {
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 1.65;
   }
 
   .actions {
     flex-direction: column;
+    margin-top: 26px;
   }
 
   .primaryAction,
   .secondaryAction {
     width: 100%;
+    min-height: 48px;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
+  .heroPanel {
+    max-width: none;
+    border-radius: 22px;
+    padding: 20px;
   }
 
-  .card {
-    min-height: 310px;
+  .panelIcon {
+    width: 56px;
+    height: 56px;
+    margin-top: 28px;
+    border-radius: 17px;
+  }
+
+  .heroPanel h2 {
+    font-size: 30px;
+  }
+
+  .panelStats {
+    gap: 6px;
+  }
+
+  .panelStats span {
+    padding: 9px 8px;
+    font-size: 8px;
+    letter-spacing: .05em;
+  }
+
+  .panelStats b {
+    font-size: 14px;
   }
 
   .heroFoot {
     gap: 10px 18px;
+    margin-top: 34px;
+    font-size: 9px;
+  }
+
+  .modules {
+    padding: 64px 0 72px;
+  }
+
+  .sectionHeading {
+    gap: 22px;
+  }
+
+  .sectionHeading h2 {
+    margin-top: 16px;
+    font-size: clamp(38px, 12vw, 48px);
+    line-height: .98;
+  }
+
+  .sectionHeading > p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .card {
+    min-height: 292px;
+    border-radius: 22px;
+    padding: 20px;
+  }
+
+  .card h3 {
+    font-size: 25px;
+  }
+
+  .cardDescription {
+    margin-top: 15px;
+    line-height: 1.65;
+  }
+
+  .cardFooter {
+    inset: auto 20px 20px 20px;
+  }
+
+  .bottomStrip {
+    margin-top: 18px;
+    border-radius: 20px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 390px) {
+  .container {
+    width: min(100% - 18px, 1220px);
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: .14em;
+  }
+
+  .panelStats span {
+    padding: 8px 6px;
+  }
+
+  .panelStats b {
+    font-size: 13px;
+  }
+
+  .badges {
+    gap: 5px;
+  }
+
+  .premiumBadge,
+  .soonBadge {
+    padding: 5px 7px;
+    font-size: 8px;
   }
 }
 
