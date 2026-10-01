@@ -26,12 +26,7 @@ type AttemptResponse = {
   };
 };
 
-type Marker = {
-  id: string;
-  x: number;
-  y: number;
-  kind: "found" | "miss";
-};
+type ScenePoint = { x: number; y: number };
 
 export default function SpotTheHazardGame({ scenario, locale, index, total, nextHref }: Props) {
   const isTr = locale === "tr";
@@ -43,7 +38,8 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
   const [firstCompletion, setFirstCompletion] = useState<boolean | null>(null);
   const [progress, setProgress] = useState<AttemptResponse["progress"]>();
   const [imageFailed, setImageFailed] = useState(false);
-  const [markers, setMarkers] = useState<Marker[]>([]);
+  const [foundMarkers, setFoundMarkers] = useState<Record<string, ScenePoint>>({});
+  const [missPoint, setMissPoint] = useState<ScenePoint | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
 
   const options = scenario.options ?? [];
@@ -71,7 +67,8 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
     setSaved(null);
     setFirstCompletion(null);
     setProgress(undefined);
-    setMarkers([]);
+    setFoundMarkers({});
+    setMissPoint(null);
     setFeedback(null);
 
     void trackUserEvent("lab_scenario_view", {
@@ -83,14 +80,26 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
     });
   }, [scenario.id, scenario.type, scenario.category, scenario.difficulty, locale]);
 
-  function findHitHotspot(x: number, y: number) {
+  function hotspotWasHit(hotspot: LabHotspot, point: ScenePoint, width: number, height: number) {
+    const dx = ((point.x - hotspot.x) / 100) * width;
+    const dy = ((point.y - hotspot.y) / 100) * height;
+    const radiusPx = (hotspot.radius / 100) * Math.min(width, height);
+    return Math.hypot(dx, dy) <= radiusPx;
+  }
+
+  function findHitHotspot(point: ScenePoint, width: number, height: number) {
     let best: (LabHotspot & { distance: number }) | null = null;
+
     for (const hotspot of hotspots) {
-      const distance = Math.hypot(hotspot.x - x, hotspot.y - y);
-      if (distance <= hotspot.radius && (!best || distance < best.distance)) {
-        best = { ...hotspot, distance };
-      }
+      if (!answerIds.includes(hotspot.id)) continue;
+      if (!hotspotWasHit(hotspot, point, width, height)) continue;
+
+      const dx = ((point.x - hotspot.x) / 100) * width;
+      const dy = ((point.y - hotspot.y) / 100) * height;
+      const distance = Math.hypot(dx, dy);
+      if (!best || distance < best.distance) best = { ...hotspot, distance };
     }
+
     return best;
   }
 
@@ -100,15 +109,14 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
     const rect = event.currentTarget.getBoundingClientRect();
     if (!rect.width || !rect.height) return;
 
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
-    const hit = findHitHotspot(x, y);
+    const point = {
+      x: ((event.clientX - rect.left) / rect.width) * 100,
+      y: ((event.clientY - rect.top) / rect.height) * 100,
+    };
+    const hit = findHitHotspot(point, rect.width, rect.height);
 
     if (!hit) {
-      setMarkers((current) => [
-        ...current,
-        { id: `miss-${Date.now()}-${current.length}`, x, y, kind: "miss" },
-      ]);
+      setMissPoint(point);
       setFeedback(
         isTr
           ? "Bu noktada tanımlı bir tehlike yok. Görseli tekrar incele."
@@ -118,16 +126,15 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
     }
 
     if (selected.includes(hit.id)) {
-      setFeedback(isTr ? "Bu tehlike zaten işaretlendi." : "That hazard has already been marked.");
+      setMissPoint(null);
+      setFeedback(isTr ? "Bu tehlike zaten bulundu." : "That hazard has already been found.");
       return;
     }
 
+    setMissPoint(null);
     setSelected((current) => [...current, hit.id]);
-    setMarkers((current) => [
-      ...current,
-      { id: `found-${hit.id}`, x: hit.x, y: hit.y, kind: "found" },
-    ]);
-    setFeedback(isTr ? "Tehlike işaretlendi." : "Hazard marked.");
+    setFoundMarkers((current) => ({ ...current, [hit.id]: point }));
+    setFeedback(isTr ? "Tehlike bulundu." : "Hazard found.");
 
     void trackUserEvent("lab_hazard_found", {
       scenario_id: scenario.id,
@@ -145,6 +152,7 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
     setSaving(true);
     setSaved(null);
     setServerResult(null);
+    setMissPoint(null);
 
     void trackUserEvent("lab_answer_submit", {
       scenario_id: scenario.id,
@@ -199,7 +207,8 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
     setSaved(null);
     setFirstCompletion(null);
     setProgress(undefined);
-    setMarkers([]);
+    setFoundMarkers({});
+    setMissPoint(null);
     setFeedback(null);
   }
 
@@ -235,15 +244,24 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
                             className="block h-full w-full object-contain [image-rendering:auto]"
                           />
 
-                          {markers.map((marker) => (
+                          {Object.entries(foundMarkers).map(([id, point]) => (
                             <span
-                              key={marker.id}
-                              className={`pointer-events-none absolute z-10 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 text-xl font-black shadow-lg ${marker.kind === "found" ? "border-emerald-300 bg-emerald-400/20 text-emerald-200" : "border-rose-400 bg-rose-500/15 text-rose-300"}`}
-                              style={{ left: `${marker.x}%`, top: `${marker.y}%` }}
+                              key={id}
+                              className="pointer-events-none absolute z-10 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-emerald-300 bg-emerald-400/20 text-xl font-black text-emerald-200 shadow-lg"
+                              style={{ left: `${point.x}%`, top: `${point.y}%` }}
                             >
-                              {marker.kind === "found" ? "✓" : "×"}
+                              ✓
                             </span>
                           ))}
+
+                          {missPoint && !submitted && (
+                            <span
+                              className="pointer-events-none absolute z-10 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-rose-400 bg-rose-500/15 text-base font-black text-rose-300"
+                              style={{ left: `${missPoint.x}%`, top: `${missPoint.y}%` }}
+                            >
+                              ×
+                            </span>
+                          )}
                         </button>
 
                         <div className="pointer-events-none absolute left-5 top-5 rounded-full border border-white/20 bg-slate-950/80 px-3 py-1 text-[11px] font-black uppercase tracking-[.18em]">SERNEM ORIGINAL SCENE</div>
@@ -277,14 +295,14 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
                 {!submitted ? (
                   <div className="mt-2 flex items-end gap-2">
                     <div className="text-4xl font-black text-cyan-300">{selected.length}</div>
-                    <div className="pb-1 text-sm text-slate-400">{isTr ? "işaretlendi" : "marked"}</div>
+                    <div className="pb-1 text-sm text-slate-400">{isTr ? "bulundu" : "found"}</div>
                   </div>
                 ) : (
                   <div className="mt-2 text-4xl font-black text-cyan-300">
                     {result?.correctCount ?? selected.length}<span className="text-base text-slate-500"> / {answerIds.length}</span>
                   </div>
                 )}
-                <p className="mt-2 text-xs leading-5 text-slate-500">{isTr ? "Her tehlike yalnızca bir kez sayılır. Yanlış tıklamalar puan kazandırmaz." : "Each hazard can only be counted once. Wrong clicks do not earn points."}</p>
+                <p className="mt-2 text-xs leading-5 text-slate-500">{isTr ? "Her tehlike yalnızca bir kez sayılır. Yanlış tıklamalar puan kazandırmaz ve yalnızca son yanlış nokta gösterilir." : "Each hazard can only be counted once. Wrong clicks do not earn points and only the latest miss is shown."}</p>
                 {feedback && <div className="mt-4 rounded-xl border border-white/10 bg-white/[.03] px-3 py-2 text-sm text-slate-300">{feedback}</div>}
               </div>
 
@@ -293,7 +311,7 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
                   <button type="button" disabled={!selected.length || saving} onClick={submitAttempt} className="w-full rounded-2xl bg-cyan-300 px-5 py-4 text-sm font-black text-slate-950 disabled:opacity-40">
                     {saving ? (isTr ? "Kontrol ediliyor..." : "Checking...") : (isTr ? "Tespitleri değerlendir" : "Evaluate findings")}
                   </button>
-                  {markers.length > 0 && (
+                  {(selected.length > 0 || missPoint) && (
                     <button type="button" onClick={resetAttempt} className="w-full rounded-2xl border border-white/10 px-4 py-3 text-sm font-bold text-slate-300">
                       {isTr ? "İşaretleri sıfırla" : "Reset marks"}
                     </button>
@@ -328,14 +346,24 @@ export default function SpotTheHazardGame({ scenario, locale, index, total, next
                     {saved === false && <p className="mt-3 text-xs text-slate-500">{isTr ? "Giriş yapılmadıysa ilerleme kaydedilmez." : "Progress is not stored when signed out."}</p>}
                   </div>
 
-                  {isFinalChallenge && <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4 text-sm font-bold text-cyan-100">{isTr ? `${total}/${total} görev tamamlandı` : `${total}/${total} challenges completed`}</div>}
+                  {isFinalChallenge && (
+                    <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-4 text-sm font-bold text-cyan-100">
+                      {isTr ? `${total}/${total} görev tamamlandı` : `${total}/${total} challenges completed`}
+                    </div>
+                  )}
 
                   <div className="flex gap-3">
-                    <button type="button" onClick={resetAttempt} className="flex-1 rounded-2xl border border-white/10 px-4 py-3 text-sm font-bold">{isTr ? "Tekrar dene" : "Try again"}</button>
+                    <button type="button" onClick={resetAttempt} className="flex-1 rounded-2xl border border-white/10 px-4 py-3 text-sm font-bold">
+                      {isTr ? "Tekrar dene" : "Try again"}
+                    </button>
                     {nextHref ? (
-                      <a href={nextHref} className="flex-1 rounded-2xl bg-cyan-300 px-4 py-3 text-center text-sm font-black text-slate-950">{isTr ? "Sonraki görev" : "Next challenge"} →</a>
+                      <a href={nextHref} className="flex-1 rounded-2xl bg-cyan-300 px-4 py-3 text-center text-sm font-black text-slate-950">
+                        {isTr ? "Sonraki görev" : "Next challenge"} →
+                      </a>
                     ) : (
-                      <a href={`/${locale}/labs`} className="flex-1 rounded-2xl bg-cyan-300 px-4 py-3 text-center text-sm font-black text-slate-950">{isTr ? "Labs'e dön" : "Back to Labs"} →</a>
+                      <a href={`/${locale}/labs`} className="flex-1 rounded-2xl bg-cyan-300 px-4 py-3 text-center text-sm font-black text-slate-950">
+                        {isTr ? "Labs'e dön" : "Back to Labs"} →
+                      </a>
                     )}
                   </div>
                 </div>
