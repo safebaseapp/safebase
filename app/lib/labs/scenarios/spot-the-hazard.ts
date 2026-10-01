@@ -8,24 +8,20 @@ const scenarios: LabScenario[] = [
     difficulty: "medium",
     language: "en",
     title: "Pipe Rack Maintenance",
-    scenario: "A maintenance crew is working from an elevated pipe rack. Select every unsafe condition that should be addressed before work continues.",
+    scenario:
+      "A technician is working from an elevated pipe-rack platform. Select the visible unsafe conditions that should be corrected before work continues.",
     options: [
-      { id: "no-tieoff", label: "One worker is not connected to an approved anchor point" },
-      { id: "loose-tools", label: "Loose hand tools are positioned where they can fall to a lower level" },
-      { id: "open-edge", label: "The work position has an exposed edge without collective fall protection" },
-      { id: "proper-helmet", label: "A second worker is wearing a chin-strap safety helmet correctly" },
-      { id: "access", label: "Access to the elevated work position is improvised and not clearly controlled" }
+      { id: "no-tieoff", label: "The worker at height is not connected to an approved anchor point" },
+      { id: "loose-tools", label: "Loose hand tools are left where they could fall to a lower level" },
+      { id: "open-edge", label: "The work position includes an exposed edge without collective fall protection" },
+      { id: "proper-ppe", label: "The worker is wearing normal site PPE" },
+      { id: "access", label: "The access ladder is improvised and not safely set for the platform" },
     ],
     correct_answer: ["no-tieoff", "loose-tools", "open-edge", "access"],
-    hazards: [
-      { id: "no-tieoff", label: "Unprotected work at height", explanation: "A fall-arrest system only protects the worker when it is connected to a suitable anchor.", severity: "critical" },
-      { id: "loose-tools", label: "Dropped-object exposure", explanation: "Unsecured tools can strike workers below. Tool retention or exclusion controls are required.", severity: "high" },
-      { id: "open-edge", label: "Open-edge exposure", explanation: "Where practicable, guardrails or another collective control should protect the exposed edge.", severity: "critical" },
-      { id: "access", label: "Unsafe access", explanation: "Access must be planned and suitable for the work position rather than improvised on site.", severity: "high" }
-    ],
-    explanation: "The scene contains four hazards. Correct PPE alone does not make the work position safe.",
+    explanation:
+      "The scene should be read visually: the unprotected edge, the unsecured access ladder, the dropped-object exposure and the lack of tie-off all need action before work continues.",
     xp: 20,
-    premium: false
+    premium: false,
   },
   {
     id: "sth-hotwork-refinery-01-en",
@@ -33,19 +29,21 @@ const scenarios: LabScenario[] = [
     category: "hot_work",
     difficulty: "medium",
     language: "en",
-    title: "Refinery Cutting Operation",
-    scenario: "A worker is carrying out cutting work in an operating industrial area. Identify the unsafe conditions.",
+    title: "Refinery Hot Work",
+    scenario:
+      "A worker is grinding in an operating industrial area. Select the visible unsafe conditions in the scene.",
     options: [
-      { id: "combustibles", label: "Combustible material remains inside the spark travel area" },
-      { id: "firewatch", label: "No dedicated fire watch is visible for the task" },
-      { id: "cylinder", label: "Gas cylinders are unsecured beside the work area" },
-      { id: "shield", label: "The worker is using appropriate face and eye protection" },
-      { id: "barrier", label: "The hot-work boundary is not clearly controlled from passers-by" }
+      { id: "combustibles", label: "Combustible materials remain inside the spark travel area" },
+      { id: "cylinder", label: "Gas cylinders are standing unsecured beside the work table" },
+      { id: "trip", label: "A power lead or hose is creating a trip hazard around the task" },
+      { id: "shield", label: "The worker is using suitable face and eye protection" },
+      { id: "segregation", label: "The hot-work area is not screened or effectively segregated from nearby traffic" },
     ],
-    correct_answer: ["combustibles", "firewatch", "cylinder", "barrier"],
-    explanation: "Hot work needs more than PPE: ignition sources, combustibles, cylinder control, fire watch and area segregation must all be managed.",
+    correct_answer: ["combustibles", "cylinder", "trip", "segregation"],
+    explanation:
+      "This challenge is visual: sparks can reach combustibles, cylinders are unsecured, the lead around the task creates trip exposure, and the work area is not clearly segregated from surrounding traffic.",
     xp: 20,
-    premium: false
+    premium: false,
   },
   {
     id: "sth-scaffold-platform-01-en",
@@ -53,19 +51,21 @@ const scenarios: LabScenario[] = [
     category: "scaffolding",
     difficulty: "hard",
     language: "en",
-    title: "Incomplete Working Platform",
-    scenario: "A scaffold is being used during maintenance work. Select the conditions that require action.",
+    title: "Incomplete Scaffold Platform",
+    scenario:
+      "A scaffold is being used during maintenance work. Select the visible conditions that require action.",
     options: [
-      { id: "tag", label: "The scaffold status/tag is missing or not visible at the access point" },
-      { id: "gap", label: "The working platform has an unsafe gap" },
-      { id: "toe", label: "Toe-board protection is incomplete where materials could fall" },
+      { id: "tag", label: "The scaffold status tag at the access point is blank or not clearly displayed" },
+      { id: "gap", label: "The working platform contains an unsafe gap" },
+      { id: "toe", label: "Toe-board protection is missing where materials could fall" },
       { id: "ladder", label: "The internal access ladder is properly secured" },
-      { id: "material", label: "Loose materials are stored at the platform edge" }
+      { id: "material", label: "Loose materials are stored at the platform edge" },
     ],
     correct_answer: ["tag", "gap", "toe", "material"],
-    explanation: "Scaffold condition, access status and dropped-object controls need to be checked together before use.",
+    explanation:
+      "The visible issues are the unsafe platform gap, the incomplete edge protection for dropped objects, loose materials at the edge and the unclear scaffold status tag at the access point.",
     xp: 30,
-    premium: false
+    premium: false,
   },
   {
     id: "sth-lifting-load-01-en",
@@ -74,18 +74,20 @@ const scenarios: LabScenario[] = [
     difficulty: "hard",
     language: "en",
     title: "Suspended Load Zone",
-    scenario: "A load is being moved by crane near an active work area. Identify the unsafe conditions.",
+    scenario:
+      "A load is being moved by crane near an active work area. Select the visible unsafe conditions.",
     options: [
       { id: "underload", label: "A worker is standing inside the suspended-load danger zone" },
-      { id: "tagline", label: "The load is being controlled with a suitable tag line from a safe position" },
-      { id: "barricade", label: "The lifting area is not effectively segregated" },
+      { id: "tagline", label: "The load is being controlled from a safe position with a proper tag line" },
+      { id: "barricade", label: "The lifting area is only partly coned off and not effectively segregated" },
       { id: "hands", label: "A worker is trying to guide the load directly by hand" },
-      { id: "sling", label: "One sling is bearing against a sharp edge without visible protection" }
+      { id: "sling", label: "A sling is bearing against a sharp edge without visible protection" },
     ],
     correct_answer: ["underload", "barricade", "hands", "sling"],
-    explanation: "Line-of-fire control is central to lifting safety. People should remain outside the load path and rigging must be protected from damage.",
+    explanation:
+      "The danger is visible in the scene: one worker is in the load path, the exclusion zone is incomplete, one worker is hand-guiding the load, and the sling contacts a sharp edge without protection.",
     xp: 30,
-    premium: false
+    premium: false,
   },
   {
     id: "sth-confined-entry-01-en",
@@ -93,19 +95,21 @@ const scenarios: LabScenario[] = [
     category: "confined_space",
     difficulty: "hard",
     language: "en",
-    title: "Vessel Entry Preparation",
-    scenario: "A team is preparing to enter a vessel. Select the conditions that would prevent a safe entry.",
+    title: "Confined Space Entry Setup",
+    scenario:
+      "A team is preparing for vessel entry. Select the visible missing controls or unsafe conditions around the manway.",
     options: [
-      { id: "gas", label: "No current atmospheric test result is available at the entry point" },
-      { id: "attendant", label: "A trained attendant is positioned outside the opening" },
-      { id: "isolation", label: "An energy line connected to the vessel is not positively isolated" },
-      { id: "rescue", label: "The rescue arrangement has not been confirmed before entry" },
-      { id: "permit", label: "The entry permit is incomplete for the planned work" }
+      { id: "entry-board", label: "No gas-test or permit information is displayed at the entry point" },
+      { id: "lanyard", label: "The entrant is wearing a harness but is not connected to a retrieval line" },
+      { id: "rescue", label: "No dedicated retrieval or rescue device is positioned for the entry" },
+      { id: "attendant", label: "Another worker is present outside the opening" },
+      { id: "manway", label: "The open manway is left without local barricade or cover protection" },
     ],
-    correct_answer: ["gas", "isolation", "rescue", "permit"],
-    explanation: "Atmospheric testing, isolation, permit control and rescue readiness are critical entry controls. An attendant alone is not enough.",
+    correct_answer: ["entry-board", "lanyard", "rescue", "manway"],
+    explanation:
+      "This scene should also be solved visually: the opening itself is unprotected, the entrant is not connected to a retrieval line, there is no visible rescue setup, and no gas-test or permit display is shown at the entry.",
     xp: 30,
-    premium: false
+    premium: false,
   },
   {
     id: "sth-wah-piperack-01-tr",
@@ -114,18 +118,20 @@ const scenarios: LabScenario[] = [
     difficulty: "medium",
     language: "tr",
     title: "Pipe Rack Bakım Çalışması",
-    scenario: "Bir bakım ekibi yükseltilmiş pipe rack üzerinde çalışıyor. Çalışma devam etmeden önce düzeltilmesi gereken tüm güvensiz durumları seç.",
+    scenario:
+      "Bir teknisyen yükseltilmiş pipe-rack platformunda çalışıyor. Görselde doğrudan görülen ve çalışma devam etmeden önce düzeltilmesi gereken güvensiz durumları seç.",
     options: [
-      { id: "no-tieoff", label: "Bir çalışan uygun ankraj noktasına bağlı değil" },
+      { id: "no-tieoff", label: "Yüksekte çalışan kişi uygun ankraj noktasına bağlı değil" },
       { id: "loose-tools", label: "El aletleri alt seviyeye düşebilecek şekilde bırakılmış" },
       { id: "open-edge", label: "Çalışma noktasında toplu düşme koruması olmayan açık kenar var" },
-      { id: "proper-helmet", label: "İkinci çalışan çene bağlı baretini doğru kullanıyor" },
-      { id: "access", label: "Yüksek çalışma alanına erişim doğaçlama ve kontrolsüz" }
+      { id: "proper-ppe", label: "Çalışan temel saha PPE'sini doğru kullanıyor" },
+      { id: "access", label: "Erişim merdiveni doğaçlama kurulmuş ve platform için güvenli değil" },
     ],
     correct_answer: ["no-tieoff", "loose-tools", "open-edge", "access"],
-    explanation: "Sahnede dört tehlike var. Doğru PPE kullanımı tek başına çalışma alanını güvenli hale getirmez.",
+    explanation:
+      "Bu sahnede tehlikeler görsel olarak okunmalı: açık kenar, kontrolsüz erişim merdiveni, düşebilecek el aletleri ve bağlantısız yüksekte çalışma aynı anda aksiyon gerektirir.",
     xp: 20,
-    premium: false
+    premium: false,
   },
   {
     id: "sth-hotwork-refinery-01-tr",
@@ -134,18 +140,20 @@ const scenarios: LabScenario[] = [
     difficulty: "medium",
     language: "tr",
     title: "Rafineri Sıcak Çalışması",
-    scenario: "Bir çalışan işletmedeki endüstriyel alanda kesme işi yapıyor. Güvensiz durumları seç.",
+    scenario:
+      "Bir çalışan endüstriyel sahada taşlama yapıyor. Görselde doğrudan görülen güvensiz durumları seç.",
     options: [
-      { id: "combustibles", label: "Kıvılcım alanında yanıcı malzeme bulunuyor" },
-      { id: "firewatch", label: "Görev için atanmış yangın gözcüsü görünmüyor" },
-      { id: "cylinder", label: "Gaz tüpleri çalışma alanı yanında sabitlenmeden duruyor" },
+      { id: "combustibles", label: "Kıvılcım sıçrama alanında yanıcı malzemeler duruyor" },
+      { id: "cylinder", label: "Gaz tüpleri çalışma masası yanında sabitlenmeden duruyor" },
+      { id: "trip", label: "Elektrik kablosu veya hortum çalışma çevresinde takılma riski oluşturuyor" },
       { id: "shield", label: "Çalışan uygun yüz ve göz koruması kullanıyor" },
-      { id: "barrier", label: "Sıcak çalışma alanı diğer kişilerden yeterince ayrılmamış" }
+      { id: "segregation", label: "Sıcak çalışma alanı çevredeki geçişlerden yeterince ayrılmamış" },
     ],
-    correct_answer: ["combustibles", "firewatch", "cylinder", "barrier"],
-    explanation: "Sıcak çalışma yalnızca PPE değildir; yanıcılar, tüpler, yangın gözcüsü ve alan kontrolü birlikte yönetilmelidir.",
+    correct_answer: ["combustibles", "cylinder", "trip", "segregation"],
+    explanation:
+      "Bu görev görsel okumaya dayanıyor: yanıcı malzeme kıvılcım alanında, tüpler sabitlenmemiş, kablo veya hortum takılma riski yaratıyor ve sıcak çalışma alanı çevreden net şekilde ayrılmamış.",
     xp: 20,
-    premium: false
+    premium: false,
   },
   {
     id: "sth-scaffold-platform-01-tr",
@@ -154,18 +162,20 @@ const scenarios: LabScenario[] = [
     difficulty: "hard",
     language: "tr",
     title: "Eksik İskele Platformu",
-    scenario: "Bakım işinde kullanılan iskelede aksiyon gerektiren durumları seç.",
+    scenario:
+      "Bakım işinde kullanılan iskelede, görselde doğrudan görülen ve aksiyon gerektiren durumları seç.",
     options: [
-      { id: "tag", label: "Erişim noktasında iskele kartı/statüsü görünmüyor" },
+      { id: "tag", label: "Erişim noktasındaki iskele kartı/statüsü boş veya net görünmüyor" },
       { id: "gap", label: "Çalışma platformunda tehlikeli boşluk var" },
       { id: "toe", label: "Malzeme düşebilecek bölgede topuk tahtası eksik" },
       { id: "ladder", label: "İç erişim merdiveni uygun şekilde sabitlenmiş" },
-      { id: "material", label: "Gevşek malzemeler platform kenarında tutuluyor" }
+      { id: "material", label: "Gevşek malzemeler platform kenarında tutuluyor" },
     ],
     correct_answer: ["tag", "gap", "toe", "material"],
-    explanation: "İskele güvenliği; statü, platform bütünlüğü, erişim ve düşen cisim kontrollerinin birlikte doğrulanmasını gerektirir.",
+    explanation:
+      "Bu sahnede görülen eksikler; tehlikeli platform boşluğu, düşen cisim riskine karşı eksik kenar koruması, kenarda tutulan gevşek malzemeler ve erişim noktasında net olmayan iskele statüsüdür.",
     xp: 30,
-    premium: false
+    premium: false,
   },
   {
     id: "sth-lifting-load-01-tr",
@@ -174,18 +184,20 @@ const scenarios: LabScenario[] = [
     difficulty: "hard",
     language: "tr",
     title: "Askıdaki Yük Alanı",
-    scenario: "Vinçle taşınan bir yük aktif çalışma alanının yakınından geçiyor. Güvensiz durumları seç.",
+    scenario:
+      "Vinçle taşınan bir yük aktif çalışma alanının yakınından geçiyor. Görselde doğrudan görülen güvensiz durumları seç.",
     options: [
       { id: "underload", label: "Bir çalışan askıdaki yükün tehlike alanında duruyor" },
       { id: "tagline", label: "Yük güvenli mesafeden uygun tag line ile kontrol ediliyor" },
-      { id: "barricade", label: "Kaldırma alanı etkili şekilde izole edilmemiş" },
+      { id: "barricade", label: "Kaldırma alanı sadece kısmen konilerle çevrilmiş ve etkili biçimde izole edilmemiş" },
       { id: "hands", label: "Bir çalışan yüke doğrudan eliyle yön vermeye çalışıyor" },
-      { id: "sling", label: "Bir sapan keskin kenara korumasız temas ediyor" }
+      { id: "sling", label: "Bir sapan keskin kenara korumasız temas ediyor" },
     ],
     correct_answer: ["underload", "barricade", "hands", "sling"],
-    explanation: "Kaldırma operasyonunda line-of-fire kontrolü esastır. Çalışanlar yük yolundan uzak tutulmalı ve sapanlar hasara karşı korunmalıdır.",
+    explanation:
+      "Görselde tehlikeler net: bir çalışan yük yolunda duruyor, kaldırma alanı eksik izole edilmiş, biri yükü eliyle yönlendiriyor ve sapan korumasız şekilde keskin kenara temas ediyor.",
     xp: 30,
-    premium: false
+    premium: false,
   },
   {
     id: "sth-confined-entry-01-tr",
@@ -194,19 +206,21 @@ const scenarios: LabScenario[] = [
     difficulty: "hard",
     language: "tr",
     title: "Kapalı Alan Giriş Hazırlığı",
-    scenario: "Bir ekip vessel içine giriş hazırlığı yapıyor. Güvenli girişi engelleyen durumları seç.",
+    scenario:
+      "Bir ekip vessel girişine hazırlanıyor. Manway çevresinde görselde doğrudan fark edilen eksik kontrolleri veya güvensiz durumları seç.",
     options: [
-      { id: "gas", label: "Giriş noktasında güncel gaz ölçüm sonucu yok" },
-      { id: "attendant", label: "Eğitimli gözcü giriş dışında görev yapıyor" },
-      { id: "isolation", label: "Vessel'a bağlı enerji hattı pozitif olarak izole edilmemiş" },
-      { id: "rescue", label: "Giriş öncesi kurtarma düzeni doğrulanmamış" },
-      { id: "permit", label: "Giriş izni planlanan iş için eksik" }
+      { id: "entry-board", label: "Giriş noktasında gaz ölçümü veya permit bilgisini gösteren bir pano yok" },
+      { id: "lanyard", label: "Girecek çalışan harness giyiyor ancak retrieval hattına bağlı değil" },
+      { id: "rescue", label: "Giriş için konumlandırılmış özel kurtarma / retrieval ekipmanı görünmüyor" },
+      { id: "attendant", label: "Açıklığın dışında başka bir çalışan bulunuyor" },
+      { id: "manway", label: "Açık manway etrafında yerel bariyer veya kapak koruması yok" },
     ],
-    correct_answer: ["gas", "isolation", "rescue", "permit"],
-    explanation: "Gaz ölçümü, izolasyon, permit ve kurtarma hazırlığı kritik giriş kontrolleridir. Sadece gözcü bulunması yeterli değildir.",
+    correct_answer: ["entry-board", "lanyard", "rescue", "manway"],
+    explanation:
+      "Bu sahne de görsel okunmalı: açıklık korunmuyor, giriş yapacak kişi retrieval hattına bağlı değil, kurtarma düzeni görünmüyor ve giriş noktasında gaz ölçümü / permit bilgisini gösteren pano bulunmuyor.",
     xp: 30,
-    premium: false
-  }
+    premium: false,
+  },
 ];
 
 export function getSpotTheHazardScenarios(locale: LabLocale) {
