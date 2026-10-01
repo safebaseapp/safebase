@@ -7,12 +7,14 @@ import type { LabCategory, LabHotspot } from "@/lib/labs/types";
 
 type Props = { params: Promise<{ locale: string; scenarioId: string }> };
 
+// Restore the high-resolution Firefly scenes that produced the best visual result.
+// These are auth-free Adobe rendition links for the generated 2688x1536 assets.
 const sceneByCategory: Partial<Record<LabCategory, string>> = {
-  working_at_height: "/labs/spot-the-hazard/pipe-rack-final.jpg",
-  hot_work: "/labs/spot-the-hazard/hot-work-final.jpg",
-  scaffolding: "/labs/spot-the-hazard/scaffold-final.jpg",
-  lifting: "/labs/spot-the-hazard/lifting-final.jpg",
-  confined_space: "/labs/spot-the-hazard/confined-space-final.jpg",
+  working_at_height: "https://at.adobe.com/KjYBnRUUl70MoI5T",
+  hot_work: "https://at.adobe.com/LvQLFNPlFwh8sqVq",
+  scaffolding: "https://at.adobe.com/ejQ6Qi1akWUDk49H",
+  lifting: "https://at.adobe.com/28dlh6BSP4LjqLlt",
+  confined_space: "https://at.adobe.com/RIOEBt1SUNvgxxfN",
 };
 
 // Multiple hit zones may share the same hazard id. This keeps selection natural:
@@ -59,10 +61,15 @@ const hotspotsByCategory: Partial<Record<LabCategory, LabHotspot[]>> = {
     { id: "barricade", x: 84, y: 80, radius: 7 },
   ],
   confined_space: [
-    { id: "entry-board", x: 24, y: 36, radius: 7.2 },
-    { id: "rescue", x: 60.5, y: 24, radius: 7.5 },
-    { id: "lanyard", x: 43, y: 56, radius: 5.8 },
-    { id: "manway", x: 49.5, y: 86.5, radius: 7 },
+    { id: "manway", x: 60, y: 48, radius: 8.5 },
+    { id: "manway", x: 61, y: 61, radius: 7.2 },
+    { id: "retrieval", x: 43, y: 55, radius: 7 },
+    { id: "retrieval", x: 47, y: 72, radius: 7.5 },
+    { id: "tools", x: 58, y: 77, radius: 7 },
+    { id: "tools", x: 63, y: 76, radius: 5.5 },
+    { id: "trip", x: 31, y: 69, radius: 8 },
+    { id: "trip", x: 52, y: 91, radius: 8.5 },
+    { id: "trip", x: 68, y: 91, radius: 7.5 },
   ],
 };
 
