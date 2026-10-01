@@ -7,9 +7,6 @@ import type { LabCategory, LabHotspot } from "@/lib/labs/types";
 
 type Props = { params: Promise<{ locale: string; scenarioId: string }> };
 
-// 2688x1536 Firefly scenes generated for the final Labs package. These rendition
-// links are auth-free Adobe assets; keeping them here lets the challenge use the
-// full-resolution source without Next/Image domain configuration.
 const sceneByCategory: Partial<Record<LabCategory, string>> = {
   working_at_height: "https://at.adobe.com/27rxkpV8O1CnfLZq",
   hot_work: "https://at.adobe.com/vnfBKIeZrpaeVaAC",
@@ -18,39 +15,36 @@ const sceneByCategory: Partial<Record<LabCategory, string>> = {
   confined_space: "https://at.adobe.com/uTQGY03MIvdvcOAA",
 };
 
-// Coordinates are calibrated against the 2688x1536 scenes above. x/y are
-// percentages of the actual image box; radius is a percentage of the shorter
-// rendered side so hit areas remain stable across desktop and mobile.
 const hotspotsByCategory: Partial<Record<LabCategory, LabHotspot[]>> = {
   working_at_height: [
-    { id: "no-tieoff", x: 61.5, y: 48, radius: 7 },
-    { id: "loose-tools", x: 44.5, y: 67, radius: 5.5 },
-    { id: "open-edge", x: 66, y: 76, radius: 7 },
-    { id: "access", x: 31, y: 76, radius: 7.5 },
+    { id: "no-tieoff", x: 60.8, y: 52, radius: 5.5 },
+    { id: "loose-tools", x: 46, y: 66.5, radius: 4.8 },
+    { id: "open-edge", x: 64.5, y: 78, radius: 5.8 },
+    { id: "access", x: 25.5, y: 77, radius: 6.2 },
   ],
   hot_work: [
-    { id: "combustibles", x: 35, y: 90, radius: 8 },
-    { id: "firewatch", x: 65, y: 51, radius: 7 },
-    { id: "cylinder", x: 22, y: 68, radius: 8 },
-    { id: "barrier", x: 82, y: 73, radius: 12 },
+    { id: "cylinder", x: 16.5, y: 69, radius: 5.6 },
+    { id: "combustibles", x: 28.5, y: 86.5, radius: 5.8 },
+    { id: "trip", x: 52.5, y: 78, radius: 5.4 },
+    { id: "segregation", x: 83.5, y: 69.5, radius: 7.6 },
   ],
   scaffolding: [
-    { id: "tag", x: 36, y: 31, radius: 5 },
-    { id: "gap", x: 61, y: 54, radius: 6 },
-    { id: "toe", x: 70, y: 59, radius: 8 },
-    { id: "material", x: 84, y: 55, radius: 8 },
+    { id: "tag", x: 34, y: 35, radius: 4.6 },
+    { id: "gap", x: 51.5, y: 53, radius: 6 },
+    { id: "toe", x: 70.5, y: 67, radius: 5.4 },
+    { id: "material", x: 83, y: 56.5, radius: 5.2 },
   ],
   lifting: [
-    { id: "underload", x: 49, y: 64, radius: 7.5 },
-    { id: "barricade", x: 88, y: 76, radius: 11 },
-    { id: "hands", x: 70, y: 77, radius: 7.5 },
-    { id: "sling", x: 54, y: 32, radius: 6.5 },
+    { id: "sling", x: 54.5, y: 38, radius: 5.2 },
+    { id: "underload", x: 49.5, y: 68, radius: 5.8 },
+    { id: "hands", x: 70, y: 68.5, radius: 5.6 },
+    { id: "barricade", x: 89.5, y: 74, radius: 7.2 },
   ],
   confined_space: [
-    { id: "gas", x: 57, y: 84, radius: 8 },
-    { id: "isolation", x: 20, y: 45, radius: 10 },
-    { id: "rescue", x: 44, y: 52, radius: 8 },
-    { id: "permit", x: 82, y: 55, radius: 11 },
+    { id: "entry-board", x: 24, y: 36, radius: 7.2 },
+    { id: "rescue", x: 60.5, y: 24, radius: 7.5 },
+    { id: "lanyard", x: 43, y: 56, radius: 5.8 },
+    { id: "manway", x: 49.5, y: 86.5, radius: 7 },
   ],
 };
 
