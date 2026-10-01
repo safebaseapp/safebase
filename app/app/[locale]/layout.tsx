@@ -10,6 +10,7 @@ import MobileQuickNav from "./components/MobileQuickNav";
 import UserActivityCapture from "./components/UserActivityCapture";
 import DashboardReturnBar from "./components/DashboardReturnBar";
 import WorkspaceUxEnhancer from "./components/WorkspaceUxEnhancer";
+import HomeLabsBridge from "./components/HomeLabsBridge";
 import "./navbar-responsive-fix.css";
 import "./premium-live-polish.css";
 import "./core-content-visual-system.css";
@@ -69,6 +70,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <NextIntlClientProvider>
       <LocalizedNavbar locale={safeLocale} />
+      <HomeLabsBridge locale={safeLocale} />
       <NavbarLegacyPremiumCleanup />
       <MobileAuthBar locale={safeLocale} />
       <MobileQuickNav locale={safeLocale} />
