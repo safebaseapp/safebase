@@ -43,7 +43,6 @@ const hotspotsByCategory: Partial<Record<LabCategory, LabHotspot[]>> = {
   scaffolding: [
     { id: "gap", x: 51.5, y: 53, radius: 7.2 },
     { id: "gap", x: 57, y: 56, radius: 6.2 },
-    { id: "toe", x: 70.5, y: 67, radius: 6.5 },
     { id: "material", x: 83, y: 56.5, radius: 6.5 },
     { id: "material", x: 80, y: 63, radius: 5.8 },
   ],
