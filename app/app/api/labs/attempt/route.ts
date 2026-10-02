@@ -24,7 +24,7 @@ export async function POST(request: Request) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ saved: false, authenticated: false, result: { ...result, xpEarned: 0 } });
 
-  const { count: previousCount, error: previousError } = await supabase.from("lab_attempts").select("id", { count: "exact", head: true }).eq("user_id", user.id).eq("scenario_id", scenario.id);
+  const { count: previousCount, error: previousError } = await supabase.from("lab_attempts").select("id", { count: "exact", head: true }).eq("user_id", user.id).eq("scenario_type", scenario.type).eq("scenario_id", scenario.id);
   if (previousError) return NextResponse.json({ error: "labs_schema_unavailable" }, { status: 503 });
   const firstCompletion = (previousCount ?? 0) === 0;
   const xp = calculateXpAward(scenario.difficulty, result.score, firstCompletion);
