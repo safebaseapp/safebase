@@ -7,12 +7,15 @@ import type { LabCategory, LabHotspot } from "@/lib/labs/types";
 
 type Props = { params: Promise<{ locale: string; scenarioId: string }> };
 
+// High-resolution generated scenes. Kept external temporarily until their
+// original bytes are copied into /public; do not replace these with the old
+// low-resolution local JPGs.
 const sceneByCategory: Partial<Record<LabCategory, string>> = {
-  working_at_height: "/labs/spot-the-hazard/pipe-rack-final.jpg",
-  hot_work: "/labs/spot-the-hazard/hot-work-final.jpg",
-  scaffolding: "/labs/spot-the-hazard/scaffold-final.jpg",
-  lifting: "/labs/spot-the-hazard/lifting-final.jpg",
-  confined_space: "/labs/spot-the-hazard/confined-space-final.jpg",
+  working_at_height: "https://at.adobe.com/touoPJZ52AupLPrw",
+  hot_work: "https://at.adobe.com/MMOmZqjqPi7fm448",
+  scaffolding: "https://at.adobe.com/nlBwRu9DivTM1vUz",
+  lifting: "https://at.adobe.com/04ZxQ3I2rx80St46",
+  confined_space: "https://at.adobe.com/c9sal33M1qrLUMii",
 };
 
 const hotspotsByCategory: Partial<Record<LabCategory, LabHotspot[]>> = {
