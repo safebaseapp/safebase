@@ -28,11 +28,19 @@ export default function PendingIncidentImport() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
+
         if (!cancelled && response.ok) {
           window.localStorage.removeItem(KEY);
+          window.dispatchEvent(new Event("sernem:labs-updated"));
           router.refresh();
+          return;
         }
-      } catch {}
+
+        // Keep the payload locally when the database/API is temporarily unavailable.
+        // It will be retried on the next dashboard visit instead of silently losing the result.
+      } catch {
+        // Retain pending payload for the next retry.
+      }
     }
 
     void importPending();
