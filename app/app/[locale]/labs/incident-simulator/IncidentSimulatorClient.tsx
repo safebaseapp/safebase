@@ -75,16 +75,26 @@ export default function IncidentSimulatorClient({ locale, scenarioId, isAuthenti
     savedRef.current = true;
     const payload = buildAttemptPayload();
 
-    if (!isAuthenticated) {
-      try { window.localStorage.setItem(PENDING_ATTEMPT_KEY, JSON.stringify(payload)); } catch {}
-      return;
-    }
+    // Persist locally first. The payload is only removed after the server confirms
+    // the database insert, so a temporary API/database failure cannot lose a result.
+    try { window.localStorage.setItem(PENDING_ATTEMPT_KEY, JSON.stringify(payload)); } catch {}
 
-    void fetch("/api/labs/incident-attempt", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    if (!isAuthenticated) return;
+
+    void (async () => {
+      try {
+        const response = await fetch("/api/labs/incident-attempt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (response.ok) {
+          try { window.localStorage.removeItem(PENDING_ATTEMPT_KEY); } catch {}
+        }
+      } catch {
+        // Keep local pending copy for dashboard retry.
+      }
+    })();
   }, [average, catalogItem?.difficulty, criticalCount, finished, history, isAuthenticated, isTr, locale, outcomeLabel, scenario.category, scenarioId, score]);
 
   const choose = (choice: IncidentChoice) => {
