@@ -22,3 +22,14 @@ This file marks the planned UI package for the next release.
 - Add Free vs Premium comparison.
 - Add a real premium output preview / before-after concept.
 - Improve trust/value microcopy around instant access and included premium tools.
+
+## Incident Simulator / Access Model
+- Keep one complete Incident Simulator scenario available to signed-in free members.
+- Use Hot Work as the free-member scenario.
+- Require Premium for all other Incident Simulator scenarios.
+- Keep premium scenarios visible in the scenario catalog instead of hiding them.
+- Show topic, difficulty and decision count on locked premium scenario cards.
+- Use a clear PREMIUM badge for locked scenarios.
+- If the visitor is not signed in, route them to Login before access.
+- If the user is signed in but not Premium, show an Upgrade to Premium gate.
+- Do not implement this access model yet; keep it as a planned follow-up item.
