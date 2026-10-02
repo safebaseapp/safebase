@@ -15,7 +15,7 @@ export default async function IncidentScenarioPage({ params }: Props) {
 
   const scenario = incidentScenarios[scenarioId];
   const catalogItem = getIncidentCatalogItem(scenarioId);
-  if (!scenario || !catalogItem || catalogItem.status !== "live") notFound();
+  if (!scenario || !catalogItem) notFound();
 
   const nextPath = `/${locale}/labs/incident-simulator/${scenarioId}`;
 
