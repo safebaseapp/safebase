@@ -7,13 +7,14 @@ import type { LabCategory, LabHotspot } from "@/lib/labs/types";
 
 type Props = { params: Promise<{ locale: string; scenarioId: string }> };
 
-// High-resolution 2688x1536 scenes.
+// Permanent local scene assets. Keeping challenge images inside /public avoids
+// expiring third-party URLs and prevents the training flow from breaking.
 const sceneByCategory: Partial<Record<LabCategory, string>> = {
-  working_at_height: "https://at.adobe.com/KjYBnRUUl70MoI5T",
-  hot_work: "https://at.adobe.com/LvQLFNPlFwh8sqVq",
-  scaffolding: "https://at.adobe.com/ejQ6Qi1akWUDk49H",
-  lifting: "https://at.adobe.com/28dlh6BSP4LjqLlt",
-  confined_space: "https://at.adobe.com/RIOEBt1SUNvgxxfN",
+  working_at_height: "/labs/spot-the-hazard/pipe-rack-final.jpg",
+  hot_work: "/labs/spot-the-hazard/hot-work-final.jpg",
+  scaffolding: "/labs/spot-the-hazard/scaffold-final.jpg",
+  lifting: "/labs/spot-the-hazard/lifting-final.jpg",
+  confined_space: "/labs/spot-the-hazard/confined-space-final.jpg",
 };
 
 // Multiple hit zones may share one hazard id so the user can click the visible
