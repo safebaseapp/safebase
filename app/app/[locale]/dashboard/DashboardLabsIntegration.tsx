@@ -25,7 +25,7 @@ export default function DashboardLabsIntegration({ locale }: { locale: string })
   const isTr = locale === "tr";
   const isDashboardHome = pathname === `/${locale}/dashboard`;
   const [navTarget, setNavTarget] = useState<Element | null>(null);
-  const [contentTarget, setContentTarget] = useState<Element | null>(null);
+  const [cardTarget, setCardTarget] = useState<Element | null>(null);
   const [summary, setSummary] = useState<Summary | null>(null);
 
   const load = useCallback(async () => {
@@ -40,17 +40,30 @@ export default function DashboardLabsIntegration({ locale }: { locale: string })
 
   useEffect(() => {
     if (!isDashboardHome) return;
+
+    let createdMount: HTMLElement | null = null;
     const findTargets = () => {
       setNavTarget(document.querySelector("main aside nav"));
-      setContentTarget(document.querySelector("main .min-w-0.flex-1"));
+
+      const contentRoot = document.querySelector("main .min-w-0.flex-1");
+      const hero = contentRoot?.querySelector("section");
+      if (hero && !document.getElementById("dashboard-labs-results-mount")) {
+        createdMount = document.createElement("div");
+        createdMount.id = "dashboard-labs-results-mount";
+        hero.insertAdjacentElement("afterend", createdMount);
+      }
+      setCardTarget(document.getElementById("dashboard-labs-results-mount"));
     };
+
     findTargets();
     const timer = window.setTimeout(findTargets, 50);
     void load();
     window.addEventListener("sernem:labs-updated", load);
+
     return () => {
       window.clearTimeout(timer);
       window.removeEventListener("sernem:labs-updated", load);
+      createdMount?.remove();
     };
   }, [isDashboardHome, load]);
 
@@ -69,7 +82,7 @@ export default function DashboardLabsIntegration({ locale }: { locale: string })
   ) : null;
 
   const latest = summary?.latest ?? null;
-  const card = contentTarget ? createPortal(
+  const card = cardTarget ? createPortal(
     <section className="mt-3 overflow-hidden rounded-[24px] border border-emerald-400/15 bg-[linear-gradient(135deg,rgba(6,32,27,.96),rgba(5,18,31,.96))] p-5 shadow-xl shadow-black/10 sm:p-6">
       <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
@@ -98,7 +111,7 @@ export default function DashboardLabsIntegration({ locale }: { locale: string })
         </div>
       </div>
     </section>,
-    contentTarget,
+    cardTarget,
   ) : null;
 
   return <>{nav}{card}</>;
