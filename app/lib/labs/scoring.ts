@@ -1,3 +1,4 @@
+import { calculateXpAward } from "./progression";
 import type { LabScenario, ScenarioScore } from "./types";
 
 export function scoreMultiSelectScenario(
@@ -25,7 +26,7 @@ export function scoreMultiSelectScenario(
   );
 
   const score = Math.min(100, Math.round((earned / possible) * 100));
-  const xpEarned = Math.max(1, Math.round((scenario.xp * score) / 100));
+  const xpEarned = calculateXpAward(scenario.difficulty, score, true).total;
 
   return {
     correctCount,
