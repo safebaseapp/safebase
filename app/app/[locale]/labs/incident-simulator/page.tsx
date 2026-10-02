@@ -7,6 +7,7 @@ import ActivityTracker from "@/components/analytics/ActivityTracker";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 import { incidentCatalog } from "@/lib/labs/scenarios/incident-catalog";
 import { incidentScenarios } from "@/lib/labs/scenarios/incident-scenarios";
+import { localizeHseText, normalizeHseEnglish } from "@/lib/labs/scenarios/hse-language";
 import s from "./catalog.module.css";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -36,7 +37,7 @@ export default async function IncidentSimulatorPage({ params }: Props) {
         <section className={s.hero}>
           <p className={s.eyebrow}>DECISION TRAINING / SCENARIO LIBRARY</p>
           <h1>{isTr ? "Sahada karar ver. Sonucunu yaşa." : "Make the field decision. Live the consequence."}</h1>
-          <p>{isTr ? "Gerçek HSE olay mantığıyla oluşturulmuş dallanan senaryolar. Her seçim Safety, Judgment ve Response skorunu etkiler; ezber yerine değişen koşullarda karar kalitesini test eder." : "Branching scenarios built around real HSE incident logic. Every choice changes Safety, Judgment and Response scores, testing judgment under changing conditions instead of memorized answers."}</p>
+          <p>{isTr ? "Gerçek HSE olay mantığıyla oluşturulmuş dallanan senaryolar. Her seçim Safety, Judgment ve Response skorunu etkiler; ezber yerine değişen koşullarda karar kalitesini test eder." : "Branching scenarios built around real HSE incident logic. Every choice affects Safety, Judgment, and Response scores, testing decision quality under changing conditions rather than memorized answers."}</p>
         </section>
 
         <div className={s.summary}>
@@ -50,7 +51,7 @@ export default async function IncidentSimulatorPage({ params }: Props) {
 
         <div className={s.note}>
           {isSignedIn ? (
-            <><UserRound size={16} /> {isPremium ? (isTr ? "Premium hesabın aktif. Hazır Expert senaryolar doğrudan açılır; hazırlanmakta olan kartlar ayrıca belirtilir. Sonuçların Dashboard / Labs Results bölümüne kaydedilir." : "Your Premium account is active. Completed Expert scenarios open directly; scenarios still in development are clearly marked. Results are saved in Dashboard / Labs Results.") : (isTr ? "Ücretsiz üyelikle 3 ek senaryo açıldı. Kalan Premium senaryoları katalogda görebilirsin; sonuçların Dashboard / Labs Results bölümüne kaydedilir." : "Your free account unlocks 3 additional scenarios. The remaining Premium library stays visible, and your results are saved in Dashboard / Labs Results.")}</>
+            <><UserRound size={16} /> {isPremium ? (isTr ? "Premium hesabın aktif. Hazır Expert senaryolar doğrudan açılır; hazırlanmakta olan kartlar ayrıca belirtilir. Sonuçların Dashboard / Labs Results bölümüne kaydedilir." : "Your Premium account is active. Completed Expert scenarios open directly; scenarios still in development are clearly marked. Results are saved under Dashboard / Labs Results.") : (isTr ? "Ücretsiz üyelikle 3 ek senaryo açıldı. Kalan Premium senaryoları katalogda görebilirsin; sonuçların Dashboard / Labs Results bölümüne kaydedilir." : "Your free account unlocks 3 additional scenarios. The remaining Premium library stays visible, and your results are saved under Dashboard / Labs Results.")}</>
           ) : (
             <>{isTr ? "İlk 3 senaryoyu hesap açmadan oynayabilirsin. Ücretsiz hesap 3 senaryo daha açar; kişisel hata analizi ve geçmiş sonuçlar da hesabına kaydedilir." : "Play the first 3 scenarios without an account. A free account unlocks 3 more and saves your personal decision analysis and result history."}</>
           )}
@@ -58,12 +59,14 @@ export default async function IncidentSimulatorPage({ params }: Props) {
 
         <section className={s.grid}>
           {incidentCatalog.map((item, index) => {
-            const title = isTr ? item.titleTr : item.titleEn;
-            const desc = isTr ? item.descTr : item.descEn;
-            const live = Boolean(incidentScenarios[item.id]);
+            const scenario = incidentScenarios[item.id];
+            const title = scenario ? localizeHseText(locale, scenario.titleTr, scenario.titleEn) : localizeHseText(locale, item.titleTr, item.titleEn);
+            const desc = localizeHseText(locale, item.descTr, item.descEn);
+            const category = isTr ? item.category : normalizeHseEnglish(item.category);
+            const live = Boolean(scenario);
             const accessAllowed = item.access === "guest" || (item.access === "free" && isSignedIn) || (item.access === "premium" && isPremium);
             const playable = live && accessAllowed;
-            const displayedDifficulty = item.access === "premium" && live ? "EXPERT" : item.difficulty.toUpperCase();
+            const displayedDifficulty = scenario?.difficulty === "expert" ? "EXPERT" : item.difficulty.toUpperCase();
 
             const badge = item.access === "guest"
               ? (isTr ? "MİSAFİR · ÜCRETSİZ" : "GUEST · FREE")
@@ -89,7 +92,7 @@ export default async function IncidentSimulatorPage({ params }: Props) {
                   <span className={s.index}>{String(index + 1).padStart(2, "0")}</span>
                   <span className={`${s.badge} ${!live ? s.coming : ""}`}>{badge}</span>
                 </div>
-                <div className={s.category}>{item.category} · {displayedDifficulty}</div>
+                <div className={s.category}>{category} · {displayedDifficulty}</div>
                 <h2>{title}</h2>
                 <p>{desc}</p>
                 <div className={s.footer}>
