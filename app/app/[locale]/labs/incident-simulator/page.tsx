@@ -23,7 +23,7 @@ export default async function IncidentSimulatorPage({ params }: Props) {
   const guestCount = incidentCatalog.filter((item) => item.access === "guest").length;
   const freeCount = incidentCatalog.filter((item) => item.access === "free").length;
   const premiumCount = incidentCatalog.filter((item) => item.access === "premium").length;
-  const livePremiumCount = incidentCatalog.filter((item) => item.access === "premium" && Boolean(incidentScenarios[item.id])).length;
+  const liveScenarioCount = incidentCatalog.filter((item) => Boolean(incidentScenarios[item.id])).length;
 
   return (
     <main className={s.page}>
@@ -45,7 +45,7 @@ export default async function IncidentSimulatorPage({ params }: Props) {
           <span>{guestCount} {isTr ? "misafire açık" : "guest access"}</span>
           <span>+{freeCount} {isTr ? "ücretsiz üyeye açık" : "free member"}</span>
           <span>{premiumCount} Premium</span>
-          <span>{livePremiumCount} {isTr ? "canlı Expert" : "live Expert"}</span>
+          <span>{liveScenarioCount} {isTr ? "canlı senaryo" : "live scenarios"}</span>
           <span>{isTr ? "8–10 karar / senaryo" : "8–10 decisions / scenario"}</span>
         </div>
 
