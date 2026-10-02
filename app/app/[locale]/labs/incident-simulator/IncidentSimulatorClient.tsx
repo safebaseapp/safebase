@@ -15,6 +15,25 @@ type HistoryItem = { nodeId: string; nodeTitle: string; choice: IncidentChoice }
 const PENDING_ATTEMPT_KEY = "sernem_pending_incident_attempt";
 const clamp = (value: number) => Math.max(0, Math.min(100, value));
 
+function stableChoiceOrder(choices: IncidentChoice[], seed: string) {
+  let hash = 2166136261;
+  for (let i = 0; i < seed.length; i += 1) {
+    hash ^= seed.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return [...choices]
+    .map((choice, index) => {
+      let value = hash ^ Math.imul(index + 1, 2654435761);
+      for (let i = 0; i < choice.id.length; i += 1) {
+        value ^= choice.id.charCodeAt(i);
+        value = Math.imul(value, 16777619);
+      }
+      return { choice, value: value >>> 0 };
+    })
+    .sort((a, b) => a.value - b.value)
+    .map(({ choice }) => choice);
+}
+
 export default function IncidentSimulatorClient({ locale, scenarioId, isAuthenticated }: Props) {
   const isTr = locale === "tr";
   const scenario = incidentScenarios[scenarioId];
@@ -27,6 +46,7 @@ export default function IncidentSimulatorClient({ locale, scenarioId, isAuthenti
 
   const tx = (tr: string | null | undefined, en: string | null | undefined) => localizeHseText(locale, tr, en);
   const node = useMemo(() => scenario.nodes.find((item) => item.id === nodeId) ?? scenario.nodes[0], [nodeId, scenario.nodes]);
+  const displayChoices = useMemo(() => stableChoiceOrder(node.choices, `${scenarioId}:${node.id}`), [node.choices, node.id, scenarioId]);
   const finished = node.choices.length === 0;
   const criticalCount = history.filter((item) => item.choice.critical).length;
   const average = Math.round((score.safety + score.judgment + score.response) / 3);
@@ -135,7 +155,7 @@ export default function IncidentSimulatorClient({ locale, scenarioId, isAuthenti
             <article className={s.eventCard}>
               <div className={s.eventHead}><span>{String(eventNumber).padStart(2, "0")} / EVENT</span>{selected?.critical ? <span className={s.critical}><TriangleAlert size={14} /> {isTr ? "KRİTİK KARAR" : "CRITICAL DECISION"}</span> : null}</div>
               <p className={s.kicker}>{isTr ? "SAHA DURUMU" : "FIELD SITUATION"}</p><h2>{tx(node.titleTr, node.titleEn)}</h2><p className={s.situation}>{tx(node.situationTr, node.situationEn)}</p>
-              <div className={s.choices}>{node.choices.map((choice, index) => <button key={choice.id} type="button" className={`${s.choice} ${selected?.id === choice.id ? s.choiceSelected : ""}`} onClick={() => choose(choice)} disabled={Boolean(selected)}><span className={s.choiceIndex}>{String.fromCharCode(65 + index)}</span><span>{tx(choice.labelTr, choice.labelEn)}</span><ArrowRight size={17} /></button>)}</div>
+              <div className={s.choices}>{displayChoices.map((choice, index) => <button key={choice.id} type="button" className={`${s.choice} ${selected?.id === choice.id ? s.choiceSelected : ""}`} onClick={() => choose(choice)} disabled={Boolean(selected)}><span className={s.choiceIndex}>{String.fromCharCode(65 + index)}</span><span>{tx(choice.labelTr, choice.labelEn)}</span><ArrowRight size={17} /></button>)}</div>
               {selected && <div className={`${s.consequence} ${selected.critical ? s.consequenceCritical : ""}`}><div className={s.consequenceTitle}>{selected.critical ? <TriangleAlert size={17} /> : <ShieldAlert size={17} />}<b>{isTr ? "KARAR SONUCU" : "DECISION CONSEQUENCE"}</b></div><p>{tx(selected.consequenceTr, selected.consequenceEn)}</p><div className={s.impactRow}><Impact label={isTr ? "Güvenlik" : "Safety"} value={selected.impact.safety} /><Impact label={isTr ? "Muhakeme" : "Judgment"} value={selected.impact.judgment} /><Impact label={isTr ? "Müdahale" : "Response"} value={selected.impact.response} /></div><button type="button" className={s.continueButton} onClick={continueScenario}>{isTr ? "Sonraki olaya geç" : "Continue to next event"}<ArrowRight size={17} /></button></div>}
             </article>
             <aside className={s.timeline}><p className={s.kicker}>{isTr ? "KARAR ZİNCİRİ" : "DECISION CHAIN"}</p>{history.length === 0 ? <p className={s.empty}>{isTr ? "İlk kararını verdiğinde zincir burada oluşacak." : "Your decision chain will appear here after the first choice."}</p> : history.map((item, index) => <div key={`${item.nodeId}-${index}`} className={s.historyItem}><span className={`${s.historyDot} ${item.choice.critical ? s.dotCritical : ""}`} /><div><small>{String(index + 1).padStart(2, "0")}</small><b>{item.nodeTitle}</b><p>{tx(item.choice.labelTr, item.choice.labelEn)}</p></div></div>)}</aside>
