@@ -6,60 +6,43 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-function LabsPuzzleMark() {
-  return (
-    <div className="flex flex-col items-center text-center">
-      <svg viewBox="0 0 180 160" className="h-28 w-32 sm:h-32 sm:w-36" aria-hidden="true">
-        <defs>
-          <linearGradient id="labsBlue" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#2f8cff" />
-            <stop offset="1" stopColor="#48cfe7" />
-          </linearGradient>
-          <linearGradient id="labsPurple" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#8b5cf6" />
-            <stop offset="1" stopColor="#c084fc" />
-          </linearGradient>
-          <linearGradient id="labsMint" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#36d6c0" />
-            <stop offset="1" stopColor="#5eead4" />
-          </linearGradient>
-        </defs>
-        <path d="M24 30c0-14 11-25 25-25h44v34c0 8 7 15 15 15s15-7 15-15V5h16c14 0 25 11 25 25v33h-34c-8 0-15 7-15 15s7 15 15 15h34v17c0 14-11 25-25 25H96v-34c0-8-7-15-15-15s-15 7-15 15v34H49c-14 0-25-11-25-25V92h34c8 0 15-7 15-15s-7-15-15-15H24V30Z" fill="url(#labsBlue)" opacity=".98" />
-        <path d="M92 71h47c14 0 25 11 25 25v31c0 14-11 25-25 25H96v-31c0-9-7-16-16-16s-16 7-16 16v31H49c-14 0-25-11-25-25v-18h33c9 0 16-7 16-16s-7-16-16-16H24v-6h42c0 9 7 16 16 16s16-7 16-16Z" fill="url(#labsPurple)" opacity=".94" />
-        <path d="M24 108h33c9 0 16-7 16-16h19v34c0 9-7 16-16 16H49c-14 0-25-11-25-25v-9Z" fill="url(#labsMint)" opacity=".92" />
-      </svg>
-      <div className="mt-1 text-[27px] font-black tracking-[-0.035em] text-white sm:text-[30px]">SERNEM</div>
-      <div className="mt-[-2px] text-[13px] font-black uppercase tracking-[0.34em] text-violet-300 sm:text-[14px]">LABS</div>
-    </div>
-  );
-}
+const LABS_LOGO = "/images/sernem-labs-logo.webp";
 
 export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
   const pathname = usePathname();
   const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
+  const isLabs = pathname.startsWith(`/${locale}/labs`);
   const tr = locale === "tr";
   const [mountNode, setMountNode] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     const nav = document.querySelector("nav");
-    const navItems = nav ? Array.from(nav.querySelectorAll<HTMLElement>("a,button")) : [];
+    if (!nav) return;
+
+    const navItems = Array.from(nav.querySelectorAll<HTMLElement>("a,button"));
     const resourceLabel = tr ? "Kaynaklar" : "Resources";
     const resourceItem = navItems.find((item) => item.textContent?.includes(resourceLabel));
-    const existing = nav?.querySelector<HTMLElement>("[data-sernem-labs-nav]");
+    const existing = nav.querySelector<HTMLElement>("[data-sernem-labs-nav]");
 
     if (!existing && resourceItem?.parentElement) {
       const anchor = document.createElement("a");
       anchor.href = `/${locale}/labs`;
       anchor.setAttribute("data-sernem-labs-nav", "true");
-      anchor.className = "relative inline-flex items-center gap-2.5 rounded-xl border border-violet-400/15 bg-violet-500/[0.045] px-3.5 py-2.5 text-[13px] font-bold text-violet-100 transition duration-200 hover:border-violet-300/30 hover:bg-violet-500/[0.10] hover:text-white";
-      anchor.innerHTML = `<span style="display:flex;height:24px;width:24px;align-items:center;justify-content:center;border-radius:7px;border:1px solid rgba(167,139,250,.28);background:rgba(139,92,246,.09);font-size:12px;color:#c4b5fd">◫</span><span>HSE Labs</span><span style="border:1px solid rgba(167,139,250,.25);border-radius:999px;padding:2px 6px;font-size:8px;letter-spacing:.08em;color:#c4b5fd">NEW</span>`;
+      anchor.className = "relative inline-flex items-center gap-2.5 rounded-xl border border-violet-400/20 bg-violet-500/[0.055] px-3.5 py-2.5 text-[13px] font-bold text-violet-100 transition duration-200 hover:border-violet-300/35 hover:bg-violet-500/[0.11] hover:text-white";
+      anchor.innerHTML = `<span style="display:flex;height:27px;width:27px;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;border:1px solid rgba(167,139,250,.26);background:#111827"><img src="${LABS_LOGO}" alt="" style="width:40px;max-width:none;transform:translateY(-7px);display:block" /></span><span>HSE Labs</span><span style="border:1px solid rgba(167,139,250,.25);border-radius:999px;padding:2px 6px;font-size:8px;letter-spacing:.08em;color:#c4b5fd">NEW</span>`;
       resourceItem.parentElement.before(anchor);
     }
 
+    const brandLink = nav.querySelector<HTMLAnchorElement>("a");
+    const brandText = brandLink ? Array.from(brandLink.querySelectorAll<HTMLElement>("div")).find((el) => el.textContent?.includes("HSE Platform")) : null;
+    const originalBrandText = brandText?.textContent ?? null;
+    if (brandText && isLabs) brandText.textContent = "HSE Labs";
+
     return () => {
-      nav?.querySelector("[data-sernem-labs-nav]")?.remove();
+      nav.querySelector("[data-sernem-labs-nav]")?.remove();
+      if (brandText && originalBrandText) brandText.textContent = originalBrandText;
     };
-  }, [locale, pathname, tr]);
+  }, [locale, pathname, tr, isLabs]);
 
   useEffect(() => {
     setMountNode(null);
@@ -89,8 +72,8 @@ export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
 
       <div className="relative mx-auto grid min-h-[360px] max-w-7xl items-center gap-8 px-5 py-10 sm:px-6 md:min-h-[390px] md:py-12 lg:grid-cols-[250px_minmax(0,1fr)_360px] lg:gap-12 xl:grid-cols-[270px_minmax(0,1fr)_390px]">
         <div className="flex items-center justify-center lg:justify-start">
-          <div className="w-full max-w-[230px] rounded-[28px] border border-white/10 bg-white/[0.035] px-6 py-6 shadow-[0_24px_70px_rgba(0,0,0,.24)] backdrop-blur-xl">
-            <LabsPuzzleMark />
+          <div className="w-full max-w-[230px] overflow-hidden rounded-[28px] border border-white/10 bg-[#111827] shadow-[0_24px_70px_rgba(0,0,0,.24)]">
+            <img src={LABS_LOGO} alt="SERNEM Labs" className="block h-auto w-full" />
           </div>
         </div>
 
