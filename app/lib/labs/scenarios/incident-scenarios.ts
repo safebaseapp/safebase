@@ -3,6 +3,7 @@ import { starterIncidentScenarios } from "./starter-scenarios";
 import { expertPackOne } from "./expert-pack-1";
 import { expertPackTwo } from "./expert-pack-2";
 import { expertPackThree } from "./expert-pack-3";
+import { expertPackFour } from "./expert-pack-4";
 
 export type { IncidentChoice, IncidentScenario };
 
@@ -12,4 +13,5 @@ export const incidentScenarios: Record<string, IncidentScenario> = {
   ...expertPackOne,
   ...expertPackTwo,
   ...expertPackThree,
+  ...expertPackFour,
 };
