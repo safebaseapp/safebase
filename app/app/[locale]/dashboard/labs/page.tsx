@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound, redirect } from "next/navigation";
-import { ArrowLeft, ArrowRight, CheckCircle2, CircleAlert, LockKeyhole } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, CircleAlert, LockKeyhole, TriangleAlert } from "lucide-react";
 import { routing } from "../../../../i18n/routing";
 import { createClient } from "@/utils/supabase/server";
 
@@ -34,6 +34,11 @@ type Attempt = {
 
 function scenarioTitle(id: string, isTr: boolean) {
   if (id === "hot-work-gas-drift") return isTr ? "Sıcak Çalışma: Ölçüm Değişiyor" : "Hot Work: The Reading Changes";
+  if (id === "height-anchor-choice") return isTr ? "Yüksekte Çalışma: Tek Ankraj Kaldı" : "Work at Height: One Anchor Left";
+  if (id === "confined-space-atmosphere") return isTr ? "Kapalı Alan: Koşullar Değişiyor" : "Confined Space: Conditions Shift";
+  if (id === "loto-unexpected-energy") return isTr ? "LOTO: Beklenmeyen Enerji" : "LOTO: Unexpected Energy";
+  if (id === "scaffold-status-change") return isTr ? "İskele: Durum Değişti" : "Scaffolding: Status Changed";
+  if (id === "excavation-water-ingress") return isTr ? "Kazı: Su Yükseliyor" : "Excavation: Water Is Rising";
   return id.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
@@ -45,7 +50,7 @@ export default async function LabsResultsPage({ params }: Props) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect(`/${locale}/login?next=/${locale}/dashboard/labs`);
 
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("lab_attempts")
     .select("id,scenario_id,category,difficulty,score,incorrect_count,selected_answers,created_at")
     .eq("user_id", user.id)
@@ -53,10 +58,11 @@ export default async function LabsResultsPage({ params }: Props) {
     .order("created_at", { ascending: false })
     .limit(20);
 
+  if (error) console.error("labs results read failed", error);
   const attempts = (data ?? []) as Attempt[];
 
   return (
-    <main className="min-h-screen bg-[#06110f] text-slate-100 px-5 py-10 md:px-10">
+    <main className="min-h-screen bg-[#06110f] px-5 py-10 text-slate-100 md:px-10">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
           <Link href={`/${locale}/dashboard`} className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white"><ArrowLeft size={16} />{isTr ? "Dashboard'a dön" : "Back to dashboard"}</Link>
@@ -69,11 +75,17 @@ export default async function LabsResultsPage({ params }: Props) {
           <p className="mt-5 max-w-3xl text-base leading-7 text-slate-400">{isTr ? "Incident Simulator denemelerin burada kişisel olarak saklanır. Her olayda verdiğin kararları, kritik seçimleri ve Safety / Judgment / Response etkilerini geriye dönük inceleyebilirsin." : "Your Incident Simulator attempts are stored here privately. Review each decision, critical choices and their Safety / Judgment / Response impact."}</p>
         </section>
 
-        {attempts.length === 0 ? (
+        {error ? (
+          <div className="rounded-3xl border border-amber-300/20 bg-amber-400/[0.05] p-8">
+            <TriangleAlert className="mb-4 text-amber-300" />
+            <h2 className="text-2xl font-semibold">{isTr ? "Labs sonuç depolaması şu anda hazır değil" : "Labs result storage is not ready"}</h2>
+            <p className="mt-2 max-w-3xl text-slate-400">{isTr ? "Deneme sonucu tarayıcıda korunuyor ve sistem tekrar kaydetmeyi deneyecek. Bu ekran artık veritabanı hatasını 'kayıt yok' diye gizlemiyor." : "Your attempt is retained in the browser and the system will retry saving it. This screen no longer hides database errors as an empty result list."}</p>
+          </div>
+        ) : attempts.length === 0 ? (
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
             <LockKeyhole className="mb-4 text-emerald-300" />
             <h2 className="text-2xl font-semibold">{isTr ? "Henüz kayıtlı deneme yok" : "No saved attempts yet"}</h2>
-            <p className="mt-2 text-slate-400">{isTr ? "Hot Work demosunu tamamladığında sonuçların otomatik olarak burada görünecek." : "Complete the Hot Work demo and your result will appear here automatically."}</p>
+            <p className="mt-2 text-slate-400">{isTr ? "Incident Simulator'da bir senaryoyu tamamladığında sonuçların otomatik olarak burada görünecek." : "Complete an Incident Simulator scenario and your result will appear here automatically."}</p>
           </div>
         ) : (
           <div className="space-y-6">
