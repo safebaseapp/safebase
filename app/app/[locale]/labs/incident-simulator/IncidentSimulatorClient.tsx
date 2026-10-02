@@ -24,6 +24,7 @@ export default function IncidentSimulatorClient({ locale }: Props) {
   const finished = node.choices.length === 0;
   const criticalCount = history.filter((item) => item.choice.critical).length;
   const average = Math.round((score.safety + score.judgment + score.response) / 3);
+  const eventNumber = history.length + (selected ? 0 : 1);
 
   const choose = (choice: IncidentChoice) => {
     if (selected || finished) return;
@@ -89,7 +90,7 @@ export default function IncidentSimulatorClient({ locale }: Props) {
         {!finished ? (
           <div className={s.gameGrid}>
             <article className={s.eventCard}>
-              <div className={s.eventHead}><span>{String(history.length + 1).padStart(2, "0")} / EVENT</span>{selected?.critical ? <span className={s.critical}><TriangleAlert size={14} /> {isTr ? "KRİTİK KARAR" : "CRITICAL DECISION"}</span> : null}</div>
+              <div className={s.eventHead}><span>{String(eventNumber).padStart(2, "0")} / EVENT</span>{selected?.critical ? <span className={s.critical}><TriangleAlert size={14} /> {isTr ? "KRİTİK KARAR" : "CRITICAL DECISION"}</span> : null}</div>
               <p className={s.kicker}>{isTr ? "SAHA DURUMU" : "FIELD SITUATION"}</p>
               <h2>{isTr ? node.titleTr : node.titleEn}</h2>
               <p className={s.situation}>{isTr ? node.situationTr : node.situationEn}</p>
@@ -138,7 +139,7 @@ export default function IncidentSimulatorClient({ locale }: Props) {
               <div><span>{history.length}</span><small>{isTr ? "KARAR" : "DECISIONS"}</small></div>
               <div><span>{criticalCount}</span><small>{isTr ? "KRİTİK HATA" : "CRITICAL ERRORS"}</small></div>
             </div>
-            <div className={s.debriefNote}><b>{isTr ? "Debrief" : "Debrief"}</b><p>{debrief}</p></div>
+            <div className={s.debriefNote}><b>Debrief</b><p>{debrief}</p></div>
             <div className={s.finalActions}><button type="button" onClick={restart}><RotateCcw size={17} /> {isTr ? "Tekrar oyna" : "Replay scenario"}</button><Link href={`/${locale}/labs`}>{isTr ? "Labs'e dön" : "Back to Labs"}<ArrowRight size={17} /></Link></div>
           </section>
         )}
