@@ -3,18 +3,18 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, RotateCcw, ShieldAlert, Sparkles, TriangleAlert } from "lucide-react";
-import { hotWorkIncident, type IncidentChoice } from "@/lib/labs/scenarios/incident-simulator";
+import { incidentScenarios, type IncidentChoice } from "@/lib/labs/scenarios/incident-simulator";
 import s from "./incident.module.css";
 
-type Props = { locale: string };
+type Props = { locale: string; scenarioId: string };
 type Score = { safety: number; judgment: number; response: number };
 type HistoryItem = { nodeId: string; nodeTitle: string; choice: IncidentChoice };
 
 const clamp = (value: number) => Math.max(0, Math.min(100, value));
 
-export default function IncidentSimulatorClient({ locale }: Props) {
+export default function IncidentSimulatorClient({ locale, scenarioId }: Props) {
   const isTr = locale === "tr";
-  const scenario = hotWorkIncident;
+  const scenario = incidentScenarios[scenarioId];
   const [nodeId, setNodeId] = useState(scenario.start);
   const [score, setScore] = useState<Score>({ safety: 50, judgment: 50, response: 50 });
   const [selected, setSelected] = useState<IncidentChoice | null>(null);
@@ -67,14 +67,14 @@ export default function IncidentSimulatorClient({ locale }: Props) {
       <div className={s.background} aria-hidden="true"><div className={s.glowOne} /><div className={s.glowTwo} /></div>
 
       <header className={s.topbar}>
-        <Link href={`/${locale}/labs`} className={s.back}><ArrowLeft size={17} /> {isTr ? "Labs'e dön" : "Back to Labs"}</Link>
+        <Link href={`/${locale}/labs/incident-simulator`} className={s.back}><ArrowLeft size={17} /> {isTr ? "Senaryolara dön" : "Back to scenarios"}</Link>
         <div className={s.topMeta}><span>LAB / 002</span><span className={s.live}><i /> {isTr ? "CANLI" : "LIVE"}</span></div>
       </header>
 
       <section className={s.shell}>
         <div className={s.introRow}>
           <div>
-            <p className={s.eyebrow}><Sparkles size={15} /> INCIDENT SIMULATOR / EXPERT</p>
+            <p className={s.eyebrow}><Sparkles size={15} /> INCIDENT SIMULATOR / {scenario.difficulty.toUpperCase()}</p>
             <h1>{isTr ? scenario.titleTr : scenario.titleEn}</h1>
             <p className={s.intro}>{isTr ? scenario.introTr : scenario.introEn}</p>
           </div>
@@ -140,7 +140,7 @@ export default function IncidentSimulatorClient({ locale }: Props) {
               <div><span>{criticalCount}</span><small>{isTr ? "KRİTİK HATA" : "CRITICAL ERRORS"}</small></div>
             </div>
             <div className={s.debriefNote}><b>Debrief</b><p>{debrief}</p></div>
-            <div className={s.finalActions}><button type="button" onClick={restart}><RotateCcw size={17} /> {isTr ? "Tekrar oyna" : "Replay scenario"}</button><Link href={`/${locale}/labs`}>{isTr ? "Labs'e dön" : "Back to Labs"}<ArrowRight size={17} /></Link></div>
+            <div className={s.finalActions}><button type="button" onClick={restart}><RotateCcw size={17} /> {isTr ? "Tekrar oyna" : "Replay scenario"}</button><Link href={`/${locale}/labs/incident-simulator`}>{isTr ? "Senaryolara dön" : "Back to scenarios"}<ArrowRight size={17} /></Link></div>
           </section>
         )}
       </section>
