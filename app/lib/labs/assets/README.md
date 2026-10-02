@@ -1,0 +1,1 @@
+Spot the Hazard image paths are centralized in spot-scenes.ts. Components must only render a scene after its binary file exists under app/public/labs/spot-the-hazard; otherwise they keep the built-in visual placeholder. This prevents broken images during staged asset production.
