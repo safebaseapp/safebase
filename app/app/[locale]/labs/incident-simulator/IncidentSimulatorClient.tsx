@@ -1,30 +1,78 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, RotateCcw, ShieldAlert, Sparkles, TriangleAlert } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, LockKeyhole, RotateCcw, ShieldAlert, Sparkles, TriangleAlert } from "lucide-react";
 import { incidentScenarios, type IncidentChoice } from "@/lib/labs/scenarios/incident-simulator";
 import s from "./incident.module.css";
 
-type Props = { locale: string; scenarioId: string };
+type Props = { locale: string; scenarioId: string; isAuthenticated: boolean };
 type Score = { safety: number; judgment: number; response: number };
 type HistoryItem = { nodeId: string; nodeTitle: string; choice: IncidentChoice };
 
+const DEMO_ID = "hot-work-gas-drift";
 const clamp = (value: number) => Math.max(0, Math.min(100, value));
 
-export default function IncidentSimulatorClient({ locale, scenarioId }: Props) {
+export default function IncidentSimulatorClient({ locale, scenarioId, isAuthenticated }: Props) {
   const isTr = locale === "tr";
   const scenario = incidentScenarios[scenarioId];
   const [nodeId, setNodeId] = useState(scenario.start);
   const [score, setScore] = useState<Score>({ safety: 50, judgment: 50, response: 50 });
   const [selected, setSelected] = useState<IncidentChoice | null>(null);
   const [history, setHistory] = useState<HistoryItem[]>([]);
+  const savedRef = useRef(false);
 
   const node = useMemo(() => scenario.nodes.find((item) => item.id === nodeId) ?? scenario.nodes[0], [nodeId, scenario.nodes]);
   const finished = node.choices.length === 0;
   const criticalCount = history.filter((item) => item.choice.critical).length;
   const average = Math.round((score.safety + score.judgment + score.response) / 3);
   const eventNumber = history.length + (selected ? 0 : 1);
+  const displayDifficulty = scenarioId === DEMO_ID ? "BASIC · DEMO" : scenario.difficulty.toUpperCase();
+
+  const outcomeLabel = node.id === "finish-safe"
+    ? (isTr ? "Kontrollü Sonuç" : "Controlled Outcome")
+    : node.id === "finish-recovered"
+      ? (isTr ? "Eskalasyon Sonrası Toparlanma" : "Recovered After Escalation")
+      : (isTr ? "Kritik Başarısızlık" : "Critical Failure");
+
+  const debrief = average >= 80 && criticalCount === 0
+    ? (isTr ? "Karar zincirin değişen koşulları erken yakaladı ve kontrol hiyerarşisini korudu." : "Your decision chain caught changing conditions early and preserved the control hierarchy.")
+    : criticalCount === 0
+      ? (isTr ? "Genel yaklaşım kontrollüydü; bazı kararlar daha erken ve daha güçlü müdahale ile geliştirilebilir." : "The overall approach remained controlled, though some decisions could be strengthened by earlier intervention.")
+      : (isTr ? "Kritik kararlar tehlikenin ilerlemesine izin verdi. Kişisel incelemede stop-work, permit revalidation ve müdahale zamanlamasına odaklan." : "Critical decisions allowed the hazard to progress. Review stop-work timing, permit revalidation and response timing in your personal analysis.");
+
+  useEffect(() => {
+    if (!finished || !isAuthenticated || savedRef.current || history.length === 0) return;
+    savedRef.current = true;
+
+    const decisions = history.map((item, index) => ({
+      step: index + 1,
+      nodeId: item.nodeId,
+      nodeTitle: item.nodeTitle,
+      choiceId: item.choice.id,
+      choiceLabel: isTr ? item.choice.labelTr : item.choice.labelEn,
+      consequence: isTr ? item.choice.consequenceTr : item.choice.consequenceEn,
+      critical: Boolean(item.choice.critical),
+      impact: item.choice.impact,
+      impactTotal: item.choice.impact.safety + item.choice.impact.judgment + item.choice.impact.response,
+    }));
+
+    void fetch("/api/labs/incident-attempt", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        scenarioId,
+        category: scenario.category,
+        difficulty: scenarioId === DEMO_ID ? "basic" : scenario.difficulty,
+        locale,
+        score: average,
+        criticalCount,
+        outcome: outcomeLabel,
+        scores: score,
+        decisions,
+      }),
+    });
+  }, [average, criticalCount, finished, history, isAuthenticated, isTr, locale, outcomeLabel, scenario.category, scenario.difficulty, scenarioId, score]);
 
   const choose = (choice: IncidentChoice) => {
     if (selected || finished) return;
@@ -44,23 +92,12 @@ export default function IncidentSimulatorClient({ locale, scenarioId }: Props) {
   };
 
   const restart = () => {
+    savedRef.current = false;
     setNodeId(scenario.start);
     setScore({ safety: 50, judgment: 50, response: 50 });
     setSelected(null);
     setHistory([]);
   };
-
-  const outcomeLabel = node.id === "finish-safe"
-    ? (isTr ? "Kontrollü Sonuç" : "Controlled Outcome")
-    : node.id === "finish-recovered"
-      ? (isTr ? "Eskalasyon Sonrası Toparlanma" : "Recovered After Escalation")
-      : (isTr ? "Kritik Başarısızlık" : "Critical Failure");
-
-  const debrief = average >= 80 && criticalCount === 0
-    ? (isTr ? "Karar zincirin değişen koşulları erken yakaladı ve kontrol hiyerarşisini korudu." : "Your decision chain caught changing conditions early and preserved the control hierarchy.")
-    : criticalCount === 0
-      ? (isTr ? "Genel yaklaşım kontrollüydü; bazı kararlar daha erken ve daha güçlü müdahale ile geliştirilebilir." : "The overall approach remained controlled, though some decisions could be strengthened by earlier intervention.")
-      : (isTr ? "Kritik kararlar, tehlikenin ilerlemesine izin verdi. Debrief'te özellikle stop-work ve permit revalidation noktalarını incele." : "Critical decisions allowed the hazard to progress. Focus the debrief on stop-work timing and permit revalidation.");
 
   return (
     <div className={s.page}>
@@ -68,17 +105,17 @@ export default function IncidentSimulatorClient({ locale, scenarioId }: Props) {
 
       <header className={s.topbar}>
         <Link href={`/${locale}/labs/incident-simulator`} className={s.back}><ArrowLeft size={17} /> {isTr ? "Senaryolara dön" : "Back to scenarios"}</Link>
-        <div className={s.topMeta}><span>LAB / 002</span><span className={s.live}><i /> {isTr ? "CANLI" : "LIVE"}</span></div>
+        <div className={s.topMeta}><span>LAB / 002</span><span className={s.live}><i /> {scenarioId === DEMO_ID ? "DEMO" : (isTr ? "CANLI" : "LIVE")}</span></div>
       </header>
 
       <section className={s.shell}>
         <div className={s.introRow}>
           <div>
-            <p className={s.eyebrow}><Sparkles size={15} /> INCIDENT SIMULATOR / {scenario.difficulty.toUpperCase()}</p>
+            <p className={s.eyebrow}><Sparkles size={15} /> INCIDENT SIMULATOR / {displayDifficulty}</p>
             <h1>{isTr ? scenario.titleTr : scenario.titleEn}</h1>
             <p className={s.intro}>{isTr ? scenario.introTr : scenario.introEn}</p>
           </div>
-          <div className={s.category}><span>{scenario.category}</span><b>{scenario.difficulty.toUpperCase()}</b></div>
+          <div className={s.category}><span>{scenario.category}</span><b>{displayDifficulty}</b></div>
         </div>
 
         <div className={s.scoreGrid}>
@@ -139,8 +176,24 @@ export default function IncidentSimulatorClient({ locale, scenarioId }: Props) {
               <div><span>{history.length}</span><small>{isTr ? "KARAR" : "DECISIONS"}</small></div>
               <div><span>{criticalCount}</span><small>{isTr ? "KRİTİK HATA" : "CRITICAL ERRORS"}</small></div>
             </div>
-            <div className={s.debriefNote}><b>Debrief</b><p>{debrief}</p></div>
-            <div className={s.finalActions}><button type="button" onClick={restart}><RotateCcw size={17} /> {isTr ? "Tekrar oyna" : "Replay scenario"}</button><Link href={`/${locale}/labs/incident-simulator`}>{isTr ? "Senaryolara dön" : "Back to scenarios"}<ArrowRight size={17} /></Link></div>
+
+            {isAuthenticated ? (
+              <div className={s.debriefNote}><b>Debrief</b><p>{debrief}</p></div>
+            ) : (
+              <div className={s.debriefNote}>
+                <b><LockKeyhole size={16} /> {isTr ? "Nerede hata yaptın?" : "Where did you lose points?"}</b>
+                <p>{isTr ? "Karar karar kişisel analizini, hangi seçimlerin puan kaybettirdiğini ve önceki denemelerini görmek için ücretsiz hesabınla giriş yap." : "Sign in with a free account to see your decision-by-decision analysis, where points were lost and your previous attempts."}</p>
+              </div>
+            )}
+
+            <div className={s.finalActions}>
+              <button type="button" onClick={restart}><RotateCcw size={17} /> {isTr ? "Tekrar oyna" : "Replay scenario"}</button>
+              {isAuthenticated ? (
+                <Link href={`/${locale}/dashboard/labs`}>{isTr ? "Hatalarımı incele" : "Review my decisions"}<ArrowRight size={17} /></Link>
+              ) : (
+                <Link href={`/${locale}/login?next=${encodeURIComponent(`/${locale}/dashboard/labs`)}`}>{isTr ? "Ücretsiz giriş yap" : "Sign in free"}<ArrowRight size={17} /></Link>
+              )}
+            </div>
           </section>
         )}
       </section>
