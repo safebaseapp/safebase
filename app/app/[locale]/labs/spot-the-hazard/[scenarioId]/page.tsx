@@ -7,8 +7,6 @@ import type { LabCategory, LabHotspot } from "@/lib/labs/types";
 
 type Props = { params: Promise<{ locale: string; scenarioId: string }> };
 
-// Permanent local scene assets. Keeping challenge images inside /public avoids
-// expiring third-party URLs and prevents the training flow from breaking.
 const sceneByCategory: Partial<Record<LabCategory, string>> = {
   working_at_height: "/labs/spot-the-hazard/pipe-rack-final.jpg",
   hot_work: "/labs/spot-the-hazard/hot-work-final.jpg",
@@ -17,8 +15,6 @@ const sceneByCategory: Partial<Record<LabCategory, string>> = {
   confined_space: "/labs/spot-the-hazard/confined-space-final.jpg",
 };
 
-// Multiple hit zones may share one hazard id so the user can click the visible
-// condition naturally instead of hunting for a single hidden pixel.
 const hotspotsByCategory: Partial<Record<LabCategory, LabHotspot[]>> = {
   working_at_height: [
     { id: "no-tieoff", x: 60.5, y: 51, radius: 7 },
