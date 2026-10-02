@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   const incorrectCount = Math.max(0, body.decisions.length - positiveCount);
   const difficulty = typeof body.difficulty === "string" ? body.difficulty : "basic";
 
-  const { count: previousCount, error: previousError } = await supabase.from("lab_attempts").select("id", { count: "exact", head: true }).eq("user_id", user.id).eq("scenario_id", body.scenarioId);
+  const { count: previousCount, error: previousError } = await supabase.from("lab_attempts").select("id", { count: "exact", head: true }).eq("user_id", user.id).eq("scenario_type", "incident_simulator").eq("scenario_id", body.scenarioId);
   if (previousError) return NextResponse.json({ ok: false, error: "LABS_SCHEMA_UNAVAILABLE" }, { status: 503 });
   const firstCompletion = (previousCount ?? 0) === 0;
   const xp = calculateXpAward(difficulty, score, firstCompletion);
