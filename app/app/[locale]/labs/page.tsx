@@ -22,7 +22,7 @@ type LabCard = {
 
 const products: LabCard[] = [
   { id: "spot", title: "Spot the Hazard", subtitle: "Visual Test Challenge", descTr: "Gerçekçi endüstriyel sahneleri incele. Görselde gerçekten bulunan tehlikeleri tespit et ve saha farkındalığını test et.", descEn: "Inspect realistic industrial scenes. Identify the hazards that are actually visible and test your field awareness.", href: "spot-the-hazard", active: true, index: "01" },
-  { id: "incident", title: "Incident Simulator", subtitle: "Scenario Judgment", descTr: "Olay akışında karar ver, sonuçlarını gör ve güvenli müdahale yaklaşımını geliştir.", descEn: "Make decisions through an incident scenario, see the consequences and sharpen response judgment.", active: false, premium: true, index: "02" },
+  { id: "incident", title: "Incident Simulator", subtitle: "Scenario Judgment", descTr: "Dallanan olay akışında karar ver. Her karar Safety, Judgment ve Response skorunu değiştirir; sonuç zincire göre şekillenir.", descEn: "Make decisions through a branching incident. Every choice changes Safety, Judgment and Response scores, and the outcome follows your decision chain.", href: "incident-simulator", active: true, premium: true, index: "02" },
   { id: "brain", title: "Daily Safety Brain", subtitle: "Quick Challenge", descTr: "Kısa günlük HSE challenge'ları ile bilgini ve saha refleksini sıcak tut.", descEn: "Keep HSE knowledge and field reflexes active with short daily challenges.", active: false, index: "03" },
   { id: "ppe", title: "PPE Matchmaker", subtitle: "Protection Logic", descTr: "Görev ve tehlikeye göre doğru kişisel koruyucu ekipman kombinasyonunu seç.", descEn: "Match tasks and hazards with the right personal protective equipment.", active: false, index: "04" },
   { id: "myth", title: "Safety Myth Buster", subtitle: "Safety Truth Check", descTr: "Sahada sık duyulan güvenlik inanışlarını kanıt ve iyi uygulamalarla test et.", descEn: "Test common field safety beliefs against evidence and good practice.", active: false, index: "05" },
@@ -58,21 +58,21 @@ export default async function LabsPage({ params }: Props) {
               </h1>
               <p className={s.lead}>{isTr ? "Gerçek endüstriyel risklerden ilham alan etkileşimli HSE challenge'ları. Tehlike farkındalığını, karar kalitesini ve saha refleksini aktif olarak test et." : "Interactive HSE challenges inspired by real industrial risk. Actively test hazard recognition, decision quality and field awareness."}</p>
               <div className={s.actions}>
-                <Link className={s.primaryAction} href={`/${locale}/labs/spot-the-hazard`}>{isTr ? "Visual Test Challenge'ı Aç" : "Open Visual Test Challenge"}<ArrowRight size={18} /></Link>
+                <Link className={s.primaryAction} href={`/${locale}/labs/incident-simulator`}>{isTr ? "Incident Simulator'ı Aç" : "Open Incident Simulator"}<ArrowRight size={18} /></Link>
                 <a className={s.secondaryAction} href="#labs-modules">{isTr ? "Modülleri Gör" : "Explore Modules"}</a>
               </div>
             </div>
 
             <div className={s.heroPanel}>
-              <div className={s.panelTop}><span>LAB / 001</span><span className={s.liveDot}>{isTr ? "CANLI" : "LIVE"}</span></div>
+              <div className={s.panelTop}><span>LAB / 002</span><span className={s.liveDot}>{isTr ? "CANLI" : "LIVE"}</span></div>
               <div className={s.panelIcon}><ScanSearch size={32} /></div>
-              <p className={s.panelKicker}>VISUAL HAZARD RECOGNITION</p>
-              <h2>Spot the Hazard</h2>
-              <p>{isTr ? "5 endüstriyel sahne · gerçek görsel tespit · anlık saha değerlendirmesi" : "5 industrial scenes · visual findings · immediate field review"}</p>
+              <p className={s.panelKicker}>SCENARIO JUDGMENT ENGINE</p>
+              <h2>Incident Simulator</h2>
+              <p>{isTr ? "Dallanan olay akışı · karar etkisi · Safety / Judgment / Response debrief" : "Branching event flow · decision impact · Safety / Judgment / Response debrief"}</p>
               <div className={s.panelStats}>
-                <span><b>5</b>{isTr ? "Sahne" : "Scenes"}</span><span><b>100</b>{isTr ? "Puan" : "Score"}</span><span><b>XP</b>{isTr ? "İlerleme" : "Progress"}</span>
+                <span><b>3</b>{isTr ? "Skor" : "Scores"}</span><span><b>3</b>{isTr ? "Sonuç" : "Outcomes"}</span><span><b>XP</b>{isTr ? "Karar" : "Judgment"}</span>
               </div>
-              <Link href={`/${locale}/labs/spot-the-hazard`} className={s.panelLink}>{isTr ? "Teste başla" : "Start test"} <ArrowRight size={16} /></Link>
+              <Link href={`/${locale}/labs/incident-simulator`} className={s.panelLink}>{isTr ? "Simülasyonu başlat" : "Start simulation"} <ArrowRight size={16} /></Link>
             </div>
           </div>
 
@@ -87,7 +87,7 @@ export default async function LabsPage({ params }: Props) {
               <p className={s.eyebrow}><span className={s.signal} /> 01 / {isTr ? "EĞİTİM MODÜLLERİ" : "TRAINING MODULES"}</p>
               <h2>{isTr ? "Okumaktan fazlası." : "More than reading."}<br /><em>{isTr ? "Aktif olarak test et." : "Actively tested."}</em></h2>
             </div>
-            <p>{isTr ? "HSE Labs kademeli olarak açılıyor. Şu anda Visual Test Challenge canlı; diğer modüller kalite kontrolü tamamlandıkça aktif edilecek." : "HSE Labs is opening in stages. The Visual Test Challenge is live now; additional modules will unlock after quality validation."}</p>
+            <p>{isTr ? "HSE Labs kademeli olarak açılıyor. Visual Test Challenge ve Incident Simulator şu anda canlı; diğer modüller kalite kontrolü tamamlandıkça aktif edilecek." : "HSE Labs is opening in stages. Visual Test Challenge and Incident Simulator are live now; additional modules will unlock after quality validation."}</p>
           </div>
 
           <div className={s.grid}>
