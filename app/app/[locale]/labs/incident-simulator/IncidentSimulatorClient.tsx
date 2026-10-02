@@ -3,19 +3,20 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, LockKeyhole, RotateCcw, ShieldAlert, Sparkles, TriangleAlert } from "lucide-react";
-import { incidentScenarios, type IncidentChoice } from "@/lib/labs/scenarios/incident-simulator";
+import { incidentScenarios, type IncidentChoice } from "@/lib/labs/scenarios/incident-scenarios";
+import { getIncidentCatalogItem } from "@/lib/labs/scenarios/incident-catalog";
 import s from "./incident.module.css";
 
 type Props = { locale: string; scenarioId: string; isAuthenticated: boolean };
 type Score = { safety: number; judgment: number; response: number };
 type HistoryItem = { nodeId: string; nodeTitle: string; choice: IncidentChoice };
 
-const DEMO_ID = "hot-work-gas-drift";
 const clamp = (value: number) => Math.max(0, Math.min(100, value));
 
 export default function IncidentSimulatorClient({ locale, scenarioId, isAuthenticated }: Props) {
   const isTr = locale === "tr";
   const scenario = incidentScenarios[scenarioId];
+  const catalogItem = getIncidentCatalogItem(scenarioId);
   const [nodeId, setNodeId] = useState(scenario.start);
   const [score, setScore] = useState<Score>({ safety: 50, judgment: 50, response: 50 });
   const [selected, setSelected] = useState<IncidentChoice | null>(null);
@@ -27,7 +28,8 @@ export default function IncidentSimulatorClient({ locale, scenarioId, isAuthenti
   const criticalCount = history.filter((item) => item.choice.critical).length;
   const average = Math.round((score.safety + score.judgment + score.response) / 3);
   const eventNumber = history.length + (selected ? 0 : 1);
-  const displayDifficulty = scenarioId === DEMO_ID ? "BASIC · DEMO" : scenario.difficulty.toUpperCase();
+  const displayDifficulty = (catalogItem?.difficulty ?? "basic").toUpperCase();
+  const accessLabel = catalogItem?.access === "guest" ? (isTr ? "MİSAFİR" : "GUEST") : catalogItem?.access === "free" ? (isTr ? "ÜCRETSİZ ÜYE" : "FREE MEMBER") : "PREMIUM";
 
   const outcomeLabel = node.id === "finish-safe"
     ? (isTr ? "Kontrollü Sonuç" : "Controlled Outcome")
@@ -63,7 +65,7 @@ export default function IncidentSimulatorClient({ locale, scenarioId, isAuthenti
       body: JSON.stringify({
         scenarioId,
         category: scenario.category,
-        difficulty: scenarioId === DEMO_ID ? "basic" : scenario.difficulty,
+        difficulty: catalogItem?.difficulty ?? "basic",
         locale,
         score: average,
         criticalCount,
@@ -72,7 +74,7 @@ export default function IncidentSimulatorClient({ locale, scenarioId, isAuthenti
         decisions,
       }),
     });
-  }, [average, criticalCount, finished, history, isAuthenticated, isTr, locale, outcomeLabel, scenario.category, scenario.difficulty, scenarioId, score]);
+  }, [average, catalogItem?.difficulty, criticalCount, finished, history, isAuthenticated, isTr, locale, outcomeLabel, scenario.category, scenarioId, score]);
 
   const choose = (choice: IncidentChoice) => {
     if (selected || finished) return;
@@ -105,7 +107,7 @@ export default function IncidentSimulatorClient({ locale, scenarioId, isAuthenti
 
       <header className={s.topbar}>
         <Link href={`/${locale}/labs/incident-simulator`} className={s.back}><ArrowLeft size={17} /> {isTr ? "Senaryolara dön" : "Back to scenarios"}</Link>
-        <div className={s.topMeta}><span>LAB / 002</span><span className={s.live}><i /> {scenarioId === DEMO_ID ? "DEMO" : (isTr ? "CANLI" : "LIVE")}</span></div>
+        <div className={s.topMeta}><span>LAB / 002</span><span className={s.live}><i /> {accessLabel}</span></div>
       </header>
 
       <section className={s.shell}>
