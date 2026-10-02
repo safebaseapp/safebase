@@ -4,12 +4,16 @@ import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2, CircleAlert, LockKeyhole, TriangleAlert } from "lucide-react";
 import { routing } from "../../../../i18n/routing";
 import { createClient } from "@/utils/supabase/server";
+import { incidentScenarios } from "@/lib/labs/scenarios/incident-scenarios";
+import { localizeHseText } from "@/lib/labs/scenarios/hse-language";
 
 type Props = { params: Promise<{ locale: string }> };
 
 type Decision = {
   step?: number;
+  nodeId?: string;
   nodeTitle?: string;
+  choiceId?: string;
   choiceLabel?: string;
   consequence?: string;
   critical?: boolean;
@@ -32,14 +36,27 @@ type Attempt = {
   } | null;
 };
 
-function scenarioTitle(id: string, isTr: boolean) {
-  if (id === "hot-work-gas-drift") return isTr ? "Sıcak Çalışma: Ölçüm Değişiyor" : "Hot Work: The Reading Changes";
-  if (id === "height-anchor-choice") return isTr ? "Yüksekte Çalışma: Tek Ankraj Kaldı" : "Work at Height: One Anchor Left";
-  if (id === "confined-space-atmosphere") return isTr ? "Kapalı Alan: Koşullar Değişiyor" : "Confined Space: Conditions Shift";
-  if (id === "loto-unexpected-energy") return isTr ? "LOTO: Beklenmeyen Enerji" : "LOTO: Unexpected Energy";
-  if (id === "scaffold-status-change") return isTr ? "İskele: Durum Değişti" : "Scaffolding: Status Changed";
-  if (id === "excavation-water-ingress") return isTr ? "Kazı: Su Yükseliyor" : "Excavation: Water Is Rising";
-  return id.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+function localizedScenarioTitle(id: string, locale: string) {
+  const scenario = incidentScenarios[id];
+  if (!scenario) return id.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+  return localizeHseText(locale, scenario.titleTr, scenario.titleEn);
+}
+
+function localizedDecision(attempt: Attempt, decision: Decision, locale: string) {
+  const scenario = incidentScenarios[attempt.scenario_id];
+  const node = scenario?.nodes.find((item) => item.id === decision.nodeId);
+  const choice = node?.choices.find((item) => item.id === decision.choiceId);
+  const isTr = locale === "tr";
+
+  return {
+    nodeTitle: node ? localizeHseText(locale, node.titleTr, node.titleEn) : (decision.nodeTitle ?? ""),
+    choiceLabel: choice ? localizeHseText(locale, choice.labelTr, choice.labelEn) : (decision.choiceLabel ?? ""),
+    consequence: choice ? localizeHseText(locale, choice.consequenceTr, choice.consequenceEn) : (decision.consequence ?? ""),
+    critical: Boolean(choice?.critical ?? decision.critical),
+    impact: choice?.impact ?? decision.impact,
+    fallbackWarning: !node || !choice,
+    isTr,
+  };
 }
 
 export default async function LabsResultsPage({ params }: Props) {
@@ -71,15 +88,15 @@ export default async function LabsResultsPage({ params }: Props) {
 
         <section className="mb-10">
           <p className="mb-3 text-xs font-bold tracking-[0.18em] text-emerald-300">SERNEM LABS / PERSONAL REVIEW</p>
-          <h1 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">{isTr ? "Kararlarını incele. Nerede puan kaybettiğini gör." : "Review your decisions. See where judgment slipped."}</h1>
-          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-400">{isTr ? "Incident Simulator denemelerin burada kişisel olarak saklanır. Her olayda verdiğin kararları, kritik seçimleri ve Safety / Judgment / Response etkilerini geriye dönük inceleyebilirsin." : "Your Incident Simulator attempts are stored here privately. Review each decision, critical choices and their Safety / Judgment / Response impact."}</p>
+          <h1 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">{isTr ? "Kararlarını incele. Nerede puan kaybettiğini gör." : "Review your decisions. See where you lost points."}</h1>
+          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-400">{isTr ? "Incident Simulator denemelerin burada kişisel olarak saklanır. Her olayda verdiğin kararları, kritik seçimleri ve Safety / Judgment / Response etkilerini geriye dönük inceleyebilirsin." : "Your Incident Simulator attempts are stored privately here. Review each decision, critical choice, and its effect on Safety, Judgment, and Response."}</p>
         </section>
 
         {error ? (
           <div className="rounded-3xl border border-amber-300/20 bg-amber-400/[0.05] p-8">
             <TriangleAlert className="mb-4 text-amber-300" />
-            <h2 className="text-2xl font-semibold">{isTr ? "Labs sonuç depolaması şu anda hazır değil" : "Labs result storage is not ready"}</h2>
-            <p className="mt-2 max-w-3xl text-slate-400">{isTr ? "Deneme sonucu tarayıcıda korunuyor ve sistem tekrar kaydetmeyi deneyecek. Bu ekran artık veritabanı hatasını 'kayıt yok' diye gizlemiyor." : "Your attempt is retained in the browser and the system will retry saving it. This screen no longer hides database errors as an empty result list."}</p>
+            <h2 className="text-2xl font-semibold">{isTr ? "Labs sonuç depolaması şu anda hazır değil" : "Labs result storage is currently unavailable"}</h2>
+            <p className="mt-2 max-w-3xl text-slate-400">{isTr ? "Deneme sonucu tarayıcıda korunuyor ve sistem tekrar kaydetmeyi deneyecek. Bu ekran artık veritabanı hatasını 'kayıt yok' diye gizlemiyor." : "Your attempt is retained in the browser and the system will retry saving it. Database errors are no longer shown as an empty result list."}</p>
           </div>
         ) : attempts.length === 0 ? (
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
@@ -93,12 +110,16 @@ export default async function LabsResultsPage({ params }: Props) {
               const decisions = attempt.selected_answers?.decisions ?? [];
               const scores = attempt.selected_answers?.scores ?? {};
               const criticalCount = Number(attempt.selected_answers?.criticalCount ?? 0);
+              const scenario = incidentScenarios[attempt.scenario_id];
+              const displayedDifficulty = scenario?.difficulty === "expert" ? "EXPERT" : attempt.difficulty.toUpperCase();
+              const category = scenario?.category ?? attempt.category;
+
               return (
                 <article key={attempt.id} className="overflow-hidden rounded-3xl border border-white/10 bg-[#0a1916]">
                   <div className="grid gap-5 border-b border-white/10 p-6 md:grid-cols-[1fr_auto] md:items-center">
                     <div>
-                      <div className="mb-2 flex flex-wrap gap-2 text-xs font-bold tracking-[0.12em] text-emerald-300"><span>{attempt.category}</span><span>·</span><span>{attempt.difficulty.toUpperCase()}</span></div>
-                      <h2 className="text-2xl font-semibold">{scenarioTitle(attempt.scenario_id, isTr)}</h2>
+                      <div className="mb-2 flex flex-wrap gap-2 text-xs font-bold tracking-[0.12em] text-emerald-300"><span>{category}</span><span>·</span><span>{displayedDifficulty}</span></div>
+                      <h2 className="text-2xl font-semibold">{localizedScenarioTitle(attempt.scenario_id, locale)}</h2>
                       <p className="mt-2 text-sm text-slate-400">{new Intl.DateTimeFormat(isTr ? "tr-TR" : "en-GB", { dateStyle: "medium", timeStyle: "short" }).format(new Date(attempt.created_at))}</p>
                     </div>
                     <div className="flex gap-5 md:text-right">
@@ -116,23 +137,26 @@ export default async function LabsResultsPage({ params }: Props) {
                   <div className="p-6">
                     <h3 className="mb-4 text-sm font-bold tracking-[0.12em] text-slate-300">{isTr ? "KARAR ZİNCİRİ" : "DECISION CHAIN"}</h3>
                     <div className="space-y-3">
-                      {decisions.map((decision, index) => (
-                        <div key={`${attempt.id}-${index}`} className={`rounded-2xl border p-4 ${decision.critical ? "border-red-400/25 bg-red-400/[0.05]" : "border-white/10 bg-white/[0.025]"}`}>
-                          <div className="flex gap-3">
-                            {decision.critical ? <CircleAlert size={18} className="mt-0.5 shrink-0 text-red-300" /> : <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-300" />}
-                            <div className="min-w-0">
-                              <div className="text-xs font-bold tracking-[0.12em] text-slate-500">{String(decision.step ?? index + 1).padStart(2, "0")} · {decision.nodeTitle}</div>
-                              <p className="mt-1 font-semibold text-slate-100">{decision.choiceLabel}</p>
-                              {decision.consequence ? <p className="mt-2 text-sm leading-6 text-slate-400">{decision.consequence}</p> : null}
-                              <div className="mt-3 flex flex-wrap gap-2 text-xs">
-                                <Impact label={isTr ? "Güvenlik" : "Safety"} value={decision.impact?.safety} />
-                                <Impact label={isTr ? "Muhakeme" : "Judgment"} value={decision.impact?.judgment} />
-                                <Impact label={isTr ? "Müdahale" : "Response"} value={decision.impact?.response} />
+                      {decisions.map((decision, index) => {
+                        const localized = localizedDecision(attempt, decision, locale);
+                        return (
+                          <div key={`${attempt.id}-${index}`} className={`rounded-2xl border p-4 ${localized.critical ? "border-red-400/25 bg-red-400/[0.05]" : "border-white/10 bg-white/[0.025]"}`}>
+                            <div className="flex gap-3">
+                              {localized.critical ? <CircleAlert size={18} className="mt-0.5 shrink-0 text-red-300" /> : <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-300" />}
+                              <div className="min-w-0">
+                                <div className="text-xs font-bold tracking-[0.12em] text-slate-500">{String(decision.step ?? index + 1).padStart(2, "0")} · {localized.nodeTitle}</div>
+                                <p className="mt-1 font-semibold text-slate-100">{localized.choiceLabel}</p>
+                                {localized.consequence ? <p className="mt-2 text-sm leading-6 text-slate-400">{localized.consequence}</p> : null}
+                                <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                                  <Impact label={isTr ? "Güvenlik" : "Safety"} value={localized.impact?.safety} />
+                                  <Impact label={isTr ? "Muhakeme" : "Judgment"} value={localized.impact?.judgment} />
+                                  <Impact label={isTr ? "Müdahale" : "Response"} value={localized.impact?.response} />
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 </article>
