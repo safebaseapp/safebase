@@ -3,7 +3,7 @@ name: Toolbox PDF QA
 on:
   push:
     branches:
-      - chore/toolbox-pdf-qa
+      - main
     paths:
       - "app/public/downloads/**"
       - "app/lib/toolbox/premium-master-slugs.ts"
@@ -41,20 +41,4 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Audit Toolbox PDFs
-        id: audit
-        continue-on-error: true
         run: npm run qa:toolbox-pdfs
-
-      - name: Upload Eye Face QA samples
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: eye-face-pdf-qa
-          path: |
-            app/public/downloads/eye-face-protection-toolbox-talk-en-branded-base.pdf
-            app/public/downloads/eye-face-protection-toolbox-talk-tr-branded-base.pdf
-          if-no-files-found: error
-
-      - name: Fail when audit failed
-        if: steps.audit.outcome == 'failure'
-        run: exit 1
