@@ -4,7 +4,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
-import { generatePremiumToolboxPdf as generateLegacyPremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf";
+import { generatePremiumToolboxPdf as generateLegacyPremiumToolboxPdf } from "./premium-toolbox-pdf";
 
 type Locale = "tr" | "en";
 
