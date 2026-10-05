@@ -46,11 +46,13 @@ export async function POST(request: NextRequest) {
     const payload = JSON.parse(rawBody);
     const eventName = String(payload?.meta?.event_name ?? "");
     const attributes = payload?.data?.attributes ?? {};
+    const customData = payload?.meta?.custom_data ?? {};
+    const customUserId = customData?.user_id ? String(customData.user_id).trim() : "";
     const email = attributes?.user_email || attributes?.customer_email || attributes?.email;
 
-    if (!email) {
-      console.error("Lemon Squeezy webhook: customer email missing", eventName);
-      return NextResponse.json({ error: "Customer email missing" }, { status: 400 });
+    if (!email && !customUserId) {
+      console.error("Lemon Squeezy webhook: customer identity missing", eventName);
+      return NextResponse.json({ error: "Customer identity missing" }, { status: 400 });
     }
 
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -63,7 +65,7 @@ export async function POST(request: NextRequest) {
       auth: { autoRefreshToken: false, persistSession: false },
     });
 
-    const normalizedEmail = String(email).trim().toLowerCase();
+    const normalizedEmail = email ? String(email).trim().toLowerCase() : "";
     const fields = lifecycleFields(payload);
     const explicitStatus = String(attributes?.status ?? "").toLowerCase();
     const isExpired = eventName === "subscription_expired" || explicitStatus === "expired";
@@ -72,16 +74,45 @@ export async function POST(request: NextRequest) {
 
     let matchedUserId: string | null = null;
 
-    const { data: profileMatch } = await supabase
-      .from("profiles")
-      .select("id")
-      .ilike("email", normalizedEmail)
-      .limit(1)
-      .maybeSingle();
+    // Preferred identity: a Supabase user ID explicitly attached to the Lemon checkout.
+    // Lemon Squeezy returns checkout custom data under meta.custom_data for subscription/order webhooks.
+    if (customUserId) {
+      const { data: profileById, error: profileByIdError } = await supabase
+        .from("profiles")
+        .select("id, email")
+        .eq("id", customUserId)
+        .maybeSingle();
 
-    if (profileMatch?.id) matchedUserId = profileMatch.id;
+      if (profileByIdError) throw profileByIdError;
 
-    if (!matchedUserId) {
+      if (profileById?.id) {
+        matchedUserId = profileById.id;
+        const profileEmail = profileById.email ? String(profileById.email).trim().toLowerCase() : "";
+        if (normalizedEmail && profileEmail && normalizedEmail !== profileEmail) {
+          console.warn("Lemon Squeezy webhook: custom user ID matched with different billing email", {
+            eventName,
+            userId: customUserId,
+          });
+        }
+      } else {
+        const { data: authUser } = await supabase.auth.admin.getUserById(customUserId);
+        if (authUser?.user?.id) matchedUserId = authUser.user.id;
+      }
+    }
+
+    // Backward-compatible fallback for existing Lemon checkout links that do not yet pass user_id.
+    if (!matchedUserId && normalizedEmail) {
+      const { data: profileMatch } = await supabase
+        .from("profiles")
+        .select("id")
+        .ilike("email", normalizedEmail)
+        .limit(1)
+        .maybeSingle();
+
+      if (profileMatch?.id) matchedUserId = profileMatch.id;
+    }
+
+    if (!matchedUserId && normalizedEmail) {
       let page = 1;
       while (!matchedUserId && page <= 10) {
         const { data, error } = await supabase.auth.admin.listUsers({ page, perPage: 1000 });
@@ -111,8 +142,17 @@ export async function POST(request: NextRequest) {
       const { error } = await supabase.from("profiles").update(update).eq("id", matchedUserId);
       if (error) throw error;
 
-      console.log(`SERNEM billing sync: ${normalizedEmail} (${eventName})`);
+      console.log(`SERNEM billing sync: ${matchedUserId} (${eventName})`);
       return NextResponse.json({ received: true });
+    }
+
+    // Pending entitlement remains the safety net for legacy/external checkouts that cannot be matched yet.
+    if (!normalizedEmail) {
+      console.error("Lemon Squeezy webhook: unmatched custom user ID and no billing email", {
+        eventName,
+        userId: customUserId,
+      });
+      return NextResponse.json({ error: "Unable to match customer" }, { status: 400 });
     }
 
     const pendingStatus = isExpired ? "inactive" : "active";
