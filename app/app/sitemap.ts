@@ -8,6 +8,9 @@ import { ppeStandards } from "@/app/[locale]/ppe-standards/data";
 import { inspectionCatalog } from "@/data/checklists/registry";
 
 const baseUrl = "https://www.sernem.com";
+const locales = ["tr", "en"] as const;
+type Locale = (typeof locales)[number];
+type SitemapEntry = MetadataRoute.Sitemap[number];
 
 const publicRoutes = [
   "",
@@ -36,81 +39,105 @@ const publicRoutes = [
   "/safety-pack",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const locales = ["tr", "en"] as const;
+function localizedEntry(
+  locale: Locale,
+  path: string,
+  options: Omit<SitemapEntry, "url" | "alternates">,
+): SitemapEntry {
+  return {
+    url: `${baseUrl}/${locale}${path}`,
+    ...options,
+    alternates: {
+      languages: {
+        en: `${baseUrl}/en${path}`,
+        tr: `${baseUrl}/tr${path}`,
+        "x-default": `${baseUrl}/en${path}`,
+      },
+    },
+  };
+}
 
+export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    publicRoutes.map((route) => ({
-      url: `${baseUrl}/${locale}${route}`,
-      changeFrequency:
-        route === "" || route === "/ai-assistant" ? "weekly" : "monthly",
-      priority:
-        route === ""
-          ? 1
-          : route === "/ai-assistant" ||
-              route === "/ppe-standards" ||
-              route === "/safety-pack" ||
-              route.startsWith("/tools/")
-            ? 0.9
-            : 0.8,
-    })),
+    publicRoutes.map((route) =>
+      localizedEntry(locale, route, {
+        changeFrequency:
+          route === "" || route === "/ai-assistant" ? "weekly" : "monthly",
+        priority:
+          route === ""
+            ? 1
+            : route === "/ai-assistant" ||
+                route === "/ppe-standards" ||
+                route === "/safety-pack" ||
+                route.startsWith("/tools/")
+              ? 0.9
+              : 0.8,
+      }),
+    ),
   );
 
   const safetyPackPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    safetyPacks.map((pack) => ({
-      url: `${baseUrl}/${locale}/safety-pack/${pack.slug}`,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    })),
+    safetyPacks.map((pack) =>
+      localizedEntry(locale, `/safety-pack/${pack.slug}`, {
+        changeFrequency: "monthly",
+        priority: 0.9,
+      }),
+    ),
   );
 
   const guidePages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    allGuides.map((guide) => ({
-      url: `${baseUrl}/${locale}/knowledge-base/${guide.slug}`,
-      changeFrequency: "monthly",
-      priority: 0.85,
-    })),
+    allGuides.map((guide) =>
+      localizedEntry(locale, `/knowledge-base/${guide.slug}`, {
+        changeFrequency: "monthly",
+        priority: 0.85,
+      }),
+    ),
   );
 
   const ppeStandardPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    ppeStandards.map((standard) => ({
-      url: `${baseUrl}/${locale}/ppe-standards/${standard.slug}`,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    })),
+    ppeStandards.map((standard) =>
+      localizedEntry(locale, `/ppe-standards/${standard.slug}`, {
+        changeFrequency: "monthly",
+        priority: 0.9,
+      }),
+    ),
   );
 
   const checklistPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    inspectionCatalog.map((entry) => ({
-      url: `${baseUrl}/${locale}/checklists/${entry.slug}`,
-      changeFrequency: "monthly",
-      priority: 0.85,
-    })),
+    inspectionCatalog.map((entry) =>
+      localizedEntry(locale, `/checklists/${entry.slug}`, {
+        changeFrequency: "monthly",
+        priority: 0.85,
+      }),
+    ),
   );
 
   const toolboxPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    toolboxData.map((toolbox) => ({
-      url: `${baseUrl}/${locale}/toolbox/${toolbox.slug}`,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    })),
+    toolboxData.map((toolbox) =>
+      localizedEntry(locale, `/toolbox/${toolbox.slug}`, {
+        changeFrequency: "monthly",
+        priority: 0.8,
+      }),
+    ),
   );
 
   const riskAssessmentPages: MetadataRoute.Sitemap = locales.flatMap(
     (locale) =>
-      allRiskActivities.map((activity) => ({
-        url: `${baseUrl}/${locale}/risk-assessment/${activity.id}`,
-        changeFrequency: "monthly",
-        priority: 0.85,
-      })),
+      allRiskActivities.map((activity) =>
+        localizedEntry(locale, `/risk-assessment/${activity.id}`, {
+          changeFrequency: "monthly",
+          priority: 0.85,
+        }),
+      ),
   );
 
   const safetySignPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    safetySigns.map((sign) => ({
-      url: `${baseUrl}/${locale}/safety-signs/${sign.slug}`,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    })),
+    safetySigns.map((sign) =>
+      localizedEntry(locale, `/safety-signs/${sign.slug}`, {
+        changeFrequency: "monthly",
+        priority: 0.8,
+      }),
+    ),
   );
 
   return [

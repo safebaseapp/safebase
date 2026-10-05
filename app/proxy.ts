@@ -53,6 +53,7 @@ export async function proxy(request: NextRequest) {
   const locale = resolveLocale(request);
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-sernem-locale", locale);
+  requestHeaders.set("x-sernem-pathname", pathname);
 
   const { response, isAuthenticated } = await updateSession(
     request,

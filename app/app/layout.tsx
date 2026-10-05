@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.sernem.com"),
   title: {
     default: "SERNEM",
     template: "%s | SERNEM",
