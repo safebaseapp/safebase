@@ -4,7 +4,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
-import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf";
+import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf-v2";
 import { premiumMasterSlugSet } from "@/lib/toolbox/premium-master-slugs";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 import { createClient } from "@/utils/supabase/server";
