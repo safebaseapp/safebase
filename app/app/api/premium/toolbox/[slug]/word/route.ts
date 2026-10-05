@@ -839,6 +839,25 @@ export async function GET(request: Request, { params }: RouteProps) {
   });
 
   const buffer = await Packer.toBuffer(document);
+
+  const { error: activityError } = await supabase
+    .from("user_activity_events")
+    .insert({
+      user_id: user.id,
+      event_name: "word_download",
+      path: request.url,
+      metadata: {
+        resource_type: "toolbox",
+        slug,
+        locale,
+        mode: "premium_word",
+      },
+    });
+
+  if (activityError) {
+    console.error("Word activity tracking error:", activityError);
+  }
+
   const filename = `${slug}-toolbox-talk-${locale}-premium.docx`;
 
   return new NextResponse(new Uint8Array(buffer), {

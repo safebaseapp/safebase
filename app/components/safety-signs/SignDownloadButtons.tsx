@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { jsPDF } from "jspdf";
 import { requirePrintAuth } from "@/lib/auth/require-print-auth";
+import { createClient } from "@/utils/supabase/client";
 
 type Props = {
   signCode: string;
@@ -215,6 +216,27 @@ export default function SignDownloadButtons({
         await downloadPNG();
       } else {
         await downloadPDF(type);
+      }
+
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { error: activityError } = await supabase
+          .from("user_activity_events")
+          .insert({
+            user_id: user.id,
+            event_name: "safety_sign_download",
+            path: window.location.href,
+            metadata: {
+              resource_type: "safety_sign",
+              sign_code: signCode,
+              locale: resolvedLocale,
+              format: type,
+            },
+          });
+        if (activityError) {
+          console.error("Safety sign activity tracking error:", activityError);
+        }
       }
     } catch (error) {
       console.error(error);

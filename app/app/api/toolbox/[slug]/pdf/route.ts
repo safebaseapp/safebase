@@ -5,7 +5,6 @@ import sharp from "sharp";
 
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf-v2";
-import { premiumMasterSlugSet } from "@/lib/toolbox/premium-master-slugs";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 import { createClient } from "@/utils/supabase/server";
 
@@ -52,17 +51,6 @@ export async function GET(
       return new Response("Toolbox not found.", {
         status: 404,
       });
-    }
-
-    if (
-      premiumMasterSlugSet.has(slug) &&
-      profile.plan !== "premium" &&
-      profile.role !== "admin"
-    ) {
-      return Response.redirect(
-        new URL(`/${locale}/upgrade`, request.url),
-        307,
-      );
     }
 
     const logoPath = path.join(

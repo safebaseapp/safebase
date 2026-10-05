@@ -219,6 +219,31 @@ export default function PosterFormatToolbar({ locale }: Props) {
     }
 
     window.print();
+
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { error: activityError } = await supabase
+          .from("user_activity_events")
+          .insert({
+            user_id: user.id,
+            event_name: "poster_print",
+            path: window.location.href,
+            metadata: {
+              resource_type: "poster",
+              size: selectedSize,
+              mode: brandedPoster ? "branded" : "standard",
+              locale,
+            },
+          });
+        if (activityError) {
+          console.error("Poster activity tracking error:", activityError);
+        }
+      }
+    } catch (error) {
+      console.error("Poster activity tracking failed:", error);
+    }
   }
 
   return (
