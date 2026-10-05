@@ -1251,7 +1251,15 @@ def content(lang, slug="working-at-height"):
         ]
     )
 
-    warning = supervisor or remember_src or controls[0]
+    # Eye & Face has a deliberately detailed supervisor script. Using that full
+    # script inside the fixed-height warning panel pushes the checklist onto an
+    # extra page. Keep the full supervisor content in the source model, but use
+    # the concise remember/control text in the warning panel for this topic.
+    warning = (
+        (remember_src or controls[0])
+        if slug == "eye-face-protection"
+        else (supervisor or remember_src or controls[0])
+    )
 
     today = date.today().strftime("%d.%m.%Y")
 
