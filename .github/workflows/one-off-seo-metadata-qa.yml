@@ -1,0 +1,104 @@
+name: One-off SEO metadata QA
+
+on:
+  push:
+    branches:
+      - seo/canonical-hreflang
+    paths:
+      - ".github/workflows/one-off-seo-metadata-qa.yml"
+  workflow_dispatch:
+
+jobs:
+  seo-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: seo/canonical-hreflang
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        working-directory: app
+        run: npm install --no-audit --no-fund
+
+      - name: Existing QA guards
+        working-directory: app
+        run: |
+          npm run qa:download-flows
+          npm run qa:toolbox-pdfs
+
+      - name: Production build
+        working-directory: app
+        run: npm run build
+
+      - name: Start production server
+        working-directory: app
+        run: |
+          npm run start -- -p 3000 > /tmp/sernem-next.log 2>&1 &
+          echo $! > /tmp/sernem-next.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:3000/en >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/sernem-next.log
+          exit 1
+
+      - name: Verify canonical and hreflang HTML
+        run: |
+          python - <<'PY'
+          import re
+          import urllib.request
+
+          checks = [
+              ('/en', 'https://www.sernem.com/en', 'https://www.sernem.com/tr'),
+              ('/tr', 'https://www.sernem.com/tr', 'https://www.sernem.com/en'),
+              ('/en/toolbox/hot-work', 'https://www.sernem.com/en/toolbox/hot-work', 'https://www.sernem.com/tr/toolbox/hot-work'),
+              ('/tr/toolbox/hot-work', 'https://www.sernem.com/tr/toolbox/hot-work', 'https://www.sernem.com/en/toolbox/hot-work'),
+          ]
+
+          for path, canonical, counterpart in checks:
+              html = urllib.request.urlopen('http://127.0.0.1:3000' + path, timeout=15).read().decode('utf-8', 'ignore')
+              expected = [
+                  f'rel="canonical" href="{canonical}"',
+                  'hreflang="en"',
+                  'hreflang="tr"',
+                  'hreflang="x-default"',
+                  counterpart,
+              ]
+              missing = [token for token in expected if token not in html]
+              if missing:
+                  print('FAIL', path, missing)
+                  raise SystemExit(2)
+              print('PASS', path, canonical)
+          PY
+
+      - name: Verify sitemap language alternates
+        run: |
+          python - <<'PY'
+          import urllib.request
+
+          xml = urllib.request.urlopen('http://127.0.0.1:3000/sitemap.xml', timeout=15).read().decode('utf-8', 'ignore')
+          checks = [
+              'hreflang="en"',
+              'hreflang="tr"',
+              'hreflang="x-default"',
+              'https://www.sernem.com/en/toolbox/hot-work',
+              'https://www.sernem.com/tr/toolbox/hot-work',
+          ]
+          missing = [token for token in checks if token not in xml]
+          if missing:
+              print('FAIL sitemap', missing)
+              raise SystemExit(3)
+          print('SITEMAP SEO QA: PASS')
+          print('hreflang=en count:', xml.count('hreflang="en"'))
+          print('hreflang=tr count:', xml.count('hreflang="tr"'))
+          print('hreflang=x-default count:', xml.count('hreflang="x-default"'))
+          PY
