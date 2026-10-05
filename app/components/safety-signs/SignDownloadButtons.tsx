@@ -9,14 +9,18 @@ type Props = {
   signCode: string;
   signTitle: string;
   locale: string;
+  branded: boolean;
 };
+
+type ExportType = "a4" | "a3" | "png" | "print";
 
 export default function SignDownloadButtons({
   signCode,
   signTitle,
   locale,
+  branded,
 }: Props) {
-  const [loading, setLoading] = useState<string | null>(null);
+  const [loading, setLoading] = useState<ExportType | null>(null);
 
   const safeName = `${signCode}-${signTitle}`
     .normalize("NFD")
@@ -27,7 +31,30 @@ export default function SignDownloadButtons({
     .replace(/^-|-$/g, "")
     .toLowerCase();
 
-  async function captureSign() {
+  async function resolveOutputBranding() {
+    try {
+      const response = await fetch("/api/safety-signs/entitlement", {
+        method: "GET",
+        credentials: "same-origin",
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        return true;
+      }
+
+      const data = (await response.json()) as {
+        isPremium?: boolean;
+      };
+
+      return data.isPremium !== true;
+    } catch (error) {
+      console.error("Safety sign entitlement check failed:", error);
+      return true;
+    }
+  }
+
+  async function captureSign(outputBranded: boolean) {
     const element = document.querySelector(
       "[data-safety-sign-renderer]"
     ) as HTMLElement | null;
@@ -65,8 +92,14 @@ export default function SignDownloadButtons({
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, width, height);
 
-    const iconAreaHeight = Math.round(height * 0.72);
-    const titleAreaHeight = height - iconAreaHeight;
+    const brandAreaHeight = outputBranded
+      ? Math.round(height * 0.05)
+      : 0;
+    const iconAreaHeight = Math.round(
+      height * (outputBranded ? 0.7 : 0.72)
+    );
+    const titleAreaHeight =
+      height - iconAreaHeight - brandAreaHeight;
 
     const response = await fetch(svgImage.src);
 
@@ -147,11 +180,29 @@ export default function SignDownloadButtons({
       maxTextWidth
     );
 
+    if (outputBranded) {
+      const brandY = iconAreaHeight + titleAreaHeight;
+
+      ctx.fillStyle = "#020617";
+      ctx.fillRect(0, brandY, width, brandAreaHeight);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = "900 38px Arial, Helvetica, sans-serif";
+      ctx.fillText(
+        "SERNEM • PROFESSIONAL HSE PLATFORM • SERNEM.COM",
+        width / 2,
+        brandY + brandAreaHeight / 2,
+        width * 0.9
+      );
+    }
+
     return canvas;
   }
 
-  async function downloadPNG() {
-    const canvas = await captureSign();
+  async function downloadPNG(outputBranded: boolean) {
+    const canvas = await captureSign(outputBranded);
 
     const blob = await new Promise<Blob | null>((resolve) =>
       canvas.toBlob(resolve, "image/png", 1)
@@ -174,8 +225,11 @@ export default function SignDownloadButtons({
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
-  async function downloadPDF(size: "a4" | "a3") {
-    const canvas = await captureSign();
+  async function downloadPDF(
+    size: "a4" | "a3",
+    outputBranded: boolean,
+  ) {
+    const canvas = await captureSign(outputBranded);
 
     const dimensions =
       size === "a4"
@@ -205,17 +259,100 @@ export default function SignDownloadButtons({
     pdf.save(`${safeName}-${size}.pdf`);
   }
 
-  async function run(type: "a4" | "a3" | "png") {
+  async function printSign(outputBranded: boolean) {
+    const canvas = await captureSign(outputBranded);
+    const imageData = canvas.toDataURL("image/png", 1);
+    const iframe = document.createElement("iframe");
+
+    iframe.setAttribute("aria-hidden", "true");
+    iframe.style.position = "fixed";
+    iframe.style.right = "0";
+    iframe.style.bottom = "0";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "0";
+
+    document.body.appendChild(iframe);
+
+    const printDocument = iframe.contentDocument;
+
+    if (!printDocument) {
+      iframe.remove();
+      throw new Error("Print document could not be created.");
+    }
+
+    printDocument.open();
+    printDocument.write(`<!doctype html>
+<html>
+<head>
+  <title>${signTitle}</title>
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+    html, body { margin: 0; width: 210mm; height: 297mm; overflow: hidden; }
+    img { display: block; width: 210mm; height: 297mm; object-fit: fill; }
+  </style>
+</head>
+<body>
+  <img id="safety-sign-print-image" src="${imageData}" alt="" />
+</body>
+</html>`);
+    printDocument.close();
+
+    const printImage = printDocument.getElementById(
+      "safety-sign-print-image"
+    ) as HTMLImageElement | null;
+
+    if (!printImage) {
+      iframe.remove();
+      throw new Error("Print image could not be created.");
+    }
+
+    if (!printImage.complete) {
+      await new Promise<void>((resolve, reject) => {
+        printImage.onload = () => resolve();
+        printImage.onerror = () => reject(new Error("Print image could not be loaded."));
+      });
+    }
+
+    const printWindow = iframe.contentWindow;
+
+    if (!printWindow) {
+      iframe.remove();
+      throw new Error("Print window is unavailable.");
+    }
+
+    printWindow.addEventListener(
+      "afterprint",
+      () => iframe.remove(),
+      { once: true },
+    );
+    printWindow.focus();
+    printWindow.print();
+
+    setTimeout(() => {
+      if (iframe.isConnected) {
+        iframe.remove();
+      }
+    }, 60_000);
+  }
+
+  async function run(type: ExportType) {
     const resolvedLocale = locale === "tr" ? "tr" : "en";
     if (!(await requirePrintAuth(resolvedLocale))) return;
 
     try {
       setLoading(type);
 
+      // Re-check entitlement on the server for every export. If the check
+      // fails, the output intentionally falls back to SERNEM branding.
+      const outputBranded = await resolveOutputBranding();
+
       if (type === "png") {
-        await downloadPNG();
+        await downloadPNG(outputBranded);
+      } else if (type === "print") {
+        await printSign(outputBranded);
       } else {
-        await downloadPDF(type);
+        await downloadPDF(type, outputBranded);
       }
 
       const supabase = createClient();
@@ -232,6 +369,7 @@ export default function SignDownloadButtons({
               sign_code: signCode,
               locale: resolvedLocale,
               format: type,
+              branded: outputBranded,
             },
           });
         if (activityError) {
@@ -253,6 +391,16 @@ export default function SignDownloadButtons({
 
   return (
     <div className="mt-7 space-y-3">
+      <div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs font-bold leading-5 text-slate-600">
+        {locale === "tr"
+          ? branded
+            ? "Ücretsiz: SERNEM etiketli çıktı"
+            : "Premium: temiz, logosuz çıktı"
+          : branded
+            ? "Free: SERNEM-branded output"
+            : "Premium: clean, unbranded output"}
+      </div>
+
       <button
         type="button"
         disabled={loading !== null}
@@ -278,6 +426,17 @@ export default function SignDownloadButtons({
         className="w-full rounded-xl border border-slate-300 px-5 py-4 font-black text-slate-900 transition hover:bg-slate-50 disabled:cursor-wait disabled:opacity-60"
       >
         {loading === "png" ? "PNG..." : "PNG"}
+      </button>
+
+      <button
+        type="button"
+        disabled={loading !== null}
+        onClick={() => void run("print")}
+        className="w-full rounded-xl border border-slate-950 bg-slate-950 px-5 py-4 font-black text-white transition hover:bg-slate-800 disabled:cursor-wait disabled:opacity-60"
+      >
+        {loading === "print"
+          ? locale === "tr" ? "Yazdırma..." : "Print..."
+          : locale === "tr" ? "Yazdır" : "Print"}
       </button>
     </div>
   );
