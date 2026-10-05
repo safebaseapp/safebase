@@ -11,6 +11,11 @@ type Props = {
   locale: string;
 };
 
+type DownloadAccessResponse = {
+  authenticated?: boolean;
+  isPremium?: boolean;
+};
+
 export default function SignDownloadButtons({
   signCode,
   signTitle,
@@ -27,7 +32,27 @@ export default function SignDownloadButtons({
     .replace(/^-|-$/g, "")
     .toLowerCase();
 
-  async function captureSign() {
+  async function resolvePremiumDownloadAccess() {
+    try {
+      const response = await fetch("/api/safety-signs/download-access", {
+        method: "GET",
+        credentials: "same-origin",
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        return false;
+      }
+
+      const data = (await response.json()) as DownloadAccessResponse;
+      return data.authenticated === true && data.isPremium === true;
+    } catch (error) {
+      console.error("Safety sign entitlement check failed:", error);
+      return false;
+    }
+  }
+
+  async function captureSign(isPremium: boolean) {
     const element = document.querySelector(
       "[data-safety-sign-renderer]"
     ) as HTMLElement | null;
@@ -66,7 +91,8 @@ export default function SignDownloadButtons({
     ctx.fillRect(0, 0, width, height);
 
     const iconAreaHeight = Math.round(height * 0.72);
-    const titleAreaHeight = height - iconAreaHeight;
+    const brandAreaHeight = isPremium ? 0 : Math.round(height * 0.045);
+    const titleAreaHeight = height - iconAreaHeight - brandAreaHeight;
 
     const response = await fetch(svgImage.src);
 
@@ -147,11 +173,35 @@ export default function SignDownloadButtons({
       maxTextWidth
     );
 
+    if (!isPremium) {
+      const brandTop = height - brandAreaHeight;
+
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, brandTop, width, brandAreaHeight);
+
+      ctx.strokeStyle = "#0f172a";
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(0, brandTop + 2.5);
+      ctx.lineTo(width, brandTop + 2.5);
+      ctx.stroke();
+
+      ctx.fillStyle = "#0f172a";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = "900 54px Arial, Helvetica, sans-serif";
+      ctx.fillText(
+        "SERNEM.COM",
+        width / 2,
+        brandTop + brandAreaHeight / 2
+      );
+    }
+
     return canvas;
   }
 
-  async function downloadPNG() {
-    const canvas = await captureSign();
+  async function downloadPNG(isPremium: boolean) {
+    const canvas = await captureSign(isPremium);
 
     const blob = await new Promise<Blob | null>((resolve) =>
       canvas.toBlob(resolve, "image/png", 1)
@@ -163,9 +213,10 @@ export default function SignDownloadButtons({
 
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
+    const outputName = isPremium ? safeName : `${safeName}-sernem`;
 
     anchor.href = url;
-    anchor.download = `${safeName}.png`;
+    anchor.download = `${outputName}.png`;
 
     document.body.appendChild(anchor);
     anchor.click();
@@ -174,8 +225,8 @@ export default function SignDownloadButtons({
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
-  async function downloadPDF(size: "a4" | "a3") {
-    const canvas = await captureSign();
+  async function downloadPDF(size: "a4" | "a3", isPremium: boolean) {
+    const canvas = await captureSign(isPremium);
 
     const dimensions =
       size === "a4"
@@ -190,6 +241,7 @@ export default function SignDownloadButtons({
     });
 
     const imageData = canvas.toDataURL("image/png", 1);
+    const outputName = isPremium ? safeName : `${safeName}-sernem`;
 
     pdf.addImage(
       imageData,
@@ -202,7 +254,7 @@ export default function SignDownloadButtons({
       "FAST"
     );
 
-    pdf.save(`${safeName}-${size}.pdf`);
+    pdf.save(`${outputName}-${size}.pdf`);
   }
 
   async function run(type: "a4" | "a3" | "png") {
@@ -212,10 +264,12 @@ export default function SignDownloadButtons({
     try {
       setLoading(type);
 
+      const isPremium = await resolvePremiumDownloadAccess();
+
       if (type === "png") {
-        await downloadPNG();
+        await downloadPNG(isPremium);
       } else {
-        await downloadPDF(type);
+        await downloadPDF(type, isPremium);
       }
 
       const supabase = createClient();
@@ -232,6 +286,8 @@ export default function SignDownloadButtons({
               sign_code: signCode,
               locale: resolvedLocale,
               format: type,
+              access_tier: isPremium ? "premium" : "free",
+              download_variant: isPremium ? "clean" : "sernem_branded",
             },
           });
         if (activityError) {
@@ -253,6 +309,12 @@ export default function SignDownloadButtons({
 
   return (
     <div className="mt-7 space-y-3">
+      <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs font-bold leading-5 text-emerald-950">
+        {locale === "tr"
+          ? "Ücretsiz indirmeler SERNEM.COM etiketi içerir. Premium üyeler temiz, logosuz sürümü otomatik olarak indirir."
+          : "Free downloads include a SERNEM.COM label. Premium members automatically receive the clean, logo-free version."}
+      </div>
+
       <button
         type="button"
         disabled={loading !== null}
