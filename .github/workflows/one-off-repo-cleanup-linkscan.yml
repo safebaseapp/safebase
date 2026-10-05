@@ -1,0 +1,191 @@
+name: One-off repo cleanup and live link scan
+
+on:
+  push:
+    branches:
+      - chore/repo-cleanup-broken-links
+    paths:
+      - ".github/workflows/one-off-repo-cleanup-linkscan.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup-and-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: chore/repo-cleanup-broken-links
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Remove verified stale backups
+        run: |
+          rm -f 'app/app/[locale]/dashboard/page.tsx.bak-hse-cleanup-20260908-145541'
+          rm -f 'app/app/[locale]/dashboard/page.tsx.bak-hse-performance-20260908-103053'
+          rm -f 'app/app/[locale]/dashboard/page.tsx.bak-hse-performance-20260908-144753'
+          rm -rf app/public/downloads/toolbox-backup-before-sernem
+          printf '\n# Editor / one-off backup artifacts\n**/*.bak-*\napp/public/downloads/toolbox-backup-before-sernem/\n' >> .gitignore
+
+      - name: Install dependencies
+        working-directory: app
+        run: npm install --no-audit --no-fund
+
+      - name: Existing QA guards
+        working-directory: app
+        run: |
+          npm run qa:download-flows
+          npm run qa:toolbox-pdfs
+
+      - name: Production build
+        working-directory: app
+        run: npm run build
+
+      - name: Live sitemap and internal-link scan
+        env:
+          BASE_URL: https://www.sernem.com
+        run: |
+          python - <<'PY'
+          import concurrent.futures
+          import re
+          import sys
+          import time
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          from html.parser import HTMLParser
+
+          BASE = 'https://www.sernem.com'
+          UA = 'SERNEM-QA-LinkScanner/1.0'
+          HUBS = [
+              '/en','/tr',
+              '/en/toolbox','/tr/toolbox',
+              '/en/downloads','/tr/downloads',
+              '/en/safety-signs','/tr/safety-signs',
+              '/en/posters','/tr/posters',
+              '/en/checklists','/tr/checklists',
+              '/en/tools','/tr/tools',
+              '/en/knowledge-base','/tr/knowledge-base',
+          ]
+
+          class LinkParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.links = set()
+              def handle_starttag(self, tag, attrs):
+                  if tag.lower() != 'a':
+                      return
+                  for k, v in attrs:
+                      if k.lower() == 'href' and v:
+                          self.links.add(v.strip())
+
+          def request(url, want_body=False):
+              last = None
+              for attempt in range(2):
+                  req = urllib.request.Request(url, headers={'User-Agent': UA, 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'})
+                  try:
+                      with urllib.request.urlopen(req, timeout=18) as r:
+                          body = r.read(4_000_000) if want_body else b''
+                          return r.getcode(), r.geturl(), body, r.headers.get('Content-Type','')
+                  except urllib.error.HTTPError as e:
+                      last = (e.code, e.geturl(), b'', e.headers.get('Content-Type','') if e.headers else '')
+                      if e.code in (429, 500, 502, 503, 504) and attempt == 0:
+                          time.sleep(1.5)
+                          continue
+                      return last
+                  except Exception as e:
+                      last = (0, url, str(e).encode(), '')
+                      if attempt == 0:
+                          time.sleep(1.0)
+                          continue
+                      return last
+              return last
+
+          # Sitemap URLs
+          status, final, xml_bytes, _ = request(BASE + '/sitemap.xml', True)
+          if not (200 <= status < 300):
+              print(f'FAIL sitemap: HTTP {status} -> {final}')
+              sys.exit(1)
+          try:
+              root = ET.fromstring(xml_bytes)
+          except Exception as e:
+              print('FAIL sitemap XML:', e)
+              sys.exit(1)
+          sitemap_urls = set()
+          for node in root.iter():
+              if node.tag.endswith('loc') and node.text:
+                  u = node.text.strip()
+                  if urllib.parse.urlparse(u).netloc in ('sernem.com','www.sernem.com'):
+                      sitemap_urls.add(u)
+
+          # Hub links
+          discovered = set()
+          hub_failures = []
+          for path in HUBS:
+              u = BASE + path
+              st, fin, body, ctype = request(u, True)
+              if not (200 <= st < 300):
+                  hub_failures.append((u, st, fin))
+                  continue
+              parser = LinkParser()
+              try:
+                  parser.feed(body.decode('utf-8', errors='ignore'))
+              except Exception:
+                  pass
+              for href in parser.links:
+                  if href.startswith(('#','mailto:','tel:','javascript:','data:')):
+                      continue
+                  absu = urllib.parse.urljoin(fin, href)
+                  p = urllib.parse.urlparse(absu)
+                  if p.netloc not in ('sernem.com','www.sernem.com'):
+                      continue
+                  clean = urllib.parse.urlunparse(('https','www.sernem.com',p.path,'',p.query,''))
+                  discovered.add(clean)
+
+          if hub_failures:
+              print('BROKEN HUBS:')
+              for row in hub_failures:
+                  print(' ', row)
+
+          urls = sorted(sitemap_urls | discovered | {BASE + p for p in HUBS})
+          print(f'Sitemap URLs: {len(sitemap_urls)}')
+          print(f'Internal links discovered from hubs: {len(discovered)}')
+          print(f'Unique same-origin URLs to check: {len(urls)}')
+
+          def check(u):
+              st, fin, _, _ = request(u, False)
+              return u, st, fin
+
+          broken = []
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:
+              for u, st, fin in ex.map(check, urls):
+                  # Redirects are followed by urllib; only final 4xx/5xx/network errors fail.
+                  if not (200 <= st < 400):
+                      broken.append((u, st, fin))
+
+          print(f'Checked: {len(urls)}')
+          print(f'Broken: {len(broken)}')
+          if broken:
+              print('BROKEN URLS:')
+              for u, st, fin in broken:
+                  print(f'  {st} {u} -> {fin}')
+              sys.exit(2)
+          print('LIVE LINK QA: PASS')
+          PY
+
+      - name: Commit verified cleanup
+        run: |
+          git config user.name "safebaseapp"
+          git config user.email "aslansercann@gmail.com"
+          git add -A .gitignore 'app/app/[locale]/dashboard' app/public/downloads/toolbox-backup-before-sernem
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: remove verified stale backup artifacts"
+          git push origin HEAD:chore/repo-cleanup-broken-links
