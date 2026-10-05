@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -21,10 +22,27 @@ import "./toolbox-visual-spot-fixes.css";
 import "./public-pages-polish.css";
 import "./ai-assistant/ai-mobile.css";
 
+const SITE_URL = "https://www.sernem.com";
+
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
+
+function normalizedLocalizedPath(pathname: string | null, locale: string) {
+  const fallback = `/${locale}`;
+  const raw = pathname?.startsWith("/") ? pathname : fallback;
+  const withoutTrailingSlash =
+    raw.length > 1 && raw.endsWith("/") ? raw.slice(0, -1) : raw;
+  const match = withoutTrailingSlash.match(/^\/(?:tr|en)(\/.*)?$/);
+  const suffix = match?.[1] ?? "";
+
+  return {
+    canonical: `${SITE_URL}/${locale}${suffix}`,
+    en: `${SITE_URL}/en${suffix}`,
+    tr: `${SITE_URL}/tr${suffix}`,
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -37,6 +55,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isTurkish = locale === "tr";
+  const requestHeaders = await headers();
+  const localized = normalizedLocalizedPath(
+    requestHeaders.get("x-sernem-pathname"),
+    locale,
+  );
 
   const title = isTurkish
     ? "SERNEM | Profesyonel İSG Araçları ve Güvenlik Kaynakları"
@@ -49,12 +72,22 @@ export async function generateMetadata({
   return {
     title,
     description,
+    alternates: {
+      canonical: localized.canonical,
+      languages: {
+        en: localized.en,
+        tr: localized.tr,
+        "x-default": localized.en,
+      },
+    },
     openGraph: {
       title,
       description,
       siteName: "SERNEM",
       type: "website",
+      url: localized.canonical,
       locale: isTurkish ? "tr_TR" : "en_US",
+      alternateLocale: isTurkish ? ["en_US"] : ["tr_TR"],
     },
   };
 }
