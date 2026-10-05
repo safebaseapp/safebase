@@ -4,3 +4,7 @@ node_modules/
 # Local backups
 backups/
 **/*.tar.gz
+
+# Editor / one-off backup artifacts
+**/*.bak-*
+app/public/downloads/toolbox-backup-before-sernem/
