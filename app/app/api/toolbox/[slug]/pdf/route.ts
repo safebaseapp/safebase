@@ -5,7 +5,6 @@ import sharp from "sharp";
 
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf-v2";
-import { premiumMasterSlugSet } from "@/lib/toolbox/premium-master-slugs";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
 import { createClient } from "@/utils/supabase/server";
 
@@ -54,17 +53,6 @@ export async function GET(
       });
     }
 
-    if (
-      premiumMasterSlugSet.has(slug) &&
-      profile.plan !== "premium" &&
-      profile.role !== "admin"
-    ) {
-      return Response.redirect(
-        new URL(`/${locale}/upgrade`, request.url),
-        307,
-      );
-    }
-
     const logoPath = path.join(
       process.cwd(),
       "public",
@@ -93,7 +81,7 @@ export async function GET(
       .from("user_activity_events")
       .insert({
         user_id: user.id,
-        event_name: "pdf_download",
+        event_name: "resource_download||PDF",
         path: request.url,
         metadata: {
           resource_type: "toolbox",

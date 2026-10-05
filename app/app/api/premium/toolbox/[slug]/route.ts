@@ -1,4 +1,4 @@
-import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf";
+import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf-v2";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { PDFDocument, rgb } from "pdf-lib";
@@ -121,7 +121,7 @@ export async function GET(request: Request, { params }: RouteProps) {
       .from("user_activity_events")
       .insert({
         user_id: userId,
-        event_name: "pdf_download",
+        event_name: "resource_download||PDF",
         path: request.url,
         metadata: {
           resource_type: "toolbox",
@@ -331,7 +331,7 @@ export async function GET(request: Request, { params }: RouteProps) {
     TRUE PREMIUM WHITE-LABEL MODE
     --------------------------------------------------
     Şirket logosu varsa hazır SERNEM PDF modifiye edilmez.
-    Toolbox verisinden tamamen yeni 3 sayfalık şirket PDF'i üretilir.
+    Toolbox verisinden tamamen yeni 4 sayfalık şirket PDF'i üretilir.
   */
   if (logoFile && logoBlob) {
     const logoBytes = new Uint8Array(
