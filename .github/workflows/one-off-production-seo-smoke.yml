@@ -1,0 +1,77 @@
+name: One-off production SEO smoke
+
+on:
+  push:
+    branches:
+      - seo/canonical-hreflang
+    paths:
+      - ".github/workflows/one-off-production-seo-smoke.yml"
+  workflow_dispatch:
+
+jobs:
+  production-seo-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check production canonical hreflang sitemap robots
+        run: |
+          python - <<'PY'
+          import urllib.request
+
+          BASE='https://www.sernem.com'
+          UA='SERNEM-Production-SEO-QA/1.0'
+
+          def fetch(path):
+              req=urllib.request.Request(BASE+path, headers={'User-Agent':UA})
+              with urllib.request.urlopen(req, timeout=20) as r:
+                  return r.getcode(), r.geturl(), r.read().decode('utf-8','ignore')
+
+          pages=[
+              ('/en','https://www.sernem.com/en','https://www.sernem.com/tr'),
+              ('/tr','https://www.sernem.com/tr','https://www.sernem.com/en'),
+              ('/en/toolbox/hot-work','https://www.sernem.com/en/toolbox/hot-work','https://www.sernem.com/tr/toolbox/hot-work'),
+              ('/tr/toolbox/hot-work','https://www.sernem.com/tr/toolbox/hot-work','https://www.sernem.com/en/toolbox/hot-work'),
+          ]
+
+          for path, canonical, counterpart in pages:
+              status, final, html=fetch(path)
+              expected=[
+                  f'rel="canonical" href="{canonical}"',
+                  'hreflang="en"',
+                  'hreflang="tr"',
+                  'hreflang="x-default"',
+                  counterpart,
+              ]
+              missing=[x for x in expected if x not in html]
+              if status != 200 or missing:
+                  print('FAIL PAGE', path, status, final, missing)
+                  raise SystemExit(2)
+              print('PASS PAGE', path, canonical)
+
+          status, final, xml=fetch('/sitemap.xml')
+          required=[
+              'hreflang="en"',
+              'hreflang="tr"',
+              'hreflang="x-default"',
+              'https://www.sernem.com/en/toolbox/hot-work',
+              'https://www.sernem.com/tr/toolbox/hot-work',
+          ]
+          missing=[x for x in required if x not in xml]
+          if status != 200 or missing:
+              print('FAIL SITEMAP', status, final, missing)
+              raise SystemExit(3)
+          print('PASS SITEMAP')
+          print('hreflang en:', xml.count('hreflang="en"'))
+          print('hreflang tr:', xml.count('hreflang="tr"'))
+          print('hreflang x-default:', xml.count('hreflang="x-default"'))
+
+          status, final, robots=fetch('/robots.txt')
+          required_robots=['User-Agent: *','Sitemap: https://www.sernem.com/sitemap.xml']
+          missing=[x for x in required_robots if x not in robots]
+          if status != 200 or missing:
+              print('FAIL ROBOTS', status, final, missing)
+              print(robots)
+              raise SystemExit(4)
+          print('PASS ROBOTS')
+          print('PRODUCTION SEO SMOKE: PASS')
+          PY
