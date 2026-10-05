@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import SignRenderer from "@/components/safety-signs/SignRenderer";
 import SignDownloadButtons from "@/components/safety-signs/SignDownloadButtons";
 import { getSafetySign } from "@/lib/safety-signs/data";
+import { getSafetySignAccess } from "@/lib/safety-signs/access";
 
 type Props = {
   params: Promise<{
@@ -28,58 +29,60 @@ export default async function SafetySignDetailPage({
   }
 
   const isTurkish = locale === "tr";
+  const { isPremium } = await getSafetySignAccess();
 
   return (
     <>
       <ActivityTracker eventName="safety_sign_detail_open" />
-    <main className="min-h-screen bg-slate-200 px-6 py-12">
-      <div className="mx-auto max-w-6xl">
-        <Link
-          href={`/${locale}/safety-signs`}
-          className="font-black text-blue-700"
-        >
-          ←{" "}
-          {isTurkish
-            ? "Güvenlik Levhaları"
-            : "Safety Signs"}
-        </Link>
+      <main className="min-h-screen bg-slate-200 px-6 py-12">
+        <div className="mx-auto max-w-6xl">
+          <Link
+            href={`/${locale}/safety-signs`}
+            className="font-black text-blue-700"
+          >
+            ←{" "}
+            {isTurkish
+              ? "Güvenlik Levhaları"
+              : "Safety Signs"}
+          </Link>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_360px]">
-          <div className="mx-auto h-[900px] w-[650px] max-w-full">
-            <SignRenderer
-              sign={sign}
-              locale={locale}
-            />
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_360px]">
+            <div className="mx-auto h-[900px] w-[650px] max-w-full">
+              <SignRenderer
+                sign={sign}
+                locale={locale}
+                branded={!isPremium}
+              />
+            </div>
+
+            <aside className="h-fit rounded-[28px] bg-white p-7 shadow-xl">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-600">
+                {sign.code}
+              </p>
+
+              <h1 className="mt-4 text-3xl font-black text-slate-950">
+                {sign.title[locale]}
+              </h1>
+
+              <p className="mt-4 leading-7 text-slate-600">
+                {sign.description[locale]}
+              </p>
+
+              <SignDownloadButtons
+                signCode={sign.code}
+                signTitle={sign.title[locale]}
+                locale={locale}
+              />
+
+              <p className="mt-6 text-xs font-semibold leading-5 text-slate-500">
+                {isTurkish
+                  ? "Profesyonel kullanıma uygun A4, A3, PNG ve yazdırma seçeneklerini kullanın."
+                  : "Use A4, A3, PNG and print options for professional use."}
+              </p>
+            </aside>
           </div>
-
-          <aside className="h-fit rounded-[28px] bg-white p-7 shadow-xl">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-600">
-              {sign.code}
-            </p>
-
-            <h1 className="mt-4 text-3xl font-black text-slate-950">
-              {sign.title[locale]}
-            </h1>
-
-            <p className="mt-4 leading-7 text-slate-600">
-              {sign.description[locale]}
-            </p>
-
-            <SignDownloadButtons
-              signCode={sign.code}
-              signTitle={sign.title[locale]}
-              locale={locale}
-            />
-
-            <p className="mt-6 text-xs font-semibold leading-5 text-slate-500">
-              {isTurkish
-                ? "Profesyonel kullanıma uygun A4, A3 ve PNG formatlarında indirin."
-                : "Download in A4, A3 or PNG format for professional use."}
-            </p>
-          </aside>
         </div>
-      </div>
-    </main>
+      </main>
     </>
   );
 }
