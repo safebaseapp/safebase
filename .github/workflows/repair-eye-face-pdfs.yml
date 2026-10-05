@@ -50,10 +50,18 @@ jobs:
         working-directory: app
         run: |
           python - <<'PY'
-          from scripts.generate_premium_toolbox_batch import build
+          import importlib.util
+          from pathlib import Path
+
+          source = Path('scripts/generate-premium-toolbox-batch.py').resolve()
+          spec = importlib.util.spec_from_file_location('sernem_toolbox_generator', source)
+          module = importlib.util.module_from_spec(spec)
+          assert spec and spec.loader
+          spec.loader.exec_module(module)
+
           slug = 'eye-face-protection'
-          build('branded', 'en', f'{slug}-toolbox-talk-en-branded-base.pdf', slug=slug)
-          build('branded', 'tr', f'{slug}-toolbox-talk-tr-branded-base.pdf', slug=slug)
+          module.build('branded', 'en', f'{slug}-toolbox-talk-en-branded-base.pdf', slug=slug)
+          module.build('branded', 'tr', f'{slug}-toolbox-talk-tr-branded-base.pdf', slug=slug)
           PY
 
       - name: Install Node dependencies
