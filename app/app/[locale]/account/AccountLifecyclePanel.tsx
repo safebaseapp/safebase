@@ -134,6 +134,55 @@ export default function AccountLifecyclePanel({ locale }: { locale: string }) {
             </span>
           </div>
 
+          {data?.protectedAccount && (
+            <div className="mt-6 rounded-2xl border border-violet-300/15 bg-gradient-to-br from-violet-500/[0.08] via-slate-950/30 to-blue-500/[0.05] p-5">
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-emerald-400/20 bg-emerald-500/[0.08] text-lg text-emerald-300">
+                  ✓
+                </div>
+                <div>
+                  <h3 className="font-black text-white">
+                    {isTr ? "Korumalı Owner Hesabı" : "Protected Owner Account"}
+                  </h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-400">
+                    {isTr
+                      ? "Bu sahip hesabında abonelik yönetimi güvenlik nedeniyle devre dışıdır. Premium erişim kalıcıdır ve herhangi bir faturalama işlemi gerekmez."
+                      : "Subscription management is disabled for this protected owner account. Premium access is permanent and no billing action is required."}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                <div className="rounded-xl border border-white/[0.08] bg-slate-950/55 px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">
+                    {isTr ? "Premium Erişim" : "Premium Access"}
+                  </p>
+                  <p className="mt-2 text-sm font-black text-emerald-300">
+                    {isTr ? "Kalıcı" : "Permanent"}
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/[0.08] bg-slate-950/55 px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">
+                    {isTr ? "Faturalama İşlemi" : "Billing Action"}
+                  </p>
+                  <p className="mt-2 text-sm font-black text-slate-200">
+                    {isTr ? "Gerekli Değil" : "Not Required"}
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/[0.08] bg-slate-950/55 px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">
+                    {isTr ? "Hesap Koruması" : "Account Protection"}
+                  </p>
+                  <p className="mt-2 text-sm font-black text-blue-300">
+                    {isTr ? "Etkin" : "Enabled"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {message && <div className="mt-5 rounded-xl border border-emerald-400/20 bg-emerald-500/[0.07] px-4 py-3 text-sm text-emerald-300">{message}</div>}
           {error && <div className="mt-5 rounded-xl border border-red-400/20 bg-red-500/[0.07] px-4 py-3 text-sm text-red-300">{error}</div>}
 
@@ -174,8 +223,22 @@ export default function AccountLifecyclePanel({ locale }: { locale: string }) {
           </p>
 
           {data?.protectedAccount ? (
-            <div className="mt-5 rounded-xl border border-blue-400/20 bg-blue-500/[0.06] px-4 py-3 text-sm font-bold text-blue-300">
-              {isTr ? "Sahip / yönetici hesabı bu ekrandan silinemez." : "Owner / administrator accounts cannot be deleted from this screen."}
+            <div className="mt-5 rounded-2xl border border-blue-400/20 bg-gradient-to-br from-blue-500/[0.08] to-slate-950/30 p-5">
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.08] text-blue-300">
+                  🛡
+                </div>
+                <div>
+                  <p className="font-black text-blue-200">
+                    {isTr ? "Owner hesabı silme koruması etkin" : "Owner account deletion protection enabled"}
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-slate-400">
+                    {isTr
+                      ? "SERNEM sahibi / yönetici hesabı bu ekrandan veya standart hesap silme akışından kaldırılamaz."
+                      : "The SERNEM owner / administrator account cannot be removed from this screen or through the standard account deletion flow."}
+                  </p>
+                </div>
+              </div>
             </div>
           ) : !showDelete ? (
             <button type="button" onClick={() => setShowDelete(true)} className="mt-6 rounded-xl border border-red-400/30 bg-red-500/[0.08] px-5 py-3 font-black text-red-200 transition hover:bg-red-500/[0.14]">
