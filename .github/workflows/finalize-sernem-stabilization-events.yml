@@ -32,10 +32,10 @@ jobs:
 
           replacements = {
             'app/app/api/toolbox/[slug]/pdf/route.ts': [
-              ('event_name: "pdf_download",', 'event_name: `resource_download|${localized.title || slug}|PDF`,')
+              ('event_name: "pdf_download",', 'event_name: "resource_download||PDF",')
             ],
             'app/app/api/premium/toolbox/[slug]/route.ts': [
-              ('event_name: "pdf_download",', 'event_name: `resource_download|${toolbox[locale].title || slug}|PDF`,')
+              ('event_name: "pdf_download",', 'event_name: "resource_download||PDF",')
             ],
             'app/app/api/premium/toolbox/[slug]/word/route.ts': [
               ('event_name: "word_download",', 'event_name: `resource_download|${title}|DOCX`,')
@@ -44,7 +44,7 @@ jobs:
               ('event_name: "safety_sign_download",', 'event_name: `resource_download|${signTitle}|${type.toUpperCase()}`,')
             ],
             'app/components/posters-v4/PosterFormatToolbar.tsx': [
-              ('event_name: "poster_print",', 'event_name: `resource_download|Poster|PDF`,')
+              ('event_name: "poster_print",', 'event_name: "resource_download|Poster|PDF",')
             ],
           }
 
@@ -57,7 +57,6 @@ jobs:
               s = s.replace(old, new)
             p.write_text(s, encoding='utf-8')
 
-          # Update the static QA guard to enforce Dashboard-visible resource_* events.
           p = Path('app/scripts/qa-download-flows.mjs')
           s = p.read_text(encoding='utf-8')
           s = s.replace('event_name: "pdf_download"', 'resource_download|')
