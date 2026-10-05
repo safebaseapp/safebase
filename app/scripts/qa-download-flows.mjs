@@ -5,7 +5,7 @@ const checks = [
     file: "app/api/toolbox/[slug]/pdf/route.ts",
     mustContain: [
       "getCurrentAccessProfile()",
-      'event_name: "pdf_download"',
+      'resource_download|',
       'mode: "standard"',
     ],
     mustNotContain: ["premiumMasterSlugSet.has(slug)"],
@@ -14,14 +14,14 @@ const checks = [
     file: "app/api/premium/toolbox/[slug]/route.ts",
     mustContain: [
       'premium-toolbox-pdf-v2',
-      'event_name: "pdf_download"',
+      'resource_download|',
     ],
     mustNotContain: ['premium-toolbox-pdf";'],
   },
   {
     file: "app/api/premium/toolbox/[slug]/word/route.ts",
     mustContain: [
-      'event_name: "word_download"',
+      'resource_download|',
       'mode: "premium_word"',
     ],
   },
@@ -29,14 +29,14 @@ const checks = [
     file: "components/safety-signs/SignDownloadButtons.tsx",
     mustContain: [
       "requirePrintAuth",
-      'event_name: "safety_sign_download"',
+      'resource_download|',
     ],
   },
   {
     file: "components/posters-v4/PosterFormatToolbar.tsx",
     mustContain: [
       "requirePrintAuth",
-      'event_name: "poster_print"',
+      'resource_download|',
     ],
   },
 ];

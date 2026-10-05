@@ -81,7 +81,7 @@ export async function GET(
       .from("user_activity_events")
       .insert({
         user_id: user.id,
-        event_name: "pdf_download",
+        event_name: "resource_download||PDF",
         path: request.url,
         metadata: {
           resource_type: "toolbox",

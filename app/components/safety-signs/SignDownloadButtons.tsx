@@ -225,7 +225,7 @@ export default function SignDownloadButtons({
           .from("user_activity_events")
           .insert({
             user_id: user.id,
-            event_name: "safety_sign_download",
+            event_name: `resource_download|${signTitle}|${type.toUpperCase()}`,
             path: window.location.href,
             metadata: {
               resource_type: "safety_sign",

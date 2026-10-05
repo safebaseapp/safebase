@@ -228,7 +228,7 @@ export default function PosterFormatToolbar({ locale }: Props) {
           .from("user_activity_events")
           .insert({
             user_id: user.id,
-            event_name: "poster_print",
+            event_name: "resource_download|Poster|PDF",
             path: window.location.href,
             metadata: {
               resource_type: "poster",
