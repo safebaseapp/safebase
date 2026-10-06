@@ -111,35 +111,35 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
       activeIcon: string;
       line: string;
       itemActive: string;
-      photoTint: string;
+      title: string;
     }
   > = {
     blue: {
-      shell: "border-blue-400/25 shadow-[0_20px_55px_rgba(2,8,23,.32)]",
-      activeShell: "border-blue-300/55 shadow-[0_22px_65px_rgba(37,99,235,.16)]",
-      icon: "border-blue-300/28 bg-blue-500/[0.12] text-blue-100 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_30px_rgba(37,99,235,.16)]",
-      activeIcon: "border-blue-200/50 bg-blue-400/[0.20] text-white",
-      line: "bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,.75)]",
-      itemActive: "border-blue-300/35 bg-blue-500/[0.14] text-white",
-      photoTint: "from-blue-500/[0.20] via-blue-500/[0.06] to-transparent",
+      shell: "border-blue-400/30 shadow-[0_18px_45px_rgba(15,23,42,.35)]",
+      activeShell: "border-blue-300/65 shadow-[0_20px_58px_rgba(37,99,235,.18)]",
+      icon: "border-blue-300/35 bg-blue-500/[0.14] text-blue-100",
+      activeIcon: "border-blue-200/55 bg-blue-400/[0.22] text-white",
+      line: "bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,.72)]",
+      itemActive: "border-blue-300/40 bg-blue-500/[0.16] text-white",
+      title: "text-blue-50",
     },
     violet: {
-      shell: "border-violet-400/25 shadow-[0_20px_55px_rgba(2,8,23,.32)]",
-      activeShell: "border-violet-300/55 shadow-[0_22px_65px_rgba(139,92,246,.16)]",
-      icon: "border-violet-300/30 bg-violet-500/[0.13] text-violet-100 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_30px_rgba(139,92,246,.16)]",
-      activeIcon: "border-violet-200/50 bg-violet-400/[0.20] text-white",
+      shell: "border-violet-400/30 shadow-[0_18px_45px_rgba(15,23,42,.35)]",
+      activeShell: "border-violet-300/65 shadow-[0_20px_58px_rgba(139,92,246,.18)]",
+      icon: "border-violet-300/35 bg-violet-500/[0.14] text-violet-100",
+      activeIcon: "border-violet-200/55 bg-violet-400/[0.22] text-white",
       line: "bg-violet-300 shadow-[0_0_18px_rgba(196,181,253,.72)]",
-      itemActive: "border-violet-300/35 bg-violet-500/[0.14] text-white",
-      photoTint: "from-violet-500/[0.22] via-violet-500/[0.06] to-transparent",
+      itemActive: "border-violet-300/40 bg-violet-500/[0.16] text-white",
+      title: "text-violet-50",
     },
     emerald: {
-      shell: "border-emerald-400/25 shadow-[0_20px_55px_rgba(2,8,23,.32)]",
-      activeShell: "border-emerald-300/50 shadow-[0_22px_65px_rgba(16,185,129,.14)]",
-      icon: "border-emerald-300/30 bg-emerald-500/[0.12] text-emerald-100 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_30px_rgba(16,185,129,.15)]",
-      activeIcon: "border-emerald-200/50 bg-emerald-400/[0.18] text-white",
+      shell: "border-emerald-400/30 shadow-[0_18px_45px_rgba(15,23,42,.35)]",
+      activeShell: "border-emerald-300/60 shadow-[0_20px_58px_rgba(16,185,129,.16)]",
+      icon: "border-emerald-300/35 bg-emerald-500/[0.13] text-emerald-100",
+      activeIcon: "border-emerald-200/55 bg-emerald-400/[0.20] text-white",
       line: "bg-emerald-300 shadow-[0_0_18px_rgba(110,231,183,.72)]",
-      itemActive: "border-emerald-300/35 bg-emerald-500/[0.13] text-white",
-      photoTint: "from-emerald-500/[0.18] via-emerald-500/[0.05] to-transparent",
+      itemActive: "border-emerald-300/40 bg-emerald-500/[0.15] text-white",
+      title: "text-emerald-50",
     },
   };
 
@@ -149,37 +149,33 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
     </span>
   );
 
-  const PhotoLayer = ({
+  const PhotoPane = ({
     src,
     position = "center",
-    tint = "from-cyan-500/[0.16] via-cyan-500/[0.04] to-transparent",
   }: {
     src: string;
     position?: string;
-    tint?: string;
   }) => (
-    <>
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <img
-          src={src}
-          alt=""
-          loading="eager"
-          onError={(event) => {
-            event.currentTarget.style.display = "none";
-          }}
-          className="h-full w-full scale-[1.02] object-cover opacity-[0.72] saturate-[0.92]"
-          style={{ objectPosition: position }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#020817] via-[#020817]/78 to-[#020817]/20" />
-        <div className={`absolute inset-0 bg-gradient-to-r ${tint}`} />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.055),transparent_18%,transparent_76%,rgba(2,8,23,.42))]" />
-      </div>
-    </>
+    <div className="pointer-events-none absolute inset-y-0 right-0 w-[58%] overflow-hidden">
+      <img
+        src={src}
+        alt=""
+        loading="eager"
+        onError={(event) => {
+          event.currentTarget.style.display = "none";
+        }}
+        className="h-full w-full object-cover opacity-95 saturate-[1.04] contrast-[1.04]"
+        style={{ objectPosition: position }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#06101e] via-[#06101e]/55 to-transparent" />
+      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#020817]/20 to-transparent" />
+    </div>
   );
 
   const Accordion = ({
     id,
     title,
+    description,
     icon: Icon,
     items,
     accent,
@@ -188,6 +184,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
   }: {
     id: Exclude<Section, null>;
     title: string;
+    description: string;
     icon: typeof Wrench;
     items: { href: string; title: string; icon: typeof Wrench }[];
     accent: Accent;
@@ -199,32 +196,37 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
     const styles = accordionStyles[accent];
 
     return (
-      <div className={`relative overflow-hidden rounded-[22px] border bg-[#06101e] transition duration-300 ${active ? styles.activeShell : styles.shell}`}>
-        <PhotoLayer src={photo} position={position} tint={styles.photoTint} />
-        <span className={`absolute bottom-3 left-0 top-3 z-10 w-[3px] rounded-r-full ${styles.line} ${active ? "opacity-100" : "opacity-70"}`} />
+      <div className={`relative overflow-hidden rounded-[24px] border bg-[#06101e] transition duration-300 ${active ? styles.activeShell : styles.shell}`}>
+        <PhotoPane src={photo} position={position} />
+        <span className={`absolute bottom-3 left-0 top-3 z-10 w-[3px] rounded-r-full ${styles.line} ${active ? "opacity-100" : "opacity-80"}`} />
 
         <button
           type="button"
           onClick={() => setOpenSection(open ? null : id)}
-          className="relative z-10 flex min-h-[82px] w-full items-center gap-3.5 px-4 pl-5 text-left"
+          className="relative z-10 flex min-h-[102px] w-full items-center gap-3 px-4 pl-5 text-left"
           aria-expanded={open}
         >
-          <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[15px] border backdrop-blur-md transition ${active ? styles.activeIcon : styles.icon}`}>
+          <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] border shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_28px_rgba(0,0,0,.22)] backdrop-blur-md transition ${active ? styles.activeIcon : styles.icon}`}>
             <Icon size={20} strokeWidth={1.9} />
           </span>
 
-          <span className="min-w-0 flex-1">
-            <span className="block text-[16px] font-black tracking-[-0.02em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,.65)]">{title}</span>
+          <span className="min-w-0 max-w-[48%]">
+            <span className={`block text-[16px] font-black tracking-[-0.025em] drop-shadow-[0_2px_10px_rgba(0,0,0,.8)] ${styles.title}`}>
+              {title}
+            </span>
+            <span className="mt-1 block text-[10px] font-medium leading-[1.35] text-slate-300/85">
+              {description}
+            </span>
             {active && <span className="mt-1.5 inline-flex"><HereBadge /></span>}
           </span>
 
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/12 bg-slate-950/45 text-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,.06)] backdrop-blur-md">
+          <span className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-[#07101f]/75 text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_8px_20px_rgba(0,0,0,.25)] backdrop-blur-md">
             <ChevronDown size={17} className={`transition duration-300 ${open ? "rotate-180" : ""}`} />
           </span>
         </button>
 
         {open && (
-          <div className="relative z-10 grid grid-cols-2 gap-2 border-t border-white/[0.08] bg-[#020817]/85 p-2.5 backdrop-blur-xl">
+          <div className="relative z-20 grid grid-cols-2 gap-2 border-t border-white/[0.08] bg-[#020817]/92 p-2.5 backdrop-blur-xl">
             {items.map((item) => {
               const ItemIcon = item.icon;
               const itemActive = isRouteActive(item.href);
@@ -260,6 +262,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
   const DirectCard = ({
     href,
     title,
+    description,
     icon: Icon,
     photo,
     active,
@@ -268,6 +271,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
   }: {
     href: string;
     title: string;
+    description: string;
     icon: typeof LayoutDashboard;
     photo: string;
     active: boolean;
@@ -277,47 +281,52 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
     const style =
       tone === "fuchsia"
         ? {
-            border: active ? "border-fuchsia-300/50" : "border-fuchsia-400/25",
-            shadow: "shadow-[0_20px_60px_rgba(126,34,206,.14)]",
+            border: active ? "border-fuchsia-300/55" : "border-fuchsia-400/30",
+            shadow: "shadow-[0_20px_58px_rgba(126,34,206,.16)]",
             line: "bg-fuchsia-300 shadow-[0_0_18px_rgba(232,121,249,.72)]",
-            icon: "border-fuchsia-300/30 bg-fuchsia-500/[0.14] text-fuchsia-100",
-            tint: "from-fuchsia-500/[0.22] via-violet-500/[0.06] to-transparent",
+            icon: "border-fuchsia-300/35 bg-fuchsia-500/[0.15] text-fuchsia-100",
+            title: "text-fuchsia-50",
           }
         : tone === "sky"
           ? {
-              border: active ? "border-sky-300/55" : "border-sky-400/25",
-              shadow: "shadow-[0_20px_60px_rgba(14,165,233,.13)]",
+              border: active ? "border-sky-300/60" : "border-sky-400/30",
+              shadow: "shadow-[0_20px_58px_rgba(14,165,233,.15)]",
               line: "bg-sky-300 shadow-[0_0_18px_rgba(125,211,252,.72)]",
-              icon: "border-sky-300/30 bg-sky-500/[0.13] text-sky-100",
-              tint: "from-sky-500/[0.20] via-cyan-500/[0.05] to-transparent",
+              icon: "border-sky-300/35 bg-sky-500/[0.14] text-sky-100",
+              title: "text-sky-50",
             }
           : {
-              border: active ? "border-cyan-300/55" : "border-cyan-400/25",
-              shadow: "shadow-[0_20px_60px_rgba(34,211,238,.12)]",
+              border: active ? "border-cyan-300/60" : "border-cyan-400/30",
+              shadow: "shadow-[0_20px_58px_rgba(34,211,238,.14)]",
               line: "bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,.72)]",
-              icon: "border-cyan-300/30 bg-cyan-500/[0.12] text-cyan-100",
-              tint: "from-cyan-500/[0.20] via-cyan-500/[0.05] to-transparent",
+              icon: "border-cyan-300/35 bg-cyan-500/[0.14] text-cyan-100",
+              title: "text-cyan-50",
             };
 
     return (
       <Link
         href={href}
         onClick={onClose}
-        className={`relative flex min-h-[82px] items-center gap-3.5 overflow-hidden rounded-[22px] border bg-[#06101e] px-4 pl-5 transition duration-300 ${style.border} ${style.shadow}`}
+        className={`relative flex min-h-[102px] items-center gap-3 overflow-hidden rounded-[24px] border bg-[#06101e] px-4 pl-5 transition duration-300 ${style.border} ${style.shadow}`}
       >
-        <PhotoLayer src={photo} position={position} tint={style.tint} />
-        <span className={`absolute bottom-3 left-0 top-3 z-10 w-[3px] rounded-r-full ${style.line} ${active ? "opacity-100" : "opacity-70"}`} />
+        <PhotoPane src={photo} position={position} />
+        <span className={`absolute bottom-3 left-0 top-3 z-10 w-[3px] rounded-r-full ${style.line} ${active ? "opacity-100" : "opacity-80"}`} />
 
-        <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-[15px] border backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_28px_rgba(0,0,0,.22)] ${style.icon}`}>
+        <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] border shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_28px_rgba(0,0,0,.22)] backdrop-blur-md ${style.icon}`}>
           <Icon size={20} />
         </span>
 
-        <span className="relative z-10 min-w-0 flex-1">
-          <span className="block text-[16px] font-black tracking-[-0.02em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,.65)]">{title}</span>
+        <span className="relative z-10 min-w-0 max-w-[48%]">
+          <span className={`block text-[16px] font-black tracking-[-0.025em] drop-shadow-[0_2px_10px_rgba(0,0,0,.8)] ${style.title}`}>
+            {title}
+          </span>
+          <span className="mt-1 block text-[10px] font-medium leading-[1.35] text-slate-300/85">
+            {description}
+          </span>
           {active && <span className="mt-1.5 inline-flex"><HereBadge /></span>}
         </span>
 
-        <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/12 bg-slate-950/45 text-white shadow-[inset_0_1px_0_rgba(255,255,255,.06)] backdrop-blur-md">
+        <span className="relative z-10 ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-[#07101f]/75 text-white shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_8px_20px_rgba(0,0,0,.25)] backdrop-blur-md">
           <ArrowRight size={17} />
         </span>
       </Link>
@@ -330,24 +339,24 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
 
   return (
     <div className="fixed inset-0 z-[9998] overflow-y-auto bg-[#020817] text-white lg:hidden">
-      <div className="pointer-events-none fixed inset-x-0 top-0 h-[315px] overflow-hidden">
+      <div className="pointer-events-none fixed inset-x-0 top-0 h-[355px] overflow-hidden">
         <img
           src="/images/sernem-hero-refinery.png"
           alt=""
-          className="h-full w-full object-cover object-center opacity-50 saturate-[0.85]"
+          className="h-full w-full object-cover object-center opacity-[0.72] saturate-[1.02] contrast-[1.04]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#020817]/40 via-[#020817]/72 to-[#020817]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#020817] via-transparent to-[#020817]/25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020817]/20 via-[#020817]/48 to-[#020817]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#020817]/85 via-[#020817]/15 to-[#020817]/15" />
       </div>
 
       <div className="relative mx-auto w-full max-w-lg px-4 pb-10 pt-[82px]">
         <div className="mb-5 flex items-start justify-between gap-4 px-1">
           <div className="pt-2">
             <p className="text-[10px] font-black uppercase tracking-[0.24em] text-sky-300">SERNEM</p>
-            <h2 className="mt-2 text-[31px] font-black leading-none tracking-[-0.045em] text-white drop-shadow-[0_3px_18px_rgba(0,0,0,.45)]">
+            <h2 className="mt-2 text-[32px] font-black leading-none tracking-[-0.05em] text-white drop-shadow-[0_3px_18px_rgba(0,0,0,.55)]">
               {tr ? "Ana Menü" : "Main Menu"}
             </h2>
-            <p className="mt-2 text-[12px] font-medium leading-5 text-slate-400">
+            <p className="mt-2 text-[12px] font-medium leading-5 text-slate-300/80">
               {tr ? "Platforma yapılandırılmış erişim." : "Structured access to the platform."}
             </p>
           </div>
@@ -356,7 +365,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
             type="button"
             onClick={onClose}
             aria-label={tr ? "Menüyü kapat" : "Close menu"}
-            className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] border border-white/15 bg-slate-950/40 text-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_16px_38px_rgba(0,0,0,.32)] backdrop-blur-xl transition active:scale-[0.98] active:bg-white/[0.08]"
+            className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-[17px] border border-white/18 bg-[#07101f]/70 text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_16px_38px_rgba(0,0,0,.32)] backdrop-blur-xl transition active:scale-[0.98] active:bg-white/[0.08]"
           >
             <X size={20} />
           </button>
@@ -367,17 +376,19 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
             <DirectCard
               href="/dashboard"
               title="Dashboard"
+              description={tr ? "Genel bakış, içgörüler ve hızlı işlemler." : "Overview, insights and quick actions."}
               icon={LayoutDashboard}
               photo={PHOTO.dashboard}
               active={dashboardActive}
               tone="cyan"
-              position="center 58%"
+              position="center 50%"
             />
           )}
 
           <Accordion
             id="tools"
             title={tr ? "HSE Araçları" : "HSE Tools"}
+            description={tr ? "Şablonlar, hesaplayıcılar ve saha araçları." : "Templates, calculators and practical tools."}
             icon={Wrench}
             items={toolItems}
             accent="blue"
@@ -389,6 +400,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
             <DirectCard
               href="/hse-performance"
               title={tr ? "HSE Performans" : "HSE Performance"}
+              description={tr ? "KPI, raporlar ve güvenlik analitiği." : "KPIs, reports and safety analytics."}
               icon={Gauge}
               photo={PHOTO.performance}
               active={performanceActive}
@@ -400,6 +412,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
           <Accordion
             id="labs"
             title="HSE Labs"
+            description={tr ? "Simülasyonlar, senaryolar ve etkileşimli öğrenme." : "Simulations, scenarios and interactive learning."}
             icon={Sparkles}
             items={labItems}
             accent="violet"
@@ -410,6 +423,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
           <Accordion
             id="resources"
             title={tr ? "Kaynaklar" : "Resources"}
+            description={tr ? "Rehberler, dokümanlar ve saha içerikleri." : "Guides, documents and field resources."}
             icon={Grid3X3}
             items={resourceItems}
             accent="emerald"
@@ -420,11 +434,12 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
           <DirectCard
             href="/ai-assistant"
             title={tr ? "AI Asistan" : "AI Assistant"}
+            description={tr ? "Sor, öğren ve hızlı HSE desteği al." : "Ask, learn and get instant HSE support."}
             icon={Bot}
             photo={PHOTO.ai}
             active={aiActive}
             tone="fuchsia"
-            position="center 52%"
+            position="center 42%"
           />
         </div>
       </div>
