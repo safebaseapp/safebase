@@ -94,7 +94,7 @@ export default async function Page({params}:P){
      <div className='rounded-xl bg-slate-50 p-3'><div className='text-[10px] font-black uppercase tracking-wider text-slate-500'>{tr?'Durum':'Status'}</div><div className='mt-1 font-bold'>{authority.status[l]}</div></div>
      <div className='rounded-xl bg-slate-50 p-3'><div className='text-[10px] font-black uppercase tracking-wider text-slate-500'>{tr?'Kapsam':'Jurisdiction'}</div><div className='mt-1 font-bold'>{authority.jurisdiction[l]}</div></div>
     </div>
-    <div className='mt-4 flex flex-col gap-3 rounded-xl border border-slate-200 p-4 md:flex-row md:items-center md:justify-between'><p className='max-w-4xl text-sm leading-6 text-slate-600'>{authority.note[l]}</p><a href={authority.sourceUrl} target='_blank' rel='noopener noreferrer' className='shrink-0 rounded-xl bg-slate-950 px-4 py-2.5 text-center text-sm font-black text-white hover:bg-slate-800'>{tr?'Ana kaynağı aç':'Open primary source'} ↗</a></div>
+    <div className='mt-4 flex flex-col gap-3 rounded-xl border border-slate-200 p-4 md:flex-row md:items-center md:justify-between'><p className='max-w-4xl text-sm leading-6 text-slate-600'>{authority.note[l]}</p><a href={authority.sourceUrl} target='_blank' rel='noopener noreferrer' className='shrink-0 rounded-xl bg-slate-950 px-4 py-2.5 text-center text-sm font-black text-white hover:bg-slate-800'>{tr?'Kaynağı aç':'Open source'} ↗</a></div>
    </section>}
 
    <section className='relative overflow-hidden rounded-[30px] border border-slate-800 bg-slate-950 text-white shadow-[0_28px_70px_rgba(15,23,42,.24)]'>
