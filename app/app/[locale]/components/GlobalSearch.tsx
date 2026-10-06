@@ -162,11 +162,32 @@ export default function GlobalSearch({ locale, compact = false }: Props) {
         onClick={() => setOpen(true)}
         className={compact
           ? "inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.025] text-slate-300 transition hover:border-blue-400/25 hover:bg-blue-500/[0.07] hover:text-white"
-          : "inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-white/[0.12] bg-white/[0.025] px-3.5 text-[12px] font-black text-slate-300 transition hover:border-blue-400/25 hover:bg-blue-500/[0.07] hover:text-white"}
+          : "group inline-flex h-12 w-full items-center justify-between gap-4 rounded-2xl border border-sky-400/[0.16] bg-gradient-to-r from-white/[0.035] via-white/[0.025] to-sky-500/[0.055] px-4 text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_8px_26px_rgba(0,0,0,.16)] transition hover:border-sky-400/30 hover:bg-sky-500/[0.07] hover:text-white"}
         aria-label={tr ? "Sitede ara" : "Search site"}
       >
-        <Search size={17} />
-        {!compact && <span>{tr ? "Ara" : "Search"}</span>}
+        {compact ? (
+          <Search size={17} />
+        ) : (
+          <>
+            <span className="flex min-w-0 items-center gap-3">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-sky-400/20 bg-sky-500/[0.08] text-sky-300 transition group-hover:border-sky-300/35 group-hover:bg-sky-500/[0.12]">
+                <Search size={16} />
+              </span>
+              <span className="min-w-0 text-left">
+                <span className="block truncate text-[12px] font-black text-slate-100">
+                  {tr ? "SERNEM'de ara" : "Search SERNEM"}
+                </span>
+                <span className="mt-0.5 block truncate text-[9px] font-semibold tracking-[0.01em] text-slate-500">
+                  {tr ? "Araçlar, rehberler, toolbox, HSE konuları..." : "Tools, guides, toolbox, HSE topics..."}
+                </span>
+              </span>
+            </span>
+
+            <span className="hidden shrink-0 items-center gap-1.5 rounded-lg border border-white/[0.10] bg-white/[0.035] px-2.5 py-1.5 text-[9px] font-black text-slate-500 2xl:inline-flex">
+              <Command size={10} /> K
+            </span>
+          </>
+        )}
       </button>
 
       {open && (
