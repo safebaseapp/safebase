@@ -7,7 +7,6 @@ import { routing } from "../../i18n/routing";
 import LocalizedNavbar from "./components/LocalizedNavbar";
 import NavbarLegacyPremiumCleanup from "./components/NavbarLegacyPremiumCleanup";
 import MobileAuthBar from "./components/MobileAuthBar";
-import MobileQuickNav from "./components/MobileQuickNav";
 import UserActivityCapture from "./components/UserActivityCapture";
 import DashboardReturnBar from "./components/DashboardReturnBar";
 import WorkspaceUxEnhancer from "./components/WorkspaceUxEnhancer";
@@ -106,7 +105,6 @@ export default async function LocaleLayout({ children, params }: Props) {
       <HomeLabsBridge locale={safeLocale} />
       <NavbarLegacyPremiumCleanup />
       <MobileAuthBar locale={safeLocale} />
-      <MobileQuickNav locale={safeLocale} />
       <UserActivityCapture />
       <DashboardReturnBar locale={safeLocale} />
       <WorkspaceUxEnhancer locale={safeLocale} />
