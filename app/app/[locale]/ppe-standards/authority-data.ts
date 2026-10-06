@@ -25,8 +25,8 @@ export const ppeAuthority:Record<string,AuthorityRecord>={
   edition:'EN 50365:2023',
   status:{tr:'Güncel Avrupa referansı; 2024 düzeltmesi mevcut',en:'Current European reference; 2024 corrigendum available'},
   jurisdiction:{tr:'Avrupa',en:'Europe'},
-  sourceLabel:'CENELEC / national standards adoption',
-  sourceUrl:'https://standards.iteh.ai/catalog/standards/clc/8c9c1ef8-9e72-4774-a84f-7d7d5d43c51d/en-50365-2023',
+  sourceLabel:'European Commission / EUR-Lex',
+  sourceUrl:'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024D2599',
   verified:'2026-10-06',
   note:{tr:'EN 397 işareti tek başına elektriksel yalıtım kanıtı değildir. Gerilim ve uygulama sınırları gerçek ürün dokümanından doğrulanmalıdır.',en:'EN 397 marking alone is not evidence of electrical insulation. Verify voltage and application limits from the actual product documentation.'}
  },
