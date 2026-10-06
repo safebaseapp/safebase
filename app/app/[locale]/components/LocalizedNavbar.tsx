@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { LogOut, ShieldCheck, UserRound } from "lucide-react";
 import { Link } from "../../../i18n/navigation";
 import { createClient } from "../../../utils/supabase/client";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -18,6 +19,7 @@ export default function LocalizedNavbar({ locale }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
@@ -27,9 +29,14 @@ export default function LocalizedNavbar({ locale }: Props) {
     setIsResourcesOpen(false);
   };
 
+  const closeAccount = () => {
+    setIsAccountOpen(false);
+  };
+
   const closeMenu = () => {
     setIsMenuOpen(false);
     closeDropdowns();
+    closeAccount();
   };
 
   useEffect(() => {
@@ -316,12 +323,67 @@ export default function LocalizedNavbar({ locale }: Props) {
           )}
 
           {isAuthenticated ? (
-            <div className="flex items-center gap-1 lg:hidden">
-              {isOwner && (
-                <Link href="/admin" onClick={closeMenu} className="inline-flex h-10 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] px-2.5 text-[11px] font-black text-violet-200 transition hover:border-violet-400/40 hover:bg-violet-500/[0.14]">Admin</Link>
+            <div className="relative lg:hidden">
+              <button
+                type="button"
+                onClick={() => {
+                  closeDropdowns();
+                  setIsMenuOpen(false);
+                  setIsAccountOpen((current) => !current);
+                }}
+                aria-expanded={isAccountOpen}
+                aria-label={isTurkish ? "Hesap menüsü" : "Account menu"}
+                className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border transition duration-200 ${isAccountOpen ? "border-blue-400/35 bg-blue-500/[0.14] text-white shadow-[0_8px_24px_rgba(37,99,235,.14)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white"}`}
+              >
+                <UserRound size={18} strokeWidth={2} />
+              </button>
+
+              {isAccountOpen && (
+                <div className="absolute right-0 top-[calc(100%+12px)] z-[500] w-56 overflow-hidden rounded-2xl border border-white/10 bg-[#07101f]/[0.99] p-2 shadow-[0_24px_70px_rgba(0,0,0,.62)] backdrop-blur-2xl">
+                  <div className="px-3 pb-2 pt-2">
+                    <div className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">
+                      {isTurkish ? "Hesap" : "Account"}
+                    </div>
+                  </div>
+
+                  <Link
+                    href="/account"
+                    onClick={closeAccount}
+                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-black text-slate-200 transition hover:bg-blue-500/[0.07] hover:text-white"
+                  >
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.07] text-blue-300">
+                      <UserRound size={16} />
+                    </span>
+                    {isTurkish ? "Hesabım" : "My Account"}
+                  </Link>
+
+                  {isOwner && (
+                    <Link
+                      href="/admin"
+                      onClick={closeAccount}
+                      className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-black text-slate-200 transition hover:bg-violet-500/[0.08] hover:text-white"
+                    >
+                      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-violet-400/15 bg-violet-500/[0.07] text-violet-300">
+                        <ShieldCheck size={16} />
+                      </span>
+                      {isTurkish ? "Yönetim" : "Admin"}
+                    </Link>
+                  )}
+
+                  <div className="my-1 border-t border-white/[0.07]" />
+
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-black text-red-200 transition hover:bg-red-500/[0.07]"
+                  >
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-red-400/15 bg-red-500/[0.06] text-red-300">
+                      <LogOut size={16} />
+                    </span>
+                    {isTurkish ? "Çıkış Yap" : "Sign Out"}
+                  </button>
+                </div>
               )}
-              <Link href="/account" onClick={closeDropdowns} className="inline-flex h-10 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.08] px-2.5 text-[11px] font-black text-blue-100 transition hover:bg-blue-500/[0.14]">{isTurkish ? "Hesabım" : "Account"}</Link>
-              <button type="button" onClick={handleSignOut} className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-red-400/15 bg-red-500/[0.05] text-sm font-black text-red-200 transition hover:border-red-400/25 hover:bg-red-500/[0.10]" aria-label={isTurkish ? "Çıkış Yap" : "Sign Out"}>⎋</button>
             </div>
           ) : (
             <Link href="/login" onClick={closeDropdowns} className="inline-flex h-11 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.025] px-3 text-[12px] font-black text-slate-200 transition hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white lg:hidden">{isTurkish ? "Giriş" : "Sign In"}</Link>
@@ -331,6 +393,7 @@ export default function LocalizedNavbar({ locale }: Props) {
             type="button"
             onClick={() => {
               closeDropdowns();
+              closeAccount();
               setIsMenuOpen((current) => !current);
             }}
             aria-expanded={isMenuOpen}
@@ -338,7 +401,7 @@ export default function LocalizedNavbar({ locale }: Props) {
             className={`inline-flex h-11 items-center justify-center gap-2.5 rounded-xl border px-4 text-[13px] font-black transition duration-200 ${isMenuOpen ? "border-blue-400/40 bg-blue-600 text-white shadow-[0_8px_24px_rgba(37,99,235,.18)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white"}`}
           >
             <span className="text-xl leading-none">{isMenuOpen ? "×" : "☰"}</span>
-            <span className="hidden sm:inline">{isTurkish ? "Menü" : "Menu"}</span>
+            <span className="hidden sm:inline">{isTurkish ? "Keşfet" : "Explore"}</span>
           </button>
         </div>
       </div>
