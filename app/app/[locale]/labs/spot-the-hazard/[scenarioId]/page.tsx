@@ -10,11 +10,11 @@ type Props = { params: Promise<{ locale: string; scenarioId: string }> };
 // Keep gameplay scenes local so Spot the Hazard never depends on expiring
 // external share links. These assets are deployed from /public with the app.
 const sceneByCategory: Partial<Record<LabCategory, string>> = {
-  working_at_height: "/labs/spot-the-hazard/pipe-rack-final.jpg",
-  hot_work: "/labs/spot-the-hazard/hot-work-final.jpg",
-  scaffolding: "/labs/spot-the-hazard/scaffold-final.jpg",
-  lifting: "/labs/spot-the-hazard/lifting-final.jpg",
-  confined_space: "/labs/spot-the-hazard/confined-space-final.jpg",
+  working_at_height: "/labs/spot-the-hazard/scene-working-at-height-2k.jpg",
+  hot_work: "/labs/spot-the-hazard/scene-hot-work-2k.jpg",
+  scaffolding: "/labs/spot-the-hazard/scene-scaffolding-2k.jpg",
+  lifting: "/labs/spot-the-hazard/scene-lifting-2k.jpg",
+  confined_space: "/labs/spot-the-hazard/scene-confined-space-2k.jpg",
 };
 
 const hotspotsByCategory: Partial<Record<LabCategory, LabHotspot[]>> = {
