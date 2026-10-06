@@ -5,6 +5,7 @@ import { getPPEStandard, ppeStandards } from '../data';
 import { getPPETech } from '../tech-data';
 import { getPPEVisual, pexels } from '../visual-data';
 import { getPPEExperience } from '../experience-data';
+import { getPPEAuthority } from '../authority-data';
 
 type P={params:Promise<{locale:string;slug:string}>};
 type Locale='tr'|'en';
@@ -69,7 +70,7 @@ export async function generateMetadata({params}:P):Promise<Metadata>{
 
 export default async function Page({params}:P){
  const{locale,slug}=await params; if(!['tr','en'].includes(locale))notFound();
- const s=getPPEStandard(slug); if(!s)notFound(); const l=locale as Locale; const tr=l==='tr'; const d=getPPETech(s.code); const xp=getPPEExperience(s.code); if(!d||!xp)notFound();
+ const s=getPPEStandard(slug); if(!s)notFound(); const l=locale as Locale; const tr=l==='tr'; const d=getPPETech(s.code); const xp=getPPEExperience(s.code); const authority=getPPEAuthority(s.code); if(!d||!xp)notFound();
  const v=theme[s.code]??theme['EN 397']; const vis=getPPEVisual(s.code); const is149=s.code==='EN 149'; const canonical=`https://www.sernem.com/${l}/ppe-standards/${slug}`; const toolboxSlug=toolboxByCode[s.code]??'ppe-safety'; const riskSlug=riskByCode[s.code];
  const scene=(index:number,width=900)=>pexels(vis.scenes[index%vis.scenes.length]??vis.photo,width);
  const schema={'@context':'https://schema.org','@type':'TechArticle',headline:`${s.code} – ${s.title[l]}`,description:s.purpose[l],inLanguage:l,url:canonical,image:pexels(vis.photo,1600),about:{'@type':'Thing',name:d.product[l]},publisher:{'@type':'Organization',name:'SERNEM',url:'https://www.sernem.com'}};
@@ -81,6 +82,20 @@ export default async function Page({params}:P){
   <div className='pointer-events-none absolute inset-x-0 top-0 h-[760px] opacity-80' style={{backgroundImage:`radial-gradient(circle at 16% 10%, ${vis.glow}22, transparent 27%), radial-gradient(circle at 86% 18%, ${vis.glow}18, transparent 23%), linear-gradient(rgba(15,23,42,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,.035) 1px, transparent 1px)`,backgroundSize:'auto,auto,34px 34px,34px 34px'}}/>
   <div className='relative mx-auto max-w-[1460px] px-4 pt-7 md:px-7'>
    <div className='mb-5 flex flex-wrap items-center gap-2 text-sm text-slate-500'><Link href={`/${l}/ppe-standards`} className='font-bold hover:text-blue-700'>← {tr?'Tüm KKD Standartları':'All PPE Standards'}</Link><span>/</span><span>{v.label[l]}</span><span>/</span><strong className='text-slate-800'>{s.code}</strong></div>
+
+   {authority&&<section className='mb-5 rounded-[24px] border border-emerald-200 bg-white p-5 shadow-sm md:p-6'>
+    <div className='flex flex-wrap items-center justify-between gap-3'>
+     <div><div className='text-[11px] font-black uppercase tracking-[.16em] text-emerald-700'>{tr?'SERNEM AUTHORITY CHECK':'SERNEM AUTHORITY CHECK'}</div><h2 className='mt-1 text-xl font-black text-slate-950'>{tr?'Standart kaynağı ve durum doğrulaması':'Standard source & status verification'}</h2></div>
+     <span className='rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-black text-emerald-800'>{tr?'Doğrulandı':'Verified'} · {authority.verified}</span>
+    </div>
+    <div className='mt-4 grid gap-3 md:grid-cols-4'>
+     <div className='rounded-xl bg-slate-50 p-3'><div className='text-[10px] font-black uppercase tracking-wider text-slate-500'>{tr?'Tür':'Type'}</div><div className='mt-1 font-bold'>{tr?'Standart':'Standard'}</div></div>
+     <div className='rounded-xl bg-slate-50 p-3'><div className='text-[10px] font-black uppercase tracking-wider text-slate-500'>{tr?'Sürüm':'Edition'}</div><div className='mt-1 font-bold'>{authority.edition}</div></div>
+     <div className='rounded-xl bg-slate-50 p-3'><div className='text-[10px] font-black uppercase tracking-wider text-slate-500'>{tr?'Durum':'Status'}</div><div className='mt-1 font-bold'>{authority.status[l]}</div></div>
+     <div className='rounded-xl bg-slate-50 p-3'><div className='text-[10px] font-black uppercase tracking-wider text-slate-500'>{tr?'Kapsam':'Jurisdiction'}</div><div className='mt-1 font-bold'>{authority.jurisdiction[l]}</div></div>
+    </div>
+    <div className='mt-4 flex flex-col gap-3 rounded-xl border border-slate-200 p-4 md:flex-row md:items-center md:justify-between'><p className='max-w-4xl text-sm leading-6 text-slate-600'>{authority.note[l]}</p><a href={authority.sourceUrl} target='_blank' rel='noopener noreferrer' className='shrink-0 rounded-xl bg-slate-950 px-4 py-2.5 text-center text-sm font-black text-white hover:bg-slate-800'>{tr?'Ana kaynağı aç':'Open primary source'} ↗</a></div>
+   </section>}
 
    <section className='relative overflow-hidden rounded-[30px] border border-slate-800 bg-slate-950 text-white shadow-[0_28px_70px_rgba(15,23,42,.24)]'>
     <img src={pexels(vis.photo,1800)} alt={vis.alt[l]} className='absolute inset-0 h-full w-full object-cover opacity-35' style={{objectPosition:'center 38%'}}/>
