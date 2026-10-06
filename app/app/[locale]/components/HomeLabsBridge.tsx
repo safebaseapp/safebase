@@ -11,34 +11,15 @@ const LABS_LOGO = "/images/sernem-labs-logo.webp";
 export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
   const pathname = usePathname();
   const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
-  const isLabs = pathname.startsWith(`/${locale}/labs`);
   const tr = locale === "tr";
   const [mountNode, setMountNode] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    const nav = document.querySelector("nav");
-    if (!nav) return;
-
-    const brandLink = nav.querySelector<HTMLAnchorElement>("a");
-    const brandText = brandLink
-      ? Array.from(brandLink.querySelectorAll<HTMLElement>("div")).find((el) =>
-          el.textContent?.includes("HSE Platform"),
-        )
-      : null;
-    const originalBrandText = brandText?.textContent ?? null;
-
-    if (brandText && isLabs) brandText.textContent = "HSE Labs";
-
-    return () => {
-      if (brandText && originalBrandText) brandText.textContent = originalBrandText;
-    };
-  }, [pathname, isLabs]);
 
   useEffect(() => {
     setMountNode(null);
     if (!isHome) return;
 
-    const hero = document.querySelector("main > section:first-child");
+    const homeTitle = document.getElementById("home-title");
+    const hero = homeTitle?.closest("section");
     if (!hero?.parentElement) return;
 
     document.querySelector("[data-sernem-labs-showcase-host]")?.remove();
@@ -47,7 +28,10 @@ export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
     hero.insertAdjacentElement("afterend", host);
     setMountNode(host);
 
-    return () => host.remove();
+    return () => {
+      setMountNode(null);
+      host.remove();
+    };
   }, [isHome, pathname]);
 
   if (!isHome || !mountNode) return null;
