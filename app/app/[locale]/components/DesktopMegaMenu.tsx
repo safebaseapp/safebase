@@ -37,7 +37,7 @@ const PHOTO = {
   dashboard: "/images/menu-dashboard.webp",
   tools: "/images/menu-tools.webp",
   performance: "/images/menu-performance.webp",
-  labs: "/images/menu-labs.webp",
+  labs: "/labs/spot-the-hazard/confined-space-final.jpg",
   resources: "/images/menu-resources.webp",
   ai: "/images/menu-ai.webp",
 };
@@ -238,10 +238,10 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
           <div>
             <p className="text-[10px] font-black uppercase tracking-[0.22em] text-sky-300">SERNEM</p>
             <h2 className="mt-2 text-[28px] font-black tracking-[-0.045em] text-white">
-              {tr ? "Ana Menü" : "Main Menu"}
+              {tr ? "Platform" : "Platform"}
             </h2>
             <p className="mt-1 text-[11px] text-slate-500">
-              {tr ? "Platform bölümlerine düzenli erişim." : "Structured access to the platform."}
+              {tr ? "Tüm SERNEM bölümleri tek görünümde." : "All SERNEM sections in one view."}
             </p>
           </div>
 
