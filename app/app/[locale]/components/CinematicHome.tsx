@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Check, FileText, ShieldCheck, Crosshair } from "lucide-react";
 import LocalizedFooter from "./LocalizedFooter";
 import ProductShowcase from "./ProductShowcase";
+import RotatingHomepagePulse from "./RotatingHomepagePulse";
 import { HomepageMotion, RiskWorkflow } from "./HomepageMotion";
 import s from "./homepage.module.css";
 
@@ -24,6 +25,8 @@ export default function CinematicHome({ locale }: { locale: "tr" | "en" }) {
     </section>
 
     <section className={s.industries} aria-label={t("Industries", "Sektörler")}><div className={s.container}><p className={s.eyebrow}>{t("DIFFERENT ENVIRONMENTS. ONE STANDARD OF CARE.", "FARKLI SAHALAR. AYNI GÜVENLİK YAKLAŞIMI.")}</p><ul>{[t("Refinery & Petrochemical", "Rafineri & Petrokimya"), t("EPC Projects", "EPC Projeleri"), t("Construction", "İnşaat"), t("Heavy Industry", "Ağır Sanayi"), t("Energy", "Enerji")].map((item,i) => <li key={item}><span>0{i+1}</span>{item}</li>)}</ul></div></section>
+
+    <RotatingHomepagePulse locale={locale}/>
 
     <section className={`${s.operations} ${s.section}`} aria-labelledby="operations-title">
       <div className={s.container}><div className={s.sectionHeading} data-reveal><div><p className={s.eyebrow}>01 / {t("OPERATIONAL VISIBILITY", "OPERASYONEL GÖRÜNÜRLÜK")}</p><h2 id="operations-title">{t("The scale is enormous.", "Operasyonlar büyük.")}<br/><em>{t("The detail matters.", "Ayrıntılar önemli.")}</em></h2></div><p>{t("Bring field observations, incident records and monthly HSE data into focus. Turn performance into a clearer management picture.", "Saha gözlemlerini, olay kayıtlarını ve aylık HSE verilerini görünür kılın. Performansı net bir yönetim görünümüne dönüştürün.")}</p></div>
