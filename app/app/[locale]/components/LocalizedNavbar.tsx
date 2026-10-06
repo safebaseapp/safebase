@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LogOut, ShieldCheck, UserRound } from "lucide-react";
+import { LogOut, PanelsTopLeft, ShieldCheck, UserRound } from "lucide-react";
 import { Link } from "../../../i18n/navigation";
 import { createClient } from "../../../utils/supabase/client";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ProductExplorer from "./ProductExplorer";
 import SernemLogo from "./SernemLogo";
 import GlobalSearch from "./GlobalSearch";
+import MobileMainMenu from "./MobileMainMenu";
 
 type Props = {
   locale: "tr" | "en";
@@ -20,6 +21,7 @@ export default function LocalizedNavbar({ locale }: Props) {
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
+  const [isMainNavOpen, setIsMainNavOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
@@ -35,6 +37,7 @@ export default function LocalizedNavbar({ locale }: Props) {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    setIsMainNavOpen(false);
     closeDropdowns();
     closeAccount();
   };
@@ -329,6 +332,7 @@ export default function LocalizedNavbar({ locale }: Props) {
                 onClick={() => {
                   closeDropdowns();
                   setIsMenuOpen(false);
+                  setIsMainNavOpen(false);
                   setIsAccountOpen((current) => !current);
                 }}
                 aria-expanded={isAccountOpen}
@@ -394,6 +398,23 @@ export default function LocalizedNavbar({ locale }: Props) {
             onClick={() => {
               closeDropdowns();
               closeAccount();
+              setIsMenuOpen(false);
+              setIsMainNavOpen((current) => !current);
+            }}
+            aria-expanded={isMainNavOpen}
+            aria-controls="sernem-main-navigation"
+            aria-label={isTurkish ? "Ana menü" : "Main menu"}
+            className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border transition duration-200 lg:hidden ${isMainNavOpen ? "border-cyan-400/35 bg-cyan-500/[0.12] text-white shadow-[0_8px_24px_rgba(8,145,178,.14)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-cyan-400/20 hover:bg-cyan-500/[0.05] hover:text-white"}`}
+          >
+            <PanelsTopLeft size={18} strokeWidth={2} />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              closeDropdowns();
+              closeAccount();
+              setIsMainNavOpen(false);
               setIsMenuOpen((current) => !current);
             }}
             aria-expanded={isMenuOpen}
@@ -405,6 +426,16 @@ export default function LocalizedNavbar({ locale }: Props) {
           </button>
         </div>
       </div>
+
+      {isMainNavOpen && (
+        <div id="sernem-main-navigation">
+          <MobileMainMenu
+            locale={locale}
+            authenticated={isAuthenticated}
+            onClose={() => setIsMainNavOpen(false)}
+          />
+        </div>
+      )}
 
       {isMenuOpen && <ProductExplorer locale={locale} onClose={closeMenu} />}
     </nav>
