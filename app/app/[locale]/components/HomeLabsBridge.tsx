@@ -19,30 +19,20 @@ export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
     const nav = document.querySelector("nav");
     if (!nav) return;
 
-    const navItems = Array.from(nav.querySelectorAll<HTMLElement>("a,button"));
-    const resourceLabel = tr ? "Kaynaklar" : "Resources";
-    const resourceItem = navItems.find((item) => item.textContent?.includes(resourceLabel));
-    const existing = nav.querySelector<HTMLElement>("[data-sernem-labs-nav]");
-
-    if (!existing && resourceItem?.parentElement) {
-      const anchor = document.createElement("a");
-      anchor.href = `/${locale}/labs`;
-      anchor.setAttribute("data-sernem-labs-nav", "true");
-      anchor.className = "relative inline-flex items-center gap-2.5 rounded-xl border border-violet-400/20 bg-violet-500/[0.055] px-3.5 py-2.5 text-[13px] font-bold text-violet-100 transition duration-200 hover:border-violet-300/35 hover:bg-violet-500/[0.11] hover:text-white";
-      anchor.innerHTML = `<span style="display:flex;height:27px;width:27px;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;border:1px solid rgba(167,139,250,.26);background:#111827"><img src="${LABS_LOGO}" alt="" style="width:40px;max-width:none;transform:translateY(-7px);display:block" /></span><span>HSE Labs</span><span style="border:1px solid rgba(167,139,250,.25);border-radius:999px;padding:2px 6px;font-size:8px;letter-spacing:.08em;color:#c4b5fd">NEW</span>`;
-      resourceItem.parentElement.before(anchor);
-    }
-
     const brandLink = nav.querySelector<HTMLAnchorElement>("a");
-    const brandText = brandLink ? Array.from(brandLink.querySelectorAll<HTMLElement>("div")).find((el) => el.textContent?.includes("HSE Platform")) : null;
+    const brandText = brandLink
+      ? Array.from(brandLink.querySelectorAll<HTMLElement>("div")).find((el) =>
+          el.textContent?.includes("HSE Platform"),
+        )
+      : null;
     const originalBrandText = brandText?.textContent ?? null;
+
     if (brandText && isLabs) brandText.textContent = "HSE Labs";
 
     return () => {
-      nav.querySelector("[data-sernem-labs-nav]")?.remove();
       if (brandText && originalBrandText) brandText.textContent = originalBrandText;
     };
-  }, [locale, pathname, tr, isLabs]);
+  }, [pathname, isLabs]);
 
   useEffect(() => {
     setMountNode(null);
