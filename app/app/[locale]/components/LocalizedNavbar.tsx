@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LogOut, PanelsTopLeft, ShieldCheck, UserRound } from "lucide-react";
+import { LogOut, PanelsTopLeft, ShieldCheck, Sparkles, UserRound } from "lucide-react";
 import { Link } from "../../../i18n/navigation";
 import { createClient } from "../../../utils/supabase/client";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -9,6 +9,7 @@ import ProductExplorer from "./ProductExplorer";
 import SernemLogo from "./SernemLogo";
 import GlobalSearch from "./GlobalSearch";
 import MobileMainMenu from "./MobileMainMenu";
+import DesktopMegaMenu from "./DesktopMegaMenu";
 
 type Props = {
   locale: "tr" | "en";
@@ -22,6 +23,7 @@ export default function LocalizedNavbar({ locale }: Props) {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isMainNavOpen, setIsMainNavOpen] = useState(false);
+  const [isDesktopNavOpen, setIsDesktopNavOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
@@ -38,6 +40,7 @@ export default function LocalizedNavbar({ locale }: Props) {
   const closeMenu = () => {
     setIsMenuOpen(false);
     setIsMainNavOpen(false);
+    setIsDesktopNavOpen(false);
     closeDropdowns();
     closeAccount();
   };
@@ -194,95 +197,53 @@ export default function LocalizedNavbar({ locale }: Props) {
           </div>
         </Link>
 
-        <div className="hidden items-center gap-1.5 xl:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           {isAuthenticated && (
-            <Link href="/dashboard" onClick={closeDropdowns} className="relative rounded-xl px-4 py-2.5 text-[13px] font-bold text-slate-300 transition duration-200 hover:bg-blue-500/[0.07] hover:text-white after:absolute after:bottom-0 after:left-4 after:right-4 after:h-px after:scale-x-0 after:bg-blue-400 after:transition-transform hover:after:scale-x-100">
+            <Link
+              href="/dashboard"
+              onClick={closeMenu}
+              className="rounded-xl px-4 py-2.5 text-[13px] font-bold text-slate-300 transition hover:bg-cyan-500/[0.07] hover:text-white"
+            >
               Dashboard
             </Link>
           )}
 
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => {
-                setIsToolsOpen((current) => !current);
-                setIsResourcesOpen(false);
-              }}
-              className={`inline-flex items-center gap-2.5 rounded-xl border px-4 py-2.5 text-[13px] font-bold transition duration-200 ${isToolsOpen ? "border-blue-400/25 bg-blue-500/[0.10] text-white shadow-[0_0_22px_rgba(37,99,235,.08)]" : "border-transparent text-slate-300 hover:border-blue-400/10 hover:bg-blue-500/[0.06] hover:text-white"}`}
-            >
-              <span className="flex h-6 w-6 items-center justify-center rounded-md border border-blue-400/15 bg-blue-500/[0.06] text-[12px] font-black text-blue-300">▦</span>
-              {isTurkish ? "HSE Araçları" : "HSE Tools"}
-              <span className={`text-[9px] text-slate-500 transition ${isToolsOpen ? "rotate-180" : ""}`}>▼</span>
-            </button>
+          <button
+            type="button"
+            onClick={() => {
+              setIsDesktopNavOpen((current) => !current);
+              setIsMenuOpen(false);
+              closeDropdowns();
+              closeAccount();
+            }}
+            aria-expanded={isDesktopNavOpen}
+            className={`inline-flex h-11 items-center gap-2.5 rounded-xl border px-4 text-[13px] font-black transition ${
+              isDesktopNavOpen
+                ? "border-sky-400/30 bg-sky-500/[0.10] text-white shadow-[0_10px_28px_rgba(14,165,233,.12)]"
+                : "border-white/[0.10] bg-white/[0.025] text-slate-300 hover:border-sky-400/20 hover:bg-sky-500/[0.05] hover:text-white"
+            }`}
+          >
+            <PanelsTopLeft size={17} />
+            {isTurkish ? "Platform" : "Platform"}
+            <span className={`text-[9px] text-slate-500 transition ${isDesktopNavOpen ? "rotate-180" : ""}`}>▼</span>
+          </button>
 
-            {isToolsOpen && (
-              <div className="absolute left-1/2 top-[calc(100%+14px)] z-[300] -translate-x-1/2 overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/95 p-2 shadow-[0_25px_70px_rgba(0,0,0,.65)] backdrop-blur-2xl" style={{ width: "560px", maxWidth: "calc(100vw - 32px)" }}>
-                <div className="px-3 pb-2 pt-2">
-                  <p className="text-[10px] font-black uppercase tracking-[0.20em] text-blue-400">{isTurkish ? "HSE Araçları" : "HSE Tools"}</p>
-                  <p className="mt-1 text-[11px] leading-5 text-slate-500">{isTurkish ? "Analiz, dokümantasyon ve performans araçları." : "Analysis, documentation and performance tools."}</p>
-                </div>
-                <div className="mt-1 border-t border-white/[0.06] pt-2">
-                  <div className="grid grid-cols-2 gap-1">
-                    {toolItems.map((item) => (
-                      <Link key={item.title} href={item.href} onClick={closeDropdowns} className="group rounded-xl border border-transparent p-3 transition hover:border-blue-400/15 hover:bg-blue-500/[0.05]">
-                        <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.06] text-base font-black text-blue-300">{item.icon}</span>
-                        <span className="mt-3 block text-sm font-black text-slate-200 transition group-hover:text-white">{item.title}</span>
-                        <span className="mt-1 block text-[11px] leading-5 text-slate-400">{item.description}</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {isAuthenticated && (
-            <Link href="/hse-performance" onClick={closeDropdowns} className="relative inline-flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-[13px] font-bold text-slate-300 transition duration-200 hover:bg-cyan-500/[0.07] hover:text-white after:absolute after:bottom-0 after:left-4 after:right-4 after:h-px after:scale-x-0 after:bg-cyan-400 after:transition-transform hover:after:scale-x-100">
-              <span className="flex h-6 w-6 items-center justify-center rounded-md border border-cyan-400/15 bg-cyan-500/[0.06] text-[11px] font-black text-cyan-300">◫</span>
-              <span>{isTurkish ? "HSE Performans" : "HSE Performance"}</span>
-            </Link>
-          )}
-
-          <Link href="/labs" onClick={closeDropdowns} className="relative inline-flex items-center gap-2.5 rounded-xl border border-violet-400/15 bg-violet-500/[0.045] px-3.5 py-2.5 text-[13px] font-bold text-violet-100 transition duration-200 hover:border-violet-300/30 hover:bg-violet-500/[0.10] hover:text-white">
-            <span className="flex h-6 w-6 items-center justify-center rounded-md border border-violet-400/20 bg-violet-500/[0.08] text-[12px] font-black text-violet-300">✦</span>
-            <span>HSE Labs</span>
-            <span className="rounded-full border border-violet-400/20 bg-violet-500/[0.07] px-1.5 py-0.5 text-[8px] font-black tracking-[0.08em] text-violet-300">NEW</span>
+          <Link
+            href="/labs"
+            onClick={closeMenu}
+            className="inline-flex items-center gap-2 rounded-xl border border-violet-400/15 bg-violet-500/[0.045] px-3.5 py-2.5 text-[13px] font-bold text-violet-100 transition hover:border-violet-300/30 hover:bg-violet-500/[0.10] hover:text-white"
+          >
+            <Sparkles size={15} className="text-violet-300" />
+            HSE Labs
           </Link>
 
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => {
-                setIsResourcesOpen((current) => !current);
-                setIsToolsOpen(false);
-              }}
-              className={`inline-flex items-center gap-2.5 rounded-xl border px-4 py-2.5 text-[13px] font-bold transition duration-200 ${isResourcesOpen ? "border-emerald-400/20 bg-emerald-500/[0.07] text-white" : "border-transparent text-slate-300 hover:border-emerald-400/10 hover:bg-emerald-500/[0.05] hover:text-white"}`}
-            >
-              <span className="flex h-6 w-6 items-center justify-center rounded-md border border-emerald-400/15 bg-emerald-500/[0.05] text-[12px] font-black text-emerald-300">▤</span>
-              {isTurkish ? "Kaynaklar" : "Resources"}
-              <span className={`text-[9px] text-slate-500 transition ${isResourcesOpen ? "rotate-180" : ""}`}>▼</span>
-            </button>
-
-            {isResourcesOpen && (
-              <div className="absolute left-1/2 top-[calc(100%+14px)] z-[300] w-[410px] -translate-x-1/2 overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/95 p-2 shadow-[0_25px_70px_rgba(0,0,0,.65)] backdrop-blur-2xl">
-                <div className="px-3 pb-2 pt-2">
-                  <p className="text-[10px] font-black uppercase tracking-[0.20em] text-emerald-400">{isTurkish ? "Saha Kaynakları" : "Field Resources"}</p>
-                </div>
-                <div className="grid grid-cols-2 gap-1">
-                  {resourceItems.map((item) => (
-                    <Link key={item.title} href={item.href} onClick={closeDropdowns} className="group rounded-xl border border-transparent p-3 transition hover:border-emerald-400/15 hover:bg-emerald-500/[0.05]">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-400/15 bg-emerald-500/[0.06] text-base font-black text-emerald-300">{item.icon}</span>
-                      <span className="mt-3 block text-sm font-black text-slate-200 transition group-hover:text-white">{item.title}</span>
-                      <span className="mt-1 block text-[11px] leading-5 text-slate-400">{item.description}</span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <Link href="/ai-assistant" onClick={closeDropdowns} className="relative rounded-xl px-4 py-2.5 text-[13px] font-bold text-slate-300 transition duration-200 hover:bg-blue-500/[0.07] hover:text-white after:absolute after:bottom-0 after:left-4 after:right-4 after:h-px after:scale-x-0 after:bg-blue-400 after:transition-transform hover:after:scale-x-100">
-            <span className="text-violet-300 transition group-hover:text-violet-200">✦</span>{isTurkish ? "AI Asistan" : "AI Assistant"}
+          <Link
+            href="/ai-assistant"
+            onClick={closeMenu}
+            className="inline-flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-[13px] font-bold text-slate-300 transition hover:bg-violet-500/[0.06] hover:text-white"
+          >
+            <Sparkles size={14} className="text-violet-300" />
+            {isTurkish ? "AI Asistan" : "AI Assistant"}
           </Link>
         </div>
 
@@ -426,6 +387,14 @@ export default function LocalizedNavbar({ locale }: Props) {
           </button>
         </div>
       </div>
+
+      {isDesktopNavOpen && (
+        <DesktopMegaMenu
+          locale={locale}
+          authenticated={isAuthenticated}
+          onClose={() => setIsDesktopNavOpen(false)}
+        />
+      )}
 
       {isMainNavOpen && (
         <div id="sernem-main-navigation">
