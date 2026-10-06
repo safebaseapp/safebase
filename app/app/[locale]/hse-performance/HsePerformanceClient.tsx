@@ -1196,25 +1196,25 @@ export default function HsePerformanceClient({
         {/* =====================================================
             CONTENT
         ===================================================== */}
-        <div className="min-w-0 flex-1 px-5 py-6 sm:px-7 lg:px-8">
+        <div className="min-w-0 flex-1 px-4 py-5 sm:px-7 sm:py-6 lg:px-8">
 
           {/* HEADER */}
-          <header className="mb-4">
+          <header className="mb-5">
             <div className="flex flex-col gap-4 2xl:flex-row 2xl:items-start 2xl:justify-between">
 
               <div>
-                <h1 className="text-4xl font-black tracking-[-0.04em] sm:text-[42px]">
+                <h1 className="text-[32px] font-black leading-[1.02] tracking-[-0.045em] sm:text-[42px]">
                   HSE Performance
                 </h1>
 
-                <p className="mt-2 text-sm text-slate-400">
+                <p className="mt-2 max-w-xl text-[13px] leading-5 text-slate-400 sm:text-sm">
                   {isTurkish
                     ? "Gözlemle. Önle. Geliştir. Daha Güvenli Yarınlar."
                     : "Observe. Prevent. Improve. Build Safer Tomorrows."}
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+              <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center 2xl:justify-end">
 
                 <div className="hidden px-4 text-center text-xs italic leading-5 text-slate-500 2xl:block">
                   “Measure today.
@@ -1225,45 +1225,55 @@ export default function HsePerformanceClient({
                   </div>
                 </div>
 
-                <input
-                  type="month"
-                  value={selectedMonth}
-                  onChange={(e) => setSelectedMonth(e.target.value)}
-                  className="rounded-xl border border-slate-700 bg-[#07111f] px-4 py-3 text-xs font-bold text-slate-300"
-                  aria-label={isTurkish ? "Dönem seç" : "Select period"}
-                />
+                <label className="min-w-0 rounded-xl border border-slate-700/80 bg-[#07111f] px-3 py-2.5 sm:border-0 sm:bg-transparent sm:p-0">
+                  <span className="mb-1 block text-[8px] font-black uppercase tracking-[0.14em] text-slate-500 sm:hidden">
+                    {isTurkish ? "Dönem" : "Period"}
+                  </span>
+                  <input
+                    type="month"
+                    value={selectedMonth}
+                    onChange={(e) => setSelectedMonth(e.target.value)}
+                    className="h-7 w-full min-w-0 bg-transparent text-[12px] font-black text-slate-200 outline-none sm:h-11 sm:w-auto sm:rounded-xl sm:border sm:border-slate-700 sm:bg-[#07111f] sm:px-4 sm:text-xs"
+                    aria-label={isTurkish ? "Dönem seç" : "Select period"}
+                  />
+                </label>
 
-                <select
-                  value={filters.project}
-                  onChange={(e) =>
-                    setFilters({
-                      ...filters,
-                      project: e.target.value,
-                    })
-                  }
-                  className="rounded-xl border border-slate-700 bg-[#07111f] px-4 py-3 text-xs font-bold text-slate-300"
-                >
-                  <option value="all">
-                    {isTurkish ? "Tüm Projeler" : "All Projects"}
-                  </option>
-
-                  {projectOptions.map((item) => (
-                    <option key={item} value={item}>
-                      {item}
+                <label className="min-w-0 rounded-xl border border-slate-700/80 bg-[#07111f] px-3 py-2.5 sm:border-0 sm:bg-transparent sm:p-0">
+                  <span className="mb-1 block text-[8px] font-black uppercase tracking-[0.14em] text-slate-500 sm:hidden">
+                    {isTurkish ? "Proje" : "Project"}
+                  </span>
+                  <select
+                    value={filters.project}
+                    onChange={(e) =>
+                      setFilters({
+                        ...filters,
+                        project: e.target.value,
+                      })
+                    }
+                    className="h-7 w-full min-w-0 bg-transparent text-[12px] font-black text-slate-200 outline-none sm:h-11 sm:w-auto sm:rounded-xl sm:border sm:border-slate-700 sm:bg-[#07111f] sm:px-4 sm:text-xs"
+                  >
+                    <option value="all">
+                      {isTurkish ? "Tüm Projeler" : "All Projects"}
                     </option>
-                  ))}
-                </select>
+
+                    {projectOptions.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                </label>
 
                 <div
-                  className={`rounded-xl border px-4 py-3 ${
+                  className={`col-span-2 rounded-xl border px-3 py-2.5 sm:px-4 sm:py-3 ${
                     stats.criticalOpen > 0
                       ? "border-amber-400/35 bg-amber-500/[0.10]"
                       : "border-emerald-400/30 bg-emerald-500/[0.08]"
                   }`}
                 >
-                  <div className="flex min-w-[235px] items-center gap-3">
+                  <div className="flex min-w-0 items-center gap-3 sm:min-w-[235px]">
                     <div
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xl font-black ${
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-lg font-black sm:h-10 sm:w-10 sm:text-xl ${
                         stats.criticalOpen > 0
                           ? "bg-amber-500/20 text-amber-300"
                           : "bg-emerald-500/20 text-emerald-300"
@@ -1272,9 +1282,9 @@ export default function HsePerformanceClient({
                       {stats.criticalOpen > 0 ? "!" : "✓"}
                     </div>
 
-                    <div>
+                    <div className="min-w-0">
                       <p
-                        className={`text-xs font-black uppercase ${
+                        className={`text-[11px] font-black uppercase sm:text-xs ${
                           stats.criticalOpen > 0
                             ? "text-amber-300"
                             : "text-emerald-300"
@@ -1289,7 +1299,7 @@ export default function HsePerformanceClient({
                             : "Under Control"}
                       </p>
 
-                      <p className="mt-1 text-[10px] text-slate-400">
+                      <p className="mt-0.5 truncate text-[9px] text-slate-400 sm:mt-1 sm:text-[10px]">
                         {stats.criticalOpen > 0
                           ? isTurkish
                             ? `${stats.criticalOpen} kritik aksiyon halen açık.`
