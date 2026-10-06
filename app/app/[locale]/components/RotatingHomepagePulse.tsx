@@ -9,7 +9,6 @@ import {
   Calculator,
   ClipboardCheck,
   Download,
-  FileCheck2,
   FileText,
   Flame,
   HardHat,
@@ -17,7 +16,6 @@ import {
   MessageSquareText,
   ScanSearch,
   ShieldCheck,
-  SignsPost,
   Sparkles,
   Wrench,
 } from "lucide-react";
@@ -89,7 +87,7 @@ function Icon({ name }: { name: Item["icon"] }) {
   if (name === "scan") return <ScanSearch {...props} />;
   if (name === "check") return <ClipboardCheck {...props} />;
   if (name === "message") return <MessageSquareText {...props} />;
-  if (name === "sign") return <SignsPost {...props} />;
+  if (name === "sign") return <ShieldCheck {...props} />;
   if (name === "download") return <Download {...props} />;
   if (name === "bot") return <Bot {...props} />;
   return <Wrench {...props} />;
