@@ -219,11 +219,14 @@ export default function LocalizedNavbar({ locale }: Props) {
           </button>
         </div>
 
-        <div className="ml-auto flex shrink-0 items-center gap-2 border-l border-white/[0.08] pl-4 sm:gap-2.5">
-          <div className="hidden sm:block">
+        <div className="ml-auto hidden min-w-[500px] flex-1 justify-end px-4 xl:flex 2xl:min-w-[680px]">
+          <div className="w-full max-w-[680px]">
             <GlobalSearch locale={locale} />
           </div>
-          <div className="sm:hidden">
+        </div>
+
+        <div className="flex shrink-0 items-center gap-2 border-l border-white/[0.08] pl-4 sm:gap-2.5">
+          <div className="xl:hidden">
             <GlobalSearch locale={locale} compact />
           </div>
 
