@@ -219,8 +219,8 @@ export default function LocalizedNavbar({ locale }: Props) {
           </button>
         </div>
 
-        <div className="ml-auto hidden min-w-[500px] flex-1 justify-end px-4 xl:flex 2xl:min-w-[680px]">
-          <div className="w-full max-w-[680px]">
+        <div className="ml-auto hidden min-w-[320px] flex-1 justify-end px-3 xl:flex 2xl:min-w-[420px]">
+          <div className="w-full max-w-[440px]">
             <GlobalSearch locale={locale} />
           </div>
         </div>
