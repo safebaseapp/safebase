@@ -329,21 +329,33 @@ export default function LocalizedNavbar({ locale }: Props) {
             <Link href="/login" onClick={closeDropdowns} className="inline-flex h-11 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.025] px-3 text-[12px] font-black text-slate-200 transition hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white lg:hidden">{isTurkish ? "Giriş" : "Sign In"}</Link>
           )}
 
-          <button
-            type="button"
-            onClick={() => {
-              closeDropdowns();
-              closeAccount();
-              setIsMenuOpen(false);
-              setIsMainNavOpen((current) => !current);
-            }}
-            aria-expanded={isMainNavOpen}
-            aria-controls="sernem-main-navigation"
-            aria-label={isTurkish ? "Ana menü" : "Main menu"}
-            className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border transition duration-200 lg:hidden ${isMainNavOpen ? "border-cyan-400/35 bg-cyan-500/[0.12] text-white shadow-[0_8px_24px_rgba(8,145,178,.14)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-cyan-400/20 hover:bg-cyan-500/[0.05] hover:text-white"}`}
-          >
-            <PanelsTopLeft size={18} strokeWidth={2} />
-          </button>
+          {isOwner ? (
+            <Link
+              href="/admin"
+              onClick={closeMenu}
+              aria-label={isTurkish ? "Yönetim" : "Admin"}
+              title={isTurkish ? "Yönetim" : "Admin"}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] text-violet-200 transition duration-200 hover:border-violet-400/40 hover:bg-violet-500/[0.14] hover:text-white lg:hidden"
+            >
+              <ShieldCheck size={18} strokeWidth={2} />
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                closeDropdowns();
+                closeAccount();
+                setIsMenuOpen(false);
+                setIsMainNavOpen((current) => !current);
+              }}
+              aria-expanded={isMainNavOpen}
+              aria-controls="sernem-main-navigation"
+              aria-label={isTurkish ? "Ana menü" : "Main menu"}
+              className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border transition duration-200 lg:hidden ${isMainNavOpen ? "border-cyan-400/35 bg-cyan-500/[0.12] text-white shadow-[0_8px_24px_rgba(8,145,178,.14)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-cyan-400/20 hover:bg-cyan-500/[0.05] hover:text-white"}`}
+            >
+              <PanelsTopLeft size={18} strokeWidth={2} />
+            </button>
+          )}
 
           <button
             type="button"
