@@ -176,7 +176,13 @@ export default function GlobalSearch({ locale, compact = false }: Props) {
             if (event.currentTarget === event.target) setOpen(false);
           }}
         >
-          <div className="relative min-h-full px-4 pb-10 pt-[7vh] sm:flex sm:items-start sm:justify-center sm:pt-[10vh]">
+          <div
+            className={`relative min-h-full px-4 pb-10 transition-all duration-300 ${
+              query.trim()
+                ? "pt-4 sm:flex sm:items-start sm:justify-center sm:pt-6"
+                : "pt-[7vh] sm:flex sm:items-start sm:justify-center sm:pt-[10vh]"
+            }`}
+          >
             <div className="pointer-events-none absolute inset-x-0 top-0 h-[310px] overflow-hidden">
               <img
                 src="/images/sernem-hero-refinery.png"
@@ -188,15 +194,21 @@ export default function GlobalSearch({ locale, compact = false }: Props) {
             </div>
 
             <div className="relative w-full max-w-2xl">
-              <div className="mb-4 flex items-end justify-between gap-4 px-1">
+              <div className={`flex items-end justify-between gap-4 px-1 transition-all duration-300 ${query.trim() ? "mb-2" : "mb-4"}`}>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.22em] text-sky-300">SERNEM SEARCH</p>
-                  <h2 className="mt-2 text-[28px] font-black tracking-[-0.045em] text-white sm:text-[34px]">
+                  <h2
+                    className={`mt-2 font-black tracking-[-0.045em] text-white transition-all duration-300 ${
+                      query.trim() ? "text-[20px] sm:text-[24px]" : "text-[28px] sm:text-[34px]"
+                    }`}
+                  >
                     {tr ? "Her şeyi tek yerden bul." : "Find anything, instantly."}
                   </h2>
-                  <p className="mt-1 text-[12px] text-slate-400">
-                    {tr ? "Araçlar, rehberler, toolbox içerikleri ve HSE kaynakları." : "Tools, guides, toolbox content and HSE resources."}
-                  </p>
+                  {!query.trim() && (
+                    <p className="mt-1 text-[12px] text-slate-400">
+                      {tr ? "Araçlar, rehberler, toolbox içerikleri ve HSE kaynakları." : "Tools, guides, toolbox content and HSE resources."}
+                    </p>
+                  )}
                 </div>
 
                 <button
@@ -217,8 +229,8 @@ export default function GlobalSearch({ locale, compact = false }: Props) {
                       ref={inputRef}
                       value={query}
                       onChange={(event) => setQuery(event.target.value)}
-                      placeholder={tr ? "Örn. sıcak çalışma, risk analizi, iskele..." : "Try hot work, risk assessment, scaffolding..."}
-                      className="min-w-0 flex-1 bg-transparent text-[15px] font-bold text-white outline-none placeholder:text-slate-500"
+                      placeholder={tr ? "Sıcak çalışma, risk, iskele..." : "Hot work, risk, scaffold..."}
+                      className="min-w-0 flex-1 bg-transparent text-[14px] font-bold text-white outline-none placeholder:text-slate-500 sm:text-[15px]"
                     />
                     <span className="hidden items-center gap-1 rounded-lg border border-white/10 bg-white/[0.035] px-2 py-1 text-[10px] font-bold text-slate-500 sm:inline-flex">
                       <Command size={11} /> K
@@ -226,34 +238,35 @@ export default function GlobalSearch({ locale, compact = false }: Props) {
                   </div>
 
                   {!query.trim() && (
-                    <div className="mt-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                      {quickQueries.map((item) => (
-                        <button
-                          key={item}
-                          type="button"
-                          onClick={() => {
-                            setQuery(item);
-                            requestAnimationFrame(() => inputRef.current?.focus());
-                          }}
-                          className="shrink-0 rounded-full border border-white/[0.09] bg-white/[0.035] px-3 py-2 text-[10px] font-black text-slate-300 transition hover:border-sky-400/25 hover:bg-sky-500/[0.07] hover:text-white"
-                        >
-                          {item}
-                        </button>
-                      ))}
+                    <div className="relative mt-3">
+                      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-6 bg-gradient-to-r from-[#06101e] to-transparent" />
+                      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-6 bg-gradient-to-l from-[#06101e] to-transparent" />
+                      <div className="flex snap-x gap-2 overflow-x-auto pb-1 pr-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                        {quickQueries.map((item) => (
+                          <button
+                            key={item}
+                            type="button"
+                            onClick={() => {
+                              setQuery(item);
+                              requestAnimationFrame(() => inputRef.current?.focus());
+                            }}
+                            className="shrink-0 snap-start rounded-full border border-white/[0.09] bg-white/[0.035] px-3 py-2 text-[10px] font-black text-slate-300 transition hover:border-sky-400/25 hover:bg-sky-500/[0.07] hover:text-white"
+                          >
+                            {item}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
 
-                <div className="max-h-[58vh] overflow-y-auto p-2.5 sm:p-3">
-                  <div className="flex items-center justify-between px-2 pb-2 pt-1">
+                <div className={`overflow-y-auto p-2.5 sm:p-3 ${query.trim() ? "max-h-[66vh]" : "max-h-[58vh]"}`}>
+                  <div className="px-2 pb-2 pt-1">
                     <span className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">
-                      {query.trim() ? (tr ? `${results.length} sonuç` : `${results.length} results`) : (tr ? "Öne çıkanlar" : "Featured")}
+                      {query.trim()
+                        ? (tr ? `${results.length} sonuç` : `${results.length} results`)
+                        : (tr ? "Hızlı erişim" : "Quick access")}
                     </span>
-                    {!query.trim() && (
-                      <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-slate-600">
-                        {tr ? "Hızlı erişim" : "Quick access"}
-                      </span>
-                    )}
                   </div>
 
                   {results.length > 0 ? (
@@ -266,22 +279,22 @@ export default function GlobalSearch({ locale, compact = false }: Props) {
                             setOpen(false);
                             setQuery("");
                           }}
-                          className="group flex min-h-[72px] items-center gap-3 rounded-2xl border border-white/[0.065] bg-white/[0.018] px-3 py-3 transition hover:border-sky-400/20 hover:bg-sky-500/[0.045]"
+                          className="group flex min-h-[64px] items-center gap-3 rounded-2xl border border-white/[0.065] bg-white/[0.018] px-3 py-2.5 transition hover:border-sky-400/20 hover:bg-sky-500/[0.045]"
                         >
-                          <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${toneClasses[item.tone]}`}>
+                          <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${toneClasses[item.tone]}`}>
                             <ItemIcon href={item.href} />
                           </span>
 
                           <span className="min-w-0 flex-1">
-                            <span className="block truncate text-[14px] font-black text-slate-100">
+                            <span className="block truncate text-[13px] font-black text-slate-100">
                               {tr ? item.titleTr : item.titleEn}
                             </span>
-                            <span className="mt-1 inline-flex rounded-md border border-white/[0.07] bg-white/[0.025] px-2 py-1 text-[8px] font-black uppercase tracking-[0.10em] text-slate-500">
+                            <span className="mt-1 inline-flex rounded-md border border-white/[0.07] bg-white/[0.025] px-2 py-0.5 text-[8px] font-black uppercase tracking-[0.10em] text-slate-500">
                               {tr ? item.categoryTr : item.categoryEn}
                             </span>
                           </span>
 
-                          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.025] text-slate-500 transition group-hover:border-sky-400/20 group-hover:text-sky-300">
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.025] text-slate-500 transition group-hover:border-sky-400/20 group-hover:text-sky-300">
                             <ArrowRight size={15} className="transition group-hover:translate-x-0.5" />
                           </span>
                         </Link>
