@@ -6,6 +6,7 @@ import { createClient } from "../../../utils/supabase/client";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ProductExplorer from "./ProductExplorer";
 import SernemLogo from "./SernemLogo";
+import GlobalSearch from "./GlobalSearch";
 
 type Props = {
   locale: "tr" | "en";
@@ -232,6 +233,12 @@ export default function LocalizedNavbar({ locale }: Props) {
             </Link>
           )}
 
+          <Link href="/labs" onClick={closeDropdowns} className="relative inline-flex items-center gap-2.5 rounded-xl border border-violet-400/15 bg-violet-500/[0.045] px-3.5 py-2.5 text-[13px] font-bold text-violet-100 transition duration-200 hover:border-violet-300/30 hover:bg-violet-500/[0.10] hover:text-white">
+            <span className="flex h-6 w-6 items-center justify-center rounded-md border border-violet-400/20 bg-violet-500/[0.08] text-[12px] font-black text-violet-300">✦</span>
+            <span>HSE Labs</span>
+            <span className="rounded-full border border-violet-400/20 bg-violet-500/[0.07] px-1.5 py-0.5 text-[8px] font-black tracking-[0.08em] text-violet-300">NEW</span>
+          </Link>
+
           <div className="relative">
             <button
               type="button"
@@ -270,6 +277,13 @@ export default function LocalizedNavbar({ locale }: Props) {
         </div>
 
         <div className="flex shrink-0 items-center gap-2 border-l border-white/[0.08] pl-4 sm:gap-2.5">
+          <div className="hidden sm:block">
+            <GlobalSearch locale={locale} />
+          </div>
+          <div className="sm:hidden">
+            <GlobalSearch locale={locale} compact />
+          </div>
+
           <LanguageSwitcher locale={locale} />
 
           <Link
@@ -324,7 +338,7 @@ export default function LocalizedNavbar({ locale }: Props) {
             className={`inline-flex h-11 items-center justify-center gap-2.5 rounded-xl border px-4 text-[13px] font-black transition duration-200 ${isMenuOpen ? "border-blue-400/40 bg-blue-600 text-white shadow-[0_8px_24px_rgba(37,99,235,.18)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white"}`}
           >
             <span className="text-xl leading-none">{isMenuOpen ? "×" : "☰"}</span>
-            <span className="hidden sm:inline">{isTurkish ? "Keşfet" : "Explore"}</span>
+            <span className="hidden sm:inline">{isTurkish ? "Menü" : "Menu"}</span>
           </button>
         </div>
       </div>
