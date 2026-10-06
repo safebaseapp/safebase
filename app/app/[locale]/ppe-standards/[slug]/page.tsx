@@ -54,10 +54,17 @@ const riskByCode:Record<string,string>={
 
 export function generateStaticParams(){return ['tr','en'].flatMap(locale=>ppeStandards.map(s=>({locale,slug:s.slug})))}
 
+const ctrMetadata:Record<string,{title:{tr:string;en:string};description:{tr:string;en:string}}>={
+ 'EN 60903':{title:{en:'EN 60903 Insulating Gloves: Classes, Markings & Field Checks',tr:'EN 60903 Yalıtkan Eldiven: Sınıflar, İşaretler ve Saha Kontrolü'},description:{en:'Understand EN 60903 insulating gloves for live electrical work: classes, markings, inspection points and field checks, then continue to the electrical risk assessment.',tr:'Canlı elektrik çalışmalarında EN 60903 yalıtkan eldiven sınıflarını, işaretleri ve saha kontrollerini inceleyin; ardından elektrik risk değerlendirmesine geçin.'}},
+ 'EN 50365':{title:{en:'EN 50365 Insulating Helmets: Requirements & Field Checks',tr:'EN 50365 Yalıtkan Baret: Gereklilikler ve Saha Kontrolü'},description:{en:'Understand EN 50365 electrically insulating helmets for live working: current reference, markings, application limits and practical field checks.',tr:'Canlı çalışmada EN 50365 elektriksel yalıtımlı baretleri inceleyin: güncel referans, işaretler, kullanım sınırları ve pratik saha kontrolleri.'}},
+ 'EN 1149-5':{title:{en:'EN 1149-5 Protective Clothing: Meaning, Limits & Field Checks',tr:'EN 1149-5 Koruyucu Giysi: Anlamı, Sınırları ve Saha Kontrolü'},description:{en:'Understand EN 1149-5 electrostatic protective clothing: what the marking means, where it applies, key limitations and practical field checks.',tr:'EN 1149-5 elektrostatik koruyucu giysiyi inceleyin: işaretin anlamı, kullanım alanı, temel sınırlar ve pratik saha kontrolleri.'}}
+};
+
 export async function generateMetadata({params}:P):Promise<Metadata>{
  const{locale,slug}=await params; const l:Locale=locale==='tr'?'tr':'en'; const s=getPPEStandard(slug); if(!s)return{};
- const canonical=`https://www.sernem.com/${l}/ppe-standards/${slug}`;
- return{title:`${s.code} – ${s.title[l]} | SERNEM`,description:s.purpose[l],alternates:{canonical,languages:{tr:`https://www.sernem.com/tr/ppe-standards/${slug}`,en:`https://www.sernem.com/en/ppe-standards/${slug}`,'x-default':`https://www.sernem.com/en/ppe-standards/${slug}`}},openGraph:{title:`${s.code} – ${s.title[l]} | SERNEM`,description:s.purpose[l],url:canonical,type:'article',siteName:'SERNEM'}};
+ const canonical=`https://www.sernem.com/${l}/ppe-standards/${slug}`; const ctr=ctrMetadata[s.code];
+ const title=ctr?.title[l]??`${s.code} – ${s.title[l]} | SERNEM`; const description=ctr?.description[l]??s.purpose[l];
+ return{title,description,alternates:{canonical,languages:{tr:`https://www.sernem.com/tr/ppe-standards/${slug}`,en:`https://www.sernem.com/en/ppe-standards/${slug}`,'x-default':`https://www.sernem.com/en/ppe-standards/${slug}`}},openGraph:{title,description,url:canonical,type:'article',siteName:'SERNEM'}};
 }
 
 export default async function Page({params}:P){
