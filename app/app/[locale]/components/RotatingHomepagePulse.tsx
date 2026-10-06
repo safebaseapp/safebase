@@ -140,47 +140,137 @@ export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
   }, []);
 
   const items = useMemo(() => ROTATIONS[slot % ROTATIONS.length], [slot]);
+  const monthLabel = new Intl.DateTimeFormat(tr ? "tr-TR" : "en-US", { month: "long", year: "numeric" }).format(new Date());
+  const podium = [0, 1, 2].map((index) => leaders[index] ?? null);
+  const categoryLinks = [
+    { href: "/tools/quick-risk-assessment", label: tr ? "Risk Analizi" : "Risk Assessment", note: tr ? "100+ faaliyet" : "100+ activities" },
+    { href: "/toolbox", label: tr ? "Toolbox Talk" : "Toolbox Talks", note: "70+" },
+    { href: "/safety-signs", label: tr ? "Güvenlik Levhaları" : "Safety Signs", note: tr ? "A4 / A3 / Poster" : "A4 / A3 / Posters" },
+    { href: "/tools/method-statement", label: "Method Statement", note: tr ? "Saha şablonları" : "Field templates" },
+    { href: "/labs", label: "HSE Labs", note: tr ? "Simülasyonlar" : "Simulations" },
+    { href: "/ai-assistant", label: "SERNEM AI", note: tr ? "HSE zekâsı" : "HSE intelligence" },
+  ];
 
   return (
     <section className="relative border-y border-white/[0.07] bg-[#050b16] text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-60%,rgba(14,165,233,.13),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-30%,rgba(14,165,233,.13),transparent_45%)]" />
       <div className="relative mx-auto max-w-7xl px-5 py-5 sm:px-6 lg:py-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
-          <div className="min-w-[210px] lg:pr-5">
-            <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.19em] text-sky-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-sky-300 shadow-[0_0_12px_rgba(125,211,252,.7)]" />
-              {tr ? "SERNEM'DE ŞİMDİ" : "NOW ON SERNEM"}
+        <Link
+          href={`/${locale}/downloads`}
+          className="group flex flex-col gap-3 rounded-2xl border border-sky-400/[0.12] bg-[linear-gradient(90deg,rgba(14,165,233,.08),rgba(255,255,255,.02))] px-4 py-4 transition hover:border-sky-300/25 sm:flex-row sm:items-center sm:justify-between sm:px-5"
+        >
+          <div className="flex items-center gap-4">
+            <div className="text-[34px] font-black tracking-[-0.045em] text-white sm:text-[40px]">1,000+</div>
+            <div>
+              <div className="text-[13px] font-black text-slate-100">{tr ? "HSE içeriği, kayıt ve araç" : "HSE content, records & tools"}</div>
+              <div className="mt-1 max-w-3xl text-[10px] leading-4 text-slate-500">
+                {tr ? "Risk kayıtları, toolbox içerikleri, rehberler, levhalar, posterler, checklistler, hesaplayıcılar, Labs ve saha araçları." : "Risk records, toolbox talks, guides, safety signs, posters, checklists, calculators, Labs and field tools."}
+              </div>
             </div>
-            <h2 className="mt-1.5 text-[16px] font-black tracking-[-0.025em] text-white">
-              {tr ? "Öne çıkan içerikler" : "Featured on SERNEM"}
-            </h2>
-            <p className="mt-1 text-[10px] leading-4 text-slate-500">
-              {tr ? "Her 12 saatte yeni içerikler." : "Fresh picks every 12 hours."}
-            </p>
+          </div>
+          <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-sky-300">
+            {tr ? "Tüm içeriği keşfet" : "Explore all content"} <ArrowUpRight size={14} />
+          </span>
+        </Link>
+
+        <div className="mt-3 grid gap-3 xl:grid-cols-[minmax(0,1.55fr)_minmax(330px,.72fr)]">
+          <div className="rounded-[22px] border border-white/[0.08] bg-[#07111f]/88 p-4 shadow-[0_20px_55px_rgba(0,0,0,.18)]">
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.18em] text-sky-300">
+                  <Sparkles size={12} /> SERNEM PULSE
+                  <span className="rounded-full border border-sky-400/20 bg-sky-500/[0.08] px-2 py-1 text-[7px] text-sky-200">{tr ? "YENİ SEÇKİ" : "NEW PICKS"}</span>
+                </div>
+                <h2 className="mt-1.5 text-[16px] font-black tracking-[-0.025em] text-white sm:text-[19px]">
+                  {tr ? "Şu an keşfetmeye değer içerikler." : "What to explore on SERNEM right now."}
+                </h2>
+              </div>
+              <span className="text-[8px] font-black uppercase tracking-[0.13em] text-slate-600">{tr ? "12 saatte bir yenilenir" : "Refreshes every 12 hours"}</span>
+            </div>
+
+            <div className="mt-3 grid gap-2 sm:grid-cols-3">
+              {items.map((item, index) => {
+                const image = FEATURE_IMAGES[(slot * 3 + index) % FEATURE_IMAGES.length];
+                const badges = tr ? ["ÖNE ÇIKAN", "SAHA SEÇKİSİ", "KEŞFET"] : ["FEATURED", "FIELD PICK", "EXPLORE"];
+                return (
+                  <Link
+                    key={item.href}
+                    href={`/${locale}${item.href}`}
+                    className="group relative min-h-[190px] overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900 transition hover:-translate-y-0.5 hover:border-sky-400/30"
+                  >
+                    <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,.12),rgba(2,6,23,.28)_35%,rgba(2,6,23,.96)_88%)]" />
+                    <div className="relative flex h-full min-h-[190px] flex-col justify-between p-3.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="rounded-lg border border-white/15 bg-slate-950/70 px-2 py-1 text-[9px] font-black text-white">{index + 1}</span>
+                        <span className="rounded-full border border-sky-300/25 bg-sky-400/15 px-2 py-1 text-[7px] font-black uppercase tracking-[0.12em] text-sky-200">{badges[index]}</span>
+                      </div>
+                      <div>
+                        <div className="text-[8px] font-black uppercase tracking-[0.14em] text-sky-300">{tr ? item.labelTr : item.label}</div>
+                        <div className="mt-1.5 text-[15px] font-black leading-5 text-white">{tr ? item.titleTr : item.title}</div>
+                        <div className="mt-3 inline-flex h-7 w-7 items-center justify-center rounded-full border border-sky-300/35 bg-slate-950/55 text-sky-200">
+                          <ArrowUpRight size={13} />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="grid min-w-0 flex-1 gap-2 sm:grid-cols-3">
-            {items.map((item) => (
-              <Link
-                key={item.href}
-                href={`/${locale}${item.href}`}
-                className="group flex min-h-[76px] items-center gap-3 rounded-2xl border border-white/[0.075] bg-white/[0.022] px-3.5 py-3 transition duration-200 hover:-translate-y-0.5 hover:border-sky-400/25 hover:bg-sky-500/[0.045]"
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-sky-400/15 bg-sky-500/[0.07] text-sky-300 transition group-hover:border-sky-300/30 group-hover:bg-sky-500/[0.11]">
-                  <Icon name={item.icon} />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block text-[8px] font-black uppercase tracking-[0.14em] text-slate-500">
-                    {tr ? item.labelTr : item.label}
-                  </span>
-                  <span className="mt-1 block truncate text-[12px] font-black text-slate-200 transition group-hover:text-white">
-                    {tr ? item.titleTr : item.title}
-                  </span>
-                </span>
-                <ArrowUpRight size={15} className="shrink-0 text-slate-600 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-sky-300" />
-              </Link>
-            ))}
-          </div>
+          <Link
+            href={`/${locale}/labs`}
+            className="group relative overflow-hidden rounded-[22px] border border-amber-300/[0.14] bg-[linear-gradient(145deg,rgba(245,158,11,.08),rgba(255,255,255,.018)_55%,rgba(14,165,233,.035))] p-4 shadow-[0_20px_55px_rgba(0,0,0,.18)] transition hover:border-amber-300/30"
+          >
+            <Trophy size={118} strokeWidth={1.1} className="pointer-events-none absolute -right-7 -top-7 text-amber-300/[0.05]" />
+            <div className="relative flex items-start justify-between gap-3">
+              <div>
+                <div className="flex items-center gap-2 text-[8px] font-black uppercase tracking-[0.18em] text-amber-300"><Trophy size={12} /> {monthLabel}</div>
+                <h3 className="mt-1.5 text-[15px] font-black text-white">HSE Labs XP Leaderboard</h3>
+                <p className="mt-1 text-[9px] text-slate-500">{tr ? "Bu ayın gerçek XP sıralaması" : "Real XP ranking for this month"}</p>
+              </div>
+              <span className="rounded-full border border-white/[0.08] bg-white/[0.03] px-2 py-1 text-[7px] font-black uppercase tracking-[0.12em] text-slate-500">{tr ? "İLK 3" : "TOP 3"}</span>
+            </div>
+
+            <div className="relative mt-4 space-y-2">
+              {podium.map((leader, index) => {
+                const rank = index + 1;
+                return (
+                  <div key={rank} className="flex min-h-[42px] items-center gap-2.5 rounded-xl border border-white/[0.06] bg-black/10 px-2.5">
+                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border ${rank === 1 ? "border-amber-300/25 bg-amber-300/[0.08] text-amber-300" : "border-white/[0.08] bg-white/[0.03] text-slate-400"}`}>
+                      {rank === 1 ? <Crown size={13} /> : <Medal size={13} />}
+                    </span>
+                    {leader ? (
+                      <>
+                        <span className="min-w-0 flex-1 truncate text-[10px] font-black text-slate-200">{leader.label}</span>
+                        <span className="shrink-0 text-[10px] font-black text-cyan-300">{leader.xp.toLocaleString()} XP</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="min-w-0 flex-1 text-[10px] font-bold text-slate-500">{tr ? `${rank}. sıra açık` : `Rank #${rank} is open`}</span>
+                        <span className="shrink-0 text-[7px] font-black uppercase tracking-[0.11em] text-amber-300/80">{tr ? "YARIŞA KATIL" : "JOIN"}</span>
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="relative mt-3 flex items-center justify-between rounded-xl bg-sky-500/[0.08] px-3 py-2.5 text-[9px] font-black text-sky-200">
+              <span>{tr ? "HSE Labs'e katıl ve XP kazan" : "Join HSE Labs and earn XP"}</span>
+              <ArrowUpRight size={13} />
+            </div>
+          </Link>
+        </div>
+
+        <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+          {categoryLinks.map((item) => (
+            <Link key={item.href} href={`/${locale}${item.href}`} className="min-w-[155px] flex-1 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2.5 transition hover:border-sky-400/20 hover:bg-sky-500/[0.035]">
+              <div className="text-[9px] font-black text-slate-200">{item.label}</div>
+              <div className="mt-0.5 text-[8px] font-semibold text-slate-600">{item.note}</div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
