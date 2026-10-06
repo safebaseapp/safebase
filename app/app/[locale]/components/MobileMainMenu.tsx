@@ -35,12 +35,12 @@ type Section = "tools" | "labs" | "resources" | null;
 type Accent = "blue" | "violet" | "emerald";
 
 const PHOTO = {
-  dashboard: "/images/sernem-hero-refinery.png",
-  tools: "https://at.adobe.com/touoPJZ52AupLPrw",
+  dashboard: "/images/sernem-hse-professional.webp",
+  tools: "/images/sernem-hse-hero.png",
   performance: "/images/sernem-hero-refinery.png",
-  labs: "https://at.adobe.com/c9sal33M1qrLUMii",
-  resources: "https://at.adobe.com/nlBwRu9DivTM1vUz",
-  ai: "https://at.adobe.com/04ZxQ3I2rx80St46",
+  labs: "/images/sernem-hse-hero-final.png",
+  resources: "/images/sernem-hse-professional.webp",
+  ai: "/images/sernem-ai-human-avatar.jpg",
 };
 
 export default function MobileMainMenu({ locale, authenticated, onClose }: Props) {
@@ -164,6 +164,9 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
           src={src}
           alt=""
           loading="eager"
+          onError={(event) => {
+            event.currentTarget.style.display = "none";
+          }}
           className="h-full w-full scale-[1.02] object-cover opacity-[0.72] saturate-[0.92]"
           style={{ objectPosition: position }}
         />
