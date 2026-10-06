@@ -35,12 +35,12 @@ type Section = "tools" | "labs" | "resources" | null;
 type Accent = "blue" | "violet" | "emerald";
 
 const PHOTO = {
-  dashboard: "/images/sernem-hse-hero.png",
-  tools: "/labs/spot-the-hazard/hot-work-final.jpg",
-  performance: "/images/sernem-hero-refinery.png",
-  labs: "/labs/spot-the-hazard/confined-space-final.jpg",
-  resources: "/labs/spot-the-hazard/scaffold-final.jpg",
-  ai: "/images/sernem-ai-human-avatar.jpg",
+  dashboard: "/images/menu-dashboard.webp",
+  tools: "/images/menu-tools.webp",
+  performance: "/images/menu-performance.webp",
+  labs: "/images/menu-labs.webp",
+  resources: "/images/menu-resources.webp",
+  ai: "/images/menu-ai.webp",
 };
 
 export default function MobileMainMenu({ locale, authenticated, onClose }: Props) {
@@ -156,7 +156,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
     src: string;
     position?: string;
   }) => (
-    <div className="pointer-events-none absolute inset-y-0 right-0 w-[58%] overflow-hidden">
+    <div className="pointer-events-none absolute inset-y-0 right-0 w-[62%] overflow-hidden">
       <img
         src={src}
         alt=""
@@ -164,10 +164,10 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
         onError={(event) => {
           event.currentTarget.style.display = "none";
         }}
-        className="h-full w-full object-cover opacity-[0.98] saturate-[1.08] contrast-[1.06] brightness-[1.03]"
+        className="h-full w-full object-cover opacity-100 saturate-[1.08] contrast-[1.07] brightness-[1.05]"
         style={{ objectPosition: position }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#06101e] via-[#06101e]/38 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#06101e] via-[#06101e]/34 to-transparent" />
       <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#020817]/20 to-transparent" />
     </div>
   );
@@ -203,20 +203,18 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
         <button
           type="button"
           onClick={() => setOpenSection(open ? null : id)}
-          className="relative z-10 flex min-h-[106px] w-full items-center gap-3 px-4 pl-5 text-left"
+          className="relative z-10 flex min-h-[96px] w-full items-center gap-3 px-4 pl-5 text-left"
           aria-expanded={open}
         >
           <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] border shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_28px_rgba(0,0,0,.22)] backdrop-blur-md transition ${active ? styles.activeIcon : styles.icon}`}>
             <Icon size={20} strokeWidth={1.9} />
           </span>
 
-          <span className="min-w-0 max-w-[46%]">
+          <span className="min-w-0 max-w-[43%]">
             <span className={`block text-[16px] font-black tracking-[-0.025em] drop-shadow-[0_2px_10px_rgba(0,0,0,.8)] ${styles.title}`}>
               {title}
             </span>
-            <span className="mt-1 block text-[10px] font-medium leading-[1.35] text-slate-300/85">
-              {description}
-            </span>
+            <span className="sr-only">{description}</span>
             {active && <span className="mt-1.5 inline-flex"><HereBadge /></span>}
           </span>
 
@@ -307,7 +305,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
       <Link
         href={href}
         onClick={onClose}
-        className={`relative flex min-h-[106px] items-center gap-3 overflow-hidden rounded-[24px] border bg-[#06101e] px-4 pl-5 transition duration-300 ${style.border} ${style.shadow}`}
+        className={`relative flex min-h-[96px] items-center gap-3 overflow-hidden rounded-[24px] border bg-[#06101e] px-4 pl-5 transition duration-300 ${style.border} ${style.shadow}`}
       >
         <PhotoPane src={photo} position={position} />
         <span className={`absolute bottom-3 left-0 top-3 z-10 w-[3px] rounded-r-full ${style.line} ${active ? "opacity-100" : "opacity-80"}`} />
@@ -316,13 +314,11 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
           <Icon size={20} />
         </span>
 
-        <span className="relative z-10 min-w-0 max-w-[46%]">
+        <span className="relative z-10 min-w-0 max-w-[43%]">
           <span className={`block text-[16px] font-black tracking-[-0.025em] drop-shadow-[0_2px_10px_rgba(0,0,0,.8)] ${style.title}`}>
             {title}
           </span>
-          <span className="mt-1 block text-[10px] font-medium leading-[1.35] text-slate-300/85">
-            {description}
-          </span>
+          <span className="sr-only">{description}</span>
           {active && <span className="mt-1.5 inline-flex"><HereBadge /></span>}
         </span>
 
@@ -343,9 +339,9 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
         <img
           src="/images/sernem-hero-refinery.png"
           alt=""
-          className="h-full w-full object-cover object-center opacity-[0.72] saturate-[1.02] contrast-[1.04]"
+          className="h-full w-full object-cover object-center opacity-[0.84] saturate-[1.08] contrast-[1.06]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#020817]/20 via-[#020817]/48 to-[#020817]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#020817]/12 via-[#020817]/38 to-[#020817]" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#020817]/85 via-[#020817]/15 to-[#020817]/15" />
       </div>
 
