@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
+import { SERNEM_EVENTS, trackJourneyEvent } from "@/lib/analytics";
 
 const DOWNLOAD_EXTENSIONS = [".pdf", ".docx", ".doc", ".xlsx", ".xls", ".png", ".jpg", ".jpeg", ".zip"];
 const RESOURCE_PATHS = ["/downloads", "/toolbox", "/posters", "/safety-signs", "/checklists", "/knowledge-base", "/risk-assessment"];
@@ -148,6 +149,14 @@ export default function UserActivityCapture() {
       }
 
       if (requiresPremium(element) && !state.premium) {
+        trackJourneyEvent(SERNEM_EVENTS.PREMIUM_INTENT, {
+          journey_stage: "conversion",
+          content_type: "resource",
+          content_slug: resolveResourceTitle(element),
+          locale,
+          source_page: pathname || "/",
+          format: resourceFormat(element),
+        });
         event.preventDefault();
         event.stopPropagation();
         void createClient().from("user_activity_events").insert({
@@ -164,6 +173,20 @@ export default function UserActivityCapture() {
       const format = resourceFormat(element);
       const language = resourceLanguage(element);
       const href = (hrefOf(element) || pathname || "/").slice(0, 300);
+
+      const journeyEvent =
+        action === "download" ? SERNEM_EVENTS.DOWNLOAD :
+        action === "open" || action === "preview" ? SERNEM_EVENTS.TOOL_OPEN :
+        SERNEM_EVENTS.EXPORT;
+      trackJourneyEvent(journeyEvent, {
+        journey_stage: action === "download" ? "value" : "activation",
+        content_type: "resource",
+        content_slug: label,
+        locale,
+        source_page: pathname || "/",
+        format,
+        action,
+      });
 
       void createClient().from("user_activity_events").insert({
         user_id: state.userId,
