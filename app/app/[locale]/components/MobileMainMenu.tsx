@@ -35,11 +35,11 @@ type Section = "tools" | "labs" | "resources" | null;
 type Accent = "blue" | "violet" | "emerald";
 
 const PHOTO = {
-  dashboard: "/images/sernem-hse-professional.webp",
-  tools: "/images/sernem-hse-hero.png",
+  dashboard: "/images/sernem-hse-hero.png",
+  tools: "/labs/spot-the-hazard/hot-work-final.jpg",
   performance: "/images/sernem-hero-refinery.png",
-  labs: "/images/sernem-hse-hero-final.png",
-  resources: "/images/sernem-hse-professional.webp",
+  labs: "/labs/spot-the-hazard/confined-space-final.jpg",
+  resources: "/labs/spot-the-hazard/scaffold-final.jpg",
   ai: "/images/sernem-ai-human-avatar.jpg",
 };
 
@@ -164,10 +164,10 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
         onError={(event) => {
           event.currentTarget.style.display = "none";
         }}
-        className="h-full w-full object-cover opacity-95 saturate-[1.04] contrast-[1.04]"
+        className="h-full w-full object-cover opacity-[0.98] saturate-[1.08] contrast-[1.06] brightness-[1.03]"
         style={{ objectPosition: position }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#06101e] via-[#06101e]/55 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#06101e] via-[#06101e]/38 to-transparent" />
       <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#020817]/20 to-transparent" />
     </div>
   );
@@ -203,14 +203,14 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
         <button
           type="button"
           onClick={() => setOpenSection(open ? null : id)}
-          className="relative z-10 flex min-h-[102px] w-full items-center gap-3 px-4 pl-5 text-left"
+          className="relative z-10 flex min-h-[106px] w-full items-center gap-3 px-4 pl-5 text-left"
           aria-expanded={open}
         >
           <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] border shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_28px_rgba(0,0,0,.22)] backdrop-blur-md transition ${active ? styles.activeIcon : styles.icon}`}>
             <Icon size={20} strokeWidth={1.9} />
           </span>
 
-          <span className="min-w-0 max-w-[48%]">
+          <span className="min-w-0 max-w-[46%]">
             <span className={`block text-[16px] font-black tracking-[-0.025em] drop-shadow-[0_2px_10px_rgba(0,0,0,.8)] ${styles.title}`}>
               {title}
             </span>
@@ -307,7 +307,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
       <Link
         href={href}
         onClick={onClose}
-        className={`relative flex min-h-[102px] items-center gap-3 overflow-hidden rounded-[24px] border bg-[#06101e] px-4 pl-5 transition duration-300 ${style.border} ${style.shadow}`}
+        className={`relative flex min-h-[106px] items-center gap-3 overflow-hidden rounded-[24px] border bg-[#06101e] px-4 pl-5 transition duration-300 ${style.border} ${style.shadow}`}
       >
         <PhotoPane src={photo} position={position} />
         <span className={`absolute bottom-3 left-0 top-3 z-10 w-[3px] rounded-r-full ${style.line} ${active ? "opacity-100" : "opacity-80"}`} />
@@ -316,7 +316,7 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
           <Icon size={20} />
         </span>
 
-        <span className="relative z-10 min-w-0 max-w-[48%]">
+        <span className="relative z-10 min-w-0 max-w-[46%]">
           <span className={`block text-[16px] font-black tracking-[-0.025em] drop-shadow-[0_2px_10px_rgba(0,0,0,.8)] ${style.title}`}>
             {title}
           </span>
