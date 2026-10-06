@@ -186,7 +186,7 @@ export default function LocalizedNavbar({ locale }: Props) {
 
   return (
     <nav className="relative z-50 border-b border-blue-400/[0.10] bg-[#020817] text-white shadow-[0_8px_35px_rgba(0,0,0,.28)]">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-3.5 sm:px-6">
+      <div className="mx-auto flex max-w-7xl items-center gap-5 px-5 py-3.5 sm:px-6">
         <Link href="/" onClick={closeMenu} className="-ml-3 sm:ml-0 group flex min-w-0 shrink items-center gap-3.5 pr-5 xl:border-r xl:border-white/[0.08]">
           <SernemLogo />
           <div className="min-w-0">
@@ -214,12 +214,12 @@ export default function LocalizedNavbar({ locale }: Props) {
             }`}
           >
             <PanelsTopLeft size={17} />
-            {isTurkish ? "Ana Menü" : "Main Menu"}
+            {isTurkish ? "Platform" : "Platform"}
             <span className={`text-[9px] text-slate-500 transition ${isDesktopNavOpen ? "rotate-180" : ""}`}>▼</span>
           </button>
         </div>
 
-        <div className="flex shrink-0 items-center gap-2 border-l border-white/[0.08] pl-4 sm:gap-2.5">
+        <div className="ml-auto flex shrink-0 items-center gap-2 border-l border-white/[0.08] pl-4 sm:gap-2.5">
           <div className="hidden sm:block">
             <GlobalSearch locale={locale} />
           </div>
