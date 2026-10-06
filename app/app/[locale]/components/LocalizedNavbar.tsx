@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LogOut, PanelsTopLeft, ShieldCheck, Sparkles, UserRound } from "lucide-react";
+import { LogOut, PanelsTopLeft, ShieldCheck, UserRound } from "lucide-react";
 import { Link } from "../../../i18n/navigation";
 import { createClient } from "../../../utils/supabase/client";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -197,17 +197,7 @@ export default function LocalizedNavbar({ locale }: Props) {
           </div>
         </Link>
 
-        <div className="hidden items-center gap-2 xl:flex">
-          {isAuthenticated && (
-            <Link
-              href="/dashboard"
-              onClick={closeMenu}
-              className="rounded-xl px-4 py-2.5 text-[13px] font-bold text-slate-300 transition hover:bg-cyan-500/[0.07] hover:text-white"
-            >
-              Dashboard
-            </Link>
-          )}
-
+        <div className="hidden items-center xl:flex">
           <button
             type="button"
             onClick={() => {
@@ -224,27 +214,9 @@ export default function LocalizedNavbar({ locale }: Props) {
             }`}
           >
             <PanelsTopLeft size={17} />
-            {isTurkish ? "Platform" : "Platform"}
+            {isTurkish ? "Ana Menü" : "Main Menu"}
             <span className={`text-[9px] text-slate-500 transition ${isDesktopNavOpen ? "rotate-180" : ""}`}>▼</span>
           </button>
-
-          <Link
-            href="/labs"
-            onClick={closeMenu}
-            className="inline-flex items-center gap-2 rounded-xl border border-violet-400/15 bg-violet-500/[0.045] px-3.5 py-2.5 text-[13px] font-bold text-violet-100 transition hover:border-violet-300/30 hover:bg-violet-500/[0.10] hover:text-white"
-          >
-            <Sparkles size={15} className="text-violet-300" />
-            HSE Labs
-          </Link>
-
-          <Link
-            href="/ai-assistant"
-            onClick={closeMenu}
-            className="inline-flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-[13px] font-bold text-slate-300 transition hover:bg-violet-500/[0.06] hover:text-white"
-          >
-            <Sparkles size={14} className="text-violet-300" />
-            {isTurkish ? "AI Asistan" : "AI Assistant"}
-          </Link>
         </div>
 
         <div className="flex shrink-0 items-center gap-2 border-l border-white/[0.08] pl-4 sm:gap-2.5">
