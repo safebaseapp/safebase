@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { LogOut, PanelsTopLeft, ShieldCheck, UserRound } from "lucide-react";
 import { Link } from "../../../i18n/navigation";
 import { createClient } from "../../../utils/supabase/client";
+import { isAdminUser } from "../../../lib/auth/access";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ProductExplorer from "./ProductExplorer";
 import SernemLogo from "./SernemLogo";
@@ -54,7 +55,7 @@ export default function LocalizedNavbar({ locale }: Props) {
       } = await supabase.auth.getUser();
 
       setIsAuthenticated(Boolean(user));
-      setIsOwner(user?.email?.trim().toLowerCase() === "safebase.global@gmail.com");
+      setIsOwner(isAdminUser(user));
       setIsAuthLoading(false);
     }
 
@@ -64,7 +65,7 @@ export default function LocalizedNavbar({ locale }: Props) {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setIsAuthenticated(Boolean(session?.user));
-      setIsOwner(session?.user?.email?.trim().toLowerCase() === "safebase.global@gmail.com");
+      setIsOwner(isAdminUser(session?.user));
       setIsAuthLoading(false);
     });
 
