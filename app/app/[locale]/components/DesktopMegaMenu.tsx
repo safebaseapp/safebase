@@ -35,7 +35,7 @@ type Accent = "cyan" | "blue" | "violet" | "emerald" | "fuchsia";
 
 const PHOTO = {
   dashboard: "/images/menu-dashboard.webp",
-  tools: "/images/menu-tools.webp",
+  tools: "/labs/spot-the-hazard/hot-work-final.jpg",
   performance: "/images/menu-performance.webp",
   labs: "/labs/spot-the-hazard/confined-space-final.jpg",
   resources: "/images/menu-resources.webp",
