@@ -11,7 +11,7 @@ import { riskLibraryPack04 } from "@/lib/risk-library/pack-04";
 import { riskLibraryPack05 } from "@/lib/risk-library/pack-05";
 import { createClient } from "@/utils/supabase/client";
 import PrintButton from "@/components/ui/PrintButton";
-import { trackEvent } from "@/lib/analytics";
+import { SERNEM_EVENTS, trackEvent, trackJourneyEvent } from "@/lib/analytics";
 import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 type RiskLevel = {
@@ -260,6 +260,15 @@ const saveRiskAssessment = async () => {
           }
         );
 
+        trackJourneyEvent(SERNEM_EVENTS.SAVE, {
+          journey_stage: "value",
+          tool_name: "quick-risk-assessment",
+          content_type: "risk_assessment",
+          locale,
+          source_page: window.location.pathname,
+          save_mode: "update",
+          risk_count: riskItems.length,
+        });
         setSaveAssessmentMessage("Risk analizi güncellendi.");
       } else {
         const { data, error } = await supabase
@@ -282,6 +291,15 @@ const saveRiskAssessment = async () => {
           }
         );
 
+        trackJourneyEvent(SERNEM_EVENTS.SAVE, {
+          journey_stage: "value",
+          tool_name: "quick-risk-assessment",
+          content_type: "risk_assessment",
+          locale,
+          source_page: window.location.pathname,
+          save_mode: "create",
+          risk_count: riskItems.length,
+        });
         setSaveAssessmentMessage("Risk analizi kaydedildi.");
       }
     } catch (error) {
@@ -332,6 +350,15 @@ const duplicateRiskItem = (id: string) => {
       locale,
       risk_count: riskItems.length,
       source: "quick_risk_assessment",
+    });
+    trackJourneyEvent(SERNEM_EVENTS.EXPORT, {
+      journey_stage: "value",
+      tool_name: "quick-risk-assessment",
+      content_type: "risk_assessment",
+      locale,
+      source_page: window.location.pathname,
+      format: "PRINT_PDF",
+      risk_count: riskItems.length,
     });
 
     window.print();
@@ -473,6 +500,14 @@ const duplicateRiskItem = (id: string) => {
       activity_name: loadedRiskTemplateName,
       risk_count: selectedEntries.length,
       source: "risk_library",
+    });
+    trackJourneyEvent(SERNEM_EVENTS.TOOL_START, {
+      journey_stage: "activation",
+      tool_name: "quick-risk-assessment",
+      content_type: "risk_assessment",
+      content_slug: selectedLibraryTemplate.id,
+      locale: lang,
+      source_page: window.location.pathname,
     });
 
     const generated: RiskRegisterItem[] =
@@ -740,6 +775,16 @@ const duplicateRiskItem = (id: string) => {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setShowResult(true);
+
+    trackJourneyEvent(SERNEM_EVENTS.TOOL_COMPLETE, {
+      journey_stage: "completion",
+      tool_name: "quick-risk-assessment",
+      content_type: "risk_assessment",
+      locale,
+      source_page: window.location.pathname,
+      risk_score: score,
+      risk_level: levelKey,
+    });
 
     void trackUserEvent(
       "risk_assessment_calculated",
