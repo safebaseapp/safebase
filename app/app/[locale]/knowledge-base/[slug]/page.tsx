@@ -24,9 +24,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = `https://www.sernem.com/${language}/knowledge-base/${guide.slug}`;
   const alternateLocale = language === "tr" ? "en" : "tr";
 
+  const ctr =
+    guide.slug === "confined-space-attendant-duties"
+      ? {
+          title:
+            language === "tr"
+              ? "Kapalı Alan Gözcüsü Görevleri: Kontrol Listesi ve Saha Rehberi"
+              : "Confined Space Attendant Duties: Checklist & Field Guide",
+          description:
+            language === "tr"
+              ? "Kapalı alan gözcüsünün görevleri, giriş takibi, iletişim, atmosferik riskler, acil durum ve stop-work kontrolleri. Risk değerlendirmesi ve saha araçlarına geçin."
+              : "Confined space attendant duties for entry monitoring, communication, atmospheric hazards, emergencies and stop-work decisions, with field-ready HSE tools.",
+        }
+      : null;
+
   return {
-    title: `${guide.title[language]} | SERNEM HSE Guide`,
-    description: guide.description[language],
+    title: ctr?.title ?? `${guide.title[language]} | SERNEM HSE Guide`,
+    description: ctr?.description ?? guide.description[language],
     alternates: {
       canonical,
       languages: {
