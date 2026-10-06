@@ -105,6 +105,15 @@ function Icon({ name }: { name: Item["icon"] }) {
   return <Wrench {...props} />;
 }
 
+const FEATURE_IMAGES = [
+  "/labs/spot-the-hazard/scene-hot-work-2k.jpg",
+  "/labs/spot-the-hazard/scene-confined-space-2k.jpg",
+  "/labs/spot-the-hazard/scene-working-at-height-2k.jpg",
+  "/labs/spot-the-hazard/scene-scaffolding-2k.jpg",
+  "/labs/spot-the-hazard/scene-lifting-2k.jpg",
+  "/images/sernem-hero-refinery.png",
+];
+
 const HALF_DAY = 12 * 60 * 60 * 1000;
 
 export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
