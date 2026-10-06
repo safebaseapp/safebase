@@ -223,7 +223,10 @@ export default function WorkspaceUxEnhancer({ locale }: Props) {
       });
     }
 
-    if (/\/(tr|en)\/hse-performance\/?$/.test(pathname)) {
+    if (
+      /\/(tr|en)\/hse-performance\/?$/.test(pathname) &&
+      window.matchMedia("(min-width: 768px)").matches
+    ) {
       const monthInput = document.querySelector<HTMLInputElement>('input[type="month"]');
       const projectSelect = monthInput?.parentElement?.querySelector<HTMLSelectElement>("select") ?? null;
       if (monthInput && projectSelect && monthInput.dataset.nativePolished !== "true") {
