@@ -243,6 +243,19 @@ export default function GuideTemplate({
           </article>
         ) : null}
 
+        {guide.slug === "confined-space-attendant-duties" ? (
+          <article className="rounded-3xl border border-emerald-400/25 bg-emerald-400/[0.07] p-8">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-emerald-300">{isTurkish ? "REHBERDEN SAHA AKIŞINA" : "FROM GUIDE TO FIELD WORKFLOW"}</p>
+            <h2 className="mt-3 text-3xl font-black">{isTurkish ? "Gözcü görevlerini sahada uygula" : "Put attendant duties into the field workflow"}</h2>
+            <p className="mt-4 max-w-3xl leading-7 text-slate-400">{isTurkish ? "Rehberi okumakla kalmayın: kapalı alan risklerini açın, giriş öncesi kontrol listesini tamamlayın ve ekiple toolbox talk yapın." : "Move beyond the guide: review confined-space hazards, complete the pre-entry checklist and brief the team with the toolbox talk."}</p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              <Link href={`/${language}/risk-assessment/confined-space`} className="rounded-xl bg-emerald-500 px-5 py-4 font-black text-slate-950 transition hover:bg-emerald-400">{isTurkish ? "Risk değerlendirmesini aç" : "Open risk assessment"} →</Link>
+              <Link href={`/${language}/checklists/confined-space`} className="rounded-xl border border-white/15 bg-white/[0.05] px-5 py-4 font-black text-white transition hover:bg-white/10">{isTurkish ? "Giriş checklisti" : "Entry checklist"} →</Link>
+              <Link href={`/${language}/toolbox/confined-space`} className="rounded-xl border border-white/15 bg-white/[0.05] px-5 py-4 font-black text-white transition hover:bg-white/10">{isTurkish ? "Toolbox Talk" : "Toolbox Talk"} →</Link>
+            </div>
+          </article>
+        ) : null}
+
         <RelatedGuideResources locale={language} guide={guide} />
 
         <article className="rounded-3xl border border-blue-400/20 bg-blue-600/10 p-8">
