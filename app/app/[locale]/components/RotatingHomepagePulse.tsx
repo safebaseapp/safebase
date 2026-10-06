@@ -18,9 +18,21 @@ import {
   ShieldCheck,
   Sparkles,
   Wrench,
+  Trophy,
+  Medal,
+  Crown,
 } from "lucide-react";
+import { createClient } from "@/utils/supabase/client";
 
 type Locale = "tr" | "en";
+
+type Leader = {
+  rank: number;
+  label: string;
+  xp: number;
+  best_score: number;
+  attempts: number;
+};
 
 type Item = {
   href: string;
@@ -98,12 +110,24 @@ const HALF_DAY = 12 * 60 * 60 * 1000;
 export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
   const tr = locale === "tr";
   const [slot, setSlot] = useState(0);
+  const [leaders, setLeaders] = useState<Leader[]>([]);
 
   useEffect(() => {
     const update = () => setSlot(Math.floor(Date.now() / HALF_DAY));
     update();
     const timer = window.setInterval(update, 60 * 1000);
     return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    const supabase = createClient();
+    void supabase.rpc("get_labs_monthly_leaderboard").then(({ data }) => {
+      if (active && Array.isArray(data)) setLeaders(data as Leader[]);
+    });
+    return () => {
+      active = false;
+    };
   }, []);
 
   const items = useMemo(() => ROTATIONS[slot % ROTATIONS.length], [slot]);
