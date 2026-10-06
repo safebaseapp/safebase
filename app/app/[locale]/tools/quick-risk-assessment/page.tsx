@@ -269,6 +269,16 @@ const saveRiskAssessment = async () => {
           save_mode: "update",
           risk_count: riskItems.length,
         });
+        trackJourneyEvent(SERNEM_EVENTS.TOOL_COMPLETE, {
+          journey_stage: "completion",
+          tool_name: "quick-risk-assessment",
+          content_type: "risk_assessment",
+          locale,
+          source_page: window.location.pathname,
+          completion_mode: "saved_assessment",
+          risk_count: riskItems.length,
+        });
+
         setSaveAssessmentMessage("Risk analizi güncellendi.");
       } else {
         const { data, error } = await supabase
@@ -300,6 +310,16 @@ const saveRiskAssessment = async () => {
           save_mode: "create",
           risk_count: riskItems.length,
         });
+        trackJourneyEvent(SERNEM_EVENTS.TOOL_COMPLETE, {
+          journey_stage: "completion",
+          tool_name: "quick-risk-assessment",
+          content_type: "risk_assessment",
+          locale,
+          source_page: window.location.pathname,
+          completion_mode: "saved_assessment",
+          risk_count: riskItems.length,
+        });
+
         setSaveAssessmentMessage("Risk analizi kaydedildi.");
       }
     } catch (error) {
@@ -771,28 +791,6 @@ const duplicateRiskItem = (id: string) => {
           : "critical";
 
   const riskLevel = riskLevels[levelKey];
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setShowResult(true);
-
-    trackJourneyEvent(SERNEM_EVENTS.TOOL_COMPLETE, {
-      journey_stage: "completion",
-      tool_name: "quick-risk-assessment",
-      content_type: "risk_assessment",
-      locale,
-      source_page: window.location.pathname,
-      risk_score: score,
-      risk_level: levelKey,
-    });
-
-    void trackUserEvent(
-      "risk_assessment_calculated",
-      {
-        tool: "quick-risk-assessment",
-      }
-    );
-  }
 
   function handleReset() {
     setActivity("");
