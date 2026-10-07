@@ -51,11 +51,22 @@ export default function LocalizedNavbar({ locale }: Props) {
 
     async function loadUser() {
       const {
-        data: { user },
-      } = await supabase.auth.getUser();
+        data: { session },
+      } = await supabase.auth.getSession();
 
-      setIsAuthenticated(Boolean(user));
-      setIsOwner(isAdminUser(user));
+      const sessionUser = session?.user ?? null;
+      setIsAuthenticated(Boolean(sessionUser));
+      setIsOwner(isAdminUser(sessionUser));
+
+      if (sessionUser) {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        setIsAuthenticated(Boolean(user));
+        setIsOwner(isAdminUser(user));
+      }
+
       setIsAuthLoading(false);
     }
 
