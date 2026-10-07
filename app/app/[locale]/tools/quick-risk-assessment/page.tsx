@@ -2180,8 +2180,8 @@ const duplicateRiskItem = (id: string) => {
             <div style={{ padding: "12px", flex: 1 }}>
               {workspacePlan === "premium" && companyLogoUrl ? (
                 <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <div style={{ width: "92px", height: "58px", overflow: "hidden", flexShrink: 0, position: "relative" }}>
-                    <img src={companyLogoUrl} alt="Company logo" style={{ width: "240px", height: "52px", objectFit: "contain", objectPosition: "left center", position: "absolute", left: 0, top: "3px", maxWidth: "none" }} />
+                  <div style={{ width: "78px", height: "58px", overflow: "hidden", flexShrink: 0, position: "relative" }}>
+                    <img src={companyLogoUrl} alt="Company logo" style={{ height: "58px", width: "auto", position: "absolute", left: 0, top: 0, maxWidth: "none", maxHeight: "none" }} />
                   </div>
                   <div>
                     <div style={{ fontSize: "15px", fontWeight: 900 }}>{companyName || companyDocumentProfile?.projectName || (isTurkish ? "ŞİRKET HSE DOKÜMANI" : "COMPANY HSE DOCUMENT")}</div>
