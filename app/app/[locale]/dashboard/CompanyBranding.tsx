@@ -147,33 +147,6 @@ export default function CompanyBranding({
     void loadDocumentProfile();
   }, [isPremium, supabase, userId]);
 
-  async function handleDocumentLogoChange(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    setMessage("");
-    setErrorMessage("");
-    if (!allowedTypes.includes(file.type) || file.size > MAX_FILE_SIZE) {
-      setErrorMessage(isTurkish ? "PDF logosu PNG, JPG veya WebP ve en fazla 2 MB olmalıdır." : "PDF logo must be PNG, JPG or WebP and no larger than 2 MB.");
-      event.target.value = "";
-      return;
-    }
-    const extension = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
-    try {
-      const { data: files } = await supabase.storage.from(BUCKET_NAME).list(userId, { limit: 30 });
-      const old = files?.filter((item) => item.name.startsWith("document-logo.")).map((item) => `${userId}/${item.name}`) ?? [];
-      if (old.length) await supabase.storage.from(BUCKET_NAME).remove(old);
-      const path = `${userId}/document-logo.${extension}`;
-      const { error } = await supabase.storage.from(BUCKET_NAME).upload(path, file, { contentType: file.type, cacheControl: "3600", upsert: true });
-      if (error) throw error;
-      const { data } = await supabase.storage.from(BUCKET_NAME).createSignedUrl(path, 60 * 60);
-      setDocumentLogoUrl(data?.signedUrl ?? null);
-      setMessage(isTurkish ? "PDF / doküman logosu kaydedildi." : "PDF / document logo saved.");
-    } catch (error) {
-      console.error("Document logo upload error:", error);
-      setErrorMessage(isTurkish ? "PDF logosu yüklenemedi." : "PDF logo could not be uploaded.");
-    } finally { event.target.value = ""; }
-  }
-
   async function handleProfileSave() {
     setMessage("");
     setErrorMessage("");
@@ -567,17 +540,6 @@ export default function CompanyBranding({
                     : "Remove Logo"}
               </button>
             )}
-          </div>
-
-          <div className="mt-8 rounded-2xl border border-amber-400/20 bg-amber-400/[0.05] p-5">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-300">{isTurkish ? "PDF / Doküman Logosu" : "PDF / Document Logo"}</p>
-            <h3 className="mt-2 text-lg font-bold text-white">{isTurkish ? "Çıktıda yalnızca bu logo kullanılır" : "Only this logo is used in document output"}</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-400">{isTurkish ? "Birleşik müşteri/partner logosu yerine PDF'de görünmesini istediğiniz tek şirket logosunu yükleyin." : "Upload the single company logo you want on PDFs instead of a combined client/partner logo."}</p>
-            <label className="mt-4 inline-flex cursor-pointer items-center justify-center rounded-xl bg-amber-300 px-5 py-3 font-bold text-slate-950">
-              <input type="file" accept="image/png,image/jpeg,image/webp" onChange={handleDocumentLogoChange} className="hidden" />
-              {isTurkish ? "PDF Logosu Yükle" : "Upload PDF Logo"}
-            </label>
-            {documentLogoUrl && <div className="mt-4 rounded-xl bg-white p-4"><img src={documentLogoUrl} alt="PDF document logo" className="max-h-20 max-w-[240px] object-contain" /></div>}
           </div>
 
           <div className="mt-8 border-t border-slate-800 pt-8">
