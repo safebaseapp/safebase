@@ -62,6 +62,8 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   const [isSavingAssessment, setIsSavingAssessment] = useState(false);
   const [saveAssessmentMessage, setSaveAssessmentMessage] = useState("");
   const [workspacePlan, setWorkspacePlan] = useState<"guest" | "free" | "premium">("guest");
+  const [companyLogoUrl, setCompanyLogoUrl] = useState<string | null>(null);
+  const [companyDocumentProfile, setCompanyDocumentProfile] = useState<{ projectName?: string; siteName?: string; workArea?: string; presentedBy?: string; revision?: string } | null>(null);
 
   useEffect(() => {
     const loadWorkspacePlan = async () => {
@@ -73,6 +75,30 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
     void loadWorkspacePlan();
   }, []);
 
+  useEffect(() => {
+    const loadPremiumBranding = async () => {
+      if (workspacePlan !== "premium") {
+        setCompanyLogoUrl(null);
+        setCompanyDocumentProfile(null);
+        return;
+      }
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data: files } = await supabase.storage.from("company-assets").list(user.id, { limit: 20 });
+      const logoFile = files?.find((file) => file.name.startsWith("logo."));
+      if (logoFile) {
+        const { data } = await supabase.storage.from("company-assets").createSignedUrl(`${user.id}/${logoFile.name}`, 60 * 60);
+        setCompanyLogoUrl(data?.signedUrl ?? null);
+      }
+
+      const { data: profileBlob } = await supabase.storage.from("company-assets").download(`${user.id}/document-profile.json`);
+      if (profileBlob) {
+        try { setCompanyDocumentProfile(JSON.parse(await profileBlob.text())); } catch { setCompanyDocumentProfile(null); }
+      }
+    };
+    void loadPremiumBranding();
+  }, [workspacePlan]);
 
   /* SERNEM_RISK_HEADER_STATE_START */
   const [projectName, setProjectName] = useState("");
@@ -2152,27 +2178,20 @@ const duplicateRiskItem = (id: string) => {
             }}
           >
             <div style={{ padding: "12px", flex: 1 }}>
-              <div
-                style={{
-                  fontSize: "24px",
-                  fontWeight: 900,
-                  letterSpacing: "-1px",
-                }}
-              >
-                <span style={{ color: "#10b981" }}>SERNEM</span>
-              </div>
-
-              <div
-                style={{
-                  marginTop: "4px",
-                  fontSize: "8px",
-                  fontWeight: 700,
-                  letterSpacing: "2px",
-                  color: "#64748b",
-                }}
-              >
-                HEALTH & SAFETY RESOURCES
-              </div>
+              {workspacePlan === "premium" && companyLogoUrl ? (
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <img src={companyLogoUrl} alt="Company logo" style={{ maxHeight: "42px", maxWidth: "150px", objectFit: "contain" }} />
+                  <div>
+                    <div style={{ fontSize: "15px", fontWeight: 900 }}>{companyName || companyDocumentProfile?.projectName || (isTurkish ? "ŞİRKET HSE DOKÜMANI" : "COMPANY HSE DOCUMENT")}</div>
+                    <div style={{ marginTop: "3px", fontSize: "7px", color: "#64748b", letterSpacing: "1.2px" }}>{companyDocumentProfile?.siteName || assessmentLocation || ""}</div>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div style={{ fontSize: "24px", fontWeight: 900, letterSpacing: "-1px" }}><span style={{ color: "#10b981" }}>SERNEM</span></div>
+                  <div style={{ marginTop: "4px", fontSize: "8px", fontWeight: 700, letterSpacing: "2px", color: "#64748b" }}>HEALTH & SAFETY RESOURCES</div>
+                </>
+              )}
 
               <div
                 style={{
@@ -2726,7 +2745,7 @@ const duplicateRiskItem = (id: string) => {
           }}
         >
           <span>
-            SERNEM • Professional Risk Assessment
+            {workspacePlan === "premium" && companyLogoUrl ? "Prepared with SERNEM" : "SERNEM • Professional Risk Assessment"}
           </span>
 
           <span>
