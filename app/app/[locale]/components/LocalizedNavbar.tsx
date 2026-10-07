@@ -4,13 +4,18 @@ import { useEffect, useState } from "react";
 import { LogOut, PanelsTopLeft, ShieldCheck, UserRound } from "lucide-react";
 import { Link } from "../../../i18n/navigation";
 import { createClient } from "../../../utils/supabase/client";
-import { isAdminUser } from "../../../lib/auth/access";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ProductExplorer from "./ProductExplorer";
 import SernemLogo from "./SernemLogo";
 import GlobalSearch from "./GlobalSearch";
 import MobileMainMenu from "./MobileMainMenu";
 import DesktopMegaMenu from "./DesktopMegaMenu";
+
+const OWNER_EMAIL = "safebase.global@gmail.com";
+
+function isOwnerUser(user: { email?: string | null } | null | undefined) {
+  return user?.email?.trim().toLowerCase() === OWNER_EMAIL;
+}
 
 type Props = {
   locale: "tr" | "en";
@@ -56,7 +61,7 @@ export default function LocalizedNavbar({ locale }: Props) {
 
       const sessionUser = session?.user ?? null;
       setIsAuthenticated(Boolean(sessionUser));
-      setIsOwner(isAdminUser(sessionUser));
+      setIsOwner(isOwnerUser(sessionUser));
 
       if (sessionUser) {
         const {
@@ -67,7 +72,7 @@ export default function LocalizedNavbar({ locale }: Props) {
         // session is already available. Never erase a confirmed owner session.
         if (user) {
           setIsAuthenticated(true);
-          setIsOwner(isAdminUser(user));
+          setIsOwner(isOwnerUser(user));
         }
       }
 
@@ -80,7 +85,7 @@ export default function LocalizedNavbar({ locale }: Props) {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setIsAuthenticated(Boolean(session?.user));
-      setIsOwner(isAdminUser(session?.user));
+      setIsOwner(isOwnerUser(session?.user));
       setIsAuthLoading(false);
     });
 
