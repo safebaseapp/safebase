@@ -19,9 +19,11 @@ function isOwnerUser(user: { email?: string | null } | null | undefined) {
 
 type Props = {
   locale: "tr" | "en";
+  initialIsAuthenticated?: boolean;
+  initialIsOwner?: boolean;
 };
 
-export default function LocalizedNavbar({ locale }: Props) {
+export default function LocalizedNavbar({ locale, initialIsAuthenticated = false, initialIsOwner = false }: Props) {
   const isTurkish = locale === "tr";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,9 +32,9 @@ export default function LocalizedNavbar({ locale }: Props) {
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isMainNavOpen, setIsMainNavOpen] = useState(false);
   const [isDesktopNavOpen, setIsDesktopNavOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isOwner, setIsOwner] = useState(false);
-  const [isAuthLoading, setIsAuthLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(initialIsAuthenticated);
+  const [isOwner, setIsOwner] = useState(initialIsOwner);
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
 
   const closeDropdowns = () => {
     setIsToolsOpen(false);
