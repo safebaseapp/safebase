@@ -347,9 +347,9 @@ export default function LocalizedNavbar({ locale }: Props) {
               onClick={closeMenu}
               aria-label={isTurkish ? "Yönetim" : "Admin"}
               title={isTurkish ? "Yönetim" : "Admin"}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] text-violet-200 transition duration-200 hover:border-violet-400/40 hover:bg-violet-500/[0.14] hover:text-white lg:hidden"
+              className="inline-flex h-11 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] px-3 text-[11px] font-black text-violet-200 transition duration-200 hover:border-violet-400/40 hover:bg-violet-500/[0.14] hover:text-white lg:hidden"
             >
-              <ShieldCheck size={18} strokeWidth={2} />
+              Admin
             </Link>
           )}
 
