@@ -61,6 +61,17 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   const [savedAssessmentId, setSavedAssessmentId] = useState<string | null>(null);
   const [isSavingAssessment, setIsSavingAssessment] = useState(false);
   const [saveAssessmentMessage, setSaveAssessmentMessage] = useState("");
+  const [workspacePlan, setWorkspacePlan] = useState<"guest" | "free" | "premium">("guest");
+
+  useEffect(() => {
+    const loadWorkspacePlan = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data } = await supabase.from("profiles").select("plan,role").eq("id", user.id).single();
+      setWorkspacePlan(data?.plan === "premium" || data?.role === "admin" ? "premium" : "free");
+    };
+    void loadWorkspacePlan();
+  }, []);
 
 
   /* SERNEM_RISK_HEADER_STATE_START */
@@ -804,6 +815,30 @@ const duplicateRiskItem = (id: string) => {
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-12 text-white">
       <ActivityTracker eventName="risk_assessment_open" />
+
+      <section className={`mb-6 rounded-2xl border p-5 ${workspacePlan === "premium" ? "border-amber-300/25 bg-amber-300/[0.06]" : "border-blue-400/20 bg-blue-500/[0.05]"}`}>
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <p className={`text-xs font-black uppercase tracking-[0.18em] ${workspacePlan === "premium" ? "text-amber-300" : "text-blue-300"}`}>SERNEM WORKSPACE</p>
+              <span className={`rounded-full border px-2.5 py-1 text-[10px] font-black ${workspacePlan === "premium" ? "border-amber-300/25 text-amber-200" : "border-slate-700 text-slate-400"}`}>{workspacePlan === "premium" ? "PREMIUM" : workspacePlan === "free" ? "FREE" : "GUEST"}</span>
+            </div>
+            <h2 className="mt-2 text-xl font-black text-white">{isTurkish ? "Bu analiz tek kullanımlık bir form değil." : "This assessment is more than a one-off form."}</h2>
+            <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-400">{workspacePlan === "premium" ? (isTurkish ? "Premium çalışma alanınızda analizi kaydedin, yeniden açın, revize edin ve kurumsal çıktı akışında tekrar kullanın." : "Save, reopen and revise the assessment in your Premium workspace and reuse it in the professional output flow.") : (isTurkish ? "Analizi oluşturabilir ve temel çıktıyı kullanabilirsiniz. Premium çalışma alanı kurumsal tekrar kullanım ve profesyonel doküman akışını açar." : "Create the assessment and use the standard output. Premium workspace adds organizational reuse and the professional document workflow.")}</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {workspacePlan === "premium" ? <Link href={`/${locale}/dashboard`} className="rounded-xl bg-amber-300 px-4 py-2.5 text-sm font-black text-slate-950">{isTurkish ? "Çalışma Alanını Aç →" : "Open Workspace →"}</Link> : <Link href={`/${locale}/upgrade`} className="rounded-xl border border-amber-300/30 bg-amber-300/[0.08] px-4 py-2.5 text-sm font-black text-amber-200">{isTurkish ? "Premium Workflow'u Gör →" : "See Premium Workflow →"}</Link>}
+          </div>
+        </div>
+        <div className="mt-4 grid gap-2 sm:grid-cols-4">
+          {[
+            [isTurkish ? "Oluştur" : "Create", true],
+            [isTurkish ? "Kaydet & yeniden aç" : "Save & reopen", workspacePlan === "premium"],
+            [isTurkish ? "Revize & tekrar kullan" : "Revise & reuse", workspacePlan === "premium"],
+            [isTurkish ? "Profesyonel çıktı" : "Professional output", workspacePlan === "premium"],
+          ].map(([label,enabled]) => <div key={String(label)} className={`rounded-xl border px-3 py-2 text-xs font-bold ${enabled ? "border-emerald-400/20 bg-emerald-500/[0.06] text-emerald-200" : "border-slate-800 bg-slate-950/40 text-slate-600"}`}>{enabled ? "✓" : "◇"} {label}</div>)}
+        </div>
+      </section>
 
       {/* SERNEM_RISK_HEADER_UI_START */}
       <section className="mb-8 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/70 shadow-xl">
