@@ -394,6 +394,40 @@ const duplicateRiskItem = (id: string) => {
 
     window.print();
   };
+
+  const handleProfessionalOutput = async () => {
+    if (workspacePlan !== "premium") {
+      trackJourneyEvent(SERNEM_EVENTS.PREMIUM_INTENT, {
+        journey_stage: "conversion",
+        tool_name: "quick-risk-assessment",
+        content_type: "risk_assessment",
+        locale,
+        source_page: window.location.pathname,
+        premium_feature: "professional_output",
+      });
+      window.location.href = `/${locale}/upgrade`;
+      return;
+    }
+
+    if (!(await requirePrintAuth(locale))) return;
+
+    trackJourneyEvent(SERNEM_EVENTS.EXPORT, {
+      journey_stage: "value",
+      tool_name: "quick-risk-assessment",
+      content_type: "risk_assessment",
+      locale,
+      source_page: window.location.pathname,
+      format: "PROFESSIONAL_HIRARC",
+      premium_feature: "professional_output",
+      risk_count: riskItems.length,
+    });
+    trackEvent("professional_output_generated", {
+      document_type: "risk_assessment",
+      locale,
+      risk_count: riskItems.length,
+    });
+    window.print();
+  };
   /* SERNEM_RISK_PRINT_HANDLER_END */
 
   const getRiskStyle = (score: number) => {
@@ -1002,6 +1036,20 @@ const duplicateRiskItem = (id: string) => {
 
             <span className="text-xl transition-transform group-hover:translate-x-1">
               →
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleProfessionalOutput}
+            className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl border border-amber-300/30 bg-amber-300/[0.08] px-6 py-4 text-sm font-black text-amber-100 transition hover:-translate-y-0.5 hover:bg-amber-300/[0.12]"
+          >
+            <span className="text-lg">◆</span>
+            <span className="flex flex-col items-start leading-tight">
+              <span>{isTurkish ? "Professional Output" : "Professional Output"} {workspacePlan !== "premium" ? "· PRO" : ""}</span>
+              <span className="mt-1 text-[10px] font-semibold text-amber-200/70">
+                {isTurkish ? "Kurumsal HIRARC · revizyon · onay alanları" : "Corporate HIRARC · revision · approval fields"}
+              </span>
             </span>
           </button>
         </div>
