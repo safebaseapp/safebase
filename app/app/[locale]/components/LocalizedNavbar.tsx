@@ -269,22 +269,24 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
               {isAuthenticated ? (
             <div className="flex items-center gap-1 lg:hidden">
               {isOwner && (
-                <Link
-                  href="/admin"
-                  onClick={closeMenu}
-                  className="inline-flex h-10 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] px-2.5 text-[11px] font-black text-violet-200 transition hover:border-violet-400/40 hover:bg-violet-500/[0.14]"
-                >
+                <Link href="/admin" onClick={closeMenu} className="inline-flex h-10 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] px-2.5 text-[11px] font-black text-violet-200 transition hover:border-violet-400/40 hover:bg-violet-500/[0.14]">
                   Admin
                 </Link>
               )}
-              <Link
-                href="/account"
-                onClick={closeDropdowns}
-                className="inline-flex h-10 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.08] px-2.5 text-[11px] font-black text-blue-100 transition hover:bg-blue-500/[0.14]"
-              >
+              <Link href="/account" onClick={closeDropdowns} className="inline-flex h-10 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/[0.08] px-2.5 text-[11px] font-black text-blue-100 transition hover:bg-blue-500/[0.14]">
                 {isTurkish ? "Hesabım" : "Account"}
               </Link>
-              <button
+              <button type="button" onClick={handleSignOut} className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-red-400/15 bg-red-500/[0.05] text-sm font-black text-red-200 transition hover:border-red-400/25 hover:bg-red-500/[0.10]" aria-label={isTurkish ? "Çıkış Yap" : "Sign Out"}>
+                ⎋
+              </button>
+            </div>
+          ) : (
+            <Link href="/login" onClick={closeDropdowns} className="inline-flex h-11 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.025] px-3 text-[12px] font-black text-slate-200 transition hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white lg:hidden">
+              {isTurkish ? "Giriş" : "Sign In"}
+            </Link>
+          )}
+
+          <button
             type="button"
             onClick={() => {
               closeDropdowns();
