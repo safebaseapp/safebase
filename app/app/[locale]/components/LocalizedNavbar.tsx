@@ -63,8 +63,12 @@ export default function LocalizedNavbar({ locale }: Props) {
           data: { user },
         } = await supabase.auth.getUser();
 
-        setIsAuthenticated(Boolean(user));
-        setIsOwner(isAdminUser(user));
+        // Mobile Safari can transiently return no user while a valid local
+        // session is already available. Never erase a confirmed owner session.
+        if (user) {
+          setIsAuthenticated(true);
+          setIsOwner(isAdminUser(user));
+        }
       }
 
       setIsAuthLoading(false);
