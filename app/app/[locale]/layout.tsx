@@ -5,6 +5,8 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "../../i18n/routing";
 import LocalizedNavbar from "./components/LocalizedNavbar";
+import { createClient } from "../../utils/supabase/server";
+import { isAdminUser } from "../../lib/auth/access";
 import NavbarLegacyPremiumCleanup from "./components/NavbarLegacyPremiumCleanup";
 import UserActivityCapture from "./components/UserActivityCapture";
 import OrganicLandingCapture from "./components/OrganicLandingCapture";
@@ -98,10 +100,14 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   setRequestLocale(locale);
   const safeLocale = locale as "tr" | "en";
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const initialIsAuthenticated = Boolean(user);
+  const initialIsOwner = isAdminUser(user);
 
   return (
     <NextIntlClientProvider>
-      <LocalizedNavbar locale={safeLocale} />
+      <LocalizedNavbar locale={safeLocale} initialIsAuthenticated={initialIsAuthenticated} initialIsOwner={initialIsOwner} />
       <HomeLabsBridge locale={safeLocale} />
       <NavbarLegacyPremiumCleanup />
       <UserActivityCapture />
