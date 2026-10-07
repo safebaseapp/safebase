@@ -27,7 +27,8 @@ export default function CompanyBranding({
   const isTurkish = locale === "tr";
   const supabase = createClient();
 
-  const [logoUrl, setLogoUrl] = useState<string | null>(null);\n  const [documentLogoUrl, setDocumentLogoUrl] = useState<string | null>(null);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+  const [documentLogoUrl, setDocumentLogoUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(isPremium);
   const [isUploading, setIsUploading] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
