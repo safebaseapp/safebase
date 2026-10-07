@@ -86,7 +86,7 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
       if (!user) return;
 
       const { data: files } = await supabase.storage.from("company-assets").list(user.id, { limit: 20 });
-      const logoFile = files?.find((file) => file.name.startsWith("logo."));
+      const logoFile = files?.find((file) => file.name.startsWith("document-logo."));
       if (logoFile) {
         const { data } = await supabase.storage.from("company-assets").createSignedUrl(`${user.id}/${logoFile.name}`, 60 * 60);
         setCompanyLogoUrl(data?.signedUrl ?? null);
@@ -2180,9 +2180,7 @@ const duplicateRiskItem = (id: string) => {
             <div style={{ padding: "12px", flex: 1 }}>
               {workspacePlan === "premium" && companyLogoUrl ? (
                 <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <div style={{ width: "78px", height: "58px", overflow: "hidden", flexShrink: 0, position: "relative" }}>
-                    <img src={companyLogoUrl} alt="Company logo" style={{ height: "58px", width: "auto", position: "absolute", left: 0, top: 0, maxWidth: "none", maxHeight: "none" }} />
-                  </div>
+                  <img src={companyLogoUrl} alt="Company document logo" style={{ maxHeight: "58px", maxWidth: "180px", width: "auto", objectFit: "contain", flexShrink: 0 }} />
                   <div>
                     <div style={{ fontSize: "15px", fontWeight: 900 }}>{companyName || companyDocumentProfile?.projectName || (isTurkish ? "ŞİRKET HSE DOKÜMANI" : "COMPANY HSE DOCUMENT")}</div>
                     <div style={{ marginTop: "3px", fontSize: "7px", color: "#64748b", letterSpacing: "1.2px" }}>{companyDocumentProfile?.siteName || assessmentLocation || ""}</div>
