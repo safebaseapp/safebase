@@ -107,7 +107,7 @@ export default function DailySafetyBrain({ locale }: { locale: Locale }) {
                   <CheckCircle2 className="mx-auto text-emerald-300" size={42} />
                   <p className="mt-3 text-5xl font-black">{score} / 5</p>
                   <h2 className="mt-3 text-2xl font-bold">{tr ? "Günlük testi bitirdin!" : "Daily challenge complete!"}</h2>
-                  <p className="mt-3 text-slate-300">{tr ? "Günlük XP: {earnedToday}. Toplam XP: {totalXp}. XP yalnızca bu tarayıcıda saklanır; global sıralamaya eklenmez." : "Daily XP: {earnedToday}. Total XP: {totalXp}. XP is saved in this browser only, not the global leaderboard."}</p>
+                  <p className="mt-3 text-slate-300">{tr ? `Günlük XP: ${earnedToday}. Toplam XP: ${totalXp}. XP yalnızca bu tarayıcıda saklanır; global sıralamaya eklenmez.` : `Daily XP: ${earnedToday}. Total XP: ${totalXp}. XP is saved in this browser only, not the global leaderboard.`}</p>
                   <button onClick={reset} className="mt-6 inline-flex items-center gap-2 rounded-xl border border-white/20 px-5 py-3 font-bold"><RotateCcw size={17} />{tr ? "Tekrar çöz" : "Try again"}</button>
                 </div>
               ) : (
