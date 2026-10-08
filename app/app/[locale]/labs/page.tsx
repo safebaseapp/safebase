@@ -23,7 +23,7 @@ type LabCard = {
 const products: LabCard[] = [
   { id: "spot", title: "Spot the Hazard", subtitle: "Visual Test Challenge", descTr: "Gerçekçi endüstriyel sahneleri incele. Görselde gerçekten bulunan tehlikeleri tespit et ve saha farkındalığını test et.", descEn: "Inspect realistic industrial scenes. Identify the hazards that are actually visible and test your field awareness.", href: "spot-the-hazard", active: true, index: "01" },
   { id: "incident", title: "Incident Simulator", subtitle: "Scenario Judgment", descTr: "Dallanan olay akışında karar ver. Her karar Safety, Judgment ve Response skorunu değiştirir; sonuç zincire göre şekillenir.", descEn: "Make decisions through a branching incident. Every choice changes Safety, Judgment and Response scores, and the outcome follows your decision chain.", href: "incident-simulator", active: true, index: "02" },
-  { id: "brain", title: "Daily Safety Brain", subtitle: "Quick Challenge", descTr: "Kısa günlük HSE challenge'ları ile bilgini ve saha refleksini sıcak tut.", descEn: "Keep HSE knowledge and field reflexes active with short daily challenges.", active: false, index: "03" },
+  { id: "brain", title: "Daily Safety Brain", subtitle: "Quick Challenge", descTr: "Kısa günlük HSE challenge'ları ile bilgini ve saha refleksini sıcak tut.", descEn: "Keep HSE knowledge and field reflexes active with short daily challenges.", href: "daily-safety-brain", active: true, index: "03" },
   { id: "ppe", title: "PPE Matchmaker", subtitle: "Protection Logic", descTr: "Görev ve tehlikeye göre doğru kişisel koruyucu ekipman kombinasyonunu seç.", descEn: "Match tasks and hazards with the right personal protective equipment.", active: false, index: "04" },
   { id: "myth", title: "Safety Myth Buster", subtitle: "Safety Truth Check", descTr: "Sahada sık duyulan güvenlik inanışlarını kanıt ve iyi uygulamalarla test et.", descEn: "Test common field safety beliefs against evidence and good practice.", active: false, index: "05" },
   { id: "blind", title: "Blind Spot Test", subtitle: "Hidden Risk Focus", descTr: "Gözden kaçan riskleri ve farkındalık boşluklarını ortaya çıkaran ileri seviye testler.", descEn: "Advanced challenges designed to reveal overlooked risks and awareness gaps.", active: false, premium: true, index: "06" },
@@ -87,7 +87,7 @@ export default async function LabsPage({ params }: Props) {
               <p className={s.eyebrow}><span className={s.signal} /> 01 / {isTr ? "EĞİTİM MODÜLLERİ" : "TRAINING MODULES"}</p>
               <h2>{isTr ? "Okumaktan fazlası." : "More than reading."}<br /><em>{isTr ? "Aktif olarak test et." : "Actively tested."}</em></h2>
             </div>
-            <p>{isTr ? "HSE Labs kademeli olarak açılıyor. Visual Test Challenge ve Incident Simulator şu anda canlı; diğer modüller kalite kontrolü tamamlandıkça aktif edilecek." : "HSE Labs is opening in stages. Visual Test Challenge and Incident Simulator are live now; additional modules will unlock after quality validation."}</p>
+            <p>{isTr ? "HSE Labs kademeli olarak açılıyor. Visual Test Challenge, Incident Simulator ve Daily Safety Brain canlı; diğer modüller kalite kontrolü tamamlandıkça aktif edilecek." : "HSE Labs is opening in stages. Visual Test Challenge, Incident Simulator and Daily Safety Brain are live; additional modules will unlock after quality validation."}</p>
           </div>
 
           <div className={s.grid}>
