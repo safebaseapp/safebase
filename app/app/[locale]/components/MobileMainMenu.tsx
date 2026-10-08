@@ -158,19 +158,17 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
     src: string;
     position?: string;
   }) => (
-    <div className="pointer-events-none absolute inset-y-0 right-0 w-[62%] overflow-hidden">
+    <div className="pointer-events-none absolute inset-0 overflow-hidden bg-gradient-to-r from-[#06101e] to-[#10233d]">
       <img
         src={src}
         alt=""
-        loading="eager"
-        onError={(event) => {
-          event.currentTarget.style.display = "none";
-        }}
-        className="h-full w-full object-cover opacity-100 saturate-[1.08] contrast-[1.07] brightness-[1.05]"
+        loading="lazy"
+        decoding="async"
+        className="h-full w-full object-cover opacity-90 saturate-[1.08] contrast-[1.06]"
         style={{ objectPosition: position }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#06101e] via-[#06101e]/34 to-transparent" />
-      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#020817]/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#06101e] via-[#06101e]/90 via-[38%] to-[#06101e]/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#020817]/35 via-transparent to-[#020817]/10" />
     </div>
   );
 
