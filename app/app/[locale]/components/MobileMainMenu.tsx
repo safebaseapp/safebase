@@ -28,6 +28,7 @@ import {
 type Props = {
   locale: "tr" | "en";
   authenticated: boolean;
+  owner: boolean;
   onClose: () => void;
 };
 
@@ -43,7 +44,7 @@ const PHOTO = {
   ai: "/images/menu-ai.webp",
 };
 
-export default function MobileMainMenu({ locale, authenticated, onClose }: Props) {
+export default function MobileMainMenu({ locale, authenticated, owner, onClose }: Props) {
   const tr = locale === "tr";
   const pathname = usePathname();
   const relativePath = pathname?.replace(/^\/(tr|en)/, "") || "/";
@@ -379,6 +380,17 @@ export default function MobileMainMenu({ locale, authenticated, onClose }: Props
               tone="cyan"
               position="center 50%"
             />
+          )}
+
+          {authenticated && owner && (
+            <Link
+              href="/admin"
+              onClick={onClose}
+              className="flex min-h-12 items-center gap-3 rounded-xl border border-violet-400/35 bg-violet-500/[0.12] px-4 py-3 text-sm font-black text-violet-100 transition hover:bg-violet-500/[0.20]"
+            >
+              <ShieldCheck size={19} strokeWidth={2} />
+              {tr ? "Yönetim (Admin)" : "Admin"}
+            </Link>
           )}
 
           <Accordion
