@@ -411,6 +411,7 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
           <MobileMainMenu
             locale={locale}
             authenticated={isAuthenticated}
+            owner={isOwner && isAuthenticated}
             onClose={() => setIsMainNavOpen(false)}
           />
         </div>
