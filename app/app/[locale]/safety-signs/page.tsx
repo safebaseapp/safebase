@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import SafetySignsClient from "./SafetySignsClient";
+import { getSafetySignAccess } from "@/lib/safety-signs/access";
 
 type Props = {
   params: Promise<{
@@ -16,5 +17,12 @@ export default async function SafetySignsPage({
     notFound();
   }
 
-  return <SafetySignsClient locale={locale} />;
+  const { isPremium } = await getSafetySignAccess();
+
+  return (
+    <SafetySignsClient
+      locale={locale}
+      branded={!isPremium}
+    />
+  );
 }

@@ -14,10 +14,12 @@ import type {
 
 type Props = {
   locale: SignLocale;
+  branded: boolean;
 };
 
 export default function SafetySignsClient({
   locale,
+  branded,
 }: Props) {
   const isTurkish = locale === "tr";
 
@@ -137,6 +139,7 @@ export default function SafetySignsClient({
                   sign={sign}
                   locale={locale}
                   compact
+                  branded={branded}
                 />
               </Link>
 

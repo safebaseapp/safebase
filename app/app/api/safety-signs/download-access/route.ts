@@ -1,18 +1,14 @@
 import { NextResponse } from "next/server";
-import { isAdminUser } from "@/lib/auth/access";
-import { getCurrentAccessProfile } from "@/lib/auth/server-access";
+import { getSafetySignAccess } from "@/lib/safety-signs/access";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const { user, profile } = await getCurrentAccessProfile();
+  const access = await getSafetySignAccess();
 
-  if (!user) {
+  if (!access.authenticated) {
     return NextResponse.json(
-      {
-        authenticated: false,
-        isPremium: false,
-      },
+      access,
       {
         status: 401,
         headers: {
@@ -22,18 +18,8 @@ export async function GET() {
     );
   }
 
-  const isPremium = Boolean(
-    profile?.status === "active" &&
-      (isAdminUser(user) ||
-        profile.role === "admin" ||
-        profile.plan === "premium")
-  );
-
   return NextResponse.json(
-    {
-      authenticated: true,
-      isPremium,
-    },
+    access,
     {
       headers: {
         "Cache-Control": "private, no-store",

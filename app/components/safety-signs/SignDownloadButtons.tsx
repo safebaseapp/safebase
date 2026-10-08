@@ -16,12 +16,14 @@ type DownloadAccessResponse = {
   isPremium?: boolean;
 };
 
+type ExportType = "a4" | "a3" | "png" | "print";
+
 export default function SignDownloadButtons({
   signCode,
   signTitle,
   locale,
 }: Props) {
-  const [loading, setLoading] = useState<string | null>(null);
+  const [loading, setLoading] = useState<ExportType | null>(null);
 
   const safeName = `${signCode}-${signTitle}`
     .normalize("NFD")
@@ -257,7 +259,94 @@ export default function SignDownloadButtons({
     pdf.save(`${outputName}-${size}.pdf`);
   }
 
-  async function run(type: "a4" | "a3" | "png") {
+  async function printSign(isPremium: boolean) {
+    const canvas = await captureSign(isPremium);
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, "image/png", 1)
+    );
+
+    if (!blob) {
+      throw new Error("Print image could not be generated.");
+    }
+
+    const imageUrl = URL.createObjectURL(blob);
+    const iframe = document.createElement("iframe");
+
+    iframe.setAttribute("aria-hidden", "true");
+    iframe.style.position = "fixed";
+    iframe.style.right = "0";
+    iframe.style.bottom = "0";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "0";
+
+    document.body.appendChild(iframe);
+
+    const printDocument = iframe.contentDocument;
+
+    if (!printDocument) {
+      URL.revokeObjectURL(imageUrl);
+      iframe.remove();
+      throw new Error("Print document could not be created.");
+    }
+
+    printDocument.open();
+    printDocument.write(`<!doctype html>
+<html>
+<head>
+  <style>
+    @page { size: A4 portrait; margin: 0; }
+    html, body { margin: 0; width: 210mm; height: 297mm; overflow: hidden; }
+    img { display: block; width: 210mm; height: 297mm; object-fit: fill; }
+  </style>
+</head>
+<body>
+  <img id="safety-sign-print-image" src="${imageUrl}" alt="" />
+</body>
+</html>`);
+    printDocument.close();
+
+    const printImage = printDocument.getElementById(
+      "safety-sign-print-image"
+    ) as HTMLImageElement | null;
+
+    if (!printImage) {
+      URL.revokeObjectURL(imageUrl);
+      iframe.remove();
+      throw new Error("Print image could not be created.");
+    }
+
+    if (!printImage.complete) {
+      await new Promise<void>((resolve, reject) => {
+        printImage.onload = () => resolve();
+        printImage.onerror = () => reject(new Error("Print image could not be loaded."));
+      });
+    }
+
+    const printWindow = iframe.contentWindow;
+
+    if (!printWindow) {
+      URL.revokeObjectURL(imageUrl);
+      iframe.remove();
+      throw new Error("Print window is unavailable.");
+    }
+
+    let cleaned = false;
+    const cleanup = () => {
+      if (cleaned) return;
+      cleaned = true;
+      URL.revokeObjectURL(imageUrl);
+      iframe.remove();
+    };
+
+    printWindow.addEventListener("afterprint", cleanup, { once: true });
+    printWindow.focus();
+    printWindow.print();
+
+    setTimeout(cleanup, 60_000);
+  }
+
+  async function run(type: ExportType) {
     const resolvedLocale = locale === "tr" ? "tr" : "en";
     if (!(await requirePrintAuth(resolvedLocale))) return;
 
@@ -268,6 +357,8 @@ export default function SignDownloadButtons({
 
       if (type === "png") {
         await downloadPNG(isPremium);
+      } else if (type === "print") {
+        await printSign(isPremium);
       } else {
         await downloadPDF(type, isPremium);
       }
@@ -311,8 +402,8 @@ export default function SignDownloadButtons({
     <div className="mt-7 space-y-3">
       <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs font-bold leading-5 text-emerald-950">
         {locale === "tr"
-          ? "Ücretsiz indirmeler SERNEM.COM etiketi içerir. Premium üyeler temiz, logosuz sürümü otomatik olarak indirir."
-          : "Free downloads include a SERNEM.COM label. Premium members automatically receive the clean, logo-free version."}
+          ? "Ücretsiz önizleme, indirme ve yazdırma çıktıları SERNEM.COM etiketi içerir. Premium üyeler temiz, logosuz sürümü kullanır."
+          : "Free preview, download and print outputs include a SERNEM.COM label. Premium members receive the clean, unbranded version."}
       </div>
 
       <button
@@ -340,6 +431,17 @@ export default function SignDownloadButtons({
         className="w-full rounded-xl border border-slate-300 px-5 py-4 font-black text-slate-900 transition hover:bg-slate-50 disabled:cursor-wait disabled:opacity-60"
       >
         {loading === "png" ? "PNG..." : "PNG"}
+      </button>
+
+      <button
+        type="button"
+        disabled={loading !== null}
+        onClick={() => void run("print")}
+        className="w-full rounded-xl border border-slate-950 bg-slate-950 px-5 py-4 font-black text-white transition hover:bg-slate-800 disabled:cursor-wait disabled:opacity-60"
+      >
+        {loading === "print"
+          ? locale === "tr" ? "Yazdırma..." : "Print..."
+          : locale === "tr" ? "Yazdır" : "Print"}
       </button>
     </div>
   );
