@@ -30,6 +30,7 @@ type Props = {
   authenticated: boolean;
   owner: boolean;
   onClose: () => void;
+  onSignOut: () => Promise<void>;
 };
 
 type Section = "tools" | "labs" | "resources" | null;
@@ -44,7 +45,7 @@ const PHOTO = {
   ai: "/images/menu-ai.webp",
 };
 
-export default function MobileMainMenu({ locale, authenticated, owner, onClose }: Props) {
+export default function MobileMainMenu({ locale, authenticated, owner, onClose, onSignOut }: Props) {
   const tr = locale === "tr";
   const pathname = usePathname();
   const relativePath = pathname?.replace(/^\/(tr|en)/, "") || "/";
@@ -368,6 +369,35 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose }
           </button>
         </div>
 
+        <div className="mb-4 rounded-2xl border border-white/15 bg-[#07101f]/90 p-3">
+          <p className="mb-2 px-1 text-[11px] font-bold uppercase tracking-widest text-slate-400">{tr ? "Hesap işlemleri" : "Account"}</p>
+          {authenticated ? (
+            <div className="grid grid-cols-2 gap-2">
+              <Link href="/account" onClick={onClose} className="flex min-h-12 items-center justify-center rounded-xl border border-blue-400/30 bg-blue-500/15 px-3 text-sm font-bold text-blue-100">
+                {tr ? "Hesabım" : "My Account"}
+              </Link>
+              <button type="button" onClick={() => void onSignOut()} className="min-h-12 rounded-xl border border-red-400/25 bg-red-500/10 px-3 text-sm font-bold text-red-100">
+                {tr ? "Çıkış Yap" : "Sign Out"}
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-2">
+              <Link href="/login" onClick={onClose} className="flex min-h-12 items-center justify-center rounded-xl bg-blue-600 px-3 text-sm font-bold text-white">
+                {tr ? "Giriş Yap" : "Sign In"}
+              </Link>
+              <Link href="/register" onClick={onClose} className="flex min-h-12 items-center justify-center rounded-xl border border-white/20 px-3 text-sm font-bold text-white">
+                {tr ? "Kayıt Ol" : "Register"}
+              </Link>
+            </div>
+          )}
+          {authenticated && owner && (
+            <Link href="/admin" onClick={onClose} className="mt-2 flex min-h-12 items-center gap-2 rounded-xl border border-violet-400/40 bg-violet-500/15 px-4 text-sm font-bold text-violet-100">
+              <ShieldCheck size={19} />
+              {tr ? "Yönetim Paneli (Admin)" : "Admin Panel"}
+            </Link>
+          )}
+        </div>
+
         <div className="space-y-2.5">
           {authenticated && (
             <DirectCard
@@ -380,17 +410,6 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose }
               tone="cyan"
               position="center 50%"
             />
-          )}
-
-          {authenticated && owner && (
-            <Link
-              href="/admin"
-              onClick={onClose}
-              className="flex min-h-12 items-center gap-3 rounded-xl border border-violet-400/35 bg-violet-500/[0.12] px-4 py-3 text-sm font-black text-violet-100 transition hover:bg-violet-500/[0.20]"
-            >
-              <ShieldCheck size={19} strokeWidth={2} />
-              {tr ? "Yönetim (Admin)" : "Admin"}
-            </Link>
           )}
 
           <Accordion
