@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LogOut, PanelsTopLeft, ShieldCheck, UserRound } from "lucide-react";
+import { PanelsTopLeft, UserRound } from "lucide-react";
 import { Link } from "../../../i18n/navigation";
 import { createClient } from "../../../utils/supabase/client";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -287,85 +287,28 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
             </>
           )}
 
-          {isAuthenticated ? (
-            <div className="relative lg:hidden">
-              <button
-                type="button"
-                onClick={() => {
-                  closeDropdowns();
-                  setIsMenuOpen(false);
-                  setIsMainNavOpen(false);
-                  setIsAccountOpen((current) => !current);
-                }}
-                aria-expanded={isAccountOpen}
-                aria-label={isTurkish ? "Hesap menüsü" : "Account menu"}
-                className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border transition duration-200 ${isAccountOpen ? "border-blue-400/35 bg-blue-500/[0.14] text-white shadow-[0_8px_24px_rgba(37,99,235,.14)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white"}`}
+          {/* Mobile auth is always reachable; desktop account buttons above are unchanged. */}
+          <div className="lg:hidden">
+            {isAuthenticated ? (
+              <Link
+                href="/account"
+                onClick={closeMenu}
+                aria-label={isTurkish ? "Hesabım" : "My account"}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-blue-400/25 bg-blue-500/[0.08] text-blue-100"
               >
-                <UserRound size={18} strokeWidth={2} />
-              </button>
-
-              {isAccountOpen && (
-                <div className="absolute right-0 top-[calc(100%+12px)] z-[500] w-56 overflow-hidden rounded-2xl border border-white/10 bg-[#07101f]/[0.99] p-2 shadow-[0_24px_70px_rgba(0,0,0,.62)] backdrop-blur-2xl">
-                  <div className="px-3 pb-2 pt-2">
-                    <div className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">
-                      {isTurkish ? "Hesap" : "Account"}
-                    </div>
-                  </div>
-
-                  <Link
-                    href="/account"
-                    onClick={closeAccount}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-black text-slate-200 transition hover:bg-blue-500/[0.07] hover:text-white"
-                  >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.07] text-blue-300">
-                      <UserRound size={16} />
-                    </span>
-                    {isTurkish ? "Hesabım" : "My Account"}
-                  </Link>
-
-                  {isOwner && (
-                    <Link
-                      href="/admin"
-                      onClick={closeAccount}
-                      className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-black text-slate-200 transition hover:bg-violet-500/[0.08] hover:text-white"
-                    >
-                      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-violet-400/15 bg-violet-500/[0.07] text-violet-300">
-                        <ShieldCheck size={16} />
-                      </span>
-                      {isTurkish ? "Yönetim" : "Admin"}
-                    </Link>
-                  )}
-
-                  <div className="my-1 border-t border-white/[0.07]" />
-
-                  <button
-                    type="button"
-                    onClick={handleSignOut}
-                    className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-black text-red-200 transition hover:bg-red-500/[0.07]"
-                  >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-red-400/15 bg-red-500/[0.06] text-red-300">
-                      <LogOut size={16} />
-                    </span>
-                    {isTurkish ? "Çıkış Yap" : "Sign Out"}
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <Link href="/login" onClick={closeDropdowns} className="inline-flex h-11 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.025] px-3 text-[12px] font-black text-slate-200 transition hover:border-blue-400/20 hover:bg-blue-500/[0.05] hover:text-white lg:hidden">{isTurkish ? "Giriş" : "Sign In"}</Link>
-          )}
-
-          {isOwner && (
-            <Link
-              href="/admin"
-              onClick={closeMenu}
-              aria-label={isTurkish ? "Yönetim" : "Admin"}
-              title={isTurkish ? "Yönetim" : "Admin"}
-              className="inline-flex h-11 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] px-3 text-[11px] font-black text-violet-200 transition duration-200 hover:border-violet-400/40 hover:bg-violet-500/[0.14] hover:text-white lg:hidden"
-            >
-              Admin
-            </Link>
-          )}
+                <UserRound size={19} />
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                onClick={closeMenu}
+                aria-label={isTurkish ? "Giriş Yap" : "Sign In"}
+                className="inline-flex h-11 items-center justify-center rounded-xl border border-blue-400/25 bg-blue-500/[0.08] px-2 text-[11px] font-bold text-blue-100"
+              >
+                {isTurkish ? "Giriş" : "Login"}
+              </Link>
+            )}
+          </div>
 
           <button
             type="button"
@@ -415,6 +358,7 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
             locale={locale}
             authenticated={isAuthenticated}
             owner={isOwner && isAuthenticated}
+            onSignOut={handleSignOut}
             onClose={() => setIsMainNavOpen(false)}
           />
         </div>
