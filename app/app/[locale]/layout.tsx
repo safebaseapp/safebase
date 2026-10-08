@@ -107,7 +107,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <NextIntlClientProvider>
-      <LocalizedNavbar locale={safeLocale} initialIsAuthenticated={initialIsAuthenticated} initialIsOwner={initialIsOwner} />
+      <LocalizedNavbar locale={safeLocale} initialIsAuthenticated={initialIsAuthenticated} initialIsOwner={initialIsOwner} initialOwnerUserId={initialIsOwner ? user?.id : null} />
       <HomeLabsBridge locale={safeLocale} />
       <NavbarLegacyPremiumCleanup />
       <UserActivityCapture />
