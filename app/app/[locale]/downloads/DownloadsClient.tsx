@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type MouseEvent } from "react";
+import { createClient } from "@/utils/supabase/client";
 import { inspectionCatalog } from "@/data/checklists/registry";
 import {
   RESOURCE_ITEMS,
@@ -223,6 +224,45 @@ export default function DownloadsClient() {
   const previewUrl = (item: ResourceItem) => item.href?.[locale] ?? item.pdfUrl?.[locale];
   const downloadUrl = (item: ResourceItem) => item.docxUrl ?? item.pdfUrl?.[locale] ?? item.href?.[locale];
 
+  async function handleFileDownload(event: MouseEvent<HTMLAnchorElement>, item: ResourceItem) {
+    // Page links have their own actions; only actual PDF/DOCX requests are recorded.
+    if (!item.pdfUrl && !item.docxUrl) return;
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    const url = downloadUrl(item);
+    if (!url) return;
+
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        const next = encodeURIComponent(url);
+        window.location.assign(`/${locale}/login?next=${next}`);
+        return;
+      }
+      const format = item.docxUrl ? "DOCX" : "PDF";
+      const { error } = await supabase.from("user_activity_events").insert({
+        user_id: user.id,
+        event_name: `resource_download|${item.title[locale]}|${format}`,
+        path: window.location.href,
+        metadata: {
+          resource_type: item.category,
+          resource_id: item.id,
+          locale,
+          format: format.toLowerCase(),
+          source: "download_center",
+          status: "requested",
+        },
+      });
+      if (error) console.error("Download activity recording failed:", error);
+    } catch (error) {
+      console.error("Download activity recording unavailable:", error);
+    }
+
+    // Keep the existing protected PDF route / static file URL unchanged.
+    window.location.assign(url);
+  }
+
   const downloadText = (item: ResourceItem) => {
     if (item.href && !item.pdfUrl && !item.docxUrl) {
       if (item.category === "safety-signs") return isTurkish ? "Levhayı Aç" : "Open Sign";
@@ -397,7 +437,7 @@ export default function DownloadsClient() {
                       )}
 
                       {downloadUrl(item) && (
-                        <a href={downloadUrl(item)} {...(!item.href ? { download: true } : {})} className={`inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-black text-white transition ${accent.button}`}>
+                        <a href={downloadUrl(item)} onClick={(event) => void handleFileDownload(event, item)} {...(!item.href ? { download: true } : {})} className={`inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-black text-white transition ${accent.button}`}>
                           <DownloadIcon />
                           {downloadText(item)}
                         </a>
@@ -493,7 +533,7 @@ export default function DownloadsClient() {
                           )}
 
                           {downloadUrl(item) && (
-                            <a href={downloadUrl(item)} {...(!item.href ? { download: true } : {})} title={downloadText(item)} className={`inline-flex h-9 items-center justify-center gap-2 rounded-lg px-3 text-xs font-black text-white transition ${rowAccent}`}>
+                            <a href={downloadUrl(item)} onClick={(event) => void handleFileDownload(event, item)} {...(!item.href ? { download: true } : {})} title={downloadText(item)} className={`inline-flex h-9 items-center justify-center gap-2 rounded-lg px-3 text-xs font-black text-white transition ${rowAccent}`}>
                               <DownloadIcon />
                               <span className="hidden xl:inline">{downloadText(item)}</span>
                             </a>
