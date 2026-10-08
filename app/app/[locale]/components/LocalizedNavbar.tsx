@@ -21,9 +21,10 @@ type Props = {
   locale: "tr" | "en";
   initialIsAuthenticated?: boolean;
   initialIsOwner?: boolean;
+  initialOwnerUserId?: string | null;
 };
 
-export default function LocalizedNavbar({ locale, initialIsAuthenticated = false, initialIsOwner = false }: Props) {
+export default function LocalizedNavbar({ locale, initialIsAuthenticated = false, initialIsOwner = false, initialOwnerUserId = null }: Props) {
   const isTurkish = locale === "tr";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,6 +35,8 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
   const [isDesktopNavOpen, setIsDesktopNavOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(initialIsAuthenticated);
   const [isOwner, setIsOwner] = useState(initialIsOwner);
+  const isVerifiedOwner = (user: { id?: string; email?: string | null } | null | undefined) =>
+    isOwnerUser(user) || Boolean(initialIsOwner && initialOwnerUserId && user?.id === initialOwnerUserId);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
 
   const closeDropdowns = () => {
@@ -63,7 +66,7 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
 
       const sessionUser = session?.user ?? null;
       setIsAuthenticated(Boolean(sessionUser));
-      setIsOwner(isOwnerUser(sessionUser));
+      setIsOwner(isVerifiedOwner(sessionUser));
 
       if (sessionUser) {
         const {
@@ -74,7 +77,7 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
         // session is already available. Never erase a confirmed owner session.
         if (user) {
           setIsAuthenticated(true);
-          setIsOwner(isOwnerUser(user));
+          setIsOwner(isVerifiedOwner(user));
         }
       }
 
@@ -87,7 +90,7 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setIsAuthenticated(Boolean(session?.user));
-      setIsOwner(isOwnerUser(session?.user));
+      setIsOwner(isVerifiedOwner(session?.user));
       setIsAuthLoading(false);
     });
 
