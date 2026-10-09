@@ -1,3 +1,5 @@
+import ExpandedPPEPage from "./ExpandedPPEPage";
+import { expandedPPEStandards } from "../expanded-data";
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -70,7 +72,7 @@ export async function generateMetadata({params}:P):Promise<Metadata>{
 
 export default async function Page({params}:P){
  const{locale,slug}=await params; if(!['tr','en'].includes(locale))notFound();
- const s=getPPEStandard(slug); if(!s)notFound(); const l=locale as Locale; const tr=l==='tr'; const d=getPPETech(s.code); const xp=getPPEExperience(s.code); const authority=getPPEAuthority(s.code); if(!d||!xp)notFound();
+ const s=getPPEStandard(slug); if(!s)notFound(); const l=locale as Locale; const tr=l==='tr'; const expanded=expandedPPEStandards.find(x=>x.slug===slug); if(expanded)return <ExpandedPPEPage standard={expanded} locale={l}/>; const d=getPPETech(s.code); const xp=getPPEExperience(s.code); const authority=getPPEAuthority(s.code); if(!d||!xp)notFound();
  const v=theme[s.code]??theme['EN 397']; const vis=getPPEVisual(s.code); const is149=s.code==='EN 149'; const canonical=`https://www.sernem.com/${l}/ppe-standards/${slug}`; const toolboxSlug=toolboxByCode[s.code]??'ppe-safety'; const riskSlug=riskByCode[s.code];
  const scene=(index:number,width=900)=>pexels(vis.scenes[index%vis.scenes.length]??vis.photo,width);
  const schema={'@context':'https://schema.org','@type':'TechArticle',headline:`${s.code} – ${s.title[l]}`,description:s.purpose[l],inLanguage:l,url:canonical,image:pexels(vis.photo,1600),about:{'@type':'Thing',name:d.product[l]},publisher:{'@type':'Organization',name:'SERNEM',url:'https://www.sernem.com'}};
