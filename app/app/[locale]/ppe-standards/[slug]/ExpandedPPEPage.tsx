@@ -1,9 +1,11 @@
+import { getPPEVisual, pexels } from "../visual-data";
 import Link from "next/link";
 import type { ExpandedPPEStandard } from "../expanded-data";
 import { ppeStandards } from "../data";
 
 export default function ExpandedPPEPage({ standard:s,locale:l }:{standard:ExpandedPPEStandard;locale:"tr"|"en"}){
  const tr=l==="tr";
+ const visual=getPPEVisual(s.code);
  const related=ppeStandards.filter(x=>x.slug!==s.slug && x.category===s.category).slice(0,6);
  const checks=[
  tr?"Standart kodunu ve üretici ürün işaretlerini doğrula.":"Confirm standard designation and manufacturer product markings.",
@@ -13,11 +15,11 @@ export default function ExpandedPPEPage({ standard:s,locale:l }:{standard:Expand
  ];
  return <main className="min-h-screen bg-[#edf2f8] pb-20 text-slate-950"><div className="mx-auto max-w-6xl px-5 pt-9">
   <Link href={`/${l}/ppe-standards`} className="text-sm font-bold text-blue-700">← {tr?"Tüm KKD standartları":"All PPE standards"}</Link>
-  <header className="relative mt-5 overflow-hidden rounded-[30px] bg-gradient-to-br from-slate-950 via-[#10304a] to-[#164e63] p-8 text-white sm:p-12">
+  <header className="relative mt-5 overflow-hidden rounded-[30px] bg-slate-950 p-8 text-white sm:p-12"><img src={pexels(visual.photo,1400)} alt={visual.alt[l]} className="absolute inset-0 h-full w-full object-cover object-center opacity-45"/><div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-900/35"/>
    <div aria-hidden="true" className="absolute -right-12 -top-12 h-80 w-80 rounded-full border-[35px] border-white/5"/>
    <div className="relative"><p className="text-xs font-black uppercase tracking-[.22em] text-teal-300">{s.category} · SERNEM FIELD REFERENCE</p><div className="mt-8 inline-flex rounded-xl border border-cyan-300/30 bg-cyan-300/10 px-5 py-3 font-mono text-2xl font-black text-cyan-100">{s.code}</div><h1 className="mt-5 max-w-4xl text-3xl font-black sm:text-5xl">{s.title[l]}</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-200">{s.purpose[l]}</p></div>
   </header>
-  <section className="mt-6 grid gap-4 md:grid-cols-3">
+  <p className="mt-3 text-xs text-slate-500">{tr?"Temsili görsel: kesin ürün performansı ve standart uygunluğu görselden belirlenemez.":"Illustrative image: product performance and standards conformity cannot be established from a photograph."}</p><section className="mt-6 grid gap-4 md:grid-cols-3">
   {[[tr?"KAPSAM":"SCOPE",s.purpose[l]],[tr?"KULLANIM":"USE CASE",s.use[l]],[tr?"SAHA İŞARETLERİ":"FIELD MARKINGS",s.markings[l]]].map(([h,v])=><article key={h} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><h2 className="text-xs font-black tracking-widest text-blue-700">{h}</h2><p className="mt-4 text-sm leading-7 text-slate-700">{v}</p></article>)}
   </section>
   <section className="mt-6 rounded-2xl bg-white p-7 shadow-sm"><h2 className="text-2xl font-black">{tr?"30 saniyelik saha kontrol listesi":"30-second field inspection"}</h2><div className="mt-5 grid gap-3 sm:grid-cols-2">{checks.map((c,i)=><div key={c} className="flex gap-3 rounded-xl bg-slate-50 p-4"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-700 font-black text-white">{i+1}</span><p className="text-sm leading-6">{c}</p></div>)}</div></section>
