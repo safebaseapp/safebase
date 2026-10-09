@@ -24,17 +24,16 @@ export async function POST(request: Request) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ saved: false, authenticated: false, result: { ...result, xpEarned: 0 } });
 
-  const { error: attemptError } = await supabase.from("lab_attempts").insert({
+  const { data: attempt, error: attemptError } = await supabase.from("lab_attempts").insert({
     user_id: user.id, scenario_id: scenario.id, scenario_type: scenario.type, category: scenario.category, difficulty: scenario.difficulty, locale,
     selected_answers: selectedAnswers, correct_count: result.correctCount, missed_count: result.missedCount, incorrect_count: result.incorrectCount,
     score: result.score, xp_earned: 0, completed: true,
-  });
+  }).select("id,xp_earned").single();
   if (attemptError) return NextResponse.json({ error: "attempt_save_failed" }, { status: 500 });
 
-  const { data: latest, error: latestError } = await supabase.from("lab_attempts").select("id,xp_earned").eq("user_id",user.id).eq("scenario_type",scenario.type).eq("scenario_id",scenario.id).order("created_at",{ascending:false}).limit(1).maybeSingle();
   const { data: currentProgress, error: progressError } = await supabase.from("lab_user_progress").select("total_xp,current_streak,longest_streak,scenario_count").eq("user_id",user.id).maybeSingle();
-  if (latestError || progressError || !currentProgress || !latest) return NextResponse.json({ok:false,error:"PROGRESS_READ_FAILED"},{status:500});
-  const awardedXp = Number(latest.xp_earned ?? 0);
+  if (progressError || !currentProgress || !attempt) return NextResponse.json({ok:false,error:"PROGRESS_READ_FAILED"},{status:500});
+  const awardedXp = Number(attempt.xp_earned ?? 0);
   const totalXp = Number(currentProgress.total_xp ?? 0);
   const levelState = getLevelState(totalXp);
   const rank = getRank(totalXp);
