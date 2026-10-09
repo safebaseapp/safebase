@@ -148,9 +148,41 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
           </div>
         </section>
 
-        <section className="mb-8 rounded-3xl border border-amber-300/15 bg-[#0c1824] p-5 sm:p-6">
-          <div className="flex flex-wrap items-center justify-between gap-2"><div><h2 className="text-xl font-black text-white">{isTr?"Rozet Koleksiyonum":"My Badge Collection"}</h2><p className="mt-1 text-xs text-slate-400">{isTr?"Rozetler yalnızca doğrulanmış Labs performansından kazanılır; ekstra yarışma XP'si vermez.":"Badges reflect verified Labs activity and award no extra competition XP."}</p></div><span className="rounded-full border border-amber-300/30 px-3 py-1 text-xs text-amber-200">{badges.length}/{badgeProgress.length} {isTr?"rozet":"badges"}</span></div>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{badgeProgress.map(b=><article key={b.key} className={`rounded-xl border p-4 ${b.earned?"border-amber-300/35 bg-amber-300/[0.07]":"border-white/10 bg-white/[0.025]"}`}><div className="flex items-center justify-between"><span className={b.earned?"text-2xl":"text-2xl grayscale opacity-40"}>{b.icon}</span><span className={b.earned?"text-xs text-emerald-300":"text-xs text-slate-500"}>{b.earned?(isTr?"Kazanıldı ✓":"Unlocked ✓"):(isTr?"Kilitli":"Locked")}</span></div><p className="mt-2 text-sm font-bold text-white">{isTr?b.titleTr:b.title}</p><p className="mt-1 min-h-9 text-xs text-slate-400">{isTr?b.descriptionTr:b.description}</p><div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-amber-300" style={{width:`${b.percent}%`}}/></div><p className="mt-1 text-xs text-slate-400">{Math.min(b.current,b.target).toLocaleString(isTr?"tr-TR":"en-US")} / {b.target.toLocaleString(isTr?"tr-TR":"en-US")}</p></article>)}</div>
+        <section className="mb-8 overflow-hidden rounded-[28px] border border-amber-300/20 bg-[radial-gradient(ellipse_at_top_left,rgba(251,191,36,.12),transparent_47%),linear-gradient(140deg,#132735,#08131f)] p-5 sm:p-7">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div><p className="mb-2 text-[11px] font-black uppercase tracking-[.24em] text-amber-300">SERNEM LABS ACHIEVEMENTS</p>
+              <h2 className="text-2xl font-black text-white sm:text-3xl">{isTr?"Rozet Koleksiyonum":"My Badge Collection"}</h2>
+              <p className="mt-2 text-sm text-slate-300">{isTr?"Kazan, biriktir, ustalaş. Her madalya doğrulanmış performansını temsil eder.":"Earn, collect, master. Every medal reflects verified performance."}</p>
+            </div>
+            <div className="rounded-2xl border border-amber-300/25 bg-amber-300/10 px-5 py-3 text-center"><p className="text-3xl font-black text-amber-200">{badges.length}<span className="text-lg text-slate-400">/{badgeProgress.length}</span></p><p className="text-[11px] font-bold uppercase tracking-wide text-amber-200">{isTr?"Kazanılan Rozet":"Badges Earned"}</p></div>
+          </div>
+          {(() => {const next=badgeProgress.filter(b=>!b.earned).sort((a,b)=>b.percent-a.percent||a.remaining-b.remaining)[0];const latest=badgeProgress.filter(b=>b.earned).at(-1);return <div className="mt-5 grid gap-3 md:grid-cols-2">
+            {next&&<div className="rounded-2xl border border-cyan-300/25 bg-cyan-300/[.07] p-4"><p className="mb-3 text-xs font-bold uppercase tracking-widest text-cyan-200">{isTr?"Sıradaki Rozetin":"Next Badge"}</p><div className="flex items-center gap-3"><span className="text-4xl">{next.icon}</span><div className="flex-1"><p className="font-bold text-white">{isTr?next.titleTr:next.title}</p><p className="text-xs text-slate-300">{next.remaining.toLocaleString(isTr?"tr-TR":"en-US")} {isTr?"adım kaldı":"remaining"}</p></div><span className="font-black text-cyan-200">{next.percent}%</span></div><div className="mt-3 h-2 rounded-full bg-white/10"><div className="h-full rounded-full bg-cyan-300" style={{width:`${next.percent}%`}}/></div></div>}
+            {latest&&<div className="rounded-2xl border border-amber-300/25 bg-amber-300/[.07] p-4"><p className="mb-3 text-xs font-bold uppercase tracking-widest text-amber-200">{isTr?"Koleksiyonundaki Başarı":"Your Achievement"}</p><div className="flex items-center gap-3"><span className="text-4xl">{latest.icon}</span><div><p className="font-bold text-white">{isTr?latest.titleTr:latest.title}</p><p className="text-xs text-emerald-300">{isTr?"Rozet kazanıldı ✓":"Badge unlocked ✓"}</p></div></div></div>}
+          </div>})()}
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            {badgeProgress.map((b,index)=>{
+              const rarity=index>=12?"elite":index>=8?"epic":index>=4?"rare":"common";
+              const tone=rarity==="elite"?"border-yellow-300/45 from-yellow-400/20 to-amber-800/10":rarity==="epic"?"border-violet-300/35 from-violet-400/20 to-fuchsia-800/10":rarity==="rare"?"border-cyan-300/35 from-cyan-400/20 to-blue-900/10":"border-emerald-300/30 from-emerald-400/15 to-teal-900/10";
+              const rarityText=rarity==="elite"?(isTr?"EFSANEVİ":"ELITE"):rarity==="epic"?(isTr?"EPİK":"EPIC"):rarity==="rare"?(isTr?"NADİR":"RARE"):(isTr?"STANDART":"COMMON");
+              return <details key={b.key} className={`group relative rounded-[22px] border bg-gradient-to-b p-3 text-center transition-all open:ring-2 open:ring-white/20 ${b.earned?tone:"border-slate-700/50 from-slate-800/40 to-slate-950/50"}`}>
+                <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <span className={`mb-2 inline-block rounded-full px-2 py-1 text-[9px] font-black tracking-[.13em] ${b.earned?"bg-white/10 text-amber-100":"bg-white/5 text-slate-500"}`}>{rarityText}</span>
+                  <div className={`relative mx-auto flex h-24 w-24 items-center justify-center rounded-full border-[5px] shadow-[inset_0_3px_12px_rgba(0,0,0,.35)] sm:h-28 sm:w-28 ${b.earned?"border-amber-300/75 bg-gradient-to-br from-amber-200/20 via-amber-500/15 to-amber-900/50 shadow-[0_0_25px_rgba(251,191,36,.17)]":"border-slate-600 bg-slate-800/70 grayscale"}`}>
+                    <div className={`absolute inset-1 rounded-full border-2 border-dashed ${b.earned?"border-amber-200/40":"border-slate-600/50"}`}/>
+                    <span className={`relative text-5xl drop-shadow-lg ${b.earned?"":"opacity-35"}`}>{b.earned?b.icon:"🔒"}</span>
+                    {b.earned&&<span className="absolute -bottom-1 rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-black text-white">✓</span>}
+                  </div>
+                  <p className="mt-4 min-h-10 text-sm font-extrabold leading-tight text-white">{isTr?b.titleTr:b.title}</p>
+                  <div className="mt-3 h-2 overflow-hidden rounded-full bg-black/35"><div className={`h-full rounded-full ${b.earned?"bg-amber-300":"bg-cyan-500"}`} style={{width:`${b.percent}%`}}/></div>
+                  <p className="mt-2 text-xs font-bold text-slate-300">{Math.min(b.current,b.target).toLocaleString(isTr?"tr-TR":"en-US")} / {b.target.toLocaleString(isTr?"tr-TR":"en-US")}</p>
+                  <p className="mt-1 text-[10px] text-slate-400">{b.earned?(isTr?"Kazanıldı":"Unlocked"):(isTr?"Ayrıntıları gör ↓":"View details ↓")}</p>
+                </summary>
+                <div className="mt-3 border-t border-white/10 pt-3 text-left"><p className="text-xs leading-5 text-slate-200">{isTr?b.descriptionTr:b.description}</p><p className="mt-2 text-xs font-semibold text-cyan-200">{b.earned?(isTr?"Başarı tamamlandı!":"Achievement completed!"):`${b.remaining.toLocaleString(isTr?"tr-TR":"en-US")} ${isTr?"kaldı":"remaining"}`}</p></div>
+              </details>;
+            })}
+          </div>
+          <p className="mt-5 text-center text-xs text-slate-500">{isTr?"Madalya ayrıntıları için bir rozete dokun. Rozetler ekstra XP kazandırmaz.":"Tap a medal for its requirements. Badges do not grant extra XP."}</p>
         </section>
 
         <section className="mb-8 rounded-3xl border border-sky-300/15 bg-[#081827] p-5 sm:p-6">
