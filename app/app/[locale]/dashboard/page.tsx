@@ -1,3 +1,4 @@
+import { hasActiveReward } from "@/lib/auth/reward-access";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import DashboardLabsIntegration from "./DashboardLabsIntegration";
 import LogoutButton from "./LogoutButton";
@@ -158,7 +159,7 @@ export default async function DashboardPage({ params }: Props) {
 
   const displayName = profile.full_name || user.email?.split("@")[0] || (isTurkish ? "Kullanıcı" : "User");
   const firstName = displayName.trim().split(/\s+/)[0] || displayName;
-  const isPremium = profile.plan === "premium" || profile.role === "admin";
+  const isPremium = profile.plan === "premium" || profile.role === "admin" || await hasActiveReward(supabase,user.id);
 
   const now = new Date();
   const year = now.getUTCFullYear();
