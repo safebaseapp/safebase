@@ -1,0 +1,60 @@
+name: Install approved SERNEM PPE package 6
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/install-sernem-ppe-paket6.yml']
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Retrieve reviewed originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/VA3bGR1WTrnKIqFY' -o /tmp/sernem-paket6.zip
+          unzip -t /tmp/sernem-paket6.zip
+          mkdir -p app/public/ppe-standards/approved
+          unzip -o /tmp/sernem-paket6.zip 'ppe-standards/approved/*.webp' -d /tmp/sernem-paket6
+          for code in en-353-2 en-358 en-360 en-361 en-362 en-813; do
+            test -s "/tmp/sernem-paket6/ppe-standards/approved/$code.webp"
+            cp "/tmp/sernem-paket6/ppe-standards/approved/$code.webp" "app/public/ppe-standards/approved/$code.webp"
+          done
+      - name: Update approved standard mappings only
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          path=Path('app/app/[locale]/ppe-standards/visual-data.ts')
+          s=path.read_text()
+          codes=['EN 353-2','EN 358','EN 360','EN 361','EN 362','EN 813']
+          for code in codes:
+              filename=code.lower().replace(' ','-')+'.webp'
+              photo="'/ppe-standards/approved/"+filename+"'"
+              lines=s.splitlines(keepends=True)
+              indices=[i for i,line in enumerate(lines) if line.lstrip().startswith("'"+code+"':")]
+              assert len(indices)==1, (code,indices)
+              i=indices[0]
+              row=lines[i]
+              row,n=re.subn(r"photo:(?:'[^']+'|[0-9]+)","photo:"+photo,row,count=1)
+              assert n==1,code
+              row,n=re.subn(r"scenes:\[[^\]]*\]","scenes:["+photo+"]",row,count=1)
+              assert n==1,code
+              lines[i]=row
+              s=''.join(lines)
+          path.write_text(s)
+          PY
+      - name: Commit six approved visuals
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/public/ppe-standards/approved 'app/app/[locale]/ppe-standards/visual-data.ts'
+          git diff --cached --quiet && exit 0
+          git commit -m 'feat(ppe): deploy six approved original package-6 images'
+          git push
