@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
-import { getAchievementBadges, getLevelState, getNextRank, getRank, normalizeLabDifficulty } from "@/lib/labs/progression";
+import { getAchievementBadges, getBadgeProgress, getLevelState, getNextRank, getRank, normalizeLabDifficulty } from "@/lib/labs/progression";
 
 export async function GET() {
   const supabase = await createClient();
@@ -34,7 +34,9 @@ export async function GET() {
       .map((item) => item.scenario_id),
   ).size;
   const uniqueCompleted = new Set(allAttempts.filter((item) => Number(item.xp_earned ?? 0) > 0).map((item) => item.scenario_id)).size;
-  const badges = getAchievementBadges({ totalXp, longestStreak: Number(progress?.longest_streak ?? 0), perfectCount, expertCompleted });
+  const badgeStats = { totalXp, longestStreak: Number(progress?.longest_streak ?? 0), perfectCount, expertCompleted, uniqueCompleted, earnedAttempts: allAttempts.filter(item=>Number(item.xp_earned??0)>0).length };
+  const badges = getAchievementBadges(badgeStats);
+  const badgeProgress = getBadgeProgress(badgeStats);
 
   return NextResponse.json({
     ok: true,
@@ -59,5 +61,6 @@ export async function GET() {
     perfectCount,
     expertCompleted,
     badges,
+    badgeProgress,
   });
 }
