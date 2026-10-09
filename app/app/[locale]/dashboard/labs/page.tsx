@@ -6,9 +6,9 @@ import { routing } from "../../../../i18n/routing";
 import { createClient } from "@/utils/supabase/server";
 import { incidentScenarios } from "@/lib/labs/scenarios/incident-scenarios";
 import { localizeHseText } from "@/lib/labs/scenarios/hse-language";
-import { getAchievementBadges, getLevelState, getNextRank, getRank, normalizeLabDifficulty } from "@/lib/labs/progression";
+import { LAB_RANKS, getAchievementBadges, getLevelState, getNextRank, getRank, normalizeLabDifficulty } from "@/lib/labs/progression";
 
-type Props = { params: Promise<{ locale: string }> };
+type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ filter?: string; page?: string }> };
 
 type Decision = {
   step?: number;
@@ -57,16 +57,26 @@ function localizedDecision(attempt: Attempt, decision: Decision, locale: string)
   };
 }
 
-export default async function LabsResultsPage({ params }: Props) {
+export default async function LabsResultsPage({ params, searchParams }: Props) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   const isTr = locale === "tr";
+  const query = await searchParams;
+  const filter = ["all", "perfect", "earned", "expert"].includes(query.filter ?? "") ? query.filter! : "all";
+  const parsedPage = Number(query.page ?? 1);
+  const page = Number.isSafeInteger(parsedPage) ? Math.max(1, Math.min(1000, parsedPage)) : 1;
+  const pageSize = 5;
+  const historyHref = (nextFilter: string, nextPage = 1) => `/${locale}/dashboard/labs?filter=${nextFilter}&page=${nextPage}`;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect(`/${locale}/login?next=/${locale}/dashboard/labs`);
 
-  const [{ data, error }, { data: progress }] = await Promise.all([
-    supabase.from("lab_attempts").select("id,scenario_id,category,difficulty,score,xp_earned,incorrect_count,selected_answers,created_at").eq("user_id", user.id).eq("scenario_type", "incident_simulator").order("created_at", { ascending: false }).limit(20),
+  let historyQuery = supabase.from("lab_attempts").select("id,scenario_id,category,difficulty,score,xp_earned,incorrect_count,selected_answers,created_at", { count: "exact" }).eq("user_id", user.id).eq("scenario_type", "incident_simulator");
+  if (filter === "perfect") historyQuery = historyQuery.eq("score", 100);
+  if (filter === "earned") historyQuery = historyQuery.gt("xp_earned", 0);
+  if (filter === "expert") historyQuery = historyQuery.eq("difficulty", "expert");
+  const [{ data, error, count }, { data: progress }] = await Promise.all([
+    historyQuery.order("created_at", { ascending: false }).range((page - 1) * pageSize, page * pageSize - 1),
     supabase.from("lab_user_progress").select("total_xp,current_streak,longest_streak").eq("user_id", user.id).maybeSingle(),
   ]);
 
@@ -111,12 +121,24 @@ export default async function LabsResultsPage({ params }: Props) {
           </div>
         </section>
 
+        <section className="mb-8 rounded-3xl border border-sky-300/15 bg-[#081827] p-5 sm:p-6">
+          <div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-xl font-black text-white">{isTr ? "Seviye ve unvan yol haritası" : "Levels & titles roadmap"}</h2><p className="mt-1 text-xs text-slate-400">{isTr ? "En yüksek unvan SERNEM Elite (80.000 XP). Sayısal seviyeler 100'e kadar ilerler." : "Top title is SERNEM Elite (80,000 XP). Numbered levels progress up to 100."}</p></div><span className="rounded-full border border-emerald-400/30 px-3 py-1 text-xs font-black text-emerald-300">Level {levelState.level}/100</span></div>
+          <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">{LAB_RANKS.map((tier,index) => <div key={tier.key} className={`rounded-xl border p-3 ${totalXp >= tier.minXp ? "border-emerald-400/35 bg-emerald-500/10" : "border-white/10 bg-white/[0.025]"}`}><div className="flex items-center justify-between text-[10px]"><span className="font-black text-slate-400">{String(index+1).padStart(2,"0")}</span><span className={totalXp >= tier.minXp ? "text-emerald-300" : "text-slate-500"}>{totalXp >= tier.minXp ? (isTr ? "Açıldı ✓" : "Unlocked ✓") : (isTr ? "Kilitli" : "Locked")}</span></div><p className="mt-2 text-sm font-bold text-white">{tier.title}</p><p className="mt-1 text-xs text-sky-300">{tier.minXp.toLocaleString(isTr ? "tr-TR" : "en-US")} XP</p></div>)}</div>
+        </section>
+
+        <section className="mb-5">
+          <h2 className="text-xl font-black text-white">{isTr ? "Geçmiş simülasyonlarım" : "My simulation history"}</h2>
+          <p className="mt-1 text-sm text-slate-400">{isTr ? "Sonuçları filtrele; karar zincirini yalnızca açmak istediğin kayıtta görüntüle." : "Filter past results and expand only the decision chains you want to review."}</p>
+          <div className="mt-3 flex flex-wrap gap-2">{[["all", isTr ? "Tümü" : "All"],["perfect", isTr ? "100 puan" : "Perfect"],["earned", isTr ? "XP kazandıran" : "Earned XP"],["expert", "Expert"]].map(([key,label]) => <Link key={key} href={historyHref(key)} className={`rounded-xl border px-3 py-2 text-xs font-bold ${filter === key ? "border-emerald-300/50 bg-emerald-300/10 text-emerald-200" : "border-white/10 text-slate-400 hover:text-white"}`}>{label}</Link>)}</div>
+          <p className="mt-3 text-xs text-slate-500">{count ?? 0} {isTr ? "kayıt" : "records"} · {isTr ? "Sayfa" : "Page"} {page}/{Math.max(1,Math.ceil((count ?? 0)/pageSize))}</p>
+        </section>
+
         {error ? (
           <div className="rounded-3xl border border-amber-300/20 bg-amber-400/[0.05] p-8"><TriangleAlert className="mb-4 text-amber-300" /><h2 className="text-2xl font-semibold">{isTr ? "Labs sonuç depolaması şu anda hazır değil" : "Labs result storage is currently unavailable"}</h2></div>
         ) : attempts.length === 0 ? (
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8"><LockKeyhole className="mb-4 text-emerald-300" /><h2 className="text-2xl font-semibold">{isTr ? "Henüz kayıtlı deneme yok" : "No saved attempts yet"}</h2></div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-3">
             {attempts.map((attempt) => {
               const decisions = attempt.selected_answers?.decisions ?? [];
               const scores = attempt.selected_answers?.scores ?? {};
@@ -125,16 +147,20 @@ export default async function LabsResultsPage({ params }: Props) {
               const displayedDifficulty = scenario?.difficulty === "expert" ? "EXPERT" : attempt.difficulty.toUpperCase();
               const category = scenario?.category ?? attempt.category;
               return (
-                <article key={attempt.id} className="overflow-hidden rounded-3xl border border-white/10 bg-[#0a1916]">
-                  <div className="grid gap-5 border-b border-white/10 p-6 md:grid-cols-[1fr_auto] md:items-center">
+                <details key={attempt.id} className="group overflow-hidden rounded-3xl border border-white/10 bg-[#0a1916]">
+                  <summary className="cursor-pointer list-none grid gap-5 p-5 md:grid-cols-[1fr_auto] md:items-center">
                     <div><div className="mb-2 flex flex-wrap gap-2 text-xs font-bold tracking-[0.12em] text-emerald-300"><span>{category}</span><span>·</span><span>{displayedDifficulty}</span></div><h2 className="text-2xl font-semibold">{localizedScenarioTitle(attempt.scenario_id, locale)}</h2><p className="mt-2 text-sm text-slate-400">{new Intl.DateTimeFormat(isTr ? "tr-TR" : "en-GB", { dateStyle: "medium", timeStyle: "short" }).format(new Date(attempt.created_at))}</p></div>
-                    <div className="flex gap-5 md:text-right"><div><b className="block text-3xl">{attempt.score}</b><span className="text-xs text-slate-500">{isTr ? "GENEL" : "OVERALL"}</span></div><div><b className="block text-3xl text-cyan-300">+{attempt.xp_earned}</b><span className="text-xs text-slate-500">XP</span></div><div><b className="block text-3xl">{criticalCount}</b><span className="text-xs text-slate-500">{isTr ? "KRİTİK" : "CRITICAL"}</span></div></div>
-                  </div>
+                    <div className="flex flex-wrap items-center gap-5 md:text-right"><span className="text-xs text-emerald-300 group-open:hidden">{isTr ? "Detayları aç ↓" : "Expand ↓"}</span><span className="hidden text-xs text-emerald-300 group-open:inline">{isTr ? "Kapat ↑" : "Close ↑"}</span><div><b className="block text-3xl">{attempt.score}</b><span className="text-xs text-slate-500">{isTr ? "GENEL" : "OVERALL"}</span></div><div><b className="block text-3xl text-cyan-300">+{attempt.xp_earned}</b><span className="text-xs text-slate-500">XP</span></div><div><b className="block text-3xl">{criticalCount}</b><span className="text-xs text-slate-500">{isTr ? "KRİTİK" : "CRITICAL"}</span></div></div>
+                  </summary>
                   <div className="grid grid-cols-3 gap-px bg-white/10"><Metric label={isTr ? "Güvenlik" : "Safety"} value={scores.safety} /><Metric label={isTr ? "Muhakeme" : "Judgment"} value={scores.judgment} /><Metric label={isTr ? "Müdahale" : "Response"} value={scores.response} /></div>
                   <div className="p-6"><h3 className="mb-4 text-sm font-bold tracking-[0.12em] text-slate-300">{isTr ? "KARAR ZİNCİRİ" : "DECISION CHAIN"}</h3><div className="space-y-3">{decisions.map((decision, index) => { const localized = localizedDecision(attempt, decision, locale); return <div key={`${attempt.id}-${index}`} className={`rounded-2xl border p-4 ${localized.critical ? "border-red-400/25 bg-red-400/[0.05]" : "border-white/10 bg-white/[0.025]"}`}><div className="flex gap-3">{localized.critical ? <CircleAlert size={18} className="mt-0.5 shrink-0 text-red-300" /> : <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-300" />}<div className="min-w-0"><div className="text-xs font-bold tracking-[0.12em] text-slate-500">{String(decision.step ?? index + 1).padStart(2, "0")} · {localized.nodeTitle}</div><p className="mt-1 font-semibold text-slate-100">{localized.choiceLabel}</p>{localized.consequence ? <p className="mt-2 text-sm leading-6 text-slate-400">{localized.consequence}</p> : null}<div className="mt-3 flex flex-wrap gap-2 text-xs"><Impact label={isTr ? "Güvenlik" : "Safety"} value={localized.impact?.safety} /><Impact label={isTr ? "Muhakeme" : "Judgment"} value={localized.impact?.judgment} /><Impact label={isTr ? "Müdahale" : "Response"} value={localized.impact?.response} /></div></div></div></div>; })}</div></div>
-                </article>
+                </details>
               );
             })}
+            <div className="flex items-center justify-between gap-3 pt-3">
+              {page > 1 ? <Link href={historyHref(filter,page-1)} className="rounded-xl border border-white/20 px-4 py-2 text-sm text-white">← {isTr ? "Önceki" : "Previous"}</Link> : <span />}
+              {page * pageSize < (count ?? 0) ? <Link href={historyHref(filter,page+1)} className="rounded-xl border border-white/20 px-4 py-2 text-sm text-white">{isTr ? "Sonraki" : "Next"} →</Link> : null}
+            </div>
           </div>
         )}
       </div>
