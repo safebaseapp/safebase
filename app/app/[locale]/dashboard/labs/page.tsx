@@ -6,7 +6,7 @@ import { routing } from "../../../../i18n/routing";
 import { createClient } from "@/utils/supabase/server";
 import { incidentScenarios } from "@/lib/labs/scenarios/incident-scenarios";
 import { localizeHseText } from "@/lib/labs/scenarios/hse-language";
-import { LAB_RANKS, getAchievementBadges, getLevelState, getNextRank, getRank, normalizeLabDifficulty } from "@/lib/labs/progression";
+import { LAB_RANKS, getBadgeProgress, getLevelState, getNextRank, getRank, normalizeLabDifficulty } from "@/lib/labs/progression";
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ filter?: string; page?: string }> };
 
@@ -112,7 +112,10 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
   const nextRank = getNextRank(totalXp);
   const perfectCount = (badgeAttempts ?? []).filter((attempt) => attempt.score === 100).length;
   const expertCompleted = new Set((badgeAttempts ?? []).filter((attempt) => attempt.xp_earned > 0 && normalizeLabDifficulty(attempt.difficulty) === "expert").map((attempt) => attempt.scenario_id)).size;
-  const badges = getAchievementBadges({ totalXp, longestStreak: Number(progress?.longest_streak ?? 0), perfectCount, expertCompleted });
+  const eligibleAttempts=(badgeAttempts??[]).filter(a=>Number(a.xp_earned)>0);
+  const uniqueCompleted=new Set(eligibleAttempts.map(a=>a.scenario_id)).size;
+  const badgeProgress=getBadgeProgress({totalXp,longestStreak:Number(progress?.longest_streak??0),perfectCount,expertCompleted,uniqueCompleted,earnedAttempts:eligibleAttempts.length});
+  const badges=badgeProgress.filter(b=>b.earned);
 
   return (
     <main className="min-h-screen bg-[#06110f] px-5 py-10 text-slate-100 md:px-10">
@@ -135,7 +138,7 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
               <div className="mt-2 text-4xl font-black text-white">{totalXp.toLocaleString(isTr ? "tr-TR" : "en-US")} XP</div>
               <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-emerald-300" style={{ width: `${levelState.progressPercent}%` }} /></div>
               <div className="mt-2 flex flex-wrap justify-between gap-2 text-xs text-slate-400"><span>{levelState.remainingXp} XP {isTr ? "sonraki seviyeye" : "to next level"}</span><span>{nextRank ? `${Math.max(0, nextRank.minXp - totalXp)} XP → ${titleFor(nextRank.key,nextRank.title)}` : "SERNEM Elite"}</span></div>
-              {badges.length > 0 ? <div className="mt-4 flex flex-wrap gap-2">{badges.map((badge) => <span key={badge.key} title={isTr ? (badgeTr[badge.key]?.[1] ?? badge.description) : badge.description} className="rounded-full border border-amber-300/20 bg-amber-300/[0.06] px-3 py-1.5 text-xs font-bold text-amber-200">🏅 {isTr ? (badgeTr[badge.key]?.[0] ?? badge.title) : badge.title}</span>)}</div> : null}
+              {badges.length > 0 ? <div className="mt-4 flex flex-wrap gap-2">{badges.map((badge) => <span key={badge.key} title={isTr ? (badgeTr[badge.key]?.[1] ?? badge.description) : badge.description} className="rounded-full border border-amber-300/20 bg-amber-300/[0.06] px-3 py-1.5 text-xs font-bold text-amber-200">{badge.icon} {isTr ? badge.titleTr : badge.title}</span>)}</div> : null}
             </div>
             <div className="grid grid-cols-2 gap-3 text-center sm:grid-cols-3">
               <ProgressStat value={Number(progress?.current_streak ?? 0)} label={isTr ? "Günlük Seri" : "Day Streak"} />
@@ -143,6 +146,11 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
               <ProgressStat value={expertCompleted} label={isTr ? "Uzman Seviye" : "Expert"} />
             </div>
           </div>
+        </section>
+
+        <section className="mb-8 rounded-3xl border border-amber-300/15 bg-[#0c1824] p-5 sm:p-6">
+          <div className="flex flex-wrap items-center justify-between gap-2"><div><h2 className="text-xl font-black text-white">{isTr?"Rozet Koleksiyonum":"My Badge Collection"}</h2><p className="mt-1 text-xs text-slate-400">{isTr?"Rozetler yalnızca doğrulanmış Labs performansından kazanılır; ekstra yarışma XP'si vermez.":"Badges reflect verified Labs activity and award no extra competition XP."}</p></div><span className="rounded-full border border-amber-300/30 px-3 py-1 text-xs text-amber-200">{badges.length}/{badgeProgress.length} {isTr?"rozet":"badges"}</span></div>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{badgeProgress.map(b=><article key={b.key} className={`rounded-xl border p-4 ${b.earned?"border-amber-300/35 bg-amber-300/[0.07]":"border-white/10 bg-white/[0.025]"}`}><div className="flex items-center justify-between"><span className={b.earned?"text-2xl":"text-2xl grayscale opacity-40"}>{b.icon}</span><span className={b.earned?"text-xs text-emerald-300":"text-xs text-slate-500"}>{b.earned?(isTr?"Kazanıldı ✓":"Unlocked ✓"):(isTr?"Kilitli":"Locked")}</span></div><p className="mt-2 text-sm font-bold text-white">{isTr?b.titleTr:b.title}</p><p className="mt-1 min-h-9 text-xs text-slate-400">{isTr?b.descriptionTr:b.description}</p><div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-amber-300" style={{width:`${b.percent}%`}}/></div><p className="mt-1 text-xs text-slate-400">{Math.min(b.current,b.target).toLocaleString(isTr?"tr-TR":"en-US")} / {b.target.toLocaleString(isTr?"tr-TR":"en-US")}</p></article>)}</div>
         </section>
 
         <section className="mb-8 rounded-3xl border border-sky-300/15 bg-[#081827] p-5 sm:p-6">
