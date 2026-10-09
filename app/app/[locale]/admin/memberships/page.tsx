@@ -142,6 +142,7 @@ export default async function MembershipsPage({ params }: Props) {
           </div>
         )}
 
+        <Link href={`/${locale}/admin/rewards`} className="mt-6 inline-flex rounded-xl border border-amber-300/30 bg-amber-400/10 px-5 py-3 text-sm font-bold text-amber-200">{isTurkish ? "🏆 Ödül ve Manuel Plan Yönetimi →" : "🏆 Rewards & Manual Plans →"}</Link>
         <div className="mt-7 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {stats.map((stat) => (
             <div
