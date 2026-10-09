@@ -1,5 +1,4 @@
 import PendingIncidentImport from "./labs/PendingIncidentImport";
-import DashboardLabsIntegration from "./DashboardLabsIntegration";
 
 type Props = { children: React.ReactNode; params: Promise<{ locale: string }> };
 
@@ -9,7 +8,6 @@ export default async function DashboardLayout({ children, params }: Props) {
   return (
     <>
       <PendingIncidentImport />
-      <DashboardLabsIntegration locale={locale} />
       {children}
     </>
   );
