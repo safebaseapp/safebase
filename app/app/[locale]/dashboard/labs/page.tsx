@@ -65,6 +65,16 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
   const filter = ["all", "perfect", "earned", "expert"].includes(query.filter ?? "") ? query.filter! : "all";
   const parsedPage = Number(query.page ?? 1);
   const page = Number.isSafeInteger(parsedPage) ? Math.max(1, Math.min(1000, parsedPage)) : 1;
+  const tierDescriptions: Record<string, [string,string]> = {
+    "hse-explorer": ["HSE Labs ile tanışma", "Introduction to HSE Labs"],
+    "field-starter": ["Temel saha kararları", "Core field decisions"],
+    "safety-practitioner": ["Güvenlik uygulamalarını geliştirme", "Developing safety practice"],
+    "advanced-hse": ["Karmaşık saha senaryoları", "Complex field scenarios"],
+    "hse-decision-specialist": ["İleri seviye karar becerisi", "Advanced decision-making"],
+    "safety-expert": ["Yüksek zorlukta güvenlik analizleri", "High-difficulty safety analysis"],
+    "hse-master": ["Kapsamlı HSE deneyimi", "Broad HSE proficiency"],
+    "sernem-elite": ["En üst Labs unvanı", "Highest Labs title"],
+  };
   const pageSize = 5;
   const historyHref = (nextFilter: string, nextPage = 1) => `/${locale}/dashboard/labs?filter=${nextFilter}&page=${nextPage}`;
   const supabase = await createClient();
@@ -75,9 +85,10 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
   if (filter === "perfect") historyQuery = historyQuery.eq("score", 100);
   if (filter === "earned") historyQuery = historyQuery.gt("xp_earned", 0);
   if (filter === "expert") historyQuery = historyQuery.eq("difficulty", "expert");
-  const [{ data, error, count }, { data: progress }] = await Promise.all([
+  const [{ data, error, count }, { data: progress }, { data: badgeAttempts }] = await Promise.all([
     historyQuery.order("created_at", { ascending: false }).range((page - 1) * pageSize, page * pageSize - 1),
     supabase.from("lab_user_progress").select("total_xp,current_streak,longest_streak").eq("user_id", user.id).maybeSingle(),
+    supabase.from("lab_attempts").select("scenario_id,difficulty,score,xp_earned").eq("user_id", user.id).eq("completed", true),
   ]);
 
   if (error) console.error("labs results read failed", error);
@@ -86,8 +97,8 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
   const levelState = getLevelState(totalXp);
   const rank = getRank(totalXp);
   const nextRank = getNextRank(totalXp);
-  const perfectCount = attempts.filter((attempt) => attempt.score === 100).length;
-  const expertCompleted = new Set(attempts.filter((attempt) => attempt.xp_earned > 0 && normalizeLabDifficulty(attempt.difficulty) === "expert").map((attempt) => attempt.scenario_id)).size;
+  const perfectCount = (badgeAttempts ?? []).filter((attempt) => attempt.score === 100).length;
+  const expertCompleted = new Set((badgeAttempts ?? []).filter((attempt) => attempt.xp_earned > 0 && normalizeLabDifficulty(attempt.difficulty) === "expert").map((attempt) => attempt.scenario_id)).size;
   const badges = getAchievementBadges({ totalXp, longestStreak: Number(progress?.longest_streak ?? 0), perfectCount, expertCompleted });
 
   return (
@@ -123,7 +134,7 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
 
         <section className="mb-8 rounded-3xl border border-sky-300/15 bg-[#081827] p-5 sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-xl font-black text-white">{isTr ? "Seviye ve unvan yol haritası" : "Levels & titles roadmap"}</h2><p className="mt-1 text-xs text-slate-400">{isTr ? "En yüksek unvan SERNEM Elite (80.000 XP). Sayısal seviyeler 100'e kadar ilerler." : "Top title is SERNEM Elite (80,000 XP). Numbered levels progress up to 100."}</p></div><span className="rounded-full border border-emerald-400/30 px-3 py-1 text-xs font-black text-emerald-300">Level {levelState.level}/100</span></div>
-          <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">{LAB_RANKS.map((tier,index) => <div key={tier.key} className={`rounded-xl border p-3 ${totalXp >= tier.minXp ? "border-emerald-400/35 bg-emerald-500/10" : "border-white/10 bg-white/[0.025]"}`}><div className="flex items-center justify-between text-[10px]"><span className="font-black text-slate-400">{String(index+1).padStart(2,"0")}</span><span className={totalXp >= tier.minXp ? "text-emerald-300" : "text-slate-500"}>{totalXp >= tier.minXp ? (isTr ? "Açıldı ✓" : "Unlocked ✓") : (isTr ? "Kilitli" : "Locked")}</span></div><p className="mt-2 text-sm font-bold text-white">{tier.title}</p><p className="mt-1 text-xs text-sky-300">{tier.minXp.toLocaleString(isTr ? "tr-TR" : "en-US")} XP</p></div>)}</div>
+          <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">{LAB_RANKS.map((tier,index) => <div key={tier.key} className={`rounded-xl border p-3 ${totalXp >= tier.minXp ? "border-emerald-400/35 bg-emerald-500/10" : "border-white/10 bg-white/[0.025]"}`}><div className="flex items-center justify-between text-[10px]"><span className="font-black text-slate-400">{String(index+1).padStart(2,"0")}</span><span className={totalXp >= tier.minXp ? "text-emerald-300" : "text-slate-500"}>{totalXp >= tier.minXp ? (isTr ? "Açıldı ✓" : "Unlocked ✓") : (isTr ? "Kilitli" : "Locked")}</span></div><p className="mt-2 text-sm font-bold text-white">{tier.title}</p><p className="mt-1 text-xs text-sky-300">{tier.minXp.toLocaleString(isTr ? "tr-TR" : "en-US")} XP</p><p className="mt-2 text-[11px] leading-4 text-slate-400">{tierDescriptions[tier.key]?.[isTr ? 0 : 1]}</p></div>)}</div>
         </section>
 
         <section className="mb-5">
