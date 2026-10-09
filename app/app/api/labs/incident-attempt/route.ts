@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import { incidentScenarios } from "@/lib/labs/scenarios/incident-scenarios";
 import { getLevelState, getNextRank, getRank } from "@/lib/labs/progression";
 
 export async function POST(request: Request) {
@@ -12,20 +13,39 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "INVALID_PAYLOAD" }, { status: 400 });
   }
 
-  const score = Math.max(0, Math.min(100, Number(body.score) || 0));
-  const criticalCount = Math.max(0, Number(body.criticalCount) || 0);
-  const positiveCount = body.decisions.filter((item: { impactTotal?: number; critical?: boolean }) => !item.critical && Number(item.impactTotal || 0) >= 0).length;
-  const incorrectCount = Math.max(0, body.decisions.length - positiveCount);
-  const difficulty = typeof body.difficulty === "string" ? body.difficulty : "basic";
-
+  const scenario = incidentScenarios[body.scenarioId];
+  if (!scenario || body.decisions.length === 0 || body.decisions.length > 100) {
+    return NextResponse.json({ok:false,error:"INVALID_SCENARIO"},{status:400});
+  }
+  let expectedNode = scenario.start;
+  let safety = 100, judgment = 100, response = 100, criticalCount = 0, positiveCount = 0;
+  const verifiedDecisions: Array<{nodeId:string;choiceId:string;critical:boolean;impactTotal:number}> = [];
+  for (const item of body.decisions) {
+    const node = scenario.nodes.find(n => n.id === expectedNode);
+    const choice = node?.choices.find(c => c.id === item.choiceId);
+    if (!node || !choice || item.nodeId !== node.id) return NextResponse.json({ok:false,error:"INVALID_DECISION_PATH"},{status:400});
+    safety = Math.max(0, safety + Math.min(0,choice.impact.safety));
+    judgment = Math.max(0, judgment + Math.min(0,choice.impact.judgment));
+    response = Math.max(0, response + Math.min(0,choice.impact.response));
+    if (choice.critical) criticalCount++;
+    const impactTotal = choice.impact.safety + choice.impact.judgment + choice.impact.response;
+    if (!choice.critical && impactTotal >= 0) positiveCount++;
+    verifiedDecisions.push({nodeId:node.id,choiceId:choice.id,critical:Boolean(choice.critical),impactTotal});
+    expectedNode = choice.next ?? "";
+  }
+  const finalNode = scenario.nodes.find(n => n.id === expectedNode);
+  if (!finalNode || finalNode.choices.length !== 0) return NextResponse.json({ok:false,error:"INCOMPLETE_SCENARIO"},{status:400});
+  const score = Math.round((safety + judgment + response)/3);
+  const incorrectCount = verifiedDecisions.length - positiveCount;
+  const difficulty = scenario.difficulty;
   const { data, error } = await supabase.from("lab_attempts").insert({
     user_id: user.id,
     scenario_id: body.scenarioId,
     scenario_type: "incident_simulator",
-    category: typeof body.category === "string" ? body.category : "Incident Simulator",
+    category: scenario.category,
     difficulty,
     locale: body.locale === "tr" ? "tr" : "en",
-    selected_answers: { decisions: body.decisions, scores: body.scores ?? null, criticalCount, outcome: body.outcome ?? null },
+    selected_answers: { decisions: verifiedDecisions, scores: {safety,judgment,response}, criticalCount },
     correct_count: positiveCount,
     missed_count: 0,
     incorrect_count: incorrectCount,
