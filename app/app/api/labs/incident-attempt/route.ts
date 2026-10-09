@@ -50,9 +50,6 @@ export async function POST(request: Request) {
   const longestStreak = Number(currentProgress.longest_streak ?? 0);
   const scenarioCount = Number(currentProgress.scenario_count ?? 0);
   const firstCompletion = awardedXp > 0;
-  return NextResponse.json({ ok: false, error: "PROGRESS_SAVE_FAILED" }, { status: 500 });
-  }
-
   return NextResponse.json({
     ok: true,
     id: data.id,
