@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import { createLabsWriter } from "@/lib/labs/admin-writer";
 import { getSpotTheHazardScenario } from "@/lib/labs/scenarios/spot-the-hazard";
 import { scoreMultiSelectScenario } from "@/lib/labs/scoring";
 import { getLevelState, getNextRank, getRank } from "@/lib/labs/progression";
@@ -24,7 +25,8 @@ export async function POST(request: Request) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ saved: false, authenticated: false, result: { ...result, xpEarned: 0 } });
 
-  const { data: attempt, error: attemptError } = await supabase.from("lab_attempts").insert({
+  const writer = createLabsWriter();
+  const { data: attempt, error: attemptError } = await writer.from("lab_attempts").insert({
     user_id: user.id, scenario_id: scenario.id, scenario_type: scenario.type, category: scenario.category, difficulty: scenario.difficulty, locale,
     selected_answers: selectedAnswers, correct_count: result.correctCount, missed_count: result.missedCount, incorrect_count: result.incorrectCount,
     score: result.score, xp_earned: 0, completed: true,
