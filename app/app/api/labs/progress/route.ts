@@ -27,7 +27,7 @@ export async function GET() {
   const rank = getRank(totalXp);
   const nextRank = getNextRank(totalXp);
   const allAttempts = attempts ?? [];
-  const perfectCount = allAttempts.filter((item) => Number(item.score) === 100).length;
+  const perfectCount = allAttempts.filter((item) => Number(item.score) === 100 && Number(item.xp_earned ?? 0)>0).length;
   const expertCompleted = new Set(
     allAttempts
       .filter((item) => Number(item.xp_earned ?? 0) > 0 && normalizeLabDifficulty(item.difficulty) === "expert")
