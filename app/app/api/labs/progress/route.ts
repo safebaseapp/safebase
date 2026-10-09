@@ -17,7 +17,9 @@ export async function GET() {
     return NextResponse.json({ ok: false, error: "LABS_PROGRESS_UNAVAILABLE" }, { status: 500 });
   }
 
-  const { data: ranking, error: rankingError } = await supabase.rpc("get_labs_my_ranking").maybeSingle();
+  type MyRanking = { global_rank: number | null; monthly_rank: number | null; monthly_xp: number; global_participants: number; monthly_participants: number };
+  const { data: rankingData, error: rankingError } = await supabase.rpc("get_labs_my_ranking").maybeSingle();
+  const ranking = rankingData as MyRanking | null;
   if (rankingError) console.error("labs rank read failed", rankingError);
 
   const totalXp = Number(progress?.total_xp ?? 0);
