@@ -41,9 +41,35 @@ export async function finalizeAndAward(form:FormData){
  const raw=String(form.get("month")??"");
  if(!/^\d{4}-\d{2}$/.test(raw)) throw new Error("INVALID_MONTH");
  const month=`${raw}-01`;
+ if(String(form.get("confirm"))!==`AWARD ${raw}`) throw new Error("CONFIRMATION_REQUIRED");
  const db=createLabsWriter();
  const {error}=await db.rpc("award_finalized_labs_month",{p_month:month,p_actor:actor.id});
  if(error) throw new Error(`REWARD_FINALIZATION_FAILED: ${error.message}`);
  revalidatePath(`/${locale}/admin/rewards`);
  redirect(`/${locale}/admin/rewards?notice=awards-issued`);
+}
+
+export async function grantTemporaryPremium(form:FormData){
+ const actor=await owner();const locale=loc(form);
+ const target=String(form.get("userId")??"");
+ const days=Number(form.get("days"));const reason=String(form.get("reason")??"").trim();
+ if(!uuid(target)||![1,3,7,30].includes(days)||reason.length<5||reason.length>300)throw new Error("INVALID_REWARD_REQUEST");
+ const db=createLabsWriter();
+ const {data:person,error}=await db.from("profiles").select("id,role,status").eq("id",target).single();
+ if(error||!person||person.role==="admin"||person.status!=="active")throw new Error("TARGET_NOT_ELIGIBLE");
+ const now=new Date();const expiration=new Date(now.getTime()+days*86400000);
+ const {error:writeError}=await db.from("manual_premium_grants").insert({user_id:target,days,starts_at:now.toISOString(),expires_at:expiration.toISOString(),granted_by:actor.id,reason});
+ if(writeError)throw new Error("TEMPORARY_GRANT_FAILED");
+ revalidatePath(`/${locale}/admin/rewards`);
+ redirect(`/${locale}/admin/rewards?notice=temporary-granted`);
+}
+export async function revokeTemporaryPremium(form:FormData){
+ const actor=await owner();const locale=loc(form);const id=String(form.get("grantId")??"");
+ if(!uuid(id)||String(form.get("confirm"))!=="REVOKE")throw new Error("INVALID_REVOKE_REQUEST");
+ const db=createLabsWriter();
+ const {error}=await db.from("manual_premium_grants").update({revoked_at:new Date().toISOString()}).eq("id",id).is("revoked_at",null);
+ if(error)throw new Error("REVOCATION_FAILED");
+ void actor;
+ revalidatePath(`/${locale}/admin/rewards`);
+ redirect(`/${locale}/admin/rewards?notice=revoked`);
 }
