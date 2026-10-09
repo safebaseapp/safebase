@@ -1,3 +1,4 @@
+import { hasActiveReward } from "@/lib/auth/reward-access";
 import {
   AlignmentType,
   BorderStyle,
@@ -420,7 +421,7 @@ export async function GET(request: Request, { params }: RouteProps) {
   }
 
   const isPremium =
-    profile.plan === "premium" || profile.role === "admin";
+    profile.plan === "premium" || profile.role === "admin" || await hasActiveReward(supabase,user.id);
 
   if (!isPremium) {
     return NextResponse.redirect(
