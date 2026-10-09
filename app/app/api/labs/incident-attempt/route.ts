@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
-import { calculateStreak, calculateXpAward, getLevelState, getNextRank, getRank, utcDateString } from "@/lib/labs/progression";
+import { getLevelState, getNextRank, getRank } from "@/lib/labs/progression";
 
 export async function POST(request: Request) {
   const supabase = await createClient();
@@ -18,11 +18,6 @@ export async function POST(request: Request) {
   const incorrectCount = Math.max(0, body.decisions.length - positiveCount);
   const difficulty = typeof body.difficulty === "string" ? body.difficulty : "basic";
 
-  const { count: previousCount, error: previousError } = await supabase.from("lab_attempts").select("id", { count: "exact", head: true }).eq("user_id", user.id).eq("scenario_type", "incident_simulator").eq("scenario_id", body.scenarioId);
-  if (previousError) return NextResponse.json({ ok: false, error: "LABS_SCHEMA_UNAVAILABLE" }, { status: 503 });
-  const firstCompletion = (previousCount ?? 0) === 0;
-  const xp = calculateXpAward(difficulty, score, firstCompletion);
-
   const { data, error } = await supabase.from("lab_attempts").insert({
     user_id: user.id,
     scenario_id: body.scenarioId,
@@ -35,7 +30,7 @@ export async function POST(request: Request) {
     missed_count: 0,
     incorrect_count: incorrectCount,
     score,
-    xp_earned: xp.total,
+    xp_earned: 0,
     completed: true,
   }).select("id").single();
 
@@ -44,39 +39,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "SAVE_FAILED" }, { status: 500 });
   }
 
-  const { data: currentProgress } = await supabase.from("lab_user_progress").select("total_xp,current_streak,longest_streak,scenario_count,correct_count,last_activity_date").eq("user_id", user.id).maybeSingle();
-  const today = utcDateString();
-  const currentStreak = calculateStreak(currentProgress?.last_activity_date ?? null, currentProgress?.current_streak ?? 0, today);
-  const totalXp = (currentProgress?.total_xp ?? 0) + xp.total;
-  const scenarioCount = (currentProgress?.scenario_count ?? 0) + 1;
-  const correctCount = (currentProgress?.correct_count ?? 0) + positiveCount;
-  const longestStreak = Math.max(currentProgress?.longest_streak ?? 0, currentStreak);
+  const { data: latest, error: latestError } = await supabase.from("lab_attempts").select("id,xp_earned").eq("user_id",user.id).eq("scenario_type","incident_simulator").eq("scenario_id",body.scenarioId).order("created_at",{ascending:false}).limit(1).maybeSingle();
+  const { data: currentProgress, error: progressError } = await supabase.from("lab_user_progress").select("total_xp,current_streak,longest_streak,scenario_count").eq("user_id",user.id).maybeSingle();
+  if (latestError || progressError || !currentProgress || !latest) return NextResponse.json({ok:false,error:"PROGRESS_READ_FAILED"},{status:500});
+  const awardedXp = Number(latest.xp_earned ?? 0);
+  const totalXp = Number(currentProgress.total_xp ?? 0);
   const levelState = getLevelState(totalXp);
   const rank = getRank(totalXp);
   const nextRank = getNextRank(totalXp);
-
-  const { error: progressError } = await supabase.from("lab_user_progress").upsert({
-    user_id: user.id,
-    total_xp: totalXp,
-    level: levelState.level,
-    current_streak: currentStreak,
-    longest_streak: longestStreak,
-    scenario_count: scenarioCount,
-    correct_count: correctCount,
-    last_activity_date: today,
-    updated_at: new Date().toISOString(),
-  });
-  if (progressError) {
-    console.error("incident progress save failed", progressError);
-    return NextResponse.json({ ok: false, error: "PROGRESS_SAVE_FAILED" }, { status: 500 });
+  const currentStreak = Number(currentProgress.current_streak ?? 0);
+  const longestStreak = Number(currentProgress.longest_streak ?? 0);
+  const scenarioCount = Number(currentProgress.scenario_count ?? 0);
+  const firstCompletion = awardedXp > 0;
+  return NextResponse.json({ ok: false, error: "PROGRESS_SAVE_FAILED" }, { status: 500 });
   }
 
   return NextResponse.json({
     ok: true,
     id: data.id,
     firstCompletion,
-    awardedXp: xp.total,
-    xpBreakdown: { base: xp.baseXp, scoreBonus: xp.scoreBonus },
+    awardedXp,
+    xpBreakdown: { base: 0, scoreBonus: 0 },
     progress: {
       totalXp,
       level: levelState.level,
