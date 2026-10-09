@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { incidentScenarios } from "@/lib/labs/scenarios/incident-scenarios";
+import { localizeHseText } from "@/lib/labs/scenarios/hse-language";
 import { getLevelState, getNextRank, getRank } from "@/lib/labs/progression";
 
 export async function POST(request: Request) {
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
   }
   let expectedNode = scenario.start;
   let safety = 100, judgment = 100, response = 100, criticalCount = 0, positiveCount = 0;
-  const verifiedDecisions: Array<{nodeId:string;choiceId:string;critical:boolean;impactTotal:number}> = [];
+  const verifiedDecisions: Array<{nodeId:string;nodeTitle:string;choiceId:string;choiceLabel:string;consequence:string;critical:boolean;impact:{safety:number;judgment:number;response:number};impactTotal:number}> = [];
   for (const item of body.decisions) {
     const node = scenario.nodes.find(n => n.id === expectedNode);
     const choice = node?.choices.find(c => c.id === item.choiceId);
@@ -30,7 +31,7 @@ export async function POST(request: Request) {
     if (choice.critical) criticalCount++;
     const impactTotal = choice.impact.safety + choice.impact.judgment + choice.impact.response;
     if (!choice.critical && impactTotal >= 0) positiveCount++;
-    verifiedDecisions.push({nodeId:node.id,choiceId:choice.id,critical:Boolean(choice.critical),impactTotal});
+    verifiedDecisions.push({nodeId:node.id,nodeTitle:localizeHseText(body.locale === "tr" ? "tr" : "en",node.titleTr,node.titleEn),choiceId:choice.id,choiceLabel:localizeHseText(body.locale === "tr" ? "tr" : "en",choice.labelTr,choice.labelEn),consequence:localizeHseText(body.locale === "tr" ? "tr" : "en",choice.consequenceTr,choice.consequenceEn),critical:Boolean(choice.critical),impact:choice.impact,impactTotal});
     expectedNode = choice.next ?? "";
   }
   const finalNode = scenario.nodes.find(n => n.id === expectedNode);
