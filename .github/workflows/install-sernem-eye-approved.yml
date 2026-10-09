@@ -1,0 +1,49 @@
+name: Install approved PPE eye visuals
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/install-sernem-eye-approved.yml']
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Fetch approved assets and update mappings
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/cUKxqDszn9pJfMET' -o /tmp/eye.zip
+          unzip -t /tmp/eye.zip
+          unzip -o /tmp/eye.zip -d app/public
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('app/app/[locale]/ppe-standards/visual-data.ts')
+          s=p.read_text()
+          for code in ['EN ISO 16321-1','EN ISO 16321-2']:
+              slug=code.lower().replace(' ','-')
+              f=Path('app/public/ppe-standards/approved')/(slug+'.webp')
+              assert f.exists() and f.stat().st_size>10000
+              lines=s.splitlines(keepends=True)
+              idx=[i for i,x in enumerate(lines) if x.lstrip().startswith("'"+code+"':")]
+              assert len(idx)==1
+              i=idx[0]
+              img="'/ppe-standards/approved/"+slug+".webp'"
+              row,n=re.subn(r"photo:(?:'[^']+'|[0-9]+)","photo:"+img,lines[i],count=1)
+              assert n==1
+              row,n=re.subn(r"scenes:\[[^\]]*\]","scenes:["+img+"]",row,count=1)
+              assert n==1
+              lines[i]=row
+              s=''.join(lines)
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/public/ppe-standards/approved 'app/app/[locale]/ppe-standards/visual-data.ts'
+          git diff --cached --quiet && exit 0
+          git commit -m 'feat(ppe): apply two approved eye protection illustrations'
+          git push
