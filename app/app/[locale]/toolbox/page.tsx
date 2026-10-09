@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { toolboxData } from "@/lib/toolbox/toolbox-data";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import type { Metadata } from "next";
 import { createClient } from "@/utils/supabase/server";
@@ -75,6 +77,16 @@ export default async function ToolboxLibraryPage({ params }: Props) {
         locale={locale}
         controls={controls}
       />
+      <nav aria-label={locale === "tr" ? "Toolbox konu dizini" : "Toolbox topic directory"} className="mx-auto max-w-6xl px-5 pb-12">
+        <details className="rounded-2xl border border-slate-200 bg-white p-5 text-slate-900">
+          <summary className="cursor-pointer font-semibold">{locale === "tr" ? "Tüm Toolbox konuları" : "Browse all Toolbox topics"}</summary>
+          <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {toolboxData.filter(item => !controls.some(c => c.slug === item.slug && (!c.published || !c.visible))).map(item => (
+              <Link key={item.slug} href={`/${locale}/toolbox/${item.slug}`} className="rounded-lg px-2 py-1 text-sm text-blue-700 hover:underline">{String(item[locale].title ?? item.slug)}</Link>
+            ))}
+          </div>
+        </details>
+      </nav>
     </>
   );
 }
