@@ -17,6 +17,9 @@ export async function GET() {
     return NextResponse.json({ ok: false, error: "LABS_PROGRESS_UNAVAILABLE" }, { status: 500 });
   }
 
+  const { data: ranking, error: rankingError } = await supabase.rpc("get_labs_my_ranking").maybeSingle();
+  if (rankingError) console.error("labs rank read failed", rankingError);
+
   const totalXp = Number(progress?.total_xp ?? 0);
   const levelState = getLevelState(totalXp);
   const rank = getRank(totalXp);
@@ -34,6 +37,11 @@ export async function GET() {
   return NextResponse.json({
     ok: true,
     totalXp,
+    globalRank: rankingError ? null : (ranking?.global_rank ?? null),
+    monthlyRank: rankingError ? null : (ranking?.monthly_rank ?? null),
+    monthlyXp: rankingError ? null : Number(ranking?.monthly_xp ?? 0),
+    globalParticipants: rankingError ? null : Number(ranking?.global_participants ?? 0),
+    monthlyParticipants: rankingError ? null : Number(ranking?.monthly_participants ?? 0),
     level: levelState.level,
     levelProgress: levelState.progressPercent,
     xpIntoLevel: levelState.xpIntoLevel,
