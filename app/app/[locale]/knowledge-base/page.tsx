@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import GuideDirectoryClient from "./components/GuideDirectoryClient";
@@ -57,5 +58,15 @@ export default async function KnowledgeBasePage({ params }: Props) {
     riskLevel: guide.riskLevel?.[locale],
   }));
 
-  return <GuideDirectoryClient locale={locale} guides={guides} />;
+  return (
+    <>
+      <GuideDirectoryClient locale={locale} guides={guides} />
+      <nav aria-label={locale === "tr" ? "Bilgi merkezi rehber dizini" : "Knowledge base guide directory"} className="mx-auto max-w-6xl px-5 pb-12">
+        <details className="rounded-2xl border border-slate-200 bg-white p-5 text-slate-900">
+          <summary className="cursor-pointer font-semibold">{locale === "tr" ? "100 İSG rehberinin tamamı" : "Browse all 100 HSE guides"}</summary>
+          <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">{guides.map(item=><Link key={item.slug} href={`/${locale}/knowledge-base/${item.slug}`} className="rounded-lg px-2 py-1 text-sm text-blue-700 hover:underline">{item.title}</Link>)}</div>
+        </details>
+      </nav>
+    </>
+  );
 }
