@@ -15,6 +15,9 @@ type Summary = {
 type Progress = {
   ok: boolean;
   totalXp?: number;
+  globalRank?: number | null;
+  monthlyRank?: number | null;
+  monthlyXp?: number | null;
   level?: number;
   levelProgress?: number;
   xpToNextLevel?: number;
@@ -106,6 +109,9 @@ export default function DashboardLabsIntegration({ locale }: { locale: string })
 
         <div className="flex flex-wrap items-stretch gap-2.5">
           <Stat value={progress?.totalXp ?? 0} label="XP" />
+          <Stat value={progress?.monthlyXp ?? 0} label={isTr ? "Aylık XP" : "Monthly XP"} />
+          <Stat value={progress?.globalRank ? `#${progress.globalRank}` : "—"} label={isTr ? "Global Sıra" : "Global Rank"} />
+          <Stat value={progress?.monthlyRank ? `#${progress.monthlyRank}` : "—"} label={isTr ? "Aylık Sıra" : "Monthly Rank"} />
           <Stat value={progress?.level ?? 1} label={isTr ? "Seviye" : "Level"} />
           <Stat value={`${progress?.currentStreak ?? 0}🔥`} label={isTr ? "Seri" : "Streak"} />
           {latest ? <Stat value={latest.score} label={isTr ? "Son Skor" : "Last Score"} /> : null}
