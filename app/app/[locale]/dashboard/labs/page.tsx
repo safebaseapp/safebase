@@ -110,7 +110,7 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
   const levelState = getLevelState(totalXp);
   const rank = getRank(totalXp);
   const nextRank = getNextRank(totalXp);
-  const perfectCount = (badgeAttempts ?? []).filter((attempt) => attempt.score === 100).length;
+  const perfectCount = (badgeAttempts ?? []).filter((attempt) => attempt.score === 100 && attempt.xp_earned>0).length;
   const expertCompleted = new Set((badgeAttempts ?? []).filter((attempt) => attempt.xp_earned > 0 && normalizeLabDifficulty(attempt.difficulty) === "expert").map((attempt) => attempt.scenario_id)).size;
   const eligibleAttempts=(badgeAttempts??[]).filter(a=>Number(a.xp_earned)>0);
   const uniqueCompleted=new Set(eligibleAttempts.map(a=>a.scenario_id)).size;
