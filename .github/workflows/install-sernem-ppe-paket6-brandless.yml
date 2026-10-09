@@ -1,0 +1,62 @@
+name: Install approved brandless SERNEM fall-protection visuals
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-sernem-ppe-paket6-brandless.yml'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download user-approved brandless visual collage
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --max-time 150 'https://at.adobe.com/g3w2KrOK2Z1yfcOH' -o /tmp/ppe-brandless.png
+          python3 -m pip install --quiet --user Pillow
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          im=Image.open('/tmp/ppe-brandless.png').convert('RGB')
+          assert im.size==(1536,1024),im.size
+          # Six standalone illustrations, preserving original approved panel order.
+          codes=['en-353-2','en-358','en-360','en-361','en-362','en-813']
+          out=Path('app/public/ppe-standards/approved')
+          out.mkdir(parents=True,exist_ok=True)
+          for n,code in enumerate(codes):
+              x=n%3; y=n//3
+              # Whitespace separators at x ~= 494/999, y ~= 509
+              box=[(0,0,491,507),(501,0,993,507),(1003,0,1536,507),
+                   (0,520,491,1024),(501,520,993,1024),(1003,520,1536,1024)][n]
+              crop=im.crop(box)
+              crop.save(out/(code+'.webp'),'WEBP',quality=88,method=6)
+              assert (out/(code+'.webp')).stat().st_size>10000
+              print(code,crop.size)
+          PY
+      - name: Confirm mappings of six approved PPE visuals
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('app/app/[locale]/ppe-standards/visual-data.ts').read_text()
+          for code in ['EN 353-2','EN 358','EN 360','EN 361','EN 362','EN 813']:
+              slug=code.lower().replace(' ','-')
+              assert "photo:'/ppe-standards/approved/"+slug+".webp'" in s, code
+          # EN 795 explicitly not included.
+          PY
+      - name: Commit approved replacement images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/public/ppe-standards/approved
+          git diff --cached --quiet && exit 0
+          git commit -m 'feat(ppe): approved brandless visuals for six fall-protection standards'
+          git push
