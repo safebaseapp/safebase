@@ -65,6 +65,19 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
   const filter = ["all", "perfect", "earned", "expert"].includes(query.filter ?? "") ? query.filter! : "all";
   const parsedPage = Number(query.page ?? 1);
   const page = Number.isSafeInteger(parsedPage) ? Math.max(1, Math.min(1000, parsedPage)) : 1;
+  const rankTr: Record<string,string> = {
+    "hse-explorer":"İSG Kaşifi","field-starter":"Saha Başlangıç",
+    "safety-practitioner":"İSG Uygulayıcısı","advanced-hse":"İleri Düzey İSG",
+    "hse-decision-specialist":"İSG Karar Uzmanı","safety-expert":"İSG Uzmanı",
+    "hse-master":"İSG Ustası","sernem-elite":"SERNEM Elit"
+  };
+  const badgeTr: Record<string,[string,string]> = {
+    "perfect-chain":["Kusursuz Karar Zinciri","Bir Labs etkinliğini tam puanla tamamladı."],
+    "expert-five":["Uzman Karar Verici","Beş uzman seviye Labs senaryosunu tamamladı."],
+    "seven-day-streak":["7 Günlük Güvenlik Serisi","Yedi gün üst üste SERNEM Labs etkinliği tamamladı."],
+    "decision-specialist":["Karar Uzmanı","15.000 Labs XP seviyesine ulaştı."]
+  };
+  const titleFor = (key: string, title: string) => isTr ? (rankTr[key] ?? title) : title;
   const tierDescriptions: Record<string, [string,string]> = {
     "hse-explorer": ["HSE Labs ile tanışma", "Introduction to HSE Labs"],
     "field-starter": ["Temel saha kararları", "Core field decisions"],
@@ -118,29 +131,29 @@ export default async function LabsResultsPage({ params, searchParams }: Props) {
         <section className="mb-8 rounded-3xl border border-emerald-300/15 bg-[linear-gradient(135deg,rgba(7,35,29,.96),rgba(8,20,35,.96))] p-6">
           <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
             <div>
-              <div className="text-xs font-black uppercase tracking-[0.18em] text-emerald-300">{rank.title} · Level {levelState.level}</div>
+              <div className="text-xs font-black uppercase tracking-[0.18em] text-emerald-300">{titleFor(rank.key,rank.title)} · {isTr ? "Seviye" : "Level"} {levelState.level}</div>
               <div className="mt-2 text-4xl font-black text-white">{totalXp.toLocaleString(isTr ? "tr-TR" : "en-US")} XP</div>
               <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-emerald-300" style={{ width: `${levelState.progressPercent}%` }} /></div>
-              <div className="mt-2 flex flex-wrap justify-between gap-2 text-xs text-slate-400"><span>{levelState.remainingXp} XP {isTr ? "sonraki seviyeye" : "to next level"}</span><span>{nextRank ? `${Math.max(0, nextRank.minXp - totalXp)} XP → ${nextRank.title}` : "SERNEM Elite"}</span></div>
-              {badges.length > 0 ? <div className="mt-4 flex flex-wrap gap-2">{badges.map((badge) => <span key={badge.key} title={badge.description} className="rounded-full border border-amber-300/20 bg-amber-300/[0.06] px-3 py-1.5 text-xs font-bold text-amber-200">🏅 {badge.title}</span>)}</div> : null}
+              <div className="mt-2 flex flex-wrap justify-between gap-2 text-xs text-slate-400"><span>{levelState.remainingXp} XP {isTr ? "sonraki seviyeye" : "to next level"}</span><span>{nextRank ? `${Math.max(0, nextRank.minXp - totalXp)} XP → ${titleFor(nextRank.key,nextRank.title)}` : "SERNEM Elite"}</span></div>
+              {badges.length > 0 ? <div className="mt-4 flex flex-wrap gap-2">{badges.map((badge) => <span key={badge.key} title={isTr ? (badgeTr[badge.key]?.[1] ?? badge.description) : badge.description} className="rounded-full border border-amber-300/20 bg-amber-300/[0.06] px-3 py-1.5 text-xs font-bold text-amber-200">🏅 {isTr ? (badgeTr[badge.key]?.[0] ?? badge.title) : badge.title}</span>)}</div> : null}
             </div>
             <div className="grid grid-cols-2 gap-3 text-center sm:grid-cols-3">
               <ProgressStat value={Number(progress?.current_streak ?? 0)} label={isTr ? "Günlük Seri" : "Day Streak"} />
               <ProgressStat value={perfectCount} label={isTr ? "Kusursuz" : "Perfect"} />
-              <ProgressStat value={expertCompleted} label="Expert" />
+              <ProgressStat value={expertCompleted} label={isTr ? "Uzman Seviye" : "Expert"} />
             </div>
           </div>
         </section>
 
         <section className="mb-8 rounded-3xl border border-sky-300/15 bg-[#081827] p-5 sm:p-6">
-          <div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-xl font-black text-white">{isTr ? "Seviye ve unvan yol haritası" : "Levels & titles roadmap"}</h2><p className="mt-1 text-xs text-slate-400">{isTr ? "En yüksek unvan SERNEM Elite (80.000 XP). Sayısal seviyeler 100'e kadar ilerler." : "Top title is SERNEM Elite (80,000 XP). Numbered levels progress up to 100."}</p></div><span className="rounded-full border border-emerald-400/30 px-3 py-1 text-xs font-black text-emerald-300">Level {levelState.level}/100</span></div>
-          <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">{LAB_RANKS.map((tier,index) => <div key={tier.key} className={`rounded-xl border p-3 ${totalXp >= tier.minXp ? "border-emerald-400/35 bg-emerald-500/10" : "border-white/10 bg-white/[0.025]"}`}><div className="flex items-center justify-between text-[10px]"><span className="font-black text-slate-400">{String(index+1).padStart(2,"0")}</span><span className={totalXp >= tier.minXp ? "text-emerald-300" : "text-slate-500"}>{totalXp >= tier.minXp ? (isTr ? "Açıldı ✓" : "Unlocked ✓") : (isTr ? "Kilitli" : "Locked")}</span></div><p className="mt-2 text-sm font-bold text-white">{tier.title}</p><p className="mt-1 text-xs text-sky-300">{tier.minXp.toLocaleString(isTr ? "tr-TR" : "en-US")} XP</p><p className="mt-2 text-[11px] leading-4 text-slate-400">{tierDescriptions[tier.key]?.[isTr ? 0 : 1]}</p></div>)}</div>
+          <div className="flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-xl font-black text-white">{isTr ? "Seviye ve unvan yol haritası" : "Levels & titles roadmap"}</h2><p className="mt-1 text-xs text-slate-400">{isTr ? "En yüksek unvan SERNEM Elite (80.000 XP). Sayısal seviyeler 100'e kadar ilerler." : "Top title is SERNEM Elite (80,000 XP). Numbered levels progress up to 100."}</p></div><span className="rounded-full border border-emerald-400/30 px-3 py-1 text-xs font-black text-emerald-300">{isTr ? "Seviye" : "Level"} {levelState.level}/100</span></div>
+          <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">{LAB_RANKS.map((tier,index) => <div key={tier.key} className={`rounded-xl border p-3 ${totalXp >= tier.minXp ? "border-emerald-400/35 bg-emerald-500/10" : "border-white/10 bg-white/[0.025]"}`}><div className="flex items-center justify-between text-[10px]"><span className="font-black text-slate-400">{String(index+1).padStart(2,"0")}</span><span className={totalXp >= tier.minXp ? "text-emerald-300" : "text-slate-500"}>{totalXp >= tier.minXp ? (isTr ? "Açıldı ✓" : "Unlocked ✓") : (isTr ? "Kilitli" : "Locked")}</span></div><p className="mt-2 text-sm font-bold text-white">{titleFor(tier.key,tier.title)}</p><p className="mt-1 text-xs text-sky-300">{tier.minXp.toLocaleString(isTr ? "tr-TR" : "en-US")} XP</p><p className="mt-2 text-[11px] leading-4 text-slate-400">{tierDescriptions[tier.key]?.[isTr ? 0 : 1]}</p></div>)}</div>
         </section>
 
         <section className="mb-5">
           <h2 className="text-xl font-black text-white">{isTr ? "Geçmiş simülasyonlarım" : "My simulation history"}</h2>
           <p className="mt-1 text-sm text-slate-400">{isTr ? "Sonuçları filtrele; karar zincirini yalnızca açmak istediğin kayıtta görüntüle." : "Filter past results and expand only the decision chains you want to review."}</p>
-          <div className="mt-3 flex flex-wrap gap-2">{[["all", isTr ? "Tümü" : "All"],["perfect", isTr ? "100 puan" : "Perfect"],["earned", isTr ? "XP kazandıran" : "Earned XP"],["expert", "Expert"]].map(([key,label]) => <Link key={key} href={historyHref(key)} className={`rounded-xl border px-3 py-2 text-xs font-bold ${filter === key ? "border-emerald-300/50 bg-emerald-300/10 text-emerald-200" : "border-white/10 text-slate-400 hover:text-white"}`}>{label}</Link>)}</div>
+          <div className="mt-3 flex flex-wrap gap-2">{[["all", isTr ? "Tümü" : "All"],["perfect", isTr ? "100 puan" : "Perfect"],["earned", isTr ? "XP kazandıran" : "Earned XP"],["expert", isTr ? "Uzman" : "Expert"]].map(([key,label]) => <Link key={key} href={historyHref(key)} className={`rounded-xl border px-3 py-2 text-xs font-bold ${filter === key ? "border-emerald-300/50 bg-emerald-300/10 text-emerald-200" : "border-white/10 text-slate-400 hover:text-white"}`}>{label}</Link>)}</div>
           <p className="mt-3 text-xs text-slate-500">{count ?? 0} {isTr ? "kayıt" : "records"} · {isTr ? "Sayfa" : "Page"} {page}/{Math.max(1,Math.ceil((count ?? 0)/pageSize))}</p>
         </section>
 
