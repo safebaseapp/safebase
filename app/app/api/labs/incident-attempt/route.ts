@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import { createLabsWriter } from "@/lib/labs/admin-writer";
 import { incidentScenarios } from "@/lib/labs/scenarios/incident-scenarios";
 import { localizeHseText } from "@/lib/labs/scenarios/hse-language";
 import { getLevelState, getNextRank, getRank } from "@/lib/labs/progression";
@@ -39,7 +40,8 @@ export async function POST(request: Request) {
   const score = Math.round((safety + judgment + response)/3);
   const incorrectCount = verifiedDecisions.length - positiveCount;
   const difficulty = scenario.difficulty;
-  const { data, error } = await supabase.from("lab_attempts").insert({
+  const writer = createLabsWriter();
+  const { data, error } = await writer.from("lab_attempts").insert({
     user_id: user.id,
     scenario_id: body.scenarioId,
     scenario_type: "incident_simulator",
