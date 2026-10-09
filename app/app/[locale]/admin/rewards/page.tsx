@@ -19,7 +19,7 @@ export default async function RewardsAdmin({params,searchParams}:{params:Promise
  const {notice,month:requestedMonth}=await searchParams;
  const month=new Date();month.setUTCMonth(month.getUTCMonth()-1);
  const previousMonth=`${month.getUTCFullYear()}-${String(month.getUTCMonth()+1).padStart(2,"0")}`;
- const selectedMonth=/^\\d{4}-\\d{2}$/.test(requestedMonth??"")?requestedMonth!:previousMonth;
+ const selectedMonth=/^\d{4}-\d{2}$/.test(requestedMonth??"")?requestedMonth!:previousMonth;
  const {data:preview}=await db.rpc("preview_labs_monthly_results",{p_month:`${selectedMonth}-01`});
  const {data:manualGrants}=await db.from("manual_premium_grants").select("id,user_id,days,expires_at,revoked_at,reason").order("granted_at",{ascending:false}).limit(30);
  const nameById=new Map((people??[]).map(p=>[p.id,p.full_name||p.email||p.id]));
