@@ -3,6 +3,7 @@ import "server-only";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { isAdminUser } from "@/lib/auth/access";
+import { hasActiveReward } from "@/lib/auth/reward-access";
 
 export type ProfileRole = "user" | "admin";
 export type ProfilePlan = "free" | "premium";
@@ -100,7 +101,8 @@ export async function requirePremiumUser({
   const hasPremium =
     isAdminUser(user) ||
     profile.role === "admin" ||
-    profile.plan === "premium";
+    profile.plan === "premium" ||
+    await hasActiveReward(await createClient(), user.id);
 
   if (!hasPremium) {
     redirect(
