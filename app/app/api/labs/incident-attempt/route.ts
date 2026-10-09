@@ -32,17 +32,16 @@ export async function POST(request: Request) {
     score,
     xp_earned: 0,
     completed: true,
-  }).select("id").single();
+  }).select("id,xp_earned").single();
 
   if (error) {
     console.error("incident attempt save failed", error);
     return NextResponse.json({ ok: false, error: "SAVE_FAILED" }, { status: 500 });
   }
 
-  const { data: latest, error: latestError } = await supabase.from("lab_attempts").select("id,xp_earned").eq("user_id",user.id).eq("scenario_type","incident_simulator").eq("scenario_id",body.scenarioId).order("created_at",{ascending:false}).limit(1).maybeSingle();
   const { data: currentProgress, error: progressError } = await supabase.from("lab_user_progress").select("total_xp,current_streak,longest_streak,scenario_count").eq("user_id",user.id).maybeSingle();
-  if (latestError || progressError || !currentProgress || !latest) return NextResponse.json({ok:false,error:"PROGRESS_READ_FAILED"},{status:500});
-  const awardedXp = Number(latest.xp_earned ?? 0);
+  if (progressError || !currentProgress || !data) return NextResponse.json({ok:false,error:"PROGRESS_READ_FAILED"},{status:500});
+  const awardedXp = Number(data.xp_earned ?? 0);
   const totalXp = Number(currentProgress.total_xp ?? 0);
   const levelState = getLevelState(totalXp);
   const rank = getRank(totalXp);
