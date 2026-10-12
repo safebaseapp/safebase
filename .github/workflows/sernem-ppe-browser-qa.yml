@@ -1,0 +1,69 @@
+name: SERNEM PPE responsive browser QA
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/sernem-ppe-browser-qa.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install headless Chrome automation
+        run: npm install --prefix /tmp/sernem-browser --no-save --silent puppeteer@24
+      - name: Test representative TR EN desktop and mobile routes
+        shell: bash
+        run: |
+          node <<'JS'
+          const puppeteer = require('/tmp/sernem-browser/node_modules/puppeteer');
+          (async()=>{
+            const browser=await puppeteer.launch({headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
+            const cases=[
+              {code:'INDEX',slug:''},
+              {code:'EN 361',slug:'en-361-full-body-harnesses'},
+              {code:'EN ISO 16321-3',slug:'en-iso-16321-3-mesh-eye-face-protectors'},
+              {code:'EN 355',slug:'en-355-energy-absorbers'},
+              {code:'EN 169',slug:'en-169-welding-filters-legacy'}
+            ];
+            let screenshots=0;
+            for(const conf of [{kind:'desktop',w:1440,h:950},{kind:'mobile',w:390,h:844}]){
+              const page=await browser.newPage();
+              await page.setViewport({width:conf.w,height:conf.h,deviceScaleFactor:1});
+              for(const c of cases){
+                for(const locale of ['tr','en']){
+                  const url='https://www.sernem.com/'+locale+'/ppe-standards'+(c.slug?'/'+c.slug:'');
+                  try{
+                    const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:40000});
+                    await new Promise(r=>setTimeout(r,350));
+                    const status=response?.status();
+                    const result=await page.evaluate(()=>{
+                      const html=document.documentElement;
+                      const viewport=window.innerWidth;
+                      let imgs=[...document.images];
+                      let visible=imgs.filter(x=>{const r=x.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight});
+                      let broken=visible.filter(x=>x.complete&&x.naturalWidth===0).map(x=>x.src.slice(-100));
+                      const approved=imgs.map(x=>x.getAttribute('src')).filter(x=>x&&x.includes('/ppe-standards/approved/'));
+                      let duplicates=approved.length-new Set(approved).size;
+                      return {width:viewport,scrollWidth:html.scrollWidth,overflowPx:Math.max(0,html.scrollWidth-viewport),visibleImages:visible.length,brokenVisible:broken,approvedImageNodes:approved.length,repeatedApprovedSrc:duplicates,h1:document.querySelector('h1')?.innerText?.slice(0,90)};
+                    });
+                    console.log('BROWSER_QA',JSON.stringify({viewport:conf.kind,code:c.code,locale,status,...result}));
+                    if((c.code==='INDEX'||c.code==='EN ISO 16321-3'||c.code==='EN 355')&&screenshots<8&&locale==='tr'){
+                      const buffer=await page.screenshot({type:'jpeg',quality:57,fullPage:false});
+                      const b64=buffer.toString('base64');
+                      const label=conf.kind+'_'+c.code.replace(/[^a-zA-Z0-9]/g,'_');
+                      console.log('SCREEN_'+label+'_BEGIN');
+                      for(let k=0;k<b64.length;k+=1800)console.log(b64.slice(k,k+1800));
+                      console.log('SCREEN_'+label+'_END');
+                      screenshots++;
+                    }
+                  }catch(e){console.log('BROWSER_ERROR',conf.kind,c.code,locale,String(e).slice(0,150))}
+                }
+              }
+              await page.close();
+            }
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)})
+          JS
