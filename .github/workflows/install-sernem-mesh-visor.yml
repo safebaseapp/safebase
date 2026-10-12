@@ -1,0 +1,51 @@
+name: Install approved mesh visor image
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/install-sernem-mesh-visor.yml']
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Install approved forestry mesh visor visual
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/uJetdSa7Ym7PsA87' -o /tmp/mesh.png
+          python3 -m pip install --quiet --user Pillow
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          im=Image.open('/tmp/mesh.png').convert('RGB')
+          assert im.width>=1000 and im.height>=700,im.size
+          p=Path('app/public/ppe-standards/approved/en-iso-16321-3.webp')
+          p.parent.mkdir(parents=True,exist_ok=True)
+          im.save(p,'WEBP',quality=87,method=6)
+          assert p.stat().st_size>20000
+          source=Path('app/app/[locale]/ppe-standards/visual-data.ts')
+          lines=source.read_text().splitlines(keepends=True)
+          idx=[i for i,x in enumerate(lines) if x.lstrip().startswith("'EN ISO 16321-3':")]
+          assert len(idx)==1
+          i=idx[0]
+          import re
+          path="'/ppe-standards/approved/en-iso-16321-3.webp'"
+          row,n=re.subn(r"photo:(?:'[^']+'|[0-9]+)","photo:"+path,lines[i],count=1)
+          assert n==1
+          row,n=re.subn(r"scenes:\[[^\]]*\]","scenes:["+path+"]",row,count=1)
+          assert n==1
+          lines[i]=row
+          source.write_text(''.join(lines))
+          PY
+      - name: Commit
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/public/ppe-standards/approved/en-iso-16321-3.webp 'app/app/[locale]/ppe-standards/visual-data.ts'
+          git diff --cached --quiet && exit 0
+          git commit -m 'feat(ppe): approved forestry mesh face shield image'
+          git push
