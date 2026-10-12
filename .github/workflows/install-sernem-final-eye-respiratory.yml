@@ -1,0 +1,56 @@
+name: Install four approved respiratory and eye visuals
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/install-sernem-final-eye-respiratory.yml']
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Install approved PPE images
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/kI1yMc4AHPfnP46R' -o /tmp/en-149.png
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/4q4MEYgoZU5q4W1C' -o /tmp/en-136.png
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/4RaIYq0YK0ZoeacZ' -o /tmp/en-166.png
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/yReOIckqy7ecn5wU' -o /tmp/en-175.png
+          python3 -m pip install --quiet --user Pillow
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import re
+          codes=['EN 149','EN 136','EN 166','EN 175']
+          base=Path('app/public/ppe-standards/approved');base.mkdir(parents=True,exist_ok=True)
+          p=Path('app/app/[locale]/ppe-standards/visual-data.ts')
+          lines=p.read_text().splitlines(keepends=True)
+          for code in codes:
+              slug=code.lower().replace(' ','-')
+              im=Image.open('/tmp/'+slug+'.png').convert('RGB')
+              assert im.width>=1000 and im.height>=700
+              dest=base/(slug+'.webp')
+              im.save(dest,'WEBP',quality=87,method=6)
+              assert dest.stat().st_size>20000
+              hits=[i for i,line in enumerate(lines) if line.lstrip().startswith("'"+code+"':")]
+              assert len(hits)==1,code
+              i=hits[0];ref="'/ppe-standards/approved/"+slug+".webp'"
+              row,n=re.subn(r"photo:(?:'[^']+'|[0-9]+)","photo:"+ref,lines[i],count=1)
+              assert n==1
+              row,n=re.subn(r"scenes:\[[^\]]*\]","scenes:["+ref+"]",row,count=1)
+              assert n==1
+              lines[i]=row
+          p.write_text(''.join(lines))
+          PY
+      - name: Commit approved changes
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/public/ppe-standards/approved 'app/app/[locale]/ppe-standards/visual-data.ts'
+          git diff --cached --quiet && exit 0
+          git commit -m 'feat(ppe): approved EN 149 EN 136 EN 166 EN 175 visuals'
+          git push
