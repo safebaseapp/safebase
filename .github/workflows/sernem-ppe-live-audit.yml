@@ -1,0 +1,125 @@
+name: SERNEM PPE public live QA scan
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/sernem-ppe-live-audit.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install scan dependencies
+        run: pip install -q requests beautifulsoup4
+      - name: Audit public TR and EN detail pages and all 46 images
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re, json, time, os, concurrent.futures
+          from pathlib import Path
+          from collections import Counter
+          import requests
+          from requests.adapters import HTTPAdapter
+          from urllib3.util.retry import Retry
+          from bs4 import BeautifulSoup
+          ROOT='https://www.sernem.com'
+          folder=Path('app/app/[locale]/ppe-standards')
+          source=(folder/'data.ts').read_text()+'\n'+(folder/'expanded-data.ts').read_text()
+          matches=re.findall(r"""slug\s*:\s*['"]([^'"]+)['"]\s*,\s*code\s*:\s*['"]([^'"]+)['"]""",source)
+          codes={}
+          for slug,code in matches: codes[slug]=code
+          assert len(codes)==46, f"Expected 46 slugs, found {len(codes)}"
+          session=requests.Session()
+          retry=Retry(total=2,backoff_factor=.3,status_forcelist=[429,500,502,503,504],allowed_methods=['GET','HEAD'])
+          adapter=HTTPAdapter(max_retries=retry,pool_connections=24,pool_maxsize=24)
+          session.mount('https://',adapter)
+          categories=['Head protection','Fall protection','Eye / face protection','Foot protection','Hand protection','Protective clothing','Respiratory protection','Hearing protection','Electrical protection']
+          def scan_item(args):
+            kind,locale,slug,code=args
+            url=f'{ROOT}/{locale}/ppe-standards'+(('/'+slug) if slug else '')
+            issues=[]
+            try:
+              r=session.get(url,timeout=35)
+              if r.status_code!=200:return dict(kind=kind,locale=locale,code=code,slug=slug,status=r.status_code,url=url,issues=['PAGE_HTTP_'+str(r.status_code)])
+              soup=BeautifulSoup(r.text,'html.parser')
+              title=soup.title.get_text(' ',strip=True) if soup.title else ''
+              lang=soup.html.get('lang','') if soup.html else ''
+              h1=soup.h1.get_text(' ',strip=True) if soup.h1 else ''
+              main=soup.find('main') or soup
+              for tag in main(['script','style','noscript']):tag.decompose()
+              visible=main.get_text(' ',strip=True)
+              canonical=soup.find('link',rel='canonical')
+              canonical=canonical.get('href','') if canonical else ''
+              alternate=[x for x in soup.find_all('link',rel='alternate') if x.get('hreflang') in ['en','tr','x-default']]
+              hrefs={x.get('hreflang'):x.get('href') for x in alternate}
+              if lang!=locale:issues.append('HTML_LANG_'+lang)
+              if not h1:issues.append('MISSING_H1')
+              if canonical!=url:issues.append('CANONICAL_MISMATCH_'+canonical[-100:])
+              if hrefs.get('tr')!=url.replace('/en/','/tr/').replace('/tr/','/tr/'):issues.append('TR_HREFLANG_MISSING_OR_WRONG')
+              if hrefs.get('en')!=url.replace('/tr/','/en/').replace('/en/','/en/'):issues.append('EN_HREFLANG_MISSING_OR_WRONG')
+              if not title:issues.append('MISSING_TITLE')
+              if len(visible)<650:issues.append('SHORT_VISIBLE_TEXT_'+str(len(visible)))
+              if kind=='detail':
+                if code not in visible:issues.append('CODE_NOT_VISIBLE')
+                imgs=[x.get('src','') for x in main.find_all('img')]
+                if not any('/ppe-standards/approved/' in s for s in imgs):issues.append('NO_APPROVED_IMAGE_IN_DOM')
+              if locale=='tr':
+                leaks=[c for c in categories if c in visible]
+                if leaks:issues.append('ENGLISH_CATEGORY_'+','.join(leaks))
+              if locale=='en':
+                # Turkish-specific navigation and section phrases, not product brands.
+                leaks=[x for x in ['Genel bakış','Saha kontrolü','İşaretleme','Teknik KKD Rehberi','Birlikte görülen standartlar','YANLIŞ SEÇİM ÖRNEĞİ','İLGİLİ STANDARTLAR'] if x.lower() in visible.lower()]
+                if leaks:issues.append('TURKISH_UI_'+','.join(leaks))
+              return dict(kind=kind,locale=locale,code=code,slug=slug,status=r.status_code,url=url,title=title[:95],h1=h1[:100],text_len=len(visible),images=len(main.find_all('img')),issues=issues)
+            except Exception as e:return dict(kind=kind,locale=locale,code=code,slug=slug,status='ERROR',url=url,issues=[str(e)[:140]])
+          jobs=[('index',l,'','INDEX') for l in ['tr','en']]
+          jobs +=[('detail',l,slug,code) for slug,code in codes.items() for l in ['tr','en']]
+          with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
+            pages=list(pool.map(scan_item,jobs))
+          vis=(folder/'visual-data.ts').read_text()
+          maps=re.findall(r"""'([^']+)':\s*\{\s*photo:\s*'([^']+)'""",vis)
+          approved=[(c,p) for c,p in maps if p.startswith('/ppe-standards/approved/')]
+          def check_image(item):
+            code,path=item
+            url=ROOT+path
+            try:
+              r=session.get(url,timeout=35,stream=True)
+              ctype=r.headers.get('content-type','')
+              size=int(r.headers.get('content-length','0') or 0)
+              r.close()
+              return dict(code=code,path=path,status=r.status_code,content_type=ctype,bytes=size,ok=r.status_code==200 and ctype.startswith('image/'))
+            except Exception as e:return dict(code=code,path=path,status='ERROR',ok=False,error=str(e)[:100])
+          with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
+            images=list(pool.map(check_image,approved))
+          report={'expected_pages':94,'pages':pages,'images':images,'image_count':len(images)}
+          Path('/tmp/sernem-ppe-audit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          page_issues=[p for p in pages if p['issues']]
+          image_issues=[x for x in images if not x['ok']]
+          print('=== SERNEM LIVE TR/EN PPE QA ===')
+          print('PAGES',len(pages),'OK_200',sum(p['status']==200 for p in pages),'ISSUE_PAGES',len(page_issues))
+          print('IMAGES',len(images),'OK',sum(x['ok'] for x in images),'FAILED',len(image_issues))
+          print('PAGE_ERROR_TYPES',dict(Counter(e.split('_')[0] for p in pages for e in p['issues'])))
+          print('MIN_VISIBLE_WORDS',sorted((p.get('text_len',0),p['locale'],p['code']) for p in pages if p['kind']=='detail')[:12])
+          print('=== ISSUE SAMPLES: up to 65 ===')
+          for p in page_issues[:65]: print('PAGE_ISSUE',p['locale'],p['code'],p['slug'],'|',' ; '.join(p['issues']))
+          for p in image_issues[:46]: print('IMAGE_ISSUE',p)
+          print('=== PAGE EXAMPLES ===')
+          for p in pages[:6]: print('PAGE_SAMPLE',p['locale'],p['code'],p.get('title'),p.get('h1'),p.get('text_len'))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+            f.write(f"# SERNEM 46 PPE standards live audit\n\nPages: **{sum(p['status']==200 for p in pages)}/{len(pages)} HTTP 200**. Images: **{sum(x['ok'] for x in images)}/{len(images)} HTTP 200**. Pages with issues: **{len(page_issues)}**.\n\n")
+            f.write('|Locale|Code|Issue|\n|---|---|---|\n')
+            for p in page_issues[:100]:f.write('|'+p['locale']+'|'+p['code']+'|'+ '; '.join(p['issues']).replace('|','/')+'|\n')
+          PY
+      - name: Save report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sernem-ppe-live-qa
+          path: /tmp/sernem-ppe-audit.json
+          if-no-files-found: warn
