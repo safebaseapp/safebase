@@ -1,0 +1,43 @@
+name: SERNEM TR EN core site public QA
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/sernem-core-site-live-audit.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Install lightweight scanner
+        run: pip install -q requests beautifulsoup4
+      - name: Check representative SERNEM public routes
+        run: |
+          python3 - <<'PY'
+          from concurrent.futures import ThreadPoolExecutor
+          from bs4 import BeautifulSoup
+          import requests,json
+          root='https://www.sernem.com'
+          sections=['','toolbox','posters','safety-signs','downloads','knowledge-base','checklists','templates','tools','labs','labs/incident-simulator','ai-assistant','risk-assessment','hse-performance','ppe-standards','faq','about','upgrade','contact']
+          urls=[(lang,s,root+'/'+lang+('/'+s if s else '')) for s in sections for lang in ['tr','en']]
+          def check(item):
+            lang,section,url=item
+            try:
+              r=requests.get(url,timeout=35,allow_redirects=True,headers={'User-Agent':'SERNEM-Official-QA/1.0'})
+              soup=BeautifulSoup(r.text,'html.parser')
+              main=soup.find('main') or soup
+              for x in main(['script','style']): x.decompose()
+              visible=main.get_text(' ',strip=True)
+              return {'locale':lang,'section':section or 'HOME','status':r.status_code,'final_url':r.url,'html_lang':soup.html.get('lang','') if soup.html else '', 'title':soup.title.get_text(' ',strip=True)[:85] if soup.title else '','h1':soup.h1.get_text(' ',strip=True)[:100] if soup.h1 else '','text_len':len(visible),'canonical': (soup.find('link',rel='canonical') or {}).get('href',''), 'english_category':lang=='tr' and 'Head protection' in visible}
+            except Exception as e:return {'locale':lang,'section':section or 'HOME','status':'ERROR','error':str(e)[:150]}
+          with ThreadPoolExecutor(max_workers=10) as pool: items=list(pool.map(check,urls))
+          print('CORE_SITE_TOTAL',len(items),'HTTP200',sum(x['status']==200 for x in items))
+          for x in items:print('CORE_ROUTE',json.dumps(x,ensure_ascii=False))
+          for path in ['robots.txt','sitemap.xml']:
+            try:
+              r=requests.get(root+'/'+path,timeout=20)
+              print('CORE_SEO_FILE',path,r.status_code,r.headers.get('content-type'),len(r.content))
+            except Exception as e:print('CORE_SEO_FILE',path,'ERROR',str(e)[:90])
+          PY
