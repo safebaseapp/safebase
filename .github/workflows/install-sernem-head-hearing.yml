@@ -1,0 +1,56 @@
+name: Install approved head and hearing PPE visuals
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/install-sernem-head-hearing.yml']
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Split approved four-panel collage and update PPE mappings
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/Q367qVY4C0QPDbWT' -o /tmp/head-hearing.png
+          python3 -m pip install --quiet --user Pillow
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import re
+          img=Image.open('/tmp/head-hearing.png').convert('RGB')
+          assert img.width>=1200 and img.height>=800,img.size
+          w,h=img.size
+          pairs=[('EN 397',(0,0,w//2,h//2)),('EN 812',(w//2,0,w,h//2)),('EN 12492',(0,h//2,w//2,h)),('EN 352',(w//2,h//2,w,h))]
+          folder=Path('app/public/ppe-standards/approved')
+          folder.mkdir(parents=True,exist_ok=True)
+          p=Path('app/app/[locale]/ppe-standards/visual-data.ts')
+          lines=p.read_text().splitlines(keepends=True)
+          for code,box in pairs:
+              slug=code.lower().replace(' ','-')
+              dest=folder/(slug+'.webp')
+              img.crop(box).save(dest,'WEBP',quality=87,method=6)
+              assert dest.stat().st_size>20000
+              indices=[i for i,line in enumerate(lines) if line.lstrip().startswith("'"+code+"':")]
+              assert len(indices)==1,code
+              i=indices[0]
+              ref="'/ppe-standards/approved/"+slug+".webp'"
+              row,n=re.subn(r"photo:(?:'[^']+'|[0-9]+)","photo:"+ref,lines[i],count=1)
+              assert n==1,code
+              row,n=re.subn(r"scenes:\[[^\]]*\]","scenes:["+ref+"]",row,count=1)
+              assert n==1,code
+              lines[i]=row
+          p.write_text(''.join(lines))
+          PY
+      - name: Commit approved four visuals
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/public/ppe-standards/approved/en-397.webp app/public/ppe-standards/approved/en-812.webp app/public/ppe-standards/approved/en-12492.webp app/public/ppe-standards/approved/en-352.webp 'app/app/[locale]/ppe-standards/visual-data.ts'
+          git diff --cached --quiet && exit 0
+          git commit -m 'feat(ppe): approved head and hearing protection visual set'
+          git push
