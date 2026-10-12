@@ -1,0 +1,60 @@
+name: Install approved footwear and glove illustrations
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/install-sernem-foot-hand.yml']
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Retrieve six approved illustrations
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/1UtXCNpUQlJTfCuk' -o '/tmp/en-iso-20345.png'
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/HKddP9m1aBf6bti3' -o '/tmp/en-iso-20346.png'
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/oGREOo1FKqGUzANE' -o '/tmp/en-iso-20347.png'
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/KN8BP9Ebz4Y8oYaR' -o '/tmp/en-388.png'
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/Qbr8bjxP32CDtBCs' -o '/tmp/en-407.png'
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/EUBrJmMgDfn3j4HB' -o '/tmp/en-511.png'
+          python3 -m pip install --quiet --user Pillow
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import re
+          codes=['EN ISO 20345','EN ISO 20346','EN ISO 20347','EN 388','EN 407','EN 511']
+          folder=Path('app/public/ppe-standards/approved')
+          folder.mkdir(parents=True,exist_ok=True)
+          p=Path('app/app/[locale]/ppe-standards/visual-data.ts')
+          lines=p.read_text().splitlines(keepends=True)
+          for code in codes:
+              slug=code.lower().replace(' ','-')
+              im=Image.open('/tmp/'+slug+'.png').convert('RGB')
+              assert im.size[0]>=1000 and im.size[1]>=700,(slug,im.size)
+              out=folder/(slug+'.webp')
+              im.save(out,'WEBP',quality=87,method=6)
+              assert out.stat().st_size>20000
+              indices=[i for i,line in enumerate(lines) if line.lstrip().startswith("'"+code+"':")]
+              assert len(indices)==1,code
+              i=indices[0]
+              target="'/ppe-standards/approved/"+slug+".webp'"
+              row,n=re.subn(r"photo:(?:'[^']+'|[0-9]+)","photo:"+target,lines[i],count=1)
+              assert n==1,code
+              row,n=re.subn(r"scenes:\[[^\]]*\]","scenes:["+target+"]",row,count=1)
+              assert n==1,code
+              lines[i]=row
+          p.write_text(''.join(lines))
+          PY
+      - name: Commit six approved PPE visuals
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/public/ppe-standards/approved 'app/app/[locale]/ppe-standards/visual-data.ts'
+          git diff --cached --quiet && exit 0
+          git commit -m 'feat(ppe): deploy six approved footwear and hand protection visuals'
+          git push
