@@ -116,6 +116,43 @@ jobs:
             f.write('|Locale|Code|Issue|\n|---|---|---|\n')
             for p in page_issues[:100]:f.write('|'+p['locale']+'|'+p['code']+'|'+ '; '.join(p['issues']).replace('|','/')+'|\n')
           PY
+      - name: Check live PPE page internal links
+        shell: bash
+        run: |
+          python - <<'PY'
+          import requests,re,concurrent.futures
+          from pathlib import Path
+          from urllib.parse import urljoin,urlsplit,urlunsplit
+          from bs4 import BeautifulSoup
+          folder=Path('app/app/[locale]/ppe-standards')
+          source=(folder/'data.ts').read_text()+'\n'+(folder/'expanded-data.ts').read_text()
+          slugs=list(dict.fromkeys(re.findall(r"""slug\s*:\s*['"]([^'"]+)['"]\s*,\s*code\s*:""",source)))
+          pages=['https://www.sernem.com/'+l+'/ppe-standards'+('/'+s if s else '') for l in ('en','tr') for s in ['']+slugs]
+          def parse(url):
+            try:
+              r=requests.get(url,timeout=22)
+              soup=BeautifulSoup(r.text,'html.parser')
+              urls=[]
+              for a in soup.find_all('a',href=True):
+                h=urljoin(url,a['href']);p=urlsplit(h)
+                if p.hostname not in ('www.sernem.com','sernem.com'):continue
+                if p.path.startswith('/_next/') or p.path.startswith('/api/'):continue
+                urls.append(urlunsplit((p.scheme,p.netloc,p.path,'','')))
+              return urls
+            except Exception as e:return []
+          with concurrent.futures.ThreadPoolExecutor(max_workers=15) as ex:
+            out=list(ex.map(parse,pages))
+          unique=sorted(set(u for xs in out for u in xs))
+          def check(url):
+            try:
+              r=requests.get(url,timeout=18,allow_redirects=True)
+              return (url,r.status_code,r.url)
+            except Exception as e:return (url,'ERROR',str(e)[:100])
+          with concurrent.futures.ThreadPoolExecutor(max_workers=15) as ex: results=list(ex.map(check,unique))
+          broken=[x for x in results if x[1] != 200]
+          print('SERNEM_INTERNAL_LINKS',len(unique),'PASSED',len(unique)-len(broken),'FAILED',len(broken))
+          for x in broken[:100]:print('BROKEN_LINK',x)
+          PY
       - name: Save report artifact
         if: always()
         uses: actions/upload-artifact@v4
