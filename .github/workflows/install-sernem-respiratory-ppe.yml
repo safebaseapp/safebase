@@ -1,0 +1,55 @@
+name: Install approved respiratory PPE visuals
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/install-sernem-respiratory-ppe.yml']
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Retrieve and convert approved respiratory images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p app/public/ppe-standards/approved
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/ty9p1AfU17IKunsM' -o /tmp/en-143.png
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/6GtPBMFMlfcejTmW' -o /tmp/en-14387.png
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          for code in ['en-143','en-14387']:
+              image=Image.open('/tmp/'+code+'.png').convert('RGB')
+              assert image.width>=1000
+              dst=Path('app/public/ppe-standards/approved')/(code+'.webp')
+              image.save(dst,'WEBP',quality=85,method=6)
+              assert dst.stat().st_size>20000
+          p=Path('app/app/[locale]/ppe-standards/visual-data.ts')
+          text=p.read_text()
+          import re
+          for code in ['EN 143','EN 14387']:
+              lines=text.splitlines(keepends=True)
+              matches=[i for i,line in enumerate(lines) if line.lstrip().startswith("'"+code+"':")]
+              assert len(matches)==1,code
+              i=matches[0]
+              ref="'/ppe-standards/approved/"+code.lower().replace(' ','-')+".webp'"
+              line,n=re.subn(r"photo:(?:'[^']+'|[0-9]+)",'photo:'+ref,lines[i],count=1)
+              assert n==1
+              line,n=re.subn(r"scenes:\[[^\]]*\]",'scenes:['+ref+']',line,count=1)
+              assert n==1
+              lines[i]=line
+              text=''.join(lines)
+          p.write_text(text)
+          PY
+      - name: Commit approved images only
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/public/ppe-standards/approved/en-143.webp app/public/ppe-standards/approved/en-14387.webp 'app/app/[locale]/ppe-standards/visual-data.ts'
+          git diff --cached --quiet && exit 0
+          git commit -m 'feat(ppe): approved EN 143 and EN 14387 respiratory visuals'
+          git push
