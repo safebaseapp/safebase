@@ -1,0 +1,54 @@
+name: Install approved electric PPE six visuals
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/install-sernem-electric-six.yml']
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Install approved images and update visuals
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --max-time 120 'https://at.adobe.com/sSGWJvzz8no6czZS' -o /tmp/ppe-electric.zip
+          unzip -t /tmp/ppe-electric.zip
+          mkdir -p app/public/ppe-standards/approved
+          unzip -o /tmp/ppe-electric.zip 'ppe-standards/approved/*.webp' -d /tmp/electric-ppe
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, shutil
+          codes=['EN IEC 61482-2','EN 60903','EN 50365','EN 1149-5','EN ISO 11611','EN ISO 11612']
+          path=Path('app/app/[locale]/ppe-standards/visual-data.ts')
+          lines=path.read_text().splitlines(keepends=True)
+          for code in codes:
+              slug=code.lower().replace(' ','-')
+              src=Path('/tmp/electric-ppe/ppe-standards/approved')/(slug+'.webp')
+              assert src.is_file() and src.stat().st_size>10000,(code,src)
+              dest=Path('app/public/ppe-standards/approved')/(slug+'.webp')
+              shutil.copy2(src,dest)
+              matches=[i for i,line in enumerate(lines) if line.lstrip().startswith("'"+code+"':")]
+              assert len(matches)==1,code
+              i=matches[0]
+              ref="'/ppe-standards/approved/"+slug+".webp'"
+              line,n=re.subn(r"photo:(?:'[^']+'|[0-9]+)",'photo:'+ref,lines[i],count=1)
+              assert n==1,code
+              line,n=re.subn(r"scenes:\[[^\]]*\]",'scenes:['+ref+']',line,count=1)
+              assert n==1,code
+              lines[i]=line
+          path.write_text(''.join(lines))
+          PY
+      - name: Commit six approved images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app/public/ppe-standards/approved 'app/app/[locale]/ppe-standards/visual-data.ts'
+          git diff --cached --quiet && exit 0
+          git commit -m 'feat(ppe): six approved electric and special clothing visuals'
+          git push
