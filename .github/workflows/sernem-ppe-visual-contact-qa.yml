@@ -1,0 +1,43 @@
+name: SERNEM PPE visual contact QA
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/sernem-ppe-visual-contact-qa.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contact-sheets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build thumbnails of all 46 approved PPE images
+        run: |
+          python3 -m pip install --quiet --user Pillow
+          python3 - <<'PY'
+          from PIL import Image,ImageDraw,ImageFont,ImageOps
+          from pathlib import Path
+          import base64,io,textwrap,hashlib
+          folder=Path('app/public/ppe-standards/approved')
+          images=sorted(folder.glob('*.webp'))
+          assert len(images)==46,len(images)
+          for page in range(3):
+              items=images[page*16:(page+1)*16]
+              w,h=1100,920
+              sheet=Image.new('RGB',(w,h),'#edf2f8')
+              d=ImageDraw.Draw(sheet)
+              for i,path in enumerate(items):
+                  col=i%4;row=i//4;x=col*275;y=row*230
+                  source=Image.open(path).convert('RGB')
+                  thumb=ImageOps.fit(source,(265,186),Image.Resampling.LANCZOS,centering=(.5,.4))
+                  sheet.paste(thumb,(x+5,y+4))
+                  d.rectangle((x+4,y+192,x+271,y+226),fill='#111e30')
+                  d.text((x+9,y+201),path.stem.replace('-',' ').upper(),fill='white')
+              bio=io.BytesIO();sheet.save(bio,format='JPEG',quality=68,optimize=True)
+              raw=bio.getvalue()
+              print('PPE_SHEET_'+str(page)+'_BEGIN')
+              for part in textwrap.wrap(base64.b64encode(raw).decode(),1900):print(part)
+              print('PPE_SHEET_'+str(page)+'_END')
+              print('SHEET_IMAGE_INFO',page,len(items),len(raw),hashlib.sha256(raw).hexdigest()[:16])
+          PY
