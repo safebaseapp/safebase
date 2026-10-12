@@ -18,6 +18,7 @@ jobs:
           mkdir -p app/public/ppe-standards/approved
           curl -fL --retry 3 --max-time 120 'https://at.adobe.com/ty9p1AfU17IKunsM' -o /tmp/en-143.png
           curl -fL --retry 3 --max-time 120 'https://at.adobe.com/6GtPBMFMlfcejTmW' -o /tmp/en-14387.png
+          python3 -m pip install --quiet --user Pillow
           python3 - <<'PY'
           from PIL import Image
           from pathlib import Path
