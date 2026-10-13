@@ -158,7 +158,8 @@ export async function POST(request: NextRequest) {
 
     if (matchedUserId && customData?.trial_reservation_id && payload?.data?.type === "subscriptions") {
       const trialReservationId = String(customData.trial_reservation_id);
-      const trialStatus = explicitStatus === "on_trial" ? "on_trial"
+      const trialStatus = attributes?.cancelled === true ? "cancelled"
+        : explicitStatus === "on_trial" ? "on_trial"
         : explicitStatus === "active" ? "active"
         : explicitStatus === "expired" ? "expired"
         : explicitStatus === "cancelled" ? "cancelled" : null;
