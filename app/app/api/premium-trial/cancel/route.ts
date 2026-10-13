@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "../../../../utils/supabase/server";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { getLemonSubscription, cancelLemonSubscription } from "../../../../lib/lemonsqueezy";
-import { premiumTrialEnabled } from "../../../../lib/premium-trial-config";
+import { PREMIUM_TRIAL_VARIANT_ID, premiumTrialEnabled } from "../../../../lib/premium-trial-config";
 
 export async function POST() {
   if (!premiumTrialEnabled()) return NextResponse.json({ error: "Unavailable" }, { status: 503 });
@@ -19,10 +19,16 @@ export async function POST() {
   if (error || !profile?.lemon_subscription_id) {
     return NextResponse.json({ error: "Subscription unavailable" }, { status: 409 });
   }
+  const { data: reservation, error: reservationError } = await db.from("premium_trial_reservations")
+    .select("id,status").eq("user_id", user.id).maybeSingle();
+  if (reservationError || !reservation || reservation.status !== "on_trial") {
+    return NextResponse.json({ error: "No verified trial to cancel" }, { status: 409 });
+  }
   const id = String(profile.lemon_subscription_id);
   try {
     const current = await getLemonSubscription(id);
-    if (current.data.attributes.status !== "on_trial") {
+    if (String(current.data.attributes.variant_id ?? "") !== PREMIUM_TRIAL_VARIANT_ID ||
+        current.data.attributes.status !== "on_trial") {
       return NextResponse.json({ error: "Not an active free trial" }, { status: 409 });
     }
     await cancelLemonSubscription(id);
