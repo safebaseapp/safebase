@@ -1,4 +1,5 @@
 import { hasActiveReward } from "@/lib/auth/reward-access";
+import { hasCurrentBillingPremium } from "@/lib/auth/billing-premium";
 import { generatePremiumToolboxPdf } from "@/lib/pdf/premium-toolbox-pdf-v2";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -106,7 +107,7 @@ export async function GET(request: Request, { params }: RouteProps) {
   }
 
   const isPremium =
-    profile.plan === "premium" || profile.role === "admin" || await hasActiveReward(supabase,user.id);
+    await hasCurrentBillingPremium(supabase,user.id,profile.plan) || profile.role === "admin" || await hasActiveReward(supabase,user.id);
 
   if (!isPremium) {
     return NextResponse.redirect(
