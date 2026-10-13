@@ -68,9 +68,19 @@ export async function POST(request: NextRequest) {
     const normalizedEmail = email ? String(email).trim().toLowerCase() : "";
     const fields = lifecycleFields(payload);
     const explicitStatus = String(attributes?.status ?? "").toLowerCase();
+    const isSubscriptionEvent = eventName.startsWith("subscription_");
     const isExpired = eventName === "subscription_expired" || explicitStatus === "expired";
-    const isPremiumEvent = eventName.startsWith("subscription_") && !isExpired;
-    const nextPlan: "premium" | "free" | null = isExpired ? "free" : isPremiumEvent ? "premium" : null;
+    // Never grant Premium from an event name alone: billing retries, failed
+    // payments and paused subscriptions must not create new entitlements.
+    const grantedStatuses = new Set(["active", "on_trial"]);
+    const revokedStatuses = new Set(["expired", "unpaid"]);
+    const nextPlan: "premium" | "free" | null = !isSubscriptionEvent
+      ? null
+      : grantedStatuses.has(explicitStatus)
+        ? "premium"
+        : (isExpired || revokedStatuses.has(explicitStatus))
+          ? "free"
+          : null;
 
     let matchedUserId: string | null = null;
 
