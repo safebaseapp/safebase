@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "../../../utils/supabase/client";
@@ -11,7 +11,7 @@ type Props = {
 
 export default function ResetPasswordForm({ locale }: Props) {
   const router = useRouter();
-  const supabase = createClient();
+  const supabase = useMemo(() => createClient(), []);
   const isTurkish = locale === "tr";
 
   const [password, setPassword] = useState("");
