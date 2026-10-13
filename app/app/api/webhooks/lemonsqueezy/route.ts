@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { createClient } from "@supabase/supabase-js";
+import { getLemonSubscription } from "../../../../lib/lemonsqueezy";
+import { PREMIUM_TRIAL_VARIANT_ID } from "../../../../lib/premium-trial-config";
 
 export const runtime = "nodejs";
 
@@ -67,7 +69,23 @@ export async function POST(request: NextRequest) {
 
     const normalizedEmail = email ? String(email).trim().toLowerCase() : "";
     const fields = lifecycleFields(payload);
-    const explicitStatus = String(attributes?.status ?? "").toLowerCase();
+    let explicitStatus = String(attributes?.status ?? "").toLowerCase();
+    const isTrialCheckout = Boolean(customData?.trial_reservation_id);
+    // Reconcile trial status with Lemon to avoid out-of-order webhook grants.
+    if (isTrialCheckout) {
+      if (payload?.data?.type !== "subscriptions" || !payload?.data?.id || !customUserId) {
+        return NextResponse.json({ error: "Invalid trial identity" }, { status: 400 });
+      }
+      const current = await getLemonSubscription(String(payload.data.id));
+      if (String(current.data.attributes.variant_id ?? "") !== PREMIUM_TRIAL_VARIANT_ID) {
+        return NextResponse.json({ error: "Trial variant mismatch" }, { status: 400 });
+      }
+      explicitStatus = String(current.data.attributes.status ?? "").toLowerCase();
+      attributes.status = explicitStatus;
+      attributes.cancelled = current.data.attributes.cancelled;
+      attributes.renews_at = current.data.attributes.renews_at ?? null;
+      attributes.ends_at = current.data.attributes.ends_at ?? null;
+    }
     const isSubscriptionEvent = eventName.startsWith("subscription_");
     const isExpired = eventName === "subscription_expired" || explicitStatus === "expired";
     // Never grant Premium from an event name alone: billing retries, failed
@@ -111,7 +129,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Backward-compatible fallback for existing Lemon checkout links that do not yet pass user_id.
-    if (!matchedUserId && normalizedEmail) {
+    if (!matchedUserId && normalizedEmail && !isTrialCheckout) {
       const { data: profileMatch } = await supabase
         .from("profiles")
         .select("id")
@@ -122,7 +140,7 @@ export async function POST(request: NextRequest) {
       if (profileMatch?.id) matchedUserId = profileMatch.id;
     }
 
-    if (!matchedUserId && normalizedEmail) {
+    if (!matchedUserId && normalizedEmail && !isTrialCheckout) {
       let page = 1;
       while (!matchedUserId && page <= 10) {
         const { data, error } = await supabase.auth.admin.listUsers({ page, perPage: 1000 });
