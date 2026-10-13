@@ -80,6 +80,39 @@ export default async function LabsPage({ params }: Props) {
         </div>
       </section>
 
+      <section aria-labelledby="daily-brain-title" className="relative bg-[#030d1c] px-4 py-10 sm:py-14">
+        <div className="mx-auto grid max-w-6xl gap-8 overflow-hidden rounded-[28px] border border-cyan-400/25 bg-gradient-to-br from-[#102f50] via-[#081c35] to-[#071326] p-6 shadow-2xl shadow-cyan-950/25 sm:p-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-400/10 px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.14em] text-cyan-200">
+              <Sparkles size={14} /> SERNEM LABS / DAILY SAFETY BRAIN
+            </div>
+            <h2 id="daily-brain-title" className="mt-5 max-w-xl text-3xl font-black leading-tight tracking-tight text-white sm:text-4xl">
+              {isTr ? "5 karar. Tek bir güvenlik yaklaşımı." : "5 Decisions. One Safety Mindset."}
+            </h2>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-slate-200 sm:text-base">
+              {isTr ? "Güvenlik yalnızca bildiklerin değil, verdiğin kararlardır. Her gün yenilenen beş gerçekçi HSE sorusuyla saha refleksini test et." : "Safety isn't just what you know. It's the decisions you make. Test your field judgment with five realistic HSE questions refreshed daily."}
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-cyan-100">
+              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-2">{isTr ? "5 günlük soru" : "5 daily questions"}</span>
+              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-2">{isTr ? "Her gün 00:00 UTC" : "Refreshes 00:00 UTC"}</span>
+              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-2">TR / EN</span>
+            </div>
+            <Link href={`/${locale}/labs/daily-safety-brain`} className="mt-7 inline-flex items-center gap-2 rounded-xl bg-cyan-400 px-5 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-cyan-300">
+              {isTr ? "Bugünün Challenge'ını başlat" : "Start today's challenge"} <ArrowRight size={17} />
+            </Link>
+          </div>
+          <div className="rounded-2xl border border-cyan-300/20 bg-slate-950/45 p-5 sm:p-6">
+            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.15em] text-cyan-300"><span>DAILY CHALLENGE</span><span>01 / 05</span></div>
+            <div className="mt-5 text-5xl font-black tracking-tight text-white">05<span className="ml-2 text-xl font-semibold text-slate-400">{isTr ? "karar" : "decisions"}</span></div>
+            <p className="mt-5 text-base font-bold leading-7 text-white">
+              {isTr ? "Bir kararın kazayı önleyebilir. Bugün ne yapardın?" : "Your next decision could prevent an incident. What would you do?"}
+            </p>
+            <div className="mt-5 grid grid-cols-5 gap-2" aria-hidden="true">{[1, 2, 3, 4, 5].map((number) => <span key={number} className="h-2 rounded-full bg-cyan-400/50" />)}</div>
+            <p className="mt-5 text-xs leading-5 text-slate-400">{isTr ? "Günlük testin sonuçları şimdilik yalnızca bu tarayıcıda tutulur. Global Labs XP sıralamasına eklenmez." : "Daily test results are currently stored in this browser only and do not count toward the global Labs XP leaderboard."}</p>
+          </div>
+        </div>
+      </section>
+
       <section id="labs-modules" className={s.modules}>
         <div className={s.container}>
           <div className={s.sectionHeading}>
