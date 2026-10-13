@@ -81,10 +81,12 @@ export async function POST(request: NextRequest) {
     if (typeof checkoutUrl !== "string") throw new Error("Missing Lemon checkout URL");
     const checkoutHost = new URL(checkoutUrl);
     if (checkoutHost.protocol !== "https:" || !(checkoutHost.hostname === "lemonsqueezy.com" || checkoutHost.hostname.endsWith(".lemonsqueezy.com"))) throw new Error("Invalid Lemon checkout host");
-    const { error: statusError } = await admin.from("premium_trial_reservations")
+    const { data: updatedReservation, error: statusError } = await admin.from("premium_trial_reservations")
       .update({ status: "checkout_created", updated_at: new Date().toISOString() })
-      .eq("id", reservation.id).eq("status", "reserved");
+      .eq("id", reservation.id).eq("status", "reserved").select("id").maybeSingle();
     if (statusError) throw statusError;
+    // A webhook may have already moved the reservation to on_trial.
+    if (!updatedReservation) console.info("Checkout already synchronized by provider webhook");
     return NextResponse.json({ url: checkoutUrl });
   } catch (error) {
     // Do not overwrite a newer on_trial/active status if a signed webhook
