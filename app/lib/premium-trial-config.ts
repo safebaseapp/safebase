@@ -12,5 +12,9 @@ export const PREMIUM_TRIAL_MONTHLY_PRICE_EUR = 9.99;
 
 /** Always disabled unless explicitly enabled. Never enable in production before end-to-end QA. */
 export function premiumTrialEnabled(): boolean {
-  return process.env.SERNEM_PREMIUM_TRIAL_ENABLED === "true";
+  // The 24-hour paid conversion flow must first pass test-mode QA.
+  // A production deployment cannot be enabled by the Preview flag alone.
+  return process.env.VERCEL_ENV === "preview" &&
+    process.env.VERCEL_GIT_COMMIT_REF === "feature/premium-24h-trial" &&
+    process.env.SERNEM_PREMIUM_TRIAL_ENABLED === "true";
 }
