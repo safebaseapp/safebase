@@ -69,6 +69,8 @@ export async function POST(request: NextRequest) {
 
     const normalizedEmail = email ? String(email).trim().toLowerCase() : "";
     let explicitStatus = String(attributes?.status ?? "").toLowerCase();
+    let verifiedTrialEndsAt: string | null = null;
+    let verifiedAccessEndsAt: string | null = null;
     const isTrialCheckout = Boolean(customData?.trial_reservation_id);
     // Reconcile trial status with Lemon to avoid out-of-order webhook grants.
     if (isTrialCheckout) {
@@ -80,6 +82,8 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "Trial variant mismatch" }, { status: 400 });
       }
       explicitStatus = String(current.data.attributes.status ?? "").toLowerCase();
+      verifiedTrialEndsAt = current.data.attributes.trial_ends_at ?? null;
+      verifiedAccessEndsAt = current.data.attributes.ends_at ?? null;
       attributes.status = explicitStatus;
       attributes.cancelled = current.data.attributes.cancelled;
       attributes.renews_at = current.data.attributes.renews_at ?? null;
@@ -172,7 +176,7 @@ export async function POST(request: NextRequest) {
         }
         const { error: trialSyncError } = await supabase
           .from("premium_trial_reservations")
-          .update({ status: trialStatus, updated_at: new Date().toISOString() })
+          .update({ status: trialStatus, lemon_subscription_id: String(payload.data.id), trial_ends_at: verifiedTrialEndsAt, access_ends_at: verifiedAccessEndsAt, updated_at: new Date().toISOString() })
           .eq("id", trialReservationId).eq("user_id", matchedUserId);
         if (trialSyncError) throw trialSyncError;
       }
