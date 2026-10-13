@@ -5,6 +5,9 @@ import { ArrowLeft, ArrowRight, LockKeyhole, UserRound } from "lucide-react";
 import { routing } from "../../../../i18n/routing";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import { getCurrentAccessProfile } from "@/lib/auth/server-access";
+import { hasActiveReward } from "@/lib/auth/reward-access";
+import { createClient } from "@/utils/supabase/server";
+import { isAdminUser } from "@/lib/auth/access";
 import { incidentCatalog } from "@/lib/labs/scenarios/incident-catalog";
 import { incidentScenarios } from "@/lib/labs/scenarios/incident-scenarios";
 import { localizeHseText, normalizeHseEnglish } from "@/lib/labs/scenarios/hse-language";
@@ -18,7 +21,7 @@ export default async function IncidentSimulatorPage({ params }: Props) {
   const isTr = locale === "tr";
   const { user, profile } = await getCurrentAccessProfile();
   const isSignedIn = Boolean(user && profile && profile.status !== "suspended");
-  const isPremium = Boolean(isSignedIn && (profile?.plan === "premium" || profile?.role === "admin"));
+  const isPremium = Boolean(isSignedIn && (profile?.plan === "premium" || profile?.role === "admin" || (user && isAdminUser(user)) || (user && await hasActiveReward(await createClient(), user.id))));
 
   const guestCount = incidentCatalog.filter((item) => item.access === "guest").length;
   const freeCount = incidentCatalog.filter((item) => item.access === "free").length;
