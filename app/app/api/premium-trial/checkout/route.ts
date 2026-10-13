@@ -65,7 +65,9 @@ export async function POST(request: NextRequest) {
     if (!result.ok) throw new Error(`Lemon checkout request failed: ${result.status}`);
     const resultBody = await result.json();
     const checkoutUrl = resultBody?.data?.attributes?.url;
-    if (typeof checkoutUrl !== "string" || !/^https:\/\/[a-z0-9.-]*lemonsqueezy\.com\//i.test(checkoutUrl)) throw new Error("Missing Lemon checkout URL");
+    if (typeof checkoutUrl !== "string") throw new Error("Missing Lemon checkout URL");
+    const checkoutHost = new URL(checkoutUrl);
+    if (checkoutHost.protocol !== "https:" || !(checkoutHost.hostname === "lemonsqueezy.com" || checkoutHost.hostname.endsWith(".lemonsqueezy.com"))) throw new Error("Invalid Lemon checkout host");
     await admin.from("premium_trial_reservations").update({ status: "checkout_created" }).eq("id", reservation.id);
     return NextResponse.json({ url: checkoutUrl });
   } catch (error) {
