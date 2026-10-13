@@ -1,5 +1,7 @@
 type LemonSubscriptionAttributes = {
   customer_id?: number | string;
+  variant_id?: number | string;
+  trial_ends_at?: string | null;
   user_email?: string;
   status?: string;
   cancelled?: boolean;
