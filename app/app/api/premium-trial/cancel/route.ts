@@ -48,6 +48,20 @@ export async function POST() {
         accessEndsAt: confirmation.data.attributes.ends_at ?? null
       }, { status: 202 });
     }
+    const { error: profileSyncError } = await db.from("profiles").update({
+      subscription_cancelled: true,
+      subscription_ends_at: confirmation.data.attributes.ends_at ?? null,
+      subscription_renews_at: confirmation.data.attributes.renews_at ?? null,
+      subscription_status: confirmation.data.attributes.status ?? null,
+      subscription_synced_at: new Date().toISOString()
+    }).eq("id", user.id).eq("lemon_subscription_id", id);
+    if (profileSyncError) {
+      return NextResponse.json({
+        confirmed: true,
+        warning: "Provider cancellation confirmed; profile synchronization pending",
+        accessEndsAt: confirmation.data.attributes.ends_at ?? null
+      }, { status: 202 });
+    }
     return NextResponse.json({
       confirmed: true,
       accessEndsAt: confirmation.data.attributes.ends_at ?? null
