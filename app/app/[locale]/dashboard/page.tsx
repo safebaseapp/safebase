@@ -1,6 +1,7 @@
 import { hasActiveReward } from "@/lib/auth/reward-access";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import DashboardLabsIntegration from "./DashboardLabsIntegration";
+import FirstVisitWelcome from "./FirstVisitWelcome";
 import LogoutButton from "./LogoutButton";
 import CompanyBranding from "./CompanyBranding";
 import RiskAssessmentActions from "./RiskAssessmentActions";
@@ -316,6 +317,8 @@ export default async function DashboardPage({ params }: Props) {
 
         <div className="min-w-0 flex-1">
           <div className="mb-4 hidden items-center rounded-2xl border border-slate-800 bg-[#071423] px-4 py-3 sm:flex"><span className="mr-3 text-slate-600">⌕</span><span className="truncate text-sm text-slate-500">{isTurkish ? "Ara… doküman, araç, şablon veya HSE kaydı" : "Search… document, tool, template or HSE record"}</span><span className="ml-auto rounded-lg border border-slate-800 bg-slate-950/60 px-2 py-1 text-[10px] font-black text-slate-500">{locale.toUpperCase()}</span></div>
+
+          <FirstVisitWelcome locale={locale as "tr" | "en"} userId={user.id} createdAt={user.created_at} />
 
           <DashboardLabsIntegration locale={locale} />
 
