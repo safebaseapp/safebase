@@ -16,3 +16,14 @@ export function hasPremiumAccess(value: TrialBillingState, at = Date.now()): boo
   }
   return false;
 }
+
+/**
+ * Trial grants are time bounded regardless of delayed webhooks.
+ * A paid active subscription is checked independently; this function must
+ * never downgrade a separate valid subscription or a prize entitlement.
+ */
+export function trialAccessUntil(status: string, trialEndsAt: string | null, accessEndsAt: string | null, now = Date.now()): boolean {
+  if (status !== "on_trial" && status !== "cancelled") return false;
+  const deadline = Date.parse((status === "cancelled" ? accessEndsAt : trialEndsAt) || "");
+  return Number.isFinite(deadline) && deadline > now;
+}
