@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { createClient } from "../../../../utils/supabase/server";
-import { PREMIUM_TRIAL_VARIANT_ID, PREMIUM_TRIAL_PRODUCT_ID, premiumTrialEnabled } from "../../../../lib/premium-trial-config";
+import { PREMIUM_TRIAL_VARIANT_ID, premiumTrialEnabled } from "../../../../lib/premium-trial-config";
 
 export const runtime = "nodejs";
 const POLICY_VERSION = "premium-trial-2026-10-13-v1";
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
     if (!result.ok) throw new Error(`Lemon checkout request failed: ${result.status}`);
     const resultBody = await result.json();
     const checkoutUrl = resultBody?.data?.attributes?.url;
-    if (typeof checkoutUrl !== "string" || !checkoutUrl.startsWith("https://")) throw new Error("Missing Lemon checkout URL");
+    if (typeof checkoutUrl !== "string" || !/^https:\/\/[a-z0-9.-]*lemonsqueezy\.com\//i.test(checkoutUrl)) throw new Error("Missing Lemon checkout URL");
     await admin.from("premium_trial_reservations").update({ status: "checkout_created" }).eq("id", reservation.id);
     return NextResponse.json({ url: checkoutUrl });
   } catch (error) {
