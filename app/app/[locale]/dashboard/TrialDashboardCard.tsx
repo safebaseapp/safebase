@@ -25,7 +25,9 @@ export default function TrialDashboardCard({ locale, trialEndsAt, cancelled, acc
       if (!response.ok || result.confirmed !== true) throw new Error(result.error || "Cancellation could not be verified");
       setConfirmed(true);
       setEnds(result.accessEndsAt ?? null);
-      setMessage(tr ? "İptal Lemon Squeezy tarafından onaylandı." : "Cancellation confirmed by Lemon Squeezy.");
+      setMessage(result.warning
+        ? (tr ? "Ödeme sağlayıcısı iptali onayladı; hesap bilgilerinin eşitlenmesi bekleniyor." : "Cancellation confirmed by provider; account sync is pending.")
+        : (tr ? "İptal Lemon Squeezy tarafından onaylandı." : "Cancellation confirmed by Lemon Squeezy."));
     } catch (err) {
       setMessage(err instanceof Error ? err.message : "Cancellation could not be verified");
     } finally { setPending(false); }
