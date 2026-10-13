@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function TrialOffer({ locale }: { locale: "tr" | "en" }) {
   const tr = locale === "tr";
@@ -36,6 +37,11 @@ export default function TrialOffer({ locale }: { locale: "tr" | "en" }) {
           <span>{tr ? "24 saatlik ücretsiz denemeden sonra iptal etmezsem €9,99/ay ücretlendirileceğimi, aylık otomatik yenilemeyi ve deneme süresi dolmadan iptal edebileceğimi anlıyorum." : "I understand that if I do not cancel before my 24-hour trial ends, I will be charged €9.99 per month on an automatically renewing subscription, and I can cancel before trial expiry."}</span>
         </label>
         <p className="mt-4 text-xs text-slate-400">{tr ? "Yasal cayma ve iade hakların saklıdır. Abonelik yönetimi SERNEM hesabından ve Lemon Squeezy müşteri portalından sağlanacaktır." : "Statutory withdrawal and refund rights remain applicable. Subscription management will be available in your SERNEM account and Lemon Squeezy customer portal."}</p>
+        <nav className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-indigo-300" aria-label={tr ? "Yasal belgeler" : "Legal documents"}>
+          <Link className="underline underline-offset-4" href={`/${locale}/terms`} target="_blank" rel="noopener noreferrer">{tr ? "Kullanım Koşulları" : "Terms of Use"}</Link>
+          <Link className="underline underline-offset-4" href={`/${locale}/privacy`} target="_blank" rel="noopener noreferrer">{tr ? "Gizlilik Politikası" : "Privacy Policy"}</Link>
+          <Link className="underline underline-offset-4" href={`/${locale}/premium-trial/conditions`} target="_blank" rel="noopener noreferrer">{tr ? "Deneme ve iptal koşulları" : "Trial and cancellation conditions"}</Link>
+        </nav>
         {error && <p className="mt-4 text-red-300" role="alert">{error}</p>}
         <button type="button" onClick={start} disabled={!accepted || busy} className="mt-6 w-full rounded-xl bg-indigo-600 px-4 py-4 font-bold disabled:cursor-not-allowed disabled:opacity-40">{busy ? (tr ? "Güvenli ödeme açılıyor..." : "Opening secure checkout...") : (tr ? "Denemeyi Başlat — Sonra €9,99/ay" : "Start Free Trial — Then €9.99/month")}</button>
       </section>
