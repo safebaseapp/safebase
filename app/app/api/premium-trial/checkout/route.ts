@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { createClient } from "../../../../utils/supabase/server";
-import { PREMIUM_TRIAL_VARIANT_ID, premiumTrialEnabled } from "../../../../lib/premium-trial-config";
+import { PREMIUM_TRIAL_PRODUCT_ID, PREMIUM_TRIAL_VARIANT_ID, premiumTrialEnabled } from "../../../../lib/premium-trial-config";
 
 export const runtime = "nodejs";
 const POLICY_VERSION = "premium-trial-2026-10-13-v1";
@@ -22,8 +22,7 @@ export async function POST(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const lemonKey = process.env.LEMONSQUEEZY_API_KEY;
-  const storeId = process.env.LEMONSQUEEZY_STORE_ID;
-  if (!url || !serviceKey || !lemonKey || !storeId) {
+  if (!url || !serviceKey || !lemonKey) {
     return NextResponse.json({ error: "Trial configuration incomplete" }, { status: 503 });
   }
   const admin = createAdminClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
@@ -46,6 +45,20 @@ export async function POST(request: NextRequest) {
 
   const base = new URL(request.url).origin;
   try {
+    // Read the authoritative store ID from this exact Lemon product rather
+    // than requiring a duplicated manually configured environment variable.
+    const productResponse = await fetch(`https://api.lemonsqueezy.com/v1/products/${PREMIUM_TRIAL_PRODUCT_ID}`, {
+      cache: "no-store",
+      headers: { Accept: "application/vnd.api+json", Authorization: `Bearer ${lemonKey}` },
+    });
+    if (!productResponse.ok) throw new Error(`Lemon product lookup failed: ${productResponse.status}`);
+    const product = await productResponse.json();
+    if (String(product?.data?.id) !== PREMIUM_TRIAL_PRODUCT_ID ||
+        product?.data?.attributes?.status !== "published" ||
+        !product?.data?.attributes?.store_id) {
+      throw new Error("Trial product is unpublished or does not match configured ID");
+    }
+    const storeId = String(product.data.attributes.store_id);
     const result = await fetch("https://api.lemonsqueezy.com/v1/checkouts", {
       method: "POST", cache: "no-store",
       headers: { Accept: "application/vnd.api+json", "Content-Type": "application/vnd.api+json", Authorization: `Bearer ${lemonKey}` },
