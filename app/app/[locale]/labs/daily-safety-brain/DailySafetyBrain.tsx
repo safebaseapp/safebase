@@ -5,8 +5,6 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, RotateCcw, ShieldCheck } from "lucide-react";
 import { dailyQuestions, dayId } from "@/lib/labs/daily-brain-bank";
 type Locale = "tr" | "en";
-
-type Locale = "tr" | "en";
 type Saved = { day: number; answers: number[] };
 
 export default function DailySafetyBrain({ locale }: { locale: Locale }) {
@@ -82,8 +80,8 @@ export default function DailySafetyBrain({ locale }: { locale: Locale }) {
       const updated = { ...xpByDay, [String(day)]: awarded };
       setXpByDay(updated);
       try { window.localStorage.setItem("sernem_daily_brain_xp_v1", JSON.stringify(updated)); } catch { /* local XP */ }
-      void saveCompletedAttempt(day, next);
     }
+    if (next.length === questions.length) void saveCompletedAttempt(day, next);
   }
   function reset() {
     setAnswers([]);
