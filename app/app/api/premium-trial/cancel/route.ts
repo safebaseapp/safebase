@@ -31,10 +31,22 @@ export async function POST() {
         current.data.attributes.status !== "on_trial") {
       return NextResponse.json({ error: "Not an active free trial" }, { status: 409 });
     }
-    await cancelLemonSubscription(id);
+    if (!current.data.attributes.cancelled) await cancelLemonSubscription(id);
     const confirmation = await getLemonSubscription(id);
     if (!confirmation.data.attributes.cancelled) {
       return NextResponse.json({ error: "Cancellation not confirmed" }, { status: 502 });
+    }
+    const { error: syncError } = await db.from("premium_trial_reservations").update({
+      status: "cancelled",
+      access_ends_at: confirmation.data.attributes.ends_at ?? null,
+      updated_at: new Date().toISOString()
+    }).eq("id", reservation.id).eq("user_id", user.id);
+    if (syncError) {
+      return NextResponse.json({
+        confirmed: true,
+        warning: "Provider cancellation confirmed; local synchronization pending",
+        accessEndsAt: confirmation.data.attributes.ends_at ?? null
+      }, { status: 202 });
     }
     return NextResponse.json({
       confirmed: true,
