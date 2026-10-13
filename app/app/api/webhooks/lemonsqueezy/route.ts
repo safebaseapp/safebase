@@ -134,6 +134,32 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    if (matchedUserId && customData?.trial_reservation_id && payload?.data?.type === "subscriptions") {
+      const trialReservationId = String(customData.trial_reservation_id);
+      const trialStatus = explicitStatus === "on_trial" ? "on_trial"
+        : explicitStatus === "active" ? "active"
+        : explicitStatus === "expired" ? "expired"
+        : explicitStatus === "cancelled" ? "cancelled" : null;
+      if (trialStatus) {
+        const { data: trialReservation, error: reservationLookupError } = await supabase
+          .from("premium_trial_reservations")
+          .select("id")
+          .eq("id", trialReservationId)
+          .eq("user_id", matchedUserId)
+          .maybeSingle();
+        if (reservationLookupError) throw reservationLookupError;
+        if (!trialReservation) {
+          console.error("Lemon Squeezy webhook: trial reservation does not match user");
+          return NextResponse.json({ error: "Invalid trial reservation" }, { status: 400 });
+        }
+        const { error: trialSyncError } = await supabase
+          .from("premium_trial_reservations")
+          .update({ status: trialStatus, updated_at: new Date().toISOString() })
+          .eq("id", trialReservationId).eq("user_id", matchedUserId);
+        if (trialSyncError) throw trialSyncError;
+      }
+    }
+
     if (matchedUserId) {
       const update: Record<string, unknown> = {
         subscription_synced_at: new Date().toISOString(),
