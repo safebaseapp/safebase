@@ -81,10 +81,16 @@ export async function POST(request: NextRequest) {
     if (typeof checkoutUrl !== "string") throw new Error("Missing Lemon checkout URL");
     const checkoutHost = new URL(checkoutUrl);
     if (checkoutHost.protocol !== "https:" || !(checkoutHost.hostname === "lemonsqueezy.com" || checkoutHost.hostname.endsWith(".lemonsqueezy.com"))) throw new Error("Invalid Lemon checkout host");
-    await admin.from("premium_trial_reservations").update({ status: "checkout_created" }).eq("id", reservation.id);
+    const { error: statusError } = await admin.from("premium_trial_reservations")
+      .update({ status: "checkout_created", updated_at: new Date().toISOString() })
+      .eq("id", reservation.id).eq("status", "reserved");
+    if (statusError) throw statusError;
     return NextResponse.json({ url: checkoutUrl });
   } catch (error) {
-    await admin.from("premium_trial_reservations").update({ status: "checkout_failed" }).eq("id", reservation.id);
+    // Do not overwrite a newer on_trial/active status if a signed webhook
+    // arrived while checkout was being created.
+    await admin.from("premium_trial_reservations").update({ status: "checkout_failed" })
+      .eq("id", reservation.id).eq("status", "reserved");
     console.error("Premium trial checkout error", error);
     return NextResponse.json({ error: "Unable to start checkout" }, { status: 502 });
   }
