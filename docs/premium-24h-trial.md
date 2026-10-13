@@ -38,3 +38,18 @@ Status: implementation branch; NOT LIVE. The existing paid checkout and subscrip
 - Duplicate/out-of-order webhook delivery; failed database write retried.
 - TR/EN locale, legal copy, exact billing timestamp in user timezone; mobile + desktop.
 - No production variant or real card used before test-mode pass.
+
+
+## Mandatory SERNEM-owned legal compliance gate (TR/EN)
+Do NOT enable live trial checkout unless all items below are implemented, reviewed and tested:
+- Pre-checkout prominent summary: exact free period (24 hours), first bill timestamp/timezone, recurring price **€9.99/month**, renewal, cancellation deadline and instructions, merchant-of-record identity and links to policies. Make sure checkout's final order action clearly communicates payment obligation.
+- Explicit non-prechecked acceptance for auto-renewing paid subscription; separate acceptance/evidence for immediate digital service access and legal withdrawal implications **only when actually applicable**; never blanket-waive mandatory statutory rights.
+- Keep durable consent evidence tied to authenticated user and checkout attempt: legal text version and language, exact terms, accepted timestamps, billing disclosure version, subscription ID once returned; minimize stored personal data.
+- Localized Terms, Subscription/Cancellation, Refund/Withdrawal, Privacy/Cookies pages must reflect the real merchant-of-record and SERNEM service roles and actual Lemon Squeezy/Supabase data flow. Review existing pages before editing; do not overwrite their unrelated terms.
+- Make cancellation accessible from account dashboard, confirm provider cancellation, and reflect exact access-end date; do not treat button click alone as successful cancellation. Provide accessible withdrawal/contact path; distinguish withdrawal from cancellation.
+- Implement email/transaction confirmations and legally required notices, and verify which party (Lemon Squeezy or SERNEM) sends each. Do not double-send misleading payment receipts.
+- TR and EU statutory rights, country-specific information and SaaS digital-service exceptions require final legal review based on exact checkout and refund mechanics. No claim of guaranteed universal compliance.
+- Set marketing consent separately from subscription consent; required service messages should not depend on marketing opt-in.
+- Never claim "24 hours free" if provider will collect immediate payment, or "cancel anytime with no charge" if cutoffs/provider terms prevent it. Test end-of-trial cancellation precisely.
+- No dark patterns: no disguised auto-renewal, pre-ticked terms or intentionally obstructed cancellation. Accessibility/mobile and language QA required.
+- Compliance sign-off remains **blocked** until the policy text, consent UI, actual payment checkout, cancellation and webhook behavior are verified in test mode.
