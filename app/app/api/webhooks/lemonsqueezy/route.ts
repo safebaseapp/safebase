@@ -68,7 +68,6 @@ export async function POST(request: NextRequest) {
     });
 
     const normalizedEmail = email ? String(email).trim().toLowerCase() : "";
-    const fields = lifecycleFields(payload);
     let explicitStatus = String(attributes?.status ?? "").toLowerCase();
     const isTrialCheckout = Boolean(customData?.trial_reservation_id);
     // Reconcile trial status with Lemon to avoid out-of-order webhook grants.
@@ -86,6 +85,7 @@ export async function POST(request: NextRequest) {
       attributes.renews_at = current.data.attributes.renews_at ?? null;
       attributes.ends_at = current.data.attributes.ends_at ?? null;
     }
+    const fields = lifecycleFields(payload);
     const isSubscriptionEvent = eventName.startsWith("subscription_");
     const isExpired = eventName === "subscription_expired" || explicitStatus === "expired";
     // Never grant Premium from an event name alone: billing retries, failed
