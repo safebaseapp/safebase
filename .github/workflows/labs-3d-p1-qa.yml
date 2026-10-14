@@ -1,0 +1,25 @@
+name: SERNEM Labs 3D Package 1 QA
+
+on:
+  push:
+    branches:
+      - feature/labs-3d-inspector-p1
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  first-person-field-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies from existing lockfile
+        run: npm ci --no-audit --no-fund
+      - name: Verify 3D prototype isolation
+        run: node scripts/qa-labs-3d-p1.mjs
+      - name: Typecheck all app routes
+        run: npx tsc --noEmit
