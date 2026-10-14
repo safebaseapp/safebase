@@ -1,0 +1,56 @@
+name: SERNEM Guardian Basic
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "app/scripts/**"
+      - "app/lib/toolbox/**"
+      - "app/lib/pdf/**"
+      - "app/app/api/**"
+      - ".github/workflows/guardian.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: guardian-basic-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - name: Check out SERNEM
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Check Turkish and English content
+        run: node scripts/i18n-quality-check.mjs
+      - name: Verify download authorization paths
+        run: node scripts/qa-download-flows.mjs
+      - name: Verify 70 Toolbox TR/EN PDF sets
+        run: node scripts/qa-toolbox-pdfs.mjs
+      - name: Guardian run summary
+        if: always()
+        run: |
+          {
+            echo "## SERNEM Guardian Basic"
+            echo ""
+            echo "Daily static content, download flow, and 70-topic bilingual PDF checks."
+            echo "No paid AI calls, no secrets, no production writes."
+            echo ""
+            echo "Results: inspect the job steps above. A failed check fails the workflow."
+          } >> "$GITHUB_STEP_SUMMARY"
