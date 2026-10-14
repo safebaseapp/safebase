@@ -29,6 +29,11 @@ const checks = [
   ["ten priority guides have technical answer blocks", ["confined-space", "hot-work", "working-at-height", "loto", "scaffolding", "excavation", "crane-safety", "electrical-safety", "permit-to-work", "chemical-safety"].every((slug) => answers.includes(`"${slug}"`))],
   ["non-OSHA source titles are not silently hidden", guideTemplate.includes("guide.references.filter((reference) => reference.trim().length > 0)")],
   ["flagship reference answers use the original bilingual guide content", guideTemplate.includes("<AuthorityAnswerPanel") && answers.includes("guide.overview[locale]") && answers.includes("guide.controls[locale]") && !answers.includes("/labs/spot-the-hazard/")],
+  ["search-console priority HSE guides have specific bilingual metadata",
+    ["confined-space-attendant-duties", "stored-energy-hazards",
+     "hydraulic-system-safety", "suspended-load-exclusion-zones"]
+      .every(slug => guides.includes('"' + slug + '"')) &&
+    guides.includes("ctrOverrides[guide.slug]?.[language]")],
   ["safety sign pages have distinct TR/EN metadata and canonicals",
     signs.includes("export async function generateMetadata") &&
     signs.includes('slug === "no-smoking"') &&
