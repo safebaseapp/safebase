@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - feature/labs-3d-inspector-p1
+      - feature/labs-3d-inspector-p2
   pull_request:
     branches:
       - main
+      - feature/labs-3d-inspector-p1
   workflow_dispatch:
 
 jobs:
@@ -21,5 +23,8 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Verify 3D prototype isolation
         run: node scripts/qa-labs-3d-p1.mjs
+      - name: Verify Package 2 hazard inspection
+        if: github.ref_name == 'feature/labs-3d-inspector-p2' || github.base_ref == 'feature/labs-3d-inspector-p1'
+        run: node scripts/qa-labs-3d-p2.mjs
       - name: Typecheck all app routes
         run: npx tsc --noEmit

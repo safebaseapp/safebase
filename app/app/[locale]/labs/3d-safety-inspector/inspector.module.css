@@ -48,3 +48,75 @@
 .footTag{font-size:11px;color:#79cfc6;align-self:center}
 @media(max-width:670px){.page{padding:10px 10px 35px}.nav{gap:8px;flex-wrap:wrap;padding:8px 0}.kicker{display:none}.heading{padding:21px 3px;display:block}.build{display:inline-block;margin-top:13px}.viewport{height:76vh;min-height:440px;border-radius:12px}.topHud{left:10px;right:10px;top:10px}.hudLabel{padding:9px 10px;font-size:9px}.hudRight{font-size:8px;padding:10px}.controls{gap:5px;padding:8px;font-size:9px}.controls b{font-size:9px}.controls span{margin-right:3px}.modal{padding:22px}.footer{padding:15px}.coords{top:62px;right:9px}}
 @media(prefers-reduced-motion:reduce){.primary,.secondary{transition:none}}
+
+/* Package 2: inspection prompts, evidence report, and recorded findings */
+.hudRight b{color:#a9fff0;font-size:13px;padding-left:9px;letter-spacing:0}
+.aim{position:absolute;z-index:1;top:calc(50% + 22px);left:50%;transform:translateX(-50%);white-space:nowrap;pointer-events:none;background:#071d30d8;border:1px solid #b3dae540;border-radius:11px;padding:9px 15px;color:#d6eef0;font-size:11px;font-weight:700;backdrop-filter:blur(9px)}
+.inspectAction{pointer-events:auto;border:none;border-radius:9px;background:transparent;color:#aaf8df;font:inherit;cursor:pointer}
+.inspectAction b{border:1px solid #6ba7ad;border-radius:5px;padding:4px 7px;margin-right:6px}
+.hint{position:absolute;z-index:1;top:calc(50% + 76px);left:50%;transform:translateX(-50%);width:min(85%,410px);border-radius:10px;padding:11px 15px;text-align:center;background:#301b14ed;border:1px solid #f5b46179;font-size:11px;font-weight:700;color:#ffe0b8}
+.findingCategory{display:inline-block;margin-bottom:14px!important;color:#9cefe0!important;background:#1d515055;border-radius:50px;border:1px solid #55cdbb44;padding:5px 12px;font-size:10px!important;font-weight:800}
+.findingBlock{border-radius:13px;padding:15px 17px;margin-bottom:11px;background:#17334677;border:1px solid #74b6b536}
+.findingBlock strong{font-size:12px;color:#a7f1e4}
+.findingBlock p{font-size:12px;line-height:1.8;margin-top:7px;color:#d9e4ec}
+.trainingNotice{font-size:11px!important;color:#a2b4bf!important;margin:10px 0 18px}
+.findingSummary{border:1px solid #ffffff20;border-radius:18px;padding:22px 24px;background:linear-gradient(110deg,#0e2534,#071525);margin-top:17px}
+.summaryTitle{display:flex;justify-content:space-between;gap:16px;align-items:center}
+.summaryTitle h2{margin-top:8px;font-size:21px;font-weight:900;color:#f0faff}
+.summaryTitle strong{color:#4be5c6;margin-left:12px}
+.summaryTitle .secondary{font-size:12px;padding:10px 14px}
+.summaryEmpty{font-size:12px;color:#91abbb;margin-top:16px;line-height:1.7}
+.findingList{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;gap:10px;margin-top:19px;padding:0}
+.findingList li{display:flex;align-items:center;gap:10px;background:#163748a0;border:1px solid #58ac9e33;border-radius:11px;padding:13px;font-size:12px;font-weight:700;color:#dbecf2}
+.findingList li span{color:#5de3a8}
+.completed{margin-top:17px;background:#16483e;border:1px solid #45deab70;color:#b2fce4;padding:14px;border-radius:11px;font-size:13px;font-weight:700}
+@media(max-width:900px){.findingList{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:580px){.findingSummary{padding:16px}.findingList{grid-template-columns:1fr}.summaryTitle h2{font-size:17px}.aim{font-size:10px;max-width:95%;white-space:normal;text-align:center}.modal{max-height:87%;overflow-y:auto}}
+
+
+/* Touch-first controls for SERNEM Labs 3D Inspector. Desktop controls remain intact. */
+.canvas{touch-action:none;-webkit-user-select:none;user-select:none;}
+.mobileControls{display:none;position:absolute;z-index:3;left:12px;right:12px;bottom:14px;align-items:flex-end;justify-content:space-between;gap:12px;pointer-events:none}
+.joystickRegion{display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:auto}
+.joystickPad{position:relative;width:132px;height:132px;border-radius:50%;border:2px solid #a8ecf27f;background:radial-gradient(circle at center,#153d59b5,#061a2bd9);box-shadow:0 7px 25px #06131e9c;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;cursor:grab}
+.joystickRing{position:absolute;inset:22px;border-radius:50%;border:1px dashed #b4e5ed65;pointer-events:none}
+.joystickThumb{position:absolute;top:50%;left:50%;margin-top:-27px;margin-left:-27px;width:54px;height:54px;border-radius:50%;background:linear-gradient(150deg,#7ef3e4,#229cba);border:2px solid #e1fffd;box-shadow:0 0 0 5px #238ca72a,0 7px 18px #0008;pointer-events:none;will-change:transform}
+.touchCaption{color:#d6f9f5;background:#05192cc9;padding:3px 10px;border-radius:12px;font-size:10px;letter-spacing:.12em;font-weight:900}
+.touchActions{display:flex;flex-direction:column;gap:11px;align-items:center;pointer-events:auto}
+.touchInspect{display:flex;width:98px;height:98px;border-radius:50%;border:2px solid #bffbee;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-weight:900;font-size:13px;color:#02292a;background:linear-gradient(145deg,#a9f6e3,#40cdb5);box-shadow:0 7px 25px #03101fc7;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.touchInspect span{font-size:26px;font-weight:800;line-height:1}
+.touchInspect:active{transform:scale(.96)}
+.touchPause{border-radius:12px;border:1px solid #bce4e65f;background:#061b2beb;color:#d7f6f8;min-height:42px;padding:9px 13px;font-size:12px;font-weight:800;touch-action:manipulation}
+.touchPause span{color:#7fe1da;margin-left:6px}
+@media(pointer:coarse){
+  .mobileControls{display:flex}
+  .bottomHud{display:none}
+  .keyboardHint{display:none}
+  .viewport{min-height:495px}
+  .aim{top:calc(50% + 14px);width:min(82%,300px);white-space:normal;text-align:center;padding:8px 11px}
+  .hint{top:calc(50% + 88px);width:min(78%,300px)}
+}
+@media(max-width:670px){
+  .mobileControls{display:flex;left:10px;right:10px;bottom:14px}
+  .bottomHud{display:none}
+  .keyboardHint{display:none}
+  .viewport{height:75svh;min-height:500px}
+  .joystickPad{width:118px;height:118px}
+  .joystickThumb{height:50px;width:50px;margin-top:-25px;margin-left:-25px}
+  .touchInspect{width:88px;height:88px;font-size:12px}
+  .heading p:not(.eyebrow){font-size:12px}
+  .hint{width:min(80%,260px)}
+}
+@media(max-width:850px) and (orientation:landscape) and (pointer:coarse){
+  .viewport{height:92svh;min-height:310px}
+  .joystickPad{height:100px;width:100px}
+  .touchInspect{height:74px;width:74px;font-size:10px}
+  .joystickThumb{height:46px;width:46px;margin-top:-23px;margin-left:-23px}
+  .mobileControls{bottom:9px}
+}
+
+/* Platform-appropriate field guidance: mobile players do not have an E key. */
+.desktopPrompt{display:inline}
+.mobilePrompt{display:none}
+@media(pointer:coarse){.desktopPrompt{display:none}.mobilePrompt{display:inline}}
+@media(max-width:670px){.desktopPrompt{display:none}.mobilePrompt{display:inline}}

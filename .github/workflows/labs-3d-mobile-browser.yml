@@ -1,0 +1,45 @@
+name: SERNEM Labs 3D Mobile Browser QA
+on:
+  push:
+    branches: [feature/labs-3d-inspector-p2]
+  workflow_dispatch:
+
+jobs:
+  mobile-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: app
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: public-test-key-not-a-secret
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install existing SERNEM dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install transient browser test dependency
+        run: npm install --no-save --package-lock=false playwright
+      - name: Install headless Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start local Next.js without production credentials
+        run: |
+          npm run dev > /tmp/labs-3d-next.log 2>&1 &
+          echo $! > /tmp/labs-3d-server.pid
+          for i in $(seq 1 75); do
+            if curl -fsS http://127.0.0.1:3000/tr/labs/3d-safety-inspector -o /tmp/labs-3d-page.html; then exit 0; fi
+            sleep 3
+          done
+          cat /tmp/labs-3d-next.log
+          exit 1
+      - name: Emulate iPhone-sized touch controls
+        run: node scripts/qa-labs-3d-mobile-browser.mjs
+      - name: Upload screenshots and logs for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: labs-3d-mobile-browser
+          path: |
+            app/artifacts/*.png
+            /tmp/labs-3d-next.log
+          if-no-files-found: ignore
