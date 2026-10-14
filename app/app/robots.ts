@@ -2,10 +2,11 @@ import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-      disallow: [
+    rules: [
+      {
+        userAgent: ["*", "OAI-SearchBot"],
+        allow: "/",
+        disallow: [
         "/api/",
 
         "/admin/",
@@ -34,8 +35,9 @@ export default function robots(): MetadataRoute.Robots {
 
         "/tr/hse-performance/",
         "/en/hse-performance/",
-      ],
-    },
+        ],
+      },
+    ],
     sitemap: "https://www.sernem.com/sitemap.xml",
     host: "https://www.sernem.com",
   };
