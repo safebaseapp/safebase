@@ -26,7 +26,7 @@ export default function Inspector3D({ locale }: Props) {
   const confirmed = useRef(new Set<string>());
   const [found, setFound] = useState<string[]>([]);
   const [focus, setFocus] = useState<SafetyHazard | null>(null);
-  const [nearby, setNearby] = useState<{ title: string; distance: number } | null>(null);
+  const [nearby, setNearby] = useState<{ distance: number; direction: string } | null>(null);
   const [inspection, setInspection] = useState<SafetyHazard | null>(null);
   const [hint, setHint] = useState("");
   const [picked, setPicked] = useState<number | null>(null);
@@ -157,7 +157,16 @@ export default function Inspector3D({ locale }: Props) {
         const target = engine.pickHazard(confirmed.current);
         setFocus(current => current?.id === target?.id ? current : target);
         const nearest = engine.nearestHazard(confirmed.current);
-        setNearby(nearest ? { title: nearest.hazard[locale].title, distance: nearest.distance } : null);
+        if (nearest) {
+          const dx = nearest.hazard.target[0] - engine.state.x;
+          const dz = nearest.hazard.target[2] - engine.state.z;
+          const bearing = Math.atan2(dx, -dz);
+          const delta = Math.atan2(Math.sin(bearing - engine.state.yaw), Math.cos(bearing - engine.state.yaw));
+          const direction = Math.abs(delta) < 0.38 ? "ahead" : delta > 0 ? "right" : "left";
+          setNearby(current => current?.direction === direction && Math.abs(current.distance - nearest.distance) < 0.5 ? current : { distance: nearest.distance, direction });
+        } else {
+          setNearby(current => current === null ? current : null);
+        }
       }
     };
     frame = requestAnimationFrame(tick);
@@ -297,7 +306,7 @@ export default function Inspector3D({ locale }: Props) {
             <h1>{isTr ? "Sahaya gir. Uygunsuzlukları tespit et." : "Enter the site. Find the hazards."}</h1>
             <p>{isTr ? "Üçüncü paket: 3D sahada 12 uygunsuzluğu bul, müdahale kararını ver ve görevi puanla." : "Package three: discover 12 hazards in the 3D site, choose safe interventions and earn mission points."}</p>
           </div>
-          <div className={s.build}>ALPHA / P3 <span>●</span> WEBGL2</div>
+          <div className={s.build}>ALPHA / P4 <span>●</span> WEBGL2</div>
         </div>
 
         <section className={s.viewport} aria-label={isTr ? "Gezilebilir 3D rafineri sahası" : "Explorable 3D refinery field"}>
@@ -321,7 +330,7 @@ export default function Inspector3D({ locale }: Props) {
                   : <span><span className={s.desktopPrompt}>{isTr ? "Sahadaki riskleri incele • E ile işaretle" : "Survey site conditions • Press E to mark"}</span><span className={s.mobilePrompt}>{isTr ? "Etrafına bak • Uygunsuzluğu hedefle ve İncele’ye dokun" : "Look around • Aim at a hazard and tap Inspect"}</span></span>}
               </div>
               {hint && <div role="status" className={s.hint}>{hint}</div>}
-              {nearby && <div className={s.proximity} aria-live="off"><span className={s.proximityDot} />{isTr ? "YAKINDAKİ BULGU" : "NEARBY FINDING"} · {nearby.distance.toFixed(0)} m<br/><b>{nearby.title}</b></div>}
+              {nearby && <div className={s.proximity} aria-live="off"><span className={s.proximityDot} />{isTr ? "YAKINDAKİ BULGU" : "NEARBY FINDING"} · {nearby.distance.toFixed(0)} m<br/><b>{nearby.direction === "ahead" ? (isTr ? "Önünde ↑" : "Ahead ↑") : nearby.direction === "right" ? (isTr ? "Sağında →" : "Right →") : (isTr ? "Solunda ←" : "Left ←")}</b></div>}
               <div className={s.mobileControls}>
                 <div className={s.joystickRegion}>
                   <div
