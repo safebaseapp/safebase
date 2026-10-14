@@ -73,7 +73,7 @@ class SiteMesh {
 function addTrainingFindings(m: SiteMesh) {
   // (1) Emergency access route: two pallets block part of a marked gate.
   m.box(1.2,0.35,35,2.8,0.70,1.65,0xa17d4b);
-  m.box(1.2,0.87,35,2.5,0.36,1.45,0x988f75);
+  m.box(1.2,0.87,35,2.5,0.36,1.45,0x988f75);m.solid(1.2,35,2.8,1.65);
   for(const x of [0.25,1.1,1.95])m.box(x,0.99,35,0.15,0.12,1.1,0x5a4936);
   // (2) Loose electrical cable visibly crossing the center walkway.
   for(let n=0;n<13;n++){
@@ -83,7 +83,7 @@ function addTrainingFindings(m: SiteMesh) {
   m.box(-4.3,0.3,20.4,0.55,0.60,0.55,0xe5ad56);
   // (3) Dark excavation inset. Three-sided edge rails leave a deliberately open approach.
   m.box(-19,0.018,-28,5.9,0.015,4.7,0x0a1725);
-  m.box(-19,0.018,-28,4.6,0.012,3.6,0x162532);
+  m.box(-19,0.018,-28,4.6,0.012,3.6,0x162532);m.solid(-19,-28,5.9,4.7);
   for(const z of [-30.35,-25.65])m.box(-19,0.75,z,6.2,0.15,0.13,0xee993b);
   for(const z of [-30.35,-25.65])for(const x of [-22,-16])m.box(x,0.55,z,0.16,1.1,0.17,0xdbb766);
   m.box(-22,0.75,-28,0.14,0.18,4.9,0xee993b);
@@ -91,16 +91,16 @@ function addTrainingFindings(m: SiteMesh) {
   // The missing segment itself is created by omitting a rail in constructSite.
   for(const x of [-10.0,-4.0])m.cylinder([x,3.4,-6],[x,4.4,-6],0.07,0xb0c5d2,8);
   // (5) Small unsecured objects positioned on the top scaffold deck.
-  for(const [x,z,w] of [[-7,-12,0.95],[-6,-12.4,0.42],[-7.8,-11.7,0.28]] as number[][]) {
+  for(const [x,z,w] of [[-4.8,-12,0.95],[-5.0,-12.4,0.42],[-4.65,-11.7,0.28]] as number[][]) {
     m.box(x,6.86,z,w,0.35,w*0.73,0xcf9859);
   }
   // (6) Unrestrained cylinder and exposed valve at the workshop approach.
   m.cylinder([1.5,0,17.5],[1.5,2.2,17.5],0.34,0x2d8a91,18);
   m.cylinder([1.5,2.2,17.5],[1.5,2.45,17.5],0.10,0xe0cfb7,12);
-  m.box(1.5,2.42,17.5,0.52,0.06,0.10,0xdaa85f);
+  m.box(1.5,2.42,17.5,0.52,0.06,0.10,0xdaa85f);m.solid(1.5,17.5,0.8,0.8);
   // (7) Hot work adjacent to fuel / combustibles, indicated by workbench and drums.
   m.box(-10,0.55,28,2.4,1.1,1.25,0x637b85);
-  m.box(-10,1.2,28,2.8,0.18,1.45,0xc1b28c);
+  m.box(-10,1.2,28,2.8,0.18,1.45,0xc1b28c);m.solid(-10,28,2.6,1.5);
   m.cylinder([-8.0,0.03,27.45],[-8,1.15,27.45],0.42,0xc46b39,14);
   m.cylinder([-8.6,0.03,29.0],[-8.6,1.15,29.0],0.42,0x993f2b,14);
   m.box(-9.0,1.43,28.0,0.7,0.27,0.4,0x9ac0cc);
@@ -111,12 +111,12 @@ function addTrainingFindings(m: SiteMesh) {
   m.box(18.4,3.4,28.1,3.0,1.45,2.6,0xb88b4b);
   m.box(18.4,4.18,28.1,2.85,0.11,2.48,0x40596c);
   // (9) Plant vehicle on walkway, no separated pedestrian crossing.
-  m.box(5,0.92,-2,2.9,1.45,3.7,0xc49b46);
+  m.box(5,0.92,-2,2.9,1.45,3.7,0xc49b46);m.solid(5,-2,3.2,3.9);
   m.box(5,1.87,-2.55,2.4,1.1,1.7,0x40586b);
   for(const x of [3.52,6.48])for(const z of [-3.17,-0.88])m.cylinder([x,0.48,z],[x+0.1,0.48,z],0.48,0x1c2732,10);
   for(const x of [4.2,5.8])m.box(x,0.25,0.6,0.25,0.2,2.3,0x879ca4);
   // (10) Open electrical cabinet with visible panel interior.
-  m.box(-26,1.42,3.4,1.6,2.5,0.55,0xb9bdaf);
+  m.box(-26,1.42,3.4,1.6,2.5,0.55,0xb9bdaf);m.solid(-26,3.4,1.8,0.8);
   m.box(-26,1.5,3.08,1.35,2.25,0.10,0x243341);
   m.box(-24.98,1.5,2.7,0.12,2.27,1.05,0xd4b85d);
   for(const x of [-26.3,-26,-25.7])for(const y of [1.0,1.45,1.9])m.box(x,y,2.99,0.18,0.24,0.07,0x9c6a4a);
@@ -126,6 +126,7 @@ function addTrainingFindings(m: SiteMesh) {
   m.box(-3,0.50,-23,1.95,0.99,1.4,0x789ba7);
   m.cylinder([-3,1.00,-23],[-1.7,1.00,-23],0.27,0xa4bac4,12);
   // (12) Cylindrical pipes stacked without chocks on vehicle access.
+  m.solid(6,-27,2.6,3.0);
   for(const [x,y,z] of [[5.2,0.28,-27],[6.0,0.28,-27],[6.8,0.28,-27],[5.6,0.78,-27],[6.4,0.78,-27]] as number[][]){
     m.cylinder([x,y,z-1.45],[x,y,z+1.45],0.32,0x91a7b7,12);
   }
