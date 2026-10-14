@@ -2,7 +2,7 @@
 // not ranking, actual crawling, citations, or rendered JSON-LD correctness.
 import { readFile } from "node:fs/promises";
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), "utf8");
-const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, signs, risks, hub] = await Promise.all([
+const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, signs, risks, hub, checklistAI] = await Promise.all([
   read("app/robots.ts"),
   read("app/[locale]/toolbox/[slug]/page.tsx"),
   read("app/[locale]/knowledge-base/[slug]/page.tsx"),
@@ -13,6 +13,7 @@ const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, sign
   read("app/[locale]/safety-signs/[slug]/page.tsx"),
   read("app/[locale]/risk-assessment/[slug]/page.tsx"),
   read("app/[locale]/knowledge-base/page.tsx"),
+  read("app/[locale]/checklists/components/PremiumAssessmentButton.tsx"),
 ]);
 const checks = [
   ["OAI-SearchBot explicitly allowed", robots.includes("OAI-SearchBot") && robots.includes('allow: "/"')],
@@ -45,6 +46,7 @@ const checks = [
      "hydraulic-system-safety", "suspended-load-exclusion-zones"]
       .every(slug => guides.includes('"' + slug + '"')) &&
     guides.includes("ctrOverrides[guide.slug]?.[language]")],
+  ["checklist AI feature is not a paid upsell", checklistAI.includes("onPremiumClick?.()") && !checklistAI.includes("setIsOpen(true)")],
   ["safety sign pages have distinct TR/EN metadata and canonicals",
     signs.includes("export async function generateMetadata") &&
     signs.includes('slug === "no-smoking"') &&
