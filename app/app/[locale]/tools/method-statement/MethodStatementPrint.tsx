@@ -98,7 +98,7 @@ export default function MethodStatementPrint({
             <h1>
               {activity ||
                 (isTurkish
-                  ? "Profesyonel İş Yöntem Beyanı"
+                  ? "Profesyonel Çalışma Yöntemi"
                   : "Professional Method Statement")}
             </h1>
           </div>
@@ -204,7 +204,7 @@ export default function MethodStatementPrint({
               {documentNo === "SRN-MS-020" ? (
                 <>
                   <tr>
-                    <td>{isTurkish ? "Yüksek basınç / stored energy" : "High pressure / stored energy"}</td>
+                    <td>{isTurkish ? "Yüksek basınç / depolanmış enerji" : "High pressure / stored energy"}</td>
                     <td>{isTurkish
                       ? "Tüp, regülatör ve bağlantıların gaz servisine uygunluğu doğrulanmalı; valf kontrollü açılmalı ve ekipman basınç sınırları aşılmamalıdır."
                       : "Cylinder, regulator and connections shall be suitable for the gas service; valves shall be opened under control and equipment pressure ratings shall not be exceeded."}</td>
@@ -1606,7 +1606,7 @@ export default function MethodStatementPrint({
                     [
                       isTurkish ? "Düşen cisim" : "Dropped objects",
                       isTurkish
-                        ? "Alt alan gerektiğinde bariyerlenmeli, gevşek malzemeler emniyete alınmalı ve uygun durumlarda tool lanyard kullanılmalıdır."
+                        ? "Alt çalışma alanı gerektiğinde bariyerlenmeli, gevşek malzemeler emniyete alınmalı ve uygun durumlarda el aleti emniyet bağlantısı kullanılmalıdır."
                         : "The area below shall be barricaded where required, loose materials secured and tool lanyards used where appropriate.",
                       isTurkish
                         ? "Yasaklı alan / saha düzeni kontrolü"
@@ -1820,7 +1820,7 @@ export default function MethodStatementPrint({
         </section>
 
         <footer className="ms-footer">
-          <span>SERNEM • Professional HSE Document</span>
+          <span>{isTurkish ? "SERNEM • Profesyonel İSG Dokümanı" : "SERNEM • Professional HSE Document"}</span>
 
           <span>
             {documentNo || "SRN-MS"} • Rev. {revision || "-"}
