@@ -221,9 +221,12 @@ export default function GuideTemplate({
                 // Link numbered OSHA standards directly to their official source.
                 // Other references remain plain text until individually verified.
                 const officialSource = /^OSHA (1910|1926)\.(\d{3,4})$/.exec(reference);
+                const officialSubpart = /^OSHA (1910|1926) Subpart ([A-Z]{1,2})$/.exec(reference);
                 const href = officialSource
                   ? `https://www.osha.gov/laws-regs/regulations/standardnumber/${officialSource[1]}/${officialSource[1]}.${officialSource[2]}`
-                  : null;
+                  : officialSubpart
+                    ? `https://www.osha.gov/laws-regs/regulations/standardnumber/${officialSubpart[1]}/${officialSubpart[1]}Subpart${officialSubpart[2]}`
+                    : null;
                 return href ? (
                   <a key={reference} href={href} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-emerald-400/30 bg-slate-950/50 px-4 py-3 font-bold text-emerald-300 underline decoration-emerald-500/50 underline-offset-4 hover:text-white">
                     {reference} ↗
