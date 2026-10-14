@@ -215,12 +215,14 @@ export default function GuideTemplate({
 
         {visibleReferences.length > 0 ? (
           <article className="rounded-3xl border border-emerald-400/20 bg-emerald-400/5 p-8">
-            <h2 className="text-3xl font-black">{isTurkish ? "OSHA Referansları" : "OSHA References"}</h2>
+            <h2 className="text-3xl font-black">{isTurkish ? "Teknik Referanslar" : "Technical References"}</h2>
             <div className="mt-6 flex flex-wrap gap-3">
               {visibleReferences.map((reference) => {
-                const officialSource = /^OSHA (1910\.146|1910\.252)$/.exec(reference);
+                // Link numbered OSHA standards directly to their official source.
+                // Other references remain plain text until individually verified.
+                const officialSource = /^OSHA (1910|1926)\.(\d{3,4})$/.exec(reference);
                 const href = officialSource
-                  ? `https://www.osha.gov/laws-regs/regulations/standardnumber/1910/${officialSource[1]}`
+                  ? `https://www.osha.gov/laws-regs/regulations/standardnumber/${officialSource[1]}/${officialSource[1]}.${officialSource[2]}`
                   : null;
                 return href ? (
                   <a key={reference} href={href} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-emerald-400/30 bg-slate-950/50 px-4 py-3 font-bold text-emerald-300 underline decoration-emerald-500/50 underline-offset-4 hover:text-white">
