@@ -37,8 +37,23 @@ const blueprints: GuideBlueprint[] = [
     focus: P("attendant monitoring, communication and emergency responsibilities outside permit spaces", "izinli kapalı alan dışında gözcünün izleme, iletişim ve acil durum sorumlulukları"),
     family: F,
     osha: ["OSHA 1910.146(i)", "OSHA 1926.1209"],
-    hazards: [P("Loss of entrant contact or unrecognized behavioral changes", "Giriş yapanla iletişimin kaybı veya davranış değişikliklerinin fark edilmemesi"), P("Attendant distracted by unrelated duties", "Gözcünün alakasız görevlerle dikkatinin dağılması")],
-    controls: [P("Maintain continuous awareness of authorized entrants and conditions affecting the space.", "Yetkili giriş yapanları ve alanı etkileyen koşulları sürekli izleyin."), P("Do not perform duties that interfere with monitoring, communication or emergency response.", "İzleme, iletişim veya acil müdahaleyi engelleyen başka görev yapmayın.")],
+    hazards: [
+      P("Loss of entrant contact or unrecognized behavioral changes", "Giriş yapanla iletişimin kaybı veya davranış değişikliklerinin fark edilmemesi"),
+      P("Attendant distracted by unrelated duties", "Gözcünün alakasız görevlerle dikkatinin dağılması"),
+      P("Unauthorized entry or failure to identify new hazards affecting entrants", "Yetkisiz giriş veya giriş yapanları etkileyen yeni tehlikelerin fark edilmemesi"),
+      P("Unplanned rescue attempt exposing the attendant to the same atmosphere", "Plansız kurtarma girişimi nedeniyle gözcünün aynı tehlikeli atmosfere maruz kalması"),
+    ],
+    controls: [
+      P("Maintain continuous awareness of authorized entrants and conditions affecting the space.", "Yetkili giriş yapanları ve alanı etkileyen koşulları sürekli izleyin."),
+      P("Do not perform duties that interfere with monitoring, communication or emergency response.", "İzleme, iletişim veya acil müdahaleyi engelleyen başka görev yapmayın."),
+      P("Keep an accurate count of authorized entrants and maintain effective communication throughout entry.", "Giriş yapmasına izin verilen personelin güncel sayısını takip edin ve giriş boyunca etkili iletişimi sürdürün."),
+      P("Order evacuation when prohibited conditions, warning signs, or other specified triggers arise; summon the designated rescue service without entering for an improvised rescue.", "Yasaklı koşullar, uyarı işaretleri veya belirlenmiş diğer tetikleyiciler oluştuğunda tahliye talimatı verin; plansız kurtarma için içeri girmeden belirlenmiş kurtarma ekibini çağırın."),
+    ],
+    checklist: [
+      P("Are entrant identities, communications and evacuation signals confirmed?", "Giriş yapanların kimlikleri, iletişim yöntemi ve tahliye sinyalleri doğrulandı mı?"),
+      P("Does the attendant know the rescue notification procedure and assigned entry duties?", "Gözcü kurtarma ekibini çağırma prosedürünü ve kendisine verilen giriş görevlerini biliyor mu?"),
+      P("Is the attendant positioned to monitor entry without conflicting tasks?", "Gözcü, çakışan görevleri olmadan girişi izleyebileceği uygun konumda mı?"),
+    ],
   },
   {
     slug: "confined-space-entry-supervisor",
