@@ -153,6 +153,10 @@ export async function generateMetadata({
   }
 
   const content = locale === "tr" ? toolbox.tr : toolbox.en;
+  // Metadata must not advertise a gated or unpublished route as indexable.
+  // This does not expose any Premium content or alter authorization.
+  const access = await getContentAccess(`toolbox:${slug}`);
+  const isPublic = access.published && access.visible && access.accessLevel === "free";
 
   const title =
     content.title ??
@@ -194,8 +198,8 @@ export async function generateMetadata({
       description,
     },
     robots: {
-      index: true,
-      follow: true,
+      index: isPublic,
+      follow: isPublic,
     },
   };
 }
