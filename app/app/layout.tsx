@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | SERNEM",
   },
   description:
-    "Global HSE platform with safety calculators, AI assistant, OSHA knowledge, templates and inspection checklists.",
+    "SERNEM is an international HSE knowledge and digital tools platform offering risk assessment, OSHA-related safety resources, toolbox talks, inspection checklists and AI-assisted learning.",
   keywords: [
     "HSE",
     "Safety",
@@ -59,6 +59,32 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body className="antialiased bg-slate-950 text-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://www.sernem.com/#organization",
+                  name: "SERNEM",
+                  url: "https://www.sernem.com",
+                  description:
+                    "SERNEM is an independent international Health, Safety and Environment (HSE) knowledge and digital tools platform for professionals worldwide.",
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://www.sernem.com/#website",
+                  name: "SERNEM",
+                  url: "https://www.sernem.com",
+                  publisher: { "@id": "https://www.sernem.com/#organization" },
+                  inLanguage: ["en", "tr"],
+                },
+              ],
+            }).replace(/</g, "\\u003c"),
+          }}
+        />
         {children}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-B4TTF1KM9J"
