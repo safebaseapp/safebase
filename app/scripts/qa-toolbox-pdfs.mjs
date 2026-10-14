@@ -14,6 +14,25 @@ const slugSourcePath = path.join(
   "premium-master-slugs.ts",
 );
 
+// Regression checks for dynamic visual summaries: critical sentences must not
+// disappear due to an arbitrary two-line or eight-line slice.
+const visualRendererPath = path.join(appRoot, "lib", "pdf", "premium-toolbox-pdf-v2.ts");
+const visualRenderer = await readFile(visualRendererPath, "utf8");
+const visualAssertions = [
+  ["hazard instructions are rendered without slicing", /textBlock\(hazardLines,\s*68,\s*692/],
+  ["control instructions are rendered without slicing", /textBlock\(controlLines,\s*436,\s*692/],
+  ["overflow fails explicitly", /throw new Error\(`Toolbox visual page:/],
+  ["hazard content is wrapped in full", /wrap\(`\$\{index \+ 1\}\. \$\{item\}`, 48\)/],
+  ["control content is wrapped in full", /wrap\(`• \$\{item\}`, 47\)/],
+];
+const visualIssues = visualAssertions
+  .filter(([, pattern]) => !pattern.test(visualRenderer))
+  .map(([description]) => `Visual PDF regression: ${description}`);
+if (visualIssues.length) {
+  console.error(visualIssues.join("\\n"));
+  process.exit(1);
+}
+
 const EXPECTED_PAGE_COUNT = 4;
 const MIN_BRANDED_BYTES = 20_000;
 
