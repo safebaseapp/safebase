@@ -114,3 +114,9 @@
   .joystickThumb{height:46px;width:46px;margin-top:-23px;margin-left:-23px}
   .mobileControls{bottom:9px}
 }
+
+/* Platform-appropriate field guidance: mobile players do not have an E key. */
+.desktopPrompt{display:inline}
+.mobilePrompt{display:none}
+@media(pointer:coarse){.desktopPrompt{display:none}.mobilePrompt{display:inline}}
+@media(max-width:670px){.desktopPrompt{display:none}.mobilePrompt{display:inline}}
