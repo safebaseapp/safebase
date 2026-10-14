@@ -215,3 +215,13 @@
   .inspectionActions{grid-template-columns:1fr}
   .inspectionActions .secondary{min-height:36px}
 }
+
+/* Package 4: keep the mobile header outside the browser's status bar. */
+@media(max-width:670px) and (orientation:portrait){
+  .page{padding-top:max(74px,calc(env(safe-area-inset-top,0px) + 24px))}
+}
+.proximity{position:absolute;z-index:1;top:75px;left:12px;max-width:min(66%,270px);padding:9px 11px;background:#061827d9;border:1px solid #e6b85d66;border-radius:11px;color:#f7d895;font-size:10px;font-weight:800;letter-spacing:.03em;pointer-events:none;box-shadow:0 8px 22px #06111b70}
+.proximity b{display:inline-block;margin-top:4px;color:#fff;font-size:11px;line-height:1.35;letter-spacing:0}
+.proximityDot{display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:#f5c05c;box-shadow:0 0 12px #ffca72}
+@media(min-width:851px){.proximity{display:none}}
+@media(max-width:670px){.proximity{top:65px;left:10px;max-width:65%;padding:7px 9px;font-size:9px}.proximity b{font-size:10px}}
