@@ -133,7 +133,7 @@ export default function MethodStatementPrint({
             </tr>
 
             <tr>
-              <th>{isTurkish ? "LOKASYON" : "LOCATION"}</th>
+              <th>{isTurkish ? "ÇALIŞMA YERİ" : "LOCATION"}</th>
               <td>{location || "-"}</td>
 
               <th>{isTurkish ? "FAALİYET" : "ACTIVITY"}</th>
@@ -204,7 +204,7 @@ export default function MethodStatementPrint({
               {documentNo === "SRN-MS-020" ? (
                 <>
                   <tr>
-                    <td>{isTurkish ? "Yüksek basınç / depolanmış enerji" : "High pressure / stored energy"}</td>
+                    <td>{isTurkish ? "Yüksek basınç ve depolanmış enerji" : "High pressure / stored energy"}</td>
                     <td>{isTurkish
                       ? "Tüp, regülatör ve bağlantıların gaz servisine uygunluğu doğrulanmalı; valf kontrollü açılmalı ve ekipman basınç sınırları aşılmamalıdır."
                       : "Cylinder, regulator and connections shall be suitable for the gas service; valves shall be opened under control and equipment pressure ratings shall not be exceeded."}</td>
