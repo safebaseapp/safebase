@@ -1,4 +1,5 @@
 import ActivityTracker from "@/components/analytics/ActivityTracker";
+import { premiumTrialEnabled } from "@/lib/premium-trial-config";
 import TrackedCheckoutLink from "@/components/analytics/TrackedCheckoutLink";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -17,6 +18,7 @@ type Benefit = {
 export default async function UpgradePage({ params }: Props) {
   const { locale } = await params;
   const isTurkish = locale === "tr";
+  const showPreviewTrial = premiumTrialEnabled();
   const supabase = await createClient();
 
   const {
@@ -190,6 +192,26 @@ export default async function UpgradePage({ params }: Props) {
                   ? "Tek üyelik. Premium araçlar, içerikler ve profesyonel çıktılar. Ödeme sonrası erişim hesabınıza otomatik tanımlanır."
                   : "One membership. Premium tools, content and professional outputs. Access is activated automatically after payment."}
               </p>
+
+              {showPreviewTrial && (
+                <div className="mt-6 rounded-2xl border border-amber-300/40 bg-amber-300/10 p-5">
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-amber-300">
+                    {isTurkish ? "TEST ORTAMI · 24 SAATLİK DENEME" : "TEST ENVIRONMENT · 24-HOUR TRIAL"}
+                  </p>
+                  <h3 className="mt-2 text-xl font-bold text-white">
+                    {isTurkish ? "24 Saat Premium'u Ücretsiz Dene" : "Try Premium Free for 24 Hours"}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-white/75">
+                    {isTurkish
+                      ? "Bugün €0. Deneme bitmeden iptal edilmezse €9,99/ay otomatik yenilenen abonelik başlar. Ödeme bilgileri yalnızca Lemon Squeezy'de alınır."
+                      : "€0 today. Unless cancelled before the trial ends, a recurring €9.99/month subscription begins. Payment details are collected only by Lemon Squeezy."}
+                  </p>
+                  <Link href={`/${locale}/premium-trial`}
+                    className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-amber-300 px-5 py-4 text-sm font-black text-slate-950 transition hover:bg-amber-200">
+                    {isTurkish ? "Deneme Koşullarını Gör →" : "View Trial Terms →"}
+                  </Link>
+                </div>
+              )}
 
               <TrackedCheckoutLink
                 href={checkoutUrl}
