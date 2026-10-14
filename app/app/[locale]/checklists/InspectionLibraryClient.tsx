@@ -84,7 +84,7 @@ export default function InspectionLibraryClient({
         <header className="border-b border-slate-800 pb-8">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-400">{isTurkish ? "SERNEM Saha Araçları" : "SERNEM Field Tools"}</p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">{isTurkish ? "İş Güvenliği Denetim Kontrol Listeleri" : "Safety Inspection Checklists"}</h1>
-          <p className="mt-4 max-w-3xl leading-7 text-slate-400">{isTurkish ? "HSE profesyonelleri için yapılandırılmış, hızlı ve yönetilebilir saha denetim araçları." : "Structured, fast and management-ready field inspection tools for HSE professionals."}</p>
+          <p className="mt-4 max-w-3xl leading-7 text-slate-400">{isTurkish ? "İSG profesyonelleri için yapılandırılmış, hızlı ve kolay yönetilebilir saha denetim araçları." : "Structured, fast and management-ready field inspection tools for HSE professionals."}</p>
           <div className="mt-7 flex flex-wrap gap-3 text-sm text-slate-300">
             <span className="rounded-full border border-slate-700 bg-slate-900 px-4 py-2">{visibleInspections.length} {isTurkish ? "denetim" : "inspections"}</span>
             <span className="rounded-full border border-slate-700 bg-slate-900 px-4 py-2">{isTurkish ? "Mobil uyumlu" : "Mobile responsive"}</span>
