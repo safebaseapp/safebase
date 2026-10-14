@@ -13,7 +13,7 @@ const checks = [
     (assessment.match(/    tr: \[/g) || []).length === 12 &&
     (assessment.match(/    en: \[/g) || []).length === 12],
   ["one valid correct choice per scenario", (assessment.match(/    correct: [012], priority:/g) || []).length === 12],
-  ["critical/high site training priority for every scenario", (assessment.match(/priority: "(?:high|critical)"/g) || []).length === 12],
+  ["critical/high site training priority for every scenario", (assessment.match(/^    correct: [012], priority: "(?:high|critical)"/gm) || []).length === 12],
   ["correct intervention required before recording", client.includes("if (!inspection || !resolved) return;")],
   ["corrective action hidden until a correct choice", client.includes("{resolved && (") &&
     client.includes("inspection[locale].control")],
