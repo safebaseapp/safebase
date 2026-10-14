@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { allGuides } from "../data/guides/all-guides";
 import RelatedGuideResources from "./RelatedGuideResources";
+import AuthorityFieldVisual from "./AuthorityFieldVisual";
 
 export type LocalizedText = {
   en: string;
@@ -137,6 +138,7 @@ export default function GuideTemplate({
       </section>
 
       <section className="mx-auto grid max-w-5xl gap-8 px-6 py-16 lg:px-8">
+        <AuthorityFieldVisual slug={guide.slug} locale={language} />
         <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
           <h2 className="text-3xl font-black">
             {isTurkish ? "Genel Bakış" : "Overview"}
