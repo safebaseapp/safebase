@@ -579,7 +579,7 @@ export const toolboxData = [
       "explanation_title": "KONU ANLATIMI",
       "explanation": [
         "Küçük bir somun, anahtar veya el aleti bile yükseklikten düştüğünde ciddi yaralanmaya neden olabilir. Cismin ağırlığı kadar düşme yüksekliği, şekli ve çarpma noktası da sonucun şiddetini belirler.",
-        "Aletler uygun tool lanyard ile bağlanmalı, küçük parçalar kapalı çantalarda tutulmalı ve platform kenarlarında gevşek malzeme bırakılmamalıdır. Topuk levhası tek başına tüm düşen cisim risklerini önlemez.",
+        "Aletler uygun el aleti emniyet bağlantısı (tool lanyard) ile bağlanmalı, küçük parçalar kapalı çantalarda tutulmalı ve platform kenarlarında gevşek malzeme bırakılmamalıdır. Topuk levhası tek başına tüm düşen cisim risklerini önlemez.",
         "Alt çalışma alanı bariyerlenmeli ve düşen cisim hattında personel bulunmamalıdır. Malzeme kaldırma, taşıma veya elden ele verme sırasında güvenli yöntem kullanılmalı; malzeme aşağıya atılmamalıdır."
       ],
       "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
@@ -603,7 +603,7 @@ export const toolboxData = [
       ],
       "controls_title": "KONTROL ÖNLEMLERİ",
       "controls": [
-        "Aletleri uygun tool lanyard ile sabitleyin.",
+        "Aletleri uygun el aleti emniyet bağlantısı (tool lanyard) ile sabitleyin.",
         "Küçük parçaları kapalı çanta veya kaplarda tutun.",
         "Platform kenarlarında gevşek malzeme bırakmayın.",
         "Topuk levhası, ağ ve kenar korumasını kontrol edin.",
@@ -1168,7 +1168,7 @@ export const toolboxData = [
         "Yanıcı malzeme kaldırıldı",
         "Hot Work Permit hazır",
         "Yangın gözcüsü mevcut",
-        "Housekeeping uygun",
+        "Saha düzeni ve temizliği uygun",
         "Gaz tüpleri güvenli",
         "Ekip bilgilendirildi",
         "Toplanma alanı biliniyor"
@@ -1818,7 +1818,7 @@ export const toolboxData = [
       "objective": "Çalışma alanındaki düzensizlik, atık, döküntü, uygunsuz istifleme ve kapatılmış geçiş yollarından kaynaklanan kayma, takılma, düşme, yangın ve erişim risklerini değerlendirmek ve iş boyunca düzenin korunmasını sağlamaktır.",
       "explanation_title": "KONU ANLATIMI",
       "explanation": [
-        "Housekeeping yalnızca iş bitiminde yapılan temizlik değildir. Malzeme, ekipman, kablo, hortum, ambalaj ve atıkların çalışma boyunca güvenli şekilde düzenlenmesi işin temel bir parçasıdır.",
+        "Saha düzeni ve temizliği yalnızca iş bitiminde yapılan bir faaliyet değildir. Malzeme, ekipman, kablo, hortum, ambalaj ve atıkların çalışma boyunca güvenli şekilde düzenlenmesi işin temel bir parçasıdır.",
         "Geçiş yollarındaki küçük bir parça, yerde bırakılan bir kablo veya dökülen yağ ciddi yaralanmalara neden olabilir. Aynı düzensizlik acil çıkışları, yangın ekipmanlarını ve kurtarma erişimini de engelleyebilir.",
         "Her ekip kendi çalışma alanından sorumludur. Atıklar uygun kaplara ayrılmalı, malzemeler devrilmeyecek şekilde istiflenmeli ve iş ilerledikçe gereksiz ekipman sahadan kaldırılmalıdır."
       ],
@@ -2560,7 +2560,7 @@ export const toolboxData = [
         "Görüşü kapatan yüklerde yardım alın veya taşıma yöntemini değiştirin.",
         "Yorgunluk, ağrı veya kontrol kaybı hissederseniz işi durdurun ve yeniden değerlendirin."
       ],
-      "supervisor_title": "SUPERVISOR KONUŞMA METNİ",
+      "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
       "supervisor_script": "Arkadaşlar, bugün elle taşıma işlerinde yalnızca yükün kilosuna bakmayacağız. Yükün şekli, tutma noktaları, ağırlık merkezi, taşıma mesafesi, güzergâh ve çalışma yüksekliğini değerlendireceğiz. Mekanik yardım varsa öncelikle onu kullanacağız. Yük görüşünüzü kapatıyorsa, kontrol edemiyorsanız veya tek kişi için uygun değilse zorlamayın; destek isteyin. Ekip kaldırmasında tek kişi komut verecek ve ellerimizi sıkışma noktalarından uzak tutacağız.",
       "questions_title": "EKİBE SORULAR",
       "questions": [
@@ -2582,7 +2582,7 @@ export const toolboxData = [
       "fields": [
         "Tarih",
         "Saha / Bölge",
-        "Supervisor",
+        "Süpervizör",
         "Katılımcılar",
         "İmza"
       ],
@@ -2662,7 +2662,7 @@ export const toolboxData = [
       "fields": [
         "Date",
         "Site / Area",
-        "Supervisor",
+        "Süpervizör",
         "Participants",
         "Signature"
       ],
@@ -3230,7 +3230,7 @@ export const toolboxData = [
         "Etiketsiz, kırmızı etiketli veya kontrol süresi geçmiş iskele.",
         "Eksik üst korkuluk, ara korkuluk veya topuk levhası.",
         "Tam döşenmemiş, gevşek veya hasarlı platformlar.",
-        "Açık bırakılan trapdoor ve erişim açıklıkları.",
+        "Açık bırakılan iskele erişim kapağı (trapdoor) ve erişim açıklıkları.",
         "Uygunsuz merdiven kullanımı veya dışarıdan tırmanma.",
         "Yetkisiz parça sökme veya iskele değişikliği.",
         "Aşırı yükleme ve uygunsuz malzeme istifleme.",
@@ -3403,7 +3403,7 @@ export const toolboxData = [
       "hazards_title": "TEMEL TEHLİKELER",
       "hazards": [
         "Korumasız kenarlardan veya platformlardan düşme.",
-        "Açık zemin boşlukları, geçişler ve trapdoor açıklıkları.",
+        "Açık zemin boşlukları, geçişler ve iskele erişim kapağı (trapdoor) açıklıkları.",
         "Uygun olmayan merdiven, iskele veya çalışma platformu.",
         "Hasarlı ya da yanlış kullanılan emniyet kemeri ve lanyard.",
         "Uygun olmayan veya yetersiz dayanımlı ankraj noktası.",
@@ -3901,7 +3901,7 @@ export const toolboxData = [
   "slug": "slips-trips-falls",
   "tr": {
     "title": "KAYMA TAKILMA VE DÜŞMELER TOOLBOX TALK",
-      "application_subtitle": "Housekeeping, geçiş yolları ve günlük saha doğrulaması.",
+      "application_subtitle": "Saha düzeni ve temizliği, geçiş yolları ve günlük saha doğrulaması.",
       "subtitle": "Yürüyüş yollarını açık tutun ve aynı seviyedeki düşmeleri önleyin.",
     "duration": "8–10 dakika",
     "objective_title": "AMAÇ",
@@ -3910,7 +3910,7 @@ export const toolboxData = [
     "explanation": [
       "Kayma ve takılmalar basit görünse de burkulma, kırık ve iş günü kaybının önemli nedenlerindendir.",
       "Geçiş yollarındaki kablo, hortum, ambalaj ve dökülmeler özellikle yoğun saha trafiğinde ciddi risk oluşturur.",
-      "Housekeeping sürekli yapılmalı; yalnız vardiya sonunda yapılan temizlik yeterli görülmemelidir."
+      "Saha düzeni ve temizliği sürekli sağlanmalı; yalnız vardiya sonunda yapılan temizlik yeterli görülmemelidir."
 ],
     "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
     "scenario": [
@@ -8590,7 +8590,7 @@ export const toolboxData = [
       "Açık boşluklar kapalı",
       "Alt alan bariyerli",
       "Malzemeler sabit",
-      "Housekeeping uygun",
+      "Saha düzeni ve temizliği uygun",
       "Yaya yolu güvenli",
       "Rüzgar kontrol edildi",
       "Ekip bilgilendirildi"
