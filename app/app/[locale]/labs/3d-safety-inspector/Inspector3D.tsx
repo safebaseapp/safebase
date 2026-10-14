@@ -362,7 +362,7 @@ export default function Inspector3D({ locale }: Props) {
           )}
           {mode === "inspecting" && inspection && (
             <div className={s.overlay}>
-              <div className={s.modal} role="dialog" aria-modal="true" aria-labelledby="finding-title">
+              <div className={`${s.modal} ${s.inspectionModal}`} role="dialog" aria-modal="true" aria-labelledby="finding-title">
                 <p className={s.eyebrow}>SITE OBSERVATION · {inspection.id.toUpperCase().replaceAll("-", " ")}</p>
                 <h2 id="finding-title">{inspection[locale].title}</h2>
                 <p className={s.findingCategory}>{inspection[locale].category}</p>
@@ -402,7 +402,7 @@ export default function Inspector3D({ locale }: Props) {
                 <p className={s.trainingNotice}>{isTr
                   ? "Bu kurgusal bir eğitim sahnesidir. Gerçek sahada yerel mevzuatı ve izin prosedürlerini doğrulayın."
                   : "This is a fictional training scene. Verify local rules and permits for real workplaces."}</p>
-                <div className={s.buttons}>
+                <div className={`${s.buttons} ${s.inspectionActions}`}>
                   <button type="button" className={s.primary} disabled={!resolved} onClick={saveFinding}>{isTr ? "Kararı ve bulguyu kaydet ✓" : "Record decision & finding ✓"}</button>
                   <button type="button" className={s.secondary} onClick={cancelInspection}>{isTr ? "Geri dön" : "Go back"}</button>
                 </div>
