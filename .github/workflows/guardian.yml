@@ -9,6 +9,11 @@ on:
     paths:
       - "app/scripts/guardian-pdf-render.py"
       - "app/scripts/qa-toolbox-pdfs.mjs"
+      - "app/scripts/qa-ai-discovery.mjs"
+      - "app/app/robots.ts"
+      - "app/public/llms.txt"
+      - "app/app/[locale]/knowledge-base/[slug]/page.tsx"
+      - "app/app/[locale]/toolbox/[slug]/page.tsx"
       - ".github/workflows/guardian.yml"
   pull_request:
     paths:
@@ -45,6 +50,8 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Check Turkish and English content
         run: node scripts/i18n-quality-check.mjs
+      - name: Verify ChatGPT search accessibility and semantic reference pages
+        run: node scripts/qa-ai-discovery.mjs
       - name: Verify download authorization paths
         run: node scripts/qa-download-flows.mjs
       - name: Verify 70 Toolbox TR/EN PDF sets
