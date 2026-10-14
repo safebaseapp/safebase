@@ -295,7 +295,7 @@ export default function DownloadsClient() {
           <div className="mx-auto max-w-[860px] text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.08] px-4 py-2 text-xs font-black uppercase tracking-[0.08em] text-emerald-300">
               <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,.95)]" />
-              {isTurkish ? "SERNEM HSE KÜTÜPHANESİ" : "SERNEM HSE LIBRARY"}
+              {isTurkish ? "SERNEM İSG KÜTÜPHANESİ" : "SERNEM HSE LIBRARY"}
             </div>
 
             <h1 className="mt-6 text-[46px] font-black leading-[0.98] tracking-[-0.055em] sm:text-[58px] lg:text-[66px]">
