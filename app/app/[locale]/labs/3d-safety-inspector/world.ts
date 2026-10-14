@@ -223,6 +223,58 @@ function constructSite() {
     m.box(-0.55,0.02,z-1.1,1.05,0.03,0.15,0xe1d2a7);
     m.box(0.55,0.02,z-1.1,1.05,0.03,0.15,0xe1d2a7);
   }
+  // Package 4 refinery detailing: flange joints, pipe supports, tank access and industrial wayfinding.
+  // Decorative geometry stays out of collision blockers to preserve the existing training route.
+  for(const [x,y,r] of [[9.2,7.9,0.35],[11.1,7.9,0.3],[13.1,7.9,0.45],[15.2,7.9,0.3],[10,4.48,0.25],[13,4.55,0.32]] as number[][]){
+    for(const z of [-27,-15,-3,9,18]){
+      m.cylinder([x,y,z-0.16],[x,y,z+0.16],r*1.35,0x536b78,14);
+      m.cylinder([x,y,z-0.20],[x,y,z-0.17],r*1.5,0xc3d1d7,14);
+      m.cylinder([x,y,z+0.17],[x,y,z+0.20],r*1.5,0xc3d1d7,14);
+    }
+  }
+  // Pipe-rack diagonal bracing and metallic cable trays.
+  for(const z of [-30,-23,-16,-9,-2,5,12]){
+    for(const x of [7.5,16.5]){
+      m.cylinder([x,0.6,z],[x,7.6,z+7],0.065,0x627e8d,8);
+      m.cylinder([x,7.6,z],[x,0.6,z+7],0.065,0x627e8d,8);
+    }
+  }
+  for(const x of [8.1,16.0]){
+    m.box(x,6.2,-5.5,0.75,0.08,51,0x7e919d);
+    for(let z=-30;z<=19;z+=2)m.box(x,6.33,z,0.75,0.07,0.09,0xc4d0d7);
+  }
+  // Tank service ladders and platform rails.
+  for(const [x,z,r,h] of [[23,-20,5,10],[27,10,4.2,7.2]] as number[][]){
+    const lx=x-r-0.48;
+    for(const offset of [-0.35,0.35])m.cylinder([lx,0.4,z+offset],[lx,h+0.25,z+offset],0.055,0xe3b65d,8);
+    for(let y=0.6;y<h;y+=0.38)m.box(lx,y,z,0.08,0.055,0.78,0xe8bd66);
+    for(let a=0;a<12;a++){
+      const angle=a*Math.PI/6, px=x+(r+0.15)*Math.cos(angle),pz=z+(r+0.15)*Math.sin(angle);
+      m.cylinder([px,h+0.2,pz],[px,h+1.25,pz],0.045,0xd7e2e7,8);
+      const next=angle+Math.PI/6;
+      m.cylinder([px,h+1.2,pz],[x+(r+0.15)*Math.cos(next),h+1.2,z+(r+0.15)*Math.sin(next)],0.045,0xd7e2e7,8);
+    }
+    m.cylinder([x,h+0.3,z],[x,h+1.7,z],0.32,0x748b9b,16);
+  }
+  // Scaffold couplers, planking seams and toe boards.
+  for(const y of [3.3,6.6]){
+    for(const z of [-18,-12,-6])for(const x of [-16,-10,-4]){
+      m.box(x,y+0.05,z,0.27,0.2,0.27,0xcbd9de);
+    }
+    for(const z of [-18,-12,-6])m.box(-10,y+0.12,z,12,0.24,0.12,0x9f7049);
+    for(const x of [-16,-10,-4])m.box(x,y+0.12,-12,0.12,0.24,12,0x9f7049);
+  }
+  // Walkway edge markings and warning chevrons near equipment zones.
+  for(const z of [-30,-25,-20,-15,-10,-5,0,5,10,15,20]){
+    m.box(5.55,0.024,z,0.18,0.025,1.3,0xe6c15b);
+    m.box(-3.4,0.024,z,0.18,0.025,1.3,0xe6c15b);
+  }
+  // Workshop cladding seams and external ventilation ducting.
+  for(let x=-35;x<=-15;x+=2)m.box(x,4.1,7.34,0.06,7.7,0.08,0x9db0ba);
+  for(const x of [-32,-25,-18]){
+    m.cylinder([x,8.85,13],[x,8.85,23],0.48,0x9aafb9,12);
+    m.cylinder([x,8.85,23],[x,7.8,23],0.48,0x9aafb9,12);
+  }
   addTrainingFindings(m);
   return m;
 }
