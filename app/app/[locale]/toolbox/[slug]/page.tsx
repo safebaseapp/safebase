@@ -252,8 +252,55 @@ export default async function ToolboxDetailPage({ params }: Props) {
       ? toolboxData[currentIndex + 1]
       : null;
 
+  const url = `https://www.sernem.com/${locale}/toolbox/${toolbox.slug}`;
+  const description = content.subtitle || content.application_subtitle ||
+    (isTurkish ? "Saha uygulamaları için tehlikeler, kontroller ve çalışma öncesi doğrulama." :
+      "Field-ready hazards, control measures, and pre-work verification.");
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline: content.title,
+      description,
+      url,
+      mainEntityOfPage: url,
+      inLanguage: locale,
+      articleSection: isTurkish ? "İSG Toolbox Eğitimi" : "HSE Toolbox Talk",
+      publisher: {
+        "@type": "Organization",
+        name: "SERNEM",
+        url: "https://www.sernem.com",
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "SERNEM",
+          item: `https://www.sernem.com/${locale}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: isTurkish ? "Toolbox Kütüphanesi" : "Toolbox Library",
+          item: `https://www.sernem.com/${locale}/toolbox`,
+        },
+        { "@type": "ListItem", position: 3, name: content.title, item: url },
+      ],
+    },
+  ];
+
   return (
     <main className="min-h-screen bg-slate-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
       <section className="border-b border-slate-200 bg-slate-950 px-6 py-16 text-white">
         <div className="mx-auto max-w-5xl">
           <Link
