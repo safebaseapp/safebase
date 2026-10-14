@@ -2,12 +2,13 @@
 // not ranking, actual crawling, citations, or rendered JSON-LD correctness.
 import { readFile } from "node:fs/promises";
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), "utf8");
-const [robots, toolbox, guides, sitemap, directory] = await Promise.all([
+const [robots, toolbox, guides, sitemap, directory, guideTemplate] = await Promise.all([
   read("app/robots.ts"),
   read("app/[locale]/toolbox/[slug]/page.tsx"),
   read("app/[locale]/knowledge-base/[slug]/page.tsx"),
   read("app/sitemap.ts"),
   read("public/llms.txt"),
+  read("app/[locale]/knowledge-base/components/GuideTemplate.tsx"),
 ]);
 const checks = [
   ["OAI-SearchBot explicitly allowed", robots.includes("OAI-SearchBot") && robots.includes('allow: "/"')],
@@ -21,6 +22,7 @@ const checks = [
   ["sitemap declares both languages", sitemap.includes('"x-default"') && sitemap.includes('const locales = ["tr", "en"]')],
   ["public reference directory links real SERNEM content", directory.includes("https://www.sernem.com/en/knowledge-base/confined-space-attendant-duties")],
   ["source directory includes safety limitations", directory.includes("Verify the applicable current standards")],
+  ["OSHA 1910/1926 references link to official sources", guideTemplate.includes("www.osha.gov/laws-regs/regulations/standardnumber/") && guideTemplate.includes("officialSource")],
 ];
 const failures = checks.filter(([, passed]) => !passed);
 for (const [label, passed] of checks) {
