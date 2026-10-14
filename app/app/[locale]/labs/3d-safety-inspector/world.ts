@@ -122,7 +122,7 @@ function constructSite() {
   // Maintenance workshop, workshop doors and overhead ventilation.
   m.box(-25,4.2,16,22,8.4,17,0x708494);m.solid(-25,16,22,17);
   m.box(-25,8.48,16,23.5,0.8,18.6,0x526575);
-  for(const x of [-30,-24,-18]){m.box(x,2.8,7.43,3.3,5.3,0.09,0x2c4759);m.box(x,5.3,7.35,3.5,0.2,0xc5ac63);}
+  for(const x of [-30,-24,-18]){m.box(x,2.8,7.43,3.3,5.3,0.09,0x2c4759);m.box(x,5.3,7.35,3.5,0.2,0.12,0xc5ac63);}
   for(const x of [-34,-32,-30,-28,-26])m.box(x,7,7.32,1.2,0.5,0.1,0xb4d5e1);
   // Three self-contained pieces of safe equipment on the working pad.
   m.box(-5,0.06,13,15,0.13,12,0x65727a);
