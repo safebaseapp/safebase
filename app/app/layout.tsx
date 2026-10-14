@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.sernem.com"),
+  other: { "google": "notranslate" },
   title: {
     default: "SERNEM",
     template: "%s | SERNEM",
@@ -54,6 +55,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
+      translate="no"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body className="antialiased bg-slate-950 text-white">
