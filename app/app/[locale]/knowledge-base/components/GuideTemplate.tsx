@@ -250,7 +250,7 @@ export default function GuideTemplate({
             <p className="mt-4 max-w-3xl leading-7 text-slate-400">{isTurkish ? "Rehberi okumakla kalmayın: kapalı alan risklerini açın, giriş öncesi kontrol listesini tamamlayın ve ekiple toolbox talk yapın." : "Move beyond the guide: review confined-space hazards, complete the pre-entry checklist and brief the team with the toolbox talk."}</p>
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               <Link href={`/${language}/risk-assessment/confined-space`} className="rounded-xl bg-emerald-500 px-5 py-4 font-black text-slate-950 transition hover:bg-emerald-400">{isTurkish ? "Risk değerlendirmesini aç" : "Open risk assessment"} →</Link>
-              <Link href={`/${language}/checklists/confined-space`} className="rounded-xl border border-white/15 bg-white/[0.05] px-5 py-4 font-black text-white transition hover:bg-white/10">{isTurkish ? "Giriş checklisti" : "Entry checklist"} →</Link>
+              <Link href={`/${language}/checklists/confined-space`} className="rounded-xl border border-white/15 bg-white/[0.05] px-5 py-4 font-black text-white transition hover:bg-white/10">{isTurkish ? "Giriş Kontrol Listesi" : "Entry Checklist"} →</Link>
               <Link href={`/${language}/toolbox/confined-space`} className="rounded-xl border border-white/15 bg-white/[0.05] px-5 py-4 font-black text-white transition hover:bg-white/10">{isTurkish ? "Toolbox Talk" : "Toolbox Talk"} →</Link>
             </div>
           </article>
