@@ -98,7 +98,7 @@ export default function MethodStatementPrint({
             <h1>
               {activity ||
                 (isTurkish
-                  ? "Profesyonel Method Statement"
+                  ? "Profesyonel İş Yöntem Beyanı"
                   : "Professional Method Statement")}
             </h1>
           </div>
@@ -388,7 +388,7 @@ export default function MethodStatementPrint({
                     <td>{isTurkish
                       ? "Taşıma rotası önceden kontrol edilmeli, engeller kaldırılmalı ve zemin / basamak / kapı koşulları değerlendirilmelidir."
                       : "The travel route shall be checked beforehand, obstacles removed and ground / step / doorway conditions assessed."}</td>
-                    <td>{isTurkish ? "Rota / housekeeping kontrolü" : "Route / housekeeping verification"}</td>
+                    <td>{isTurkish ? "Güzergâh / saha düzeni kontrolü" : "Route / housekeeping verification"}</td>
                   </tr>
 
                   <tr>
@@ -530,7 +530,7 @@ export default function MethodStatementPrint({
                     <td>{isTurkish
                       ? "Aletler çanta veya kemer ile taşınmalı, alt alan kontrol edilmeli ve merdivenden kontrolsüz malzeme bırakılmamalıdır."
                       : "Tools shall be carried in a bag or belt, the lower area controlled and materials shall not be dropped from ladders."}</td>
-                    <td>{isTurkish ? "Alt alan / housekeeping kontrolü" : "Lower-area / housekeeping verification"}</td>
+                    <td>{isTurkish ? "Alt alan düzen ve temizlik kontrolü" : "Lower-area / housekeeping verification"}</td>
                   </tr>
                   <tr>
                     <td>{isTurkish ? "Trafik / kapı / geçiş yolu" : "Traffic / doors / access routes"}</td>
@@ -673,11 +673,11 @@ export default function MethodStatementPrint({
                   </tr>
 
                   <tr>
-                    <td>{isTurkish ? "Housekeeping / izolasyon atığı" : "Housekeeping / insulation waste"}</td>
+                    <td>{isTurkish ? "Saha temizliği / izolasyon atığı" : "Housekeeping / insulation waste"}</td>
                     <td>{isTurkish
                       ? "Mineral yün, sac artıkları, banding ve ambalaj malzemeleri düzenli toplanmalı; lif / toz yayacak kuru süpürmeden kaçınılmalıdır."
                       : "Mineral wool, sheet-metal offcuts, banding and packaging shall be regularly collected and dry sweeping that spreads fibres / dust avoided."}</td>
-                    <td>{isTurkish ? "Housekeeping / atık kontrolü" : "Housekeeping / waste verification"}</td>
+                    <td>{isTurkish ? "Saha düzeni / atık kontrolü" : "Housekeeping / waste verification"}</td>
                   </tr>
                 </>
               ) : (
@@ -1609,7 +1609,7 @@ export default function MethodStatementPrint({
                         ? "Alt alan gerektiğinde bariyerlenmeli, gevşek malzemeler emniyete alınmalı ve uygun durumlarda tool lanyard kullanılmalıdır."
                         : "The area below shall be barricaded where required, loose materials secured and tool lanyards used where appropriate.",
                       isTurkish
-                        ? "Dışlama alanı / housekeeping kontrolü"
+                        ? "Yasaklı alan / saha düzeni kontrolü"
                         : "Exclusion-zone / housekeeping check",
                     ],
                     [
