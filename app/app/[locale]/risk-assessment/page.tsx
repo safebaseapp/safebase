@@ -124,7 +124,7 @@ export default async function RiskAssessmentLibraryPage({
             <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
               <div className="text-3xl font-black">{categories.length}</div>
               <div className="mt-2 text-sm text-slate-400">
-                {isTr ? "HSE kategorisi" : "HSE categories"}
+                {isTr ? "İSG kategorisi" : "HSE categories"}
               </div>
             </div>
 
@@ -155,7 +155,7 @@ export default async function RiskAssessmentLibraryPage({
                 <div className="flex items-end justify-between gap-5 border-b border-white/10 pb-5">
                   <div>
                     <div className="text-xs font-bold uppercase tracking-[0.16em] text-blue-400">
-                      HSE Category
+                      {isTr ? "İSG Kategorisi" : "HSE Category"}
                     </div>
                     <h2 className="mt-2 text-2xl font-black">{category}</h2>
                   </div>
