@@ -305,7 +305,7 @@ export const safetySigns: SafetySign[] = [
     category: "mandatory",
     icon: "M012",
     title: {
-      tr: "Korkuluğu Kullanın",
+      tr: "Merdiven Trabzanını Kullanın",
       en: "Use Handrail",
     },
     description: {
@@ -375,7 +375,7 @@ export const safetySigns: SafetySign[] = [
     category: "prohibition",
     icon: "P005",
     title: {
-      tr: "İçilmez Su",
+      tr: "İçme Suyu Değildir",
       en: "Not Drinking Water",
     },
     description: {
