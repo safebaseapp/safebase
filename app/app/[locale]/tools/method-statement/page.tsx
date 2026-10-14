@@ -124,7 +124,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; düşme sonucu yaralanma riski bulunan yüksekte çalışma faaliyetlerinin planlanması, güvenli erişim sağlanması, çalışma alanının hazırlanması, uygun düşüş önleme veya düşüş durdurma sistemlerinin kullanılması, işin kontrollü şekilde yürütülmesi ve çalışma sonrasında alanın güvenli bırakılması için uygulanacak yöntemi tanımlar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); düşme sonucu yaralanma riski bulunan yüksekte çalışma faaliyetlerinin planlanması, güvenli erişim sağlanması, çalışma alanının hazırlanması, uygun düşüş önleme veya düşüş durdurma sistemlerinin kullanılması, işin kontrollü şekilde yürütülmesi ve çalışma sonrasında alanın güvenli bırakılması için uygulanacak yöntemi tanımlar."
         : "This Method Statement defines the safe method for planning work at height, providing safe access, preparing the work area, selecting appropriate fall-prevention or fall-arrest systems, performing the work under controlled conditions and leaving the area safe after completion."
     );
 
@@ -313,7 +313,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; kaynak, kesme, taşlama, lehimleme ve alev, kıvılcım veya yüksek sıcaklık oluşturan diğer sıcak çalışma faaliyetlerinin güvenli şekilde planlanması ve yürütülmesi için uygulanacak yöntemi tanımlar. Çalışma alanının hazırlanması, yanıcı maddelerin kontrolü, gerekli izinlerin alınması, yangın önleme tedbirleri, uygun PPE kullanımı, çalışma sırasında gözetim ve iş tamamlandıktan sonraki yangın kontrollerini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); kaynak, kesme, taşlama, lehimleme ve alev, kıvılcım veya yüksek sıcaklık oluşturan diğer sıcak çalışma faaliyetlerinin güvenli şekilde planlanması ve yürütülmesi için uygulanacak yöntemi tanımlar. Çalışma alanının hazırlanması, yanıcı maddelerin kontrolü, gerekli izinlerin alınması, yangın önleme tedbirleri, uygun PPE kullanımı, çalışma sırasında gözetim ve iş tamamlandıktan sonraki yangın kontrollerini kapsar."
         : "This Method Statement defines the safe method for planning and carrying out welding, cutting, grinding, brazing and other hot-work activities that generate flame, sparks or high temperatures. It covers preparation of the work area, control of combustible materials, required permits, fire-prevention measures, suitable PPE, monitoring during the work and post-work fire checks."
     );
 
@@ -520,7 +520,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; tank, vessel, pit, manhole, kanal, silo ve benzeri kapalı veya kısıtlı alanlara güvenli giriş yapılması, çalışma süresince güvenli koşulların korunması ve alanın kontrollü şekilde terk edilmesi için uygulanacak yöntemi tanımlar. Çalışma; giriş izni, enerji izolasyonu, atmosfer testi, havalandırma, giriş gözetimi, iletişim, kurtarma hazırlığı ve çalışma sonrası kapatma faaliyetlerini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); tank, proses kabı, çukur, menhol, kanal, silo ve benzeri kapalı veya kısıtlı alanlara güvenli giriş yapılması, çalışma süresince güvenli koşulların korunması ve alanın kontrollü şekilde terk edilmesi için uygulanacak yöntemi tanımlar. Çalışma; giriş izni, enerji izolasyonu, atmosfer testi, havalandırma, giriş gözetimi, iletişim, kurtarma hazırlığı ve çalışma sonrası kapatma faaliyetlerini kapsar."
         : "This Method Statement defines the safe method for entry into tanks, vessels, pits, manholes, ducts, silos and similar confined or restricted spaces, maintaining safe conditions during the work and completing the entry under controlled conditions. It covers entry permitting, energy isolation, atmospheric testing, ventilation, entry monitoring, communication, rescue preparedness and post-work closeout."
     );
 
@@ -724,7 +724,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; bakım, onarım, temizlik, ayar veya müdahale öncesinde tehlikeli enerji kaynaklarının belirlenmesi, izole edilmesi, kilitlenmesi ve etiketlenmesi, sıfır enerji durumunun doğrulanması ve çalışma tamamlandıktan sonra kontrollü yeniden devreye alma yöntemini tanımlar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); bakım, onarım, temizlik, ayar veya müdahale öncesinde tehlikeli enerji kaynaklarının belirlenmesi, izole edilmesi, kilitlenmesi ve etiketlenmesi, sıfır enerji durumunun doğrulanması ve çalışma tamamlandıktan sonra kontrollü yeniden devreye alma yöntemini tanımlar."
         : "This Method Statement defines the safe method for identifying hazardous energy sources, isolating, locking and tagging them, verifying zero-energy condition and controlled recommissioning before maintenance, repair, cleaning, adjustment or intervention."
     );
 
@@ -867,7 +867,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; mobil veya sabit vinçler ve diğer uygun kaldırma ekipmanları kullanılarak gerçekleştirilen kaldırma operasyonlarının güvenli şekilde planlanması ve yürütülmesi için uygulanacak yöntemi tanımlar. Çalışma; kaldırma planının kontrolü, yük bilgilerinin doğrulanması, ekipman ve rigging kontrolleri, zemin ve outrigger koşulları, dışlama alanı, haberleşme, yükün bağlanması, kaldırılması, taşınması, indirilmesi ve operasyon sonrası kontrolleri kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); mobil veya sabit vinçler ve diğer uygun kaldırma ekipmanları kullanılarak gerçekleştirilen kaldırma operasyonlarının güvenli şekilde planlanması ve yürütülmesi için uygulanacak yöntemi tanımlar. Çalışma; kaldırma planının kontrolü, yük bilgilerinin doğrulanması, ekipman ve rigging kontrolleri, zemin ve outrigger koşulları, dışlama alanı, haberleşme, yükün bağlanması, kaldırılması, taşınması, indirilmesi ve operasyon sonrası kontrolleri kapsar."
         : "This Method Statement defines the safe method for planning and carrying out lifting operations using mobile or fixed cranes and other suitable lifting equipment. It covers review of the lifting plan, verification of load information, equipment and rigging inspections, ground and outrigger conditions, exclusion zones, communication, rigging, lifting, travelling or slewing the load, landing and post-operation checks."
     );
 
@@ -1076,7 +1076,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; çalışma iskelesinin güvenli şekilde kurulması, değiştirilmesi ve sökülmesi için uygulanacak yöntemi tanımlar. Çalışma; alanın hazırlanması, zemin ve taban koşullarının kontrolü, iskele elemanlarının kontrolü, güvenli erişim, platform ve korkulukların kurulması, ankraj ve bağlamalar, kullanım öncesi kontrol, etiketleme ve kontrollü söküm faaliyetlerini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); çalışma iskelesinin güvenli şekilde kurulması, değiştirilmesi ve sökülmesi için uygulanacak yöntemi tanımlar. Çalışma; alanın hazırlanması, zemin ve taban koşullarının kontrolü, iskele elemanlarının kontrolü, güvenli erişim, platform ve korkulukların kurulması, ankraj ve bağlamalar, kullanım öncesi kontrol, etiketleme ve kontrollü söküm faaliyetlerini kapsar."
         : "This Method Statement defines the safe method for erection, modification and dismantling of working scaffolds. It covers work-area preparation, ground and foundation checks, inspection of scaffold components, safe access, installation of platforms and guardrails, ties and anchors, pre-use inspection, tagging and controlled dismantling."
     );
 
@@ -1283,7 +1283,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; hendek, temel, kanal ve benzeri kazı çalışmalarının güvenli şekilde planlanması, açılması, kontrol edilmesi ve kapatılması için uygulanacak yöntemi tanımlar. Çalışma; yeraltı servislerinin tespiti, kazı izni, alan izolasyonu, zemin koşullarının değerlendirilmesi, şevlendirme veya iksa, güvenli erişim, kazı malzemesinin yönetimi, atmosfer ve su kontrolü, günlük kontrol ve geri dolgu faaliyetlerini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); hendek, temel, kanal ve benzeri kazı çalışmalarının güvenli şekilde planlanması, açılması, kontrol edilmesi ve kapatılması için uygulanacak yöntemi tanımlar. Çalışma; yeraltı servislerinin tespiti, kazı izni, alan izolasyonu, zemin koşullarının değerlendirilmesi, şevlendirme veya iksa, güvenli erişim, kazı malzemesinin yönetimi, atmosfer ve su kontrolü, günlük kontrol ve geri dolgu faaliyetlerini kapsar."
         : "This Method Statement defines the safe method for planning, opening, controlling and closing trenches, foundations, channels and similar excavations. It covers underground-service identification, excavation permits, area isolation, soil-condition assessment, sloping or shoring, safe access, spoil management, atmosphere and water control, daily inspection and backfilling."
     );
 
@@ -1490,7 +1490,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; elektrik ekipmanı, panolar, kablolar, devreler ve bağlantılar üzerinde yapılacak bakım, montaj, test, arıza giderme ve benzeri elektrik çalışmalarının güvenli şekilde gerçekleştirilmesi için uygulanacak yöntemi tanımlar. Çalışma; enerji durumunun belirlenmesi, izolasyon ve LOTO, gerilim yokluğunun doğrulanması, çalışma alanının kontrolü, uygun test ekipmanı ve PPE kullanımı, kontrollü çalışma ve güvenli yeniden enerjilendirme faaliyetlerini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); elektrik ekipmanı, panolar, kablolar, devreler ve bağlantılar üzerinde yapılacak bakım, montaj, test, arıza giderme ve benzeri elektrik çalışmalarının güvenli şekilde gerçekleştirilmesi için uygulanacak yöntemi tanımlar. Çalışma; enerji durumunun belirlenmesi, izolasyon ve LOTO, gerilim yokluğunun doğrulanması, çalışma alanının kontrolü, uygun test ekipmanı ve PPE kullanımı, kontrollü çalışma ve güvenli yeniden enerjilendirme faaliyetlerini kapsar."
         : "This Method Statement defines the safe method for maintenance, installation, testing, troubleshooting and similar work on electrical equipment, panels, cables, circuits and connections. It covers determination of energy status, isolation and LOTO, verification of absence of voltage, work-area control, use of suitable test equipment and PPE, controlled work and safe re-energization."
     );
 
@@ -1705,7 +1705,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; portatif taşlama makineleri, kesme makineleri ve benzeri döner ekipmanlarla gerçekleştirilen metal taşlama, kesme ve yüzey hazırlama çalışmalarının güvenli şekilde yapılması için uygulanacak yöntemi tanımlar. Çalışma; ekipman ve disk seçimi, kullanım öncesi kontrol, çalışma alanının hazırlanması, yangın ve kıvılcım kontrolü, doğru PPE kullanımı, güvenli çalışma tekniği ve çalışma sonrası kontrolleri kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); portatif taşlama makineleri, kesme makineleri ve benzeri döner ekipmanlarla gerçekleştirilen metal taşlama, kesme ve yüzey hazırlama çalışmalarının güvenli şekilde yapılması için uygulanacak yöntemi tanımlar. Çalışma; ekipman ve disk seçimi, kullanım öncesi kontrol, çalışma alanının hazırlanması, yangın ve kıvılcım kontrolü, doğru PPE kullanımı, güvenli çalışma tekniği ve çalışma sonrası kontrolleri kapsar."
         : "This Method Statement defines the safe method for metal grinding, cutting and surface-preparation activities using portable grinders, cutting machines and similar rotating equipment. It covers equipment and disc selection, pre-use inspection, work-area preparation, fire and spark control, correct PPE, safe operating techniques and post-work checks."
     );
 
@@ -1898,7 +1898,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; boru, spool, fitting, flange ve benzeri borulama elemanlarının saha içerisinde taşınması, hizalanması, montajı, bağlantısı, desteklenmesi ve gerekli durumlarda sökülmesi için uygulanacak güvenli çalışma yöntemini tanımlar. Çalışma; malzeme elleçleme, kaldırma, flange hizalama, boru destekleri, sıcak çalışma, hat açma, artık basınç kontrolü, keskin kenarlar ve çalışma alanı düzenini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); boru, spool, fitting, flange ve benzeri borulama elemanlarının saha içerisinde taşınması, hizalanması, montajı, bağlantısı, desteklenmesi ve gerekli durumlarda sökülmesi için uygulanacak güvenli çalışma yöntemini tanımlar. Çalışma; malzeme elleçleme, kaldırma, flange hizalama, boru destekleri, sıcak çalışma, hat açma, artık basınç kontrolü, keskin kenarlar ve çalışma alanı düzenini kapsar."
         : "This Method Statement defines the safe method for handling, aligning, installing, connecting, supporting and, where required, dismantling pipes, spools, fittings, flanges and similar piping components. It covers material handling, lifting, flange alignment, pipe supports, hot work, line opening, residual pressure, sharp edges and work-area control."
     );
 
@@ -2091,7 +2091,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; boru hattı, ekipman, spool, vessel veya benzeri sistemlerin su kullanılarak hidrostatik basınç testine tabi tutulması için uygulanacak güvenli çalışma yöntemini tanımlar. Çalışma; test sınırlarının doğrulanması, izolasyon, test ekipmanlarının kurulması, su doldurma, hava tahliyesi, kontrollü basınçlandırma, test basıncında bekleme, kaçak kontrolü, kontrollü basınç düşürme ve test suyunun güvenli şekilde tahliyesini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); boru hattı, ekipman, spool, vessel veya benzeri sistemlerin su kullanılarak hidrostatik basınç testine tabi tutulması için uygulanacak güvenli çalışma yöntemini tanımlar. Çalışma; test sınırlarının doğrulanması, izolasyon, test ekipmanlarının kurulması, su doldurma, hava tahliyesi, kontrollü basınçlandırma, test basıncında bekleme, kaçak kontrolü, kontrollü basınç düşürme ve test suyunun güvenli şekilde tahliyesini kapsar."
         : "This Method Statement defines the safe method for hydrostatic pressure testing of piping, equipment, spools, vessels or similar systems using water. It covers confirmation of test boundaries, isolation, installation of test equipment, filling, venting air, controlled pressurization, holding at test pressure, leak inspection, controlled depressurization and safe discharge of test water."
     );
 
@@ -2282,7 +2282,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; boru hatları, spoollar ve ekipmanların basınçlı hava kullanılarak temizlenmesi veya içindeki yabancı maddelerin uzaklaştırılması için uygulanacak güvenli çalışma yöntemini tanımlar. Çalışma; hat sınırlarının doğrulanması, geçici bağlantıların kurulması, kompresör ve hortum kontrolleri, dışlama alanının oluşturulması, kontrollü basınçlandırma, hava tahliyesi, discharge zone kontrolü, gürültü ve uçan parçacık riskleri ile kontrollü basınç düşürmeyi kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); boru hatları, spoollar ve ekipmanların basınçlı hava kullanılarak temizlenmesi veya içindeki yabancı maddelerin uzaklaştırılması için uygulanacak güvenli çalışma yöntemini tanımlar. Çalışma; hat sınırlarının doğrulanması, geçici bağlantıların kurulması, kompresör ve hortum kontrolleri, dışlama alanının oluşturulması, kontrollü basınçlandırma, hava tahliyesi, discharge zone kontrolü, gürültü ve uçan parçacık riskleri ile kontrollü basınç düşürmeyi kapsar."
         : "This Method Statement defines the safe method for cleaning piping, spools and equipment using compressed air to remove foreign material. It covers confirmation of line boundaries, installation of temporary connections, compressor and hose checks, establishment of exclusion zones, controlled pressurization, air discharge, discharge-zone control, noise and flying-particle hazards and controlled depressurization."
     );
 
@@ -2443,7 +2443,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; endüstriyel yüzeylerde boya, astar, kaplama ve benzeri kimyasal ürünlerin hazırlanması ve uygulanması için kullanılacak güvenli çalışma yöntemini tanımlar. Çalışma; ürün ve SDS kontrolü, yüzey hazırlığı, boya karışımı, elle veya sprey uygulama, havalandırma, VOC / solvent maruziyetinin kontrolü, yangın ve ateşleme kaynaklarının yönetimi, basınçlı boya ekipmanları, PPE ve atık yönetimini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); endüstriyel yüzeylerde boya, astar, kaplama ve benzeri kimyasal ürünlerin hazırlanması ve uygulanması için kullanılacak güvenli çalışma yöntemini tanımlar. Çalışma; ürün ve SDS kontrolü, yüzey hazırlığı, boya karışımı, elle veya sprey uygulama, havalandırma, VOC / solvent maruziyetinin kontrolü, yangın ve ateşleme kaynaklarının yönetimi, basınçlı boya ekipmanları, PPE ve atık yönetimini kapsar."
         : "This Method Statement defines the safe method for preparation and application of paints, primers, coatings and similar chemical products on industrial surfaces. It covers product and SDS verification, surface preparation, paint mixing, brush / roller or spray application, ventilation, VOC / solvent exposure control, management of fire and ignition sources, pressurized painting equipment, PPE and waste management."
     );
 
@@ -2636,7 +2636,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; boru, ekipman, tank, kanal ve benzeri yüzeylerde ısı veya soğuk izolasyon malzemelerinin taşınması, kesilmesi, hazırlanması, uygulanması, sabitlenmesi ve metal kaplama ile tamamlanması için güvenli çalışma yöntemini tanımlar. Çalışma; izolasyon malzemelerinin elle taşınması, mineral yün ve benzeri lifli malzemelerle çalışma, kesici el aletleri, sac kaplama, keskin kenarlar, sıcak yüzeyler, yüksekte çalışma, toz ve lif maruziyeti, PPE, housekeeping ve atık yönetimini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); boru, ekipman, tank, kanal ve benzeri yüzeylerde ısı veya soğuk izolasyon malzemelerinin taşınması, kesilmesi, hazırlanması, uygulanması, sabitlenmesi ve metal kaplama ile tamamlanması için güvenli çalışma yöntemini tanımlar. Çalışma; izolasyon malzemelerinin elle taşınması, mineral yün ve benzeri lifli malzemelerle çalışma, kesici el aletleri, sac kaplama, keskin kenarlar, sıcak yüzeyler, yüksekte çalışma, toz ve lif maruziyeti, PPE, housekeeping ve atık yönetimini kapsar."
         : "This Method Statement defines the safe method for transporting, cutting, preparing, installing and securing thermal or cold insulation materials on piping, equipment, tanks, ducts and similar surfaces, including completion with metal cladding. The work covers manual handling, mineral wool and similar fibrous materials, cutting tools, sheet-metal cladding, sharp edges, hot surfaces, work at height, dust and fibre exposure, PPE, housekeeping and waste management."
     );
 
@@ -2830,7 +2830,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; forklift, telehandler, mobil vinç, manlift, loader, ekskavatör ve benzeri ağır veya mobil ekipmanların saha içerisinde güvenli kullanımı, hareketi, manevrası, park edilmesi ve gerektiğinde yük taşıma faaliyetleri için uygulanacak çalışma yöntemini tanımlar. Çalışma; ekipman uygunluğu, operatör yetkinliği, trafik planı, yaya ayrımı, kör nokta kontrolü, banksman kullanımı, zemin stabilitesi, günlük kontroller ve güvenli park düzenlemelerini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); forklift, telehandler, mobil vinç, manlift, loader, ekskavatör ve benzeri ağır veya mobil ekipmanların saha içerisinde güvenli kullanımı, hareketi, manevrası, park edilmesi ve gerektiğinde yük taşıma faaliyetleri için uygulanacak çalışma yöntemini tanımlar. Çalışma; ekipman uygunluğu, operatör yetkinliği, trafik planı, yaya ayrımı, kör nokta kontrolü, banksman kullanımı, zemin stabilitesi, günlük kontroller ve güvenli park düzenlemelerini kapsar."
         : "This Method Statement defines the safe working method for the operation, movement, manoeuvring, parking and where applicable load handling of forklifts, telehandlers, mobile cranes, MEWPs, loaders, excavators and similar heavy or mobile equipment. The work includes equipment suitability, operator competence, traffic planning, pedestrian segregation, blind-spot control, banksman arrangements, ground stability, daily inspections and safe parking."
     );
 
@@ -3036,7 +3036,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; taşınabilir seyyar merdivenlerin kısa süreli erişim ve hafif işlerde güvenli şekilde seçilmesi, kontrol edilmesi, kurulması, kullanılması ve kaldırılması için uygulanacak yöntemi tanımlar. Çalışma; doğru merdiven seçimi, kullanım öncesi kontrol, zemin ve açı, sabitleme, üç nokta temas, aşırı uzanmanın önlenmesi, düşen malzeme, elektrik tehlikeleri ve güvenli erişimi kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); taşınabilir seyyar merdivenlerin kısa süreli erişim ve hafif işlerde güvenli şekilde seçilmesi, kontrol edilmesi, kurulması, kullanılması ve kaldırılması için uygulanacak yöntemi tanımlar. Çalışma; doğru merdiven seçimi, kullanım öncesi kontrol, zemin ve açı, sabitleme, üç nokta temas, aşırı uzanmanın önlenmesi, düşen malzeme, elektrik tehlikeleri ve güvenli erişimi kapsar."
         : "This Method Statement defines the safe method for selecting, inspecting, setting up, using and removing portable ladders for short-duration access and light work. It covers correct ladder selection, pre-use inspection, ground condition and angle, securing, three-point contact, prevention of overreaching, falling-object hazards, electrical hazards and safe access."
     );
 
@@ -3195,7 +3195,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; manlift, boom lift, scissor lift ve benzeri mobil yükseltilebilir çalışma platformlarının güvenli şekilde seçilmesi, kontrol edilmesi, konumlandırılması, kullanılması ve park edilmesi için uygulanacak yöntemi tanımlar. Çalışma; operatör yetkinliği, günlük ekipman kontrolü, zemin stabilitesi, dışlama alanı, düşme koruması, ezilme / sıkışma, elektrik hattı yakınlığı, hava koşulları, acil indirme ve güvenli park işlemlerini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); manlift, boom lift, scissor lift ve benzeri mobil yükseltilebilir çalışma platformlarının güvenli şekilde seçilmesi, kontrol edilmesi, konumlandırılması, kullanılması ve park edilmesi için uygulanacak yöntemi tanımlar. Çalışma; operatör yetkinliği, günlük ekipman kontrolü, zemin stabilitesi, dışlama alanı, düşme koruması, ezilme / sıkışma, elektrik hattı yakınlığı, hava koşulları, acil indirme ve güvenli park işlemlerini kapsar."
         : "This Method Statement defines the safe method for selecting, inspecting, positioning, operating and parking mobile elevating work platforms such as boom lifts and scissor lifts. It covers operator competence, daily inspection, ground stability, exclusion zones, fall protection, crushing / trapping hazards, proximity to electrical lines, weather conditions, emergency lowering and safe parking."
     );
 
@@ -3354,7 +3354,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; malzeme, ekipman, kutu, boru, parça ve benzeri yüklerin elle kaldırılması, indirilmesi, taşınması, itilmesi veya çekilmesi sırasında uygulanacak güvenli çalışma yöntemini tanımlar. Çalışma; yükün ağırlık ve boyutunun değerlendirilmesi, taşıma rotasının kontrolü, doğru kaldırma tekniği, ekip kaldırması, mekanik yardım kullanımı, kavrama, pinch point ve tekrarlı hareket risklerinin kontrolünü kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); malzeme, ekipman, kutu, boru, parça ve benzeri yüklerin elle kaldırılması, indirilmesi, taşınması, itilmesi veya çekilmesi sırasında uygulanacak güvenli çalışma yöntemini tanımlar. Çalışma; yükün ağırlık ve boyutunun değerlendirilmesi, taşıma rotasının kontrolü, doğru kaldırma tekniği, ekip kaldırması, mekanik yardım kullanımı, kavrama, pinch point ve tekrarlı hareket risklerinin kontrolünü kapsar."
         : "This Method Statement defines the safe method for manually lifting, lowering, carrying, pushing or pulling materials, equipment, boxes, pipes, components and similar loads. It covers assessment of load weight and size, travel-route control, correct lifting technique, team lifting, use of mechanical assistance, grip, pinch-point and repetitive-motion hazards."
     );
 
@@ -3515,7 +3515,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; saha içerisinde kullanılan kimyasal maddelerin teslim alınması, tanımlanması, taşınması, depolanması, hazırlanması, aktarılması, kullanılması ve atıklarının yönetilmesi sırasında uygulanacak güvenli çalışma yöntemini tanımlar. Çalışma; SDS kontrolü, etiketleme, kimyasal uyumluluk, cilt ve göz teması, inhalasyon, havalandırma, dökülme kontrolü, uygun PPE, depolama ve acil müdahale düzenlemelerini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); saha içerisinde kullanılan kimyasal maddelerin teslim alınması, tanımlanması, taşınması, depolanması, hazırlanması, aktarılması, kullanılması ve atıklarının yönetilmesi sırasında uygulanacak güvenli çalışma yöntemini tanımlar. Çalışma; SDS kontrolü, etiketleme, kimyasal uyumluluk, cilt ve göz teması, inhalasyon, havalandırma, dökülme kontrolü, uygun PPE, depolama ve acil müdahale düzenlemelerini kapsar."
         : "This Method Statement defines the safe method for receiving, identifying, transporting, storing, preparing, transferring, using and disposing of chemicals used on site. It covers SDS verification, labelling, chemical compatibility, skin and eye contact, inhalation, ventilation, spill control, suitable PPE, storage and emergency-response arrangements."
     );
 
@@ -3708,7 +3708,7 @@ export default function MethodStatementPage({ params }: Props) {
 
     setScope(
       isTurkish
-        ? "Bu Method Statement; basınçlı gaz tüplerinin saha içerisinde teslim alınması, tanımlanması, taşınması, depolanması, sabitlenmesi, regülatör ve hortum bağlantılarının yapılması, kullanılması ve çalışma sonrası güvenli şekilde kapatılması için uygulanacak çalışma yöntemini tanımlar. Çalışma; yüksek basınç, tüp devrilmesi, valf hasarı, gaz sızıntısı, yanlış gaz kullanımı, oksijen ve yanıcı gazların ayrılması, ateşleme kaynakları, taşıma, depolama ve acil durum kontrollerini kapsar."
+        ? "Bu İş Yöntem Beyanı (Method Statement); basınçlı gaz tüplerinin saha içerisinde teslim alınması, tanımlanması, taşınması, depolanması, sabitlenmesi, regülatör ve hortum bağlantılarının yapılması, kullanılması ve çalışma sonrası güvenli şekilde kapatılması için uygulanacak çalışma yöntemini tanımlar. Çalışma; yüksek basınç, tüp devrilmesi, valf hasarı, gaz sızıntısı, yanlış gaz kullanımı, oksijen ve yanıcı gazların ayrılması, ateşleme kaynakları, taşıma, depolama ve acil durum kontrollerini kapsar."
         : "This Method Statement defines the safe method for receiving, identifying, transporting, storing, securing, connecting regulators and hoses, using and safely shutting down compressed gas cylinders on site. It covers high pressure, cylinder overturning, valve damage, gas leakage, incorrect gas selection, segregation of oxygen and fuel gases, ignition sources, transportation, storage and emergency controls."
     );
 
