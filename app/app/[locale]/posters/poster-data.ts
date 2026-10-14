@@ -241,7 +241,7 @@ export const posters: PosterLibraryItem[] = [
     icon: "🧹",
     category: "general" as any,
     title: {
-      tr: "Housekeeping Kritik Güvenlik Kuralları",
+      tr: "Saha Düzeni ve Temizlikte Kritik Güvenlik Kuralları",
       en: "Housekeeping Critical Safety Rules",
     },
     description: {
@@ -261,7 +261,7 @@ export const posters: PosterLibraryItem[] = [
       en: "Excavation Critical Safety Rules",
     },
     description: {
-      tr: "Göçük, yeraltı hatları, güvenli erişim, spoil pile ve yetkin kişi kontrolleri.",
+      tr: "Göçük, yeraltı hatları, güvenli erişim, kazıdan çıkarılan malzeme yığınları ve yetkin kişi kontrolleri.",
       en: "Controls cave-ins, underground services, access, spoil piles and competent-person inspections.",
     },
     available: true,
