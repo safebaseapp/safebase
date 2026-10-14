@@ -177,7 +177,7 @@ export default function MethodStatementPage({ params }: Props) {
           ? "Mümkünse işi yer seviyesinden gerçekleştir. Yüksekte çalışma gerekiyorsa risk değerlendirmesine göre uygun erişim ve düşüş önleme sistemini seç."
           : "Perform the task from ground level where reasonably practicable. Where work at height is necessary, select suitable access and fall-prevention measures based on the risk assessment.",
         responsible: isTurkish
-          ? "Saha Süpervizörü / HSE"
+          ? "Saha Süpervizörü / İSG"
           : "Site Supervisor / HSE",
       },
       {
@@ -216,7 +216,7 @@ export default function MethodStatementPage({ params }: Props) {
           ? "Düşüş önleme ve gerekiyorsa kişisel düşüş koruma sistemlerini kur."
           : "Establish fall-prevention and, where required, personal fall-protection systems.",
         hazards: isTurkish
-          ? "Yüksekten düşme, uygunsuz ankraj, yetersiz düşüş açıklığı, swing fall."
+          ? "Yüksekten düşme, uygunsuz ankraj, yetersiz düşüş mesafesi, savrularak düşme."
           : "Fall from height, unsuitable anchorage, inadequate fall clearance or swing fall.",
         controls: isTurkish
           ? "Öncelikle korkuluk, güvenli platform veya diğer toplu koruma yöntemlerini kullan. Kişisel sistem gerekiyorsa uygun ankraj, tam vücut kemeri ve göreve uygun bağlantı ekipmanı kullan. Düşüş açıklığını ve swing-fall riskini değerlendir."
