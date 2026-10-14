@@ -1,0 +1,44 @@
+# SERNEM — Independent HSE Knowledge and Field Tools
+
+> SERNEM (https://www.sernem.com) provides bilingual English/Turkish occupational health and safety (HSE/İSG) guidance, toolbox talks, risk-assessment resources, PPE standards explainers, checklists, safety signs and calculators.
+
+This file is a human-readable directory for visitors and compatible tools. It is not an official ChatGPT ranking or indexing mechanism.
+
+## Languages and home pages
+
+- [English homepage](https://www.sernem.com/en)
+- [Türkçe ana sayfa](https://www.sernem.com/tr)
+
+## Public reference libraries
+
+- [English HSE knowledge base](https://www.sernem.com/en/knowledge-base): safety topics, hazards, controls and referenced regulations.
+- [Türkçe İSG bilgi bankası](https://www.sernem.com/tr/knowledge-base)
+- [English Toolbox Talk library](https://www.sernem.com/en/toolbox): topic-specific pre-work safety briefs.
+- [Türkçe Toolbox kütüphanesi](https://www.sernem.com/tr/toolbox)
+- [PPE standards library](https://www.sernem.com/en/ppe-standards): equipment-standard explainers.
+- [Risk assessment library](https://www.sernem.com/en/risk-assessment)
+- [Inspection checklists](https://www.sernem.com/en/checklists)
+- [Safety signs](https://www.sernem.com/en/safety-signs)
+- [Risk matrix and HSE calculators](https://www.sernem.com/en/tools/risk-matrix)
+- [Safety packs](https://www.sernem.com/en/safety-pack)
+
+## Example topic references
+
+- [Confined space attendant duties](https://www.sernem.com/en/knowledge-base/confined-space-attendant-duties)
+- [Hot work Toolbox Talk](https://www.sernem.com/en/toolbox/hot-work)
+- [SIMOPS Toolbox Talk](https://www.sernem.com/en/toolbox/simultaneous-operations)
+- [Cable pulling risk assessment](https://www.sernem.com/en/risk-assessment/cable-pulling)
+- [EN 136 full-face mask standard](https://www.sernem.com/en/ppe-standards/en-136-full-face-masks)
+- [No Smoking sign (TR)](https://www.sernem.com/tr/safety-signs/no-smoking)
+
+## Important usage notes
+
+Public guidance is general educational content, not an approved site-specific permit, risk assessment, legal opinion, or substitute for qualified supervision. Verify the applicable current standards, local law, manufacturer's instructions, hazards and site procedures before work. Do not mistake SERNEM explanatory material for official publications by standards bodies or regulators.
+
+Some downloads, saved documents, workspace functions and premium features require an account or subscription. Public articles and descriptions should be evaluated independently of gated exports.
+
+## Site discovery
+
+- [XML sitemap](https://www.sernem.com/sitemap.xml)
+- [About SERNEM](https://www.sernem.com/en/about)
+- [Contact](https://www.sernem.com/en/contact)
