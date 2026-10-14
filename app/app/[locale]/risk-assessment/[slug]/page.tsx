@@ -16,6 +16,44 @@ type PageProps = {
 
 const baseUrl = "https://www.sernem.com";
 
+// Search Console identifies these existing pages as high-impression opportunities.
+// Descriptions refer only to hazards/controls already present in the risk library.
+const searchIntentMetadata: Record<string, {
+  tr: { title: string; description: string };
+  en: { title: string; description: string };
+}> = {
+  "roof-work": {
+    tr: {
+      title: "Çatı Çalışması Risk Analizi | Düşme ve Kırılgan Çatı Riskleri",
+      description: "Çatı çalışması risk analizinde kenardan düşme, kırılgan çatı yüzeyleri, güvenli erişim ve kontrol önlemlerini inceleyin. SERNEM risk değerlendirmesi.",
+    },
+    en: {
+      title: "Roof Work Risk Assessment | Fall Hazards & Controls",
+      description: "Review roof work hazards including fragile roofs, edge protection, safe access and fall prevention controls in a practical risk assessment.",
+    },
+  },
+  "cable-pulling": {
+    tr: {
+      title: "Kablo Çekme Risk Analizi | Tehlikeler ve Kontrol Önlemleri",
+      description: "Kablo çekme faaliyetinde sıkışma noktaları, kablo tamburu, vinç çekme kuvveti ve ekipman kontrolleri için risk değerlendirmesini inceleyin.",
+    },
+    en: {
+      title: "Cable Pulling Risk Assessment | Hazards & Control Measures",
+      description: "Explore cable pulling hazards and controls: pinch points, cable drums, winch pulling force and safe positioning. Practical HSE risk assessment.",
+    },
+  },
+  "steel-erection": {
+    tr: {
+      title: "Çelik Konstrüksiyon Montajı Risk Analizi | SERNEM",
+      description: "Çelik konstrüksiyon montajında kaldırma, ezilme, bağlantı ve geçici stabilite tehlikelerini değerlendirin. Saha kontrol önlemlerini inceleyin.",
+    },
+    en: {
+      title: "Steel Erection Risk Assessment | Hazards & Controls",
+      description: "Review steel erection hazards including lifting, pinch points, connections and temporary stability, with practical control measures.",
+    },
+  },
+};
+
 function getActivity(slug: string) {
   return allRiskActivities.find((item) => item.id === slug);
 }
@@ -37,15 +75,14 @@ export async function generateMetadata({
   const name = activity.activity[locale];
   const hazardCount = activity.items.length;
 
-  const title =
-    locale === "tr"
-      ? `${name} Risk Değerlendirmesi | SERNEM`
-      : `${name} Risk Assessment | SERNEM`;
+  const intent = searchIntentMetadata[activity.id]?.[locale];
+  const title = intent?.title ?? (locale === "tr"
+    ? `${name} Risk Değerlendirmesi | SERNEM`
+    : `${name} Risk Assessment | SERNEM`);
 
-  const description =
-    locale === "tr"
-      ? `${name} için ${hazardCount} hazır tehlike, sonuç ve kontrol önlemini inceleyin. SERNEM ile profesyonel risk değerlendirmesi hazırlayın.`
-      : `Review ${hazardCount} hazards, consequences and control measures for ${name}. Build a professional HSE risk assessment with SERNEM.`;
+  const description = intent?.description ?? (locale === "tr"
+    ? `${name} için ${hazardCount} hazır tehlike, sonuç ve kontrol önlemini inceleyin. SERNEM ile profesyonel risk değerlendirmesi hazırlayın.`
+    : `Review ${hazardCount} hazards, consequences and control measures for ${name}. Build a professional HSE risk assessment with SERNEM.`);
 
   const canonical = `${baseUrl}/${locale}/risk-assessment/${activity.id}`;
 
@@ -57,6 +94,7 @@ export async function generateMetadata({
       languages: {
         en: `${baseUrl}/en/risk-assessment/${activity.id}`,
         tr: `${baseUrl}/tr/risk-assessment/${activity.id}`,
+        "x-default": `${baseUrl}/en/risk-assessment/${activity.id}`,
       },
     },
     openGraph: {
@@ -136,6 +174,22 @@ export default async function RiskAssessmentActivityPage({
                   ? `${activityName} faaliyeti için kritik tehlikeleri, olası sonuçları, risk altındaki kişileri ve önerilen kontrol önlemlerini tek profesyonel HSE görünümünde inceleyin.`
                   : `Review the critical hazards, potential consequences, persons at risk and recommended control measures for ${activityName} in one professional HSE workspace.`}
               </p>
+
+              {searchIntentMetadata[activity.id] ? (
+                <section className="mt-7 max-w-4xl rounded-2xl border border-blue-400/20 bg-blue-500/5 p-5" aria-label={isTr ? "Öne çıkan tehlikeler" : "Key hazards"}>
+                  <h2 className="text-lg font-bold text-white">
+                    {isTr ? "Öne çıkan tehlikeler ve kontrol noktaları" : "Key hazards and control checkpoints"}
+                  </h2>
+                  <p className="mt-3 text-sm leading-7 text-slate-300">
+                    {activity.items.slice(0, 3).map((item) => item.hazard[locale]).join(" · ")}
+                  </p>
+                  <p className="mt-3 text-xs leading-6 text-slate-400">
+                    {isTr
+                      ? "Aşağıdaki risk değerlendirmesinde her tehlike için önerilen kontrolleri ve olası sonuçları inceleyin. Uygulama öncesinde sahaya özel doğrulama yapın."
+                      : "Review control measures and potential consequences for each hazard in the assessment below. Verify site-specific conditions before work."}
+                  </p>
+                </section>
+              ) : null}
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
