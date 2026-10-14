@@ -146,3 +146,59 @@
   .decisionChoices{gap:7px}
   .modal{max-height:89%;overflow:auto;overscroll-behavior:contain}
 }
+
+/* Mobile polish: safe-area header, compact viewport controls, and scrollable decision sheet. */
+@media(max-width:670px){
+  .page{padding-top:max(18px,env(safe-area-inset-top,0px));padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px))}
+  .nav{min-height:48px}
+  .heading{padding:14px 3px 17px}
+  .heading h1{font-size:clamp(23px,6vw,30px);line-height:1.16;overflow-wrap:anywhere}
+  .heading p:not(.eyebrow){line-height:1.5;margin-top:8px}
+  .build{margin-top:8px;padding:8px 11px}
+  .viewport{height:min(74svh,680px);min-height:480px}
+  .topHud{top:9px;left:9px;right:9px;gap:6px}
+  .hudLabel{padding:8px;font-size:8px;gap:5px}
+  .hudRight{padding:8px;font-size:8px}
+  .coords{top:66px;right:9px;padding:6px 8px;font-size:9px}
+  .overlay{padding:10px;align-items:center}
+  .modal{box-sizing:border-box;width:100%;max-width:480px;max-height:calc(100% - 20px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:17px 16px;border-radius:17px}
+  .modal h2{font-size:clamp(20px,5vw,25px);margin:8px 0;line-height:1.2}
+  .modal>p:not(.eyebrow){font-size:11px;line-height:1.5}
+  .modal .eyebrow{font-size:9px;line-height:1.5;letter-spacing:.08em}
+  .findingCategory{margin-bottom:8px!important}
+  .findingBlock{padding:10px 12px;margin-bottom:8px}
+  .findingBlock strong{font-size:11px}
+  .findingBlock p{font-size:11px;line-height:1.5;margin-top:4px}
+  .decisionPanel{padding:10px;margin-bottom:9px}
+  .decisionTitle{font-size:11px!important;margin-bottom:7px!important}
+  .decisionChoices{gap:6px}
+  .decisionOption{min-height:43px;padding:8px 9px;gap:8px;font-size:11px;line-height:1.35}
+  .decisionOption>span{flex-basis:24px;height:24px}
+  .decisionWrong,.decisionSuccess{margin-top:8px!important}
+  .trainingNotice{font-size:10px!important;line-height:1.5!important;margin:8px 0 10px}
+  .buttons{gap:8px}
+  .modal .primary,.modal .secondary{min-height:43px;padding:10px 14px;font-size:12px}
+  .features{gap:5px;margin:11px 0}
+  .features span{padding:6px 8px;font-size:10px}
+  .modal .help{margin-top:10px;font-size:10px!important}
+  .mobileControls{left:12px;right:12px;bottom:11px;gap:8px}
+  .joystickPad{width:96px;height:96px}
+  .joystickRing{inset:17px}
+  .joystickThumb{width:40px;height:40px;margin-top:-20px;margin-left:-20px}
+  .touchInspect{width:76px;height:76px;font-size:10px}
+  .touchInspect span{font-size:20px}
+  .touchPause{min-height:37px;padding:7px 10px;font-size:10px}
+  .touchActions{gap:7px}
+  .touchCaption{font-size:9px}
+  .aim{top:calc(50% + 16px);max-width:75%;padding:7px 9px;font-size:9px}
+  .summaryTitle{align-items:flex-start}
+  .summaryTitle .secondary{flex-shrink:0;padding:8px 10px;font-size:10px}
+}
+@media(max-width:850px) and (orientation:landscape) and (pointer:coarse){
+  .page{padding-top:max(12px,env(safe-area-inset-top,0px))}
+  .viewport{height:88svh;min-height:300px}
+  .modal{max-height:calc(100% - 12px);padding:12px}
+  .joystickPad{width:78px;height:78px}
+  .joystickThumb{width:34px;height:34px;margin-top:-17px;margin-left:-17px}
+  .touchInspect{width:65px;height:65px}
+}
