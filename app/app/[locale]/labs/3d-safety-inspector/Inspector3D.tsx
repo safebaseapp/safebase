@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { RefineryWorld } from "./world";
 import { trainingHazards, HAZARD_COUNT, type SafetyHazard } from "./hazards";
 import s from "./inspector.module.css";
@@ -16,6 +16,9 @@ export default function Inspector3D({ locale }: Props) {
   const world = useRef<RefineryWorld | null>(null);
   const active = useRef(false);
   const keys = useRef(new Set<string>());
+  const touchMove = useRef({ forward: 0, side: 0 });
+  const joystickPointer = useRef<number | null>(null);
+  const [stick, setStick] = useState({ x: 0, y: 0 });
   const [mode, setMode] = useState<Mode>("ready");
   const [error, setError] = useState("");
   const [position, setPosition] = useState<Position>({ x: 0, z: 30 });
@@ -28,6 +31,9 @@ export default function Inspector3D({ locale }: Props) {
   const pause = useCallback(() => {
     active.current = false;
     keys.current.clear();
+    touchMove.current = { forward: 0, side: 0 };
+    joystickPointer.current = null;
+    setStick({ x: 0, y: 0 });
     if (document.pointerLockElement === canvas.current) document.exitPointerLock();
     setMode((old) => old === "running" ? "paused" : old);
   }, []);
@@ -63,6 +69,31 @@ export default function Inspector3D({ locale }: Props) {
     setMode("paused");
   };
 
+  const moveStick = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const range = Math.max(30, Math.min(rect.width, rect.height) * 0.34);
+    let x = event.clientX - (rect.left + rect.width / 2);
+    let y = event.clientY - (rect.top + rect.height / 2);
+    const length = Math.hypot(x, y);
+    if (length > range) { x *= range / length; y *= range / length; }
+    setStick({ x, y });
+    // Forward is positive when the thumb travels upward.
+    touchMove.current = {
+      forward: Math.abs(y) < 5 ? 0 : -y / range,
+      side: Math.abs(x) < 5 ? 0 : x / range,
+    };
+  };
+
+  const releaseStick = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (joystickPointer.current !== event.pointerId) return;
+    joystickPointer.current = null;
+    touchMove.current = { forward: 0, side: 0 };
+    setStick({ x: 0, y: 0 });
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
   useEffect(() => {
     const target = canvas.current;
     if (!target) return;
@@ -77,6 +108,8 @@ export default function Inspector3D({ locale }: Props) {
     }
     let frame = 0, previous = performance.now(), lastPosition = previous, lastAim = previous;
     let dragX = 0, dragY = 0, dragging = false;
+    let lookTouch: number | null = null;
+    let lastTouchX = 0, lastTouchY = 0;
     const tick = (now: number) => {
       frame = requestAnimationFrame(tick);
       const dt = Math.min((now - previous) / 1000, 0.05);
@@ -85,7 +118,7 @@ export default function Inspector3D({ locale }: Props) {
         const pressed = keys.current;
         const f = Number(pressed.has("KeyW") || pressed.has("ArrowUp")) - Number(pressed.has("KeyS") || pressed.has("ArrowDown"));
         const side = Number(pressed.has("KeyD") || pressed.has("ArrowRight")) - Number(pressed.has("KeyA") || pressed.has("ArrowLeft"));
-        engine.walk(f, side, dt, pressed.has("ShiftLeft") || pressed.has("ShiftRight"));
+        engine.walk(f + touchMove.current.forward, side + touchMove.current.side, dt, pressed.has("ShiftLeft") || pressed.has("ShiftRight"));
       }
       // Render even when paused so the user sees the environment before entering.
       if (!document.hidden) engine.render();
@@ -127,6 +160,28 @@ export default function Inspector3D({ locale }: Props) {
       dragging = true; dragX = event.clientX; dragY = event.clientY;
     };
     const onMouseUp = () => { dragging = false; };
+    // On touchscreens the right-hand play area rotates the first-person camera.
+    // A distinct pointer ID makes the camera compatible with the joystick being held.
+    const onTouchDown = (event: PointerEvent) => {
+      if (!active.current || event.pointerType !== "touch" || lookTouch !== null) return;
+      event.preventDefault();
+      lookTouch = event.pointerId;
+      lastTouchX = event.clientX;
+      lastTouchY = event.clientY;
+      target.setPointerCapture(event.pointerId);
+    };
+    const onTouchMove = (event: PointerEvent) => {
+      if (!active.current || event.pointerType !== "touch" || event.pointerId !== lookTouch) return;
+      event.preventDefault();
+      engine.look((event.clientX - lastTouchX) * 1.35, (event.clientY - lastTouchY) * 1.35);
+      lastTouchX = event.clientX;
+      lastTouchY = event.clientY;
+    };
+    const onTouchEnd = (event: PointerEvent) => {
+      if (event.pointerId !== lookTouch) return;
+      lookTouch = null;
+      if (target.hasPointerCapture(event.pointerId)) target.releasePointerCapture(event.pointerId);
+    };
     const onContext = (event: MouseEvent) => event.preventDefault();
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("keyup", onKeyUp);
@@ -135,6 +190,10 @@ export default function Inspector3D({ locale }: Props) {
     window.addEventListener("mouseup", onMouseUp);
     document.addEventListener("pointerlockchange", onPointer);
     target.addEventListener("mousedown", onMouseDown);
+    target.addEventListener("pointerdown", onTouchDown);
+    target.addEventListener("pointermove", onTouchMove);
+    target.addEventListener("pointerup", onTouchEnd);
+    target.addEventListener("pointercancel", onTouchEnd);
     target.addEventListener("contextmenu", onContext);
     return () => {
       cancelAnimationFrame(frame);
@@ -148,6 +207,10 @@ export default function Inspector3D({ locale }: Props) {
       window.removeEventListener("mouseup", onMouseUp);
       document.removeEventListener("pointerlockchange", onPointer);
       target.removeEventListener("mousedown", onMouseDown);
+      target.removeEventListener("pointerdown", onTouchDown);
+      target.removeEventListener("pointermove", onTouchMove);
+      target.removeEventListener("pointerup", onTouchEnd);
+      target.removeEventListener("pointercancel", onTouchEnd);
       target.removeEventListener("contextmenu", onContext);
       engine.dispose();
       world.current = null;
@@ -162,7 +225,8 @@ export default function Inspector3D({ locale }: Props) {
     setMode("running");
     try {
       // Pointer lock is requested only from this direct user click.
-      const result = canvas.current?.requestPointerLock();
+      const isTouchscreen = window.matchMedia("(pointer: coarse)").matches;
+      const result = isTouchscreen ? undefined : canvas.current?.requestPointerLock();
       if (result && typeof result.catch === "function") {
         void result.catch(() => { /* drag-look remains available as a fallback */ });
       }
@@ -178,6 +242,8 @@ export default function Inspector3D({ locale }: Props) {
     setInspection(null);
     setHint("");
     setPosition({ x: 0, z: 30 });
+    touchMove.current = { forward: 0, side: 0 };
+    setStick({ x: 0, y: 0 });
     pause();
     setMode("ready");
   };
@@ -215,11 +281,47 @@ export default function Inspector3D({ locale }: Props) {
               <div className={s.aim}>
                 {focus
                   ? <button type="button" className={s.inspectAction} onClick={inspect}>
-                      <b>[E]</b> {isTr ? "Uygunsuzluğu incele" : "Inspect finding"}
+                      <b className={s.keyboardHint}>[E]</b> {isTr ? "Uygunsuzluğu incele" : "Inspect finding"}
                     </button>
                   : <span>{isTr ? "Sahadaki riskleri incele • E ile işaretle" : "Survey site conditions • Press E to mark"}</span>}
               </div>
               {hint && <div role="status" className={s.hint}>{hint}</div>}
+              <div className={s.mobileControls}>
+                <div className={s.joystickRegion}>
+                  <div
+                    role="group"
+                    aria-label={isTr ? "Yürüme joystick'i" : "Movement joystick"}
+                    className={s.joystickPad}
+                    onPointerDown={(event) => {
+                      if (!active.current || joystickPointer.current !== null) return;
+                      event.preventDefault();
+                      joystickPointer.current = event.pointerId;
+                      event.currentTarget.setPointerCapture(event.pointerId);
+                      moveStick(event);
+                    }}
+                    onPointerMove={(event) => {
+                      if (joystickPointer.current !== event.pointerId) return;
+                      event.preventDefault();
+                      moveStick(event);
+                    }}
+                    onPointerUp={releaseStick}
+                    onPointerCancel={releaseStick}
+                    onLostPointerCapture={releaseStick}
+                  >
+                    <div className={s.joystickRing} />
+                    <div className={s.joystickThumb} style={{ transform: `translate(${stick.x}px, ${stick.y}px)` }} />
+                  </div>
+                  <span className={s.touchCaption}>{isTr ? "YÜRÜ" : "MOVE"}</span>
+                </div>
+                <div className={s.touchActions}>
+                  <button type="button" className={s.touchInspect} onClick={inspect}>
+                    <span aria-hidden="true">◎</span>{isTr ? "İNCELE" : "INSPECT"}
+                  </button>
+                  <button type="button" className={s.touchPause} onClick={pause}>
+                    {isTr ? "Duraklat" : "Pause"} <span aria-hidden="true">Ⅱ</span>
+                  </button>
+                </div>
+              </div>
               <div className={s.bottomHud}>
                 <div className={s.controls}><b>W A S D</b><span>{isTr ? "Hareket" : "Move"}</span><b>{isTr ? "FARE" : "MOUSE"}</b><span>{isTr ? "Bakış" : "Look"}</span><b>SHIFT</b><span>{isTr ? "Hızlı yürü" : "Sprint"}</span><b>E</b><span>{isTr ? "İncele" : "Inspect"}</span></div>
                 <button className={s.pause} type="button" onClick={pause}>{isTr ? "Duraklat" : "Pause"} <span>ESC</span></button>
@@ -256,12 +358,12 @@ export default function Inspector3D({ locale }: Props) {
               <div className={s.modal}>
                 <p className={s.eyebrow}>SERNEM FIELD TRAINING · 3D EXPERIENCE</p>
                 <h2>{mode === "unsupported" ? (isTr ? "3D motor kullanılamıyor" : "3D engine unavailable") : mode === "paused" ? (isTr ? "Saha incelemesi duraklatıldı" : "Field walkthrough paused") : (isTr ? "Rafineri eğitim sahası" : "Refinery training environment")}</h2>
-                <p>{mode === "unsupported" ? error : isTr ? "Sahada görünür uygunsuzlukları bul. Nişangâhla hedefle, E tuşu veya fare tıklamasıyla incele. Henüz XP veya puan verilmiyor." : "Find visible unsafe conditions. Aim at the evidence, then press E or click to inspect. XP and scoring are not active yet."}</p>
+                <p>{mode === "unsupported" ? error : isTr ? "Sahada uygunsuzlukları bul. Telefonda sol joystick ile yürü, ekranda parmağını sürükleyerek bak ve İncele düğmesine bas. Bilgisayarda WASD / fare / E kullanılabilir. Henüz XP verilmez." : "Find unsafe conditions. On mobile, walk with the left joystick, drag the scene to look, then tap Inspect. Desktop: WASD / mouse / E. No XP yet."}</p>
                 {mode !== "unsupported" && (
                   <>
                     <div className={s.features}>
                       <span>{isTr ? "3D saha" : "3D world"}</span>
-                      <span>WASD + {isTr ? "fare" : "mouse"}</span>
+                      <span>{isTr ? "Telefon: joystick + dokunmatik" : "Mobile: joystick + touch"}</span>
                       <span>{isTr ? "Çarpışma" : "Collision"}</span>
                       <span>{isTr ? `12 eğitim tehlikesi` : `12 training hazards`}</span>
                     </div>
@@ -271,7 +373,7 @@ export default function Inspector3D({ locale }: Props) {
                     </div>
                   </>
                 )}
-                <p className={s.help}>{isTr ? "Masaüstü tarayıcı önerilir. ESC ile duraklat. Fare kilidi engellenirse fareyi basılı sürükleyerek bakabilirsin." : "Desktop browser recommended. ESC to pause. If pointer lock is blocked, click and drag to look."}</p>
+                <p className={s.help}>{isTr ? "Telefonda sol joystick ile hareket et; 3D görüntü üzerinde sürükleyerek etrafa bak. İncele ve Duraklat butonları sağda." : "On mobile use the left joystick to move; drag across the 3D scene to look. Inspect and Pause are on the right."}</p>
               </div>
             </div>
           )}
@@ -286,7 +388,7 @@ export default function Inspector3D({ locale }: Props) {
           </div>
           {found.length === 0 ? (
             <p className={s.summaryEmpty}>{isTr
-              ? "Henüz bulgu kaydedilmedi. Sahada tehlikeli görünen koşullara yaklaş, hedefle ve E tuşuna bas."
+              ? "Henüz bulgu kaydedilmedi. Tehlikeli koşullara yaklaş, hedefle; telefonda İncele düğmesine bas."
               : "No findings recorded. Explore the field, aim at visibly unsafe conditions, then press E."}</p>
           ) : (
             <ul className={s.findingList}>
