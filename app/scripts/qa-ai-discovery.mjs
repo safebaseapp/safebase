@@ -18,6 +18,10 @@ const checks = [
   ["OAI-SearchBot explicitly allowed", robots.includes("OAI-SearchBot") && robots.includes('allow: "/"')],
   ["robots protects private API endpoints", robots.includes('"/api/"')],
   ["robots protects private user dashboards", robots.includes('"/tr/dashboard/"') && robots.includes('"/en/dashboard/"')],
+  ["toolbox index signals respect Premium and unpublished access",
+    toolbox.includes('const isPublic = access.published && access.visible && access.accessLevel === "free"') &&
+    toolbox.includes("index: isPublic") && toolbox.includes("follow: isPublic") &&
+    toolbox.includes("redirect(")],
   ["toolbox has semantic article data", toolbox.includes('"@type": "TechArticle"') && toolbox.includes('"@type": "BreadcrumbList"')],
   ["guide has semantic article data", guides.includes('"@type": "TechArticle"') && guides.includes('"@type": "BreadcrumbList"')],
   ["toolbox article uses real content", toolbox.includes("headline: content.title")],
