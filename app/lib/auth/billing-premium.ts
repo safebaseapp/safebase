@@ -26,7 +26,7 @@ export async function hasCurrentBillingPremium(
 
   // Reservation alone does not grant Premium.
   if (trial.status === "reserved" || trial.status === "checkout_created" || trial.status === "checkout_failed")
-    return plan === "premium";
+    return false;
 
   // Purchased and converted subscriptions must be handled separately after
   // the provider confirms an active paid status.
