@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - feature/labs-3d-inspector-p1
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
