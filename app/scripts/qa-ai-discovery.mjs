@@ -48,6 +48,10 @@ const checks = [
   ["sign metadata discloses login and Premium access",
     signs.includes("Sign in for A4/A3 PDF") &&
     signs.includes("logosuz sürüm Premium")],
+  ["high-value risk assessments link to related technical guides",
+    risks.includes('relatedKnowledgeGuides[activity.id]') &&
+    risks.includes('/knowledge-base/${relatedGuideSlug}') &&
+    risks.includes('"roof-work": "working-at-height"')],
   ["three Google-visible risk pages have query-aligned descriptions",
     ["roof-work", "cable-pulling", "steel-erection"].every(slug => risks.includes('"' + slug + '"')) &&
     risks.includes("const intent = searchIntentMetadata") &&
