@@ -32,15 +32,43 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Account is not eligible for a free trial" }, { status: 409 });
   }
 
-  // Database UNIQUE(user_id) guarantees one checkout reservation per SERNEM identity.
-  // No attempts are overwritten automatically; support can review abandoned checkouts.
-  const { data: reservation, error: reservationError } = await admin
+  // A reserved checkout is not a consumed trial. Permit retry only when the
+  // prior checkout has not produced a verified Lemon subscription.
+  // The conditional status transition is an atomic one-request-at-a-time lock.
+  const { data: existing, error: existingError } = await admin
     .from("premium_trial_reservations")
-    .insert({ user_id: user.id, email: user.email.toLowerCase(), locale: body.locale, consent_version: POLICY_VERSION,
-      consent_at: new Date().toISOString(), status: "reserved" })
-    .select("id").single();
-  if (reservationError || !reservation) {
-    return NextResponse.json({ error: "Trial already requested or unavailable" }, { status: 409 });
+    .select("id,status,lemon_subscription_id,trial_ends_at")
+    .eq("user_id", user.id).maybeSingle();
+  if (existingError) return NextResponse.json({ error: "Unable to verify trial eligibility" }, { status: 503 });
+
+  let reservation: { id: string } | null = null;
+  if (existing) {
+    if (existing.lemon_subscription_id || existing.trial_ends_at ||
+      !["checkout_created", "checkout_failed"].includes(existing.status)) {
+      return NextResponse.json({ error: "Trial already used or currently being prepared" }, { status: 409 });
+    }
+    const { data: claimed, error: claimError } = await admin
+      .from("premium_trial_reservations")
+      .update({ status: "reserved", locale: body.locale,
+        consent_version: POLICY_VERSION, consent_at: new Date().toISOString(),
+        updated_at: new Date().toISOString() })
+      .eq("id", existing.id).eq("user_id", user.id).eq("status", existing.status)
+      .is("lemon_subscription_id", null).is("trial_ends_at", null)
+      .select("id").maybeSingle();
+    if (claimError || !claimed) {
+      return NextResponse.json({ error: "Trial checkout is already in progress" }, { status: 409 });
+    }
+    reservation = claimed;
+  } else {
+    const { data: inserted, error: reservationError } = await admin
+      .from("premium_trial_reservations")
+      .insert({ user_id: user.id, email: user.email.toLowerCase(), locale: body.locale,
+        consent_version: POLICY_VERSION, consent_at: new Date().toISOString(), status: "reserved" })
+      .select("id").single();
+    if (reservationError || !inserted) {
+      return NextResponse.json({ error: "Trial checkout is already in progress" }, { status: 409 });
+    }
+    reservation = inserted;
   }
 
   const base = new URL(request.url).origin;
