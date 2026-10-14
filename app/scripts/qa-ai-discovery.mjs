@@ -2,7 +2,7 @@
 // not ranking, actual crawling, citations, or rendered JSON-LD correctness.
 import { readFile } from "node:fs/promises";
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), "utf8");
-const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers] = await Promise.all([
+const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, signs, risks] = await Promise.all([
   read("app/robots.ts"),
   read("app/[locale]/toolbox/[slug]/page.tsx"),
   read("app/[locale]/knowledge-base/[slug]/page.tsx"),
@@ -10,6 +10,8 @@ const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers] = aw
   read("public/llms.txt"),
   read("app/[locale]/knowledge-base/components/GuideTemplate.tsx"),
   read("app/[locale]/knowledge-base/components/AuthorityAnswerPanel.tsx"),
+  read("app/[locale]/safety-signs/[slug]/page.tsx"),
+  read("app/[locale]/risk-assessment/[slug]/page.tsx"),
 ]);
 const checks = [
   ["OAI-SearchBot explicitly allowed", robots.includes("OAI-SearchBot") && robots.includes('allow: "/"')],
@@ -27,6 +29,18 @@ const checks = [
   ["ten priority guides have technical answer blocks", ["confined-space", "hot-work", "working-at-height", "loto", "scaffolding", "excavation", "crane-safety", "electrical-safety", "permit-to-work", "chemical-safety"].every((slug) => answers.includes(`"${slug}"`))],
   ["non-OSHA source titles are not silently hidden", guideTemplate.includes("guide.references.filter((reference) => reference.trim().length > 0)")],
   ["flagship reference answers use the original bilingual guide content", guideTemplate.includes("<AuthorityAnswerPanel") && answers.includes("guide.overview[locale]") && answers.includes("guide.controls[locale]") && !answers.includes("/labs/spot-the-hazard/")],
+  ["safety sign pages have distinct TR/EN metadata and canonicals",
+    signs.includes("export async function generateMetadata") &&
+    signs.includes('slug === "no-smoking"') &&
+    signs.includes('"x-default": SITE_URL') &&
+    signs.includes('type="application/ld+json"')],
+  ["sign metadata discloses login and Premium access",
+    signs.includes("Sign in for A4/A3 PDF") &&
+    signs.includes("logosuz sürüm Premium")],
+  ["three Google-visible risk pages have query-aligned descriptions",
+    ["roof-work", "cable-pulling", "steel-erection"].every(slug => risks.includes('"' + slug + '"')) &&
+    risks.includes("const intent = searchIntentMetadata") &&
+    risks.includes("activity.items.slice(0, 3)")],
   ["OSHA 1910/1926 references link to official sources", guideTemplate.includes("www.osha.gov/laws-regs/regulations/standardnumber/") && guideTemplate.includes("officialSource")],
 ];
 const failures = checks.filter(([, passed]) => !passed);
