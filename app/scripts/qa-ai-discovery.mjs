@@ -2,7 +2,7 @@
 // not ranking, actual crawling, citations, or rendered JSON-LD correctness.
 import { readFile } from "node:fs/promises";
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), "utf8");
-const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, signs, risks] = await Promise.all([
+const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, signs, risks, hub] = await Promise.all([
   read("app/robots.ts"),
   read("app/[locale]/toolbox/[slug]/page.tsx"),
   read("app/[locale]/knowledge-base/[slug]/page.tsx"),
@@ -12,6 +12,7 @@ const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, sign
   read("app/[locale]/knowledge-base/components/AuthorityAnswerPanel.tsx"),
   read("app/[locale]/safety-signs/[slug]/page.tsx"),
   read("app/[locale]/risk-assessment/[slug]/page.tsx"),
+  read("app/[locale]/knowledge-base/page.tsx"),
 ]);
 const checks = [
   ["OAI-SearchBot explicitly allowed", robots.includes("OAI-SearchBot") && robots.includes('allow: "/"')],
@@ -29,6 +30,11 @@ const checks = [
   ["ten priority guides have technical answer blocks", ["confined-space", "hot-work", "working-at-height", "loto", "scaffolding", "excavation", "crane-safety", "electrical-safety", "permit-to-work", "chemical-safety"].every((slug) => answers.includes(`"${slug}"`))],
   ["non-OSHA source titles are not silently hidden", guideTemplate.includes("guide.references.filter((reference) => reference.trim().length > 0)")],
   ["flagship reference answers use the original bilingual guide content", guideTemplate.includes("<AuthorityAnswerPanel") && answers.includes("guide.overview[locale]") && answers.includes("guide.controls[locale]") && !answers.includes("/labs/spot-the-hazard/")],
+  ["indexing priority pages have visible direct links from knowledge hub",
+    hub.includes("priorityGuides.map(") &&
+    hub.includes('href={`/${locale}/knowledge-base/${item.slug}`}') &&
+    hub.includes('"dropped-object-prevention"') &&
+    hub.includes('"confined-space-attendant-duties"')],
   ["search-console priority HSE guides have specific bilingual metadata",
     ["confined-space-attendant-duties", "stored-energy-hazards",
      "hydraulic-system-safety", "suspended-load-exclusion-zones"]
