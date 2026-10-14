@@ -22,8 +22,8 @@ type LabCard = {
 
 const products: LabCard[] = [
   { id: "spot", title: "Spot the Hazard", subtitle: "Visual Test Challenge", descTr: "Gerçekçi endüstriyel sahneleri incele. Görselde gerçekten bulunan tehlikeleri tespit et ve saha farkındalığını test et.", descEn: "Inspect realistic industrial scenes. Identify the hazards that are actually visible and test your field awareness.", href: "spot-the-hazard", active: true, index: "01" },
-  { id: "incident", title: "Incident Simulator", subtitle: "Scenario Judgment", descTr: "Dallanan olay akışında karar ver. Her karar Safety, Judgment ve Response skorunu değiştirir; sonuç zincire göre şekillenir.", descEn: "Make decisions through a branching incident. Every choice changes Safety, Judgment and Response scores, and the outcome follows your decision chain.", href: "incident-simulator", active: true, index: "02" },
-  { id: "brain", title: "Daily Safety Brain", subtitle: "Quick Challenge", descTr: "Kısa günlük HSE challenge'ları ile bilgini ve saha refleksini sıcak tut.", descEn: "Keep HSE knowledge and field reflexes active with short daily challenges.", href: "daily-safety-brain", active: true, index: "03" },
+  { id: "incident", title: "Incident Simulator", subtitle: "Scenario Judgment", descTr: "Dallanan olay akışında karar ver. Her karar Güvenlik, Karar Kalitesi ve Müdahale puanlarını değiştirir; sonuç zincire göre şekillenir.", descEn: "Make decisions through a branching incident. Every choice changes Safety, Judgment and Response scores, and the outcome follows your decision chain.", href: "incident-simulator", active: true, index: "02" },
+  { id: "brain", title: "Daily Safety Brain", subtitle: "Quick Challenge", descTr: "Kısa günlük İSG bilgi testleriyle bilgini ve saha refleksini sıcak tut.", descEn: "Keep HSE knowledge and field reflexes active with short daily challenges.", href: "daily-safety-brain", active: true, index: "03" },
   { id: "ppe", title: "PPE Matchmaker", subtitle: "Protection Logic", descTr: "Görev ve tehlikeye göre doğru kişisel koruyucu ekipman kombinasyonunu seç.", descEn: "Match tasks and hazards with the right personal protective equipment.", active: false, index: "04" },
   { id: "myth", title: "Safety Myth Buster", subtitle: "Safety Truth Check", descTr: "Sahada sık duyulan güvenlik inanışlarını kanıt ve iyi uygulamalarla test et.", descEn: "Test common field safety beliefs against evidence and good practice.", active: false, index: "05" },
   { id: "blind", title: "Blind Spot Test", subtitle: "Hidden Risk Focus", descTr: "Gözden kaçan riskleri ve farkındalık boşluklarını ortaya çıkaran ileri seviye testler.", descEn: "Advanced challenges designed to reveal overlooked risks and awareness gaps.", active: false, premium: true, index: "06" },
@@ -56,9 +56,9 @@ export default async function LabsPage({ params }: Props) {
                 {isTr ? "Gözünü eğit." : "Train your eye."}<br />
                 <em>{isTr ? "Saha kararını güçlendir." : "Strengthen field judgment."}</em>
               </h1>
-              <p className={s.lead}>{isTr ? "Gerçek endüstriyel risklerden ilham alan etkileşimli HSE challenge'ları. Tehlike farkındalığını, karar kalitesini ve saha refleksini aktif olarak test et." : "Interactive HSE challenges inspired by real industrial risk. Actively test hazard recognition, decision quality and field awareness."}</p>
+              <p className={s.lead}>{isTr ? "Gerçek endüstriyel risklerden ilham alan etkileşimli İSG senaryoları. Tehlike farkındalığını, karar kalitesini ve saha refleksini aktif olarak test et." : "Interactive HSE challenges inspired by real industrial risk. Actively test hazard recognition, decision quality and field awareness."}</p>
               <div className={s.actions}>
-                <Link className={s.primaryAction} href={`/${locale}/labs/incident-simulator`}>{isTr ? "Incident Simulator'ı Aç" : "Open Incident Simulator"}<ArrowRight size={18} /></Link>
+                <Link className={s.primaryAction} href={`/${locale}/labs/incident-simulator`}>{isTr ? "Olay Simülatörünü Aç" : "Open Incident Simulator"}<ArrowRight size={18} /></Link>
                 <a className={s.secondaryAction} href="#labs-modules">{isTr ? "Modülleri Gör" : "Explore Modules"}</a>
               </div>
             </div>
@@ -68,7 +68,7 @@ export default async function LabsPage({ params }: Props) {
               <div className={s.panelIcon}><ScanSearch size={32} /></div>
               <p className={s.panelKicker}>SCENARIO JUDGMENT ENGINE</p>
               <h2>Incident Simulator</h2>
-              <p>{isTr ? "Dallanan olay akışı · karar etkisi · Safety / Judgment / Response debrief" : "Branching event flow · decision impact · Safety / Judgment / Response debrief"}</p>
+              <p>{isTr ? "Dallanan olay akışı · karar etkisi · güvenlik / karar kalitesi / müdahale değerlendirmesi" : "Branching event flow · decision impact · Safety / Judgment / Response debrief"}</p>
               <div className={s.panelStats}>
                 <span><b>3</b>{isTr ? "Skor" : "Scores"}</span><span><b>3</b>{isTr ? "Sonuç" : "Outcomes"}</span><span><b>XP</b>{isTr ? "Karar" : "Judgment"}</span>
               </div>
