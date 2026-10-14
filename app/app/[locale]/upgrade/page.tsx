@@ -18,7 +18,8 @@ type Benefit = {
 export default async function UpgradePage({ params }: Props) {
   const { locale } = await params;
   const isTurkish = locale === "tr";
-  const showPreviewTrial = premiumTrialEnabled();
+  const showTrialOffer = premiumTrialEnabled();
+  const isPreviewTrial = process.env.VERCEL_ENV !== "production";
   const supabase = await createClient();
 
   const {
@@ -193,10 +194,10 @@ export default async function UpgradePage({ params }: Props) {
                   : "One membership. Premium tools, content and professional outputs. Access is activated automatically after payment."}
               </p>
 
-              {showPreviewTrial && (
+              {showTrialOffer && (
                 <div className="mt-6 rounded-2xl border border-amber-300/40 bg-amber-300/10 p-5">
                   <p className="text-xs font-bold uppercase tracking-[0.16em] text-amber-300">
-                    {isTurkish ? "TEST ORTAMI · 24 SAATLİK DENEME" : "TEST ENVIRONMENT · 24-HOUR TRIAL"}
+                    {isPreviewTrial ? (isTurkish ? "TEST ORTAMI · 24 SAATLİK DENEME" : "TEST ENVIRONMENT · 24-HOUR TRIAL") : (isTurkish ? "24 SAATLİK ÜCRETSİZ DENEME" : "24-HOUR FREE TRIAL")}
                   </p>
                   <h3 className="mt-2 text-xl font-bold text-white">
                     {isTurkish ? "24 Saat Premium'u Ücretsiz Dene" : "Try Premium Free for 24 Hours"}
