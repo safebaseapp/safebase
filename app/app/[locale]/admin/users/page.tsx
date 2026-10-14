@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { isAdminUser } from "@/lib/auth/access";
@@ -56,6 +57,25 @@ export default async function AdminUsersPage({ params }: Props) {
 
   const profiles = (data ?? []) as Profile[];
 
+  type TrialRow = { user_id: string; status: string; trial_ends_at: string | null; access_ends_at: string | null };
+  let trialRows: TrialRow[] = [];
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    const db = createAdminClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
+    const { data: trials, error: trialError } = await db.from("premium_trial_reservations").select("user_id,status,trial_ends_at,access_ends_at");
+    if (!trialError) trialRows = (trials || []) as TrialRow[];
+  }
+  const trialByUser = new Map(trialRows.map((row) => [row.user_id, row]));
+  function trialLabel(profile: Profile) {
+    const trial = trialByUser.get(profile.id);
+    if (!trial) return null;
+    const expiry = trial.status === "cancelled" ? (trial.access_ends_at || trial.trial_ends_at) : trial.trial_ends_at;
+    const label = trial.status === "cancelled" ? (isTurkish ? "Deneme iptal · Yenileme kapalı" : "Trial cancelled · Renewal off")
+      : trial.status === "on_trial" ? (isTurkish ? "Aktif Premium deneme" : "Active Premium trial")
+      : trial.status === "active" ? (isTurkish ? "Ücretli abonelik" : "Paid subscription")
+      : trial.status === "expired" ? (isTurkish ? "Deneme sona erdi" : "Trial expired")
+      : (isTurkish ? "Ödeme tamamlanmadı" : "Checkout incomplete");
+    return { label, expiry };
+  }
   const totalUsers = profiles.length;
   const premiumUsers = profiles.filter(
     (profile) => profile.plan === "premium"
@@ -230,6 +250,12 @@ export default async function AdminUsersPage({ params }: Props) {
                             ? "👑 PREMIUM"
                             : "🌍 FREE"}
                         </span>
+                        {trialLabel(profile) && (
+                          <p className="mt-2 text-[11px] font-semibold text-sky-300">
+                            {trialLabel(profile)?.label}
+                            {trialLabel(profile)?.expiry && <span className="mt-1 block text-slate-400">{isTurkish ? "Bitiş: " : "Ends: "}{formatDate(trialLabel(profile)!.expiry!, locale)}</span>}
+                          </p>
+                        )}
                       </td>
 
                       <td className="px-6 py-5">
