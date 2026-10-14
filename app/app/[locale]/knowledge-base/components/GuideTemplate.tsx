@@ -218,7 +218,7 @@ export default function GuideTemplate({
             <h2 className="text-3xl font-black">{isTurkish ? "OSHA Referansları" : "OSHA References"}</h2>
             <div className="mt-6 flex flex-wrap gap-3">
               {visibleReferences.map((reference) => {
-                const officialSource = /^OSHA (1910\\.146|1910\\.252)$/.exec(reference);
+                const officialSource = /^OSHA (1910\.146|1910\.252)$/.exec(reference);
                 const href = officialSource
                   ? `https://www.osha.gov/laws-regs/regulations/standardnumber/1910/${officialSource[1]}`
                   : null;
