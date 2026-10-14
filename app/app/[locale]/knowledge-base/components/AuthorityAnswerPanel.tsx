@@ -1,7 +1,10 @@
 import Link from "next/link";
 import type { SafetyGuide } from "./GuideTemplate";
 
-const flagship = new Set(["confined-space", "hot-work", "working-at-height", "loto", "scaffolding"]);
+const flagship = new Set([
+  "confined-space", "hot-work", "working-at-height", "loto", "scaffolding",
+  "excavation", "crane-safety", "electrical-safety", "permit-to-work", "chemical-safety",
+]);
 
 export default function AuthorityAnswerPanel({ guide, locale }: { guide: SafetyGuide; locale: "tr" | "en" }) {
   if (!flagship.has(guide.slug)) return null;
@@ -52,9 +55,11 @@ export default function AuthorityAnswerPanel({ guide, locale }: { guide: SafetyG
           </article>
         ) : null}
       </div>
+      {["confined-space", "hot-work", "working-at-height", "loto", "scaffolding"].includes(guide.slug) ? (
       <Link href={`/${locale}/toolbox/${guide.slug === "scaffolding" ? "scaffold-safety" : guide.slug}`} className="mt-6 inline-flex rounded-xl border border-emerald-400/30 px-5 py-3 font-bold text-emerald-300 transition hover:bg-emerald-400/10">
         {tr ? "İlgili Toolbox Talk →" : "Related Toolbox Talk →"}
       </Link>
+      ) : null}
     </section>
   );
 }
