@@ -24,19 +24,52 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = `https://www.sernem.com/${language}/knowledge-base/${guide.slug}`;
   const alternateLocale = language === "tr" ? "en" : "tr";
 
-  const ctr =
-    guide.slug === "confined-space-attendant-duties"
-      ? {
-          title:
-            language === "tr"
-              ? "Kapalı Alan Gözcüsü Görevleri: Kontrol Listesi ve Saha Rehberi"
-              : "Confined Space Attendant Duties: Checklist & Field Guide",
-          description:
-            language === "tr"
-              ? "Kapalı alan gözcüsünün görevleri, giriş takibi, iletişim, atmosferik riskler, acil durum ve stop-work kontrolleri. Risk değerlendirmesi ve saha araçlarına geçin."
-              : "Confined space attendant duties for entry monitoring, communication, atmospheric hazards, emergencies and stop-work decisions, with field-ready HSE tools.",
-        }
-      : null;
+  const ctrOverrides: Record<string, {
+    tr: { title: string; description: string };
+    en: { title: string; description: string };
+  }> = {
+    "confined-space-attendant-duties": {
+      tr: {
+        title: "Kapalı Alan Gözcüsü Görevleri: Kontrol Listesi ve Saha Rehberi",
+        description: "Kapalı alan gözcüsünün giriş takibi, iletişim, atmosferik risk ve acil durum sorumluluklarını inceleyin. İlgili risk değerlendirmesi ve saha araçlarına geçin.",
+      },
+      en: {
+        title: "Confined Space Attendant Duties: Checklist & Field Guide",
+        description: "Confined space attendant responsibilities: entrant monitoring, communication, changes in conditions and emergency response, with field-ready controls.",
+      },
+    },
+    "stored-energy-hazards": {
+      tr: {
+        title: "Depolanmış Enerji Tehlikeleri | İzolasyon ve LOTO Kontrolleri",
+        description: "Basınç, yerçekimi, yay ve mekanik sistemlerde depolanmış enerjiyi tanımlayın. İzolasyon, enerji boşaltma ve sıfır enerji kontrollerini inceleyin.",
+      },
+      en: {
+        title: "Stored Energy Hazards | Pressure, Gravity & LOTO Controls",
+        description: "Understand stored energy hazards involving pressure, gravity, springs and machinery. Review isolation, discharge and verification controls before work.",
+      },
+    },
+    "hydraulic-system-safety": {
+      tr: {
+        title: "Hidrolik Sistem Güvenliği | Basınç ve Sıvı Enjeksiyonu Riski",
+        description: "Hidrolik sistemlerde yüksek basınçlı sıvı enjeksiyonu, enerji boşaltma ve beklenmeyen hareket risklerini, temel kontrol önlemleriyle inceleyin.",
+      },
+      en: {
+        title: "Hydraulic System Safety | Fluid Injection & Pressure Hazards",
+        description: "Review hydraulic-system safety: high-pressure fluid injection, stored energy, unexpected movement, isolation and depressurization controls.",
+      },
+    },
+    "suspended-load-exclusion-zones": {
+      tr: {
+        title: "Askıdaki Yük Güvenliği | Yasaklı Bölge ve Kaldırma Kontrolleri",
+        description: "Askıdaki yükün altındaki tehlikeler, yük salınımı ve yasaklı bölge oluşturma kontrollerini inceleyin. Kaldırma çalışmalarında erişimi yönetin.",
+      },
+      en: {
+        title: "Suspended Load Exclusion Zones | Lifting Safety Controls",
+        description: "Learn how to manage lifting exclusion zones, unexpected load movement and access around suspended loads, with practical field control measures.",
+      },
+    },
+  };
+  const ctr = ctrOverrides[guide.slug]?.[language];
 
   return {
     title: ctr?.title ?? `${guide.title[language]} | SERNEM HSE Guide`,
