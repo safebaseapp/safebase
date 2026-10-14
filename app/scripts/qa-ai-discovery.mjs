@@ -2,13 +2,14 @@
 // not ranking, actual crawling, citations, or rendered JSON-LD correctness.
 import { readFile } from "node:fs/promises";
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), "utf8");
-const [robots, toolbox, guides, sitemap, directory, guideTemplate] = await Promise.all([
+const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers] = await Promise.all([
   read("app/robots.ts"),
   read("app/[locale]/toolbox/[slug]/page.tsx"),
   read("app/[locale]/knowledge-base/[slug]/page.tsx"),
   read("app/sitemap.ts"),
   read("public/llms.txt"),
   read("app/[locale]/knowledge-base/components/GuideTemplate.tsx"),
+  read("app/[locale]/knowledge-base/components/AuthorityAnswerPanel.tsx"),
 ]);
 const checks = [
   ["OAI-SearchBot explicitly allowed", robots.includes("OAI-SearchBot") && robots.includes('allow: "/"')],
@@ -23,6 +24,7 @@ const checks = [
   ["public reference directory links real SERNEM content", directory.includes("https://www.sernem.com/en/knowledge-base/confined-space-attendant-duties")],
   ["source directory includes safety limitations", directory.includes("Verify the applicable current standards")],
   ["Labs hazard scenario visuals are not presented in guides", !guideTemplate.includes("AuthorityFieldVisual")],
+  ["flagship reference answers use the original bilingual guide content", guideTemplate.includes("<AuthorityAnswerPanel") && answers.includes("guide.overview[locale]") && answers.includes("guide.controls[locale]") && !answers.includes("/labs/spot-the-hazard/")],
   ["OSHA 1910/1926 references link to official sources", guideTemplate.includes("www.osha.gov/laws-regs/regulations/standardnumber/") && guideTemplate.includes("officialSource")],
 ];
 const failures = checks.filter(([, passed]) => !passed);
