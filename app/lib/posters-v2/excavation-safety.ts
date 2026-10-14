@@ -54,7 +54,7 @@ export const excavationSafetyPoster: PosterDefinition = {
     {
       number: "04",
       title: {
-        tr: "Spoil Pile Mesafesini Koru",
+        tr: "Kazı Malzemesini Güvenli Mesafede Tut",
         en: "Control Spoil Piles",
       },
       items: {
