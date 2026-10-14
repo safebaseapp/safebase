@@ -58,9 +58,46 @@ export default async function KnowledgeBasePage({ params }: Props) {
     riskLevel: guide.riskLevel?.[locale],
   }));
 
+  // Give priority, public HSE references direct crawlable internal links.
+  // A visible link list is more dependable than links hidden in interactive filtering.
+  const prioritySlugs = [
+    "dropped-object-prevention",
+    "confined-space-attendant-duties",
+    "stored-energy-hazards",
+    "hydraulic-system-safety",
+    "scaffold-tagging-systems",
+    "line-breaking-safety",
+    "suspended-load-exclusion-zones",
+    "confined-space",
+    "hot-work",
+    "working-at-height",
+  ];
+  const priorityGuides = prioritySlugs
+    .map((slug) => guides.find((item) => item.slug === slug))
+    .filter((item): item is (typeof guides)[number] => Boolean(item));
+
   return (
     <>
       <GuideDirectoryClient locale={locale} guides={guides} />
+      <nav aria-label={locale === "tr" ? "Öncelikli teknik rehberler" : "Featured technical safety guides"} className="mx-auto max-w-6xl px-5 pb-10">
+        <div className="rounded-2xl border border-blue-200 bg-white p-6 text-slate-900">
+          <h2 className="text-xl font-extrabold">
+            {locale === "tr" ? "Öne çıkan teknik saha rehberleri" : "Featured technical field guides"}
+          </h2>
+          <p className="mt-2 text-sm text-slate-600">
+            {locale === "tr"
+              ? "Saha kontrolleri, iş izinleri ve kritik tehlikeler için doğrudan teknik kaynaklara geçin."
+              : "Open focused references on field controls, work permits and critical hazards."}
+          </p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {priorityGuides.map((item) => (
+              <Link key={item.slug} href={`/${locale}/knowledge-base/${item.slug}`} className="rounded-xl border border-slate-200 px-4 py-3 font-semibold text-blue-800 transition hover:border-blue-400 hover:bg-blue-50">
+                {item.title} <span aria-hidden="true">↗</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </nav>
       <nav aria-label={locale === "tr" ? "Bilgi merkezi rehber dizini" : "Knowledge base guide directory"} className="mx-auto max-w-6xl px-5 pb-12">
         <details className="rounded-2xl border border-slate-200 bg-white p-5 text-slate-900">
           <summary className="cursor-pointer font-semibold">{locale === "tr" ? "100 İSG rehberinin tamamı" : "Browse all 100 HSE guides"}</summary>
