@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { RefineryWorld } from "./world";
+import { trainingHazards, HAZARD_COUNT, type SafetyHazard } from "./hazards";
 import s from "./inspector.module.css";
 
-type Mode = "ready" | "running" | "paused" | "unsupported";
+type Mode = "ready" | "running" | "paused" | "inspecting" | "unsupported";
 type Props = { locale: "tr" | "en" };
 type Position = { x: number; z: number };
 
@@ -18,7 +19,11 @@ export default function Inspector3D({ locale }: Props) {
   const [mode, setMode] = useState<Mode>("ready");
   const [error, setError] = useState("");
   const [position, setPosition] = useState<Position>({ x: 0, z: 30 });
-  const [graphics, setGraphics] = useState<"high" | "low">("high");
+  const confirmed = useRef(new Set<string>());
+  const [found, setFound] = useState<string[]>([]);
+  const [focus, setFocus] = useState<SafetyHazard | null>(null);
+  const [inspection, setInspection] = useState<SafetyHazard | null>(null);
+  const [hint, setHint] = useState("");
 
   const pause = useCallback(() => {
     active.current = false;
@@ -26,6 +31,37 @@ export default function Inspector3D({ locale }: Props) {
     if (document.pointerLockElement === canvas.current) document.exitPointerLock();
     setMode((old) => old === "running" ? "paused" : old);
   }, []);
+
+  const inspect = useCallback(() => {
+    if (!active.current || !world.current) return;
+    const match = world.current.pickHazard(confirmed.current);
+    if (!match) {
+      setHint(isTr
+        ? "Bir bulguyu incelemek için nişangâhı görünen uygunsuzluğa çevir ve yaklaş."
+        : "Aim the crosshair at visible unsafe equipment or conditions and move closer.");
+      return;
+    }
+    active.current = false;
+    keys.current.clear();
+    setFocus(null);
+    setHint("");
+    setInspection(match);
+    setMode("inspecting");
+    if (document.pointerLockElement === canvas.current) document.exitPointerLock();
+  }, [isTr]);
+
+  const saveFinding = () => {
+    if (!inspection) return;
+    confirmed.current.add(inspection.id);
+    setFound([...confirmed.current]);
+    setInspection(null);
+    setMode("paused");
+  };
+
+  const cancelInspection = () => {
+    setInspection(null);
+    setMode("paused");
+  };
 
   useEffect(() => {
     const target = canvas.current;
@@ -39,7 +75,7 @@ export default function Inspector3D({ locale }: Props) {
       setMode("unsupported");
       return;
     }
-    let frame = 0, previous = performance.now(), lastPosition = previous;
+    let frame = 0, previous = performance.now(), lastPosition = previous, lastAim = previous;
     let dragX = 0, dragY = 0, dragging = false;
     const tick = (now: number) => {
       frame = requestAnimationFrame(tick);
@@ -57,12 +93,18 @@ export default function Inspector3D({ locale }: Props) {
         lastPosition = now;
         setPosition({ x: engine.state.x, z: engine.state.z });
       }
+      if (active.current && now - lastAim > 150) {
+        lastAim = now;
+        const target = engine.pickHazard(confirmed.current);
+        setFocus(current => current?.id === target?.id ? current : target);
+      }
     };
     frame = requestAnimationFrame(tick);
     const onKeyDown = (event: KeyboardEvent) => {
       if (!active.current) return;
       if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].includes(event.code)) event.preventDefault();
       if (event.code === "Escape") { pause(); return; }
+      if (event.code === "KeyE") { event.preventDefault(); inspect(); return; }
       keys.current.add(event.code);
     };
     const onKeyUp = (event: KeyboardEvent) => keys.current.delete(event.code);
@@ -80,9 +122,9 @@ export default function Inspector3D({ locale }: Props) {
       }
     };
     const onMouseDown = (event: MouseEvent) => {
-      if (event.button === 0 && active.current && document.pointerLockElement !== target) {
-        dragging = true; dragX = event.clientX; dragY = event.clientY;
-      }
+      if (event.button !== 0 || !active.current) return;
+      if (document.pointerLockElement === target) { inspect(); return; }
+      dragging = true; dragX = event.clientX; dragY = event.clientY;
     };
     const onMouseUp = () => { dragging = false; };
     const onContext = (event: MouseEvent) => event.preventDefault();
@@ -110,11 +152,13 @@ export default function Inspector3D({ locale }: Props) {
       engine.dispose();
       world.current = null;
     };
-  }, [pause]);
+  }, [pause, inspect]);
 
   const start = () => {
     if (!world.current) return;
     active.current = true;
+    setHint("");
+    setInspection(null);
     setMode("running");
     try {
       // Pointer lock is requested only from this direct user click.
@@ -128,6 +172,11 @@ export default function Inspector3D({ locale }: Props) {
   };
   const reset = () => {
     world.current?.reset();
+    confirmed.current.clear();
+    setFound([]);
+    setFocus(null);
+    setInspection(null);
+    setHint("");
     setPosition({ x: 0, z: 30 });
     pause();
     setMode("ready");
@@ -138,16 +187,16 @@ export default function Inspector3D({ locale }: Props) {
       <div className={s.shell}>
         <div className={s.nav}>
           <Link href={`/${locale}/labs`} className={s.back}>← {isTr ? "SERNEM Labs'e dön" : "Back to SERNEM Labs"}</Link>
-          <span className={s.kicker}>SERNEM LABS / 3D SAFETY INSPECTOR / PACKAGE 01</span>
-          <span className={s.status}>{isTr ? "OYUN PROTOTİPİ" : "PLAYABLE PROTOTYPE"}</span>
+          <span className={s.kicker}>SERNEM LABS / 3D SAFETY INSPECTOR / PACKAGE 02</span>
+          <span className={s.status}>{isTr ? "GÖREV BETA" : "MISSION BETA"}</span>
         </div>
         <div className={s.heading}>
           <div>
             <p className={s.eyebrow}>FIELD WALKTHROUGH · REFINERY MAINTENANCE ZONE</p>
-            <h1>{isTr ? "Sahaya gir. Çevreni keşfet." : "Enter the site. Explore the field."}</h1>
-            <p>{isTr ? "İlk paket: gezilebilir 3D endüstriyel saha, yürüyüş, bakış kontrolü ve çarpışma. Tehlike tespiti ikinci pakette eklenecek." : "Package one: explorable 3D industrial field, walking, camera and collisions. Hazard detection arrives in package two."}</p>
+            <h1>{isTr ? "Sahaya gir. Uygunsuzlukları tespit et." : "Enter the site. Find the hazards."}</h1>
+            <p>{isTr ? "İkinci paket: 3D rafineri sahasında 12 görünür uygunsuzluğu bul, hedefle, incele ve bulgu olarak kaydet." : "Package two: identify, inspect and record 12 visible unsafe conditions across the explorable 3D training site."}</p>
           </div>
-          <div className={s.build}>ALPHA / P1 <span>●</span> WEBGL2</div>
+          <div className={s.build}>ALPHA / P2 <span>●</span> WEBGL2</div>
         </div>
 
         <section className={s.viewport} aria-label={isTr ? "Gezilebilir 3D rafineri sahası" : "Explorable 3D refinery field"}>
@@ -157,31 +206,64 @@ export default function Inspector3D({ locale }: Props) {
             aria-label={isTr ? "3D eğitim sahası. Başlat düğmesini seçin." : "3D training field. Choose Start to begin."}
           />
           <div className={s.topHud}>
-            <div className={s.hudLabel}><b>MISSION 01</b><span>{isTr ? "SAHA KEŞFİ" : "FIELD ORIENTATION"}</span></div>
-            <div className={s.hudRight}><span className={s.dot} /> {mode === "running" ? (isTr ? "SAHADASIN" : "ON SITE") : (isTr ? "HAZIR" : "STANDBY")}</div>
+            <div className={s.hudLabel}><b>MISSION 01</b><span>{isTr ? "SAHA DENETİMİ" : "SITE INSPECTION"}</span></div>
+            <div className={s.hudRight}><span className={s.dot} /> {isTr ? "BULGULAR" : "FINDINGS"} <b>{found.length}/{HAZARD_COUNT}</b></div>
           </div>
           {mode === "running" && (
             <>
               <div className={s.crosshair} aria-hidden="true"><span /><span /></div>
+              <div className={s.aim}>
+                {focus
+                  ? <button type="button" className={s.inspectAction} onClick={inspect}>
+                      <b>[E]</b> {isTr ? "Uygunsuzluğu incele" : "Inspect finding"}
+                    </button>
+                  : <span>{isTr ? "Sahadaki riskleri incele • E ile işaretle" : "Survey site conditions • Press E to mark"}</span>}
+              </div>
+              {hint && <div role="status" className={s.hint}>{hint}</div>}
               <div className={s.bottomHud}>
-                <div className={s.controls}><b>W A S D</b><span>{isTr ? "Hareket" : "Move"}</span><b>{isTr ? "FARE" : "MOUSE"}</b><span>{isTr ? "Bakış" : "Look"}</span><b>SHIFT</b><span>{isTr ? "Hızlı yürü" : "Sprint"}</span></div>
+                <div className={s.controls}><b>W A S D</b><span>{isTr ? "Hareket" : "Move"}</span><b>{isTr ? "FARE" : "MOUSE"}</b><span>{isTr ? "Bakış" : "Look"}</span><b>SHIFT</b><span>{isTr ? "Hızlı yürü" : "Sprint"}</span><b>E</b><span>{isTr ? "İncele" : "Inspect"}</span></div>
                 <button className={s.pause} type="button" onClick={pause}>{isTr ? "Duraklat" : "Pause"} <span>ESC</span></button>
               </div>
               <div className={s.coords}>X {position.x.toFixed(1)} &nbsp; | &nbsp; Z {position.z.toFixed(1)}</div>
             </>
           )}
-          {mode !== "running" && (
+          {mode === "inspecting" && inspection && (
+            <div className={s.overlay}>
+              <div className={s.modal} role="dialog" aria-modal="true" aria-labelledby="finding-title">
+                <p className={s.eyebrow}>SITE OBSERVATION · {inspection.id.toUpperCase().replaceAll("-", " ")}</p>
+                <h2 id="finding-title">{inspection[locale].title}</h2>
+                <p className={s.findingCategory}>{inspection[locale].category}</p>
+                <div className={s.findingBlock}>
+                  <strong>{isTr ? "Sahada görülen uygunsuzluk" : "Visible evidence"}</strong>
+                  <p>{inspection[locale].evidence}</p>
+                </div>
+                <div className={s.findingBlock}>
+                  <strong>{isTr ? "Önerilen kontrol önlemi" : "Recommended control"}</strong>
+                  <p>{inspection[locale].control}</p>
+                </div>
+                <p className={s.trainingNotice}>{isTr
+                  ? "Bu kurgusal bir eğitim sahnesidir. Gerçek sahada yerel mevzuatı ve izin prosedürlerini doğrulayın."
+                  : "This is a fictional training scene. Verify local rules and permits for real workplaces."}</p>
+                <div className={s.buttons}>
+                  <button type="button" className={s.primary} onClick={saveFinding}>{isTr ? "Bulgu olarak kaydet ✓" : "Record finding ✓"}</button>
+                  <button type="button" className={s.secondary} onClick={cancelInspection}>{isTr ? "Geri dön" : "Go back"}</button>
+                </div>
+              </div>
+            </div>
+          )}
+          {mode !== "running" && mode !== "inspecting" && (
             <div className={s.overlay}>
               <div className={s.modal}>
                 <p className={s.eyebrow}>SERNEM FIELD TRAINING · 3D EXPERIENCE</p>
                 <h2>{mode === "unsupported" ? (isTr ? "3D motor kullanılamıyor" : "3D engine unavailable") : mode === "paused" ? (isTr ? "Saha incelemesi duraklatıldı" : "Field walkthrough paused") : (isTr ? "Rafineri eğitim sahası" : "Refinery training environment")}</h2>
-                <p>{mode === "unsupported" ? error : isTr ? "Boru hatları, tanklar, iskeleler ve bakım alanlarını gez. Bu birinci paket; tehlike puanlaması henüz etkin değil." : "Walk through pipe racks, tanks, scaffolding and a maintenance zone. This is package one; hazard scoring is not active yet."}</p>
+                <p>{mode === "unsupported" ? error : isTr ? "Sahada görünür uygunsuzlukları bul. Nişangâhla hedefle, E tuşu veya fare tıklamasıyla incele. Henüz XP veya puan verilmiyor." : "Find visible unsafe conditions. Aim at the evidence, then press E or click to inspect. XP and scoring are not active yet."}</p>
                 {mode !== "unsupported" && (
                   <>
                     <div className={s.features}>
                       <span>{isTr ? "3D saha" : "3D world"}</span>
                       <span>WASD + {isTr ? "fare" : "mouse"}</span>
                       <span>{isTr ? "Çarpışma" : "Collision"}</span>
+                      <span>{isTr ? `12 eğitim tehlikesi` : `12 training hazards`}</span>
                     </div>
                     <div className={s.buttons}>
                       <button type="button" onClick={start} className={s.primary}>{mode === "paused" ? (isTr ? "Devam et →" : "Resume →") : (isTr ? "Sahaya gir →" : "Enter the site →")}</button>
@@ -194,9 +276,33 @@ export default function Inspector3D({ locale }: Props) {
             </div>
           )}
         </section>
+        <section className={s.findingSummary} aria-label={isTr ? "Tespit edilen uygunsuzluklar" : "Recorded findings"}>
+          <div className={s.summaryTitle}>
+            <div>
+              <span className={s.eyebrow}>TRAINING OBSERVATIONS</span>
+              <h2>{isTr ? "Saha tespitleri" : "Site findings"} <strong>{found.length}/{HAZARD_COUNT}</strong></h2>
+            </div>
+            <button className={s.secondary} type="button" onClick={reset}>{isTr ? "Görevi sıfırla" : "Reset mission"}</button>
+          </div>
+          {found.length === 0 ? (
+            <p className={s.summaryEmpty}>{isTr
+              ? "Henüz bulgu kaydedilmedi. Sahada tehlikeli görünen koşullara yaklaş, hedefle ve E tuşuna bas."
+              : "No findings recorded. Explore the field, aim at visibly unsafe conditions, then press E."}</p>
+          ) : (
+            <ul className={s.findingList}>
+              {trainingHazards.filter(item => found.includes(item.id)).map(item => (
+                <li key={item.id}><span>✓</span>{item[locale].title}</li>
+              ))}
+            </ul>
+          )}
+          {found.length === HAZARD_COUNT && <p role="status" className={s.completed}>
+            {isTr ? "Tebrikler! Eğitim sahnesindeki 12 bulgunun tamamı kaydedildi. Puan ve XP henüz bu prototipte etkin değil." : "All 12 training findings recorded! Scoring and XP are not active in this prototype."}
+          </p>}
+        </section>
+
         <div className={s.footer}>
-          <div><b>{isTr ? "Paket 1 / Oynanabilir ortam" : "Package 1 / Playable environment"}</b><span>{isTr ? "Mevcut Labs, XP ve Premium altyapısı değiştirilmedi." : "Existing Labs, XP and Premium systems remain unchanged."}</span></div>
-          <span className={s.footTag}>{isTr ? "Sonraki paket: uygunsuzluk motoru" : "Next package: hazard detection"}</span>
+          <div><b>{isTr ? "Paket 2 / Tespit motoru" : "Package 2 / Detection engine"}</b><span>{isTr ? "Mevcut Labs, XP ve Premium altyapısı değiştirilmedi." : "Existing Labs, XP and Premium systems remain unchanged."}</span></div>
+          <span className={s.footTag}>{isTr ? "Sonraki paket: risk değerlendirmesi ve görev puanı" : "Next package: judgment and score"}</span>
         </div>
       </div>
     </main>
