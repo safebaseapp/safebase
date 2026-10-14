@@ -251,7 +251,7 @@ export class RefineryWorld {
   }
   reset(){this.state={...SPAWN};}
   look(dx:number,dy:number){
-    this.state.yaw-=dx*0.0021;
+    this.state.yaw+=dx*0.0021;
     this.state.pitch=Math.max(-1.28,Math.min(1.28,this.state.pitch-dy*0.0021));
   }
   private canMove(x:number,z:number){
