@@ -12,7 +12,7 @@ export default function TrialDashboardCard({ locale, trialEndsAt, cancelled, acc
   const [ends, setEnds] = useState(accessEndsAt);
   const target = confirmed ? ends : trialEndsAt;
   const date = target ? new Intl.DateTimeFormat(tr ? "tr-TR" : "en-GB", {
-    dateStyle: "medium", timeStyle: "short", timeZoneName: "short",
+    year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", timeZoneName: "short",
   }).format(new Date(target)) : null;
 
   async function cancel() {
