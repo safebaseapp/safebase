@@ -7,7 +7,7 @@ const blueprints: GuideBlueprint[] = [
   {
     slug: "toolbox-talk-best-practices",
     title: P("Toolbox Talk Best Practices", "Toolbox Talk İyi Uygulamaları"),
-    focus: P("short, task-specific safety briefings that confirm hazards, controls and worker understanding", "tehlike, kontrol ve çalışan anlayışını doğrulayan kısa ve işe özel güvenlik konuşmaları"),
+    focus: P("short, task-specific safety briefings that confirm hazards, controls and worker understanding", "tehlikeleri, kontrol önlemlerini ve çalışanların konuyu anladığını doğrulayan kısa, işe özel güvenlik bilgilendirmeleri"),
     family: F,
     risk: "medium",
     osha: ["OSHA 1926.21(b)(2)"],
