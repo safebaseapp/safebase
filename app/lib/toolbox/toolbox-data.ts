@@ -2662,7 +2662,7 @@ export const toolboxData = [
       "fields": [
         "Date",
         "Site / Area",
-        "Süpervizör",
+        "Supervisor",
         "Participants",
         "Signature"
       ],
