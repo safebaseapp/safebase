@@ -259,9 +259,10 @@ void main(){
   float diffuse=max(dot(n,sun),0.0);
   float cold=max(dot(n,normalize(vec3(0.5,0.2,-0.8))),0.0)*0.12;
   float occlusion=n.y<0.15?0.91:1.0;
-  float light=(0.30+diffuse*0.73+cold)*occlusion;
+  float light=(0.37+diffuse*0.70+cold)*occlusion;
+  float metalHighlight=pow(max(dot(reflect(-sun,n),normalize(vec3(0.2,0.65,0.75))),0.0),20.0)*0.13;
   float textureNoise=fract(sin(dot(vWorld.xz*3.1+vWorld.yy,vec2(12.9898,78.233)))*43758.5453);
-  vec3 lit=vColor*light*(0.965+0.065*textureNoise);
+  vec3 lit=vColor*light*(0.95+0.10*textureNoise)+vec3(0.65,0.78,0.84)*metalHighlight;
   vec3 atmospheric=vec3(0.37,0.49,0.59);
   float fog=clamp((vDepth-19.0)/105.0,0.0,0.84);
   fragColor=vec4(mix(lit,atmospheric,fog),1.0);
@@ -328,7 +329,7 @@ export class RefineryWorld {
     const {yaw,pitch}=this.state;
     const viewDir: V3 = [Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),-Math.cos(yaw)*Math.cos(pitch)];
     let selected: SafetyHazard | null = null;
-    let best = 0.975;
+    let best = 0.925;
     for(const hazard of trainingHazards){
       if(completed.has(hazard.id))continue;
       const [x,y,z]=hazard.target;
@@ -339,6 +340,17 @@ export class RefineryWorld {
       if(alignment>best){best=alignment;selected=hazard;}
     }
     return selected;
+  }
+  /** A nearby hazard to help touch users locate the next inspection point. */
+  nearestHazard(completed: ReadonlySet<string>): { hazard: SafetyHazard; distance: number } | null {
+    let nearest: { hazard: SafetyHazard; distance: number } | null = null;
+    for (const hazard of trainingHazards) {
+      if (completed.has(hazard.id)) continue;
+      const distance = Math.hypot(hazard.target[0]-this.state.x,hazard.target[2]-this.state.z);
+      if (distance > 12 || (nearest && nearest.distance <= distance)) continue;
+      nearest = { hazard, distance };
+    }
+    return nearest;
   }
   reset(){this.state={...SPAWN};}
   look(dx:number,dy:number){
