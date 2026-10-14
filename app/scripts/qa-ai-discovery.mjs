@@ -24,6 +24,8 @@ const checks = [
   ["public reference directory links real SERNEM content", directory.includes("https://www.sernem.com/en/knowledge-base/confined-space-attendant-duties")],
   ["source directory includes safety limitations", directory.includes("Verify the applicable current standards")],
   ["Labs hazard scenario visuals are not presented in guides", !guideTemplate.includes("AuthorityFieldVisual")],
+  ["ten priority guides have technical answer blocks", ["confined-space", "hot-work", "working-at-height", "loto", "scaffolding", "excavation", "crane-safety", "electrical-safety", "permit-to-work", "chemical-safety"].every((slug) => answers.includes(`"${slug}"`))],
+  ["non-OSHA source titles are not silently hidden", guideTemplate.includes("guide.references.filter((reference) => reference.trim().length > 0)")],
   ["flagship reference answers use the original bilingual guide content", guideTemplate.includes("<AuthorityAnswerPanel") && answers.includes("guide.overview[locale]") && answers.includes("guide.controls[locale]") && !answers.includes("/labs/spot-the-hazard/")],
   ["OSHA 1910/1926 references link to official sources", guideTemplate.includes("www.osha.gov/laws-regs/regulations/standardnumber/") && guideTemplate.includes("officialSource")],
 ];
