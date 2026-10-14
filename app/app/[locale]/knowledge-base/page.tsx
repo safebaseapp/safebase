@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = `https://www.sernem.com/${language}/knowledge-base`;
 
   const title = isTurkish
-    ? "100 İSG Rehberi | SERNEM Bilgi Merkezi"
-    : "100 HSE Guides | SERNEM Knowledge Base";
+    ? `${allGuides.length} İSG Rehberi | SERNEM Bilgi Merkezi`
+    : `${allGuides.length} HSE Guides | SERNEM Knowledge Base`;
 
   const description = isTurkish
     ? "Yüksekte çalışma, kaldırma, kapalı alan, elektrik, sıcak çalışma, kimyasal, iskele, ekipman ve genel İSG yönetimi için 100 profesyonel saha rehberi."
