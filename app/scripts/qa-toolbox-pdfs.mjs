@@ -86,7 +86,18 @@ for (const slug of slugs) {
     if (!(await fileExists(standardPath))) {
       errors.push(`Missing standard PDF: ${standardName}`);
     } else {
-      standardPresenceChecked += 1;
+      try {
+        const standardResult = await inspectPdf(standardPath);
+        standardPresenceChecked += 1;
+        if (standardResult.pages < 1) {
+          errors.push(`Empty standard PDF: ${standardName}`);
+        }
+        if (standardResult.bytes < 3_000) {
+          warnings.push(`Suspiciously small standard PDF: ${standardName} (${standardResult.bytes} bytes)`);
+        }
+      } catch (error) {
+        errors.push(`Unreadable standard PDF: ${standardName} (${error instanceof Error ? error.message : String(error)})`);
+      }
     }
 
     if (!(await fileExists(brandedPath))) {
