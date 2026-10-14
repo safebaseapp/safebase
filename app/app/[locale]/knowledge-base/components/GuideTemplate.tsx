@@ -217,9 +217,19 @@ export default function GuideTemplate({
           <article className="rounded-3xl border border-emerald-400/20 bg-emerald-400/5 p-8">
             <h2 className="text-3xl font-black">{isTurkish ? "OSHA Referansları" : "OSHA References"}</h2>
             <div className="mt-6 flex flex-wrap gap-3">
-              {visibleReferences.map((reference) => (
-                <span key={reference} className="rounded-lg border border-emerald-400/20 bg-slate-950/50 px-4 py-3 font-bold text-emerald-300">{reference}</span>
-              ))}
+              {visibleReferences.map((reference) => {
+                const officialSource = /^OSHA (1910\\.146|1910\\.252)$/.exec(reference);
+                const href = officialSource
+                  ? `https://www.osha.gov/laws-regs/regulations/standardnumber/1910/${officialSource[1]}`
+                  : null;
+                return href ? (
+                  <a key={reference} href={href} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-emerald-400/30 bg-slate-950/50 px-4 py-3 font-bold text-emerald-300 underline decoration-emerald-500/50 underline-offset-4 hover:text-white">
+                    {reference} ↗
+                  </a>
+                ) : (
+                  <span key={reference} className="rounded-lg border border-emerald-400/20 bg-slate-950/50 px-4 py-3 font-bold text-emerald-300">{reference}</span>
+                );
+              })}
             </div>
           </article>
         ) : null}
