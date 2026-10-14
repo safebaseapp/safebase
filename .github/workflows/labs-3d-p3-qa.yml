@@ -1,0 +1,67 @@
+name: SERNEM Labs 3D Package 3 QA
+
+on:
+  push:
+    branches: [feature/labs-3d-inspector-p3]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package3-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Check 3D world, hazards and field controls
+        run: |
+          node scripts/qa-labs-3d-p1.mjs
+          node scripts/qa-labs-3d-p2.mjs
+          node scripts/qa-labs-3d-p3.mjs
+      - name: Check TypeScript
+        run: npx tsc --noEmit
+
+  mobile-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: app
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: public-test-key-not-a-secret
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install project and test dependencies
+        run: |
+          npm ci --no-audit --no-fund
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+      - name: Start local Next.js without production credentials
+        run: |
+          npm run dev > /tmp/labs-3d-p3-next.log 2>&1 &
+          for i in $(seq 1 75); do
+            if curl -fsS http://127.0.0.1:3000/tr/labs/3d-safety-inspector -o /tmp/labs-3d-p3-page.html; then exit 0; fi
+            sleep 3
+          done
+          cat /tmp/labs-3d-p3-next.log
+          exit 1
+      - name: iPhone-sized Chromium controls (Safari device QA still required)
+        run: node scripts/qa-labs-3d-mobile-browser.mjs
+      - name: Preserve test screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: labs-3d-p3-mobile-chromium
+          path: app/artifacts/*.png
+          if-no-files-found: ignore
