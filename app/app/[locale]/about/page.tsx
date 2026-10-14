@@ -16,8 +16,8 @@ export async function generateMetadata({
   return {
     title: isTurkish ? "Hakkımızda" : "About",
     description: isTurkish
-      ? "SERNEM'in amacı, yaklaşımı ve HSE profesyonelleri için geliştirdiği dijital iş güvenliği platformu hakkında bilgi edinin."
-      : "Learn about SERNEM, our approach, and the digital HSE platform built for safety professionals.",
+      ? "SERNEM, OSHA gereklilikleri ve ilgili ISO/EN standartlarını referans alan uluslararası HSE bilgi ve dijital araç platformudur."
+      : "Discover SERNEM, an international HSE knowledge and digital tools platform drawing on OSHA requirements and relevant ISO/EN standards.",
     alternates: {
       canonical: `https://www.sernem.com/${locale}/about`,
       languages: {
@@ -35,9 +35,9 @@ export default async function AboutPage({ params }: PageProps) {
   const content = isTurkish
     ? {
         eyebrow: "SERNEM HAKKINDA",
-        title: "HSE çalışmalarını daha düzenli, hızlı ve erişilebilir hale getiriyoruz.",
+        title: "SERNEM | Global HSE Knowledge Platform",
         intro:
-          "SERNEM; iş sağlığı, güvenliği ve çevre profesyonellerinin günlük çalışmalarında ihtiyaç duyduğu araçları, dokümanları ve pratik kaynakları tek bir dijital platformda bir araya getirmek için geliştirildi.",
+          "SERNEM, dünyanın farklı bölgelerindeki Health, Safety and Environment (HSE) profesyonelleri için geliştirilen uluslararası bir bilgi ve dijital araç platformudur. Risk değerlendirmeleri, Toolbox Talk kaynakları, denetim araçları ve yapay zekâ destekli öğrenme içerikleri sunar. Teknik kaynaklarımız, konuyla ilgili OSHA gereklilikleri, ISO 45001 yaklaşımı ve uygulanabilir EN/ISO standartlarını esas alır; belirli bir ülkenin mevzuatıyla sınırlı değildir.",
         missionTitle: "Amacımız",
         mission:
           "Risk değerlendirmesinden Method Statement hazırlamaya, saha kontrol listelerinden Toolbox Talk içeriklerine ve HSE hesaplayıcılarına kadar günlük süreçleri sadeleştiren, profesyonel ve kullanımı kolay bir çalışma alanı sunmak.",
@@ -71,9 +71,9 @@ export default async function AboutPage({ params }: PageProps) {
       }
     : {
         eyebrow: "ABOUT SERNEM",
-        title: "Making HSE work more structured, efficient and accessible.",
+        title: "SERNEM | Global HSE Knowledge Platform",
         intro:
-          "SERNEM was built to bring together the tools, documents and practical resources that health, safety and environment professionals use in their daily work — within one digital platform.",
+          "SERNEM is an independent, internationally focused Health, Safety and Environment (HSE) knowledge and digital tools platform for professionals worldwide. It brings together risk assessment tools, toolbox talks, field inspections and AI-assisted learning. Technical resources draw on relevant OSHA requirements, ISO 45001 frameworks and applicable EN/ISO standards rather than being limited to any one country’s legislation.",
         missionTitle: "Our purpose",
         mission:
           "To provide a professional and easy-to-use workspace that simplifies everyday HSE processes, from risk assessments and method statements to field inspections, toolbox talks and safety performance calculations.",
