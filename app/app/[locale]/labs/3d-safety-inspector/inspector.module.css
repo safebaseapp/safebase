@@ -202,3 +202,16 @@
   .joystickThumb{width:34px;height:34px;margin-top:-17px;margin-left:-17px}
   .touchInspect{width:65px;height:65px}
 }
+
+/* iPhone Safari: keep the heading below browser chrome and the save action in view. */
+@media(max-width:670px){
+  .page{padding-top:max(54px,calc(env(safe-area-inset-top,0px) + 16px))}
+  .inspectionModal{display:flex;flex-direction:column;overflow-y:auto;padding-bottom:0;scroll-padding-bottom:78px}
+  .inspectionActions{position:sticky;bottom:0;z-index:5;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;margin:10px -16px 0;padding:10px 16px max(12px,env(safe-area-inset-bottom,0px));background:linear-gradient(0deg,#091528 80%,#091528f0);border-top:1px solid #ffffff29;box-shadow:0 -12px 25px #06111bd9}
+  .inspectionActions .primary{min-width:0;white-space:normal;text-align:center}
+  .inspectionActions .secondary{white-space:nowrap}
+}
+@media(max-width:380px){
+  .inspectionActions{grid-template-columns:1fr}
+  .inspectionActions .secondary{min-height:36px}
+}
