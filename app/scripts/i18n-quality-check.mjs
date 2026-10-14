@@ -87,6 +87,44 @@ const signs = load("lib/safety-signs/data.ts");
 const countSign = lang => [...signs.matchAll(new RegExp(`\\b${lang}:\\s*"`, "g"))].length;
 check(countSign("tr") === countSign("en"), "Safety signs locale pairing mismatch");
 badText(signs, "lib/safety-signs/data.ts");
+
+
+// Knowledge Base: check all source modules, not only the listing page.
+const guideRoot = path.join(root, "app/[locale]/knowledge-base/data/guides");
+const guideSources = [];
+function collectGuideSources(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const absolute = path.join(dir, entry.name);
+    if (entry.isDirectory()) collectGuideSources(absolute);
+    else if (entry.name.endsWith(".ts")) guideSources.push(absolute);
+  }
+}
+collectGuideSources(guideRoot);
+check(guideSources.length >= 20, `Knowledge Base source file count regressed: ${guideSources.length}`);
+for (const absolute of guideSources) {
+  const relative = path.relative(root, absolute);
+  const source = fs.readFileSync(absolute, "utf8");
+  badText(source, relative);
+  // Every blueprint text pair must provide a nonempty English and Turkish string.
+  for (const found of source.matchAll(/\bP\(\s*"([^"]*)"\s*,\s*"([^"]*)"\s*\)/g)) {
+    check(Boolean(found[1].trim() && found[2].trim()), `${relative}: empty bilingual guide text pair`);
+  }
+}
+const guideCatalog = load("app/[locale]/knowledge-base/data/guides/all-guides.ts");
+check(guideCatalog.includes("allGuides.length !== 100"), "100-guide count guard missing");
+check(guideCatalog.includes("uniqueGuideSlugs.size !== allGuides.length"), "Duplicate guide guard missing");
+const guideFactory = load("app/[locale]/knowledge-base/data/guides/generated/factory.ts");
+for (const key of ["category", "title", "description", "overview", "hazards", "controls", "requiredPPE", "aiText"]) {
+  check(guideFactory.includes(key), `Knowledge Base generated guide missing ${key} field`);
+}
+const guideView = load("app/[locale]/knowledge-base/components/GuideTemplate.tsx");
+check(guideView.includes("guide.title[language]") && guideView.includes("guide.hazards[language]"),
+  "Knowledge Base template is not rendering the selected language");
+badText(guideView, "Knowledge Base guide template");
+const methodPrint = load("app/[locale]/tools/method-statement/MethodStatementPrint.tsx");
+badText(methodPrint, "Method Statement printable template");
+check(methodPrint.includes("isTurkish"), "Method Statement printable template missing language selection");
+
 const method = load("app/[locale]/tools/method-statement/page.tsx");
 badText(method, "Method Statement templates");
 
@@ -95,6 +133,6 @@ if (errors.length) {
   console.error(`SERNEM i18n integrity check failed: ${errors.length} finding(s)`);
   process.exitCode = 1;
 } else {
-  console.log(`PASS: ${toolbox.length} toolbox topics, ${sections.length} inspection libraries, ${posterFiles.length} posters, safety signs, TR/EN messages, method templates.`);
+  console.log(`PASS: ${toolbox.length} toolbox topics, ${sections.length} inspection libraries, ${posterFiles.length} posters, safety signs, TR/EN messages, method templates, ${guideSources.length} Knowledge Base source modules and printable templates.`);
   console.log("Note: textual parity is not proof of technical accuracy or rendered PDF quality.");
 }
