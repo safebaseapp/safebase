@@ -283,7 +283,7 @@ export default function Inspector3D({ locale }: Props) {
                   ? <button type="button" className={s.inspectAction} onClick={inspect}>
                       <b className={s.keyboardHint}>[E]</b> {isTr ? "Uygunsuzluğu incele" : "Inspect finding"}
                     </button>
-                  : <span>{isTr ? "Sahadaki riskleri incele • E ile işaretle" : "Survey site conditions • Press E to mark"}</span>}
+                  : <span><span className={s.desktopPrompt}>{isTr ? "Sahadaki riskleri incele • E ile işaretle" : "Survey site conditions • Press E to mark"}</span><span className={s.mobilePrompt}>{isTr ? "Etrafına bak • Uygunsuzluğu hedefle ve İncele’ye dokun" : "Look around • Aim at a hazard and tap Inspect"}</span></span>}
               </div>
               {hint && <div role="status" className={s.hint}>{hint}</div>}
               <div className={s.mobileControls}>
