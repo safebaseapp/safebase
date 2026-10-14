@@ -345,7 +345,7 @@ export default function PosterLibraryClient({
                     
 <div className="mt-6 flex items-center gap-2 flex-nowrap">
   <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">
-    ✓ Print Ready
+    ✓ {isTurkish ? "Yazdırmaya Hazır" : "Print Ready"}
   </span>
 
   <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-bold text-cyan-300">
@@ -380,7 +380,7 @@ export default function PosterLibraryClient({
                             }
                             className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-3 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-emerald-500"
                           >
-                            {isPremium ? "👑 Kilidi Aç" : "A3 PDF"}
+                            {isPremium ? (isTurkish ? "👑 Kilidi Aç" : "👑 Unlock") : "A3 PDF"}
                           </Link>
 
                           <Link
@@ -392,8 +392,8 @@ export default function PosterLibraryClient({
                             className="col-span-2 inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm font-black text-white transition hover:bg-white/[0.1]"
                           >
                             {isPremium
-                              ? "🔒 Premium Preview"
-                              : "👁 Preview"}
+                              ? (isTurkish ? "🔒 Premium Önizleme" : "🔒 Premium Preview")
+                              : (isTurkish ? "👁 Önizleme" : "👁 Preview")}
                           </Link>
                         </div>
                       ) : (
