@@ -216,6 +216,11 @@ export default function GuideTemplate({
         {visibleReferences.length > 0 ? (
           <article className="rounded-3xl border border-emerald-400/20 bg-emerald-400/5 p-8">
             <h2 className="text-3xl font-black">{isTurkish ? "Teknik Referanslar" : "Technical References"}</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-400">
+              {isTurkish
+                ? "OSHA bağlantıları resmî ABD mevzuatına yönlendirir. Ülkenizdeki yürürlükteki kuralları, standartların kapsamını ve sahaya özel gereklilikleri ayrıca doğrulayın. Listelenen diğer kaynaklar bağlantısı doğrulanıncaya kadar yalnızca referans olarak gösterilir."
+                : "OSHA links lead to official US regulations. Always confirm local legal requirements, scope of applicability, and site-specific procedures. Other listed sources remain informational references until their official links are verified."}
+            </p>
             <div className="mt-6 flex flex-wrap gap-3">
               {visibleReferences.map((reference) => {
                 // Link numbered OSHA standards directly to their official source.
