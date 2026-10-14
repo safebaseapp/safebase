@@ -125,12 +125,24 @@ async function buildFieldVisualPage({
   const ruleLabel = locale === "tr" ? "ANA KURAL" : "KEY RULE";
   const projectLabel = locale === "tr" ? "PROJE / SAHA" : "PROJECT / SITE";
 
+  // Never silently truncate a safety instruction halfway through a sentence.
+  // This visual page summarises the first 3 hazards and 4 controls;
+  // the accompanying document pages contain the complete instructions.
   const hazardLines = hazards.slice(0, 3).flatMap((item, index) =>
-    wrap(`${index + 1}. ${item}`, 48).slice(0, 2),
+    wrap(`${index + 1}. ${item}`, 48),
   );
   const controlLines = controls.slice(0, 4).flatMap((item) =>
-    wrap(`• ${item}`, 47).slice(0, 2),
+    wrap(`• ${item}`, 47),
   );
+  const fitList = (lines: string[], section: string) => {
+    // 692..938 leaves 246px within the card.
+    if (lines.length > 14) {
+      throw new Error(`Toolbox visual page: ${section} exceeds available space (${lines.length} lines)`);
+    }
+    return { size: lines.length > 10 ? 9.8 : 11.2, height: lines.length > 10 ? 16 : 20 };
+  };
+  const hazardFit = fitList(hazardLines, "hazards");
+  const controlFit = fitList(controlLines, "controls");
 
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="${PAGE_W}" height="${PAGE_H}" viewBox="0 0 ${PAGE_W} ${PAGE_H}">
@@ -171,10 +183,10 @@ async function buildFieldVisualPage({
       <rect x="412" y="624" width="338" height="314" rx="18" fill="#ffffff" stroke="#dce6ef"/>
 
       <text x="68" y="660" font-size="12" font-weight="800" letter-spacing="1.4" fill="#b91c1c">${esc(focusLabel)}</text>
-      ${textBlock(hazardLines.slice(0, 8), 68, 692, 11.2, 22)}
+      ${textBlock(hazardLines, 68, 692, hazardFit.size, hazardFit.height)}
 
       <text x="436" y="660" font-size="12" font-weight="800" letter-spacing="1.4" fill="#047857">${esc(controlsLabel)}</text>
-      ${textBlock(controlLines.slice(0, 8), 436, 692, 11.2, 22)}
+      ${textBlock(controlLines, 436, 692, controlFit.size, controlFit.height)}
 
       <rect x="44" y="960" width="706" height="72" rx="15" fill="#0b1f39"/>
       <text x="68" y="986" font-size="10" font-weight="800" letter-spacing="2" fill="#fbbf24">${esc(ruleLabel)}</text>
