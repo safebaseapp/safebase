@@ -72,3 +72,51 @@ jobs:
             echo ""
             echo "Results: inspect the job steps above. A failed check fails the workflow."
           } >> "$GITHUB_STEP_SUMMARY"
+
+  report-failure:
+    name: Open or clear Guardian alert
+    needs: quality-watch
+    if: always() && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Keep one actionable GitHub issue per Guardian failure
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = "SERNEM Guardian: quality check needs attention";
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              ...context.repo, state: "open", per_page: 100
+            });
+            const existing = issues.find(issue => !issue.pull_request && issue.title === title);
+            const status = "${{ needs.quality-watch.result }}";
+            if (status !== "success") {
+              const body = [
+                "SERNEM Guardian found a failed or interrupted quality check.",
+                "",
+                `**Workflow result:** ${status}`,
+                `**Latest run:** ${runUrl}`,
+                "",
+                "Review the failed GitHub Actions step and the PDF report artifact.",
+                "Do not deploy an untested automatic code change."
+              ].join("\n");
+              if (existing) {
+                await github.rest.issues.update({
+                  ...context.repo, issue_number: existing.number, body
+                });
+              } else {
+                await github.rest.issues.create({
+                  ...context.repo, title, body
+                });
+              }
+            } else if (existing) {
+              await github.rest.issues.createComment({
+                ...context.repo, issue_number: existing.number,
+                body: `Guardian checks are passing again: ${runUrl}`
+              });
+              await github.rest.issues.update({
+                ...context.repo, issue_number: existing.number, state: "closed"
+              });
+            }
