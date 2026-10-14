@@ -26,6 +26,7 @@ export default function Inspector3D({ locale }: Props) {
   const confirmed = useRef(new Set<string>());
   const [found, setFound] = useState<string[]>([]);
   const [focus, setFocus] = useState<SafetyHazard | null>(null);
+  const [nearby, setNearby] = useState<{ title: string; distance: number } | null>(null);
   const [inspection, setInspection] = useState<SafetyHazard | null>(null);
   const [hint, setHint] = useState("");
   const [picked, setPicked] = useState<number | null>(null);
@@ -155,6 +156,8 @@ export default function Inspector3D({ locale }: Props) {
         lastAim = now;
         const target = engine.pickHazard(confirmed.current);
         setFocus(current => current?.id === target?.id ? current : target);
+        const nearest = engine.nearestHazard(confirmed.current);
+        setNearby(nearest ? { title: nearest.hazard[locale].title, distance: nearest.distance } : null);
       }
     };
     frame = requestAnimationFrame(tick);
@@ -270,6 +273,7 @@ export default function Inspector3D({ locale }: Props) {
     timeRef.current = 0;
     setSeconds(0);
     setFocus(null);
+    setNearby(null);
     setInspection(null);
     setHint("");
     setPosition({ x: 0, z: 30 });
@@ -317,6 +321,7 @@ export default function Inspector3D({ locale }: Props) {
                   : <span><span className={s.desktopPrompt}>{isTr ? "Sahadaki riskleri incele • E ile işaretle" : "Survey site conditions • Press E to mark"}</span><span className={s.mobilePrompt}>{isTr ? "Etrafına bak • Uygunsuzluğu hedefle ve İncele’ye dokun" : "Look around • Aim at a hazard and tap Inspect"}</span></span>}
               </div>
               {hint && <div role="status" className={s.hint}>{hint}</div>}
+              {nearby && <div className={s.proximity} aria-live="off"><span className={s.proximityDot} />{isTr ? "YAKINDAKİ BULGU" : "NEARBY FINDING"} · {nearby.distance.toFixed(0)} m<br/><b>{nearby.title}</b></div>}
               <div className={s.mobileControls}>
                 <div className={s.joystickRegion}>
                   <div
