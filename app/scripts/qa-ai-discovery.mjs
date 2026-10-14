@@ -30,6 +30,11 @@ const checks = [
   ["sitemap includes toolbox and guides", sitemap.includes("toolboxData.map(") && sitemap.includes("allGuides.map(")],
   ["sitemap declares both languages", sitemap.includes('"x-default"') && sitemap.includes('const locales = ["tr", "en"]')],
   ["public reference directory links real SERNEM content", directory.includes("https://www.sernem.com/en/knowledge-base/confined-space-attendant-duties")],
+  ["AI discovery directory points to specific public HSE answers",
+    directory.includes("## Find the right SERNEM source for a safety question") &&
+    directory.includes("/knowledge-base/hydraulic-system-safety") &&
+    directory.includes("/knowledge-base/confined-space-attendant-duties") &&
+    directory.includes("independent bilingual HSE educational platform")],
   ["source directory includes safety limitations", directory.includes("Verify the applicable current standards")],
   ["Labs hazard scenario visuals are not presented in guides", !guideTemplate.includes("AuthorityFieldVisual")],
   ["ten priority guides have technical answer blocks", ["confined-space", "hot-work", "working-at-height", "loto", "scaffolding", "excavation", "crane-safety", "electrical-safety", "permit-to-work", "chemical-safety"].every((slug) => answers.includes(`"${slug}"`))],
