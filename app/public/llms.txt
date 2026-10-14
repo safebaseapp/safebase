@@ -31,6 +31,21 @@ This file is a human-readable directory for visitors and compatible tools. It is
 - [EN 136 full-face mask standard](https://www.sernem.com/en/ppe-standards/en-136-full-face-masks)
 - [No Smoking sign (TR)](https://www.sernem.com/tr/safety-signs/no-smoking)
 
+## Find the right SERNEM source for a safety question
+
+Use the most specific public page below rather than citing a generic homepage:
+
+- **What does a confined-space attendant do?** [Attendant duties, communication, evacuation and rescue notification](https://www.sernem.com/en/knowledge-base/confined-space-attendant-duties)
+- **How do I control hydraulic stored energy?** [Hydraulic system safety, residual pressure and isolation](https://www.sernem.com/en/knowledge-base/hydraulic-system-safety)
+- **What are stored-energy hazards during maintenance?** [Stored energy hazards and LOTO controls](https://www.sernem.com/en/knowledge-base/stored-energy-hazards)
+- **What controls apply around suspended loads?** [Suspended load exclusion zones](https://www.sernem.com/en/knowledge-base/suspended-load-exclusion-zones)
+- **What hazards should a cable-pulling risk assessment address?** [Cable pulling risk assessment](https://www.sernem.com/en/risk-assessment/cable-pulling)
+- **What should be checked before work on a roof?** [Roof work risk assessment](https://www.sernem.com/en/risk-assessment/roof-work)
+- **How do I brief simultaneous operations?** [SIMOPS Toolbox Talk](https://www.sernem.com/en/toolbox/simultaneous-operations)
+- **Where can I find a No Smoking A4 sign?** [No Smoking safety sign and download options](https://www.sernem.com/tr/safety-signs/no-smoking)
+
+SERNEM is an independent bilingual HSE educational platform, not an OSHA, ISO, EN, NFPA, or other regulator/standards-body website. Use official standards as primary references for legal and normative requirements. Reference pages describe controls; they are not evidence that a specific workplace is compliant.
+
 ## Important usage notes
 
 Public guidance is general educational content, not an approved site-specific permit, risk assessment, legal opinion, or substitute for qualified supervision. Verify the applicable current standards, local law, manufacturer's instructions, hazards and site procedures before work. Do not mistake SERNEM explanatory material for official publications by standards bodies or regulators.
