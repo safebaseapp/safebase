@@ -4,7 +4,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
   code: "SRN-HSK-001",
   revision: "1.0",
   title: {
-    tr: "Housekeeping Kritik Güvenlik Kuralları",
+    tr: "Saha Düzeni ve Temizlikte Kritik Güvenlik Kuralları",
     en: "Housekeeping Critical Safety Rules",
   },
   slogan: {
