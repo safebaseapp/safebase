@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "17 4 * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "app/scripts/guardian-pdf-render.py"
+      - "app/scripts/qa-toolbox-pdfs.mjs"
+      - ".github/workflows/guardian.yml"
   pull_request:
     paths:
       - "app/scripts/**"
@@ -43,13 +49,25 @@ jobs:
         run: node scripts/qa-download-flows.mjs
       - name: Verify 70 Toolbox TR/EN PDF sets
         run: node scripts/qa-toolbox-pdfs.mjs
+      - name: Prepare Python PDF rendering
+        run: python -m pip install --disable-pip-version-check --quiet "pymupdf==1.26.7"
+      - name: Render all Toolbox PDFs and inspect for blank pages
+        run: python scripts/guardian-pdf-render.py
+      - name: Upload visual QA samples and machine-readable report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sernem-guardian-pdf-report
+          path: app/guardian-reports/
+          if-no-files-found: warn
+          retention-days: 7
       - name: Guardian run summary
         if: always()
         run: |
           {
             echo "## SERNEM Guardian Basic"
             echo ""
-            echo "Daily static content, download flow, and 70-topic bilingual PDF checks."
+            echo "Daily static content, download flow, and render checks for 280 TR/EN PDF exports."
             echo "No paid AI calls, no secrets, no production writes."
             echo ""
             echo "Results: inspect the job steps above. A failed check fails the workflow."
