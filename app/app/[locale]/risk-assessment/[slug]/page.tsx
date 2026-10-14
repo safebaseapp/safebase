@@ -16,6 +16,16 @@ type PageProps = {
 
 const baseUrl = "https://www.sernem.com";
 
+// Curated links to matching public safety guides, rather than arbitrary keyword matches.
+const relatedKnowledgeGuides: Record<string, string> = {
+  "roof-work": "working-at-height",
+  "cable-pulling": "electrical-safety",
+  "steel-erection": "crane-safety",
+  "welding": "hot-work",
+  "confined-space": "confined-space",
+  "excavation": "excavation",
+};
+
 // Search Console identifies these existing pages as high-impression opportunities.
 // Descriptions refer only to hazards/controls already present in the risk library.
 const searchIntentMetadata: Record<string, {
@@ -122,6 +132,8 @@ export default async function RiskAssessmentActivityPage({
   const categoryName = activity.category[locale];
   const hazardCount = activity.items.length;
 
+  const relatedGuideSlug = relatedKnowledgeGuides[activity.id];
+
   const relatedActivities = allRiskActivities
     .filter(
       (item) =>
@@ -189,6 +201,15 @@ export default async function RiskAssessmentActivityPage({
                       : "Review control measures and potential consequences for each hazard in the assessment below. Verify site-specific conditions before work."}
                   </p>
                 </section>
+              ) : null}
+
+              {relatedGuideSlug ? (
+                <Link
+                  href={`/${locale}/knowledge-base/${relatedGuideSlug}`}
+                  className="mt-5 inline-flex rounded-xl border border-cyan-400/30 px-5 py-3 text-sm font-bold text-cyan-200 hover:bg-cyan-400/10"
+                >
+                  {isTr ? "Konuyla ilgili teknik rehberi incele →" : "Read the related technical guide →"}
+                </Link>
               ) : null}
 
               <div className="mt-8 flex flex-wrap gap-3">
