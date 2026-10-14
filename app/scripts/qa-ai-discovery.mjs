@@ -18,6 +18,9 @@ const checks = [
   ["OAI-SearchBot explicitly allowed", robots.includes("OAI-SearchBot") && robots.includes('allow: "/"')],
   ["robots protects private API endpoints", robots.includes('"/api/"')],
   ["robots protects private user dashboards", robots.includes('"/tr/dashboard/"') && robots.includes('"/en/dashboard/"')],
+  ["published Toolbox content never redirects readers to login or Premium",
+    !toolbox.includes('redirect(') && toolbox.includes('if (!access.published || !access.visible)') &&
+    toolbox.includes("authentication and Premium") === false],
   ["public Toolbox reading remains indexable independently of PDF entitlements",
     toolbox.includes("index: true") && toolbox.includes("follow: true")],
   ["toolbox has semantic article data", toolbox.includes('"@type": "TechArticle"') && toolbox.includes('"@type": "BreadcrumbList"')],
