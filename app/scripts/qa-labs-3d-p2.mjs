@@ -14,10 +14,10 @@ const checks=[
     (hazards.match(/\bcontrol: "/g)||[]).length===24],
   ["scene props represent all 12 training scenarios",
     world.includes("addTrainingFindings(m);") &&
-    world.includes("emergency access route") &&
+    world.toLowerCase().includes("emergency access route") &&
     world.includes("excavation inset") &&
-    world.includes("unrestrained cylinder") &&
-    world.includes("suspended load") &&
+    world.toLowerCase().includes("unrestrained cylinder") &&
+    world.toLowerCase().includes("suspended load") &&
     world.includes("stacked without chocks")],
   ["missing scaffold guardrail deliberately visible",
     world.includes("if (y===3.3 && z===-6)")],
