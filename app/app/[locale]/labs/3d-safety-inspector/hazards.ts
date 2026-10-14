@@ -36,7 +36,7 @@ export const trainingHazards: readonly SafetyHazard[] = [
     tr: { title: "İskelede eksik kenar korkuluğu", category: "Yüksekte çalışma", evidence: "Eğitim sahnesinde üst iskele platformunun dış kenarında korkuluk bölümü bulunmuyor.", control: "Yetkin personel kenar korumasını tamamlayıp kontrol edene kadar ilgili platforma erişimi durdurun." },
   },
   {
-    id: "scaffold-loose-tools", target: [-7, 6.9, -12], sector: "scaffold", range: 12,
+    id: "scaffold-loose-tools", target: [-4.8, 6.9, -12], sector: "scaffold", range: 12,
     en: { title: "Loose material near scaffold edge", category: "Dropped objects", evidence: "Unsecured tool boxes and small items are placed close to the elevated deck edge.", control: "Secure tools and materials using suitable containment, toe boards and exclusion arrangements as required." },
     tr: { title: "İskele kenarında sabitlenmemiş malzeme", category: "Düşen cisimler", evidence: "Yüksekteki platform kenarına yakın sabitlenmemiş alet kutuları ve parçalar var.", control: "Alet ve malzemeleri uygun şekilde sabitleyin; gerekli malzeme tutucuları, etek tahtaları ve alttaki korumaları sağlayın." },
   },
