@@ -81,9 +81,25 @@ const blueprints: GuideBlueprint[] = [
     title: P("Hydraulic System Safety", "Hidrolik Sistem Güvenliği"),
     focus: P("controlling high-pressure fluid, stored energy and component movement in hydraulic systems", "hidrolik sistemlerde yüksek basınçlı akışkan, depolanmış enerji ve parça hareketinin kontrolü"),
     family: F,
-    osha: ["OSHA 1910.147", "OSHA 1910.169"],
-    hazards: [P("High-pressure fluid injection through damaged hoses or fittings", "Hasarlı hortum veya bağlantıdan yüksek basınçlı sıvı enjeksiyonu"), P("Unexpected movement when pressure is released or reapplied", "Basınç boşalırken veya yeniden uygulanırken beklenmeyen hareket")],
-    controls: [P("Never use hands to search for hydraulic leaks; use safe detection methods.", "Hidrolik kaçağı elle aramayın; güvenli tespit yöntemi kullanın."), P("Isolate, depressurize and mechanically support raised components before maintenance.", "Bakım öncesi izole edin, basıncı boşaltın ve yükseltilmiş parçaları mekanik olarak destekleyin.")],
+    // 1910.169 governs air receivers; it is not a hydraulic-system-specific authority.
+    osha: ["OSHA 1910.147"],
+    hazards: [
+      P("High-pressure fluid injection through damaged hoses or fittings", "Hasarlı hortum veya bağlantıdan yüksek basınçlı sıvı enjeksiyonu"),
+      P("Unexpected movement when pressure is released or reapplied", "Basınç boşalırken veya yeniden uygulanırken beklenmeyen hareket"),
+      P("Residual pressure trapped in accumulators or isolated sections", "Akümülatörlerde veya izole edilmiş hat bölümlerinde hapsolmuş artık basınç"),
+      P("Raised components falling when hydraulic support is lost", "Hidrolik destek kaybolduğunda yükseltilmiş parçaların düşmesi"),
+    ],
+    controls: [
+      P("Never use hands to search for hydraulic leaks; use safe detection methods.", "Hidrolik kaçağı elle aramayın; güvenli tespit yöntemi kullanın."),
+      P("Isolate, depressurize and mechanically support raised components before maintenance.", "Bakım öncesi izole edin, basıncı boşaltın ve yükseltilmiş parçaları mekanik olarak destekleyin."),
+      P("Identify accumulators and trapped-pressure points; follow the manufacturer's safe discharge procedure and verify zero energy before breaking a connection.", "Akümülatörleri ve hapsolmuş basınç noktalarını belirleyin; üreticinin güvenli boşaltma prosedürünü izleyin ve bağlantı açmadan önce sıfır enerjiyi doğrulayın."),
+      P("Keep personnel clear of possible hose-whip and component movement paths during controlled testing or recommissioning.", "Kontrollü test veya yeniden devreye alma sırasında personeli olası hortum savrulması ve parça hareketi güzergâhlarından uzak tutun."),
+    ],
+    checklist: [
+      P("Have all pressure sources, accumulators and elevated loads been identified and isolated?", "Tüm basınç kaynakları, akümülatörler ve yükseltilmiş yükler belirlenip izole edildi mi?"),
+      P("Has residual pressure been safely discharged and the zero-energy state verified?", "Artık basınç güvenle boşaltıldı ve sıfır enerji durumu doğrulandı mı?"),
+      P("Are raised parts mechanically supported independently of hydraulic pressure?", "Yükseltilmiş parçalar hidrolik basınçtan bağımsız olarak mekanik biçimde destekleniyor mu?"),
+    ],
   },
 ];
 
