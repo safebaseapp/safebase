@@ -76,9 +76,9 @@ export default function GuideTemplate({
   const requiredPPE = guide.requiredPPE?.[language] ?? [];
   const commonMistakes = guide.commonMistakes?.[language] ?? [];
   const checklist = guide.checklist?.[language] ?? [];
-  const visibleReferences = guide.references.filter((reference) =>
-    reference.trim().toUpperCase().startsWith("OSHA"),
-  );
+  // Show every declared source, including NFPA and other authorities.
+  // Link only identifiable OSHA provisions to official sources.
+  const visibleReferences = guide.references.filter((reference) => reference.trim().length > 0);
 
   const relatedGuides: RelatedGuide[] =
     guide.relatedGuides && guide.relatedGuides.length > 0
