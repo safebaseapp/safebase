@@ -69,23 +69,32 @@ export default async function AdminUsersPage({ params }: Props) {
     const trial = trialByUser.get(profile.id);
     if (!trial) return null;
     const expiry = trial.status === "cancelled" ? (trial.access_ends_at || trial.trial_ends_at) : trial.trial_ends_at;
-    const label = trial.status === "cancelled" ? (isTurkish ? "Deneme iptal · Yenileme kapalı" : "Trial cancelled · Renewal off")
+    const isExpired = expiry ? Number.isFinite(Date.parse(expiry)) && Date.parse(expiry) <= Date.now() : false;
+    const label = (isExpired && (trial.status === "cancelled" || trial.status === "on_trial")) ? (isTurkish ? "Deneme süresi doldu · Free erişim" : "Trial ended · Free access")
+      : trial.status === "cancelled" ? (isTurkish ? "Deneme iptal · Yenileme kapalı" : "Trial cancelled · Renewal off")
       : trial.status === "on_trial" ? (isTurkish ? "Aktif Premium deneme" : "Active Premium trial")
       : trial.status === "active" ? (isTurkish ? "Ücretli abonelik" : "Paid subscription")
       : trial.status === "expired" ? (isTurkish ? "Deneme sona erdi" : "Trial expired")
       : (isTurkish ? "Ödeme tamamlanmadı" : "Checkout incomplete");
     return { label, expiry };
   }
+  // Display effective entitlements independently of the stored plan, since a
+  // delayed provider webhook can leave profiles.plan temporarily stale.
+  function effectivePlan(profile: Profile): "free" | "premium" {
+    const trial = trialByUser.get(profile.id);
+    if (!trial) return profile.plan;
+    if (trial.status === "active") return profile.plan;
+    if (trial.status !== "on_trial" && trial.status !== "cancelled") return "free";
+    const expiry = trial.status === "cancelled"
+      ? (trial.access_ends_at || trial.trial_ends_at)
+      : trial.trial_ends_at;
+    const deadline = Date.parse(expiry || "");
+    return Number.isFinite(deadline) && deadline > Date.now() ? "premium" : "free";
+  }
   const totalUsers = profiles.length;
-  const premiumUsers = profiles.filter(
-    (profile) => profile.plan === "premium"
-  ).length;
-  const freeUsers = profiles.filter(
-    (profile) => profile.plan === "free"
-  ).length;
-  const suspendedUsers = profiles.filter(
-    (profile) => profile.status === "suspended"
-  ).length;
+  const premiumUsers = profiles.filter(profile => effectivePlan(profile) === "premium").length;
+  const freeUsers = profiles.filter(profile => effectivePlan(profile) === "free").length;
+  const suspendedUsers = profiles.filter(profile => profile.status === "suspended").length;
 
   return (
     <main className="min-h-screen bg-slate-950 px-5 py-8 text-white sm:px-8">
@@ -241,12 +250,12 @@ export default async function AdminUsersPage({ params }: Props) {
                       <td className="px-6 py-5">
                         <span
                           className={`rounded-full px-3 py-1 text-xs font-black ${
-                            profile.plan === "premium"
+                            effectivePlan(profile) === "premium"
                               ? "bg-amber-400/15 text-amber-300"
                               : "bg-emerald-400/15 text-emerald-300"
                           }`}
                         >
-                          {profile.plan === "premium"
+                          {effectivePlan(profile) === "premium"
                             ? "👑 PREMIUM"
                             : "🌍 FREE"}
                         </span>
