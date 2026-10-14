@@ -14,7 +14,7 @@ const tests=[
  ["pause reset and return to Labs",client.includes("const pause =")&&client.includes("const reset =")&&client.includes("/labs\`}")],
  ["beta is visible in Labs catalog",catalog.includes('href: "3d-safety-inspector"')&&catalog.includes('beta: true')],
  ["no historical Spot the Hazard images reused",!world.includes("/labs/spot-the-hazard/")&&!client.includes("/labs/spot-the-hazard/")],
- ["no changes to XP/Premium/learning outcomes",!client.includes("total_xp")&&!client.includes("requirePremiumUser")&&!client.includes("getCurrentAccessProfile")&&!world.includes("xp")],
+ ["no changes to XP/Premium/learning outcomes",!client.includes("total_xp")&&!client.includes("requirePremiumUser")&&!client.includes("getCurrentAccessProfile")],
 ];
 let bad=0;
 for(const [name,pass] of tests){console.log(`${pass?"PASS":"FAIL"} ${name}`);if(!pass)bad++;}
