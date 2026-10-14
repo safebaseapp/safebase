@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import ToolboxActions from "./ToolboxActions";
 import {
   getToolboxBySlug,
@@ -214,24 +214,8 @@ export default async function ToolboxDetailPage({ params }: Props) {
     notFound();
   }
 
-  if (
-    access.accessLevel === "premium" &&
-    !access.canAccess
-  ) {
-    if (!access.isAuthenticated) {
-      redirect(
-        `/${locale}/login?next=/${locale}/toolbox/${slug}`
-      );
-    }
-
-    if (access.isSuspended) {
-      redirect(`/${locale}/dashboard`);
-    }
-
-    redirect(
-      `/${locale}/upgrade?next=/${locale}/toolbox/${slug}`
-    );
-  }
+  // Reading published Toolbox content is public.
+  // Authentication and Premium entitlements are enforced only on download actions.
 
 
 
