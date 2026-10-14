@@ -129,7 +129,7 @@ export default function Inspector3D({ locale }: Props) {
       setMode("unsupported");
       return;
     }
-    let frame = 0, previous = performance.now(), lastPosition = previous, lastAim = previous;
+    let frame = 0, previous = performance.now(), lastPosition = previous, lastAim = previous, lastIdleRender = previous;
     let dragX = 0, dragY = 0, dragging = false;
     let lookTouch: number | null = null;
     let lastTouchX = 0, lastTouchY = 0;
@@ -147,7 +147,10 @@ export default function Inspector3D({ locale }: Props) {
         engine.walk(f + touchMove.current.forward, side + touchMove.current.side, dt, pressed.has("ShiftLeft") || pressed.has("ShiftRight"));
       }
       // Render even when paused so the user sees the environment before entering.
-      if (!document.hidden) engine.render();
+      if (!document.hidden && (active.current || now - lastIdleRender > 120)) {
+        engine.render();
+        lastIdleRender = now;
+      }
       if (now - lastPosition > 420) {
         lastPosition = now;
         setPosition({ x: engine.state.x, z: engine.state.z });
@@ -474,7 +477,7 @@ export default function Inspector3D({ locale }: Props) {
         </section>
 
         <div className={s.footer}>
-          <div><b>{isTr ? "Paket 3 / Risk kararı ve görev puanı" : "Package 3 / HSE judgment and mission score"}</b><span>{isTr ? "Mevcut Labs, XP ve Premium altyapısı değiştirilmedi." : "Existing Labs, XP and Premium systems remain unchanged."}</span></div>
+          <div><b>{isTr ? "Paket 4 / Rafineri sahası ve mobil keşif" : "Package 4 / Refinery scene and mobile exploration"}</b><span>{isTr ? "Mevcut Labs, XP ve Premium altyapısı değiştirilmedi." : "Existing Labs, XP and Premium systems remain unchanged."}</span></div>
           <span className={s.footTag}>{isTr ? "Sonraki paket: ilerleme kaydı ve XP entegrasyon testleri" : "Next package: progress persistence and XP integration QA"}</span>
         </div>
       </div>
