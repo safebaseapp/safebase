@@ -47,7 +47,7 @@ export default async function DashboardLayout({ children, params }: Props) {
   return (
     <>
       <PendingIncidentImport />
-      {trial && <TrialDashboardCard locale={locale} {...trial} />}
+      {trial && <div className="bg-[#020814] pb-4"><TrialDashboardCard locale={locale} {...trial} /></div>}
       {children}
     </>
   );
