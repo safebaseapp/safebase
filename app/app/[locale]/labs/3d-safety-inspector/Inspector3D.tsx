@@ -132,6 +132,8 @@ export default function Inspector3D({ locale }: Props) {
     try {
       engine = new RefineryWorld(target);
       world.current = engine;
+      // Optional real refinery geometry: keep training hazards playable if the GLB is absent.
+      void engine.loadRefineryGLB().catch(() => false);
     } catch (e) {
       setError(e instanceof Error ? e.message : "3D scene could not initialize");
       setMode("unsupported");
