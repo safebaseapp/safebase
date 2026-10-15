@@ -171,6 +171,26 @@ function constructSite() {
   // Wide construction joints rather than a dense artificial checkerboard.
   for(let x=-30;x<=30;x+=15)m.box(x,-0.023,0,0.025,0.009,77,0x3c4b56);
   for(let z=-30;z<=30;z+=15)m.box(0,-0.022,z,77,0.009,0.025,0x3c4b56);
+  // P5 environment: worn apron, darker vehicle lanes, patched concrete, and drain grilles.
+  for(const [x,z,w,d] of [[-31,-26,9,7],[28,22,10,8],[-29,30,12,7],[27,-30,11,8]] as number[][]){
+    m.box(x,-0.026,z,w,0.018,d,0x394b56);
+    for(let k=-2;k<=2;k++)m.box(x+k*0.38,-0.011,z+d*0.32,0.09,0.012,0.9,0x465863);
+  }
+  for(const [x,z] of [[-2,-9],[8,15],[-20,30],[26,4],[-31,-12]] as number[][]){
+    m.box(x,-0.008,z,1.4,0.012,0.65,0x1e343f);
+    for(let j=-4;j<=4;j++)m.box(x+j*0.14,0.003,z,0.055,0.015,0.56,0x7a8c93);
+  }
+  for(const [x,z] of [[-27,-1],[-7,-32],[12,19],[30,-25]] as number[][]){
+    m.box(x,-0.013,z,4.1,0.015,2.1,0x475a62);
+    m.box(x,-0.003,z,3.5,0.009,0.06,0x5d6b70);
+  }
+  // Bunded service pad beside the storage tanks: curb, pipe stanchions and maintenance racks.
+  for(const x of [9,32])m.box(x,0.17,-11,0.27,0.34,26,0x85959b);
+  for(const z of [-24,2])m.box(20.5,0.17,z,23,0.34,0.27,0x85959b);
+  for(const z of [-19,-14,-9,-4]){
+    m.box(30,0.65,z,1.5,1.3,0.15,0x526c79);
+    for(const y of [1.0,1.35])m.cylinder([29.3,y,z],[30.7,y,z],0.09,0xa2b3b9,10);
+  }
   // Fenced compound perimeter with entrances at the south.
   for(const x of [-40,40]){
     for(let z=-40;z<=40;z+=3){ m.box(x,1.12,z,0.15,2.24,0.16,0x7f9fb0); }
@@ -199,11 +219,40 @@ function constructSite() {
     m.cylinder([xa[i],0.2,-18],[xa[i+1],6.45,-18],0.043,0x819eaa);
     m.cylinder([xa[i],6.45,-6],[xa[i+1],0.2,-6],0.043,0x819eaa);
   }
+  // Scaffold deck texture is built from individual plank and mesh strips, not solid slabs alone.
+  for(const y of [3.3,6.6]){
+    for(const z of [-15,-9])for(let x=-15.75;x<=-4.25;x+=0.62){
+      m.box(x,y+0.119,z,0.51,0.035,5.65,0x96785d);
+      m.box(x+0.26,y+0.14,z,0.028,0.017,5.6,0x544c45);
+    }
+    for(const z of [-18,-12,-6])for(const x of [-16,-10,-4]){
+      m.cylinder([x,y-0.14,z],[x,y+0.2,z],0.15,0x87999e,10);
+      m.box(x,y+0.03,z,0.28,0.05,0.28,0xb2c0c5);
+    }
+  }
+  for(const x of [-16,-10,-4])for(const z of [-18,-12,-6]){
+    for(const y of [1.2,4.5,7.8])m.cylinder([x-0.17,y,z],[x+0.17,y,z],0.095,0x8fa4ae,10);
+  }
   // Maintenance workshop, workshop doors and overhead ventilation.
   m.box(-25,4.2,16,22,8.4,17,0x708494);m.solid(-25,16,22,17);
   m.box(-25,8.48,16,23.5,0.8,18.6,0x526575);
   for(const x of [-30,-24,-18]){m.box(x,2.8,7.43,3.3,5.3,0.09,0x2c4759);m.box(x,5.3,7.35,3.5,0.2,0.12,0xc5ac63);}
   for(const x of [-34,-32,-30,-28,-26])m.box(x,7,7.32,1.2,0.5,0.1,0xb4d5e1);
+  // Corrugated facade, framed doors, flashing and high windows.
+  for(let x=-35.5;x<=-14.5;x+=0.62)m.box(x,4.05,7.27,0.075,7.85,0.12,0x8a9da7);
+  for(const x of [-30,-24,-18]){
+    m.box(x,2.82,7.22,3.45,5.55,0.16,0x293f4a);
+    for(let k=-1;k<=1;k++)m.box(x+k*0.95,2.8,7.12,0.06,5.25,0.08,0x738993);
+    m.box(x,5.5,7.08,3.5,0.12,0.16,0xb5a46c);
+    m.box(x,1.0,7.04,2.65,0.08,0.1,0x728791);
+  }
+  for(const x of [-33,-28,-23,-18])m.box(x,7.15,7.13,1.15,0.5,0.14,0x293d4a);
+  for(const z of [10,13,16,19,22]){
+    m.box(-36.09,4.2,z,0.12,7.6,0.07,0x9daeb7);
+    m.box(-13.91,4.2,z,0.12,7.6,0.07,0x9daeb7);
+  }
+  m.box(-25,8.84,16,24.0,0.14,19.1,0xa3b0b6);
+  for(const x of [-35.8,-14.2])for(const z of [7,25])m.cylinder([x,0,z],[x,8.7,z],0.13,0x677e8b,10);
   // Three self-contained pieces of safe equipment on the working pad.
   m.box(-5,0.06,13,15,0.13,12,0x65727a);
   m.box(-8,0.85,12,3.5,1.7,2.4,0xb5a36f);m.solid(-8,12,3.6,2.4);
@@ -211,6 +260,16 @@ function constructSite() {
   m.cylinder([-5,1,11],[-5,3.2,11],0.52,0xc9d5db,14);m.solid(-5,11,1.1,1.1);
   m.cylinder([-4.4,3,11],[-1.3,3,11],0.17,0xd1bc78);
   m.box(-1.5,1.1,15,2.3,2.2,3.6,0x7f9b9d);m.solid(-1.5,15,2.4,3.5);
+  // Pipe supports, electrical conduit and color-coded service headers near the workshop.
+  for(const z of [9.5,11.3,13.1]){
+    m.cylinder([-35,6.9,z],[-15,6.9,z],0.105,z===11.3?0xc29b55:0x7c9ba6,12);
+    for(const x of [-34,-29,-24,-19,-15])m.cylinder([x,6.8,z],[x,7.25,z],0.065,0x647985,8);
+  }
+  for(const [x,z] of [[-34,27],[-20,27],[-14,27]] as number[][]){
+    m.box(x,0.12,z,1.3,0.24,1.0,0x73868c);
+    m.box(x,0.83,z,0.12,1.42,0.14,0x6c7d83);
+    m.box(x,1.58,z,1.4,0.16,0.45,0x9aabb0);
+  }
   // Safety delineation: approach lane, bollards and barriers.
   for(const z of [-27,-23,-19,-15]){
     m.box(2.9,0.02,z,0.14,0.03,2.4,0xdcc676);
