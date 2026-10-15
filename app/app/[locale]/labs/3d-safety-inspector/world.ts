@@ -261,7 +261,9 @@ in vec3 aPosition;
 in vec3 aNormal;
 in vec3 aColor;
 in vec2 aUv;
+in vec2 aMetalRough;
 out vec2 vUv;
+out vec2 vMetalRough;
 uniform mat4 uProjection;
 uniform mat4 uView;
 uniform vec3 uEye;
@@ -273,6 +275,7 @@ void main(){
   vWorld=aPosition;
   vColor=aColor;
   vUv=aUv;
+  vMetalRough=aMetalRough;
   vNormal=aNormal;
   vDepth=distance(aPosition,uEye);
   gl_Position=uProjection*uView*vec4(aPosition,1.0);
@@ -284,6 +287,8 @@ in vec3 vNormal;
 in float vDepth;
 in vec3 vWorld;
 in vec2 vUv;
+in vec2 vMetalRough;
+uniform vec3 uEye;
 uniform sampler2D uBaseTexture;
 uniform int uUseTexture;
 out vec4 fragColor;
@@ -294,7 +299,13 @@ void main(){
   float cold=max(dot(n,normalize(vec3(0.5,0.2,-0.8))),0.0)*0.12;
   float occlusion=n.y<0.15?0.91:1.0;
   float light=(0.37+diffuse*0.70+cold)*occlusion;
-  float metalHighlight=pow(max(dot(reflect(-sun,n),normalize(vec3(0.2,0.65,0.75))),0.0),20.0)*0.13;
+  vec3 viewDir=normalize(uEye-vWorld);
+  vec3 halfVector=normalize(sun+viewDir);
+  float rough=clamp(vMetalRough.y,0.08,1.0);
+  float metal=clamp(vMetalRough.x,0.0,1.0);
+  float specPower=mix(150.0,8.0,rough*rough);
+  float specular=pow(max(dot(n,halfVector),0.0),specPower)*max(dot(n,sun),0.0);
+  float metalHighlight=specular*mix(0.10,0.46,metal)*(1.0-rough*0.55);
   // P5: restrained industrial finish: multiscale surface grain, grime and warm daylight.
   float fine=fract(sin(dot(vWorld.xz*11.7+vWorld.yy*2.4,vec2(12.9898,78.233)))*43758.5453);
   float coarse=fract(sin(dot(floor(vWorld.xz*0.35)+vWorld.yy*0.17,vec2(39.3468,11.135)))*12741.315);
@@ -305,7 +316,7 @@ void main(){
   vec3 base=vColor*texel*(0.97+0.025*fine+0.025*coarse)*dirt;
   base*=1.0-0.028*seams*horizontal;
   float edgeLight=pow(1.0-max(dot(n,normalize(vec3(0.0,0.55,0.84))),0.0),3.0)*0.07;
-  vec3 lit=base*(light+edgeLight)+vec3(0.72,0.77,0.78)*metalHighlight;
+  vec3 lit=base*(light+edgeLight)*(1.0-0.32*metal)+mix(vec3(0.72,0.77,0.78),base,metal)*metalHighlight;
   // Subtle filmic compression prevents flat, overexposed industrial surfaces.
   lit=lit/(vec3(1.0)+lit*0.27);
   lit=pow(max(lit,vec3(0.0)),vec3(0.94));
@@ -344,6 +355,7 @@ export class RefineryWorld {
   private buffers: WebGLBuffer[]=[];
   private vertexCount=0;
   private uvBuffer:WebGLBuffer|null=null;
+  private materialBuffer:WebGLBuffer|null=null;
   private textures:(WebGLTexture|null)[]=[];
   private texturedRanges:{start:number,count:number,texture:number}[]=[];
   private plainStart=0;
@@ -378,6 +390,15 @@ export class RefineryWorld {
     gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(this.vertexCount*2),gl.STATIC_DRAW);
     const uvLocation=gl.getAttribLocation(program,'aUv');
     if(uvLocation>=0){gl.enableVertexAttribArray(uvLocation);gl.vertexAttribPointer(uvLocation,2,gl.FLOAT,false,0,0);}
+    const materialBuffer=gl.createBuffer();
+    if(!materialBuffer)throw new Error('Material buffer unavailable');
+    this.materialBuffer=materialBuffer;
+    gl.bindBuffer(gl.ARRAY_BUFFER,materialBuffer);
+    const proceduralMaterials=new Float32Array(this.vertexCount*2);
+    for(let i=0;i<this.vertexCount;i++)proceduralMaterials[i*2+1]=0.84;
+    gl.bufferData(gl.ARRAY_BUFFER,proceduralMaterials,gl.STATIC_DRAW);
+    const materialLocation=gl.getAttribLocation(program,'aMetalRough');
+    if(materialLocation>=0){gl.enableVertexAttribArray(materialLocation);gl.vertexAttribPointer(materialLocation,2,gl.FLOAT,false,0,0);}
     this.plainStart=this.vertexCount;
     gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.disable(gl.CULL_FACE);gl.clearColor(0.54,0.63,0.68,1);
   }
@@ -426,7 +447,7 @@ export class RefineryWorld {
       }
       return result;
     };
-    const positions: number[] = [], normals: number[] = [], colors: number[] = [], uvs:number[]=[];
+    const positions: number[] = [], normals: number[] = [], colors: number[] = [], uvs:number[]=[], metalRough:number[]=[];
     const ranges:{start:number,count:number,texture:number}[]=[];
     const nodes = json.nodes || [], meshes = json.meshes || [];
     // glTF matrices are column-major; Sketchfab uses a rotated root matrix.
@@ -457,6 +478,8 @@ export class RefineryWorld {
         const material=json.materials?.[p.material];
         const texIndex=material?.pbrMetallicRoughness?.baseColorTexture?.index;
         const imageIndex=texIndex===undefined?-1:(json.textures?.[texIndex]?.source??-1);
+        const metallic=material?.pbrMetallicRoughness?.metallicFactor??0;
+        const roughness=material?.pbrMetallicRoughness?.roughnessFactor??0.85;
         const idx = p.indices !== undefined ? read(p.indices).map(a=>a[0]) : xyz.map((_,i)=>i);
         const factor = json.materials?.[p.material]?.pbrMetallicRoughness?.baseColorFactor || [0.66,0.73,0.77,1];
         for (let i=0;i+2<idx.length;i+=3) for (let k=0;k<3;k++) {
@@ -477,6 +500,7 @@ export class RefineryWorld {
           normals.push(nx/nl,ny/nl,nz/nl);
           colors.push(factor[0],factor[1],factor[2]);
           uvs.push(uv[v]?.[0]??0,uv[v]?.[1]??0);
+          metalRough.push(metallic,roughness);
         }
         const rangeCount=positions.length/3-rangeStart;
         if(rangeCount>0)ranges.push({start:rangeStart,count:rangeCount,texture:imageIndex});
@@ -496,13 +520,19 @@ export class RefineryWorld {
       combined.set(previous);combined.set(values,previous.length);
       gl.bufferData(gl.ARRAY_BUFFER,combined,gl.STATIC_DRAW);
     }
-    if(!this.uvBuffer)return false;
+    if(!this.uvBuffer||!this.materialBuffer)return false;
     gl.bindBuffer(gl.ARRAY_BUFFER,this.uvBuffer);
     const previousUv=new Float32Array(this.plainStart*2);
     gl.getBufferSubData(gl.ARRAY_BUFFER,0,previousUv);
     const allUv=new Float32Array(previousUv.length+uvs.length);
     allUv.set(previousUv);allUv.set(uvs,previousUv.length);
     gl.bufferData(gl.ARRAY_BUFFER,allUv,gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER,this.materialBuffer);
+    const oldMaterials=new Float32Array(this.plainStart*2);
+    gl.getBufferSubData(gl.ARRAY_BUFFER,0,oldMaterials);
+    const combinedMaterials=new Float32Array(oldMaterials.length+metalRough.length);
+    combinedMaterials.set(oldMaterials);combinedMaterials.set(metalRough,oldMaterials.length);
+    gl.bufferData(gl.ARRAY_BUFFER,combinedMaterials,gl.STATIC_DRAW);
     const loadedTextures:(WebGLTexture|null)[]=[];
     for(const image of json.images||[]){
       const view=views[image.bufferView];
@@ -603,5 +633,5 @@ export class RefineryWorld {
       gl.drawArrays(gl.TRIANGLES,range.start,range.count);
     }
   }
-  dispose(){for(const b of this.buffers)this.gl.deleteBuffer(b);if(this.uvBuffer)this.gl.deleteBuffer(this.uvBuffer);for(const t of this.textures)if(t)this.gl.deleteTexture(t);this.gl.deleteProgram(this.program);}
+  dispose(){for(const b of this.buffers)this.gl.deleteBuffer(b);if(this.uvBuffer)this.gl.deleteBuffer(this.uvBuffer);if(this.materialBuffer)this.gl.deleteBuffer(this.materialBuffer);for(const t of this.textures)if(t)this.gl.deleteTexture(t);this.gl.deleteProgram(this.program);}
 }
