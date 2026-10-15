@@ -104,17 +104,47 @@ function addTrainingFindings(m: SiteMesh) {
   m.cylinder([-8.0,0.03,27.45],[-8,1.15,27.45],0.42,0xc46b39,14);
   m.cylinder([-8.6,0.03,29.0],[-8.6,1.15,29.0],0.42,0x993f2b,14);
   m.box(-9.0,1.43,28.0,0.7,0.27,0.4,0x9ac0cc);
-  // (8) Suspended load in open corridor: gantry, hook, cable, hanging object.
-  for(const x of [15,22])m.box(x,5.0,28,0.65,10,0.65,0x91a7b2);
-  m.box(18.5,10.1,28,8.0,0.6,0.75,0xbbcbd1);
-  m.cylinder([18.4,9.85,28.1],[18.4,4.2,28.1],0.08,0x303f49,10);
-  m.box(18.4,3.4,28.1,3.0,1.45,2.6,0xb88b4b);
-  m.box(18.4,4.18,28.1,2.85,0.11,2.48,0x40596c);
-  // (9) Plant vehicle on walkway, no separated pedestrian crossing.
-  m.box(5,0.92,-2,2.9,1.45,3.7,0xc49b46);m.solid(5,-2,3.2,3.9);
-  m.box(5,1.87,-2.55,2.4,1.1,1.7,0x40586b);
-  for(const x of [3.52,6.48])for(const z of [-3.17,-0.88])m.cylinder([x,0.48,z],[x+0.1,0.48,z],0.48,0x1c2732,10);
-  for(const x of [4.2,5.8])m.box(x,0.25,0.6,0.25,0.2,2.3,0x879ca4);
+  // (8) Braced portal gantry: I-beam silhouette, structural diagonals, hoist and slung load.
+  for(const x of [15,22]){
+    m.box(x,5.0,28,0.22,10,0.54,0x758b98);
+    m.box(x,5.0,28,0.78,10,0.12,0x9cabb2);
+    m.box(x,0.18,28,1.65,0.36,1.65,0x64727a);
+    m.box(x,9.55,28,1.2,0.16,1.2,0x687d89);
+  }
+  m.box(18.5,10.05,28,8.2,0.18,0.85,0x718997);
+  m.box(18.5,10.36,28,8.2,0.13,0.85,0xa5b4bc);
+  m.box(18.5,9.77,28,8.2,0.13,0.85,0xa5b4bc);
+  for(const x of [15.5,17,18.5,20,21.5])m.box(x,10.07,28,0.11,0.52,0.88,0x667985);
+  for(const x of [15,22]){
+    m.cylinder([x,1.0,27.95],[x+(x===15?1.1:-1.1),7.8,27.95],0.055,0x8fa6b1,8);
+  }
+  m.box(18.4,9.45,28.1,1.3,0.52,0.9,0x374d5b);
+  for(const x of [18.1,18.7])m.cylinder([x,9.65,27.65],[x,9.65,28.55],0.17,0x293a46,12);
+  m.cylinder([18.4,9.2,28.1],[18.4,4.3,28.1],0.045,0x2d3940,10);
+  m.cylinder([18.4,4.3,28.1],[18.4,4.0,28.1],0.12,0xd5a848,12);
+  for(const x of [17.15,19.65])for(const z of [27.02,29.18]){
+    m.cylinder([18.4,4.0,28.1],[x,3.65,z],0.035,0x9baeb7,8);
+  }
+  m.box(18.4,3.25,28.1,3.0,1.4,2.6,0xa37c48);
+  m.box(18.4,4.0,28.1,3.06,0.15,2.66,0x4c5d66);
+  for(const x of [17.15,17.8,18.5,19.2,19.65])m.box(x,3.25,29.43,0.045,1.25,0.045,0x755a3b);
+  // (9) Industrial forklift: distinct mast, operator cage, wheels and exposed forks.
+  m.box(5,0.87,-2.4,2.45,1.15,2.7,0xc59b40);m.solid(5,-2,3.2,3.9);
+  m.box(5,0.45,-0.82,2.3,0.5,0.78,0xa98632);
+  m.box(5,1.8,-2.55,2.2,0.18,1.85,0x334550);
+  for(const x of [4.0,6.0])for(const z of [-3.36,-1.74])m.cylinder([x,0.52,z],[x+0.16,0.52,z],0.48,0x1b252b,16);
+  for(const x of [4.05,5.95])for(const z of [-3.3,-1.82])m.cylinder([x,0.5,z],[x+0.16,0.5,z],0.21,0x74848a,12);
+  for(const x of [4.1,5.9])for(const z of [-3.25,-1.92])m.cylinder([x,1.2,z],[x,2.65,z],0.065,0x35454e,10);
+  m.box(5,2.72,-2.6,2.15,0.13,1.7,0x394b53);
+  m.box(5,1.08,-1.72,1.5,0.18,0.25,0x283943);
+  for(const x of [4.25,5.75]){
+    m.box(x,1.6,-0.05,0.13,3.2,0.19,0x34464f);
+    m.box(x,0.26,0.12,0.23,0.13,2.8,0x83959e);
+    m.box(x,2.9,-0.05,0.27,0.2,0.25,0x4d5f67);
+  }
+  m.box(5,1.1,-0.04,1.55,0.2,0.18,0x566c79);
+  m.cylinder([5.2,1.6,-2.0],[5.2,1.6,-1.65],0.3,0x27343c,12);
+  m.box(5.2,0.97,-2.55,0.75,0.12,0.68,0x263740);
   // (10) Open electrical cabinet with visible panel interior.
   m.box(-26,1.42,3.4,1.6,2.5,0.55,0xb9bdaf);m.solid(-26,3.4,1.8,0.8);
   m.box(-26,1.5,3.08,1.35,2.25,0.10,0x243341);
