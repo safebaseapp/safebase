@@ -138,10 +138,9 @@ function constructSite() {
   m.box(0,-0.26,0,86,0.45,86,0x344454);
   m.box(0,-0.018,7,11,0.035,72,0x415668);
   for(let z=-39;z<=39;z+=5){ m.box(0,0.005,z,0.13,0.012,2.3,0xe1d39c); }
-  for(let x=-38;x<=38;x+=4){
-    m.box(x,-0.016,-39,0.05,0.02,76,0x3f5060);
-  }
-  for(let z=-38;z<=38;z+=4){ m.box(0,-0.014,z,78,0.02,0.05,0x3f5060); }
+  // Wide construction joints rather than a dense artificial checkerboard.
+  for(let x=-30;x<=30;x+=15)m.box(x,-0.023,0,0.025,0.009,77,0x3c4b56);
+  for(let z=-30;z<=30;z+=15)m.box(0,-0.022,z,77,0.009,0.025,0x3c4b56);
   // Fenced compound perimeter with entrances at the south.
   for(const x of [-40,40]){
     for(let z=-40;z<=40;z+=3){ m.box(x,1.12,z,0.15,2.24,0.16,0x7f9fb0); }
@@ -292,11 +291,11 @@ void main(){
   float metalHighlight=pow(max(dot(reflect(-sun,n),normalize(vec3(0.2,0.65,0.75))),0.0),20.0)*0.13;
   // P5: restrained industrial finish: multiscale surface grain, grime and warm daylight.
   float fine=fract(sin(dot(vWorld.xz*11.7+vWorld.yy*2.4,vec2(12.9898,78.233)))*43758.5453);
-  float coarse=fract(sin(dot(floor(vWorld.xz*1.65)+vWorld.yy*0.17,vec2(39.3468,11.135)))*12741.315);
-  float seams=1.0-smoothstep(0.018,0.065,min(fract(abs(vWorld.x)*0.25),fract(abs(vWorld.z)*0.25)));
+  float coarse=fract(sin(dot(floor(vWorld.xz*0.35)+vWorld.yy*0.17,vec2(39.3468,11.135)))*12741.315);
+  float seams=1.0-smoothstep(0.008,0.03,min(fract(abs(vWorld.x)/15.0),fract(abs(vWorld.z)/15.0)));
   float horizontal=clamp(n.y,0.0,1.0);
-  float dirt=mix(0.965,0.87+coarse*0.14,horizontal);
-  vec3 base=vColor*(0.92+0.10*fine+0.06*coarse)*dirt;
+  float dirt=mix(0.965,0.93+coarse*0.06,horizontal);
+  vec3 base=vColor*(0.97+0.025*fine+0.025*coarse)*dirt;
   base*=1.0-0.028*seams*horizontal;
   float edgeLight=pow(1.0-max(dot(n,normalize(vec3(0.0,0.55,0.84))),0.0),3.0)*0.07;
   vec3 lit=base*(light+edgeLight)+vec3(0.72,0.77,0.78)*metalHighlight;
@@ -304,7 +303,7 @@ void main(){
   lit=lit/(vec3(1.0)+lit*0.27);
   lit=pow(max(lit,vec3(0.0)),vec3(0.94));
   vec3 atmospheric=vec3(0.54,0.63,0.68);
-  float fog=clamp((vDepth-27.0)/116.0,0.0,0.70);
+  float fog=clamp((vDepth-48.0)/160.0,0.0,0.52);
   fragColor=vec4(mix(lit,atmospheric,fog),1.0);
 }`;
 
