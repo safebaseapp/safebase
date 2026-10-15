@@ -472,26 +472,49 @@ export class RefineryWorld {
     };
     const positions: number[] = [], normals: number[] = [], colors: number[] = [];
     const nodes = json.nodes || [], meshes = json.meshes || [];
+    // glTF matrices are column-major; Sketchfab uses a rotated root matrix.
+    const identity = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
+    const multiply = (a: number[], b: number[]) => {
+      const out = new Array<number>(16).fill(0);
+      for (let col=0;col<4;col++) for(let row=0;row<4;row++)
+        for(let k=0;k<4;k++) out[col*4+row]+=a[k*4+row]*b[col*4+k];
+      return out;
+    };
     const add = (nodeIndex: number, parent: number[]) => {
       const node = nodes[nodeIndex];
       if (!node) return;
-      const t = node.translation || [0,0,0], scale = node.scale || [1,1,1];
-      const world = [parent[0] + t[0] * parent[3], parent[1] + t[1] * parent[4], parent[2] + t[2] * parent[5], parent[3] * scale[0], parent[4] * scale[1], parent[5] * scale[2]];
+      const t = node.translation || [0,0,0], q = node.rotation || [0,0,0,1], sc = node.scale || [1,1,1];
+      const [x,y,z,w]=q, [sx,sy,sz]=sc;
+      const local: number[] = node.matrix || [
+        (1-2*(y*y+z*z))*sx,2*(x*y+z*w)*sx,2*(x*z-y*w)*sx,0,
+        2*(x*y-z*w)*sy,(1-2*(x*x+z*z))*sy,2*(y*z+x*w)*sy,0,
+        2*(x*z+y*w)*sz,2*(y*z-x*w)*sz,(1-2*(x*x+y*y))*sz,0,
+        t[0],t[1],t[2],1
+      ];
+      const m = multiply(parent,local);
       if (node.mesh !== undefined) for (const p of meshes[node.mesh]?.primitives || []) {
         if (p.mode !== undefined && p.mode !== 4) continue;
         const xyz = read(p.attributes?.POSITION), nrm = p.attributes?.NORMAL !== undefined ? read(p.attributes.NORMAL) : [];
-        const idx = p.indices !== undefined ? read(p.indices).map(x=>x[0]) : xyz.map((_,i)=>i);
+        const idx = p.indices !== undefined ? read(p.indices).map(a=>a[0]) : xyz.map((_,i)=>i);
         const factor = json.materials?.[p.material]?.pbrMetallicRoughness?.baseColorFactor || [0.66,0.73,0.77,1];
         for (let i=0;i+2<idx.length;i+=3) for (let k=0;k<3;k++) {
-          const v=idx[i+k], q=xyz[v], n=nrm[v] || [0,1,0];
-          if (!q) continue;
-          positions.push(q[0]*world[3]*0.4+17+world[0]*0.4,q[1]*world[4]*0.4+world[1]*0.4,q[2]*world[5]*0.4-12+world[2]*0.4);
-          normals.push(n[0],n[1],n[2]); colors.push(factor[0],factor[1],factor[2]);
+          const v=idx[i+k], qv=xyz[v], n=nrm[v] || [0,1,0];
+          if (!qv) continue;
+          const px=m[0]*qv[0]+m[4]*qv[1]+m[8]*qv[2]+m[12];
+          const py=m[1]*qv[0]+m[5]*qv[1]+m[9]*qv[2]+m[13];
+          const pz=m[2]*qv[0]+m[6]*qv[1]+m[10]*qv[2]+m[14];
+          const nx=m[0]*n[0]+m[4]*n[1]+m[8]*n[2];
+          const ny=m[1]*n[0]+m[5]*n[1]+m[9]*n[2];
+          const nz=m[2]*n[0]+m[6]*n[1]+m[10]*n[2];
+          const nl=Math.hypot(nx,ny,nz)||1;
+          positions.push(px*0.4+17,py*0.4,pz*0.4-12);
+          normals.push(nx/nl,ny/nl,nz/nl);
+          colors.push(factor[0],factor[1],factor[2]);
         }
       }
-      for (const child of node.children || []) add(child,world);
+      for (const child of node.children || []) add(child,m);
     };
-    for (const root of json.scenes?.[json.scene || 0]?.nodes || []) add(root,[0,0,0,1,1,1]);
+    for (const root of json.scenes?.[json.scene || 0]?.nodes || []) add(root,identity);
     if (!positions.length) return false;
     const gl=this.gl;
     gl.useProgram(this.program);
