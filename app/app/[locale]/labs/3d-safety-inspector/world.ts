@@ -360,7 +360,7 @@ export class RefineryWorld {
       gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(values),gl.STATIC_DRAW);
       gl.enableVertexAttribArray(location);gl.vertexAttribPointer(location,3,gl.FLOAT,false,0,0);
     }
-    gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.clearColor(0.54,0.63,0.68,1);
+    gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.disable(gl.CULL_FACE);gl.clearColor(0.54,0.63,0.68,1);
   }
   /**
    * Import a real binary glTF refinery asset into the playable scene.
@@ -440,9 +440,13 @@ export class RefineryWorld {
           const px=m[0]*qv[0]+m[4]*qv[1]+m[8]*qv[2]+m[12];
           const py=m[1]*qv[0]+m[5]*qv[1]+m[9]*qv[2]+m[13];
           const pz=m[2]*qv[0]+m[6]*qv[1]+m[10]*qv[2]+m[14];
-          const nx=m[0]*n[0]+m[4]*n[1]+m[8]*n[2];
-          const ny=m[1]*n[0]+m[5]*n[1]+m[9]*n[2];
-          const nz=m[2]*n[0]+m[6]*n[1]+m[10]*n[2];
+          // glTF scaled nodes require inverse-transpose normal transformation.
+          const a=m[0],b=m[4],c=m[8],d=m[1],e=m[5],f=m[9],g=m[2],h=m[6],j=m[10];
+          const det=a*(e*j-f*h)-b*(d*j-f*g)+c*(d*h-e*g);
+          const inv=Math.abs(det)>1e-9?1/det:0;
+          const nx=inv*((e*j-f*h)*n[0]+(f*g-d*j)*n[1]+(d*h-e*g)*n[2]);
+          const ny=inv*((c*h-b*j)*n[0]+(a*j-c*g)*n[1]+(b*g-a*h)*n[2]);
+          const nz=inv*((b*f-c*e)*n[0]+(c*d-a*f)*n[1]+(a*e-b*d)*n[2]);
           const nl=Math.hypot(nx,ny,nz)||1;
           positions.push(px*0.4+17,py*0.4,pz*0.4-12);
           normals.push(nx/nl,ny/nl,nz/nl);
