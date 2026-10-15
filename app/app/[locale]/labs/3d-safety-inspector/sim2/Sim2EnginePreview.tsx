@@ -69,18 +69,18 @@ export default function Sim2EnginePreview() {
         if (disposed || !canvas.current) return;
         const element = canvas.current;
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color("#9cafba");
-        scene.fog = new THREE.Fog("#9cafba", 80, 165);
+        scene.background = new THREE.Color("#8faec5");
+        scene.fog = new THREE.Fog("#8faec5", 95, 195);
         const camera = new THREE.PerspectiveCamera(73, 1, 0.08, 190);
         const renderer = new THREE.WebGLRenderer({ canvas: element, antialias: true, powerPreference: "high-performance" });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
         renderer.outputColorSpace = THREE.SRGBColorSpace;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 0.85;
+        renderer.toneMappingExposure = 1.08;
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        scene.add(new THREE.HemisphereLight(0xddeaf2, 0x55616b, 1.0));
-        const sun = new THREE.DirectionalLight(0xffedce, 1.9);
+        scene.add(new THREE.HemisphereLight(0xe5f1ff, 0x6b7170, 1.45));
+        const sun = new THREE.DirectionalLight(0xffe4b6, 2.25);
         sun.position.set(-22, 44, 22);
         sun.castShadow = true;
         sun.shadow.mapSize.set(1024, 1024);
@@ -88,8 +88,8 @@ export default function Sim2EnginePreview() {
         sun.shadow.camera.top = 65; sun.shadow.camera.bottom = -65;
         scene.add(sun);
         const material = (color: number, metalness = 0.15) => new THREE.MeshStandardMaterial({ color, roughness: 0.83, metalness });
-        const asphalt = new THREE.MeshStandardMaterial({color:0x596a70,roughness:0.96,metalness:0});
-        const road = material(0x454f51);
+        const asphalt = new THREE.MeshStandardMaterial({color:0x737d7b,roughness:0.96,metalness:0});
+        const road = new THREE.MeshStandardMaterial({color:0x757a75,roughness:0.98,metalness:0});
         const railing = material(0xb5c0bb,0.65);
         const safetyRed = material(0xb94935);
         const glass = new THREE.MeshStandardMaterial({color:0x8daeb4,metalness:0.25,roughness:0.22,transparent:true,opacity:0.7});
@@ -228,6 +228,21 @@ export default function Sim2EnginePreview() {
         }
         if (disposed) return;
         const position = new THREE.Vector3(0, 1.72, 38);
+        const inspector = new THREE.Group();
+        const avatarMaterial = (color:number) => new THREE.MeshStandardMaterial({color,roughness:0.85});
+        const avatarBox=(w:number,h:number,d:number,x:number,y:number,mat:any)=>{
+          const part=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);
+          part.position.set(x,y,0);part.castShadow=true;inspector.add(part);
+        };
+        const vest=avatarMaterial(0xd9ee37), uniform=avatarMaterial(0x253643);
+        avatarBox(0.75,0.78,0.4,0,1.2,vest);
+        avatarBox(0.7,0.3,0.38,0,0.72,uniform);
+        for(const x of [-0.22,0.22])avatarBox(0.26,0.7,0.3,x,0.34,uniform);
+        for(const x of [-0.55,0.55])avatarBox(0.2,0.65,0.28,x,1.15,uniform);
+        avatarBox(0.33,0.35,0.33,0,1.75,avatarMaterial(0x9b745e));
+        const helmet=new THREE.Mesh(new THREE.SphereGeometry(0.33,14,10),avatarMaterial(0xf1f2e9));
+        helmet.scale.y=0.55;helmet.position.y=2;inspector.add(helmet);
+        scene.add(inspector);
         const blockers = [
           {x:-30,z:20,w:13,d:17},{x:-6,z:-9,w:13,d:7},
           {x:18,z:27,w:12,d:3},{x:28,z:-5,w:15,d:15},
@@ -256,7 +271,7 @@ export default function Sim2EnginePreview() {
           camera.updateMatrixWorld();
           raycaster.setFromCamera(centerRay, camera);
           const hits = raycaster.intersectObjects(markers.map(m => m.mesh), false);
-          const targeted = hits.find((hit: any) => hit.distance <= 7.5 && solvedRef.current[hit.object.userData.hazardId] === undefined);
+          const targeted = hits.find((hit: any) => hit.distance <= 11 && solvedRef.current[hit.object.userData.hazardId] === undefined);
           const nearby = markers.filter(m => solvedRef.current[m.id] === undefined)
             .map(m => ({ marker: m, d: m.position.distanceTo(position) }))
             .filter(v => v.d < 3.8).sort((a,b) => a.d - b.d)[0];
@@ -310,9 +325,11 @@ export default function Sim2EnginePreview() {
           if(!blocked(position.x,nextZ))position.z=nextZ;
           position.x = Math.max(-69,Math.min(69,position.x));
           position.z = Math.max(-69,Math.min(69,position.z));
-          camera.position.copy(position);
+          inspector.position.set(position.x,0,position.z);
+          inspector.rotation.y=yaw+Math.PI;
+          camera.position.set(position.x-Math.sin(yaw)*3.2,position.y+1.35,position.z-Math.cos(yaw)*3.2);
           camera.rotation.order = "YXZ";
-          camera.rotation.set(pitch,yaw,0);
+          camera.rotation.set(pitch-0.14,yaw,0);
           for(const marker of markers) {
             const solvedNow=solvedRef.current[marker.id] !== undefined;
             marker.mesh.material.color.copy(solvedNow ? doneMaterial.color : markerMaterial.color);
@@ -372,8 +389,8 @@ export default function Sim2EnginePreview() {
       </div>
       <button onClick={()=>engine.current?.inspect()} style={{...buttonStyle,position:"absolute",bottom:17,right:12,background:"#147b79",border:"2px solid #7cf5d9",fontWeight:800,fontSize:15}}>{t("İNCELE · E","INSPECT · E")}</button>
     </div>
-    {selected && active && <div role="dialog" aria-label={active[language].title} style={{position:"fixed",inset:0,zIndex:100,background:"#020b12dd",display:"grid",placeItems:"center",padding:16}}>
-      <div style={{background:"#102e40",border:"1px solid #4e9f9f",borderRadius:18,padding:22,width:"min(650px,100%)",maxHeight:"90vh",overflowY:"auto"}}>
+    {selected && active && <div role="dialog" aria-label={active[language].title} style={{position:"fixed",inset:0,zIndex:100,background:"#020b1280",display:"flex",justifyContent:"flex-end",alignItems:"center",padding:16}}>
+      <div style={{background:"#102e40",border:"1px solid #4e9f9f",borderRadius:18,padding:22,width:"min(390px,100%)",maxHeight:"90vh",overflowY:"auto"}}>
         <div style={{display:"flex",justifyContent:"space-between",gap:12}}><h2 style={{fontSize:21,fontWeight:800}}>{active[language].title}</h2><button style={buttonStyle} onClick={()=>setSelected(null)}>✕</button></div>
         <p style={{color:"#a6cbd2",marginTop:8}}>{active[language].category} · {distance?.toFixed(1)} m</p>
         <p style={{marginTop:16}}>{active[language].evidence}</p>
