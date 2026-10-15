@@ -263,6 +263,32 @@ export default function Sim2EnginePreview() {
           scene.add(mesh);
           markers.push({ id: hazard.id, mesh, position: new THREE.Vector3(x, py, z) });
         }
+        // Industrial tank weathering. Original GLB ships without usable base-color maps;
+        // supply a lightweight authored coating rather than displaying bare white geometry.
+        const coatingCanvas=document.createElement("canvas");coatingCanvas.width=coatingCanvas.height=512;
+        const coatingCtx=coatingCanvas.getContext("2d");
+        if(coatingCtx){
+          coatingCtx.fillStyle="#a1a7a1";coatingCtx.fillRect(0,0,512,512);
+          let seed=41257;const noise=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+          for(let i=0;i<32000;i++){
+            const x=noise()*512,y=noise()*512,v=45+Math.floor(noise()*80);
+            coatingCtx.fillStyle="rgba("+v+","+(v+5)+","+(v+7)+","+(noise()*0.16+0.035)+")";
+            coatingCtx.fillRect(x,y,noise()*4+0.4,noise()*9+0.6);
+          }
+          for(let i=0;i<45;i++){
+            const x=noise()*512,y=noise()*512;
+            const grad=coatingCtx.createLinearGradient(x,y,x+noise()*30,y+90+noise()*170);
+            grad.addColorStop(0,"rgba(80,66,51,0.0)");
+            grad.addColorStop(0.25,"rgba(87,71,55,0.16)");
+            grad.addColorStop(1,"rgba(67,60,53,0.0)");
+            coatingCtx.fillStyle=grad;coatingCtx.fillRect(x,y,12+noise()*42,190);
+          }
+        }
+        const coatingTexture=new THREE.CanvasTexture(coatingCanvas);
+        coatingTexture.colorSpace=THREE.SRGBColorSpace;
+        coatingTexture.wrapS=coatingTexture.wrapT=THREE.RepeatWrapping;
+        coatingTexture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+        let coatedMeshes=0;
         let meshCount = 0, mappedMaterials = 0;
         try {
           const gltf = await new GLTFLoader().loadAsync("/models/refinery/large_industrial_storage_tanks.glb");
@@ -278,6 +304,14 @@ export default function Sim2EnginePreview() {
             if (obj.isMesh) {
               obj.castShadow = true; obj.receiveShadow = true; meshCount++;
               for (const mat of (Array.isArray(obj.material) ? obj.material : [obj.material])) {
+                if(mat && !mat.map && obj.geometry?.attributes?.uv && mat.isMeshStandardMaterial){
+                  mat.map=coatingTexture;
+                  mat.color.set("#b7b9b2");
+                  mat.roughness=0.78;
+                  mat.metalness=0.52;
+                  mat.needsUpdate=true;
+                  coatedMeshes++;
+                }
                 if (mat?.map) mappedMaterials++;
               }
             }
@@ -403,7 +437,7 @@ export default function Sim2EnginePreview() {
         element.addEventListener("pointercancel",onPointerUp);
         onResize();
         engine.current = { inspect, move: (key,on) => { if (on) held.add(key); else held.delete(key); }, teleport, stop: () => held.clear(), cameraMode: (enabled) => { isFirstPerson=enabled; } };
-        setStatus("SIM 2.0 · 12 aktif saha bulgusu · " + meshCount + " GLB mesh · " + mappedMaterials + " dokulu");
+        setStatus("SIM 2.0 · 12 aktif saha bulgusu · " + meshCount + " GLB mesh · " + mappedMaterials + " dokulu · " + coatedMeshes + " kaplamalı");
         renderer.setAnimationLoop((now: number) => {
           const dt = Math.min((now-lastTime)/1000,0.045); lastTime = now;
           const speed = held.has("shift") ? 9 : 5.1;
