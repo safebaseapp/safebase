@@ -111,17 +111,17 @@ export default function Sim2EnginePreview() {
           mesh.castShadow = true; parent.add(mesh); return mesh;
         };
         box(0, -0.14, 0, 155, 0.28, 155, asphalt);
-        box(4.3, 0.016, 9, 15, 0.035, 132, road);
-        for (let z=-60;z<=65;z+=8) {box(4.3,0.043,z,0.14,0.015,3.2,yellow);}
+        box(4.3, 0.055, 9, 15, 0.1, 132, road);
+        for (let z=-60;z<=65;z+=8) {box(4.3,0.115,z,0.14,0.015,3.2,yellow);}
         for (const x of [-64,64]) for(let z=-64;z<=64;z+=5){pipe(x,0,z,x,2.1,z,0.055,railing); if(z<64)pipe(x,1.2,z,x,1.2,z+5,0.042,railing);}
         for (const z of [-64,64]) for(let x=-64;x<=64;x+=5){pipe(x,0,z,x,2.1,z,0.055,railing); if(x<64)pipe(x,1.2,z,x+5,1.2,z,0.042,railing);}
         // Service road: concrete kerbs, crossing and striped hazard exclusion zone.
-        for(const x of [-3.3,11.7])box(x,0.1,9,0.3,0.18,132,concrete);
-        for(let x=-2.8;x<=11;x+=1.25)box(x,0.06,30,0.72,0.02,3.1,concrete);
-        for(let i=0;i<10;i++) {const stripe=box(19+i*0.55,0.025,22,0.18,0.02,5,yellow);stripe.rotation.y=-0.55;}
+        for(const x of [-3.3,11.7])box(x,0.15,9,0.3,0.3,132,concrete);
+        for(let x=-2.8;x<=11;x+=1.25)box(x,0.125,30,0.72,0.02,3.1,concrete);
+        for(let i=0;i<10;i++) {const stripe=box(19+i*0.55,0.12,22,0.18,0.02,5,yellow);stripe.rotation.y=-0.55;}
         for (let z = -60; z <= 60; z += 10) {
-          box(-0.4, 0.015, z, 0.16, 0.025, 4.2, yellow);
-          box(9, 0.015, z, 0.12, 0.025, 3.4, yellow);
+          box(-0.4, 0.12, z, 0.16, 0.02, 4.2, yellow);
+          box(9, 0.12, z, 0.12, 0.02, 3.4, yellow);
         }
         // Coherent industrial compound, deliberately outside the central walk corridor.
         for (const x of [-27, -17, -7, 3, 13, 23]) {
@@ -182,12 +182,12 @@ export default function Sim2EnginePreview() {
           "open-excavation": (x,y,z) => { box(x,-0.07,z,4,0.1,3,material(0x1e282b)); for(const d of [-2.3,2.3]) pipe(x+d,0,z-2,x+d,1,z-2,0.07,yellow); },
           "scaffold-guardrail": (x,y,z) => { box(x,3.55,z,1.5,0.15,0.3,danger); },
           "scaffold-loose-tools": (x,y,z) => { for(let i=0;i<4;i++) box(x+i*0.4,6.95,z,0.35,0.3,0.28,steel); },
-          "cylinder-unsecured": (x,y,z) => { pipe(x,0,z,x,2.2,z,0.3,danger); },
+          "cylinder-unsecured": (x,y,z) => { for(const dx of [0,0.55]){pipe(x+dx,0.2,z,x+dx,1.6,z,0.19,danger);box(x+dx,1.67,z,0.25,0.13,0.25,steel);} },
           "hot-work-combustible": (x,y,z) => { box(x,0.6,z,1.5,1.2,1.4,material(0x99673d)); box(x+1.3,0.4,z,0.9,0.8,0.8,danger); },
           "suspended-load": (x,y,z) => { box(x,3.1,z,3,1.5,2,yellow); },
-          "vehicle-interface": (x,y,z) => { box(x,0.8,z,3,1.4,2.3,yellow); for(const d of [-1,1]) pipe(x+d,0.45,z-1.4,x+d,0.45,z+1.4,0.35,material(0x222c30)); },
+          "vehicle-interface": (x,y,z) => {box(x,0.95,z,3.4,1.1,2.2,yellow);box(x-0.8,1.75,z,1.45,1.1,1.6,steel);for(const d of [-1.1,1.1])for(const zz of [-0.9,0.9]){const wheel=new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.42,0.23,12),material(0x1e2427));wheel.rotation.z=Math.PI/2;wheel.position.set(x+d,0.43,z+zz);scene.add(wheel);}for(const zz of [-0.55,0.55])pipe(x+1.8,0.23,z+zz,x+4.1,0.23,z+zz,0.075,steel); },
           "electrical-panel": (x,y,z) => { box(x,1.3,z,1.3,2.4,0.65,danger); box(x+0.2,1.5,z+0.35,0.5,0.65,0.05,material(0x20282b)); },
-          "oil-spill": (x,y,z) => { box(x,0.02,z,2.8,0.02,2,material(0x222f34)); },
+          "oil-spill": (x,y,z) => {const spill=new THREE.Mesh(new THREE.CircleGeometry(1.6,28),new THREE.MeshStandardMaterial({color:0x111b1c,roughness:0.18,metalness:0.45}));spill.rotation.x=-Math.PI/2;spill.scale.set(1.35,0.7,1);spill.position.set(x,0.028,z);scene.add(spill); },
           "improper-materials": (x,y,z) => { for(let i=0;i<4;i++) pipe(x-1.7,0.25+i*0.38,z,x+1.7,0.25+i*0.38,z,0.17,steel); },
         };
         const markers: { id: string; position: any; mesh: any }[] = [];
