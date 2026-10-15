@@ -215,6 +215,61 @@ export default function Sim2EnginePreview() {
           const lamp=new THREE.PointLight(0xffe3b2,0.5,12,2);
           lamp.position.set(x,4.9,30);scene.add(lamp);
         }
+        // SIM3 hot-work vertical slice: visible work zone, welding rig, sparks,
+        // shielding and unsecured cylinders; no floating marker needed.
+        const weldZone=new THREE.Group();scene.add(weldZone);
+        const workX=24,workZ=17;
+        const darkRubber=material(0x252f32),copper=material(0xb46c3e,0.75);
+        const cylinderShell=new THREE.MeshStandardMaterial({color:0x477b91,metalness:0.55,roughness:0.4});
+        const addWeldBox=(x:number,y:number,z:number,w:number,h:number,d:number,mat:any)=>{
+          const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);
+          mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;weldZone.add(mesh);return mesh;
+        };
+        // Concrete welding pad with visible edge, not an orange game marker.
+        addWeldBox(workX,0.075,workZ,10,0.15,8,concrete);
+        addWeldBox(workX,0.20,workZ,4.2,0.24,2.6,darkRubber);
+        for(const dx of [-1.5,1.5]){
+          addWeldBox(workX+dx,0.85,workZ,0.12,1.5,1.1,steel);
+          addWeldBox(workX+dx,1.58,workZ,0.22,0.14,1.1,steel);
+        }
+        addWeldBox(workX,1.55,workZ,3.6,0.17,1.4,steel);
+        // Two unsecured industrial cylinders with valves and regulator.
+        for(const [i,dx] of [-1,1].entries()){
+          const cx=workX+3.3+dx*0.43,cz=workZ+1.6;
+          const body=new THREE.Mesh(new THREE.CylinderGeometry(0.23,0.24,1.45,24),i===0?cylinderShell:danger);
+          body.position.set(cx,0.85,cz);body.castShadow=true;weldZone.add(body);
+          const dome=new THREE.Mesh(new THREE.SphereGeometry(0.23,16,10),i===0?cylinderShell:danger);
+          dome.position.set(cx,1.59,cz);weldZone.add(dome);
+          const valve=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.07,0.24,12),copper);
+          valve.position.set(cx,1.77,cz);weldZone.add(valve);
+          const ring=new THREE.Mesh(new THREE.TorusGeometry(0.12,0.026,8,16),steel);
+          ring.rotation.x=Math.PI/2;ring.position.set(cx,1.87,cz);weldZone.add(ring);
+        }
+        // Fire blanket screen, welding curtain and torch stand.
+        for(const x of [workX-4.2,workX+1.4]){
+          addWeldBox(x,1.25,workZ-2.1,0.11,2.5,0.11,steel);
+        }
+        const screen=new THREE.Mesh(new THREE.PlaneGeometry(5.6,2.15),new THREE.MeshStandardMaterial({color:0x6b3728,transparent:true,opacity:0.78,roughness:0.88,side:THREE.DoubleSide}));
+        screen.position.set(workX-1.4,1.35,workZ-2.1);weldZone.add(screen);
+        addWeldBox(workX-3.7,0.63,workZ+2.5,0.55,1.25,0.45,safetyRed);
+        addWeldBox(workX-3.7,1.18,workZ+2.76,0.36,0.34,0.035,concrete);
+        const weldGlow=new THREE.PointLight(0x89c8ff,0,8,2);
+        weldGlow.position.set(workX,1.65,workZ);weldZone.add(weldGlow);
+        const sparkMaterial=new THREE.MeshBasicMaterial({color:0xffd487});
+        const sparkParticles: any[]=[];
+        for(let i=0;i<22;i++){
+          const particle=new THREE.Mesh(new THREE.SphereGeometry(0.018+(i%4)*0.009,5,4),sparkMaterial);
+          weldZone.add(particle);sparkParticles.push(particle);
+        }
+        const weldZoneAnimate=(time:number)=>{
+          weldGlow.intensity=1.1+Math.sin(time*0.031)*0.65;
+          sparkParticles.forEach((p,i)=>{
+            const t=(time*0.0017+i*0.073)%1;
+            const angle=i*2.399963;
+            p.position.set(workX+Math.cos(angle)*t*1.15,1.7-t*t*1.6,workZ+Math.sin(angle)*t*1.15);
+            p.scale.setScalar(1-t*0.65);
+          });
+        };
         // More readable field equipment: valves, fire points, barriers, work lighting.
         for(const x of [-24,-12,0,12,24]) {
           pipe(x,0,-18,x,1.3,-18,0.13,steel);
@@ -450,6 +505,7 @@ export default function Sim2EnginePreview() {
           if(!blocked(position.x,nextZ))position.z=nextZ;
           position.x = Math.max(-69,Math.min(69,position.x));
           position.z = Math.max(-69,Math.min(69,position.z));
+          weldZoneAnimate(now);
           inspector.position.set(position.x,0,position.z);
           inspector.rotation.y=yaw+Math.PI;
           const walking=Math.hypot(forward,sideways)>0;
