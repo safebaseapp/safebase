@@ -191,6 +191,32 @@ function constructSite() {
     m.box(30,0.65,z,1.5,1.3,0.15,0x526c79);
     for(const y of [1.0,1.35])m.cylinder([29.3,y,z],[30.7,y,z],0.09,0xa2b3b9,10);
   }
+  // A compact service pipe-rack ties the workshop and tank compound together.
+  // Keep its legs outside the inspection corridor to preserve walkability.
+  for(const x of [-12,-4,4,12]){
+    for(const z of [-26,-22]){
+      m.cylinder([x,0,z],[x,5.7,z],0.14,0x748a95,10);
+      m.box(x,0.15,z,0.82,0.3,0.82,0x657984);
+    }
+    m.box(x,5.7,-24,0.25,0.3,5.3,0x869ca6);
+    m.box(x,5.5,-24,0.95,0.13,5.3,0x566d7a);
+  }
+  for(const [y,color,r] of [[5.92,0x8c9fa8,0.19],[6.4,0xb89c61,0.13],[6.77,0x7b9a9d,0.11]] as number[][]){
+    for(const z of [-25.25,-24,-22.75]){
+      m.cylinder([-12.3,y,z],[12.3,y,z],r,color,12);
+      for(const x of [-12,-4,4,12])m.box(x,y-0.18,z,0.38,0.12,0.45,0x586e79);
+    }
+  }
+  for(const x of [-8,0,8]){
+    m.cylinder([x,5.9,-26],[x,4.5,-26],0.08,0x9faeb5,10);
+    m.box(x,4.48,-26,0.65,0.18,0.4,0x5e7580);
+  }
+  // Safety signage is placed on equipment rather than floating across the ground.
+  for(const [x,z] of [[-10,-27],[-2,-27],[6,-27]] as number[][]){
+    m.box(x,2.1,z,0.76,0.85,0.09,0xe0d0a0);
+    m.box(x,2.1,z-0.054,0.57,0.62,0.02,0x273c48);
+    m.box(x,2.27,z-0.07,0.45,0.08,0.02,0xc9aa57);
+  }
   // Large-scale visual grounding: equipment shadows are soft, layered pads,
   // not dynamic shadows, so they remain cheap on mobile GPUs.
   for(const [x,z,w,d] of [[-10,-12,15,15],[-25,16,25,20],[5,-2,4.5,5.4],[18.5,28,9.5,4]] as number[][]){
