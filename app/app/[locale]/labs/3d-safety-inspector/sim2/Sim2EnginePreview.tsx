@@ -492,7 +492,7 @@ export default function Sim2EnginePreview() {
         element.addEventListener("pointercancel",onPointerUp);
         onResize();
         engine.current = { inspect, move: (key,on) => { if (on) held.add(key); else held.delete(key); }, teleport, stop: () => held.clear(), cameraMode: (enabled) => { isFirstPerson=enabled; } };
-        setStatus("SIM 2.0 · 12 aktif saha bulgusu · " + meshCount + " GLB mesh · " + mappedMaterials + " dokulu · " + coatedMeshes + " kaplamalı");
+        setStatus("SIM 3.0 deneysel sıcak çalışma sahası · 12 HSE bulgusu · " + meshCount + " GLB mesh · " + mappedMaterials + " dokulu · " + coatedMeshes + " kaplamalı");
         renderer.setAnimationLoop((now: number) => {
           const dt = Math.min((now-lastTime)/1000,0.045); lastTime = now;
           const speed = held.has("shift") ? 9 : 5.1;
