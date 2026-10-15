@@ -327,7 +327,8 @@ export default function Sim2EnginePreview() {
           position.z = Math.max(-69,Math.min(69,position.z));
           inspector.position.set(position.x,0,position.z);
           inspector.rotation.y=yaw+Math.PI;
-          camera.position.set(position.x-Math.sin(yaw)*3.2,position.y+1.35,position.z-Math.cos(yaw)*3.2);
+          // Camera stays BEHIND the inspector: at yaw=0 the player looks toward -Z.
+          camera.position.set(position.x+Math.sin(yaw)*3.2,position.y+1.35,position.z+Math.cos(yaw)*3.2);
           camera.rotation.order = "YXZ";
           camera.rotation.set(pitch-0.14,yaw,0);
           for(const marker of markers) {
