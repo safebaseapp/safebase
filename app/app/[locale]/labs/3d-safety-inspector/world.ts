@@ -275,6 +275,32 @@ function constructSite() {
     m.cylinder([x,8.85,13],[x,8.85,23],0.48,0x9aafb9,12);
     m.cylinder([x,8.85,23],[x,7.8,23],0.48,0x9aafb9,12);
   }
+  // Package 4 environmental cues: readable silhouettes at walking height, no answer markers.
+  // Industrial fire points and eyewash stations give the compound a working-site identity.
+  for(const [x,z] of [[-3,31],[4,6],[-12,21],[4,-17]] as number[][]){
+    m.box(x,1.15,z,0.72,1.6,0.16,0xd9e3e7);
+    m.box(x,1.63,z+0.095,0.58,0.43,0.06,0xb82e35);
+    m.box(x,0.86,z+0.16,0.24,0.62,0.20,0xc83136);
+    m.cylinder([x,1.21,z+0.29],[x,1.44,z+0.29],0.05,0x202d36,8);
+    m.box(x,0.52,z+0.18,0.42,0.12,0.28,0x6a7d88);
+  }
+  for(const [x,z] of [[-12,29],[4,-8]] as number[][]){
+    m.box(x,1.2,z,0.9,1.65,0.22,0x3c8c88);
+    m.box(x,1.65,z+0.14,0.66,0.38,0.08,0xe3e6d4);
+    m.cylinder([x,0.75,z+0.28],[x,1.18,z+0.28],0.07,0xcbd9dd,8);
+    m.box(x,0.8,z+0.42,0.48,0.16,0.32,0xe6c86a);
+  }
+  // Small reflective floor studs guide navigation without pointing to any specific finding.
+  for(const x of [-5.25,5.25])for(let z=-34;z<=34;z+=4){
+    m.box(x,0.025,z,0.23,0.05,0.43,0xe7d9a3);
+  }
+  // Instrument cabinets and gauges: thin, decorative panels avoid new invisible walls.
+  for(const [x,z] of [[5,26],[-13,7],[18,25]] as number[][]){
+    m.box(x,1.15,z,1.1,1.8,0.46,0x849aa5);
+    m.box(x,1.52,z+0.25,0.83,0.72,0.045,0x203d4c);
+    for(const ox of [-0.25,0,0.25])m.cylinder([x+ox,1.66,z+0.29],[x+ox,1.66,z+0.35],0.085,0xe0c98b,10);
+    m.box(x,0.9,z+0.26,0.58,0.14,0.045,0x5ba5a6);
+  }
   addTrainingFindings(m);
   return m;
 }
