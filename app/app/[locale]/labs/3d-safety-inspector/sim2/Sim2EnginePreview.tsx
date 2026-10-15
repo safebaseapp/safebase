@@ -271,7 +271,7 @@ export default function Sim2EnginePreview() {
         let weldingAssetLoaded=false;
         // Third-party authored 3D asset (CC0), not procedural placeholder geometry.
         // Source: https://3dassets.dev/assets/car-factory-production-line-spot-weld-gun-on-balancer-20e53e7e
-        // Asset: https://cdn.3dassets.dev/assets/27809/v1/model.glb
+        // Asset: /models/refinery/portable_welding_cart_1k.glb
         // External CDN must allow CORS; failure is reported in the SIM status panel.
         try {
           const weldingAsset=await new GLTFLoader().loadAsync("https://cdn.3dassets.dev/assets/27809/v1/model.glb");
@@ -289,8 +289,8 @@ export default function Sim2EnginePreview() {
             weldingAssetLoaded=true;
           }
         }catch(assetError){
-          console.warn("SIM3 CC0 welding asset unavailable",assetError);
-          setStatus("SIM 3.0: Harici kaynak ekipmanı modeli yüklenemedi; CDN/CORS kontrolü gerekli.");
+          console.warn("SIM3 locally hosted welding asset unavailable",assetError);
+          setStatus("SIM 3.0: Kaynak ekipmanı GLB dosyası bulunamadı; /models/refinery/ yolunu kontrol edin.");
         }
         // Industrial tank weathering. Original GLB ships without usable base-color maps;
         // supply a lightweight authored coating rather than displaying bare white geometry.
