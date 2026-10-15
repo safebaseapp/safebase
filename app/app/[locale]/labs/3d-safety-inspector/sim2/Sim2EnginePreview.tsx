@@ -10,6 +10,7 @@ type Engine = {
   move: (direction: string, active: boolean) => void;
   teleport: (id: string) => void;
   stop: () => void;
+  cameraMode: (firstPerson: boolean) => void;
 };
 const accent = "#70e3d1";
 const buttonStyle = { background: "#163c50", color: "#e7faff", border: "1px solid #407287", borderRadius: 10, padding: "10px 14px", cursor: "pointer" } as const;
@@ -32,6 +33,7 @@ export default function Sim2EnginePreview() {
   const [location, setLocation] = useState("X 0 · Z 0");
   const [help, setHelp] = useState(true);
   const [guidance, setGuidance] = useState(false);
+  const [firstPerson, setFirstPerson] = useState(true);
   const guidanceRef = useRef(false);
   useEffect(()=>{guidanceRef.current=guidance;},[guidance]);
   const [nearbyHint, setNearbyHint] = useState("");
@@ -69,8 +71,8 @@ export default function Sim2EnginePreview() {
         if (disposed || !canvas.current) return;
         const element = canvas.current;
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color("#8faec5");
-        scene.fog = new THREE.Fog("#8faec5", 95, 195);
+        scene.background = new THREE.Color("#a6c5d5");
+        scene.fog = new THREE.FogExp2("#a6c5d5", 0.0037);
         const camera = new THREE.PerspectiveCamera(73, 1, 0.08, 190);
         const renderer = new THREE.WebGLRenderer({ canvas: element, antialias: true, powerPreference: "high-performance" });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
@@ -79,7 +81,8 @@ export default function Sim2EnginePreview() {
         renderer.toneMappingExposure = 1.08;
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        scene.add(new THREE.HemisphereLight(0xe5f1ff, 0x6b7170, 1.45));
+        scene.add(new THREE.HemisphereLight(0xf3f7ff, 0x6c726c, 1.65));
+        const ambientFill=new THREE.AmbientLight(0xe0edff,0.26);scene.add(ambientFill);
         const sun = new THREE.DirectionalLight(0xffe4b6, 2.25);
         sun.position.set(-22, 44, 22);
         sun.castShadow = true;
@@ -336,6 +339,7 @@ export default function Sim2EnginePreview() {
         ];
         const blocked = (x:number,z:number) => blockers.some(b=>Math.abs(x-b.x)<b.w/2+0.65 && Math.abs(z-b.z)<b.d/2+0.65);
         let yaw = Math.PI, pitch = -0.04;
+        let isFirstPerson = true;
         const held = new Set<string>();
         const raycaster = new THREE.Raycaster();
         const centerRay = new THREE.Vector2(0, 0);
@@ -398,7 +402,7 @@ export default function Sim2EnginePreview() {
         element.addEventListener("pointerup",onPointerUp);
         element.addEventListener("pointercancel",onPointerUp);
         onResize();
-        engine.current = { inspect, move: (key,on) => { if (on) held.add(key); else held.delete(key); }, teleport, stop: () => held.clear() };
+        engine.current = { inspect, move: (key,on) => { if (on) held.add(key); else held.delete(key); }, teleport, stop: () => held.clear(), cameraMode: (enabled) => { isFirstPerson=enabled; } };
         setStatus("SIM 2.0 · 12 aktif saha bulgusu · " + meshCount + " GLB mesh · " + mappedMaterials + " dokulu");
         renderer.setAnimationLoop((now: number) => {
           const dt = Math.min((now-lastTime)/1000,0.045); lastTime = now;
@@ -418,10 +422,11 @@ export default function Sim2EnginePreview() {
           const stride=walking?Math.sin(now*0.012*(held.has("shift")?1.5:1))*0.52:0;
           animatedLimbs[0].rotation.x=stride;animatedLimbs[1].rotation.x=-stride;
           animatedLimbs[2].rotation.x=-stride*0.65;animatedLimbs[3].rotation.x=stride*0.65;
-          // Camera stays BEHIND the inspector: at yaw=0 the player looks toward -Z.
-          camera.position.set(position.x+Math.sin(yaw)*3.2,position.y+1.35,position.z+Math.cos(yaw)*3.2);
+          // Eye-level inspection camera is the default; third-person remains optional.
+          inspector.visible=!isFirstPerson;
+          camera.position.set(position.x+(isFirstPerson?0:Math.sin(yaw)*3.2),position.y+(isFirstPerson?0.02:1.35),position.z+(isFirstPerson?0:Math.cos(yaw)*3.2));
           camera.rotation.order = "YXZ";
-          camera.rotation.set(pitch-0.14,yaw,0);
+          camera.rotation.set(pitch-(isFirstPerson?0:0.14),yaw,0);
           for(const marker of markers) {
             const solvedNow=solvedRef.current[marker.id] !== undefined;
             marker.mesh.material.color.copy(solvedNow ? doneMaterial.color : markerMaterial.color);
@@ -462,6 +467,7 @@ export default function Sim2EnginePreview() {
       <p style={{fontSize:13,color:"#9ab8c6"}}>{t("3D sahada uygunsuzlukları bul ve doğru müdahaleyi seç","Find site hazards and select the correct intervention")}</p></div>
       <div style={{display:"flex",alignItems:"center",gap:9,flexWrap:"wrap"}}>
         <strong style={{color:accent}}>{completed}/12 · {score}/{MAX_MISSION_SCORE} {t("puan","points")} · {Math.floor(elapsed/60)}:{String(elapsed%60).padStart(2,"0")}</strong>
+        <button style={buttonStyle} onClick={()=>setFirstPerson(v=>{engine.current?.cameraMode(!v);return !v;})}>{firstPerson?t("Üçüncü şahıs","Third person"):t("Göz hizası","Eye level")}</button>
         <button style={buttonStyle} onClick={()=>setGuidance(v=>!v)}>{guidance?t("İşaretleri gizle","Hide hints"):t("Eğitim ipuçları","Training hints")}</button>
         <button style={buttonStyle} onClick={()=>setLanguage(v=>v==="tr"?"en":"tr")}>{language==="tr"?"EN":"TR"}</button>
         <button style={buttonStyle} onClick={restart}>{t("Yeniden başlat","Restart")}</button>
@@ -501,7 +507,12 @@ export default function Sim2EnginePreview() {
         </div>)}
       </div>
     </section>
-    {completed===12&&<p style={{marginTop:16,fontSize:22,fontWeight:800,color:accent}}>{t("Görev tamamlandı!","Mission complete!")} {score}/{MAX_MISSION_SCORE}</p>}
+    {completed===12&&<section style={{marginTop:16,padding:22,borderRadius:16,background:"#123a42",border:"1px solid #4d9c8d"}}>
+      <h2 style={{fontSize:24,fontWeight:850,color:accent}}>{t("Saha denetimi tamamlandı","Inspection completed")}</h2>
+      <p style={{marginTop:8}}>{score}/{MAX_MISSION_SCORE} {t("puan","points")} · {Math.floor(elapsed/60)}:{String(elapsed%60).padStart(2,"0")} · {t("12 uygunsuzluk değerlendirildi","12 hazards assessed")}</p>
+      <p style={{marginTop:8,color:"#d1e6e4"}}>{score>=200?t("Başarılı denetim: yüksek doğruluk.","Strong inspection: high decision accuracy."):t("Eğitim önerisi: yanlış müdahaleleri tekrar gözden geçir.","Training recommended: review incorrect decisions.")}</p>
+      <button style={{...buttonStyle,marginTop:14}} onClick={()=>window.print()}>{t("Denetim sonucunu yazdır","Print inspection result")}</button>
+    </section>}
     <p style={{fontSize:11,color:"#8cabb9",marginTop:14}}>Training simulation · GLB model: Duane’s Mind / Sketchfab (CC BY). No Labs XP or account writes. Hazard objects are training placeholders, not verified real-world site observations.</p>
   </section>;
 }
