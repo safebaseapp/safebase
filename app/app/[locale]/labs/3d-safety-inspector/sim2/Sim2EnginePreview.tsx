@@ -229,6 +229,7 @@ export default function Sim2EnginePreview() {
         if (disposed) return;
         const position = new THREE.Vector3(0, 1.72, 38);
         const inspector = new THREE.Group();
+        const animatedLimbs: any[] = [];
         const avatarMaterial = (color:number) => new THREE.MeshStandardMaterial({color,roughness:0.85});
         const avatarBox=(w:number,h:number,d:number,x:number,y:number,mat:any)=>{
           const part=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);
@@ -237,11 +238,18 @@ export default function Sim2EnginePreview() {
         const vest=avatarMaterial(0xd9ee37), uniform=avatarMaterial(0x253643);
         avatarBox(0.75,0.78,0.4,0,1.2,vest);
         avatarBox(0.7,0.3,0.38,0,0.72,uniform);
-        for(const x of [-0.22,0.22])avatarBox(0.26,0.7,0.3,x,0.34,uniform);
-        for(const x of [-0.55,0.55])avatarBox(0.2,0.65,0.28,x,1.15,uniform);
+        for(const x of [-0.22,0.22]){const joint=new THREE.Group();joint.position.set(x,0.69,0);const limb=new THREE.Mesh(new THREE.BoxGeometry(0.26,0.7,0.3),uniform);limb.position.y=-0.35;limb.castShadow=true;joint.add(limb);inspector.add(joint);animatedLimbs.push(joint);}
+        for(const x of [-0.55,0.55]){const joint=new THREE.Group();joint.position.set(x,1.49,0);const limb=new THREE.Mesh(new THREE.BoxGeometry(0.2,0.65,0.28),uniform);limb.position.y=-0.32;limb.castShadow=true;joint.add(limb);inspector.add(joint);animatedLimbs.push(joint);}
         avatarBox(0.33,0.35,0.33,0,1.75,avatarMaterial(0x9b745e));
         const helmet=new THREE.Mesh(new THREE.SphereGeometry(0.33,14,10),avatarMaterial(0xf1f2e9));
         helmet.scale.y=0.55;helmet.position.y=2;inspector.add(helmet);
+        const reflective=new THREE.MeshStandardMaterial({color:0xd9e9d9,metalness:0.15,roughness:0.55});
+        for(const x of [-0.26,0.26])avatarBox(0.09,0.74,0.016,x,1.2,reflective);
+        const vestCanvas=document.createElement("canvas");vestCanvas.width=512;vestCanvas.height=256;
+        const vc=vestCanvas.getContext("2d");
+        if(vc){vc.fillStyle="#d9ee37";vc.fillRect(0,0,512,256);vc.fillStyle="#13251c";vc.font="bold 64px Arial";vc.textAlign="center";vc.fillText("SERNEM",256,140);vc.font="bold 35px Arial";vc.fillText("SIM",256,190);}
+        const logo=new THREE.Mesh(new THREE.PlaneGeometry(0.63,0.32),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(vestCanvas),side:THREE.DoubleSide}));
+        logo.position.set(0,1.22,0.209);inspector.add(logo);
         scene.add(inspector);
         const blockers = [
           {x:-30,z:20,w:13,d:17},{x:-6,z:-9,w:13,d:7},
@@ -327,6 +335,10 @@ export default function Sim2EnginePreview() {
           position.z = Math.max(-69,Math.min(69,position.z));
           inspector.position.set(position.x,0,position.z);
           inspector.rotation.y=yaw+Math.PI;
+          const walking=Math.hypot(forward,sideways)>0;
+          const stride=walking?Math.sin(now*0.012*(held.has("shift")?1.5:1))*0.52:0;
+          animatedLimbs[0].rotation.x=stride;animatedLimbs[1].rotation.x=-stride;
+          animatedLimbs[2].rotation.x=-stride*0.65;animatedLimbs[3].rotation.x=stride*0.65;
           // Camera stays BEHIND the inspector: at yaw=0 the player looks toward -Z.
           camera.position.set(position.x+Math.sin(yaw)*3.2,position.y+1.35,position.z+Math.cos(yaw)*3.2);
           camera.rotation.order = "YXZ";
