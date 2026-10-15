@@ -22,6 +22,7 @@ export default function Inspector3D({ locale }: Props) {
   const [stick, setStick] = useState({ x: 0, y: 0 });
   const [mode, setMode] = useState<Mode>("ready");
   const [error, setError] = useState("");
+  const [assetStatus, setAssetStatus] = useState<"loading" | "loaded" | "missing" | "failed">("loading");
   const [position, setPosition] = useState<Position>({ x: 0, z: 30 });
   const confirmed = useRef(new Set<string>());
   const [found, setFound] = useState<string[]>([]);
@@ -36,6 +37,7 @@ export default function Inspector3D({ locale }: Props) {
   const [seconds, setSeconds] = useState(0);
   const timeRef = useRef(0);
   const missionScore = Object.values(points).reduce((sum, item) => sum + item, 0);
+  const assetMessage = assetStatus === "loading" ? (isTr ? "GLB yükleniyor" : "GLB loading") : assetStatus === "loaded" ? (isTr ? "GLB geometri eklendi" : "GLB geometry added") : assetStatus === "missing" ? (isTr ? "GLB bulunamadı / okunamadı" : "GLB missing / unreadable") : (isTr ? "GLB yükleme hatası" : "GLB load error");
 
   const pause = useCallback(() => {
     active.current = false;
@@ -133,7 +135,7 @@ export default function Inspector3D({ locale }: Props) {
       engine = new RefineryWorld(target);
       world.current = engine;
       // Optional real refinery geometry: keep training hazards playable if the GLB is absent.
-      void engine.loadRefineryGLB().catch(() => false);
+      void engine.loadRefineryGLB().then(ok => setAssetStatus(ok ? "loaded" : "missing")).catch(() => setAssetStatus("failed"));
     } catch (e) {
       setError(e instanceof Error ? e.message : "3D scene could not initialize");
       setMode("unsupported");
@@ -307,6 +309,7 @@ export default function Inspector3D({ locale }: Props) {
 
   return (
     <main className={s.page}>
+      <div role="status" style={{position:"fixed",bottom:8,left:8,zIndex:9999,background:"#10202de8",color:assetStatus==="loaded"?"#7bf0ce":"#ffcf8b",fontSize:11,padding:"5px 9px",borderRadius:6,pointerEvents:"none"}}>3D ASSET: {assetMessage}</div>
       <div className={s.shell}>
         <div className={s.nav}>
           <Link href={`/${locale}/labs`} className={s.back}>← {isTr ? "SERNEM Labs'e dön" : "Back to SERNEM Labs"}</Link>
