@@ -269,12 +269,9 @@ export default function Sim2EnginePreview() {
           markers.push({ id: hazard.id, mesh, position: new THREE.Vector3(x, py, z) });
         }
         let weldingAssetLoaded=false;
-        // Third-party authored 3D asset (CC0), not procedural placeholder geometry.
-        // Source: https://3dassets.dev/assets/car-factory-production-line-spot-weld-gun-on-balancer-20e53e7e
-        // Asset: /models/refinery/portable_welding_cart_1k.glb
-        // External CDN must allow CORS; failure is reported in the SIM status panel.
+        // Poly Haven Portable Welding Cart (CC0), hosted in app/public/models/refinery.
         try {
-          const weldingAsset=await new GLTFLoader().loadAsync("https://cdn.3dassets.dev/assets/27809/v1/model.glb");
+          const weldingAsset=await new GLTFLoader().loadAsync("/models/refinery/portable_welding_cart_1k.glb");
           if(disposed)return;
           const model=weldingAsset.scene;
           const bounds=new THREE.Box3().setFromObject(model);
