@@ -294,6 +294,25 @@ function constructSite() {
   for(const x of [-5.25,5.25])for(let z=-34;z<=34;z+=4){
     m.box(x,0.025,z,0.23,0.05,0.43,0xe7d9a3);
   }
+  // P5 surface detailing: weathered maintenance grating, pipe clamps and tank weld seams.
+  for(const z of [6,8,10,12,14,16]){
+    m.box(4.8,0.037,z,0.85,0.04,0.045,0x8799a0);
+    for(const x of [4.46,4.70,4.94,5.18])m.box(x,0.047,z,0.035,0.045,0.68,0x657983);
+  }
+  for(const [x,z,r,h] of [[23,-20,5,10],[27,10,4.2,7.2]] as number[][]){
+    for(let y=1.1;y<h-0.7;y+=1.6){
+      for(let k=0;k<32;k++){
+        const a=k*Math.PI/16, b=(k+1)*Math.PI/16;
+        m.cylinder([x+(r+0.016)*Math.cos(a),y,z+(r+0.016)*Math.sin(a)],[x+(r+0.016)*Math.cos(b),y,z+(r+0.016)*Math.sin(b)],0.018,0x71838b,5);
+      }
+    }
+  }
+  for(const z of [-29,-22,-15,-8,-1,6,13,19]){
+    for(const x of [9.2,11.1,13.1,15.2]){
+      m.box(x,7.31,z,0.44,0.11,0.32,0x5e707b);
+      m.box(x,7.18,z,0.13,0.23,0.11,0x879aa2);
+    }
+  }
   // Instrument cabinets and gauges: thin, decorative panels avoid new invisible walls.
   for(const [x,z] of [[5,26],[-13,7],[18,25]] as number[][]){
     m.box(x,1.15,z,1.1,1.8,0.46,0x849aa5);
@@ -339,10 +358,21 @@ void main(){
   float occlusion=n.y<0.15?0.91:1.0;
   float light=(0.37+diffuse*0.70+cold)*occlusion;
   float metalHighlight=pow(max(dot(reflect(-sun,n),normalize(vec3(0.2,0.65,0.75))),0.0),20.0)*0.13;
-  float textureNoise=fract(sin(dot(vWorld.xz*3.1+vWorld.yy,vec2(12.9898,78.233)))*43758.5453);
-  vec3 lit=vColor*light*(0.95+0.10*textureNoise)+vec3(0.65,0.78,0.84)*metalHighlight;
-  vec3 atmospheric=vec3(0.37,0.49,0.59);
-  float fog=clamp((vDepth-19.0)/105.0,0.0,0.84);
+  // P5: restrained industrial finish: multiscale surface grain, grime and warm daylight.
+  float fine=fract(sin(dot(vWorld.xz*11.7+vWorld.yy*2.4,vec2(12.9898,78.233)))*43758.5453);
+  float coarse=fract(sin(dot(floor(vWorld.xz*1.65)+vWorld.yy*0.17,vec2(39.3468,11.135)))*12741.315);
+  float seams=1.0-smoothstep(0.018,0.065,min(fract(abs(vWorld.x)*0.25),fract(abs(vWorld.z)*0.25)));
+  float horizontal=clamp(n.y,0.0,1.0);
+  float dirt=mix(0.965,0.87+coarse*0.14,horizontal);
+  vec3 base=vColor*(0.92+0.10*fine+0.06*coarse)*dirt;
+  base*=1.0-0.028*seams*horizontal;
+  float edgeLight=pow(1.0-max(dot(n,normalize(vec3(0.0,0.55,0.84))),0.0),3.0)*0.07;
+  vec3 lit=base*(light+edgeLight)+vec3(0.72,0.77,0.78)*metalHighlight;
+  // Subtle filmic compression prevents flat, overexposed industrial surfaces.
+  lit=lit/(vec3(1.0)+lit*0.27);
+  lit=pow(max(lit,vec3(0.0)),vec3(0.94));
+  vec3 atmospheric=vec3(0.54,0.63,0.68);
+  float fog=clamp((vDepth-27.0)/116.0,0.0,0.70);
   fragColor=vec4(mix(lit,atmospheric,fog),1.0);
 }`;
 
@@ -399,7 +429,7 @@ export class RefineryWorld {
       gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(values),gl.STATIC_DRAW);
       gl.enableVertexAttribArray(location);gl.vertexAttribPointer(location,3,gl.FLOAT,false,0,0);
     }
-    gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.clearColor(0.30,0.43,0.54,1);
+    gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.clearColor(0.54,0.63,0.68,1);
   }
   /** Nearest aimed training finding within a short inspection distance. */
   pickHazard(completed: ReadonlySet<string>): SafetyHazard | null {
