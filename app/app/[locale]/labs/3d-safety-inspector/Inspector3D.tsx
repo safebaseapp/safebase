@@ -309,7 +309,7 @@ export default function Inspector3D({ locale }: Props) {
 
   return (
     <main className={s.page}>
-      <div role="status" style={{position:"fixed",bottom:8,left:8,zIndex:9999,background:"#10202de8",color:assetStatus==="loaded"?"#7bf0ce":"#ffcf8b",fontSize:11,padding:"5px 9px",borderRadius:6,pointerEvents:"none"}}>3D ASSET: {assetMessage}</div>
+      {assetStatus !== "loaded" && <div role="status" style={{position:"fixed",bottom:8,left:8,zIndex:9999,background:"#10202de8",color:"#ffcf8b",fontSize:11,padding:"5px 9px",borderRadius:6,pointerEvents:"none"}}>3D ASSET: {assetMessage}</div>}
       <div className={s.shell}>
         <div className={s.nav}>
           <Link href={`/${locale}/labs`} className={s.back}>← {isTr ? "SERNEM Labs'e dön" : "Back to SERNEM Labs"}</Link>
@@ -320,9 +320,9 @@ export default function Inspector3D({ locale }: Props) {
           <div>
             <p className={s.eyebrow}>FIELD WALKTHROUGH · REFINERY MAINTENANCE ZONE</p>
             <h1>{isTr ? "Sahaya gir. Uygunsuzlukları tespit et." : "Enter the site. Find the hazards."}</h1>
-            <p>{isTr ? "Üçüncü paket: 3D sahada 12 uygunsuzluğu bul, müdahale kararını ver ve görevi puanla." : "Package three: discover 12 hazards in the 3D site, choose safe interventions and earn mission points."}</p>
+            <p>{isTr ? "Gerçekçi rafineri sahasında 12 uygunsuzluğu incele, güvenli müdahaleyi seç ve puan kazan." : "Inspect 12 hazards in the refinery, choose safe interventions and earn mission points."}</p>
           </div>
-          <div className={s.build}>ALPHA / P4 <span>●</span> WEBGL2</div>
+          <div className={s.build}>ALPHA / P5 <span>●</span> WEBGL2</div>
         </div>
 
         <section className={s.viewport} aria-label={isTr ? "Gezilebilir 3D rafineri sahası" : "Explorable 3D refinery field"}>
