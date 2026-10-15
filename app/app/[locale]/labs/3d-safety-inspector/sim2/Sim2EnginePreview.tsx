@@ -14,7 +14,12 @@ export default function Sim2EnginePreview() {
     let cancelled = false;
     let renderer: { dispose: () => void; setAnimationLoop: (cb: null | (() => void)) => void; domElement: HTMLCanvasElement } | undefined;
     let frame = 0;
+    let azimuth = 0;
+    let orbitDistance = 1;
+    let dragX: number | null = null;
+    let userInteracted = false;
     let resize: (() => void) | undefined;
+    let removeControls: (() => void) | undefined;
     const start = async () => {
       try {
         // @ts-ignore External ESM prototype module; isolated from application dependencies.
@@ -29,6 +34,17 @@ export default function Sim2EnginePreview() {
         camera.position.set(22, 12, 35);
         camera.lookAt(0, 6, 0);
         const webgl = new THREE.WebGLRenderer({ canvas: canvas.current, antialias: true, powerPreference: "high-performance" });
+        const canvasElement = canvas.current;
+        const onPointerDown = (event: PointerEvent) => { dragX = event.clientX; userInteracted = true; canvasElement.setPointerCapture(event.pointerId); };
+        const onPointerMove = (event: PointerEvent) => { if (dragX !== null) { azimuth += (event.clientX - dragX) * 0.006; dragX = event.clientX; } };
+        const onPointerUp = () => { dragX = null; };
+        const onWheel = (event: WheelEvent) => { event.preventDefault(); orbitDistance = Math.min(2.4, Math.max(0.65, orbitDistance + event.deltaY * 0.001)); userInteracted = true; };
+        canvasElement.addEventListener("pointerdown", onPointerDown);
+        canvasElement.addEventListener("pointermove", onPointerMove);
+        canvasElement.addEventListener("pointerup", onPointerUp);
+        canvasElement.addEventListener("pointercancel", onPointerUp);
+        canvasElement.addEventListener("wheel", onWheel, { passive: false });
+        removeControls = () => { canvasElement.removeEventListener("pointerdown", onPointerDown); canvasElement.removeEventListener("pointermove", onPointerMove); canvasElement.removeEventListener("pointerup", onPointerUp); canvasElement.removeEventListener("pointercancel", onPointerUp); canvasElement.removeEventListener("wheel", onWheel); };
         renderer = webgl;
         webgl.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
         webgl.outputColorSpace = THREE.SRGBColorSpace;
@@ -85,8 +101,9 @@ export default function Sim2EnginePreview() {
         setStatus("SIM 2.0 · Gerçek GLB / PBR / gölgeler");
         webgl.setAnimationLoop(() => {
           frame++;
-          camera.position.x = Math.cos(frame * 0.0015) * maxSize * 1.35;
-          camera.position.z = Math.sin(frame * 0.0015) * maxSize * 1.35;
+          if (!userInteracted) azimuth += 0.0015;
+          camera.position.x = Math.cos(azimuth) * maxSize * 1.35 * orbitDistance;
+          camera.position.z = Math.sin(azimuth) * maxSize * 1.35 * orbitDistance;
           camera.lookAt(0, size.y * 0.42, 0);
           webgl.render(scene, camera);
         });
@@ -98,15 +115,16 @@ export default function Sim2EnginePreview() {
     return () => {
       cancelled = true;
       if (resize) window.removeEventListener("resize", resize);
+      removeControls?.();
       renderer?.setAnimationLoop(null);
       renderer?.dispose();
     };
   }, []);
   return <section style={{ minHeight: "100vh", padding: "24px", color: "#d7edf3", background: "#071a26" }}>
     <h1 style={{ fontSize: "clamp(24px,4vw,42px)", fontWeight: 800, marginBottom: 8 }}>SERNEM SIM 2.0</h1>
-    <p style={{ marginBottom: 16, color: "#a7c5d0" }}>Yeni 3D motor ve gerçek rafineri modeli · İzole motor testi (henüz oynanabilir görev sürümü değil)</p>
+    <p style={{ marginBottom: 16, color: "#a7c5d0" }}>Yeni 3D motor ve gerçek rafineri modeli · Fareyle veya dokunarak döndür · Kaydırarak yakınlaştır · Motor testi</p>
     <div style={{ position: "relative", height: "min(72vh,720px)", minHeight: 360, borderRadius: 18, overflow: "hidden", border: "1px solid #285364" }}>
-      <canvas ref={canvas} style={{ width: "100%", height: "100%", display: "block" }} />
+      <canvas ref={canvas} style={{ width: "100%", height: "100%", display: "block", touchAction: "none", cursor: "grab" }} />
       <div role="status" style={{ position: "absolute", left: 12, bottom: 12, background: "#0a2638dd", borderRadius: 9, padding: "9px 12px", fontSize: 13 }}>{status}</div>
     </div>
     <p style={{ marginTop: 14, fontSize: 12, color: "#87a6b3" }}>Refinery model: Duane’s Mind (Sketchfab), CC BY. Three.js engine proof of concept.</p>
