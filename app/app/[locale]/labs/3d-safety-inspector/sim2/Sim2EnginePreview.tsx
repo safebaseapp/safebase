@@ -29,7 +29,7 @@ export default function Sim2EnginePreview() {
         if (cancelled || !canvas.current) return;
         const scene = new THREE.Scene();
         scene.background = new THREE.Color("#9aafbb");
-        scene.fog = new THREE.Fog("#9aafbb", 55, 170);
+        scene.fog = new THREE.Fog("#9aafbb", 85, 220);
         const camera = new THREE.PerspectiveCamera(62, 1, 0.1, 250);
         camera.position.set(22, 12, 35);
         camera.lookAt(0, 6, 0);
@@ -49,11 +49,11 @@ export default function Sim2EnginePreview() {
         webgl.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
         webgl.outputColorSpace = THREE.SRGBColorSpace;
         webgl.toneMapping = THREE.ACESFilmicToneMapping;
-        webgl.toneMappingExposure = 1.35;
+        webgl.toneMappingExposure = 0.82;
         webgl.shadowMap.enabled = true;
         webgl.shadowMap.type = THREE.PCFSoftShadowMap;
-        scene.add(new THREE.HemisphereLight(0xe9f4ff, 0x52616c, 2.3));
-        const sun = new THREE.DirectionalLight(0xffe8c7, 3.2);
+        scene.add(new THREE.HemisphereLight(0xddeaf2, 0x495963, 0.85));
+        const sun = new THREE.DirectionalLight(0xffebd4, 1.9);
         sun.position.set(-30, 48, 22);
         sun.castShadow = true;
         sun.shadow.mapSize.set(1024, 1024);
@@ -77,15 +77,26 @@ export default function Sim2EnginePreview() {
         const center = bounds.getCenter(new THREE.Vector3());
         model.scene.position.sub(center);
         model.scene.position.y += size.y / 2;
+        let meshCount = 0;
+        let mappedMaterials = 0;
+        let totalMaterials = 0;
         model.scene.traverse((obj: any) => {
           if (obj instanceof THREE.Mesh) {
             obj.castShadow = true;
             obj.receiveShadow = true;
+            meshCount++;
+            const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
+            for (const mat of materials) {
+              if (!mat) continue;
+              totalMaterials++;
+              if (mat.map) { mappedMaterials++; mat.map.colorSpace = THREE.SRGBColorSpace; }
+              mat.needsUpdate = true;
+            }
           }
         });
         scene.add(model.scene);
         const maxSize = Math.max(size.x, size.y, size.z);
-        camera.position.set(maxSize * 1.15, Math.max(size.y * 0.85, 9), maxSize * 1.5);
+        camera.position.set(maxSize * 0.9, Math.max(size.y * 0.65, 9), maxSize * 1.1);
         camera.lookAt(0, size.y * 0.42, 0);
         resize = () => {
           if (!canvas.current) return;
@@ -98,12 +109,12 @@ export default function Sim2EnginePreview() {
         };
         window.addEventListener("resize", resize);
         resize();
-        setStatus("SIM 2.0 · Gerçek GLB / PBR / gölgeler");
+        setStatus(`SIM 2.0 · ${meshCount} mesh · ${mappedMaterials}/${totalMaterials} dokulu malzeme · PBR`);
         webgl.setAnimationLoop(() => {
           frame++;
           if (!userInteracted) azimuth += 0.0015;
-          camera.position.x = Math.cos(azimuth) * maxSize * 1.35 * orbitDistance;
-          camera.position.z = Math.sin(azimuth) * maxSize * 1.35 * orbitDistance;
+          camera.position.x = Math.cos(azimuth) * maxSize * 1.05 * orbitDistance;
+          camera.position.z = Math.sin(azimuth) * maxSize * 1.05 * orbitDistance;
           camera.lookAt(0, size.y * 0.42, 0);
           webgl.render(scene, camera);
         });
