@@ -15,7 +15,7 @@ type Engine = {
 const accent = "#70e3d1";
 const buttonStyle = { background: "#163c50", color: "#e7faff", border: "1px solid #407287", borderRadius: 10, padding: "10px 14px", cursor: "pointer" } as const;
 
-/** SIM 2.0 playable vertical slice. Uses P5's authored scenarios and decisions.
+/** SIM 3.0 experimental playable vertical slice. Uses P5's authored scenarios and decisions.
  * Marker geometry is a temporary, visibly labeled training placeholder, NOT a
  * photorealistic representation of each unsafe condition. No XP or DB writes.
  */
@@ -514,7 +514,7 @@ export default function Sim2EnginePreview() {
           renderer.dispose();
         };
       } catch(err) {
-        if(!disposed) setStatus("SIM 2.0 motor hatası: "+String(err));
+        if(!disposed) setStatus("SIM 3.0 motor hatası: "+String(err));
       }
     };
     void start();
@@ -524,7 +524,7 @@ export default function Sim2EnginePreview() {
   const t = (tr: string,en: string) => language === "tr" ? tr : en;
   return <section style={{minHeight:"100vh",background:"#061824",color:"#e4f6fa",padding:"clamp(12px,2vw,26px)"}}>
     <header style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:12,marginBottom:12}}>
-      <div><h1 style={{fontSize:"clamp(23px,3vw,38px)",fontWeight:850}}>SERNEM SIM 2.0 <span style={{fontSize:13,color:accent}}>MISSION 01</span></h1>
+      <div><h1 style={{fontSize:"clamp(23px,3vw,38px)",fontWeight:850}}>SERNEM SIM 3.0 <span style={{fontSize:13,color:accent}}>MISSION 01</span></h1>
       <p style={{fontSize:13,color:"#9ab8c6"}}>{t("3D sahada uygunsuzlukları bul ve doğru müdahaleyi seç","Find site hazards and select the correct intervention")}</p></div>
       <div style={{display:"flex",alignItems:"center",gap:9,flexWrap:"wrap"}}>
         <strong style={{color:accent}}>{completed}/12 · {score}/{MAX_MISSION_SCORE} {t("puan","points")} · {Math.floor(elapsed/60)}:{String(elapsed%60).padStart(2,"0")}</strong>
@@ -574,6 +574,6 @@ export default function Sim2EnginePreview() {
       <p style={{marginTop:8,color:"#d1e6e4"}}>{score>=200?t("Başarılı denetim: yüksek doğruluk.","Strong inspection: high decision accuracy."):t("Eğitim önerisi: yanlış müdahaleleri tekrar gözden geçir.","Training recommended: review incorrect decisions.")}</p>
       <button style={{...buttonStyle,marginTop:14}} onClick={()=>window.print()}>{t("Denetim sonucunu yazdır","Print inspection result")}</button>
     </section>}
-    <p style={{fontSize:11,color:"#8cabb9",marginTop:14}}>Training simulation · GLB model: Duane’s Mind / Sketchfab (CC BY). No Labs XP or account writes. Hazard objects are training placeholders, not verified real-world site observations.</p>
+    <p style={{fontSize:11,color:"#8cabb9",marginTop:14}}>Experimental training simulation · Welding cart: Poly Haven (CC0). Tank model: Duane’s Mind / Sketchfab (CC BY). No Labs XP or account writes. Remaining hazard props are training placeholders, not verified real-world site observations.</p>
   </section>;
 }
