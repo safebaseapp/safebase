@@ -58,7 +58,11 @@ export default function Inspector3D({ locale }: Props) {
     }
     active.current = false;
     keys.current.clear();
+    touchMove.current = { forward: 0, side: 0 };
+    joystickPointer.current = null;
+    setStick({ x: 0, y: 0 });
     setFocus(null);
+    setNearby(null);
     setHint("");
     setInspection(match);
     setPicked(null);
@@ -84,11 +88,13 @@ export default function Inspector3D({ locale }: Props) {
     setPoints(old => ({ ...old, [inspection.id]: pointsForDecision(wrongAttempts) }));
     setFound([...confirmed.current]);
     setInspection(null);
+    setNearby(null);
     setMode("paused");
   };
 
   const cancelInspection = () => {
     setInspection(null);
+    setNearby(null);
     setMode("paused");
   };
 
