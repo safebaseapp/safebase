@@ -431,6 +431,83 @@ export class RefineryWorld {
     }
     gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.clearColor(0.54,0.63,0.68,1);
   }
+  /**
+   * Import a real binary glTF refinery asset into the playable scene.
+   * Keeps hazard meshes and scoring intact. Material base colors are used as
+   * a fallback until the PBR renderer lands. GLB is optional in preview.
+   */
+  async loadRefineryGLB(source = "/models/refinery/large_industrial_storage_tanks.glb"): Promise<boolean> {
+    const response = await fetch(source);
+    if (!response.ok) return false;
+    const bytes = await response.arrayBuffer();
+    const dv = new DataView(bytes);
+    if (dv.getUint32(0, true) !== 0x46546c67 || dv.getUint32(4, true) !== 2) return false;
+    let offset = 12, json: any = null, binary: ArrayBuffer | null = null;
+    while (offset + 8 <= bytes.byteLength) {
+      const length = dv.getUint32(offset, true), type = dv.getUint32(offset + 4, true);
+      offset += 8;
+      if (type === 0x4e4f534a) json = JSON.parse(new TextDecoder().decode(new Uint8Array(bytes, offset, length)));
+      if (type === 0x004e4942) binary = bytes.slice(offset, offset + length);
+      offset += length;
+    }
+    if (!json || !binary) return false;
+    const views = json.bufferViews || [], accessors = json.accessors || [];
+    const read = (index: number): number[][] => {
+      const a = accessors[index], v = views[a.bufferView];
+      if (!a || !v || a.sparse) return [];
+      const count = a.type === "VEC3" ? 3 : a.type === "VEC2" ? 2 : 1;
+      const width = a.componentType === 5126 || a.componentType === 5125 ? 4 : a.componentType === 5123 ? 2 : 1;
+      const stride = v.byteStride || count * width;
+      const data = new DataView(binary!, (v.byteOffset || 0) + (a.byteOffset || 0));
+      const result: number[][] = [];
+      for (let i = 0; i < a.count; i++) {
+        const row: number[] = [];
+        for (let k = 0; k < count; k++) {
+          const at = i * stride + k * width;
+          row.push(a.componentType === 5126 ? data.getFloat32(at, true) : a.componentType === 5125 ? data.getUint32(at, true) : a.componentType === 5123 ? data.getUint16(at, true) : data.getUint8(at));
+        }
+        result.push(row);
+      }
+      return result;
+    };
+    const positions: number[] = [], normals: number[] = [], colors: number[] = [];
+    const nodes = json.nodes || [], meshes = json.meshes || [];
+    const add = (nodeIndex: number, parent: number[]) => {
+      const node = nodes[nodeIndex];
+      if (!node) return;
+      const t = node.translation || [0,0,0], scale = node.scale || [1,1,1];
+      const world = [parent[0] + t[0] * parent[3], parent[1] + t[1] * parent[4], parent[2] + t[2] * parent[5], parent[3] * scale[0], parent[4] * scale[1], parent[5] * scale[2]];
+      if (node.mesh !== undefined) for (const p of meshes[node.mesh]?.primitives || []) {
+        if (p.mode !== undefined && p.mode !== 4) continue;
+        const xyz = read(p.attributes?.POSITION), nrm = p.attributes?.NORMAL !== undefined ? read(p.attributes.NORMAL) : [];
+        const idx = p.indices !== undefined ? read(p.indices).map(x=>x[0]) : xyz.map((_,i)=>i);
+        const factor = json.materials?.[p.material]?.pbrMetallicRoughness?.baseColorFactor || [0.66,0.73,0.77,1];
+        for (let i=0;i+2<idx.length;i+=3) for (let k=0;k<3;k++) {
+          const v=idx[i+k], q=xyz[v], n=nrm[v] || [0,1,0];
+          if (!q) continue;
+          positions.push(q[0]*world[3]*0.4+17+world[0]*0.4,q[1]*world[4]*0.4+world[1]*0.4,q[2]*world[5]*0.4-12+world[2]*0.4);
+          normals.push(n[0],n[1],n[2]); colors.push(factor[0],factor[1],factor[2]);
+        }
+      }
+      for (const child of node.children || []) add(child,world);
+    };
+    for (const root of json.scenes?.[json.scene || 0]?.nodes || []) add(root,[0,0,0,1,1,1]);
+    if (!positions.length) return false;
+    const gl=this.gl;
+    gl.useProgram(this.program);
+    for (const [i,values] of [positions,normals,colors].entries()) {
+      gl.bindBuffer(gl.ARRAY_BUFFER,this.buffers[i]);
+      const oldBytes=gl.getBufferParameter(gl.ARRAY_BUFFER,gl.BUFFER_SIZE) as number;
+      const previous=new Float32Array(oldBytes/4);
+      gl.getBufferSubData(gl.ARRAY_BUFFER,0,previous);
+      const combined=new Float32Array(previous.length+values.length);
+      combined.set(previous);combined.set(values,previous.length);
+      gl.bufferData(gl.ARRAY_BUFFER,combined,gl.STATIC_DRAW);
+    }
+    this.vertexCount+=positions.length/3;
+    return true;
+  }
+
   /** Nearest aimed training finding within a short inspection distance. */
   pickHazard(completed: ReadonlySet<string>): SafetyHazard | null {
     const eye: V3 = [this.state.x,1.72,this.state.z];
