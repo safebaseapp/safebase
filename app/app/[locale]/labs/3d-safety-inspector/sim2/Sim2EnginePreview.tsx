@@ -17,7 +17,9 @@ export default function Sim2EnginePreview() {
     let resize: (() => void) | undefined;
     const start = async () => {
       try {
+        // @ts-ignore External ESM prototype module; isolated from application dependencies.
         const THREE = await import(/* webpackIgnore: true */ "https://esm.sh/three@0.180.0");
+        // @ts-ignore External ESM prototype module; isolated from application dependencies.
         const { GLTFLoader } = await import(/* webpackIgnore: true */ "https://esm.sh/three@0.180.0/examples/jsm/loaders/GLTFLoader.js");
         if (cancelled || !canvas.current) return;
         const scene = new THREE.Scene();
@@ -59,7 +61,7 @@ export default function Sim2EnginePreview() {
         const center = bounds.getCenter(new THREE.Vector3());
         model.scene.position.sub(center);
         model.scene.position.y += size.y / 2;
-        model.scene.traverse((obj: THREE.Object3D) => {
+        model.scene.traverse((obj: any) => {
           if (obj instanceof THREE.Mesh) {
             obj.castShadow = true;
             obj.receiveShadow = true;
