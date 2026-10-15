@@ -218,7 +218,8 @@ export default function Sim2EnginePreview() {
         // SIM3 hot-work vertical slice: visible work zone, welding rig, sparks,
         // shielding and unsecured cylinders; no floating marker needed.
         const weldZone=new THREE.Group();scene.add(weldZone);
-        const workX=24,workZ=17;
+        const hotWorkTarget=trainingHazards.find(h=>h.id==="hot-work-combustible");
+        const workX=hotWorkTarget?.target[0] ?? -10,workZ=hotWorkTarget?.target[2] ?? 28;
         const darkRubber=material(0x252f32),copper=material(0xb46c3e,0.75);
         const cylinderShell=new THREE.MeshStandardMaterial({color:0x477b91,metalness:0.55,roughness:0.4});
         const addWeldBox=(x:number,y:number,z:number,w:number,h:number,d:number,mat:any)=>{
@@ -244,6 +245,11 @@ export default function Sim2EnginePreview() {
           valve.position.set(cx,1.77,cz);weldZone.add(valve);
           const ring=new THREE.Mesh(new THREE.TorusGeometry(0.12,0.026,8,16),steel);
           ring.rotation.x=Math.PI/2;ring.position.set(cx,1.87,cz);weldZone.add(ring);
+        }
+        // Combustible storage is intentionally adjacent to the active hot-work area.
+        // The hazard evidence and visual scene must correspond.
+        for(let i=0;i<3;i++){
+          addWeldBox(workX+2.4+(i%2)*0.68,0.33+(i===2?0.65:0),workZ-0.6,0.58,0.62,0.62,material(0x88603d));
         }
         // Fire blanket screen, welding curtain and torch stand.
         for(const x of [workX-4.2,workX+1.4]){
