@@ -43,6 +43,8 @@ export default function Inspector3D({ locale }: Props) {
     touchMove.current = { forward: 0, side: 0 };
     joystickPointer.current = null;
     setStick({ x: 0, y: 0 });
+    setNearby(null);
+    setHint("");
     if (document.pointerLockElement === canvas.current) document.exitPointerLock();
     setMode((old) => old === "running" ? "paused" : old);
   }, []);
@@ -368,7 +370,7 @@ export default function Inspector3D({ locale }: Props) {
                   <span className={s.touchCaption}>{isTr ? "YÜRÜ" : "MOVE"}</span>
                 </div>
                 <div className={s.touchActions}>
-                  <button type="button" className={s.touchInspect} onClick={inspect}>
+                  <button type="button" className={`${s.touchInspect} ${focus ? s.touchInspectReady : ""}`} onClick={inspect} aria-label={focus ? (isTr ? "Hedefteki uygunsuzluğu incele" : "Inspect targeted finding") : (isTr ? "Uygunsuzluğu hedefle" : "Aim at a finding")}>
                     <span aria-hidden="true">◎</span>{isTr ? "İNCELE" : "INSPECT"}
                   </button>
                   <button type="button" className={s.touchPause} onClick={pause}>
