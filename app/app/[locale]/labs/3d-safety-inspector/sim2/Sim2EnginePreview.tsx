@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { trainingHazards } from "../hazards";
+import { assessments, MAX_MISSION_SCORE, pointsForDecision } from "../assessment";
 
 /**
  * Isolated SIM 2.0 renderer proof of concept. Existing P5 playtest stays intact.
@@ -10,6 +12,20 @@ import { useEffect, useRef, useState } from "react";
 export default function Sim2EnginePreview() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [status, setStatus] = useState("3D motor hazırlanıyor…");
+  const [selected, setSelected] = useState<string | null>(null);
+  const [solved, setSolved] = useState<Record<string, number>>({});
+  const [mistakes, setMistakes] = useState<Record<string, number>>({});
+  const [language, setLanguage] = useState<"tr" | "en">("tr");
+  const active = trainingHazards.find(h => h.id === selected);
+  const completed = Object.keys(solved).length;
+  const score = Object.values(solved).reduce((a,b) => a+b,0);
+  const choose = (choice: number) => {
+    if (!selected || solved[selected] !== undefined) return;
+    if (choice === assessments[selected].correct) {
+      setSolved(prev => ({...prev,[selected]:pointsForDecision(mistakes[selected] || 0)}));
+      setSelected(null);
+    } else setMistakes(prev => ({...prev,[selected]:(prev[selected] || 0)+1}));
+  };
   useEffect(() => {
     let cancelled = false;
     let renderer: { dispose: () => void; setAnimationLoop: (cb: null | (() => void)) => void; domElement: HTMLCanvasElement } | undefined;
@@ -133,11 +149,13 @@ export default function Sim2EnginePreview() {
   }, []);
   return <section style={{ minHeight: "100vh", padding: "24px", color: "#d7edf3", background: "#071a26" }}>
     <h1 style={{ fontSize: "clamp(24px,4vw,42px)", fontWeight: 800, marginBottom: 8 }}>SERNEM SIM 2.0</h1>
-    <p style={{ marginBottom: 16, color: "#a7c5d0" }}>Yeni 3D motor ve gerçek rafineri modeli · Fareyle veya dokunarak döndür · Kaydırarak yakınlaştır · Motor testi</p>
+    <p style={{ marginBottom: 16, color: "#a7c5d0" }}>12 İSG senaryosu · Karar ver · Puan kazan · Three.js görev entegrasyonunun ilk aşaması</p>
+    <div style={{display:"flex",gap:12,flexWrap:"wrap",alignItems:"center",marginBottom:14}}><strong>{completed}/12 {language==="tr"?"bulgu":"findings"} · {score}/{MAX_MISSION_SCORE} {language==="tr"?"puan":"points"}</strong><button onClick={()=>setLanguage(language==="tr"?"en":"tr")} style={{padding:"8px 12px",borderRadius:8,background:"#155269",color:"white"}}>{language==="tr"?"English":"Türkçe"}</button><button onClick={()=>{setSolved({});setMistakes({});setSelected(null);}} style={{padding:"8px 12px",borderRadius:8,background:"#344955",color:"white"}}>{language==="tr"?"Sıfırla":"Reset"}</button></div>
     <div style={{ position: "relative", height: "min(72vh,720px)", minHeight: 360, borderRadius: 18, overflow: "hidden", border: "1px solid #285364" }}>
       <canvas ref={canvas} style={{ width: "100%", height: "100%", display: "block", touchAction: "none", cursor: "grab" }} />
       <div role="status" style={{ position: "absolute", left: 12, bottom: 12, background: "#0a2638dd", borderRadius: 9, padding: "9px 12px", fontSize: 13 }}>{status}</div>
     </div>
-    <p style={{ marginTop: 14, fontSize: 12, color: "#87a6b3" }}>Refinery model: Duane’s Mind (Sketchfab), CC BY. Three.js engine proof of concept.</p>
+    <div style={{marginTop:18,padding:16,border:"1px solid #295062",borderRadius:14,background:"#0b2635"}}><h2 style={{fontSize:20,fontWeight:700,marginBottom:8}}>{language==="tr"?"Saha denetimi · 12 eğitim bulgusu":"Site inspection · 12 training findings"}</h2><p style={{fontSize:13,color:"#9bb7c4",marginBottom:12}}>{language==="tr"?"Bir bulgu seç, durumu değerlendir ve doğru müdahaleyi belirle. Konumlar mevcut P5 senaryosundan alınmıştır; bu motor testinde 3D etkileşim ve yürüyüş henüz taşınmadı.":"Select a finding and choose the correct control. Positions originate in P5; 3D interaction and walking are not integrated yet."}</p><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:8}}>{trainingHazards.map((h,i)=><button key={h.id} onClick={()=>setSelected(h.id)} style={{textAlign:"left",padding:12,borderRadius:9,border:"1px solid "+(selected===h.id?"#58d4cb":"#315366"),background:solved[h.id]!==undefined?"#194b43":"#102f41",color:"white",cursor:"pointer"}}>{i+1}. {h[language].title} {solved[h.id]!==undefined?"✓":""}</button>)}</div>{active && <div style={{marginTop:14,padding:16,border:"1px solid #478a92",borderRadius:12,background:"#103a4b"}}><h3 style={{fontSize:18,fontWeight:700}}>{active[language].title}</h3><p style={{margin:"10px 0"}}>{active[language].evidence}</p><p style={{fontSize:13,color:"#b4d3dc"}}>{language==="tr"?"Hangi müdahale doğru?":"Which action is correct?"}</p><div style={{display:"grid",gap:8,marginTop:10}}>{assessments[active.id][language].map((option,i)=><button key={i} onClick={()=>choose(i)} disabled={solved[active.id]!==undefined} style={{textAlign:"left",padding:12,borderRadius:8,background:"#1b5063",color:"white",border:"1px solid #3d7180",cursor:"pointer"}}>{String.fromCharCode(65+i)}. {option}</button>)}</div>{(mistakes[active.id]||0)>0&&<p style={{marginTop:10,color:"#ffcf92"}}>{language==="tr"?"Yanlış müdahale. Yeniden değerlendir.":"Incorrect action. Try again."} ({mistakes[active.id]})</p>}</div>}</div>
+    <p style={{ marginTop: 14, fontSize: 12, color: "#87a6b3" }}>Refinery model: Duane’s Mind (Sketchfab), CC BY. No Labs XP or account data is changed by this prototype.</p>
   </section>;
 }
