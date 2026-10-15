@@ -440,12 +440,14 @@ export class RefineryWorld {
     const response = await fetch(source);
     if (!response.ok) return false;
     const bytes = await response.arrayBuffer();
+    if (bytes.byteLength < 20) return false;
     const dv = new DataView(bytes);
     if (dv.getUint32(0, true) !== 0x46546c67 || dv.getUint32(4, true) !== 2) return false;
     let offset = 12, json: any = null, binary: ArrayBuffer | null = null;
     while (offset + 8 <= bytes.byteLength) {
       const length = dv.getUint32(offset, true), type = dv.getUint32(offset + 4, true);
       offset += 8;
+      if (length > bytes.byteLength - offset) return false;
       if (type === 0x4e4f534a) json = JSON.parse(new TextDecoder().decode(new Uint8Array(bytes, offset, length)));
       if (type === 0x004e4942) binary = bytes.slice(offset, offset + length);
       offset += length;
@@ -453,12 +455,16 @@ export class RefineryWorld {
     if (!json || !binary) return false;
     const views = json.bufferViews || [], accessors = json.accessors || [];
     const read = (index: number): number[][] => {
-      const a = accessors[index], v = views[a.bufferView];
-      if (!a || !v || a.sparse) return [];
+      const a = accessors[index];
+      if (!a || a.bufferView === undefined || a.sparse) return [];
+      const v = views[a.bufferView];
+      if (!v) return [];
       const count = a.type === "VEC3" ? 3 : a.type === "VEC2" ? 2 : 1;
       const width = a.componentType === 5126 || a.componentType === 5125 ? 4 : a.componentType === 5123 ? 2 : 1;
       const stride = v.byteStride || count * width;
-      const data = new DataView(binary!, (v.byteOffset || 0) + (a.byteOffset || 0));
+      const byteOffset = (v.byteOffset || 0) + (a.byteOffset || 0);
+      if (byteOffset + (a.count - 1) * stride + count * width > binary!.byteLength) return [];
+      const data = new DataView(binary!, byteOffset);
       const result: number[][] = [];
       for (let i = 0; i < a.count; i++) {
         const row: number[] = [];
@@ -515,7 +521,7 @@ export class RefineryWorld {
       for (const child of node.children || []) add(child,m);
     };
     for (const root of json.scenes?.[json.scene || 0]?.nodes || []) add(root,identity);
-    if (!positions.length) return false;
+    if (!positions.length || positions.length !== normals.length || positions.length !== colors.length) return false;
     const gl=this.gl;
     gl.useProgram(this.program);
     for (const [i,values] of [positions,normals,colors].entries()) {
