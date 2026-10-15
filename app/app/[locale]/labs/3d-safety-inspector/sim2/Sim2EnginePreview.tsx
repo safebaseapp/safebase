@@ -88,8 +88,31 @@ export default function Sim2EnginePreview() {
         sun.shadow.camera.top = 65; sun.shadow.camera.bottom = -65;
         scene.add(sun);
         const material = (color: number, metalness = 0.15) => new THREE.MeshStandardMaterial({ color, roughness: 0.83, metalness });
-        const asphalt = new THREE.MeshStandardMaterial({color:0x737d7b,roughness:0.96,metalness:0});
-        const road = new THREE.MeshStandardMaterial({color:0x757a75,roughness:0.98,metalness:0});
+        // Deterministic tileable surface maps: concrete aggregate and worn asphalt.
+        // Canvas textures work offline and on iOS; no extra package or asset download.
+        const surfaceTexture=(base:string,seed:number,roadSurface=false)=>{
+          const c=document.createElement("canvas");c.width=c.height=512;
+          const ctx=c.getContext("2d");if(!ctx)return null;
+          ctx.fillStyle=base;ctx.fillRect(0,0,512,512);
+          let state=seed;const rand=()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;};
+          for(let i=0;i<22000;i++){
+            const v=Math.floor(rand()*75+55),alpha=rand()*0.15+0.035;
+            ctx.fillStyle=`rgba(${v},${v+3},${v+2},${alpha})`;
+            const x=rand()*512,y=rand()*512,r=rand()*2.8+0.25;
+            ctx.fillRect(x,y,r,r);
+          }
+          if(roadSurface){
+            ctx.strokeStyle="rgba(26,32,33,0.16)";ctx.lineWidth=1;
+            for(let i=0;i<16;i++){const y=rand()*512;ctx.beginPath();ctx.moveTo(0,y);ctx.bezierCurveTo(130,y+rand()*20,300,y-rand()*18,512,y+rand()*8);ctx.stroke();}
+          }else{
+            ctx.strokeStyle="rgba(42,47,47,0.22)";ctx.lineWidth=2;
+            for(let i=0;i<=512;i+=128){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,512);ctx.moveTo(0,i);ctx.lineTo(512,i);ctx.stroke();}
+          }
+          const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;
+          t.repeat.set(24,24);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());return t;
+        };
+        const asphalt = new THREE.MeshStandardMaterial({color:0xc4c5c0,map:surfaceTexture("#858e8b",23),roughness:0.96,metalness:0});
+        const road = new THREE.MeshStandardMaterial({color:0xb3b4ad,map:surfaceTexture("#737976",71,true),roughness:0.98,metalness:0});
         const railing = material(0xb5c0bb,0.65);
         const safetyRed = material(0xb94935);
         const glass = new THREE.MeshStandardMaterial({color:0x8daeb4,metalness:0.25,roughness:0.22,transparent:true,opacity:0.7});
@@ -155,6 +178,40 @@ export default function Sim2EnginePreview() {
         box(18, 10, 27, 11, 0.65, 0.8, steel);
         pipe(18, 9.7, 27, 18, 5.3, 27, 0.055, steel);
         box(18, 4.7, 27, 3.2, 1.2, 2.4, yellow);
+        // Production-style detail layer: safety rails, pipe flanges, pump skids,
+        // bollards and instrument clusters to break up the toy-like empty compound.
+        const stainless=material(0xa5aaa5,0.72),darkSteel=material(0x36474d,0.66);
+        for(const x of [-27,-17,-7,3,13,23]){
+          for(const z of [-29,-22]){
+            box(x,0.18,z,0.9,0.35,0.9,concrete);
+            for(const h of [0.5,1.15,1.8])pipe(x-0.28,h,z,x+0.28,h,z,0.035,stainless);
+          }
+        }
+        for(let x=-25;x<=20;x+=9){
+          const z=-16;
+          box(x,0.26,z,3.4,0.45,2.1,concrete);
+          const pump=new THREE.Mesh(new THREE.CylinderGeometry(0.68,0.68,1.7,24),darkSteel);
+          pump.rotation.z=Math.PI/2;pump.position.set(x,1.12,z);pump.castShadow=true;scene.add(pump);
+          for(const dx of [-1,1]){
+            const flange=new THREE.Mesh(new THREE.TorusGeometry(0.48,0.085,8,24),stainless);
+            flange.rotation.y=Math.PI/2;flange.position.set(x+dx,1.12,z);scene.add(flange);
+          }
+          pipe(x,1.12,z-0.8,x,1.12,z-2.8,0.19,steel);
+          pipe(x,1.12,z+0.8,x,1.12,z+2.8,0.19,steel);
+        }
+        for(const z of [-46,-38,-30,-22,-14,-6,2,10,18,26,34,42,50]){
+          for(const x of [-4.0,12.3]){
+            const post=new THREE.Mesh(new THREE.CylinderGeometry(0.11,0.13,1.15,12),yellow);
+            post.position.set(x,0.575,z);post.castShadow=true;scene.add(post);
+            pipe(x,0.87,z,x,0.96,z,0.13,darkSteel);
+          }
+        }
+        for(const x of [-35,-25,-15]){
+          const post=pipe(x,0,30,x,5.2,30,0.09,steel);
+          box(x,5.1,30,1.3,0.5,0.65,darkSteel);
+          const lamp=new THREE.PointLight(0xffe3b2,0.5,12,2);
+          lamp.position.set(x,4.9,30);scene.add(lamp);
+        }
         // More readable field equipment: valves, fire points, barriers, work lighting.
         for(const x of [-24,-12,0,12,24]) {
           pipe(x,0,-18,x,1.3,-18,0.13,steel);
