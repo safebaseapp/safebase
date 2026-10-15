@@ -324,6 +324,28 @@ export default function Sim2EnginePreview() {
           scene.add(mesh);
           markers.push({ id: hazard.id, mesh, position: new THREE.Vector3(x, py, z) });
         }
+        // Third-party authored 3D asset (CC0), not procedural placeholder geometry.
+        // Source: https://3dassets.dev/assets/car-factory-production-line-spot-weld-gun-on-balancer-20e53e7e
+        // Asset: https://cdn.3dassets.dev/assets/27809/v1/model.glb
+        // External CDN must allow CORS; failure is reported in the SIM status panel.
+        try {
+          const weldingAsset=await new GLTFLoader().loadAsync("https://cdn.3dassets.dev/assets/27809/v1/model.glb");
+          if(disposed)return;
+          const model=weldingAsset.scene;
+          const bounds=new THREE.Box3().setFromObject(model);
+          const size=bounds.getSize(new THREE.Vector3());
+          const center=bounds.getCenter(new THREE.Vector3());
+          if(size.y>0){
+            const scale=3.12/size.y;
+            model.scale.setScalar(scale);
+            model.position.set(workX-center.x*scale, -bounds.min.y*scale,workZ-center.z*scale);
+            model.traverse((obj:any)=>{if(obj.isMesh){obj.castShadow=true;obj.receiveShadow=true;}});
+            scene.add(model);
+          }
+        }catch(assetError){
+          console.warn("SIM3 CC0 welding asset unavailable",assetError);
+          setStatus("SIM 3.0: Harici kaynak ekipmanı modeli yüklenemedi; CDN/CORS kontrolü gerekli.");
+        }
         // Industrial tank weathering. Original GLB ships without usable base-color maps;
         // supply a lightweight authored coating rather than displaying bare white geometry.
         const coatingCanvas=document.createElement("canvas");coatingCanvas.width=coatingCanvas.height=512;
