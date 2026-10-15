@@ -260,6 +260,8 @@ precision highp float;
 in vec3 aPosition;
 in vec3 aNormal;
 in vec3 aColor;
+in vec2 aUv;
+out vec2 vUv;
 uniform mat4 uProjection;
 uniform mat4 uView;
 uniform vec3 uEye;
@@ -270,6 +272,7 @@ out vec3 vWorld;
 void main(){
   vWorld=aPosition;
   vColor=aColor;
+  vUv=aUv;
   vNormal=aNormal;
   vDepth=distance(aPosition,uEye);
   gl_Position=uProjection*uView*vec4(aPosition,1.0);
@@ -280,6 +283,9 @@ in vec3 vColor;
 in vec3 vNormal;
 in float vDepth;
 in vec3 vWorld;
+in vec2 vUv;
+uniform sampler2D uBaseTexture;
+uniform int uUseTexture;
 out vec4 fragColor;
 void main(){
   vec3 n=normalize(vNormal);
@@ -295,7 +301,8 @@ void main(){
   float seams=1.0-smoothstep(0.008,0.03,min(fract(abs(vWorld.x)/15.0),fract(abs(vWorld.z)/15.0)));
   float horizontal=clamp(n.y,0.0,1.0);
   float dirt=mix(0.965,0.93+coarse*0.06,horizontal);
-  vec3 base=vColor*(0.97+0.025*fine+0.025*coarse)*dirt;
+  vec3 texel=uUseTexture==1?texture(uBaseTexture,vUv).rgb:vec3(1.0);
+  vec3 base=vColor*texel*(0.97+0.025*fine+0.025*coarse)*dirt;
   base*=1.0-0.028*seams*horizontal;
   float edgeLight=pow(1.0-max(dot(n,normalize(vec3(0.0,0.55,0.84))),0.0),3.0)*0.07;
   vec3 lit=base*(light+edgeLight)+vec3(0.72,0.77,0.78)*metalHighlight;
@@ -336,6 +343,10 @@ export class RefineryWorld {
   private program: WebGLProgram;
   private buffers: WebGLBuffer[]=[];
   private vertexCount=0;
+  private uvBuffer:WebGLBuffer|null=null;
+  private textures:(WebGLTexture|null)[]=[];
+  private texturedRanges:{start:number,count:number,texture:number}[]=[];
+  private plainStart=0;
   private blockers:Blocker[]=[];
   public state:WalkState={...SPAWN};
   readonly bounds=37.6;
@@ -360,6 +371,14 @@ export class RefineryWorld {
       gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(values),gl.STATIC_DRAW);
       gl.enableVertexAttribArray(location);gl.vertexAttribPointer(location,3,gl.FLOAT,false,0,0);
     }
+    const uv=gl.createBuffer();
+    if(!uv)throw new Error('UV buffer unavailable');
+    this.uvBuffer=uv;
+    gl.bindBuffer(gl.ARRAY_BUFFER,uv);
+    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(this.vertexCount*2),gl.STATIC_DRAW);
+    const uvLocation=gl.getAttribLocation(program,'aUv');
+    if(uvLocation>=0){gl.enableVertexAttribArray(uvLocation);gl.vertexAttribPointer(uvLocation,2,gl.FLOAT,false,0,0);}
+    this.plainStart=this.vertexCount;
     gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.disable(gl.CULL_FACE);gl.clearColor(0.54,0.63,0.68,1);
   }
   /**
@@ -407,7 +426,8 @@ export class RefineryWorld {
       }
       return result;
     };
-    const positions: number[] = [], normals: number[] = [], colors: number[] = [];
+    const positions: number[] = [], normals: number[] = [], colors: number[] = [], uvs:number[]=[];
+    const ranges:{start:number,count:number,texture:number}[]=[];
     const nodes = json.nodes || [], meshes = json.meshes || [];
     // glTF matrices are column-major; Sketchfab uses a rotated root matrix.
     const identity = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1];
@@ -432,6 +452,11 @@ export class RefineryWorld {
       if (node.mesh !== undefined) for (const p of meshes[node.mesh]?.primitives || []) {
         if (p.mode !== undefined && p.mode !== 4) continue;
         const xyz = read(p.attributes?.POSITION), nrm = p.attributes?.NORMAL !== undefined ? read(p.attributes.NORMAL) : [];
+        const uv = p.attributes?.TEXCOORD_0 !== undefined ? read(p.attributes.TEXCOORD_0) : [];
+        const rangeStart=positions.length/3;
+        const material=json.materials?.[p.material];
+        const texIndex=material?.pbrMetallicRoughness?.baseColorTexture?.index;
+        const imageIndex=texIndex===undefined?-1:(json.textures?.[texIndex]?.source??-1);
         const idx = p.indices !== undefined ? read(p.indices).map(a=>a[0]) : xyz.map((_,i)=>i);
         const factor = json.materials?.[p.material]?.pbrMetallicRoughness?.baseColorFactor || [0.66,0.73,0.77,1];
         for (let i=0;i+2<idx.length;i+=3) for (let k=0;k<3;k++) {
@@ -451,7 +476,10 @@ export class RefineryWorld {
           positions.push(px*0.4+17,py*0.4,pz*0.4-12);
           normals.push(nx/nl,ny/nl,nz/nl);
           colors.push(factor[0],factor[1],factor[2]);
+          uvs.push(uv[v]?.[0]??0,uv[v]?.[1]??0);
         }
+        const rangeCount=positions.length/3-rangeStart;
+        if(rangeCount>0)ranges.push({start:rangeStart,count:rangeCount,texture:imageIndex});
       }
       for (const child of node.children || []) add(child,m);
     };
@@ -468,6 +496,35 @@ export class RefineryWorld {
       combined.set(previous);combined.set(values,previous.length);
       gl.bufferData(gl.ARRAY_BUFFER,combined,gl.STATIC_DRAW);
     }
+    if(!this.uvBuffer)return false;
+    gl.bindBuffer(gl.ARRAY_BUFFER,this.uvBuffer);
+    const previousUv=new Float32Array(this.plainStart*2);
+    gl.getBufferSubData(gl.ARRAY_BUFFER,0,previousUv);
+    const allUv=new Float32Array(previousUv.length+uvs.length);
+    allUv.set(previousUv);allUv.set(uvs,previousUv.length);
+    gl.bufferData(gl.ARRAY_BUFFER,allUv,gl.STATIC_DRAW);
+    const loadedTextures:(WebGLTexture|null)[]=[];
+    for(const image of json.images||[]){
+      const view=views[image.bufferView];
+      if(!view){loadedTextures.push(null);continue;}
+      const blob=new Blob([binary.slice(view.byteOffset||0,(view.byteOffset||0)+view.byteLength)],{type:image.mimeType||'image/png'});
+      let bitmap:ImageBitmap|null=null;
+      try{bitmap=await createImageBitmap(blob);}catch{loadedTextures.push(null);continue;}
+      const tex=gl.createTexture();
+      if(!tex){bitmap.close();loadedTextures.push(null);continue;}
+      gl.bindTexture(gl.TEXTURE_2D,tex);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.REPEAT);
+      gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.REPEAT);
+      gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,bitmap);
+      gl.generateMipmap(gl.TEXTURE_2D);
+      bitmap.close();
+      loadedTextures.push(tex);
+    }
+    this.textures=loadedTextures;
+    this.texturedRanges=ranges.map(r=>({...r,start:r.start+this.plainStart}));
     this.vertexCount+=positions.length/3;
     return true;
   }
@@ -534,7 +591,17 @@ export class RefineryWorld {
     gl.uniformMatrix4fv(gl.getUniformLocation(this.program,"uProjection"),false,proj);
     gl.uniformMatrix4fv(gl.getUniformLocation(this.program,"uView"),false,view);
     gl.uniform3fv(gl.getUniformLocation(this.program,"uEye"),new Float32Array(eye));
-    gl.drawArrays(gl.TRIANGLES,0,this.vertexCount);
+    const flag=gl.getUniformLocation(this.program,'uUseTexture');
+    gl.uniform1i(flag,0);
+    gl.drawArrays(gl.TRIANGLES,0,this.plainStart);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.uniform1i(gl.getUniformLocation(this.program,'uBaseTexture'),0);
+    for(const range of this.texturedRanges){
+      const tex=this.textures[range.texture];
+      gl.uniform1i(flag,tex?1:0);
+      if(tex)gl.bindTexture(gl.TEXTURE_2D,tex);
+      gl.drawArrays(gl.TRIANGLES,range.start,range.count);
+    }
   }
-  dispose(){for(const b of this.buffers)this.gl.deleteBuffer(b);this.gl.deleteProgram(this.program);}
+  dispose(){for(const b of this.buffers)this.gl.deleteBuffer(b);if(this.uvBuffer)this.gl.deleteBuffer(this.uvBuffer);for(const t of this.textures)if(t)this.gl.deleteTexture(t);this.gl.deleteProgram(this.program);}
 }
