@@ -225,3 +225,8 @@
 .proximityDot{display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:#f5c05c;box-shadow:0 0 12px #ffca72}
 @media(min-width:851px){.proximity{display:none}}
 @media(max-width:670px){.proximity{top:65px;left:10px;max-width:65%;padding:7px 9px;font-size:9px}.proximity b{font-size:10px}}
+
+/* P4: visual confirmation only when the crosshair is aligned with a finding. */
+.touchInspectReady{border-color:#f5c05c!important;background:linear-gradient(145deg,#a96719,#62400d)!important;color:#fff!important;box-shadow:0 0 0 3px #f5c05c3d,0 0 24px #f5c05c70!important;animation:inspectReadyPulse 1.9s ease-in-out infinite}
+@keyframes inspectReadyPulse{0%,100%{box-shadow:0 0 0 3px #f5c05c3d,0 0 20px #f5c05c50}50%{box-shadow:0 0 0 6px #f5c05c28,0 0 30px #f5c05c80}}
+@media(prefers-reduced-motion:reduce){.touchInspectReady{animation:none}}
