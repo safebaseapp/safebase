@@ -191,6 +191,21 @@ function constructSite() {
     m.box(30,0.65,z,1.5,1.3,0.15,0x526c79);
     for(const y of [1.0,1.35])m.cylinder([29.3,y,z],[30.7,y,z],0.09,0xa2b3b9,10);
   }
+  // Large-scale visual grounding: equipment shadows are soft, layered pads,
+  // not dynamic shadows, so they remain cheap on mobile GPUs.
+  for(const [x,z,w,d] of [[-10,-12,15,15],[-25,16,25,20],[5,-2,4.5,5.4],[18.5,28,9.5,4]] as number[][]){
+    m.box(x,-0.015,z,w,0.012,d,0x30414b);
+    m.box(x,-0.008,z,w*0.88,0.011,d*0.88,0x354550);
+  }
+  // Industrial route separation and pedestrian edge barriers.
+  for(const z of [3,8,13,18,23]){
+    m.box(7.25,0.018,z,0.12,0.018,2.5,0xd6bb70);
+    m.box(7.25,0.019,z+1.48,0.12,0.018,0.42,0xd6bb70);
+  }
+  for(const z of [9,13,17,21]){
+    m.cylinder([8.7,0,z],[8.7,1.05,z],0.09,0xd6a548,10);
+    m.box(8.7,0.85,z,0.25,0.18,0.25,0x333f45);
+  }
   // Fenced compound perimeter with entrances at the south.
   for(const x of [-40,40]){
     for(let z=-40;z<=40;z+=3){ m.box(x,1.12,z,0.15,2.24,0.16,0x7f9fb0); }
