@@ -268,6 +268,7 @@ export default function Sim2EnginePreview() {
           scene.add(mesh);
           markers.push({ id: hazard.id, mesh, position: new THREE.Vector3(x, py, z) });
         }
+        let weldingAssetLoaded=false;
         // Third-party authored 3D asset (CC0), not procedural placeholder geometry.
         // Source: https://3dassets.dev/assets/car-factory-production-line-spot-weld-gun-on-balancer-20e53e7e
         // Asset: https://cdn.3dassets.dev/assets/27809/v1/model.glb
@@ -285,6 +286,7 @@ export default function Sim2EnginePreview() {
             model.position.set(workX-center.x*scale, -bounds.min.y*scale,workZ-center.z*scale);
             model.traverse((obj:any)=>{if(obj.isMesh){obj.castShadow=true;obj.receiveShadow=true;}});
             scene.add(model);
+            weldingAssetLoaded=true;
           }
         }catch(assetError){
           console.warn("SIM3 CC0 welding asset unavailable",assetError);
