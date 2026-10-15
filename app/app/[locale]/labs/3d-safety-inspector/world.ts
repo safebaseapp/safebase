@@ -151,29 +151,8 @@ function constructSite() {
     for(let x=-40;x<=40;x+=3){ if(z===40&&Math.abs(x)<5)continue; m.box(x,1.12,z,0.15,2.24,0.16,0x7f9fb0);}
     for(const y of [0.55,1.9]){ m.box(-22,y,z,36,0.08,0.08,0x6e8799);m.box(22,y,z,36,0.08,0.08,0x6e8799);}
   }
-  // Storage tanks on the east; raised pads, shell rings, railings and piping.
-  for (const [x,z,rad,height] of [[23,-20,5,10],[27,10,4.2,7.2]] as number[][]) {
-    m.box(x,0.12,z,rad*2+1,0.24,rad*2+1,0x576674);
-    m.cylinder([x,0.25,z],[x,height,z],rad,0xaabec8,30);
-    for(const y of [1.5,4,6.5,9].filter(y=>y<height)){
-      m.cylinder([x-rad-0.02,y,z],[x+rad+0.02,y,z],0.055,0xd6e3e8,18);
-    }
-    m.cylinder([x,height,z],[x,height+0.32,z],rad*0.98,0x8a9fab,30);
-    for(let y=0.7;y<height-0.6;y+=0.48){
-      m.box(x-rad-0.18,y,z,0.1,0.08,0.48,0xe8b964);
-    }
-    m.solid(x,z,rad*2,rad*2);
-  }
-  // Pipe rack with multiple levels, steel girders, supports and color-coded pipes.
-  for(const z of [-30,-23,-16,-9,-2,5,12,19]){
-    for(const x of [7.5,16.5]){
-      m.box(x,4.1,z,0.55,8.2,0.55,0x8eabb9); m.box(x,8.3,z,0.9,0.4,0.9,0xb8d1d9);m.solid(x,z,1.1,1.1);
-    }
-    for(const y of [4.1,7.45])m.box(12,y,z,10.8,0.36,0.55,0xb7c6d0);
-  }
-  for(const [x,y,r,c] of [[9.2,7.9,0.35,0xc8d9df],[11.1,7.9,0.3,0xe5bb5d],[13.1,7.9,0.45,0x8eaac1],[15.2,7.9,0.3,0xc8d9df],[10,4.48,0.25,0x6caeb0],[13,4.55,0.32,0xa2c3cd]] as number[][]) {
-    m.cylinder([x,y,-32],[x,y,21],r,c,12);
-  }
+  // Real GLB refinery asset replaces the old procedural eastern tank and pipe rack.
+  // Hazard evidence and its target positions are deliberately preserved.
   // Scaffolding training zone: decking, braces, toe boards, guardrails.
   const xa=[-16,-10,-4], za=[-18,-12,-6], levels=[0,3.3,6.6];
   for(const x of xa)for(const z of za){m.cylinder([x,0,z],[x,9.2,z],0.09,0xb0c5d2,10);m.solid(x,z,0.55,0.55);}
@@ -398,7 +377,7 @@ function cameraView(eye:V3,yaw:number,pitch:number):Float32Array{
   ]);
 }
 export type WalkState = { x:number; z:number; yaw:number; pitch:number };
-const SPAWN: WalkState={x:0,z:30,yaw:0.1,pitch:0.03};
+const SPAWN: WalkState={x:13,z:5,yaw:0,pitch:0.03};
 
 export class RefineryWorld {
   private gl: WebGL2RenderingContext;
