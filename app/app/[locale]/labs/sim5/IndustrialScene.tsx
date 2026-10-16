@@ -12,7 +12,7 @@ export default function IndustrialScene({tr}:{tr:boolean}) {
   window.addEventListener("keydown",down);window.addEventListener("keyup",up);
   (async()=>{
    try {
-    const THREE=await import("three");
+    const THREE:any=await new Promise((resolve,reject)=>{const w=window as any;if(w.THREE)return resolve(w.THREE);const s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.1/three.min.js";s.onload=()=>resolve((window as any).THREE);s.onerror=()=>reject(new Error("Three.js CDN unavailable"));document.head.appendChild(s)});
     if(disposed||!mount.current)return;
     const host=mount.current;
     const scene=new THREE.Scene();scene.background=new THREE.Color("#91b5c8");scene.fog=new THREE.Fog("#91b5c8",90,280);
