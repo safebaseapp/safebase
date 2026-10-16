@@ -285,13 +285,51 @@ export default function Sim2EnginePreview() {
           scene.add(model);
           return true;
         };
+        // Lift assembly is intentionally one connected visual chain, not a floating sling.
+        // Boom and rigging are scene geometry; the truck and textile sling are authored GLBs.
+        const loadBottom=1.15,loadHeight=1.45,loadTop=loadBottom+loadHeight;
+        const loadCentreY=loadBottom+loadHeight/2;
+        const slingBottomY=loadTop-0.16;
+        const slingTopY=loadTop+1.45;
+        const hookY=slingTopY+0.20;
+        const boomTipY=10.6;
+        const craneX=liftX+8.0,craneZ=liftZ;
         try {
-          // Park the crane off the pedestrian corridor, facing the lift work zone.
-          craneAssetLoaded=await loadAuthoredModel("mobile-crane",26,0,29,refineryAsset("mobile-crane").heightMetres ?? 7);
+          craneAssetLoaded=await loadAuthoredModel("mobile-crane",craneX,0,craneZ,refineryAsset("mobile-crane").heightMetres ?? 7);
         }catch(err){console.warn("SIM3 mobile crane GLB unavailable",err);}
+        // The supplied crane GLB shows the chassis, but not an extended working boom.
+        // Attach a clearly visible boom and hoist to the same parked machine.
+        if(craneAssetLoaded){
+          const boomSteel=material(0xc4ad42,0.7);
+          const darkRig=material(0x2e3539,0.85);
+          const boomRoot=new THREE.Vector3(craneX-0.5,4.15,craneZ);
+          const boomTip=new THREE.Vector3(liftX,boomTipY,liftZ);
+          const boomVector=boomTip.clone().sub(boomRoot);
+          const boomMid=boomRoot.clone().addScaledVector(boomVector,0.5);
+          const boomMesh=box(boomMid.x,boomMid.y,boomMid.z,0.88,boomVector.length(),0.92,boomSteel);
+          boomMesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),boomVector.clone().normalize());
+          const extensionStart=boomRoot.clone().addScaledVector(boomVector,0.53);
+          pipe(extensionStart.x,extensionStart.y,extensionStart.z,boomTip.x,boomTip.y,boomTip.z,0.23,steel);
+          pipe(liftX,boomTipY,liftZ,liftX,hookY+0.34,liftZ,0.028,darkRig);
+          const hookBlock=new THREE.Mesh(new THREE.CylinderGeometry(0.24,0.24,0.44,16),darkRig);
+          hookBlock.rotation.z=Math.PI/2;hookBlock.position.set(liftX,hookY+0.16,liftZ);scene.add(hookBlock);
+          const hookCurve=new THREE.Mesh(new THREE.TorusGeometry(0.16,0.047,9,18,Math.PI*1.55),darkRig);
+          hookCurve.rotation.z=Math.PI;hookCurve.position.set(liftX,hookY-0.14,liftZ);scene.add(hookCurve);
+        }
+        // Lifted steel equipment crate with four distinct lifting lugs and webbing legs.
+        // Only the missing exclusion zone is the intended HSE violation.
+        const cargoMat=material(0x657e88,0.72);
+        const cargo=box(liftX,loadCentreY,liftZ,2.55,loadHeight,1.8,cargoMat);
+        cargo.castShadow=true;
+        for(const dx of [-0.95,0.95])for(const dz of [-0.62,0.62]){
+          const lugX=liftX+dx,lugZ=liftZ+dz;
+          const lug=new THREE.Mesh(new THREE.TorusGeometry(0.13,0.037,8,14),steel);
+          lug.rotation.x=Math.PI/2;lug.position.set(lugX,loadTop+0.10,lugZ);scene.add(lug);
+          pipe(lugX,loadTop+0.12,lugZ,liftX,slingTopY,liftZ,0.045,material(0xc59c38,0.95));
+        }
+        // Position the supplied endless sling around the top connection rather than in open sky.
         try {
-          // Preliminary visual placement only; final hook / sling attachment needs rigging QA.
-          slingAssetLoaded=await loadAuthoredModel("lifting-sling",liftX,5.2,liftZ,refineryAsset("lifting-sling").heightMetres ?? 1.25);
+          slingAssetLoaded=await loadAuthoredModel("lifting-sling",liftX,slingTopY-0.65,liftZ,refineryAsset("lifting-sling").heightMetres ?? 1.25);
         }catch(err){console.warn("SIM3 lifting sling GLB unavailable",err);}
         if(!craneAssetLoaded || !slingAssetLoaded){
           setStatus("SIM 3.0: Kaldırma GLB dosyaları eksik ("+(craneAssetLoaded?"vinç ✓":"vinç ✕")+", "+(slingAssetLoaded?"sapan ✓":"sapan ✕")+"). /models/refinery/ klasörüne yükleyin.");
