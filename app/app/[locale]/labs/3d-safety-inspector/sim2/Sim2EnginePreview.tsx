@@ -300,17 +300,10 @@ export default function Sim2EnginePreview() {
         // The supplied crane GLB shows the chassis, but not an extended working boom.
         // Attach a clearly visible boom and hoist to the same parked machine.
         if(craneAssetLoaded){
-          const boomSteel=material(0xc4ad42,0.7);
           const darkRig=material(0x2e3539,0.85);
-          const boomRoot=new THREE.Vector3(craneX-0.5,4.15,craneZ);
-          const boomTip=new THREE.Vector3(liftX,boomTipY,liftZ);
-          const boomVector=boomTip.clone().sub(boomRoot);
-          const boomMid=boomRoot.clone().addScaledVector(boomVector,0.5);
-          const boomMesh=box(boomMid.x,boomMid.y,boomMid.z,0.88,boomVector.length(),0.92,boomSteel);
-          boomMesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),boomVector.clone().normalize());
-          const extensionStart=boomRoot.clone().addScaledVector(boomVector,0.53);
-          pipe(extensionStart.x,extensionStart.y,extensionStart.z,boomTip.x,boomTip.y,boomTip.z,0.23,steel);
-          pipe(liftX,boomTipY,liftZ,liftX,hookY+0.34,liftZ,0.028,darkRig);
+          // The imported crane already has a telescopic boom; avoid drawing another.
+          // Connect the training hoist to its visible boom end for this camera angle.
+          pipe(craneX-5.2,5.0,craneZ,liftX,hookY+0.34,liftZ,0.028,darkRig);
           const hookBlock=new THREE.Mesh(new THREE.CylinderGeometry(0.24,0.24,0.44,16),darkRig);
           hookBlock.rotation.z=Math.PI/2;hookBlock.position.set(liftX,hookY+0.16,liftZ);scene.add(hookBlock);
           const hookCurve=new THREE.Mesh(new THREE.TorusGeometry(0.16,0.047,9,18,Math.PI*1.55),darkRig);
