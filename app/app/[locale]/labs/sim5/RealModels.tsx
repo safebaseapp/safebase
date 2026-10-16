@@ -9,8 +9,10 @@ export default function RealModels({tr}:{tr:boolean}) {
   let active=true,renderer:any,frame=0,cleanup=()=>{};
   (async()=>{
    try {
-    const THREE:any=await import("three");
-    const {GLTFLoader}=await import("three/examples/jsm/loaders/GLTFLoader.js");
+    const threeUrl="https://esm.sh/three@0.180.0";
+    const THREE:any=await import(/* webpackIgnore: true */ threeUrl);
+    const loaderUrl="https://esm.sh/three@0.180.0/examples/jsm/loaders/GLTFLoader.js";
+    const {GLTFLoader}=await import(/* webpackIgnore: true */ loaderUrl);
     if(!active||!ref.current)return;
     const host=ref.current,scene=new THREE.Scene();
     scene.background=new THREE.Color("#91b3c1");
