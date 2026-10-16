@@ -1,0 +1,23 @@
+"use client";
+import {useEffect,useRef,useState} from "react";
+const views=[
+{title:"Proses Ünitesi",desc:"Proses hatları ve ekipmanlar",src:"https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/industrial_pipe_and_valve_02.jpg"},
+{title:"Endüstriyel Proses Tesisi",desc:"Enefit280 gerçek tesis fotoğrafı — petrol rafinerisi değildir",src:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Oil_shale_-_from_research_to_reality_03._Enefit280_plant%2C_view_of_the_plant.jpg/3840px-Oil_shale_-_from_research_to_reality_03._Enefit280_plant%2C_view_of_the_plant.jpg"},
+{title:"Boru Hatları ve Bakım",desc:"Alternatif saha inceleme görünümü",src:"https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/industrial_pipe_and_valve_02.jpg"}
+];
+export default function MultiView(){
+ const [scene,setScene]=useState(0),[zoom,setZoom]=useState(1),[pan,setPan]=useState(50),[fail,setFail]=useState(false);
+ const pointer=useRef<{x:number;start:number}|null>(null);
+ useEffect(()=>{setPan(50);setZoom(1);setFail(false)},[scene]);
+ const move=(n:number)=>setScene(s=>(s+n+views.length)%views.length);
+ return <main className="min-h-screen bg-slate-950 text-white px-3 py-5 md:px-6"><div className="mx-auto max-w-[1800px]"><div className="flex flex-wrap items-center justify-between gap-2"><div><h1 className="text-2xl font-bold">SERNEM Labs · Multi-View</h1><p className="text-sm text-slate-300">Canlı etkileşimli geliştirme önizlemesi · Üç sahne · Mobil uyumlu</p></div><span className="rounded-full border border-sky-700 px-3 py-1 text-xs">QA prototipi · XP kapalı</span></div>
+ <div className="relative mt-4 h-[74dvh] min-h-[390px] overflow-hidden rounded-xl border border-slate-700 bg-slate-900 touch-none" onPointerDown={e=>{e.currentTarget.setPointerCapture(e.pointerId);pointer.current={x:e.clientX,start:pan}}} onPointerMove={e=>{if(!pointer.current)return;setPan(Math.min(100,Math.max(0,pointer.current.start+(pointer.current.x-e.clientX)/e.currentTarget.clientWidth*75)))}} onPointerUp={()=>pointer.current=null} onPointerCancel={()=>pointer.current=null}>
+ {!fail?<img key={scene} src={views[scene].src} alt={views[scene].title} onError={()=>setFail(true)} draggable={false} className="absolute inset-0 h-full w-full select-none object-cover pointer-events-none" style={{objectPosition:pan+"% 50%",transform:"scale("+zoom+")"}}/>:<div className="absolute inset-0 flex items-center justify-center text-center p-8">Görsel kaynağına erişilemedi. Diğer sahneyi seçerek devam et.</div>}
+ <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/75 to-transparent pointer-events-none"/>
+ <div className="absolute left-3 top-3 rounded-lg bg-black/75 p-3"><strong>{views[scene].title}</strong><p className="text-xs text-slate-200">{views[scene].desc}</p></div>
+ <button className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/80 px-4 py-3" onPointerDown={e=>e.stopPropagation()} onClick={()=>move(-1)} aria-label="Önceki sahne">❮</button>
+ <button className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/80 px-4 py-3" onPointerDown={e=>e.stopPropagation()} onClick={()=>move(1)} aria-label="Sonraki sahne">❯</button>
+ <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2 items-center justify-between"><span className="rounded-lg bg-black/80 px-3 py-2 text-xs">Sürükle: görüntüyü incele · Oklar: sahne değiştir</span><div className="flex gap-2"><button onPointerDown={e=>e.stopPropagation()} onClick={()=>setZoom(z=>Math.max(1,z-.25))} className="rounded-lg bg-black/80 px-4 py-2">−</button><button onPointerDown={e=>e.stopPropagation()} onClick={()=>setZoom(z=>Math.min(2.5,z+.25))} className="rounded-lg bg-black/80 px-4 py-2">+</button></div></div></div>
+ <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-3">{views.map((v,i)=><button key={i} onClick={()=>setScene(i)} className={"rounded-xl border p-4 text-left "+(i===scene?"border-sky-400 bg-sky-950":"border-slate-700 bg-slate-900")}><strong>{i+1}. {v.title}</strong><p className="mt-1 text-xs text-slate-300">{v.desc}</p></button>)}</div>
+ <p className="mt-4 text-sm text-slate-300">Bu çalışan bir Multi-View gezinti prototipidir; birbirine dikilmiş gerçek 360° panorama değildir. Sahne 1 ve 3 aynı kaynak görüntünün farklı kullanımını test eder. Tehlike/XP yalnızca görselde doğrulanmış eğitim sahnelerinde açılacaktır. Enefit280 fotoğrafı: Lauri Veerde / Wikimedia Commons, CC BY 4.0. Diğer görsel: Poly Haven, CC0.</p></div></main>
+}
