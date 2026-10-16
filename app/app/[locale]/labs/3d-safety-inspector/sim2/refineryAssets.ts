@@ -22,7 +22,7 @@ export const REFINERY_ASSETS: readonly RefineryAsset[] = [
   },
   {
     id: "mobile-crane",
-    src: "/models/refinery/mobile-crane.glb",
+    src: "/models/refinery/mobile-crane%20(1).glb",
     attribution: "Innerscene – Mobile Crane (user-supplied GLB)",
     licence: "CC0 (verify provenance before production)",
     position: [20, 0, 27],
@@ -36,7 +36,7 @@ export const REFINERY_ASSETS: readonly RefineryAsset[] = [
   },
   {
     id: "lifting-sling",
-    src: "/models/refinery/endless-webbing-lifting-sling.glb",
+    src: "/models/refinery/endless-webbing-lifting-sling%20(2).glb",
     attribution: "User-supplied CAD lifting sling converted to GLB",
     licence: "Unverified",
     heightMetres: 1.25,
