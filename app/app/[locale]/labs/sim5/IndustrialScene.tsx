@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 export default function IndustrialScene({tr}:{tr:boolean}) {
  const mount=useRef<HTMLDivElement>(null);
  const [status,setStatus]=useState(tr?"3D saha yükleniyor":"Loading 3D site");
+ const [found,setFound]=useState<string[]>([]);
  useEffect(()=>{
   let disposed=false,renderer:any,frame=0;
   const keys=new Set<string>();
@@ -31,12 +32,31 @@ export default function IndustrialScene({tr}:{tr:boolean}) {
     for(let i=0;i<8;i++){let x=-48+i*14;add(new THREE.CylinderGeometry(1.1,1.1,17,12),steel,x,8.5,-16);add(new THREE.CylinderGeometry(1.4,1.4,1,12),rust,x,17.5,-16);}
     for(let i=0;i<6;i++){let z=-28+i*10;const pipe=add(new THREE.CylinderGeometry(.45,.45,110,12),i%2?red:yellow,0,4,z);pipe.rotation.z=Math.PI/2;for(let x=-48;x<=48;x+=16)add(new THREE.BoxGeometry(.7,4,.7),steel,x,2,z);}
     for(let i=0;i<8;i++)add(new THREE.BoxGeometry(1.1,5,1.1),yellow,-56+i*16,2.5,17);
+    const hazards:any[]=[];
+    const hazard=(id:string,x:number,y:number,z:number,color:string)=>{
+      const mesh=add(new THREE.SphereGeometry(1.25,16,12),new THREE.MeshStandardMaterial({color,emissive:color,emissiveIntensity:.5}),x,y,z);
+      mesh.userData.hazardId=id;hazards.push(mesh);
+    };
+    hazard("leak",-29,1.5,15,"#ff6b3d");
+    hazard("hotwork",25,2,-25,"#ffbf47");
+    hazard("fall",4,6,-36,"#f25b65");
+    hazard("blocked",-3,1.5,46,"#ffbf47");
+    const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
+    const clickHazard=(e:PointerEvent)=>{
+      if(dragDistance>12)return;
+      const rect=renderer.domElement.getBoundingClientRect();
+      pointer.set(((e.clientX-rect.left)/rect.width)*2-1,-((e.clientY-rect.top)/rect.height)*2+1);
+      raycaster.setFromCamera(pointer,camera);
+      const hit=raycaster.intersectObjects(hazards)[0];
+      if(hit){const id=hit.object.userData.hazardId as string;hit.object.visible=false;setFound(prev=>prev.includes(id)?prev:[...prev,id]);}
+    };
+    renderer.domElement.addEventListener("pointerup",clickHazard);
     add(new THREE.BoxGeometry(12,.1,95),mat("#3d464c"),0,.08,44);
     for(let z=3;z<85;z+=7)add(new THREE.BoxGeometry(.2,.11,3),yellow,0,.15,z);
-    let yaw=Math.PI, pitch=-.05,drag=false,px=0,py=0;
-    const onDown=(e:PointerEvent)=>{drag=true;px=e.clientX;py=e.clientY};
+    let yaw=Math.PI, pitch=-.05,drag=false,px=0,py=0,dragDistance=0;
+    const onDown=(e:PointerEvent)=>{drag=true;dragDistance=0;px=e.clientX;py=e.clientY};
     const onUp=()=>drag=false;
-    const onMove=(e:PointerEvent)=>{if(!drag)return;yaw-=(e.clientX-px)*.004;pitch=Math.max(-1.2,Math.min(1.2,pitch-(e.clientY-py)*.003));px=e.clientX;py=e.clientY};
+    const onMove=(e:PointerEvent)=>{if(!drag)return;dragDistance+=Math.abs(e.clientX-px)+Math.abs(e.clientY-py);yaw-=(e.clientX-px)*.004;pitch=Math.max(-1.2,Math.min(1.2,pitch-(e.clientY-py)*.003));px=e.clientX;py=e.clientY};
     renderer.domElement.addEventListener("pointerdown",onDown);window.addEventListener("pointerup",onUp);window.addEventListener("pointermove",onMove);
     let last=performance.now();
     function animate(now:number){if(disposed)return;const dt=Math.min((now-last)/1000,.06);last=now;
@@ -52,10 +72,10 @@ export default function IndustrialScene({tr}:{tr:boolean}) {
     frame=requestAnimationFrame(animate);setStatus(tr?"3D saha hazır — WASD ile yürü, sürükleyerek bak":"3D site ready — WASD to walk, drag to look");
     const resize=()=>{if(!host.clientWidth)return;camera.aspect=host.clientWidth/host.clientHeight;camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight)};
     window.addEventListener("resize",resize);
-    (host as any).__cleanup=()=>{window.removeEventListener("resize",resize);window.removeEventListener("pointerup",onUp);window.removeEventListener("pointermove",onMove);renderer.domElement.removeEventListener("pointerdown",onDown)};
+    (host as any).__cleanup=()=>{window.removeEventListener("resize",resize);window.removeEventListener("pointerup",onUp);window.removeEventListener("pointermove",onMove);renderer.domElement.removeEventListener("pointerdown",onDown);renderer.domElement.removeEventListener("pointerup",clickHazard)};
    }catch(e){setStatus("3D error: "+String(e))}
   })();
   return()=>{disposed=true;cancelAnimationFrame(frame);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);(mount.current as any)?.__cleanup?.();renderer?.dispose();renderer?.domElement?.remove()};
  },[tr]);
- return <div><p style={{color:"#a7e9fb"}}>{status}</p><div ref={mount} style={{width:"100%",height:"min(70vh,720px)",minHeight:350,background:"#91b5c8",touchAction:"none",borderRadius:12,overflow:"hidden"}}/><div style={{display:"flex",gap:8,marginTop:10}}>{[["↶","arrowleft"],["↑","w"],["↓","s"],["↷","arrowright"]].map(([label,key])=><button key={key} style={{padding:"12px 18px",background:"#176b82",color:"white",border:0,borderRadius:8}} onPointerDown={()=>window.dispatchEvent(new KeyboardEvent("keydown",{key}))} onPointerUp={()=>window.dispatchEvent(new KeyboardEvent("keyup",{key}))} onPointerLeave={()=>window.dispatchEvent(new KeyboardEvent("keyup",{key}))}>{label}</button>)}</div><p style={{fontSize:12,color:"#eabf7c"}}>{tr?"Geçici geometrik saha prototipi; lisanslı Factory ve Oil Tank modelleri henüz aktarılmadı.":"Temporary geometric site prototype; licensed Factory and Oil Tank assets are not yet uploaded."}</p></div>;
+ return <div><p style={{color:"#a7e9fb"}}>{status}</p><p style={{color:"#ffcf7d",fontWeight:600}}>{tr?"Tehlike tespiti:":"Hazard detection:"} {found.length}/4 · {tr?"Parlayan işaretlere tıkla":"Click glowing markers"}</p><div ref={mount} style={{width:"100%",height:"min(70vh,720px)",minHeight:350,background:"#91b5c8",touchAction:"none",borderRadius:12,overflow:"hidden"}}/><div style={{display:"flex",gap:8,marginTop:10}}>{[["↶","arrowleft"],["↑","w"],["↓","s"],["↷","arrowright"]].map(([label,key])=><button key={key} style={{padding:"12px 18px",background:"#176b82",color:"white",border:0,borderRadius:8}} onPointerDown={()=>window.dispatchEvent(new KeyboardEvent("keydown",{key}))} onPointerUp={()=>window.dispatchEvent(new KeyboardEvent("keyup",{key}))} onPointerLeave={()=>window.dispatchEvent(new KeyboardEvent("keyup",{key}))}>{label}</button>)}</div><p style={{fontSize:13,color:"#b4d7de"}}>{found.map(id=>({leak:tr?"Sızıntı":"Leak",hotwork:tr?"Sıcak çalışma":"Hot work",fall:tr?"Yüksekte çalışma":"Working at height",blocked:tr?"Engellenmiş geçiş":"Blocked access"} as Record<string,string>)[id]).join(" · ")} {found.length===4?(tr?"— 4/4 tehlike bulundu!":"— All 4 hazards found!"):""}</p><p style={{fontSize:12,color:"#eabf7c"}}>{tr?"Geçici geometrik saha prototipi; lisanslı Factory ve Oil Tank modelleri henüz aktarılmadı.":"Temporary geometric site prototype; licensed Factory and Oil Tank assets are not yet uploaded."}</p></div>;
 }
