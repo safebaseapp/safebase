@@ -3,7 +3,7 @@
  * Missing equipment must not silently be replaced by toy-like procedural props.
  * All dimensions are in scene metres and placement is explicit.
  */
-export type RefineryAssetId = "welding-cart" | "storage-tanks" | "mobile-crane";
+export type RefineryAssetId = "welding-cart" | "storage-tanks" | "mobile-crane" | "lifting-sling" | "mobile-crane";
 export type RefineryAsset = {
   id: RefineryAssetId;
   src: string;
@@ -26,6 +26,20 @@ export const REFINERY_ASSETS: readonly RefineryAsset[] = [
     attribution: "Innerscene – Mobile Crane (user-supplied GLB)",
     licence: "CC0 (verify provenance before production)",
     position: [20, 0, 27],
+  },
+  {
+    id: "mobile-crane",
+    src: "/models/refinery/mobile-crane.glb",
+    attribution: "User-supplied mobile crane model; verify original author and licence before public release",
+    licence: "Unverified",
+    heightMetres: 7,
+  },
+  {
+    id: "lifting-sling",
+    src: "/models/refinery/endless-webbing-lifting-sling.glb",
+    attribution: "User-supplied CAD lifting sling converted to GLB",
+    licence: "Unverified",
+    heightMetres: 1.25,
   },
   {
     id: "storage-tanks",
