@@ -1,0 +1,77 @@
+{
+  "version": "0.1",
+  "status": "design_only_no_visual_approval",
+  "siteType": "refinery",
+  "rules": {
+    "visualProofRequired": true,
+    "noImaginaryFindings": true,
+    "trainingEditsMustBeLabeled": true,
+    "hotspotMustMatchEditedAsset": true,
+    "noXpBeforeReview": true
+  },
+  "scenes": [
+    {
+      "id": "refinery-unit-01",
+      "name": "Proses ünitesi / bakım",
+      "imageStatus": "required",
+      "hazards": [
+        {
+          "id": "HW-01",
+          "title": "Sıcak çalışma yakınında yanıcı malzeme",
+          "visualEdit": "Kaynak alanının hemen yanında açıkça görünen yanıcı atık ve korumasız hortum",
+          "decision": "Çalışmayı durdur; izin, izolasyon, gaz ölçümü ve yangın önlemlerini yeniden doğrula"
+        },
+        {
+          "id": "LOTO-01",
+          "title": "İzolasyonsuz ekipman bakımı",
+          "visualEdit": "Bakım yapılan vana/enerji kaynağında görünür kilit ve etiket eksikliği; durum senaryo brifinginde doğrulanmalı",
+          "decision": "Enerji kaynaklarını belirle, izole et, kilitle-etiketle ve sıfır enerji doğrulaması yap"
+        },
+        {
+          "id": "WAH-01",
+          "title": "Platform kenarında eksik korkuluk",
+          "visualEdit": "Platformun bir kenarında net biçimde eksik üst/ara korkuluk ve erişilebilir düşme boşluğu",
+          "decision": "Erişimi kapat, toplu düşme korumasını tamamla"
+        },
+        {
+          "id": "SIMOPS-01",
+          "title": "Kaldırma operasyonu altında personel",
+          "visualEdit": "Gerçekçi vinç, askıdaki yük ve yükün düşme bölgesinde personel",
+          "decision": "Operasyonu durdur, kaldırma alanını izole et, kaldırma planını doğrula"
+        },
+        {
+          "id": "DO-01",
+          "title": "Üst kotta emniyetsiz takım",
+          "visualEdit": "Yüksekte platform kenarında sabitlenmemiş malzeme, alt kottaki erişim hattı",
+          "decision": "Malzemeyi sabitle, düşen cisim bölgesini izole et"
+        },
+        {
+          "id": "TRIP-01",
+          "title": "Yaya güzergâhında hortum",
+          "visualEdit": "İşaretli yaya yolunu kesen korunmasız hortum",
+          "decision": "Geçişi emniyete al, hortumu yönlendir veya uygun köprü kullan"
+        },
+        {
+          "id": "FIRE-01",
+          "title": "Yangın ekipmanına engellenmiş erişim",
+          "visualEdit": "Yangın dolabı önüne istiflenmiş paletler",
+          "decision": "Erişimi hemen aç ve istif düzenini düzelt"
+        },
+        {
+          "id": "ELEC-01",
+          "title": "Açık elektrik panosu",
+          "visualEdit": "Yetkisiz erişime açık, kapağı açık elektrik panosu",
+          "decision": "Alanı izole et, yetkili elektrik ekibini çağır"
+        }
+      ]
+    }
+  ],
+  "acceptance": [
+    "Görsel kullanım hakkı doğrulanmış olacak",
+    "Eklenen her uygunsuzluk görselde fiziksel olarak görülebilecek",
+    "İki HSE gözden geçirmesi ve mobil QA",
+    "Yanlış tıklamada hayali bulgu üretilmeyecek",
+    "İpucu ve soru aynı görünür nesneye referans verecek",
+    "Kullanıcıya kurgulanmış eğitim sahası etiketi gösterilecek"
+  ]
+}
