@@ -3,7 +3,7 @@
  * Missing equipment must not silently be replaced by toy-like procedural props.
  * All dimensions are in scene metres and placement is explicit.
  */
-export type RefineryAssetId = "welding-cart" | "storage-tanks";
+export type RefineryAssetId = "welding-cart" | "storage-tanks" | "mobile-crane";
 export type RefineryAsset = {
   id: RefineryAssetId;
   src: string;
@@ -19,6 +19,13 @@ export const REFINERY_ASSETS: readonly RefineryAsset[] = [
     attribution: "Poly Haven – Portable Welding Cart",
     licence: "CC0",
     heightMetres: 3.12,
+  },
+  {
+    id: "mobile-crane",
+    src: "/models/refinery/mobile-crane.glb",
+    attribution: "Innerscene – Mobile Crane (user-supplied GLB)",
+    licence: "CC0 (verify provenance before production)",
+    position: [20, 0, 27],
   },
   {
     id: "storage-tanks",
