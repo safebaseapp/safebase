@@ -23,3 +23,13 @@ Status: **BLOCKED (real refinery asset not yet verified)**. This branch is isola
 
 ## Next implementation after asset approval
 Install one 3D runtime, create isolated `/en/labs/3d-safety-inspector/sim5` and `/tr/...` routes, implement real movement/collision/touch, then browser-test the asset. Do not begin hazard/XP packages before this gate passes.
+
+## Asset search checkpoint — 2026-10-16
+Research sources and disposition (research only; no assets imported):
+- **Sketchfab / burnedhrum, "Gas / Oil Tank / Refinery / Storage"** — downloadable CC BY model, ~110.1k triangles, ~63.6k vertices. It is **one storage tank**, not a complete walkable refinery. **REJECT as primary scene**; potential supporting asset only after downloaded file/material QA. https://sketchfab.com/3d-models/gas-oil-tank-refinery-storage-f386d1acb6eb4e8dbdd6fa19d2ce801e
+- **Sketchfab Store / lwjcxhlsc, "Refinery"** — full complex refinery description, ~197.3k triangles, mentions texture PNG and real-time/mobile. **BLOCKED**: paid-store listing and actual asset/license/download not verified; no purchase authorized. https://sketchfab.com/3d-models/refinery-851fa1dad60c40a992ccef5fd0155241
+- **3D CAD Browser, "Petroleum Plant Refinery"** — 50,259 polygons, 44 objects, 17 materials, 0 textures; account required, redistribution restrictions. **REJECT** for current quality/licensing/download constraints. https://www.3dcadbrowser.com/3d-model/petroleum-plant-refinery
+- **Kenney Factory Kit / City Kit Industrial** — CC0 but low-poly/stylized; **REJECT** for primary photorealistic environment. https://kenney.nl/assets/factory-kit
+- **Sketchfab refinery listings** — discovery index only; does not establish file/license suitability. https://sketchfab.com/tags/oil-refinery
+
+**Decision:** No candidate meets all gates. **Paket 1 remains BLOCKED**; no deployment or false demo. Next search should prioritize verifiable complete refinery scenes with PBR textures and explicit commercial hosting permissions; evaluate actual download files before integration.
