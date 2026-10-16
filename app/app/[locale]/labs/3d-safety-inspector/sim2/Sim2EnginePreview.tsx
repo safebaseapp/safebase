@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { trainingHazards } from "../hazards";
+import { refineryAsset } from "./refineryAssets";
 import { assessments, MAX_MISSION_SCORE, pointsForDecision } from "../assessment";
 
 type Language = "tr" | "en";
@@ -271,14 +272,14 @@ export default function Sim2EnginePreview() {
         let weldingAssetLoaded=false;
         // Poly Haven Portable Welding Cart (CC0), hosted in app/public/models/refinery.
         try {
-          const weldingAsset=await new GLTFLoader().loadAsync("/models/refinery/portable_welding_cart_1k.glb");
+          const weldingAsset=await new GLTFLoader().loadAsync(refineryAsset("welding-cart").src);
           if(disposed)return;
           const model=weldingAsset.scene;
           const bounds=new THREE.Box3().setFromObject(model);
           const size=bounds.getSize(new THREE.Vector3());
           const center=bounds.getCenter(new THREE.Vector3());
           if(size.y>0){
-            const scale=3.12/size.y;
+            const scale=(refineryAsset("welding-cart").heightMetres ?? 3.12)/size.y;
             model.scale.setScalar(scale);
             model.position.set(workX-center.x*scale, -bounds.min.y*scale,workZ-center.z*scale);
             model.traverse((obj:any)=>{if(obj.isMesh){obj.castShadow=true;obj.receiveShadow=true;}});
@@ -317,7 +318,7 @@ export default function Sim2EnginePreview() {
         let coatedMeshes=0;
         let meshCount = 0, mappedMaterials = 0;
         try {
-          const gltf = await new GLTFLoader().loadAsync("/models/refinery/large_industrial_storage_tanks.glb");
+          const gltf = await new GLTFLoader().loadAsync(refineryAsset("storage-tanks").src);
           if (disposed) return;
           const bounds = new THREE.Box3().setFromObject(gltf.scene);
           const center = bounds.getCenter(new THREE.Vector3());
