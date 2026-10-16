@@ -175,13 +175,7 @@ export default function Sim2EnginePreview() {
         box(-30, 4.8, 20, 12, 9.6, 16, material(0x50626c, 0.4));
         box(-30, 9.8, 20, 13, 0.55, 17, steel);
         for (const x of [-35, -31, -27]) box(x, 4.5, 11.95, 1.4, 4.8, 0.18, material(0x303c43));
-        for (const x of [14, 22]) {
-          pipe(x, 0, 27, x, 10, 27, 0.35, steel);
-          box(x, 0.3, 27, 1.7, 0.6, 1.7, concrete);
-        }
-        box(18, 10, 27, 11, 0.65, 0.8, steel);
-        pipe(18, 9.7, 27, 18, 5.3, 27, 0.055, steel);
-        box(18, 4.7, 27, 3.2, 1.2, 2.4, yellow);
+        // SIM3: retired the toy-like gantry and block load. Authored lifting assets load below.
         // Production-style detail layer: safety rails, pipe flanges, pump skids,
         // bollards and instrument clusters to break up the toy-like empty compound.
         const stainless=material(0xa5aaa5,0.72),darkSteel=material(0x36474d,0.66);
@@ -250,7 +244,7 @@ export default function Sim2EnginePreview() {
           "scaffold-loose-tools": (x,y,z) => { for(let i=0;i<4;i++) box(x+i*0.4,6.95,z,0.35,0.3,0.28,steel); },
           "cylinder-unsecured": (x,y,z) => { for(const dx of [0,0.55]){pipe(x+dx,0.2,z,x+dx,1.6,z,0.19,danger);box(x+dx,1.67,z,0.25,0.13,0.25,steel);} },
           "hot-work-combustible": (_x,_y,_z) => { /* Only show licensed 3D assets here; no placeholder boxes. */ },
-          "suspended-load": (x,y,z) => { box(x,3.1,z,3,1.5,2,yellow); },
+          "suspended-load": (_x,_y,_z) => { /* Real crane / sling assets load asynchronously below. */ },
           "vehicle-interface": (x,y,z) => {box(x,0.95,z,3.4,1.1,2.2,yellow);box(x-0.8,1.75,z,1.45,1.1,1.6,steel);for(const d of [-1.1,1.1])for(const zz of [-0.9,0.9]){const wheel=new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.42,0.23,12),material(0x1e2427));wheel.rotation.z=Math.PI/2;wheel.position.set(x+d,0.43,z+zz);scene.add(wheel);}for(const zz of [-0.55,0.55])pipe(x+1.8,0.23,z+zz,x+4.1,0.23,z+zz,0.075,steel); },
           "electrical-panel": (x,y,z) => { box(x,1.3,z,1.3,2.4,0.65,danger); box(x+0.2,1.5,z+0.35,0.5,0.65,0.05,material(0x20282b)); },
           "oil-spill": (x,y,z) => {const spill=new THREE.Mesh(new THREE.CircleGeometry(1.6,28),new THREE.MeshStandardMaterial({color:0x111b1c,roughness:0.18,metalness:0.45}));spill.rotation.x=-Math.PI/2;spill.scale.set(1.35,0.7,1);spill.position.set(x,0.028,z);scene.add(spill); },
@@ -268,6 +262,39 @@ export default function Sim2EnginePreview() {
           mesh.userData.hazardId = hazard.id;
           scene.add(mesh);
           markers.push({ id: hazard.id, mesh, position: new THREE.Vector3(x, py, z) });
+        }
+        // Authored mobile-crane / webbing-sling loading. Do not fake a crane with boxes.
+        // Asset files must be present in public/models/refinery before this section can render.
+        const liftingTarget=trainingHazards.find(h=>h.id==="suspended-load");
+        const liftX=liftingTarget?.target[0] ?? 18;
+        const liftZ=liftingTarget?.target[2] ?? 29;
+        let craneAssetLoaded=false;
+        let slingAssetLoaded=false;
+        const loadAuthoredModel=async (id:"mobile-crane"|"lifting-sling", targetX:number, targetY:number, targetZ:number, height:number)=>{
+          const gltf=await new GLTFLoader().loadAsync(refineryAsset(id).src);
+          if(disposed)return false;
+          const model=gltf.scene;
+          const bounds=new THREE.Box3().setFromObject(model);
+          const size=bounds.getSize(new THREE.Vector3());
+          if(!(size.y>0))return false;
+          const scale=height/size.y;
+          const center=bounds.getCenter(new THREE.Vector3());
+          model.scale.setScalar(scale);
+          model.position.set(targetX-center.x*scale,targetY-bounds.min.y*scale,targetZ-center.z*scale);
+          model.traverse((obj:any)=>{if(obj.isMesh){obj.castShadow=true;obj.receiveShadow=true;}});
+          scene.add(model);
+          return true;
+        };
+        try {
+          // Park the crane off the pedestrian corridor, facing the lift work zone.
+          craneAssetLoaded=await loadAuthoredModel("mobile-crane",26,0,29,refineryAsset("mobile-crane").heightMetres ?? 7);
+        }catch(err){console.warn("SIM3 mobile crane GLB unavailable",err);}
+        try {
+          // Preliminary visual placement only; final hook / sling attachment needs rigging QA.
+          slingAssetLoaded=await loadAuthoredModel("lifting-sling",liftX,5.2,liftZ,refineryAsset("lifting-sling").heightMetres ?? 1.25);
+        }catch(err){console.warn("SIM3 lifting sling GLB unavailable",err);}
+        if(!craneAssetLoaded || !slingAssetLoaded){
+          setStatus("SIM 3.0: Kaldırma GLB dosyaları eksik ("+(craneAssetLoaded?"vinç ✓":"vinç ✕")+", "+(slingAssetLoaded?"sapan ✓":"sapan ✕")+"). /models/refinery/ klasörüne yükleyin.");
         }
         let weldingAssetLoaded=false;
         // Poly Haven Portable Welding Cart (CC0), hosted in app/public/models/refinery.
