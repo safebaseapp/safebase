@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type PcApp = { start: () => void; destroy: () => void; resizeCanvas: (w: number, h: number) => void; root: { addChild: (entity: unknown) => void }; scene: { ambientLight: unknown } };
+type PcApp = { start: () => void; destroy: () => void; resizeCanvas: (w: number, h: number) => void; root: { addChild: (entity: unknown) => void }; scene: { ambientLight: unknown }; assets: { loadFromUrl: (url: string, type: string, callback: (error: unknown, asset: { resource?: { instantiateRenderEntity?: () => unknown } }) => void) => void } };
 type PcApi = {
   Application: new (canvas: HTMLCanvasElement, options: Record<string, unknown>) => PcApp;
   Entity: new (name: string) => { addComponent: (type: string, options: Record<string, unknown>) => void; setPosition: (x: number, y: number, z: number) => void; setEulerAngles: (x: number, y: number, z: number) => void };
@@ -36,6 +36,16 @@ export default function Sim4Prototype() {
         camera.setEulerAngles(-8, 0, 0);
         app.root.addChild(camera);
         app.start();
+        // Authored Factory model; original glTF and BIN must be deployed together.
+        app.assets.loadFromUrl("/models/refinery/factory/scene.gltf", "container", (error, asset) => {
+          if (disposed || !app) return;
+          if (error || !asset?.resource?.instantiateRenderEntity) {
+            setStatus("PlayCanvas çalışıyor; Factory modeli henüz sunucuda yok veya yüklenemedi.");
+            return;
+          }
+          app.root.addChild(asset.resource.instantiateRenderEntity());
+          setStatus("Factory 3D modeli yüklendi. Ölçek ve mobil performans kontrol edilmeli.");
+        });
         const resize = () => { if (canvas && app) app.resizeCanvas(canvas.clientWidth, canvas.clientHeight); };
         observer = new ResizeObserver(resize);
         observer.observe(canvas);
@@ -67,7 +77,7 @@ export default function Sim4Prototype() {
         <canvas ref={canvasRef} className="block h-[65vh] min-h-[360px] w-full" aria-label="SIM 4.0 PlayCanvas prototip görüntüsü" />
       </div>
       <p className="mt-3 text-sm" role="status">{status}</p>
-      <p className="mt-2 text-xs opacity-70">Kalite onayı için gerçek rafineri GLB/GLTF çevresi, lisans ve mobil performans doğrulaması gereklidir.</p>
+      <p className="mt-2 text-xs opacity-70">Factory — Pepe Orejel, CC BY 4.0. Kaynak: https://sketchfab.com/3d-models/factory-d4aaf95e8a6048959688e6ec6916a363</p>
     </main>
   );
 }
