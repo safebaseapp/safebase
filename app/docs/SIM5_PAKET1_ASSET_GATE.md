@@ -46,3 +46,18 @@ Search expanded to professional/commercial refinery environments rather than acc
 - 3D CAD Browser, *Refinery Plant*: https://www.3dcadbrowser.com/3d-model/refinery-plant . Listing reports 142206 polygons, 1724 objects, 17 materials but **0 textures** and **no UV mapping**. Reject for photorealistic ready-to-deploy primary environment.
 
 **Hard stop remains:** Neither priority model is an accepted asset until a legitimate downloadable copy is inspected, license permits intended SERNEM hosting, and actual in-browser rendering/mobile performance is tested. Do not deploy stock images or substitute scenes. SIM 3.0 and production remain untouched.
+
+## Free-only research checkpoint — 2026-10-16
+**Budget requirement: 0 EUR. Paid listings are excluded from all further consideration.**
+
+Promising engineering reference (NOT a refinery, NOT accepted as SIM 5 environment):
+- [helinyyman/geothermal-digital-twin](https://github.com/helinyyman/geothermal-digital-twin) — an open-source geothermal ORC power plant, built with 17 Blender/Python stages and a browser GLB inspector. The repository LICENSE is MIT (copyright 2026 Helin Yaman; preserve license notice when reusing code). A release page lists a downloadable exported `Geothermal_Digital_Twin_v4.glb`, approximately 40 MB per README. This proves a **free code-driven industrial plant construction workflow** is available, but the plant is geothermal, not an oil refinery; it is not yet verified visually, and no model was downloaded or imported.
+- [Poly Haven Modular Pipes](https://www.mixos.io/free-models/tools/modular_pipes) — listing reports CC0, GLB, embedded PBR materials, 106 parts and 94,856 triangles. Suitable **candidate component**, not a refinery; actual GLB uninspected.
+- [Innerscene portable air compressor](https://www.innerscene.com/tools/library/3d-parts/air-tank-air-compressor-ef756889) — CC0, GLB with embedded PBR, about 7k triangles. Candidate detail asset only; not primary environment.
+- [Kenney Industrial City GLB pack](https://eclair-assets.itch.io/industrial-city-glb-pack-25-free-cc0-3d-models) — CC0 and free download, but low-poly visual style; **REJECT primary environment**.
+
+**Engineering direction:** Investigate a Blender-generated, fully connected oil-refinery scene (columns, exchangers, tanks, pipe racks, accessways) using legitimate CC0 PBR materials and a constrained modular design. Unlike the previous photo-carousel approach, this yields one navigable mesh scene. A procedural first-pass does not qualify as photorealistic until reviewed. Avoid borrowing the geothermal model as a substitute refinery.
+
+**Attempted download validation:** The external GLB could not be downloaded in the available runtime; source release listing and license were inspected, but binary file, materials, geometry, and in-browser FPS remain unverified. Do not claim import or working demo.
+
+**Status:** BLOCKED pending inspection of an actual free, commercially usable, credible refinery scene. SIM 3.0 and production unchanged.
