@@ -33,3 +33,16 @@ Research sources and disposition (research only; no assets imported):
 - **Sketchfab refinery listings** — discovery index only; does not establish file/license suitability. https://sketchfab.com/tags/oil-refinery
 
 **Decision:** No candidate meets all gates. **Paket 1 remains BLOCKED**; no deployment or false demo. Next search should prioritize verifiable complete refinery scenes with PBR textures and explicit commercial hosting permissions; evaluate actual download files before integration.
+
+## Candidate expansion — 2026-10-16, second pass
+Search expanded to professional/commercial refinery environments rather than accepting low-poly substitutes.
+
+**Priority A (pending acquisition/inspection):**
+- OpiStudio, *Modular Industrial Refinery and Chemical Plant Complex — 3D Environment Kit*: https://www.fab.com/listings/8a134d13-ef9e-490d-ae1e-d82e1527072d . Listing claims distillation towers, pipelines, tanks, modular scene, PBR workflow, GLB/glTF/FBX/OBJ. **UNVERIFIED**: actual scene content, visual quality, file sizes, licensing entitlement, collision/walkability, mobile performance. No purchase or download made.
+- MSP Assets, *Industrial Refinery Processing Plant Complex*: https://www.fab.com/listings/18f83f06-9621-451d-bc1f-8ee820ae29ea . Listing claims a large detailed complex with pipelines/tanks/columns and GLB; publisher claims mobile optimization. **UNVERIFIED**: actual texture quality, walkable interior, performance, license/entitlement. No purchase or download made.
+
+**Rejected alternatives:**
+- Pplouch, *Oil Refinery Low Poly*: https://www.fab.com/listings/36fe799a-a9d8-4479-ad0c-d5ecd44df4a9 . Low-poly visual style violates user's quality gate.
+- 3D CAD Browser, *Refinery Plant*: https://www.3dcadbrowser.com/3d-model/refinery-plant . Listing reports 142206 polygons, 1724 objects, 17 materials but **0 textures** and **no UV mapping**. Reject for photorealistic ready-to-deploy primary environment.
+
+**Hard stop remains:** Neither priority model is an accepted asset until a legitimate downloadable copy is inspected, license permits intended SERNEM hosting, and actual in-browser rendering/mobile performance is tested. Do not deploy stock images or substitute scenes. SIM 3.0 and production remain untouched.
