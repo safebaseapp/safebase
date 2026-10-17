@@ -92,6 +92,10 @@ export default function RealModels({tr}:{tr:boolean}) {
       // Anchor the imported mesh to the top of its equipment-yard foundation.
       const grounded=new THREE.Box3().setFromObject(obj);
       obj.position.y+=.08-grounded.min.y;
+      // Factory's authored lower feet extend far beneath the primary working deck.
+      // Recess the structure into its slab to bring the deck, pipework and access
+      // platforms closer to a natural human-scale ground level.
+      if(x<0)obj.position.y-=2.4;
       obj.updateMatrixWorld(true);
       scene.add(obj);
       obj.updateMatrixWorld(true);
