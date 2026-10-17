@@ -73,15 +73,34 @@ export default function RealModels({tr}:{tr:boolean}) {
     const concrete=material("#858e89");
     const steel=material("#687a80",.3);
     box(-47,.12,-12,62,.20,85,concrete);
+    // Raised structures remain elevated by design; the new support system and
+    // circulation floor make the undercroft a credible, usable equipment yard.
     const supportColumn=(x:number,z:number,top:number)=>{
       if(top<.45)return;
       const h=Math.max(.25,top-.22);
-      box(x,.22+h/2,z,.55,h,.55,steel);
+      solid(x,.22+h/2,z,.55,h,.55,steel);
       box(x,.23,z,1.5,.16,1.5,concrete);
     };
     const colliders:any[]=[];
     const colliderBoxes:any[]=[];
     const collisionRay=new THREE.Raycaster();
+    const physicalBoxes:any[]=[];
+    const solid=(x:number,y:number,z:number,w:number,h:number,d:number,m:any)=>{
+      box(x,y,z,w,h,d,m);
+      physicalBoxes.push(new THREE.Box3(
+        new THREE.Vector3(x-w/2,y-h/2,z-d/2),
+        new THREE.Vector3(x+w/2,y+h/2,z+d/2)
+      ));
+    };
+    // Facility-grade concrete bays and defined pedestrian access beneath factory.
+    const footpath=material("#c0c9c1"),edgePaint=material("#f0cb4d");
+    for(const x of [-67,-47,-27]){
+      box(x,.255,-12,2.8,.07,70,footpath);
+      for(let z=-44;z<22;z+=7)box(x-1.22,.31,z,.12,.035,3.2,edgePaint);
+    }
+    for(const z of [-40,12]){
+      box(-47,.27,z,57,.07,2.8,footpath);
+    }
     const loader=new GLTFLoader();
     const fit=(obj:any,targetHeight:number,x:number,z:number)=>{
       const before=new THREE.Box3().setFromObject(obj),size=before.getSize(new THREE.Vector3());
@@ -142,6 +161,8 @@ export default function RealModels({tr}:{tr:boolean}) {
       const distance=delta.length();if(distance<.00001)return true;
       const direction=delta.normalize();
       const reach=distance+.48;
+      const capsule=new THREE.Box3(new THREE.Vector3(next.x-.43,.22,next.z-.43),new THREE.Vector3(next.x+.43,1.83,next.z+.43));
+      if(physicalBoxes.some(b=>b.intersectsBox(capsule)))return false;
       const near:any[]=[];
       for(let i=0;i<colliders.length;i++){
         const b=colliderBoxes[i];
