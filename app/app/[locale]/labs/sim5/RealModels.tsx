@@ -170,16 +170,41 @@ export default function RealModels({tr}:{tr:boolean}) {
     let realWelderLoaded=false;
     try{
       const welderScene=await new Promise<any>((resolve,reject)=>loader.load("/sim5/SERNEM_Welder_06_under25MB.glb",(g:any)=>resolve(g.scene),undefined,reject));
+      // Keep the author's textures, but correct color space and washed-out material response.
+      // This Sketchfab GLB contains the welder, power unit and cable as one assembly.
+      welderScene.traverse((obj:any)=>{
+        if(!obj.isMesh)return;
+        obj.castShadow=true;obj.receiveShadow=true;
+        const materials=Array.isArray(obj.material)?obj.material:[obj.material];
+        for(const mat of materials){
+          if(!mat)continue;
+          if(mat.map){mat.map.colorSpace=THREE.SRGBColorSpace;mat.map.needsUpdate=true;}
+          if(mat.emissiveMap){mat.emissiveMap.colorSpace=THREE.SRGBColorSpace;mat.emissiveMap.needsUpdate=true;}
+          if(mat.isMeshStandardMaterial||mat.isMeshPhysicalMaterial){
+            mat.roughness=Math.max(.55,mat.roughness??.8);
+            mat.metalness=Math.min(.35,mat.metalness??0);
+            mat.needsUpdate=true;
+          }
+        }
+      });
+      // Fit on the HUMAN height, not the entire assembly (which includes equipment).
+      // Use the assembly's original dimensions and clamp it to a plausible site footprint.
+      welderScene.updateMatrixWorld(true);
       const originalBounds=new THREE.Box3().setFromObject(welderScene);
       const originalSize=originalBounds.getSize(new THREE.Vector3());
-      const scale=2.15/Math.max(originalSize.y,.01);
+      const scale=Math.min(2.2/Math.max(originalSize.y,.01),6.5/Math.max(originalSize.x,.01),6.5/Math.max(originalSize.z,.01));
       welderScene.scale.multiplyScalar(scale);
       welderScene.updateMatrixWorld(true);
       const bounds=new THREE.Box3().setFromObject(welderScene);
       const center=bounds.getCenter(new THREE.Vector3());
-      welderScene.position.set(workX-center.x,.17-bounds.min.y,workZ-center.z);
-      welderScene.traverse((obj:any)=>{if(obj.isMesh){obj.castShadow=true;obj.receiveShadow=true;}});
+      // Offset position from the computed bounds; avoid the floating-foot issue.
+      welderScene.position.x+=workX-center.x;
+      welderScene.position.y+=.13-bounds.min.y;
+      welderScene.position.z+=workZ-center.z;
+      welderScene.updateMatrixWorld(true);
       scene.add(welderScene);
+      // Entire loaded assembly is selectable for the hot-work HSE exercise.
+      welderScene.traverse((obj:any)=>{if(obj.isMesh){obj.userData.inspectionId="hotwork";inspectionMarkers.push(obj);}});
       realWelderLoaded=true;
     }catch{ /* Preserve the existing playable scene if the asset is unavailable. */ }
     // Hot-work violation: fallback equipment and combustible drums.
@@ -202,6 +227,49 @@ export default function RealModels({tr}:{tr:boolean}) {
     extinguisher.rotation.z=.12;
     place(new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.09,12),darkMetal),workX+3.46,.76,workZ+1.1);
     place(new THREE.Mesh(new THREE.BoxGeometry(.3,.045,.06),darkMetal),workX+3.46,.83,workZ+1.1);
+    }
+    // Physical hot-work context: grounded pipe spool, supports, fire watch position
+    // and nearby combustibles. These remain present with the licensed welder GLB.
+    const hotPipe=place(new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,3.6,18),darkMetal),workX+1.9,.88,workZ-1.8,"hotwork");
+    hotPipe.rotation.z=Math.PI/2;
+    for(const dx of [.65,3.1]){
+      box(workX+dx,.43,workZ-1.8,.17,.76,.55,darkMetal);
+      box(workX+dx,.12,workZ-1.8,.65,.09,.65,darkMetal);
+    }
+    for(const dx of [-2.6,-1.8]){
+      const drum=place(new THREE.Mesh(new THREE.CylinderGeometry(.31,.31,.92,18),material("#9e5431",.2)),workX+dx,.59,workZ+2.05,"hotwork");
+      for(const y of [.26,.91])place(new THREE.Mesh(new THREE.TorusGeometry(.315,.022,6,22),darkMetal),workX+dx,y,workZ+2.05).rotation.x=Math.PI/2;
+      drum.rotation.y=.14;
+    }
+    // Extinguisher station is visible but not a substitute for a permit or fire watch.
+    const ext=place(new THREE.Mesh(new THREE.CylinderGeometry(.12,.13,.65,14),material("#bb2823",.25)),workX+3.5,.49,workZ+1.9,"hotwork");
+    place(new THREE.Mesh(new THREE.BoxGeometry(.32,.05,.09),darkMetal),workX+3.5,.86,workZ+1.9);
+    const signMat=material("#f1d45e");
+    box(workX+3.7,.83,workZ+2.5,.9,1.3,.08,signMat);
+    box(workX+3.7,.12,workZ+2.5,.12,.22,.12,darkMetal);
+    // A grounded weld pool and compact spark cluster make the work position legible.
+    const weldGlow=new THREE.MeshBasicMaterial({color:0xffb75b});
+    const weldPoint=place(new THREE.Mesh(new THREE.SphereGeometry(.065,10,8),weldGlow),workX+1.15,1.02,workZ-1.8);
+    for(let i=0;i<10;i++){
+      const spark=place(new THREE.Mesh(new THREE.SphereGeometry(.016,5,4),new THREE.MeshBasicMaterial({color:i%2?0xffb847:0xffe7a1})),workX+1.15+(i%5-2)*.12,.94+(i%4)*.12,workZ-1.8+(i%3-1)*.11);
+      sparkMeshes.push(spark);
+    }
+    // Additional grounded site assets fill the tank yard without blocking inspection.
+    const tankSign=material("#e8d16b"),steel=material("#71818a",.45);
+    for(const [sx,sz] of [[35,-32],[57,5],[38,13]]){
+      box(sx,.35,sz,2.5,.65,1.4,steel);
+      box(sx,.72,sz,2.6,.09,1.5,darkMetal);
+      for(const side of [-1,1])box(sx+side*.95,.12,sz,.15,.22,1.3,darkMetal);
+    }
+    // Bunded chemical containers, with clear space left around the leak point.
+    for(const [cx,cz] of [[28,-29],[30,-29],[28,-27]]){
+      const can=place(new THREE.Mesh(new THREE.CylinderGeometry(.38,.38,.94,12),material("#365b78",.22)),cx,.63,cz);
+      place(new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.05,10),darkMetal),cx,1.13,cz);
+      can.receiveShadow=true;
+    }
+    for(const [sx,sz] of [[32,-28],[54,15]]){
+      box(sx,1.2,sz,.09,2.1,.09,darkMetal);
+      box(sx,2.25,sz,.95,.6,.07,tankSign);
     }
     // Visible warning paint on the yard surface.
     const warning=material("#e0b83c");
@@ -299,7 +367,7 @@ export default function RealModels({tr}:{tr:boolean}) {
         if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next)}
       }else if(nearbyRef.current){nearbyRef.current=null;setNearbyHazard(null)}
       drip.position.y=.6+Math.abs(Math.sin(now*.003))*.42;
-      for(let i=0;i<sparkMeshes.length;i++){const spark=sparkMeshes[i];spark.position.y=1.2+Math.abs(Math.sin(now*.003+i*1.9))*.55;spark.visible=Math.sin(now*.016+i*3)>-.35;}
+      for(let i=0;i<sparkMeshes.length;i++){const spark=sparkMeshes[i];spark.visible=Math.sin(now*.016+i*3)>-.35;}
       renderer.render(scene,camera);raf=requestAnimationFrame(tick);
     };
     raf=requestAnimationFrame(tick);
@@ -329,6 +397,6 @@ export default function RealModels({tr}:{tr:boolean}) {
   <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/3 · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
   {activeInspection&&<section style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}><h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>{inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{const current=inspections[activeInspection];if(i===current.correct){setCompletedInspections(prev=>prev.includes(activeInspection)?prev:[...prev,activeInspection]);setActiveInspection(null)}setInspectionFeedback((i===current.correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+current.explanation[tr?0:1])}} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}<button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button></section>}
   {inspectionFeedback&&<p role="status" style={{color:"#ffcf7d"}}>{inspectionFeedback}</p>}
-  <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: burnedhrum · CC BY 4.0 · {loaded}/2 GLB</p>
+  <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: burnedhrum · Welder: grewe.juergen · CC BY 4.0 · {loaded}/2 GLB</p>
  </section>;
 }
