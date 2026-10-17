@@ -73,10 +73,16 @@ export default function RealModels({tr}:{tr:boolean}) {
     const colliderBoxes:any[]=[];
     const collisionRay=new THREE.Raycaster();
     const physicalBoxes:any[]=[];
+    // Prevent walking through roadside posts and barriers without blocking marked gates.
     const solid=(x:number,y:number,z:number,w:number,h:number,d:number,m:any)=>{
       box(x,y,z,w,h,d,m);
       physicalBoxes.push(new THREE.Box3(new THREE.Vector3(x-w/2,y-h/2,z-d/2),new THREE.Vector3(x+w/2,y+h/2,z+d/2)));
     };
+    // Guardrails on both sides of the service road, leaving designated access gaps.
+    for(const side of [-1,1])for(let z=-48;z<99;z+=12){
+      if((z>=-18&&z<=6)||(z>=42&&z<=66))continue;
+      physicalBoxes.push(new THREE.Box3(new THREE.Vector3(side*11-.12,0,z-5.9),new THREE.Vector3(side*11+.12,1.5,z+5.9)));
+    }
     const loader=new GLTFLoader();
     const fit=(obj:any,targetHeight:number,x:number,z:number)=>{
       obj.updateMatrixWorld(true);
@@ -183,7 +189,7 @@ export default function RealModels({tr}:{tr:boolean}) {
   })();
   return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();held.current.clear()};
  },[tr]);
- const controls=[["↶","arrowleft"],["↑","w"],["↓","s"],["↷","arrowright"]];
+ const controls=[["↶","arrowleft"],["←","a"],["↑","w"],["↓","s"],["→","d"],["↷","arrowright"]];
  return <section style={{maxWidth:1600,margin:"0 auto"}}>
   <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",justifyContent:"space-between",marginBottom:12}}>
    <p style={{color:"#9de8e9",margin:0}} role="status">{status}</p>
