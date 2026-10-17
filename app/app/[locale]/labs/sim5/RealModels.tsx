@@ -32,16 +32,27 @@ export default function RealModels({tr}:{tr:boolean}) {
     const camera=new THREE.PerspectiveCamera(64,host.clientWidth/Math.max(1,host.clientHeight),.1,900);
     renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});
     renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.8));renderer.setSize(host.clientWidth,host.clientHeight);
-    renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+    renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.96;
+    renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
     host.appendChild(renderer.domElement);
-    scene.add(new THREE.HemisphereLight(0xe8f3ff,0x697369,2.1));
-    const sun=new THREE.DirectionalLight(0xfff3dc,2.5);sun.position.set(-55,85,30);scene.add(sun);
+    scene.add(new THREE.HemisphereLight(0xd8ebff,0x687363,1.35));
+    const sun=new THREE.DirectionalLight(0xffedcf,2.8);sun.position.set(-65,95,42);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-120;sun.shadow.camera.right=120;sun.shadow.camera.top=120;sun.shadow.camera.bottom=-120;sun.shadow.camera.near=1;sun.shadow.camera.far=240;sun.shadow.bias=-.00025;sun.shadow.normalBias=.035;scene.add(sun);
     const material=(color:string,metalness=0)=>new THREE.MeshStandardMaterial({color,roughness:.85,metalness});
     const asphalt=material("#444f57"),walkway=material("#a9b5af"),grass=material("#607668"),white=material("#e4e5dc"),yellow=material("#e9c34a"),fence=material("#aebec4",.35);
-    const box=(x:number,y:number,z:number,w:number,h:number,d:number,m:any)=>{
-      const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);mesh.position.set(x,y,z);scene.add(mesh);return mesh;
+    const surfaceTexture=(base:string,variation:number,scale:number)=>{
+      const canvas=document.createElement("canvas");canvas.width=256;canvas.height=256;
+      const ctx=canvas.getContext("2d");if(!ctx)return null;
+      ctx.fillStyle=base;ctx.fillRect(0,0,256,256);
+      for(let i=0;i<6500;i++){const v=Math.floor(80+Math.random()*120);ctx.fillStyle=`rgba(${v},${v},${v},${Math.random()*variation})`;ctx.fillRect(Math.random()*256,Math.random()*256,1+Math.random()*3,1+Math.random()*3)}
+      const texture=new THREE.CanvasTexture(canvas);texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.repeat.set(scale,scale);texture.colorSpace=THREE.SRGBColorSpace;return texture;
     };
-    const ground=new THREE.Mesh(new THREE.PlaneGeometry(450,450),grass);ground.rotation.x=-Math.PI/2;ground.position.y=-.14;scene.add(ground);
+    const roadTexture=surfaceTexture("#515b60",.14,16),concreteTexture=surfaceTexture("#a3a9a4",.12,12);
+    if(roadTexture){asphalt.map=roadTexture;asphalt.color.set("#ffffff");asphalt.needsUpdate=true;}
+    if(concreteTexture){walkway.map=concreteTexture;walkway.color.set("#ffffff");walkway.needsUpdate=true;}
+    const box=(x:number,y:number,z:number,w:number,h:number,d:number,m:any)=>{
+      const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);mesh.position.set(x,y,z);mesh.castShadow=h>.2;mesh.receiveShadow=true;scene.add(mesh);return mesh;
+    };
+    const ground=new THREE.Mesh(new THREE.PlaneGeometry(450,450),grass);ground.rotation.x=-Math.PI/2;ground.position.y=-.14;ground.receiveShadow=true;scene.add(ground);
     // Central service road, continuous pedestrian sidewalks and safe crosswalks.
     box(0,.025,25,13,.09,155,asphalt);
     for(const side of [-1,1]){
@@ -114,6 +125,7 @@ export default function RealModels({tr}:{tr:boolean}) {
       scene.add(obj);
       obj.traverse((child:any)=>{
         if(!child.isMesh)return;
+        child.castShadow=true;child.receiveShadow=true;
         const bounds=new THREE.Box3().setFromObject(child);
         if(bounds.isEmpty()||bounds.max.y<.25||bounds.min.y>2.7)return;
         colliders.push(child);colliderBoxes.push(bounds);
@@ -128,7 +140,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     const hazardMaterial=(color:string,opacity=1)=>new THREE.MeshStandardMaterial({color,roughness:.85,transparent:opacity<1,opacity,side:THREE.DoubleSide});
     const darkMetal=material("#505b62",.5),rust=material("#a85d36"),wood=material("#8b6747");
     const place=(mesh:any,x:number,y:number,z:number,id?:string)=>{
-      mesh.position.set(x,y,z);if(id)mesh.userData.inspectionId=id;scene.add(mesh);
+      mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;if(id)mesh.userData.inspectionId=id;scene.add(mesh);
       if(id)inspectionMarkers.push(mesh);return mesh;
     };
     // Tank-yard leak: pipe joint, flange, drip and irregular liquid spill.
