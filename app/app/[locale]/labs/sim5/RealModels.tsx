@@ -151,6 +151,25 @@ export default function RealModels({tr}:{tr:boolean}) {
     // Supported pipework with a visible elbow, valve and bolted joint.
     const pipe=place(new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,3.5,16),darkMetal),leakX,1.25,leakZ);
     pipe.rotation.z=Math.PI/2;
+    // Pipe rack continuation connects the leaking spool to the tank-yard
+    // process network, rather than leaving a floating isolated pipe segment.
+    const pipeRuns:[[number,number,number],[number,number,number]][]=[
+      [[leakX+1.75,1.25,leakZ],[36,1.25,leakZ]],
+      [[36,1.25,leakZ],[36,1.25,-10]],
+      [[36,1.25,-10],[43,1.25,-10]]
+    ];
+    for(const [a,b] of pipeRuns){
+      const p1=new THREE.Vector3(...a),p2=new THREE.Vector3(...b);
+      const direction=p2.clone().sub(p1),length=direction.length();
+      const run=new THREE.Mesh(new THREE.CylinderGeometry(.21,.21,length,14),darkMetal);
+      run.position.copy(p1.add(p2).multiplyScalar(.5));
+      run.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),direction.normalize());
+      run.castShadow=true;run.receiveShadow=true;scene.add(run);
+    }
+    for(const [x,z] of [[27,leakZ],[33,leakZ],[36,-16],[39,-10]]){
+      box(x,.66,z,.16,1.12,.22,darkMetal);
+      box(x,.14,z,.7,.12,.65,darkMetal);
+    }
     for(const dx of [-1.35,1.35]){
       box(leakX+dx,.68,leakZ,.15,1.15,.17,darkMetal);
       box(leakX+dx,.17,leakZ,.65,.13,.7,darkMetal);
@@ -212,9 +231,19 @@ export default function RealModels({tr}:{tr:boolean}) {
       welderScene.updateMatrixWorld(true);
       const bounds=new THREE.Box3().setFromObject(welderScene);
       const center=bounds.getCenter(new THREE.Vector3());
-      // Offset position from the computed bounds; avoid the floating-foot issue.
+      // Imported assembly includes long cables and equipment: its lowest vertex
+      // is not necessarily a boot. Ground using the lower HUMAN meshes instead.
+      const humanMeshes:any[]=[];
+      welderScene.traverse((obj:any)=>{
+        if(!obj.isMesh)return;
+        const n=(obj.name+" "+(obj.material?.name||"")).toLowerCase();
+        if(/boot|shoe|foot|leg|body|bodysuit|pants|trouser/.test(n))humanMeshes.push(obj);
+      });
+      const humanBounds=new THREE.Box3();
+      for(const obj of humanMeshes)humanBounds.expandByObject(obj);
+      const footY=humanMeshes.length&&!humanBounds.isEmpty()?humanBounds.min.y:bounds.min.y;
       welderScene.position.x+=workX-center.x;
-      welderScene.position.y+=.13-bounds.min.y;
+      welderScene.position.y+=.12-footY;
       welderScene.position.z+=workZ-center.z;
       welderScene.updateMatrixWorld(true);
       scene.add(welderScene);
@@ -245,6 +274,16 @@ export default function RealModels({tr}:{tr:boolean}) {
     }
     // Compact hot-work context. Keep the imported welder and its detailed
     // equipment visually dominant; avoid giant untextured props in the foreground.
+    // Put the workpiece in front of the operator, not across the camera.
+    // Its modest diameter keeps the authored welder assembly in focus.
+    const spool=place(new THREE.Mesh(new THREE.CylinderGeometry(.14,.14,1.4,18),darkMetal),workX+1.05,1.02,workZ-.85,"hotwork");
+    spool.rotation.z=Math.PI/2;
+    for(const x of [workX+.55,workX+1.55]){
+      box(x,.48,workZ-.85,.11,.84,.18,darkMetal);
+      box(x,.11,workZ-.85,.45,.08,.48,darkMetal);
+    }
+    const joint=place(new THREE.Mesh(new THREE.TorusGeometry(.145,.025,8,20),rust),workX+1.05,1.02,workZ-.85,"hotwork");
+    joint.rotation.y=Math.PI/2;
     const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.095,.11,.52,16),material("#b72921",.18)),workX+2.7,.43,workZ+1.45,"hotwork");
     place(new THREE.Mesh(new THREE.BoxGeometry(.24,.035,.06),darkMetal),workX+2.7,.72,workZ+1.45);
     for(const dx of [-2.4,-1.8]){
@@ -260,6 +299,10 @@ export default function RealModels({tr}:{tr:boolean}) {
       const servicePipe=place(new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,1.9,16),skidSteel),sx,.72,sz);
       servicePipe.rotation.z=Math.PI/2;
     }
+    // A visible containment tray beneath the stored drums.
+    box(29,.11,-29,3.55,.1,2.55,darkMetal);
+    for(const x of [27.28,30.72])box(x,.23,-29,.09,.23,2.55,darkMetal);
+    for(const z of [-30.22,-27.78])box(29,.23,z,3.55,.23,.09,darkMetal);
     // Drum storage on a low bunded pallet, placed away from the leak.
     box(29,.17,-29,3.2,.18,2.15,wood);
     for(const [cx,cz] of [[28.25,-29.5],[29.5,-29.5],[28.25,-28.55],[29.5,-28.55]]){
