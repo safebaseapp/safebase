@@ -184,6 +184,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     }catch{ /* Preserve the existing playable scene if the asset is unavailable. */ }
     // Hot-work violation: fallback equipment and combustible drums.
 
+    const sparkMeshes:any[]=[];
     if(!realWelderLoaded){
     place(new THREE.Mesh(new THREE.BoxGeometry(2.4,.14,1.3),darkMetal),workX,1.1,workZ,"hotwork");
     for(const dx of [-.95,.95])for(const dz of [-.45,.45])place(new THREE.Mesh(new THREE.BoxGeometry(.1,1.05,.1),darkMetal),workX+dx,.54,workZ+dz);
@@ -207,7 +208,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     for(const dx of [-3.2,3.2])box(workX+dx,.14,workZ, .14,.025,5.8,warning);
     for(const dz of [-2.8,2.8])box(workX,.14,workZ+dz,6.4,.025,.14,warning);
     // Small animated sparks, rather than static hovering particles.
-    const sparkMeshes=scene.children.filter((obj:any)=>obj.isMesh&&obj.geometry?.type==="CylinderGeometry"&&obj.material?.type==="MeshBasicMaterial");
+    sparkMeshes.push(...scene.children.filter((obj:any)=>obj.isMesh&&obj.geometry?.type==="CylinderGeometry"&&obj.material?.type==="MeshBasicMaterial"));
     // Obstructed yard entrance: stacked timber pallets and crates beside the equipment access route.
     const accessX=19.5,accessZ=-5;
     for(let layer=0;layer<3;layer++){
