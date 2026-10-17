@@ -180,6 +180,21 @@ export default function RealModels({tr}:{tr:boolean}) {
           if(!mat)continue;
           if(mat.map){mat.map.colorSpace=THREE.SRGBColorSpace;mat.map.needsUpdate=true;}
           if(mat.emissiveMap){mat.emissiveMap.colorSpace=THREE.SRGBColorSpace;mat.emissiveMap.needsUpdate=true;}
+          // Authored color textures are valid in the GLB, but some imported
+          // material assignments render near-white. Give human PPE a realistic
+          // deterministic color fallback rather than leaving a white mannequin.
+          const label=String(mat.name||"").toLowerCase();
+          const fallback=label.includes("bodysuit")||label.includes("mc-bodysuit")?"#234f78":
+            label.includes("apron")?"#7b4e34":
+            label.includes("helmet")?"#e6d9b0":
+            label.includes("caucasian")?"#b88d73":
+            label.includes("hair")?"#242020":null;
+          if(fallback&&mat.color){
+            mat.color.set(fallback);
+            // Fallback must be visible even when a texture is absent or white.
+            if(mat.map&&label.includes("bodysuit"))mat.map=null;
+            if(mat.map&&label.includes("apron"))mat.map=null;
+          }
           if(mat.isMeshStandardMaterial||mat.isMeshPhysicalMaterial){
             mat.roughness=Math.max(.55,mat.roughness??.8);
             mat.metalness=Math.min(.35,mat.metalness??0);
@@ -228,48 +243,27 @@ export default function RealModels({tr}:{tr:boolean}) {
     place(new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.09,12),darkMetal),workX+3.46,.76,workZ+1.1);
     place(new THREE.Mesh(new THREE.BoxGeometry(.3,.045,.06),darkMetal),workX+3.46,.83,workZ+1.1);
     }
-    // Physical hot-work context: grounded pipe spool, supports, fire watch position
-    // and nearby combustibles. These remain present with the licensed welder GLB.
-    const hotPipe=place(new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,3.6,18),darkMetal),workX+1.9,.88,workZ-1.8,"hotwork");
-    hotPipe.rotation.z=Math.PI/2;
-    for(const dx of [.65,3.1]){
-      box(workX+dx,.43,workZ-1.8,.17,.76,.55,darkMetal);
-      box(workX+dx,.12,workZ-1.8,.65,.09,.65,darkMetal);
+    // Compact hot-work context. Keep the imported welder and its detailed
+    // equipment visually dominant; avoid giant untextured props in the foreground.
+    const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.095,.11,.52,16),material("#b72921",.18)),workX+2.7,.43,workZ+1.45,"hotwork");
+    place(new THREE.Mesh(new THREE.BoxGeometry(.24,.035,.06),darkMetal),workX+2.7,.72,workZ+1.45);
+    for(const dx of [-2.4,-1.8]){
+      const drum=place(new THREE.Mesh(new THREE.CylinderGeometry(.27,.27,.74,20),material("#915337",.12)),workX+dx,.51,workZ+2.1,"hotwork");
+      drum.castShadow=true;
     }
-    for(const dx of [-2.6,-1.8]){
-      const drum=place(new THREE.Mesh(new THREE.CylinderGeometry(.31,.31,.92,18),material("#9e5431",.2)),workX+dx,.59,workZ+2.05,"hotwork");
-      for(const y of [.26,.91])place(new THREE.Mesh(new THREE.TorusGeometry(.315,.022,6,22),darkMetal),workX+dx,y,workZ+2.05).rotation.x=Math.PI/2;
-      drum.rotation.y=.14;
+    // Tank-yard scene: realistic proportions, no billboard-like warning slabs.
+    // A few compact service skids provide scale without overwhelming the tanks.
+    const skidSteel=material("#62717b",.42);
+    for(const [sx,sz] of [[35,-32],[57,5]]){
+      box(sx,.23,sz,2.1,.27,1.05,skidSteel);
+      for(const dx of [-.7,.7])box(sx+dx,.48,sz,.14,.34,.85,darkMetal);
+      const servicePipe=place(new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,1.9,16),skidSteel),sx,.72,sz);
+      servicePipe.rotation.z=Math.PI/2;
     }
-    // Extinguisher station is visible but not a substitute for a permit or fire watch.
-    const ext=place(new THREE.Mesh(new THREE.CylinderGeometry(.12,.13,.65,14),material("#bb2823",.25)),workX+3.5,.49,workZ+1.9,"hotwork");
-    place(new THREE.Mesh(new THREE.BoxGeometry(.32,.05,.09),darkMetal),workX+3.5,.86,workZ+1.9);
-    const signMat=material("#f1d45e");
-    box(workX+3.7,.83,workZ+2.5,.9,1.3,.08,signMat);
-    box(workX+3.7,.12,workZ+2.5,.12,.22,.12,darkMetal);
-    // A grounded weld pool and compact spark cluster make the work position legible.
-    const weldGlow=new THREE.MeshBasicMaterial({color:0xffb75b});
-    const weldPoint=place(new THREE.Mesh(new THREE.SphereGeometry(.065,10,8),weldGlow),workX+1.15,1.02,workZ-1.8);
-    for(let i=0;i<10;i++){
-      const spark=place(new THREE.Mesh(new THREE.SphereGeometry(.016,5,4),new THREE.MeshBasicMaterial({color:i%2?0xffb847:0xffe7a1})),workX+1.15+(i%5-2)*.12,.94+(i%4)*.12,workZ-1.8+(i%3-1)*.11);
-      sparkMeshes.push(spark);
-    }
-    // Additional grounded site assets fill the tank yard without blocking inspection.
-    const tankSign=material("#e8d16b"),steel=material("#71818a",.45);
-    for(const [sx,sz] of [[35,-32],[57,5],[38,13]]){
-      box(sx,.35,sz,2.5,.65,1.4,steel);
-      box(sx,.72,sz,2.6,.09,1.5,darkMetal);
-      for(const side of [-1,1])box(sx+side*.95,.12,sz,.15,.22,1.3,darkMetal);
-    }
-    // Bunded chemical containers, with clear space left around the leak point.
-    for(const [cx,cz] of [[28,-29],[30,-29],[28,-27]]){
-      const can=place(new THREE.Mesh(new THREE.CylinderGeometry(.38,.38,.94,12),material("#365b78",.22)),cx,.63,cz);
-      place(new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.05,10),darkMetal),cx,1.13,cz);
-      can.receiveShadow=true;
-    }
-    for(const [sx,sz] of [[32,-28],[54,15]]){
-      box(sx,1.2,sz,.09,2.1,.09,darkMetal);
-      box(sx,2.25,sz,.95,.6,.07,tankSign);
+    // Drum storage on a low bunded pallet, placed away from the leak.
+    box(29,.17,-29,3.2,.18,2.15,wood);
+    for(const [cx,cz] of [[28.25,-29.5],[29.5,-29.5],[28.25,-28.55],[29.5,-28.55]]){
+      place(new THREE.Mesh(new THREE.CylinderGeometry(.27,.27,.68,18),material("#32516b",.14)),cx,.61,cz);
     }
     // Visible warning paint on the yard surface.
     const warning=material("#e0b83c");
