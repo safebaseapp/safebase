@@ -296,8 +296,29 @@ export default function RealModels({tr}:{tr:boolean}) {
     // The imported welder already carries a torch, power source and cable.
     // Do not obscure the worker with a fake pipe or misaligned weld joint.
     // The unsafe condition is the combustible material within the hot-work zone.
-    const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.095,.11,.52,16),material("#b72921",.18)),workX+2.7,.26,workZ+1.45,"hotwork");
-    place(new THREE.Mesh(new THREE.BoxGeometry(.24,.035,.06),darkMetal),workX+2.7,.54,workZ+1.45);
+    // Compact but recognizable portable fire extinguisher, including the
+    // safety handle, pressure gauge, flexible hose and discharge nozzle.
+    const exX=workX+2.7,exZ=workZ+1.45;
+    const extinguisherRed=material("#c52c23",.23);
+    const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.105,.115,.52,24),extinguisherRed),exX,.275,exZ,"hotwork");
+    place(new THREE.Mesh(new THREE.CylinderGeometry(.085,.1,.085,20),darkMetal),exX,.05,exZ,"hotwork");
+    place(new THREE.Mesh(new THREE.CylinderGeometry(.045,.05,.075,16),darkMetal),exX,.575,exZ,"hotwork");
+    box(exX,.635,exZ,.28,.034,.06,darkMetal);
+    box(exX-.09,.675,exZ,.13,.025,.055,darkMetal);
+    const gauge=place(new THREE.Mesh(new THREE.CylinderGeometry(.045,.045,.026,18),material("#ddd9ca",.38)),exX+.075,.605,exZ,"hotwork");
+    gauge.rotation.z=Math.PI/2;
+    const hosePoints=[
+      new THREE.Vector3(exX+.08,.57,exZ),
+      new THREE.Vector3(exX+.22,.49,exZ+.03),
+      new THREE.Vector3(exX+.23,.31,exZ+.07),
+      new THREE.Vector3(exX+.16,.19,exZ+.13)
+    ];
+    const exHose=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(hosePoints),18,.018,7,false),darkMetal);
+    exHose.castShadow=true;scene.add(exHose);
+    const nozzle=place(new THREE.Mesh(new THREE.CylinderGeometry(.025,.035,.09,12),darkMetal),exX+.16,.16,exZ+.13,"hotwork");
+    nozzle.rotation.x=Math.PI/2;
+    // The fire extinguisher is intentionally close to combustibles but not
+    // a replacement for a hot-work permit or proper fire-watch controls.
     for(const dx of [-2.4,-1.8]){
       const drum=place(new THREE.Mesh(new THREE.CylinderGeometry(.27,.27,.74,20),material("#915337",.12)),workX+dx,.37,workZ+2.1,"hotwork");
       drum.castShadow=true;
