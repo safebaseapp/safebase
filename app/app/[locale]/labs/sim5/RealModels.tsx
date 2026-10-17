@@ -104,7 +104,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     const loader=new GLTFLoader();
     const fit=(obj:any,targetHeight:number,x:number,z:number)=>{
       const before=new THREE.Box3().setFromObject(obj),size=before.getSize(new THREE.Vector3());
-      obj.scale.multiplyScalar(targetHeight/Math.max(size.y,.01));
+      // Fit the actual footprint inside its yard, preventing pipes and tanks from crossing the road.\n      const plotWidth=x<0?54:55,plotDepth=76;\n      const factor=Math.min(targetHeight/Math.max(size.y,.01),plotWidth/Math.max(size.x,.01),plotDepth/Math.max(size.z,.01));\n      obj.scale.multiplyScalar(factor);
       const after=new THREE.Box3().setFromObject(obj),center=after.getCenter(new THREE.Vector3());
       obj.position.x+=x-center.x;obj.position.y-=after.min.y;obj.position.z+=z-center.z;
       obj.updateMatrixWorld(true);
@@ -114,7 +114,7 @@ export default function RealModels({tr}:{tr:boolean}) {
       // Factory's authored lower feet extend far beneath the primary working deck.
       // Recess the structure into its slab to bring the deck, pipework and access
       // platforms closer to a natural human-scale ground level.
-      if(x<0)obj.position.y-=2.4;
+      // Keep authored legs at grade; lowering the entire GLB buries its lower geometry.\n      if(x<0)obj.position.y-=0;
       obj.updateMatrixWorld(true);
       scene.add(obj);
       obj.updateMatrixWorld(true);
