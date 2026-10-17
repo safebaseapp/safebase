@@ -68,11 +68,17 @@ export default function RealModels({tr}:{tr:boolean}) {
     // Entry apron and marked pedestrian access.
     box(0,.03,103,42,.08,21,asphalt);
     box(0,.15,91,11,.07,1,white);
-    // Concrete foundation and visible piers give the elevated factory a grounded base.
+    // Factory equipment is an elevated structure: foundations must reach its ACTUAL
+    // underside, rather than using arbitrary short supports at guessed coordinates.
     const concrete=material("#858e89");
-    box(-47,.18,-12,62,.32,85,concrete);
-    const piers=[[-67,-39],[-47,-39],[-27,-39],[-67,11],[-47,11],[-27,11]];
-    for(const [x,z] of piers){box(x,1.35,z,1.7,2.5,1.7,concrete);box(x,.35,z,3,.25,3,material("#69746f"));}
+    const steel=material("#687a80",.3);
+    box(-47,.12,-12,62,.20,85,concrete);
+    const supportColumn=(x:number,z:number,top:number)=>{
+      if(top<.45)return;
+      const h=Math.max(.25,top-.22);
+      box(x,.22+h/2,z,.55,h,.55,steel);
+      box(x,.23,z,1.5,.16,1.5,concrete);
+    };
     const colliders:any[]=[];
     const colliderBoxes:any[]=[];
     const collisionRay=new THREE.Raycaster();
@@ -89,6 +95,32 @@ export default function RealModels({tr}:{tr:boolean}) {
       obj.updateMatrixWorld(true);
       scene.add(obj);
       obj.updateMatrixWorld(true);
+      if(x<0){
+        // Place visible columns beneath the real horizontal equipment decks.
+        // Model-wide minimum Y is misleading because ladders and feet already reach ground.
+        const decks:any[]=[];
+        obj.traverse((child:any)=>{
+          if(!child.isMesh)return;
+          const bb=new THREE.Box3().setFromObject(child);
+          const s=bb.getSize(new THREE.Vector3());
+          if(s.x>3&&s.z>2&&s.y<2.6&&bb.min.y>2.2&&bb.min.y<14)
+            decks.push({bb,area:s.x*s.z});
+        });
+        decks.sort((a,b)=>b.area-a.area);
+        const locations:{x:number,z:number}[]=[];
+        let supports=0;
+        for(const {bb} of decks){
+          if(supports>=24)break;
+          const width=bb.max.x-bb.min.x,depth=bb.max.z-bb.min.z;
+          for(const sx of [.15,.85])for(const sz of [.15,.85]){
+            const cx=bb.min.x+width*sx,cz=bb.min.z+depth*sz;
+            if(cx<-77||cx>-17||cz<-54||cz>30)continue;
+            if(locations.some(p=>Math.hypot(p.x-cx,p.z-cz)<4.5))continue;
+            supportColumn(cx,cz,bb.min.y);
+            locations.push({x:cx,z:cz});supports++;
+          }
+        }
+      }
       obj.traverse((child:any)=>{
         if(!child.isMesh)return;
         const bounds=new THREE.Box3().setFromObject(child);
