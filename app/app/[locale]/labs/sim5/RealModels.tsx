@@ -68,82 +68,36 @@ export default function RealModels({tr}:{tr:boolean}) {
     // Entry apron and marked pedestrian access.
     box(0,.03,103,42,.08,21,asphalt);
     box(0,.15,91,11,.07,1,white);
-    // Factory equipment is an elevated structure: foundations must reach its ACTUAL
-    // underside, rather than using arbitrary short supports at guessed coordinates.
-    const concrete=material("#858e89");
-    const steel=material("#687a80",.3);
-    box(-47,.12,-12,62,.20,85,concrete);
-    // Raised structures remain elevated by design; the new support system and
-    // circulation floor make the undercroft a credible, usable equipment yard.
-    const supportColumn=(x:number,z:number,top:number)=>{
-      if(top<.45)return;
-      const h=Math.max(.25,top-.22);
-      solid(x,.22+h/2,z,.55,h,.55,steel);
-      box(x,.23,z,1.5,.16,1.5,concrete);
-    };
+    // Equipment yards are level, without invented columns or elevated foundations.
     const colliders:any[]=[];
     const colliderBoxes:any[]=[];
     const collisionRay=new THREE.Raycaster();
     const physicalBoxes:any[]=[];
     const solid=(x:number,y:number,z:number,w:number,h:number,d:number,m:any)=>{
       box(x,y,z,w,h,d,m);
-      physicalBoxes.push(new THREE.Box3(
-        new THREE.Vector3(x-w/2,y-h/2,z-d/2),
-        new THREE.Vector3(x+w/2,y+h/2,z+d/2)
-      ));
+      physicalBoxes.push(new THREE.Box3(new THREE.Vector3(x-w/2,y-h/2,z-d/2),new THREE.Vector3(x+w/2,y+h/2,z+d/2)));
     };
-    // Facility-grade concrete bays and defined pedestrian access beneath factory.
-    const footpath=material("#c0c9c1"),edgePaint=material("#f0cb4d");
-    for(const x of [-67,-47,-27]){
-      box(x,.255,-12,2.8,.07,70,footpath);
-      for(let z=-44;z<22;z+=7)box(x-1.22,.31,z,.12,.035,3.2,edgePaint);
-    }
-    for(const z of [-40,12]){
-      box(-47,.27,z,57,.07,2.8,footpath);
-    }
     const loader=new GLTFLoader();
     const fit=(obj:any,targetHeight:number,x:number,z:number)=>{
-      const before=new THREE.Box3().setFromObject(obj),size=before.getSize(new THREE.Vector3());
-      // Fit the actual footprint inside its yard, preventing pipes and tanks from crossing the road.\n      const plotWidth=x<0?54:55,plotDepth=76;\n      const factor=Math.min(targetHeight/Math.max(size.y,.01),plotWidth/Math.max(size.x,.01),plotDepth/Math.max(size.z,.01));\n      obj.scale.multiplyScalar(factor);
-      const after=new THREE.Box3().setFromObject(obj),center=after.getCenter(new THREE.Vector3());
-      obj.position.x+=x-center.x;obj.position.y-=after.min.y;obj.position.z+=z-center.z;
       obj.updateMatrixWorld(true);
-      // Anchor the imported mesh to the top of its equipment-yard foundation.
-      const grounded=new THREE.Box3().setFromObject(obj);
-      obj.position.y+=.08-grounded.min.y;
-      // Factory's authored lower feet extend far beneath the primary working deck.
-      // Recess the structure into its slab to bring the deck, pipework and access
-      // platforms closer to a natural human-scale ground level.
-      // Keep authored legs at grade; lowering the entire GLB buries its lower geometry.\n      if(x<0)obj.position.y-=0;
+      const before=new THREE.Box3().setFromObject(obj);
+      const size=before.getSize(new THREE.Vector3());
+      // Limit all THREE dimensions: the full pipe network must stay inside its own yard.
+      const maxWidth=x<0?48:52;
+      const maxDepth=70;
+      const scale=Math.min(targetHeight/Math.max(size.y,.01),maxWidth/Math.max(size.x,.01),maxDepth/Math.max(size.z,.01));
+      obj.scale.multiplyScalar(scale);
+      obj.updateMatrixWorld(true);
+      const scaled=new THREE.Box3().setFromObject(obj);
+      const center=scaled.getCenter(new THREE.Vector3());
+      obj.position.x+=x-center.x;
+      obj.position.z+=z-center.z;
+      // The factory model is authored with an elevated service deck. Embed its
+      // low understructure into the yard rather than inventing tall support piers.
+      const burial=x<0?Math.min(3.4,(scaled.max.y-scaled.min.y)*.28):0;
+      obj.position.y+=.08-scaled.min.y-burial;
       obj.updateMatrixWorld(true);
       scene.add(obj);
-      obj.updateMatrixWorld(true);
-      if(x<0){
-        // Place visible columns beneath the real horizontal equipment decks.
-        // Model-wide minimum Y is misleading because ladders and feet already reach ground.
-        const decks:any[]=[];
-        obj.traverse((child:any)=>{
-          if(!child.isMesh)return;
-          const bb=new THREE.Box3().setFromObject(child);
-          const s=bb.getSize(new THREE.Vector3());
-          if(s.x>3&&s.z>2&&s.y<2.6&&bb.min.y>2.2&&bb.min.y<14)
-            decks.push({bb,area:s.x*s.z});
-        });
-        decks.sort((a,b)=>b.area-a.area);
-        const locations:{x:number,z:number}[]=[];
-        let supports=0;
-        for(const {bb} of decks){
-          if(supports>=24)break;
-          const width=bb.max.x-bb.min.x,depth=bb.max.z-bb.min.z;
-          for(const sx of [.15,.85])for(const sz of [.15,.85]){
-            const cx=bb.min.x+width*sx,cz=bb.min.z+depth*sz;
-            if(cx<-77||cx>-17||cz<-54||cz>30)continue;
-            if(locations.some(p=>Math.hypot(p.x-cx,p.z-cz)<4.5))continue;
-            supportColumn(cx,cz,bb.min.y);
-            locations.push({x:cx,z:cz});supports++;
-          }
-        }
-      }
       obj.traverse((child:any)=>{
         if(!child.isMesh)return;
         const bounds=new THREE.Box3().setFromObject(child);
@@ -153,7 +107,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     };
     const load=(url:string,height:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{if(!active){resolve();return}fit(g.scene,height,x,z);resolve()},undefined,reject));
     const paths=["/sim5/SERNEM_SIM4_Factory_optimized.glb","/sim5/large_industrial_storage_tanks%20(1).glb"];
-    const results=await Promise.allSettled([load(paths[0],22,-47,-12),load(paths[1],17,47,-12)]);
+    const results=await Promise.allSettled([load(paths[0],14,-47,-12),load(paths[1],17,47,-12)]);
     if(active){const count=results.filter(r=>r.status==="fulfilled").length;setLoaded(count);setStatus(count===2?(tr?"Gerçek tesis hazır · 2/2 model":"Industrial site ready · 2/2 models"):(tr?`Model yükleme: ${count}/2 — dosya bağlantısını kontrol et`:`Model loading: ${count}/2 — check asset links`))}
     // Movement is tested against imported geometry, not only the outer site bounds.
     const canStep=(next:any,previous:any)=>{
