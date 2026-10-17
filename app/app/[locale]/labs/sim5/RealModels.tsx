@@ -15,8 +15,10 @@ export default function RealModels({tr}:{tr:boolean}) {
   const host=mount.current;if(!host)return;
   (async()=>{
    try {
-    const THREE:any=await import(/* webpackIgnore: true */ "https://esm.sh/three@0.180.0");
-    const {GLTFLoader}=await import(/* webpackIgnore: true */ "https://esm.sh/three@0.180.0/examples/jsm/loaders/GLTFLoader.js");
+    const threeUrl="https://esm.sh/three@0.180.0";
+    const THREE:any=await import(/* webpackIgnore: true */ threeUrl);
+    const loaderUrl="https://esm.sh/three@0.180.0/examples/jsm/loaders/GLTFLoader.js";
+    const {GLTFLoader}=await import(/* webpackIgnore: true */ loaderUrl);
     if(!active||!mount.current)return;
     const scene=new THREE.Scene();scene.background=new THREE.Color("#91b1c5");scene.fog=new THREE.Fog("#91b1c5",160,360);
     const camera=new THREE.PerspectiveCamera(64,host.clientWidth/Math.max(1,host.clientHeight),.1,900);
