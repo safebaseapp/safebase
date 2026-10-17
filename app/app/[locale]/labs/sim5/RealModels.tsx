@@ -132,21 +132,22 @@ export default function RealModels({tr}:{tr:boolean}) {
       if(id)inspectionMarkers.push(mesh);return mesh;
     };
     // Tank-yard leak: pipe joint, flange, drip and irregular liquid spill.
-    const leakX=12.5,leakZ=-20;
+    const leakX=22,leakZ=-20;
     const pipe=place(new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,3.5,16),darkMetal),leakX,1.25,leakZ);
     pipe.rotation.z=Math.PI/2;
     place(new THREE.Mesh(new THREE.TorusGeometry(.34,.09,10,18),rust),leakX,1.25,leakZ,"leak").rotation.y=Math.PI/2;
     const puddle=place(new THREE.Mesh(new THREE.CircleGeometry(1.7,24),hazardMaterial("#393e37",.85)),leakX,.18,leakZ+.65,"leak");
     puddle.rotation.x=-Math.PI/2;puddle.scale.set(1.45,.72,1);
-    for(let i=0;i<5;i++)place(new THREE.Mesh(new THREE.SphereGeometry(.055+i*.008,8,8),hazardMaterial("#9aaf9b",.8)),leakX+.1,.55+i*.13,leakZ+.5);
+    const spillEdge=place(new THREE.Mesh(new THREE.RingGeometry(1.55,1.67,28),hazardMaterial("#555d50",.55)),leakX,.19,leakZ+.65,"leak");spillEdge.rotation.x=-Math.PI/2;spillEdge.scale.set(1.45,.72,1);
+    for(let i=0;i<5;i++)place(new THREE.Mesh(new THREE.SphereGeometry(.035+i*.004,8,8),hazardMaterial("#9aaf9b",.8)),leakX+.1,.55+i*.13,leakZ+.5);
     // Hot-work violation: a workbench, welding point, sparks and nearby combustible drums.
-    const workX=-12.5,workZ=-5;
+    const workX=-22,workZ=-5;
     place(new THREE.Mesh(new THREE.BoxGeometry(2.4,.14,1.3),darkMetal),workX,1.1,workZ,"hotwork");
     for(const dx of [-.95,.95])for(const dz of [-.45,.45])place(new THREE.Mesh(new THREE.BoxGeometry(.1,1.05,.1),darkMetal),workX+dx,.54,workZ+dz);
-    for(let i=0;i<12;i++){const spark=place(new THREE.Mesh(new THREE.SphereGeometry(.035+(i%3)*.012,6,6),hazardMaterial("#ffb22c")),workX+(i%5-2)*.19,1.2+(i%4)*.14,workZ+(i%3-1)*.15);spark.userData.spark=true;}
+    for(let i=0;i<18;i++){const spark=place(new THREE.Mesh(new THREE.CylinderGeometry(.008,.018,.16+(i%3)*.05,5),new THREE.MeshBasicMaterial({color:i%2?0xffd56b:0xff832b})),workX+(i%7-3)*.14,1.2+(i%5)*.12,workZ+(i%4-2)*.1);spark.rotation.z=(i%7)*.33;}
     for(const dx of [-2.5,-1.8])place(new THREE.Mesh(new THREE.CylinderGeometry(.34,.34,1.05,12),rust),workX+dx,.57,workZ+1.6,"hotwork");
-    // Obstructed access: stacked timber pallets and shipping crates across the pedestrian apron.
-    const accessX=12.5,accessZ=47;
+    // Obstructed yard entrance: stacked timber pallets and crates beside the equipment access route.
+    const accessX=19.5,accessZ=-5;
     for(let layer=0;layer<3;layer++){
       for(const dz of [-.65,0,.65])place(new THREE.Mesh(new THREE.BoxGeometry(2.8,.16,.47),wood),accessX,.27+layer*.25,accessZ+dz,"access");
       for(const dx of [-1,0,1])place(new THREE.Mesh(new THREE.BoxGeometry(.24,.12,2.15),wood),accessX+dx,.14+layer*.25,accessZ,"access");
@@ -189,7 +190,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     let yaw=Math.PI,pitch=-.13,drag=false,px=0,py=0,orbitAngle=.5;
     const setCamera=()=>{
       if(modeRef.current==="overview"){camera.position.set(104,68,123);camera.lookAt(0,4,-8)}
-      else {camera.position.set(0,1.8,99);yaw=Math.PI;pitch=-.06;camera.lookAt(0,1.8,60)}
+      else {camera.position.set(-18,1.8,10);yaw=Math.PI;pitch=-.06;camera.lookAt(-18,1.8,-20)}
     };
     reset.current=setCamera;setCamera();
     const down=(e:KeyboardEvent)=>{if(["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"].includes(e.key.toLowerCase())){held.current.add(e.key.toLowerCase());if(e.key.startsWith("Arrow"))e.preventDefault()}};
