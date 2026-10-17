@@ -41,8 +41,10 @@ export default function RealModels({tr}:{tr:boolean}) {
       box(side*6.65,.13,25,.18,.08,155,white);
       for(let z=-48;z<99;z+=7)box(side*5.7,.13,z,.16,.05,3.2,yellow);
       for(let z=-48;z<99;z+=12){
+        // Leave pedestrian gates at the entrance and opposite equipment plots.
+        if((z>=-18&&z<=6)||(z>=42&&z<=66))continue;
         box(side*11,.72,z,.09,1.4,.09,fence);
-        box(side*11,1.4,z,.09,.08,12,fence);
+        box(side*11,1.4,z,.09,.08,11.8,fence);
       }
     }
     for(let z=-48;z<100;z+=12)box(0,.14,z,.18,.05,4.1,white);
@@ -51,8 +53,17 @@ export default function RealModels({tr}:{tr:boolean}) {
     box(-47,.02,-12,62,.07,85,material("#777f7c"));
     box(47,.02,-12,62,.07,85,material("#777f7c"));
     for(const x of [-15.5,15.5]){
-      for(let z=-48;z<=24;z+=12)box(x,.63,z,.14,1.2,.14,fence);
-      box(x,1.2,-12,.1,.07,72,fence);
+      // Intermittent railings, with wide access gaps for entering both facilities.
+      for(let z=-48;z<=24;z+=12){
+        if(z>=-18&&z<=6)continue;
+        box(x,.63,z,.14,1.2,.14,fence);
+        box(x,1.2,z,.1,.07,10,fence);
+      }
+    }
+    // Paved pedestrian entrances connect the road sidewalks to the equipment yards.
+    for(const side of [-1,1]){
+      box(side*14,.14,-6,9,.08,6,walkway);
+      box(side*14,.14,47,9,.08,6,walkway);
     }
     // Entry apron and marked pedestrian access.
     box(0,.03,103,42,.08,21,asphalt);
@@ -63,6 +74,11 @@ export default function RealModels({tr}:{tr:boolean}) {
       obj.scale.multiplyScalar(targetHeight/Math.max(size.y,.01));
       const after=new THREE.Box3().setFromObject(obj),center=after.getCenter(new THREE.Vector3());
       obj.position.x+=x-center.x;obj.position.y-=after.min.y;obj.position.z+=z-center.z;
+      obj.updateMatrixWorld(true);
+      // Anchor the imported mesh to the top of its equipment-yard foundation.
+      const grounded=new THREE.Box3().setFromObject(obj);
+      obj.position.y+=.08-grounded.min.y;
+      obj.updateMatrixWorld(true);
       scene.add(obj);
     };
     const load=(url:string,height:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{if(!active){resolve();return}fit(g.scene,height,x,z);resolve()},undefined,reject));
@@ -96,8 +112,8 @@ export default function RealModels({tr}:{tr:boolean}) {
         if(held.current.has("d"))camera.position.addScaledVector(right,-dt*7);
         if(held.current.has("arrowleft"))yaw+=dt*1.4;
         if(held.current.has("arrowright"))yaw-=dt*1.4;
-        camera.position.x=Math.max(-10.6,Math.min(10.6,camera.position.x));
-        camera.position.z=Math.max(-49,Math.min(105,camera.position.z));
+        camera.position.x=Math.max(-80,Math.min(80,camera.position.x));
+        camera.position.z=Math.max(-62,Math.min(115,camera.position.z));
         camera.position.y=1.8;
         camera.lookAt(camera.position.clone().add(new THREE.Vector3(Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch))));
       }
@@ -124,7 +140,7 @@ export default function RealModels({tr}:{tr:boolean}) {
   <div ref={mount} style={{width:"100%",height:"min(72vh,750px)",minHeight:380,borderRadius:14,overflow:"hidden",background:"#91b1c5",touchAction:"none"}}/>
   <div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap",marginTop:12}}>
    {controls.map(([label,key])=><button key={key} disabled={mode!=="walk"} onPointerDown={e=>{e.preventDefault();held.current.add(key)}} onPointerUp={()=>held.current.delete(key)} onPointerCancel={()=>held.current.delete(key)} onPointerLeave={()=>held.current.delete(key)} style={{padding:"12px 18px",border:0,borderRadius:9,background:mode==="walk"?"#176b82":"#364a55",color:"white",fontSize:19,touchAction:"none",cursor:"pointer"}}>{label}</button>)}
-   <span style={{fontSize:13,color:"#b7cdd5"}}>{mode==="walk"?(tr?"WASD ile yürü · sürükleyerek etrafa bak · güvenli yürüyüş koridoru":"WASD to walk · drag to look · protected pedestrian corridor"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
+   <span style={{fontSize:13,color:"#b7cdd5"}}>{mode==="walk"?(tr?"WASD ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
   </div>
   <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: burnedhrum · CC BY 4.0 · {loaded}/2 GLB</p>
  </section>;
