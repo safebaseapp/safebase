@@ -187,16 +187,18 @@ export default function RealModels({tr}:{tr:boolean}) {
       const flange=place(new THREE.Mesh(new THREE.CylinderGeometry(.34,.34,.07,24),darkMetal),leakX+dx,1.25,leakZ,"leak");
       flange.rotation.z=Math.PI/2;
     }
-    // The dark fluid runs downhill from the flange toward the ground.
-    const trailPoints=[
-      new THREE.Vector3(leakX,1.05,leakZ+.23),
-      new THREE.Vector3(leakX+.06,.62,leakZ+.38),
-      new THREE.Vector3(leakX+.12,.19,leakZ+.55)
-    ];
-    const trail=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(trailPoints),16,.035,8,false),new THREE.MeshStandardMaterial({color:"#363d32",roughness:.28}));
-    trail.castShadow=false;scene.add(trail);
-    // Keep the irregular spill edge subtle; avoid the previous cartoon oval rim.
-    const drip=place(new THREE.Mesh(new THREE.SphereGeometry(.045,8,8),hazardMaterial("#8d9e91",.8)),leakX+.1,.85,leakZ+.35);
+    // Animated droplets fall from the underside of the leaking flange into
+    // the existing irregular puddle. No rigid diagonal "stick" geometry.
+    const leakDrops:any[]=[];
+    const dropMat=new THREE.MeshPhysicalMaterial({color:"#353c31",roughness:.18,metalness:.12,transparent:true,opacity:.9});
+    for(let i=0;i<5;i++){
+      const drop=place(new THREE.Mesh(new THREE.SphereGeometry(.027+i%2*.008,10,8),dropMat),leakX,.9,leakZ+.3,"leak");
+      drop.scale.y=1.7;leakDrops.push(drop);
+    }
+    // A slight wet stain directly below the flange visually joins the
+    // leak source to the collection area.
+    const wetMark=place(new THREE.Mesh(new THREE.CircleGeometry(.23,24),new THREE.MeshStandardMaterial({color:"#333b32",roughness:.24,transparent:true,opacity:.65,depthWrite:false,side:THREE.DoubleSide})),leakX,.135,leakZ+.34,"leak");
+    wetMark.rotation.x=-Math.PI/2;
     // Optional licensed real welder scene. Falls back to procedural objects until the GLB is uploaded.
     const workX=-22,workZ=-5;
     let realWelderLoaded=false;
@@ -335,7 +337,13 @@ export default function RealModels({tr}:{tr:boolean}) {
       inspectPointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);
       inspectRay.setFromCamera(inspectPointer,camera);
       const hit=inspectRay.intersectObjects(inspectionMarkers)[0];
-      if(hit&&camera.position.distanceTo(hit.object.position)<10){setActiveInspection(hit.object.userData.inspectionId);setInspectionFeedback("");}
+      if(hit){
+        const worldHit=hit.point;
+        const targetId=hit.object.userData.inspectionId;
+        if(targetId&&camera.position.distanceTo(worldHit)<10){
+          setActiveInspection(targetId);setInspectionFeedback("");
+        }
+      }
     };
     renderer.domElement.addEventListener("pointerup",inspect);
     inspectNearby.current=()=>{const id=nearbyRef.current;if(id){setActiveInspection(id);setInspectionFeedback("")}};
@@ -409,7 +417,13 @@ export default function RealModels({tr}:{tr:boolean}) {
         const next=closest?.d<7?closest.id:null;
         if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next)}
       }else if(nearbyRef.current){nearbyRef.current=null;setNearbyHazard(null)}
-      drip.position.y=.6+Math.abs(Math.sin(now*.003))*.42;
+      // Staggered gravity-like drops: origin at flange, landing at the puddle.
+      for(let i=0;i<leakDrops.length;i++){
+        const phase=((now*.00052+i/leakDrops.length)%1);
+        const drop=leakDrops[i];
+        drop.position.set(leakX+.035*Math.sin(i*2.1),1.07-(phase*phase)*.88,leakZ+.29+phase*.18);
+        drop.visible=phase<.96;
+      }
       for(let i=0;i<sparkMeshes.length;i++){const spark=sparkMeshes[i];spark.visible=Math.sin(now*.016+i*3)>-.35;}
       renderer.render(scene,camera);raf=requestAnimationFrame(tick);
     };
