@@ -246,19 +246,23 @@ export default function RealModels({tr}:{tr:boolean}) {
       welderScene.updateMatrixWorld(true);
       const bounds=new THREE.Box3().setFromObject(welderScene);
       const center=bounds.getCenter(new THREE.Vector3());
-      // Imported assembly includes long cables and equipment: its lowest vertex
-      // is not necessarily a boot. Ground using the lower HUMAN meshes instead.
-      const humanMeshes:any[]=[];
+      // Ground the *visible boots*, not the full imported assembly. The
+      // downloaded asset includes trailing cables and a wheeled power unit,
+      // whose bounding boxes are not reliable ground references.
+      const boots:any[]=[];
       welderScene.traverse((obj:any)=>{
         if(!obj.isMesh)return;
-        const n=(obj.name+" "+(obj.material?.name||"")).toLowerCase();
-        if(/boot|shoe|foot|leg|body|bodysuit|pants|trouser/.test(n))humanMeshes.push(obj);
+        const matNames=(Array.isArray(obj.material)?obj.material:[obj.material]).map((m:any)=>m?.name||"").join(" ");
+        const name=(obj.name+" "+matNames).toLowerCase();
+        if(/boot|shoe|foot|feet|rubberboot|wellies/.test(name))boots.push(obj);
       });
-      const humanBounds=new THREE.Box3();
-      for(const obj of humanMeshes)humanBounds.expandByObject(obj);
-      const footY=humanMeshes.length&&!humanBounds.isEmpty()?humanBounds.min.y:bounds.min.y;
+      const bootBounds=new THREE.Box3();
+      for(const obj of boots)bootBounds.expandByObject(obj);
+      // If the source mesh has no identifiable footwear, the scene bounding
+      // box is used as a fallback, with no arbitrary vertical offset.
+      const bottom=boots.length&&!bootBounds.isEmpty()?bootBounds.min.y:bounds.min.y;
       welderScene.position.x+=workX-center.x;
-      welderScene.position.y+=.12-footY;
+      welderScene.position.y+=.015-bottom;
       welderScene.position.z+=workZ-center.z;
       welderScene.updateMatrixWorld(true);
       scene.add(welderScene);
@@ -292,10 +296,10 @@ export default function RealModels({tr}:{tr:boolean}) {
     // The imported welder already carries a torch, power source and cable.
     // Do not obscure the worker with a fake pipe or misaligned weld joint.
     // The unsafe condition is the combustible material within the hot-work zone.
-    const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.095,.11,.52,16),material("#b72921",.18)),workX+2.7,.26+.12,workZ+1.45,"hotwork");
-    place(new THREE.Mesh(new THREE.BoxGeometry(.24,.035,.06),darkMetal),workX+2.7,.66,workZ+1.45);
+    const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.095,.11,.52,16),material("#b72921",.18)),workX+2.7,.26,workZ+1.45,"hotwork");
+    place(new THREE.Mesh(new THREE.BoxGeometry(.24,.035,.06),darkMetal),workX+2.7,.54,workZ+1.45);
     for(const dx of [-2.4,-1.8]){
-      const drum=place(new THREE.Mesh(new THREE.CylinderGeometry(.27,.27,.74,20),material("#915337",.12)),workX+dx,.37+.12,workZ+2.1,"hotwork");
+      const drum=place(new THREE.Mesh(new THREE.CylinderGeometry(.27,.27,.74,20),material("#915337",.12)),workX+dx,.37,workZ+2.1,"hotwork");
       drum.castShadow=true;
     }
     // Tank-yard scene: realistic proportions, no billboard-like warning slabs.
