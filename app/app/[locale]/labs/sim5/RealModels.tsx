@@ -44,7 +44,7 @@ export default function RealModels({tr}:{tr:boolean}) {
       obj.position.x+=x-center.x;obj.position.y-=b.min.y;obj.position.z+=z-center.z;scene.add(obj);loaded.push(obj);
     };
     const load=(url:string,h:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{fit(g.scene,h,x,z);resolve()},undefined,reject));
-    const urls=["/sim5/factory.glb","/sim5/oil-tanks.glb"];
+    const urls=["/sim5/SERNEM_SIM4_Factory_optimized.glb","/sim5/large_industrial_storage_tanks%20(1).glb"];
     const loadOrCached=async(key:string,url:string,h:number,x:number,z:number)=>{
       try{await load(url,h,x,z);return}catch{}
       const saved=await getModel(key);if(!saved)throw new Error("Model not available");
