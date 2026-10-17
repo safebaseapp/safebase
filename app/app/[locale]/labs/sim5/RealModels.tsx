@@ -68,6 +68,14 @@ export default function RealModels({tr}:{tr:boolean}) {
     // Entry apron and marked pedestrian access.
     box(0,.03,103,42,.08,21,asphalt);
     box(0,.15,91,11,.07,1,white);
+    // Concrete foundation and visible piers give the elevated factory a grounded base.
+    const concrete=material("#858e89");
+    box(-47,.18,-12,62,.32,85,concrete);
+    const piers=[[-67,-39],[-47,-39],[-27,-39],[-67,11],[-47,11],[-27,11]];
+    for(const [x,z] of piers){box(x,1.35,z,1.7,2.5,1.7,concrete);box(x,.35,z,3,.25,3,material("#69746f"));}
+    const colliders:any[]=[];
+    const colliderBoxes:any[]=[];
+    const collisionRay=new THREE.Raycaster();
     const loader=new GLTFLoader();
     const fit=(obj:any,targetHeight:number,x:number,z:number)=>{
       const before=new THREE.Box3().setFromObject(obj),size=before.getSize(new THREE.Vector3());
@@ -80,11 +88,39 @@ export default function RealModels({tr}:{tr:boolean}) {
       obj.position.y+=.08-grounded.min.y;
       obj.updateMatrixWorld(true);
       scene.add(obj);
+      obj.updateMatrixWorld(true);
+      obj.traverse((child:any)=>{
+        if(!child.isMesh)return;
+        const bounds=new THREE.Box3().setFromObject(child);
+        if(bounds.isEmpty()||bounds.max.y<.25||bounds.min.y>2.7)return;
+        colliders.push(child);colliderBoxes.push(bounds);
+      });
     };
     const load=(url:string,height:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{if(!active){resolve();return}fit(g.scene,height,x,z);resolve()},undefined,reject));
     const paths=["/sim5/SERNEM_SIM4_Factory_optimized.glb","/sim5/large_industrial_storage_tanks%20(1).glb"];
     const results=await Promise.allSettled([load(paths[0],22,-47,-12),load(paths[1],17,47,-12)]);
     if(active){const count=results.filter(r=>r.status==="fulfilled").length;setLoaded(count);setStatus(count===2?(tr?"Gerçek tesis hazır · 2/2 model":"Industrial site ready · 2/2 models"):(tr?`Model yükleme: ${count}/2 — dosya bağlantısını kontrol et`:`Model loading: ${count}/2 — check asset links`))}
+    // Movement is tested against imported geometry, not only the outer site bounds.
+    const canStep=(next:any,previous:any)=>{
+      const delta=next.clone().sub(previous);delta.y=0;
+      const distance=delta.length();if(distance<.00001)return true;
+      const direction=delta.normalize();
+      const reach=distance+.48;
+      const near:any[]=[];
+      for(let i=0;i<colliders.length;i++){
+        const b=colliderBoxes[i];
+        if(b.max.x<Math.min(next.x,previous.x)-.7||b.min.x>Math.max(next.x,previous.x)+.7||
+           b.max.z<Math.min(next.z,previous.z)-.7||b.min.z>Math.max(next.z,previous.z)+.7)continue;
+        near.push(colliders[i]);
+      }
+      if(!near.length)return true;
+      for(const height of [.45,1.15,1.75]){
+        collisionRay.set(new THREE.Vector3(previous.x,height,previous.z),direction);
+        collisionRay.near=0;collisionRay.far=reach;
+        if(collisionRay.intersectObjects(near,false).length)return false;
+      }
+      return true;
+    };
     let yaw=Math.PI,pitch=-.13,drag=false,px=0,py=0,orbitAngle=.5;
     const setCamera=()=>{
       if(modeRef.current==="overview"){camera.position.set(104,68,123);camera.lookAt(0,4,-8)}
@@ -106,10 +142,19 @@ export default function RealModels({tr}:{tr:boolean}) {
       }else{
         const forward=new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw));
         const right=new THREE.Vector3(Math.cos(yaw),0,-Math.sin(yaw));
-        if(held.current.has("w")||held.current.has("arrowup"))camera.position.addScaledVector(forward,dt*9);
-        if(held.current.has("s")||held.current.has("arrowdown"))camera.position.addScaledVector(forward,-dt*9);
-        if(held.current.has("a"))camera.position.addScaledVector(right,dt*7);
-        if(held.current.has("d"))camera.position.addScaledVector(right,-dt*7);
+        const move=new THREE.Vector3();
+        if(held.current.has("w")||held.current.has("arrowup"))move.add(forward);
+        if(held.current.has("s")||held.current.has("arrowdown"))move.sub(forward);
+        if(held.current.has("a"))move.sub(right);
+        if(held.current.has("d"))move.add(right);
+        if(move.lengthSq()>0){
+          move.normalize().multiplyScalar(dt*7);
+          // Separate axes permit sliding along tank walls and pipework.
+          const xNext=camera.position.clone();xNext.x+=move.x;
+          if(canStep(xNext,camera.position))camera.position.x=xNext.x;
+          const zNext=camera.position.clone();zNext.z+=move.z;
+          if(canStep(zNext,camera.position))camera.position.z=zNext.z;
+        }
         if(held.current.has("arrowleft"))yaw+=dt*1.4;
         if(held.current.has("arrowright"))yaw-=dt*1.4;
         camera.position.x=Math.max(-80,Math.min(80,camera.position.x));
