@@ -169,7 +169,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     const workX=-22,workZ=-5;
     let realWelderLoaded=false;
     try{
-      const welderScene=await new Promise<any>((resolve,reject)=>loader.load("/sim5/SERNEM_Welder_06_web.glb",(g:any)=>resolve(g.scene),undefined,reject));
+      const welderScene=await new Promise<any>((resolve,reject)=>loader.load("/sim5/SERNEM_Welder_06_under25MB.glb",(g:any)=>resolve(g.scene),undefined,reject));
       const originalBounds=new THREE.Box3().setFromObject(welderScene);
       const originalSize=originalBounds.getSize(new THREE.Vector3());
       const scale=2.15/Math.max(originalSize.y,.01);
