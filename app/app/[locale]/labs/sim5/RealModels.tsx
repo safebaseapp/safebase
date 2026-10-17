@@ -25,6 +25,10 @@ export default function RealModels({tr}:{tr:boolean}) {
     const ground=new THREE.Mesh(new THREE.PlaneGeometry(300,300),new THREE.MeshStandardMaterial({color:"#586a63",roughness:.9}));
     ground.rotation.x=-Math.PI/2;ground.position.y=-.08;scene.add(ground);
     const loader=new GLTFLoader(),loaded:any[]=[];
+    const openStore=()=>new Promise<IDBDatabase>((resolve,reject)=>{const request=indexedDB.open("sernem-sim5-assets",1);request.onupgradeneeded=()=>request.result.createObjectStore("models");request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)});
+    const saveModel=async(key:string,file:File)=>{const db=await openStore();await new Promise<void>((resolve,reject)=>{const tx=db.transaction("models","readwrite");tx.objectStore("models").put(file,key);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)});db.close()};
+    const getModel=async(key:string)=>{const db=await openStore();const file=await new Promise<Blob|undefined>((resolve,reject)=>{const tx=db.transaction("models","readonly");const req=tx.objectStore("models").get(key);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});db.close();return file};
+
     let yaw=Math.PI,pitch=-.13,drag=false,px=0,py=0;
     const keys=new Set<string>();
     const down=(e:KeyboardEvent)=>keys.add(e.key.toLowerCase()),up=(e:KeyboardEvent)=>keys.delete(e.key.toLowerCase());
@@ -41,10 +45,15 @@ export default function RealModels({tr}:{tr:boolean}) {
     };
     const load=(url:string,h:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{fit(g.scene,h,x,z);resolve()},undefined,reject));
     const urls=["/sim5/factory.glb","/sim5/oil-tanks.glb"];
-    const result=await Promise.allSettled([load(urls[0],23,-23,-12),load(urls[1],16,24,-8)]);
+    const loadOrCached=async(key:string,url:string,h:number,x:number,z:number)=>{
+      try{await load(url,h,x,z);return}catch{}
+      const saved=await getModel(key);if(!saved)throw new Error("Model not available");
+      const localUrl=URL.createObjectURL(saved);try{await load(localUrl,h,x,z)}finally{URL.revokeObjectURL(localUrl)}
+    };
+    const result=await Promise.allSettled([loadOrCached("factory",urls[0],23,-23,-12),loadOrCached("tanks",urls[1],16,24,-8)]);
     if(active){const ok=result.filter(r=>r.status==="fulfilled").length;setSelected(ok);setMessage(ok===2?(tr?"İki gerçek model yüklendi":"Both real models loaded"):(tr?`${ok}/2 model yüklendi — eksik GLB dosyalarını seçebilirsin`:`${ok}/2 models loaded — select missing GLB files`));}
     const fileInput=document.getElementById("sim5-local-glb") as HTMLInputElement|null;
-    const onFile=async(e:Event)=>{const files=Array.from((e.target as HTMLInputElement).files||[]);for(let i=0;i<files.length;i++){const file=files[i];const url=URL.createObjectURL(file);try{await load(url,i===0?23:16,i===0?-23:24,-8);setSelected(loaded.length);setMessage(tr?"Gerçek modeller sahneye eklendi":"Real models added to the scene")}catch(err){setMessage(String(err))}finally{URL.revokeObjectURL(url)}}};
+    const onFile=async(e:Event)=>{const files=Array.from((e.target as HTMLInputElement).files||[]);for(let i=0;i<files.length;i++){const file=files[i];const url=URL.createObjectURL(file);try{await load(url,i===0?23:16,i===0?-23:24,-8);await saveModel(i===0?"factory":"tanks",file);setSelected(loaded.length);setMessage(tr?"Gerçek modeller eklendi ve bu tarayıcıya kaydedildi":"Real models added and saved in this browser")}catch(err){setMessage(String(err))}finally{URL.revokeObjectURL(url)}}};
     fileInput?.addEventListener("change",onFile);
     let last=performance.now();
     const animate=(now:number)=>{if(!active)return;const dt=Math.min((now-last)/1000,.05);last=now;
@@ -64,5 +73,5 @@ export default function RealModels({tr}:{tr:boolean}) {
   })();
   return()=>{active=false;cancelAnimationFrame(frame);cleanup();renderer?.dispose();renderer?.domElement?.remove()};
  },[tr]);
- return <section><p style={{color:"#a7e9fb"}}>{message}</p><div ref={ref} style={{height:"min(72vh,720px)",minHeight:360,borderRadius:12,overflow:"hidden",touchAction:"none"}}/><p style={{marginTop:12}}>{tr?"Model dosyaları sunucuda bulunmazsa kendi GLB dosyalarını seç:":"If the model files are not on the server, choose your GLB files:"}</p><input id="sim5-local-glb" type="file" accept=".glb,model/gltf-binary" multiple style={{padding:12,background:"#163747",borderRadius:8,color:"#fff",maxWidth:"100%"}}/><p style={{color:"#a7b8c1",fontSize:13}}>{tr?"WASD: yürü · Fareyle sürükle: bak · Yerel dosyalar yalnızca tarayıcında açılır.":"WASD: walk · Drag: look · Local files remain in your browser."} ({selected}/2)</p><p style={{fontSize:12,color:"#9cb1bb"}}>Factory: Pepe Orejel · Oil Tank: burnedhrum · CC BY 4.0</p></section>;
+ return <section><p style={{color:"#a7e9fb"}}>{message}</p><div ref={ref} style={{height:"min(72vh,720px)",minHeight:360,borderRadius:12,overflow:"hidden",touchAction:"none"}}/><p style={{marginTop:12}}>{tr?"Model dosyaları sunucuda bulunmazsa kendi GLB dosyalarını seç:":"If the model files are not on the server, choose your GLB files:"}</p><input id="sim5-local-glb" type="file" accept=".glb,model/gltf-binary" multiple style={{padding:12,background:"#163747",borderRadius:8,color:"#fff",maxWidth:"100%"}}/><p style={{color:"#a7b8c1",fontSize:13}}>{tr?"WASD: yürü · Fareyle sürükle: bak · Dosyalar bu tarayıcıda saklanır; sonraki ziyaretlerde otomatik yüklenir.":"WASD: walk · Drag: look · Files are saved in this browser and load automatically on future visits."} ({selected}/2)</p><p style={{fontSize:12,color:"#9cb1bb"}}>Factory: Pepe Orejel · Oil Tank: burnedhrum · CC BY 4.0</p></section>;
 }
