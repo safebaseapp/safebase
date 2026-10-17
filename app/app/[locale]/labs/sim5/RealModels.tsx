@@ -293,9 +293,17 @@ export default function RealModels({tr}:{tr:boolean}) {
     }
     // Compact hot-work context. Keep the imported welder and its detailed
     // equipment visually dominant; avoid giant untextured props in the foreground.
-    // The imported welder already carries a torch, power source and cable.
-    // Do not obscure the worker with a fake pipe or misaligned weld joint.
-    // The unsafe condition is the combustible material within the hot-work zone.
+    // A small weld coupon on a compact stand, offset to the operator's
+    // working side. Unlike the former long pipe, this does not obscure the
+    // worker or pretend the static torch is already touching a weld seam.
+    const couponSteel=material("#58636a",.65);
+    box(workX+1.48,.57,workZ-.72,.09,1.05,.09,darkMetal);
+    box(workX+1.48,.09,workZ-.72,.55,.13,.48,darkMetal);
+    box(workX+1.48,1.09,workZ-.72,.55,.055,.42,couponSteel);
+    const coupon=place(new THREE.Mesh(new THREE.BoxGeometry(.34,.18,.22),couponSteel),workX+1.48,1.22,workZ-.72,"hotwork");
+    coupon.rotation.y=.16;
+    // Hazard remains the combustible material within the hot-work zone.
+    // The static source asset is not represented as a finished welding animation.
     // Compact but recognizable portable fire extinguisher, including the
     // safety handle, pressure gauge, flexible hose and discharge nozzle.
     const exX=workX+2.7,exZ=workZ+1.45;
@@ -461,10 +469,10 @@ export default function RealModels({tr}:{tr:boolean}) {
   return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();held.current.clear()};
  },[tr]);
  const controls=[["↶","arrowleft"],["←","a"],["↑","w"],["↓","s"],["→","d"],["↷","arrowright"]];
- return <section style={{maxWidth:1600,margin:"0 auto"}}>
+ return <section style={{maxWidth:1600,width:"100%",minWidth:0,margin:"0 auto",overflowX:"clip"}}>
   <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",justifyContent:"space-between",marginBottom:12}}>
    <p style={{color:"#9de8e9",margin:0}} role="status">{status}</p>
-   <div style={{display:"flex",gap:8}}>
+   <div style={{display:"flex",gap:8,flexWrap:"wrap",maxWidth:"100%"}}>
     <button onClick={()=>switchMode("overview")} style={{padding:"10px 14px",borderRadius:8,border:mode==="overview"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="overview"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Kuş bakışı":"Overview"}</button>
     <button onClick={()=>switchMode("walk")} style={{padding:"10px 14px",borderRadius:8,border:mode==="walk"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="walk"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sahada yürü":"Walk site"}</button>
     <button onClick={()=>reset.current()} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sıfırla":"Reset"}</button>
