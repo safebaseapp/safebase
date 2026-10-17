@@ -182,6 +182,19 @@ export default function RealModels({tr}:{tr:boolean}) {
     for(let i=0;i<=48;i++){const a=i*Math.PI*2/48;const radius=1+.14*Math.sin(5*a)+.09*Math.sin(11*a);const x=Math.cos(a)*radius*1.65,y=Math.sin(a)*radius*.9;if(i===0)spillShape.moveTo(x,y);else spillShape.lineTo(x,y)}
     const puddle=place(new THREE.Mesh(new THREE.ShapeGeometry(spillShape),new THREE.MeshStandardMaterial({color:"#353d37",roughness:.22,metalness:.12,transparent:true,opacity:.78,side:THREE.DoubleSide,depthWrite:false})),leakX,.18,leakZ+.65,"leak");
     puddle.rotation.x=-Math.PI/2;
+    // Two restrained flange faces make the joint itself the leak origin.
+    for(const dx of [-.13,.13]){
+      const flange=place(new THREE.Mesh(new THREE.CylinderGeometry(.34,.34,.07,24),darkMetal),leakX+dx,1.25,leakZ,"leak");
+      flange.rotation.z=Math.PI/2;
+    }
+    // The dark fluid runs downhill from the flange toward the ground.
+    const trailPoints=[
+      new THREE.Vector3(leakX,1.05,leakZ+.23),
+      new THREE.Vector3(leakX+.06,.62,leakZ+.38),
+      new THREE.Vector3(leakX+.12,.19,leakZ+.55)
+    ];
+    const trail=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(trailPoints),16,.035,8,false),new THREE.MeshStandardMaterial({color:"#363d32",roughness:.28}));
+    trail.castShadow=false;scene.add(trail);
     // Keep the irregular spill edge subtle; avoid the previous cartoon oval rim.
     const drip=place(new THREE.Mesh(new THREE.SphereGeometry(.045,8,8),hazardMaterial("#8d9e91",.8)),leakX+.1,.85,leakZ+.35);
     // Optional licensed real welder scene. Falls back to procedural objects until the GLB is uploaded.
@@ -274,20 +287,13 @@ export default function RealModels({tr}:{tr:boolean}) {
     }
     // Compact hot-work context. Keep the imported welder and its detailed
     // equipment visually dominant; avoid giant untextured props in the foreground.
-    // Put the workpiece in front of the operator, not across the camera.
-    // Its modest diameter keeps the authored welder assembly in focus.
-    const spool=place(new THREE.Mesh(new THREE.CylinderGeometry(.14,.14,1.4,18),darkMetal),workX+1.05,1.02,workZ-.85,"hotwork");
-    spool.rotation.z=Math.PI/2;
-    for(const x of [workX+.55,workX+1.55]){
-      box(x,.48,workZ-.85,.11,.84,.18,darkMetal);
-      box(x,.11,workZ-.85,.45,.08,.48,darkMetal);
-    }
-    const joint=place(new THREE.Mesh(new THREE.TorusGeometry(.145,.025,8,20),rust),workX+1.05,1.02,workZ-.85,"hotwork");
-    joint.rotation.y=Math.PI/2;
-    const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.095,.11,.52,16),material("#b72921",.18)),workX+2.7,.43,workZ+1.45,"hotwork");
-    place(new THREE.Mesh(new THREE.BoxGeometry(.24,.035,.06),darkMetal),workX+2.7,.72,workZ+1.45);
+    // The imported welder already carries a torch, power source and cable.
+    // Do not obscure the worker with a fake pipe or misaligned weld joint.
+    // The unsafe condition is the combustible material within the hot-work zone.
+    const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.095,.11,.52,16),material("#b72921",.18)),workX+2.7,.26+.12,workZ+1.45,"hotwork");
+    place(new THREE.Mesh(new THREE.BoxGeometry(.24,.035,.06),darkMetal),workX+2.7,.66,workZ+1.45);
     for(const dx of [-2.4,-1.8]){
-      const drum=place(new THREE.Mesh(new THREE.CylinderGeometry(.27,.27,.74,20),material("#915337",.12)),workX+dx,.51,workZ+2.1,"hotwork");
+      const drum=place(new THREE.Mesh(new THREE.CylinderGeometry(.27,.27,.74,20),material("#915337",.12)),workX+dx,.37+.12,workZ+2.1,"hotwork");
       drum.castShadow=true;
     }
     // Tank-yard scene: realistic proportions, no billboard-like warning slabs.
