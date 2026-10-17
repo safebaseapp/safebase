@@ -2,76 +2,128 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function RealModels({tr}:{tr:boolean}) {
- const ref=useRef<HTMLDivElement>(null);
- const [message,setMessage]=useState(tr?"Gerçek 3D modeller yükleniyor…":"Loading real 3D models…");
- const [selected,setSelected]=useState(0);
+ const mount=useRef<HTMLDivElement>(null);
+ const held=useRef<Set<string>>(new Set());
+ const reset=useRef<()=>void>(()=>{});
+ const [status,setStatus]=useState(tr?"Saha hazırlanıyor…":"Preparing site…");
+ const [loaded,setLoaded]=useState(0);
+ const [mode,setMode]=useState<"walk"|"overview">("overview");
+ const modeRef=useRef<"walk"|"overview">("overview");
+ const switchMode=(m:"walk"|"overview")=>{modeRef.current=m;setMode(m);reset.current()};
  useEffect(()=>{
-  let active=true,renderer:any,frame=0,cleanup=()=>{};
+  let active=true,raf=0,renderer:any,cleanup=()=>{};
+  const host=mount.current;if(!host)return;
   (async()=>{
    try {
-    const threeUrl="https://esm.sh/three@0.180.0";
-    const THREE:any=await import(/* webpackIgnore: true */ threeUrl);
-    const loaderUrl="https://esm.sh/three@0.180.0/examples/jsm/loaders/GLTFLoader.js";
-    const {GLTFLoader}=await import(/* webpackIgnore: true */ loaderUrl);
-    if(!active||!ref.current)return;
-    const host=ref.current,scene=new THREE.Scene();
-    scene.background=new THREE.Color("#91b3c1");
-    scene.add(new THREE.HemisphereLight(0xffffff,0x4b5962,2.2));
-    const sun=new THREE.DirectionalLight(0xfff3df,2.4);sun.position.set(25,40,15);scene.add(sun);
-    const camera=new THREE.PerspectiveCamera(65,host.clientWidth/host.clientHeight,.1,2000);
-    camera.position.set(0,15,65);
-    renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-    renderer.setSize(host.clientWidth,host.clientHeight);host.appendChild(renderer.domElement);
-    const ground=new THREE.Mesh(new THREE.PlaneGeometry(300,300),new THREE.MeshStandardMaterial({color:"#586a63",roughness:.9}));
-    ground.rotation.x=-Math.PI/2;ground.position.y=-.08;scene.add(ground);
-    const loader=new GLTFLoader(),loaded:any[]=[];
-    const openStore=()=>new Promise<IDBDatabase>((resolve,reject)=>{const request=indexedDB.open("sernem-sim5-assets",1);request.onupgradeneeded=()=>request.result.createObjectStore("models");request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)});
-    const saveModel=async(key:string,file:File)=>{const db=await openStore();await new Promise<void>((resolve,reject)=>{const tx=db.transaction("models","readwrite");tx.objectStore("models").put(file,key);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)});db.close()};
-    const getModel=async(key:string)=>{const db=await openStore();const file=await new Promise<Blob|undefined>((resolve,reject)=>{const tx=db.transaction("models","readonly");const req=tx.objectStore("models").get(key);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});db.close();return file};
-
-    let yaw=Math.PI,pitch=-.13,drag=false,px=0,py=0;
-    const keys=new Set<string>();
-    const down=(e:KeyboardEvent)=>keys.add(e.key.toLowerCase()),up=(e:KeyboardEvent)=>keys.delete(e.key.toLowerCase());
-    window.addEventListener("keydown",down);window.addEventListener("keyup",up);
-    const onDown=(e:PointerEvent)=>{drag=true;px=e.clientX;py=e.clientY};
-    const onUp=()=>drag=false;
-    const onMove=(e:PointerEvent)=>{if(!drag)return;yaw-=(e.clientX-px)*.004;pitch=Math.max(-1.1,Math.min(1.1,pitch-(e.clientY-py)*.003));px=e.clientX;py=e.clientY};
-    renderer.domElement.addEventListener("pointerdown",onDown);window.addEventListener("pointerup",onUp);window.addEventListener("pointermove",onMove);
+    const THREE:any=await import(/* webpackIgnore: true */ "https://esm.sh/three@0.180.0");
+    const {GLTFLoader}=await import(/* webpackIgnore: true */ "https://esm.sh/three@0.180.0/examples/jsm/loaders/GLTFLoader.js");
+    if(!active||!mount.current)return;
+    const scene=new THREE.Scene();scene.background=new THREE.Color("#91b1c5");scene.fog=new THREE.Fog("#91b1c5",160,360);
+    const camera=new THREE.PerspectiveCamera(64,host.clientWidth/Math.max(1,host.clientHeight),.1,900);
+    renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.8));renderer.setSize(host.clientWidth,host.clientHeight);
+    renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+    host.appendChild(renderer.domElement);
+    scene.add(new THREE.HemisphereLight(0xe8f3ff,0x697369,2.1));
+    const sun=new THREE.DirectionalLight(0xfff3dc,2.5);sun.position.set(-55,85,30);scene.add(sun);
+    const material=(color:string,metalness=0)=>new THREE.MeshStandardMaterial({color,roughness:.85,metalness});
+    const asphalt=material("#444f57"),walkway=material("#a9b5af"),grass=material("#607668"),white=material("#e4e5dc"),yellow=material("#e9c34a"),fence=material("#aebec4",.35);
+    const box=(x:number,y:number,z:number,w:number,h:number,d:number,m:any)=>{
+      const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);mesh.position.set(x,y,z);scene.add(mesh);return mesh;
+    };
+    const ground=new THREE.Mesh(new THREE.PlaneGeometry(450,450),grass);ground.rotation.x=-Math.PI/2;ground.position.y=-.14;scene.add(ground);
+    // Central service road, continuous pedestrian sidewalks and safe crosswalks.
+    box(0,.025,25,13,.09,155,asphalt);
+    for(const side of [-1,1]){
+      box(side*9,.07,25,3.5,.12,155,walkway);
+      box(side*6.65,.13,25,.18,.08,155,white);
+      for(let z=-48;z<99;z+=7)box(side*5.7,.13,z,.16,.05,3.2,yellow);
+      for(let z=-48;z<99;z+=12){
+        box(side*11,.72,z,.09,1.4,.09,fence);
+        box(side*11,1.4,z,.09,.08,12,fence);
+      }
+    }
+    for(let z=-48;z<100;z+=12)box(0,.14,z,.18,.05,4.1,white);
+    for(let x=-5.6;x<=5.6;x+=1.2)box(x,.15,57,.65,.05,3,white);
+    // Industrial equipment plots are separated from the central circulation corridor.
+    box(-47,.02,-12,62,.07,85,material("#777f7c"));
+    box(47,.02,-12,62,.07,85,material("#777f7c"));
+    for(const x of [-15.5,15.5]){
+      for(let z=-48;z<=24;z+=12)box(x,.63,z,.14,1.2,.14,fence);
+      box(x,1.2,-12,.1,.07,72,fence);
+    }
+    // Entry apron and marked pedestrian access.
+    box(0,.03,103,42,.08,21,asphalt);
+    box(0,.15,91,11,.07,1,white);
+    const loader=new GLTFLoader();
     const fit=(obj:any,targetHeight:number,x:number,z:number)=>{
-      const box=new THREE.Box3().setFromObject(obj),size=box.getSize(new THREE.Vector3());
-      const scale=targetHeight/Math.max(size.y,.01);obj.scale.multiplyScalar(scale);
-      const b=new THREE.Box3().setFromObject(obj),center=b.getCenter(new THREE.Vector3());
-      obj.position.x+=x-center.x;obj.position.y-=b.min.y;obj.position.z+=z-center.z;scene.add(obj);loaded.push(obj);
+      const before=new THREE.Box3().setFromObject(obj),size=before.getSize(new THREE.Vector3());
+      obj.scale.multiplyScalar(targetHeight/Math.max(size.y,.01));
+      const after=new THREE.Box3().setFromObject(obj),center=after.getCenter(new THREE.Vector3());
+      obj.position.x+=x-center.x;obj.position.y-=after.min.y;obj.position.z+=z-center.z;
+      scene.add(obj);
     };
-    const load=(url:string,h:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{fit(g.scene,h,x,z);resolve()},undefined,reject));
-    const urls=["/sim5/SERNEM_SIM4_Factory_optimized.glb","/sim5/large_industrial_storage_tanks%20(1).glb"];
-    const loadOrCached=async(key:string,url:string,h:number,x:number,z:number)=>{
-      try{await load(url,h,x,z);return}catch{}
-      const saved=await getModel(key);if(!saved)throw new Error("Model not available");
-      const localUrl=URL.createObjectURL(saved);try{await load(localUrl,h,x,z)}finally{URL.revokeObjectURL(localUrl)}
+    const load=(url:string,height:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{if(!active){resolve();return}fit(g.scene,height,x,z);resolve()},undefined,reject));
+    const paths=["/sim5/SERNEM_SIM4_Factory_optimized.glb","/sim5/large_industrial_storage_tanks%20(1).glb"];
+    const results=await Promise.allSettled([load(paths[0],22,-47,-12),load(paths[1],17,47,-12)]);
+    if(active){const count=results.filter(r=>r.status==="fulfilled").length;setLoaded(count);setStatus(count===2?(tr?"Gerçek tesis hazır · 2/2 model":"Industrial site ready · 2/2 models"):(tr?`Model yükleme: ${count}/2 — dosya bağlantısını kontrol et`:`Model loading: ${count}/2 — check asset links`))}
+    let yaw=Math.PI,pitch=-.13,drag=false,px=0,py=0,orbitAngle=.5;
+    const setCamera=()=>{
+      if(modeRef.current==="overview"){camera.position.set(104,68,123);camera.lookAt(0,4,-8)}
+      else {camera.position.set(0,1.8,99);yaw=Math.PI;pitch=-.06;camera.lookAt(0,1.8,60)}
     };
-    const result=await Promise.allSettled([loadOrCached("factory",urls[0],23,-23,-12),loadOrCached("tanks",urls[1],16,24,-8)]);
-    if(active){const ok=result.filter(r=>r.status==="fulfilled").length;setSelected(ok);setMessage(ok===2?(tr?"İki gerçek model yüklendi":"Both real models loaded"):(tr?`${ok}/2 model yüklendi — eksik GLB dosyalarını seçebilirsin`:`${ok}/2 models loaded — select missing GLB files`));}
-    const fileInput=document.getElementById("sim5-local-glb") as HTMLInputElement|null;
-    const onFile=async(e:Event)=>{const files=Array.from((e.target as HTMLInputElement).files||[]);for(let i=0;i<files.length;i++){const file=files[i];const url=URL.createObjectURL(file);try{await load(url,i===0?23:16,i===0?-23:24,-8);await saveModel(i===0?"factory":"tanks",file);setSelected(loaded.length);setMessage(tr?"Gerçek modeller eklendi ve bu tarayıcıya kaydedildi":"Real models added and saved in this browser")}catch(err){setMessage(String(err))}finally{URL.revokeObjectURL(url)}}};
-    fileInput?.addEventListener("change",onFile);
+    reset.current=setCamera;setCamera();
+    const down=(e:KeyboardEvent)=>{if(["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"].includes(e.key.toLowerCase())){held.current.add(e.key.toLowerCase());if(e.key.startsWith("Arrow"))e.preventDefault()}};
+    const up=(e:KeyboardEvent)=>held.current.delete(e.key.toLowerCase());
+    window.addEventListener("keydown",down);window.addEventListener("keyup",up);
+    const pointerDown=(e:PointerEvent)=>{drag=true;px=e.clientX;py=e.clientY;renderer.domElement.setPointerCapture?.(e.pointerId)};
+    const pointerUp=()=>drag=false;
+    const pointerMove=(e:PointerEvent)=>{if(!drag)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;if(modeRef.current==="walk"){yaw-=dx*.004;pitch=Math.max(-1.15,Math.min(1.15,pitch-dy*.003))}else{orbitAngle+=dx*.004}};
+    renderer.domElement.addEventListener("pointerdown",pointerDown);renderer.domElement.addEventListener("pointerup",pointerUp);renderer.domElement.addEventListener("pointermove",pointerMove);
     let last=performance.now();
-    const animate=(now:number)=>{if(!active)return;const dt=Math.min((now-last)/1000,.05);last=now;
-      const f=new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw)),r=new THREE.Vector3(Math.cos(yaw),0,-Math.sin(yaw));
-      if(keys.has("w")||keys.has("arrowup"))camera.position.addScaledVector(f,dt*11);
-      if(keys.has("s")||keys.has("arrowdown"))camera.position.addScaledVector(f,-dt*11);
-      if(keys.has("a"))camera.position.addScaledVector(r,dt*11);
-      if(keys.has("d"))camera.position.addScaledVector(r,-dt*11);
-      if(keys.has("arrowleft"))yaw+=dt;if(keys.has("arrowright"))yaw-=dt;
-      camera.position.y=2.2;camera.lookAt(camera.position.clone().add(new THREE.Vector3(Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch))));
-      renderer.render(scene,camera);frame=requestAnimationFrame(animate);
-    };frame=requestAnimationFrame(animate);
-    const resize=()=>{if(!host.clientWidth)return;camera.aspect=host.clientWidth/host.clientHeight;camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight)};
+    const tick=(now:number)=>{
+      if(!active)return;const dt=Math.min(.05,(now-last)/1000);last=now;
+      if(modeRef.current==="overview"){
+        const distance=145;camera.position.set(Math.sin(orbitAngle)*distance,66,Math.cos(orbitAngle)*distance);camera.lookAt(0,4,-8);
+      }else{
+        const forward=new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw));
+        const right=new THREE.Vector3(Math.cos(yaw),0,-Math.sin(yaw));
+        if(held.current.has("w")||held.current.has("arrowup"))camera.position.addScaledVector(forward,dt*9);
+        if(held.current.has("s")||held.current.has("arrowdown"))camera.position.addScaledVector(forward,-dt*9);
+        if(held.current.has("a"))camera.position.addScaledVector(right,dt*7);
+        if(held.current.has("d"))camera.position.addScaledVector(right,-dt*7);
+        if(held.current.has("arrowleft"))yaw+=dt*1.4;
+        if(held.current.has("arrowright"))yaw-=dt*1.4;
+        camera.position.x=Math.max(-10.6,Math.min(10.6,camera.position.x));
+        camera.position.z=Math.max(-49,Math.min(105,camera.position.z));
+        camera.position.y=1.8;
+        camera.lookAt(camera.position.clone().add(new THREE.Vector3(Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch))));
+      }
+      renderer.render(scene,camera);raf=requestAnimationFrame(tick);
+    };
+    raf=requestAnimationFrame(tick);
+    const resize=()=>{if(!host.clientWidth||!host.clientHeight)return;camera.aspect=host.clientWidth/host.clientHeight;camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight)};
     window.addEventListener("resize",resize);
-    cleanup=()=>{fileInput?.removeEventListener("change",onFile);window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);window.removeEventListener("pointerup",onUp);window.removeEventListener("pointermove",onMove);renderer?.domElement?.removeEventListener("pointerdown",onDown)};
-   }catch(err){if(active)setMessage("3D: "+String(err))}
+    cleanup=()=>{window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
+   }catch(e){if(active)setStatus("3D error: "+String(e))}
   })();
-  return()=>{active=false;cancelAnimationFrame(frame);cleanup();renderer?.dispose();renderer?.domElement?.remove()};
+  return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();held.current.clear()};
  },[tr]);
- return <section><p style={{color:"#a7e9fb"}}>{message}</p><div ref={ref} style={{height:"min(72vh,720px)",minHeight:360,borderRadius:12,overflow:"hidden",touchAction:"none"}}/><p style={{marginTop:12}}>{tr?"Model dosyaları sunucuda bulunmazsa kendi GLB dosyalarını seç:":"If the model files are not on the server, choose your GLB files:"}</p><input id="sim5-local-glb" type="file" accept=".glb,model/gltf-binary" multiple style={{padding:12,background:"#163747",borderRadius:8,color:"#fff",maxWidth:"100%"}}/><p style={{color:"#a7b8c1",fontSize:13}}>{tr?"WASD: yürü · Fareyle sürükle: bak · Dosyalar bu tarayıcıda saklanır; sonraki ziyaretlerde otomatik yüklenir.":"WASD: walk · Drag: look · Files are saved in this browser and load automatically on future visits."} ({selected}/2)</p><p style={{fontSize:12,color:"#9cb1bb"}}>Factory: Pepe Orejel · Oil Tank: burnedhrum · CC BY 4.0</p></section>;
+ const controls=[["↶","arrowleft"],["↑","w"],["↓","s"],["↷","arrowright"]];
+ return <section style={{maxWidth:1600,margin:"0 auto"}}>
+  <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",justifyContent:"space-between",marginBottom:12}}>
+   <p style={{color:"#9de8e9",margin:0}} role="status">{status}</p>
+   <div style={{display:"flex",gap:8}}>
+    <button onClick={()=>switchMode("overview")} style={{padding:"10px 14px",borderRadius:8,border:mode==="overview"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="overview"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Kuş bakışı":"Overview"}</button>
+    <button onClick={()=>switchMode("walk")} style={{padding:"10px 14px",borderRadius:8,border:mode==="walk"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="walk"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sahada yürü":"Walk site"}</button>
+    <button onClick={()=>reset.current()} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sıfırla":"Reset"}</button>
+   </div>
+  </div>
+  <div ref={mount} style={{width:"100%",height:"min(72vh,750px)",minHeight:380,borderRadius:14,overflow:"hidden",background:"#91b1c5",touchAction:"none"}}/>
+  <div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap",marginTop:12}}>
+   {controls.map(([label,key])=><button key={key} disabled={mode!=="walk"} onPointerDown={e=>{e.preventDefault();held.current.add(key)}} onPointerUp={()=>held.current.delete(key)} onPointerCancel={()=>held.current.delete(key)} onPointerLeave={()=>held.current.delete(key)} style={{padding:"12px 18px",border:0,borderRadius:9,background:mode==="walk"?"#176b82":"#364a55",color:"white",fontSize:19,touchAction:"none",cursor:"pointer"}}>{label}</button>)}
+   <span style={{fontSize:13,color:"#b7cdd5"}}>{mode==="walk"?(tr?"WASD ile yürü · sürükleyerek etrafa bak · güvenli yürüyüş koridoru":"WASD to walk · drag to look · protected pedestrian corridor"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
+  </div>
+  <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: burnedhrum · CC BY 4.0 · {loaded}/2 GLB</p>
+ </section>;
 }
