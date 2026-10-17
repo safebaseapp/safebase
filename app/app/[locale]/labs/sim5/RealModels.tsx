@@ -296,17 +296,20 @@ export default function RealModels({tr}:{tr:boolean}) {
     // A small weld coupon on a compact stand, offset to the operator's
     // working side. Unlike the former long pipe, this does not obscure the
     // worker or pretend the static torch is already touching a weld seam.
+    // Keep the coupon outside the welder's body silhouette. A static
+    // source pose is not an animated welding operation.
     const couponSteel=material("#58636a",.65);
-    box(workX+1.48,.57,workZ-.72,.09,1.05,.09,darkMetal);
-    box(workX+1.48,.09,workZ-.72,.55,.13,.48,darkMetal);
-    box(workX+1.48,1.09,workZ-.72,.55,.055,.42,couponSteel);
-    const coupon=place(new THREE.Mesh(new THREE.BoxGeometry(.34,.18,.22),couponSteel),workX+1.48,1.22,workZ-.72,"hotwork");
+    const standX=workX+2.25,standZ=workZ-1.3;
+    box(standX,.48,standZ,.09,.9,.09,darkMetal);
+    box(standX,.08,standZ,.52,.12,.5,darkMetal);
+    box(standX,.96,standZ,.55,.055,.44,couponSteel);
+    const coupon=place(new THREE.Mesh(new THREE.BoxGeometry(.34,.18,.22),couponSteel),standX,1.09,standZ,"hotwork");
     coupon.rotation.y=.16;
     // Hazard remains the combustible material within the hot-work zone.
     // The static source asset is not represented as a finished welding animation.
     // Compact but recognizable portable fire extinguisher, including the
     // safety handle, pressure gauge, flexible hose and discharge nozzle.
-    const exX=workX+2.7,exZ=workZ+1.45;
+    const exX=workX+3.4,exZ=workZ+1.1;
     const extinguisherRed=material("#c52c23",.23);
     const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.105,.115,.52,24),extinguisherRed),exX,.275,exZ,"hotwork");
     place(new THREE.Mesh(new THREE.CylinderGeometry(.085,.1,.085,20),darkMetal),exX,.05,exZ,"hotwork");
@@ -469,7 +472,7 @@ export default function RealModels({tr}:{tr:boolean}) {
   return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();held.current.clear()};
  },[tr]);
  const controls=[["↶","arrowleft"],["←","a"],["↑","w"],["↓","s"],["→","d"],["↷","arrowright"]];
- return <section style={{maxWidth:1600,width:"100%",minWidth:0,margin:"0 auto",overflowX:"clip"}}>
+ return <section style={{boxSizing:"border-box",maxWidth:1600,width:"100%",minWidth:0,margin:"0 auto",overflowX:"hidden"}}>
   <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",justifyContent:"space-between",marginBottom:12}}>
    <p style={{color:"#9de8e9",margin:0}} role="status">{status}</p>
    <div style={{display:"flex",gap:8,flexWrap:"wrap",maxWidth:"100%"}}>
