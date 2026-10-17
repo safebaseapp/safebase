@@ -10,6 +10,9 @@ export default function RealModels({tr}:{tr:boolean}) {
  const [activeInspection,setActiveInspection]=useState<string|null>(null);
  const [completedInspections,setCompletedInspections]=useState<string[]>([]);
  const [inspectionFeedback,setInspectionFeedback]=useState("");
+ const [nearbyHazard,setNearbyHazard]=useState<string|null>(null);
+ const nearbyRef=useRef<string|null>(null);
+ const inspectNearby=useRef<()=>void>(()=>{});
  const inspections:Record<string,{question:[string,string],answers:[[string,string],[string,string]],correct:number,explanation:[string,string]}>= {
   leak:{question:["Tank sahasında şüpheli sızıntı var. İlk adım?","Suspected tank-yard leak. First action?"],answers:[["Alanı izole et, güvenli mesafeden bildir","Isolate the area and report from a safe distance"],["Sızıntının kaynağına yaklaş","Approach the leak source"]],correct:0,explanation:["Bilinmeyen sızıntıya yaklaşma; acil müdahale prosedürünü başlat.","Do not approach an unknown release; initiate the emergency response procedure."]},
   hotwork:{question:["Sıcak çalışma öncesi yanıcı atmosfer ihtimali var. Ne yaparsın?","Potential flammable atmosphere before hot work. What do you do?"],answers:[["Yangın söndürücü ile işe başla","Start with a fire extinguisher"],["İşi durdur, izin ve gaz ölçümünü doğrula","Stop work and verify permit and gas testing"]],correct:1,explanation:["Çalışma izni, atmosfer testi ve yangın gözcüsü kontrol edilmeli.","Verify the permit, atmosphere testing and fire watch."]},
@@ -145,13 +148,23 @@ export default function RealModels({tr}:{tr:boolean}) {
     };
     // Tank-yard leak: pipe joint, flange, drip and irregular liquid spill.
     const leakX=22,leakZ=-20;
+    // Supported pipework with a visible elbow, valve and bolted joint.
     const pipe=place(new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,3.5,16),darkMetal),leakX,1.25,leakZ);
     pipe.rotation.z=Math.PI/2;
+    for(const dx of [-1.35,1.35]){
+      box(leakX+dx,.68,leakZ,.15,1.15,.17,darkMetal);
+      box(leakX+dx,.17,leakZ,.65,.13,.7,darkMetal);
+    }
+    const valve=place(new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.45,12),darkMetal),leakX+.9,1.55,leakZ);
+    place(new THREE.Mesh(new THREE.TorusGeometry(.3,.035,8,24),material("#b3472f",.35)),leakX+.9,1.83,leakZ).rotation.x=Math.PI/2;
+    for(let i=0;i<8;i++){const a=i*Math.PI/4;place(new THREE.Mesh(new THREE.SphereGeometry(.045,7,6),material("#aeb6b3",.6)),leakX,1.25+Math.cos(a)*.31,leakZ+Math.sin(a)*.31)}
     place(new THREE.Mesh(new THREE.TorusGeometry(.34,.09,10,18),rust),leakX,1.25,leakZ,"leak").rotation.y=Math.PI/2;
-    const puddle=place(new THREE.Mesh(new THREE.CircleGeometry(1.7,24),hazardMaterial("#393e37",.85)),leakX,.18,leakZ+.65,"leak");
-    puddle.rotation.x=-Math.PI/2;puddle.scale.set(1.45,.72,1);
-    const spillEdge=place(new THREE.Mesh(new THREE.RingGeometry(1.55,1.67,28),hazardMaterial("#555d50",.55)),leakX,.19,leakZ+.65,"leak");spillEdge.rotation.x=-Math.PI/2;spillEdge.scale.set(1.45,.72,1);
-    for(let i=0;i<5;i++)place(new THREE.Mesh(new THREE.SphereGeometry(.035+i*.004,8,8),hazardMaterial("#9aaf9b",.8)),leakX+.1,.55+i*.13,leakZ+.5);
+    const spillShape=new THREE.Shape();
+    for(let i=0;i<=48;i++){const a=i*Math.PI*2/48;const radius=1+.14*Math.sin(5*a)+.09*Math.sin(11*a);const x=Math.cos(a)*radius*1.65,y=Math.sin(a)*radius*.9;if(i===0)spillShape.moveTo(x,y);else spillShape.lineTo(x,y)}
+    const puddle=place(new THREE.Mesh(new THREE.ShapeGeometry(spillShape),new THREE.MeshStandardMaterial({color:"#353d37",roughness:.22,metalness:.12,transparent:true,opacity:.78,side:THREE.DoubleSide,depthWrite:false})),leakX,.18,leakZ+.65,"leak");
+    puddle.rotation.x=-Math.PI/2;
+    // Keep the irregular spill edge subtle; avoid the previous cartoon oval rim.
+    const drip=place(new THREE.Mesh(new THREE.SphereGeometry(.045,8,8),hazardMaterial("#8d9e91",.8)),leakX+.1,.85,leakZ+.35);
     // Hot-work violation: a workbench, welding point, sparks and nearby combustible drums.
     const workX=-22,workZ=-5;
     place(new THREE.Mesh(new THREE.BoxGeometry(2.4,.14,1.3),darkMetal),workX,1.1,workZ,"hotwork");
@@ -194,6 +207,7 @@ export default function RealModels({tr}:{tr:boolean}) {
       if(hit&&camera.position.distanceTo(hit.object.position)<10){setActiveInspection(hit.object.userData.inspectionId);setInspectionFeedback("");}
     };
     renderer.domElement.addEventListener("pointerup",inspect);
+    inspectNearby.current=()=>{const id=nearbyRef.current;if(id){setActiveInspection(id);setInspectionFeedback("")}};
     // Movement is tested against imported geometry, not only the outer site bounds.
     const canStep=(next:any,previous:any)=>{
       const delta=next.clone().sub(previous);delta.y=0;
@@ -258,6 +272,13 @@ export default function RealModels({tr}:{tr:boolean}) {
         camera.position.y=1.8;
         camera.lookAt(camera.position.clone().add(new THREE.Vector3(Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch))));
       }
+      if(modeRef.current==="walk"){
+        const hazards:[string,number,number][]=[["hotwork",workX,workZ],["leak",leakX,leakZ],["access",accessX,accessZ]];
+        const closest=hazards.map(([id,x,z])=>({id,d:Math.hypot(camera.position.x-x,camera.position.z-z)})).sort((a,b)=>a.d-b.d)[0];
+        const next=closest?.d<7?closest.id:null;
+        if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next)}
+      }else if(nearbyRef.current){nearbyRef.current=null;setNearbyHazard(null)}
+      drip.position.y=.6+Math.abs(Math.sin(now*.003))*.42;
       for(let i=0;i<sparkMeshes.length;i++){const spark=sparkMeshes[i];spark.position.y=1.2+Math.abs(Math.sin(now*.003+i*1.9))*.55;spark.visible=Math.sin(now*.016+i*3)>-.35;}
       renderer.render(scene,camera);raf=requestAnimationFrame(tick);
     };
@@ -284,6 +305,7 @@ export default function RealModels({tr}:{tr:boolean}) {
    {controls.map(([label,key])=><button key={key} disabled={mode!=="walk"} onPointerDown={e=>{e.preventDefault();held.current.add(key)}} onPointerUp={()=>held.current.delete(key)} onPointerCancel={()=>held.current.delete(key)} onPointerLeave={()=>held.current.delete(key)} style={{padding:"12px 18px",border:0,borderRadius:9,background:mode==="walk"?"#176b82":"#364a55",color:"white",fontSize:19,touchAction:"none",cursor:"pointer"}}>{label}</button>)}
    <span style={{fontSize:13,color:"#b7cdd5"}}>{mode==="walk"?(tr?"WASD ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
   </div>
+  {mode==="walk"&&nearbyHazard&&<button onClick={()=>inspectNearby.current()} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
   <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/3 · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
   {activeInspection&&<section style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}><h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>{inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{const current=inspections[activeInspection];if(i===current.correct){setCompletedInspections(prev=>prev.includes(activeInspection)?prev:[...prev,activeInspection]);setActiveInspection(null)}setInspectionFeedback((i===current.correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+current.explanation[tr?0:1])}} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}<button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button></section>}
   {inspectionFeedback&&<p role="status" style={{color:"#ffcf7d"}}>{inspectionFeedback}</p>}
