@@ -83,8 +83,8 @@ export default function RealModels({tr}:{tr:boolean}) {
       const before=new THREE.Box3().setFromObject(obj);
       const size=before.getSize(new THREE.Vector3());
       // Limit all THREE dimensions: the full pipe network must stay inside its own yard.
-      const maxWidth=x<0?48:52;
-      const maxDepth=70;
+      const maxWidth=x<0?60:52;
+      const maxDepth=x<0?80:70;
       const scale=Math.min(targetHeight/Math.max(size.y,.01),maxWidth/Math.max(size.x,.01),maxDepth/Math.max(size.z,.01));
       obj.scale.multiplyScalar(scale);
       obj.updateMatrixWorld(true);
@@ -107,7 +107,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     };
     const load=(url:string,height:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{if(!active){resolve();return}fit(g.scene,height,x,z);resolve()},undefined,reject));
     const paths=["/sim5/SERNEM_SIM4_Factory_optimized.glb","/sim5/large_industrial_storage_tanks%20(1).glb"];
-    const results=await Promise.allSettled([load(paths[0],14,-47,-12),load(paths[1],17,47,-12)]);
+    const results=await Promise.allSettled([load(paths[0],17.5,-47,-12),load(paths[1],17,47,-12)]);
     if(active){const count=results.filter(r=>r.status==="fulfilled").length;setLoaded(count);setStatus(count===2?(tr?"Gerçek tesis hazır · 2/2 model":"Industrial site ready · 2/2 models"):(tr?`Model yükleme: ${count}/2 — dosya bağlantısını kontrol et`:`Model loading: ${count}/2 — check asset links`))}
     // Movement is tested against imported geometry, not only the outer site bounds.
     const canStep=(next:any,previous:any)=>{
