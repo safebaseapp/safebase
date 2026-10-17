@@ -158,6 +158,24 @@ export default function RealModels({tr}:{tr:boolean}) {
     for(const dx of [-.95,.95])for(const dz of [-.45,.45])place(new THREE.Mesh(new THREE.BoxGeometry(.1,1.05,.1),darkMetal),workX+dx,.54,workZ+dz);
     for(let i=0;i<18;i++){const spark=place(new THREE.Mesh(new THREE.CylinderGeometry(.008,.018,.16+(i%3)*.05,5),new THREE.MeshBasicMaterial({color:i%2?0xffd56b:0xff832b})),workX+(i%7-3)*.14,1.2+(i%5)*.12,workZ+(i%4-2)*.1);spark.rotation.z=(i%7)*.33;}
     for(const dx of [-2.5,-1.8])place(new THREE.Mesh(new THREE.CylinderGeometry(.34,.34,1.05,12),rust),workX+dx,.57,workZ+1.6,"hotwork");
+    // Work equipment: compact welding power source, cable and nearby unsecured extinguisher.
+    const welder=place(new THREE.Mesh(new THREE.BoxGeometry(.85,.72,.55),material("#d2a42c",.3)),workX+2.4,.48,workZ-.7,"hotwork");
+    welder.rotation.y=-.2;
+    place(new THREE.Mesh(new THREE.BoxGeometry(.48,.28,.025),material("#29363b")),workX+2.4,.62,workZ-.41);
+    for(const dx of [-.29,.29])place(new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.1,12),darkMetal),workX+2.4+dx,.17,workZ-.7).rotation.z=Math.PI/2;
+    const cablePoints=[new THREE.Vector3(workX+2.4,.36,workZ-.4),new THREE.Vector3(workX+1.8,.16,workZ),new THREE.Vector3(workX+.8,.17,workZ+.45),new THREE.Vector3(workX+.1,1.12,workZ)];
+    const cableCurve=new THREE.CatmullRomCurve3(cablePoints);
+    place(new THREE.Mesh(new THREE.TubeGeometry(cableCurve,35,.035,7,false),material("#22292b")),0,0,0);
+    const extinguisher=place(new THREE.Mesh(new THREE.CylinderGeometry(.13,.14,.58,14),material("#bf2421",.2)),workX+3.5,.4,workZ+1.1,"hotwork");
+    extinguisher.rotation.z=.12;
+    place(new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.09,12),darkMetal),workX+3.46,.76,workZ+1.1);
+    place(new THREE.Mesh(new THREE.BoxGeometry(.3,.045,.06),darkMetal),workX+3.46,.83,workZ+1.1);
+    // Visible warning paint on the yard surface.
+    const warning=material("#e0b83c");
+    for(const dx of [-3.2,3.2])box(workX+dx,.14,workZ, .14,.025,5.8,warning);
+    for(const dz of [-2.8,2.8])box(workX,.14,workZ+dz,6.4,.025,.14,warning);
+    // Small animated sparks, rather than static hovering particles.
+    const sparkMeshes=scene.children.filter((obj:any)=>obj.isMesh&&obj.geometry?.type==="CylinderGeometry"&&obj.material?.type==="MeshBasicMaterial");
     // Obstructed yard entrance: stacked timber pallets and crates beside the equipment access route.
     const accessX=19.5,accessZ=-5;
     for(let layer=0;layer<3;layer++){
@@ -240,6 +258,7 @@ export default function RealModels({tr}:{tr:boolean}) {
         camera.position.y=1.8;
         camera.lookAt(camera.position.clone().add(new THREE.Vector3(Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch))));
       }
+      for(let i=0;i<sparkMeshes.length;i++){const spark=sparkMeshes[i];spark.position.y=1.2+Math.abs(Math.sin(now*.003+i*1.9))*.55;spark.visible=Math.sin(now*.016+i*3)>-.35;}
       renderer.render(scene,camera);raf=requestAnimationFrame(tick);
     };
     raf=requestAnimationFrame(tick);
