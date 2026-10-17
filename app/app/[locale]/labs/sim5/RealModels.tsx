@@ -165,8 +165,26 @@ export default function RealModels({tr}:{tr:boolean}) {
     puddle.rotation.x=-Math.PI/2;
     // Keep the irregular spill edge subtle; avoid the previous cartoon oval rim.
     const drip=place(new THREE.Mesh(new THREE.SphereGeometry(.045,8,8),hazardMaterial("#8d9e91",.8)),leakX+.1,.85,leakZ+.35);
-    // Hot-work violation: a workbench, welding point, sparks and nearby combustible drums.
+    // Optional licensed real welder scene. Falls back to procedural objects until the GLB is uploaded.
     const workX=-22,workZ=-5;
+    let realWelderLoaded=false;
+    try{
+      const welderScene=await new Promise<any>((resolve,reject)=>loader.load("/sim5/SERNEM_Welder_06_web.glb",(g:any)=>resolve(g.scene),undefined,reject));
+      const originalBounds=new THREE.Box3().setFromObject(welderScene);
+      const originalSize=originalBounds.getSize(new THREE.Vector3());
+      const scale=2.15/Math.max(originalSize.y,.01);
+      welderScene.scale.multiplyScalar(scale);
+      welderScene.updateMatrixWorld(true);
+      const bounds=new THREE.Box3().setFromObject(welderScene);
+      const center=bounds.getCenter(new THREE.Vector3());
+      welderScene.position.set(workX-center.x,.17-bounds.min.y,workZ-center.z);
+      welderScene.traverse((obj:any)=>{if(obj.isMesh){obj.castShadow=true;obj.receiveShadow=true;}});
+      scene.add(welderScene);
+      realWelderLoaded=true;
+    }catch{ /* Preserve the existing playable scene if the asset is unavailable. */ }
+    // Hot-work violation: fallback equipment and combustible drums.
+
+    if(!realWelderLoaded){
     place(new THREE.Mesh(new THREE.BoxGeometry(2.4,.14,1.3),darkMetal),workX,1.1,workZ,"hotwork");
     for(const dx of [-.95,.95])for(const dz of [-.45,.45])place(new THREE.Mesh(new THREE.BoxGeometry(.1,1.05,.1),darkMetal),workX+dx,.54,workZ+dz);
     for(let i=0;i<18;i++){const spark=place(new THREE.Mesh(new THREE.CylinderGeometry(.008,.018,.16+(i%3)*.05,5),new THREE.MeshBasicMaterial({color:i%2?0xffd56b:0xff832b})),workX+(i%7-3)*.14,1.2+(i%5)*.12,workZ+(i%4-2)*.1);spark.rotation.z=(i%7)*.33;}
@@ -183,6 +201,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     extinguisher.rotation.z=.12;
     place(new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.09,12),darkMetal),workX+3.46,.76,workZ+1.1);
     place(new THREE.Mesh(new THREE.BoxGeometry(.3,.045,.06),darkMetal),workX+3.46,.83,workZ+1.1);
+    }
     // Visible warning paint on the yard surface.
     const warning=material("#e0b83c");
     for(const dx of [-3.2,3.2])box(workX+dx,.14,workZ, .14,.025,5.8,warning);
