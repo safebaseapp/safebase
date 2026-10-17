@@ -123,11 +123,36 @@ export default function RealModels({tr}:{tr:boolean}) {
     const paths=["/sim5/SERNEM_SIM4_Factory_optimized.glb","/sim5/large_industrial_storage_tanks%20(1).glb"];
     const results=await Promise.allSettled([load(paths[0],17.5,-47,-12),load(paths[1],17,47,-12)]);
     if(active){const count=results.filter(r=>r.status==="fulfilled").length;setLoaded(count);setStatus(count===2?(tr?"Gerçek tesis hazır · 2/2 model":"Industrial site ready · 2/2 models"):(tr?`Model yükleme: ${count}/2 — dosya bağlantısını kontrol et`:`Model loading: ${count}/2 — check asset links`))}
+    // Visible site conditions replace the oversized interaction spheres.
     const inspectionMarkers:any[]=[];
-    for(const [id,x,z] of [["leak",12.5,-20],["hotwork",-12.5,-5],["access",12.5,47]] as [string,number,number][]){
-      const marker=new THREE.Mesh(new THREE.SphereGeometry(.8,12,10),new THREE.MeshStandardMaterial({color:0xffbb42,emissive:0x9b4a00,emissiveIntensity:.6}));
-      marker.position.set(x,2.2,z);marker.userData.inspectionId=id;scene.add(marker);inspectionMarkers.push(marker);
+    const hazardMaterial=(color:string,opacity=1)=>new THREE.MeshStandardMaterial({color,roughness:.85,transparent:opacity<1,opacity,side:THREE.DoubleSide});
+    const darkMetal=material("#505b62",.5),rust=material("#a85d36"),wood=material("#8b6747");
+    const place=(mesh:any,x:number,y:number,z:number,id?:string)=>{
+      mesh.position.set(x,y,z);if(id)mesh.userData.inspectionId=id;scene.add(mesh);
+      if(id)inspectionMarkers.push(mesh);return mesh;
+    };
+    // Tank-yard leak: pipe joint, flange, drip and irregular liquid spill.
+    const leakX=12.5,leakZ=-20;
+    const pipe=place(new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,3.5,16),darkMetal),leakX,1.25,leakZ);
+    pipe.rotation.z=Math.PI/2;
+    place(new THREE.Mesh(new THREE.TorusGeometry(.34,.09,10,18),rust),leakX,1.25,leakZ,"leak").rotation.y=Math.PI/2;
+    const puddle=place(new THREE.Mesh(new THREE.CircleGeometry(1.7,24),hazardMaterial("#393e37",.85)),leakX,.18,leakZ+.65,"leak");
+    puddle.rotation.x=-Math.PI/2;puddle.scale.set(1.45,.72,1);
+    for(let i=0;i<5;i++)place(new THREE.Mesh(new THREE.SphereGeometry(.055+i*.008,8,8),hazardMaterial("#9aaf9b",.8)),leakX+.1,.55+i*.13,leakZ+.5);
+    // Hot-work violation: a workbench, welding point, sparks and nearby combustible drums.
+    const workX=-12.5,workZ=-5;
+    place(new THREE.Mesh(new THREE.BoxGeometry(2.4,.14,1.3),darkMetal),workX,1.1,workZ,"hotwork");
+    for(const dx of [-.95,.95])for(const dz of [-.45,.45])place(new THREE.Mesh(new THREE.BoxGeometry(.1,1.05,.1),darkMetal),workX+dx,.54,workZ+dz);
+    for(let i=0;i<12;i++){const spark=place(new THREE.Mesh(new THREE.SphereGeometry(.035+(i%3)*.012,6,6),hazardMaterial("#ffb22c")),workX+(i%5-2)*.19,1.2+(i%4)*.14,workZ+(i%3-1)*.15);spark.userData.spark=true;}
+    for(const dx of [-2.5,-1.8])place(new THREE.Mesh(new THREE.CylinderGeometry(.34,.34,1.05,12),rust),workX+dx,.57,workZ+1.6,"hotwork");
+    // Obstructed access: stacked timber pallets and shipping crates across the pedestrian apron.
+    const accessX=12.5,accessZ=47;
+    for(let layer=0;layer<3;layer++){
+      for(const dz of [-.65,0,.65])place(new THREE.Mesh(new THREE.BoxGeometry(2.8,.16,.47),wood),accessX,.27+layer*.25,accessZ+dz,"access");
+      for(const dx of [-1,0,1])place(new THREE.Mesh(new THREE.BoxGeometry(.24,.12,2.15),wood),accessX+dx,.14+layer*.25,accessZ,"access");
     }
+    place(new THREE.Mesh(new THREE.BoxGeometry(.95,.9,.85),material("#b59c78")),accessX+.7,1.2,accessZ,"access");
+    physicalBoxes.push(new THREE.Box3(new THREE.Vector3(accessX-1.5,.2,accessZ-1.4),new THREE.Vector3(accessX+1.5,1.9,accessZ+1.4)));
     const inspectRay=new THREE.Raycaster(),inspectPointer=new THREE.Vector2();let startX=0,startY=0;
     const inspect=(e:PointerEvent)=>{
       if(modeRef.current!=="walk"||Math.hypot(e.clientX-startX,e.clientY-startY)>12)return;
@@ -135,7 +160,7 @@ export default function RealModels({tr}:{tr:boolean}) {
       inspectPointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);
       inspectRay.setFromCamera(inspectPointer,camera);
       const hit=inspectRay.intersectObjects(inspectionMarkers)[0];
-      if(hit&&camera.position.distanceTo(hit.object.position)<15){setActiveInspection(hit.object.userData.inspectionId);setInspectionFeedback("");}
+      if(hit&&camera.position.distanceTo(hit.object.position)<10){setActiveInspection(hit.object.userData.inspectionId);setInspectionFeedback("");}
     };
     renderer.domElement.addEventListener("pointerup",inspect);
     // Movement is tested against imported geometry, not only the outer site bounds.
@@ -227,7 +252,7 @@ export default function RealModels({tr}:{tr:boolean}) {
    {controls.map(([label,key])=><button key={key} disabled={mode!=="walk"} onPointerDown={e=>{e.preventDefault();held.current.add(key)}} onPointerUp={()=>held.current.delete(key)} onPointerCancel={()=>held.current.delete(key)} onPointerLeave={()=>held.current.delete(key)} style={{padding:"12px 18px",border:0,borderRadius:9,background:mode==="walk"?"#176b82":"#364a55",color:"white",fontSize:19,touchAction:"none",cursor:"pointer"}}>{label}</button>)}
    <span style={{fontSize:13,color:"#b7cdd5"}}>{mode==="walk"?(tr?"WASD ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
   </div>
-  <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/3 · {tr?"Yürüme modunda turuncu işaretlere yaklaş ve dokun":"In walk mode approach and tap orange markers"}</p>
+  <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/3 · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
   {activeInspection&&<section style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}><h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>{inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{const current=inspections[activeInspection];if(i===current.correct){setCompletedInspections(prev=>prev.includes(activeInspection)?prev:[...prev,activeInspection]);setActiveInspection(null)}setInspectionFeedback((i===current.correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+current.explanation[tr?0:1])}} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}<button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button></section>}
   {inspectionFeedback&&<p role="status" style={{color:"#ffcf7d"}}>{inspectionFeedback}</p>}
   <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: burnedhrum · CC BY 4.0 · {loaded}/2 GLB</p>
