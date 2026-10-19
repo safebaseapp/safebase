@@ -421,7 +421,11 @@ export default function RealModels({tr}:{tr:boolean}) {
     renderer.domElement.addEventListener("pointerdown",pointerDown);renderer.domElement.addEventListener("pointerup",pointerUp);renderer.domElement.addEventListener("pointermove",pointerMove);
     let last=performance.now();
     const tick=(now:number)=>{
-      if(!active)return;const dt=Math.min(.05,(now-last)/1000);last=now;
+      if(!active)return;
+      // Keep the preview lightweight when its browser tab is not visible.
+      // Continue scheduling so rendering resumes automatically on return.
+      if(document.hidden){last=now;raf=requestAnimationFrame(tick);return;}
+      const dt=Math.min(.05,(now-last)/1000);last=now;
       if(modeRef.current==="overview"){
         const distance=145;camera.position.set(Math.sin(orbitAngle)*distance,66,Math.cos(orbitAngle)*distance);camera.lookAt(0,4,-8);
       }else{
@@ -465,8 +469,13 @@ export default function RealModels({tr}:{tr:boolean}) {
     };
     raf=requestAnimationFrame(tick);
     const resize=()=>{if(!host.clientWidth||!host.clientHeight)return;camera.aspect=host.clientWidth/host.clientHeight;camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight)};
+    // Window resize alone misses responsive parent/layout changes. Observe
+    // the actual canvas container so its aspect ratio stays accurate on mobile.
+    const sizeObserver=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
+    sizeObserver?.observe(host);
     window.addEventListener("resize",resize);
-    cleanup=()=>{window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointerup",inspect);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
+    resize();
+    cleanup=()=>{sizeObserver?.disconnect();window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointerup",inspect);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
    }catch(e){if(active)setStatus("3D error: "+String(e))}
   })();
   return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();held.current.clear()};
