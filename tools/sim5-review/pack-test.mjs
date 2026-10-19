@@ -76,13 +76,13 @@ try{
   check(`${lang}: lifting pad is off the road and beyond the factory plot`,placement.position[0]+12.85<-11.1&&placement.position[2]-8>30.5&&placement.hasWelder);
   await page.getByRole('button',{name:lang==='tr'?'Sahada yürü':'Walk site',exact:true}).click();await page.evaluate(()=>window.siteCamera.position.set(-17,1.8,47));
   const inspect=page.getByRole('button',{name:lang==='tr'?'🔍 Yakındaki tehlikeyi incele':'🔍 Inspect nearby hazard'});await inspect.waitFor();await inspect.click();
-  await page.getByRole('button',{name:lang==='tr'?'Borunun altından hızlıca geç':'Walk quickly under the pipe',exact:true}).click();await page.getByText(lang==='tr'?'Güvensiz seçim.':'Unsafe choice.',{exact:false}).waitFor();
-  check(`${lang}: unsafe suspended-load shortcut is rejected`,(await page.locator('body').innerText()).includes('0/4'));
-  await page.getByRole('button',{name:lang==='tr'?'Alan dışında kal, işaretçinin güvenli geçiş onayını bekle':'Stay outside and wait for the signaller to confirm safe access',exact:true}).click();await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
-  check(`${lang}: safe lifting decision is recorded once`,(await page.locator('body').innerText()).includes('1/4'));
+  await page.getByRole('button',{name:lang==='tr'?'Bariyer varken sapan ve işaretçi kontrolü gerekmez':'A barrier makes rigging and signaller checks unnecessary',exact:true}).click();await page.getByText(lang==='tr'?'Güvensiz seçim.':'Unsafe choice.',{exact:false}).waitFor();
+  check(`${lang}: unsafe assumption that barriers replace rigging checks is rejected`,(await page.locator('body').innerText()).includes('0/6'));
+  await page.getByRole('button',{name:lang==='tr'?'Kaldırma planı, sapanlar, zemin/ayaklar ve işaretçi iletişimi':'Lift plan, rigging, ground/outriggers and signaller communication',exact:true}).click();await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
+  check(`${lang}: safe lifting decision is recorded once`,(await page.locator('body').innerText()).includes('1/6'));
   await inspect.click();
-  await page.getByRole('button',{name:lang==='tr'?'Alan dışında kal, işaretçinin güvenli geçiş onayını bekle':'Stay outside and wait for the signaller to confirm safe access',exact:true}).click();
-  check(`${lang}: repeat lifting inspection cannot inflate progress`,(await page.locator('body').innerText()).includes('1/4'));
+  await page.getByRole('button',{name:lang==='tr'?'Kaldırma planı, sapanlar, zemin/ayaklar ve işaretçi iletişimi':'Lift plan, rigging, ground/outriggers and signaller communication',exact:true}).click();
+  check(`${lang}: repeat lifting inspection cannot inflate progress`,(await page.locator('body').innerText()).includes('1/6'));
   for(const hazard of [
    {position:[-22,1.8,-2],answer:['İşi durdur, izin ve gaz ölçümünü doğrula','Stop work and verify permit and gas testing']},
    {position:[22,1.8,-17],answer:['Alanı izole et, güvenli mesafeden bildir','Isolate the area and report from a safe distance']},
@@ -91,10 +91,10 @@ try{
    await page.evaluate(position=>window.siteCamera.position.fromArray(position),hazard.position);await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await inspect.click();
    await page.getByRole('button',{name:hazard.answer[lang==='tr'?0:1],exact:true}).click();await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
   }
-  check(`${lang}: existing three decisions and lifting finish together at 4/4`,(await page.locator('body').innerText()).includes('4/4'));
+  check(`${lang}: existing three decisions and lifting finish together at 4/6`,(await page.locator('body').innerText()).includes('4/6'));
   await page.evaluate(()=>window.siteCamera.position.set(-17,1.8,47));await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await inspect.click();
-  await page.getByRole('button',{name:lang==='tr'?'Alan dışında kal, işaretçinin güvenli geçiş onayını bekle':'Stay outside and wait for the signaller to confirm safe access',exact:true}).click();
-  await page.getByText(lang==='tr'?'Askıdaki yükün altına girilmez.':'Never enter beneath a suspended load.',{exact:false}).waitFor();
+  await page.getByRole('button',{name:lang==='tr'?'Kaldırma planı, sapanlar, zemin/ayaklar ve işaretçi iletişimi':'Lift plan, rigging, ground/outriggers and signaller communication',exact:true}).click();
+  await page.getByText(lang==='tr'?'Bariyer dışında kal.':'Remain outside the barrier.',{exact:false}).waitFor();
   for(const[name,position,target]of [['approach',[-12,6,33],[-27,4.8,47]],['rear',[-47,11,60],[-27,5,47]],['overview',[66,58,115],[-2,3,12]]]){
    await page.evaluate(({position,target})=>{window.reviewCamera={position,target};window.reviewFrameRequested=true;},{position,target});await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await page.screenshot({path:path.join(out,`pack-site-${lang}-${name}.png`)});
   }

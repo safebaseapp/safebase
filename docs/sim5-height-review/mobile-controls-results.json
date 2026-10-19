@@ -1,0 +1,548 @@
+{
+  "timestamp": "2026-10-19T10:34:22.959Z",
+  "checks": [
+    "yaw 0: d moves screen-right without turning",
+    "yaw 0: ArrowRight moves screen-right without turning",
+    "yaw 0: a moves screen-left without turning",
+    "yaw 0: ArrowLeft moves screen-left without turning",
+    "yaw 90: d moves screen-right without turning",
+    "yaw 90: ArrowRight moves screen-right without turning",
+    "yaw 90: a moves screen-left without turning",
+    "yaw 90: ArrowLeft moves screen-left without turning",
+    "yaw 180: d moves screen-right without turning",
+    "yaw 180: ArrowRight moves screen-right without turning",
+    "yaw 180: a moves screen-left without turning",
+    "yaw 180: ArrowLeft moves screen-left without turning",
+    "yaw 270: d moves screen-right without turning",
+    "yaw 270: ArrowRight moves screen-right without turning",
+    "yaw 270: a moves screen-left without turning",
+    "yaw 270: ArrowLeft moves screen-left without turning",
+    "reset clears held keyboard input and ignores stale auto-repeat",
+    "mode switch clears held input",
+    "blur clears held input",
+    "visibilitychange clears held input",
+    "releasing a pointer preserves the same held keyboard key",
+    "all input released stops movement",
+    "small-portrait: same models, vertex detail, colors, shadows and antialiasing as desktop",
+    "small-portrait: hold d moves in the labelled direction",
+    "small-portrait: releasing d stops",
+    "small-portrait: hold a moves in the labelled direction",
+    "small-portrait: releasing a stops",
+    "small-portrait: hold w moves in the labelled direction",
+    "small-portrait: releasing w stops",
+    "small-portrait: hold s moves in the labelled direction",
+    "small-portrait: releasing s stops",
+    "small-portrait: native touch cancel stops movement",
+    "small-portrait: lost capture stops movement",
+    "small-portrait: native canvas drag changes viewing direction",
+    "small-portrait: two fingers can walk and look together",
+    "small-portrait: releasing movement finger keeps camera drag active without walking",
+    "small-portrait: no horizontal overflow or clipped controls",
+    "small-portrait: inspect and D-pad do not overlap and remain in viewport",
+    "small-portrait: touch inspect opens the correct lifting hazard",
+    "small-portrait: keyboard inspection still works after touch",
+    "small-portrait: rotating viewport clears active input",
+    "portrait: same models, vertex detail, colors, shadows and antialiasing as desktop",
+    "portrait: hold d moves in the labelled direction",
+    "portrait: releasing d stops",
+    "portrait: hold a moves in the labelled direction",
+    "portrait: releasing a stops",
+    "portrait: hold w moves in the labelled direction",
+    "portrait: releasing w stops",
+    "portrait: hold s moves in the labelled direction",
+    "portrait: releasing s stops",
+    "portrait: native touch cancel stops movement",
+    "portrait: lost capture stops movement",
+    "portrait: native canvas drag changes viewing direction",
+    "portrait: two fingers can walk and look together",
+    "portrait: releasing movement finger keeps camera drag active without walking",
+    "portrait: no horizontal overflow or clipped controls",
+    "portrait: inspect and D-pad do not overlap and remain in viewport",
+    "portrait: touch inspect opens the correct lifting hazard",
+    "portrait: keyboard inspection still works after touch",
+    "portrait: rotating viewport clears active input",
+    "landscape: same models, vertex detail, colors, shadows and antialiasing as desktop",
+    "landscape: hold d moves in the labelled direction",
+    "landscape: releasing d stops",
+    "landscape: hold a moves in the labelled direction",
+    "landscape: releasing a stops",
+    "landscape: hold w moves in the labelled direction",
+    "landscape: releasing w stops",
+    "landscape: hold s moves in the labelled direction",
+    "landscape: releasing s stops",
+    "landscape: native touch cancel stops movement",
+    "landscape: lost capture stops movement",
+    "landscape: native canvas drag changes viewing direction",
+    "landscape: two fingers can walk and look together",
+    "landscape: releasing movement finger keeps camera drag active without walking",
+    "landscape: no horizontal overflow or clipped controls",
+    "landscape: inspect and D-pad do not overlap and remain in viewport",
+    "landscape: touch inspect opens the correct lifting hazard",
+    "landscape: keyboard inspection still works after touch",
+    "landscape: rotating viewport clears active input",
+    "no browser page errors"
+  ],
+  "layouts": [
+    {
+      "name": "small-portrait",
+      "viewport": [
+        320,
+        568
+      ],
+      "scrollWidth": 320,
+      "canvas": {
+        "x": 24,
+        "y": 199,
+        "width": 272,
+        "height": 369,
+        "right": 296,
+        "bottom": 568
+      },
+      "pad": {
+        "x": 32,
+        "y": 464.1875,
+        "width": 146,
+        "height": 96,
+        "right": 178,
+        "bottom": 560.1875
+      },
+      "inspect": {
+        "x": 161.859375,
+        "y": 207,
+        "width": 126.140625,
+        "height": 34,
+        "right": 288,
+        "bottom": 241
+      },
+      "buttons": [
+        {
+          "x": 82,
+          "right": 128,
+          "width": 46,
+          "height": 46
+        },
+        {
+          "x": 32,
+          "right": 78,
+          "width": 46,
+          "height": 46
+        },
+        {
+          "x": 82,
+          "right": 128,
+          "width": 46,
+          "height": 46
+        },
+        {
+          "x": 132,
+          "right": 178,
+          "width": 46,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "name": "portrait",
+      "viewport": [
+        390,
+        844
+      ],
+      "scrollWidth": 390,
+      "canvas": {
+        "x": 24,
+        "y": 184,
+        "width": 342,
+        "height": 549,
+        "right": 366,
+        "bottom": 733
+      },
+      "pad": {
+        "x": 32,
+        "y": 628.59375,
+        "width": 146,
+        "height": 96,
+        "right": 178,
+        "bottom": 724.59375
+      },
+      "inspect": {
+        "x": 235.65625,
+        "y": 192,
+        "width": 122.34375,
+        "height": 34,
+        "right": 358,
+        "bottom": 226
+      },
+      "buttons": [
+        {
+          "x": 82,
+          "right": 128,
+          "width": 46,
+          "height": 46
+        },
+        {
+          "x": 32,
+          "right": 78,
+          "width": 46,
+          "height": 46
+        },
+        {
+          "x": 82,
+          "right": 128,
+          "width": 46,
+          "height": 46
+        },
+        {
+          "x": 132,
+          "right": 178,
+          "width": 46,
+          "height": 46
+        }
+      ]
+    },
+    {
+      "name": "landscape",
+      "viewport": [
+        844,
+        390
+      ],
+      "scrollWidth": 844,
+      "canvas": {
+        "x": 24,
+        "y": 117,
+        "width": 796,
+        "height": 273,
+        "right": 820,
+        "bottom": 390
+      },
+      "pad": {
+        "x": 32,
+        "y": 290,
+        "width": 140,
+        "height": 92,
+        "right": 172,
+        "bottom": 382
+      },
+      "inspect": {
+        "x": 638.484375,
+        "y": 129,
+        "width": 169.515625,
+        "height": 44,
+        "right": 808,
+        "bottom": 173
+      },
+      "buttons": [
+        {
+          "x": 80,
+          "right": 124,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "x": 32,
+          "right": 76,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "x": 80,
+          "right": 124,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "x": 128,
+          "right": 172,
+          "width": 44,
+          "height": 44
+        }
+      ]
+    }
+  ],
+  "quality": [
+    {
+      "device": "desktop",
+      "meshCount": 1037,
+      "vertices": 1765538,
+      "pixelRatio": 1.8,
+      "antialias": true,
+      "toneMapping": 4,
+      "exposure": 0.96,
+      "shadows": true,
+      "shadowType": 2,
+      "shadowResolution": [
+        2048,
+        2048
+      ],
+      "materials": [
+        {
+          "name": "Object_19",
+          "color": "a8bfdc",
+          "roughness": 0.91,
+          "map": true
+        },
+        {
+          "name": "Object_27",
+          "color": "c6a48b",
+          "roughness": 0.88,
+          "map": true
+        },
+        {
+          "name": "Object_12",
+          "color": "e9e3d0",
+          "roughness": 0.68,
+          "map": true
+        },
+        {
+          "name": "Object_10",
+          "color": "ccb49c",
+          "roughness": 0.86,
+          "map": true
+        }
+      ],
+      "parts": [
+        {
+          "name": "sim5-welding-operation",
+          "present": true
+        },
+        {
+          "name": "sim5-lifting-operation",
+          "present": true
+        },
+        {
+          "name": "extinguisher-body",
+          "present": true
+        },
+        {
+          "name": "basket-sling",
+          "present": true
+        },
+        {
+          "name": "lifted-pipe",
+          "present": true
+        },
+        {
+          "name": "face-shield",
+          "present": true
+        },
+        {
+          "name": "torch-lead",
+          "present": true
+        }
+      ]
+    },
+    {
+      "device": "small-portrait",
+      "meshCount": 1037,
+      "vertices": 1765538,
+      "pixelRatio": 1.8,
+      "antialias": true,
+      "toneMapping": 4,
+      "exposure": 0.96,
+      "shadows": true,
+      "shadowType": 2,
+      "shadowResolution": [
+        2048,
+        2048
+      ],
+      "materials": [
+        {
+          "name": "Object_19",
+          "color": "a8bfdc",
+          "roughness": 0.91,
+          "map": true
+        },
+        {
+          "name": "Object_27",
+          "color": "c6a48b",
+          "roughness": 0.88,
+          "map": true
+        },
+        {
+          "name": "Object_12",
+          "color": "e9e3d0",
+          "roughness": 0.68,
+          "map": true
+        },
+        {
+          "name": "Object_10",
+          "color": "ccb49c",
+          "roughness": 0.86,
+          "map": true
+        }
+      ],
+      "parts": [
+        {
+          "name": "sim5-welding-operation",
+          "present": true
+        },
+        {
+          "name": "sim5-lifting-operation",
+          "present": true
+        },
+        {
+          "name": "extinguisher-body",
+          "present": true
+        },
+        {
+          "name": "basket-sling",
+          "present": true
+        },
+        {
+          "name": "lifted-pipe",
+          "present": true
+        },
+        {
+          "name": "face-shield",
+          "present": true
+        },
+        {
+          "name": "torch-lead",
+          "present": true
+        }
+      ]
+    },
+    {
+      "device": "portrait",
+      "meshCount": 1037,
+      "vertices": 1765538,
+      "pixelRatio": 1.8,
+      "antialias": true,
+      "toneMapping": 4,
+      "exposure": 0.96,
+      "shadows": true,
+      "shadowType": 2,
+      "shadowResolution": [
+        2048,
+        2048
+      ],
+      "materials": [
+        {
+          "name": "Object_19",
+          "color": "a8bfdc",
+          "roughness": 0.91,
+          "map": true
+        },
+        {
+          "name": "Object_27",
+          "color": "c6a48b",
+          "roughness": 0.88,
+          "map": true
+        },
+        {
+          "name": "Object_12",
+          "color": "e9e3d0",
+          "roughness": 0.68,
+          "map": true
+        },
+        {
+          "name": "Object_10",
+          "color": "ccb49c",
+          "roughness": 0.86,
+          "map": true
+        }
+      ],
+      "parts": [
+        {
+          "name": "sim5-welding-operation",
+          "present": true
+        },
+        {
+          "name": "sim5-lifting-operation",
+          "present": true
+        },
+        {
+          "name": "extinguisher-body",
+          "present": true
+        },
+        {
+          "name": "basket-sling",
+          "present": true
+        },
+        {
+          "name": "lifted-pipe",
+          "present": true
+        },
+        {
+          "name": "face-shield",
+          "present": true
+        },
+        {
+          "name": "torch-lead",
+          "present": true
+        }
+      ]
+    },
+    {
+      "device": "landscape",
+      "meshCount": 1037,
+      "vertices": 1765538,
+      "pixelRatio": 1.8,
+      "antialias": true,
+      "toneMapping": 4,
+      "exposure": 0.96,
+      "shadows": true,
+      "shadowType": 2,
+      "shadowResolution": [
+        2048,
+        2048
+      ],
+      "materials": [
+        {
+          "name": "Object_19",
+          "color": "a8bfdc",
+          "roughness": 0.91,
+          "map": true
+        },
+        {
+          "name": "Object_27",
+          "color": "c6a48b",
+          "roughness": 0.88,
+          "map": true
+        },
+        {
+          "name": "Object_12",
+          "color": "e9e3d0",
+          "roughness": 0.68,
+          "map": true
+        },
+        {
+          "name": "Object_10",
+          "color": "ccb49c",
+          "roughness": 0.86,
+          "map": true
+        }
+      ],
+      "parts": [
+        {
+          "name": "sim5-welding-operation",
+          "present": true
+        },
+        {
+          "name": "sim5-lifting-operation",
+          "present": true
+        },
+        {
+          "name": "extinguisher-body",
+          "present": true
+        },
+        {
+          "name": "basket-sling",
+          "present": true
+        },
+        {
+          "name": "lifted-pipe",
+          "present": true
+        },
+        {
+          "name": "face-shield",
+          "present": true
+        },
+        {
+          "name": "torch-lead",
+          "present": true
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

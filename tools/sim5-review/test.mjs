@@ -82,7 +82,7 @@ try{
   await page.getByRole('button',{name:lang==='tr'?'İşi durdur, izin ve gaz ölçümünü doğrula':'Stop work and verify permit and gas testing',exact:true}).click();
   await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
   const body=await page.locator('body').innerText();
-  check(`${lang}: incorrect hot-work choice rejected and correct choice recorded`,body.includes('1/4'));
+  check(`${lang}: incorrect hot-work choice rejected and correct choice recorded`,body.includes('1/6'));
   check(`${lang}: both industrial assets loaded`,body.includes('2/2'));
   await page.evaluate(()=>{window.reviewCamera={position:[-18.6,2.8,-9.6],target:[-22.3,1,-4.65]};window.reviewFrameRequested=true;});
   await page.waitForFunction(()=>!!window.siteCamera);
@@ -102,7 +102,7 @@ try{
    await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
    checks.push(`${lang}: ${hazard.name} unsafe choice rejected and safe choice accepted`);
   }
-  check(`${lang}: all three HSE decisions completed`,(await page.locator('body').innerText()).includes('3/4'));
+  check(`${lang}: all three HSE decisions completed`,(await page.locator('body').innerText()).includes('3/6'));
  }
  assert.deepEqual(errors,[],'Browser errors');assert.deepEqual(requests,[],'Isolated review unexpectedly used external network');
  checks.push('no browser errors or external network requests');

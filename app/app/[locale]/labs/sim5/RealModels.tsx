@@ -1,7 +1,13 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any -- Three is loaded by the pinned runtime module, as in the operation modules. */
 import { useCallback, useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent } from "react";
 import { createWeldingOperation } from "./WeldingOperation";
 import { createLiftingOperation } from "./LiftingOperation";
+import { createSiteNavigation } from "./SiteNavigation";
+import { siteInspections, canInspectAt } from "./SiteInspections";
+import { addUpperEvidence, createSignaller, addFireWatchStation } from "./SiteEvidence";
+
+const inspections=siteInspections;
 
 export default function RealModels({tr}:{tr:boolean}) {
  const mount=useRef<HTMLDivElement>(null);
@@ -20,6 +26,7 @@ export default function RealModels({tr}:{tr:boolean}) {
  const [nearbyHazard,setNearbyHazard]=useState<string|null>(null);
  const nearbyRef=useRef<string|null>(null);
  const inspectNearby=useRef<()=>void>(()=>{});
+ const inspectionAvailable=useRef<(id:string)=>boolean>(()=>false);
  const inspectPress=useRef<{id:number;x:number;y:number}|null>(null);
  const touchInspection=useRef(false);
  const beginInspection=(e:ReactPointerEvent<HTMLButtonElement>)=>{
@@ -33,12 +40,8 @@ export default function RealModels({tr}:{tr:boolean}) {
  const clickInspection=(e:ReactMouseEvent<HTMLButtonElement>)=>{if(e.detail===0||!touchInspection.current)inspectNearby.current()};
  const cancelInspection=()=>{inspectPress.current=null};
  const inspectionEvents={onPointerDown:beginInspection,onPointerUp:finishInspection,onPointerCancel:cancelInspection,onLostPointerCapture:cancelInspection,onClick:clickInspection};
- const inspections:Record<string,{question:[string,string],answers:[[string,string],[string,string]],correct:number,explanation:[string,string]}>= {
-  leak:{question:["Tank sahasında şüpheli sızıntı var. İlk adım?","Suspected tank-yard leak. First action?"],answers:[["Alanı izole et, güvenli mesafeden bildir","Isolate the area and report from a safe distance"],["Sızıntının kaynağına yaklaş","Approach the leak source"]],correct:0,explanation:["Bilinmeyen sızıntıya yaklaşma; acil müdahale prosedürünü başlat.","Do not approach an unknown release; initiate the emergency response procedure."]},
-  hotwork:{question:["Sıcak çalışma öncesi yanıcı atmosfer ihtimali var. Ne yaparsın?","Potential flammable atmosphere before hot work. What do you do?"],answers:[["Yangın söndürücü ile işe başla","Start with a fire extinguisher"],["İşi durdur, izin ve gaz ölçümünü doğrula","Stop work and verify permit and gas testing"]],correct:1,explanation:["Çalışma izni, atmosfer testi ve yangın gözcüsü kontrol edilmeli.","Verify the permit, atmosphere testing and fire watch."]},
-  lifting:{question:["Askıdaki borunun yanından geçmen gerekiyor. Ne yaparsın?","You need to pass the suspended pipe. What do you do?"],answers:[["Borunun altından hızlıca geç","Walk quickly under the pipe"],["Alan dışında kal, işaretçinin güvenli geçiş onayını bekle","Stay outside and wait for the signaller to confirm safe access"]],correct:1,explanation:["Askıdaki yükün altına girilmez. Güvenlik alanını, sapanları ve işaretçi koordinasyonunu doğrula.","Never enter beneath a suspended load. Verify the exclusion zone, rigging and signaller coordination."]},
-  access:{question:["Acil çıkış güzergâhı engellenmiş. Ne yaparsın?","An emergency route is obstructed. What do you do?"],answers:[["Engeli güvenle kaldırttır ve erişimi doğrula","Arrange safe removal and verify access"],["Vardiya sonunu bekle","Wait until the end of the shift"]],correct:0,explanation:["Acil kaçış yolları sürekli açık tutulmalıdır.","Emergency escape routes must remain clear."]}
- };
+ const inspectionRecords=Object.fromEntries(Object.entries(inspections).map(([id,h])=>[id,{...h,completed:completedInspections.includes(id)}]));
+ const [discovered,setDiscovered]=useState<string[]>([]);
  const [mode,setMode]=useState<"walk"|"overview">("overview");
  const modeRef=useRef<"walk"|"overview">("overview");
  const switchMode=(m:"walk"|"overview")=>{clearInput();modeRef.current=m;setMode(m);reset.current()};
@@ -114,13 +117,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     // Equipment yards are level, without invented columns or elevated foundations.
     const colliders:any[]=[];
     const colliderBoxes:any[]=[];
-    const collisionRay=new THREE.Raycaster();
     const physicalBoxes:any[]=[];
-    // Prevent walking through roadside posts and barriers without blocking marked gates.
-    const solid=(x:number,y:number,z:number,w:number,h:number,d:number,m:any)=>{
-      box(x,y,z,w,h,d,m);
-      physicalBoxes.push(new THREE.Box3(new THREE.Vector3(x-w/2,y-h/2,z-d/2),new THREE.Vector3(x+w/2,y+h/2,z+d/2)));
-    };
     // Guardrails on both sides of the service road, leaving designated access gaps.
     for(const side of [-1,1])for(let z=-48;z<99;z+=12){
       if((z>=-18&&z<=6)||(z>=42&&z<=66))continue;
@@ -151,7 +148,7 @@ export default function RealModels({tr}:{tr:boolean}) {
         if(!child.isMesh)return;
         child.castShadow=true;child.receiveShadow=true;
         const bounds=new THREE.Box3().setFromObject(child);
-        if(bounds.isEmpty()||bounds.max.y<.25||bounds.min.y>2.7)return;
+        if(bounds.isEmpty()||bounds.max.y<.25)return;
         colliders.push(child);colliderBoxes.push(bounds);
       });
     };
@@ -161,7 +158,6 @@ export default function RealModels({tr}:{tr:boolean}) {
     if(active){const count=results.filter(r=>r.status==="fulfilled").length;setLoaded(count);setStatus(count===2?(tr?"Gerçek tesis hazır · 2/2 model":"Industrial site ready · 2/2 models"):(tr?`Model yükleme: ${count}/2 — dosya bağlantısını kontrol et`:`Model loading: ${count}/2 — check asset links`))}
     // Visible site conditions replace the oversized interaction spheres.
     const inspectionMarkers:any[]=[];
-    const hazardMaterial=(color:string,opacity=1)=>new THREE.MeshStandardMaterial({color,roughness:.85,transparent:opacity<1,opacity,side:THREE.DoubleSide});
     const darkMetal=material("#505b62",.5),rust=material("#a85d36"),wood=material("#8b6747");
     const place=(mesh:any,x:number,y:number,z:number,id?:string)=>{
       mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;if(id)mesh.userData.inspectionId=id;scene.add(mesh);
@@ -195,7 +191,7 @@ export default function RealModels({tr}:{tr:boolean}) {
       box(leakX+dx,.68,leakZ,.15,1.15,.17,darkMetal);
       box(leakX+dx,.17,leakZ,.65,.13,.7,darkMetal);
     }
-    const valve=place(new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.45,12),darkMetal),leakX+.9,1.55,leakZ);
+    place(new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.45,12),darkMetal),leakX+.9,1.55,leakZ);
     place(new THREE.Mesh(new THREE.TorusGeometry(.3,.035,8,24),material("#b3472f",.35)),leakX+.9,1.83,leakZ).rotation.x=Math.PI/2;
     for(let i=0;i<8;i++){const a=i*Math.PI/4;place(new THREE.Mesh(new THREE.SphereGeometry(.045,7,6),material("#aeb6b3",.6)),leakX,1.25+Math.cos(a)*.31,leakZ+Math.sin(a)*.31)}
     place(new THREE.Mesh(new THREE.TorusGeometry(.34,.09,10,18),rust),leakX,1.25,leakZ,"leak").rotation.y=Math.PI/2;
@@ -230,6 +226,7 @@ export default function RealModels({tr}:{tr:boolean}) {
       weldingOperation=createWeldingOperation(THREE,gltf.scene,tr);
       weldingOperation.group.position.add(new THREE.Vector3(workX,.06,workZ));
       scene.add(weldingOperation.group);
+      scene.add(createSignaller(THREE,gltf.scene));
       weldingOperation.group.updateMatrixWorld(true);
       weldingOperation.group.traverse((obj:{isMesh?:boolean;name:string;userData:{part?:string}})=>{
         if(!obj.isMesh)return;
@@ -256,7 +253,6 @@ export default function RealModels({tr}:{tr:boolean}) {
         colliders.push(obj);colliderBoxes.push(new THREE.Box3().setFromObject(obj));
       }
     });
-    const liftingPoint=liftingOperation.inspectionPoint.clone().add(new THREE.Vector3(liftingX,0,liftingZ));
     // Combustibles remain an intentional hot-work HSE decision, independent
     // of the corrected operator, protective equipment and electrical circuit.
     for(const dx of [-2.4,-1.8]){
@@ -293,6 +289,17 @@ export default function RealModels({tr}:{tr:boolean}) {
     }
     place(new THREE.Mesh(new THREE.BoxGeometry(.95,.9,.85),material("#b59c78")),accessX+.7,1.2,accessZ,"access");
     physicalBoxes.push(new THREE.Box3(new THREE.Vector3(accessX-1.5,.2,accessZ-1.4),new THREE.Vector3(accessX+1.5,1.9,accessZ+1.4)));
+    physicalBoxes.push(new THREE.Box3(new THREE.Vector3(-36.2,0,40.8),new THREE.Vector3(-18.8,15,53.2)));
+    box(-17.5,.02,56,3,.08,3,walkway);
+    addUpperEvidence(THREE,scene,inspectionMarkers);
+    addFireWatchStation(THREE,scene,tr);
+    const sightRay=new THREE.Raycaster();
+    const available=(id:string)=>{
+      const h=inspections[id];if(modeRef.current!=="walk"||!h||!canInspectAt(h,camera.position))return false;
+      const direction=new THREE.Vector3(...h.location).sub(camera.position),distance=direction.length();
+      sightRay.set(camera.position,direction.normalize());sightRay.near=.1;sightRay.far=Math.max(.1,distance-.15);
+      return !sightRay.intersectObjects(colliders,false).some((hit:any)=>hit.object.userData.inspectionId!==id);
+    };
     const inspectRay=new THREE.Raycaster(),inspectPointer=new THREE.Vector2();let startX=0,startY=0;
     const inspect=(e:PointerEvent)=>{
       if(modeRef.current!=="walk"||Math.hypot(e.clientX-startX,e.clientY-startY)>12)return;
@@ -304,42 +311,37 @@ export default function RealModels({tr}:{tr:boolean}) {
       if(hit){
         const worldHit=hit.point;
         const targetId=hit.object.userData.inspectionId;
-        if(targetId&&camera.position.distanceTo(worldHit)<10){
+        if(targetId&&available(targetId)&&camera.position.distanceTo(worldHit)<10){
           setActiveInspection(targetId);setInspectionFeedback("");
         }
       }
     };
     renderer.domElement.addEventListener("pointerup",inspect);
-    inspectNearby.current=()=>{const id=nearbyRef.current;if(id){setActiveInspection(id);setInspectionFeedback("")}};
-    // Movement is tested against imported geometry, not only the outer site bounds.
-    const canStep=(next:any,previous:any)=>{
-      const delta=next.clone().sub(previous);delta.y=0;
-      const distance=delta.length();if(distance<.00001)return true;
-      const direction=delta.normalize();
-      const reach=distance+.48;
-      const capsule=new THREE.Box3(new THREE.Vector3(next.x-.43,.22,next.z-.43),new THREE.Vector3(next.x+.43,1.83,next.z+.43));
-      if(physicalBoxes.some(b=>b.intersectsBox(capsule)))return false;
-      const near:any[]=[];
-      for(let i=0;i<colliders.length;i++){
-        const b=colliderBoxes[i];
-        if(b.max.x<Math.min(next.x,previous.x)-.7||b.min.x>Math.max(next.x,previous.x)+.7||
-           b.max.z<Math.min(next.z,previous.z)-.7||b.min.z>Math.max(next.z,previous.z)+.7)continue;
-        near.push(colliders[i]);
-      }
-      if(!near.length)return true;
-      for(const height of [.45,1.15,1.75]){
-        collisionRay.set(new THREE.Vector3(previous.x,height,previous.z),direction);
-        collisionRay.near=0;collisionRay.far=reach;
-        if(collisionRay.intersectObjects(near,false).length)return false;
-      }
-      return true;
-    };
+    inspectionAvailable.current=available;
+    inspectNearby.current=()=>{const id=nearbyRef.current;if(id&&available(id)){setActiveInspection(id);setInspectionFeedback("")}};
+    box(63.3,.125,-16.1,1.05,.25,1.5,walkway);
+    // Close the measured 8 cm seam between the two authored stair landings.
+    box(63.3,5.115,-21.95,.83,.08,.5,darkMetal);
+    // The upper landing has a second measured seam at X=62.8.
+    box(62.8,9.81,-26.65,.48,.08,.83,darkMetal);
+    // Positive walking deck over the authored inter-tank service bridge.
+    // Tank crowns support the ends; two longitudinal beams carry the span.
+    box(51.35,11.17,-26.65,7.9,.08,.86,darkMetal);
+    for(const z of [-27.1,-26.2]){
+      physicalBoxes.push(new THREE.Box3(new THREE.Vector3(47.5,11.21,z-.04),new THREE.Vector3(55.2,12.35,z+.04)));
+      box(51.35,11.02,z,7.9,.25,.12,darkMetal);
+      for(const h of [11.77,12.32])box(51.35,h,z,7.7,.055,.055,fence);
+      box(51.35,11.29,z,7.7,.15,.025,darkMetal);
+      for(let x=47.5;x<55.3;x+=1.45)box(x,11.77,z,.055,1.1,.055,fence);
+    }
+    const navigation=createSiteNavigation(THREE,scene,colliders,colliderBoxes,physicalBoxes);
+    const canStep=navigation.step;
     let yaw=Math.PI,pitch=-.13,drag=false,px=0,py=0,orbitAngle=.5;
     let dragPointer:number|null=null;
     const setCamera=()=>{
-      clearInput();drag=false;dragPointer=null;
+      clearInput();drag=false;dragPointer=null;navigation.reset();setActiveInspection(null);
       if(modeRef.current==="overview"){camera.position.set(104,68,123);camera.lookAt(0,4,-8)}
-      else {camera.position.set(-18,1.8,10);yaw=Math.PI;pitch=-.06;camera.lookAt(-18,1.8,-20)}
+      else {camera.position.set(0,1.8,90);yaw=Math.PI;pitch=-.06;camera.lookAt(0,1.8,60)}
     };
     reset.current=setCamera;setCamera();
     const isTyping=(target:EventTarget|null)=>target instanceof HTMLElement&&!!target.closest("input,textarea,select,[contenteditable='true']");
@@ -385,7 +387,7 @@ export default function RealModels({tr}:{tr:boolean}) {
         if(held.current.has("a")||held.current.has("arrowleft"))move.sub(right);
         if(held.current.has("d")||held.current.has("arrowright"))move.add(right);
         if(move.lengthSq()>0){
-          move.normalize().multiplyScalar(dt*7);
+          move.normalize().multiplyScalar(dt*(navigation.feet>.35?2:7));
           // Separate axes permit sliding along tank walls and pipework.
           const xNext=camera.position.clone();xNext.x+=move.x;
           if(canStep(xNext,camera.position))camera.position.x=xNext.x;
@@ -394,14 +396,13 @@ export default function RealModels({tr}:{tr:boolean}) {
         }
         camera.position.x=Math.max(-80,Math.min(80,camera.position.x));
         camera.position.z=Math.max(-62,Math.min(115,camera.position.z));
-        camera.position.y=1.8;
+        navigation.update(camera,dt);
         camera.lookAt(camera.position.clone().add(new THREE.Vector3(Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch))));
       }
       if(modeRef.current==="walk"){
-        const hazards:[string,number,number][]=[["hotwork",workX,workZ],["leak",leakX,leakZ],["access",accessX,accessZ],["lifting",liftingPoint.x,liftingPoint.z]];
-        const closest=hazards.map(([id,x,z])=>({id,d:Math.hypot(camera.position.x-x,camera.position.z-z)})).sort((a,b)=>a.d-b.d)[0];
-        const next=closest?.d<7?closest.id:null;
-        if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next)}
+        const closest=Object.values(inspections).filter(h=>available(h.id)).sort((a,b)=>camera.position.distanceTo(new THREE.Vector3(...a.location))-camera.position.distanceTo(new THREE.Vector3(...b.location)))[0];
+        const next=closest?.id||null;
+        if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next);if(next)setDiscovered(prev=>prev.includes(next)?prev:[...prev,next])}
       }else if(nearbyRef.current){nearbyRef.current=null;setNearbyHazard(null)}
       // Staggered gravity-like drops: origin at flange, landing at the puddle.
       for(let i=0;i<leakDrops.length;i++){
@@ -448,6 +449,7 @@ export default function RealModels({tr}:{tr:boolean}) {
  const releaseKey=(e:ReactPointerEvent<HTMLButtonElement>)=>{releasePointer(e.pointerId)};
  return <>
   <style>{`
+   .sim5-inspection button{box-sizing:border-box;min-height:44px}
    .sim5-stage{position:relative;width:100%;min-width:0;isolation:isolate}
    .sim5-canvas{height:min(72vh,750px);min-height:380px}
    .sim5-touch-dpad,.sim5-touch-inspect{display:none}
@@ -487,6 +489,7 @@ export default function RealModels({tr}:{tr:boolean}) {
      <button onClick={()=>{clearInput();reset.current()}} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sıfırla":"Reset"}</button>
     </div>
    </div>
+   <p style={{color:"#c4dce3",fontSize:14}}>{tr?"Saha brifingi: İşaretli geçişleri kullan. Aktif kaldırma alanına girme. Görünür kanıtları yaklaşarak incele; tank merdivenleri üst servis yoluna çıkar. Üst seviyeyi de araştır.":"Site briefing: Use marked access routes. Stay outside the active lifting zone. Approach visible evidence to inspect it; the tank stairs lead to the upper service walkway. Explore both levels."}</p>
    <div className="sim5-stage">
     <div ref={mount} className="sim5-canvas" style={{width:"100%",borderRadius:14,overflow:"hidden",background:"#91b1c5",touchAction:"none"}}/>
     {mode==="walk"&&<div className="sim5-touch-dpad" role="group" aria-label={tr?"Hareket kontrolleri":"Movement controls"}>
@@ -507,9 +510,11 @@ export default function RealModels({tr}:{tr:boolean}) {
    </div>
   {mode==="walk"&&nearbyHazard&&<button {...inspectionEvents} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
   <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(inspections).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
-  {activeInspection&&<section style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}><h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>{inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{const current=inspections[activeInspection];if(i===current.correct){setCompletedInspections(prev=>prev.includes(activeInspection)?prev:[...prev,activeInspection]);setActiveInspection(null)}setInspectionFeedback((i===current.correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+current.explanation[tr?0:1])}} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}<button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button></section>}
+  {discovered.length>0&&<ul style={{color:"#c4dce3"}} aria-label={tr?"Bulunan uygunsuzluklar":"Discovered findings"}>{discovered.map(id=><li key={id}>{inspectionRecords[id].completed?"✓ ":"○ "}{inspections[id].visibleEvidence[tr?0:1]}</li>)}</ul>}
+  {completedInspections.length===Object.keys(inspections).length&&<p role="status" style={{color:"#a3efbc"}}>{tr?"Saha incelemesi tamamlandı. Alt ve üst seviyedeki tüm riskler için güvenli kontroller seçildi.":"Site inspection complete. Safe controls selected for all ground and upper-level findings."}</p>}
+  {activeInspection&&<section className="sim5-inspection" style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}><h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>{inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{if(!inspectionAvailable.current(activeInspection)){setActiveInspection(null);setInspectionFeedback(tr?"İnceleme noktasına güvenli seviyeden yaklaş.":"Approach the inspection point at its accessible level.");return;}const current=inspections[activeInspection];if(i===current.correct){setCompletedInspections(prev=>prev.includes(activeInspection)?prev:[...prev,activeInspection]);setActiveInspection(null)}setInspectionFeedback((i===current.correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+current.explanation[tr?0:1])}} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}<button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button></section>}
   {inspectionFeedback&&<p role="status" style={{color:"#ffcf7d"}}>{inspectionFeedback}</p>}
-  <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: burnedhrum · Welder: grewe.juergen · CC BY 4.0 · {loaded}/2 GLB</p>
+  <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: Duane’s Mind (Sketchfab) · Welder: grewe.juergen · CC BY 4.0 · {loaded}/2 GLB</p>
   </section>
  </>;
 }
