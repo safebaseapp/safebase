@@ -13,7 +13,7 @@ export class WebGLRenderer extends Renderer {
    window.reviewFrameRequested=false;window.renderedOnce=true;
    let view=camera;
    if(window.reviewCamera){view=camera.clone();view.position.fromArray(window.reviewCamera.position);view.lookAt(...window.reviewCamera.target);}
-   const started=performance.now();render(scene,view);if(window.reviewContinuous){this.getContext().finish();(window.reviewRenderTimes||=[]).push(performance.now()-started);}window.reviewFrameCount=(window.reviewFrameCount||0)+1;
+   const started=performance.now();render(scene,view);window.reviewCapturedArc={visible:scene.getObjectByName('weld-arc')?.visible,light:scene.getObjectByName('weld-light')?.intensity};if(window.reviewContinuous){this.getContext().finish();(window.reviewRenderTimes||=[]).push(performance.now()-started);}window.reviewFrameCount=(window.reviewFrameCount||0)+1;
   };
  }
 }

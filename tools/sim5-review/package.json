@@ -13,7 +13,10 @@
     "render:site": "node render-site.mjs",
     "inspect:site": "node site-geometry.mjs",
     "test:runtime": "node performance-test.mjs",
-    "test:navigation": "node navigation-test.mjs"
+    "test:navigation": "node navigation-test.mjs",
+    "test:mission": "node mission-suite.mjs",
+    "test:mission:state": "node mission-state-test.mjs",
+    "test:mission:browser": "node mission-browser-test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.25.12",

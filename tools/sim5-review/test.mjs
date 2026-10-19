@@ -1,3 +1,4 @@
+import {startMission,lookAtInspection,resumeMission} from './mission-test-support.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -73,8 +74,9 @@ try{
   await page.waitForFunction(()=>window.siteScene?.getObjectByName('sim5-welding-operation'),null,{timeout:120000});
   const site=await page.evaluate(()=>({meshes:window.siteScene.children.length,station:!!window.siteScene.getObjectByName('sim5-welding-operation')}));
   check(`${lang}: actual site component includes welding operation`,site.station&&site.meshes>100);
-  await page.getByRole('button',{name:lang==='tr'?'Sahada yürü':'Walk site',exact:true}).click();
+  await startMission(page,lang);await page.getByRole('button',{name:lang==='tr'?'Sahada yürü':'Walk site',exact:true}).click();
   await page.evaluate(()=>window.siteCamera.position.set(-22,1.8,-2));
+  await lookAtInspection(page,'hotwork');
   const inspect=page.getByRole('button',{name:lang==='tr'?'🔍 Yakındaki tehlikeyi incele':'🔍 Inspect nearby hazard'});
   await inspect.waitFor({timeout:15000});await inspect.click();
   await page.getByRole('button',{name:lang==='tr'?'Yangın söndürücü ile işe başla':'Start with a fire extinguisher',exact:true}).click();
@@ -82,7 +84,7 @@ try{
   await page.getByRole('button',{name:lang==='tr'?'İşi durdur, izin ve gaz ölçümünü doğrula':'Stop work and verify permit and gas testing',exact:true}).click();
   await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
   const body=await page.locator('body').innerText();
-  check(`${lang}: incorrect hot-work choice rejected and correct choice recorded`,body.includes('1/6'));
+  check(`${lang}: incorrect hot-work choice rejected and correct choice recorded`,(await page.getByTestId('sim5-hse-progress').innerText()).includes('1/6'));
   check(`${lang}: both industrial assets loaded`,body.includes('2/2'));
   await page.evaluate(()=>{window.reviewCamera={position:[-18.6,2.8,-9.6],target:[-22.3,1,-4.65]};window.reviewFrameRequested=true;});
   await page.waitForFunction(()=>!!window.siteCamera);
@@ -95,14 +97,14 @@ try{
   ]){
    await page.evaluate(position=>window.siteCamera.position.fromArray(position),hazard.position);
    await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
-   await inspect.click();
+   await lookAtInspection(page,hazard.name);await inspect.click();
    await page.getByRole('button',{name:hazard.wrong[lang==='tr'?0:1],exact:true}).click();
    await page.getByText(lang==='tr'?'Güvensiz seçim.':'Unsafe choice.',{exact:false}).waitFor();
    await page.getByRole('button',{name:hazard.correct[lang==='tr'?0:1],exact:true}).click();
    await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
    checks.push(`${lang}: ${hazard.name} unsafe choice rejected and safe choice accepted`);
   }
-  check(`${lang}: all three HSE decisions completed`,(await page.locator('body').innerText()).includes('3/6'));
+  check(`${lang}: all three HSE decisions completed`,(await page.getByTestId('sim5-hse-progress').innerText()).includes('3/6'));
  }
  assert.deepEqual(errors,[],'Browser errors');assert.deepEqual(requests,[],'Isolated review unexpectedly used external network');
  checks.push('no browser errors or external network requests');

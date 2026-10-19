@@ -221,8 +221,8 @@ export function createWeldingOperation(THREE: any, source: any, tr: boolean) {
   label.rotation.y=0;
   group.position.y=-floor;
   group.traverse((mesh:any)=>{if(mesh.isMesh)mesh.userData.inspectionId="hotwork";});
-  const update=(seconds:number)=>{
-    const active=Math.sin(seconds*9)>-.42;
+  const update=(seconds:number,enabled=true)=>{
+    const active=enabled&&Math.sin(seconds*9)>-.42;
     arc.visible=halo.visible=active;light.intensity=active?2.8+.45*Math.sin(seconds*35):0;
     for(let i=0;i<sparks.length;i++){
       const age=(seconds*1.8+i/sparks.length)%1,angle=i*2.399963;
