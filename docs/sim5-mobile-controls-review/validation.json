@@ -1,0 +1,27 @@
+{
+  "base": "4f9dddeb64c35911ab74e48b264d1d148c4f8fb1",
+  "checks": {
+    "controls-results.json": 80,
+    "welding-regression-results.json": 28,
+    "lifting-color-results.json": 47
+  },
+  "totalChecks": 155,
+  "commands": {
+    "tsc --noEmit": 0,
+    "next build": 0,
+    "test:controls": 0,
+    "test:all": 0,
+    "eslint RealModels.tsx": 1
+  },
+  "lint": "16 inherited errors, 3 warnings; baseline 16 errors, 4 warnings; zero new diagnostics",
+  "buildWarning": "Existing NFT whole-project trace warning from admin/content importing next.config.ts",
+  "unchangedOperationAndAssetFiles": [
+    "app/app/[locale]/labs/sim5/WeldingOperation.ts",
+    "app/app/[locale]/labs/sim5/LiftingOperation.ts",
+    "app/public/sim5/SERNEM_SIM4_Factory_optimized.glb",
+    "app/public/sim5/large_industrial_storage_tanks (1).glb",
+    "app/public/sim5/SERNEM_Welder_06_under25MB.glb"
+  ],
+  "physicalDeviceTesting": false,
+  "supabaseAuthenticatedPageE2E": false
+}

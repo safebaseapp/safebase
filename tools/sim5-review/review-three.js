@@ -6,7 +6,7 @@ export class WebGLRenderer extends Renderer {
   super(options);
   const render=this.render.bind(this);
   this.render=(scene,camera)=>{
-   window.siteScene=scene;window.siteCamera=camera;
+   window.siteScene=scene;window.siteCamera=camera;window.siteRenderer=this;
    // Render on demand for deterministic software-GPU integration captures.
    // The real component's animation, controls and HSE logic continue running.
    if(window.renderedOnce&&!window.reviewFrameRequested)return;

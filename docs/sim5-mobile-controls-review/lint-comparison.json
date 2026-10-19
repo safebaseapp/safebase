@@ -1,0 +1,12 @@
+{
+  "base": {
+    "errors": 16,
+    "warnings": 4
+  },
+  "current": {
+    "errors": 16,
+    "warnings": 3
+  },
+  "newDiagnostics": 0,
+  "note": "ESLint remains nonzero because of 16 inherited no-explicit-any errors; no suppressions added."
+}

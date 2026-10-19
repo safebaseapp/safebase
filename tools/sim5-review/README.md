@@ -70,3 +70,27 @@ use the `pack-` prefix. Passing result files are removed at the beginning of eac
 suite and written only after all checks pass. The original GLBs are still
 checksummed. No downloaded crane asset is needed: crane and rigging geometry are
 original procedural project code under the repository's MIT license.
+
+## Direction and mobile-input review
+
+`npm --prefix tools/sim5-review run test:controls` runs the real site component
+at desktop, 320×568, 390×844 and 844×390 sizes, with the page's 24px container
+padding. The fixture has a mobile viewport meta tag. It exposes the renderer
+only in the test shim to compare actual mesh/vertex counts, materials,
+antialiasing, pixel ratio, tone mapping and shadows between devices.
+
+The 80 checks use real keyboard, mouse, CDP touch and multi-touch events:
+camera-relative strafe at four yaw angles, hold/release, touch cancel, native
+capture loss, simultaneous look/move, mixed pointer/keyboard input, reset,
+mode changes, blur/visibility cleanup, viewport rotation, inspect after drag,
+keyboard activation after touch, and overflow/overlap/44px target checks.
+For partial CDP `touchEnd`, provide the ending finger (not remaining fingers).
+Capture loss is tested after activating capture and processing the next pointer
+event, as required by pending pointer capture semantics.
+
+Control screenshots capture the actual viewport, rather than temporarily
+resizing a mobile viewport for a full-page screenshot. They are real WebGL
+renders with identical review camera placement. The fixture does not replace
+production navigation or reduce mobile rendering quality. Results and screenshots
+are generated under `artifacts/controls-*`; reviewed copies live under
+`docs/sim5-mobile-controls-review/`.
