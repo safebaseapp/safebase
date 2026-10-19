@@ -1,0 +1,146 @@
+{
+  "timestamp": "2026-10-19T07:11:43.629Z",
+  "checks": [
+    "mesh positions and normals finite",
+    "posed worker normals retain lighting",
+    "table is on the measured forward side",
+    "wire has 12mm nozzle standoff",
+    "contact lies on both fillet faces",
+    "coupon rests on tabletop",
+    "arc originates at the contact",
+    "machine to grip lead endpoints continuous",
+    "torch and work-return leads stay above floor",
+    "torch grip remains inside the glove",
+    "eye to weld ray passes through shield window",
+    "shield viewing axis follows the weld",
+    "extinguisher rests on ground",
+    "boots remain grounded",
+    "contact particles move with elapsed time",
+    "en: actual site component includes welding operation",
+    "en: incorrect hot-work choice rejected and correct choice recorded",
+    "en: both industrial assets loaded",
+    "en: leak unsafe choice rejected and safe choice accepted",
+    "en: access unsafe choice rejected and safe choice accepted",
+    "en: all three HSE decisions completed",
+    "tr: actual site component includes welding operation",
+    "tr: incorrect hot-work choice rejected and correct choice recorded",
+    "tr: both industrial assets loaded",
+    "tr: leak unsafe choice rejected and safe choice accepted",
+    "tr: access unsafe choice rejected and safe choice accepted",
+    "tr: all three HSE decisions completed",
+    "no browser errors or external network requests"
+  ],
+  "geometry": {
+    "diagnostics": {
+      "sourceHumanHeight": 1.7819199797797196,
+      "forward": [
+        0,
+        0,
+        -1
+      ],
+      "floor": 0.007231935873960505,
+      "leanDegrees": 22,
+      "headTiltDegrees": 11.855738982295184,
+      "rawEye": [
+        -0.014003395739343463,
+        1.6356560223568977,
+        -0.10280552263074998
+      ],
+      "rawNozzleTip": [
+        0.01266039256305807,
+        1.4998135254686449,
+        -0.7520515796492924
+      ],
+      "rawNozzleAxis": [
+        0.0013678854815415956,
+        -0.2698539104777848,
+        -0.9629003042315218
+      ],
+      "eye": [
+        -0.014003395739343463,
+        1.5174427113620832,
+        -0.3736350074642814
+      ],
+      "tip": [
+        0.012660392563058072,
+        1.1783164143893097,
+        -0.9019076742767541
+      ],
+      "contact": [
+        0.012676807188836571,
+        1.1709854584894612,
+        -0.9114080330149565
+      ],
+      "leadSocket": [
+        0.013635595780215282,
+        1.1667631190329928,
+        -0.5530354333331802
+      ],
+      "machineSocket": [
+        -0.06691234780754018,
+        0.5096994224004447,
+        1.7927369990013484
+      ],
+      "leadStart": [
+        -0.06691234780754018,
+        0.5096994224004447,
+        1.7927369990013484
+      ],
+      "leadEnd": [
+        0.013635595780215282,
+        1.1667631190329928,
+        -0.5530354333331801
+      ],
+      "benchCenter": [
+        0.012676807188836571,
+        1.1709854584894612,
+        -0.9864080330149565
+      ],
+      "benchTop": 1.1359854584894613,
+      "extinguisherBase": [
+        -0.92,
+        0.007231935873960505,
+        -0.45
+      ],
+      "extinguisherBounds": [
+        -1.0299999994039535,
+        0.007231935873960505,
+        -0.5599999994039535
+      ],
+      "lensCenter": [
+        -0.00740269166787965,
+        1.4354040505537318,
+        -0.4959253745660054
+      ],
+      "labelVisible": true
+    },
+    "invalid": 0,
+    "zeroNormals": 0,
+    "cableMin": 0,
+    "wireLength": 0.01200000000000006,
+    "benchAhead": 0.9864080330149565,
+    "contactBaseDelta": 7.45057349149647e-11,
+    "contactUprightDelta": 1.862645593320167e-10,
+    "benchPlateGap": 4.47035075623603e-10,
+    "eyeShieldHit": [
+      {
+        "part": "Object_771",
+        "distance": 0.14325098492999555
+      },
+      {
+        "part": "Object_763",
+        "distance": 0.14740401181381105
+      }
+    ],
+    "lensGazeAngle": 1.0781521215600007,
+    "leadStartError": 0,
+    "leadEndError": 1.1102230246251565e-16,
+    "handGripOverlap": true,
+    "extinguisherBottom": 0,
+    "groundClearance": 0.0019440576281795404,
+    "arcPosition": 0
+  },
+  "errors": [],
+  "externalRequests": [],
+  "assetSha256": "147b7b18d9121c77b08ab3137e2f8678174806b470ad82a9ecf6a7184fd245c7"
+}
