@@ -17,6 +17,7 @@ type LabCard = {
   href?: string;
   active: boolean;
   premium?: boolean;
+  beta?: boolean;
   index: string;
 };
 
@@ -26,6 +27,7 @@ const products: LabCard[] = [
   { id: "brain", title: "Daily Safety Brain", subtitle: "Quick Challenge", descTr: "Kısa günlük İSG bilgi testleriyle bilgini ve saha refleksini sıcak tut.", descEn: "Keep HSE knowledge and field reflexes active with short daily challenges.", href: "daily-safety-brain", active: true, index: "03" },
   { id: "ppe", title: "PPE Matchmaker", subtitle: "Protection Logic", descTr: "Görev ve tehlikeye göre doğru kişisel koruyucu ekipman kombinasyonunu seç.", descEn: "Match tasks and hazards with the right personal protective equipment.", active: false, index: "04" },
   { id: "myth", title: "Safety Myth Buster", subtitle: "Safety Truth Check", descTr: "Sahada sık duyulan güvenlik inanışlarını kanıt ve iyi uygulamalarla test et.", descEn: "Test common field safety beliefs against evidence and good practice.", active: false, index: "05" },
+  { id: "field3d", title: "3D Safety Inspector", subtitle: "First-Person Field Walk", descTr: "Rafineri bakım sahasında dolaş. Bu ilk oynanabilir prototip; tehlike tespit motoru sonraki pakette eklenecek.", descEn: "Walk through a 3D refinery training zone. This first playable prototype adds hazard detection in the next package.", href: "3d-safety-inspector", active: true, beta: true, index: "07" },
   { id: "blind", title: "Blind Spot Test", subtitle: "Hidden Risk Focus", descTr: "Gözden kaçan riskleri ve farkındalık boşluklarını ortaya çıkaran ileri seviye testler.", descEn: "Advanced challenges designed to reveal overlooked risks and awareness gaps.", active: false, premium: true, index: "06" },
 ];
 
@@ -127,7 +129,7 @@ export default async function LabsPage({ params }: Props) {
             {products.map((product) => {
               const card = (
                 <article className={`${s.card} ${product.active ? s.activeCard : s.soonCard}`}>
-                  <div className={s.cardTop}><span className={s.cardIndex}>{product.index}</span><div className={s.badges}>{product.premium && <span className={s.premiumBadge}><Sparkles size={12} /> PREMIUM</span>}<span className={product.active ? s.liveBadge : s.soonBadge}>{product.active ? (isTr ? "CANLI" : "LIVE") : (isTr ? "YAKINDA" : "COMING SOON")}</span></div></div>
+                  <div className={s.cardTop}><span className={s.cardIndex}>{product.index}</span><div className={s.badges}>{product.premium && <span className={s.premiumBadge}><Sparkles size={12} /> PREMIUM</span>}<span className={product.active ? s.liveBadge : s.soonBadge}>{product.beta ? "BETA / P1" : product.active ? (isTr ? "CANLI" : "LIVE") : (isTr ? "YAKINDA" : "COMING SOON")}</span></div></div>
                   <p className={s.cardSubtitle}>{product.subtitle}</p>
                   <h3>{product.title}</h3>
                   <p className={s.cardDescription}>{isTr ? product.descTr : product.descEn}</p>
