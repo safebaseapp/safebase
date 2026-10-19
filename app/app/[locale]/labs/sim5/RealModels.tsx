@@ -275,8 +275,8 @@ export default function RealModels({tr}:{tr:boolean}) {
       for(const obj of headParts)headBounds.expandByObject(obj);
       const headCenter=headParts.length?headBounds.getCenter(new THREE.Vector3()):new THREE.Vector3(workX,1.93,workZ);
       const visorFrame=new THREE.Group();
-      visorFrame.position.set(headCenter.x+.17,headCenter.y-.08,headCenter.z);
-      visorFrame.rotation.y=-.12;
+      visorFrame.position.set(headCenter.x,headCenter.y-.12,headCenter.z-.19);
+      visorFrame.rotation.y=0;
       const visorMat=new THREE.MeshPhysicalMaterial({color:"#152027",roughness:.35,metalness:.08,side:THREE.DoubleSide});
       const visor=new THREE.Mesh(new THREE.BoxGeometry(.055,.34,.31),visorMat);
       visor.position.set(0,-.12,0);visor.castShadow=true;visorFrame.add(visor);
@@ -318,7 +318,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     const couponSteel=material("#58636a",.65);
     // Raise and bring the work surface towards the torch side of the
     // imported worker, instead of leaving the coupon below the raised hand.
-    const standX=workX+1.35,standZ=workZ-.55;
+    const standX=workX+2.1,standZ=workZ-1.15;
     for(const dx of [-.46,.46])for(const dz of [-.35,.35]){
       box(standX+dx,.715,standZ+dz,.09,1.43,.09,darkMetal);
       box(standX+dx,.09,standZ+dz,.19,.08,.19,darkMetal);
@@ -329,8 +329,8 @@ export default function RealModels({tr}:{tr:boolean}) {
     const coupon=place(new THREE.Mesh(new THREE.BoxGeometry(.46,.16,.27),couponSteel),standX,1.65,standZ,"hotwork");
     coupon.rotation.y=.16;
     // A short electrode terminates at the coupon; no floating weld point.
-    const contact=new THREE.Vector3(standX-.14,1.75,standZ);
-    const electrodeStart=new THREE.Vector3(workX+.63,1.84,workZ-.32);
+    const contact=new THREE.Vector3(standX-.3,1.75,standZ+.12);
+    const electrodeStart=new THREE.Vector3(workX+.73,1.84,workZ-.5);
     const electrodeVector=contact.clone().sub(electrodeStart);
     const electrode=new THREE.Mesh(new THREE.CylinderGeometry(.014,.014,electrodeVector.length(),8),material("#343c42",.6));
     electrode.position.copy(electrodeStart.clone().add(contact).multiplyScalar(.5));
@@ -356,7 +356,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     // The static source asset is not represented as a finished welding animation.
     // Compact but recognizable portable fire extinguisher, including the
     // safety handle, pressure gauge, flexible hose and discharge nozzle.
-    const exX=workX-3.1,exZ=workZ+2.0;
+    const exX=workX-2.6,exZ=workZ+3.1;
     const extinguisherRed=material("#c52c23",.23);
     const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.16,.17,.72,32),extinguisherRed),exX,.39,exZ,"hotwork");
     place(new THREE.Mesh(new THREE.CylinderGeometry(.085,.1,.085,20),darkMetal),exX,.045,exZ,"hotwork");
