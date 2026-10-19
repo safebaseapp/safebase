@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-10-19T10:36:35.782827+00:00",
+  "base": "7228c511b8881c369d0cb21915b81a0cc58112fc",
+  "assertionCounts": {
+    "height-results.json": 40,
+    "navigation-results.json": 5,
+    "welding-results.json": 28,
+    "lifting-color-results.json": 47,
+    "mobile-controls-results.json": 80
+  },
+  "totalAssertions": 200,
+  "commands": [
+    {
+      "command": "tsc --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "targeted ESLint: RealModels / SiteNavigation / SiteInspections / SiteEvidence",
+      "exitCode": 0
+    },
+    {
+      "command": "next build (direct, skips unrelated PDF prebuild)",
+      "exitCode": 0,
+      "warning": "Existing next.config.ts/admin-content import trace warning"
+    }
+  ],
+  "unchangedOperationBuilders": [
+    "app/app/[locale]/labs/sim5/WeldingOperation.ts",
+    "app/app/[locale]/labs/sim5/LiftingOperation.ts"
+  ],
+  "assetSha256": {
+    "SERNEM_SIM4_Factory_optimized.glb": "0bfb3c1baed3478cbffed6ab078e4e080c0a361ae2f185896ecc4607922d9785",
+    "large_industrial_storage_tanks (1).glb": "57f8af41a804fb9f231437c73c5fcd1d11047a4aac42aaa43f0b52dd8d3558e8",
+    "SERNEM_Welder_06_under25MB.glb": "147b7b18d9121c77b08ab3137e2f8678174806b470ad82a9ecf6a7184fd245c7"
+  },
+  "fontChangesIncluded": false,
+  "supplementaryRuntimeReport": "runtime-validation.json",
+  "limitations": [
+    "Isolated actual-component fixture bypasses Supabase authentication.",
+    "Native browser touch emulation, not physical iOS/Android hardware.",
+    "Software-GPU render timings are not phone FPS.",
+    "Kinematic supported stepping, no jump/fall rigid-body simulation."
+  ]
+}

@@ -8,7 +8,12 @@
     "serve": "node server.mjs",
     "test:pack": "node pack-test.mjs",
     "test:all": "node test.mjs && node pack-test.mjs",
-    "test:controls": "node controls-test.mjs"
+    "test:controls": "node controls-test.mjs",
+    "test:height": "node height-test.mjs",
+    "render:site": "node render-site.mjs",
+    "inspect:site": "node site-geometry.mjs",
+    "test:runtime": "node performance-test.mjs",
+    "test:navigation": "node navigation-test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.25.12",
