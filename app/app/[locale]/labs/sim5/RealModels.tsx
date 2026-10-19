@@ -273,9 +273,13 @@ export default function RealModels({tr}:{tr:boolean}) {
       welderScene.traverse((obj:any)=>{if(!obj.isMesh)return;const names=(Array.isArray(obj.material)?obj.material:[obj.material]).map((m:any)=>m?.name||"").join(" ");if(/head|face|helmet|hardhat|caucasian/i.test(obj.name+" "+names))headParts.push(obj)});
       const headBounds=new THREE.Box3();
       for(const obj of headParts)headBounds.expandByObject(obj);
-      const headCenter=headParts.length?headBounds.getCenter(new THREE.Vector3()):new THREE.Vector3(workX,1.93,workZ);
+      // Use the facial mesh first: helmet + body union can place a mask behind the head.
+      const faceMeshes=headParts.filter((obj:any)=>/caucasian|face|head/i.test(obj.name+" "+(Array.isArray(obj.material)?obj.material:[obj.material]).map((m:any)=>m?.name||"").join(" ")));
+      const faceBounds=new THREE.Box3();
+      for(const obj of faceMeshes)faceBounds.expandByObject(obj);
+      const headCenter=!faceBounds.isEmpty()?faceBounds.getCenter(new THREE.Vector3()):headParts.length?headBounds.getCenter(new THREE.Vector3()):new THREE.Vector3(workX,1.93,workZ);
       const visorFrame=new THREE.Group();
-      visorFrame.position.set(headCenter.x,headCenter.y-.12,headCenter.z-.19);
+      visorFrame.position.set(headCenter.x,headCenter.y-.08,headCenter.z-.23);
       visorFrame.rotation.y=0;
       const visorMat=new THREE.MeshPhysicalMaterial({color:"#152027",roughness:.35,metalness:.08,side:THREE.DoubleSide});
       const visor=new THREE.Mesh(new THREE.BoxGeometry(.055,.34,.31),visorMat);
@@ -318,7 +322,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     const couponSteel=material("#58636a",.65);
     // Raise and bring the work surface towards the torch side of the
     // imported worker, instead of leaving the coupon below the raised hand.
-    const standX=workX+2.1,standZ=workZ-1.15;
+    const standX=workX+1.45,standZ=workZ-1.35;
     for(const dx of [-.46,.46])for(const dz of [-.35,.35]){
       box(standX+dx,.715,standZ+dz,.09,1.43,.09,darkMetal);
       box(standX+dx,.09,standZ+dz,.19,.08,.19,darkMetal);
@@ -346,6 +350,8 @@ export default function RealModels({tr}:{tr:boolean}) {
     // Contact-only light and restrained sparks, never suspended mid-air.
     const weldLight=new THREE.PointLight(0x9ccfff,0,3.2,1.8);
     weldLight.position.copy(contact);scene.add(weldLight);
+    // Localized white-blue weld core exactly at the metal contact point.
+    const arcCore=place(new THREE.Mesh(new THREE.SphereGeometry(.045,10,8),new THREE.MeshBasicMaterial({color:0xe6f8ff})),contact.x,contact.y,contact.z);
     const contactSparks:any[]=[];
     for(let i=0;i<12;i++){
       const a=i*2.39996;
@@ -522,6 +528,7 @@ export default function RealModels({tr}:{tr:boolean}) {
       for(let i=0;i<sparkMeshes.length;i++){const spark=sparkMeshes[i];spark.visible=Math.sin(now*.016+i*3)>-.35;}
       const arcActive=realWelderLoaded&&Math.sin(now*.009)>-.42;
       weldLight.intensity=arcActive?1.7+.5*Math.sin(now*.035):0;
+      arcCore.visible=arcActive;
       for(let i=0;i<contactSparks.length;i++)contactSparks[i].visible=arcActive&&Math.sin(now*.03+i*2.1)>.05;
       renderer.render(scene,camera);raf=requestAnimationFrame(tick);
     };
