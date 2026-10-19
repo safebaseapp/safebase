@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { createWeldingOperation } from "./WeldingOperation";
+import { createLiftingOperation } from "./LiftingOperation";
 
 export default function RealModels({tr}:{tr:boolean}) {
  const mount=useRef<HTMLDivElement>(null);
@@ -16,6 +18,7 @@ export default function RealModels({tr}:{tr:boolean}) {
  const inspections:Record<string,{question:[string,string],answers:[[string,string],[string,string]],correct:number,explanation:[string,string]}>= {
   leak:{question:["Tank sahasında şüpheli sızıntı var. İlk adım?","Suspected tank-yard leak. First action?"],answers:[["Alanı izole et, güvenli mesafeden bildir","Isolate the area and report from a safe distance"],["Sızıntının kaynağına yaklaş","Approach the leak source"]],correct:0,explanation:["Bilinmeyen sızıntıya yaklaşma; acil müdahale prosedürünü başlat.","Do not approach an unknown release; initiate the emergency response procedure."]},
   hotwork:{question:["Sıcak çalışma öncesi yanıcı atmosfer ihtimali var. Ne yaparsın?","Potential flammable atmosphere before hot work. What do you do?"],answers:[["Yangın söndürücü ile işe başla","Start with a fire extinguisher"],["İşi durdur, izin ve gaz ölçümünü doğrula","Stop work and verify permit and gas testing"]],correct:1,explanation:["Çalışma izni, atmosfer testi ve yangın gözcüsü kontrol edilmeli.","Verify the permit, atmosphere testing and fire watch."]},
+  lifting:{question:["Askıdaki borunun yanından geçmen gerekiyor. Ne yaparsın?","You need to pass the suspended pipe. What do you do?"],answers:[["Borunun altından hızlıca geç","Walk quickly under the pipe"],["Alan dışında kal, işaretçinin güvenli geçiş onayını bekle","Stay outside and wait for the signaller to confirm safe access"]],correct:1,explanation:["Askıdaki yükün altına girilmez. Güvenlik alanını, sapanları ve işaretçi koordinasyonunu doğrula.","Never enter beneath a suspended load. Verify the exclusion zone, rigging and signaller coordination."]},
   access:{question:["Acil çıkış güzergâhı engellenmiş. Ne yaparsın?","An emergency route is obstructed. What do you do?"],answers:[["Engeli güvenle kaldırttır ve erişimi doğrula","Arrange safe removal and verify access"],["Vardiya sonunu bekle","Wait until the end of the shift"]],correct:0,explanation:["Acil kaçış yolları sürekli açık tutulmalıdır.","Emergency escape routes must remain clear."]}
  };
  const [mode,setMode]=useState<"walk"|"overview">("overview");
@@ -199,193 +202,45 @@ export default function RealModels({tr}:{tr:boolean}) {
     // leak source to the collection area.
     const wetMark=place(new THREE.Mesh(new THREE.CircleGeometry(.23,24),new THREE.MeshStandardMaterial({color:"#333b32",roughness:.24,transparent:true,opacity:.65,depthWrite:false,side:THREE.DoubleSide})),leakX,.135,leakZ+.34,"leak");
     wetMark.rotation.x=-Math.PI/2;
-    // Optional licensed real welder scene. Falls back to procedural objects until the GLB is uploaded.
+    // Geometry-derived welding station. Source pose and equipment are inspected
+    // in WeldingOperation; no guessed site-space hand, visor or arc coordinates.
     const workX=-22,workZ=-5;
-    let realWelderLoaded=false;
+    let weldingOperation:ReturnType<typeof createWeldingOperation>|null=null;
     try{
-      const welderScene=await new Promise<any>((resolve,reject)=>loader.load("/sim5/SERNEM_Welder_06_under25MB.glb",(g:any)=>resolve(g.scene),undefined,reject));
-      // Keep the author's textures, but correct color space and washed-out material response.
-      // This Sketchfab GLB contains the welder, power unit and cable as one assembly.
-      welderScene.traverse((obj:any)=>{
+      const gltf=await loader.loadAsync("/sim5/SERNEM_Welder_06_under25MB.glb");
+      if(!active)return;
+      weldingOperation=createWeldingOperation(THREE,gltf.scene,tr);
+      weldingOperation.group.position.add(new THREE.Vector3(workX,.06,workZ));
+      scene.add(weldingOperation.group);
+      weldingOperation.group.updateMatrixWorld(true);
+      weldingOperation.group.traverse((obj:{isMesh?:boolean;name:string;userData:{part?:string}})=>{
         if(!obj.isMesh)return;
-        obj.castShadow=true;obj.receiveShadow=true;
-        const materials=Array.isArray(obj.material)?obj.material:[obj.material];
-        for(const mat of materials){
-          if(!mat)continue;
-          if(mat.map){mat.map.colorSpace=THREE.SRGBColorSpace;mat.map.needsUpdate=true;}
-          if(mat.emissiveMap){mat.emissiveMap.colorSpace=THREE.SRGBColorSpace;mat.emissiveMap.needsUpdate=true;}
-          // Authored color textures are valid in the GLB, but some imported
-          // material assignments render near-white. Give human PPE a realistic
-          // deterministic color fallback rather than leaving a white mannequin.
-          const label=String(mat.name||"").toLowerCase();
-          const fallback=label.includes("bodysuit")||label.includes("mc-bodysuit")?"#234f78":
-            label.includes("apron")?"#7b4e34":
-            label.includes("helmet")?"#e6d9b0":
-            label.includes("caucasian")?"#b88d73":
-            label.includes("hair")?"#242020":null;
-          if(fallback&&mat.color){
-            mat.color.set(fallback);
-            // Fallback must be visible even when a texture is absent or white.
-            if(mat.map&&label.includes("bodysuit"))mat.map=null;
-            if(mat.map&&label.includes("apron"))mat.map=null;
-          }
-          if(mat.isMeshStandardMaterial||mat.isMeshPhysicalMaterial){
-            mat.roughness=Math.max(.55,mat.roughness??.8);
-            mat.metalness=Math.min(.35,mat.metalness??0);
-            mat.needsUpdate=true;
-          }
+        inspectionMarkers.push(obj);
+        // Table and power unit are solid in walk mode; cables are not walls.
+        if(obj.name==="bench-top"||obj.userData.part==="power-source"){
+          const bounds=new THREE.Box3().setFromObject(obj);
+          if(bounds.max.y>.25){colliders.push(obj);colliderBoxes.push(bounds);}
         }
       });
-      // Fit on the HUMAN height, not the entire assembly (which includes equipment).
-      // Use the assembly's original dimensions and clamp it to a plausible site footprint.
-      welderScene.updateMatrixWorld(true);
-      const originalBounds=new THREE.Box3().setFromObject(welderScene);
-      const originalSize=originalBounds.getSize(new THREE.Vector3());
-      const scale=Math.min(2.2/Math.max(originalSize.y,.01),6.5/Math.max(originalSize.x,.01),6.5/Math.max(originalSize.z,.01));
-      welderScene.scale.multiplyScalar(scale);
-      welderScene.updateMatrixWorld(true);
-      const bounds=new THREE.Box3().setFromObject(welderScene);
-      const center=bounds.getCenter(new THREE.Vector3());
-      // Ground the *visible boots*, not the full imported assembly. The
-      // downloaded asset includes trailing cables and a wheeled power unit,
-      // whose bounding boxes are not reliable ground references.
-      const boots:any[]=[];
-      welderScene.traverse((obj:any)=>{
-        if(!obj.isMesh)return;
-        const matNames=(Array.isArray(obj.material)?obj.material:[obj.material]).map((m:any)=>m?.name||"").join(" ");
-        const name=(obj.name+" "+matNames).toLowerCase();
-        if(/boot|shoe|foot|feet|rubberboot|wellies/.test(name))boots.push(obj);
-      });
-      const bootBounds=new THREE.Box3();
-      for(const obj of boots)bootBounds.expandByObject(obj);
-      // If the source mesh has no identifiable footwear, the scene bounding
-      // box is used as a fallback, with no arbitrary vertical offset.
-      const bottom=boots.length&&!bootBounds.isEmpty()?bootBounds.min.y:bounds.min.y;
-      welderScene.position.x+=workX-center.x;
-      welderScene.position.y+=.015-bottom;
-      welderScene.position.z+=workZ-center.z;
-      welderScene.updateMatrixWorld(true);
-      scene.add(welderScene);
-      // The source worker's visor is stored upright. Add a lowered,
-      // dark protective face screen at the working side of the helmet.
-      // This is a static PPE pose correction, not skeletal animation.
-      const headParts:any[]=[];
-      welderScene.traverse((obj:any)=>{if(!obj.isMesh)return;const names=(Array.isArray(obj.material)?obj.material:[obj.material]).map((m:any)=>m?.name||"").join(" ");if(/head|face|helmet|hardhat|caucasian/i.test(obj.name+" "+names))headParts.push(obj)});
-      const headBounds=new THREE.Box3();
-      for(const obj of headParts)headBounds.expandByObject(obj);
-      // Use the facial mesh first: helmet + body union can place a mask behind the head.
-      const faceMeshes=headParts.filter((obj:any)=>/caucasian|face|head/i.test(obj.name+" "+(Array.isArray(obj.material)?obj.material:[obj.material]).map((m:any)=>m?.name||"").join(" ")));
-      const faceBounds=new THREE.Box3();
-      for(const obj of faceMeshes)faceBounds.expandByObject(obj);
-      const headCenter=!faceBounds.isEmpty()?faceBounds.getCenter(new THREE.Vector3()):headParts.length?headBounds.getCenter(new THREE.Vector3()):new THREE.Vector3(workX,1.93,workZ);
-      const visorFrame=new THREE.Group();
-      visorFrame.position.set(headCenter.x,headCenter.y-.08,headCenter.z-.23);
-      visorFrame.rotation.y=0;
-      const visorMat=new THREE.MeshPhysicalMaterial({color:"#152027",roughness:.35,metalness:.08,side:THREE.DoubleSide});
-      const visor=new THREE.Mesh(new THREE.BoxGeometry(.055,.34,.31),visorMat);
-      visor.position.set(0,-.12,0);visor.castShadow=true;visorFrame.add(visor);
-      const windowMesh=new THREE.Mesh(new THREE.BoxGeometry(.061,.085,.19),new THREE.MeshPhysicalMaterial({color:"#28343c",roughness:.22,transparent:true,opacity:.78}));
-      windowMesh.position.set(.004,-.095,0);visorFrame.add(windowMesh);
-      const rim=new THREE.Mesh(new THREE.BoxGeometry(.075,.035,.33),darkMetal);
-      rim.position.set(0,.055,0);visorFrame.add(rim);
-      scene.add(visorFrame);
-      // Entire loaded assembly is selectable for the hot-work HSE exercise.
-      welderScene.traverse((obj:any)=>{if(obj.isMesh){obj.userData.inspectionId="hotwork";inspectionMarkers.push(obj);}});
-      realWelderLoaded=true;
-    }catch{ /* Preserve the existing playable scene if the asset is unavailable. */ }
-    // Hot-work violation: fallback equipment and combustible drums.
-
-    const sparkMeshes:any[]=[];
-    if(!realWelderLoaded){
-    place(new THREE.Mesh(new THREE.BoxGeometry(2.4,.14,1.3),darkMetal),workX,1.1,workZ,"hotwork");
-    for(const dx of [-.95,.95])for(const dz of [-.45,.45])place(new THREE.Mesh(new THREE.BoxGeometry(.1,1.05,.1),darkMetal),workX+dx,.54,workZ+dz);
-    for(let i=0;i<18;i++){const spark=place(new THREE.Mesh(new THREE.CylinderGeometry(.008,.018,.16+(i%3)*.05,5),new THREE.MeshBasicMaterial({color:i%2?0xffd56b:0xff832b})),workX+(i%7-3)*.14,1.2+(i%5)*.12,workZ+(i%4-2)*.1);spark.rotation.z=(i%7)*.33;}
-    for(const dx of [-2.5,-1.8])place(new THREE.Mesh(new THREE.CylinderGeometry(.34,.34,1.05,12),rust),workX+dx,.57,workZ+1.6,"hotwork");
-    // Work equipment: compact welding power source, cable and nearby unsecured extinguisher.
-    const welder=place(new THREE.Mesh(new THREE.BoxGeometry(.85,.72,.55),material("#d2a42c",.3)),workX+2.4,.48,workZ-.7,"hotwork");
-    welder.rotation.y=-.2;
-    place(new THREE.Mesh(new THREE.BoxGeometry(.48,.28,.025),material("#29363b")),workX+2.4,.62,workZ-.41);
-    for(const dx of [-.29,.29])place(new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.1,12),darkMetal),workX+2.4+dx,.17,workZ-.7).rotation.z=Math.PI/2;
-    const cablePoints=[new THREE.Vector3(workX+2.4,.36,workZ-.4),new THREE.Vector3(workX+1.8,.16,workZ),new THREE.Vector3(workX+.8,.17,workZ+.45),new THREE.Vector3(workX+.1,1.12,workZ)];
-    const cableCurve=new THREE.CatmullRomCurve3(cablePoints);
-    place(new THREE.Mesh(new THREE.TubeGeometry(cableCurve,35,.035,7,false),material("#22292b")),0,0,0);
-    // The detailed extinguisher below is shared by real and fallback scenes;
-    // do not render a second overlapping red cylinder here.
+    }catch(error){
+      if(active)setStatus(previous=>previous+" · "+(tr?"Kaynak modeli yüklenemedi: ":"Welder model failed: ")+String(error));
     }
-    // Compact hot-work context. Keep the imported welder and its detailed
-    // equipment visually dominant; avoid giant untextured props in the foreground.
-    // A small weld coupon on a compact stand, offset to the operator's
-    // working side. Unlike the former long pipe, this does not obscure the
-    // worker or pretend the static torch is already touching a weld seam.
-    // Keep the coupon outside the welder's body silhouette. A static
-    // source pose is not an animated welding operation.
-    const couponSteel=material("#58636a",.65);
-    // Raise and bring the work surface towards the torch side of the
-    // imported worker, instead of leaving the coupon below the raised hand.
-    const standX=workX+1.95,standZ=workZ-.45;
-    for(const dx of [-.46,.46])for(const dz of [-.35,.35]){
-      box(standX+dx,.715,standZ+dz,.09,1.43,.09,darkMetal);
-      box(standX+dx,.09,standZ+dz,.19,.08,.19,darkMetal);
-    }
-    for(const dz of [-.35,.35])box(standX,.38,standZ+dz,1.03,.065,.07,darkMetal);
-    for(const dx of [-.46,.46])box(standX+dx,.38,standZ,.07,.065,.78,darkMetal);
-    box(standX,1.47,standZ,1.12,.075,.83,couponSteel);
-    const coupon=place(new THREE.Mesh(new THREE.BoxGeometry(.46,.16,.27),couponSteel),standX,1.65,standZ,"hotwork");
-    coupon.rotation.y=.16;
-    // A short electrode terminates at the coupon; no floating weld point.
-    const contact=new THREE.Vector3(standX-.3,1.75,standZ+.12);
-    const electrodeStart=new THREE.Vector3(workX+1.12,1.84,workZ-.36);
-    const electrodeVector=contact.clone().sub(electrodeStart);
-    const electrode=new THREE.Mesh(new THREE.CylinderGeometry(.014,.014,electrodeVector.length(),8),material("#343c42",.6));
-    electrode.position.copy(electrodeStart.clone().add(contact).multiplyScalar(.5));
-    electrode.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),electrodeVector.normalize());
-    scene.add(electrode);
-    // Extend the visibly loose imported lead to a plausible floor connection
-    // rather than leaving a cable end isolated on the ground.
-    if(realWelderLoaded){
-      const leadPath=[new THREE.Vector3(workX-1.65,.38,workZ+.8),new THREE.Vector3(workX-.9,.13,workZ+1.35),new THREE.Vector3(workX+.3,.13,workZ+1.15),new THREE.Vector3(workX+.95,.25,workZ+.25),new THREE.Vector3(workX+1.02,1.1,workZ-.28),electrodeStart];
-      const lead=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(leadPath),36,.025,8,false),material("#20252a"));
-      lead.castShadow=true;scene.add(lead);
-    }
-    // Contact-only light and restrained sparks, never suspended mid-air.
-    const weldLight=new THREE.PointLight(0x9ccfff,0,3.2,1.8);
-    weldLight.position.copy(contact);scene.add(weldLight);
-    // Localized white-blue weld core exactly at the metal contact point.
-    const arcCore=place(new THREE.Mesh(new THREE.SphereGeometry(.045,10,8),new THREE.MeshBasicMaterial({color:0xe6f8ff})),contact.x,contact.y,contact.z);
-    const contactSparks:any[]=[];
-    for(let i=0;i<12;i++){
-      const a=i*2.39996;
-      const p=place(new THREE.Mesh(new THREE.SphereGeometry(.012+(i%3)*.004,5,4),new THREE.MeshBasicMaterial({color:i%2?0xffd47c:0xfff4d8})),contact.x+Math.cos(a)*(.06+i*.012),contact.y+Math.sin(a)*(.05+i*.008),contact.z+Math.sin(a*1.4)*.09);
-      contactSparks.push(p);
-    }
-    // Hazard remains the combustible material within the hot-work zone.
-    // The static source asset is not represented as a finished welding animation.
-    // Compact but recognizable portable fire extinguisher, including the
-    // safety handle, pressure gauge, flexible hose and discharge nozzle.
-    const exX=workX-2.6,exZ=workZ+3.1;
-    const extinguisherRed=material("#c52c23",.23);
-    const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.16,.17,.72,32),extinguisherRed),exX,.39,exZ,"hotwork");
-    place(new THREE.Mesh(new THREE.CylinderGeometry(.085,.1,.085,20),darkMetal),exX,.045,exZ,"hotwork");
-    place(new THREE.Mesh(new THREE.CylinderGeometry(.045,.05,.075,16),darkMetal),exX,.79,exZ,"hotwork");
-    box(exX,.85,exZ,.38,.04,.075,darkMetal);
-    box(exX-.13,.89,exZ,.17,.03,.065,darkMetal);
-    const gauge=place(new THREE.Mesh(new THREE.CylinderGeometry(.045,.045,.026,18),material("#ddd9ca",.38)),exX+.11,.83,exZ,"hotwork");
-    gauge.rotation.z=Math.PI/2;
-    place(new THREE.Mesh(new THREE.PlaneGeometry(.22,.27),new THREE.MeshBasicMaterial({color:"#e9e6dc",side:THREE.DoubleSide})),exX,.42,exZ+.168,"hotwork");
-    const safetyPin=place(new THREE.Mesh(new THREE.TorusGeometry(.034,.009,7,12),material("#d6c36e",.5)),exX-.13,.87,exZ,"hotwork");
-    safetyPin.rotation.y=Math.PI/2;
-    const hosePoints=[
-      new THREE.Vector3(exX+.12,.81,exZ),
-      new THREE.Vector3(exX+.28,.68,exZ+.03),
-      new THREE.Vector3(exX+.3,.36,exZ+.07),
-      new THREE.Vector3(exX+.22,.13,exZ+.13)
-    ];
-    const exHose=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(hosePoints),18,.018,7,false),darkMetal);
-    exHose.castShadow=true;scene.add(exHose);
-    const nozzle=place(new THREE.Mesh(new THREE.CylinderGeometry(.025,.035,.09,12),darkMetal),exX+.22,.13,exZ+.13,"hotwork");
-    nozzle.rotation.x=Math.PI/2;
-    // The fire extinguisher is intentionally close to combustibles but not
-    // a replacement for a hot-work permit or proper fire-watch controls.
+    // Front-yard lifting pad, beyond the factory footprint and off the road.
+    const liftingX=-30,liftingZ=47;
+    const liftingOperation=createLiftingOperation(THREE,tr);
+    liftingOperation.group.position.set(liftingX,.06,liftingZ);
+    scene.add(liftingOperation.group);
+    liftingOperation.group.updateMatrixWorld(true);
+    liftingOperation.group.traverse((obj:{isMesh?:boolean;name:string})=>{
+      if(!obj.isMesh)return;
+      inspectionMarkers.push(obj);
+      if(["crane-chassis","crane-tire","outrigger-mat","outrigger-extension","barrier-post","barrier-foot"].includes(obj.name)){
+        colliders.push(obj);colliderBoxes.push(new THREE.Box3().setFromObject(obj));
+      }
+    });
+    const liftingPoint=liftingOperation.inspectionPoint.clone().add(new THREE.Vector3(liftingX,0,liftingZ));
+    // Combustibles remain an intentional hot-work HSE decision, independent
+    // of the corrected operator, protective equipment and electrical circuit.
     for(const dx of [-2.4,-1.8]){
       const drum=place(new THREE.Mesh(new THREE.CylinderGeometry(.27,.27,.74,20),material("#915337",.12)),workX+dx,.37,workZ+2.1,"hotwork");
       drum.castShadow=true;
@@ -412,8 +267,6 @@ export default function RealModels({tr}:{tr:boolean}) {
     const warning=material("#e0b83c");
     for(const dx of [-3.2,3.2])box(workX+dx,.14,workZ, .14,.025,5.8,warning);
     for(const dz of [-2.8,2.8])box(workX,.14,workZ+dz,6.4,.025,.14,warning);
-    // Small animated sparks, rather than static hovering particles.
-    sparkMeshes.push(...scene.children.filter((obj:any)=>obj.isMesh&&obj.geometry?.type==="CylinderGeometry"&&obj.material?.type==="MeshBasicMaterial"));
     // Obstructed yard entrance: stacked timber pallets and crates beside the equipment access route.
     const accessX=19.5,accessZ=-5;
     for(let layer=0;layer<3;layer++){
@@ -513,7 +366,7 @@ export default function RealModels({tr}:{tr:boolean}) {
         camera.lookAt(camera.position.clone().add(new THREE.Vector3(Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch))));
       }
       if(modeRef.current==="walk"){
-        const hazards:[string,number,number][]=[["hotwork",workX,workZ],["leak",leakX,leakZ],["access",accessX,accessZ]];
+        const hazards:[string,number,number][]=[["hotwork",workX,workZ],["leak",leakX,leakZ],["access",accessX,accessZ],["lifting",liftingPoint.x,liftingPoint.z]];
         const closest=hazards.map(([id,x,z])=>({id,d:Math.hypot(camera.position.x-x,camera.position.z-z)})).sort((a,b)=>a.d-b.d)[0];
         const next=closest?.d<7?closest.id:null;
         if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next)}
@@ -525,11 +378,7 @@ export default function RealModels({tr}:{tr:boolean}) {
         drop.position.set(leakX+.035*Math.sin(i*2.1),1.07-(phase*phase)*.88,leakZ+.29+phase*.18);
         drop.visible=phase<.96;
       }
-      for(let i=0;i<sparkMeshes.length;i++){const spark=sparkMeshes[i];spark.visible=Math.sin(now*.016+i*3)>-.35;}
-      const arcActive=realWelderLoaded&&Math.sin(now*.009)>-.42;
-      weldLight.intensity=arcActive?1.7+.5*Math.sin(now*.035):0;
-      arcCore.visible=arcActive;
-      for(let i=0;i<contactSparks.length;i++)contactSparks[i].visible=arcActive&&Math.sin(now*.03+i*2.1)>.05;
+      weldingOperation?.update(now/1000);
       renderer.render(scene,camera);raf=requestAnimationFrame(tick);
     };
     raf=requestAnimationFrame(tick);
@@ -561,7 +410,7 @@ export default function RealModels({tr}:{tr:boolean}) {
    <span style={{fontSize:13,color:"#b7cdd5"}}>{mode==="walk"?(tr?"WASD ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
   </div>
   {mode==="walk"&&nearbyHazard&&<button onClick={()=>inspectNearby.current()} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
-  <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/3 · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
+  <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(inspections).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
   {activeInspection&&<section style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}><h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>{inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{const current=inspections[activeInspection];if(i===current.correct){setCompletedInspections(prev=>prev.includes(activeInspection)?prev:[...prev,activeInspection]);setActiveInspection(null)}setInspectionFeedback((i===current.correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+current.explanation[tr?0:1])}} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}<button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button></section>}
   {inspectionFeedback&&<p role="status" style={{color:"#ffcf7d"}}>{inspectionFeedback}</p>}
   <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: burnedhrum · Welder: grewe.juergen · CC BY 4.0 · {loaded}/2 GLB</p>
