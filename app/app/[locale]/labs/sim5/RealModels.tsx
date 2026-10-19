@@ -269,14 +269,21 @@ export default function RealModels({tr}:{tr:boolean}) {
       // The source worker's visor is stored upright. Add a lowered,
       // dark protective face screen at the working side of the helmet.
       // This is a static PPE pose correction, not skeletal animation.
+      const headParts:any[]=[];
+      welderScene.traverse((obj:any)=>{if(!obj.isMesh)return;const names=(Array.isArray(obj.material)?obj.material:[obj.material]).map((m:any)=>m?.name||"").join(" ");if(/head|face|helmet|hardhat|caucasian/i.test(obj.name+" "+names))headParts.push(obj)});
+      const headBounds=new THREE.Box3();
+      for(const obj of headParts)headBounds.expandByObject(obj);
+      const headCenter=headParts.length?headBounds.getCenter(new THREE.Vector3()):new THREE.Vector3(workX,1.93,workZ);
       const visorFrame=new THREE.Group();
-      visorFrame.position.set(workX+.27,1.86,workZ-.15);
-      visorFrame.rotation.y=-.22;
-      const visorMat=new THREE.MeshPhysicalMaterial({color:"#101c23",roughness:.38,metalness:.08,transparent:true,opacity:.92,side:THREE.DoubleSide});
-      const visor=new THREE.Mesh(new THREE.BoxGeometry(.065,.35,.29),visorMat);
-      visor.position.set(0,-.15,0);visor.castShadow=true;visorFrame.add(visor);
-      const rim=new THREE.Mesh(new THREE.BoxGeometry(.075,.035,.31),darkMetal);
-      rim.position.set(0,.03,0);visorFrame.add(rim);
+      visorFrame.position.set(headCenter.x+.17,headCenter.y-.08,headCenter.z);
+      visorFrame.rotation.y=-.12;
+      const visorMat=new THREE.MeshPhysicalMaterial({color:"#152027",roughness:.35,metalness:.08,side:THREE.DoubleSide});
+      const visor=new THREE.Mesh(new THREE.BoxGeometry(.055,.34,.31),visorMat);
+      visor.position.set(0,-.12,0);visor.castShadow=true;visorFrame.add(visor);
+      const windowMesh=new THREE.Mesh(new THREE.BoxGeometry(.061,.085,.19),new THREE.MeshPhysicalMaterial({color:"#28343c",roughness:.22,transparent:true,opacity:.78}));
+      windowMesh.position.set(.004,-.095,0);visorFrame.add(windowMesh);
+      const rim=new THREE.Mesh(new THREE.BoxGeometry(.075,.035,.33),darkMetal);
+      rim.position.set(0,.055,0);visorFrame.add(rim);
       scene.add(visorFrame);
       // Entire loaded assembly is selectable for the hot-work HSE exercise.
       welderScene.traverse((obj:any)=>{if(obj.isMesh){obj.userData.inspectionId="hotwork";inspectionMarkers.push(obj);}});
@@ -312,9 +319,13 @@ export default function RealModels({tr}:{tr:boolean}) {
     // Raise and bring the work surface towards the torch side of the
     // imported worker, instead of leaving the coupon below the raised hand.
     const standX=workX+1.35,standZ=workZ-.55;
-    box(standX,.75,standZ,.11,1.45,.11,darkMetal);
-    box(standX,.09,standZ,.72,.14,.62,darkMetal);
-    box(standX,1.49,standZ,.7,.07,.54,couponSteel);
+    for(const dx of [-.46,.46])for(const dz of [-.35,.35]){
+      box(standX+dx,.715,standZ+dz,.09,1.43,.09,darkMetal);
+      box(standX+dx,.09,standZ+dz,.19,.08,.19,darkMetal);
+    }
+    for(const dz of [-.35,.35])box(standX,.38,standZ+dz,1.03,.065,.07,darkMetal);
+    for(const dx of [-.46,.46])box(standX+dx,.38,standZ,.07,.065,.78,darkMetal);
+    box(standX,1.47,standZ,1.12,.075,.83,couponSteel);
     const coupon=place(new THREE.Mesh(new THREE.BoxGeometry(.46,.16,.27),couponSteel),standX,1.65,standZ,"hotwork");
     coupon.rotation.y=.16;
     // A short electrode terminates at the coupon; no floating weld point.
@@ -345,24 +356,27 @@ export default function RealModels({tr}:{tr:boolean}) {
     // The static source asset is not represented as a finished welding animation.
     // Compact but recognizable portable fire extinguisher, including the
     // safety handle, pressure gauge, flexible hose and discharge nozzle.
-    const exX=workX+3.4,exZ=workZ+1.1;
+    const exX=workX-3.1,exZ=workZ+2.0;
     const extinguisherRed=material("#c52c23",.23);
-    const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.105,.115,.52,24),extinguisherRed),exX,.275,exZ,"hotwork");
-    place(new THREE.Mesh(new THREE.CylinderGeometry(.085,.1,.085,20),darkMetal),exX,.05,exZ,"hotwork");
-    place(new THREE.Mesh(new THREE.CylinderGeometry(.045,.05,.075,16),darkMetal),exX,.575,exZ,"hotwork");
-    box(exX,.635,exZ,.28,.034,.06,darkMetal);
-    box(exX-.09,.675,exZ,.13,.025,.055,darkMetal);
-    const gauge=place(new THREE.Mesh(new THREE.CylinderGeometry(.045,.045,.026,18),material("#ddd9ca",.38)),exX+.075,.605,exZ,"hotwork");
+    const fireWatchExt=place(new THREE.Mesh(new THREE.CylinderGeometry(.16,.17,.72,32),extinguisherRed),exX,.39,exZ,"hotwork");
+    place(new THREE.Mesh(new THREE.CylinderGeometry(.085,.1,.085,20),darkMetal),exX,.045,exZ,"hotwork");
+    place(new THREE.Mesh(new THREE.CylinderGeometry(.045,.05,.075,16),darkMetal),exX,.79,exZ,"hotwork");
+    box(exX,.85,exZ,.38,.04,.075,darkMetal);
+    box(exX-.13,.89,exZ,.17,.03,.065,darkMetal);
+    const gauge=place(new THREE.Mesh(new THREE.CylinderGeometry(.045,.045,.026,18),material("#ddd9ca",.38)),exX+.11,.83,exZ,"hotwork");
     gauge.rotation.z=Math.PI/2;
+    place(new THREE.Mesh(new THREE.PlaneGeometry(.22,.27),new THREE.MeshBasicMaterial({color:"#e9e6dc",side:THREE.DoubleSide})),exX,.42,exZ+.168,"hotwork");
+    const safetyPin=place(new THREE.Mesh(new THREE.TorusGeometry(.034,.009,7,12),material("#d6c36e",.5)),exX-.13,.87,exZ,"hotwork");
+    safetyPin.rotation.y=Math.PI/2;
     const hosePoints=[
-      new THREE.Vector3(exX+.08,.57,exZ),
-      new THREE.Vector3(exX+.22,.49,exZ+.03),
-      new THREE.Vector3(exX+.23,.31,exZ+.07),
-      new THREE.Vector3(exX+.16,.19,exZ+.13)
+      new THREE.Vector3(exX+.12,.81,exZ),
+      new THREE.Vector3(exX+.28,.68,exZ+.03),
+      new THREE.Vector3(exX+.3,.36,exZ+.07),
+      new THREE.Vector3(exX+.22,.13,exZ+.13)
     ];
     const exHose=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(hosePoints),18,.018,7,false),darkMetal);
     exHose.castShadow=true;scene.add(exHose);
-    const nozzle=place(new THREE.Mesh(new THREE.CylinderGeometry(.025,.035,.09,12),darkMetal),exX+.16,.16,exZ+.13,"hotwork");
+    const nozzle=place(new THREE.Mesh(new THREE.CylinderGeometry(.025,.035,.09,12),darkMetal),exX+.22,.13,exZ+.13,"hotwork");
     nozzle.rotation.x=Math.PI/2;
     // The fire extinguisher is intentionally close to combustibles but not
     // a replacement for a hot-work permit or proper fire-watch controls.
