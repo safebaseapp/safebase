@@ -1,11 +1,16 @@
 "use client";
-import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent } from "react";
 import { createWeldingOperation } from "./WeldingOperation";
 import { createLiftingOperation } from "./LiftingOperation";
 
 export default function RealModels({tr}:{tr:boolean}) {
  const mount=useRef<HTMLDivElement>(null);
  const held=useRef<Set<string>>(new Set());
+ const keyboard=useRef<Set<string>>(new Set());
+ const pointers=useRef<Map<number,string>>(new Map());
+ const syncInput=useCallback(()=>{held.current.clear();for(const key of keyboard.current)held.current.add(key);for(const key of pointers.current.values())held.current.add(key)},[]);
+ const clearInput=useCallback(()=>{keyboard.current.clear();pointers.current.clear();held.current.clear()},[]);
+ const releasePointer=useCallback((pointerId:number)=>{pointers.current.delete(pointerId);syncInput()},[syncInput]);
  const reset=useRef<()=>void>(()=>{});
  const [status,setStatus]=useState(tr?"Saha hazırlanıyor…":"Preparing site…");
  const [loaded,setLoaded]=useState(0);
@@ -15,6 +20,19 @@ export default function RealModels({tr}:{tr:boolean}) {
  const [nearbyHazard,setNearbyHazard]=useState<string|null>(null);
  const nearbyRef=useRef<string|null>(null);
  const inspectNearby=useRef<()=>void>(()=>{});
+ const inspectPress=useRef<{id:number;x:number;y:number}|null>(null);
+ const touchInspection=useRef(false);
+ const beginInspection=(e:ReactPointerEvent<HTMLButtonElement>)=>{
+  touchInspection.current=e.pointerType!=="mouse";
+  inspectPress.current={id:e.pointerId,x:e.clientX,y:e.clientY};
+ };
+ const finishInspection=(e:ReactPointerEvent<HTMLButtonElement>)=>{
+  const press=inspectPress.current;inspectPress.current=null;
+  if(touchInspection.current&&press?.id===e.pointerId&&Math.hypot(e.clientX-press.x,e.clientY-press.y)<12){e.preventDefault();inspectNearby.current();}
+ };
+ const clickInspection=(e:ReactMouseEvent<HTMLButtonElement>)=>{if(e.detail===0||!touchInspection.current)inspectNearby.current()};
+ const cancelInspection=()=>{inspectPress.current=null};
+ const inspectionEvents={onPointerDown:beginInspection,onPointerUp:finishInspection,onPointerCancel:cancelInspection,onLostPointerCapture:cancelInspection,onClick:clickInspection};
  const inspections:Record<string,{question:[string,string],answers:[[string,string],[string,string]],correct:number,explanation:[string,string]}>= {
   leak:{question:["Tank sahasında şüpheli sızıntı var. İlk adım?","Suspected tank-yard leak. First action?"],answers:[["Alanı izole et, güvenli mesafeden bildir","Isolate the area and report from a safe distance"],["Sızıntının kaynağına yaklaş","Approach the leak source"]],correct:0,explanation:["Bilinmeyen sızıntıya yaklaşma; acil müdahale prosedürünü başlat.","Do not approach an unknown release; initiate the emergency response procedure."]},
   hotwork:{question:["Sıcak çalışma öncesi yanıcı atmosfer ihtimali var. Ne yaparsın?","Potential flammable atmosphere before hot work. What do you do?"],answers:[["Yangın söndürücü ile işe başla","Start with a fire extinguisher"],["İşi durdur, izin ve gaz ölçümünü doğrula","Stop work and verify permit and gas testing"]],correct:1,explanation:["Çalışma izni, atmosfer testi ve yangın gözcüsü kontrol edilmeli.","Verify the permit, atmosphere testing and fire watch."]},
@@ -23,7 +41,7 @@ export default function RealModels({tr}:{tr:boolean}) {
  };
  const [mode,setMode]=useState<"walk"|"overview">("overview");
  const modeRef=useRef<"walk"|"overview">("overview");
- const switchMode=(m:"walk"|"overview")=>{held.current.clear();modeRef.current=m;setMode(m);reset.current()};
+ const switchMode=(m:"walk"|"overview")=>{clearInput();modeRef.current=m;setMode(m);reset.current()};
  useEffect(()=>{
   let active=true,raf=0,renderer:any,cleanup=()=>{};
   const host=mount.current;if(!host)return;
@@ -317,19 +335,34 @@ export default function RealModels({tr}:{tr:boolean}) {
       return true;
     };
     let yaw=Math.PI,pitch=-.13,drag=false,px=0,py=0,orbitAngle=.5;
+    let dragPointer:number|null=null;
     const setCamera=()=>{
+      clearInput();drag=false;dragPointer=null;
       if(modeRef.current==="overview"){camera.position.set(104,68,123);camera.lookAt(0,4,-8)}
       else {camera.position.set(-18,1.8,10);yaw=Math.PI;pitch=-.06;camera.lookAt(-18,1.8,-20)}
     };
     reset.current=setCamera;setCamera();
     const isTyping=(target:EventTarget|null)=>target instanceof HTMLElement&&!!target.closest("input,textarea,select,[contenteditable='true']");
-    const down=(e:KeyboardEvent)=>{if(isTyping(e.target)||e.altKey||e.ctrlKey||e.metaKey)return;const key=e.key.toLowerCase();if(["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"].includes(key)){held.current.add(key);if(e.key.startsWith("Arrow")&&modeRef.current==="walk")e.preventDefault()}};
-    const up=(e:KeyboardEvent)=>held.current.delete(e.key.toLowerCase());
-    const blur=()=>{held.current.clear();drag=false};
+    const down=(e:KeyboardEvent)=>{
+      if(modeRef.current!=="walk"||isTyping(e.target)||e.altKey||e.ctrlKey||e.metaKey)return;
+      const key=e.key.toLowerCase();
+      if(["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"].includes(key)){
+        e.preventDefault();if(e.repeat&&!keyboard.current.has(key))return;keyboard.current.add(key);syncInput();
+      }
+    };
+    const up=(e:KeyboardEvent)=>{keyboard.current.delete(e.key.toLowerCase());syncInput()};
+    const blur=()=>{clearInput();drag=false;dragPointer=null};
+    const visibility=()=>{if(document.hidden)blur()};
+    const release=(e:PointerEvent)=>releasePointer(e.pointerId);
     window.addEventListener("keydown",down);window.addEventListener("keyup",up);window.addEventListener("blur",blur);
-    const pointerDown=(e:PointerEvent)=>{if(e.pointerType==="mouse"&&e.button!==0)return;drag=true;px=e.clientX;py=e.clientY;startX=px;startY=py;renderer.domElement.setPointerCapture?.(e.pointerId)};
-    const pointerUp=()=>drag=false;
-    const pointerMove=(e:PointerEvent)=>{if(!drag)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;if(modeRef.current==="walk"){yaw-=dx*.004;pitch=Math.max(-1.15,Math.min(1.15,pitch-dy*.003))}else{orbitAngle+=dx*.004}};
+    window.addEventListener("pointerup",release);window.addEventListener("pointercancel",release);window.addEventListener("lostpointercapture",release);
+    document.addEventListener("visibilitychange",visibility);
+    const pointerDown=(e:PointerEvent)=>{
+      if((e.pointerType==="mouse"&&e.button!==0)||dragPointer!==null)return;
+      drag=true;dragPointer=e.pointerId;px=e.clientX;py=e.clientY;startX=px;startY=py;renderer.domElement.setPointerCapture?.(e.pointerId);
+    };
+    const pointerUp=(e:PointerEvent)=>{if(e.pointerId===dragPointer){drag=false;dragPointer=null}};
+    const pointerMove=(e:PointerEvent)=>{if(!drag||e.pointerId!==dragPointer)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;if(modeRef.current==="walk"){yaw-=dx*.004;pitch=Math.max(-1.15,Math.min(1.15,pitch-dy*.003))}else{orbitAngle+=dx*.004}};
     // Touch gestures should rotate the 3D camera rather than scroll the page.
     renderer.domElement.style.touchAction="none";
     renderer.domElement.addEventListener("pointerdown",pointerDown);renderer.domElement.addEventListener("pointerup",pointerUp);renderer.domElement.addEventListener("pointercancel",pointerUp);renderer.domElement.addEventListener("lostpointercapture",pointerUp);renderer.domElement.addEventListener("pointermove",pointerMove);
@@ -349,8 +382,8 @@ export default function RealModels({tr}:{tr:boolean}) {
         const move=new THREE.Vector3();
         if(held.current.has("w")||held.current.has("arrowup"))move.add(forward);
         if(held.current.has("s")||held.current.has("arrowdown"))move.sub(forward);
-        if(held.current.has("a"))move.sub(right);
-        if(held.current.has("d"))move.add(right);
+        if(held.current.has("a")||held.current.has("arrowleft"))move.sub(right);
+        if(held.current.has("d")||held.current.has("arrowright"))move.add(right);
         if(move.lengthSq()>0){
           move.normalize().multiplyScalar(dt*7);
           // Separate axes permit sliding along tank walls and pipework.
@@ -359,8 +392,6 @@ export default function RealModels({tr}:{tr:boolean}) {
           const zNext=camera.position.clone();zNext.z+=move.z;
           if(canStep(zNext,camera.position))camera.position.z=zNext.z;
         }
-        if(held.current.has("arrowleft"))yaw+=dt*1.4;
-        if(held.current.has("arrowright"))yaw-=dt*1.4;
         camera.position.x=Math.max(-80,Math.min(80,camera.position.x));
         camera.position.z=Math.max(-62,Math.min(115,camera.position.z));
         camera.position.y=1.8;
@@ -383,26 +414,24 @@ export default function RealModels({tr}:{tr:boolean}) {
       renderer.render(scene,camera);raf=requestAnimationFrame(tick);
     };
     raf=requestAnimationFrame(tick);
-    const resize=()=>{if(!host.clientWidth||!host.clientHeight)return;camera.aspect=host.clientWidth/host.clientHeight;camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight)};
+    const resize=()=>{clearInput();drag=false;dragPointer=null;if(!host.clientWidth||!host.clientHeight)return;camera.aspect=host.clientWidth/host.clientHeight;camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight)};
     // Window resize alone misses responsive parent/layout changes. Observe
     // the actual canvas container so its aspect ratio stays accurate on mobile.
     const sizeObserver=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
     sizeObserver?.observe(host);
     window.addEventListener("resize",resize);
     resize();
-    cleanup=()=>{sizeObserver?.disconnect();window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);window.removeEventListener("blur",blur);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointercancel",pointerUp);renderer?.domElement?.removeEventListener("lostpointercapture",pointerUp);renderer?.domElement?.removeEventListener("pointerup",inspect);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
+    cleanup=()=>{sizeObserver?.disconnect();window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);window.removeEventListener("blur",blur);window.removeEventListener("pointerup",release);window.removeEventListener("pointercancel",release);window.removeEventListener("lostpointercapture",release);document.removeEventListener("visibilitychange",visibility);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointercancel",pointerUp);renderer?.domElement?.removeEventListener("lostpointercapture",pointerUp);renderer?.domElement?.removeEventListener("pointerup",inspect);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
    }catch(e){if(active)setStatus("3D error: "+String(e))}
   })();
-  return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();held.current.clear()};
- },[tr]);
+  return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();clearInput()};
+ },[tr,clearInput,syncInput,releasePointer]);
 
  const controls:[string,string,string,string][]=[
-  ["↶","arrowleft","Sola dön","Turn left"],
   ["←","a","Sola git","Strafe left"],
   ["↑","w","İleri git","Move forward"],
   ["↓","s","Geri git","Move backward"],
   ["→","d","Sağa git","Strafe right"],
-  ["↷","arrowright","Sağa dön","Turn right"]
  ];
  const touchButtons:[string,string,number,number,string,string][]=[
   ["↑","w",2,1,"İleri","Forward"],
@@ -412,32 +441,36 @@ export default function RealModels({tr}:{tr:boolean}) {
  ];
  const holdKey=(key:string,e:ReactPointerEvent<HTMLButtonElement>)=>{
   if(modeRef.current!=="walk")return;
-  e.preventDefault();held.current.add(key);
+  if(e.pointerType==="mouse"&&e.button!==0)return;
+  e.preventDefault();pointers.current.set(e.pointerId,key);syncInput();
   try{e.currentTarget.setPointerCapture(e.pointerId)}catch{/* button can detach after mode change */}
  };
- const releaseKey=(key:string)=>{held.current.delete(key)};
+ const releaseKey=(e:ReactPointerEvent<HTMLButtonElement>)=>{releasePointer(e.pointerId)};
  return <>
   <style>{`
-   .sim5-stage{position:relative;width:100%;min-width:0}
+   .sim5-stage{position:relative;width:100%;min-width:0;isolation:isolate}
    .sim5-canvas{height:min(72vh,750px);min-height:380px}
    .sim5-touch-dpad,.sim5-touch-inspect{display:none}
    .sim5-desktop-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
    .sim5-desktop-controls button{min-width:52px;min-height:48px;border:0;border-radius:9px;background:#176b82;color:#fff;font-size:19px;touch-action:none;cursor:pointer}
    .sim5-desktop-controls button:disabled{background:#364a55;cursor:default}
+   .sim5-touch-button{box-sizing:border-box}
+   .sim5-touch-help{display:none}
    .sim5-controls-help{font-size:13px;color:#b7cdd5}
    @media (pointer:coarse),(max-width:700px){
     .sim5-canvas{height:min(68svh,680px);min-height:350px}
     .sim5-touch-dpad{position:absolute;left:14px;bottom:14px;display:grid;grid-template-columns:repeat(3,54px);grid-template-rows:repeat(2,54px);gap:5px;z-index:2;touch-action:none;user-select:none}
     .sim5-touch-button{width:54px;height:54px;border:1px solid rgba(179,233,244,.58);border-radius:12px;background:rgba(12,50,65,.86);color:#fff;font-size:25px;font-weight:700;touch-action:none;user-select:none;cursor:pointer}
     .sim5-touch-button:active{background:#1388a9}
-    .sim5-touch-inspect{position:absolute;right:12px;bottom:18px;display:block;max-width:43%;padding:12px 14px;border:0;border-radius:10px;font-weight:800;background:#e4b53e;color:#17272e;z-index:2;touch-action:manipulation}
-    .sim5-desktop-controls button{display:none}
+    .sim5-touch-inspect{position:absolute;right:12px;top:12px;height:fit-content;display:block;max-width:43%;padding:12px 14px;border:0;border-radius:10px;font-weight:800;background:#e4b53e;color:#17272e;z-index:2;touch-action:manipulation}
+    .sim5-desktop-controls button,.sim5-controls-help{display:none}
+    .sim5-touch-help{display:block;font-size:13px;color:#b7cdd5}
    }
    @media (max-width:420px){
     .sim5-canvas{height:min(65svh,570px);min-height:320px}
     .sim5-touch-dpad{left:8px;bottom:8px;grid-template-columns:repeat(3,46px);grid-template-rows:repeat(2,46px);gap:4px}
     .sim5-touch-button{width:46px;height:46px}
-    .sim5-touch-inspect{font-size:12px;right:8px;bottom:10px;padding:10px;max-width:42%}
+    .sim5-touch-inspect{font-size:12px;right:8px;top:8px;padding:10px;max-width:calc(100% - 16px)}
    }
    @media (orientation:landscape) and (max-height:540px){
     .sim5-canvas{height:70svh;min-height:245px}
@@ -451,7 +484,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     <div style={{display:"flex",gap:8,flexWrap:"wrap",maxWidth:"100%"}}>
      <button onClick={()=>switchMode("overview")} style={{padding:"10px 14px",borderRadius:8,border:mode==="overview"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="overview"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Kuş bakışı":"Overview"}</button>
      <button onClick={()=>switchMode("walk")} style={{padding:"10px 14px",borderRadius:8,border:mode==="walk"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="walk"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sahada yürü":"Walk site"}</button>
-     <button onClick={()=>{held.current.clear();reset.current()}} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sıfırla":"Reset"}</button>
+     <button onClick={()=>{clearInput();reset.current()}} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sıfırla":"Reset"}</button>
     </div>
    </div>
    <div className="sim5-stage">
@@ -459,19 +492,20 @@ export default function RealModels({tr}:{tr:boolean}) {
     {mode==="walk"&&<div className="sim5-touch-dpad" role="group" aria-label={tr?"Hareket kontrolleri":"Movement controls"}>
      {touchButtons.map(([symbol,key,col,row,trl,enl])=><button key={key} type="button" data-testid={"sim5-touch-"+key} className="sim5-touch-button" aria-label={tr?trl:enl} title={tr?trl:enl} style={{gridColumn:col,gridRow:row}}
       onPointerDown={e=>holdKey(key,e)}
-      onPointerUp={()=>releaseKey(key)}
-      onPointerCancel={()=>releaseKey(key)}
-      onLostPointerCapture={()=>releaseKey(key)}
+      onPointerUp={releaseKey}
+      onPointerCancel={releaseKey}
+      onLostPointerCapture={releaseKey}
       onContextMenu={e=>e.preventDefault()}>{symbol}</button>)}
     </div>}
-    {mode==="walk"&&nearbyHazard&&<button type="button" className="sim5-touch-inspect" onClick={()=>inspectNearby.current()}>{tr?"🔍 Tehlikeyi incele":"🔍 Inspect hazard"}</button>}
+    {mode==="walk"&&nearbyHazard&&<button type="button" className="sim5-touch-inspect" {...inspectionEvents}>{tr?"🔍 Tehlikeyi incele":"🔍 Inspect hazard"}</button>}
    </div>
    <div className="sim5-desktop-controls">
     {controls.map(([symbol,key,trl,enl])=><button type="button" key={key} disabled={mode!=="walk"} aria-label={tr?trl:enl} title={tr?trl:enl}
-     onPointerDown={e=>holdKey(key,e)} onPointerUp={()=>releaseKey(key)} onPointerCancel={()=>releaseKey(key)} onLostPointerCapture={()=>releaseKey(key)} onContextMenu={e=>e.preventDefault()}>{symbol}</button>)}
-    <span className="sim5-controls-help">{mode==="walk"?(tr?"WASD ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
+     onPointerDown={e=>holdKey(key,e)} onPointerUp={releaseKey} onPointerCancel={releaseKey} onLostPointerCapture={releaseKey} onContextMenu={e=>e.preventDefault()}>{symbol}</button>)}
+    <span className="sim5-controls-help">{mode==="walk"?(tr?"WASD / ok tuşları ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD / arrows to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
+    <span className="sim5-touch-help">{mode==="walk"?(tr?"Yön tuşlarını basılı tut · Sahneyi sürükleyerek bak":"Hold a direction to move · Drag the scene to look"):(tr?"Yürü modunu seç · Sürükleyerek tesisin etrafında dön":"Select Walk · Drag to orbit the site")}</span>
    </div>
-  {mode==="walk"&&nearbyHazard&&<button onClick={()=>inspectNearby.current()} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
+  {mode==="walk"&&nearbyHazard&&<button {...inspectionEvents} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
   <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(inspections).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
   {activeInspection&&<section style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}><h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>{inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{const current=inspections[activeInspection];if(i===current.correct){setCompletedInspections(prev=>prev.includes(activeInspection)?prev:[...prev,activeInspection]);setActiveInspection(null)}setInspectionFeedback((i===current.correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+current.explanation[tr?0:1])}} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}<button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button></section>}
   {inspectionFeedback&&<p role="status" style={{color:"#ffcf7d"}}>{inspectionFeedback}</p>}
