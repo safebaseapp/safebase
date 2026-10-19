@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { createWeldingOperation } from "./WeldingOperation";
+import { createLiftingOperation } from "./LiftingOperation";
 
 export default function RealModels({tr}:{tr:boolean}) {
  const mount=useRef<HTMLDivElement>(null);
@@ -17,6 +18,7 @@ export default function RealModels({tr}:{tr:boolean}) {
  const inspections:Record<string,{question:[string,string],answers:[[string,string],[string,string]],correct:number,explanation:[string,string]}>= {
   leak:{question:["Tank sahasında şüpheli sızıntı var. İlk adım?","Suspected tank-yard leak. First action?"],answers:[["Alanı izole et, güvenli mesafeden bildir","Isolate the area and report from a safe distance"],["Sızıntının kaynağına yaklaş","Approach the leak source"]],correct:0,explanation:["Bilinmeyen sızıntıya yaklaşma; acil müdahale prosedürünü başlat.","Do not approach an unknown release; initiate the emergency response procedure."]},
   hotwork:{question:["Sıcak çalışma öncesi yanıcı atmosfer ihtimali var. Ne yaparsın?","Potential flammable atmosphere before hot work. What do you do?"],answers:[["Yangın söndürücü ile işe başla","Start with a fire extinguisher"],["İşi durdur, izin ve gaz ölçümünü doğrula","Stop work and verify permit and gas testing"]],correct:1,explanation:["Çalışma izni, atmosfer testi ve yangın gözcüsü kontrol edilmeli.","Verify the permit, atmosphere testing and fire watch."]},
+  lifting:{question:["Askıdaki borunun yanından geçmen gerekiyor. Ne yaparsın?","You need to pass the suspended pipe. What do you do?"],answers:[["Borunun altından hızlıca geç","Walk quickly under the pipe"],["Alan dışında kal, işaretçinin güvenli geçiş onayını bekle","Stay outside and wait for the signaller to confirm safe access"]],correct:1,explanation:["Askıdaki yükün altına girilmez. Güvenlik alanını, sapanları ve işaretçi koordinasyonunu doğrula.","Never enter beneath a suspended load. Verify the exclusion zone, rigging and signaller coordination."]},
   access:{question:["Acil çıkış güzergâhı engellenmiş. Ne yaparsın?","An emergency route is obstructed. What do you do?"],answers:[["Engeli güvenle kaldırttır ve erişimi doğrula","Arrange safe removal and verify access"],["Vardiya sonunu bekle","Wait until the end of the shift"]],correct:0,explanation:["Acil kaçış yolları sürekli açık tutulmalıdır.","Emergency escape routes must remain clear."]}
  };
  const [mode,setMode]=useState<"walk"|"overview">("overview");
@@ -223,6 +225,20 @@ export default function RealModels({tr}:{tr:boolean}) {
     }catch(error){
       if(active)setStatus(previous=>previous+" · "+(tr?"Kaynak modeli yüklenemedi: ":"Welder model failed: ")+String(error));
     }
+    // Front-yard lifting pad, beyond the factory footprint and off the road.
+    const liftingX=-30,liftingZ=47;
+    const liftingOperation=createLiftingOperation(THREE,tr);
+    liftingOperation.group.position.set(liftingX,.06,liftingZ);
+    scene.add(liftingOperation.group);
+    liftingOperation.group.updateMatrixWorld(true);
+    liftingOperation.group.traverse((obj:{isMesh?:boolean;name:string})=>{
+      if(!obj.isMesh)return;
+      inspectionMarkers.push(obj);
+      if(["crane-chassis","crane-tire","outrigger-mat","outrigger-extension","barrier-post","barrier-foot"].includes(obj.name)){
+        colliders.push(obj);colliderBoxes.push(new THREE.Box3().setFromObject(obj));
+      }
+    });
+    const liftingPoint=liftingOperation.inspectionPoint.clone().add(new THREE.Vector3(liftingX,0,liftingZ));
     // Combustibles remain an intentional hot-work HSE decision, independent
     // of the corrected operator, protective equipment and electrical circuit.
     for(const dx of [-2.4,-1.8]){
@@ -350,7 +366,7 @@ export default function RealModels({tr}:{tr:boolean}) {
         camera.lookAt(camera.position.clone().add(new THREE.Vector3(Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch))));
       }
       if(modeRef.current==="walk"){
-        const hazards:[string,number,number][]=[["hotwork",workX,workZ],["leak",leakX,leakZ],["access",accessX,accessZ]];
+        const hazards:[string,number,number][]=[["hotwork",workX,workZ],["leak",leakX,leakZ],["access",accessX,accessZ],["lifting",liftingPoint.x,liftingPoint.z]];
         const closest=hazards.map(([id,x,z])=>({id,d:Math.hypot(camera.position.x-x,camera.position.z-z)})).sort((a,b)=>a.d-b.d)[0];
         const next=closest?.d<7?closest.id:null;
         if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next)}
@@ -394,7 +410,7 @@ export default function RealModels({tr}:{tr:boolean}) {
    <span style={{fontSize:13,color:"#b7cdd5"}}>{mode==="walk"?(tr?"WASD ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
   </div>
   {mode==="walk"&&nearbyHazard&&<button onClick={()=>inspectNearby.current()} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
-  <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/3 · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
+  <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(inspections).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
   {activeInspection&&<section style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}><h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>{inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{const current=inspections[activeInspection];if(i===current.correct){setCompletedInspections(prev=>prev.includes(activeInspection)?prev:[...prev,activeInspection]);setActiveInspection(null)}setInspectionFeedback((i===current.correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+current.explanation[tr?0:1])}} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}<button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button></section>}
   {inspectionFeedback&&<p role="status" style={{color:"#ffcf7d"}}>{inspectionFeedback}</p>}
   <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: burnedhrum · Welder: grewe.juergen · CC BY 4.0 · {loaded}/2 GLB</p>

@@ -6,13 +6,14 @@ import {build} from 'esbuild';
 import {repoRoot,toolRoot} from './inspect.mjs';
 const operation=path.join(repoRoot,'app/app/[locale]/labs/sim5/WeldingOperation.ts');
 export async function startServer(port=4176){
+ const lifting=await build({entryPoints:[path.join(repoRoot,'app/app/[locale]/labs/sim5/LiftingOperation.ts')],format:'esm',write:false});
  const compiled=await build({entryPoints:[operation],format:'esm',write:false});
  const site=await build({entryPoints:[path.join(toolRoot,'site.jsx')],bundle:true,write:false,format:'esm',jsx:'automatic',nodePaths:[path.join(repoRoot,'app/node_modules')]});
  const types={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.glb':'model/gltf-binary','.png':'image/png'};
  const server=http.createServer(async(req,res)=>{
   try{
    const pathname=decodeURIComponent(new URL(req.url,'http://local').pathname);
-   if(pathname==='/operation.js'||pathname==='/site.js'){res.setHeader('Content-Type','text/javascript');return res.end((pathname==='/operation.js'?compiled:site).outputFiles[0].contents);}
+   if(pathname==='/operation.js'||pathname==='/site.js'||pathname==='/lifting.js'){res.setHeader('Content-Type','text/javascript');return res.end((pathname==='/operation.js'?compiled:pathname==='/lifting.js'?lifting:site).outputFiles[0].contents);}
    let base=toolRoot,relative=pathname==='/'?'review.html':pathname.slice(1);
    if(pathname.startsWith('/vendor/')){base=path.join(toolRoot,'node_modules');relative=pathname.slice(8);}
    else if(pathname.startsWith('/sim5/')){base=path.join(repoRoot,'app/public');relative=pathname.slice(1);}

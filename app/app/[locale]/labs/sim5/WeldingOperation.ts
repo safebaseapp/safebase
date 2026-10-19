@@ -85,6 +85,16 @@ export function createWeldingOperation(THREE: any, source: any, tr: boolean) {
     if (!materialCopies.has(original)) {
       const m = original.clone();
       if (m.map) m.map.colorSpace = THREE.SRGBColorSpace;
+      // Keep authored albedo/UV detail. Muted tints and dielectric roughness
+      // prevent the leather and hardhat turning white under the site's sun.
+      const finish = m.name.includes("MC-BodySuit") ? ["#a8bfdc", "#245d91", .91] :
+        m.name.includes("elvs_mens_apron") ? ["#c6a48b", "#75462d", .88] :
+        m.name.includes("materialMaterial") ? ["#ccb49c", "#765136", .86] :
+        m.name.includes("riding_helmet") ? ["#e9e3d0", "#e9e3d0", .68] : null;
+      if (finish) {
+        m.color.set(m.map ? finish[0] : finish[1]);
+        m.roughness = finish[2];m.metalness = 0;
+      }
       if (m.name === lens.material.name) { m.color.set("#102c27"); m.metalness = .25; m.roughness = .19; }
       materialCopies.set(original, m);
     }
@@ -110,6 +120,9 @@ export function createWeldingOperation(THREE: any, source: any, tr: boolean) {
       // that buffer rounds them to zero; rebuild into a Float32 attribute.
       geometry.deleteAttribute("normal");
       geometry.computeVertexNormals();
+      // The hardhat's authored tangent frame no longer matches its posed
+      // normals. Let Three derive the normal-map frame from the posed UVs.
+      geometry.deleteAttribute("tangent");
     }
     geometry.computeBoundingBox();geometry.computeBoundingSphere();
     const mesh = new THREE.Mesh(geometry, Array.isArray(original.material) ? original.material.map(materialCopy) : materialCopy(original.material));
@@ -175,11 +188,12 @@ export function createWeldingOperation(THREE: any, source: any, tr: boolean) {
     const x=sign<0?shellBox.min.x:shellBox.max.x;
     segment("shield-headband",headPose(v(x,eyeCenter.y+.045,center(face).z)),headPose(v(x,eyeCenter.y+.045,shellBox.max.z+.07)),.009,dark);
   }
-  const arc=add("weld-arc",new THREE.SphereGeometry(.014,12,8),new THREE.MeshBasicMaterial({color:0xe6f7ff}),contact);
-  const light=new THREE.PointLight(0xbce6ff,1.25,1.6,2);light.name="weld-light";light.position.copy(contact);group.add(light);
+  const arc=add("weld-arc",new THREE.SphereGeometry(.020,12,8),new THREE.MeshBasicMaterial({color:0xe6f7ff,toneMapped:false}),contact);
+  const halo=add("weld-arc-halo",new THREE.SphereGeometry(.043,12,8),new THREE.MeshBasicMaterial({color:0x76caff,transparent:true,opacity:.20,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false}),contact);
+  const light=new THREE.PointLight(0xbce6ff,2.8,1.8,2);light.name="weld-light";light.position.copy(contact);group.add(light);
   const sparks:any[]=[];
-  const sparkMat=new THREE.MeshBasicMaterial({color:0xffc261});
-  for(let i=0;i<16;i++)sparks.push(add("contact-spark",new THREE.SphereGeometry(.0025,5,4),sparkMat,contact));
+  const sparkMat=new THREE.MeshBasicMaterial({color:0xffc261,toneMapped:false});
+  for(let i=0;i<20;i++)sparks.push(add("contact-spark",new THREE.SphereGeometry(.004,5,4),sparkMat,contact));
   // A grounded 6 kg extinguisher, away from the lead route and readable from
   // the approach side. All details are procedural; no additional asset license.
   const ex=v(-.92,floor,-.45),red=metal("#b82020",.23,.38);
@@ -209,7 +223,7 @@ export function createWeldingOperation(THREE: any, source: any, tr: boolean) {
   group.traverse((mesh:any)=>{if(mesh.isMesh)mesh.userData.inspectionId="hotwork";});
   const update=(seconds:number)=>{
     const active=Math.sin(seconds*9)>-.42;
-    arc.visible=active;light.intensity=active?1.25+.25*Math.sin(seconds*35):0;
+    arc.visible=halo.visible=active;light.intensity=active?2.8+.45*Math.sin(seconds*35):0;
     for(let i=0;i<sparks.length;i++){
       const age=(seconds*1.8+i/sparks.length)%1,angle=i*2.399963;
       sparks[i].visible=active&&age<.8;

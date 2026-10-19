@@ -5,7 +5,7 @@ import {chromium} from 'playwright';
 import {createHash} from 'node:crypto';
 import {inspectAsset,repoRoot,toolRoot} from './inspect.mjs';
 import {startServer} from './server.mjs';
-const out=path.join(toolRoot,'artifacts');await fs.mkdir(out,{recursive:true});
+const out=path.join(toolRoot,'artifacts');await fs.mkdir(out,{recursive:true});await fs.rm(path.join(out,'results.json'),{force:true});
 const asset=inspectAsset();
 assert.equal(asset.sha256,'147b7b18d9121c77b08ab3137e2f8678174806b470ad82a9ecf6a7184fd245c7');
 assert.equal(asset.nodes.length,772);assert.equal(asset.meshCount,387);assert.equal(asset.materials.length,27);
@@ -82,7 +82,7 @@ try{
   await page.getByRole('button',{name:lang==='tr'?'İşi durdur, izin ve gaz ölçümünü doğrula':'Stop work and verify permit and gas testing',exact:true}).click();
   await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
   const body=await page.locator('body').innerText();
-  check(`${lang}: incorrect hot-work choice rejected and correct choice recorded`,body.includes('1/3'));
+  check(`${lang}: incorrect hot-work choice rejected and correct choice recorded`,body.includes('1/4'));
   check(`${lang}: both industrial assets loaded`,body.includes('2/2'));
   await page.evaluate(()=>{window.reviewCamera={position:[-18.6,2.8,-9.6],target:[-22.3,1,-4.65]};window.reviewFrameRequested=true;});
   await page.waitForFunction(()=>!!window.siteCamera);
@@ -102,15 +102,16 @@ try{
    await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
    checks.push(`${lang}: ${hazard.name} unsafe choice rejected and safe choice accepted`);
   }
-  check(`${lang}: all three HSE decisions completed`,(await page.locator('body').innerText()).includes('3/3'));
+  check(`${lang}: all three HSE decisions completed`,(await page.locator('body').innerText()).includes('3/4'));
  }
  assert.deepEqual(errors,[],'Browser errors');assert.deepEqual(requests,[],'Isolated review unexpectedly used external network');
  checks.push('no browser errors or external network requests');
- const result={timestamp:new Date().toISOString(),checks,geometry,errors,externalRequests:requests,assetSha256:asset.sha256};
- await fs.writeFile(path.join(out,'results.json'),JSON.stringify(result,null,2));
- console.log(`PASS: ${checks.length} geometry, rendering, integration and TR/EN HSE checks. Screenshots: ${out}`);
  // Models from the site outside the welder must be byte-identical.
  for(const [name,expected]of [['SERNEM_SIM4_Factory_optimized.glb','0bfb3c1baed3478cbffed6ab078e4e080c0a361ae2f185896ecc4607922d9785'],['large_industrial_storage_tanks (1).glb','57f8af41a804fb9f231437c73c5fcd1d11047a4aac42aaa43f0b52dd8d3558e8']]){
   const bytes=await fs.readFile(path.join(repoRoot,'app/public/sim5',name));assert.equal(createHash('sha256').update(bytes).digest('hex'),expected);
  }
+ const result={timestamp:new Date().toISOString(),checks,geometry,errors,externalRequests:requests,assetSha256:asset.sha256};
+ await fs.writeFile(path.join(out,'results.json'),JSON.stringify(result,null,2));
+ console.log(`PASS: ${checks.length} geometry, rendering, integration and TR/EN HSE checks. Screenshots: ${out}`);
+
 }catch(error){console.error('PAGE',await page.locator('body').innerText());console.error('ERRORS',errors);throw error;}finally{await browser.close();server.closeAllConnections();await new Promise(resolve=>server.close(resolve));}

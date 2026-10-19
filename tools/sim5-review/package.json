@@ -5,7 +5,9 @@
   "scripts": {
     "inspect": "node inspect.mjs",
     "test": "node test.mjs",
-    "serve": "node server.mjs"
+    "serve": "node server.mjs",
+    "test:pack": "node pack-test.mjs",
+    "test:all": "node test.mjs && node pack-test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.25.12",

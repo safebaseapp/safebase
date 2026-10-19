@@ -47,3 +47,26 @@ changing the component's initial camera or controls.
 Screenshots and full machine-readable reports are ignored generated artifacts.
 Selected, visually inspected captures are retained in
 `docs/sim5-welding-review/` with the development report.
+
+## Lifting and welder-color pack
+
+Run `npm --prefix tools/sim5-review run test:all` from the repository root.
+This preserves the 28 welding/site regression checks and then runs
+`pack-test.mjs`: 47 additional checks for unchanged welding anchors, actual
+rendered colors under three camera/light combinations, hook/rope/sling
+connectivity, hollow balanced pipe geometry, grounded outriggers, site clearance,
+and both languages' four HSE decisions. `test:pack` runs that second suite alone.
+The additional manual fixture is `/lifting.html` (add `?lang=tr` for labels).
+
+Color samples render only the selected garment against black with the real
+material, textures and lighting. Non-background pixels are read back from
+WebGL. Blue/brown chroma and white-pixel fractions are checked; the hardhat's
+brightness is compared with the suit under the same illumination, so a shaded
+white hardhat is not incorrectly required to have sunlit pixel values.
+These checks do not replace inspection of complete station/site captures.
+
+`artifacts/pack-results.json` records each assertion and measured values; captures
+use the `pack-` prefix. Passing result files are removed at the beginning of each
+suite and written only after all checks pass. The original GLBs are still
+checksummed. No downloaded crane asset is needed: crane and rigging geometry are
+original procedural project code under the repository's MIT license.
