@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { createWeldingOperation } from "./WeldingOperation";
 import { createLiftingOperation } from "./LiftingOperation";
 
@@ -23,7 +23,7 @@ export default function RealModels({tr}:{tr:boolean}) {
  };
  const [mode,setMode]=useState<"walk"|"overview">("overview");
  const modeRef=useRef<"walk"|"overview">("overview");
- const switchMode=(m:"walk"|"overview")=>{modeRef.current=m;setMode(m);reset.current()};
+ const switchMode=(m:"walk"|"overview")=>{held.current.clear();modeRef.current=m;setMode(m);reset.current()};
  useEffect(()=>{
   let active=true,raf=0,renderer:any,cleanup=()=>{};
   const host=mount.current;if(!host)return;
@@ -344,7 +344,8 @@ export default function RealModels({tr}:{tr:boolean}) {
         const distance=145;camera.position.set(Math.sin(orbitAngle)*distance,66,Math.cos(orbitAngle)*distance);camera.lookAt(0,4,-8);
       }else{
         const forward=new THREE.Vector3(Math.sin(yaw),0,Math.cos(yaw));
-        const right=new THREE.Vector3(Math.cos(yaw),0,-Math.sin(yaw));
+        // Camera-right is forward crossed with world-up (the old vector pointed left).
+        const right=forward.clone().cross(new THREE.Vector3(0,1,0));
         const move=new THREE.Vector3();
         if(held.current.has("w")||held.current.has("arrowup"))move.add(forward);
         if(held.current.has("s")||held.current.has("arrowdown"))move.sub(forward);
@@ -394,25 +395,87 @@ export default function RealModels({tr}:{tr:boolean}) {
   })();
   return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();held.current.clear()};
  },[tr]);
- const controls=[["↶","arrowleft"],["←","a"],["↑","w"],["↓","s"],["→","d"],["↷","arrowright"]];
- return <section style={{boxSizing:"border-box",maxWidth:1600,width:"100%",minWidth:0,margin:"0 auto",overflowX:"hidden"}}>
-  <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",justifyContent:"space-between",marginBottom:12}}>
-   <p style={{color:"#9de8e9",margin:0}} role="status">{status}</p>
-   <div style={{display:"flex",gap:8,flexWrap:"wrap",maxWidth:"100%"}}>
-    <button onClick={()=>switchMode("overview")} style={{padding:"10px 14px",borderRadius:8,border:mode==="overview"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="overview"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Kuş bakışı":"Overview"}</button>
-    <button onClick={()=>switchMode("walk")} style={{padding:"10px 14px",borderRadius:8,border:mode==="walk"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="walk"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sahada yürü":"Walk site"}</button>
-    <button onClick={()=>reset.current()} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sıfırla":"Reset"}</button>
+
+ const controls:[string,string,string,string][]=[
+  ["↶","arrowleft","Sola dön","Turn left"],
+  ["←","a","Sola git","Strafe left"],
+  ["↑","w","İleri git","Move forward"],
+  ["↓","s","Geri git","Move backward"],
+  ["→","d","Sağa git","Strafe right"],
+  ["↷","arrowright","Sağa dön","Turn right"]
+ ];
+ const touchButtons:[string,string,number,number,string,string][]=[
+  ["↑","w",2,1,"İleri","Forward"],
+  ["←","a",1,2,"Sol","Left"],
+  ["↓","s",2,2,"Geri","Back"],
+  ["→","d",3,2,"Sağ","Right"]
+ ];
+ const holdKey=(key:string,e:ReactPointerEvent<HTMLButtonElement>)=>{
+  if(modeRef.current!=="walk")return;
+  e.preventDefault();held.current.add(key);
+  try{e.currentTarget.setPointerCapture(e.pointerId)}catch{/* button can detach after mode change */}
+ };
+ const releaseKey=(key:string)=>{held.current.delete(key)};
+ return <>
+  <style>{`
+   .sim5-stage{position:relative;width:100%;min-width:0}
+   .sim5-canvas{height:min(72vh,750px);min-height:380px}
+   .sim5-touch-dpad,.sim5-touch-inspect{display:none}
+   .sim5-desktop-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+   .sim5-desktop-controls button{min-width:52px;min-height:48px;border:0;border-radius:9px;background:#176b82;color:#fff;font-size:19px;touch-action:none;cursor:pointer}
+   .sim5-desktop-controls button:disabled{background:#364a55;cursor:default}
+   .sim5-controls-help{font-size:13px;color:#b7cdd5}
+   @media (pointer:coarse),(max-width:700px){
+    .sim5-canvas{height:min(68svh,680px);min-height:350px}
+    .sim5-touch-dpad{position:absolute;left:14px;bottom:14px;display:grid;grid-template-columns:repeat(3,54px);grid-template-rows:repeat(2,54px);gap:5px;z-index:2;touch-action:none;user-select:none}
+    .sim5-touch-button{width:54px;height:54px;border:1px solid rgba(179,233,244,.58);border-radius:12px;background:rgba(12,50,65,.86);color:#fff;font-size:25px;font-weight:700;touch-action:none;user-select:none;cursor:pointer}
+    .sim5-touch-button:active{background:#1388a9}
+    .sim5-touch-inspect{position:absolute;right:12px;bottom:18px;display:block;max-width:43%;padding:12px 14px;border:0;border-radius:10px;font-weight:800;background:#e4b53e;color:#17272e;z-index:2;touch-action:manipulation}
+    .sim5-desktop-controls button{display:none}
+   }
+   @media (max-width:420px){
+    .sim5-canvas{height:min(65svh,570px);min-height:320px}
+    .sim5-touch-dpad{left:8px;bottom:8px;grid-template-columns:repeat(3,46px);grid-template-rows:repeat(2,46px);gap:4px}
+    .sim5-touch-button{width:46px;height:46px}
+    .sim5-touch-inspect{font-size:12px;right:8px;bottom:10px;padding:10px;max-width:42%}
+   }
+   @media (orientation:landscape) and (max-height:540px){
+    .sim5-canvas{height:70svh;min-height:245px}
+    .sim5-touch-dpad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px);left:8px;bottom:8px;gap:4px}
+    .sim5-touch-button{width:44px;height:44px;font-size:23px}
+   }
+`}</style>
+  <section style={{boxSizing:"border-box",maxWidth:1600,width:"100%",minWidth:0,margin:"0 auto",overflowX:"hidden"}}>
+   <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap",justifyContent:"space-between",marginBottom:12}}>
+    <p style={{color:"#9de8e9",margin:0}} role="status">{status}</p>
+    <div style={{display:"flex",gap:8,flexWrap:"wrap",maxWidth:"100%"}}>
+     <button onClick={()=>switchMode("overview")} style={{padding:"10px 14px",borderRadius:8,border:mode==="overview"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="overview"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Kuş bakışı":"Overview"}</button>
+     <button onClick={()=>switchMode("walk")} style={{padding:"10px 14px",borderRadius:8,border:mode==="walk"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="walk"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sahada yürü":"Walk site"}</button>
+     <button onClick={()=>{held.current.clear();reset.current()}} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sıfırla":"Reset"}</button>
+    </div>
    </div>
-  </div>
-  <div ref={mount} style={{width:"100%",height:"min(72vh,750px)",minHeight:380,borderRadius:14,overflow:"hidden",background:"#91b1c5",touchAction:"none"}}/>
-  <div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap",marginTop:12}}>
-   {controls.map(([label,key])=><button key={key} disabled={mode!=="walk"} onPointerDown={e=>{e.preventDefault();held.current.add(key)}} onPointerUp={()=>held.current.delete(key)} onPointerCancel={()=>held.current.delete(key)} onPointerLeave={()=>held.current.delete(key)} style={{padding:"12px 18px",border:0,borderRadius:9,background:mode==="walk"?"#176b82":"#364a55",color:"white",fontSize:19,touchAction:"none",cursor:"pointer"}}>{label}</button>)}
-   <span style={{fontSize:13,color:"#b7cdd5"}}>{mode==="walk"?(tr?"WASD ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
-  </div>
+   <div className="sim5-stage">
+    <div ref={mount} className="sim5-canvas" style={{width:"100%",borderRadius:14,overflow:"hidden",background:"#91b1c5",touchAction:"none"}}/>
+    {mode==="walk"&&<div className="sim5-touch-dpad" role="group" aria-label={tr?"Hareket kontrolleri":"Movement controls"}>
+     {touchButtons.map(([symbol,key,col,row,trl,enl])=><button key={key} type="button" data-testid={"sim5-touch-"+key} className="sim5-touch-button" aria-label={tr?trl:enl} title={tr?trl:enl} style={{gridColumn:col,gridRow:row}}
+      onPointerDown={e=>holdKey(key,e)}
+      onPointerUp={()=>releaseKey(key)}
+      onPointerCancel={()=>releaseKey(key)}
+      onLostPointerCapture={()=>releaseKey(key)}
+      onContextMenu={e=>e.preventDefault()}>{symbol}</button>)}
+    </div>}
+    {mode==="walk"&&nearbyHazard&&<button type="button" className="sim5-touch-inspect" onClick={()=>inspectNearby.current()}>{tr?"🔍 Tehlikeyi incele":"🔍 Inspect hazard"}</button>}
+   </div>
+   <div className="sim5-desktop-controls">
+    {controls.map(([symbol,key,trl,enl])=><button type="button" key={key} disabled={mode!=="walk"} aria-label={tr?trl:enl} title={tr?trl:enl}
+     onPointerDown={e=>holdKey(key,e)} onPointerUp={()=>releaseKey(key)} onPointerCancel={()=>releaseKey(key)} onLostPointerCapture={()=>releaseKey(key)} onContextMenu={e=>e.preventDefault()}>{symbol}</button>)}
+    <span className="sim5-controls-help">{mode==="walk"?(tr?"WASD ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
+   </div>
   {mode==="walk"&&nearbyHazard&&<button onClick={()=>inspectNearby.current()} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
   <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(inspections).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
   {activeInspection&&<section style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}><h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>{inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{const current=inspections[activeInspection];if(i===current.correct){setCompletedInspections(prev=>prev.includes(activeInspection)?prev:[...prev,activeInspection]);setActiveInspection(null)}setInspectionFeedback((i===current.correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+current.explanation[tr?0:1])}} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}<button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button></section>}
   {inspectionFeedback&&<p role="status" style={{color:"#ffcf7d"}}>{inspectionFeedback}</p>}
   <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: burnedhrum · Welder: grewe.juergen · CC BY 4.0 · {loaded}/2 GLB</p>
- </section>;
+  </section>
+ </>;
 }
