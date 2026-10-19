@@ -1,3 +1,4 @@
+import {startMission,lookAtInspection,resumeMission} from './mission-test-support.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -74,27 +75,27 @@ try{
   await page.goto(url+'/site.html?lang='+lang);await page.waitForFunction(()=>window.siteScene?.getObjectByName('sim5-lifting-operation'),null,{timeout:120000});
   const placement=await page.evaluate(()=>{const group=window.siteScene.getObjectByName('sim5-lifting-operation');return{position:group.position.toArray(),hasWelder:!!window.siteScene.getObjectByName('sim5-welding-operation')};});
   check(`${lang}: lifting pad is off the road and beyond the factory plot`,placement.position[0]+12.85<-11.1&&placement.position[2]-8>30.5&&placement.hasWelder);
-  await page.getByRole('button',{name:lang==='tr'?'Sahada yürü':'Walk site',exact:true}).click();await page.evaluate(()=>window.siteCamera.position.set(-17,1.8,47));
+  await startMission(page,lang);await page.getByRole('button',{name:lang==='tr'?'Sahada yürü':'Walk site',exact:true}).click();await page.evaluate(()=>window.siteCamera.position.set(-17,1.8,47));
+  await lookAtInspection(page,'lifting');
   const inspect=page.getByRole('button',{name:lang==='tr'?'🔍 Yakındaki tehlikeyi incele':'🔍 Inspect nearby hazard'});await inspect.waitFor();await inspect.click();
   await page.getByRole('button',{name:lang==='tr'?'Bariyer varken sapan ve işaretçi kontrolü gerekmez':'A barrier makes rigging and signaller checks unnecessary',exact:true}).click();await page.getByText(lang==='tr'?'Güvensiz seçim.':'Unsafe choice.',{exact:false}).waitFor();
-  check(`${lang}: unsafe assumption that barriers replace rigging checks is rejected`,(await page.locator('body').innerText()).includes('0/6'));
+  check(`${lang}: unsafe assumption that barriers replace rigging checks is rejected`,(await page.getByTestId('sim5-hse-progress').innerText()).includes('0/6'));
   await page.getByRole('button',{name:lang==='tr'?'Kaldırma planı, sapanlar, zemin/ayaklar ve işaretçi iletişimi':'Lift plan, rigging, ground/outriggers and signaller communication',exact:true}).click();await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
-  check(`${lang}: safe lifting decision is recorded once`,(await page.locator('body').innerText()).includes('1/6'));
+  check(`${lang}: safe lifting decision is recorded once`,(await page.getByTestId('sim5-hse-progress').innerText()).includes('1/6'));
   await inspect.click();
-  await page.getByRole('button',{name:lang==='tr'?'Kaldırma planı, sapanlar, zemin/ayaklar ve işaretçi iletişimi':'Lift plan, rigging, ground/outriggers and signaller communication',exact:true}).click();
-  check(`${lang}: repeat lifting inspection cannot inflate progress`,(await page.locator('body').innerText()).includes('1/6'));
+  await page.getByRole('heading',{name:lang==='tr'?'Kontrol durumu':'Control status',exact:true}).waitFor();await page.getByRole('button',{name:lang==='tr'?'Kapat':'Close',exact:true}).click();
+  check(`${lang}: repeat lifting inspection cannot inflate progress`,(await page.getByTestId('sim5-hse-progress').innerText()).includes('1/6'));
   for(const hazard of [
-   {position:[-22,1.8,-2],answer:['İşi durdur, izin ve gaz ölçümünü doğrula','Stop work and verify permit and gas testing']},
-   {position:[22,1.8,-17],answer:['Alanı izole et, güvenli mesafeden bildir','Isolate the area and report from a safe distance']},
-   {position:[19.5,1.8,-2],answer:['Engeli güvenle kaldırttır ve erişimi doğrula','Arrange safe removal and verify access']}
+   {id:'hotwork',position:[-22,1.8,-2],answer:['İşi durdur, izin ve gaz ölçümünü doğrula','Stop work and verify permit and gas testing']},
+   {id:'leak',position:[22,1.8,-17],answer:['Alanı izole et, güvenli mesafeden bildir','Isolate the area and report from a safe distance']},
+   {id:'access',position:[19.5,1.8,-2],answer:['Engeli güvenle kaldırttır ve erişimi doğrula','Arrange safe removal and verify access']}
   ]){
-   await page.evaluate(position=>window.siteCamera.position.fromArray(position),hazard.position);await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await inspect.click();
+   await page.evaluate(position=>window.siteCamera.position.fromArray(position),hazard.position);await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await lookAtInspection(page,hazard.id);await inspect.click();
    await page.getByRole('button',{name:hazard.answer[lang==='tr'?0:1],exact:true}).click();await page.getByText(lang==='tr'?'Doğru.':'Correct.',{exact:false}).waitFor();
   }
-  check(`${lang}: existing three decisions and lifting finish together at 4/6`,(await page.locator('body').innerText()).includes('4/6'));
-  await page.evaluate(()=>window.siteCamera.position.set(-17,1.8,47));await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await inspect.click();
-  await page.getByRole('button',{name:lang==='tr'?'Kaldırma planı, sapanlar, zemin/ayaklar ve işaretçi iletişimi':'Lift plan, rigging, ground/outriggers and signaller communication',exact:true}).click();
-  await page.getByText(lang==='tr'?'Bariyer dışında kal.':'Remain outside the barrier.',{exact:false}).waitFor();
+  check(`${lang}: existing three decisions and lifting finish together at 4/6`,(await page.getByTestId('sim5-hse-progress').innerText()).includes('4/6'));
+  await page.evaluate(()=>window.siteCamera.position.set(-17,1.8,47));await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await lookAtInspection(page,'lifting');await inspect.click();
+  await page.getByRole('heading',{name:lang==='tr'?'Kontrol durumu':'Control status',exact:true}).waitFor();await page.getByRole('button',{name:lang==='tr'?'Kapat':'Close',exact:true}).click();
   for(const[name,position,target]of [['approach',[-12,6,33],[-27,4.8,47]],['rear',[-47,11,60],[-27,5,47]],['overview',[66,58,115],[-2,3,12]]]){
    await page.evaluate(({position,target})=>{window.reviewCamera={position,target};window.reviewFrameRequested=true;},{position,target});await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await page.screenshot({path:path.join(out,`pack-site-${lang}-${name}.png`)});
   }

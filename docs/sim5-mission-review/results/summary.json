@@ -1,0 +1,28 @@
+{
+  "base": "cefb5bd7b0ba021929596f60c87ecd02289a9fb2",
+  "counts": {
+    "mission-state-results.json": 27,
+    "mission-browser-results.json": 43,
+    "height-results.json": 52,
+    "runtime-validation.json": 7,
+    "navigation-results.json": 5,
+    "results.json": 28,
+    "pack-results.json": 47,
+    "controls-results.json": 80
+  },
+  "totalChecks": 289,
+  "typescript": "passed: npx tsc --noEmit",
+  "eslint": "passed: eight changed SIM5 production modules",
+  "build": "passed: npx next build (inherited NFT import-trace warning)",
+  "limitations": [
+    "Physical Android/iOS hardware not tested",
+    "No authenticated Supabase application E2E",
+    "SwiftShader diagnostic timings are not hardware mobile FPS",
+    "Attempt state is in memory and lost on page reload; persistence deliberately deferred"
+  ],
+  "assetSha256": {
+    "SERNEM_SIM4_Factory_optimized.glb": "0bfb3c1baed3478cbffed6ab078e4e080c0a361ae2f185896ecc4607922d9785",
+    "large_industrial_storage_tanks (1).glb": "57f8af41a804fb9f231437c73c5fcd1d11047a4aac42aaa43f0b52dd8d3558e8",
+    "SERNEM_Welder_06_under25MB.glb": "147b7b18d9121c77b08ab3137e2f8678174806b470ad82a9ecf6a7184fd245c7"
+  }
+}

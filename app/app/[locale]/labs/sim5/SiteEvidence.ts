@@ -1,14 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- pinned Three runtime */
 /** Original project geometry. GLB assets are never rewritten. */
 export function addUpperEvidence(T:any,scene:any,markers:any[]) {
+ const evidence:Record<string,any[]>={droppedTool:[],materials:[]};
  const steel=new T.MeshStandardMaterial({color:'#8e9ba2',metalness:.75,roughness:.35}),red=new T.MeshStandardMaterial({color:'#b44330',roughness:.8});
- const add=(id:string,g:any,m:any,x:number,y:number,z:number)=>{const o=new T.Mesh(g,m);o.position.set(x,y,z);o.name='evidence-'+id;o.userData.inspectionId=id;o.castShadow=true;o.receiveShadow=true;scene.add(o);markers.push(o);return o;};
+ const add=(id:string,g:any,m:any,x:number,y:number,z:number)=>{const o=new T.Mesh(g,m);o.position.set(x,y,z);o.name='evidence-'+id;o.userData.inspectionId=id;o.castShadow=true;o.receiveShadow=true;scene.add(o);markers.push(o);evidence[id].push(o);return o;};
  add('droppedTool',new T.BoxGeometry(.32,.025,.055),steel,57.8,11.235,-24.1);
  for(const x of [57.62,57.98]){const ring=add('droppedTool',new T.TorusGeometry(.048,.014,8,16),steel,x,11.235,-24.1);ring.rotation.x=Math.PI/2;}
  add('materials',new T.BoxGeometry(.38,.035,.27),red,51.5,11.235,-26.55);
  for(const z of [-26.685,-26.415])add('materials',new T.BoxGeometry(.38,.06,.025),red,51.5,11.28,z);
  for(const x of [51.31,51.69])add('materials',new T.BoxGeometry(.025,.06,.27),red,x,11.28,-26.55);
  for(let i=0;i<5;i++){const nut=add('materials',new T.TorusGeometry(.027,.012,6,6),steel,51.38+i*.055,11.275,-26.55+(i%2)*.07);nut.rotation.x=Math.PI/2;}
+ const base=new Map<any,any>();for(const meshes of Object.values(evidence))for(const mesh of meshes)base.set(mesh,mesh.position.clone());
+ const box=(name:string,x:number,y:number,z:number,w:number,h:number,d:number,color:string,id:string)=>{
+  const mesh=new T.Mesh(new T.BoxGeometry(w,h,d),new T.MeshStandardMaterial({color,roughness:.75,metalness:.25}));mesh.name=name;mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;mesh.visible=false;mesh.userData.inspectionId=id;scene.add(mesh);return mesh;
+ };
+ const toolBox=box('secured-tool-box',58.9,11.27,-25.1,.52,.12,.32,'#345e69','droppedTool');
+ const toolLid=box('secured-tool-lid',58.9,11.345,-25.1,.54,.03,.34,'#527d86','droppedTool');
+ const latch=box('secured-tool-latch',58.9,11.32,-25.28,.06,.05,.025,'#c6d1d5','droppedTool');
+ const lid=box('closed-fittings-lid',46,11.325,-25.3,.40,.025,.29,'#b44330','materials');
+ return { apply(completed:Set<string>){
+  const toolDone=completed.has('droppedTool'),materialsDone=completed.has('materials');
+  for(const mesh of evidence.droppedTool)mesh.position.copy(base.get(mesh)).add(new T.Vector3(toolDone?1.1:0,0,toolDone?-1:0));
+  for(const mesh of evidence.materials)mesh.position.copy(base.get(mesh)).add(new T.Vector3(materialsDone?-5.5:0,0,materialsDone?1.25:0));
+  toolBox.visible=toolLid.visible=latch.visible=toolDone;lid.visible=materialsDone;
+  toolBox.userData.controlState=toolDone?'tool-stowed':'pending';lid.userData.controlState=materialsDone?'closed-and-relocated':'pending';
+ }};
+
 }
 /** Shared, detailed CC BY human geometry from the already loaded source asset.
  * Retain its standing pose and PPE; omit apron, torch, shield and welding equipment.

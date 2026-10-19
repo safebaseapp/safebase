@@ -6,6 +6,11 @@ import { createLiftingOperation } from "./LiftingOperation";
 import { createSiteNavigation } from "./SiteNavigation";
 import { siteInspections, canInspectAt } from "./SiteInspections";
 import { addUpperEvidence, createSignaller, addFireWatchStation } from "./SiteEvidence";
+import { useMission } from "./useMission";
+import { missionSummary } from "./MissionState";
+import { MissionPanel, MissionHud } from "./MissionPanel";
+import { controlOutcomes, wrongDecisionReasons, scenarioNames } from "./MissionConsequences";
+import { createMissionSceneEffects } from "./MissionSceneEffects";
 
 const inspections=siteInspections;
 
@@ -21,7 +26,11 @@ export default function RealModels({tr}:{tr:boolean}) {
  const [status,setStatus]=useState(tr?"Saha hazırlanıyor…":"Preparing site…");
  const [loaded,setLoaded]=useState(0);
  const [activeInspection,setActiveInspection]=useState<string|null>(null);
- const [completedInspections,setCompletedInspections]=useState<string[]>([]);
+ const {mission,missionRef,send}=useMission();
+ const summary=missionSummary(mission);
+ const completedInspections=summary.completed;
+ const discovered=summary.found;
+ const [ready,setReady]=useState(false);
  const [inspectionFeedback,setInspectionFeedback]=useState("");
  const [nearbyHazard,setNearbyHazard]=useState<string|null>(null);
  const nearbyRef=useRef<string|null>(null);
@@ -41,9 +50,11 @@ export default function RealModels({tr}:{tr:boolean}) {
  const cancelInspection=()=>{inspectPress.current=null};
  const inspectionEvents={onPointerDown:beginInspection,onPointerUp:finishInspection,onPointerCancel:cancelInspection,onLostPointerCapture:cancelInspection,onClick:clickInspection};
  const inspectionRecords=Object.fromEntries(Object.entries(inspections).map(([id,h])=>[id,{...h,completed:completedInspections.includes(id)}]));
- const [discovered,setDiscovered]=useState<string[]>([]);
  const [mode,setMode]=useState<"walk"|"overview">("overview");
  const modeRef=useRef<"walk"|"overview">("overview");
+ const startMission=()=>{clearInput();send({type:"start"});modeRef.current="walk";setMode("walk");reset.current();if(window.matchMedia("(pointer:coarse),(max-width:700px)").matches)requestAnimationFrame(()=>mount.current?.scrollIntoView({block:"center"}));};
+ const restartMission=()=>{clearInput();send({type:"restart"});setInspectionFeedback("");setActiveInspection(null);nearbyRef.current=null;setNearbyHazard(null);reset.current();};
+ useEffect(()=>{if(mission.phase!=="active"){clearInput();setActiveInspection(null)}},[mission.phase,clearInput]);
  const switchMode=(m:"walk"|"overview")=>{clearInput();modeRef.current=m;setMode(m);reset.current()};
  useEffect(()=>{
   let active=true,raf=0,renderer:any,cleanup=()=>{};
@@ -291,11 +302,17 @@ export default function RealModels({tr}:{tr:boolean}) {
     physicalBoxes.push(new THREE.Box3(new THREE.Vector3(accessX-1.5,.2,accessZ-1.4),new THREE.Vector3(accessX+1.5,1.9,accessZ+1.4)));
     physicalBoxes.push(new THREE.Box3(new THREE.Vector3(-36.2,0,40.8),new THREE.Vector3(-18.8,15,53.2)));
     box(-17.5,.02,56,3,.08,3,walkway);
-    addUpperEvidence(THREE,scene,inspectionMarkers);
+    const upperEvidence=addUpperEvidence(THREE,scene,inspectionMarkers);
+    const consequences=createMissionSceneEffects(THREE,scene,tr,upperEvidence);
+    consequences.sync(Object.entries(missionRef.current.findings).filter(([,finding])=>finding.completed).map(([id])=>id));
+    let appliedFindings=missionRef.current.findings;
     addFireWatchStation(THREE,scene,tr);
     const sightRay=new THREE.Raycaster();
     const available=(id:string)=>{
-      const h=inspections[id];if(modeRef.current!=="walk"||!h||!canInspectAt(h,camera.position))return false;
+      const h=inspections[id];if(missionRef.current.phase!=="active"||modeRef.current!=="walk"||!h||!canInspectAt(h,camera.position))return false;
+      camera.updateMatrixWorld(true);
+      const projected=new THREE.Vector3(...h.location).project(camera);
+      if(projected.z< -1||projected.z>1||Math.abs(projected.x)>.98||Math.abs(projected.y)>.98)return false;
       const direction=new THREE.Vector3(...h.location).sub(camera.position),distance=direction.length();
       sightRay.set(camera.position,direction.normalize());sightRay.near=.1;sightRay.far=Math.max(.1,distance-.15);
       return !sightRay.intersectObjects(colliders,false).some((hit:any)=>hit.object.userData.inspectionId!==id);
@@ -312,13 +329,13 @@ export default function RealModels({tr}:{tr:boolean}) {
         const worldHit=hit.point;
         const targetId=hit.object.userData.inspectionId;
         if(targetId&&available(targetId)&&camera.position.distanceTo(worldHit)<10){
-          setActiveInspection(targetId);setInspectionFeedback("");
+          send({type:"discover",id:targetId});clearInput();setActiveInspection(targetId);setInspectionFeedback("");
         }
       }
     };
     renderer.domElement.addEventListener("pointerup",inspect);
     inspectionAvailable.current=available;
-    inspectNearby.current=()=>{const id=nearbyRef.current;if(id&&available(id)){setActiveInspection(id);setInspectionFeedback("")}};
+    inspectNearby.current=()=>{const id=nearbyRef.current;if(id&&available(id)){send({type:"discover",id});clearInput();setActiveInspection(id);setInspectionFeedback("")}};
     box(63.3,.125,-16.1,1.05,.25,1.5,walkway);
     // Close the measured 8 cm seam between the two authored stair landings.
     box(63.3,5.115,-21.95,.83,.08,.5,darkMetal);
@@ -346,7 +363,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     reset.current=setCamera;setCamera();
     const isTyping=(target:EventTarget|null)=>target instanceof HTMLElement&&!!target.closest("input,textarea,select,[contenteditable='true']");
     const down=(e:KeyboardEvent)=>{
-      if(modeRef.current!=="walk"||isTyping(e.target)||e.altKey||e.ctrlKey||e.metaKey)return;
+      if(missionRef.current.phase!=="active"||modeRef.current!=="walk"||isTyping(e.target)||e.altKey||e.ctrlKey||e.metaKey)return;
       const key=e.key.toLowerCase();
       if(["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"].includes(key)){
         e.preventDefault();if(e.repeat&&!keyboard.current.has(key))return;keyboard.current.add(key);syncInput();
@@ -368,13 +385,14 @@ export default function RealModels({tr}:{tr:boolean}) {
     // Touch gestures should rotate the 3D camera rather than scroll the page.
     renderer.domElement.style.touchAction="none";
     renderer.domElement.addEventListener("pointerdown",pointerDown);renderer.domElement.addEventListener("pointerup",pointerUp);renderer.domElement.addEventListener("pointercancel",pointerUp);renderer.domElement.addEventListener("lostpointercapture",pointerUp);renderer.domElement.addEventListener("pointermove",pointerMove);
-    let last=performance.now();
+    let last=performance.now(),simulationSeconds=0;
     const tick=(now:number)=>{
       if(!active)return;
       // Keep the preview lightweight when its browser tab is not visible.
       // Continue scheduling so rendering resumes automatically on return.
       if(document.hidden){last=now;raf=requestAnimationFrame(tick);return;}
       const dt=Math.min(.05,(now-last)/1000);last=now;
+      if(missionRef.current.phase==="active"||missionRef.current.phase==="briefing")simulationSeconds+=dt;
       if(modeRef.current==="overview"){
         const distance=145;camera.position.set(Math.sin(orbitAngle)*distance,66,Math.cos(orbitAngle)*distance);camera.lookAt(0,4,-8);
       }else{
@@ -386,7 +404,7 @@ export default function RealModels({tr}:{tr:boolean}) {
         if(held.current.has("s")||held.current.has("arrowdown"))move.sub(forward);
         if(held.current.has("a")||held.current.has("arrowleft"))move.sub(right);
         if(held.current.has("d")||held.current.has("arrowright"))move.add(right);
-        if(move.lengthSq()>0){
+        if(missionRef.current.phase==="active"&&move.lengthSq()>0){
           move.normalize().multiplyScalar(dt*(navigation.feet>.35?2:7));
           // Separate axes permit sliding along tank walls and pipework.
           const xNext=camera.position.clone();xNext.x+=move.x;
@@ -402,16 +420,18 @@ export default function RealModels({tr}:{tr:boolean}) {
       if(modeRef.current==="walk"){
         const closest=Object.values(inspections).filter(h=>available(h.id)).sort((a,b)=>camera.position.distanceTo(new THREE.Vector3(...a.location))-camera.position.distanceTo(new THREE.Vector3(...b.location)))[0];
         const next=closest?.id||null;
-        if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next);if(next)setDiscovered(prev=>prev.includes(next)?prev:[...prev,next])}
+        if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next);if(next&&!missionRef.current.findings[next].discovered)send({type:"discover",id:next})}
       }else if(nearbyRef.current){nearbyRef.current=null;setNearbyHazard(null)}
       // Staggered gravity-like drops: origin at flange, landing at the puddle.
       for(let i=0;i<leakDrops.length;i++){
-        const phase=((now*.00052+i/leakDrops.length)%1);
+        const phase=((simulationSeconds*.52+i/leakDrops.length)%1);
         const drop=leakDrops[i];
         drop.position.set(leakX+.035*Math.sin(i*2.1),1.07-(phase*phase)*.88,leakZ+.29+phase*.18);
         drop.visible=phase<.96;
       }
-      weldingOperation?.update(now/1000);
+      if(appliedFindings!==missionRef.current.findings){appliedFindings=missionRef.current.findings;consequences.sync(Object.entries(appliedFindings).filter(([,finding])=>finding.completed).map(([id])=>id));}
+      const missionNow=missionRef.current;
+      weldingOperation?.update(simulationSeconds,!missionNow.findings.hotwork.completed);
       renderer.render(scene,camera);raf=requestAnimationFrame(tick);
     };
     raf=requestAnimationFrame(tick);
@@ -422,11 +442,12 @@ export default function RealModels({tr}:{tr:boolean}) {
     sizeObserver?.observe(host);
     window.addEventListener("resize",resize);
     resize();
+    if(active)setReady(results.every(r=>r.status==="fulfilled")&&!!weldingOperation);
     cleanup=()=>{sizeObserver?.disconnect();window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);window.removeEventListener("blur",blur);window.removeEventListener("pointerup",release);window.removeEventListener("pointercancel",release);window.removeEventListener("lostpointercapture",release);document.removeEventListener("visibilitychange",visibility);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointercancel",pointerUp);renderer?.domElement?.removeEventListener("lostpointercapture",pointerUp);renderer?.domElement?.removeEventListener("pointerup",inspect);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
    }catch(e){if(active)setStatus("3D error: "+String(e))}
   })();
   return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();clearInput()};
- },[tr,clearInput,syncInput,releasePointer]);
+ },[tr,clearInput,syncInput,releasePointer,missionRef,send]);
 
  const controls:[string,string,string,string][]=[
   ["←","a","Sola git","Strafe left"],
@@ -441,7 +462,7 @@ export default function RealModels({tr}:{tr:boolean}) {
   ["→","d",3,2,"Sağ","Right"]
  ];
  const holdKey=(key:string,e:ReactPointerEvent<HTMLButtonElement>)=>{
-  if(modeRef.current!=="walk")return;
+  if(missionRef.current.phase!=="active"||modeRef.current!=="walk")return;
   if(e.pointerType==="mouse"&&e.button!==0)return;
   e.preventDefault();pointers.current.set(e.pointerId,key);syncInput();
   try{e.currentTarget.setPointerCapture(e.pointerId)}catch{/* button can detach after mode change */}
@@ -486,14 +507,16 @@ export default function RealModels({tr}:{tr:boolean}) {
     <div style={{display:"flex",gap:8,flexWrap:"wrap",maxWidth:"100%"}}>
      <button onClick={()=>switchMode("overview")} style={{padding:"10px 14px",borderRadius:8,border:mode==="overview"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="overview"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Kuş bakışı":"Overview"}</button>
      <button onClick={()=>switchMode("walk")} style={{padding:"10px 14px",borderRadius:8,border:mode==="walk"?"1px solid #7ed9ef":"1px solid #375769",background:mode==="walk"?"#14617b":"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sahada yürü":"Walk site"}</button>
-     <button onClick={()=>{clearInput();reset.current()}} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Sıfırla":"Reset"}</button>
+     <button onClick={()=>{clearInput();reset.current()}} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Kamerayı sıfırla":"Reset camera"}</button>
     </div>
    </div>
+   <MissionPanel mission={mission} tr={tr} ready={ready} send={send} onStart={startMission} onRestart={restartMission}/>
    <p style={{color:"#c4dce3",fontSize:14}}>{tr?"Saha brifingi: İşaretli geçişleri kullan. Aktif kaldırma alanına girme. Görünür kanıtları yaklaşarak incele; tank merdivenleri üst servis yoluna çıkar. Üst seviyeyi de araştır.":"Site briefing: Use marked access routes. Stay outside the active lifting zone. Approach visible evidence to inspect it; the tank stairs lead to the upper service walkway. Explore both levels."}</p>
    <div className="sim5-stage">
     <div ref={mount} className="sim5-canvas" style={{width:"100%",borderRadius:14,overflow:"hidden",background:"#91b1c5",touchAction:"none"}}/>
+    <MissionHud mission={mission} tr={tr}/>
     {mode==="walk"&&<div className="sim5-touch-dpad" role="group" aria-label={tr?"Hareket kontrolleri":"Movement controls"}>
-     {touchButtons.map(([symbol,key,col,row,trl,enl])=><button key={key} type="button" data-testid={"sim5-touch-"+key} className="sim5-touch-button" aria-label={tr?trl:enl} title={tr?trl:enl} style={{gridColumn:col,gridRow:row}}
+     {touchButtons.map(([symbol,key,col,row,trl,enl])=><button key={key} type="button" data-testid={"sim5-touch-"+key} className="sim5-touch-button" disabled={mission.phase!=="active"} aria-label={tr?trl:enl} title={tr?trl:enl} style={{gridColumn:col,gridRow:row}}
       onPointerDown={e=>holdKey(key,e)}
       onPointerUp={releaseKey}
       onPointerCancel={releaseKey}
@@ -503,16 +526,29 @@ export default function RealModels({tr}:{tr:boolean}) {
     {mode==="walk"&&nearbyHazard&&<button type="button" className="sim5-touch-inspect" {...inspectionEvents}>{tr?"🔍 Tehlikeyi incele":"🔍 Inspect hazard"}</button>}
    </div>
    <div className="sim5-desktop-controls">
-    {controls.map(([symbol,key,trl,enl])=><button type="button" key={key} disabled={mode!=="walk"} aria-label={tr?trl:enl} title={tr?trl:enl}
+    {controls.map(([symbol,key,trl,enl])=><button type="button" key={key} disabled={mode!=="walk"||mission.phase!=="active"} aria-label={tr?trl:enl} title={tr?trl:enl}
      onPointerDown={e=>holdKey(key,e)} onPointerUp={releaseKey} onPointerCancel={releaseKey} onLostPointerCapture={releaseKey} onContextMenu={e=>e.preventDefault()}>{symbol}</button>)}
     <span className="sim5-controls-help">{mode==="walk"?(tr?"WASD / ok tuşları ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD / arrows to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
     <span className="sim5-touch-help">{mode==="walk"?(tr?"Yön tuşlarını basılı tut · Sahneyi sürükleyerek bak":"Hold a direction to move · Drag the scene to look"):(tr?"Yürü modunu seç · Sürükleyerek tesisin etrafında dön":"Select Walk · Drag to orbit the site")}</span>
    </div>
   {mode==="walk"&&nearbyHazard&&<button {...inspectionEvents} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
-  <p style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(inspections).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
-  {discovered.length>0&&<ul style={{color:"#c4dce3"}} aria-label={tr?"Bulunan uygunsuzluklar":"Discovered findings"}>{discovered.map(id=><li key={id}>{inspectionRecords[id].completed?"✓ ":"○ "}{inspections[id].visibleEvidence[tr?0:1]}</li>)}</ul>}
-  {completedInspections.length===Object.keys(inspections).length&&<p role="status" style={{color:"#a3efbc"}}>{tr?"Saha incelemesi tamamlandı. Alt ve üst seviyedeki tüm riskler için güvenli kontroller seçildi.":"Site inspection complete. Safe controls selected for all ground and upper-level findings."}</p>}
-  {activeInspection&&<section className="sim5-inspection" style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}><h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>{inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{if(!inspectionAvailable.current(activeInspection)){setActiveInspection(null);setInspectionFeedback(tr?"İnceleme noktasına güvenli seviyeden yaklaş.":"Approach the inspection point at its accessible level.");return;}const current=inspections[activeInspection];if(i===current.correct){setCompletedInspections(prev=>prev.includes(activeInspection)?prev:[...prev,activeInspection]);setActiveInspection(null)}setInspectionFeedback((i===current.correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+current.explanation[tr?0:1])}} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}<button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button></section>}
+  <p data-testid="sim5-hse-progress" style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(inspections).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
+  {discovered.length>0&&<ul style={{color:"#c4dce3"}} aria-label={tr?"Bulunan uygunsuzluklar":"Discovered findings"}>{discovered.map(id=><li key={id}>{inspectionRecords[id].completed?"✓ ":"○ "}{inspectionRecords[id].completed?scenarioNames[id][tr?0:1]+" · "+controlOutcomes[id].sign[tr?0:1]:inspections[id].visibleEvidence[tr?0:1]}</li>)}</ul>}
+  {activeInspection&&<section className="sim5-inspection" style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}>
+   {mission.findings[activeInspection].completed?<><h2>{tr?"Kontrol durumu":"Control status"}</h2><p>{tr?"İlk gözlenen kanıt: ":"Initially observed evidence: "}{inspections[activeInspection].visibleEvidence[tr?0:1]}</p><p>{controlOutcomes[activeInspection].text[tr?0:1]}</p><p>{tr?"Bu bulgu için karar kaydedildi; tekrar puan veya XP verilmez.":"The decision is recorded; reviewing this finding awards no additional score or XP."}</p></>:<>
+    <p>{tr?"Gözlenen kanıt: ":"Observed evidence: "}{inspections[activeInspection].visibleEvidence[tr?0:1]}</p>
+    <h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>
+    {inspections[activeInspection].answers.map((answer,i)=><button key={i} onClick={()=>{
+     if(!inspectionAvailable.current(activeInspection)){setActiveInspection(null);setInspectionFeedback(tr?"İnceleme noktasına güvenli seviyeden yaklaş ve kanıta bak.":"Approach the inspection point at its accessible level and look at the evidence.");return;}
+     if(missionRef.current.findings[activeInspection].completed)return;
+     const current=inspections[activeInspection],correct=i===current.correct;
+     send({type:"answer",id:activeInspection,answer:i});
+     if(correct)setActiveInspection(null);
+     setInspectionFeedback((correct?(tr?"Doğru. ":"Correct. "):(tr?"Güvensiz seçim. ":"Unsafe choice. "))+(correct?current.explanation[tr?0:1]+" "+controlOutcomes[activeInspection].text[tr?0:1]:wrongDecisionReasons[activeInspection][tr?0:1]));
+    }} style={{display:"block",width:"100%",textAlign:"left",padding:12,marginTop:8,border:"1px solid #497c91",borderRadius:8,background:"#174659",color:"white"}}>{answer[tr?0:1]}</button>)}
+   </>}
+   <button onClick={()=>setActiveInspection(null)} style={{marginTop:10,padding:8}}>{tr?"Kapat":"Close"}</button>
+  </section>}
   {inspectionFeedback&&<p role="status" style={{color:"#ffcf7d"}}>{inspectionFeedback}</p>}
   <p style={{fontSize:12,color:"#9cb1bb"}}>{tr?"Saha yerleşimi konsept prototipidir; gerçek bir tesisin onaylı kaçış veya trafik planı değildir.":"Concept site layout only; not an approved traffic or evacuation plan for a real facility."} · Factory: Pepe Orejel · Oil Tank: Duane’s Mind (Sketchfab) · Welder: grewe.juergen · CC BY 4.0 · {loaded}/2 GLB</p>
   </section>
