@@ -266,6 +266,18 @@ export default function RealModels({tr}:{tr:boolean}) {
       welderScene.position.z+=workZ-center.z;
       welderScene.updateMatrixWorld(true);
       scene.add(welderScene);
+      // The source worker's visor is stored upright. Add a lowered,
+      // dark protective face screen at the working side of the helmet.
+      // This is a static PPE pose correction, not skeletal animation.
+      const visorFrame=new THREE.Group();
+      visorFrame.position.set(workX+.27,1.86,workZ-.15);
+      visorFrame.rotation.y=-.22;
+      const visorMat=new THREE.MeshPhysicalMaterial({color:"#101c23",roughness:.38,metalness:.08,transparent:true,opacity:.92,side:THREE.DoubleSide});
+      const visor=new THREE.Mesh(new THREE.BoxGeometry(.065,.35,.29),visorMat);
+      visor.position.set(0,-.15,0);visor.castShadow=true;visorFrame.add(visor);
+      const rim=new THREE.Mesh(new THREE.BoxGeometry(.075,.035,.31),darkMetal);
+      rim.position.set(0,.03,0);visorFrame.add(rim);
+      scene.add(visorFrame);
       // Entire loaded assembly is selectable for the hot-work HSE exercise.
       welderScene.traverse((obj:any)=>{if(obj.isMesh){obj.userData.inspectionId="hotwork";inspectionMarkers.push(obj);}});
       realWelderLoaded=true;
@@ -297,12 +309,38 @@ export default function RealModels({tr}:{tr:boolean}) {
     // Keep the coupon outside the welder's body silhouette. A static
     // source pose is not an animated welding operation.
     const couponSteel=material("#58636a",.65);
-    const standX=workX+2.25,standZ=workZ-1.3;
-    box(standX,.48,standZ,.09,.9,.09,darkMetal);
-    box(standX,.08,standZ,.52,.12,.5,darkMetal);
-    box(standX,.96,standZ,.55,.055,.44,couponSteel);
-    const coupon=place(new THREE.Mesh(new THREE.BoxGeometry(.34,.18,.22),couponSteel),standX,1.09,standZ,"hotwork");
+    // Raise and bring the work surface towards the torch side of the
+    // imported worker, instead of leaving the coupon below the raised hand.
+    const standX=workX+1.35,standZ=workZ-.55;
+    box(standX,.75,standZ,.11,1.45,.11,darkMetal);
+    box(standX,.09,standZ,.72,.14,.62,darkMetal);
+    box(standX,1.49,standZ,.7,.07,.54,couponSteel);
+    const coupon=place(new THREE.Mesh(new THREE.BoxGeometry(.46,.16,.27),couponSteel),standX,1.65,standZ,"hotwork");
     coupon.rotation.y=.16;
+    // A short electrode terminates at the coupon; no floating weld point.
+    const contact=new THREE.Vector3(standX-.14,1.75,standZ);
+    const electrodeStart=new THREE.Vector3(workX+.63,1.84,workZ-.32);
+    const electrodeVector=contact.clone().sub(electrodeStart);
+    const electrode=new THREE.Mesh(new THREE.CylinderGeometry(.014,.014,electrodeVector.length(),8),material("#343c42",.6));
+    electrode.position.copy(electrodeStart.clone().add(contact).multiplyScalar(.5));
+    electrode.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),electrodeVector.normalize());
+    scene.add(electrode);
+    // Extend the visibly loose imported lead to a plausible floor connection
+    // rather than leaving a cable end isolated on the ground.
+    if(realWelderLoaded){
+      const leadPath=[new THREE.Vector3(workX-.55,.14,workZ+1.05),new THREE.Vector3(workX-.05,.12,workZ+.75),new THREE.Vector3(workX+.35,.13,workZ+.12),new THREE.Vector3(workX+.52,.65,workZ-.26),electrodeStart];
+      const lead=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(leadPath),36,.025,8,false),material("#20252a"));
+      lead.castShadow=true;scene.add(lead);
+    }
+    // Contact-only light and restrained sparks, never suspended mid-air.
+    const weldLight=new THREE.PointLight(0x9ccfff,0,3.2,1.8);
+    weldLight.position.copy(contact);scene.add(weldLight);
+    const contactSparks:any[]=[];
+    for(let i=0;i<12;i++){
+      const a=i*2.39996;
+      const p=place(new THREE.Mesh(new THREE.SphereGeometry(.012+(i%3)*.004,5,4),new THREE.MeshBasicMaterial({color:i%2?0xffd47c:0xfff4d8})),contact.x+Math.cos(a)*(.06+i*.012),contact.y+Math.sin(a)*(.05+i*.008),contact.z+Math.sin(a*1.4)*.09);
+      contactSparks.push(p);
+    }
     // Hazard remains the combustible material within the hot-work zone.
     // The static source asset is not represented as a finished welding animation.
     // Compact but recognizable portable fire extinguisher, including the
@@ -468,6 +506,9 @@ export default function RealModels({tr}:{tr:boolean}) {
         drop.visible=phase<.96;
       }
       for(let i=0;i<sparkMeshes.length;i++){const spark=sparkMeshes[i];spark.visible=Math.sin(now*.016+i*3)>-.35;}
+      const arcActive=realWelderLoaded&&Math.sin(now*.009)>-.42;
+      weldLight.intensity=arcActive?1.7+.5*Math.sin(now*.035):0;
+      for(let i=0;i<contactSparks.length;i++)contactSparks[i].visible=arcActive&&Math.sin(now*.03+i*2.1)>.05;
       renderer.render(scene,camera);raf=requestAnimationFrame(tick);
     };
     raf=requestAnimationFrame(tick);
