@@ -286,10 +286,8 @@ export default function RealModels({tr}:{tr:boolean}) {
     const cablePoints=[new THREE.Vector3(workX+2.4,.36,workZ-.4),new THREE.Vector3(workX+1.8,.16,workZ),new THREE.Vector3(workX+.8,.17,workZ+.45),new THREE.Vector3(workX+.1,1.12,workZ)];
     const cableCurve=new THREE.CatmullRomCurve3(cablePoints);
     place(new THREE.Mesh(new THREE.TubeGeometry(cableCurve,35,.035,7,false),material("#22292b")),0,0,0);
-    const extinguisher=place(new THREE.Mesh(new THREE.CylinderGeometry(.13,.14,.58,14),material("#bf2421",.2)),workX+3.5,.4,workZ+1.1,"hotwork");
-    extinguisher.rotation.z=.12;
-    place(new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.09,12),darkMetal),workX+3.46,.76,workZ+1.1);
-    place(new THREE.Mesh(new THREE.BoxGeometry(.3,.045,.06),darkMetal),workX+3.46,.83,workZ+1.1);
+    // The detailed extinguisher below is shared by real and fallback scenes;
+    // do not render a second overlapping red cylinder here.
     }
     // Compact hot-work context. Keep the imported welder and its detailed
     // equipment visually dominant; avoid giant untextured props in the foreground.
@@ -370,6 +368,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     const inspect=(e:PointerEvent)=>{
       if(modeRef.current!=="walk"||Math.hypot(e.clientX-startX,e.clientY-startY)>12)return;
       const rect=renderer.domElement.getBoundingClientRect();
+      if(!rect.width||!rect.height)return;
       inspectPointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);
       inspectRay.setFromCamera(inspectPointer,camera);
       const hit=inspectRay.intersectObjects(inspectionMarkers)[0];
@@ -412,10 +411,12 @@ export default function RealModels({tr}:{tr:boolean}) {
       else {camera.position.set(-18,1.8,10);yaw=Math.PI;pitch=-.06;camera.lookAt(-18,1.8,-20)}
     };
     reset.current=setCamera;setCamera();
-    const down=(e:KeyboardEvent)=>{if(["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"].includes(e.key.toLowerCase())){held.current.add(e.key.toLowerCase());if(e.key.startsWith("Arrow"))e.preventDefault()}};
+    const isTyping=(target:EventTarget|null)=>target instanceof HTMLElement&&!!target.closest("input,textarea,select,[contenteditable='true']");
+    const down=(e:KeyboardEvent)=>{if(isTyping(e.target)||e.altKey||e.ctrlKey||e.metaKey)return;const key=e.key.toLowerCase();if(["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"].includes(key)){held.current.add(key);if(e.key.startsWith("Arrow")&&modeRef.current==="walk")e.preventDefault()}};
     const up=(e:KeyboardEvent)=>held.current.delete(e.key.toLowerCase());
-    window.addEventListener("keydown",down);window.addEventListener("keyup",up);
-    const pointerDown=(e:PointerEvent)=>{drag=true;px=e.clientX;py=e.clientY;startX=px;startY=py;renderer.domElement.setPointerCapture?.(e.pointerId)};
+    const blur=()=>{held.current.clear();drag=false};
+    window.addEventListener("keydown",down);window.addEventListener("keyup",up);window.addEventListener("blur",blur);
+    const pointerDown=(e:PointerEvent)=>{if(e.pointerType==="mouse"&&e.button!==0)return;drag=true;px=e.clientX;py=e.clientY;startX=px;startY=py;renderer.domElement.setPointerCapture?.(e.pointerId)};
     const pointerUp=()=>drag=false;
     const pointerMove=(e:PointerEvent)=>{if(!drag)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;if(modeRef.current==="walk"){yaw-=dx*.004;pitch=Math.max(-1.15,Math.min(1.15,pitch-dy*.003))}else{orbitAngle+=dx*.004}};
     // Touch gestures should rotate the 3D camera rather than scroll the page.
@@ -477,7 +478,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     sizeObserver?.observe(host);
     window.addEventListener("resize",resize);
     resize();
-    cleanup=()=>{sizeObserver?.disconnect();window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointercancel",pointerUp);renderer?.domElement?.removeEventListener("lostpointercapture",pointerUp);renderer?.domElement?.removeEventListener("pointerup",inspect);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
+    cleanup=()=>{sizeObserver?.disconnect();window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);window.removeEventListener("blur",blur);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointercancel",pointerUp);renderer?.domElement?.removeEventListener("lostpointercapture",pointerUp);renderer?.domElement?.removeEventListener("pointerup",inspect);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
    }catch(e){if(active)setStatus("3D error: "+String(e))}
   })();
   return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();held.current.clear()};
