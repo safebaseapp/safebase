@@ -12,6 +12,7 @@ try {
 for(const layout of [{width:1280,height:1000},{width:320,height:568},{width:390,height:844},{width:844,height:390}])for(const lang of ['tr','en']){
  const mobile=layout.width<1000,tr=lang==='tr',tag=`${lang}-${layout.width}x${layout.height}`;
  const ctx=await browser.newContext({viewport:layout,isMobile:mobile,hasTouch:mobile});const p=await ctx.newPage();p.on('pageerror',e=>errors.push(e.message));p.on('request',r=>{if(r.method()!=='GET')writes.push(r.url())});
+ await p.addInitScript(()=>{window.sim5Analytics=[];window.gtag=(...args)=>window.sim5Analytics.push(args)});
  await p.goto(url+'/site.html?mode=demo&lang='+lang+'&premium=true');await startMission(p,lang);
  if(mobile){await p.locator('.sim5-stage').scrollIntoViewIfNeeded();const cdp=await ctx.newCDPSession(p);const b=await p.getByTestId('sim5-touch-d').boundingBox();const before=await p.evaluate(()=>window.siteCamera.position.x);await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:b.x+b.width/2,y:b.y+b.height/2,id:1}]});await p.waitForTimeout(250);await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});check(tag+' native touch moves',await p.evaluate(()=>window.siteCamera.position.x)>before+.2);}
  else {const before=await p.evaluate(()=>window.siteCamera.position.z);await p.keyboard.down('w');await p.waitForTimeout(200);await p.keyboard.up('w');check(tag+' keyboard moves',await p.evaluate(()=>window.siteCamera.position.z)<before-.2);}
@@ -26,6 +27,8 @@ for(const layout of [{width:1280,height:1000},{width:320,height:568},{width:390,
   const a=p.getByRole('button',{name:siteInspections[id].answers[siteInspections[id].correct][tr?0:1],exact:true});if(mobile)await a.tap();else await a.click();
  }
  await p.getByTestId('mission-report').waitFor();const report=await p.getByTestId('mission-report').innerText();check(tag+' normalized two-finding report',report.includes('100/100')&&report.includes('2/2')&&report.includes('DEMO'));
+ const analytics=await p.evaluate(()=>window.sim5Analytics);
+ check(tag+' analytics start/complete once without PII',analytics.filter(e=>e[1]==='sim5_demo_start').length===1&&analytics.filter(e=>e[1]==='sim5_demo_complete').length===1&&!JSON.stringify(analytics).includes('email'));
  check(tag+' no premium findings in report',!report.includes('6/6'));
  check(tag+' no horizontal overflow',await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await p.locator('.sim5-stage').scrollIntoViewIfNeeded();await p.screenshot({path:new URL('./artifacts/pack7/demo-'+tag+'.png',import.meta.url).pathname});

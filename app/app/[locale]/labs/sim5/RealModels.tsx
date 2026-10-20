@@ -14,7 +14,7 @@ import { createMissionSceneEffects } from "./MissionSceneEffects";
 
 const inspections=siteInspections;
 
-export default function RealModels({tr, missionMode = "full", persist = false}:{tr:boolean; missionMode?: MissionMode; persist?: boolean}) {
+export default function RealModels({tr, missionMode = "full", persist = false, unlockHref}:{tr:boolean; missionMode?: MissionMode; persist?: boolean; unlockHref?: string}) {
  const mount=useRef<HTMLDivElement>(null);
  const held=useRef<Set<string>>(new Set());
  const keyboard=useRef<Set<string>>(new Set());
@@ -24,6 +24,7 @@ export default function RealModels({tr, missionMode = "full", persist = false}:{
  const releasePointer=useCallback((pointerId:number)=>{pointers.current.delete(pointerId);syncInput()},[syncInput]);
  const reset=useRef<()=>void>(()=>{});
  const [status,setStatus]=useState(tr?"Saha hazırlanıyor…":"Preparing site…");
+ const [sceneError,setSceneError]=useState(false);
  const [loaded,setLoaded]=useState(0);
  const [activeInspection,setActiveInspection]=useState<string|null>(null);
  const {mission,missionRef,send,persistence}=useMission(missionMode,persist,tr);
@@ -55,10 +56,11 @@ export default function RealModels({tr, missionMode = "full", persist = false}:{
  const modeRef=useRef<"walk"|"overview">("overview");
  const startMission=()=>{clearInput();send({type:"start"});modeRef.current="walk";setMode("walk");reset.current();if(window.matchMedia("(pointer:coarse),(max-width:700px)").matches)requestAnimationFrame(()=>mount.current?.scrollIntoView({block:"center"}));};
  const restartMission=()=>{clearInput();send({type:"restart"});setInspectionFeedback("");setActiveInspection(null);nearbyRef.current=null;setNearbyHazard(null);reset.current();};
- useEffect(()=>{if(mission.phase!=="active"){clearInput();setActiveInspection(null)}},[mission.phase,clearInput]);
+ useEffect(()=>{if(mission.phase!=="active")clearInput()},[mission.phase,clearInput]);
  const switchMode=(m:"walk"|"overview")=>{clearInput();modeRef.current=m;setMode(m);reset.current()};
  useEffect(()=>{
   let active=true,raf=0,renderer:any,cleanup=()=>{};
+  const contextLost=(event:Event)=>{event.preventDefault();if(active){clearInput();send({type:"pause"});setReady(false);setSceneError(true);setStatus(tr?"WebGL bağlantısı kesildi. Sahneyi yeniden yükle.":"WebGL context lost. Reload the scene.");}};
   const host=mount.current;if(!host)return;
   (async()=>{
    try {
@@ -74,6 +76,7 @@ export default function RealModels({tr, missionMode = "full", persist = false}:{
     renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.96;
     renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
     host.appendChild(renderer.domElement);
+    renderer.domElement.addEventListener("webglcontextlost",contextLost);
     scene.add(new THREE.HemisphereLight(0xd8ebff,0x687363,1.35));
     const sun=new THREE.DirectionalLight(0xffedcf,2.8);sun.position.set(-65,95,42);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-120;sun.shadow.camera.right=120;sun.shadow.camera.top=120;sun.shadow.camera.bottom=-120;sun.shadow.camera.near=1;sun.shadow.camera.far=240;sun.shadow.bias=-.00025;sun.shadow.normalBias=.035;scene.add(sun);
     const material=(color:string,metalness=0)=>new THREE.MeshStandardMaterial({color,roughness:.85,metalness});
@@ -446,9 +449,9 @@ export default function RealModels({tr, missionMode = "full", persist = false}:{
     resize();
     if(active)setReady(results.every(r=>r.status==="fulfilled")&&!!weldingOperation);
     cleanup=()=>{sizeObserver?.disconnect();window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);window.removeEventListener("blur",blur);window.removeEventListener("pointerup",release);window.removeEventListener("pointercancel",release);window.removeEventListener("lostpointercapture",release);document.removeEventListener("visibilitychange",visibility);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointercancel",pointerUp);renderer?.domElement?.removeEventListener("lostpointercapture",pointerUp);renderer?.domElement?.removeEventListener("pointerup",inspect);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
-   }catch(e){if(active)setStatus("3D error: "+String(e))}
+   }catch(e){if(active){setReady(false);setSceneError(true);setStatus((tr?"3D sahne açılamadı. WebGL destekleyen bir tarayıcıda yeniden dene. ":"Unable to open the 3D scene. Retry in a WebGL-capable browser. ")+String(e))}}
   })();
-  return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.dispose();renderer?.domElement?.remove();clearInput()};
+  return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.domElement?.removeEventListener("webglcontextlost",contextLost);renderer?.dispose();renderer?.domElement?.remove();clearInput()};
  },[tr,clearInput,syncInput,releasePointer,missionRef,send]);
 
  const controls:[string,string,string,string][]=[
@@ -522,7 +525,8 @@ export default function RealModels({tr, missionMode = "full", persist = false}:{
     <p>{tr?"Sekme kapanır veya sayfa yenilenirse son başarılı kayıt geçmişte eksik deneme olarak kalır; otomatik devam edilmez. Yeni deneme başlat. Kayıt 10 saniyede bir ve duraklatma/bitirmede denenir.":"Closing or reloading keeps the last successful checkpoint as an interrupted attempt in history; it does not auto-resume. Start a new attempt. Saves are attempted every 10 seconds and on pause/finish."}</p>
     {persistence.status && <p role="status">{persistence.status}</p>}<button type="button" className="min-h-11 underline" onClick={persistence.retry}>{tr?"Kaydı yeniden dene":"Retry save"}</button>
    </aside>}
-   <MissionPanel mission={mission} tr={tr} ready={ready} send={send} onStart={startMission} onRestart={restartMission}/>
+   {sceneError&&<div role="alert"><p>{tr?"Simülasyon yüklenmedi; görev başlatılamaz.":"The simulation did not load; the mission cannot start."}</p><button type="button" className="min-h-11 underline" onClick={()=>window.location.reload()}>{tr?"Yeniden yükle":"Reload"}</button></div>}
+   <MissionPanel unlockHref={unlockHref} mission={mission} tr={tr} ready={ready} send={send} onStart={startMission} onRestart={restartMission}/>
    <p style={{color:"#c4dce3",fontSize:14}}>{missionMode==="demo"?(tr?"DEMO: Kaynak ve kaldırma sahnelerinde iki bulguyu değerlendir. Diğer bulgular ve üst platform görevleri Premium sürümdedir.":"DEMO: Assess two findings at the welding and lifting stations. Other findings and upper-platform missions belong to Premium."):tr?"Saha brifingi: İşaretli geçişleri kullan. Aktif kaldırma alanına girme. Görünür kanıtları yaklaşarak incele; tank merdivenleri üst servis yoluna çıkar. Üst seviyeyi de araştır.":"Site briefing: Use marked access routes. Stay outside the active lifting zone. Approach visible evidence to inspect it; the tank stairs lead to the upper service walkway. Explore both levels."}</p>
    <div className="sim5-stage">
     <div ref={mount} className="sim5-canvas" style={{width:"100%",borderRadius:14,overflow:"hidden",background:"#91b1c5",touchAction:"none"}}/>
@@ -556,7 +560,7 @@ export default function RealModels({tr, missionMode = "full", persist = false}:{
   {mode==="walk"&&nearbyHazard&&<button {...inspectionEvents} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
   <p data-testid="sim5-hse-progress" style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(mission.findings).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
   {discovered.length>0&&<ul style={{color:"#c4dce3"}} aria-label={tr?"Bulunan uygunsuzluklar":"Discovered findings"}>{discovered.map(id=><li key={id}>{inspectionRecords[id].completed?"✓ ":"○ "}{inspectionRecords[id].completed?scenarioNames[id][tr?0:1]+" · "+controlOutcomes[id].sign[tr?0:1]:inspections[id].visibleEvidence[tr?0:1]}</li>)}</ul>}
-  {activeInspection&&<section className="sim5-inspection" style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}>
+  {activeInspection&&mission.phase==="active"&&<section className="sim5-inspection" style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}>
    {mission.findings[activeInspection].completed?<><h2>{tr?"Kontrol durumu":"Control status"}</h2><p>{tr?"İlk gözlenen kanıt: ":"Initially observed evidence: "}{inspections[activeInspection].visibleEvidence[tr?0:1]}</p><p>{controlOutcomes[activeInspection].text[tr?0:1]}</p><p>{tr?"Bu bulgu için karar kaydedildi; tekrar puan veya XP verilmez.":"The decision is recorded; reviewing this finding awards no additional score or XP."}</p></>:<>
     <p>{tr?"Gözlenen kanıt: ":"Observed evidence: "}{inspections[activeInspection].visibleEvidence[tr?0:1]}</p>
     <h2 style={{fontSize:18}}>{inspections[activeInspection].question[tr?0:1]}</h2>

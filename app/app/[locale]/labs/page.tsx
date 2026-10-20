@@ -132,12 +132,11 @@ export default async function LabsPage({ params }: Props) {
               <span className="rounded-full border border-white/15 bg-white/5 px-3 py-2">{isTr ? "6 HSE bulgusu" : "6 HSE findings"}</span>
               <span className="rounded-full border border-white/15 bg-white/5 px-3 py-2">{isTr ? "Mobil + masaüstü" : "Mobile + desktop"}</span>
             </div>
-            <Link href={`/${locale}/labs/sim5`} className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-cyan-300 px-6 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-cyan-200">
-              {isTr ? "3D Saha Simülatörünü Aç" : "Open 3D Site Simulator"} <ArrowRight size={17} />
+            <Link href={`/${locale}/labs/sim5/demo`} className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-cyan-300 px-6 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-cyan-200">
+              {isTr ? "Ücretsiz Demo Oyna" : "Play Free Demo"} <ArrowRight size={17} />
             </Link>
-            <p className="mt-3 text-xs text-slate-400">
-              {isTr ? "Beta sürümü · Denetim sonuçları şimdilik kullanıcı profiline kaydedilmez." : "Beta release · Inspection results are not yet saved to your profile."}
-            </p>
+            <Link href={`/${locale}/labs/sim5`} className="ml-0 mt-3 inline-flex min-h-12 items-center rounded-xl border border-cyan-300/40 px-5 py-3 text-sm font-bold sm:ml-3">{isTr ? "Premium Simülasyonu Başlat" : "Start Premium Simulation"}</Link>
+            <p className="mt-3 text-xs text-slate-400">{isTr ? "Ücretsiz DEMO: 2 bulgu, kayıt gerekmez. Premium: 6 bulgu, üst platformlar ve hesap geçmişi." : "Free DEMO: 2 findings, no sign-in. Premium: 6 findings, upper platforms and account history."}</p>
           </div>
           <div className="rounded-2xl border border-cyan-300/20 bg-slate-950/50 p-6">
             <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.15em] text-cyan-300"><span>FIELD INSPECTION</span><span>SIM / 5.0</span></div>

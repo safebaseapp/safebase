@@ -36,7 +36,11 @@ export function createSignaller(T:any,source:any){
  const human=new T.Box3(),glove=new T.Box3();
  source.traverse((o:any)=>{if(!o.isMesh||!names.has(o.name))return;
   const g=o.geometry.clone().applyMatrix4(o.matrixWorld);g.setAttribute('normal',new T.BufferAttribute(new Float32Array(g.attributes.position.count*3),3));g.computeVertexNormals();
-  const materials=(Array.isArray(o.material)?o.material:[o.material]).map((m:any)=>{const n=m.clone();return n;});
+  const materials=(Array.isArray(o.material)?o.material:[o.material]).map((m:any)=>{const n=m.clone();
+   if(n.map)n.map.colorSpace=T.SRGBColorSpace;
+   const finish=n.name.includes('MC-BodySuit')?['#a8bfdc','#245d91',.91]:n.name.includes('materialMaterial')?['#ccb49c','#765136',.86]:n.name.includes('riding_helmet')?['#e9e3d0','#e9e3d0',.68]:null;
+   if(finish){n.color.set(n.map?finish[0]:finish[1]);n.roughness=finish[2];n.metalness=0;}
+   return n;});
   const mesh=new T.Mesh(g,Array.isArray(o.material)?materials:materials[0]);mesh.name='signaller-'+o.name;mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);human.union(new T.Box3().setFromObject(mesh));if(o.name==='Object_10')glove.copy(new T.Box3().setFromObject(mesh));
  });
  // A fitted high-visibility vest follows the existing torso triangles.

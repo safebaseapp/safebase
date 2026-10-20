@@ -71,6 +71,7 @@ async function exercise({mobile=false,width=1280,height=950,lang='en',name='desk
  await context.close();
 }
 try{
- await exercise({});await exercise({mobile:true,width:390,height:844,lang:'tr',name:'mobile-portrait'});await exercise({mobile:true,width:844,height:390,lang:'en',name:'mobile-landscape'});
+ const layouts=[{name:'desktop'},{mobile:true,width:390,height:844,lang:'tr',name:'mobile-portrait'},{mobile:true,width:844,height:390,lang:'en',name:'mobile-landscape'}];
+ for(const layout of layouts)if(!process.env.SIM5_HEIGHT_LAYOUT||process.env.SIM5_HEIGHT_LAYOUT===layout.name)await exercise(layout);
  check('no browser errors',errors.length===0);fs.rmSync(`${out}/height-failure.json`,{force:true});fs.writeFileSync(`${out}/height-results.json`,JSON.stringify({timestamp:new Date().toISOString(),checks,routes,errors,renderer:'Chromium / SwiftShader; on-demand render captures, live component input/animation loop',mobileFixture:'XZ placement at stair entrance only; no Y assignments; all vertical travel is native D-pad input'},null,2));console.log('PASS',checks.length);
 }catch(e){fs.writeFileSync(`${out}/height-failure.json`,JSON.stringify({checks,routes,errors,error:String(e)},null,2));throw e}finally{await browser.close();server.closeAllConnections();server.close()}

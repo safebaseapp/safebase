@@ -1,3 +1,4 @@
+import { Sim5GateEvent, Sim5UnlockLink } from "./Sim5Actions";
 import Link from "next/link";
 import Sim5History from "./Sim5History";
 import RealModels from "./RealModels";
@@ -43,9 +44,10 @@ export default async function Sim5Page({ params }: { params: Promise<{ locale: s
         </p>
       </header>
 
+      {!access.allowed && <Sim5GateEvent tr={isTr}/>}
       <section className="mx-auto mb-5 max-w-[1600px] rounded-xl border border-cyan-300/30 p-4">
         <div className="flex flex-wrap gap-3"><Link className="inline-flex min-h-12 items-center rounded-lg bg-cyan-200 px-5 font-bold text-slate-950" href={`/${locale}/labs/sim5/demo`}>{isTr ? "Ücretsiz Demo Oyna" : "Play Free Demo"}</Link>
-        {!access.allowed && <Link className="inline-flex min-h-12 items-center rounded-lg border px-5" href={unlockPath}>{isTr ? "Premium Simülasyonu Başlat" : "Start Premium Simulation"}</Link>}</div>
+        {!access.allowed && <Sim5UnlockLink tr={isTr} href={unlockPath}>{isTr ? "Premium Simülasyonu Başlat" : "Start Premium Simulation"}</Sim5UnlockLink>}</div>
         <table className="mt-4 w-full text-left text-sm"><caption className="mb-2 text-left font-bold">DEMO / Premium</caption><thead><tr><th>{isTr?"Özellik":"Feature"}</th><th>DEMO</th><th>Premium</th></tr></thead><tbody>
         <tr><th>{isTr?"HSE bulguları":"HSE findings"}</th><td>2</td><td>6</td></tr><tr><th>{isTr?"Üst platform görevi":"Upper-platform mission"}</th><td>—</td><td>✓</td></tr><tr><th>{isTr?"Tekrar":"Replay"}</th><td>∞</td><td>∞</td></tr><tr><th>{isTr?"Hesap geçmişi":"Account history"}</th><td>—</td><td>✓</td></tr></tbody></table>
         {!access.allowed && <p className="mt-3" role="status">{access.reason === "unconfigured" || access.reason === "unavailable" ? (isTr ? "Premium erişimi şu anda doğrulanamıyor. Ücretsiz DEMO oynanabilir; tam görev kapalıdır." : "Premium access cannot currently be verified. Play the free DEMO; the full mission remains locked.") : isTr ? "Tam denetim yalnız aktif Premium/admin hesabına açıktır." : "Full inspection requires an active Premium/admin account."}</p>}

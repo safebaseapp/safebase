@@ -57,6 +57,7 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
   };
 
   useEffect(() => {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) return;
     const supabase = createClient();
 
     async function loadUser() {

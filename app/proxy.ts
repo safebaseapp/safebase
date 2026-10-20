@@ -57,7 +57,7 @@ export async function proxy(request: NextRequest) {
 
   // Public SIM pages and assets remain guest-readable without a database.
   // The full page and API independently verify entitlement on the server.
-  const publicSim = /^\/(?:tr|en)\/labs\/sim5(?:\/demo)?$/.test(pathname) || pathname.startsWith("/sim5/");
+  const publicSim = /^\/(?:tr|en)\/labs(?:\/sim5(?:\/demo)?)?$/.test(pathname) || pathname.startsWith("/sim5/") || pathname === "/api/labs/sim5/runs";
   if (publicSim && (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY)) {
     return NextResponse.next({ request: { headers: requestHeaders } });
   }

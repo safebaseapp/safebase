@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { useMissionPersistence } from "./useMissionPersistence";
 import { createMission, reduceMission, type MissionMode, type MissionEvent } from "./MissionState";
 
@@ -18,10 +19,14 @@ export function useMission(mode: MissionMode = "full", persist = false, tr = fal
   if (event.type === "resume" && document.hidden) return;
   const beforeEvent = next;
   next = reduceMission(next, event);
-  if ((event.type === "tick" && beforeEvent.phase === "active") || next !== beforeEvent) record(event);
+  if ((event.type === "tick" && beforeEvent.phase === "active") || next !== beforeEvent) {
+   record(event);
+   if(event.type==="start")trackEvent(mode==="demo"?"sim5_demo_start":"sim5_full_mission_start",{mode,locale:tr?"tr":"en"});
+   if(event.type==="finish")trackEvent(mode==="demo"?"sim5_demo_complete":"sim5_full_mission_complete",{mode,locale:tr?"tr":"en",completed_count:Object.values(next.findings).filter(f=>f.completed).length});
+  }
   missionRef.current = next;
   if (next !== previous) setMission(next);
- }, [record]);
+ }, [record,mode,tr]);
  useEffect(() => {
   last.current = performance.now();
   const timer = window.setInterval(() => send({ type: "tick", deltaMs: 0 }), 1000);

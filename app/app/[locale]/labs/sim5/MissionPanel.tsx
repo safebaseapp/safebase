@@ -1,4 +1,5 @@
 "use client";
+import { trackEvent } from "@/lib/analytics";
 import { useEffect, useRef, useState } from "react";
 import { findingScore, missionSummary, missionWeights, type MissionEvent, type MissionState } from "./MissionState";
 import { controlOutcomes, scenarioNames, wrongDecisionReasons } from "./MissionConsequences";
@@ -19,8 +20,8 @@ export function MissionHud({ mission, tr }: { mission: MissionState; tr: boolean
   <span>{formatMissionTime(mission.activeMs)}</span>
  </div>;
 }
-export function MissionPanel({ mission, tr, ready, send, onStart, onRestart }: {
- mission: MissionState; tr: boolean; ready: boolean; send: (event: MissionEvent) => void; onStart: () => void; onRestart: () => void;
+export function MissionPanel({ mission, tr, ready, send, onStart, onRestart, unlockHref }: {
+ unlockHref?: string; mission: MissionState; tr: boolean; ready: boolean; send: (event: MissionEvent) => void; onStart: () => void; onRestart: () => void;
 }) {
  const [confirm, setConfirm] = useState<"restart" | "cancel" | null>(null);
  const keepButton=useRef<HTMLButtonElement>(null);
@@ -89,8 +90,8 @@ export function MissionPanel({ mission, tr, ready, send, onStart, onRestart }: {
   {mission.mode === "demo" && ended && <aside className="mt-4 rounded-xl border border-cyan-300/30 p-4">
    <h3>{tr ? "Tam saha denetimine devam et" : "Continue with the full site inspection"}</h3>
    <p>{tr ? "Premium: Altı bulgu, tank merdivenleri ve üst platform riskleri, sınırsız tekrar ve ayrıntılı hesap geçmişi. Demo tamamlamak Premium erişim kazandırmaz." : "Premium: Six findings, tank stairs and upper-platform risks, unlimited replay and detailed account history. Completing the demo does not grant Premium."}</p>
-   <a className="inline-flex min-h-11 items-center underline" href={`/${tr ? "tr" : "en"}/labs/sim5`}>{tr ? "Tam Simülasyonu Aç" : "Unlock Full Simulation"}</a>
+   <a className="inline-flex min-h-11 items-center underline" onClick={()=>trackEvent("sim5_upgrade_click",{locale:tr?"tr":"en",mode:"demo"})} href={unlockHref || `/${tr ? "tr" : "en"}/labs/sim5`}>{tr ? "Tam Simülasyonu Aç" : "Unlock Full Simulation"}</a>
   </aside>}
-  <details><summary>{tr ? "Puanlama nasıl çalışır?" : "How scoring works"}</summary>{mission.mode === "demo" && <p>{tr ? "Aşağıdaki ağırlıklar yalnız iki DEMO bulgusuna göre 0–100 ölçeğine çevrilir. XP verilmez." : "The weights below are normalized to 0–100 for the two DEMO findings only. No XP is awarded."}</p>}<p>{tr ? "Tespit ağırlığın %20’sini, doğru kontrol %80’ini kazandırır. Yanlış ilk karar ağırlığın %20’sini bir kez düşürür; düzeltilen bulgu en fazla %80 kazanır. Tekrar açma puan/XP kazandırmaz. Görev XP = puan × 2; denemeler arasında birikmez." : "Discovery earns 20% of the weight and a safe control earns 80%. A wrong first decision deducts 20% once; a corrected finding earns at most 80%. Reopening awards no score/XP. Mission XP = score × 2; attempts do not accumulate."}</p><ul>{Object.entries(missionWeights).filter(([id]) => Object.hasOwn(mission.findings, id)).map(([id, weight]) => <li key={id}>{scenarioNames[id][l]}: {weight}</li>)}</ul></details>
+  <details><summary>{tr ? "Puanlama nasıl çalışır?" : "How scoring works"}</summary>{mission.mode === "demo" && <p>{tr ? "Aşağıdaki ağırlıklar yalnız iki DEMO bulgusuna göre 0–100 ölçeğine çevrilir. XP verilmez." : "The weights below are normalized to 0–100 for the two DEMO findings only. No XP is awarded."}</p>}<p>{mission.mode === "demo" ? (tr ? "Tespit ağırlığın %20’sini, doğru kontrol %80’ini kazandırır. Yanlış ilk karar bir kez %20 düşürür. İki bulgu 0–100 DEMO puanına çevrilir; görev veya hesap XP verilmez." : "Discovery earns 20% of the weight, a safe control 80%. A wrong first decision deducts 20% once. Two findings normalize to a 0–100 DEMO score; neither mission nor account XP is awarded.") : tr ? "Tespit ağırlığın %20’sini, doğru kontrol %80’ini kazandırır. Yanlış ilk karar ağırlığın %20’sini bir kez düşürür; düzeltilen bulgu en fazla %80 kazanır. Tekrar açma puan/XP kazandırmaz. Görev XP = puan × 2; denemeler arasında birikmez." : "Discovery earns 20% of the weight and a safe control earns 80%. A wrong first decision deducts 20% once; a corrected finding earns at most 80%. Reopening awards no score/XP. Mission XP = score × 2; attempts do not accumulate."}</p><ul>{Object.entries(missionWeights).filter(([id]) => Object.hasOwn(mission.findings, id)).map(([id, weight]) => <li key={id}>{scenarioNames[id][l]}: {weight}</li>)}</ul></details>
  </section>;
 }

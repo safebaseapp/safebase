@@ -1,4 +1,5 @@
 import http from 'node:http';
+import {execFileSync} from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -8,7 +9,10 @@ const operation=path.join(repoRoot,'app/app/[locale]/labs/sim5/WeldingOperation.
 export async function startServer(port=4176){
  const lifting=await build({entryPoints:[path.join(repoRoot,'app/app/[locale]/labs/sim5/LiftingOperation.ts')],format:'esm',write:false});
  const compiled=await build({entryPoints:[operation],format:'esm',write:false});
- const site=await build({entryPoints:[path.join(toolRoot,'site.jsx')],bundle:true,write:false,format:'esm',jsx:'automatic',nodePaths:[path.join(repoRoot,'app/node_modules')]});
+ const baseline=process.env.SIM5_REVIEW_BASELINE;
+ if(baseline&&!/^[0-9a-f]{40}$/.test(baseline))throw Error('Invalid baseline SHA');
+ const plugins=baseline?[{name:'baseline-source',setup(b){b.onLoad({filter:/[/\\]sim5[/\\].*\.tsx?$/},args=>({contents:execFileSync('git',['-C',repoRoot,'show',`${baseline}:${path.relative(repoRoot,args.path)}`],{encoding:'utf8'}),loader:args.path.endsWith('.tsx')?'tsx':'ts'}))}}]:[];
+ const site=await build({plugins,entryPoints:[path.join(toolRoot,'site.jsx')],bundle:true,write:false,format:'esm',jsx:'automatic',nodePaths:[path.join(repoRoot,'app/node_modules')]});
  const types={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.glb':'model/gltf-binary','.png':'image/png'};
  const server=http.createServer(async(req,res)=>{
   try{
