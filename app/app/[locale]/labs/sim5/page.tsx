@@ -15,7 +15,7 @@ export default async function Sim5Page({ params }: { params: Promise<{ locale: s
   const access = await getSim5Access();
   const fullPath = `/${locale}/labs/sim5`;
   const upgradePath = `/${locale}/upgrade?next=${encodeURIComponent(fullPath)}`;
-  const unlockPath = access.reason === "inactive" ? `/${locale}/account-suspended` : access.userId ? upgradePath : `/${locale}/login?next=${encodeURIComponent(upgradePath)}`;
+  const unlockPath = access.reason === "inactive" ? `/${locale}/account-suspended` : access.userId ? upgradePath : `/${locale}/login?next=${encodeURIComponent(fullPath)}`;
 
   return (
     <main className="min-h-screen bg-[#071622] px-3 py-6 text-[#eaf4fa] sm:px-6 sm:py-8">
