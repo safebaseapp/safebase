@@ -1,4 +1,5 @@
 import Image from "next/image";
+import showcaseImage from "@/components/sim5/showcase-image";
 import Sim5PromoLink from "@/components/sim5/Sim5PromoLink";
 import Link from "next/link";
 import { hasLocale } from "next-intl";
@@ -141,7 +142,7 @@ export default async function LabsPage({ params }: Props) {
             <p className="mt-3 text-xs text-slate-400">{isTr ? "Ücretsiz DEMO: 2 bulgu, kayıt gerekmez. Premium: 6 bulgu, üst platformlar ve hesap geçmişi." : "Free DEMO: 2 findings, no sign-in. Premium: 6 findings, upper platforms and account history."}</p>
           </div>
           <div className="rounded-2xl border border-cyan-300/20 bg-slate-950/50 p-6">
-            <Image src="/images/sim5-site-showcase.webp" width={1920} height={1080} sizes="(max-width: 1024px) 100vw, 40vw" alt={isTr?"SIM 5.0 endüstriyel sahası: fabrika, mobil vinç, tesis yolu ve tanklar":"SIM 5.0 industrial site: factory, mobile crane, site road and tanks"} className="mb-5 aspect-video w-full rounded-xl object-cover"/>
+            <Image src={showcaseImage} sizes="(max-width: 1024px) 100vw, 40vw" alt={isTr?"SIM 5.0 endüstriyel sahası: fabrika, mobil vinç, tesis yolu ve tanklar":"SIM 5.0 industrial site: factory, mobile crane, site road and tanks"} className="mb-5 aspect-video w-full rounded-xl object-contain"/>
             <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.15em] text-cyan-300"><span>FIELD INSPECTION</span><span>SIM / 5.0</span></div>
             <div className="mt-7 text-5xl font-black tracking-tight text-white">06 <span className="text-lg font-semibold text-slate-400">{isTr ? "Premium bulgusu" : "Premium findings"}</span></div>
             <div className="mt-6 grid grid-cols-3 gap-2" aria-hidden="true">

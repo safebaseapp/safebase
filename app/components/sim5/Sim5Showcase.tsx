@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import showcaseImage from "./showcase-image";
 import {useEffect,useRef} from "react";
 import {ArrowUpRight,MoveUpRight,ScanLine} from "lucide-react";
 import {trackEvent} from "@/lib/analytics";
@@ -22,7 +23,7 @@ export default function Sim5Showcase({locale}:{locale:"tr"|"en"}) {
     <div className={s.actions}><Sim5PromoLink locale={locale} kind="demo" surface="homepage" className={s.primary}>{tr?"Ücretsiz Demo Oyna":"Play Free Demo"}<ArrowUpRight size={18} aria-hidden="true"/></Sim5PromoLink><Sim5PromoLink locale={locale} kind="premium" surface="homepage" className={s.secondary}>{tr?"Premium Simülasyonu Başlat":"Start Premium Simulation"}<MoveUpRight size={16} aria-hidden="true"/></Sim5PromoLink></div>
     <p className={s.note}>{tr?"Ücretsiz DEMO: kaynak + kaldırma, kayıt gerekmez. Premium: altı bulgulu tam denetim ve performans geçmişi.":"Free DEMO: welding + lifting, no sign-in required. Premium: the full six-finding inspection and performance history."}</p>
    </div>
-   <figure className={s.visual}><div className={s.imageFrame}><Image src="/images/sim5-site-showcase.webp" fill sizes="(max-width: 1000px) 100vw, 60vw" alt={tr?"SIM 5.0 sahasının kuş bakışı görünümü: tesis yolu, fabrika, mobil vinç ve depolama tankları":"Bird’s-eye view of the SIM 5.0 site: access road, factory, mobile crane and storage tanks"}/></div><figcaption><span>{tr?"GERÇEK SİMÜLASYON SAHASI":"ACTUAL SIMULATION SITE"}</span><span>WELDING / LIFTING / TANK ACCESS</span></figcaption></figure>
+   <figure className={s.visual}><div className={s.imageFrame}><Image src={showcaseImage} fill sizes="(max-width: 1000px) 100vw, 60vw" alt={tr?"SIM 5.0 sahasının kuş bakışı görünümü: tesis yolu, fabrika, mobil vinç ve depolama tankları":"Bird’s-eye view of the SIM 5.0 site: access road, factory, mobile crane and storage tanks"}/></div><figcaption><span>{tr?"GERÇEK SİMÜLASYON SAHASI":"ACTUAL SIMULATION SITE"}</span><span>WELDING / LIFTING / TANK ACCESS</span></figcaption></figure>
   </div>
  </section>;
 }

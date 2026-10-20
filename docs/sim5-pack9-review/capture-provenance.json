@@ -1,0 +1,115 @@
+{
+  "timestamp": "2026-10-20T10:51:48.129Z",
+  "renderer": "Actual RealModels; test-only cloned camera; pinned Three 0.180.0 software WebGL",
+  "runtimeModified": false,
+  "materialsModified": false,
+  "sources": [
+    {
+      "path": "/sim5/SERNEM_SIM4_Factory_optimized.glb",
+      "status": 200,
+      "sha256": "0bfb3c1baed3478cbffed6ab078e4e080c0a361ae2f185896ecc4607922d9785"
+    },
+    {
+      "path": "/sim5/large_industrial_storage_tanks (1).glb",
+      "status": 200,
+      "sha256": "57f8af41a804fb9f231437c73c5fcd1d11047a4aac42aaa43f0b52dd8d3558e8"
+    },
+    {
+      "path": "/sim5/SERNEM_Welder_06_under25MB.glb",
+      "status": 200,
+      "sha256": "147b7b18d9121c77b08ab3137e2f8678174806b470ad82a9ecf6a7184fd245c7"
+    }
+  ],
+  "views": [
+    {
+      "name": "south-low",
+      "position": [
+        -10,
+        58,
+        112
+      ],
+      "target": [
+        -5,
+        2,
+        18
+      ],
+      "fov": 40,
+      "format": "webp",
+      "width": 2560,
+      "height": 1440,
+      "space": "srgb",
+      "channels": 3,
+      "depth": "uchar",
+      "isProgressive": false,
+      "isPalette": false,
+      "hasProfile": false,
+      "hasAlpha": false,
+      "autoOrient": {
+        "width": 2560,
+        "height": 1440
+      },
+      "bytes": 130300,
+      "sha256": "1f00110596cb1601aa8e1b6c0f2316ed42d276f7c8198b1687ca5eff3676fd12"
+    },
+    {
+      "name": "southwest",
+      "position": [
+        -45,
+        66,
+        115
+      ],
+      "target": [
+        -5,
+        2,
+        18
+      ],
+      "fov": 40,
+      "format": "webp",
+      "width": 2560,
+      "height": 1440,
+      "space": "srgb",
+      "channels": 3,
+      "depth": "uchar",
+      "isProgressive": false,
+      "isPalette": false,
+      "hasProfile": false,
+      "hasAlpha": false,
+      "autoOrient": {
+        "width": 2560,
+        "height": 1440
+      },
+      "bytes": 132642,
+      "sha256": "8c8ea3942ce6eba9ed9fae5273839530d5523f572e26fdb4a7b892a01d14086b"
+    },
+    {
+      "name": "southeast-low",
+      "position": [
+        55,
+        65,
+        115
+      ],
+      "target": [
+        0,
+        2,
+        18
+      ],
+      "fov": 43,
+      "format": "webp",
+      "width": 2560,
+      "height": 1440,
+      "space": "srgb",
+      "channels": 3,
+      "depth": "uchar",
+      "isProgressive": false,
+      "isPalette": false,
+      "hasProfile": false,
+      "hasAlpha": false,
+      "autoOrient": {
+        "width": 2560,
+        "height": 1440
+      },
+      "bytes": 132068,
+      "sha256": "ab84a172e637cffdbbe93e74cb771b1a39e4d668cc20f595498cd974b5573acb"
+    }
+  ]
+}
