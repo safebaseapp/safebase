@@ -50,8 +50,8 @@ jobs:
         run: node tools/sim5-review/daily-xp-db-test.mjs
       - name: Install app dependencies
         run: npm ci --prefix app --no-audit --no-fund
-      - name: TypeScript
-        run: cd app && npx tsc --noEmit
+      - name: Generate Next.js typings and check TypeScript
+        run: cd app && npx next typegen && npx tsc --noEmit
       - name: Focused ESLint
         run: cd app && npx eslint "app/api/labs/sim5/runs/route.ts" "app/[locale]/labs/sim5/Sim5DailyReward.tsx" "app/[locale]/labs/sim5/useMissionPersistence.ts" "app/[locale]/labs/sim5/RealModels.tsx"
       - name: Next.js production build
