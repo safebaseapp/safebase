@@ -10,6 +10,15 @@ on:
       - "app/app/[locale]/labs/sim5/**"
       - "tools/sim5-review/daily-xp-db-test.mjs"
       - ".github/workflows/sim5-pack10-daily-xp-ci.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "app/supabase/migrations/20261020_sim5_daily_inspection_xp.sql"
+      - "app/app/api/labs/sim5/runs/route.ts"
+      - "app/app/[locale]/labs/sim5/**"
+      - "tools/sim5-review/daily-xp-db-test.mjs"
+      - ".github/workflows/sim5-pack10-daily-xp-ci.yml"
   workflow_dispatch:
 
 permissions:
