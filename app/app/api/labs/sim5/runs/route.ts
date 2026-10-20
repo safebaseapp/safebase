@@ -16,12 +16,13 @@ export async function GET() {
  try {
   const db=createLabsWriter();
   const rewardDate=budapestDate();
-  const [history,day]=await Promise.all([
+  const [history,day,best]=await Promise.all([
    db.from("sim5_runs").select("id,schema_version,locale,status,score,xp_awarded,report,started_at,ended_at,updated_at").eq("user_id",access.userId).order("started_at",{ascending:false}).limit(30),
-   db.from("sim5_daily_rewards").select("reward_date,xp_awarded").eq("user_id",access.userId).eq("reward_date",rewardDate).maybeSingle()
+   db.from("sim5_daily_rewards").select("reward_date,xp_awarded").eq("user_id",access.userId).eq("reward_date",rewardDate).maybeSingle(),
+   db.from("sim5_xp_best").select("best_xp").eq("user_id",access.userId).maybeSingle()
   ]);
-  if(history.error||day.error)return reply({ok:false,error:"HISTORY_UNAVAILABLE"},503);
-  return reply({ok:true,runs:history.data,daily:{rewardDate,claimed:!!day.data,earnedToday:day.data?.xp_awarded||0,maxDailyXp:50}});
+  if(history.error||day.error||best.error)return reply({ok:false,error:"HISTORY_UNAVAILABLE"},503);
+  return reply({ok:true,runs:history.data,daily:{rewardDate,claimed:!!day.data,earnedToday:day.data?.xp_awarded||0,maxDailyXp:50,lifetimeBestXp:best.data?.best_xp||0}});
  }catch{return reply({ok:false,error:"PERSISTENCE_UNAVAILABLE"},503);}
 }
 export async function POST(request:Request) {
