@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-20T10:06:45.676Z",
+  "timestamp": "2026-10-20T10:06:49.160Z",
   "source": "Actual RealModels scene, pinned Three 0.180.0, original GLBs; no stock/generated imagery",
   "camera": {
     "name": "southeast",
@@ -16,8 +16,8 @@
     "fov": 47
   },
   "runtimeCameraChanged": false,
-  "width": 1920,
-  "height": 1080,
+  "width": 1760,
+  "height": 994,
   "bytes": 62886,
   "sha256": "5ed1fc862f626928c43f0973fcbcda988983a867c12ce8aae46d06ffb3d21ffb",
   "sources": [

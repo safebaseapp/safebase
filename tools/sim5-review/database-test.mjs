@@ -25,6 +25,13 @@ check('legacy direct-client XP and attempt forgery is denied',()=>{assert.match(
 check('existing server Labs writer retains insert access',()=>{db(`set role service_role;insert into lab_attempts(user_id,scenario_id,scenario_type,category,difficulty,locale,score)values('${a}','legacy-fixture','spot','hse','basic','en',70);`)});
 check('authenticated cannot invoke award RPC',()=>assert.match(db(auth(a)+save(run,a).replace('set role service_role;',''),true),/permission denied/));
 check('RPC binds run ownership',()=>assert.match(db(save(run,b),true),/RUN_NOT_FOUND/));
+check('RPC rejects null or incomplete reports before awarding',()=>{
+ for(const report of [{schema:'sim5-mission/1',score:100},{schema:'sim5-mission/1',score:100,phase:'finished',completed:['hotwork','hotwork','hotwork','hotwork','hotwork','hotwork']},{score:100,phase:'finished',completed:['hotwork','lifting','leak','access','droppedTool','materials']}]){
+  const statement=save(run,a).replace(/'\{[^']+\}'::jsonb/,"'"+JSON.stringify(report)+"'::jsonb");assert.match(db(statement,true),/INVALID_RESULT|INCOMPLETE_RESULT/);
+ }
+ assert.match(db(save(run,a).replace(",0,",",null,"),true),/INVALID_RESULT/);
+ assert.equal(db(`select total_xp from lab_user_progress where user_id='${a}';`),'700');
+});
 check('first 80 score credits only 160 XP and preserves old progress',()=>{db(save(run,a,80));assert.equal(db(`select total_xp||','||scenario_count||','||current_streak from lab_user_progress where user_id='${a}';`),'860,4,3')});
 check('same run retry is idempotent',()=>{db(save(run,a,80));assert.equal(db(`select total_xp from lab_user_progress where user_id='${a}';`),'860')});
 const ids=['20000000-0000-4000-8000-000000000001','20000000-0000-4000-8000-000000000002'];
@@ -38,5 +45,11 @@ check('cross-account history is invisible after award',()=>assert.equal(db(auth(
 const partial='30000000-0000-4000-8000-000000000001';db(`insert into sim5_runs(id,user_id,locale)values('${partial}','${a}','en');`);
 check('partial run receives no XP',()=>{db(save(partial,a).replace("'completed',100","'partial',100"));assert.equal(db(`select xp_awarded from sim5_runs where id='${partial}';`),'0')});
 check('full run cannot be rewritten after finalization',()=>assert.match(db(save(run,a,100).replace('"atMs":1','"atMs":2'),true),/RUN_CONFLICT/));
+check('XP best rows are owner-read-only',()=>{
+ assert.equal(db(auth(b)+`select count(*) from sim5_xp_best where user_id='${a}';`),'0');
+ assert.match(db(auth(a)+`update sim5_xp_best set best_xp=0;`,true),/permission denied/);
+ assert.match(db('set role anon;select * from sim5_xp_best;',true),/permission denied/);
+});
+check('existing Labs level curve is preserved',()=>assert.equal(db(`select level from lab_user_progress where user_id='${a}';`),'2'));
 check('additive migration preserves other lab attempts',()=>assert.equal(db('select count(*) from lab_attempts;'),'1'));
 fs.mkdirSync(path.join(toolRoot,'artifacts/pack7'),{recursive:true});fs.writeFileSync(path.join(toolRoot,'artifacts/pack7/database-results.json'),JSON.stringify({timestamp:new Date().toISOString(),database:'isolated PostgreSQL 17; Supabase role fixtures',liveSupabase:'NOT_RUN',checks},null,2));console.log('PASS',checks.length,'local PostgreSQL checks; LIVE Supabase NOT RUN');

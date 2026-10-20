@@ -52,9 +52,11 @@ declare
  lvl integer:=1;
  remaining integer;
 begin
- if p_status not in ('in_progress','partial','completed','cancelled') or p_score not between 0 and 100
+ if p_status is null or p_score is null or p_revision is null or p_revision<0
+   or p_events is null or p_report is null or jsonb_typeof(p_report)<>'object'
+   or p_status not in ('in_progress','partial','completed','cancelled') or p_score not between 0 and 100
    or jsonb_typeof(p_events)<>'array' or jsonb_array_length(p_events)>4096
-   or p_report->>'schema'<>'sim5-mission/1' or (p_report->>'score')::integer<>p_score then
+   or p_report->>'schema' is distinct from 'sim5-mission/1' or (p_report->>'score')::integer is distinct from p_score then
   raise exception 'INVALID_RESULT';
  end if;
  select * into r from public.sim5_runs where id=p_run_id and user_id=p_user_id for update;
@@ -68,7 +70,11 @@ begin
  if exists(select 1 from jsonb_array_elements(r.events) with ordinality e(value,n)
            where e.value is distinct from p_events->((e.n-1)::integer)) then raise exception 'LOG_CONFLICT'; end if;
  if p_status='completed' then
-  if jsonb_array_length(p_report->'completed')<>6 or p_report->>'phase'<>'finished' then raise exception 'INCOMPLETE_RESULT'; end if;
+  if jsonb_typeof(p_report->'completed') is distinct from 'array'
+     or p_report->>'phase' is distinct from 'finished' then raise exception 'INCOMPLETE_RESULT'; end if;
+  if jsonb_array_length(p_report->'completed')<>6
+     or not (p_report->'completed' @> '["hotwork","lifting","leak","access","droppedTool","materials"]'::jsonb)
+     then raise exception 'INCOMPLETE_RESULT'; end if;
   perform pg_advisory_xact_lock(hashtextextended(p_user_id::text||':sim5-static-six',0));
   insert into public.sim5_xp_best(user_id) values(p_user_id) on conflict do nothing;
   select best_xp into previous_best from public.sim5_xp_best where user_id=p_user_id for update;
