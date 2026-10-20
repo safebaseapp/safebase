@@ -14,7 +14,7 @@ import { createMissionSceneEffects } from "./MissionSceneEffects";
 
 const inspections=siteInspections;
 
-export default function RealModels({tr, missionMode = "full"}:{tr:boolean; missionMode?: MissionMode}) {
+export default function RealModels({tr, missionMode = "full", persist = false}:{tr:boolean; missionMode?: MissionMode; persist?: boolean}) {
  const mount=useRef<HTMLDivElement>(null);
  const held=useRef<Set<string>>(new Set());
  const keyboard=useRef<Set<string>>(new Set());
@@ -26,7 +26,7 @@ export default function RealModels({tr, missionMode = "full"}:{tr:boolean; missi
  const [status,setStatus]=useState(tr?"Saha hazırlanıyor…":"Preparing site…");
  const [loaded,setLoaded]=useState(0);
  const [activeInspection,setActiveInspection]=useState<string|null>(null);
- const {mission,missionRef,send}=useMission(missionMode);
+ const {mission,missionRef,send,persistence}=useMission(missionMode,persist,tr);
  const summary=missionSummary(mission);
  const completedInspections=summary.completed;
  const discovered=summary.found;
@@ -331,13 +331,13 @@ export default function RealModels({tr, missionMode = "full"}:{tr:boolean; missi
         const worldHit=hit.point;
         const targetId=hit.object.userData.inspectionId;
         if(targetId&&available(targetId)&&camera.position.distanceTo(worldHit)<10){
-          send({type:"discover",id:targetId});clearInput();setActiveInspection(targetId);setInspectionFeedback("");
+          send({type:"discover",id:targetId,position:camera.position.toArray()});clearInput();setActiveInspection(targetId);setInspectionFeedback("");
         }
       }
     };
     renderer.domElement.addEventListener("pointerup",inspect);
     inspectionAvailable.current=available;
-    inspectNearby.current=()=>{const id=nearbyRef.current;if(id&&available(id)){send({type:"discover",id});clearInput();setActiveInspection(id);setInspectionFeedback("")}};
+    inspectNearby.current=()=>{const id=nearbyRef.current;if(id&&available(id)){send({type:"discover",id,position:camera.position.toArray()});clearInput();setActiveInspection(id);setInspectionFeedback("")}};
     box(63.3,.125,-16.1,1.05,.25,1.5,walkway);
     // Close the measured 8 cm seam between the two authored stair landings.
     box(63.3,5.115,-21.95,.83,.08,.5,darkMetal);
@@ -422,7 +422,7 @@ export default function RealModels({tr, missionMode = "full"}:{tr:boolean; missi
       if(modeRef.current==="walk"){
         const closest=Object.values(inspections).filter(h=>available(h.id)).sort((a,b)=>camera.position.distanceTo(new THREE.Vector3(...a.location))-camera.position.distanceTo(new THREE.Vector3(...b.location)))[0];
         const next=closest?.id||null;
-        if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next);if(next&&!missionRef.current.findings[next].discovered)send({type:"discover",id:next})}
+        if(next!==nearbyRef.current){nearbyRef.current=next;setNearbyHazard(next);if(next&&!missionRef.current.findings[next].discovered)send({type:"discover",id:next,position:camera.position.toArray()})}
       }else if(nearbyRef.current){nearbyRef.current=null;setNearbyHazard(null)}
       // Staggered gravity-like drops: origin at flange, landing at the puddle.
       for(let i=0;i<leakDrops.length;i++){
@@ -517,6 +517,11 @@ export default function RealModels({tr, missionMode = "full"}:{tr:boolean; missi
      <button onClick={()=>{clearInput();reset.current()}} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Kamerayı sıfırla":"Reset camera"}</button>
     </div>
    </div>
+   {persist && missionMode === "full" && <aside className="rounded-xl border border-cyan-300/30 p-3">
+    <p>{tr?"Kalıcı XP yalnız tamamlanan altı bulgulu görevin en iyi puanındaki artış için verilir (toplam en fazla 200). Tekrar oynamak sınırsızdır. Skor sunucuda doğrulanır.":"Permanent XP rewards only improvements to your best completed six-finding score (200 total maximum). Replay is unlimited. The server verifies the score."}</p>
+    <p>{tr?"Sekme kapanır veya sayfa yenilenirse son başarılı kayıt geçmişte eksik deneme olarak kalır; otomatik devam edilmez. Yeni deneme başlat. Kayıt 10 saniyede bir ve duraklatma/bitirmede denenir.":"Closing or reloading keeps the last successful checkpoint as an interrupted attempt in history; it does not auto-resume. Start a new attempt. Saves are attempted every 10 seconds and on pause/finish."}</p>
+    {persistence.status && <p role="status">{persistence.status}</p>}<button type="button" className="min-h-11 underline" onClick={persistence.retry}>{tr?"Kaydı yeniden dene":"Retry save"}</button>
+   </aside>}
    <MissionPanel mission={mission} tr={tr} ready={ready} send={send} onStart={startMission} onRestart={restartMission}/>
    <p style={{color:"#c4dce3",fontSize:14}}>{missionMode==="demo"?(tr?"DEMO: Kaynak ve kaldırma sahnelerinde iki bulguyu değerlendir. Diğer bulgular ve üst platform görevleri Premium sürümdedir.":"DEMO: Assess two findings at the welding and lifting stations. Other findings and upper-platform missions belong to Premium."):tr?"Saha brifingi: İşaretli geçişleri kullan. Aktif kaldırma alanına girme. Görünür kanıtları yaklaşarak incele; tank merdivenleri üst servis yoluna çıkar. Üst seviyeyi de araştır.":"Site briefing: Use marked access routes. Stay outside the active lifting zone. Approach visible evidence to inspect it; the tank stairs lead to the upper service walkway. Explore both levels."}</p>
    <div className="sim5-stage">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Sim5History from "./Sim5History";
 import RealModels from "./RealModels";
 import { getSim5Access } from "@/lib/sim5/server-access";
 import { notFound } from "next/navigation";
@@ -49,7 +50,7 @@ export default async function Sim5Page({ params }: { params: Promise<{ locale: s
         <tr><th>{isTr?"HSE bulguları":"HSE findings"}</th><td>2</td><td>6</td></tr><tr><th>{isTr?"Üst platform görevi":"Upper-platform mission"}</th><td>—</td><td>✓</td></tr><tr><th>{isTr?"Tekrar":"Replay"}</th><td>∞</td><td>∞</td></tr><tr><th>{isTr?"Hesap geçmişi":"Account history"}</th><td>—</td><td>✓</td></tr></tbody></table>
         {!access.allowed && <p className="mt-3" role="status">{access.reason === "unconfigured" || access.reason === "unavailable" ? (isTr ? "Premium erişimi şu anda doğrulanamıyor. Ücretsiz DEMO oynanabilir; tam görev kapalıdır." : "Premium access cannot currently be verified. Play the free DEMO; the full mission remains locked.") : isTr ? "Tam denetim yalnız aktif Premium/admin hesabına açıktır." : "Full inspection requires an active Premium/admin account."}</p>}
       </section>
-      {access.allowed && <RealModels tr={isTr} missionMode="full" />}
+      {access.allowed && <><RealModels tr={isTr} missionMode="full" persist /><Sim5History tr={isTr}/></>}
     </main>
   );
 }

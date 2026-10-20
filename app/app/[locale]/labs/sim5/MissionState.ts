@@ -9,7 +9,7 @@ export type MissionState = { mode?: MissionMode; phase: MissionPhase; activeMs: 
 export type MissionEvent =
  | { type: "start" | "pause" | "resume" | "finish" | "cancel" | "restart" }
  | { type: "tick"; deltaMs: number }
- | { type: "discover"; id: string }
+ | { type: "discover"; id: string; position?: [number, number, number] }
  | { type: "answer"; id: string; answer: number };
 
 // Relative training priorities, not a certified quantitative risk assessment.
