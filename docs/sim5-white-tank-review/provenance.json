@@ -1,0 +1,82 @@
+{
+  "timestamp": "2026-10-20T11:14:33.425Z",
+  "source": "Actual RealModels 3D scene rendered by headless Chromium",
+  "cameraMode": "test-only cloned camera",
+  "gameplayChanged": false,
+  "modelGeometryChanged": false,
+  "tankFinish": "modern white coated steel",
+  "coatingReport": {
+    "name": "sim5-modern-white-storage-tanks",
+    "geometryCount": 43,
+    "materials": [
+      "SIM5_Modern_White_Tank_lambert3",
+      "SIM5_Modern_White_Tank_Round_Tank_Material",
+      "SIM5_Modern_White_Tank_Long_TankLong_TankA_Material",
+      "SIM5_Modern_White_Tank_Long_Tanklambert3",
+      "SIM5_Modern_White_Tank_Large_tank"
+    ]
+  },
+  "sourceModels": [
+    {
+      "name": "SERNEM_SIM4_Factory_optimized.glb",
+      "sha256": "0bfb3c1baed3478cbffed6ab078e4e080c0a361ae2f185896ecc4607922d9785"
+    },
+    {
+      "name": "large_industrial_storage_tanks (1).glb",
+      "sha256": "57f8af41a804fb9f231437c73c5fcd1d11047a4aac42aaa43f0b52dd8d3558e8"
+    }
+  ],
+  "selected": "southwest",
+  "candidates": [
+    {
+      "name": "southwest",
+      "position": [
+        -45,
+        59,
+        113
+      ],
+      "target": [
+        0,
+        2,
+        12
+      ],
+      "fov": 42,
+      "bytes": 118846,
+      "sha256": "1714fd693fec860b0776ae27ee604edaa21eb7dbfbfe47b0fd6869ca7b2a38b6"
+    },
+    {
+      "name": "south",
+      "position": [
+        -8,
+        51,
+        109
+      ],
+      "target": [
+        1,
+        2,
+        11
+      ],
+      "fov": 42,
+      "bytes": 115504,
+      "sha256": "7271a7a166822ad883af6f759c30e843e7158e4e5c2aae49df50562b66dfd4c8"
+    },
+    {
+      "name": "southeast",
+      "position": [
+        35,
+        51,
+        107
+      ],
+      "target": [
+        0,
+        2,
+        12
+      ],
+      "fov": 44,
+      "bytes": 123594,
+      "sha256": "8598c119998266f569412e7a0820520f033e24619fa1e7e40372ebe680479040"
+    }
+  ],
+  "imagePath": "app/public/images/sim5-site-showcase.webp",
+  "sha256": "1714fd693fec860b0776ae27ee604edaa21eb7dbfbfe47b0fd6869ca7b2a38b6"
+}
