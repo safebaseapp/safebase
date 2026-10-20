@@ -22,7 +22,6 @@ import {
   Medal,
   Crown,
 } from "lucide-react";
-import { createClient } from "@/utils/supabase/client";
 
 type Locale = "tr" | "en";
 
@@ -127,8 +126,6 @@ const HALF_DAY = 12 * 60 * 60 * 1000;
 export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
   const tr = locale === "tr";
   const [slot, setSlot] = useState(0);
-  const [leaders, setLeaders] = useState<Leader[]>([]);
-  const [rankingView, setRankingView] = useState<"example" | "live">("example");
 
   useEffect(() => {
     const update = () => setSlot(Math.floor(Date.now() / HALF_DAY));
@@ -137,21 +134,9 @@ export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
     return () => window.clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) return;
-    let active = true;
-    const supabase = createClient();
-    void supabase.rpc("get_labs_monthly_leaderboard").then(({ data }) => {
-      if (active && Array.isArray(data)) setLeaders(data as Leader[]);
-    });
-    return () => {
-      active = false;
-    };
-  }, []);
-
   const items = useMemo(() => ROTATIONS[slot % ROTATIONS.length], [slot]);
   const monthLabel = new Intl.DateTimeFormat(tr ? "tr-TR" : "en-US", { month: "long", year: "numeric" }).format(new Date());
-  const podium = [0, 1, 2].map((index) => (rankingView === "example" ? SAMPLE_LEADERS : leaders)[index] ?? null);
+  const podium = SAMPLE_LEADERS;
   const categoryLinks = [
     { href: "/tools/quick-risk-assessment", label: tr ? "Risk Analizi" : "Risk Assessment", note: tr ? "100+ faaliyet" : "100+ activities" },
     { href: "/toolbox", label: tr ? "Toolbox Talk" : "Toolbox Talks", note: "70+" },
@@ -235,24 +220,8 @@ export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
               <div>
                 <div className="flex items-center gap-2 text-[8px] font-black uppercase tracking-[0.18em] text-amber-300"><Trophy size={12} /> {monthLabel}</div>
                 <h3 className="mt-1.5 text-[15px] font-black text-white">HSE Labs XP Leaderboard</h3>
-                <p className="mt-1 text-[9px] text-slate-400">{rankingView === "example"
-                  ? (tr ? "Temsilî profiller ve örnek XP puanları — gerçek kullanıcı değildir." : "Illustrative profiles and sample XP scores — not real users.")
-                  : (tr ? "Bu ayın gerçek XP sıralaması" : "Real XP ranking for this month")}</p>
+                <p className="mt-1 text-[9px] text-slate-400">{tr ? "Temsilî sıralama" : "Illustrative ranking"}</p>
               </div>
-              <span className={`rounded-full border px-2 py-1 text-[8px] font-black uppercase tracking-[0.12em] ${rankingView === "example" ? "border-amber-300/45 bg-amber-300/10 text-amber-200" : "border-sky-300/30 bg-sky-300/10 text-sky-200"}`}>
-                {rankingView === "example" ? (tr ? "ÖRNEK" : "SAMPLE") : (tr ? "GERÇEK" : "LIVE")}
-              </span>
-            </div>
-
-            <div className="relative mt-3 flex gap-2" role="group" aria-label={tr ? "Sıralama türü" : "Ranking type"}>
-              <button type="button" aria-pressed={rankingView === "example"} onClick={() => setRankingView("example")}
-                className={`min-h-9 flex-1 rounded-lg border px-3 py-2 text-[10px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300 ${rankingView === "example" ? "border-amber-300/50 bg-amber-300/10 text-amber-100" : "border-white/10 text-slate-300 hover:bg-white/5"}`}>
-                {tr ? "Örnek sıralama" : "Sample ranking"}
-              </button>
-              <button type="button" aria-pressed={rankingView === "live"} onClick={() => setRankingView("live")}
-                className={`min-h-9 flex-1 rounded-lg border px-3 py-2 text-[10px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300 ${rankingView === "live" ? "border-sky-300/50 bg-sky-300/10 text-sky-100" : "border-white/10 text-slate-300 hover:bg-white/5"}`}>
-                {tr ? "Gerçek sıralama" : "Live ranking"}
-              </button>
             </div>
 
             <div className="relative mt-3 space-y-2">
