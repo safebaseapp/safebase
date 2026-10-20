@@ -37,6 +37,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Install isolated SIM5 review test dependencies
+        run: npm ci --prefix tools/sim5-review --ignore-scripts --no-audit --no-fund
       - name: Install isolated PostgreSQL 17
         run: |
           docker run -d --name sim5-pack7-db -e POSTGRES_PASSWORD=sim5-test-password postgres:17-alpine
