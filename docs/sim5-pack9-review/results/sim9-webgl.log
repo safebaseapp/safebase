@@ -1,0 +1,14 @@
+CHECK tr completed two findings at 100/100
+CHECK tr terminal rendering throttles to <=5 calls/1.1s
+CHECK tr replay resumes active rendering
+CHECK tr context loss preserves exact report
+CHECK tr localized report retention message
+CHECK tr context loss stops renderer calls
+CHECK en completed two findings at 100/100
+CHECK en terminal rendering throttles to <=5 calls/1.1s
+CHECK en replay resumes active rendering
+CHECK en context loss preserves exact report
+CHECK en localized report retention message
+CHECK en context loss stops renderer calls
+CHECK DEMO never sends writes
+PASS 13

@@ -1,0 +1,40 @@
+{
+  "checks": [
+    "production recorder starts a server run",
+    "real UI evidence positions and legal answer log pass server replay",
+    "failed save is visibly reported, local report kept",
+    "retry persists partial report without XP",
+    "full mission analytics fire once per explicit start/finish",
+    "no browser or replay errors"
+  ],
+  "errors": [],
+  "saves": [
+    {
+      "status": "in_progress",
+      "score": 0,
+      "events": 1
+    },
+    {
+      "status": "in_progress",
+      "score": 50,
+      "events": 6
+    },
+    {
+      "status": "in_progress",
+      "score": 50,
+      "events": 6
+    },
+    {
+      "status": "partial",
+      "score": 50,
+      "events": 8
+    },
+    {
+      "status": "partial",
+      "score": 50,
+      "events": 8
+    }
+  ],
+  "liveSupabase": "NOT_RUN",
+  "transport": "intercepted browser fixture; real server replay"
+}

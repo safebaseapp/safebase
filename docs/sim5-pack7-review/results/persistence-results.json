@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "server recomputes complete six-finding report and 200 maximum XP",
+    "sanitized log roundtrips and extends checkpoints",
+    "rejects self asserted XP",
+    "rejects self asserted completion",
+    "rejects answer before discovery",
+    "rejects unknown finding",
+    "rejects remote discovery",
+    "rejects reversed time",
+    "rejects future time",
+    "rejects invalid answer",
+    "rejects resume after final",
+    "rejects duplicate answer",
+    "rejects run restart",
+    "rejects empty log",
+    "rejects oversized log",
+    "JSONB key reordering preserves prefix identity",
+    "early finish and cancel never award permanent XP",
+    "pause/resume excludes inactive time"
+  ],
+  "liveSupabase": "NOT_RUN"
+}

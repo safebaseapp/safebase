@@ -14,6 +14,9 @@ type SitemapEntry = MetadataRoute.Sitemap[number];
 
 const publicRoutes = [
   "",
+  "/labs",
+  "/labs/sim5",
+  "/labs/sim5/demo",
   "/about",
   "/contact",
   "/faq",

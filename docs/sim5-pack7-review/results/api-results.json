@@ -1,0 +1,18 @@
+{
+  "checks": [
+    "guest cannot read/write before DB access",
+    "free cannot read/write before DB access",
+    "suspended cannot read/write before DB access",
+    "expired cannot read/write before DB access",
+    "cross-origin cookie-authenticated write denied",
+    "history is private no-store and explicitly owner-filtered",
+    "cross-account/missing run is not found",
+    "client score and premium flag rejected",
+    "server computes report from full log, not claimed completion",
+    "stale/divergent event prefix rejected before RPC",
+    "DB conflicts propagate for safe retry",
+    "missing persistence configuration is not success"
+  ],
+  "liveSupabase": "NOT_RUN",
+  "dependencies": "in-memory fixtures"
+}

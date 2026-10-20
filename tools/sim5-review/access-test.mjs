@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict';import {build} from 'esbuild';import {repoRoot} from './inspect.mjs';import path from 'node:path';
+const b=await build({entryPoints:[path.join(repoRoot,'app/lib/sim5/access-policy.ts')],bundle:true,format:'esm',write:false});const {canPlayFullMission:can}=await import('data:text/javascript;base64,'+Buffer.from(b.outputFiles[0].contents).toString('base64'));
+const rows=[['guest',false,true,false,false,false,false],['free',true,true,false,false,false,false],['suspended premium',true,false,false,false,true,false],['suspended admin',true,false,true,false,false,false],['premium',true,true,false,false,true,true],['admin',true,true,true,false,false,true],['reward',true,true,false,true,false,true],['expired',true,true,false,false,false,false],['unavailable profile',true,false,false,false,false,false]];
+for(const [label,authenticated,active,admin,reward,billing,expected]of rows){assert.equal(can({authenticated,active,admin,reward,billing}),expected,label);console.log('CHECK',label)}
+console.log('PASS',rows.length,'pure entitlement policy cases — no live Supabase test');

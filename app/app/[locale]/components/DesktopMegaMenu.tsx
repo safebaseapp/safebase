@@ -1,5 +1,6 @@
 "use client";
 
+import Sim5MenuEntry from "@/components/sim5/Sim5MenuEntry";
 import { useState } from "react";
 import {
   Activity,
@@ -108,7 +109,7 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
     return map[accent];
   };
 
-  const PhotoPane = ({ src }: { src: string }) => (
+  const renderPhotoPane = ({ src }: { src: string }) => (
     <div className="pointer-events-none absolute inset-y-0 right-0 w-[58%] overflow-hidden">
       <img
         src={src}
@@ -120,7 +121,7 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
     </div>
   );
 
-  const DirectCard = ({
+  const renderDirectCard = ({
     href,
     title,
     subtitle,
@@ -143,7 +144,7 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
         onClick={onClose}
         className={`group relative flex min-h-[118px] items-center gap-4 overflow-hidden rounded-[24px] border bg-[#06101e] px-5 transition duration-300 ${styles.border} ${styles.glow} hover:-translate-y-0.5`}
       >
-        <PhotoPane src={photo} />
+        {renderPhotoPane({src:photo})}
         <span className={`absolute bottom-4 left-0 top-4 z-10 w-[3px] rounded-r-full ${styles.line}`} />
 
         <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] border backdrop-blur-md ${styles.icon}`}>
@@ -162,7 +163,7 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
     );
   };
 
-  const AccordionCard = ({
+  const renderAccordionCard = ({
     id,
     title,
     subtitle,
@@ -184,7 +185,7 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
 
     return (
       <div className={`relative overflow-hidden rounded-[24px] border bg-[#06101e] transition duration-300 ${styles.border} ${styles.glow}`}>
-        <PhotoPane src={photo} />
+        {renderPhotoPane({src:photo})}
         <span className={`absolute bottom-4 left-0 top-4 z-10 w-[3px] rounded-r-full ${styles.line}`} />
 
         <button
@@ -209,6 +210,7 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
 
         {open && (
           <div className="relative z-20 grid grid-cols-2 gap-2 border-t border-white/[0.08] bg-[#020817]/92 p-3 backdrop-blur-xl">
+            {id === "labs" && <Sim5MenuEntry locale={locale} onNavigate={onClose}/>}
             {items.map((item) => {
               const ItemIcon = item.icon;
               return (
@@ -257,65 +259,20 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
 
         <div className="grid grid-cols-2 gap-3">
           {authenticated && (
-            <DirectCard
-              href="/dashboard"
-              title="Dashboard"
-              subtitle={tr ? "Genel bakış, kayıtlar ve hızlı işlemler." : "Overview, saved work and quick actions."}
-              icon={LayoutDashboard}
-              photo={PHOTO.dashboard}
-              accent="cyan"
-            />
+            renderDirectCard({href:"/dashboard",title:"Dashboard",subtitle:tr ? "Genel bakış, kayıtlar ve hızlı işlemler." : "Overview, saved work and quick actions.",icon:LayoutDashboard,photo:PHOTO.dashboard,accent:"cyan"})
           )}
 
-          <AccordionCard
-            id="tools"
-            title={tr ? "HSE Araçları" : "HSE Tools"}
-            subtitle={tr ? "Risk, dokümantasyon ve saha araçları." : "Risk, documentation and field tools."}
-            icon={Wrench}
-            photo={PHOTO.tools}
-            accent="blue"
-            items={toolItems}
-          />
+          {renderAccordionCard({id:"tools",title:tr ? "HSE Araçları" : "HSE Tools",subtitle:tr ? "Risk, dokümantasyon ve saha araçları." : "Risk, documentation and field tools.",icon:Wrench,photo:PHOTO.tools,accent:"blue",items:toolItems})}
 
           {authenticated && (
-            <DirectCard
-              href="/hse-performance"
-              title={tr ? "HSE Performans" : "HSE Performance"}
-              subtitle={tr ? "KPI, gözlem, trend ve raporlama." : "KPIs, observations, trends and reporting."}
-              icon={Gauge}
-              photo={PHOTO.performance}
-              accent="cyan"
-            />
+            renderDirectCard({href:"/hse-performance",title:tr ? "HSE Performans" : "HSE Performance",subtitle:tr ? "KPI, gözlem, trend ve raporlama." : "KPIs, observations, trends and reporting.",icon:Gauge,photo:PHOTO.performance,accent:"cyan"})
           )}
 
-          <AccordionCard
-            id="labs"
-            title="HSE Labs"
-            subtitle={tr ? "Simülasyonlar ve etkileşimli eğitim." : "Simulations and interactive training."}
-            icon={Sparkles}
-            photo={PHOTO.labs}
-            accent="violet"
-            items={labItems}
-          />
+          {renderAccordionCard({id:"labs",title:"HSE Labs",subtitle:tr ? "Simülasyonlar ve etkileşimli eğitim." : "Simulations and interactive training.",icon:Sparkles,photo:PHOTO.labs,accent:"violet",items:labItems})}
 
-          <AccordionCard
-            id="resources"
-            title={tr ? "Kaynaklar" : "Resources"}
-            subtitle={tr ? "Rehberler, toolbox ve saha içerikleri." : "Guides, toolbox talks and field resources."}
-            icon={Grid3X3}
-            photo={PHOTO.resources}
-            accent="emerald"
-            items={resourceItems}
-          />
+          {renderAccordionCard({id:"resources",title:tr ? "Kaynaklar" : "Resources",subtitle:tr ? "Rehberler, toolbox ve saha içerikleri." : "Guides, toolbox talks and field resources.",icon:Grid3X3,photo:PHOTO.resources,accent:"emerald",items:resourceItems})}
 
-          <DirectCard
-            href="/ai-assistant"
-            title={tr ? "AI Asistan" : "AI Assistant"}
-            subtitle={tr ? "Sor, öğren ve hızlı HSE desteği al." : "Ask, learn and get instant HSE support."}
-            icon={Bot}
-            photo={PHOTO.ai}
-            accent="fuchsia"
-          />
+          {renderDirectCard({href:"/ai-assistant",title:tr ? "AI Asistan" : "AI Assistant",subtitle:tr ? "Sor, öğren ve hızlı HSE desteği al." : "Ask, learn and get instant HSE support.",icon:Bot,photo:PHOTO.ai,accent:"fuchsia"})}
         </div>
       </div>
     </div>

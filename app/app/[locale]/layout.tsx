@@ -12,7 +12,6 @@ import UserActivityCapture from "./components/UserActivityCapture";
 import OrganicLandingCapture from "./components/OrganicLandingCapture";
 import DashboardReturnBar from "./components/DashboardReturnBar";
 import WorkspaceUxEnhancer from "./components/WorkspaceUxEnhancer";
-import HomeLabsBridge from "./components/HomeLabsBridge";
 import "./navbar-responsive-fix.css";
 import "./premium-live-polish.css";
 import "./core-content-visual-system.css";
@@ -100,15 +99,14 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   setRequestLocale(locale);
   const safeLocale = locale as "tr" | "en";
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const supabase = process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ? await createClient() : null;
+  const user = supabase ? (await supabase.auth.getUser()).data.user : null;
   const initialIsAuthenticated = Boolean(user);
   const initialIsOwner = isAdminUser(user);
 
   return (
     <NextIntlClientProvider>
       <LocalizedNavbar locale={safeLocale} initialIsAuthenticated={initialIsAuthenticated} initialIsOwner={initialIsOwner} initialOwnerUserId={initialIsOwner ? user?.id : null} />
-      <HomeLabsBridge locale={safeLocale} />
       <NavbarLegacyPremiumCleanup />
       <UserActivityCapture />
       <OrganicLandingCapture locale={safeLocale} />

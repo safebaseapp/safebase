@@ -1,0 +1,56 @@
+{
+  "baseline": "9c7bb81462148ab64cbb3a6b5825a185ee05b188",
+  "timestamp": "2026-10-20T08:32:50.804457+00:00",
+  "package6": {
+    "passed": 289,
+    "failed": 0,
+    "suites": [
+      {
+        "file": "mission-state-results.json",
+        "passed": 27
+      },
+      {
+        "file": "mission-browser-results.json",
+        "passed": 43
+      },
+      {
+        "file": "height-results.json",
+        "passed": 52
+      },
+      {
+        "file": "runtime-validation.json",
+        "passed": 7
+      },
+      {
+        "file": "navigation-results.json",
+        "passed": 5
+      },
+      {
+        "file": "welding-results.json",
+        "passed": 28
+      },
+      {
+        "file": "pack-results.json",
+        "passed": 47
+      },
+      {
+        "file": "controls-results.json",
+        "passed": 80
+      }
+    ]
+  },
+  "package7Scripts": 13,
+  "localPostgresChecks": 17,
+  "realNextNoSupabaseChecks": 8,
+  "typecheck": "passed",
+  "build": "passed",
+  "changedFileLint": {
+    "errors": 0,
+    "warnings": 7
+  },
+  "liveSupabase": "NOT_RUN",
+  "liveGA4": "NOT_RUN",
+  "actualCdnBrowserSmoke": "FAILED: ERR_CERT_AUTHORITY_INVALID (cloud proxy CA trust)",
+  "productionWrites": false,
+  "merges": false
+}

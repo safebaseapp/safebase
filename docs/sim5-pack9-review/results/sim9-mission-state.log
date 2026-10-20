@@ -1,0 +1,28 @@
+CHECK briefing cannot discover, answer, accrue time or XP
+CHECK start is explicit and repeated start does not reset an attempt
+CHECK unseen findings cannot be answered
+CHECK unknown and prototype IDs are ignored
+CHECK discovery alone earns only 20 percent of the finding weight
+CHECK repeated discovery cannot farm points
+CHECK invalid answer indices cannot count as attempts
+CHECK safe first decision earns the full weight
+CHECK completed findings reject both repeated right and wrong decisions
+CHECK wrong first decision does not complete and deducts discovery credit
+CHECK further wrong attempts are recorded without stacking the first-decision penalty
+CHECK correcting a wrong first decision recovers 80 percent, not a perfect score
+CHECK six first-time safe decisions normalize to exactly 100 and 200 local XP
+CHECK six corrected first errors finish at 80 with six first-decision learning points
+CHECK inspection order does not change normalized score
+CHECK scoring is independent of completion speed and device
+CHECK relative weights sum to 100 and prioritize high-consequence operations
+CHECK real active-time deltas accumulate without frame-rate clamping
+CHECK invalid time deltas are rejected
+CHECK paused clock and inspection are frozen
+CHECK resume continues the same findings and time
+CHECK early finish lists missed risks and never awards free answers
+CHECK finished attempts cannot resume, answer or extend the clock
+CHECK cancellation is a frozen incomplete report, including from paused state
+CHECK restart returns to briefing and resets score, XP, time and attempt history
+CHECK state transitions do not mutate prior attempts
+CHECK versioned summary is serializable without a persistent profile identity
+PASS 27

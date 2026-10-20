@@ -1,0 +1,126 @@
+CHECK tr/desktop showcase directly follows hero
+CHECK tr/desktop real image loaded
+CHECK tr/desktop no horizontal overflow
+CHECK tr/desktop demo CTA
+CHECK tr/desktop premium CTA
+CHECK tr/desktop menu preserves Labs links
+CHECK tr/desktop keyboard reaches Premium
+CHECK tr/desktop escape closes and restores trigger
+CHECK tr/desktop Labs image loaded
+CHECK tr/desktop Labs no overflow
+CHECK tr/laptop showcase directly follows hero
+CHECK tr/laptop real image loaded
+CHECK tr/laptop no horizontal overflow
+CHECK tr/laptop demo CTA
+CHECK tr/laptop premium CTA
+CHECK tr/laptop menu preserves Labs links
+CHECK tr/laptop keyboard reaches Premium
+CHECK tr/laptop escape closes and restores trigger
+CHECK tr/laptop Labs image loaded
+CHECK tr/laptop Labs no overflow
+CHECK tr/tablet showcase directly follows hero
+CHECK tr/tablet real image loaded
+CHECK tr/tablet no horizontal overflow
+CHECK tr/tablet demo CTA
+CHECK tr/tablet premium CTA
+CHECK tr/tablet menu preserves Labs links
+CHECK tr/tablet keyboard reaches Premium
+CHECK tr/tablet escape closes and restores trigger
+CHECK tr/tablet Labs image loaded
+CHECK tr/tablet Labs no overflow
+CHECK tr/mobile showcase directly follows hero
+CHECK tr/mobile real image loaded
+CHECK tr/mobile no horizontal overflow
+CHECK tr/mobile demo CTA
+CHECK tr/mobile premium CTA
+CHECK tr/mobile menu preserves Labs links
+CHECK tr/mobile keyboard reaches Premium
+CHECK tr/mobile escape closes and restores trigger
+CHECK tr/mobile Labs image loaded
+CHECK tr/mobile Labs no overflow
+CHECK tr/small showcase directly follows hero
+CHECK tr/small real image loaded
+CHECK tr/small no horizontal overflow
+CHECK tr/small demo CTA
+CHECK tr/small premium CTA
+CHECK tr/small menu preserves Labs links
+CHECK tr/small keyboard reaches Premium
+CHECK tr/small escape closes and restores trigger
+CHECK tr/small Labs image loaded
+CHECK tr/small Labs no overflow
+CHECK tr/landscape showcase directly follows hero
+CHECK tr/landscape real image loaded
+CHECK tr/landscape no horizontal overflow
+CHECK tr/landscape demo CTA
+CHECK tr/landscape premium CTA
+CHECK tr/landscape menu preserves Labs links
+CHECK tr/landscape keyboard reaches Premium
+CHECK tr/landscape escape closes and restores trigger
+CHECK tr/landscape Labs image loaded
+CHECK tr/landscape Labs no overflow
+CHECK en/desktop showcase directly follows hero
+CHECK en/desktop real image loaded
+CHECK en/desktop no horizontal overflow
+CHECK en/desktop demo CTA
+CHECK en/desktop premium CTA
+CHECK en/desktop menu preserves Labs links
+CHECK en/desktop keyboard reaches Premium
+CHECK en/desktop escape closes and restores trigger
+CHECK en/desktop Labs image loaded
+CHECK en/desktop Labs no overflow
+CHECK en/laptop showcase directly follows hero
+CHECK en/laptop real image loaded
+CHECK en/laptop no horizontal overflow
+CHECK en/laptop demo CTA
+CHECK en/laptop premium CTA
+CHECK en/laptop menu preserves Labs links
+CHECK en/laptop keyboard reaches Premium
+CHECK en/laptop escape closes and restores trigger
+CHECK en/laptop Labs image loaded
+CHECK en/laptop Labs no overflow
+CHECK en/tablet showcase directly follows hero
+CHECK en/tablet real image loaded
+CHECK en/tablet no horizontal overflow
+CHECK en/tablet demo CTA
+CHECK en/tablet premium CTA
+CHECK en/tablet menu preserves Labs links
+CHECK en/tablet keyboard reaches Premium
+CHECK en/tablet escape closes and restores trigger
+CHECK en/tablet Labs image loaded
+CHECK en/tablet Labs no overflow
+CHECK en/mobile showcase directly follows hero
+CHECK en/mobile real image loaded
+CHECK en/mobile no horizontal overflow
+CHECK en/mobile demo CTA
+CHECK en/mobile premium CTA
+CHECK en/mobile menu preserves Labs links
+CHECK en/mobile keyboard reaches Premium
+CHECK en/mobile escape closes and restores trigger
+CHECK en/mobile Labs image loaded
+CHECK en/mobile Labs no overflow
+CHECK en/small showcase directly follows hero
+CHECK en/small real image loaded
+CHECK en/small no horizontal overflow
+CHECK en/small demo CTA
+CHECK en/small premium CTA
+CHECK en/small menu preserves Labs links
+CHECK en/small keyboard reaches Premium
+CHECK en/small escape closes and restores trigger
+CHECK en/small Labs image loaded
+CHECK en/small Labs no overflow
+CHECK en/landscape showcase directly follows hero
+CHECK en/landscape real image loaded
+CHECK en/landscape no horizontal overflow
+CHECK en/landscape demo CTA
+CHECK en/landscape premium CTA
+CHECK en/landscape menu preserves Labs links
+CHECK en/landscape keyboard reaches Premium
+CHECK en/landscape escape closes and restores trigger
+CHECK en/landscape Labs image loaded
+CHECK en/landscape Labs no overflow
+CHECK tr DEMO CTA navigates to public two-finding page
+CHECK tr Premium CTA navigates to fail-closed server gate
+CHECK en DEMO CTA navigates to public two-finding page
+CHECK en Premium CTA navigates to fail-closed server gate
+CHECK no browser exceptions
+PASS 125

@@ -1,0 +1,11 @@
+CHECK server guest
+CHECK server free
+CHECK server premium
+CHECK server expired premium plan
+CHECK server suspended admin
+CHECK server admin role
+CHECK server admin email
+CHECK server reward
+CHECK server profile missing
+CHECK server auth unavailable
+PASS server authorization fixtures; LIVE auth NOT RUN

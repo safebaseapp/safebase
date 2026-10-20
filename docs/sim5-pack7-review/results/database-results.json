@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-10-20T08:22:22.876Z",
+  "database": "isolated PostgreSQL 17; Supabase role fixtures",
+  "liveSupabase": "NOT_RUN",
+  "checks": [
+    "migration executes on PostgreSQL 17 with existing Labs schema",
+    "RLS reads only owned runs",
+    "anonymous cannot read runs",
+    "authenticated cannot insert forged results",
+    "authenticated cannot update or delete owned results",
+    "legacy direct-client XP and attempt forgery is denied",
+    "existing server Labs writer retains insert access",
+    "authenticated cannot invoke award RPC",
+    "RPC binds run ownership",
+    "first 80 score credits only 160 XP and preserves old progress",
+    "same run retry is idempotent",
+    "concurrent runs award only best-score improvement once",
+    "concurrent duplicate retries cannot double-credit XP",
+    "cross-account history is invisible after award",
+    "partial run receives no XP",
+    "full run cannot be rewritten after finalization",
+    "additive migration preserves other lab attempts"
+  ]
+}

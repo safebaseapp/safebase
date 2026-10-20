@@ -107,6 +107,7 @@ export default function UserActivityCapture() {
   const access = useRef<AccessState>({ ready: false, userId: null, premium: false });
 
   useEffect(() => {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) return;
     let active = true;
     const supabase = createClient();
     void (async () => {

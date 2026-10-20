@@ -1,0 +1,7 @@
+CHECK production recorder starts a server run
+CHECK real UI evidence positions and legal answer log pass server replay
+CHECK failed save is visibly reported, local report kept
+CHECK retry persists partial report without XP
+CHECK full mission analytics fire once per explicit start/finish
+CHECK no browser or replay errors
+PASS 6

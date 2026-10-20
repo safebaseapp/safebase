@@ -1,0 +1,91 @@
+{
+  "timestamp": "2026-10-19T12:36:15.240Z",
+  "checks": [
+    "mobile answer buttons fit and meet 44px targets",
+    "answer after leaving the approach awards no completion",
+    "ground XZ anchor cannot expose upper finding 57.8",
+    "ground XZ anchor cannot expose upper finding 51.5",
+    "imported tank wall preserves an outside collision margin",
+    "six GPU-completed frames have no WebGL error",
+    "render workload stays within two percent of Package 5 triangles and thirty draw calls"
+  ],
+  "baselineRenderWorkload": {
+    "renderTimesMs": [
+      17.300000000745058,
+      8.899999998509884,
+      6.400000000372529,
+      10.5,
+      9.899999998509884,
+      8.699999999254942
+    ],
+    "drawCalls": 908,
+    "triangles": 2621292,
+    "geometries": 1024,
+    "textures": 26,
+    "pixelRatio": 1.8,
+    "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "glError": 0
+  },
+  "staleAnswerRejected": true,
+  "mobileAnswerButtons": [
+    {
+      "left": 40,
+      "right": 350,
+      "height": 44
+    },
+    {
+      "left": 40,
+      "right": 350,
+      "height": 62
+    },
+    {
+      "left": 40,
+      "right": 100.90625,
+      "height": 44
+    }
+  ],
+  "groundLevelNegativeTests": [
+    {
+      "xz": [
+        57.8,
+        -24.1
+      ],
+      "eyeY": 1.8,
+      "inspectButtons": 0
+    },
+    {
+      "xz": [
+        51.5,
+        -26.55
+      ],
+      "eyeY": 1.8,
+      "inspectButtons": 0
+    }
+  ],
+  "tankCollision": {
+    "position": [
+      30.133100000000013,
+      1.7550000001490118,
+      2.0716370183736493e-15
+    ],
+    "surfaceX": 32.85407515457683
+  },
+  "renderBurst": {
+    "renderTimesMs": [
+      18.5,
+      12.599999997764826,
+      6.900000002235174,
+      16.800000000745058,
+      13.400000002235174,
+      11.199999999254942
+    ],
+    "drawCalls": 907,
+    "triangles": 2621152,
+    "geometries": 1024,
+    "textures": 26,
+    "pixelRatio": 1.8,
+    "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "glError": 0
+  },
+  "limitation": "Software SwiftShader, six continuous GPU-completed frames at mobile DPR 1.8. These are diagnostic timings, not hardware mobile FPS."
+}

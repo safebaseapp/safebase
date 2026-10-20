@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-10-20T08:22:35.883Z",
+  "checks": [
+    "briefing cannot discover, answer, accrue time or XP",
+    "start is explicit and repeated start does not reset an attempt",
+    "unseen findings cannot be answered",
+    "unknown and prototype IDs are ignored",
+    "discovery alone earns only 20 percent of the finding weight",
+    "repeated discovery cannot farm points",
+    "invalid answer indices cannot count as attempts",
+    "safe first decision earns the full weight",
+    "completed findings reject both repeated right and wrong decisions",
+    "wrong first decision does not complete and deducts discovery credit",
+    "further wrong attempts are recorded without stacking the first-decision penalty",
+    "correcting a wrong first decision recovers 80 percent, not a perfect score",
+    "six first-time safe decisions normalize to exactly 100 and 200 local XP",
+    "six corrected first errors finish at 80 with six first-decision learning points",
+    "inspection order does not change normalized score",
+    "scoring is independent of completion speed and device",
+    "relative weights sum to 100 and prioritize high-consequence operations",
+    "real active-time deltas accumulate without frame-rate clamping",
+    "invalid time deltas are rejected",
+    "paused clock and inspection are frozen",
+    "resume continues the same findings and time",
+    "early finish lists missed risks and never awards free answers",
+    "finished attempts cannot resume, answer or extend the clock",
+    "cancellation is a frozen incomplete report, including from paused state",
+    "restart returns to briefing and resets score, XP, time and attempt history",
+    "state transitions do not mutate prior attempts",
+    "versioned summary is serializable without a persistent profile identity"
+  ]
+}

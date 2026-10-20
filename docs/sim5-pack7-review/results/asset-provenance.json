@@ -1,0 +1,27 @@
+[
+  {
+    "file": "app/public/sim5/SERNEM_SIM4_Factory_optimized.glb",
+    "sha256": "0bfb3c1baed3478cbffed6ab078e4e080c0a361ae2f185896ecc4607922d9785",
+    "unchangedFromBaseline": true
+  },
+  {
+    "file": "app/public/sim5/large_industrial_storage_tanks (1).glb",
+    "sha256": "57f8af41a804fb9f231437c73c5fcd1d11047a4aac42aaa43f0b52dd8d3558e8",
+    "unchangedFromBaseline": true
+  },
+  {
+    "file": "app/public/sim5/SERNEM_Welder_06_under25MB.glb",
+    "sha256": "147b7b18d9121c77b08ab3137e2f8678174806b470ad82a9ecf6a7184fd245c7",
+    "unchangedFromBaseline": true
+  },
+  {
+    "file": "app/app/[locale]/labs/sim5/WeldingOperation.ts",
+    "sha256": "4ee6ee88db9d27d9187d45e659b0af2274838ee5ff076b537267d0b84b05c71a",
+    "unchangedFromBaseline": true
+  },
+  {
+    "file": "app/app/[locale]/labs/sim5/LiftingOperation.ts",
+    "sha256": "c3be6a3133356369d69ef0815d574125f75c0ac9e81959f0032ee8710b8c853d",
+    "unchangedFromBaseline": true
+  }
+]

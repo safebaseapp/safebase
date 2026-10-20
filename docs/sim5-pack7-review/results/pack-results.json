@@ -1,0 +1,808 @@
+{
+  "timestamp": "2026-10-20T08:29:23.426Z",
+  "checks": [
+    "welding geometry unchanged: tip",
+    "welding geometry unchanged: contact",
+    "welding geometry unchanged: leadSocket",
+    "welding geometry unchanged: machineSocket",
+    "welding geometry unchanged: leadStart",
+    "welding geometry unchanged: leadEnd",
+    "welding geometry unchanged: benchCenter",
+    "welding geometry unchanged: eye",
+    "welding geometry unchanged: lensCenter",
+    "authored suit and apron textures retained",
+    "leather is rough and hardhat tangent frame is refreshed",
+    "arc visibility increased without moving its contact",
+    "suit: rendered color under light/view 1",
+    "apron: rendered color under light/view 1",
+    "gloves-boots: rendered color under light/view 1",
+    "hardhat: rendered color under light/view 1",
+    "suit: rendered color under light/view 2",
+    "apron: rendered color under light/view 2",
+    "gloves-boots: rendered color under light/view 2",
+    "hardhat: rendered color under light/view 2",
+    "suit: rendered color under light/view 3",
+    "apron: rendered color under light/view 3",
+    "gloves-boots: rendered color under light/view 3",
+    "hardhat: rendered color under light/view 3",
+    "lifting meshes have finite geometry and normals",
+    "pipe is hollow and suspended above the slab",
+    "pipe remains horizontal and centred under the hook",
+    "two hoist falls are plumb and meet the hook block",
+    "hoist falls run tangentially over the head sheave",
+    "head reeving joins both hoist falls",
+    "basket slings join the same master link at both ends",
+    "both basket wraps support the underside without cutting the pipe",
+    "equal pick stations straddle the load centre",
+    "sling legs have a plausible angle above horizontal",
+    "four deployed outrigger mats rest on the pad",
+    "all outriggers and pipe lie inside the exclusion zone",
+    "en: lifting pad is off the road and beyond the factory plot",
+    "en: unsafe assumption that barriers replace rigging checks is rejected",
+    "en: safe lifting decision is recorded once",
+    "en: repeat lifting inspection cannot inflate progress",
+    "en: existing three decisions and lifting finish together at 4/6",
+    "tr: lifting pad is off the road and beyond the factory plot",
+    "tr: unsafe assumption that barriers replace rigging checks is rejected",
+    "tr: safe lifting decision is recorded once",
+    "tr: repeat lifting inspection cannot inflate progress",
+    "tr: existing three decisions and lifting finish together at 4/6",
+    "no browser page errors or external network requests"
+  ],
+  "materialSamples": [
+    {
+      "name": "suit",
+      "view": 0,
+      "pixels": 28811,
+      "mean": [
+        0.03644441359203082,
+        19.331123529207595,
+        82.95022734372289
+      ],
+      "whiteFraction": 0
+    },
+    {
+      "name": "apron",
+      "view": 0,
+      "pixels": 16379,
+      "mean": [
+        55.68252030038464,
+        24.68099395567495,
+        11.972770010379143
+      ],
+      "whiteFraction": 0
+    },
+    {
+      "name": "gloves-boots",
+      "view": 0,
+      "pixels": 10513,
+      "mean": [
+        29.04822600589746,
+        10.831637020831351,
+        4.366308380100827
+      ],
+      "whiteFraction": 0
+    },
+    {
+      "name": "hardhat",
+      "view": 0,
+      "pixels": 3034,
+      "mean": [
+        155.61766644693475,
+        155.5596572181938,
+        145.0273566249176
+      ],
+      "whiteFraction": 0.06526038233355307
+    },
+    {
+      "name": "suit",
+      "view": 1,
+      "pixels": 50796,
+      "mean": [
+        0.3867430506339082,
+        9.38599496023309,
+        66.72385620915033
+      ],
+      "whiteFraction": 0
+    },
+    {
+      "name": "apron",
+      "view": 1,
+      "pixels": 24854,
+      "mean": [
+        26.38838818701215,
+        9.653657358976423,
+        3.7021002655508166
+      ],
+      "whiteFraction": 0
+    },
+    {
+      "name": "gloves-boots",
+      "view": 1,
+      "pixels": 20116,
+      "mean": [
+        15.530970371843308,
+        4.943129846888049,
+        1.8268542453768144
+      ],
+      "whiteFraction": 0
+    },
+    {
+      "name": "hardhat",
+      "view": 1,
+      "pixels": 5801,
+      "mean": [
+        112.74418203757973,
+        119.4566454059645,
+        115.14893983795898
+      ],
+      "whiteFraction": 0.003792449577659024
+    },
+    {
+      "name": "suit",
+      "view": 2,
+      "pixels": 27929,
+      "mean": [
+        0.0359124923914211,
+        22.57316767517634,
+        90.44444842278635
+      ],
+      "whiteFraction": 0
+    },
+    {
+      "name": "apron",
+      "view": 2,
+      "pixels": 14419,
+      "mean": [
+        50.63783896248006,
+        22.400374505860324,
+        11.103405229211457
+      ],
+      "whiteFraction": 0
+    },
+    {
+      "name": "gloves-boots",
+      "view": 2,
+      "pixels": 9219,
+      "mean": [
+        25.14480963228116,
+        8.933398416314134,
+        3.4123006833712983
+      ],
+      "whiteFraction": 0
+    },
+    {
+      "name": "hardhat",
+      "view": 2,
+      "pixels": 2205,
+      "mean": [
+        94.89569160997732,
+        97.55283446712018,
+        92.17777777777778
+      ],
+      "whiteFraction": 0.014512471655328799
+    }
+  ],
+  "welding": {
+    "diagnostics": {
+      "sourceHumanHeight": 1.7819199797797196,
+      "forward": [
+        0,
+        0,
+        -1
+      ],
+      "floor": 0.007231935873960505,
+      "leanDegrees": 22,
+      "headTiltDegrees": 11.855738982295184,
+      "rawEye": [
+        -0.014003395739343463,
+        1.6356560223568977,
+        -0.10280552263074998
+      ],
+      "rawNozzleTip": [
+        0.01266039256305807,
+        1.4998135254686449,
+        -0.7520515796492924
+      ],
+      "rawNozzleAxis": [
+        0.0013678854815415956,
+        -0.2698539104777848,
+        -0.9629003042315218
+      ],
+      "eye": [
+        -0.014003395739343463,
+        1.5174427113620832,
+        -0.3736350074642814
+      ],
+      "tip": [
+        0.012660392563058072,
+        1.1783164143893097,
+        -0.9019076742767541
+      ],
+      "contact": [
+        0.012676807188836571,
+        1.1709854584894612,
+        -0.9114080330149565
+      ],
+      "leadSocket": [
+        0.013635595780215282,
+        1.1667631190329928,
+        -0.5530354333331802
+      ],
+      "machineSocket": [
+        -0.06691234780754018,
+        0.5096994224004447,
+        1.7927369990013484
+      ],
+      "leadStart": [
+        -0.06691234780754018,
+        0.5096994224004447,
+        1.7927369990013484
+      ],
+      "leadEnd": [
+        0.013635595780215282,
+        1.1667631190329928,
+        -0.5530354333331801
+      ],
+      "benchCenter": [
+        0.012676807188836571,
+        1.1709854584894612,
+        -0.9864080330149565
+      ],
+      "benchTop": 1.1359854584894613,
+      "extinguisherBase": [
+        -0.92,
+        0.007231935873960505,
+        -0.45
+      ],
+      "extinguisherBounds": [
+        -1.0299999994039535,
+        0.007231935873960505,
+        -0.5599999994039535
+      ],
+      "lensCenter": [
+        -0.00740269166787965,
+        1.4354040505537318,
+        -0.4959253745660054
+      ],
+      "labelVisible": true
+    },
+    "hatTangent": false,
+    "apronRoughness": 0.88,
+    "suitMap": true,
+    "apronMap": true,
+    "arcRadius": 0.02,
+    "arcIntensity": 2.642147547539671
+  },
+  "lifting": {
+    "diagnostics": {
+      "pivot": [
+        0,
+        2.4,
+        0
+      ],
+      "boomTip": [
+        7.2,
+        12.8,
+        0
+      ],
+      "boomLength": 12.649110640673518,
+      "boomAngleDegrees": 55.30484646876604,
+      "hookBlock": [
+        7.2,
+        5.62,
+        0
+      ],
+      "hookPoints": [
+        [
+          7.2,
+          5.18,
+          0
+        ],
+        [
+          7.04,
+          5.1,
+          0
+        ],
+        [
+          7.01,
+          4.94,
+          0
+        ],
+        [
+          7.12,
+          4.83,
+          0
+        ],
+        [
+          7.28,
+          4.85,
+          0
+        ],
+        [
+          7.39,
+          4.99,
+          0
+        ]
+      ],
+      "master": [
+        7.2,
+        4.66,
+        0
+      ],
+      "masterBottom": [
+        7.2,
+        4.44,
+        0
+      ],
+      "load": [
+        7.2,
+        2.6,
+        0
+      ],
+      "pipeLength": 6,
+      "pipeRadius": 0.34,
+      "pipeInnerRadius": 0.305,
+      "slingStations": [
+        -1.8,
+        1.8
+      ],
+      "slingAngleDegrees": 45.118746832506886,
+      "slingEndpoints": [
+        [
+          [
+            7.2,
+            4.44,
+            0
+          ],
+          [
+            7.2,
+            4.44,
+            0
+          ]
+        ],
+        [
+          [
+            7.2,
+            4.44,
+            0
+          ],
+          [
+            7.2,
+            4.44,
+            0
+          ]
+        ]
+      ],
+      "slingCurves": [
+        [
+          [
+            7.2,
+            4.44,
+            0
+          ],
+          [
+            6.857,
+            2.6,
+            -1.8
+          ],
+          [
+            6.8599344125487836,
+            2.5552295160685223,
+            -1.8
+          ],
+          [
+            6.86868744158285,
+            2.5112250675298355,
+            -1.8
+          ],
+          [
+            6.883109320348629,
+            2.4687395826987744,
+            -1.8
+          ],
+          [
+            6.902953286501938,
+            2.4285,
+            -1.8
+          ],
+          [
+            6.927879804280106,
+            2.3911948298500088,
+            -1.8
+          ],
+          [
+            6.957462374053014,
+            2.3574623740530143,
+            -1.8
+          ],
+          [
+            6.991194829850009,
+            2.3278798042801063,
+            -1.8
+          ],
+          [
+            7.0285,
+            2.3029532865019378,
+            -1.8
+          ],
+          [
+            7.0687395826987744,
+            2.283109320348629,
+            -1.8
+          ],
+          [
+            7.111225067529835,
+            2.2686874415828497,
+            -1.8
+          ],
+          [
+            7.155229516068522,
+            2.259934412548783,
+            -1.8
+          ],
+          [
+            7.2,
+            2.257,
+            -1.8
+          ],
+          [
+            7.244770483931478,
+            2.259934412548783,
+            -1.8
+          ],
+          [
+            7.288774932470164,
+            2.2686874415828497,
+            -1.8
+          ],
+          [
+            7.331260417301226,
+            2.2831093203486286,
+            -1.8
+          ],
+          [
+            7.3715,
+            2.3029532865019373,
+            -1.8
+          ],
+          [
+            7.408805170149991,
+            2.3278798042801063,
+            -1.8
+          ],
+          [
+            7.4425376259469855,
+            2.3574623740530143,
+            -1.8
+          ],
+          [
+            7.472120195719894,
+            2.3911948298500088,
+            -1.8
+          ],
+          [
+            7.4970467134980625,
+            2.4285,
+            -1.8
+          ],
+          [
+            7.516890679651372,
+            2.468739582698774,
+            -1.8
+          ],
+          [
+            7.5313125584171505,
+            2.5112250675298355,
+            -1.8
+          ],
+          [
+            7.540065587451217,
+            2.555229516068522,
+            -1.8
+          ],
+          [
+            7.543,
+            2.6,
+            -1.8
+          ],
+          [
+            7.2,
+            4.44,
+            0
+          ]
+        ],
+        [
+          [
+            7.2,
+            4.44,
+            0
+          ],
+          [
+            6.857,
+            2.6,
+            1.8
+          ],
+          [
+            6.8599344125487836,
+            2.5552295160685223,
+            1.8
+          ],
+          [
+            6.86868744158285,
+            2.5112250675298355,
+            1.8
+          ],
+          [
+            6.883109320348629,
+            2.4687395826987744,
+            1.8
+          ],
+          [
+            6.902953286501938,
+            2.4285,
+            1.8
+          ],
+          [
+            6.927879804280106,
+            2.3911948298500088,
+            1.8
+          ],
+          [
+            6.957462374053014,
+            2.3574623740530143,
+            1.8
+          ],
+          [
+            6.991194829850009,
+            2.3278798042801063,
+            1.8
+          ],
+          [
+            7.0285,
+            2.3029532865019378,
+            1.8
+          ],
+          [
+            7.0687395826987744,
+            2.283109320348629,
+            1.8
+          ],
+          [
+            7.111225067529835,
+            2.2686874415828497,
+            1.8
+          ],
+          [
+            7.155229516068522,
+            2.259934412548783,
+            1.8
+          ],
+          [
+            7.2,
+            2.257,
+            1.8
+          ],
+          [
+            7.244770483931478,
+            2.259934412548783,
+            1.8
+          ],
+          [
+            7.288774932470164,
+            2.2686874415828497,
+            1.8
+          ],
+          [
+            7.331260417301226,
+            2.2831093203486286,
+            1.8
+          ],
+          [
+            7.3715,
+            2.3029532865019373,
+            1.8
+          ],
+          [
+            7.408805170149991,
+            2.3278798042801063,
+            1.8
+          ],
+          [
+            7.4425376259469855,
+            2.3574623740530143,
+            1.8
+          ],
+          [
+            7.472120195719894,
+            2.3911948298500088,
+            1.8
+          ],
+          [
+            7.4970467134980625,
+            2.4285,
+            1.8
+          ],
+          [
+            7.516890679651372,
+            2.468739582698774,
+            1.8
+          ],
+          [
+            7.5313125584171505,
+            2.5112250675298355,
+            1.8
+          ],
+          [
+            7.540065587451217,
+            2.555229516068522,
+            1.8
+          ],
+          [
+            7.543,
+            2.6,
+            1.8
+          ],
+          [
+            7.2,
+            4.44,
+            0
+          ]
+        ]
+      ],
+      "feet": [
+        [
+          -4.6,
+          0,
+          -3.1
+        ],
+        [
+          4.6,
+          0,
+          -3.1
+        ],
+        [
+          -4.6,
+          0,
+          3.1
+        ],
+        [
+          4.6,
+          0,
+          3.1
+        ]
+      ],
+      "ropeEnds": [
+        [
+          [
+            7.2,
+            12.8,
+            -0.14
+          ],
+          [
+            7.2,
+            5.9,
+            -0.14
+          ]
+        ],
+        [
+          [
+            7.2,
+            12.8,
+            0.14
+          ],
+          [
+            7.2,
+            5.9,
+            0.14
+          ]
+        ]
+      ],
+      "zone": {
+        "minX": -6.2,
+        "maxX": 11.2,
+        "minZ": -6.2,
+        "maxZ": 6.2
+      }
+    },
+    "invalid": 0,
+    "rope": [
+      {
+        "top": [
+          7.2,
+          12.8,
+          -0.14
+        ],
+        "bottom": [
+          7.2,
+          5.900000000000001,
+          -0.14
+        ],
+        "verticalError": 0,
+        "blockGap": 1.1920917586394353e-9
+      },
+      {
+        "top": [
+          7.2,
+          12.8,
+          0.14
+        ],
+        "bottom": [
+          7.2,
+          5.900000000000001,
+          0.14
+        ],
+        "verticalError": 0,
+        "blockGap": 1.1920917586394353e-9
+      }
+    ],
+    "slings": [
+      {
+        "start": [
+          7.200000047683716,
+          4.440000057220459,
+          0
+        ],
+        "end": [
+          7.200000047683716,
+          4.440000057220459,
+          0
+        ],
+        "minRadius": 0.3422656207656148,
+        "minY": 2.256999969482422,
+        "belowCount": 27
+      },
+      {
+        "start": [
+          7.200000047683716,
+          4.440000057220459,
+          0
+        ],
+        "end": [
+          7.200000047683716,
+          4.440000057220459,
+          0
+        ],
+        "minRadius": 0.3422656207656148,
+        "minY": 2.256999969482422,
+        "belowCount": 27
+      }
+    ],
+    "pipeMin": [
+      6.8599999964237215,
+      2.259999996423721,
+      -3
+    ],
+    "pipeMax": [
+      7.540000003576279,
+      2.940000003576279,
+      3
+    ],
+    "pipeCenter": [
+      7.2,
+      2.6,
+      0
+    ],
+    "matMinY": [
+      -1.7881393449270533e-9,
+      -1.7881393449270533e-9,
+      -1.7881393449270533e-9,
+      -1.7881393449270533e-9
+    ],
+    "sheaveTangentError": 0,
+    "reeving": [
+      [
+        7.200000000000004,
+        12.8,
+        -0.14
+      ],
+      [
+        7.200000000000004,
+        12.8,
+        0.14
+      ]
+    ]
+  },
+  "errors": [],
+  "externalRequests": []
+}

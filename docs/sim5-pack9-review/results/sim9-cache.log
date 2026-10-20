@@ -1,0 +1,94 @@
+CHECK tr/320 home content-hashed source
+CHECK tr/320 home exact refreshed bytes
+CHECK tr/320 no crop at any viewport
+CHECK tr/320 reserved 16:9 frame
+CHECK tr/320 no overflow
+CHECK tr/320 CTA visible
+CHECK tr/320 CTA visible
+CHECK tr/320 menu content-hashed source
+CHECK tr/320 menu exact refreshed bytes
+CHECK tr/320 Labs content-hashed source
+CHECK tr/320 Labs exact refreshed bytes
+CHECK tr/390 home content-hashed source
+CHECK tr/390 home exact refreshed bytes
+CHECK tr/390 no crop at any viewport
+CHECK tr/390 reserved 16:9 frame
+CHECK tr/390 no overflow
+CHECK tr/390 CTA visible
+CHECK tr/390 CTA visible
+CHECK tr/390 menu content-hashed source
+CHECK tr/390 menu exact refreshed bytes
+CHECK tr/390 Labs content-hashed source
+CHECK tr/390 Labs exact refreshed bytes
+CHECK tr/820 home content-hashed source
+CHECK tr/820 home exact refreshed bytes
+CHECK tr/820 no crop at any viewport
+CHECK tr/820 reserved 16:9 frame
+CHECK tr/820 no overflow
+CHECK tr/820 CTA visible
+CHECK tr/820 CTA visible
+CHECK tr/820 menu content-hashed source
+CHECK tr/820 menu exact refreshed bytes
+CHECK tr/820 Labs content-hashed source
+CHECK tr/820 Labs exact refreshed bytes
+CHECK tr/1600 home content-hashed source
+CHECK tr/1600 home exact refreshed bytes
+CHECK tr/1600 no crop at any viewport
+CHECK tr/1600 reserved 16:9 frame
+CHECK tr/1600 no overflow
+CHECK tr/1600 CTA visible
+CHECK tr/1600 CTA visible
+CHECK tr/1600 menu content-hashed source
+CHECK tr/1600 menu exact refreshed bytes
+CHECK tr/1600 Labs content-hashed source
+CHECK tr/1600 Labs exact refreshed bytes
+CHECK en/320 home content-hashed source
+CHECK en/320 home exact refreshed bytes
+CHECK en/320 no crop at any viewport
+CHECK en/320 reserved 16:9 frame
+CHECK en/320 no overflow
+CHECK en/320 CTA visible
+CHECK en/320 CTA visible
+CHECK en/320 menu content-hashed source
+CHECK en/320 menu exact refreshed bytes
+CHECK en/320 Labs content-hashed source
+CHECK en/320 Labs exact refreshed bytes
+CHECK en/390 home content-hashed source
+CHECK en/390 home exact refreshed bytes
+CHECK en/390 no crop at any viewport
+CHECK en/390 reserved 16:9 frame
+CHECK en/390 no overflow
+CHECK en/390 CTA visible
+CHECK en/390 CTA visible
+CHECK en/390 menu content-hashed source
+CHECK en/390 menu exact refreshed bytes
+CHECK en/390 Labs content-hashed source
+CHECK en/390 Labs exact refreshed bytes
+CHECK en/820 home content-hashed source
+CHECK en/820 home exact refreshed bytes
+CHECK en/820 no crop at any viewport
+CHECK en/820 reserved 16:9 frame
+CHECK en/820 no overflow
+CHECK en/820 CTA visible
+CHECK en/820 CTA visible
+CHECK en/820 menu content-hashed source
+CHECK en/820 menu exact refreshed bytes
+CHECK en/820 Labs content-hashed source
+CHECK en/820 Labs exact refreshed bytes
+CHECK en/1600 home content-hashed source
+CHECK en/1600 home exact refreshed bytes
+CHECK en/1600 no crop at any viewport
+CHECK en/1600 reserved 16:9 frame
+CHECK en/1600 no overflow
+CHECK en/1600 CTA visible
+CHECK en/1600 CTA visible
+CHECK en/1600 menu content-hashed source
+CHECK en/1600 menu exact refreshed bytes
+CHECK en/1600 Labs content-hashed source
+CHECK en/1600 Labs exact refreshed bytes
+CHECK optimizer 0 returns WebP
+CHECK optimizer 1 returns WebP
+CHECK repeated optimized image is identical
+CHECK all surfaces/locales share one refreshed hashed source
+CHECK legacy public filename also contains refreshed image
+PASS 93

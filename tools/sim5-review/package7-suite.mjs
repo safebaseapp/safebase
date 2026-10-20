@@ -1,0 +1,6 @@
+import {spawnSync} from 'node:child_process';import fs from 'node:fs';import path from 'node:path';import {toolRoot} from './inspect.mjs';
+const scripts=['demo-state-test.mjs','access-test.mjs','access-server-test.mjs','page-gate-test.mjs','persistence-test.mjs','api-test.mjs','seo-test.mjs','connector-test.mjs','analytics-test.mjs','demo-browser-test.mjs','persistence-browser-test.mjs','signaller-test.mjs','webgl-failure-test.mjs'];
+fs.mkdirSync(path.join(toolRoot,'artifacts/pack7'),{recursive:true});fs.rmSync(path.join(toolRoot,'artifacts/pack7/suite-results.json'),{force:true});
+const results=[];
+for(const script of scripts){const result=spawnSync(process.execPath,[path.join(toolRoot,script)],{cwd:toolRoot,stdio:'inherit'});if(result.error)throw result.error;if(result.status!==0)process.exit(result.status||1);results.push({script,status:'passed'});}
+fs.writeFileSync(path.join(toolRoot,'artifacts/pack7/suite-results.json'),JSON.stringify({timestamp:new Date().toISOString(),results,liveSupabase:'NOT_RUN',liveGA4:'NOT_RUN',database:'Run test:database separately in a disposable PostgreSQL container',nextServer:'Run next-smoke-test.mjs separately against a real local Next server'},null,2));console.log('PASS Package 7',results.length,'test scripts');

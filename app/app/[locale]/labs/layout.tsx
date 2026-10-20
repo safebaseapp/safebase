@@ -16,14 +16,12 @@ type LabProgress = {
 export default async function LabsLayout({ children, params }: Props) {
   const { locale } = await params;
   const isTr = locale === "tr";
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const supabase = process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ? await createClient() : null;
+  const user = supabase ? (await supabase.auth.getUser()).data.user : null;
 
   let progress: LabProgress | null = null;
 
-  if (user) {
+  if (user && supabase) {
     const { data } = await supabase
       .from("lab_user_progress")
       .select("total_xp,level,current_streak,scenario_count")

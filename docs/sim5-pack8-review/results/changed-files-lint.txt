@@ -1,0 +1,33 @@
+
+/workspace/safebase/app/app/[locale]/components/DesktopMegaMenu.tsx
+  114:7  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/safebase/app/app/[locale]/components/HomeLabsBridge.tsx
+  20:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/safebase/app/app/[locale]/components/LocalizedNavbar.tsx
+   31:10  warning  'isToolsOpen' is assigned a value but never used                                                                    @typescript-eslint/no-unused-vars
+   32:10  warning  'isResourcesOpen' is assigned a value but never used                                                                @typescript-eslint/no-unused-vars
+   33:10  warning  'isAccountOpen' is assigned a value but never used                                                                  @typescript-eslint/no-unused-vars
+  115:6   warning  React Hook useEffect has a missing dependency: 'isVerifiedOwner'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  126:9   warning  'toolItems' is assigned a value but never used                                                                      @typescript-eslint/no-unused-vars
+  183:9   warning  'resourceItems' is assigned a value but never used                                                                  @typescript-eslint/no-unused-vars
+
+/workspace/safebase/app/app/[locale]/components/MobileMainMenu.tsx
+  163:7  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  341:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/safebase/app/app/[locale]/components/RotatingHomepagePulse.tsx
+   89:10  warning  'Icon' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  202:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/safebase/app/app/[locale]/labs/page.tsx
+  56:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+✖ 13 problems (0 errors, 13 warnings)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

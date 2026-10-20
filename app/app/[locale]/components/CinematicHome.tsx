@@ -1,4 +1,6 @@
+import HomeLabsBridge from "./HomeLabsBridge";
 import Link from "next/link";
+import Sim5Showcase from "@/components/sim5/Sim5Showcase";
 import { ArrowRight, ArrowUpRight, Check, FileText, ShieldCheck, Crosshair } from "lucide-react";
 import LocalizedFooter from "./LocalizedFooter";
 import ProductShowcase from "./ProductShowcase";
@@ -23,6 +25,9 @@ export default function CinematicHome({ locale }: { locale: "tr" | "en" }) {
       </div>
       <span className={s.heroIndex}>01 — 10 / SERNEM</span>
     </section>
+
+    <Sim5Showcase locale={locale}/>
+    <HomeLabsBridge locale={locale}/>
 
     <section className={s.industries} aria-label={t("Industries", "Sektörler")}><div className={s.container}><p className={s.eyebrow}>{t("DIFFERENT ENVIRONMENTS. ONE STANDARD OF CARE.", "FARKLI SAHALAR. AYNI GÜVENLİK YAKLAŞIMI.")}</p><ul>{[t("Refinery & Petrochemical", "Rafineri & Petrokimya"), t("EPC Projects", "EPC Projeleri"), t("Construction", "İnşaat"), t("Heavy Industry", "Ağır Sanayi"), t("Energy", "Enerji")].map((item,i) => <li key={item}><span>0{i+1}</span>{item}</li>)}</ul></div></section>
 

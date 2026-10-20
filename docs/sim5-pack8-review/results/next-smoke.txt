@@ -1,0 +1,9 @@
+CHECK tr real Next DEMO renders two-finding client entry
+CHECK tr SSR forged flags cannot render full scene
+CHECK tr RSC forged flags cannot render full scene
+CHECK en real Next DEMO renders two-finding client entry
+CHECK en SSR forged flags cannot render full scene
+CHECK en RSC forged flags cannot render full scene
+CHECK real unauthenticated API fails closed
+CHECK real gate hydration has no uncaught browser exceptions
+PASS 8 real Next checks without Supabase
