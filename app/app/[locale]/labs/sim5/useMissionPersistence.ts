@@ -19,7 +19,11 @@ export function useMissionPersistence(enabled:boolean,tr:boolean){
     let run;
     try { run=await session.run; } catch { session.run=post({action:"start",runId:session.runId,locale:tr?"tr":"en"}).then(r=>r.run);run=await session.run; }
     const result=await post({action:"sync",runId:run.id,revision:session.revision,events});session.revision=result.revision;
-    setStatus(tr?`Sunucuda kaydedildi · Bu denemede kazanılan hesap XP: ${result.xpAwarded}`:`Saved on server · Account XP earned in this run: ${result.xpAwarded}`);
+    const lifetime=Number(result.bestXpAwarded??result.xpAwarded) || 0;
+    const daily=Number(result.dailyXpAwarded??0) || 0;
+    setStatus(tr
+     ? `Sunucuda kaydedildi · Hesaba eklenen XP: ${result.xpAwarded} (en iyi puan: +${lifetime}, günlük: +${daily}). Görev puanı ile kalıcı XP farklıdır.`
+     : `Saved on server · Account XP added: ${result.xpAwarded} (lifetime best: +${lifetime}, daily: +${daily}). Mission score is separate from permanent XP.`);
     setHistoryRevision(n=>n+1);
    }catch{setStatus(tr?"Hesaba kaydedilemedi. Yerel rapor korunuyor; Kaydı yeniden dene düğmesini kullan. Kalıcı XP doğrulanmadı.":"Account save failed. Local report remains; use Retry save. Permanent XP has not been confirmed.");}
   });

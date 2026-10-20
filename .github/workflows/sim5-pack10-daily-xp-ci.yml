@@ -1,0 +1,58 @@
+name: SIM5 Pack10 Daily XP CI
+
+on:
+  push:
+    branches:
+      - feature/sim5-daily-inspection-xp-pack10-20261020
+    paths:
+      - "app/supabase/migrations/20261020_sim5_daily_inspection_xp.sql"
+      - "app/app/api/labs/sim5/runs/route.ts"
+      - "app/app/[locale]/labs/sim5/**"
+      - "tools/sim5-review/daily-xp-db-test.mjs"
+      - ".github/workflows/sim5-pack10-daily-xp-ci.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "app/supabase/migrations/20261020_sim5_daily_inspection_xp.sql"
+      - "app/app/api/labs/sim5/runs/route.ts"
+      - "app/app/[locale]/labs/sim5/**"
+      - "tools/sim5-review/daily-xp-db-test.mjs"
+      - ".github/workflows/sim5-pack10-daily-xp-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sim5-pack10-daily-xp-ci
+  cancel-in-progress: true
+
+jobs:
+  postgres-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install isolated SIM5 review test dependencies
+        run: npm ci --prefix tools/sim5-review --ignore-scripts --no-audit --no-fund
+      - name: Install isolated PostgreSQL 17
+        run: |
+          docker run -d --name sim5-pack7-db -e POSTGRES_PASSWORD=sim5-test-password postgres:17-alpine
+          for i in {1..40}; do docker exec sim5-pack7-db pg_isready -U postgres && exit 0 || sleep 2; done
+          exit 1
+      - name: Existing SIM5 server and XP database regression
+        run: node tools/sim5-review/database-test.mjs
+      - name: New daily award and DST tests (isolated database)
+        run: node tools/sim5-review/daily-xp-db-test.mjs
+      - name: Install app dependencies
+        run: npm ci --prefix app --no-audit --no-fund
+      - name: Generate Next.js typings and check TypeScript
+        run: cd app && npx next typegen && npx tsc --noEmit
+      - name: Focused ESLint
+        run: cd app && npx eslint "app/api/labs/sim5/runs/route.ts" "app/[locale]/labs/sim5/Sim5DailyReward.tsx" "app/[locale]/labs/sim5/useMissionPersistence.ts" "app/[locale]/labs/sim5/RealModels.tsx"
+      - name: Next.js production build
+        run: npm run build --prefix app
