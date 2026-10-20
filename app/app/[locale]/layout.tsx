@@ -100,8 +100,8 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   setRequestLocale(locale);
   const safeLocale = locale as "tr" | "en";
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const supabase = process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ? await createClient() : null;
+  const user = supabase ? (await supabase.auth.getUser()).data.user : null;
   const initialIsAuthenticated = Boolean(user);
   const initialIsOwner = isAdminUser(user);
 

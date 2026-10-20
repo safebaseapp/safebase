@@ -1,10 +1,10 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { createMission, reduceMission, type MissionEvent } from "./MissionState";
+import { createMission, reduceMission, type MissionMode, type MissionEvent } from "./MissionState";
 
 /** One in-memory attempt. No storage, Labs API, Supabase or profile XP writes. */
-export function useMission() {
- const [mission, setMission] = useState(createMission);
+export function useMission(mode: MissionMode = "full") {
+ const [mission, setMission] = useState(() => createMission(mode));
  const missionRef = useRef(mission);
  const last = useRef<number | null>(null);
  const send = useCallback((event: MissionEvent) => {

@@ -7,14 +7,14 @@ import { createSiteNavigation } from "./SiteNavigation";
 import { siteInspections, canInspectAt } from "./SiteInspections";
 import { addUpperEvidence, createSignaller, addFireWatchStation } from "./SiteEvidence";
 import { useMission } from "./useMission";
-import { missionSummary } from "./MissionState";
+import { missionSummary, type MissionMode } from "./MissionState";
 import { MissionPanel, MissionHud } from "./MissionPanel";
 import { controlOutcomes, wrongDecisionReasons, scenarioNames } from "./MissionConsequences";
 import { createMissionSceneEffects } from "./MissionSceneEffects";
 
 const inspections=siteInspections;
 
-export default function RealModels({tr}:{tr:boolean}) {
+export default function RealModels({tr, missionMode = "full"}:{tr:boolean; missionMode?: MissionMode}) {
  const mount=useRef<HTMLDivElement>(null);
  const held=useRef<Set<string>>(new Set());
  const keyboard=useRef<Set<string>>(new Set());
@@ -26,10 +26,11 @@ export default function RealModels({tr}:{tr:boolean}) {
  const [status,setStatus]=useState(tr?"Saha hazırlanıyor…":"Preparing site…");
  const [loaded,setLoaded]=useState(0);
  const [activeInspection,setActiveInspection]=useState<string|null>(null);
- const {mission,missionRef,send}=useMission();
+ const {mission,missionRef,send}=useMission(missionMode);
  const summary=missionSummary(mission);
  const completedInspections=summary.completed;
  const discovered=summary.found;
+ useEffect(()=>{if(mission.mode==="demo"&&mission.phase==="active"&&Object.values(mission.findings).every(f=>f.completed))send({type:"finish"})},[mission,send]);
  const [ready,setReady]=useState(false);
  const [inspectionFeedback,setInspectionFeedback]=useState("");
  const [nearbyHazard,setNearbyHazard]=useState<string|null>(null);
@@ -166,6 +167,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     const load=(url:string,height:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{if(!active){resolve();return}fit(g.scene,height,x,z);resolve()},undefined,reject));
     const paths=["/sim5/SERNEM_SIM4_Factory_optimized.glb","/sim5/large_industrial_storage_tanks%20(1).glb"];
     const results=await Promise.allSettled([load(paths[0],17.5,-47,-12),load(paths[1],17,47,-12)]);
+    if(results.some(r=>r.status==="rejected"))throw new Error(tr?"Tesis modelleri yüklenemedi; yeniden yüklemeyi dene.":"Site models could not load; try reloading.");
     if(active){const count=results.filter(r=>r.status==="fulfilled").length;setLoaded(count);setStatus(count===2?(tr?"Gerçek tesis hazır · 2/2 model":"Industrial site ready · 2/2 models"):(tr?`Model yükleme: ${count}/2 — dosya bağlantısını kontrol et`:`Model loading: ${count}/2 — check asset links`))}
     // Visible site conditions replace the oversized interaction spheres.
     const inspectionMarkers:any[]=[];
@@ -249,7 +251,7 @@ export default function RealModels({tr}:{tr:boolean}) {
         }
       });
     }catch(error){
-      if(active)setStatus(previous=>previous+" · "+(tr?"Kaynak modeli yüklenemedi: ":"Welder model failed: ")+String(error));
+      throw error;
     }
     // Front-yard lifting pad, beyond the factory footprint and off the road.
     const liftingX=-30,liftingZ=47;
@@ -309,7 +311,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     addFireWatchStation(THREE,scene,tr);
     const sightRay=new THREE.Raycaster();
     const available=(id:string)=>{
-      const h=inspections[id];if(missionRef.current.phase!=="active"||modeRef.current!=="walk"||!h||!canInspectAt(h,camera.position))return false;
+      const h=inspections[id];if(!Object.hasOwn(missionRef.current.findings,id)||missionRef.current.phase!=="active"||modeRef.current!=="walk"||!h||!canInspectAt(h,camera.position))return false;
       camera.updateMatrixWorld(true);
       const projected=new THREE.Vector3(...h.location).project(camera);
       if(projected.z< -1||projected.z>1||Math.abs(projected.x)>.98||Math.abs(projected.y)>.98)return false;
@@ -516,12 +518,12 @@ export default function RealModels({tr}:{tr:boolean}) {
     </div>
    </div>
    <MissionPanel mission={mission} tr={tr} ready={ready} send={send} onStart={startMission} onRestart={restartMission}/>
-   <p style={{color:"#c4dce3",fontSize:14}}>{tr?"Saha brifingi: İşaretli geçişleri kullan. Aktif kaldırma alanına girme. Görünür kanıtları yaklaşarak incele; tank merdivenleri üst servis yoluna çıkar. Üst seviyeyi de araştır.":"Site briefing: Use marked access routes. Stay outside the active lifting zone. Approach visible evidence to inspect it; the tank stairs lead to the upper service walkway. Explore both levels."}</p>
+   <p style={{color:"#c4dce3",fontSize:14}}>{missionMode==="demo"?(tr?"DEMO: Kaynak ve kaldırma sahnelerinde iki bulguyu değerlendir. Diğer bulgular ve üst platform görevleri Premium sürümdedir.":"DEMO: Assess two findings at the welding and lifting stations. Other findings and upper-platform missions belong to Premium."):tr?"Saha brifingi: İşaretli geçişleri kullan. Aktif kaldırma alanına girme. Görünür kanıtları yaklaşarak incele; tank merdivenleri üst servis yoluna çıkar. Üst seviyeyi de araştır.":"Site briefing: Use marked access routes. Stay outside the active lifting zone. Approach visible evidence to inspect it; the tank stairs lead to the upper service walkway. Explore both levels."}</p>
    <div className="sim5-stage">
     <div ref={mount} className="sim5-canvas" style={{width:"100%",borderRadius:14,overflow:"hidden",background:"#91b1c5",touchAction:"none"}}/>
     {mission.phase==="briefing"&&<div className="sim5-start-overlay" role="status" data-testid="sim5-start-overlay">
      <strong>{tr?"Yürümek için önce denetimi başlat":"Start the inspection to walk"}</strong>
-     <p>{tr?"Yön tuşları ve WASD, görev başladıktan sonra açılır. Kaynak, vinç ve üst platform risklerini sahada keşfet.":"The arrows and WASD unlock when the inspection starts. Explore welding, lifting and upper-level hazards."}</p>
+     <p>{tr?"Yön tuşları ve WASD, görev başladıktan sonra açılır. Kaynak ve vinç risklerini sahada keşfet.":"The arrows and WASD unlock when the inspection starts. Explore welding and lifting hazards."}</p>
      <button type="button" disabled={!ready} onClick={startMission}>{ready?(tr?"Denetime başla →":"Start inspection →"):(tr?"Saha yükleniyor…":"Loading site…")}</button>
     </div>}
     {mission.phase==="paused"&&mode==="walk"&&<div className="sim5-start-overlay" role="status" data-testid="sim5-paused-overlay">
@@ -547,7 +549,7 @@ export default function RealModels({tr}:{tr:boolean}) {
     <span className="sim5-touch-help">{mission.phase==="briefing"?(tr?"Hareket için önce Denetime başla":"Start inspection to unlock movement"):mission.phase==="paused"?(tr?"Hareket için Denetime devam et":"Resume inspection to move"):mode==="walk"?(tr?"Yön tuşlarını basılı tut · Sahneyi sürükleyerek bak":"Hold a direction to move · Drag the scene to look"):(tr?"Yürü modunu seç · Sürükleyerek tesisin etrafında dön":"Select Walk · Drag to orbit the site")}</span>
    </div>
   {mode==="walk"&&nearbyHazard&&<button {...inspectionEvents} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
-  <p data-testid="sim5-hse-progress" style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(inspections).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
+  <p data-testid="sim5-hse-progress" style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(mission.findings).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
   {discovered.length>0&&<ul style={{color:"#c4dce3"}} aria-label={tr?"Bulunan uygunsuzluklar":"Discovered findings"}>{discovered.map(id=><li key={id}>{inspectionRecords[id].completed?"✓ ":"○ "}{inspectionRecords[id].completed?scenarioNames[id][tr?0:1]+" · "+controlOutcomes[id].sign[tr?0:1]:inspections[id].visibleEvidence[tr?0:1]}</li>)}</ul>}
   {activeInspection&&<section className="sim5-inspection" style={{background:"#123344",padding:16,borderRadius:12,marginTop:12}}>
    {mission.findings[activeInspection].completed?<><h2>{tr?"Kontrol durumu":"Control status"}</h2><p>{tr?"İlk gözlenen kanıt: ":"Initially observed evidence: "}{inspections[activeInspection].visibleEvidence[tr?0:1]}</p><p>{controlOutcomes[activeInspection].text[tr?0:1]}</p><p>{tr?"Bu bulgu için karar kaydedildi; tekrar puan veya XP verilmez.":"The decision is recorded; reviewing this finding awards no additional score or XP."}</p></>:<>

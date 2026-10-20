@@ -1,9 +1,11 @@
 import { siteInspections } from "./SiteInspections";
 
+export type MissionMode = "demo" | "full";
+export const demoFindingIds = ["hotwork", "lifting"] as const;
 export type MissionPhase = "briefing" | "active" | "paused" | "finished" | "cancelled";
 export type Attempt = { answer: number; correct: boolean; activeMs: number };
 export type FindingProgress = { discovered: boolean; completed: boolean; attempts: Attempt[] };
-export type MissionState = { phase: MissionPhase; activeMs: number; findings: Record<string, FindingProgress> };
+export type MissionState = { mode?: MissionMode; phase: MissionPhase; activeMs: number; findings: Record<string, FindingProgress> };
 export type MissionEvent =
  | { type: "start" | "pause" | "resume" | "finish" | "cancel" | "restart" }
  | { type: "tick"; deltaMs: number }
@@ -16,17 +18,18 @@ export type MissionEvent =
 export const missionWeights: Record<string, number> = {
  hotwork: 25, lifting: 25, leak: 20, droppedTool: 15, access: 10, materials: 5,
 };
-export function createMission(): MissionState {
- return { phase: "briefing", activeMs: 0, findings: Object.fromEntries(Object.keys(siteInspections).map(id => [id, { discovered: false, completed: false, attempts: [] }])) };
+export function createMission(mode: MissionMode = "full"): MissionState {
+ return { mode, phase: "briefing", activeMs: 0, findings: Object.fromEntries((mode === "demo" ? demoFindingIds : Object.keys(siteInspections)).map(id => [id, { discovered: false, completed: false, attempts: [] }])) };
 }
 export function reduceMission(state: MissionState, event: MissionEvent): MissionState {
- if (event.type === "restart") return createMission();
+ if (event.type === "restart") return createMission(state.mode);
  if (event.type === "start") return state.phase === "briefing" ? { ...state, phase: "active" } : state;
  if (event.type === "pause") return state.phase === "active" ? { ...state, phase: "paused" } : state;
  if (event.type === "resume") return state.phase === "paused" ? { ...state, phase: "active" } : state;
  if (event.type === "finish" || event.type === "cancel") return state.phase === "active" || state.phase === "paused" ? { ...state, phase: event.type === "finish" ? "finished" : "cancelled" } : state;
  if (state.phase !== "active") return state;
  if (event.type === "tick") return Number.isFinite(event.deltaMs) && event.deltaMs > 0 ? { ...state, activeMs: state.activeMs + event.deltaMs } : state;
+ if (state.mode === "demo" && "id" in event && !(demoFindingIds as readonly string[]).includes(event.id)) return state;
  if (!("id" in event) || !Object.hasOwn(state.findings, event.id)) return state;
  const finding = state.findings[event.id];
  if (event.type === "discover") {
@@ -42,11 +45,12 @@ export function findingScore(id: string, finding: FindingProgress) {
  return Math.max(0, (finding.discovered ? weight * .2 : 0) + (finding.completed ? weight * .8 : 0) - (finding.attempts[0]?.correct === false ? weight * .2 : 0));
 }
 export function missionSummary(state: MissionState) {
- const entries = Object.entries(state.findings);
- const score = Math.round(entries.reduce((sum, [id, finding]) => sum + findingScore(id, finding), 0));
+ const entries = Object.entries(state.findings).filter(([id]) => state.mode !== "demo" || (demoFindingIds as readonly string[]).includes(id));
+ const maximum = entries.reduce((sum, [id]) => sum + missionWeights[id], 0);
+ const score = Math.round(entries.reduce((sum, [id, finding]) => sum + findingScore(id, finding), 0) * 100 / (maximum || 100));
  return {
   schema: "sim5-mission/1" as const, phase: state.phase, activeMs: state.activeMs,
-  score, localXp: score * 2,
+  score, localXp: state.mode === "demo" ? 0 : score * 2,
   found: entries.filter(([, f]) => f.discovered).map(([id]) => id),
   missed: entries.filter(([, f]) => !f.discovered).map(([id]) => id),
   completed: entries.filter(([, f]) => f.completed).map(([id]) => id),
