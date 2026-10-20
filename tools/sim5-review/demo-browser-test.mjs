@@ -31,6 +31,7 @@ for(const layout of [{width:1280,height:1000},{width:320,height:568},{width:390,
  check(tag+' analytics start/complete once without PII',analytics.filter(e=>e[1]==='sim5_demo_start').length===1&&analytics.filter(e=>e[1]==='sim5_demo_complete').length===1&&!JSON.stringify(analytics).includes('email'));
  check(tag+' no premium findings in report',!report.includes('6/6'));
  check(tag+' no horizontal overflow',await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await p.getByTestId('mission-report').screenshot({path:new URL('./artifacts/pack7/demo-report-'+tag+'.png',import.meta.url).pathname});
  await p.locator('.sim5-stage').scrollIntoViewIfNeeded();await p.screenshot({path:new URL('./artifacts/pack7/demo-'+tag+'.png',import.meta.url).pathname});
  const restart=p.getByRole('button',{name:tr?'Görevi yeniden başlat':'Restart mission',exact:true});await restart.click();await p.getByRole('button',{name:tr?'Onayla':'Confirm',exact:true}).click();check(tag+' replay returns to briefing',await p.getByTestId('sim5-start-overlay').count()===1);
  check(tag+' no guest state persistence',await p.evaluate(()=>localStorage.length===0));await ctx.close();

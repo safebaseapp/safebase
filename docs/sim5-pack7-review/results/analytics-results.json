@@ -1,0 +1,21 @@
+{
+  "events": [
+    [
+      "event",
+      "sim5_premium_gate_view",
+      {
+        "locale": "en",
+        "mode": "full"
+      }
+    ],
+    [
+      "event",
+      "sim5_upgrade_click",
+      {
+        "locale": "en",
+        "mode": "full"
+      }
+    ]
+  ],
+  "liveGA4": "NOT_RUN"
+}

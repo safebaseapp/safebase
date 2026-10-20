@@ -4,7 +4,8 @@ import { trackEvent } from "@/lib/analytics";
 import { useMissionPersistence } from "./useMissionPersistence";
 import { createMission, reduceMission, type MissionMode, type MissionEvent } from "./MissionState";
 
-/** One in-memory attempt. No storage, Labs API, Supabase or profile XP writes. */
+/** One local attempt; optional full-mode recorder sends legal events to the server.
+ * Guest DEMO never enables persistence. */
 export function useMission(mode: MissionMode = "full", persist = false, tr = false) {
  const persistence = useMissionPersistence(persist && mode === "full", tr);
  const record = persistence.record;

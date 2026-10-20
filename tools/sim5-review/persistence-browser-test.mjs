@@ -10,6 +10,7 @@ try{
   if(failNext){failNext=false;return route.fulfill({status:503,json:{ok:false,error:'FIXTURE_OUTAGE'}})}
   try{assert.equal(body.runId,runId);assert.equal(body.revision,revision);const v=verifyMissionLog(body.events,120000);assert.ok(isLogExtension(previous,v.log));previous=v.log;revision++;saved.push(v);return route.fulfill({json:{ok:true,revision,xpAwarded:v.eligibleXp,status:v.status}})}catch(e){errors.push('replay: '+String(e));return route.fulfill({status:400,json:{ok:false,error:'INVALID_LOG'}})}
  });
+ await p.addInitScript(()=>{window.sim5Analytics=[];window.gtag=(...a)=>window.sim5Analytics.push(a)});
  await p.goto(url+'/site.html?persist=fixture');await startMission(p);await p.getByText('Saved on server',{exact:false}).waitFor();
  check('production recorder starts a server run',saved.length>0&&saved[0].state.phase==='active');
  for(const [id,pos]of [['hotwork',[-18,1.8,-2]],['lifting',[-17,1.8,47]]]){
@@ -19,6 +20,7 @@ try{
  check('real UI evidence positions and legal answer log pass server replay',saved.at(-1).summary.completed.length===2&&saved.at(-1).eligibleXp===0);
  await p.getByRole('button',{name:'Resume inspection',exact:true}).click();failNext=true;await p.getByRole('button',{name:'Finish inspection',exact:true}).click();await p.getByText('Account save failed.',{exact:false}).waitFor();check('failed save is visibly reported, local report kept',await p.getByTestId('mission-report').count()===1);
  await p.getByRole('button',{name:'Retry save',exact:true}).click();await p.getByText('Saved on server',{exact:false}).waitFor();check('retry persists partial report without XP',saved.at(-1).status==='partial'&&saved.at(-1).eligibleXp===0);
+ const analytics=await p.evaluate(()=>window.sim5Analytics);check('full mission analytics fire once per explicit start/finish',analytics.filter(e=>e[1]==='sim5_full_mission_start').length===1&&analytics.filter(e=>e[1]==='sim5_full_mission_complete').length===1&&!JSON.stringify(analytics).includes('email'));
  check('no browser or replay errors',errors.length===0);
  fs.writeFileSync(path.join(toolRoot,'artifacts/pack7/recorder-results.json'),JSON.stringify({checks,errors,saves:saved.map(v=>({status:v.status,score:v.summary.score,events:v.log.length})),liveSupabase:'NOT_RUN',transport:'intercepted browser fixture; real server replay'},null,2));console.log('PASS',checks.length);
 }finally{await browser.close();server.closeAllConnections();server.close()}

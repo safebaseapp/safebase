@@ -62,7 +62,9 @@ in-memory unsaved events do not survive page reload.
 
 ## Database rollout and rollback
 
-`app/supabase/migrations/20261020_sim5_runs.sql` is additive and transactional.
+`app/supabase/migrations/20261020_sim5_runs.sql` adds transactional SIM storage
+and hardens direct-client write permissions on the existing Labs tables. It
+preserves their rows and service-role write paths.
 Apply to a disposable staging Supabase project first, after the existing Labs
 migration. Confirm active/free/suspended/reward/expired sessions and service-role
 RPC privileges using that project's actual policies before release.

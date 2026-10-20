@@ -16,7 +16,9 @@
     "test:navigation": "node navigation-test.mjs",
     "test:mission": "node mission-suite.mjs",
     "test:mission:state": "node mission-state-test.mjs",
-    "test:mission:browser": "node mission-browser-test.mjs"
+    "test:mission:browser": "node mission-browser-test.mjs",
+    "test:package7": "node package7-suite.mjs",
+    "test:database": "node database-test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.25.12",

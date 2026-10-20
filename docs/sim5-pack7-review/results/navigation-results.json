@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-10-20T08:28:07.777Z",
+  "checks": [
+    "open floor supports a normal step",
+    "upward-facing low floor blocks travel",
+    "downward-facing low floor blocks travel",
+    "ceiling above eye but below head blocks travel",
+    "adequate headroom remains traversable"
+  ],
+  "context": "Real Three geometry/raycast integration checks for head clearance; playable routes are separately verified in WebGL."
+}
