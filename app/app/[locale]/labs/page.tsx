@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Sim5PromoLink from "@/components/sim5/Sim5PromoLink";
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -132,15 +134,16 @@ export default async function LabsPage({ params }: Props) {
               <span className="rounded-full border border-white/15 bg-white/5 px-3 py-2">{isTr ? "6 HSE bulgusu" : "6 HSE findings"}</span>
               <span className="rounded-full border border-white/15 bg-white/5 px-3 py-2">{isTr ? "Mobil + masaüstü" : "Mobile + desktop"}</span>
             </div>
-            <Link href={`/${locale}/labs/sim5/demo`} className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-cyan-300 px-6 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-cyan-200">
+            <Sim5PromoLink locale={locale} kind="demo" surface="labs" className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-cyan-300 px-6 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-cyan-200">
               {isTr ? "Ücretsiz Demo Oyna" : "Play Free Demo"} <ArrowRight size={17} />
-            </Link>
-            <Link href={`/${locale}/labs/sim5`} className="ml-0 mt-3 inline-flex min-h-12 items-center rounded-xl border border-cyan-300/40 px-5 py-3 text-sm font-bold sm:ml-3">{isTr ? "Premium Simülasyonu Başlat" : "Start Premium Simulation"}</Link>
+            </Sim5PromoLink>
+            <Sim5PromoLink locale={locale} kind="premium" surface="labs" className="ml-0 mt-3 inline-flex min-h-12 items-center rounded-xl border border-cyan-300/40 px-5 py-3 text-sm font-bold sm:ml-3">{isTr ? "Premium Simülasyonu Başlat" : "Start Premium Simulation"}</Sim5PromoLink>
             <p className="mt-3 text-xs text-slate-400">{isTr ? "Ücretsiz DEMO: 2 bulgu, kayıt gerekmez. Premium: 6 bulgu, üst platformlar ve hesap geçmişi." : "Free DEMO: 2 findings, no sign-in. Premium: 6 findings, upper platforms and account history."}</p>
           </div>
           <div className="rounded-2xl border border-cyan-300/20 bg-slate-950/50 p-6">
+            <Image src="/images/sim5-site-showcase.webp" width={1920} height={1080} sizes="(max-width: 1024px) 100vw, 40vw" alt={isTr?"SIM 5.0 endüstriyel sahası: fabrika, mobil vinç, tesis yolu ve tanklar":"SIM 5.0 industrial site: factory, mobile crane, site road and tanks"} className="mb-5 aspect-video w-full rounded-xl object-cover"/>
             <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.15em] text-cyan-300"><span>FIELD INSPECTION</span><span>SIM / 5.0</span></div>
-            <div className="mt-7 text-5xl font-black tracking-tight text-white">06 <span className="text-lg font-semibold text-slate-400">{isTr ? "inceleme" : "inspections"}</span></div>
+            <div className="mt-7 text-5xl font-black tracking-tight text-white">06 <span className="text-lg font-semibold text-slate-400">{isTr ? "Premium bulgusu" : "Premium findings"}</span></div>
             <div className="mt-6 grid grid-cols-3 gap-2" aria-hidden="true">
               {[0, 1, 2].map((index) => <span key={index} className="h-2 rounded-full bg-cyan-400/70" />)}
             </div>

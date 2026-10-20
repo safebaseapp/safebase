@@ -146,13 +146,13 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
     },
   };
 
-  const HereBadge = () => (
+  const renderHereBadge = () => (
     <span className="rounded-full border border-white/15 bg-white/[0.08] px-2 py-1 text-[8px] font-black uppercase tracking-[0.12em] text-white backdrop-blur-md">
       {tr ? "BURADASIN" : "YOU'RE HERE"}
     </span>
   );
 
-  const PhotoPane = ({
+  const renderPhotoPane = ({
     src,
     position = "center",
   }: {
@@ -173,7 +173,7 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
     </div>
   );
 
-  const Accordion = ({
+  const renderAccordion = ({
     id,
     title,
     description,
@@ -198,7 +198,7 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
 
     return (
       <div className={`relative overflow-hidden rounded-[24px] border bg-[#06101e] transition duration-300 ${active ? styles.activeShell : styles.shell}`}>
-        <PhotoPane src={photo} position={position} />
+        {renderPhotoPane({src:photo,position:position})}
         <span className={`absolute bottom-3 left-0 top-3 z-10 w-[3px] rounded-r-full ${styles.line} ${active ? "opacity-100" : "opacity-80"}`} />
 
         <button
@@ -216,7 +216,7 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
               {title}
             </span>
             <span className="sr-only">{description}</span>
-            {active && <span className="mt-1.5 inline-flex"><HereBadge /></span>}
+            {active && <span className="mt-1.5 inline-flex">{renderHereBadge()}</span>}
           </span>
 
           <span className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-[#07101f]/75 text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_8px_20px_rgba(0,0,0,.25)] backdrop-blur-md">
@@ -259,7 +259,7 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
     );
   };
 
-  const DirectCard = ({
+  const renderDirectCard = ({
     href,
     title,
     description,
@@ -309,7 +309,7 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
         onClick={onClose}
         className={`relative flex min-h-[96px] items-center gap-3 overflow-hidden rounded-[24px] border bg-[#06101e] px-4 pl-5 transition duration-300 ${style.border} ${style.shadow}`}
       >
-        <PhotoPane src={photo} position={position} />
+        {renderPhotoPane({src:photo,position:position})}
         <span className={`absolute bottom-3 left-0 top-3 z-10 w-[3px] rounded-r-full ${style.line} ${active ? "opacity-100" : "opacity-80"}`} />
 
         <span className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] border shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_10px_28px_rgba(0,0,0,.22)] backdrop-blur-md ${style.icon}`}>
@@ -321,7 +321,7 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
             {title}
           </span>
           <span className="sr-only">{description}</span>
-          {active && <span className="mt-1.5 inline-flex"><HereBadge /></span>}
+          {active && <span className="mt-1.5 inline-flex">{renderHereBadge()}</span>}
         </span>
 
         <span className="relative z-10 ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-[#07101f]/75 text-white shadow-[inset_0_1px_0_rgba(255,255,255,.08),0_8px_20px_rgba(0,0,0,.25)] backdrop-blur-md">
@@ -400,74 +400,20 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
 
         <div className="space-y-2.5">
           {authenticated && (
-            <DirectCard
-              href="/dashboard"
-              title="Dashboard"
-              description={tr ? "Genel bakış, içgörüler ve hızlı işlemler." : "Overview, insights and quick actions."}
-              icon={LayoutDashboard}
-              photo={PHOTO.dashboard}
-              active={dashboardActive}
-              tone="cyan"
-              position="center 50%"
-            />
+            renderDirectCard({href:"/dashboard",title:"Dashboard",description:tr ? "Genel bakış, içgörüler ve hızlı işlemler." : "Overview, insights and quick actions.",icon:LayoutDashboard,photo:PHOTO.dashboard,active:dashboardActive,tone:"cyan",position:"center 50%"})
           )}
 
-          <Accordion
-            id="tools"
-            title={tr ? "HSE Araçları" : "HSE Tools"}
-            description={tr ? "Şablonlar, hesaplayıcılar ve saha araçları." : "Templates, calculators and practical tools."}
-            icon={Wrench}
-            items={toolItems}
-            accent="blue"
-            photo={PHOTO.tools}
-            position="center 54%"
-          />
+          {renderAccordion({id:"tools",title:tr ? "HSE Araçları" : "HSE Tools",description:tr ? "Şablonlar, hesaplayıcılar ve saha araçları." : "Templates, calculators and practical tools.",icon:Wrench,items:toolItems,accent:"blue",photo:PHOTO.tools,position:"center 54%"})}
 
           {authenticated && (
-            <DirectCard
-              href="/hse-performance"
-              title={tr ? "HSE Performans" : "HSE Performance"}
-              description={tr ? "KPI, raporlar ve güvenlik analitiği." : "KPIs, reports and safety analytics."}
-              icon={Gauge}
-              photo={PHOTO.performance}
-              active={performanceActive}
-              tone="sky"
-              position="center 62%"
-            />
+            renderDirectCard({href:"/hse-performance",title:tr ? "HSE Performans" : "HSE Performance",description:tr ? "KPI, raporlar ve güvenlik analitiği." : "KPIs, reports and safety analytics.",icon:Gauge,photo:PHOTO.performance,active:performanceActive,tone:"sky",position:"center 62%"})
           )}
 
-          <Accordion
-            id="labs"
-            title="HSE Labs"
-            description={tr ? "Simülasyonlar, senaryolar ve etkileşimli öğrenme." : "Simulations, scenarios and interactive learning."}
-            icon={Sparkles}
-            items={labItems}
-            accent="violet"
-            photo={PHOTO.labs}
-            position="center 48%"
-          />
+          {renderAccordion({id:"labs",title:"HSE Labs",description:tr ? "Simülasyonlar, senaryolar ve etkileşimli öğrenme." : "Simulations, scenarios and interactive learning.",icon:Sparkles,items:labItems,accent:"violet",photo:PHOTO.labs,position:"center 48%"})}
 
-          <Accordion
-            id="resources"
-            title={tr ? "Kaynaklar" : "Resources"}
-            description={tr ? "Rehberler, dokümanlar ve saha içerikleri." : "Guides, documents and field resources."}
-            icon={Grid3X3}
-            items={resourceItems}
-            accent="emerald"
-            photo={PHOTO.resources}
-            position="center 52%"
-          />
+          {renderAccordion({id:"resources",title:tr ? "Kaynaklar" : "Resources",description:tr ? "Rehberler, dokümanlar ve saha içerikleri." : "Guides, documents and field resources.",icon:Grid3X3,items:resourceItems,accent:"emerald",photo:PHOTO.resources,position:"center 52%"})}
 
-          <DirectCard
-            href="/ai-assistant"
-            title={tr ? "AI Asistan" : "AI Assistant"}
-            description={tr ? "Sor, öğren ve hızlı HSE desteği al." : "Ask, learn and get instant HSE support."}
-            icon={Bot}
-            photo={PHOTO.ai}
-            active={aiActive}
-            tone="fuchsia"
-            position="center 42%"
-          />
+          {renderDirectCard({href:"/ai-assistant",title:tr ? "AI Asistan" : "AI Assistant",description:tr ? "Sor, öğren ve hızlı HSE desteği al." : "Ask, learn and get instant HSE support.",icon:Bot,photo:PHOTO.ai,active:aiActive,tone:"fuchsia",position:"center 42%"})}
         </div>
       </div>
     </div>

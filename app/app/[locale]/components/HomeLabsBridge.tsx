@@ -1,43 +1,12 @@
-"use client";
 
 import Link from "next/link";
 import { ArrowRight, FlaskConical, Puzzle, ScanSearch, Sparkles, Target } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 
 const LABS_LOGO = "/images/sernem-labs-logo.webp";
 
 export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
-  const pathname = usePathname();
-  const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
   const tr = locale === "tr";
-  const [mountNode, setMountNode] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    setMountNode(null);
-    if (!isHome) return;
-
-    const homeTitle = document.getElementById("home-title");
-    const hero = homeTitle?.closest("section");
-    if (!hero?.parentElement) return;
-
-    document.querySelector("[data-sernem-labs-showcase-host]")?.remove();
-    const host = document.createElement("div");
-    host.setAttribute("data-sernem-labs-showcase-host", "true");
-    const anchor = document.querySelector("[data-sim5-home-showcase]") ?? hero;
-    anchor.insertAdjacentElement("afterend", host);
-    setMountNode(host);
-
-    return () => {
-      setMountNode(null);
-      host.remove();
-    };
-  }, [isHome, pathname]);
-
-  if (!isHome || !mountNode) return null;
-
-  return createPortal(
+  return (
     <section className="relative isolate overflow-hidden border-y border-violet-400/20 bg-[#050817] text-white shadow-[inset_0_1px_0_rgba(255,255,255,.03)]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_35%,rgba(59,130,246,.18),transparent_28%),radial-gradient(circle_at_68%_35%,rgba(139,92,246,.22),transparent_30%),radial-gradient(circle_at_93%_70%,rgba(34,211,238,.12),transparent_26%),linear-gradient(110deg,rgba(2,6,23,.98),rgba(13,18,45,.94)_46%,rgba(9,12,32,.98))]" />
       <div className="pointer-events-none absolute -left-20 top-1/2 -translate-y-1/2 text-blue-400/[0.045]"><Puzzle size={300} strokeWidth={1.1} /></div>
@@ -105,7 +74,6 @@ export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
           </Link>
         </div>
       </div>
-    </section>,
-    mountNode,
+    </section>
   );
 }
