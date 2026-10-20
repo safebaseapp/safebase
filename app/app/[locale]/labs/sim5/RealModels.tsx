@@ -473,6 +473,11 @@ export default function RealModels({tr}:{tr:boolean}) {
    .sim5-inspection button{box-sizing:border-box;min-height:44px}
    .sim5-stage{position:relative;width:100%;min-width:0;isolation:isolate}
    .sim5-canvas{height:min(72vh,750px);min-height:380px}
+   .sim5-start-overlay{position:absolute;top:16px;left:16px;z-index:4;width:min(370px,calc(100% - 32px));box-sizing:border-box;padding:16px;background:rgba(7,29,43,.95);border:1px solid #8ddae6;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.28);color:#effdff}
+   .sim5-start-overlay strong{display:block;font-size:17px;line-height:1.4}
+   .sim5-start-overlay p{margin:8px 0 12px;font-size:13px;line-height:1.5;color:#c6e4ea}
+   .sim5-start-overlay button{min-height:44px;padding:10px 18px;border:0;border-radius:9px;background:#8ee6f0;color:#082334;font-size:15px;font-weight:800;cursor:pointer}
+   .sim5-start-overlay button:disabled{opacity:.6;cursor:wait}
    .sim5-touch-dpad,.sim5-touch-inspect{display:none}
    .sim5-desktop-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
    .sim5-desktop-controls button{min-width:52px;min-height:48px;border:0;border-radius:9px;background:#176b82;color:#fff;font-size:19px;touch-action:none;cursor:pointer}
@@ -514,6 +519,16 @@ export default function RealModels({tr}:{tr:boolean}) {
    <p style={{color:"#c4dce3",fontSize:14}}>{tr?"Saha brifingi: İşaretli geçişleri kullan. Aktif kaldırma alanına girme. Görünür kanıtları yaklaşarak incele; tank merdivenleri üst servis yoluna çıkar. Üst seviyeyi de araştır.":"Site briefing: Use marked access routes. Stay outside the active lifting zone. Approach visible evidence to inspect it; the tank stairs lead to the upper service walkway. Explore both levels."}</p>
    <div className="sim5-stage">
     <div ref={mount} className="sim5-canvas" style={{width:"100%",borderRadius:14,overflow:"hidden",background:"#91b1c5",touchAction:"none"}}/>
+    {mission.phase==="briefing"&&<div className="sim5-start-overlay" role="status" data-testid="sim5-start-overlay">
+     <strong>{tr?"Yürümek için önce denetimi başlat":"Start the inspection to walk"}</strong>
+     <p>{tr?"Yön tuşları ve WASD, görev başladıktan sonra açılır. Kaynak, vinç ve üst platform risklerini sahada keşfet.":"The arrows and WASD unlock when the inspection starts. Explore welding, lifting and upper-level hazards."}</p>
+     <button type="button" disabled={!ready} onClick={startMission}>{ready?(tr?"Denetime başla →":"Start inspection →"):(tr?"Saha yükleniyor…":"Loading site…")}</button>
+    </div>}
+    {mission.phase==="paused"&&mode==="walk"&&<div className="sim5-start-overlay" role="status" data-testid="sim5-paused-overlay">
+     <strong>{tr?"Denetim duraklatıldı":"Inspection paused"}</strong>
+     <p>{tr?"Yön tuşları ve WASD, görev duraklatıldığında kapalıdır.":"The arrows and WASD are disabled while the mission is paused."}</p>
+     <button type="button" onClick={()=>send({type:"resume"})}>{tr?"Denetime devam et →":"Resume inspection →"}</button>
+    </div>}
     <MissionHud mission={mission} tr={tr}/>
     {mode==="walk"&&<div className="sim5-touch-dpad" role="group" aria-label={tr?"Hareket kontrolleri":"Movement controls"}>
      {touchButtons.map(([symbol,key,col,row,trl,enl])=><button key={key} type="button" data-testid={"sim5-touch-"+key} className="sim5-touch-button" disabled={mission.phase!=="active"} aria-label={tr?trl:enl} title={tr?trl:enl} style={{gridColumn:col,gridRow:row}}
@@ -528,8 +543,8 @@ export default function RealModels({tr}:{tr:boolean}) {
    <div className="sim5-desktop-controls">
     {controls.map(([symbol,key,trl,enl])=><button type="button" key={key} disabled={mode!=="walk"||mission.phase!=="active"} aria-label={tr?trl:enl} title={tr?trl:enl}
      onPointerDown={e=>holdKey(key,e)} onPointerUp={releaseKey} onPointerCancel={releaseKey} onLostPointerCapture={releaseKey} onContextMenu={e=>e.preventDefault()}>{symbol}</button>)}
-    <span className="sim5-controls-help">{mode==="walk"?(tr?"WASD / ok tuşları ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD / arrows to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
-    <span className="sim5-touch-help">{mode==="walk"?(tr?"Yön tuşlarını basılı tut · Sahneyi sürükleyerek bak":"Hold a direction to move · Drag the scene to look"):(tr?"Yürü modunu seç · Sürükleyerek tesisin etrafında dön":"Select Walk · Drag to orbit the site")}</span>
+    <span className="sim5-controls-help">{mission.phase==="briefing"?(tr?"Hareket kilitli · Sahnenin üzerindeki Denetime başla düğmesine bas":"Movement locked · Select Start inspection on the scene"):mission.phase==="paused"?(tr?"Denetim duraklatıldı · Devam et düğmesine bas":"Inspection paused · Select Resume inspection"):mode==="walk"?(tr?"WASD / ok tuşları ile yürü · sürükleyerek bak · açıklıklardan tesislere gir":"WASD / arrows to walk · drag to look · enter the plots through marked openings"):(tr?"Sürükleyerek tesisin etrafında dön · Yürü butonuyla girişe geç":"Drag to orbit site · select Walk to enter")}</span>
+    <span className="sim5-touch-help">{mission.phase==="briefing"?(tr?"Hareket için önce Denetime başla":"Start inspection to unlock movement"):mission.phase==="paused"?(tr?"Hareket için Denetime devam et":"Resume inspection to move"):mode==="walk"?(tr?"Yön tuşlarını basılı tut · Sahneyi sürükleyerek bak":"Hold a direction to move · Drag the scene to look"):(tr?"Yürü modunu seç · Sürükleyerek tesisin etrafında dön":"Select Walk · Drag to orbit the site")}</span>
    </div>
   {mode==="walk"&&nearbyHazard&&<button {...inspectionEvents} style={{padding:"12px 20px",background:"#d6a52c",color:"#13242d",border:0,borderRadius:9,fontWeight:800,cursor:"pointer"}}>{tr?"🔍 Yakındaki tehlikeyi incele":"🔍 Inspect nearby hazard"}</button>}
   <p data-testid="sim5-hse-progress" style={{color:"#a3efbc",fontWeight:600}}>{tr?"HSE kararları":"HSE decisions"}: {completedInspections.length}/{Object.keys(inspections).length} · {tr?"Yürüme modunda uygunsuzluğa yaklaş ve dokun":"In walk mode approach and inspect visible hazards"}</p>
