@@ -38,10 +38,12 @@ export default function Sim5DailyReward({tr,refreshKey}:Props){
   <div className="flex flex-wrap items-center justify-between gap-2">
    <h2 className="text-lg font-bold text-cyan-100">{tr?"Günlük Saha Denetimi":"Daily Site Inspection"}</h2>
    <span className="rounded-full bg-cyan-200 px-3 py-1 text-sm font-bold text-slate-950">
-    {daily?.claimed?(tr?"Bugün tamamlandı":"Claimed today"):firstTime?(tr?"İlk başarı +200 XP":"First success +200 XP"):"+50 XP"}
+    {!daily?(tr?"Kontrol ediliyor…":"Checking…"):daily.claimed?(tr?"Bugün tamamlandı":"Claimed today"):firstTime?(tr?"İlk başarı +200 XP":"First success +200 XP"):"+50 XP"}
    </span>
   </div>
-  {daily?.claimed
+  {!daily
+   ?<p className="mt-2 text-sm text-slate-200">{tr?"Sunucudan günlük ödül hakkın kontrol ediliyor.":"Checking your daily eligibility with the server."}</p>
+   :daily.claimed
    ?<p className="mt-2 text-sm text-slate-200">{tr?"Bugünkü kalıcı XP hakkın kullanıldı. Simülasyonu istediğin kadar yeniden oynayabilirsin; yeni günlük ödül yarın açılır.":"Today's permanent XP slot is used. Replay as often as you like; the next daily reward becomes available tomorrow."}</p>
    :firstTime
    ?<p className="mt-2 text-sm text-slate-200">{tr?"İlk başarılı tam saha denetiminde en fazla 200 XP kazan. Sonraki günlerde 100/100 puanla günlük +50 XP al.":"Earn up to 200 XP for your first completed full inspection. On following days, earn +50 XP daily with a perfect 100/100 score."}</p>
