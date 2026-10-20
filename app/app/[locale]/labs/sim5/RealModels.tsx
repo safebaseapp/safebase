@@ -59,8 +59,22 @@ export default function RealModels({tr, missionMode = "full", persist = false, u
  useEffect(()=>{if(mission.phase!=="active")clearInput()},[mission.phase,clearInput]);
  const switchMode=(m:"walk"|"overview")=>{clearInput();modeRef.current=m;setMode(m);reset.current()};
  useEffect(()=>{
-  let active=true,raf=0,renderer:any,cleanup=()=>{};
-  const contextLost=(event:Event)=>{event.preventDefault();if(active){clearInput();send({type:"pause"});setReady(false);setSceneError(true);setStatus(tr?"WebGL bağlantısı kesildi. Sahneyi yeniden yükle.":"WebGL context lost. Reload the scene.");}};
+  let active=true,raf=0,renderer:any,cleanup=()=>{},contextUnavailable=false;
+  const contextLost=(event:Event)=>{
+   event.preventDefault();
+   if(!active)return;
+   // Stop scheduling GPU work if the context disappears during rendering.
+   contextUnavailable=true;
+   cancelAnimationFrame(raf);
+   clearInput();
+   const reportReady=missionRef.current.phase==="finished"||missionRef.current.phase==="cancelled";
+   if(!reportReady)send({type:"pause"});
+   setReady(false);
+   setSceneError(true);
+   setStatus(reportReady
+    ? (tr?"3D görüntü durdu; görev raporun bu sayfada korunuyor.":"The 3D view stopped; your mission report remains on this page.")
+    : (tr?"WebGL görüntüsü kesildi. Sahneyi yeniden yükle.":"WebGL rendering stopped. Reload the scene."));
+  };
   const host=mount.current;if(!host)return;
   (async()=>{
    try {
@@ -390,12 +404,17 @@ export default function RealModels({tr, missionMode = "full", persist = false, u
     // Touch gestures should rotate the 3D camera rather than scroll the page.
     renderer.domElement.style.touchAction="none";
     renderer.domElement.addEventListener("pointerdown",pointerDown);renderer.domElement.addEventListener("pointerup",pointerUp);renderer.domElement.addEventListener("pointercancel",pointerUp);renderer.domElement.addEventListener("lostpointercapture",pointerUp);renderer.domElement.addEventListener("pointermove",pointerMove);
-    let last=performance.now(),simulationSeconds=0;
+    let last=performance.now(),simulationSeconds=0,lastReportRender=0;
     const tick=(now:number)=>{
-      if(!active)return;
+      if(!active||contextUnavailable)return;
       // Keep the preview lightweight when its browser tab is not visible.
       // Continue scheduling so rendering resumes automatically on return.
       if(document.hidden){last=now;raf=requestAnimationFrame(tick);return;}
+      // Reports do not need full-frame-rate 3D updates. Keep the scene
+      // viewable while reducing GPU demand until the next attempt starts.
+      const terminal=missionRef.current.phase==="finished"||missionRef.current.phase==="cancelled";
+      if(terminal&&now-lastReportRender<250){last=now;raf=requestAnimationFrame(tick);return;}
+      if(terminal)lastReportRender=now;
       const dt=Math.min(.05,(now-last)/1000);last=now;
       if(missionRef.current.phase==="active"||missionRef.current.phase==="briefing")simulationSeconds+=dt;
       if(modeRef.current==="overview"){
@@ -437,7 +456,8 @@ export default function RealModels({tr, missionMode = "full", persist = false, u
       if(appliedFindings!==missionRef.current.findings){appliedFindings=missionRef.current.findings;consequences.sync(Object.entries(appliedFindings).filter(([,finding])=>finding.completed).map(([id])=>id));}
       const missionNow=missionRef.current;
       weldingOperation?.update(simulationSeconds,!missionNow.findings.hotwork.completed);
-      renderer.render(scene,camera);raf=requestAnimationFrame(tick);
+      renderer.render(scene,camera);
+      if(!contextUnavailable)raf=requestAnimationFrame(tick);
     };
     raf=requestAnimationFrame(tick);
     const resize=()=>{clearInput();drag=false;dragPointer=null;if(!host.clientWidth||!host.clientHeight)return;camera.aspect=host.clientWidth/host.clientHeight;camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight)};
@@ -525,7 +545,9 @@ export default function RealModels({tr, missionMode = "full", persist = false, u
     <p>{tr?"Sekme kapanır veya sayfa yenilenirse son başarılı kayıt geçmişte eksik deneme olarak kalır; otomatik devam edilmez. Yeni deneme başlat. Kayıt 10 saniyede bir ve duraklatma/bitirmede denenir.":"Closing or reloading keeps the last successful checkpoint as an interrupted attempt in history; it does not auto-resume. Start a new attempt. Saves are attempted every 10 seconds and on pause/finish."}</p>
     {persistence.status && <p role="status">{persistence.status}</p>}<button type="button" className="min-h-11 underline" onClick={persistence.retry}>{tr?"Kaydı yeniden dene":"Retry save"}</button>
    </aside>}
-   {sceneError&&<div role="alert"><p>{tr?"Simülasyon yüklenmedi; görev başlatılamaz.":"The simulation did not load; the mission cannot start."}</p><button type="button" className="min-h-11 underline" onClick={()=>window.location.reload()}>{tr?"Yeniden yükle":"Reload"}</button></div>}
+   {sceneError&&<div role="alert"><p>{mission.phase==="finished"||mission.phase==="cancelled"
+    ? (tr?"3D görüntü durdu; mevcut görev raporu bu sayfada duruyor. Tekrar oynamak için sayfayı yeniden yükle.":"The 3D view stopped; your mission report remains on this page. Reload to play again.")
+    : (tr?"3D görüntü durdu; yeni görev başlatılamaz. Yeniden yüklemeyi dene.":"The 3D view stopped; a new mission cannot start. Try reloading.")}</p><button type="button" className="min-h-11 underline" onClick={()=>window.location.reload()}>{tr?"Yeniden yükle":"Reload"}</button></div>}
    <MissionPanel unlockHref={unlockHref} mission={mission} tr={tr} ready={ready} send={send} onStart={startMission} onRestart={restartMission}/>
    <p style={{color:"#c4dce3",fontSize:14}}>{missionMode==="demo"?(tr?"DEMO: Kaynak ve kaldırma sahnelerinde iki bulguyu değerlendir. Diğer bulgular ve üst platform görevleri Premium sürümdedir.":"DEMO: Assess two findings at the welding and lifting stations. Other findings and upper-platform missions belong to Premium."):tr?"Saha brifingi: İşaretli geçişleri kullan. Aktif kaldırma alanına girme. Görünür kanıtları yaklaşarak incele; tank merdivenleri üst servis yoluna çıkar. Üst seviyeyi de araştır.":"Site briefing: Use marked access routes. Stay outside the active lifting zone. Approach visible evidence to inspect it; the tank stairs lead to the upper service walkway. Explore both levels."}</p>
    <div className="sim5-stage">
