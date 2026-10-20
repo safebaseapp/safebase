@@ -1,4 +1,5 @@
 import {startServer} from './server.mjs';import {chromium} from 'playwright';import {startMission,lookAtInspection,siteInspections} from './mission-test-support.mjs';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {toolRoot} from './inspect.mjs';
+fs.mkdirSync(path.join(toolRoot,'artifacts/pack8'),{recursive:true});
 const {server,url}=await startServer(0),browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});const checks=[],measurements=[],writes=[];const check=(n,b)=>{assert.ok(b,n);checks.push(n);console.log('CHECK',n)};
 async function calls(p){const before=await p.evaluate(()=>window.reviewRenderInvocations||0);await p.waitForTimeout(1100);return (await p.evaluate(()=>window.reviewRenderInvocations||0))-before}
 try{for(const lang of ['tr','en']){

@@ -1,7 +1,7 @@
 # SERNEM SIM 5.0 — Package 8 release preparation
 
-Draft PR: https://github.com/safebaseapp/safebase/pull/106  
-Branch: `codex/sim5-final-homepage-menu-visual-xp-pack8`  
+Draft PR: https://github.com/safebaseapp/safebase/pull/106
+Branch: `codex/sim5-final-homepage-menu-visual-xp-pack8`
 Verified start: `fix/sim5-demo-post-completion-webgl-20261020` at `95f7f9e49d0abb0c26f5b5866500bec0db63fb49`. The new branch was pushed before development. PR #104/#105 and Issue #102 were reviewed; neither earlier PR was modified or merged. The draft targets the #105 branch to isolate Package 8 review. Main remains `b8ebca8e07bcbf500c276767d4a80251d3db2b08`.
 
 ## User-visible changes
