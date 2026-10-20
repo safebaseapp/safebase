@@ -26,12 +26,12 @@ export default function Sim5DailyReward({tr,refreshKey}:Props){
   let active=true;
   // Refresh after each account-save response and at the next Budapest day.
   // No client-side timezone or score value is trusted by the XP writer.
-  void reload();
+  const initial=window.setTimeout(()=>{if(active)void reload()},0);
   const tick=window.setInterval(()=>{
    if(!active||document.hidden)return;
    if(daily?.rewardDate&&localDay()!==daily.rewardDate)void reload();
   },30000);
-  return()=>{active=false;window.clearInterval(tick)};
+  return()=>{active=false;window.clearTimeout(initial);window.clearInterval(tick)};
  },[reload,refreshKey,daily?.rewardDate]);
  const firstTime=!!daily&&!daily.claimed&&daily.lifetimeBestXp===0;
  return <aside className="my-4 rounded-xl border border-cyan-300/40 bg-[#103244] p-4" aria-label={tr?"SIM5 günlük XP durumu":"SIM5 daily XP status"}>
