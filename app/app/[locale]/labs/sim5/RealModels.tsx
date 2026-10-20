@@ -11,6 +11,7 @@ import { missionSummary, type MissionMode } from "./MissionState";
 import { MissionPanel, MissionHud } from "./MissionPanel";
 import { controlOutcomes, wrongDecisionReasons, scenarioNames } from "./MissionConsequences";
 import { createMissionSceneEffects } from "./MissionSceneEffects";
+import Sim5DailyReward from "./Sim5DailyReward";
 
 const inspections=siteInspections;
 
@@ -584,8 +585,9 @@ export default function RealModels({tr, missionMode = "full", persist = false, u
      <button onClick={()=>{clearInput();reset.current()}} style={{padding:"10px 14px",borderRadius:8,border:"1px solid #375769",background:"#142c3a",color:"white",cursor:"pointer"}}>{tr?"Kamerayı sıfırla":"Reset camera"}</button>
     </div>
    </div>
+   {persist && missionMode === "full" && <Sim5DailyReward tr={tr} refreshKey={mission.phase==="finished"?persistence.historyRevision:0}/>}
    {persist && missionMode === "full" && <aside className="rounded-xl border border-cyan-300/30 p-3">
-    <p>{tr?"Kalıcı XP yalnız tamamlanan altı bulgulu görevin en iyi puanındaki artış için verilir (toplam en fazla 200). Tekrar oynamak sınırsızdır. Skor sunucuda doğrulanır.":"Permanent XP rewards only improvements to your best completed six-finding score (200 total maximum). Replay is unlimited. The server verifies the score."}</p>
+    <p>{tr?"İlk başarılı tam denetimde en iyi puana göre en fazla 200 kalıcı XP verilir. Sonraki günlerde 100/100 puanla günlük +50 XP kazanılabilir. Aynı gün tekrar oynamak serbesttir ancak ek günlük XP vermez. Skor sunucuda doğrulanır.":"The first full inspection awards up to 200 lifetime best-score XP. On following days, a perfect 100/100 score earns +50 XP daily. Replays are unlimited, but daily XP is awarded only once per day. The server verifies the score."}</p>
     <p>{tr?"Sekme kapanır veya sayfa yenilenirse son başarılı kayıt geçmişte eksik deneme olarak kalır; otomatik devam edilmez. Yeni deneme başlat. Kayıt 10 saniyede bir ve duraklatma/bitirmede denenir.":"Closing or reloading keeps the last successful checkpoint as an interrupted attempt in history; it does not auto-resume. Start a new attempt. Saves are attempted every 10 seconds and on pause/finish."}</p>
     {persistence.status && <p role="status">{persistence.status}</p>}<button type="button" className="min-h-11 underline" onClick={persistence.retry}>{tr?"Kaydı yeniden dene":"Retry save"}</button>
    </aside>}
