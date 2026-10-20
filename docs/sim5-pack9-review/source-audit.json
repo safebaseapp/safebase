@@ -1,0 +1,52 @@
+{
+  "baseCommit": "0742757f2dfb78006671f46221e8b082c5115125",
+  "branch": "codex/sim5-showcase-image-refresh-pack9",
+  "runtimeModel": "app/public/sim5/large_industrial_storage_tanks (1).glb",
+  "runtimeGitBlob": "37aaa996a26fbc04a6265be3934c1ae5bd5290c7",
+  "runtimeSha256": "57f8af41a804fb9f231437c73c5fcd1d11047a4aac42aaa43f0b52dd8d3558e8",
+  "pack8CaptureRecordedSha256": "57f8af41a804fb9f231437c73c5fcd1d11047a4aac42aaa43f0b52dd8d3558e8",
+  "materials": [
+    {
+      "name": "lambert3",
+      "baseColorTexture": {
+        "index": 0
+      }
+    },
+    {
+      "name": "Round_Tank_Material",
+      "baseColorTexture": {
+        "index": 2
+      }
+    },
+    {
+      "name": "Long_TankLong_TankA_Material",
+      "baseColorTexture": {
+        "index": 4
+      }
+    },
+    {
+      "name": "Long_Tanklambert3",
+      "baseColorTexture": {
+        "index": 0
+      }
+    },
+    {
+      "name": "Large_tank",
+      "baseColorTexture": {
+        "index": 6
+      }
+    }
+  ],
+  "preview": "https://safebase-811rkvglk-safebaseapps-projects.vercel.app/en/labs/sim5/demo",
+  "previewVerification": "BLOCKED: cloud gateway CONNECT 403; not a verified runtime rendering",
+  "runtimeModified": false,
+  "clarification": "User confirmed same GLB across versions; compare lower camera angles, do not assume a new white GLB.",
+  "olderVersions": {
+    "package6": "9cc0d0da52484b9fc88847b7d47c4340c48e88e0",
+    "package6Labs": "9c7bb81462148ab64cbb3a6b5825a185ee05b188"
+  },
+  "tankBlobIdenticalAcrossThreeVersions": true,
+  "separateWhiteModelUsed": false,
+  "selectedView": "southwest",
+  "whiteFactoryCylinders": "White cylindrical structures on the factory side belong to the original SERNEM_SIM4_Factory_optimized.glb loaded at x=-47; the separate storage yard at x=47 retains its original textured patina, including the sides."
+}

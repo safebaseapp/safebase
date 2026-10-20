@@ -1,0 +1,19 @@
+CHECK server recomputes complete six-finding report and 200 maximum XP
+CHECK sanitized log roundtrips and extends checkpoints
+CHECK rejects self asserted XP
+CHECK rejects self asserted completion
+CHECK rejects answer before discovery
+CHECK rejects unknown finding
+CHECK rejects remote discovery
+CHECK rejects reversed time
+CHECK rejects future time
+CHECK rejects invalid answer
+CHECK rejects resume after final
+CHECK rejects duplicate answer
+CHECK rejects run restart
+CHECK rejects empty log
+CHECK rejects oversized log
+CHECK JSONB key reordering preserves prefix identity
+CHECK early finish and cancel never award permanent XP
+CHECK pause/resume excludes inactive time
+PASS 18 server log checks; LIVE DB NOT RUN

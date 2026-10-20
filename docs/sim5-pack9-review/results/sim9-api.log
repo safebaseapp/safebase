@@ -1,0 +1,13 @@
+CHECK guest cannot read/write before DB access
+CHECK free cannot read/write before DB access
+CHECK suspended cannot read/write before DB access
+CHECK expired cannot read/write before DB access
+CHECK cross-origin cookie-authenticated write denied
+CHECK history is private no-store and explicitly owner-filtered
+CHECK cross-account/missing run is not found
+CHECK client score and premium flag rejected
+CHECK server computes report from full log, not claimed completion
+CHECK stale/divergent event prefix rejected before RPC
+CHECK DB conflicts propagate for safe retry
+CHECK missing persistence configuration is not success
+PASS 12 real handlers with dependency fixtures; live API NOT RUN
