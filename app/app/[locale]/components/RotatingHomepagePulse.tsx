@@ -129,6 +129,7 @@ export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
   }, []);
 
   useEffect(() => {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) return;
     let active = true;
     const supabase = createClient();
     void supabase.rpc("get_labs_monthly_leaderboard").then(({ data }) => {

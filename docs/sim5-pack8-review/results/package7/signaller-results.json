@@ -1,0 +1,57 @@
+{
+  "checks": [
+    "view 1: suit is rendered blue, not washed white",
+    "view 1: fitted high-visibility vest retains real triangles",
+    "view 2: suit is rendered blue, not washed white",
+    "view 2: fitted high-visibility vest retains real triangles",
+    "view 3: suit is rendered blue, not washed white",
+    "view 3: fitted high-visibility vest retains real triangles"
+  ],
+  "samples": [
+    {
+      "pixels": 21592,
+      "mean": [
+        0.5573823638384587,
+        8.840450166728418,
+        58.40640051871063
+      ],
+      "whiteFraction": 0,
+      "positions": [
+        -17,
+        0.05082400649785995,
+        56
+      ],
+      "vestTriangles": 133146
+    },
+    {
+      "pixels": 18765,
+      "mean": [
+        0.06512123634425793,
+        26.472475353050893,
+        93.97543298694377
+      ],
+      "whiteFraction": 0,
+      "positions": [
+        -17,
+        0.05082400649785995,
+        56
+      ],
+      "vestTriangles": 133146
+    },
+    {
+      "pixels": 28728,
+      "mean": [
+        0.09955444165970481,
+        10.72364940128098,
+        62.02575884154832
+      ],
+      "whiteFraction": 0,
+      "positions": [
+        -17,
+        0.05082400649785995,
+        56
+      ],
+      "vestTriangles": 133146
+    }
+  ]
+}

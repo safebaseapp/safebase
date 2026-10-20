@@ -11,7 +11,7 @@ try{
    await p.waitForFunction(()=>window.siteRenderer&&document.querySelector('[data-testid="sim5-start-overlay"] button')?.disabled===false,null,{timeout:120000});
    await p.evaluate(()=>window.siteRenderer.getContext().getExtension('WEBGL_lose_context').loseContext());
   }
-  await p.getByRole('alert').waitFor({timeout:120000});check(mode+' has localized accessible fallback',(await p.getByRole('alert').innerText()).includes('Simülasyon yüklenmedi'));
+  await p.getByRole('alert').waitFor({timeout:120000});check(mode+' has localized accessible fallback',(await p.getByRole('alert').innerText()).includes('3D görüntü durdu'));
   check(mode+' cannot start a broken mission',await p.getByRole('button',{name:'Denetime başla',exact:true}).isDisabled());
   await p.getByRole('alert').screenshot({path:path.join(toolRoot,`artifacts/pack7/${mode}.png`)});await p.close();
  }

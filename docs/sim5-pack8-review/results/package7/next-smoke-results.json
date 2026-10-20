@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "tr real Next DEMO renders two-finding client entry",
+    "tr SSR forged flags cannot render full scene",
+    "tr RSC forged flags cannot render full scene",
+    "en real Next DEMO renders two-finding client entry",
+    "en SSR forged flags cannot render full scene",
+    "en RSC forged flags cannot render full scene",
+    "real unauthenticated API fails closed",
+    "real gate hydration has no uncaught browser exceptions"
+  ],
+  "liveSupabase": "NOT_RUN"
+}

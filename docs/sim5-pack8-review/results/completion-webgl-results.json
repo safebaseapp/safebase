@@ -1,0 +1,31 @@
+{
+  "checks": [
+    "tr completed two findings at 100/100",
+    "tr terminal rendering throttles to <=5 calls/1.1s",
+    "tr replay resumes active rendering",
+    "tr context loss preserves exact report",
+    "tr localized report retention message",
+    "tr context loss stops renderer calls",
+    "en completed two findings at 100/100",
+    "en terminal rendering throttles to <=5 calls/1.1s",
+    "en replay resumes active rendering",
+    "en context loss preserves exact report",
+    "en localized report retention message",
+    "en context loss stops renderer calls",
+    "DEMO never sends writes"
+  ],
+  "measurements": [
+    {
+      "lang": "tr",
+      "activeCallsPer1100ms": 58,
+      "endedCallsPer1100ms": 4
+    },
+    {
+      "lang": "en",
+      "activeCallsPer1100ms": 57,
+      "endedCallsPer1100ms": 4
+    }
+  ],
+  "writes": [],
+  "renderer": "Chromium software WebGL; invocation rate, not physical GPU utilization"
+}

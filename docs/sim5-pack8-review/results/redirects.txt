@@ -1,0 +1,21 @@
+CHECK page.tsx tr guest /tr/login?next=%2Ftr%2Flabs%2Fsim5
+CHECK page.tsx tr unavailable /tr/login?next=%2Ftr%2Flabs%2Fsim5
+CHECK page.tsx tr free /tr/upgrade?next=%2Ftr%2Flabs%2Fsim5
+CHECK page.tsx tr inactive /tr/account-suspended
+CHECK page.tsx tr premium /tr/labs/sim5
+CHECK page.tsx en guest /en/login?next=%2Fen%2Flabs%2Fsim5
+CHECK page.tsx en unavailable /en/login?next=%2Fen%2Flabs%2Fsim5
+CHECK page.tsx en free /en/upgrade?next=%2Fen%2Flabs%2Fsim5
+CHECK page.tsx en inactive /en/account-suspended
+CHECK page.tsx en premium /en/labs/sim5
+CHECK demo/page.tsx tr guest /tr/login?next=%2Ftr%2Flabs%2Fsim5
+CHECK demo/page.tsx tr unavailable /tr/login?next=%2Ftr%2Flabs%2Fsim5
+CHECK demo/page.tsx tr free /tr/upgrade?next=%2Ftr%2Flabs%2Fsim5
+CHECK demo/page.tsx tr inactive /tr/account-suspended
+CHECK demo/page.tsx tr premium /tr/labs/sim5
+CHECK demo/page.tsx en guest /en/login?next=%2Fen%2Flabs%2Fsim5
+CHECK demo/page.tsx en unavailable /en/login?next=%2Fen%2Flabs%2Fsim5
+CHECK demo/page.tsx en free /en/upgrade?next=%2Fen%2Flabs%2Fsim5
+CHECK demo/page.tsx en inactive /en/account-suspended
+CHECK demo/page.tsx en premium /en/labs/sim5
+PASS 20 redirect fixtures; LIVE login NOT RUN

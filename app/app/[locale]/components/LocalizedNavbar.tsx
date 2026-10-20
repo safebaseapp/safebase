@@ -57,6 +57,20 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
   };
 
   useEffect(() => {
+    if (!isDesktopNavOpen && !isMainNavOpen) return;
+    const trigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const dismiss = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      setIsDesktopNavOpen(false);
+      setIsMainNavOpen(false);
+      trigger?.focus();
+    };
+    document.addEventListener("keydown", dismiss);
+    return () => document.removeEventListener("keydown", dismiss);
+  }, [isDesktopNavOpen, isMainNavOpen]);
+
+  useEffect(() => {
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) return;
     const supabase = createClient();
 
@@ -234,6 +248,7 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
               closeAccount();
             }}
             aria-expanded={isDesktopNavOpen}
+            aria-controls="sernem-desktop-navigation"
             className={`inline-flex h-11 items-center gap-2.5 rounded-xl border px-4 text-[13px] font-black transition ${
               isDesktopNavOpen
                 ? "border-sky-400/30 bg-sky-500/[0.10] text-white shadow-[0_10px_28px_rgba(14,165,233,.12)]"
@@ -322,7 +337,7 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
             aria-expanded={isMainNavOpen}
             aria-controls="sernem-main-navigation"
             aria-label={isTurkish ? "Ana menü" : "Main menu"}
-            className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border transition duration-200 lg:hidden ${isMainNavOpen ? "border-cyan-400/35 bg-cyan-500/[0.12] text-white shadow-[0_8px_24px_rgba(8,145,178,.14)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-cyan-400/20 hover:bg-cyan-500/[0.05] hover:text-white"}`}
+            className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border transition duration-200 2xl:hidden ${isMainNavOpen ? "border-cyan-400/35 bg-cyan-500/[0.12] text-white shadow-[0_8px_24px_rgba(8,145,178,.14)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-cyan-400/20 hover:bg-cyan-500/[0.05] hover:text-white"}`}
           >
             <PanelsTopLeft size={18} strokeWidth={2} />
           </button>
@@ -346,11 +361,11 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
       </div>
 
       {isDesktopNavOpen && (
-        <DesktopMegaMenu
+        <div id="sernem-desktop-navigation"><DesktopMegaMenu
           locale={locale}
           authenticated={isAuthenticated}
           onClose={() => setIsDesktopNavOpen(false)}
-        />
+        /></div>
       )}
 
       {isMainNavOpen && (
