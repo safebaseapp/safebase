@@ -47,6 +47,10 @@ Global XP is improvement-only for the **same static six-finding mission**:
 `max(0, verified score*2 - previous best XP)`, only for all six completed findings.
 Lifetime maximum 200; cancelled/partial runs award zero. Replays remain unlimited.
 Existing Labs totals increment atomically; other attempt records are unchanged.
+The repository already routes existing Labs writes through createLabsWriter.
+The migration revokes legacy direct browser writes to lab_user_progress and
+lab_attempts, preventing users from bypassing replay by forging totals/attempts.
+Authenticated owner reads and service-role writes remain available.
 Streak/date and level follow existing Labs semantics. SIM history is separate
 from the existing `lab_attempts` table so unrelated triggers cannot double-award.
 

@@ -22,6 +22,11 @@ revoke all on public.sim5_runs from anon,authenticated;
 grant select on public.sim5_runs to authenticated;
 grant all on public.sim5_runs to service_role;
 
+-- Existing Labs writes in this repository already use createLabsWriter.
+-- Close the legacy direct-client path that could otherwise forge total XP or
+-- insert an attempt around server verification. Preserve reads and all history.
+revoke insert,update,delete on public.lab_user_progress,public.lab_attempts from anon,authenticated;
+
 -- One lifetime best award for this static mission, even if display/schema evolves.
 create table public.sim5_xp_best (
  user_id uuid primary key references auth.users(id) on delete cascade,

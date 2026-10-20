@@ -10,6 +10,7 @@ function db(text,shouldFail=false){return sql('\\connect sim5_test\n'+text,shoul
 sql(`do $$ begin if not exists(select 1 from pg_roles where rolname='anon') then create role anon; end if; if not exists(select 1 from pg_roles where rolname='authenticated') then create role authenticated; end if; if not exists(select 1 from pg_roles where rolname='service_role') then create role service_role bypassrls; end if; end $$;`);
 db(`create schema auth;create table auth.users(id uuid primary key);create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;grant usage on schema auth to authenticated;grant execute on function auth.uid() to authenticated;`);
 db(fs.readFileSync(path.join(repoRoot,'app/supabase/migrations/20260930_sernem_labs_v1.sql'),'utf8'));
+db('grant select,insert,update,delete on lab_attempts,lab_user_progress to anon,authenticated,service_role;');
 check('migration executes on PostgreSQL 17 with existing Labs schema',()=>db(fs.readFileSync(path.join(repoRoot,'app/supabase/migrations/20261020_sim5_runs.sql'),'utf8')));
 const a='00000000-0000-4000-8000-000000000001',b='00000000-0000-4000-8000-000000000002',run='10000000-0000-4000-8000-000000000001',run2='10000000-0000-4000-8000-000000000002';
 db(`insert into auth.users values('${a}'),('${b}');insert into lab_user_progress(user_id,total_xp,scenario_count,current_streak,longest_streak,last_activity_date) values('${a}',700,3,2,2,current_date-1);insert into sim5_runs(id,user_id,locale) values('${run}','${a}','en'),('${run2}','${b}','tr');`);
@@ -20,6 +21,8 @@ check('RLS reads only owned runs',()=>assert.equal(db(auth(a)+"select count(*) f
 check('anonymous cannot read runs',()=>assert.match(db('set role anon;select * from public.sim5_runs;',true),/permission denied/));
 check('authenticated cannot insert forged results',()=>assert.match(db(auth(a)+`insert into public.sim5_runs(user_id,locale,score)values('${a}','en',100);`,true),/permission denied/));
 check('authenticated cannot update or delete owned results',()=>{assert.match(db(auth(a)+`update public.sim5_runs set score=100;`,true),/permission denied/);assert.match(db(auth(a)+`delete from public.sim5_runs;`,true),/permission denied/)});
+check('legacy direct-client XP and attempt forgery is denied',()=>{assert.match(db(auth(a)+`update lab_user_progress set total_xp=999999 where user_id='${a}';`,true),/permission denied/);assert.match(db(auth(a)+`insert into lab_attempts(user_id,scenario_id,scenario_type,category,difficulty,locale,score)values('${a}','forged','sim5','hse','expert','en',100);`,true),/permission denied/)});
+check('existing server Labs writer retains insert access',()=>{db(`set role service_role;insert into lab_attempts(user_id,scenario_id,scenario_type,category,difficulty,locale,score)values('${a}','legacy-fixture','spot','hse','basic','en',70);`)});
 check('authenticated cannot invoke award RPC',()=>assert.match(db(auth(a)+save(run,a).replace('set role service_role;',''),true),/permission denied/));
 check('RPC binds run ownership',()=>assert.match(db(save(run,b),true),/RUN_NOT_FOUND/));
 check('first 80 score credits only 160 XP and preserves old progress',()=>{db(save(run,a,80));assert.equal(db(`select total_xp||','||scenario_count||','||current_streak from lab_user_progress where user_id='${a}';`),'860,4,3')});
@@ -35,5 +38,5 @@ check('cross-account history is invisible after award',()=>assert.equal(db(auth(
 const partial='30000000-0000-4000-8000-000000000001';db(`insert into sim5_runs(id,user_id,locale)values('${partial}','${a}','en');`);
 check('partial run receives no XP',()=>{db(save(partial,a).replace("'completed',100","'partial',100"));assert.equal(db(`select xp_awarded from sim5_runs where id='${partial}';`),'0')});
 check('full run cannot be rewritten after finalization',()=>assert.match(db(save(run,a,100).replace('"atMs":1','"atMs":2'),true),/RUN_CONFLICT/));
-check('additive migration preserves other lab attempts',()=>assert.equal(db('select count(*) from lab_attempts;'),'0'));
+check('additive migration preserves other lab attempts',()=>assert.equal(db('select count(*) from lab_attempts;'),'1'));
 fs.mkdirSync(path.join(toolRoot,'artifacts/pack7'),{recursive:true});fs.writeFileSync(path.join(toolRoot,'artifacts/pack7/database-results.json'),JSON.stringify({timestamp:new Date().toISOString(),database:'isolated PostgreSQL 17; Supabase role fixtures',liveSupabase:'NOT_RUN',checks},null,2));console.log('PASS',checks.length,'local PostgreSQL checks; LIVE Supabase NOT RUN');
