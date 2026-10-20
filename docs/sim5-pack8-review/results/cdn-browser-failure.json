@@ -1,0 +1,44 @@
+{
+  "status": [
+    "Unable to open the 3D scene. Retry in a WebGL-capable browser. TypeError: Failed to fetch dynamically imported module: https://esm.sh/three@0.180.0",
+    "The 3D view stopped; a new mission cannot start. Try reloading.Reload",
+    "Start the inspection to walkThe arrows and WASD unlock when the inspection starts. Explore welding and lifting hazards.Loading site…",
+    ""
+  ],
+  "errors": [],
+  "failedRequests": [
+    {
+      "host": "www.googletagmanager.com",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "host": "127.0.0.1",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "host": "127.0.0.1",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "host": "127.0.0.1",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "host": "127.0.0.1",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "host": "127.0.0.1",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "host": "127.0.0.1",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "host": "esm.sh",
+      "error": "net::ERR_CERT_AUTHORITY_INVALID"
+    }
+  ],
+  "error": "TimeoutError: locator.waitFor: Timeout 45000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Industrial site ready · 2/2 models', { exact: true }) to be visible\u001b[22m\n"
+}

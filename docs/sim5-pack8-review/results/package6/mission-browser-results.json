@@ -1,0 +1,104 @@
+{
+  "timestamp": "2026-10-20T09:58:19.781Z",
+  "checks": [
+    "briefing forbids inspection and has no awarded HUD",
+    "explicit start creates empty score and mission XP",
+    "active clock measures elapsed time",
+    "pause freezes clock and clears held keyboard motion",
+    "overview/walk retains the same mission and score",
+    "blur pauses active time until explicit resume",
+    "hidden/visible transition does not silently resume or count hidden time",
+    "early finish reports six missed risks, no controls and zero XP",
+    "finished clock remains frozen",
+    "restart requires explicit confirmation and Keep preserves report",
+    "confirmed restart returns to briefing and clears report",
+    "destructive mission prompt pauses and focuses the safe choice",
+    "Escape cancels the prompt without erasing the attempt",
+    "cancellation produces an incomplete frozen report",
+    "nearby evidence behind the camera cannot be discovered",
+    "visible evidence discovers a weighted finding",
+    "before-control capture contains an actually active rendered arc",
+    "unsafe first choice leaves hot work active and reduces its available score",
+    "stop-work decision suppresses arc, halo, light and all sparks across six frames",
+    "corrected control earns 20/25 and only 40 local XP",
+    "after-control render captures the extinguished arc",
+    "reopening a controlled finding shows status rather than a stale active-hazard question",
+    "review cannot farm score or XP",
+    "camera reset preserves mission decisions and scene stop state",
+    "lifting: scene status states a request, not unperformed repair/clearance",
+    "leak: scene status states a request, not unperformed repair/clearance",
+    "access: scene status states a request, not unperformed repair/clearance",
+    "leak release and obstructing pallets remain after requests",
+    "control decisions preserve approved welding/lifting geometry",
+    "measured partial report separates found, missed, first error and pending controls",
+    "replay resets consequence signs without reloading assets",
+    "attempts do not create persistent profile or Labs XP writes",
+    "small-portrait: native D-pad movement is available after mission start",
+    "small-portrait: visible mission HUD does not overlap the D-pad or overflow",
+    "small-portrait: touch pause freezes movement and time",
+    "small-portrait: early report is translated and contains missed risks",
+    "small-portrait: restart confirmation stays in the viewport",
+    "landscape: native D-pad movement is available after mission start",
+    "landscape: visible mission HUD does not overlap the D-pad or overflow",
+    "landscape: touch pause freezes movement and time",
+    "landscape: early report is translated and contains missed risks",
+    "landscape: restart confirmation stays in the viewport",
+    "no browser errors or API writes"
+  ],
+  "errors": [],
+  "writes": [],
+  "glbRequests": [
+    "http://127.0.0.1:39829/sim5/SERNEM_SIM4_Factory_optimized.glb",
+    "http://127.0.0.1:39829/sim5/large_industrial_storage_tanks%20(1).glb",
+    "http://127.0.0.1:39829/sim5/SERNEM_Welder_06_under25MB.glb"
+  ],
+  "timings": [],
+  "visualProof": {
+    "before": {
+      "visible": true,
+      "light": 2.515601226171863
+    },
+    "stoppedFrames": [
+      {
+        "arc": false,
+        "halo": false,
+        "light": 0,
+        "sparks": 0
+      },
+      {
+        "arc": false,
+        "halo": false,
+        "light": 0,
+        "sparks": 0
+      },
+      {
+        "arc": false,
+        "halo": false,
+        "light": 0,
+        "sparks": 0
+      },
+      {
+        "arc": false,
+        "halo": false,
+        "light": 0,
+        "sparks": 0
+      },
+      {
+        "arc": false,
+        "halo": false,
+        "light": 0,
+        "sparks": 0
+      },
+      {
+        "arc": false,
+        "halo": false,
+        "light": 0,
+        "sparks": 0
+      }
+    ],
+    "after": {
+      "visible": false,
+      "light": 0
+    }
+  }
+}

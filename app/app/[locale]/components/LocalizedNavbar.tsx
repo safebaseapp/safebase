@@ -337,7 +337,7 @@ export default function LocalizedNavbar({ locale, initialIsAuthenticated = false
             aria-expanded={isMainNavOpen}
             aria-controls="sernem-main-navigation"
             aria-label={isTurkish ? "Ana menü" : "Main menu"}
-            className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border transition duration-200 lg:hidden ${isMainNavOpen ? "border-cyan-400/35 bg-cyan-500/[0.12] text-white shadow-[0_8px_24px_rgba(8,145,178,.14)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-cyan-400/20 hover:bg-cyan-500/[0.05] hover:text-white"}`}
+            className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border transition duration-200 2xl:hidden ${isMainNavOpen ? "border-cyan-400/35 bg-cyan-500/[0.12] text-white shadow-[0_8px_24px_rgba(8,145,178,.14)]" : "border-white/[0.12] bg-white/[0.025] text-slate-300 hover:border-cyan-400/20 hover:bg-cyan-500/[0.05] hover:text-white"}`}
           >
             <PanelsTopLeft size={18} strokeWidth={2} />
           </button>

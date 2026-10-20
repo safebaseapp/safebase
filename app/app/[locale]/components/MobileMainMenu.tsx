@@ -336,7 +336,7 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
   const aiActive = relativePath.startsWith("/ai-assistant");
 
   return (
-    <div className="fixed inset-0 z-[9998] overflow-y-auto bg-[#020817] text-white lg:hidden">
+    <div className="fixed inset-0 z-[9998] overflow-y-auto bg-[#020817] text-white 2xl:hidden">
       <div className="pointer-events-none fixed inset-x-0 top-0 h-[355px] overflow-hidden">
         <img
           src="/images/sernem-hero-refinery.png"

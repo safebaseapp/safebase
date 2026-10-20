@@ -1,0 +1,21 @@
+CHECK migration executes on PostgreSQL 17 with existing Labs schema
+CHECK RLS reads only owned runs
+CHECK anonymous cannot read runs
+CHECK authenticated cannot insert forged results
+CHECK authenticated cannot update or delete owned results
+CHECK legacy direct-client XP and attempt forgery is denied
+CHECK existing server Labs writer retains insert access
+CHECK authenticated cannot invoke award RPC
+CHECK RPC binds run ownership
+CHECK RPC rejects null or incomplete reports before awarding
+CHECK first 80 score credits only 160 XP and preserves old progress
+CHECK same run retry is idempotent
+CHECK concurrent runs award only best-score improvement once
+CHECK concurrent duplicate retries cannot double-credit XP
+CHECK cross-account history is invisible after award
+CHECK partial run receives no XP
+CHECK full run cannot be rewritten after finalization
+CHECK XP best rows are owner-read-only
+CHECK existing Labs level curve is preserved
+CHECK additive migration preserves other lab attempts
+PASS 20 local PostgreSQL checks; LIVE Supabase NOT RUN

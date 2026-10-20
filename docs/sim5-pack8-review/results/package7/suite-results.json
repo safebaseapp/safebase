@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-10-20T10:07:32.781Z",
+  "results": [
+    {
+      "script": "demo-state-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "access-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "access-server-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "page-gate-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "persistence-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "api-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "seo-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "connector-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "analytics-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "demo-browser-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "persistence-browser-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "signaller-test.mjs",
+      "status": "passed"
+    },
+    {
+      "script": "webgl-failure-test.mjs",
+      "status": "passed"
+    }
+  ],
+  "liveSupabase": "NOT_RUN",
+  "liveGA4": "NOT_RUN",
+  "database": "Run test:database separately in a disposable PostgreSQL container",
+  "nextServer": "Run next-smoke-test.mjs separately against a real local Next server"
+}

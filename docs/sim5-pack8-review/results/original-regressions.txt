@@ -1,0 +1,429 @@
+CHECK briefing cannot discover, answer, accrue time or XP
+CHECK start is explicit and repeated start does not reset an attempt
+CHECK unseen findings cannot be answered
+CHECK unknown and prototype IDs are ignored
+CHECK discovery alone earns only 20 percent of the finding weight
+CHECK repeated discovery cannot farm points
+CHECK invalid answer indices cannot count as attempts
+CHECK safe first decision earns the full weight
+CHECK completed findings reject both repeated right and wrong decisions
+CHECK wrong first decision does not complete and deducts discovery credit
+CHECK further wrong attempts are recorded without stacking the first-decision penalty
+CHECK correcting a wrong first decision recovers 80 percent, not a perfect score
+CHECK six first-time safe decisions normalize to exactly 100 and 200 local XP
+CHECK six corrected first errors finish at 80 with six first-decision learning points
+CHECK inspection order does not change normalized score
+CHECK scoring is independent of completion speed and device
+CHECK relative weights sum to 100 and prioritize high-consequence operations
+CHECK real active-time deltas accumulate without frame-rate clamping
+CHECK invalid time deltas are rejected
+CHECK paused clock and inspection are frozen
+CHECK resume continues the same findings and time
+CHECK early finish lists missed risks and never awards free answers
+CHECK finished attempts cannot resume, answer or extend the clock
+CHECK cancellation is a frozen incomplete report, including from paused state
+CHECK restart returns to briefing and resets score, XP, time and attempt history
+CHECK state transitions do not mutate prior attempts
+CHECK versioned summary is serializable without a persistent profile identity
+PASS 27
+CHECK briefing forbids inspection and has no awarded HUD
+CHECK explicit start creates empty score and mission XP
+CHECK active clock measures elapsed time
+CHECK pause freezes clock and clears held keyboard motion
+CHECK overview/walk retains the same mission and score
+CHECK blur pauses active time until explicit resume
+CHECK hidden/visible transition does not silently resume or count hidden time
+CHECK early finish reports six missed risks, no controls and zero XP
+CHECK finished clock remains frozen
+CHECK restart requires explicit confirmation and Keep preserves report
+CHECK confirmed restart returns to briefing and clears report
+CHECK destructive mission prompt pauses and focuses the safe choice
+CHECK Escape cancels the prompt without erasing the attempt
+CHECK cancellation produces an incomplete frozen report
+CHECK nearby evidence behind the camera cannot be discovered
+CHECK visible evidence discovers a weighted finding
+CHECK before-control capture contains an actually active rendered arc
+CHECK unsafe first choice leaves hot work active and reduces its available score
+CHECK stop-work decision suppresses arc, halo, light and all sparks across six frames
+CHECK corrected control earns 20/25 and only 40 local XP
+CHECK after-control render captures the extinguished arc
+CHECK reopening a controlled finding shows status rather than a stale active-hazard question
+CHECK review cannot farm score or XP
+CHECK camera reset preserves mission decisions and scene stop state
+CHECK lifting: scene status states a request, not unperformed repair/clearance
+CHECK leak: scene status states a request, not unperformed repair/clearance
+CHECK access: scene status states a request, not unperformed repair/clearance
+CHECK leak release and obstructing pallets remain after requests
+CHECK control decisions preserve approved welding/lifting geometry
+CHECK measured partial report separates found, missed, first error and pending controls
+CHECK replay resets consequence signs without reloading assets
+CHECK attempts do not create persistent profile or Labs XP writes
+CHECK small-portrait: native D-pad movement is available after mission start
+CHECK small-portrait: visible mission HUD does not overlap the D-pad or overflow
+CHECK small-portrait: touch pause freezes movement and time
+CHECK small-portrait: early report is translated and contains missed risks
+CHECK small-portrait: restart confirmation stays in the viewport
+CHECK landscape: native D-pad movement is available after mission start
+CHECK landscape: visible mission HUD does not overlap the D-pad or overflow
+CHECK landscape: touch pause freezes movement and time
+CHECK landscape: early report is translated and contains missed risks
+CHECK landscape: restart confirmation stays in the viewport
+CHECK no browser errors or API writes
+PASS 43
+CHECK leak: complete TR/EN scene evidence and control data
+CHECK hotwork: complete TR/EN scene evidence and control data
+CHECK lifting: complete TR/EN scene evidence and control data
+CHECK access: complete TR/EN scene evidence and control data
+CHECK droppedTool: complete TR/EN scene evidence and control data
+CHECK droppedTool: same XZ on ground cannot inspect upper finding
+CHECK materials: complete TR/EN scene evidence and control data
+CHECK materials: same XZ on ground cannot inspect upper finding
+desktop main-road [ 1.1000953210868735e-14, 1.864929074721922, 0.1704000000000176 ]
+desktop factory-gate [ -13.76518042373134, 1.5600100289282233, 0.0028579392399204692 ]
+desktop welding-approach [ -17.983399428672875, 1.754919909842164, -1.9921485435439987 ]
+CHECK desktop: hotwork rejects wrong control and records correct decision
+desktop factory-exit [ -17.00884175076644, 1.7550000001490114, 19.80227321461311 ]
+desktop lifting-outside [ -17.00004354124067, 1.879983943207717, 46.867771784591675 ]
+CHECK desktop: lifting rejects wrong control and records correct decision
+CHECK desktop: lifting exclusion volume prevents entry
+desktop lifting-return [ -17.119218829793827, 1.878929932395208, 47.007372503078145 ]
+desktop west-gate [ -14.086127301191176, 1.8799999986635427, 47.000203882644804 ]
+desktop road-crossing [ -0.20306607645635716, 1.770000000962563, 46.96739168577094 ]
+desktop tank-gate [ -0.0009063969385019032, 1.7700007910987197, -5.763220793736602 ]
+desktop access-side-approach [ 16.730945983590832, 1.8799999990848084, -8.948776581378155 ]
+CHECK desktop: access rejects wrong control and records correct decision
+desktop access-bypass [ 24.89768929670971, 1.755000000924412, -8.999365786027482 ]
+desktop leak-safe-approach [ 24.02223941428568, 1.7550000001490118, -15.826565293392418 ]
+CHECK desktop: leak rejects wrong control and records correct decision
+desktop tank-south [ 24.993114463246435, 1.7550000001490118, 13.789925575704533 ]
+desktop east-aisle [ 64.77426604377823, 1.7550000001490118, 13.998812666593242 ]
+desktop stair-approach [ 64.99855997022213, 1.7550000001490118, -14.815114370077024 ]
+desktop stair-bottom [ 63.37435342085008, 1.7550000001490118, -14.99190669167733 ]
+desktop ascent-17 [ 63.30527521430727, 2.1536193494743365, -16.857528253350843 ]
+desktop ascent-19 [ 63.30059712689388, 4.28713715768509, -18.75752249426268 ]
+desktop ascent-21 [ 63.29567233192321, 6.422536947250252, -20.75771643145834 ]
+desktop ascent-22 [ 63.29903892159714, 6.855331759293477, -21.72411056744736 ]
+desktop ascent-24 [ 63.299883572551394, 8.743640336264638, -23.723910389070674 ]
+desktop ascent-26 [ 63.30074241506087, 10.877488969968612, -25.757310207696964 ]
+desktop ascent-26.6 [ 63.300995751215666, 11.547672068889652, -26.35711015419644 ]
+CHECK desktop: real input raises eye Y by over 9 metres
+desktop top-landing [ 63.30076933471153, 11.556149799372749, -26.423709769327214 ]
+desktop connector [ 62.78747112462552, 11.55030686278963, -26.56876323368615 ]
+desktop upper-access [ 61.78965548255552, 12.219746722337163, -26.63172341507445 ]
+desktop tank-platform [ 60.28953370571573, 12.905498306804782, -26.64704316217978 ]
+desktop valve-bypass [ 60.0763154278799, 12.909638195084225, -25.875980281477634 ]
+desktop dropped-tool-approach [ 58.27744732299967, 12.913452762174407, -25.376965470831088 ]
+CHECK desktop: droppedTool rejects wrong control and records correct decision
+CHECK desktop: droppedTool has an actual closed-container scene result
+desktop inner-platform [ 56.086308651622936, 12.912516635417223, -25.574225002404784 ]
+desktop bridge-entry [ 55.871967373912774, 12.90985208810574, -26.379590370836773 ]
+desktop upper-walkway [ 55.26699029894654, 12.909946421526856, -26.567202467368993 ]
+desktop materials-approach [ 52.267141459141044, 12.909999999105928, -26.597317883984328 ]
+CHECK desktop: materials rejects wrong control and records correct decision
+CHECK desktop: materials has an actual closed-container scene result
+CHECK desktop: upper walking surface keeps eye above 12.8m
+CHECK desktop: bridge rail blocks travel and retains upper level
+desktop rail-return [ 52.081841010845736, 12.90999999910593, -26.770163103385155 ]
+desktop return-bridge [ 54.713011241508646, 12.90999999910593, -26.66181746538437 ]
+desktop return-platform [ 55.54636199437517, 12.909040951972006, -26.652757515230462 ]
+desktop return-inner [ 55.73378907917225, 12.910706169459932, -25.87481720396969 ]
+desktop return-valve-bypass [ 59.72511649569352, 12.911895643888306, -25.617707083350705 ]
+desktop return-access [ 59.930970724038175, 12.908789786953196, -26.390768553527963 ]
+desktop down-connector [ 61.246536181559264, 12.790301534594679, -26.60812330267659 ]
+desktop down-seam [ 62.21259720116431, 11.897780373588045, -26.64039815975887 ]
+desktop down-landing [ 63.012566014603394, 11.556344080940296, -26.647461977759725 ]
+desktop descent-26 [ 63.1884194364488, 11.55615617620138, -26.25134187725324 ]
+desktop descent-24 [ 63.28576809412206, 9.260408418370316, -24.287152782779597 ]
+desktop descent-22 [ 63.2984194072259, 7.101470182834076, -22.25399214370629 ]
+desktop descent-20 [ 63.299798318609426, 5.962134077966914, -20.287392627128682 ]
+desktop descent-18 [ 63.301200508675926, 3.6023225714182194, -18.28759311871219 ]
+desktop descent-16 [ 63.30274342258797, 1.9540123249018737, -16.08709365963098 ]
+desktop descent-15 [ 63.300681823797184, 1.772676153608969, -15.27019626104876 ]
+CHECK desktop: returns to ground by the same stairs
+CHECK desktop: release leaves no horizontal stuck movement
+CHECK desktop: all six scene decisions complete before explicit finish
+desktop return-east [ 64.91421257997231, 1.7550000002586603, -15.013640343407577 ]
+desktop return-south [ 64.9994135626401, 1.7550000001490118, 13.801733696201111 ]
+desktop wall-approach-south [ 25.218202261490173, 1.7550000001490118, 13.998919657372088 ]
+desktop tank-wall-approach [ 25.003650196354084, 1.7550000001490118, 0.23439170137786947 ]
+CHECK desktop: imported tank wall blocks the player
+CHECK desktop: explicit finish produces measured score and wrong-decision report
+CHECK desktop: real WebGL and no horizontal page overflow
+CHECK desktop: replay restores both original upper evidence positions and removes control lids
+mobile-portrait ascent-17 [ 63.3, 2.153702241612373, -16.866199999999996 ]
+mobile-portrait ascent-19 [ 63.3, 4.287344499857303, -18.766199999999973 ]
+mobile-portrait ascent-21 [ 63.3, 6.4286176631143075, -20.79959999999994 ]
+mobile-portrait ascent-22 [ 63.3, 6.8553454688862105, -21.76619999999993 ]
+mobile-portrait ascent-24 [ 63.3, 8.74860916184531, -23.76619999999991 ]
+mobile-portrait ascent-26 [ 63.3, 10.877751183733162, -25.765999999999874 ]
+mobile-portrait ascent-26.6 [ 63.3, 11.547687228332679, -26.365999999999865 ]
+CHECK mobile-portrait: real input raises eye Y by over 9 metres
+mobile-portrait top-landing [ 63.3, 11.55614461019842, -26.432599999999866 ]
+mobile-portrait connector [ 62.720998312555196, 11.550466568813166, -26.58994371908667 ]
+mobile-portrait upper-access [ 61.755565435125845, 12.221124073365687, -26.63742970837304 ]
+mobile-portrait tank-platform [ 60.25560388585163, 12.906154683470442, -26.648169852643772 ]
+mobile-portrait valve-bypass [ 60.05029350236616, 12.910058455165341, -25.806241585846006 ]
+mobile-portrait dropped-tool-approach [ 58.23811634794055, 12.913403665065038, -25.35879380009035 ]
+CHECK mobile-portrait: droppedTool rejects wrong control and records correct decision
+CHECK mobile-portrait: droppedTool has an actual closed-container scene result
+mobile-portrait inner-platform [ 56.015566371037295, 12.912398537880597, -25.578673676767707 ]
+mobile-portrait bridge-entry [ 55.85116920462288, 12.909803911073455, -26.39569823678713 ]
+mobile-portrait upper-walkway [ 55.24446819597476, 12.909943751716623, -26.57696082560608 ]
+mobile-portrait materials-approach [ 52.24454383096267, 12.909999999105928, -26.59826350635816 ]
+CHECK mobile-portrait: materials rejects wrong control and records correct decision
+CHECK mobile-portrait: materials has an actual closed-container scene result
+CHECK mobile-portrait: upper walking surface keeps eye above 12.8m
+CHECK mobile-portrait: bridge rail blocks travel and retains upper level
+mobile-portrait rail-return [ 52.07257160841846, 12.90999999910593, -26.769820479474486 ]
+mobile-portrait return-bridge [ 54.77011297519389, 12.90999999910593, -26.659409363482364 ]
+mobile-portrait return-platform [ 55.56987959658087, 12.909056916957537, -26.652102427376985 ]
+mobile-portrait return-inner [ 55.747911909981816, 12.910873138884021, -25.838144974321203 ]
+mobile-portrait return-valve-bypass [ 59.74145346390557, 12.911878233210663, -25.614480276425077 ]
+mobile-portrait return-access [ 59.94338608801095, 12.90871866326424, -26.42325229332594 ]
+mobile-portrait down-connector [ 61.262662729247204, 12.79030154866295, -26.615427692085536 ]
+mobile-portrait down-seam [ 62.26247253300227, 11.895467918045641, -26.64336326645092 ]
+mobile-portrait down-landing [ 63.095655487396066, 11.556250786119902, -26.64869285439159 ]
+mobile-portrait descent-26 [ 63.22581256221995, 11.556156144914233, -26.23550842114985 ]
+mobile-portrait descent-24 [ 63.292147862394444, 9.256932471611496, -24.23660881687984 ]
+mobile-portrait descent-22 [ 63.29916926686563, 7.099281536624029, -22.236621141947992 ]
+mobile-portrait descent-20 [ 63.29991204700467, 5.959029304852459, -20.23682127989238 ]
+mobile-portrait descent-18 [ 63.30065482714369, 3.601655201156778, -18.237021417836747 ]
+mobile-portrait descent-16 [ 63.30150272118377, 1.952952919919441, -15.95422157530223 ]
+mobile-portrait descent-15 [ 63.30180614007342, 1.7680994888192714, -15.137321631651272 ]
+CHECK mobile-portrait: returns to ground by the same stairs
+CHECK mobile-portrait: release leaves no horizontal stuck movement
+CHECK mobile-portrait: explicit finish produces measured score and wrong-decision report
+CHECK mobile-portrait: real WebGL and no horizontal page overflow
+CHECK mobile-portrait: replay restores both original upper evidence positions and removes control lids
+mobile-landscape ascent-17 [ 63.3, 2.1537902943807237, -16.866200000000003 ]
+mobile-landscape ascent-19 [ 63.3, 4.287293856853242, -18.766200000000023 ]
+mobile-landscape ascent-21 [ 63.3, 6.4286319762035, -20.799399999999988 ]
+mobile-landscape ascent-22 [ 63.3, 6.855345539854142, -21.76619999999997 ]
+mobile-landscape ascent-24 [ 63.3, 8.74860910513252, -23.766199999999934 ]
+mobile-landscape ascent-26 [ 63.3, 10.879635024166433, -25.799599999999895 ]
+mobile-landscape ascent-26.6 [ 63.3, 11.549863056334152, -26.366199999999886 ]
+CHECK mobile-landscape: real input raises eye Y by over 9 metres
+mobile-landscape top-landing [ 63.3, 11.55615267260964, -26.432599999999884 ]
+mobile-landscape connector [ 62.75303640139109, 11.550517720995925, -26.58123734993853 ]
+mobile-landscape upper-access [ 61.7545387404394, 12.221283563815033, -26.636031702512415 ]
+mobile-landscape tank-platform [ 60.221387326503546, 12.906650782875863, -26.648237518606056 ]
+mobile-landscape valve-bypass [ 60.049213882297565, 12.909916140852204, -25.833020648619758 ]
+mobile-landscape dropped-tool-approach [ 58.24272472696857, 12.913406246929414, -25.363135033093002 ]
+CHECK mobile-landscape: droppedTool rejects wrong control and records correct decision
+CHECK mobile-landscape: droppedTool has an actual closed-container scene result
+mobile-landscape inner-platform [ 56.05319439988902, 12.912465068916331, -25.57544844953015 ]
+mobile-landscape bridge-entry [ 55.8544420912951, 12.909760599639398, -26.418948941425995 ]
+mobile-landscape upper-walkway [ 55.24319575999903, 12.909942242166123, -26.584237061014374 ]
+mobile-landscape materials-approach [ 52.243231192691475, 12.909999999105928, -26.598817695421207 ]
+CHECK mobile-landscape: materials rejects wrong control and records correct decision
+CHECK mobile-landscape: materials has an actual closed-container scene result
+CHECK mobile-landscape: upper walking surface keeps eye above 12.8m
+CHECK mobile-landscape: bridge rail blocks travel and retains upper level
+mobile-landscape rail-return [ 52.072184596909025, 12.90999999910593, -26.770114808741095 ]
+mobile-landscape return-bridge [ 54.73634353777108, 12.90999999910593, -26.6608166027863 ]
+mobile-landscape return-platform [ 55.53650216502856, 12.90903359950475, -26.652679574738748 ]
+mobile-landscape return-inner [ 55.73886836674835, 12.910835928033016, -25.84422210498444 ]
+mobile-landscape return-valve-bypass [ 59.76546034271106, 12.911831167522312, -25.613442341766838 ]
+mobile-landscape return-access [ 59.9420115556488, 12.908770775869582, -26.393717722135985 ]
+mobile-landscape down-connector [ 61.29048921989841, 12.618476148030515, -26.61553645222873 ]
+mobile-landscape down-seam [ 62.29008351980743, 11.893492708743242, -26.644018649993022 ]
+mobile-landscape down-landing [ 63.08986949260499, 11.556258360898932, -26.648755496642202 ]
+mobile-landscape descent-26 [ 63.223354707266004, 11.556156145130757, -26.23663423115484 ]
+mobile-landscape descent-24 [ 63.29184403842614, 9.259858469131197, -24.23800738966661 ]
+mobile-landscape descent-22 [ 63.29925364410511, 7.097355711442914, -22.204820891151606 ]
+mobile-landscape descent-20 [ 63.29993063492939, 5.744765253247821, -20.205021005742193 ]
+mobile-landscape descent-18 [ 63.300607693459526, 3.596866576952376, -18.205021120344238 ]
+mobile-landscape descent-16 [ 63.30136941815887, 1.9529482528070274, -15.9549212492773 ]
+mobile-landscape descent-15 [ 63.30168529981612, 1.7647080690242223, -15.021821302744875 ]
+CHECK mobile-landscape: returns to ground by the same stairs
+CHECK mobile-landscape: release leaves no horizontal stuck movement
+CHECK mobile-landscape: explicit finish produces measured score and wrong-decision report
+CHECK mobile-landscape: real WebGL and no horizontal page overflow
+CHECK mobile-landscape: replay restores both original upper evidence positions and removes control lids
+CHECK no browser errors
+PASS 52
+{
+  renderTimesMs: [
+    51.700000000186265,
+    46.299999999813735,
+    9.799999999813735,
+    11,
+    9.700000000186265,
+    10.900000000372529
+  ],
+  drawCalls: 925,
+  triangles: 2621968,
+  geometries: 1024,
+  textures: 26,
+  pixelRatio: 1.8,
+  webgl: 'WebGL 2.0 (OpenGL ES 3.0 Chromium)',
+  glError: 0
+}
+PASS 5
+CHECK mesh positions and normals finite
+CHECK posed worker normals retain lighting
+CHECK table is on the measured forward side
+CHECK wire has 12mm nozzle standoff
+CHECK contact lies on both fillet faces
+CHECK coupon rests on tabletop
+CHECK arc originates at the contact
+CHECK machine to grip lead endpoints continuous
+CHECK torch and work-return leads stay above floor
+CHECK torch grip remains inside the glove
+CHECK eye to weld ray passes through shield window
+CHECK shield viewing axis follows the weld
+CHECK extinguisher rests on ground
+CHECK boots remain grounded
+CHECK contact particles move with elapsed time
+SITE en
+CHECK en: actual site component includes welding operation
+CHECK en: incorrect hot-work choice rejected and correct choice recorded
+CHECK en: both industrial assets loaded
+CHECK en: all three HSE decisions completed
+SITE tr
+CHECK tr: actual site component includes welding operation
+CHECK tr: incorrect hot-work choice rejected and correct choice recorded
+CHECK tr: both industrial assets loaded
+CHECK tr: all three HSE decisions completed
+PASS: 28 geometry, rendering, integration and TR/EN HSE checks. Screenshots: /workspace/safebase/tools/sim5-review/artifacts
+CHECK welding geometry unchanged: tip
+CHECK welding geometry unchanged: contact
+CHECK welding geometry unchanged: leadSocket
+CHECK welding geometry unchanged: machineSocket
+CHECK welding geometry unchanged: leadStart
+CHECK welding geometry unchanged: leadEnd
+CHECK welding geometry unchanged: benchCenter
+CHECK welding geometry unchanged: eye
+CHECK welding geometry unchanged: lensCenter
+CHECK authored suit and apron textures retained
+CHECK leather is rough and hardhat tangent frame is refreshed
+CHECK arc visibility increased without moving its contact
+SAMPLE suit 0 {"pixels":28811,"mean":[0.03644441359203082,19.331123529207595,82.95022734372289],"whiteFraction":0}
+CHECK suit: rendered color under light/view 1
+SAMPLE apron 0 {"pixels":16379,"mean":[55.68252030038464,24.68099395567495,11.972770010379143],"whiteFraction":0}
+CHECK apron: rendered color under light/view 1
+SAMPLE gloves-boots 0 {"pixels":10513,"mean":[29.04822600589746,10.831637020831351,4.366308380100827],"whiteFraction":0}
+CHECK gloves-boots: rendered color under light/view 1
+SAMPLE hardhat 0 {"pixels":3034,"mean":[155.61766644693475,155.5596572181938,145.0273566249176],"whiteFraction":0.06526038233355307}
+CHECK hardhat: rendered color under light/view 1
+SAMPLE suit 1 {"pixels":50796,"mean":[0.3867430506339082,9.38599496023309,66.72385620915033],"whiteFraction":0}
+CHECK suit: rendered color under light/view 2
+SAMPLE apron 1 {"pixels":24854,"mean":[26.38838818701215,9.653657358976423,3.7021002655508166],"whiteFraction":0}
+CHECK apron: rendered color under light/view 2
+SAMPLE gloves-boots 1 {"pixels":20116,"mean":[15.530970371843308,4.943129846888049,1.8268542453768144],"whiteFraction":0}
+CHECK gloves-boots: rendered color under light/view 2
+SAMPLE hardhat 1 {"pixels":5801,"mean":[112.74418203757973,119.4566454059645,115.14893983795898],"whiteFraction":0.003792449577659024}
+CHECK hardhat: rendered color under light/view 2
+SAMPLE suit 2 {"pixels":27929,"mean":[0.0359124923914211,22.57316767517634,90.44444842278635],"whiteFraction":0}
+CHECK suit: rendered color under light/view 3
+SAMPLE apron 2 {"pixels":14419,"mean":[50.63783896248006,22.400374505860324,11.103405229211457],"whiteFraction":0}
+CHECK apron: rendered color under light/view 3
+SAMPLE gloves-boots 2 {"pixels":9219,"mean":[25.14480963228116,8.933398416314134,3.4123006833712983],"whiteFraction":0}
+CHECK gloves-boots: rendered color under light/view 3
+SAMPLE hardhat 2 {"pixels":2205,"mean":[94.89569160997732,97.55283446712018,92.17777777777778],"whiteFraction":0.014512471655328799}
+CHECK hardhat: rendered color under light/view 3
+CHECK lifting meshes have finite geometry and normals
+CHECK pipe is hollow and suspended above the slab
+CHECK pipe remains horizontal and centred under the hook
+CHECK two hoist falls are plumb and meet the hook block
+CHECK hoist falls run tangentially over the head sheave
+CHECK head reeving joins both hoist falls
+CHECK basket slings join the same master link at both ends
+CHECK both basket wraps support the underside without cutting the pipe
+CHECK equal pick stations straddle the load centre
+CHECK sling legs have a plausible angle above horizontal
+CHECK four deployed outrigger mats rest on the pad
+CHECK all outriggers and pipe lie inside the exclusion zone
+CHECK en: lifting pad is off the road and beyond the factory plot
+CHECK en: unsafe assumption that barriers replace rigging checks is rejected
+CHECK en: safe lifting decision is recorded once
+CHECK en: repeat lifting inspection cannot inflate progress
+CHECK en: existing three decisions and lifting finish together at 4/6
+CHECK tr: lifting pad is off the road and beyond the factory plot
+CHECK tr: unsafe assumption that barriers replace rigging checks is rejected
+CHECK tr: safe lifting decision is recorded once
+CHECK tr: repeat lifting inspection cannot inflate progress
+CHECK tr: existing three decisions and lifting finish together at 4/6
+CHECK no browser page errors or external network requests
+PASS: 47 color, lifting, geometry-preservation and TR/EN interaction checks.
+CHECK yaw 0: d moves screen-right without turning
+CHECK yaw 0: ArrowRight moves screen-right without turning
+CHECK yaw 0: a moves screen-left without turning
+CHECK yaw 0: ArrowLeft moves screen-left without turning
+CHECK yaw 90: d moves screen-right without turning
+CHECK yaw 90: ArrowRight moves screen-right without turning
+CHECK yaw 90: a moves screen-left without turning
+CHECK yaw 90: ArrowLeft moves screen-left without turning
+CHECK yaw 180: d moves screen-right without turning
+CHECK yaw 180: ArrowRight moves screen-right without turning
+CHECK yaw 180: a moves screen-left without turning
+CHECK yaw 180: ArrowLeft moves screen-left without turning
+CHECK yaw 270: d moves screen-right without turning
+CHECK yaw 270: ArrowRight moves screen-right without turning
+CHECK yaw 270: a moves screen-left without turning
+CHECK yaw 270: ArrowLeft moves screen-left without turning
+CHECK reset clears held keyboard input and ignores stale auto-repeat
+CHECK mode switch clears held input
+CHECK blur clears held input
+CHECK visibilitychange clears held input
+CHECK releasing a pointer preserves the same held keyboard key
+CHECK all input released stops movement
+CHECK small-portrait: same models, vertex detail, colors, shadows and antialiasing as desktop
+CHECK small-portrait: hold d moves in the labelled direction
+CHECK small-portrait: releasing d stops
+CHECK small-portrait: hold a moves in the labelled direction
+CHECK small-portrait: releasing a stops
+CHECK small-portrait: hold w moves in the labelled direction
+CHECK small-portrait: releasing w stops
+CHECK small-portrait: hold s moves in the labelled direction
+CHECK small-portrait: releasing s stops
+CHECK small-portrait: native touch cancel stops movement
+CHECK small-portrait: lost capture stops movement
+CHECK small-portrait: native canvas drag changes viewing direction
+CHECK small-portrait: two fingers can walk and look together
+CHECK small-portrait: releasing movement finger keeps camera drag active without walking
+CHECK small-portrait: no horizontal overflow or clipped controls
+CHECK small-portrait: inspect and D-pad do not overlap and remain in viewport
+CHECK small-portrait: touch inspect opens the correct lifting hazard
+CHECK small-portrait: keyboard inspection still works after touch
+CHECK small-portrait: rotating viewport clears active input
+CHECK portrait: same models, vertex detail, colors, shadows and antialiasing as desktop
+CHECK portrait: hold d moves in the labelled direction
+CHECK portrait: releasing d stops
+CHECK portrait: hold a moves in the labelled direction
+CHECK portrait: releasing a stops
+CHECK portrait: hold w moves in the labelled direction
+CHECK portrait: releasing w stops
+CHECK portrait: hold s moves in the labelled direction
+CHECK portrait: releasing s stops
+CHECK portrait: native touch cancel stops movement
+CHECK portrait: lost capture stops movement
+CHECK portrait: native canvas drag changes viewing direction
+CHECK portrait: two fingers can walk and look together
+CHECK portrait: releasing movement finger keeps camera drag active without walking
+CHECK portrait: no horizontal overflow or clipped controls
+CHECK portrait: inspect and D-pad do not overlap and remain in viewport
+CHECK portrait: touch inspect opens the correct lifting hazard
+CHECK portrait: keyboard inspection still works after touch
+CHECK portrait: rotating viewport clears active input
+CHECK landscape: same models, vertex detail, colors, shadows and antialiasing as desktop
+CHECK landscape: hold d moves in the labelled direction
+CHECK landscape: releasing d stops
+CHECK landscape: hold a moves in the labelled direction
+CHECK landscape: releasing a stops
+CHECK landscape: hold w moves in the labelled direction
+CHECK landscape: releasing w stops
+CHECK landscape: hold s moves in the labelled direction
+CHECK landscape: releasing s stops
+CHECK landscape: native touch cancel stops movement
+CHECK landscape: lost capture stops movement
+CHECK landscape: native canvas drag changes viewing direction
+CHECK landscape: two fingers can walk and look together
+CHECK landscape: releasing movement finger keeps camera drag active without walking
+CHECK landscape: no horizontal overflow or clipped controls
+CHECK landscape: inspect and D-pad do not overlap and remain in viewport
+CHECK landscape: touch inspect opens the correct lifting hazard
+CHECK landscape: keyboard inspection still works after touch
+CHECK landscape: rotating viewport clears active input
+CHECK no browser page errors
+PASS: 80 input, mobile layout and quality checks

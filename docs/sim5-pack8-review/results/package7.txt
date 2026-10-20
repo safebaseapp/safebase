@@ -1,0 +1,187 @@
+PASS demo allowlist, forged IDs, 2-finding normalization, zero XP, unlimited replay
+CHECK guest
+CHECK free
+CHECK suspended premium
+CHECK suspended admin
+CHECK premium
+CHECK admin
+CHECK reward
+CHECK expired
+CHECK unavailable profile
+PASS 9 pure entitlement policy cases — no live Supabase test
+CHECK server guest
+CHECK server free
+CHECK server premium
+CHECK server expired premium plan
+CHECK server suspended admin
+CHECK server admin role
+CHECK server admin email
+CHECK server reward
+CHECK server profile missing
+CHECK server auth unavailable
+PASS server authorization fixtures; LIVE auth NOT RUN
+CHECK server page tr guest no operable scene
+CHECK server page tr free no operable scene
+CHECK server page tr inactive no operable scene
+CHECK server page tr expired no operable scene
+CHECK server page tr unconfigured no operable scene
+CHECK server page tr premium full mission
+CHECK server page tr admin full mission
+CHECK server page tr reward full mission
+CHECK server page en guest no operable scene
+CHECK server page en free no operable scene
+CHECK server page en inactive no operable scene
+CHECK server page en expired no operable scene
+CHECK server page en unconfigured no operable scene
+CHECK server page en premium full mission
+CHECK server page en admin full mission
+CHECK server page en reward full mission
+PASS 17 server page fixtures; LIVE sessions NOT RUN
+CHECK server recomputes complete six-finding report and 200 maximum XP
+CHECK sanitized log roundtrips and extends checkpoints
+CHECK rejects self asserted XP
+CHECK rejects self asserted completion
+CHECK rejects answer before discovery
+CHECK rejects unknown finding
+CHECK rejects remote discovery
+CHECK rejects reversed time
+CHECK rejects future time
+CHECK rejects invalid answer
+CHECK rejects resume after final
+CHECK rejects duplicate answer
+CHECK rejects run restart
+CHECK rejects empty log
+CHECK rejects oversized log
+CHECK JSONB key reordering preserves prefix identity
+CHECK early finish and cancel never award permanent XP
+CHECK pause/resume excludes inactive time
+PASS 18 server log checks; LIVE DB NOT RUN
+CHECK guest cannot read/write before DB access
+CHECK free cannot read/write before DB access
+CHECK suspended cannot read/write before DB access
+CHECK expired cannot read/write before DB access
+CHECK cross-origin cookie-authenticated write denied
+CHECK history is private no-store and explicitly owner-filtered
+CHECK cross-account/missing run is not found
+CHECK client score and premium flag rejected
+CHECK server computes report from full log, not claimed completion
+CHECK stale/divergent event prefix rejected before RPC
+CHECK DB conflicts propagate for safe retry
+CHECK missing persistence configuration is not success
+PASS 12 real handlers with dependency fixtures; live API NOT RUN
+PASS sitemap 818 -> 824; six localized entries, no existing entries changed, no duplicates
+PASS 21 actual-geometry connector cases, steps 0.2mm–20mm
+PASS gate view deduplicated under StrictMode/re-render; upgrade intent and no PII; live GA4 NOT RUN
+CHECK tr-1280x1000 keyboard moves
+CHECK tr-1280x1000 rejects leak
+CHECK tr-1280x1000 rejects access
+CHECK tr-1280x1000 rejects droppedTool
+CHECK tr-1280x1000 rejects materials
+CHECK tr-1280x1000 normalized two-finding report
+CHECK tr-1280x1000 analytics start/complete once without PII
+CHECK tr-1280x1000 no premium findings in report
+CHECK tr-1280x1000 no horizontal overflow
+CHECK tr-1280x1000 replay returns to briefing
+CHECK tr-1280x1000 no guest state persistence
+CHECK en-1280x1000 keyboard moves
+CHECK en-1280x1000 rejects leak
+CHECK en-1280x1000 rejects access
+CHECK en-1280x1000 rejects droppedTool
+CHECK en-1280x1000 rejects materials
+CHECK en-1280x1000 normalized two-finding report
+CHECK en-1280x1000 analytics start/complete once without PII
+CHECK en-1280x1000 no premium findings in report
+CHECK en-1280x1000 no horizontal overflow
+CHECK en-1280x1000 replay returns to briefing
+CHECK en-1280x1000 no guest state persistence
+CHECK tr-320x568 native touch moves
+CHECK tr-320x568 rejects leak
+CHECK tr-320x568 rejects access
+CHECK tr-320x568 rejects droppedTool
+CHECK tr-320x568 rejects materials
+CHECK tr-320x568 normalized two-finding report
+CHECK tr-320x568 analytics start/complete once without PII
+CHECK tr-320x568 no premium findings in report
+CHECK tr-320x568 no horizontal overflow
+CHECK tr-320x568 replay returns to briefing
+CHECK tr-320x568 no guest state persistence
+CHECK en-320x568 native touch moves
+CHECK en-320x568 rejects leak
+CHECK en-320x568 rejects access
+CHECK en-320x568 rejects droppedTool
+CHECK en-320x568 rejects materials
+CHECK en-320x568 normalized two-finding report
+CHECK en-320x568 analytics start/complete once without PII
+CHECK en-320x568 no premium findings in report
+CHECK en-320x568 no horizontal overflow
+CHECK en-320x568 replay returns to briefing
+CHECK en-320x568 no guest state persistence
+CHECK tr-390x844 native touch moves
+CHECK tr-390x844 rejects leak
+CHECK tr-390x844 rejects access
+CHECK tr-390x844 rejects droppedTool
+CHECK tr-390x844 rejects materials
+CHECK tr-390x844 normalized two-finding report
+CHECK tr-390x844 analytics start/complete once without PII
+CHECK tr-390x844 no premium findings in report
+CHECK tr-390x844 no horizontal overflow
+CHECK tr-390x844 replay returns to briefing
+CHECK tr-390x844 no guest state persistence
+CHECK en-390x844 native touch moves
+CHECK en-390x844 rejects leak
+CHECK en-390x844 rejects access
+CHECK en-390x844 rejects droppedTool
+CHECK en-390x844 rejects materials
+CHECK en-390x844 normalized two-finding report
+CHECK en-390x844 analytics start/complete once without PII
+CHECK en-390x844 no premium findings in report
+CHECK en-390x844 no horizontal overflow
+CHECK en-390x844 replay returns to briefing
+CHECK en-390x844 no guest state persistence
+CHECK tr-844x390 native touch moves
+CHECK tr-844x390 rejects leak
+CHECK tr-844x390 rejects access
+CHECK tr-844x390 rejects droppedTool
+CHECK tr-844x390 rejects materials
+CHECK tr-844x390 normalized two-finding report
+CHECK tr-844x390 analytics start/complete once without PII
+CHECK tr-844x390 no premium findings in report
+CHECK tr-844x390 no horizontal overflow
+CHECK tr-844x390 replay returns to briefing
+CHECK tr-844x390 no guest state persistence
+CHECK en-844x390 native touch moves
+CHECK en-844x390 rejects leak
+CHECK en-844x390 rejects access
+CHECK en-844x390 rejects droppedTool
+CHECK en-844x390 rejects materials
+CHECK en-844x390 normalized two-finding report
+CHECK en-844x390 analytics start/complete once without PII
+CHECK en-844x390 no premium findings in report
+CHECK en-844x390 no horizontal overflow
+CHECK en-844x390 replay returns to briefing
+CHECK en-844x390 no guest state persistence
+CHECK no browser exceptions
+CHECK no demo writes
+PASS 90
+CHECK production recorder starts a server run
+CHECK real UI evidence positions and legal answer log pass server replay
+CHECK failed save is visibly reported, local report kept
+CHECK retry persists partial report without XP
+CHECK full mission analytics fire once per explicit start/finish
+CHECK no browser or replay errors
+PASS 6
+CHECK view 1: suit is rendered blue, not washed white
+CHECK view 1: fitted high-visibility vest retains real triangles
+CHECK view 2: suit is rendered blue, not washed white
+CHECK view 2: fitted high-visibility vest retains real triangles
+CHECK view 3: suit is rendered blue, not washed white
+CHECK view 3: fitted high-visibility vest retains real triangles
+PASS 6
+CHECK unavailable has localized accessible fallback
+CHECK unavailable cannot start a broken mission
+CHECK asset-failure has localized accessible fallback
+CHECK asset-failure cannot start a broken mission
+CHECK context-loss has localized accessible fallback
+CHECK context-loss cannot start a broken mission
+PASS 6
+PASS Package 7 13 test scripts
