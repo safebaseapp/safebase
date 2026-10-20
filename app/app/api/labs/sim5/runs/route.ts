@@ -3,15 +3,25 @@ import { getSim5Access } from "@/lib/sim5/server-access";
 import { createLabsWriter } from "@/lib/labs/admin-writer";
 import { isLogExtension, verifyMissionLog } from "@/lib/sim5/replay";
 export const dynamic="force-dynamic";
+// Server-computed calendar day matching the trusted PostgreSQL reward clock.
+function budapestDate(now=new Date()) {
+ const parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Budapest",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(now);
+ const value=(type:string)=>parts.find(part=>part.type===type)?.value||"";
+ return `${value("year")}-${value("month")}-${value("day")}`;
+}
 const reply=(body:unknown,status=200)=>NextResponse.json(body,{status,headers:{"Cache-Control":"private, no-store","Vary":"Cookie"}});
 export async function GET() {
  const access=await getSim5Access();
  if(!access.allowed||!access.userId)return reply({ok:false,error:"PREMIUM_REQUIRED"},403);
  try {
   const db=createLabsWriter();
-  const {data,error}=await db.from("sim5_runs").select("id,schema_version,locale,status,score,xp_awarded,report,started_at,ended_at,updated_at").eq("user_id",access.userId).order("started_at",{ascending:false}).limit(30);
-  if(error)return reply({ok:false,error:"HISTORY_UNAVAILABLE"},503);
-  return reply({ok:true,runs:data});
+  const rewardDate=budapestDate();
+  const [history,day]=await Promise.all([
+   db.from("sim5_runs").select("id,schema_version,locale,status,score,xp_awarded,report,started_at,ended_at,updated_at").eq("user_id",access.userId).order("started_at",{ascending:false}).limit(30),
+   db.from("sim5_daily_rewards").select("reward_date,xp_awarded").eq("user_id",access.userId).eq("reward_date",rewardDate).maybeSingle()
+  ]);
+  if(history.error||day.error)return reply({ok:false,error:"HISTORY_UNAVAILABLE"},503);
+  return reply({ok:true,runs:history.data,daily:{rewardDate,claimed:!!day.data,earnedToday:day.data?.xp_awarded||0,maxDailyXp:50}});
  }catch{return reply({ok:false,error:"PERSISTENCE_UNAVAILABLE"},503);}
 }
 export async function POST(request:Request) {
