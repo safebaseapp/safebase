@@ -11,7 +11,13 @@ export async function startServer(port=4176){
  const compiled=await build({entryPoints:[operation],format:'esm',write:false});
  const baseline=process.env.SIM5_REVIEW_BASELINE;
  if(baseline&&!/^[0-9a-f]{40}$/.test(baseline))throw Error('Invalid baseline SHA');
- const plugins=baseline?[{name:'baseline-source',setup(b){b.onLoad({filter:/[/\\]sim5[/\\].*\.tsx?$/},args=>({contents:execFileSync('git',['-C',repoRoot,'show',`${baseline}:${path.relative(repoRoot,args.path)}`],{encoding:'utf8'}),loader:args.path.endsWith('.tsx')?'tsx':'ts'}))}}]:[];
+ const probe=process.env.SIM5_NAV_PROBE==='1';
+ const plugins=baseline||probe?[{name:'review-source',setup(b){b.onLoad({filter:/[/\\]sim5[/\\].*\.tsx?$/},async args=>{
+  let contents=baseline?execFileSync('git',['-C',repoRoot,'show',`${baseline}:${path.relative(repoRoot,args.path)}`],{encoding:'utf8'}):await fs.readFile(args.path,'utf8');
+  // Expose the real navigation only inside this isolated review bundle.
+  if(probe&&args.path.endsWith('/RealModels.tsx'))contents=contents.replace('const canStep=navigation.step;','window.reviewNavigation=navigation;const canStep=navigation.step;');
+  return {contents,loader:args.path.endsWith('.tsx')?'tsx':'ts'};
+ })}}]:[];
  const site=await build({plugins,entryPoints:[path.join(toolRoot,'site.jsx')],bundle:true,write:false,format:'esm',jsx:'automatic',nodePaths:[path.join(repoRoot,'app/node_modules')]});
  const types={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.glb':'model/gltf-binary','.png':'image/png'};
  const server=http.createServer(async(req,res)=>{
