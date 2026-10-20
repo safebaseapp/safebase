@@ -34,6 +34,14 @@ type Leader = {
   attempts: number;
 };
 
+// Illustrative profiles for layout preview only — never inserted into Supabase,
+// counted as participants, or displayed as authentic competitive results.
+const SAMPLE_LEADERS: Leader[] = [
+  { rank: 1, label: "Alex Morgan", xp: 14850, best_score: 100, attempts: 0 },
+  { rank: 2, label: "Luca Moretti", xp: 11270, best_score: 100, attempts: 0 },
+  { rank: 3, label: "Maya Chen", xp: 8930, best_score: 100, attempts: 0 },
+];
+
 type Item = {
   href: string;
   title: string;
@@ -120,6 +128,7 @@ export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
   const tr = locale === "tr";
   const [slot, setSlot] = useState(0);
   const [leaders, setLeaders] = useState<Leader[]>([]);
+  const [rankingView, setRankingView] = useState<"example" | "live">("example");
 
   useEffect(() => {
     const update = () => setSlot(Math.floor(Date.now() / HALF_DAY));
@@ -142,7 +151,7 @@ export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
 
   const items = useMemo(() => ROTATIONS[slot % ROTATIONS.length], [slot]);
   const monthLabel = new Intl.DateTimeFormat(tr ? "tr-TR" : "en-US", { month: "long", year: "numeric" }).format(new Date());
-  const podium = [0, 1, 2].map((index) => leaders[index] ?? null);
+  const podium = [0, 1, 2].map((index) => (rankingView === "example" ? SAMPLE_LEADERS : leaders)[index] ?? null);
   const categoryLinks = [
     { href: "/tools/quick-risk-assessment", label: tr ? "Risk Analizi" : "Risk Assessment", note: tr ? "100+ faaliyet" : "100+ activities" },
     { href: "/toolbox", label: tr ? "Toolbox Talk" : "Toolbox Talks", note: "70+" },
@@ -220,21 +229,33 @@ export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
             </div>
           </div>
 
-          <Link
-            href={`/${locale}/labs`}
-            className="group relative overflow-hidden rounded-[22px] border border-amber-300/[0.14] bg-[linear-gradient(145deg,rgba(245,158,11,.08),rgba(255,255,255,.018)_55%,rgba(14,165,233,.035))] p-4 shadow-[0_20px_55px_rgba(0,0,0,.18)] transition hover:border-amber-300/30"
-          >
+          <div className="relative overflow-hidden rounded-[22px] border border-amber-300/[0.14] bg-[linear-gradient(145deg,rgba(245,158,11,.08),rgba(255,255,255,.018)_55%,rgba(14,165,233,.035))] p-4 shadow-[0_20px_55px_rgba(0,0,0,.18)]">
             <Trophy size={118} strokeWidth={1.1} className="pointer-events-none absolute -right-7 -top-7 text-amber-300/[0.05]" />
             <div className="relative flex items-start justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2 text-[8px] font-black uppercase tracking-[0.18em] text-amber-300"><Trophy size={12} /> {monthLabel}</div>
                 <h3 className="mt-1.5 text-[15px] font-black text-white">HSE Labs XP Leaderboard</h3>
-                <p className="mt-1 text-[9px] text-slate-500">{tr ? "Bu ayın gerçek XP sıralaması" : "Real XP ranking for this month"}</p>
+                <p className="mt-1 text-[9px] text-slate-400">{rankingView === "example"
+                  ? (tr ? "Temsilî profiller ve örnek XP puanları — gerçek kullanıcı değildir." : "Illustrative profiles and sample XP scores — not real users.")
+                  : (tr ? "Bu ayın gerçek XP sıralaması" : "Real XP ranking for this month")}</p>
               </div>
-              <span className="rounded-full border border-white/[0.08] bg-white/[0.03] px-2 py-1 text-[7px] font-black uppercase tracking-[0.12em] text-slate-500">{tr ? "İLK 3" : "TOP 3"}</span>
+              <span className={`rounded-full border px-2 py-1 text-[8px] font-black uppercase tracking-[0.12em] ${rankingView === "example" ? "border-amber-300/45 bg-amber-300/10 text-amber-200" : "border-sky-300/30 bg-sky-300/10 text-sky-200"}`}>
+                {rankingView === "example" ? (tr ? "ÖRNEK" : "SAMPLE") : (tr ? "GERÇEK" : "LIVE")}
+              </span>
             </div>
 
-            <div className="relative mt-4 space-y-2">
+            <div className="relative mt-3 flex gap-2" role="group" aria-label={tr ? "Sıralama türü" : "Ranking type"}>
+              <button type="button" aria-pressed={rankingView === "example"} onClick={() => setRankingView("example")}
+                className={`min-h-9 flex-1 rounded-lg border px-3 py-2 text-[10px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300 ${rankingView === "example" ? "border-amber-300/50 bg-amber-300/10 text-amber-100" : "border-white/10 text-slate-300 hover:bg-white/5"}`}>
+                {tr ? "Örnek sıralama" : "Sample ranking"}
+              </button>
+              <button type="button" aria-pressed={rankingView === "live"} onClick={() => setRankingView("live")}
+                className={`min-h-9 flex-1 rounded-lg border px-3 py-2 text-[10px] font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300 ${rankingView === "live" ? "border-sky-300/50 bg-sky-300/10 text-sky-100" : "border-white/10 text-slate-300 hover:bg-white/5"}`}>
+                {tr ? "Gerçek sıralama" : "Live ranking"}
+              </button>
+            </div>
+
+            <div className="relative mt-3 space-y-2">
               {podium.map((leader, index) => {
                 const rank = index + 1;
                 return (
@@ -258,11 +279,11 @@ export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
               })}
             </div>
 
-            <div className="relative mt-3 flex items-center justify-between rounded-xl bg-sky-500/[0.08] px-3 py-2.5 text-[9px] font-black text-sky-200">
+            <Link href={`/${locale}/labs`} className="relative mt-3 flex min-h-10 items-center justify-between rounded-xl bg-sky-500/[0.08] px-3 py-2.5 text-[9px] font-black text-sky-200 transition hover:bg-sky-500/[0.15] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300">
               <span>{tr ? "HSE Labs'e katıl ve XP kazan" : "Join HSE Labs and earn XP"}</span>
               <ArrowUpRight size={13} />
-            </div>
-          </Link>
+            </Link>
+          </div>
         </div>
 
         <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
