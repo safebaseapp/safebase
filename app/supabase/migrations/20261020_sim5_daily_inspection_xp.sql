@@ -3,6 +3,11 @@
 -- Calendar day is computed inside the trusted database; the client cannot
 -- choose or spoof its reward day.
 begin;
+-- Lifetime-best improvement and the daily 50 can both be earned on one later
+-- perfect completion. A low earlier score can make that combined award >200.
+alter table public.sim5_runs drop constraint if exists sim5_runs_xp_awarded_check;
+alter table public.sim5_runs add constraint sim5_runs_xp_awarded_check
+ check(xp_awarded between 0 and 250);
 create table public.sim5_daily_rewards (
  user_id uuid not null references auth.users(id) on delete cascade,
  reward_date date not null,
