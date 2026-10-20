@@ -181,7 +181,51 @@ export default function RealModels({tr, missionMode = "full", persist = false, u
         colliders.push(child);colliderBoxes.push(bounds);
       });
     };
-    const load=(url:string,height:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{if(!active){resolve();return}fit(g.scene,height,x,z);resolve()},undefined,reject));
+    // The source storage-tank GLB includes a rusty baked albedo. Refinish only
+    // the STORAGE-TANK model with modern painted steel; keep its geometry,
+    // stairs, railings, UVs, world transforms and collision meshes untouched.
+    // Never recolor the factory model (which also includes white cylinders).
+    const tankCoatings:Record<string,[string,number,number]>={
+      "Large_tank":["#eff4f1",.61,.17],
+      "Round_Tank_Material":["#f1f4f2",.65,.14],
+      "Long_TankLong_TankA_Material":["#dce7e6",.63,.23],
+      "Long_Tanklambert3":["#c3d3d8",.59,.32],
+      "lambert3":["#a8bec7",.55,.39],
+    };
+    const applyModernTankFinish=(root:any)=>{
+      const refinished=new Map<string,any>();
+      let coated=0;
+      root.traverse((child:any)=>{
+        if(!child.isMesh)return;
+        const coat=(previous:any)=>{
+          const key=previous?.name||"";
+          const spec=tankCoatings[key];
+          if(!spec)return previous;
+          let finish=refinished.get(key);
+          if(!finish){
+            finish=new THREE.MeshStandardMaterial({
+              name:"SIM5_Modern_White_Tank_"+key,
+              color:spec[0],roughness:spec[1],metalness:spec[2],
+              side:previous.side??THREE.FrontSide,
+            });
+            refinished.set(key,finish);
+          }
+          coated++;
+          return finish;
+        };
+        child.material=Array.isArray(child.material)?child.material.map(coat):coat(child.material);
+      });
+      if(!coated)throw new Error("Storage tank finishes were not found in the loaded GLB.");
+      root.userData.sim5TankFinish="modern-white";
+      root.name="sim5-modern-white-storage-tanks";
+    };
+    const load=(url:string,height:number,x:number,z:number)=>new Promise<void>((resolve,reject)=>loader.load(url,(g:any)=>{
+      if(!active){resolve();return}
+      try{
+        if(x>0)applyModernTankFinish(g.scene);
+        fit(g.scene,height,x,z);resolve();
+      }catch(error){reject(error)}
+    },undefined,reject));
     const paths=["/sim5/SERNEM_SIM4_Factory_optimized.glb","/sim5/large_industrial_storage_tanks%20(1).glb"];
     const results=await Promise.allSettled([load(paths[0],17.5,-47,-12),load(paths[1],17,47,-12)]);
     if(results.some(r=>r.status==="rejected"))throw new Error(tr?"Tesis modelleri yüklenemedi; yeniden yüklemeyi dene.":"Site models could not load; try reloading.");
