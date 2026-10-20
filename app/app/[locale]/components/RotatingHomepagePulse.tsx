@@ -21,6 +21,7 @@ import {
   Trophy,
   Medal,
   Crown,
+  UsersRound,
 } from "lucide-react";
 
 type Locale = "tr" | "en";
@@ -150,23 +151,56 @@ export default function RotatingHomepagePulse({ locale }: { locale: Locale }) {
     <section className="relative border-y border-white/[0.07] bg-[#050b16] text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-30%,rgba(14,165,233,.13),transparent_45%)]" />
       <div className="relative mx-auto max-w-7xl px-5 py-5 sm:px-6 lg:py-6">
-        <Link
-          href={`/${locale}/downloads`}
-          className="group flex flex-col gap-3 rounded-2xl border border-sky-400/[0.12] bg-[linear-gradient(90deg,rgba(14,165,233,.08),rgba(255,255,255,.02))] px-4 py-4 transition hover:border-sky-300/25 sm:flex-row sm:items-center sm:justify-between sm:px-5"
-        >
-          <div className="flex items-center gap-4">
-            <div className="text-[34px] font-black tracking-[-0.045em] text-white sm:text-[40px]">1,000+</div>
-            <div>
-              <div className="text-[13px] font-black text-slate-100">{tr ? "HSE içeriği, kayıt ve araç" : "HSE content, records & tools"}</div>
-              <div className="mt-1 max-w-3xl text-[10px] leading-4 text-slate-500">
-                {tr ? "Risk kayıtları, toolbox içerikleri, rehberler, levhalar, posterler, checklistler, hesaplayıcılar, Labs ve saha araçları." : "Risk records, toolbox talks, guides, safety signs, posters, checklists, calculators, Labs and field tools."}
-              </div>
+        <div className="relative isolate overflow-hidden rounded-[24px] border border-sky-400/25 bg-[linear-gradient(115deg,#071a2d_0%,#07101e_51%,#071b2b_100%)] p-3 shadow-[0_16px_42px_rgba(0,0,0,.22)] sm:p-4">
+          <div aria-hidden="true" className="pointer-events-none absolute -left-28 -top-32 h-64 w-64 rounded-full bg-sky-400/[0.07] blur-[75px]" />
+          <div aria-hidden="true" className="pointer-events-none absolute -right-20 -bottom-40 h-64 w-64 rounded-full bg-cyan-400/[0.07] blur-[80px]" />
+          <div className="relative grid gap-2 md:grid-cols-[minmax(0,1.28fr)_minmax(0,.94fr)_minmax(0,.90fr)] xl:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)_minmax(0,.95fr)_auto] xl:items-center">
+            <Link href={`/${locale}/downloads`} className="group flex min-w-0 items-center gap-3 rounded-2xl border border-sky-400/15 bg-sky-400/[0.035] p-3 transition hover:border-sky-300/40 hover:bg-sky-400/[0.08] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300 sm:gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-cyan-300/25 bg-cyan-400/[0.08] text-cyan-300 shadow-[inset_0_0_15px_rgba(34,211,238,.06)] sm:h-14 sm:w-14" aria-hidden="true">
+                <FileText size={27} strokeWidth={1.65} />
+              </span>
+              <span className="min-w-0">
+                <span className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                  <span className="text-[29px] font-black leading-none tracking-[-0.055em] text-white sm:text-[34px]">{tr ? "1.000+" : "1,000+"}</span>
+                  <span className="text-[11px] font-extrabold leading-tight text-slate-100 sm:text-[12px]">{tr ? "HSE içeriği ve araç" : "HSE resources & tools"}</span>
+                </span>
+                <span className="mt-2 block max-w-sm text-[10px] leading-[1.55] text-slate-400">
+                  {tr ? "Risk değerlendirmeleri, toolbox, kontrol listeleri, rehberler ve saha araçları." : "Risk assessments, toolbox talks, checklists, guides and field tools."}
+                </span>
+              </span>
+            </Link>
+            <div className="relative flex min-w-0 items-center gap-3 rounded-2xl border border-sky-400/25 bg-[linear-gradient(135deg,rgba(8,145,178,.13),rgba(2,6,23,.16))] p-3 shadow-[inset_0_1px_0_rgba(125,211,252,.07)] sm:gap-3.5" aria-label={tr ? "Topluluk büyüme hedefi: 1.000 üzeri üye" : "Community growth goal: over 1,000 members"}>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-sky-300/30 bg-sky-400/10 text-cyan-300 sm:h-12 sm:w-12" aria-hidden="true">
+                <UsersRound size={24} strokeWidth={1.75} />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-[8px] font-black uppercase tracking-[0.16em] text-cyan-300/90">{tr ? "TOPLULUK HEDEFİ" : "COMMUNITY GOAL"}</span>
+                <span className="mt-0.5 flex flex-wrap items-baseline gap-x-2">
+                  <span className="text-[28px] font-black leading-none tracking-[-0.045em] text-white sm:text-[32px]">{tr ? "1.000+" : "1,000+"}</span>
+                  <span className="text-[11px] font-bold text-slate-100">{tr ? "Üye" : "Members"}</span>
+                </span>
+                <span className="mt-1 block text-[9px] leading-4 text-slate-400">{tr ? "Hedeflenen HSE topluluğu" : "Target HSE community size"}</span>
+              </span>
             </div>
+            <div className="relative flex min-w-0 items-center gap-3 rounded-2xl border border-amber-300/25 bg-[linear-gradient(135deg,rgba(245,158,11,.09),rgba(2,6,23,.18))] p-3 shadow-[inset_0_1px_0_rgba(253,230,138,.05)] sm:gap-3.5" aria-label={tr ? "Premium büyüme hedefi: 100 üzeri üye" : "Premium growth goal: over 100 members"}>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-amber-300/30 bg-amber-300/[0.07] text-amber-300 sm:h-12 sm:w-12" aria-hidden="true">
+                <Crown size={24} strokeWidth={1.75} />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-[8px] font-black uppercase tracking-[0.16em] text-amber-300/90">{tr ? "PREMIUM HEDEFİ" : "PREMIUM GOAL"}</span>
+                <span className="mt-0.5 flex flex-wrap items-baseline gap-x-2">
+                  <span className="text-[28px] font-black leading-none tracking-[-0.045em] text-white sm:text-[32px]">100+</span>
+                  <span className="text-[11px] font-bold text-slate-100">Premium</span>
+                </span>
+                <span className="mt-1 block text-[9px] leading-4 text-slate-400">{tr ? "Uzmanlar için özel araçlar" : "Advanced tools for professionals"}</span>
+              </span>
+            </div>
+            <Link href={`/${locale}/downloads`} className="group flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-sky-400/15 bg-sky-500/[0.06] px-3 text-[10px] font-black text-cyan-300 transition hover:border-cyan-300/35 hover:bg-sky-500/[0.12] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300 md:col-span-3 xl:col-span-1 xl:bg-transparent xl:text-right">
+              {tr ? "Tüm içeriği keşfet" : "Explore all content"}
+              <ArrowUpRight size={15} className="shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Link>
           </div>
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-sky-300">
-            {tr ? "Tüm içeriği keşfet" : "Explore all content"} <ArrowUpRight size={14} />
-          </span>
-        </Link>
+        </div>
 
         <div className="mt-3 grid gap-3 xl:grid-cols-[minmax(0,1.55fr)_minmax(330px,.72fr)]">
           <div className="rounded-[22px] border border-white/[0.08] bg-[#07111f]/88 p-4 shadow-[0_20px_55px_rgba(0,0,0,.18)]">
