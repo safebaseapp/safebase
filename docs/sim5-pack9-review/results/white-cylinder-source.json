@@ -1,0 +1,63 @@
+{
+  "source": "SERNEM_SIM4_Factory_optimized.glb",
+  "method": "Raycasts at visible white cylinders in selected southwest photograph; hit mesh names must exist in original factory GLB node/mesh list",
+  "hits": [
+    {
+      "uv": [
+        0.183,
+        0.451
+      ],
+      "mesh": "Object_4",
+      "material": "Material__0",
+      "point": [
+        -50.42386574678726,
+        9.070908768948518,
+        3.2045883818863246
+      ],
+      "root": "",
+      "rootBounds": [
+        -47,
+        3.524671413255022,
+        -11.999999999999996
+      ]
+    },
+    {
+      "uv": [
+        0.221,
+        0.386
+      ],
+      "mesh": "Object_4",
+      "material": "Material__0",
+      "point": [
+        -43.969434743914974,
+        9.070908768948534,
+        -7.343289820236684
+      ],
+      "root": "",
+      "rootBounds": [
+        -47,
+        3.524671413255022,
+        -11.999999999999996
+      ]
+    },
+    {
+      "uv": [
+        0.261,
+        0.33
+      ],
+      "mesh": "Object_14",
+      "material": "Material__0",
+      "point": [
+        -36.29143775930209,
+        9.599339091716374,
+        -16.354895475636212
+      ],
+      "root": "",
+      "rootBounds": [
+        -47,
+        3.524671413255022,
+        -11.999999999999996
+      ]
+    }
+  ]
+}
