@@ -1,5 +1,6 @@
 "use client";
 
+import Sim5MenuEntry from "@/components/sim5/Sim5MenuEntry";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Link } from "../../../i18n/navigation";
@@ -225,6 +226,7 @@ export default function MobileMainMenu({ locale, authenticated, owner, onClose, 
 
         {open && (
           <div className="relative z-20 grid grid-cols-2 gap-2 border-t border-white/[0.08] bg-[#020817]/92 p-2.5 backdrop-blur-xl">
+            {id === "labs" && <Sim5MenuEntry locale={locale} onNavigate={onClose}/>}
             {items.map((item) => {
               const ItemIcon = item.icon;
               const itemActive = isRouteActive(item.href);

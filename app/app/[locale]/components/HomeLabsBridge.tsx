@@ -25,7 +25,8 @@ export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
     document.querySelector("[data-sernem-labs-showcase-host]")?.remove();
     const host = document.createElement("div");
     host.setAttribute("data-sernem-labs-showcase-host", "true");
-    hero.insertAdjacentElement("afterend", host);
+    const anchor = document.querySelector("[data-sim5-home-showcase]") ?? hero;
+    anchor.insertAdjacentElement("afterend", host);
     setMountNode(host);
 
     return () => {

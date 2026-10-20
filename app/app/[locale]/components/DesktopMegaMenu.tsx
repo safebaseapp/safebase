@@ -1,5 +1,6 @@
 "use client";
 
+import Sim5MenuEntry from "@/components/sim5/Sim5MenuEntry";
 import { useState } from "react";
 import {
   Activity,
@@ -209,6 +210,7 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
 
         {open && (
           <div className="relative z-20 grid grid-cols-2 gap-2 border-t border-white/[0.08] bg-[#020817]/92 p-3 backdrop-blur-xl">
+            {id === "labs" && <Sim5MenuEntry locale={locale} onNavigate={onClose}/>}
             {items.map((item) => {
               const ItemIcon = item.icon;
               return (
