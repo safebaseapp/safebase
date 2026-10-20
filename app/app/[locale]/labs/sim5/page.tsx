@@ -1,11 +1,19 @@
 import Link from "next/link";
 import RealModels from "./RealModels";
+import { getSim5Access } from "@/lib/sim5/server-access";
 import { notFound } from "next/navigation";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function Sim5Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (locale !== "en" && locale !== "tr") notFound();
   const isTr = locale === "tr";
+  const access = await getSim5Access();
+  const fullPath = `/${locale}/labs/sim5`;
+  const upgradePath = `/${locale}/upgrade?next=${encodeURIComponent(fullPath)}`;
+  const unlockPath = access.reason === "inactive" ? `/${locale}/account-suspended` : access.userId ? upgradePath : `/${locale}/login?next=${encodeURIComponent(upgradePath)}`;
 
   return (
     <main className="min-h-screen bg-[#071622] px-3 py-6 text-[#eaf4fa] sm:px-6 sm:py-8">
@@ -29,12 +37,19 @@ export default async function Sim5Page({ params }: { params: Promise<{ locale: s
         </p>
         <p className="mt-2 text-xs text-slate-400">
           {isTr
-            ? "Beta sürümü: Bu simülasyonun denetim sonuçları henüz hesabına veya Labs XP toplamına kaydedilmez."
-            : "Beta release: Inspection results are not yet saved to your account or added to your Labs XP total."}
+            ? "DEMO kayıt gerektirmez. Premium tam denetim için hesabındaki erişim sunucuda doğrulanır."
+            : "No sign-in needed for DEMO. Premium full inspection is authorized on the server."}
         </p>
       </header>
 
-      <RealModels tr={isTr} />
+      <section className="mx-auto mb-5 max-w-[1600px] rounded-xl border border-cyan-300/30 p-4">
+        <div className="flex flex-wrap gap-3"><Link className="inline-flex min-h-12 items-center rounded-lg bg-cyan-200 px-5 font-bold text-slate-950" href={`/${locale}/labs/sim5/demo`}>{isTr ? "Ücretsiz Demo Oyna" : "Play Free Demo"}</Link>
+        {!access.allowed && <Link className="inline-flex min-h-12 items-center rounded-lg border px-5" href={unlockPath}>{isTr ? "Premium Simülasyonu Başlat" : "Start Premium Simulation"}</Link>}</div>
+        <table className="mt-4 w-full text-left text-sm"><caption className="mb-2 text-left font-bold">DEMO / Premium</caption><thead><tr><th>{isTr?"Özellik":"Feature"}</th><th>DEMO</th><th>Premium</th></tr></thead><tbody>
+        <tr><th>{isTr?"HSE bulguları":"HSE findings"}</th><td>2</td><td>6</td></tr><tr><th>{isTr?"Üst platform görevi":"Upper-platform mission"}</th><td>—</td><td>✓</td></tr><tr><th>{isTr?"Tekrar":"Replay"}</th><td>∞</td><td>∞</td></tr><tr><th>{isTr?"Hesap geçmişi":"Account history"}</th><td>—</td><td>✓</td></tr></tbody></table>
+        {!access.allowed && <p className="mt-3" role="status">{access.reason === "unconfigured" || access.reason === "unavailable" ? (isTr ? "Premium erişimi şu anda doğrulanamıyor. Ücretsiz DEMO oynanabilir; tam görev kapalıdır." : "Premium access cannot currently be verified. Play the free DEMO; the full mission remains locked.") : isTr ? "Tam denetim yalnız aktif Premium/admin hesabına açıktır." : "Full inspection requires an active Premium/admin account."}</p>}
+      </section>
+      {access.allowed && <RealModels tr={isTr} missionMode="full" />}
     </main>
   );
 }
