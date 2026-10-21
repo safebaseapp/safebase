@@ -1,0 +1,79 @@
+
+> app@0.1.0 prebuild
+> node scripts/polish-toolbox-pdfs.mjs && node scripts/qa-toolbox-pdfs.mjs && node scripts/qa-download-flows.mjs
+
+[toolbox-pdf] Polished 280 toolbox PDFs: branded metadata, footer spacing, dates and known EN/batch text issues.
+
+SERNEM Toolbox PDF QA
+---------------------
+Master slugs: 70
+Standard TR/EN files present: 140/140
+Branded-base PDFs inspected: 140/140
+Required branded-base page count: 4
+
+PASS: all 70 Toolbox topics have TR/EN standard files and 4-page branded-base PDFs.
+SERNEM download/auth QA: PASS
+
+> app@0.1.0 build
+> next build
+
+▲ Next.js 16.2.10 (Turbopack)
+- Experiments (use with caution):
+  · serverActions
+
+  Creating an optimized production build ...
+Turbopack build encountered 2 warnings:
+[next]/internal/font/google/8a480f0b521d4e75-s.woff2
+Error while requesting resource
+Received response with status 503 when requesting https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwYGFWNOITddY4.woff2
+
+
+./next.config.ts
+Encountered unexpected file in NFT list
+A file was traced that indicates that the whole project was traced unintentionally. Somewhere in the import trace below, there are:
+- filesystem operations (like path.join, path.resolve or fs.readFile), or
+- very dynamic requires (like require('./' + foo)).
+To resolve this, you can
+- remove them if possible, or
+- only use them in development, or
+- make sure they are statically scoped to some subfolder: path.join(process.cwd(), 'data', bar), or
+- add ignore comments: path.join(/*turbopackIgnore: true*/ process.cwd(), bar)
+
+Import trace:
+  Server Component:
+    ./next.config.ts
+    ./app/[locale]/admin/content/page.tsx
+
+
+
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+[next]/internal/font/google/geist_a71539c9.module.css:16:8
+Module not found: Can't resolve '@vercel/turbopack-next/internal/font/google/font'
+  [90m14 |[0m   font-weight: [35m100[0m [35m900[0m;
+  [90m15 |[0m   font-display: swap;
+[31m[1m>[0m [90m16 |[0m   src: url(@vercel/turbopack-next/internal/font/google/font?{%[35m22[0murl%[35m22[0m:%[35m22[0mhttps:[90m//fonts.gs...[0m
+  [90m   |[0m        [31m[1m^[0m
+  [90m17 |[0m   unicode-range: [33mU[0m+[35m0301[0m, [33mU[0m+[35m0400[0m-[35m045[0m[33mF[0m, [33mU[0m+[35m0490[0m-[35m0491[0m, [33mU[0m+[35m04[0m[33mB0[0m-[35m04[0m[33mB1[0m, [33mU[0m+[35m2116[0m;
+  [90m18 |[0m }
+  [90m19 |[0m [90m/* vietnamese */[0m
+
+Import map: Resolved by import map
+
+
+Import trace:
+  Server Component:
+    [next]/internal/font/google/geist_a71539c9.module.css
+    [next]/internal/font/google/geist_a71539c9.js
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> ([next]/internal/font/google/geist_a71539c9.module.css:16:8)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

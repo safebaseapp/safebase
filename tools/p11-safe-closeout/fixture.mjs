@@ -1,0 +1,3 @@
+import http from 'node:http';
+// Public read-only fixture. No accounts, sessions, provider calls or DB writes.
+http.createServer((req,res)=>{res.setHeader('Content-Type','application/json');res.setHeader('Access-Control-Allow-Origin','*');if(req.method==='OPTIONS'){res.writeHead(204);return res.end()}if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);return res.end('{}')}if(req.url.startsWith('/auth/')){res.writeHead(401);return res.end('{"message":"No synthetic session"}')}res.end('[]')}).listen(54519,'127.0.0.1',()=>console.log('P119 read-only loopback fixture; no external forwarding'));

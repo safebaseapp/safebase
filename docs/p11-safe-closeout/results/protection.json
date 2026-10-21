@@ -1,0 +1,13 @@
+{
+  "base": "892ebcec9d5098880e7f5d2cab392332666a2b95",
+  "sourceP11": "1f48f44a2d620e15ab8dffe6dc7e6bf0c47c137f",
+  "applicationFiles": [
+    "app/app/[locale]/downloads/DownloadsClient.tsx",
+    "app/app/[locale]/tools/method-statement/MethodStatementPrint.tsx",
+    "app/app/[locale]/tools/method-statement/page.tsx"
+  ],
+  "otherApplicationChanges": [],
+  "p12Overlap": [],
+  "nonPresentationLogicUnchanged": true,
+  "onlyPrintHeaderSpecificityChanged": true
+}

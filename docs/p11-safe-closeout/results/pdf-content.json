@@ -1,0 +1,26 @@
+[
+  {
+    "locale": "tr",
+    "width": 320,
+    "missingBodyTokens": [],
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "missingBodyTokens": [],
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 320,
+    "missingBodyTokens": [],
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "missingBodyTokens": [],
+    "result": "PASS"
+  }
+]

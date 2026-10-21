@@ -4893,7 +4893,7 @@ export default function MethodStatementPage({ params }: Props) {
           <button
             type="button"
             onClick={handlePrintMethodStatement}
-            className="group inline-flex min-h-14 items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 px-7 py-4 text-base font-black text-white shadow-[0_12px_35px_rgba(37,99,235,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(34,211,238,0.35)] active:translate-y-0"
+            className="group inline-flex min-h-14 w-full min-w-0 max-w-full items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 px-4 py-4 sm:w-auto sm:px-7 text-base font-black text-white shadow-[0_12px_35px_rgba(37,99,235,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(34,211,238,0.35)] active:translate-y-0"
           >
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-xl">
               📄

@@ -1,0 +1,58 @@
+[
+  {
+    "locale": "tr",
+    "width": 320,
+    "pages": 2,
+    "bytes": 61431,
+    "headerDisplay": "grid",
+    "headerText": true,
+    "content": true,
+    "a4": true,
+    "expected": "A4 parses; template and synthetic project retained; visible title/document control",
+    "result": "PASS",
+    "glyphs": true,
+    "pageCountPreserved": true
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "pages": 2,
+    "bytes": 61431,
+    "headerDisplay": "grid",
+    "headerText": true,
+    "content": true,
+    "a4": true,
+    "expected": "A4 parses; template and synthetic project retained; visible title/document control",
+    "result": "PASS",
+    "glyphs": true,
+    "pageCountPreserved": true
+  },
+  {
+    "locale": "en",
+    "width": 320,
+    "pages": 2,
+    "bytes": 59580,
+    "headerDisplay": "grid",
+    "headerText": true,
+    "content": true,
+    "a4": true,
+    "expected": "A4 parses; template and synthetic project retained; visible title/document control",
+    "result": "PASS",
+    "glyphs": true,
+    "pageCountPreserved": true
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "pages": 2,
+    "bytes": 59580,
+    "headerDisplay": "grid",
+    "headerText": true,
+    "content": true,
+    "a4": true,
+    "expected": "A4 parses; template and synthetic project retained; visible title/document control",
+    "result": "PASS",
+    "glyphs": true,
+    "pageCountPreserved": true
+  }
+]

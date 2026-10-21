@@ -1895,8 +1895,8 @@ export default function MethodStatementPrint({
             line-height: 1.32;
           }
 
-          .ms-document-header {
-            display: grid;
+          #method-statement-print .ms-document-header {
+            display: grid !important;
             grid-template-columns: 1.1fr 2fr 1.15fr;
             border: 1.4px solid #334155;
             margin-bottom: 8px;

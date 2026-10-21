@@ -1,0 +1,178 @@
+[
+  {
+    "locale": "tr",
+    "width": 320,
+    "route": "downloads",
+    "status": 200,
+    "viewport": 320,
+    "document": 377,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "FAIL"
+  },
+  {
+    "locale": "tr",
+    "width": 320,
+    "route": "tools/method-statement",
+    "status": 200,
+    "viewport": 320,
+    "document": 320,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "downloads",
+    "status": 200,
+    "viewport": 360,
+    "document": 377,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "FAIL"
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "tools/method-statement",
+    "status": 200,
+    "viewport": 360,
+    "document": 360,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "downloads",
+    "status": 200,
+    "viewport": 390,
+    "document": 390,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "tools/method-statement",
+    "status": 200,
+    "viewport": 390,
+    "document": 390,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "downloads",
+    "status": 200,
+    "viewport": 1440,
+    "document": 1440,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "tools/method-statement",
+    "status": 200,
+    "viewport": 1440,
+    "document": 1440,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 320,
+    "route": "downloads",
+    "status": 200,
+    "viewport": 320,
+    "document": 365,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "FAIL"
+  },
+  {
+    "locale": "en",
+    "width": 320,
+    "route": "tools/method-statement",
+    "status": 200,
+    "viewport": 320,
+    "document": 320,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "downloads",
+    "status": 200,
+    "viewport": 360,
+    "document": 365,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "FAIL"
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "tools/method-statement",
+    "status": 200,
+    "viewport": 360,
+    "document": 360,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "downloads",
+    "status": 200,
+    "viewport": 390,
+    "document": 390,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "tools/method-statement",
+    "status": 200,
+    "viewport": 390,
+    "document": 390,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "downloads",
+    "status": 200,
+    "viewport": 1440,
+    "document": 1440,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "tools/method-statement",
+    "status": 200,
+    "viewport": 1440,
+    "document": 1440,
+    "ctaFits": true,
+    "expected": "200; document fits viewport; print CTA fits",
+    "result": "PASS"
+  }
+]
