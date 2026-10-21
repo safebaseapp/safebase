@@ -1,3 +1,4 @@
+import PublicSourceNotes from "../knowledge-base/components/PublicSourceNotes";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -33,6 +34,7 @@ export async function generateMetadata({
     alternates: {
       canonical: `${baseUrl}/${locale}/risk-assessment`,
       languages: {
+        "x-default": "https://www.sernem.com/en/risk-assessment",
         tr: `${baseUrl}/tr/risk-assessment`,
         en: `${baseUrl}/en/risk-assessment`,
       },
@@ -55,6 +57,7 @@ export default async function RiskAssessmentLibraryPage({
 
   return (
     <main className="min-h-screen bg-[#020617] text-white">
+      <div className="mx-auto max-w-7xl px-6 pt-6"><PublicSourceNotes slug="risk-assessment" locale={isTr ? "tr" : "en"} /></div>
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_15%,rgba(37,99,235,0.18),transparent_35%)]" />
 

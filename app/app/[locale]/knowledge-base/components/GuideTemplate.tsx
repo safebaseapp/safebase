@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { officialOshaReference } from "@/lib/seo/hse-sources";
+import PublicSourceNotes from "./PublicSourceNotes";
 import { allGuides } from "../data/guides/all-guides";
 import RelatedGuideResources from "./RelatedGuideResources";
 import AuthorityAnswerPanel from "./AuthorityAnswerPanel";
@@ -121,7 +123,7 @@ export default function GuideTemplate({
 
           <div className="mt-8 flex flex-wrap gap-3">
             <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-slate-300">
-              OSHA
+              {isTurkish ? "Bağımsız İSG rehberi" : "Independent HSE guide"}
             </span>
 
             <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-slate-300">
@@ -139,6 +141,7 @@ export default function GuideTemplate({
 
       <section className="mx-auto grid max-w-5xl gap-8 px-6 py-16 lg:px-8">
         <AuthorityAnswerPanel guide={guide} locale={language} />
+        <PublicSourceNotes slug={guide.slug} locale={language} />
         <article className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
           <h2 className="text-3xl font-black">
             {isTurkish ? "Genel Bakış" : "Overview"}
@@ -227,13 +230,7 @@ export default function GuideTemplate({
               {visibleReferences.map((reference) => {
                 // Link numbered OSHA standards directly to their official source.
                 // Other references remain plain text until individually verified.
-                const officialSource = /^OSHA (1910|1926)\.(\d{3,4})$/.exec(reference);
-                const officialSubpart = /^OSHA (1910|1926) Subpart ([A-Z]{1,2})$/.exec(reference);
-                const href = officialSource
-                  ? `https://www.osha.gov/laws-regs/regulations/standardnumber/${officialSource[1]}/${officialSource[1]}.${officialSource[2]}`
-                  : officialSubpart
-                    ? `https://www.osha.gov/laws-regs/regulations/standardnumber/${officialSubpart[1]}/${officialSubpart[1]}Subpart${officialSubpart[2]}`
-                    : null;
+                const href = officialOshaReference(reference);
                 return href ? (
                   <a key={reference} href={href} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-emerald-400/30 bg-slate-950/50 px-4 py-3 font-bold text-emerald-300 underline decoration-emerald-500/50 underline-offset-4 hover:text-white">
                     {reference} ↗

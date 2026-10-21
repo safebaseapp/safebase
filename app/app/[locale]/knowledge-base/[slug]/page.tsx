@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { officialOshaReference } from "@/lib/seo/hse-sources";
 import { notFound } from "next/navigation";
 import GuideTemplate from "../components/GuideTemplate";
 import { getGuideBySlug } from "../data/guides/all-guides";
@@ -117,6 +118,10 @@ export default async function KnowledgeGuidePage({ params }: Props) {
       url: "https://www.sernem.com",
     },
     about: guide.category[language],
+    citation: guide.references.map(name => {
+      const sourceUrl = officialOshaReference(name);
+      return sourceUrl ? { "@type": "CreativeWork", name, url: sourceUrl } : name;
+    }),
     educationalUse: "Professional workplace safety training",
     isAccessibleForFree: true,
   };

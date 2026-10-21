@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { publicPosterPages } from "@/lib/seo/public-posters";
 import { toolboxData } from "@/lib/toolbox/toolbox-data";
 import { allRiskActivities } from "@/lib/risk-library/all-activities";
 import { safetySigns } from "@/lib/safety-signs/data";
@@ -145,6 +146,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticPages,
+    ...locales.flatMap(locale => publicPosterPages.map(poster =>
+      localizedEntry(locale, `/posters/${poster.slug}`, { changeFrequency: "monthly", priority: 0.8 }),
+    )),
     ...safetyPackPages,
     ...guidePages,
     ...ppeStandardPages,

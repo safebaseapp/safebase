@@ -30,6 +30,7 @@ export async function generateMetadata({
     alternates: {
       canonical,
       languages: {
+        "x-default": "https://www.sernem.com/en/tools/risk-matrix",
         en: "https://www.sernem.com/en/tools/risk-matrix",
         tr: "https://www.sernem.com/tr/tools/risk-matrix",
       },

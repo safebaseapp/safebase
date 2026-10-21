@@ -52,6 +52,14 @@ Public guidance is general educational content, not an approved site-specific pe
 
 Some downloads, saved documents, workspace functions and premium features require an account or subscription. Public articles and descriptions should be evaluated independently of gated exports.
 
+## Additional public reading paths
+
+- [Public safety posters](https://www.sernem.com/en/posters): educational content; exports and branding can be gated.
+- [Working at height](https://www.sernem.com/en/knowledge-base/working-at-height)
+- [Scaffolding](https://www.sernem.com/en/knowledge-base/scaffolding)
+- [LOTO](https://www.sernem.com/en/knowledge-base/loto)
+- [HIRARC and risk assessment library](https://www.sernem.com/en/risk-assessment)
+
 ## Site discovery
 
 - [XML sitemap](https://www.sernem.com/sitemap.xml)
