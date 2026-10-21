@@ -1,0 +1,5 @@
+
+> app@0.1.0 qa:download-flows
+> node scripts/qa-download-flows.mjs
+
+SERNEM download/auth QA: PASS

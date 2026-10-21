@@ -1,0 +1,1 @@
+PASS safe local return allowlist, TR/EN PKCE callback success/failure and auth-link credential stripping; LIVE mail NOT TESTED

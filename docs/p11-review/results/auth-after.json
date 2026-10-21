@@ -1,0 +1,42 @@
+[
+  {
+    "name": "tr login transport failure releases loading",
+    "pass": true
+  },
+  {
+    "name": "tr API download return preserved",
+    "pass": true
+  },
+  {
+    "name": "tr register transport failure releases loading",
+    "pass": true
+  },
+  {
+    "name": "tr signup uses PKCE callback retaining locale/next",
+    "pass": true
+  },
+  {
+    "name": "tr forgot transport failure releases loading",
+    "pass": true
+  },
+  {
+    "name": "en login transport failure releases loading",
+    "pass": true
+  },
+  {
+    "name": "en API download return preserved",
+    "pass": true
+  },
+  {
+    "name": "en register transport failure releases loading",
+    "pass": true
+  },
+  {
+    "name": "en signup uses PKCE callback retaining locale/next",
+    "pass": true
+  },
+  {
+    "name": "en forgot transport failure releases loading",
+    "pass": true
+  }
+]

@@ -1,0 +1,15 @@
+PASS 1 legacy first run credits lifetime 200
+PASS 2 legacy same-day replay credits no XP
+PASS 3 daily migration backfills historical completed days and preserves total 2900
+PASS 4 authenticated can read own daily reward but not another user's
+PASS 5 guest and authenticated cannot create forged daily reward
+PASS 6 client cannot execute protected server RPC
+PASS 7 existing 200 XP holder cannot get another 50 on migration day
+PASS 8 brand-new user's first perfect awards only 200 and reserves daily slot
+PASS 9 new user replay on first day gets zero
+PASS 10 simultaneous next-day perfect completions credit at most one 50
+PASS 11 same-run retries are idempotent
+PASS 12 third perfect run same day still earns zero
+PASS 13 distinct foreign accounts have independent reward date
+PASS 14 Budapest date changes correctly around summer and winter DST
+PASS 14 daily reward PostgreSQL tests, no live Supabase writes

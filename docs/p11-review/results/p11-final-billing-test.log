@@ -1,0 +1,7 @@
+PASS paid active
+PASS paid expired stale plan
+PASS cancelled past deadline
+PASS cancelled future deadline
+PASS manual legacy premium
+PASS expired trial
+PASS active trial

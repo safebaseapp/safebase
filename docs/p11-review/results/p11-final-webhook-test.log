@@ -1,0 +1,11 @@
+SERNEM pending billing state synchronized
+SERNEM billing state synchronized
+SERNEM billing state synchronized
+SERNEM billing state synchronized
+PASS bad signature cannot write
+PASS unpaid unmatched subscription never grants pending access
+PASS unsupported order event never grants pending access
+PASS old subscription cannot replace current paid binding
+PASS provider current status overrides stale active event
+PASS unapproved new variant cannot create entitlement
+PASS active known variant reconciles and repeated state is idempotent

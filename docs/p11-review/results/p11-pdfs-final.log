@@ -1,0 +1,18 @@
+
+> app@0.1.0 qa:toolbox-pdfs
+> node scripts/qa-toolbox-pdfs.mjs
+
+
+SERNEM Toolbox PDF QA
+---------------------
+Master slugs: 70
+Standard TR/EN files present: 140/140
+Branded-base PDFs inspected: 140/140
+Required branded-base page count: 4
+
+PASS: all 70 Toolbox topics have TR/EN standard files and 4-page branded-base PDFs.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

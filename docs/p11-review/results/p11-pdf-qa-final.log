@@ -1,0 +1,135 @@
+PASS tr/guest/standard server gate
+PASS tr/guest/branded server gate
+PASS tr/guest/word server gate
+PASS tr/guest/poster-word server gate
+PASS tr/free/standard server gate
+PASS tr/free/standard nonzero/type
+PASS toolbox-standard-tr.pdf parses and nonempty
+PASS tr/free/branded server gate
+PASS tr/free/word server gate
+PASS tr/free/poster-word server gate
+PASS tr/expired/standard server gate
+PASS tr/expired/standard nonzero/type
+PASS tr/expired/branded server gate
+PASS tr/expired/word server gate
+PASS tr/expired/poster-word server gate
+PASS tr/paid/standard server gate
+PASS tr/paid/standard nonzero/type
+PASS tr/paid/branded server gate
+PASS tr/paid/branded nonzero/type
+PASS toolbox-branded-tr.pdf parses and nonempty
+PASS toolbox-branded-tr.pdf expected page count
+PASS tr/paid/word server gate
+PASS tr/paid/word nonzero/type
+PASS tr/paid/poster-word server gate
+PASS tr/paid/poster-word nonzero/type
+PASS tr/admin/standard server gate
+PASS tr/admin/standard nonzero/type
+PASS tr/admin/branded server gate
+PASS tr/admin/branded nonzero/type
+PASS tr/admin/word server gate
+PASS tr/admin/word nonzero/type
+PASS tr/admin/poster-word server gate
+PASS tr/admin/poster-word nonzero/type
+PASS tr/suspended/standard server gate
+PASS tr/suspended/branded server gate
+PASS tr/suspended/word server gate
+PASS tr/suspended/poster-word server gate
+PASS tr/trial/standard server gate
+PASS tr/trial/standard nonzero/type
+PASS tr/trial/branded server gate
+PASS tr/trial/branded nonzero/type
+PASS tr/trial/word server gate
+PASS tr/trial/word nonzero/type
+PASS tr/trial/poster-word server gate
+PASS tr/trial/poster-word nonzero/type
+PASS en/guest/standard server gate
+PASS en/guest/branded server gate
+PASS en/guest/word server gate
+PASS en/guest/poster-word server gate
+PASS en/free/standard server gate
+PASS en/free/standard nonzero/type
+PASS toolbox-standard-en.pdf parses and nonempty
+PASS en/free/branded server gate
+PASS en/free/word server gate
+PASS en/free/poster-word server gate
+PASS en/expired/standard server gate
+PASS en/expired/standard nonzero/type
+PASS en/expired/branded server gate
+PASS en/expired/word server gate
+PASS en/expired/poster-word server gate
+PASS en/paid/standard server gate
+PASS en/paid/standard nonzero/type
+PASS en/paid/branded server gate
+PASS en/paid/branded nonzero/type
+PASS toolbox-branded-en.pdf parses and nonempty
+PASS toolbox-branded-en.pdf expected page count
+PASS en/paid/word server gate
+PASS en/paid/word nonzero/type
+PASS en/paid/poster-word server gate
+PASS en/paid/poster-word nonzero/type
+PASS en/admin/standard server gate
+PASS en/admin/standard nonzero/type
+PASS en/admin/branded server gate
+PASS en/admin/branded nonzero/type
+PASS en/admin/word server gate
+PASS en/admin/word nonzero/type
+PASS en/admin/poster-word server gate
+PASS en/admin/poster-word nonzero/type
+PASS en/suspended/standard server gate
+PASS en/suspended/branded server gate
+PASS en/suspended/word server gate
+PASS en/suspended/poster-word server gate
+PASS en/trial/standard server gate
+PASS en/trial/standard nonzero/type
+PASS en/trial/branded server gate
+PASS en/trial/branded nonzero/type
+PASS en/trial/word server gate
+PASS en/trial/word nonzero/type
+PASS en/trial/poster-word server gate
+PASS en/trial/poster-word nonzero/type
+PASS tr/risk Free actual print handler
+PASS risk-tr-a4.pdf parses and nonempty
+PASS tr/risk PDF has document content
+PASS tr/risk Turkish glyphs preserved
+PASS tr/method Free actual print handler
+PASS method-tr-a4.pdf parses and nonempty
+PASS tr/method PDF has document content
+PASS tr Method Statement title/control header preserved
+PASS tr/method Turkish glyphs preserved
+PASS tr/poster Free actual print handler
+PASS poster-tr-a4.pdf parses and nonempty
+PASS tr/poster PDF has document content
+PASS tr/inspection Free actual print handler
+PASS inspection-tr-a4.pdf parses and nonempty
+PASS tr/inspection PDF has document content
+PASS sign-tr-A4.pdf parses and nonempty
+PASS sign-tr-A4.pdf expected page count
+PASS tr/A4 correct physical PDF size
+PASS sign-tr-A3.pdf parses and nonempty
+PASS sign-tr-A3.pdf expected page count
+PASS tr/A3 correct physical PDF size
+PASS tr Free PNG nonempty
+PASS en/risk Free actual print handler
+PASS risk-en-a4.pdf parses and nonempty
+PASS en/risk PDF has document content
+PASS en/risk Turkish glyphs preserved
+PASS en/method Free actual print handler
+PASS method-en-a4.pdf parses and nonempty
+PASS en/method PDF has document content
+PASS en Method Statement title/control header preserved
+PASS en/method Turkish glyphs preserved
+PASS en/poster Free actual print handler
+PASS poster-en-a4.pdf parses and nonempty
+PASS en/poster PDF has document content
+PASS en/inspection Free actual print handler
+PASS inspection-en-a4.pdf parses and nonempty
+PASS en/inspection PDF has document content
+PASS sign-en-A4.pdf parses and nonempty
+PASS sign-en-A4.pdf expected page count
+PASS en/A4 correct physical PDF size
+PASS sign-en-A3.pdf parses and nonempty
+PASS sign-en-A3.pdf expected page count
+PASS en/A3 correct physical PDF size
+PASS en Free PNG nonempty
+TOTAL 134 FAIL 0
