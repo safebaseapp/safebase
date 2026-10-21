@@ -23,7 +23,7 @@ export default function PublicSourceNotes({slug,locale}:{slug:string;locale:"tr"
     <p className="mt-3 leading-7 text-slate-300">{note[locale]}</p>
     <p className="mt-3 text-sm leading-6 text-slate-400">{tr?"OSHA, ABD mevzuatıdır; diğer ülkelerde otomatik yasal gereklilik sayılmaz. Bu bağımsız eğitim içeriği bir onay veya sahaya özel çalışma izni değildir.":"OSHA is US regulation, not an automatic legal requirement in other jurisdictions. This independent educational content is not an approval or site-specific work permit."}</p>
     <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold text-emerald-300">
-      <a href={slug==="risk-assessment"?"https://www.osha.gov/job-hazard-analysis":`https://www.osha.gov/laws-regs/regulations/standardnumber/${note.reference.split(" ")[1].split(".")[0]}/${note.reference.split(" ")[1]}`} rel="noopener noreferrer" target="_blank">{slug==="risk-assessment"?"OSHA — Job Hazard Analysis (US)":`${note.reference} (US)`} ↗</a>
+      <a href={slug==="risk-assessment"?"https://www.osha.gov/safety-management/hazard-identification":`https://www.osha.gov/laws-regs/regulations/standardnumber/${note.reference.split(" ")[1].split(".")[0]}/${note.reference.split(" ")[1]}`} rel="noopener noreferrer" target="_blank">{slug==="risk-assessment"?"OSHA — Job Hazard Analysis (US)":`${note.reference} (US)`} ↗</a>
       <Link href={`/${locale}/${slug==="ppe"?"ppe-standards":"risk-assessment"}`}>{tr?"İlgili kamuya açık kaynaklar":"Related public resources"} →</Link>
     </div>
   </aside>;
