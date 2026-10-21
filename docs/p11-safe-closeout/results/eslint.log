@@ -1,0 +1,5 @@
+
+/workspace/safebase/app/app/[locale]/tools/method-statement/page.tsx
+  7:8  warning  'PrintButton' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)

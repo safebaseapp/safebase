@@ -1,0 +1,50 @@
+[
+  {
+    "locale": "tr",
+    "width": 320,
+    "pages": 2,
+    "bytes": 56605,
+    "headerDisplay": "none",
+    "headerText": false,
+    "content": true,
+    "a4": true,
+    "expected": "A4 parses; template and synthetic project retained; visible title/document control",
+    "result": "FAIL"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "pages": 2,
+    "bytes": 56605,
+    "headerDisplay": "none",
+    "headerText": false,
+    "content": true,
+    "a4": true,
+    "expected": "A4 parses; template and synthetic project retained; visible title/document control",
+    "result": "FAIL"
+  },
+  {
+    "locale": "en",
+    "width": 320,
+    "pages": 2,
+    "bytes": 55797,
+    "headerDisplay": "none",
+    "headerText": false,
+    "content": true,
+    "a4": true,
+    "expected": "A4 parses; template and synthetic project retained; visible title/document control",
+    "result": "FAIL"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "pages": 2,
+    "bytes": 55797,
+    "headerDisplay": "none",
+    "headerText": false,
+    "content": true,
+    "a4": true,
+    "expected": "A4 parses; template and synthetic project retained; visible title/document control",
+    "result": "FAIL"
+  }
+]

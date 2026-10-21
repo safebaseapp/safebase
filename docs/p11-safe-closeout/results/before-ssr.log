@@ -1,0 +1,17 @@
+FAIL tr 320 downloads {"viewport":320,"document":377}
+PASS tr 320 tools/method-statement {"viewport":320,"document":320}
+FAIL tr 360 downloads {"viewport":360,"document":377}
+PASS tr 360 tools/method-statement {"viewport":360,"document":360}
+PASS tr 390 downloads {"viewport":390,"document":390}
+PASS tr 390 tools/method-statement {"viewport":390,"document":390}
+PASS tr 1440 downloads {"viewport":1440,"document":1440}
+PASS tr 1440 tools/method-statement {"viewport":1440,"document":1440}
+FAIL en 320 downloads {"viewport":320,"document":365}
+FAIL en 320 tools/method-statement {"viewport":320,"document":328}
+FAIL en 360 downloads {"viewport":360,"document":365}
+PASS en 360 tools/method-statement {"viewport":360,"document":360}
+PASS en 390 downloads {"viewport":390,"document":390}
+PASS en 390 tools/method-statement {"viewport":390,"document":390}
+PASS en 1440 downloads {"viewport":1440,"document":1440}
+PASS en 1440 tools/method-statement {"viewport":1440,"document":1440}
+TOTAL responsive 16 FAIL 5 PDF 0 FAIL 0

@@ -1,0 +1,1 @@
+PASS strict 3-file allowlist; exact safe P11 deltas; handlers/data/auth/export unchanged; P12 zero overlap; main ancestry

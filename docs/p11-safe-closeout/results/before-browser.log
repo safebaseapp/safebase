@@ -1,0 +1,21 @@
+FAIL tr 320 downloads {"viewport":320,"document":377}
+PASS tr 320 tools/method-statement {"viewport":320,"document":320}
+FAIL tr 320 A4 PDF header none false content false
+FAIL tr 360 downloads {"viewport":360,"document":377}
+PASS tr 360 tools/method-statement {"viewport":360,"document":360}
+PASS tr 390 downloads {"viewport":390,"document":390}
+PASS tr 390 tools/method-statement {"viewport":390,"document":390}
+PASS tr 1440 downloads {"viewport":1440,"document":1440}
+PASS tr 1440 tools/method-statement {"viewport":1440,"document":1440}
+FAIL tr 1440 A4 PDF header none false content false
+FAIL en 320 downloads {"viewport":320,"document":365}
+PASS en 320 tools/method-statement {"viewport":320,"document":320}
+FAIL en 320 A4 PDF header none false content false
+FAIL en 360 downloads {"viewport":360,"document":365}
+PASS en 360 tools/method-statement {"viewport":360,"document":360}
+PASS en 390 downloads {"viewport":390,"document":390}
+PASS en 390 tools/method-statement {"viewport":390,"document":390}
+PASS en 1440 downloads {"viewport":1440,"document":1440}
+PASS en 1440 tools/method-statement {"viewport":1440,"document":1440}
+FAIL en 1440 A4 PDF header none false content false
+TOTAL responsive 16 FAIL 4 PDF 4 FAIL 4
