@@ -1,0 +1,4 @@
+import assert from 'node:assert/strict';import {load} from './module.mjs';
+const {allGuides}=await load('app/app/[locale]/knowledge-base/data/guides/all-guides.ts');const {guideSchema}=await load('app/lib/seo/guide-schema.ts');
+for(const locale of ['tr','en'])for(const guide of allGuides){const [article,breadcrumbs]=JSON.parse(JSON.stringify(guideSchema(guide,locale)));assert.equal(article['@type'],'TechArticle');assert.equal(article.inLanguage,locale);assert.equal(article.url,`https://www.sernem.com/${locale}/knowledge-base/${guide.slug}`);assert.equal(article.citation.length,guide.references.length);assert.equal(breadcrumbs.itemListElement.at(-1).item,article.url);assert.ok(!article.author&&!article.dateModified&&!article.aggregateRating)}
+console.log('PASS 200 localized guide schema objects: existing 100 guides, truthful visible citations, canonical breadcrumbs, no fabricated author/date/rating');

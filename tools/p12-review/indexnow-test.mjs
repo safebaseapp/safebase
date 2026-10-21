@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';import fs from 'node:fs/promises';import os from 'node:os';import path from 'node:path';import {validateChanges,submitBatch} from './indexnow.mjs';
+const url='https://www.sernem.com/en/knowledge-base/loto',item={url,change:'updated',changedAt:'2026-10-21',evidence:'reviewed editorial diff'},allow=new Set([url]);
+assert.equal(validateChanges([item,item],allow).length,1);
+for(const bad of ['https://evil.invalid/en/a','https://www.sernem.com/en/admin','https://www.sernem.com/en/knowledge-base/loto?q=1','https://www.sernem.com/api/a'])assert.throws(()=>validateChanges([{...item,url:bad}],allow));
+assert.throws(()=>validateChanges([{...item,evidence:''}],allow));assert.throws(()=>validateChanges([{...item,change:'deleted'}],allow));assert.equal(validateChanges([{...item,change:'deleted'}],new Set(),allow).length,1);let calls=0;
+await assert.rejects(submitBatch({urls:[url],key:'synthetic-key',enabled:false,approved:true,fetchImpl:()=>{calls++}}));assert.equal(calls,0);
+const dir=await fs.mkdtemp(path.join(os.tmpdir(),'p12-indexnow-'));const mock=async u=>{calls++;return u.endsWith('.txt')?new Response('synthetic-key'):new Response('',{status:202})};
+assert.equal((await submitBatch({urls:[url],key:'synthetic-key',enabled:true,approved:true,fetchImpl:mock,stateDir:dir})).status,202);
+await assert.rejects(submitBatch({urls:[url],key:'synthetic-key',enabled:true,approved:true,fetchImpl:mock,stateDir:dir}));assert.equal(calls,2);
+const dir2=await fs.mkdtemp(path.join(os.tmpdir(),'p12-indexnow-retry-'));let posts=0;await assert.rejects(submitBatch({urls:[url],key:'synthetic-key',enabled:true,approved:true,stateDir:dir2,fetchImpl:async u=>u.endsWith('.txt')?new Response('synthetic-key'):(posts++,new Response('',{status:503}))}));assert.equal(posts,3);
+console.log('PASS public-only, dedupe, evidence, disabled zero-network, mocked ownership/submission, local 24h limit, bounded retries; NO real submission');

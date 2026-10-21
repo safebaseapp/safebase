@@ -1,0 +1,22 @@
+diff --git a/app/app/[locale]/knowledge-base/data/guides/excavation.ts b/app/app/[locale]/knowledge-base/data/guides/excavation.ts
+index afc78a4..27ee3f5 100644
+--- a/app/app/[locale]/knowledge-base/data/guides/excavation.ts
++++ b/app/app/[locale]/knowledge-base/data/guides/excavation.ts
+@@ -80,7 +80,7 @@ export const excavationGuide: SafetyGuide = {
+       "Have a competent person assess soil conditions, excavation depth and protective-system requirements.",
+       "Use suitable sloping, benching, shoring or shielding where required.",
+       "Provide safe access and egress, such as ladders, stairs or ramps.",
+-      "Keep spoil piles, materials and equipment at least 0.6 metres from the excavation edge.",
++      "Plan setback and retaining measures for material that could fall or roll into the excavation (US construction reference: OSHA 1926.651(j)(2)). Have the competent person assess equipment surcharge and ground stability; a generic setback alone does not establish safe edge loading.",
+       "Use barriers, guardrails or warning systems around exposed edges.",
+       "Inspect the excavation daily and after rain, vibration, nearby loading or any condition change.",
+       "Control water accumulation with drainage, pumps or other suitable measures.",
+@@ -92,7 +92,7 @@ export const excavationGuide: SafetyGuide = {
+       "Yetkin bir kişinin zemin şartlarını, kazı derinliğini ve koruyucu sistem gerekliliklerini değerlendirmesini sağlayın.",
+       "Gerekli olduğunda uygun şevlendirme, basamaklandırma, iksa veya kalkan sistemi kullanın.",
+       "Merdiven, basamak veya rampa gibi güvenli giriş ve çıkış sağlayın.",
+-      "Hafriyat yığınlarını, malzemeleri ve ekipmanı kazı kenarından en az 0,6 metre uzakta tutun.",
++      "Kazıya düşebilecek veya yuvarlanabilecek malzeme için geri çekme ve tutucu önlemleri planlayın (ABD inşaat referansı: OSHA 1926.651(j)(2)). Ekipmanın ek yükünü ve zemin kararlılığını yetkin kişiye değerlendirtin; tek bir genel mesafe güvenli kenar yüklemesini kanıtlamaz.",
+       "Açık kenarlarda bariyer, korkuluk veya uyarı sistemi kullanın.",
+       "Kazıyı her gün ve yağmur, titreşim, yakın yükleme veya koşul değişikliğinden sonra kontrol edin.",
+       "Su birikmesini drenaj, pompa veya diğer uygun yöntemlerle kontrol edin.",

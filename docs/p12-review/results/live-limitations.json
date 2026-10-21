@@ -1,0 +1,19 @@
+{
+  "live_robots": {
+    "url": "https://www.sernem.com/robots.txt",
+    "result": "BLOCKED",
+    "curl_exit": 56,
+    "application_http_status": null,
+    "network_error": "CONNECT tunnel failed, response 403"
+  },
+  "live_sitemap": "NOT TESTED \u2014 same origin network blocker; no repeated request",
+  "official_reference_probe": {
+    "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.651",
+    "result": "BLOCKED",
+    "curl_exit": 56
+  },
+  "escalated_network_attempt": "interrupted; no successful elevated HTTP observation",
+  "real_search_measurements": "NOT TESTED",
+  "Bing_Webmaster_GSC": "NOT TESTED \u2014 no account access",
+  "no_indexing_conclusion": true
+}

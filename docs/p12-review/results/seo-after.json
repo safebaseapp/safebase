@@ -1,0 +1,350 @@
+{
+  "base": "e25c7c1",
+  "entries": 854,
+  "rows": [
+    {
+      "name": "Googlebot private /api",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /api/private",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /auth/callback",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /tr/login",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /en/login",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /tr/admin",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /en/admin/users",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /en/dashboard",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /tr/account",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /en/register",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /tr/reset-password",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /en/hse-performance/observations",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot public guidance remains crawlable",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /api",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /api/private",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /auth/callback",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /tr/login",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /en/login",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /tr/admin",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /en/admin/users",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /en/dashboard",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /tr/account",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /en/register",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /tr/reset-password",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /en/hse-performance/observations",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot public guidance remains crawlable",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /api",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /api/private",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /auth/callback",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /tr/login",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /en/login",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /tr/admin",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /en/admin/users",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /en/dashboard",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /tr/account",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /en/register",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /tr/reset-password",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /en/hse-performance/observations",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot public guidance remains crawlable",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /api",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /api/private",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /auth/callback",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /tr/login",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /en/login",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /tr/admin",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /en/admin/users",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /en/dashboard",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /tr/account",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /en/register",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /tr/reset-password",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /en/hse-performance/observations",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot public guidance remains crawlable",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /api",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /api/private",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /auth/callback",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /tr/login",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /en/login",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /tr/admin",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /en/admin/users",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /en/dashboard",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /tr/account",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /en/register",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /tr/reset-password",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /en/hse-performance/observations",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot public guidance remains crawlable",
+      "result": "PASS"
+    },
+    {
+      "name": "no dedicated GPTBot allowance",
+      "result": "PASS"
+    },
+    {
+      "name": "sitemap unique entries",
+      "result": "PASS"
+    },
+    {
+      "name": "all entries canonical bilingual and x-default without fake modification dates",
+      "result": "PASS"
+    },
+    {
+      "name": "tr public poster in sitemap",
+      "result": "PASS"
+    },
+    {
+      "name": "en public poster in sitemap",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route working-at-height-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route ladder-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route housekeeping-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route excavation-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route chemical-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route forklift-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route manual-handling-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route dropped-objects-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route scaffold-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route hot-work-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route confined-space-entry-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route electrical-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route loto-golden-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route fire-safety-rules",
+      "result": "PASS"
+    },
+    {
+      "name": "poster registry corresponds to existing route mandatory-ppe",
+      "result": "PASS"
+    },
+    {
+      "name": "30 localized poster entries only",
+      "result": "PASS"
+    }
+  ]
+}

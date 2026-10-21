@@ -1,0 +1,333 @@
+{
+  "base": "e25c7c1",
+  "entries": 824,
+  "rows": [
+    {
+      "name": "Googlebot private /api",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Googlebot private /api/private",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /auth/callback",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Googlebot private /tr/login",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Googlebot private /en/login",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Googlebot private /tr/admin",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Googlebot private /en/admin/users",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot private /en/dashboard",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Googlebot private /tr/account",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Googlebot private /en/register",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Googlebot private /tr/reset-password",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Googlebot private /en/hse-performance/observations",
+      "result": "PASS"
+    },
+    {
+      "name": "Googlebot public guidance remains crawlable",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /api",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Bingbot private /api/private",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /auth/callback",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Bingbot private /tr/login",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Bingbot private /en/login",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Bingbot private /tr/admin",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Bingbot private /en/admin/users",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot private /en/dashboard",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Bingbot private /tr/account",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Bingbot private /en/register",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Bingbot private /tr/reset-password",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Bingbot private /en/hse-performance/observations",
+      "result": "PASS"
+    },
+    {
+      "name": "Bingbot public guidance remains crawlable",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /api",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "OAI-SearchBot private /api/private",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /auth/callback",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "OAI-SearchBot private /tr/login",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "OAI-SearchBot private /en/login",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "OAI-SearchBot private /tr/admin",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "OAI-SearchBot private /en/admin/users",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot private /en/dashboard",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "OAI-SearchBot private /tr/account",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "OAI-SearchBot private /en/register",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "OAI-SearchBot private /tr/reset-password",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "OAI-SearchBot private /en/hse-performance/observations",
+      "result": "PASS"
+    },
+    {
+      "name": "OAI-SearchBot public guidance remains crawlable",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /api",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "PerplexityBot private /api/private",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /auth/callback",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "PerplexityBot private /tr/login",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "PerplexityBot private /en/login",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "PerplexityBot private /tr/admin",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "PerplexityBot private /en/admin/users",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot private /en/dashboard",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "PerplexityBot private /tr/account",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "PerplexityBot private /en/register",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "PerplexityBot private /tr/reset-password",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "PerplexityBot private /en/hse-performance/observations",
+      "result": "PASS"
+    },
+    {
+      "name": "PerplexityBot public guidance remains crawlable",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /api",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Claude-SearchBot private /api/private",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /auth/callback",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Claude-SearchBot private /tr/login",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Claude-SearchBot private /en/login",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Claude-SearchBot private /tr/admin",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Claude-SearchBot private /en/admin/users",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot private /en/dashboard",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Claude-SearchBot private /tr/account",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Claude-SearchBot private /en/register",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Claude-SearchBot private /tr/reset-password",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "Claude-SearchBot private /en/hse-performance/observations",
+      "result": "PASS"
+    },
+    {
+      "name": "Claude-SearchBot public guidance remains crawlable",
+      "result": "PASS"
+    },
+    {
+      "name": "no dedicated GPTBot allowance",
+      "result": "PASS"
+    },
+    {
+      "name": "sitemap unique entries",
+      "result": "PASS"
+    },
+    {
+      "name": "all entries canonical bilingual and x-default without fake modification dates",
+      "result": "PASS"
+    },
+    {
+      "name": "tr public poster in sitemap",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    },
+    {
+      "name": "en public poster in sitemap",
+      "result": "FAIL",
+      "reason": "The expression evaluated to a falsy value:"
+    }
+  ]
+}

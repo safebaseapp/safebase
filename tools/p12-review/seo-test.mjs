@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {load,root} from './module.mjs';
+const baseline=process.env.P12_BASELINE==='1',rows=[];const check=(name,fn)=>{try{fn();rows.push({name,result:'PASS'})}catch(e){rows.push({name,result:'FAIL',reason:e.message.split('\n')[0]})}};
+const robots=(await load('app/app/robots.ts',{baseline})).default();const entries=(await load('app/app/sitemap.ts',{baseline})).default();
+for(const bot of ['Googlebot','Bingbot','OAI-SearchBot','PerplexityBot','Claude-SearchBot']){
+ const groups=robots.rules.filter(r=>[r.userAgent].flat().some(ua=>ua==='*'||bot.toLowerCase().includes(ua.toLowerCase())));
+ const specific=groups.filter(r=>[r.userAgent].flat().some(ua=>ua!=='*'&&bot.toLowerCase().includes(ua.toLowerCase())));const rules=specific.length?specific:groups;
+ for(const url of ['/api','/api/private','/auth/callback','/tr/login','/en/login','/tr/admin','/en/admin/users','/en/dashboard','/tr/account','/en/register','/tr/reset-password','/en/hse-performance/observations'])check(`${bot} private ${url}`,()=>assert.ok(rules.some(r=>[r.disallow].flat().some(d=>url.startsWith(d)))));
+ check(`${bot} public guidance remains crawlable`,()=>assert.ok(!rules.some(r=>[r.disallow].flat().some(d=>'/en/knowledge-base/loto'.startsWith(d)))));
+}
+check('no dedicated GPTBot allowance',()=>assert.ok(!robots.rules.some(r=>[r.userAgent].flat().includes('GPTBot'))));
+check('sitemap unique entries',()=>assert.equal(new Set(entries.map(x=>x.url)).size,entries.length));
+check('all entries canonical bilingual and x-default without fake modification dates',()=>{for(const e of entries){const u=new URL(e.url);assert.equal(u.origin,'https://www.sernem.com');assert.match(u.pathname,/^\/(tr|en)(\/|$)/);assert.equal(e.alternates.languages['x-default'],e.alternates.languages.en);assert.ok(!e.lastModified);assert.ok(!/[?#]/.test(e.url));assert.ok(!/\/(api|auth|admin|dashboard|account|login|register|premium)(\/|$)/.test(u.pathname))}});
+for(const locale of ['tr','en'])check(`${locale} public poster in sitemap`,()=>assert.ok(entries.some(x=>x.url===`https://www.sernem.com/${locale}/posters/working-at-height-rules`)));
+if(!baseline){const {publicPosterPages}=await load('app/lib/seo/public-posters.ts');const source=fs.readFileSync(path.join(root,'app/app/[locale]/posters/[slug]/page.tsx'),'utf8');for(const p of publicPosterPages)check(`poster registry corresponds to existing route ${p.slug}`,()=>assert.ok(source.includes(`"${p.slug}":`)));check('30 localized poster entries only',()=>assert.equal(entries.filter(x=>/\/posters\//.test(x.url)).length,30));}
+const out=path.join(root,'docs/p12-review/results',baseline?'seo-before.json':'seo-after.json');fs.writeFileSync(out,JSON.stringify({base:'e25c7c1',entries:entries.length,rows},null,2)+'\n');for(const r of rows)console.log(r.result,r.name);console.log('TOTAL',rows.length,'FAIL',rows.filter(r=>r.result==='FAIL').length);if(rows.some(r=>r.result==='FAIL'))process.exitCode=1;
