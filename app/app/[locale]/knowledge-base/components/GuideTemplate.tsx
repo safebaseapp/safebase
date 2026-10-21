@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { guideSchema } from "@/lib/seo/guide-schema";
 import { officialOshaReference } from "@/lib/seo/hse-sources";
 import PublicSourceNotes from "./PublicSourceNotes";
 import { allGuides } from "../data/guides/all-guides";
@@ -100,6 +101,7 @@ export default function GuideTemplate({
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSchema(guide, language)).replace(/</g, "\\u003c") }} />
       <section className="border-b border-white/10 bg-gradient-to-b from-blue-950/40 to-slate-950">
         <div className="mx-auto max-w-5xl px-6 py-20 lg:px-8">
           <Link

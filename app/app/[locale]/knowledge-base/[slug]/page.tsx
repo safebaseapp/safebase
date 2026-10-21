@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { officialOshaReference } from "@/lib/seo/hse-sources";
 import { notFound } from "next/navigation";
 import GuideTemplate from "../components/GuideTemplate";
 import { getGuideBySlug } from "../data/guides/all-guides";
@@ -102,63 +101,5 @@ export default async function KnowledgeGuidePage({ params }: Props) {
   const guide = getGuideBySlug(slug);
   if (!guide) notFound();
 
-  const language = locale === "tr" ? "tr" : "en";
-  const url = `https://www.sernem.com/${language}/knowledge-base/${guide.slug}`;
-  const article = {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    headline: guide.title[language],
-    description: guide.description[language],
-    url,
-    mainEntityOfPage: url,
-    inLanguage: language,
-    publisher: {
-      "@type": "Organization",
-      name: "SERNEM",
-      url: "https://www.sernem.com",
-    },
-    about: guide.category[language],
-    citation: guide.references.map(name => {
-      const sourceUrl = officialOshaReference(name);
-      return sourceUrl ? { "@type": "CreativeWork", name, url: sourceUrl } : name;
-    }),
-    educationalUse: "Professional workplace safety training",
-    isAccessibleForFree: true,
-  };
-  const breadcrumbs = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "SERNEM",
-        item: `https://www.sernem.com/${language}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: language === "tr" ? "Bilgi Bankası" : "Knowledge Base",
-        item: `https://www.sernem.com/${language}/knowledge-base`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: guide.title[language],
-        item: url,
-      },
-    ],
-  };
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([article, breadcrumbs]).replace(/</g, "\\u003c"),
-        }}
-      />
-      <GuideTemplate locale={locale} guide={guide} />
-    </>
-  );
+  return <GuideTemplate locale={locale} guide={guide} />;
 }
