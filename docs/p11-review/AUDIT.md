@@ -1,5 +1,7 @@
 # SERNEM Paket 11 — Issue #114
 
+**Son takip kapanışı:** [FOLLOWUP.md](FOLLOWUP.md) — önceki testler yeniden çalıştırılmadı; yalnız ücretli binding/geçmiş trial etkileşimi için 8 yeni hedefli kontrol. Son karar NO-GO.
+
 Review date: 21 October 2026 (Europe/Budapest). **A + B delivered together; production approval remains blocked.**
 
 Final safety re-review: **[Türkçe GO / NO-GO değerlendirmesi](RELEASE-REVIEW.md)**. Current affected-file ESLint is PASS (0 errors, 14 warnings); the four baseline errors below were subsequently fixed. Real variant/sandbox/Preview-access blockers remain. Historical initial-run evidence is retained; latest rerun evidence is in [results/release](results/release).

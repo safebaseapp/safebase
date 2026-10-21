@@ -1,0 +1,27 @@
+FAIL new paid binding is not vetoed by expired prior trial
+FAIL renewed same binding is not vetoed by stale cancelled trial
+FAIL paid cancellation retains only verified future access
+PASS expired paid cancellation cannot use stale Premium label
+PASS unbound active status is insufficient to override prior trial
+PASS Free plan is insufficient to claim a paid binding
+PASS unpaid binding cannot override prior trial
+PASS profile verification failure remains closed
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: P11 paid access follow-up regressions
+
+3 !== 0
+
+    at file:///workspace/safebase/tools/p11-review/paid-access-followup-test.mjs:33:8
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 3,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

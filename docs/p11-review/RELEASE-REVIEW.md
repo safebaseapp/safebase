@@ -1,5 +1,7 @@
 # Paket 11 — Son kalite ve yayın güvenliği: NO-GO
 
+**Güncel hedefli kapanış:** [FOLLOWUP.md](FOLLOWUP.md). Son takip yorumuna göre önceki testler **already covered**; yeniden çalıştırılmadı. Yalnız eski trial kaydının ücretli binding erişimini veto etmesi giderildi: 8 yeni hedefli assertion, TypeScript ve değişen helper ESLint PASS. Normal variant/provider sandbox ve yeni scope doğrulaması hâlâ blokaj. Aşağıdaki geniş test tablosu önceki incelemenin kanıtıdır.
+
 21 Ekim 2026, Europe/Budapest. Mevcut PR: [#115](https://github.com/safebaseapp/safebase/pull/115). Yeni PR açılmadı. İncelenen önceki uç commit `c97e2b8`; son uygulama değişikliği `5540909bd969658801db70af41573a382d5adc7a`.
 
 **Karar: Production için NO-GO.** Yerel kalite kontrolleri geçti; gerçek normal Premium variant eşleştirmesi, yetkili sandbox entegrasyonu ve erişilebilir Preview akışları doğrulanamadı. READY deployment bu eksik doğrulamaların yerine geçmez. Merge/deploy yapılmadı; yazılı kullanıcı onayı bekleniyor.
@@ -44,7 +46,7 @@ Webhook testleri **16 PASS**: imza, unpaid/order, eski yabancı bağ, provider'd
 
 Repo içindeki test/live trial product/variant sabitleri **yalnız trial yapılandırmasının kanıtıdır**; normal Premium eşleştirmesi değildir. Gerçek ID okumak için canlı billing API'sine gidilmedi. Mevcut abonelik, pending entitlement ve eski kayıt dağılımı incelenmedi/değiştirilmedi.
 
-## Tekrarlanan testler
+## Önceki incelemede tekrarlanan testler — bu takipte already covered
 
 Hepsi yalnız yerel derleme ve sentetik protokol/provider fixtürleri üzerindedir. Browser dış ağ istekleri engellidir; fixture CSP istisnası gerçek CSP doğrulaması değildir.
 

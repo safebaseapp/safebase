@@ -1,0 +1,8 @@
+PASS new paid binding is not vetoed by expired prior trial
+PASS renewed same binding is not vetoed by stale cancelled trial
+PASS paid cancellation retains only verified future access
+PASS expired paid cancellation cannot use stale Premium label
+PASS unbound active status is insufficient to override prior trial
+PASS Free plan is insufficient to claim a paid binding
+PASS unpaid binding cannot override prior trial
+PASS profile verification failure remains closed
