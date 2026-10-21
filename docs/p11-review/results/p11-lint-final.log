@@ -73,4 +73,3 @@ Calling setState synchronously within an effect body causes cascading renders th
   8:3  warning  'HeadingLevel' is defined but never used  @typescript-eslint/no-unused-vars
 
 ✖ 19 problems (4 errors, 15 warnings)
-
