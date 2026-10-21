@@ -16,7 +16,7 @@ export async function hasCurrentBillingPremium(
   if (!url || !key) return false;
   const db = createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } });
   const { data: billing, error: billingError } = await db.from("profiles")
-    .select("subscription_status,subscription_ends_at").eq("id", userId).maybeSingle();
+    .select("subscription_status,subscription_ends_at,lemon_subscription_id").eq("id", userId).maybeSingle();
   if (billingError) return false;
   if (["expired", "unpaid", "paused"].includes(String(billing?.subscription_status ?? ""))) return false;
   if (billing?.subscription_status === "cancelled") {
@@ -30,6 +30,12 @@ export async function hasCurrentBillingPremium(
     console.error("Trial entitlement verification failed", error);
     return false;
   }
+  // A provider-synchronized paid binding supersedes an old trial reservation.
+  // Do not let a failed/expired earlier trial veto a later normal purchase or
+  // renewal. Cancelled access has already passed the finite deadline above.
+  const currentPaidBinding = plan === "premium" && Boolean(billing?.lemon_subscription_id) &&
+    (billing?.subscription_status === "active" || billing?.subscription_status === "cancelled");
+  if (currentPaidBinding) return true;
   if (!trial) return plan === "premium";
 
   // Reservation alone does not grant Premium.
