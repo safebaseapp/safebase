@@ -25,7 +25,7 @@ export function createRenderPerformance(T:any,scene:any,renderer:any,host:HTMLEl
   output=document.createElement("pre");Object.assign(output.style,{whiteSpace:"pre-wrap",overflowWrap:"anywhere",margin:"0 0 6px"});panel.append(output);
   const select=document.createElement("select");select.setAttribute("aria-label",tr?"Çizim profili":"Render profile");select.style.pointerEvents="auto";select.style.maxWidth="100%";
   for(const value of ["auto","high","balanced","low","baseline"] as Profile[]){const option=document.createElement("option");option.value=value;option.textContent=value;select.append(option)}select.value=profile;
-  select.onchange=()=>{profile=select.value as Profile;ratio=Math.min(native,profile==="balanced"?1.25:profile==="low"?.85:profile==="auto"?1.5:native);renderer.setPixelRatio(ratio);renderer.shadowMap.needsUpdate=true;intervals.length=windowFrames.length=0;bad=good=0;lastAdjust=performance.now();lastSample=0;};panel.append(select);
+  select.onchange=()=>{profile=select.value as Profile;ratio=Math.min(native,profile==="balanced"?1.25:profile==="low"?.85:profile==="auto"?1.5:native);renderer.setPixelRatio(ratio);renderer.shadowMap.needsUpdate=true;intervals.length=windowFrames.length=longTasks.length=0;snapshot={};lastPublish=0;bad=good=0;lastAdjust=performance.now();lastSample=0;};panel.append(select);
   const copy=document.createElement("button");copy.type="button";copy.textContent=tr?"Anonim ölçümü kopyala":"Copy anonymous metrics";copy.style.pointerEvents="auto";copy.onclick=()=>{void navigator.clipboard?.writeText(JSON.stringify(snapshot,null,2)).then(()=>{copy.textContent=tr?"Kopyalandı":"Copied"}).catch(()=>{copy.textContent=tr?"Kopyalanamadı":"Copy unavailable"})};panel.append(copy);host.parentElement?.append(panel);
   try{observer=new PerformanceObserver(list=>{for(const entry of list.getEntries())longTasks.push(entry.duration);if(longTasks.length>200)longTasks.splice(0,longTasks.length-200)});observer.observe({entryTypes:["longtask"]});}catch{/* Unsupported browser: explicitly reported below. */}
  }
@@ -45,7 +45,8 @@ export function createRenderPerformance(T:any,scene:any,renderer:any,host:HTMLEl
   }
  }
  function sample(now:number,position:any,mode:string,renderMs:number,shadowUpdated:boolean,allowAdapt=true){
-  if(lastSample&&now-lastSample<10000){const delta=now-lastSample;windowFrames.push(delta);if(debug){intervals.push(delta);if(intervals.length>240)intervals.shift();}}lastSample=now;
+  if(lastSample&&now-lastSample<10000){const delta=now-lastSample;if(allowAdapt)windowFrames.push(delta);if(debug){intervals.push(delta);if(intervals.length>240)intervals.shift();}}lastSample=now;
+  if(!allowAdapt){windowFrames.length=0;bad=good=0;lastAdjust=now;}
   if(allowAdapt&&profile==="auto"&&now-lastAdjust>=4000&&windowFrames.length>=8){
    const {p95}=frameStats(windowFrames);bad=p95>60?bad+2:p95>28?bad+1:0;good=p95<19?good+1:0;
    if(bad>=2&&ratio>Math.min(native,.85)){ratio=Math.max(Math.min(native,.85),Math.round((ratio-.15)*100)/100);renderer.setPixelRatio(ratio);bad=good=0;}
@@ -58,5 +59,5 @@ export function createRenderPerformance(T:any,scene:any,renderer:any,host:HTMLEl
   snapshot={...frameStats(intervals),zone,mode,profile,dpr:renderer.getPixelRatio(),viewport:[host.clientWidth,host.clientHeight],gpu,shadows:renderer.shadowMap.enabled,shadowMap:2048,shadowUpdated,shadowCalls,shadowTriangles,calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,renderSubmitMs:renderMs,longTasks:observer?{count:longTasks.length,maxMs:Math.max(0,...longTasks)}:"unsupported",gc:"not available",note:"Rolling 240 rendered RAF intervals; submit time is CPU, not GPU time. Calls include shadow pass. No network/storage."};
   if(output)output.textContent=`${zone} · ${mode} · ${profile}\nFPS ${snapshot.fps.toFixed(1)} | p50 ${snapshot.p50.toFixed(1)} ms\np95 ${snapshot.p95.toFixed(1)} | p99 ${snapshot.p99.toFixed(1)} ms\n>50 ${snapshot.over50} | >100 ${snapshot.over100} / ${snapshot.samples}\ncalls ${snapshot.calls} | triangles ${snapshot.triangles}\nDPR ${snapshot.dpr} | shadows 2048 ${shadowUpdated?"updated":"cached"} (${shadowCalls} calls)\n${gpu}\nlong tasks ${observer?longTasks.length:"unsupported"}`;
  }
- return {beforeRender,sample,debug,resetTiming(){lastSample=0;windowFrames.length=0;},dispose(){if(debug)renderer.shadowMap.render=originalShadowRender;observer?.disconnect();panel?.remove();}};
+ return {beforeRender,sample,debug,resetTiming(){lastSample=lastPublish=0;intervals.length=windowFrames.length=longTasks.length=0;bad=good=0;lastAdjust=performance.now();},dispose(){if(debug)renderer.shadowMap.render=originalShadowRender;observer?.disconnect();panel?.remove();}};
 }
