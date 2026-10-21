@@ -1,0 +1,140 @@
+[
+  {
+    "locale": "tr",
+    "width": 360,
+    "initial": [
+      9,
+      4
+    ],
+    "reduction": [
+      56,
+      96,
+      0
+    ],
+    "boundaryScores": [
+      1,
+      5,
+      10,
+      16,
+      25
+    ],
+    "pdfPages": 1,
+    "download": "SERNEM-Risk-Matrix-25-to-1.pdf",
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "initial": [
+      9,
+      4
+    ],
+    "reduction": [
+      56,
+      96,
+      0
+    ],
+    "boundaryScores": [
+      1,
+      5,
+      10,
+      16,
+      25
+    ],
+    "pdfPages": 1,
+    "download": "SERNEM-Risk-Matrix-25-to-1.pdf",
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "initial": [
+      9,
+      4
+    ],
+    "reduction": [
+      56,
+      96,
+      0
+    ],
+    "boundaryScores": [
+      1,
+      5,
+      10,
+      16,
+      25
+    ],
+    "pdfPages": 1,
+    "download": "SERNEM-Risk-Matrix-25-to-1.pdf",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "initial": [
+      9,
+      4
+    ],
+    "reduction": [
+      56,
+      96,
+      0
+    ],
+    "boundaryScores": [
+      1,
+      5,
+      10,
+      16,
+      25
+    ],
+    "pdfPages": 1,
+    "download": "SERNEM-Risk-Matrix-25-to-1.pdf",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "initial": [
+      9,
+      4
+    ],
+    "reduction": [
+      56,
+      96,
+      0
+    ],
+    "boundaryScores": [
+      1,
+      5,
+      10,
+      16,
+      25
+    ],
+    "pdfPages": 1,
+    "download": "SERNEM-Risk-Matrix-25-to-1.pdf",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "initial": [
+      9,
+      4
+    ],
+    "reduction": [
+      56,
+      96,
+      0
+    ],
+    "boundaryScores": [
+      1,
+      5,
+      10,
+      16,
+      25
+    ],
+    "pdfPages": 1,
+    "download": "SERNEM-Risk-Matrix-25-to-1.pdf",
+    "result": "PASS"
+  }
+]

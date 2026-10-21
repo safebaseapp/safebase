@@ -1,5 +1,7 @@
 # SERNEM Paket 12 — Türkçe denetim ve yönetim raporu
 
+**Güncel mobil takip sonucu:** [MOBILE-FOLLOWUP.md](MOBILE-FOLLOWUP.md). Önceki 8 FAIL yeniden üretildi ve iki ekran kapsayıcısı düzeltildi; güncel public browser matrisi **84/84 PASS**. Aşağıdaki 76/8 ve açık mobil maddesi ilk incelemenin tarihsel sonucudur; artık güncel blokaj değildir. Poster A4/A3 baskı ve risk fonksiyon regresyon kanıtları takip raporundadır. Kaynak/live crawl ve kullanıcı onayı kapıları devam eder.
+
 21 Ekim 2026, Europe/Budapest. Issue [#116](https://github.com/safebaseapp/safebase/issues/116) bütünüyle okundu. Tek branch: `codex/sernem-ai-visibility-authority-pack12`. **Manuel Draft PR incelemesine hazır; production yayını NO-GO / onay bekliyor.** AI atfı, trafik veya sıralama garantisi verilmez.
 
 ## İzolasyon ve geri dönüş
@@ -53,7 +55,7 @@ Resmî OSHA referans URL yapısı ve mevcut içerikle eşleşmesi yerelde doğru
 | Robots/sitemap source QA | **86/86 PASS** | [log](results/seo-complete.log), [matris](results/seo-after.json); başlangıç 70 check'te 47 FAIL (45 exact-private + 2 poster) |
 | Guide schema | **200 localized PASS** | [log](results/guide-schema.log); JSON serialize/parse, article/citation/breadcrumb, sahte metadata yok |
 | Yerel HTTP | **48 PASS** | [matris](results/http-seo.json): 5 robots UA + 5 public text UA + XML + 30 poster + 6 schema page + llms |
-| TR/EN public browser, 360/390/1440 | **76 PASS / 8 FAIL** | [matris](results/public-browser.json), [log](results/public-browser-complete.log). Bingbot UA + JavaScript kapalı, actual server HTML; gerçek Bing crawler testi değil |
+| TR/EN public browser, 360/390/1440 | **84 PASS / 0 FAIL** (takip sonrası) | [matris](results/mobile-followup/after-browser.json), [log](results/mobile-followup/after-browser.log). Bingbot UA + JavaScript kapalı, actual server HTML; gerçek Bing crawler testi değil |
 | IndexNow | **PASS (mock/offline only)** | [test](results/indexnow-complete.log), [dry run](results/indexnow-dry.log); gerçek submission/ownership/key yayını NOT TESTED |
 | Koruma / P11 overlap | **PASS** | [kanıt](results/protection.json), [log](results/protection-complete.log) |
 | Google Rich Results / Schema validator | **NOT TESTED** | Ağ engelli. Yerel JSON/schema assertion'ları resmî validator PASS yerine kullanılmadı |
@@ -65,9 +67,9 @@ Yerel Next build açıkça sahte Supabase public URL/key ile çalıştırıldı;
 
 Next 16 streaming metadata nedeniyle default JS-kapalı Chrome gözlemi gerçek bot davranışı sayılmadı; desteklenen HTML-limited `bingbot` UA ile tekrar edildi. Native HTTP'de beş UA için teknik içerik literal HTML'de, canonical link de response'da bulundu. Google'ın JS render'ı veya AI servislerinin parser davranışı gerçek servis erişimi olmadan doğrulanmış sayılmaz. Global htmlLimitedBots override/next config değişikliği yapılmadı. İlk tarayıcı koşusunda ortam/resource/harness sorunu ve eksik x-default bulguları vardı; final sonuç yalnız son build'den taze server 3133'ün kaydıdır.
 
-### Açık kalan 8 mobil FAIL
+### İlk incelemedeki 8 mobil FAIL — takipte giderildi
 
-TR/EN × 360/390 px × iki mevcut sayfa: **poster detail** ve **risk matrix** yatay taşıyor. 1440 px aynı sayfalar PASS. Kaynakta önceden bulunan poster 794/1123px baskı frame'i ve calculator 620px min-width paneli değişmedi; baseline için ayrı gerçek browser build'i yeniden koşulmadı, mevcut kaynak ve git diff korunuyor. Bunlar “düzeltildi” veya PASS sayılmadı. Baskı/export/component tasarımı SEO metadata düzeltmesiyle karıştırılmadı; owner'ın ayrı dar kapsam onayına bırakıldı. [TR poster](evidence/failure-tr-posters-working-at-height-rules.png), [EN matrix](evidence/failure-en-tools-risk-matrix.png). Tüm diğer 76 public kombinasyonun metadata, dil, schema ve görünür HTML kontrolleri PASS.
+İlk denetimde TR/EN × 360/390 px için poster detail ve risk matrix taşmaları vardı (76 PASS / 8 FAIL). Başarısızlıklar takipte yeniden üretildi; poster için print'te kutu oluşturmayan ekran scroll kapsayıcısı, matris için daralabilir grid track/kartlar eklendi. **Güncel sonuç 84 PASS / 0 FAIL**, A4/A3 print boyutları/metni/raster'ı aynı ve hesaplayıcı fonksiyon testleri PASS. [Güncel rapor ve önce/sonra kanıtlar](MOBILE-FOLLOWUP.md). Eski loglar tarihsel kanıt olarak korunuyor; güncel [matris](results/mobile-followup/after-browser.json) ve [log](results/mobile-followup/after-browser.log) esas alınmalıdır.
 
 ## Görünürlük, otorite ve veri fizibilitesi
 
@@ -77,7 +79,7 @@ TR/EN × 360/390 px × iki mevcut sayfa: **poster detail** ve **risk matrix** ya
 
 ## Son karar / gerekli onaylar
 
-**Manuel inceleme GO; production yayın NO-GO.** İçerik/kamuya açık SEO deltası gözden geçirilebilir ve korunan sistemlerle dosya çakışması yok. Yayından önce: (1) yetkin HSE incelemesiyle resmî kaynak/kapsam teyidi, (2) erişilebilir preview/live crawl ve sitemap/canonical doğrulaması, (3) 8 mobil başarısızlığın owner tarafından değerlendirilmesi, (4) sahibin açık merge/yayın onayı. Billing freeze kaldırılmaz veya P11 otomatik dahil edilmez.
+**Manuel inceleme GO; production yayın NO-GO.** İçerik/kamuya açık SEO deltası gözden geçirilebilir ve korunan sistemlerle dosya çakışması yok. Yayından önce: (1) yetkin HSE incelemesiyle resmî kaynak/kapsam teyidi, (2) erişilebilir preview/live crawl ve sitemap/canonical doğrulaması, (3) giderilen mobil kapsamın ve baskı/hesap kanıtlarının owner tarafından incelenmesi, (4) sahibin açık merge/yayın onayı. Billing freeze kaldırılmaz veya P11 otomatik dahil edilmez.
 
 ## Tekrar çalıştırma
 

@@ -73,19 +73,15 @@
     "locale": "tr",
     "width": 360,
     "route": "tools/risk-matrix",
-    "result": "FAIL",
-    "errors": [
-      "horizontal overflow"
-    ]
+    "result": "PASS",
+    "errors": []
   },
   {
     "locale": "tr",
     "width": 360,
     "route": "posters/working-at-height-rules",
-    "result": "FAIL",
-    "errors": [
-      "horizontal overflow"
-    ]
+    "result": "PASS",
+    "errors": []
   },
   {
     "locale": "tr",
@@ -175,19 +171,15 @@
     "locale": "tr",
     "width": 390,
     "route": "tools/risk-matrix",
-    "result": "FAIL",
-    "errors": [
-      "horizontal overflow"
-    ]
+    "result": "PASS",
+    "errors": []
   },
   {
     "locale": "tr",
     "width": 390,
     "route": "posters/working-at-height-rules",
-    "result": "FAIL",
-    "errors": [
-      "horizontal overflow"
-    ]
+    "result": "PASS",
+    "errors": []
   },
   {
     "locale": "tr",
@@ -375,19 +367,15 @@
     "locale": "en",
     "width": 360,
     "route": "tools/risk-matrix",
-    "result": "FAIL",
-    "errors": [
-      "horizontal overflow"
-    ]
+    "result": "PASS",
+    "errors": []
   },
   {
     "locale": "en",
     "width": 360,
     "route": "posters/working-at-height-rules",
-    "result": "FAIL",
-    "errors": [
-      "horizontal overflow"
-    ]
+    "result": "PASS",
+    "errors": []
   },
   {
     "locale": "en",
@@ -477,19 +465,15 @@
     "locale": "en",
     "width": 390,
     "route": "tools/risk-matrix",
-    "result": "FAIL",
-    "errors": [
-      "horizontal overflow"
-    ]
+    "result": "PASS",
+    "errors": []
   },
   {
     "locale": "en",
     "width": 390,
     "route": "posters/working-at-height-rules",
-    "result": "FAIL",
-    "errors": [
-      "horizontal overflow"
-    ]
+    "result": "PASS",
+    "errors": []
   },
   {
     "locale": "en",

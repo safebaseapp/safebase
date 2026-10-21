@@ -1,0 +1,87 @@
+PASS Googlebot private /api
+PASS Googlebot private /api/private
+PASS Googlebot private /auth/callback
+PASS Googlebot private /tr/login
+PASS Googlebot private /en/login
+PASS Googlebot private /tr/admin
+PASS Googlebot private /en/admin/users
+PASS Googlebot private /en/dashboard
+PASS Googlebot private /tr/account
+PASS Googlebot private /en/register
+PASS Googlebot private /tr/reset-password
+PASS Googlebot private /en/hse-performance/observations
+PASS Googlebot public guidance remains crawlable
+PASS Bingbot private /api
+PASS Bingbot private /api/private
+PASS Bingbot private /auth/callback
+PASS Bingbot private /tr/login
+PASS Bingbot private /en/login
+PASS Bingbot private /tr/admin
+PASS Bingbot private /en/admin/users
+PASS Bingbot private /en/dashboard
+PASS Bingbot private /tr/account
+PASS Bingbot private /en/register
+PASS Bingbot private /tr/reset-password
+PASS Bingbot private /en/hse-performance/observations
+PASS Bingbot public guidance remains crawlable
+PASS OAI-SearchBot private /api
+PASS OAI-SearchBot private /api/private
+PASS OAI-SearchBot private /auth/callback
+PASS OAI-SearchBot private /tr/login
+PASS OAI-SearchBot private /en/login
+PASS OAI-SearchBot private /tr/admin
+PASS OAI-SearchBot private /en/admin/users
+PASS OAI-SearchBot private /en/dashboard
+PASS OAI-SearchBot private /tr/account
+PASS OAI-SearchBot private /en/register
+PASS OAI-SearchBot private /tr/reset-password
+PASS OAI-SearchBot private /en/hse-performance/observations
+PASS OAI-SearchBot public guidance remains crawlable
+PASS PerplexityBot private /api
+PASS PerplexityBot private /api/private
+PASS PerplexityBot private /auth/callback
+PASS PerplexityBot private /tr/login
+PASS PerplexityBot private /en/login
+PASS PerplexityBot private /tr/admin
+PASS PerplexityBot private /en/admin/users
+PASS PerplexityBot private /en/dashboard
+PASS PerplexityBot private /tr/account
+PASS PerplexityBot private /en/register
+PASS PerplexityBot private /tr/reset-password
+PASS PerplexityBot private /en/hse-performance/observations
+PASS PerplexityBot public guidance remains crawlable
+PASS Claude-SearchBot private /api
+PASS Claude-SearchBot private /api/private
+PASS Claude-SearchBot private /auth/callback
+PASS Claude-SearchBot private /tr/login
+PASS Claude-SearchBot private /en/login
+PASS Claude-SearchBot private /tr/admin
+PASS Claude-SearchBot private /en/admin/users
+PASS Claude-SearchBot private /en/dashboard
+PASS Claude-SearchBot private /tr/account
+PASS Claude-SearchBot private /en/register
+PASS Claude-SearchBot private /tr/reset-password
+PASS Claude-SearchBot private /en/hse-performance/observations
+PASS Claude-SearchBot public guidance remains crawlable
+PASS no dedicated GPTBot allowance
+PASS sitemap unique entries
+PASS all entries canonical bilingual and x-default without fake modification dates
+PASS tr public poster in sitemap
+PASS en public poster in sitemap
+PASS poster registry corresponds to existing route working-at-height-rules
+PASS poster registry corresponds to existing route ladder-safety-rules
+PASS poster registry corresponds to existing route housekeeping-safety-rules
+PASS poster registry corresponds to existing route excavation-safety-rules
+PASS poster registry corresponds to existing route chemical-safety-rules
+PASS poster registry corresponds to existing route forklift-safety-rules
+PASS poster registry corresponds to existing route manual-handling-safety-rules
+PASS poster registry corresponds to existing route dropped-objects-safety-rules
+PASS poster registry corresponds to existing route scaffold-safety-rules
+PASS poster registry corresponds to existing route hot-work-safety-rules
+PASS poster registry corresponds to existing route confined-space-entry-rules
+PASS poster registry corresponds to existing route electrical-safety-rules
+PASS poster registry corresponds to existing route loto-golden-rules
+PASS poster registry corresponds to existing route fire-safety-rules
+PASS poster registry corresponds to existing route mandatory-ppe
+PASS 30 localized poster entries only
+TOTAL 86 FAIL 0
