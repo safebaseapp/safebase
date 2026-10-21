@@ -1,0 +1,32 @@
+[
+  {
+    "phase": "before",
+    "route": "posters/working-at-height-rules",
+    "viewport": 360,
+    "document": 814,
+    "posterWidth": 794,
+    "gridColumns": null
+  },
+  {
+    "phase": "before",
+    "route": "tools/risk-matrix",
+    "viewport": 360,
+    "document": 694,
+    "gridColumns": "670px"
+  },
+  {
+    "phase": "after",
+    "route": "posters/working-at-height-rules",
+    "viewport": 360,
+    "document": 360,
+    "posterWidth": 794,
+    "gridColumns": null
+  },
+  {
+    "phase": "after",
+    "route": "tools/risk-matrix",
+    "viewport": 360,
+    "document": 360,
+    "gridColumns": "312px"
+  }
+]

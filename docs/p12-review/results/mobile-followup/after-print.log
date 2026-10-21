@@ -1,0 +1,8 @@
+PASS tr-a4-390 same one-page PDF size/text/raster as baseline
+PASS tr-a4-1440 same one-page PDF size/text/raster as baseline
+PASS tr-a3-390 same one-page PDF size/text/raster as baseline
+PASS tr-a3-1440 same one-page PDF size/text/raster as baseline
+PASS en-a4-390 same one-page PDF size/text/raster as baseline
+PASS en-a4-1440 same one-page PDF size/text/raster as baseline
+PASS en-a3-390 same one-page PDF size/text/raster as baseline
+PASS en-a3-1440 same one-page PDF size/text/raster as baseline

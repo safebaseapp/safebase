@@ -1,0 +1,85 @@
+PASS tr 360 knowledge-base/working-at-height
+PASS tr 360 knowledge-base/scaffolding
+PASS tr 360 knowledge-base/confined-space
+PASS tr 360 knowledge-base/hot-work
+PASS tr 360 knowledge-base/loto
+PASS tr 360 knowledge-base/crane-safety
+PASS tr 360 knowledge-base/electrical-safety
+PASS tr 360 knowledge-base/excavation
+PASS tr 360 knowledge-base/ppe
+PASS tr 360 risk-assessment
+FAIL tr 360 tools/risk-matrix horizontal overflow
+FAIL tr 360 posters/working-at-height-rules horizontal overflow
+PASS tr 360 labs
+PASS tr 360 labs/sim5
+PASS tr 390 knowledge-base/working-at-height
+PASS tr 390 knowledge-base/scaffolding
+PASS tr 390 knowledge-base/confined-space
+PASS tr 390 knowledge-base/hot-work
+PASS tr 390 knowledge-base/loto
+PASS tr 390 knowledge-base/crane-safety
+PASS tr 390 knowledge-base/electrical-safety
+PASS tr 390 knowledge-base/excavation
+PASS tr 390 knowledge-base/ppe
+PASS tr 390 risk-assessment
+FAIL tr 390 tools/risk-matrix horizontal overflow
+FAIL tr 390 posters/working-at-height-rules horizontal overflow
+PASS tr 390 labs
+PASS tr 390 labs/sim5
+PASS tr 1440 knowledge-base/working-at-height
+PASS tr 1440 knowledge-base/scaffolding
+PASS tr 1440 knowledge-base/confined-space
+PASS tr 1440 knowledge-base/hot-work
+PASS tr 1440 knowledge-base/loto
+PASS tr 1440 knowledge-base/crane-safety
+PASS tr 1440 knowledge-base/electrical-safety
+PASS tr 1440 knowledge-base/excavation
+PASS tr 1440 knowledge-base/ppe
+PASS tr 1440 risk-assessment
+PASS tr 1440 tools/risk-matrix
+PASS tr 1440 posters/working-at-height-rules
+PASS tr 1440 labs
+PASS tr 1440 labs/sim5
+PASS en 360 knowledge-base/working-at-height
+PASS en 360 knowledge-base/scaffolding
+PASS en 360 knowledge-base/confined-space
+PASS en 360 knowledge-base/hot-work
+PASS en 360 knowledge-base/loto
+PASS en 360 knowledge-base/crane-safety
+PASS en 360 knowledge-base/electrical-safety
+PASS en 360 knowledge-base/excavation
+PASS en 360 knowledge-base/ppe
+PASS en 360 risk-assessment
+FAIL en 360 tools/risk-matrix horizontal overflow
+FAIL en 360 posters/working-at-height-rules horizontal overflow
+PASS en 360 labs
+PASS en 360 labs/sim5
+PASS en 390 knowledge-base/working-at-height
+PASS en 390 knowledge-base/scaffolding
+PASS en 390 knowledge-base/confined-space
+PASS en 390 knowledge-base/hot-work
+PASS en 390 knowledge-base/loto
+PASS en 390 knowledge-base/crane-safety
+PASS en 390 knowledge-base/electrical-safety
+PASS en 390 knowledge-base/excavation
+PASS en 390 knowledge-base/ppe
+PASS en 390 risk-assessment
+FAIL en 390 tools/risk-matrix horizontal overflow
+FAIL en 390 posters/working-at-height-rules horizontal overflow
+PASS en 390 labs
+PASS en 390 labs/sim5
+PASS en 1440 knowledge-base/working-at-height
+PASS en 1440 knowledge-base/scaffolding
+PASS en 1440 knowledge-base/confined-space
+PASS en 1440 knowledge-base/hot-work
+PASS en 1440 knowledge-base/loto
+PASS en 1440 knowledge-base/crane-safety
+PASS en 1440 knowledge-base/electrical-safety
+PASS en 1440 knowledge-base/excavation
+PASS en 1440 knowledge-base/ppe
+PASS en 1440 risk-assessment
+PASS en 1440 tools/risk-matrix
+PASS en 1440 posters/working-at-height-rules
+PASS en 1440 labs
+PASS en 1440 labs/sim5
+TOTAL 84 FAIL 8

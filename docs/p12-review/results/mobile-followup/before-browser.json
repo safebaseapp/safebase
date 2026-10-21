@@ -1,0 +1,606 @@
+[
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "knowledge-base/working-at-height",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "knowledge-base/scaffolding",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "knowledge-base/confined-space",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "knowledge-base/hot-work",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "knowledge-base/loto",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "knowledge-base/crane-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "knowledge-base/electrical-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "knowledge-base/excavation",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "knowledge-base/ppe",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "risk-assessment",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "tools/risk-matrix",
+    "result": "FAIL",
+    "errors": [
+      "horizontal overflow"
+    ]
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "posters/working-at-height-rules",
+    "result": "FAIL",
+    "errors": [
+      "horizontal overflow"
+    ]
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "labs",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 360,
+    "route": "labs/sim5",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "knowledge-base/working-at-height",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "knowledge-base/scaffolding",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "knowledge-base/confined-space",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "knowledge-base/hot-work",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "knowledge-base/loto",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "knowledge-base/crane-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "knowledge-base/electrical-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "knowledge-base/excavation",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "knowledge-base/ppe",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "risk-assessment",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "tools/risk-matrix",
+    "result": "FAIL",
+    "errors": [
+      "horizontal overflow"
+    ]
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "posters/working-at-height-rules",
+    "result": "FAIL",
+    "errors": [
+      "horizontal overflow"
+    ]
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "labs",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "route": "labs/sim5",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "knowledge-base/working-at-height",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "knowledge-base/scaffolding",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "knowledge-base/confined-space",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "knowledge-base/hot-work",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "knowledge-base/loto",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "knowledge-base/crane-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "knowledge-base/electrical-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "knowledge-base/excavation",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "knowledge-base/ppe",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "risk-assessment",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "tools/risk-matrix",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "posters/working-at-height-rules",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "labs",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "route": "labs/sim5",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "knowledge-base/working-at-height",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "knowledge-base/scaffolding",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "knowledge-base/confined-space",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "knowledge-base/hot-work",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "knowledge-base/loto",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "knowledge-base/crane-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "knowledge-base/electrical-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "knowledge-base/excavation",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "knowledge-base/ppe",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "risk-assessment",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "tools/risk-matrix",
+    "result": "FAIL",
+    "errors": [
+      "horizontal overflow"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "posters/working-at-height-rules",
+    "result": "FAIL",
+    "errors": [
+      "horizontal overflow"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "labs",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 360,
+    "route": "labs/sim5",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "knowledge-base/working-at-height",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "knowledge-base/scaffolding",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "knowledge-base/confined-space",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "knowledge-base/hot-work",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "knowledge-base/loto",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "knowledge-base/crane-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "knowledge-base/electrical-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "knowledge-base/excavation",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "knowledge-base/ppe",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "risk-assessment",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "tools/risk-matrix",
+    "result": "FAIL",
+    "errors": [
+      "horizontal overflow"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "posters/working-at-height-rules",
+    "result": "FAIL",
+    "errors": [
+      "horizontal overflow"
+    ]
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "labs",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "route": "labs/sim5",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "knowledge-base/working-at-height",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "knowledge-base/scaffolding",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "knowledge-base/confined-space",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "knowledge-base/hot-work",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "knowledge-base/loto",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "knowledge-base/crane-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "knowledge-base/electrical-safety",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "knowledge-base/excavation",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "knowledge-base/ppe",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "risk-assessment",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "tools/risk-matrix",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "posters/working-at-height-rules",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "labs",
+    "result": "PASS",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "route": "labs/sim5",
+    "result": "PASS",
+    "errors": []
+  }
+]

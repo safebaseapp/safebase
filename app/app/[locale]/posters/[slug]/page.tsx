@@ -230,6 +230,12 @@ export default async function PosterDetailPage({
         )}
 
         <div
+          className="mx-auto max-w-full overflow-x-auto print:contents"
+          role="region"
+          aria-label={isTurkish ? "Poster önizlemesi; yatay kaydırılabilir" : "Poster preview; scroll horizontally"}
+          tabIndex={0}
+        >
+        <div
           id="poster-print-area"
           className={`mx-auto overflow-hidden bg-white print:shadow-none ${
             isEmbed ? "shadow-none" : "shadow-2xl"
@@ -261,6 +267,7 @@ export default async function PosterDetailPage({
               />
             </div>
           </div>
+        </div>
         </div>
       </main>
     </>

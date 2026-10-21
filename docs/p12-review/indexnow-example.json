@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://www.sernem.com/en/knowledge-base/excavation",
+    "change": "updated",
+    "changedAt": "2026-10-21",
+    "evidence": "P12 editorial/source scope changes; main base e25c7c1, code e23038f/8844a5d. Dry run only; do not submit before owner-approved publication."
+  },
+  {
+    "url": "https://www.sernem.com/tr/knowledge-base/excavation",
+    "change": "updated",
+    "changedAt": "2026-10-21",
+    "evidence": "Same bilingual editorial diff; dry run only, publication not approved."
+  }
+]

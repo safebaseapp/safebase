@@ -1,0 +1,8 @@
+PASS tr-a4-390 baseline one-page A4/A3 PDF
+PASS tr-a4-1440 baseline one-page A4/A3 PDF
+PASS tr-a3-390 baseline one-page A4/A3 PDF
+PASS tr-a3-1440 baseline one-page A4/A3 PDF
+PASS en-a4-390 baseline one-page A4/A3 PDF
+PASS en-a4-1440 baseline one-page A4/A3 PDF
+PASS en-a3-390 baseline one-page A4/A3 PDF
+PASS en-a3-1440 baseline one-page A4/A3 PDF

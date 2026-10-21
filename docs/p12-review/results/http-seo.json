@@ -1,0 +1,293 @@
+[
+  {
+    "bot": "Googlebot",
+    "path": "/robots.txt",
+    "status": 200,
+    "cache": "public, max-age=0, must-revalidate",
+    "result": "PASS",
+    "scope": "simulated UA on local build, not real bot reachability"
+  },
+  {
+    "bot": "Bingbot",
+    "path": "/robots.txt",
+    "status": 200,
+    "cache": "public, max-age=0, must-revalidate",
+    "result": "PASS",
+    "scope": "simulated UA on local build, not real bot reachability"
+  },
+  {
+    "bot": "OAI-SearchBot",
+    "path": "/robots.txt",
+    "status": 200,
+    "cache": "public, max-age=0, must-revalidate",
+    "result": "PASS",
+    "scope": "simulated UA on local build, not real bot reachability"
+  },
+  {
+    "bot": "PerplexityBot",
+    "path": "/robots.txt",
+    "status": 200,
+    "cache": "public, max-age=0, must-revalidate",
+    "result": "PASS",
+    "scope": "simulated UA on local build, not real bot reachability"
+  },
+  {
+    "bot": "Claude-SearchBot",
+    "path": "/robots.txt",
+    "status": 200,
+    "cache": "public, max-age=0, must-revalidate",
+    "result": "PASS",
+    "scope": "simulated UA on local build, not real bot reachability"
+  },
+  {
+    "bot": "Googlebot",
+    "path": "/en/knowledge-base/loto",
+    "serverReadableTechnicalText": true,
+    "canonicalInLiteralHtml": true,
+    "result": "PASS",
+    "scope": "local simulated UA; remote bot fetch/parser NOT TESTED"
+  },
+  {
+    "bot": "Bingbot",
+    "path": "/en/knowledge-base/loto",
+    "serverReadableTechnicalText": true,
+    "canonicalInLiteralHtml": true,
+    "result": "PASS",
+    "scope": "local simulated UA; remote bot fetch/parser NOT TESTED"
+  },
+  {
+    "bot": "OAI-SearchBot",
+    "path": "/en/knowledge-base/loto",
+    "serverReadableTechnicalText": true,
+    "canonicalInLiteralHtml": true,
+    "result": "PASS",
+    "scope": "local simulated UA; remote bot fetch/parser NOT TESTED"
+  },
+  {
+    "bot": "PerplexityBot",
+    "path": "/en/knowledge-base/loto",
+    "serverReadableTechnicalText": true,
+    "canonicalInLiteralHtml": true,
+    "result": "PASS",
+    "scope": "local simulated UA; remote bot fetch/parser NOT TESTED"
+  },
+  {
+    "bot": "Claude-SearchBot",
+    "path": "/en/knowledge-base/loto",
+    "serverReadableTechnicalText": true,
+    "canonicalInLiteralHtml": true,
+    "result": "PASS",
+    "scope": "local simulated UA; remote bot fetch/parser NOT TESTED"
+  },
+  {
+    "path": "/sitemap.xml",
+    "entries": 854,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/working-at-height-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/ladder-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/housekeeping-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/excavation-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/chemical-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/forklift-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/manual-handling-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/dropped-objects-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/scaffold-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/hot-work-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/confined-space-entry-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/electrical-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/loto-golden-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/fire-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/posters/mandatory-ppe",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/working-at-height-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/ladder-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/housekeeping-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/excavation-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/chemical-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/forklift-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/manual-handling-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/dropped-objects-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/scaffold-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/hot-work-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/confined-space-entry-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/electrical-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/loto-golden-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/fire-safety-rules",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/en/posters/mandatory-ppe",
+    "status": 200,
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/knowledge-base/excavation",
+    "schemaTypes": [
+      "@graph",
+      "TechArticle",
+      "BreadcrumbList"
+    ],
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/knowledge-base/confined-space-attendant-duties",
+    "schemaTypes": [
+      "@graph",
+      "TechArticle",
+      "BreadcrumbList"
+    ],
+    "result": "PASS"
+  },
+  {
+    "path": "/tr/tools/risk-matrix",
+    "schemaTypes": [
+      "@graph",
+      "WebApplication"
+    ],
+    "result": "PASS"
+  },
+  {
+    "path": "/en/knowledge-base/excavation",
+    "schemaTypes": [
+      "@graph",
+      "TechArticle",
+      "BreadcrumbList"
+    ],
+    "result": "PASS"
+  },
+  {
+    "path": "/en/knowledge-base/confined-space-attendant-duties",
+    "schemaTypes": [
+      "@graph",
+      "TechArticle",
+      "BreadcrumbList"
+    ],
+    "result": "PASS"
+  },
+  {
+    "path": "/en/tools/risk-matrix",
+    "schemaTypes": [
+      "@graph",
+      "WebApplication"
+    ],
+    "result": "PASS"
+  },
+  {
+    "path": "/llms.txt",
+    "result": "PASS"
+  }
+]

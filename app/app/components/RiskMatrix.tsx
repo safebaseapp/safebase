@@ -540,8 +540,8 @@ const recommendations = {
           </p>
         </div>
 
-        <div className="mt-12 grid items-start gap-8 lg:grid-cols-[0.88fr_1.45fr]">
-          <div className="rounded-3xl border border-white/10 bg-slate-900/55 p-6 shadow-2xl shadow-black/25">
+        <div className="mt-12 grid min-w-0 grid-cols-1 items-start gap-8 lg:grid-cols-[0.88fr_1.45fr]">
+          <div className="min-w-0 rounded-3xl border border-white/10 bg-slate-900/55 p-6 shadow-2xl shadow-black/25">
 
             {/* STEP 1 */}
             <section className="relative border-b border-white/10 pb-6">
@@ -903,7 +903,7 @@ const recommendations = {
               </div>
             </div>
 
-          <div className="self-start overflow-hidden rounded-3xl border border-white/10 bg-slate-900/60 shadow-2xl shadow-black/30 backdrop-blur">
+          <div className="min-w-0 self-start overflow-hidden rounded-3xl border border-white/10 bg-slate-900/60 shadow-2xl shadow-black/30 backdrop-blur">
             <div className="border-b border-white/10 bg-slate-950/35 px-6 py-5">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>

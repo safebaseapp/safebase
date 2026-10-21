@@ -1,0 +1,71 @@
+FAIL Googlebot private /api
+PASS Googlebot private /api/private
+FAIL Googlebot private /auth/callback
+FAIL Googlebot private /tr/login
+FAIL Googlebot private /en/login
+FAIL Googlebot private /tr/admin
+PASS Googlebot private /en/admin/users
+FAIL Googlebot private /en/dashboard
+FAIL Googlebot private /tr/account
+FAIL Googlebot private /en/register
+FAIL Googlebot private /tr/reset-password
+PASS Googlebot private /en/hse-performance/observations
+PASS Googlebot public guidance remains crawlable
+FAIL Bingbot private /api
+PASS Bingbot private /api/private
+FAIL Bingbot private /auth/callback
+FAIL Bingbot private /tr/login
+FAIL Bingbot private /en/login
+FAIL Bingbot private /tr/admin
+PASS Bingbot private /en/admin/users
+FAIL Bingbot private /en/dashboard
+FAIL Bingbot private /tr/account
+FAIL Bingbot private /en/register
+FAIL Bingbot private /tr/reset-password
+PASS Bingbot private /en/hse-performance/observations
+PASS Bingbot public guidance remains crawlable
+FAIL OAI-SearchBot private /api
+PASS OAI-SearchBot private /api/private
+FAIL OAI-SearchBot private /auth/callback
+FAIL OAI-SearchBot private /tr/login
+FAIL OAI-SearchBot private /en/login
+FAIL OAI-SearchBot private /tr/admin
+PASS OAI-SearchBot private /en/admin/users
+FAIL OAI-SearchBot private /en/dashboard
+FAIL OAI-SearchBot private /tr/account
+FAIL OAI-SearchBot private /en/register
+FAIL OAI-SearchBot private /tr/reset-password
+PASS OAI-SearchBot private /en/hse-performance/observations
+PASS OAI-SearchBot public guidance remains crawlable
+FAIL PerplexityBot private /api
+PASS PerplexityBot private /api/private
+FAIL PerplexityBot private /auth/callback
+FAIL PerplexityBot private /tr/login
+FAIL PerplexityBot private /en/login
+FAIL PerplexityBot private /tr/admin
+PASS PerplexityBot private /en/admin/users
+FAIL PerplexityBot private /en/dashboard
+FAIL PerplexityBot private /tr/account
+FAIL PerplexityBot private /en/register
+FAIL PerplexityBot private /tr/reset-password
+PASS PerplexityBot private /en/hse-performance/observations
+PASS PerplexityBot public guidance remains crawlable
+FAIL Claude-SearchBot private /api
+PASS Claude-SearchBot private /api/private
+FAIL Claude-SearchBot private /auth/callback
+FAIL Claude-SearchBot private /tr/login
+FAIL Claude-SearchBot private /en/login
+FAIL Claude-SearchBot private /tr/admin
+PASS Claude-SearchBot private /en/admin/users
+FAIL Claude-SearchBot private /en/dashboard
+FAIL Claude-SearchBot private /tr/account
+FAIL Claude-SearchBot private /en/register
+FAIL Claude-SearchBot private /tr/reset-password
+PASS Claude-SearchBot private /en/hse-performance/observations
+PASS Claude-SearchBot public guidance remains crawlable
+PASS no dedicated GPTBot allowance
+PASS sitemap unique entries
+PASS all entries canonical bilingual and x-default without fake modification dates
+FAIL tr public poster in sitemap
+FAIL en public poster in sitemap
+TOTAL 70 FAIL 47

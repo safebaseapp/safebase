@@ -1,0 +1,90 @@
+[
+  {
+    "locale": "tr",
+    "size": "a4",
+    "viewport": 390,
+    "pages": 1,
+    "width": 594.95996,
+    "height": 841.91998,
+    "textHash": "d0332311486136637fbbbdf8830f2d361f5efa43ee856c9c1eb035622e88d1f9",
+    "rasterHash": "574c26d1270d17f90d6dc66bc2a55dd9bb1bc2a1faeb6aa43f5d1766d2931ba1",
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "size": "a4",
+    "viewport": 1440,
+    "pages": 1,
+    "width": 594.95996,
+    "height": 841.91998,
+    "textHash": "d0332311486136637fbbbdf8830f2d361f5efa43ee856c9c1eb035622e88d1f9",
+    "rasterHash": "574c26d1270d17f90d6dc66bc2a55dd9bb1bc2a1faeb6aa43f5d1766d2931ba1",
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "size": "a3",
+    "viewport": 390,
+    "pages": 1,
+    "width": 841.91998,
+    "height": 1191.12,
+    "textHash": "5e33f78ccec55af8ccdc81462adcc4e954fcac55e04ef574c7eb171a9eb20fab",
+    "rasterHash": "8d39db7525e8250ad91e5bc7489188250ecd20cf0526c4c3082e6bcea8628be4",
+    "result": "PASS"
+  },
+  {
+    "locale": "tr",
+    "size": "a3",
+    "viewport": 1440,
+    "pages": 1,
+    "width": 841.91998,
+    "height": 1191.12,
+    "textHash": "5e33f78ccec55af8ccdc81462adcc4e954fcac55e04ef574c7eb171a9eb20fab",
+    "rasterHash": "8d39db7525e8250ad91e5bc7489188250ecd20cf0526c4c3082e6bcea8628be4",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "size": "a4",
+    "viewport": 390,
+    "pages": 1,
+    "width": 594.95996,
+    "height": 841.91998,
+    "textHash": "083bcccdfc48a3f8eff38c00b4fe169c0e97c05ec3c82aba14048e2da67ce4ad",
+    "rasterHash": "5d4b321b1a644c9fc6ce37db951c8a0c54aa809aaf9b635d50d2b067f9378ccf",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "size": "a4",
+    "viewport": 1440,
+    "pages": 1,
+    "width": 594.95996,
+    "height": 841.91998,
+    "textHash": "083bcccdfc48a3f8eff38c00b4fe169c0e97c05ec3c82aba14048e2da67ce4ad",
+    "rasterHash": "5d4b321b1a644c9fc6ce37db951c8a0c54aa809aaf9b635d50d2b067f9378ccf",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "size": "a3",
+    "viewport": 390,
+    "pages": 1,
+    "width": 841.91998,
+    "height": 1191.12,
+    "textHash": "aef90d4828ea757510e3cfc8729b322f7ae819f9a5a47c0a1e10481e7f1775c6",
+    "rasterHash": "99221da734341b4ec5307e4dcbd8a66f088539214fa5bc56833ac90b77df6a36",
+    "result": "PASS"
+  },
+  {
+    "locale": "en",
+    "size": "a3",
+    "viewport": 1440,
+    "pages": 1,
+    "width": 841.91998,
+    "height": 1191.12,
+    "textHash": "aef90d4828ea757510e3cfc8729b322f7ae819f9a5a47c0a1e10481e7f1775c6",
+    "rasterHash": "99221da734341b4ec5307e4dcbd8a66f088539214fa5bc56833ac90b77df6a36",
+    "result": "PASS"
+  }
+]

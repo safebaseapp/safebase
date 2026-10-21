@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import {execFileSync} from 'node:child_process';import {root} from './module.mjs';
+const base='e25c7c11eb6902f4ecefe096fee4a8e1b959bc11';
+assert.equal(execFileSync('git',['merge-base','HEAD',base],{cwd:root,encoding:'utf8'}).trim(),base);
+const tracked=execFileSync('git',['diff',base,'--name-only'],{cwd:root,encoding:'utf8'}).trim().split('\n').filter(Boolean);
+const untracked=execFileSync('git',['ls-files','--others','--exclude-standard'],{cwd:root,encoding:'utf8'}).trim().split('\n').filter(Boolean);
+const files=[...new Set([...tracked,...untracked])];
+const forbidden=/(supabase|migrations|\/api\/|\/auth\/|\/login\/|\/register\/|password|premium|lemonsqueezy|\/sim5\/|\/labs\/|\/xp|\/admin\/|\/dashboard\/|\/account\/|TrackedCheckout|UserActivityCapture|PosterBrandingCanvas|PosterFormatToolbar|package(-lock)?\.json)/i;
+for(const file of files)assert.ok(!forbidden.test(file),'Protected path modified: '+file);
+const p11=new Set(fs.readFileSync('/tmp/p12-p11-files.txt','utf8').trim().split('\n'));
+assert.deepEqual(files.filter(f=>p11.has(f)),[],'P11 file overlap');
+const layout=fs.readFileSync(root+'/app/app/[locale]/tools/risk-matrix/layout.tsx','utf8');assert.ok(layout.includes('<ActivityTracker eventName="risk_matrix_open" />'));
+const output={base,rollback:base,protectedPathsChanged:[],p11Overlaps:[],existingRiskMatrixActivityPreserved:true,files};fs.writeFileSync(root+'/docs/p12-review/results/protection.json',JSON.stringify(output,null,2)+'\n');console.log('PASS branch ancestry, protected path exclusion, zero P11 file overlaps, existing calculator event preserved');
