@@ -1,0 +1,182 @@
+{
+  "before": {
+    "geometry": {
+      "meshes": 1042,
+      "missingBounds": 495
+    },
+    "route": [
+      [
+        -18,
+        -2
+      ],
+      [
+        -17,
+        20
+      ],
+      [
+        -17,
+        47
+      ],
+      [
+        0,
+        47
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        -14,
+        0
+      ],
+      [
+        -18,
+        -2
+      ]
+    ],
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "calls": 1021,
+    "triangles": 2627738,
+    "pixelRatio": 1,
+    "note": "Navigation CPU microbenchmark on actual scene geometry, two axis steps per sample; not FPS or a successful end-to-end route. Review renderer is on demand.",
+    "frames": null,
+    "source": "063a93d36c10262a7103c73a56fd6b2f7a98af79",
+    "passes": [
+      {
+        "samples": 1318,
+        "totalMs": 124.99999997019768,
+        "medianMs": 0.09999999403953552,
+        "p95Ms": 0.20000000298023224,
+        "p99Ms": 0.4000000059604645,
+        "over50Ms": 0,
+        "meshRaycasts": 843884
+      },
+      {
+        "samples": 1318,
+        "totalMs": 87.30000002682209,
+        "medianMs": 0.09999999403953552,
+        "p95Ms": 0.19999998807907104,
+        "p99Ms": 0.20000000298023224,
+        "over50Ms": 0,
+        "meshRaycasts": 843884
+      },
+      {
+        "samples": 1318,
+        "totalMs": 92.3999999910593,
+        "medianMs": 0.09999999403953552,
+        "p95Ms": 0.20000000298023224,
+        "p99Ms": 0.20000000298023224,
+        "over50Ms": 0,
+        "meshRaycasts": 843884
+      },
+      {
+        "samples": 1318,
+        "totalMs": 86.1000000089407,
+        "medianMs": 0.09999999403953552,
+        "p95Ms": 0.20000000298023224,
+        "p99Ms": 0.20000000298023224,
+        "over50Ms": 0,
+        "meshRaycasts": 843884
+      },
+      {
+        "samples": 1318,
+        "totalMs": 87.20000000298023,
+        "medianMs": 0.09999999403953552,
+        "p95Ms": 0.20000000298023224,
+        "p99Ms": 0.20000000298023224,
+        "over50Ms": 0,
+        "meshRaycasts": 843884
+      }
+    ]
+  },
+  "after": {
+    "geometry": {
+      "meshes": 1042,
+      "missingBounds": 283
+    },
+    "route": [
+      [
+        -18,
+        -2
+      ],
+      [
+        -17,
+        20
+      ],
+      [
+        -17,
+        47
+      ],
+      [
+        0,
+        47
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        -14,
+        0
+      ],
+      [
+        -18,
+        -2
+      ]
+    ],
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "calls": 1021,
+    "triangles": 2627738,
+    "pixelRatio": 1,
+    "note": "Navigation CPU microbenchmark on actual scene geometry, two axis steps per sample; not FPS or a successful end-to-end route. Review renderer is on demand.",
+    "frames": null,
+    "source": "working-tree",
+    "passes": [
+      {
+        "samples": 1318,
+        "totalMs": 82.70000000298023,
+        "medianMs": 0,
+        "p95Ms": 0.20000000298023224,
+        "p99Ms": 0.29999999701976776,
+        "over50Ms": 0,
+        "meshRaycasts": 13837
+      },
+      {
+        "samples": 1318,
+        "totalMs": 49.29999999701977,
+        "medianMs": 0,
+        "p95Ms": 0.10000000894069672,
+        "p99Ms": 0.20000000298023224,
+        "over50Ms": 0,
+        "meshRaycasts": 13837
+      },
+      {
+        "samples": 1318,
+        "totalMs": 56.19999998807907,
+        "medianMs": 0,
+        "p95Ms": 0.10000000894069672,
+        "p99Ms": 0.20000000298023224,
+        "over50Ms": 0,
+        "meshRaycasts": 13837
+      },
+      {
+        "samples": 1318,
+        "totalMs": 46.299999967217445,
+        "medianMs": 0,
+        "p95Ms": 0.10000000894069672,
+        "p99Ms": 0.20000000298023224,
+        "over50Ms": 0,
+        "meshRaycasts": 13837
+      },
+      {
+        "samples": 1318,
+        "totalMs": 45.70000001788139,
+        "medianMs": 0,
+        "p95Ms": 0.10000000894069672,
+        "p99Ms": 0.20000000298023224,
+        "over50Ms": 0,
+        "meshRaycasts": 13837
+      }
+    ]
+  }
+}

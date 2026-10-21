@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent } from "react";
 import { createWeldingOperation } from "./WeldingOperation";
 import { createLiftingOperation } from "./LiftingOperation";
+import { createRenderPerformance } from "./RenderPerformance";
 import { createSiteNavigation } from "./SiteNavigation";
 import { siteInspections, canInspectAt } from "./SiteInspections";
 import { addUpperEvidence, createSignaller, addFireWatchStation } from "./SiteEvidence";
@@ -415,6 +416,8 @@ export default function RealModels({tr, missionMode = "full", persist = false, u
       box(51.35,11.29,z,7.7,.15,.025,darkMetal);
       for(let x=47.5;x<55.3;x+=1.45)box(x,11.77,z,.055,1.1,.055,fence);
     }
+    const renderPerformance=createRenderPerformance(THREE,scene,renderer,host,tr);
+    renderer.info.autoReset=false;
     const navigation=createSiteNavigation(THREE,scene,colliders,colliderBoxes,physicalBoxes);
     const canStep=navigation.step;
     let yaw=Math.PI,pitch=-.13,drag=false,px=0,py=0,orbitAngle=.5;
@@ -454,7 +457,7 @@ export default function RealModels({tr, missionMode = "full", persist = false, u
       if(!active||contextUnavailable)return;
       // Keep the preview lightweight when its browser tab is not visible.
       // Continue scheduling so rendering resumes automatically on return.
-      if(document.hidden){last=now;raf=requestAnimationFrame(tick);return;}
+      if(document.hidden){renderPerformance.resetTiming();last=now;raf=requestAnimationFrame(tick);return;}
       // Reports do not need full-frame-rate 3D updates. Keep the scene
       // viewable while reducing GPU demand until the next attempt starts.
       const terminal=missionRef.current.phase==="finished"||missionRef.current.phase==="cancelled";
@@ -501,11 +504,16 @@ export default function RealModels({tr, missionMode = "full", persist = false, u
       if(appliedFindings!==missionRef.current.findings){appliedFindings=missionRef.current.findings;consequences.sync(Object.entries(appliedFindings).filter(([,finding])=>finding.completed).map(([id])=>id));}
       const missionNow=missionRef.current;
       weldingOperation?.update(simulationSeconds,!missionNow.findings.hotwork.completed);
+      renderPerformance.beforeRender();
+      const shadowUpdated=renderer.shadowMap.autoUpdate||renderer.shadowMap.needsUpdate;
+      renderer.info.reset();
+      const renderStarted=renderPerformance.debug?performance.now():0;
       renderer.render(scene,camera);
+      renderPerformance.sample(now,camera.position,modeRef.current,renderPerformance.debug?performance.now()-renderStarted:0,shadowUpdated,!terminal);
       if(!contextUnavailable)raf=requestAnimationFrame(tick);
     };
     raf=requestAnimationFrame(tick);
-    const resize=()=>{clearInput();drag=false;dragPointer=null;if(!host.clientWidth||!host.clientHeight)return;camera.aspect=host.clientWidth/host.clientHeight;camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight)};
+    const resize=()=>{renderPerformance.resetTiming();clearInput();drag=false;dragPointer=null;if(!host.clientWidth||!host.clientHeight)return;camera.aspect=host.clientWidth/host.clientHeight;camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight)};
     // Window resize alone misses responsive parent/layout changes. Observe
     // the actual canvas container so its aspect ratio stays accurate on mobile.
     const sizeObserver=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
@@ -513,7 +521,7 @@ export default function RealModels({tr, missionMode = "full", persist = false, u
     window.addEventListener("resize",resize);
     resize();
     if(active)setReady(results.every(r=>r.status==="fulfilled")&&!!weldingOperation);
-    cleanup=()=>{sizeObserver?.disconnect();window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);window.removeEventListener("blur",blur);window.removeEventListener("pointerup",release);window.removeEventListener("pointercancel",release);window.removeEventListener("lostpointercapture",release);document.removeEventListener("visibilitychange",visibility);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointercancel",pointerUp);renderer?.domElement?.removeEventListener("lostpointercapture",pointerUp);renderer?.domElement?.removeEventListener("pointerup",inspect);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
+    cleanup=()=>{renderPerformance.dispose();sizeObserver?.disconnect();window.removeEventListener("resize",resize);window.removeEventListener("keydown",down);window.removeEventListener("keyup",up);window.removeEventListener("blur",blur);window.removeEventListener("pointerup",release);window.removeEventListener("pointercancel",release);window.removeEventListener("lostpointercapture",release);document.removeEventListener("visibilitychange",visibility);renderer?.domElement?.removeEventListener("pointerdown",pointerDown);renderer?.domElement?.removeEventListener("pointerup",pointerUp);renderer?.domElement?.removeEventListener("pointercancel",pointerUp);renderer?.domElement?.removeEventListener("lostpointercapture",pointerUp);renderer?.domElement?.removeEventListener("pointerup",inspect);renderer?.domElement?.removeEventListener("pointermove",pointerMove)};
    }catch(e){if(active){setReady(false);setSceneError(true);setStatus((tr?"3D sahne açılamadı. WebGL destekleyen bir tarayıcıda yeniden dene. ":"Unable to open the 3D scene. Retry in a WebGL-capable browser. ")+String(e))}}
   })();
   return()=>{active=false;cancelAnimationFrame(raf);cleanup();renderer?.domElement?.removeEventListener("webglcontextlost",contextLost);renderer?.dispose();renderer?.domElement?.remove();clearInput()};

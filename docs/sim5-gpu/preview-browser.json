@@ -1,0 +1,16 @@
+{
+  "base": "https://safebase-git-codex-sim5-demo-navig-cf6272-safebaseapps-projects.vercel.app",
+  "cases": [
+    {
+      "lang": "tr",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-git-codex-sim5-demo-navig-cf6272-safebaseapps-projects.vercel.app/tr/labs/sim5/demo?sim5Perf=1\nCall log:\n\u001b[2m  - navigating to \"https://safebase-git-codex-sim5-demo-navig-cf6272-safebaseapps-projects.vercel.app/tr/labs/sim5/demo?sim5Perf=1\", waiting until \"domcontentloaded\"\u001b[22m\n",
+      "result": "NOT VERIFIED"
+    },
+    {
+      "lang": "en",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-git-codex-sim5-demo-navig-cf6272-safebaseapps-projects.vercel.app/en/labs/sim5/demo?sim5Perf=1\nCall log:\n\u001b[2m  - navigating to \"https://safebase-git-codex-sim5-demo-navig-cf6272-safebaseapps-projects.vercel.app/en/labs/sim5/demo?sim5Perf=1\", waiting until \"domcontentloaded\"\u001b[22m\n",
+      "result": "NOT VERIFIED"
+    }
+  ],
+  "network": "Read-only: only GET to Preview hostname and esm.sh; live auth/payment/analytics/data requests blocked."
+}

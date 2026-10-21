@@ -1,0 +1,172 @@
+CHECK leak: complete TR/EN scene evidence and control data
+CHECK hotwork: complete TR/EN scene evidence and control data
+CHECK lifting: complete TR/EN scene evidence and control data
+CHECK access: complete TR/EN scene evidence and control data
+CHECK droppedTool: complete TR/EN scene evidence and control data
+CHECK droppedTool: same XZ on ground cannot inspect upper finding
+CHECK materials: complete TR/EN scene evidence and control data
+CHECK materials: same XZ on ground cannot inspect upper finding
+desktop main-road [ 1.0986808540338558e-14, 1.864928946940783, 0.28589999999990195 ]
+desktop factory-gate [ -13.879506186420013, 1.5600055072972312, 0.0024607981814387288 ]
+desktop welding-approach [ -17.762193513629818, 1.7548920191973696, -1.8844320787790356 ]
+CHECK desktop: hotwork rejects wrong control and records correct decision
+desktop factory-exit [ -16.99876561138732, 1.7550000001490116, 20.035377533717085 ]
+desktop lifting-outside [ -16.9999922910977, 1.8799839142810741, 46.86707750567679 ]
+CHECK desktop: lifting rejects wrong control and records correct decision
+CHECK desktop: lifting exclusion volume prevents entry
+desktop lifting-return [ -17.118343348494385, 1.8789280045405803, 47.007151370682514 ]
+desktop west-gate [ -14.085251323770255, 1.879999998508411, 47.0001958293896 ]
+desktop road-crossing [ 0.030211560735318013, 1.8586269580566055, 46.96782599551661 ]
+desktop tank-gate [ 0.00013439696090796133, 1.7700004344514841, -5.764565426873893 ]
+desktop access-side-approach [ 16.847032652236933, 1.8799999990902923, -8.970888814552922 ]
+CHECK desktop: access rejects wrong control and records correct decision
+desktop access-bypass [ 24.89698133803881, 1.7550000011963207, -8.999631743382457 ]
+desktop leak-safe-approach [ 24.022178176682356, 1.7550000001490116, -15.826914148474577 ]
+CHECK desktop: leak rejects wrong control and records correct decision
+desktop tank-south [ 24.99307728857888, 1.7550000001490116, 13.78887555574427 ]
+desktop east-aisle [ 64.77422337314397, 1.7550000001490116, 13.998806707545919 ]
+desktop stair-approach [ 64.99857216586305, 1.7550000001490116, -14.816519944414985 ]
+desktop stair-bottom [ 63.37422142718168, 1.7550000001490116, -14.991982526594565 ]
+desktop ascent-17 [ 63.309555455717046, 1.9496419205687532, -16.741487828711332 ]
+desktop ascent-19 [ 63.30102328835914, 4.287188570522662, -18.758169779867732 ]
+desktop ascent-21 [ 63.30011057755464, 6.422562488491147, -20.75816957160744 ]
+desktop ascent-22 [ 63.2996542221524, 6.855345476889467, -21.758169467477277 ]
+desktop ascent-24 [ 63.298741602619, 8.74857661542778, -23.75796925923779 ]
+desktop ascent-26 [ 63.29784413408494, 10.874881069428218, -25.724569054455433 ]
+desktop ascent-26.6 [ 63.29757032084359, 11.54471492811551, -26.324568991977344 ]
+CHECK desktop: real input raises eye Y by over 9 metres
+desktop top-landing [ 63.29806755234786, 11.556155569781456, -26.39116713580157 ]
+desktop connector [ 62.75910473860675, 11.55051772094691, -26.565966007091674 ]
+desktop upper-access [ 61.79484993301958, 12.219748353737753, -26.63032150337675 ]
+desktop tank-platform [ 60.29494007896573, 12.906109324863602, -26.64676625063469 ]
+desktop valve-bypass [ 60.068973549432826, 12.90980989734941, -25.84479282992125 ]
+desktop dropped-tool-approach [ 58.26409564134424, 12.91343345603895, -25.369540584378473 ]
+CHECK desktop: droppedTool rejects wrong control and records correct decision
+CHECK desktop: droppedTool has an actual closed-container scene result
+desktop inner-platform [ 56.040599241545216, 12.912445850592768, -25.577497310840158 ]
+desktop bridge-entry [ 55.86548403744414, 12.909882936677528, -26.35809622532355 ]
+desktop upper-walkway [ 55.265301025968405, 12.909947543009482, -26.560521304639234 ]
+desktop materials-approach [ 52.23232269180644, 12.909999999105928, -26.597190971994472 ]
+CHECK desktop: materials rejects wrong control and records correct decision
+CHECK desktop: materials has an actual closed-container scene result
+CHECK desktop: upper walking surface keeps eye above 12.8m
+CHECK desktop: bridge rail blocks travel and retains upper level
+desktop rail-return [ 52.08329591917098, 12.90999999910593, -26.799414024689895 ]
+desktop return-bridge [ 54.74640392076302, 12.90999999910593, -26.662990669446195 ]
+desktop return-platform [ 55.546343118758365, 12.909040194004266, -26.65312763185235 ]
+desktop return-inner [ 55.73362748897663, 12.910709681871628, -25.875564383832046 ]
+desktop return-valve-bypass [ 59.72530980823986, 12.911895047967548, -25.61774223179066 ]
+desktop return-access [ 59.93098393177435, 12.908789982693698, -26.390644680297843 ]
+desktop down-connector [ 61.213579524022364, 12.790301534637047, -26.60265540348436 ]
+desktop down-seam [ 62.24608050208775, 11.897762537888825, -26.64065501261373 ]
+desktop down-landing [ 63.01265036792256, 11.556343835386974, -26.64745212920766 ]
+desktop descent-26 [ 63.188381724997356, 11.556156176104185, -26.251496664362644 ]
+desktop descent-24 [ 63.28740051366615, 9.260388021051547, -24.254149593998932 ]
+desktop descent-22 [ 63.29839234975509, 7.1048414274803635, -22.2875803123464 ]
+desktop descent-20 [ 63.299797835389526, 5.962134077965297, -20.287780806243347 ]
+desktop descent-18 [ 63.30120346158658, 3.6023523901460397, -18.28778130018967 ]
+desktop descent-16 [ 63.302667140145594, 1.9540123249017416, -16.20518181453599 ]
+desktop descent-15 [ 63.30332293504786, 1.772713358661024, -15.272082044986723 ]
+CHECK desktop: returns to ground by the same stairs
+CHECK desktop: release leaves no horizontal stuck movement
+CHECK desktop: all six scene decisions complete before explicit finish
+desktop return-east [ 64.80039584521157, 1.7550000001936854, -15.032008844371182 ]
+desktop return-south [ 64.99931316462802, 1.7550000001490118, 13.899707344960516 ]
+desktop wall-approach-south [ 25.101538600990786, 1.7550000001490118, 13.999753730066402 ]
+desktop tank-wall-approach [ 25.001698457910166, 1.7550000001490118, 0.2339157829659592 ]
+CHECK desktop: imported tank wall blocks the player
+CHECK desktop: explicit finish produces measured score and wrong-decision report
+CHECK desktop: real WebGL and no horizontal page overflow
+CHECK desktop: replay restores both original upper evidence positions and removes control lids
+mobile-portrait ascent-17 [ 63.3, 2.1591888345637034, -16.866900000000008 ]
+mobile-portrait ascent-19 [ 63.3, 4.057855730100483, -18.73349999999998 ]
+mobile-portrait ascent-21 [ 63.3, 6.421950472486507, -20.733499999999957 ]
+mobile-portrait ascent-22 [ 63.3, 6.855331663301145, -21.73349999999994 ]
+mobile-portrait ascent-24 [ 63.3, 8.743631063824912, -23.733499999999918 ]
+mobile-portrait ascent-26 [ 63.3, 10.875252440738663, -25.733499999999886 ]
+mobile-portrait ascent-26.6 [ 63.3, 11.544714390762474, -26.333499999999876 ]
+CHECK mobile-portrait: real input raises eye Y by over 9 metres
+mobile-portrait top-landing [ 63.3, 11.556155369474457, -26.400099999999874 ]
+mobile-portrait connector [ 62.69521996966306, 11.550428169655484, -26.589018169866193 ]
+mobile-portrait upper-access [ 61.72987563901755, 12.222132031936818, -26.638271426516233 ]
+mobile-portrait tank-platform [ 60.229910114253215, 12.906643367063408, -26.648441211109937 ]
+mobile-portrait valve-bypass [ 60.037174807560895, 12.910287060591005, -25.76952532118974 ]
+mobile-portrait dropped-tool-approach [ 58.218065591572845, 12.913377691565199, -25.350259414744684 ]
+CHECK mobile-portrait: droppedTool rejects wrong control and records correct decision
+CHECK mobile-portrait: droppedTool has an actual closed-container scene result
+mobile-portrait inner-platform [ 56.029706250875044, 12.912428581268296, -25.576275776941326 ]
+mobile-portrait bridge-entry [ 55.85535865644815, 12.909815825559786, -26.391234963844294 ]
+mobile-portrait upper-walkway [ 55.18534717368634, 12.909969362356426, -26.593928360301287 ]
+mobile-portrait materials-approach [ 52.25215250215302, 12.909999999105928, -26.599519325104584 ]
+CHECK mobile-portrait: materials rejects wrong control and records correct decision
+CHECK mobile-portrait: materials has an actual closed-container scene result
+CHECK mobile-portrait: upper walking surface keeps eye above 12.8m
+CHECK mobile-portrait: bridge rail blocks travel and retains upper level
+mobile-portrait rail-return [ 52.07506598895201, 12.90999999910593, -26.771281273463995 ]
+mobile-portrait return-bridge [ 54.739376577295886, 12.90999999910593, -26.660806620993124 ]
+mobile-portrait return-platform [ 55.57273332129813, 12.90905853370716, -26.652315612453542 ]
+mobile-portrait return-inner [ 55.76973293535755, 12.911306223663322, -25.740146005384535 ]
+mobile-portrait return-valve-bypass [ 59.800921321070234, 12.911791890625977, -25.606595419851317 ]
+mobile-portrait return-access [ 59.95085442301864, 12.908755642894203, -26.39241986903837 ]
+mobile-portrait down-connector [ 61.33189411878928, 12.612879124145653, -26.622048610065324 ]
+mobile-portrait down-seam [ 62.33140800475581, 11.892020787017726, -26.645965795520485 ]
+mobile-portrait down-landing [ 63.09820135392019, 11.556226776173363, -26.649159488881896 ]
+mobile-portrait descent-26 [ 63.2267963981536, 11.556156144876558, -26.235486242709747 ]
+mobile-portrait descent-24 [ 63.29443997004834, 9.252349648422337, -24.16979348066085 ]
+mobile-portrait descent-22 [ 63.299479252630896, 7.098981367143561, -22.203199937085827 ]
+mobile-portrait descent-20 [ 63.30451853521347, 5.957936883462294, -20.2366063935108 ]
+mobile-portrait descent-18 [ 63.300410933390886, 3.593299601156292, -18.203410542736115 ]
+mobile-portrait descent-16 [ 63.295798063411816, 1.9529525716226845, -15.920115202349631 ]
+mobile-portrait descent-15 [ 63.299528595193266, 1.7621966442920025, -15.103223720491362 ]
+CHECK mobile-portrait: returns to ground by the same stairs
+CHECK mobile-portrait: release leaves no horizontal stuck movement
+CHECK mobile-portrait: explicit finish produces measured score and wrong-decision report
+CHECK mobile-portrait: real WebGL and no horizontal page overflow
+CHECK mobile-portrait: replay restores both original upper evidence positions and removes control lids
+mobile-landscape ascent-17 [ 63.3, 2.1537902127745783, -16.866200000000006 ]
+mobile-landscape ascent-19 [ 63.3, 4.287293269112903, -18.76619999999997 ]
+mobile-landscape ascent-21 [ 63.3, 6.4258020617130756, -20.76619999999994 ]
+mobile-landscape ascent-22 [ 63.3, 6.855363323838854, -21.832799999999924 ]
+mobile-landscape ascent-24 [ 63.3, 8.75498365843787, -23.7991999999999 ]
+mobile-landscape ascent-26 [ 63.3, 10.87962543952952, -25.799199999999864 ]
+mobile-landscape ascent-26.6 [ 63.3, 11.549874915260327, -26.39939999999986 ]
+CHECK mobile-landscape: real input raises eye Y by over 9 metres
+mobile-landscape top-landing [ 63.3, 11.556156016510293, -26.49939999999986 ]
+mobile-landscape connector [ 62.710356949426966, 11.55042816965548, -26.610400328427083 ]
+mobile-landscape upper-access [ 61.67770948866003, 12.381674388949772, -26.64418585449409 ]
+mobile-landscape tank-platform [ 60.24431809592556, 12.9061634965774, -26.649153271797296 ]
+mobile-landscape valve-bypass [ 60.055300272714064, 12.90989186463036, -25.837471177311798 ]
+mobile-landscape dropped-tool-approach [ 58.1849930992398, 12.91331602854802, -25.348376792912998 ]
+CHECK mobile-landscape: droppedTool rejects wrong control and records correct decision
+CHECK mobile-landscape: droppedTool has an actual closed-container scene result
+mobile-landscape inner-platform [ 56.063567041667646, 12.912492565447153, -25.572193061878664 ]
+mobile-landscape bridge-entry [ 55.857714156415845, 12.909766526878705, -26.413988850436358 ]
+mobile-landscape upper-walkway [ 55.21480879233534, 12.909957188012845, -26.590892589335542 ]
+mobile-landscape materials-approach [ 52.215020830434135, 12.909999999105928, -26.599391038137135 ]
+CHECK mobile-landscape: materials rejects wrong control and records correct decision
+CHECK mobile-landscape: materials has an actual closed-container scene result
+CHECK mobile-landscape: upper walking surface keeps eye above 12.8m
+CHECK mobile-landscape: bridge rail blocks travel and retains upper level
+mobile-landscape rail-return [ 52.051748485275674, 12.90999999910593, -26.738639440692115 ]
+mobile-landscape return-bridge [ 54.78371403688046, 12.90999999910593, -26.65650257415161 ]
+mobile-landscape return-platform [ 55.58349766610546, 12.909068534017948, -26.65138530694305 ]
+mobile-landscape return-inner [ 55.76501798669447, 12.911176459147748, -25.769880699346896 ]
+mobile-landscape return-valve-bypass [ 59.794976974703665, 12.911796397189812, -25.608224289127186 ]
+mobile-landscape return-access [ 59.94945502495272, 12.908762308634648, -26.39316793805445 ]
+mobile-landscape down-connector [ 61.26493106849999, 12.790298741201209, -26.611063185485946 ]
+mobile-landscape down-seam [ 62.2644344952837, 11.895458069316396, -26.642573498837187 ]
+mobile-landscape down-landing [ 63.097813065566925, 11.556226559414391, -26.64855000222372 ]
+mobile-landscape descent-26 [ 63.22674401275502, 11.556156145112546, -26.234981324907377 ]
+mobile-landscape descent-24 [ 63.29225618846378, 9.256932522451308, -24.236254681558176 ]
+mobile-landscape descent-22 [ 63.29918189039202, 7.098981864602857, -22.236266672930995 ]
+mobile-landscape descent-20 [ 63.299913514348404, 5.959029304744728, -20.23626680674943 ]
+mobile-landscape descent-18 [ 63.30064506514239, 3.601654668487989, -18.236466940554447 ]
+mobile-landscape descent-16 [ 63.30148065286303, 1.9521899329957952, -15.952267093388446 ]
+mobile-landscape descent-15 [ 63.30177948466804, 1.764709978178519, -15.135367148046594 ]
+CHECK mobile-landscape: returns to ground by the same stairs
+CHECK mobile-landscape: release leaves no horizontal stuck movement
+CHECK mobile-landscape: explicit finish produces measured score and wrong-decision report
+CHECK mobile-landscape: real WebGL and no horizontal page overflow
+CHECK mobile-landscape: replay restores both original upper evidence positions and removes control lids
+CHECK no browser errors
+PASS 52
