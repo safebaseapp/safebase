@@ -1,0 +1,5 @@
+import fs from 'node:fs';import {execFileSync} from 'node:child_process';import assert from 'node:assert/strict';
+const base='87fd75d302471ba1f03340fe7ba93b28b5cbf405',allowed=['app/app/[locale]/labs/sim5/RealModels.tsx','app/app/[locale]/labs/sim5/RenderPerformance.ts'];
+const paths=execFileSync('git',['diff','--name-only',base,'--','app'],{encoding:'utf8'}).trim().split('\n').filter(Boolean);assert.deepEqual(paths.sort(),allowed.sort());
+for(const p of ['app/app/[locale]/labs/sim5/SiteNavigation.ts','app/app/[locale]/labs/sim5/MissionState.ts','app/app/[locale]/labs/sim5/SiteInspections.ts','app/app/[locale]/labs/sim5/useMission.ts'])assert.equal(fs.readFileSync(p,'utf8'),execFileSync('git',['show',`${base}:${p}`],{encoding:'utf8'}));
+fs.writeFileSync('docs/sim5-gpu/protection.json',JSON.stringify({base,result:'PASS',allowedApplicationChanges:paths,note:'All other app code/assets, collision/navigation, access/auth, payment/Supabase/XP/scoring/questions and deployment config unchanged. No live customer tests.'},null,2));console.log('PASS protected paths');

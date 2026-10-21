@@ -73,3 +73,9 @@ Geri alma yalnızca bu PR'daki `SiteNavigation.ts` değişikliğinin geri alınm
 ### Gerçek Next giriş denemesi — ortam engeli
 
 Yerel normal production build sunucusunda TR/EN DEMO HTML ve başlangıç arayüzü açıldı; ancak sahne, `https://esm.sh/three@0.180.0` dinamik import isteği başarısız olduğu için başlatılamadı. İki dilde hata fallback'i görüldü. İlk denemede başlangıç düğmesinin açılması **DOĞRULANAMADI**; bu başarısız deneme korunmuştur. İlk denemenin kanıtı [next-smoke-first-attempt.json](next-smoke-first-attempt.json). Ağ kısıtı olasılığı nedeniyle yükseltilmiş izinle yeniden denendi; son sonuç [next-smoke.json](next-smoke.json): **TR ve EN PASS, HTTP 200, denetim başarıyla başladı, tarayıcı istisnası yok**. CDN modül veya GLB ikamesi yapılmadı. Gerçek Next rotasının tam yürüyüş/FPS testi yapıldığı iddia edilmez. Yerel sunucu logunda ayrıca eksik Supabase URL/key nedeniyle bazı genel isteklerde hata görüldü; bu görev için canlı anahtar eklenmedi veya auth/proxy kodu değiştirilmedi.
+
+## GPU follow-up — Issue #123
+
+Kullanıcı bu CPU-only Preview'da ciddi kasmanın sürdüğünü doğruladı. Aynı Draft PR #122 dalına GPU gölge önbelleği, ölçüme dayalı DPR ve yalnız Preview/development opt-in A/B paneli eklendi. Önceki CPU kanıtları burada korunur; render ölçümleri, TR/EN sonuçlar ve kalan NO-GO sınırları [GPU AUDIT](../sim5-gpu/AUDIT.md), yeni dağıtım durumu [Preview](../sim5-gpu/PREVIEW.md) içinde. Yeni çalışma “ciddi kasma gerçek cihazda çözüldü” onayı değildir.
+
+English: owner-confirmed stutter persisted after the CPU fix. The same Draft PR now includes a measured GPU follow-up and opt-in Preview diagnostics. Hardware smoothness remains unverified; see the GPU audit and deployment evidence linked above.
