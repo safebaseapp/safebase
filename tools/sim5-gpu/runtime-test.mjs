@@ -1,0 +1,20 @@
+import {startServer} from '../sim5-review/server.mjs';
+import {chromium} from '../sim5-review/node_modules/playwright/index.mjs';
+import fs from 'node:fs';import assert from 'node:assert/strict';
+process.env.SIM5_NAV_PROBE='1';const {server,url}=await startServer(0),browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const checks=[],rows=[],check=(n,v)=>{assert.ok(v,n);checks.push(n);console.log('PASS',n)};
+try{const p=await browser.newPage({viewport:{width:1280,height:900},deviceScaleFactor:2});
+await p.route('**/review-three.js',r=>r.fulfill({contentType:'text/javascript',body:`export * from '/vendor/three/build/three.module.js';import {WebGLRenderer as R} from '/vendor/three/build/three.module.js';export class WebGLRenderer extends R{constructor(o){super(o);const render=this.render.bind(this);this.render=(s,c)=>{window.siteScene=s;window.siteCamera=c;window.siteRenderer=this;if(!window.runGPU)return;window.runGPU=false;this.info.reset();const gl=this.getContext();gl.finish();let shadows=0;const orig=this.shadowMap.render.bind(this.shadowMap);this.shadowMap.render=(...a)=>{const n=this.info.render.calls;orig(...a);shadows=this.info.render.calls-n};const start=performance.now();render(s,window.gpuCamera||c);gl.finish();window.gpuResult={ms:performance.now()-start,calls:this.info.render.calls,triangles:this.info.render.triangles,shadowCalls:shadows,dpr:this.getPixelRatio()};this.shadowMap.render=orig;}}}` }));
+await p.goto(url+'/site.html?mode=demo&sim5Perf=1');await p.waitForFunction(()=>window.reviewNavigation,null,{timeout:120000});check('debug opt-in panel appears',await p.locator('[data-sim5-perf]').count()===1);
+for(const profile of ['baseline','high','balanced','low']){
+ await p.getByLabel('Render profile').selectOption(profile);
+ for(let pass=0;pass<2;pass++)for(const [zone,position,target]of [['welding',[-18,1.8,-2],[-22,1,-5]],['road',[0,1.8,15],[-17,1,25]],['lifting',[-17,1.8,47],[-30,3,47]],['return',[-18,1.8,-2],[-22,1,-5]]]){
+ await p.evaluate(({position,target})=>{window.gpuCamera=window.siteCamera.clone();window.gpuCamera.position.fromArray(position);window.gpuCamera.lookAt(...target);window.gpuResult=null;window.runGPU=true},{position,target});await p.waitForFunction(()=>window.gpuResult,null,{timeout:120000});const result=await p.evaluate(()=>window.gpuResult);rows.push({profile,pass,zone,...result});if(pass===1&&profile==='high')check(zone+' cached shadow pass has zero calls',result.shadowCalls===0);
+ if(pass===1&&(profile==='baseline'||profile==='high'))await p.locator('canvas').screenshot({path:`docs/sim5-gpu/${profile}-${zone}.png`});
+ }
+}
+await p.getByLabel('Render profile').selectOption('high');await p.evaluate(()=>{const m=window.siteScene.getObjectByName('bench-top');m.position.y+=.01;window.runGPU=true;window.gpuResult=null});await p.waitForFunction(()=>window.gpuResult);check('moved equipment invalidates cache',await p.evaluate(()=>window.gpuResult.shadowCalls>0));
+await p.evaluate(()=>{const m=window.siteScene.getObjectByName('bench-top');m.visible=false;window.runGPU=true;window.gpuResult=null});await p.waitForFunction(()=>window.gpuResult);check('visibility change invalidates cache',await p.evaluate(()=>window.gpuResult.shadowCalls>0));
+await p.goto(url+'/site.html?mode=demo');await p.waitForFunction(()=>window.reviewNavigation,null,{timeout:120000});check('panel absent without flag',await p.locator('[data-sim5-perf]').count()===0);
+fs.writeFileSync('docs/sim5-gpu/runtime-results.json',JSON.stringify({checks,rows,note:'SwiftShader rasterization and gl.finish completion, not hardware FPS. Camera positions fixed in test wrapper; two passes per quality. RAF runs on demand in this integration fixture and is NOT a real FPS benchmark.'},null,2));
+}finally{await browser.close();server.closeAllConnections();server.close()}
