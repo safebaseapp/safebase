@@ -1,0 +1,912 @@
+[
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=tr",
+    "role": "guest",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/login"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=tr",
+    "role": "guest",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/login"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=tr",
+    "role": "guest",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/login"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=tr",
+    "role": "guest",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/login"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "guest",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 401,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=tr",
+    "role": "free",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=tr",
+    "role": "free",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=tr",
+    "role": "free",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=tr",
+    "role": "free",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "free",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 403,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=tr",
+    "role": "trial",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=tr",
+    "role": "trial",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=tr",
+    "role": "trial",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=tr",
+    "role": "trial",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "trial",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=tr",
+    "role": "expired",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=tr",
+    "role": "expired",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=tr",
+    "role": "expired",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=tr",
+    "role": "expired",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "expired",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 403,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=tr",
+    "role": "paid",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=tr",
+    "role": "paid",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=tr",
+    "role": "paid",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=tr",
+    "role": "paid",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "paid",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=tr",
+    "role": "admin",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=tr",
+    "role": "admin",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=tr",
+    "role": "admin",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=tr",
+    "role": "admin",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "admin",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=tr",
+    "role": "suspended",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/account-suspended"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=tr",
+    "role": "suspended",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/dashboard"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=tr",
+    "role": "suspended",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/dashboard"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=tr",
+    "role": "suspended",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/tr/dashboard"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "suspended",
+    "locale": "tr",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 403,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=en",
+    "role": "guest",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/login"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=en",
+    "role": "guest",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/login"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=en",
+    "role": "guest",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/login"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=en",
+    "role": "guest",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/login"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "guest",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 401,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=en",
+    "role": "free",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=en",
+    "role": "free",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=en",
+    "role": "free",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=en",
+    "role": "free",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "free",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 403,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=en",
+    "role": "trial",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=en",
+    "role": "trial",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=en",
+    "role": "trial",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=en",
+    "role": "trial",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "trial",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=en",
+    "role": "expired",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=en",
+    "role": "expired",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=en",
+    "role": "expired",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=en",
+    "role": "expired",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/upgrade"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "expired",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 403,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=en",
+    "role": "paid",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=en",
+    "role": "paid",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=en",
+    "role": "paid",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=en",
+    "role": "paid",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "paid",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=en",
+    "role": "admin",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=en",
+    "role": "admin",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/pdf",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=en",
+    "role": "admin",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=en",
+    "role": "admin",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "admin",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "200 with nonempty document",
+    "actual": {
+      "status": 200,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/toolbox/working-at-height/pdf?locale=en",
+    "role": "suspended",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/account-suspended"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height?locale=en",
+    "role": "suspended",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/dashboard"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/toolbox/working-at-height/word?locale=en",
+    "role": "suspended",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/dashboard"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/premium/posters/working-at-height-rules/word?locale=en",
+    "role": "suspended",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 307,
+      "type": null,
+      "location": "/en/dashboard"
+    },
+    "result": "pass"
+  },
+  {
+    "route": "/api/account/branding?user_id=foreign-fixture",
+    "role": "suspended",
+    "locale": "en",
+    "device": "server; mobile/desktop invariant",
+    "expected": "auth/upgrade/suspension denial",
+    "actual": {
+      "status": 403,
+      "type": "application/json",
+      "location": null
+    },
+    "result": "pass"
+  }
+]

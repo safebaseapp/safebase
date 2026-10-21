@@ -1,0 +1,14 @@
+PASS bad signature cannot write
+PASS unpaid unmatched subscription never grants pending access
+PASS unsupported order event never grants pending access
+PASS old subscription cannot replace current paid binding
+PASS provider current status overrides stale active event
+PASS unapproved new variant cannot create entitlement
+PASS active known variant reconciles and repeated state is idempotent
+PASS bound legacy variant remains valid without allowlist
+PASS bound subscription survives provider/account email divergence
+PASS approved synthetic normal paid variant activates unbound account
+PASS unconfigured normal variant fails closed without writes
+PASS new subscription cannot claim mismatched account email
+PASS cancelled bound membership persists finite future deadline
+PASS cancelled elapsed membership is revoked

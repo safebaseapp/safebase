@@ -1,0 +1,122 @@
+[
+  {
+    "locale": "tr",
+    "width": 390,
+    "step": "guest checkout -> login retains next",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "step": "real UI login using isolated protocol -> Free upgrade page",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "step": "Free -> Premium checkout intent (window.open stub; no payment)",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "step": "Free full SIM stays server-locked",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "width": 390,
+    "step": "paid fixture full six-finding SIM entry permitted; no mission/XP writes",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "step": "guest checkout -> login retains next",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "step": "real UI login using isolated protocol -> Free upgrade page",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "step": "Free -> Premium checkout intent (window.open stub; no payment)",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "step": "Free full SIM stays server-locked",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "width": 1440,
+    "step": "paid fixture full six-finding SIM entry permitted; no mission/XP writes",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "step": "guest checkout -> login retains next",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "step": "real UI login using isolated protocol -> Free upgrade page",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "step": "Free -> Premium checkout intent (window.open stub; no payment)",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "step": "Free full SIM stays server-locked",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "width": 390,
+    "step": "paid fixture full six-finding SIM entry permitted; no mission/XP writes",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "step": "guest checkout -> login retains next",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "step": "real UI login using isolated protocol -> Free upgrade page",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "step": "Free -> Premium checkout intent (window.open stub; no payment)",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "step": "Free full SIM stays server-locked",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "width": 1440,
+    "step": "paid fixture full six-finding SIM entry permitted; no mission/XP writes",
+    "result": "pass"
+  }
+]

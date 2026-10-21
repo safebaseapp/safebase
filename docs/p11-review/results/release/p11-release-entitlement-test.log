@@ -1,0 +1,4 @@
+PASS free
+PASS expired trial with stale plan
+PASS active paid
+PASS admin

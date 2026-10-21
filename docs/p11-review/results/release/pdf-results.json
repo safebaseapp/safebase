@@ -1,0 +1,538 @@
+[
+  {
+    "name": "tr/guest/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/guest/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/guest/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/guest/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/free/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/free/standard nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "toolbox-standard-tr.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "tr/free/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/free/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/free/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/expired/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/expired/standard nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/expired/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/expired/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/expired/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/paid/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/paid/standard nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/paid/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/paid/branded nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "toolbox-branded-tr.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "toolbox-branded-tr.pdf expected page count",
+    "result": "pass"
+  },
+  {
+    "name": "tr/paid/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/paid/word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/paid/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/paid/poster-word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/admin/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/admin/standard nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/admin/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/admin/branded nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/admin/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/admin/word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/admin/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/admin/poster-word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/suspended/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/suspended/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/suspended/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/suspended/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/trial/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/trial/standard nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/trial/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/trial/branded nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/trial/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/trial/word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/trial/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "tr/trial/poster-word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/guest/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/guest/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/guest/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/guest/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/free/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/free/standard nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "toolbox-standard-en.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "en/free/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/free/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/free/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/expired/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/expired/standard nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/expired/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/expired/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/expired/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/paid/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/paid/standard nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/paid/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/paid/branded nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "toolbox-branded-en.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "toolbox-branded-en.pdf expected page count",
+    "result": "pass"
+  },
+  {
+    "name": "en/paid/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/paid/word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/paid/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/paid/poster-word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/admin/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/admin/standard nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/admin/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/admin/branded nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/admin/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/admin/word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/admin/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/admin/poster-word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/suspended/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/suspended/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/suspended/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/suspended/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/trial/standard server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/trial/standard nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/trial/branded server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/trial/branded nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/trial/word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/trial/word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "en/trial/poster-word server gate",
+    "result": "pass"
+  },
+  {
+    "name": "en/trial/poster-word nonzero/type",
+    "result": "pass"
+  },
+  {
+    "name": "tr/risk Free actual print handler",
+    "result": "pass"
+  },
+  {
+    "name": "risk-tr-a4.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "tr/risk PDF has document content",
+    "result": "pass"
+  },
+  {
+    "name": "tr/risk Turkish glyphs preserved",
+    "result": "pass"
+  },
+  {
+    "name": "tr/method Free actual print handler",
+    "result": "pass"
+  },
+  {
+    "name": "method-tr-a4.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "tr/method PDF has document content",
+    "result": "pass"
+  },
+  {
+    "name": "tr Method Statement title/control header preserved",
+    "result": "pass"
+  },
+  {
+    "name": "tr/method Turkish glyphs preserved",
+    "result": "pass"
+  },
+  {
+    "name": "tr/poster Free actual print handler",
+    "result": "pass"
+  },
+  {
+    "name": "poster-tr-a4.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "tr/poster PDF has document content",
+    "result": "pass"
+  },
+  {
+    "name": "tr/inspection Free actual print handler",
+    "result": "pass"
+  },
+  {
+    "name": "inspection-tr-a4.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "tr/inspection PDF has document content",
+    "result": "pass"
+  },
+  {
+    "name": "sign-tr-A4.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "sign-tr-A4.pdf expected page count",
+    "result": "pass"
+  },
+  {
+    "name": "tr/A4 correct physical PDF size",
+    "result": "pass"
+  },
+  {
+    "name": "sign-tr-A3.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "sign-tr-A3.pdf expected page count",
+    "result": "pass"
+  },
+  {
+    "name": "tr/A3 correct physical PDF size",
+    "result": "pass"
+  },
+  {
+    "name": "tr Free PNG nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "en/risk Free actual print handler",
+    "result": "pass"
+  },
+  {
+    "name": "risk-en-a4.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "en/risk PDF has document content",
+    "result": "pass"
+  },
+  {
+    "name": "en/risk Turkish glyphs preserved",
+    "result": "pass"
+  },
+  {
+    "name": "en/method Free actual print handler",
+    "result": "pass"
+  },
+  {
+    "name": "method-en-a4.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "en/method PDF has document content",
+    "result": "pass"
+  },
+  {
+    "name": "en Method Statement title/control header preserved",
+    "result": "pass"
+  },
+  {
+    "name": "en/method Turkish glyphs preserved",
+    "result": "pass"
+  },
+  {
+    "name": "en/poster Free actual print handler",
+    "result": "pass"
+  },
+  {
+    "name": "poster-en-a4.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "en/poster PDF has document content",
+    "result": "pass"
+  },
+  {
+    "name": "en/inspection Free actual print handler",
+    "result": "pass"
+  },
+  {
+    "name": "inspection-en-a4.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "en/inspection PDF has document content",
+    "result": "pass"
+  },
+  {
+    "name": "sign-en-A4.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "sign-en-A4.pdf expected page count",
+    "result": "pass"
+  },
+  {
+    "name": "en/A4 correct physical PDF size",
+    "result": "pass"
+  },
+  {
+    "name": "sign-en-A3.pdf parses and nonempty",
+    "result": "pass"
+  },
+  {
+    "name": "sign-en-A3.pdf expected page count",
+    "result": "pass"
+  },
+  {
+    "name": "en/A3 correct physical PDF size",
+    "result": "pass"
+  },
+  {
+    "name": "en Free PNG nonempty",
+    "result": "pass"
+  }
+]

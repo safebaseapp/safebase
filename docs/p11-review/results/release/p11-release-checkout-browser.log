@@ -1,0 +1,1 @@
+PASS duplicate gesture opens one checkout; existing checkout_start reaches GA4 once without identity; offline shows retry feedback; no live checkout/collector

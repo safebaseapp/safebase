@@ -1,0 +1,193 @@
+
+> app@0.1.0 prebuild
+> node scripts/polish-toolbox-pdfs.mjs && node scripts/qa-toolbox-pdfs.mjs && node scripts/qa-download-flows.mjs
+
+[toolbox-pdf] Polished 280 toolbox PDFs: branded metadata, footer spacing, dates and known EN/batch text issues.
+
+SERNEM Toolbox PDF QA
+---------------------
+Master slugs: 70
+Standard TR/EN files present: 140/140
+Branded-base PDFs inspected: 140/140
+Required branded-base page count: 4
+
+PASS: all 70 Toolbox topics have TR/EN standard files and 4-page branded-base PDFs.
+SERNEM download/auth QA: PASS
+
+> app@0.1.0 build
+> next build
+
+▲ Next.js 16.2.10 (Turbopack)
+- Experiments (use with caution):
+  · serverActions
+
+  Creating an optimized production build ...
+Turbopack build encountered 1 warnings:
+./next.config.ts
+Encountered unexpected file in NFT list
+A file was traced that indicates that the whole project was traced unintentionally. Somewhere in the import trace below, there are:
+- filesystem operations (like path.join, path.resolve or fs.readFile), or
+- very dynamic requires (like require('./' + foo)).
+To resolve this, you can
+- remove them if possible, or
+- only use them in development, or
+- make sure they are statically scoped to some subfolder: path.join(process.cwd(), 'data', bar), or
+- add ignore comments: path.join(/*turbopackIgnore: true*/ process.cwd(), bar)
+
+Import trace:
+  Server Component:
+    ./next.config.ts
+    ./app/[locale]/admin/content/page.tsx
+
+
+✓ Compiled successfully in 25.3s
+  Running TypeScript ...
+  Finished TypeScript in 18.4s ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/849) ...
+  Generating static pages using 4 workers (212/849)
+  Generating static pages using 4 workers (424/849)
+  Generating static pages using 4 workers (636/849)
+✓ Generating static pages using 4 workers (849/849) in 1785ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /[locale]
+├ ƒ /[locale]/about
+├ ƒ /[locale]/account
+├ ƒ /[locale]/account-suspended
+├ ƒ /[locale]/admin
+├ ƒ /[locale]/admin-check
+├ ƒ /[locale]/admin/content
+├ ƒ /[locale]/admin/features
+├ ƒ /[locale]/admin/memberships
+├ ƒ /[locale]/admin/rewards
+├ ƒ /[locale]/admin/settings
+├ ƒ /[locale]/admin/users
+├ ƒ /[locale]/admin/users/[id]
+├ ƒ /[locale]/ai-assistant
+├ ƒ /[locale]/checklists
+├ ƒ /[locale]/checklists/[slug]
+├ ƒ /[locale]/checklists/all
+├ ƒ /[locale]/checklists/confined-space
+├ ƒ /[locale]/checklists/hot-work
+├ ƒ /[locale]/checklists/lifting
+├ ƒ /[locale]/checklists/loto
+├ ƒ /[locale]/checklists/scaffold
+├ ƒ /[locale]/checklists/work-at-height
+├ ƒ /[locale]/contact
+├ ƒ /[locale]/cookies
+├ ƒ /[locale]/dashboard
+├ ƒ /[locale]/dashboard/labs
+├ ƒ /[locale]/downloads
+├ ƒ /[locale]/faq
+├ ƒ /[locale]/forgot-password
+├ ƒ /[locale]/hse-performance
+├ ƒ /[locale]/hse-performance/field-report
+├ ƒ /[locale]/hse-performance/incidents
+├ ƒ /[locale]/hse-performance/observations
+├ ƒ /[locale]/hse-performance/report
+├ ƒ /[locale]/hse-performance/report/print
+├ ƒ /[locale]/knowledge-base
+├ ƒ /[locale]/knowledge-base/[slug]
+├ ƒ /[locale]/knowledge-base/chemical-safety
+├ ƒ /[locale]/knowledge-base/confined-space
+├ ƒ /[locale]/knowledge-base/crane-safety
+├ ƒ /[locale]/knowledge-base/electrical-safety
+├ ƒ /[locale]/knowledge-base/excavation
+├ ƒ /[locale]/knowledge-base/fire-safety
+├ ƒ /[locale]/knowledge-base/grinding
+├ ƒ /[locale]/knowledge-base/hot-work
+├ ƒ /[locale]/knowledge-base/loto
+├ ƒ /[locale]/knowledge-base/manual-handling
+├ ƒ /[locale]/knowledge-base/permit-to-work
+├ ƒ /[locale]/knowledge-base/ppe
+├ ƒ /[locale]/knowledge-base/scaffolding
+├ ƒ /[locale]/knowledge-base/working-at-height
+├ ƒ /[locale]/labs
+├ ƒ /[locale]/labs/ai-workplace-safety
+├ ƒ /[locale]/labs/daily-safety-brain
+├ ƒ /[locale]/labs/incident-simulator
+├ ƒ /[locale]/labs/incident-simulator/[scenarioId]
+├ ƒ /[locale]/labs/sim5
+├ ƒ /[locale]/labs/sim5/demo
+├ ƒ /[locale]/labs/spot-the-hazard
+├ ƒ /[locale]/labs/spot-the-hazard/[scenarioId]
+├ ƒ /[locale]/login
+├ ƒ /[locale]/posters
+├ ƒ /[locale]/posters/[slug]
+├ ƒ /[locale]/ppe-standards
+├ ƒ /[locale]/ppe-standards/[slug]
+├ ƒ /[locale]/premium-trial
+├ ƒ /[locale]/premium-trial/conditions
+├ ƒ /[locale]/privacy
+├ ƒ /[locale]/register
+├ ƒ /[locale]/reset-password
+├ ƒ /[locale]/risk-assessment
+├ ƒ /[locale]/risk-assessment/[slug]
+├ ƒ /[locale]/safety-pack
+├ ƒ /[locale]/safety-pack/[slug]
+├ ƒ /[locale]/safety-signs
+├ ƒ /[locale]/safety-signs/[slug]
+├ ƒ /[locale]/terms
+├ ƒ /[locale]/toolbox
+├ ƒ /[locale]/toolbox/[slug]
+├ ƒ /[locale]/tools
+├ ƒ /[locale]/tools/ltifr
+├ ƒ /[locale]/tools/method-statement
+├ ƒ /[locale]/tools/quick-risk-assessment
+├ ƒ /[locale]/tools/risk-matrix
+├ ƒ /[locale]/tools/severity-rate
+├ ƒ /[locale]/tools/simops
+├ ƒ /[locale]/tools/trir
+├ ƒ /[locale]/upgrade
+├ ƒ /ai-assistant
+├ ƒ /api/account
+├ ƒ /api/account/branding
+├ ƒ /api/account/subscription
+├ ƒ /api/ai/account-state
+├ ƒ /api/ai/assessment
+├ ƒ /api/ai/short-answer
+├ ƒ /api/ask
+├ ƒ /api/cron/agent-pilot
+├ ƒ /api/labs/attempt
+├ ƒ /api/labs/daily-brain
+├ ƒ /api/labs/incident-attempt
+├ ƒ /api/labs/incident-summary
+├ ƒ /api/labs/progress
+├ ƒ /api/labs/sim5/runs
+├ ƒ /api/premium-trial/cancel
+├ ƒ /api/premium-trial/checkout
+├ ƒ /api/premium/posters/[slug]
+├ ƒ /api/premium/posters/[slug]/word
+├ ƒ /api/premium/toolbox/[slug]
+├ ƒ /api/premium/toolbox/[slug]/word
+├ ƒ /api/safety-signs/download-access
+├ ƒ /api/toolbox/[slug]/pdf
+├ ƒ /api/webhooks/lemonsqueezy
+├ ƒ /auth/callback
+├ ƒ /checklists
+├ ƒ /guides
+├ ƒ /guides/[slug]
+├ ○ /manifest.webmanifest
+├ ○ /robots.txt
+├ ○ /sitemap.xml
+├ ƒ /tools
+├ ƒ /tools/ltifr
+├ ƒ /tools/risk-matrix
+├ ƒ /tools/severity-rate
+└ ƒ /tools/trir
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

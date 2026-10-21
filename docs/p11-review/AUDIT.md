@@ -2,6 +2,8 @@
 
 Review date: 21 October 2026 (Europe/Budapest). **A + B delivered together; production approval remains blocked.**
 
+Final safety re-review: **[Türkçe GO / NO-GO değerlendirmesi](RELEASE-REVIEW.md)**. Current affected-file ESLint is PASS (0 errors, 14 warnings); the four baseline errors below were subsequently fixed. Real variant/sandbox/Preview-access blockers remain. Historical initial-run evidence is retained; latest rerun evidence is in [results/release](results/release).
+
 ## Scope and preservation
 
 Base: `e25c7c11eb6902f4ecefe096fee4a8e1b959bc11`, verified remote main. Merged PRs #109 (SIM showcase), #110 (Budapest daily XP), #113 (homepage community) are ancestors. Work uses `codex/sernem-conversion-mobile-pdf-qa-p11`; the stale Pack 9 branch was not reused/reset. First implementation checkpoint: `283edb2`.
@@ -32,9 +34,9 @@ Full per-row role/route/language/expected/actual results: [server access (70)](r
 | `cd app && npm run qa:toolbox-pdfs` | PASS | PASS, 140 standard + 140 branded-base localized files / 70 topics |
 | `npm run qa:download-flows` | PASS | PASS; source-token checks, not authorization proof |
 | `npx tsc --noEmit` | PASS | PASS |
-| ESLint all affected TS/TSX | Existing Quick Risk errors independently reproduced on base | **FAIL: 4 errors, 15 warnings**, all errors pre-existing in Quick Risk Assessment; see unresolved section |
+| ESLint all affected TS/TSX | Existing Quick Risk errors independently reproduced on base | **PASS: 0 errors, 14 warnings** in final safety review; initial 4 errors fixed without disables/config changes |
 | `npm run build` | Not used as baseline runtime | PASS, normal unmodified prebuild and production compile/prerender |
-| Entitlement / billing / webhook | 1 / 2 / 5 failing cases | 4 / 7 / 7 cases PASS |
+| Entitlement / billing / webhook | 1 / 2 / 5 failing cases | 4 / 7 / 16 cases PASS after final safety review |
 | Auth components / callback / trial | 10 component failures; callback absent | PASS; 21 mocked trial boundary/DST/one-use/parallel-checkout assertions |
 | Resource classification / early click | 3 failures / 1 failure | 4 PASS / delayed-auth browser PASS |
 | Native server role matrix | Hypotheses initially | 70/70 PASS, TR/EN, guest/Free/trial/expired/paid/admin/suspended |
@@ -69,7 +71,7 @@ Only the missing GA4 mirror of existing `checkout_start` and duplicate gesture w
 
 ## Unresolved / release blockers
 
-1. **ESLint FAIL**: four baseline Quick Risk Assessment errors (Date.now/Math.random render purity, global location mutation, synchronous effect state). Same four reproduced from base source under unchanged config: [baseline lint](results/p11-baseline-risk-lint.log), [final lint](results/p11-lint-final.log). Kept out of a broad editor rewrite; remaining warnings include existing unused values/hooks/image advisory. Typecheck/build pass does not make lint pass.
+1. **Resolved in final safety review:** the four Quick Risk Assessment lint errors. Deterministic initial row ID, event-time IDs, router navigation and guarded dependent-selection adjustment replace render impurity/global mutation/effect cascade. [Current lint](results/release/p11-release-eslint.log): 0 errors, 14 existing warnings. The earlier [4-error run](results/p11-lint-final.log) remains historical evidence, not the current result.
 2. **Deployment configuration blocker:** strict new-subscription variant allowlist contains the existing trial variant plus optional comma-separated `LEMONSQUEEZY_PREMIUM_VARIANT_IDS`. The legacy normal checkout numeric variant is not discoverable from repository source. Before deployment, review and configure its exact approved IDs in a sandbox and verify a legitimate new paid activation. Otherwise a legitimate unbound paid subscription can be rejected. Existing bound subscriptions retain legacy mappings. No live env/config was changed.
 3. Real Supabase auth callback redirect allowlist/mail templates, email delivery/expired sessions, persisted customer entitlement/RLS/storage scopes, provider checkout/return/cancel/renewal/distributed webhook delivery are **not tested**. The new callback path must be reviewed against sandbox Auth redirect configuration before release. Mock CAS/reconciliation/repeat tests do not prove real provider ordering or distributed exactly-once delivery.
 4. New branding API scopes paths exclusively to verified `user.id` and ignores foreign IDs. **Live bucket/RLS policies are absent from available repository evidence and were not queried/changed.** Direct storage denial must be validated in an authorized isolated Supabase project before declaring storage-level security complete. User files remain untouched.

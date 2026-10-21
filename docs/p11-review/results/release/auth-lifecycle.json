@@ -1,0 +1,72 @@
+[
+  {
+    "locale": "tr",
+    "step": "real signup form -> isolated SDK signup; confirmation guidance",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "step": "PKCE SDK callback with local verifier -> requested localized page",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "step": "recovery request acknowledged by isolated protocol; no email sent",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "step": "local recovery code exchange -> password update fixture -> login",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "step": "invalid password shows localized error and retry enabled",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "step": "real sign-out clears browser session; server API denies",
+    "result": "pass"
+  },
+  {
+    "locale": "tr",
+    "step": "expired recovery link has disabled submit and retry link",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "step": "real signup form -> isolated SDK signup; confirmation guidance",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "step": "PKCE SDK callback with local verifier -> requested localized page",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "step": "recovery request acknowledged by isolated protocol; no email sent",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "step": "local recovery code exchange -> password update fixture -> login",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "step": "invalid password shows localized error and retry enabled",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "step": "real sign-out clears browser session; server API denies",
+    "result": "pass"
+  },
+  {
+    "locale": "en",
+    "step": "expired recovery link has disabled submit and retry link",
+    "result": "pass"
+  }
+]

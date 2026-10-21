@@ -1,0 +1,10 @@
+PASS tr login transport failure releases loading
+PASS tr API download return preserved
+PASS tr register transport failure releases loading
+PASS tr signup uses PKCE callback retaining locale/next
+PASS tr forgot transport failure releases loading
+PASS en login transport failure releases loading
+PASS en API download return preserved
+PASS en register transport failure releases loading
+PASS en signup uses PKCE callback retaining locale/next
+PASS en forgot transport failure releases loading

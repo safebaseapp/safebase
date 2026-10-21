@@ -1,0 +1,39 @@
+SERNEM pending billing state synchronized
+SERNEM billing state synchronized
+SERNEM billing state synchronized
+SERNEM billing state synchronized
+SERNEM billing state synchronized
+SERNEM billing state synchronized
+PASS bad signature cannot write
+PASS unpaid unmatched subscription never grants pending access
+PASS unsupported order event never grants pending access
+PASS old subscription cannot replace current paid binding
+PASS provider current status overrides stale active event
+PASS unapproved new variant cannot create entitlement
+PASS active known variant reconciles and repeated state is idempotent
+PASS bound legacy variant remains valid without allowlist
+FAIL bound subscription survives provider/account email divergence
+PASS approved synthetic normal paid variant activates unbound account
+PASS unconfigured normal variant fails closed without writes
+PASS new subscription cannot claim mismatched account email
+FAIL cancelled bound membership persists finite future deadline
+FAIL cancelled elapsed membership is revoked
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Webhook security regressions
+
+3 !== 0
+
+    at file:///workspace/safebase/tools/p11-review/webhook-test.mjs:22:103
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 3,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

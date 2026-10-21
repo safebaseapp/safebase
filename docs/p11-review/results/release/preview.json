@@ -1,0 +1,16 @@
+{
+  "code_sha": "5540909bd969658801db70af41573a382d5adc7a",
+  "deployment_id": 7220979441,
+  "state": "success",
+  "description": "Deployment has completed",
+  "preview_url": "https://safebase-d63onrnz9-safebaseapps-projects.vercel.app",
+  "access_probe": {
+    "method": "HEAD",
+    "path": "/en/login",
+    "result": "not testable",
+    "network_proxy_status": 403,
+    "curl_exit": 56,
+    "message": "CONNECT tunnel failed; also reproduced with approved elevated network execution"
+  },
+  "user_flow_preview_result": "NOT TESTED: no reachable Preview response; local fixture tests are separate"
+}
