@@ -492,19 +492,19 @@ export default function DownloadsClient() {
           )}
 
           {filteredResources.length > 0 ? (
-            <div className="mt-7 grid gap-3 lg:grid-cols-2">
+            <div className="mt-7 grid grid-cols-1 gap-3 lg:grid-cols-2">
               {filteredResources.map((item) => {
                 const meta = categoryMeta[item.category];
                 const rowAccent = resourceAccent(item);
                 const isOpenableResource =
                   (item.category === "guides" || item.category === "checklists") && Boolean(item.href);
                 return (
-                  <article key={item.id} className="group flex min-h-[82px] items-center gap-4 rounded-xl border border-white/[0.08] bg-gradient-to-r from-[#081321] to-[#06101c] px-4 py-3 transition hover:border-blue-400/25 hover:bg-[#0a1426]">
+                  <article key={item.id} className="group flex min-w-0 min-h-[82px] items-center gap-4 rounded-xl border border-white/[0.08] bg-gradient-to-r from-[#081321] to-[#06101c] px-4 py-3 transition hover:border-blue-400/25 hover:bg-[#0a1426]">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/[0.06] bg-white/[0.04] text-xl">{item.icon}</div>
 
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="font-black text-white">{item.title[locale]}</h3>
+                        <h3 className="break-words font-black text-white">{item.title[locale]}</h3>
                         <span className={`text-[10px] font-black uppercase ${meta.accent}`}>{meta[locale]}</span>
                       </div>
                       <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-500">{item.description[locale]}</p>

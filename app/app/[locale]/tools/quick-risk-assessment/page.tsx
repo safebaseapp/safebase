@@ -69,8 +69,9 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
     const loadWorkspacePlan = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
-      const { data } = await supabase.from("profiles").select("plan,role").eq("id", user.id).single();
-      setWorkspacePlan(data?.plan === "premium" || data?.role === "admin" ? "premium" : "free");
+      const response = await fetch("/api/safety-signs/download-access", { cache: "no-store" });
+      const access = response.ok ? await response.json() : null;
+      setWorkspacePlan(access?.isPremium === true ? "premium" : "free");
     };
     void loadWorkspacePlan();
   }, []);

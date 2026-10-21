@@ -1,3 +1,4 @@
+import { hasCurrentBillingPremium } from "@/lib/auth/billing-premium";
 import { hasActiveReward } from "@/lib/auth/reward-access";
 import { NextResponse } from "next/server";
 import { isAdminUser } from "@/lib/auth/access";
@@ -28,7 +29,7 @@ export async function GET() {
     profile?.status === "active" &&
       (isAdminUser(user) ||
         profile.role === "admin" ||
-        profile.plan === "premium" || giftPremium)
+        await hasCurrentBillingPremium(null, user.id, profile.plan) || giftPremium)
   );
 
   return NextResponse.json(

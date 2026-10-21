@@ -1,3 +1,4 @@
+import { hasCurrentBillingPremium } from "@/lib/auth/billing-premium";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import { premiumTrialEnabled } from "@/lib/premium-trial-config";
 import TrackedCheckoutLink from "@/components/analytics/TrackedCheckoutLink";
@@ -45,7 +46,7 @@ export default async function UpgradePage({ params }: Props) {
       redirect(`/${locale}/account-suspended`);
     }
 
-    if (profile?.plan === "premium" || profile?.role === "admin") {
+    if (profile?.role === "admin" || (profile && await hasCurrentBillingPremium(null, user!.id, profile.plan))) {
       redirect(`/${locale}/dashboard`);
     }
   }

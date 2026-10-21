@@ -1,11 +1,13 @@
 "use client";
 
+import { useRef, useState } from "react";
 import type {
   AnchorHTMLAttributes,
   MouseEvent,
   ReactNode,
 } from "react";
 
+import { trackEvent } from "@/lib/analytics";
 import { trackUserEvent } from "@/lib/analytics/track-user-event";
 import { createClient } from "@/utils/supabase/client";
 
@@ -30,8 +32,14 @@ export default function TrackedCheckoutLink({
   rel,
   ...props
 }: Props) {
+  const pending = useRef(false);
+  const [error, setError] = useState("");
   async function handleClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
+    if (pending.current) return;
+    pending.current = true;
+    setError("");
+    try {
 
     const supabase = createClient();
     const {
@@ -47,6 +55,7 @@ export default function TrackedCheckoutLink({
       return;
     }
 
+    trackEvent("checkout_start", { provider: "lemonsqueezy", product: "sernem-premium", locale: currentLocale() });
     void trackUserEvent("checkout_start", {
       provider: "lemonsqueezy",
       product: "sernem-premium",
@@ -58,9 +67,15 @@ export default function TrackedCheckoutLink({
     }
 
     window.location.assign(href);
+    } catch {
+      setError(currentLocale() === "tr" ? "Bağlantı kurulamadı. Lütfen tekrar dene." : "Unable to connect. Please try again.");
+    } finally {
+      window.setTimeout(() => { pending.current = false; }, 500);
+    }
   }
 
   return (
+    <>
     <a
       href={href}
       target={target}
@@ -72,5 +87,7 @@ export default function TrackedCheckoutLink({
     >
       {children}
     </a>
+    {error && <span role="alert">{error}</span>}
+    </>
   );
 }

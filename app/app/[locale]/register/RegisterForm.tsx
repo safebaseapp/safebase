@@ -4,17 +4,11 @@ import { FormEvent, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "../../../utils/supabase/client";
+import { safeNextPath } from "@/lib/auth/next-path";
 import { trackEvent } from "../../../lib/analytics";
 
 type Props = { locale: "tr" | "en" };
 
-function safeNextPath(value: string | null, locale: "tr" | "en") {
-  if (!value) return `/${locale}/dashboard`;
-  if (!value.startsWith(`/${locale}/`) || value.startsWith("//")) {
-    return `/${locale}/dashboard`;
-  }
-  return value;
-}
 
 export default function RegisterForm({ locale }: Props) {
   const searchParams = useSearchParams();
@@ -31,11 +25,16 @@ export default function RegisterForm({ locale }: Props) {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isLoading) return;
+    try {
     setErrorMessage("");
     setSuccessMessage("");
     setIsLoading(true);
 
-    const emailRedirectTo = `${window.location.origin}${nextPath}`;
+    const callback = new URL("/auth/callback", window.location.origin);
+    callback.searchParams.set("locale", locale);
+    callback.searchParams.set("next", nextPath);
+    const emailRedirectTo = callback.toString();
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -43,18 +42,23 @@ export default function RegisterForm({ locale }: Props) {
     });
 
     if (error) {
-      console.error("Supabase signup error:", error);
+      
       setErrorMessage(isTurkish ? `Hesap oluşturulamadı: ${error.message}` : `Account could not be created: ${error.message}`);
       setIsLoading(false);
       return;
     }
 
     trackEvent("sign_up", { method: "email", locale });
-    setSuccessMessage(isTurkish ? "Hesabın oluşturuldu. E-posta adresine gönderilen doğrulama bağlantısını kontrol et. Doğrulamadan sonra Premium sayfasına döneceksin." : "Your account was created. Check your email for the confirmation link. After confirmation, you'll return to the Premium page.");
+    setSuccessMessage(isTurkish ? "Hesabın oluşturuldu. E-posta adresine gönderilen doğrulama bağlantısını kontrol et. Doğrulamadan sonra seçtiğin sayfaya döneceksin." : "Your account was created. Check your email for the confirmation link. After confirmation, you'll return to your requested page.");
     setFullName("");
     setEmail("");
     setPassword("");
     setIsLoading(false);
+    } catch {
+      setErrorMessage(isTurkish ? "Bağlantı kurulamadı. Lütfen tekrar dene." : "Unable to connect. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (

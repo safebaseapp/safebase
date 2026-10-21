@@ -1,0 +1,23 @@
+PASS free
+FAIL expired trial with stale plan
+PASS active paid
+PASS admin
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Premium gates must use verified entitlement, not stale plan
+
+1 !== 0
+
+    at file:///workspace/safebase/tools/p11-review/entitlement-test.mjs:5:8
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

@@ -4,19 +4,13 @@ import { FormEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "../../../utils/supabase/client";
+import { safeNextPath } from "@/lib/auth/next-path";
 import { trackEvent } from "../../../lib/analytics";
 
 type Props = {
   locale: "tr" | "en";
 };
 
-function safeNextPath(value: string | null, locale: "tr" | "en") {
-  if (!value) return `/${locale}/dashboard`;
-  if (!value.startsWith(`/${locale}/`) || value.startsWith("//")) {
-    return `/${locale}/dashboard`;
-  }
-  return value;
-}
 
 export default function LoginForm({ locale }: Props) {
   const router = useRouter();
@@ -28,11 +22,13 @@ export default function LoginForm({ locale }: Props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(searchParams.get("error") === "confirmation_failed" ? (isTurkish ? "Doğrulama bağlantısı geçersiz veya süresi dolmuş. Yeni bağlantı iste veya giriş yap." : "The confirmation link is invalid or expired. Request a new link or sign in.") : "");
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isLoading) return;
+    try {
     setErrorMessage("");
     setIsLoading(true);
 
@@ -51,6 +47,11 @@ export default function LoginForm({ locale }: Props) {
     trackEvent("login", { method: "password", locale });
     router.push(nextPath);
     router.refresh();
+    } catch {
+      setErrorMessage(isTurkish ? "Bağlantı kurulamadı. Lütfen tekrar dene." : "Unable to connect. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (

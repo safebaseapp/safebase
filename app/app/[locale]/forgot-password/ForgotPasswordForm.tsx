@@ -19,6 +19,8 @@ export default function ForgotPasswordForm({ locale }: Props) {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isLoading) return;
+    try {
 
     setErrorMessage("");
     setSuccessMessage("");
@@ -48,6 +50,11 @@ export default function ForgotPasswordForm({ locale }: Props) {
     );
 
     setIsLoading(false);
+    } catch {
+      setErrorMessage(isTurkish ? "Bağlantı kurulamadı. Lütfen tekrar dene." : "Unable to connect. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (

@@ -1,0 +1,26 @@
+PASS bad signature cannot write
+FAIL unpaid unmatched subscription never grants pending access
+FAIL unsupported order event never grants pending access
+FAIL old subscription cannot replace current paid binding
+FAIL provider current status overrides stale active event
+FAIL unapproved new variant cannot create entitlement
+PASS active known variant reconciles and repeated state is idempotent
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Webhook security regressions
+
+5 !== 0
+
+    at file:///workspace/safebase/tools/p11-review/webhook-test.mjs:15:103
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 5,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

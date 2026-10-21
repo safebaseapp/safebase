@@ -15,6 +15,14 @@ export async function hasCurrentBillingPremium(
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) return false;
   const db = createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } });
+  const { data: billing, error: billingError } = await db.from("profiles")
+    .select("subscription_status,subscription_ends_at").eq("id", userId).maybeSingle();
+  if (billingError) return false;
+  if (["expired", "unpaid", "paused"].includes(String(billing?.subscription_status ?? ""))) return false;
+  if (billing?.subscription_status === "cancelled") {
+    const ends = Date.parse(billing.subscription_ends_at || "");
+    if (!Number.isFinite(ends) || Date.now() >= ends) return false;
+  }
   const { data: trial, error } = await db.from("premium_trial_reservations")
     .select("status,trial_ends_at,access_ends_at,lemon_subscription_id")
     .eq("user_id", userId).maybeSingle();

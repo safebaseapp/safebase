@@ -1,0 +1,26 @@
+PASS paid active
+FAIL paid expired stale plan
+FAIL cancelled past deadline
+PASS cancelled future deadline
+PASS manual legacy premium
+PASS expired trial
+PASS active trial
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+2 !== 0
+
+    at file:///workspace/safebase/tools/p11-review/billing-test.mjs:2:817
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 2,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

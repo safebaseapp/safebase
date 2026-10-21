@@ -43,8 +43,11 @@ function isProtectedResourceAction(element: HTMLElement, pathname: string) {
 
 function requiresPremium(element: HTMLElement) {
   if (element.dataset.premium === "true" || element.dataset.access === "premium") return true;
-  const context = cleanLabel(element.closest("article, tr, li, section, [data-resource-title]")?.textContent || elementText(element));
-  return PREMIUM_WORDS.test(context) && ACTION_WORDS.test(elementText(element));
+  // A neighbouring Premium action must not lock a standard PDF/print button.
+  const ownLabel = elementText(element);
+  const href = hrefOf(element);
+  return /^\/api\/premium\//.test(href) || /\b(word|docx)\b/i.test(ownLabel) ||
+    (PREMIUM_WORDS.test(ownLabel) && ACTION_WORDS.test(ownLabel));
 }
 
 function actionType(element: HTMLElement) {
@@ -118,12 +121,13 @@ export default function UserActivityCapture() {
           access.current = { ready: true, userId: null, premium: false };
           return;
         }
-        const { data: profile } = await supabase.from("profiles").select("plan,role").eq("id", user.id).maybeSingle();
+        const response = await fetch("/api/safety-signs/download-access", { cache: "no-store" });
+        const verified = response.ok ? await response.json() : null;
         if (!active) return;
         access.current = {
           ready: true,
           userId: user.id,
-          premium: profile?.plan === "premium" || profile?.role === "admin",
+          premium: verified?.isPremium === true,
         };
       } catch {
         if (active) access.current = { ready: true, userId: null, premium: false };

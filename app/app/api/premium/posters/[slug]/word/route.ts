@@ -1,3 +1,4 @@
+import { hasCurrentBillingPremium } from "@/lib/auth/billing-premium";
 import { hasActiveReward } from "@/lib/auth/reward-access";
 import {
   AlignmentType,
@@ -461,7 +462,7 @@ export async function GET(
   }
 
   const isPremium =
-    profile.plan === "premium" || profile.role === "admin" || await hasActiveReward(supabase,user.id);
+    await hasCurrentBillingPremium(null, user.id, profile.plan) || profile.role === "admin" || await hasActiveReward(supabase,user.id);
 
   if (!isPremium) {
     return NextResponse.redirect(

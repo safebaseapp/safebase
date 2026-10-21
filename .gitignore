@@ -8,3 +8,6 @@ backups/
 # Editor / one-off backup artifacts
 **/*.bak-*
 app/public/downloads/toolbox-backup-before-sernem/
+
+# Isolated Package 11 QA runtime artifacts
+tools/p11-review/artifacts/

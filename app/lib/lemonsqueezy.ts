@@ -42,8 +42,7 @@ async function lemonRequest(path: string, init: RequestInit = {}) {
   });
 
   if (!response.ok) {
-    const body = await response.text().catch(() => "");
-    throw new Error(`Lemon Squeezy request failed (${response.status})${body ? `: ${body.slice(0, 300)}` : ""}`);
+    throw new Error(`Lemon Squeezy request failed (${response.status})`);
   }
 
   return (await response.json()) as LemonSubscription;

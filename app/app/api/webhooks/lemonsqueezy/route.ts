@@ -17,7 +17,12 @@ function verifySignature(rawBody: string, signature: string | null) {
   }
 }
 
-function lifecycleFields(payload: any) {
+type WebhookPayload = {
+  meta?: { event_name?: string; custom_data?: { user_id?: string; trial_reservation_id?: string } };
+  data?: { id?: string; type?: string; attributes?: { variant_id?: string | number; trial_ends_at?: string | null; customer_id?: string | number; status?: string; cancelled?: boolean; renews_at?: string | null; ends_at?: string | null; user_email?: string; customer_email?: string; email?: string } };
+};
+
+function lifecycleFields(payload: WebhookPayload) {
   const data = payload?.data ?? {};
   const attributes = data?.attributes ?? {};
   const isSubscription = data?.type === "subscriptions";
@@ -45,9 +50,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
     }
 
-    const payload = JSON.parse(rawBody);
+    const payload = JSON.parse(rawBody) as WebhookPayload;
     const eventName = String(payload?.meta?.event_name ?? "");
-    const attributes = payload?.data?.attributes ?? {};
+    let attributes = payload?.data?.attributes ?? {};
     const customData = payload?.meta?.custom_data ?? {};
     const customUserId = customData?.user_id ? String(customData.user_id).trim() : "";
     const email = attributes?.user_email || attributes?.customer_email || attributes?.email;
@@ -67,31 +72,32 @@ export async function POST(request: NextRequest) {
       auth: { autoRefreshToken: false, persistSession: false },
     });
 
-    const normalizedEmail = email ? String(email).trim().toLowerCase() : "";
-    let explicitStatus = String(attributes?.status ?? "").toLowerCase();
-    let verifiedTrialEndsAt: string | null = null;
-    let verifiedAccessEndsAt: string | null = null;
-    const isTrialCheckout = Boolean(customData?.trial_reservation_id);
-    // Reconcile trial status with Lemon to avoid out-of-order webhook grants.
-    if (isTrialCheckout) {
-      if (payload?.data?.type !== "subscriptions" || !payload?.data?.id || !customUserId) {
-        return NextResponse.json({ error: "Invalid trial identity" }, { status: 400 });
-      }
-      const current = await getLemonSubscription(String(payload.data.id));
-      if (String(current.data.attributes.variant_id ?? "") !== PREMIUM_TRIAL_VARIANT_ID) {
-        return NextResponse.json({ error: "Trial variant mismatch" }, { status: 400 });
-      }
-      explicitStatus = String(current.data.attributes.status ?? "").toLowerCase();
-      verifiedTrialEndsAt = current.data.attributes.trial_ends_at ?? null;
-      verifiedAccessEndsAt = current.data.attributes.ends_at ?? null;
-      attributes.status = explicitStatus;
-      attributes.cancelled = current.data.attributes.cancelled;
-      attributes.renews_at = current.data.attributes.renews_at ?? null;
-      attributes.ends_at = current.data.attributes.ends_at ?? null;
+    let normalizedEmail = email ? String(email).trim().toLowerCase() : "";
+    // Only subscriptions grant membership. Orders and payment notification events
+    // must not create pending grants that the profile trigger would later apply.
+    if (!eventName.startsWith("subscription_") || payload?.data?.type !== "subscriptions" || !payload.data.id) {
+      return NextResponse.json({ received: true, ignored: true });
     }
+    const current = await getLemonSubscription(String(payload.data.id));
+    if (current.data.id !== String(payload.data.id) || current.data.type !== "subscriptions") {
+      return NextResponse.json({ error: "Subscription mismatch" }, { status: 400 });
+    }
+    attributes = current.data.attributes;
+    payload.data.attributes = attributes;
+    normalizedEmail = String(attributes.user_email || email || "").trim().toLowerCase();
+    const explicitStatus = String(attributes.status ?? "").toLowerCase();
+    const verifiedTrialEndsAt = attributes.trial_ends_at ?? null;
+    const verifiedAccessEndsAt = attributes.ends_at ?? null;
+    const isTrialCheckout = Boolean(customData?.trial_reservation_id);
+    if (isTrialCheckout && (!customUserId || String(attributes.variant_id ?? "") !== PREMIUM_TRIAL_VARIANT_ID)) {
+      return NextResponse.json({ error: "Trial identity or variant mismatch" }, { status: 400 });
+    }
+    const approvedVariants = new Set([PREMIUM_TRIAL_VARIANT_ID,
+      ...(process.env.LEMONSQUEEZY_PREMIUM_VARIANT_IDS ?? "").split(",").map(v => v.trim()).filter(Boolean)]);
+    const approvedVariant = approvedVariants.has(String(attributes.variant_id ?? ""));
     const fields = lifecycleFields(payload);
     const isSubscriptionEvent = eventName.startsWith("subscription_");
-    const isExpired = eventName === "subscription_expired" || explicitStatus === "expired";
+    const isExpired = explicitStatus === "expired";
     // Never grant Premium from an event name alone: billing retries, failed
     // payments and paused subscriptions must not create new entitlements.
     const grantedStatuses = new Set(["active", "on_trial"]);
@@ -105,13 +111,14 @@ export async function POST(request: NextRequest) {
           : null;
 
     let matchedUserId: string | null = null;
+    let existingSubscription: string | null = null;
 
     // Preferred identity: a Supabase user ID explicitly attached to the Lemon checkout.
     // Lemon Squeezy returns checkout custom data under meta.custom_data for subscription/order webhooks.
     if (customUserId) {
       const { data: profileById, error: profileByIdError } = await supabase
         .from("profiles")
-        .select("id, email")
+        .select("id, email, lemon_subscription_id")
         .eq("id", customUserId)
         .maybeSingle();
 
@@ -119,12 +126,10 @@ export async function POST(request: NextRequest) {
 
       if (profileById?.id) {
         matchedUserId = profileById.id;
+        existingSubscription = profileById.lemon_subscription_id ?? null;
         const profileEmail = profileById.email ? String(profileById.email).trim().toLowerCase() : "";
         if (normalizedEmail && profileEmail && normalizedEmail !== profileEmail) {
-          console.warn("Lemon Squeezy webhook: custom user ID matched with different billing email", {
-            eventName,
-            userId: customUserId,
-          });
+          return NextResponse.json({ error: "Billing identity mismatch" }, { status: 400 });
         }
       } else {
         const { data: authUser } = await supabase.auth.admin.getUserById(customUserId);
@@ -136,12 +141,12 @@ export async function POST(request: NextRequest) {
     if (!matchedUserId && normalizedEmail && !isTrialCheckout) {
       const { data: profileMatch } = await supabase
         .from("profiles")
-        .select("id")
-        .ilike("email", normalizedEmail)
+        .select("id,lemon_subscription_id")
+        .eq("email", normalizedEmail)
         .limit(1)
         .maybeSingle();
 
-      if (profileMatch?.id) matchedUserId = profileMatch.id;
+      if (profileMatch?.id) { matchedUserId = profileMatch.id; existingSubscription = profileMatch.lemon_subscription_id ?? null; }
     }
 
     if (!matchedUserId && normalizedEmail && !isTrialCheckout) {
@@ -155,6 +160,22 @@ export async function POST(request: NextRequest) {
         page += 1;
       }
     }
+
+    if (isTrialCheckout && !matchedUserId) {
+      return NextResponse.json({ error: "Trial account not found" }, { status: 400 });
+    }
+    if (explicitStatus === "on_trial" && (!isTrialCheckout || !Number.isFinite(Date.parse(verifiedTrialEndsAt || "")) || Date.parse(verifiedTrialEndsAt!) <= Date.now())) {
+      return NextResponse.json({ error: "A current verified trial reservation is required" }, { status: 400 });
+    }
+    if (existingSubscription && existingSubscription !== String(payload.data.id)) {
+      return NextResponse.json({ error: "Different subscription is already linked" }, { status: 409 });
+    }
+    // Existing bound subscriptions keep their legacy product mapping. New grants
+    // require an explicitly approved variant; unknown products never grant access.
+    if (!approvedVariant && existingSubscription !== String(payload.data.id)) {
+      return NextResponse.json({ error: "Unapproved subscription variant" }, { status: 400 });
+    }
+    if (!nextPlan) return NextResponse.json({ received: true, ignored: true });
 
     if (matchedUserId && customData?.trial_reservation_id && payload?.data?.type === "subscriptions") {
       const trialReservationId = String(customData.trial_reservation_id);
@@ -198,27 +219,27 @@ export async function POST(request: NextRequest) {
         update.subscription_ends_at = fields.subscription_ends_at;
       }
 
-      const { error } = await supabase.from("profiles").update(update).eq("id", matchedUserId);
+      let write = supabase.from("profiles").update(update).eq("id", matchedUserId);
+      write = existingSubscription ? write.eq("lemon_subscription_id", existingSubscription) : write.is("lemon_subscription_id", null);
+      const { data: saved, error } = await write.select("id").maybeSingle();
       if (error) throw error;
+      if (!saved) return NextResponse.json({ error: "Subscription binding changed; retry" }, { status: 409 });
 
-      console.log(`SERNEM billing sync: ${matchedUserId} (${eventName})`);
+      console.info("SERNEM billing state synchronized");
       return NextResponse.json({ received: true });
     }
 
     // Pending entitlement remains the safety net for legacy/external checkouts that cannot be matched yet.
     if (!normalizedEmail) {
-      console.error("Lemon Squeezy webhook: unmatched custom user ID and no billing email", {
-        eventName,
-        userId: customUserId,
-      });
+      console.error("Lemon Squeezy webhook: unmatched customer");
       return NextResponse.json({ error: "Unable to match customer" }, { status: 400 });
     }
 
-    const pendingStatus = isExpired ? "inactive" : "active";
+    const pendingStatus = nextPlan === "premium" ? "active" : "inactive";
     const { data: existing, error: lookupError } = await supabase
       .from("pending_premium_entitlements")
-      .select("id")
-      .ilike("email", normalizedEmail)
+      .select("id,lemon_subscription_id")
+      .eq("email", normalizedEmail)
       .order("updated_at", { ascending: false })
       .limit(1)
       .maybeSingle();
@@ -238,6 +259,9 @@ export async function POST(request: NextRequest) {
       pendingUpdate.subscription_ends_at = fields.subscription_ends_at;
     }
 
+    if (existing?.lemon_subscription_id && existing.lemon_subscription_id !== String(payload.data.id)) {
+      return NextResponse.json({ error: "Different pending subscription is already linked" }, { status: 409 });
+    }
     if (existing?.id) {
       const { error } = await supabase.from("pending_premium_entitlements").update(pendingUpdate).eq("id", existing.id);
       if (error) throw error;
@@ -246,10 +270,10 @@ export async function POST(request: NextRequest) {
       if (error) throw error;
     }
 
-    console.log(`SERNEM pending Premium: ${normalizedEmail} -> ${pendingStatus} (${eventName})`);
+    console.info("SERNEM pending billing state synchronized");
     return NextResponse.json({ ok: true, pending: true });
-  } catch (error) {
-    console.error("Lemon Squeezy webhook error:", error);
+  } catch {
+    console.error("Lemon Squeezy webhook processing failed");
     return NextResponse.json({ error: "Webhook processing failed" }, { status: 500 });
   }
 }
