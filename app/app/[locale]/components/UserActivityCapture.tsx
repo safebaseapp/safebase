@@ -109,11 +109,14 @@ export default function UserActivityCapture() {
   const pathname = usePathname();
   const access = useRef<AccessState>({ ready: false, userId: null, premium: false });
 
+  const pendingAccess = useRef<Promise<void> | null>(null);
+  const replaying = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) return;
     let active = true;
     const supabase = createClient();
-    void (async () => {
+    pendingAccess.current = (async () => {
       try {
         const { data: { user } } = await supabase.auth.getUser();
         if (!active) return;
@@ -146,6 +149,17 @@ export default function UserActivityCapture() {
       const locale = pathname?.startsWith("/tr") ? "tr" : "en";
       const current = `${window.location.pathname}${window.location.search}`;
 
+      if (!state.ready && pendingAccess.current) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (replaying.current === element) return;
+        replaying.current = element;
+        void pendingAccess.current.then(() => {
+          replaying.current = null;
+          if (access.current.ready && element.isConnected) element.click();
+        });
+        return;
+      }
       if (!state.ready || !state.userId) {
         event.preventDefault();
         event.stopPropagation();

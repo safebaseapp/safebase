@@ -18,7 +18,8 @@ if(u.pathname==='/auth/v1/user')return user?reply(user):reply({message:'No fixtu
 if(u.pathname==='/auth/v1/token'){let data={};try{data=JSON.parse(body)}catch{};if(data.password==='reject-fixture')return reply({error:'invalid_grant',error_description:'Invalid fixture login'},400);return reply(session('free'))}
 if(u.pathname==='/auth/v1/signup')return reply({user:users[0],session:null});if(u.pathname==='/auth/v1/recover'||u.pathname==='/auth/v1/logout')return reply({});if(u.pathname==='/auth/v1/verify')return reply(session('free'));
 if(u.pathname.includes('/storage/')){
- if(u.pathname.includes('/object/list/'))return reply(['paid','admin'].includes(roles[users.indexOf(user)])?[{name:'logo.png'}]:[]);
+ if(u.pathname.includes('/object/sign/')&&req.method==='POST')return reply({signedURL:u.pathname.replace('/storage/v1','')});
+ if(u.pathname.includes('/object/list/'))return reply(['paid','admin','expired','trial'].includes(roles[users.indexOf(user)])?[{name:'logo.png'}]:[]);
  if(u.pathname.endsWith('/logo.png')){res.writeHead(200,{'Content-Type':'image/png','Access-Control-Allow-Origin':'*'});return res.end(fs.readFileSync(new URL('./artifacts/fixture-logo.png',import.meta.url)))}
  if(u.pathname.endsWith('/document-profile.json'))return reply({projectName:'P11 Fixture',siteName:'Local test',presentedBy:'Fixture',revision:'00'});
  return reply({message:'No fixture asset'},404);

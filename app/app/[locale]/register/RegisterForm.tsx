@@ -42,7 +42,7 @@ export default function RegisterForm({ locale }: Props) {
     });
 
     if (error) {
-      
+
       setErrorMessage(isTurkish ? `Hesap oluşturulamadı: ${error.message}` : `Account could not be created: ${error.message}`);
       setIsLoading(false);
       return;

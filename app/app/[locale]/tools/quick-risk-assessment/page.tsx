@@ -69,8 +69,8 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
     const loadWorkspacePlan = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
-      const response = await fetch("/api/safety-signs/download-access", { cache: "no-store" });
-      const access = response.ok ? await response.json() : null;
+      const response = await fetch("/api/safety-signs/download-access", { cache: "no-store" }).catch(() => null);
+      const access = response?.ok ? await response.json() : null;
       setWorkspacePlan(access?.isPremium === true ? "premium" : "free");
     };
     void loadWorkspacePlan();
@@ -83,20 +83,10 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
         setCompanyDocumentProfile(null);
         return;
       }
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      const { data: files } = await supabase.storage.from("company-assets").list(user.id, { limit: 20 });
-      const logoFile = files?.find((file) => file.name.startsWith("logo."));
-      if (logoFile) {
-        const { data } = await supabase.storage.from("company-assets").createSignedUrl(`${user.id}/${logoFile.name}`, 60 * 60);
-        setCompanyLogoUrl(data?.signedUrl ?? null);
-      }
-
-      const { data: profileBlob } = await supabase.storage.from("company-assets").download(`${user.id}/document-profile.json`);
-      if (profileBlob) {
-        try { setCompanyDocumentProfile(JSON.parse(await profileBlob.text())); } catch { setCompanyDocumentProfile(null); }
-      }
+      const response = await fetch("/api/account/branding", { cache: "no-store" }).catch(() => null);
+      const branding = response?.ok ? await response.json() : null;
+      setCompanyLogoUrl(branding?.logoUrl ?? null);
+      setCompanyDocumentProfile(branding?.documentProfile ?? null);
     };
     void loadPremiumBranding();
   }, [workspacePlan]);

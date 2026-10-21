@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
-import { isAdminUser } from "@/lib/auth/access";
 import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 type Props = {
@@ -75,27 +74,9 @@ export default function PosterFormatToolbar({ locale }: Props) {
 
     async function resolvePremium() {
       try {
-        const supabase = createClient();
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-
-        if (!user) {
-          if (active) setPremiumState("free");
-          return;
-        }
-
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("plan, role, status")
-          .eq("id", user.id)
-          .maybeSingle();
-
-        const premium = Boolean(
-          isAdminUser(user) ||
-            (profile?.status !== "suspended" &&
-              (profile?.plan === "premium" || profile?.role === "admin")),
-        );
+        const response = await fetch("/api/safety-signs/download-access", { cache: "no-store" });
+        const access = response.ok ? await response.json() : null;
+        const premium = access?.isPremium === true;
 
         if (active) setPremiumState(premium ? "premium" : "free");
       } catch (error) {

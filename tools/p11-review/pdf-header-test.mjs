@@ -1,0 +1,2 @@
+import {execFileSync} from 'node:child_process';import path from 'node:path';import assert from 'node:assert/strict';import {root} from './compile.mjs';
+for(const locale of ['tr','en']){const file=path.join(root,'tools/p11-review/artifacts/pdf',`method-${locale}-a4.pdf`),text=execFileSync('pdftotext',[file,'-'],{encoding:'utf8'});const ok=text.replace(/\s/g,'').includes(locale==='tr'?'ÇALIŞMAYÖNTEMİ':'METHODSTATEMENT')&&text.includes('SRN-MS-001');console.log(ok?'PASS':'FAIL',locale,'printed Method Statement retains document title/control header');assert.ok(ok)}
