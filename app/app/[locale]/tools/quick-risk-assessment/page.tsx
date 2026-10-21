@@ -3,6 +3,7 @@ import { trackUserEvent } from "@/lib/analytics/track-user-event";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, use } from "react";
 import { riskLibraryPack01 } from "@/lib/risk-library/pack-01";
 import { riskLibraryPack02 } from "@/lib/risk-library/pack-02";
@@ -57,6 +58,7 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   const [activeRiskTemplateName, setActiveRiskTemplateName] = useState<string | null>(null);
 
 
+  const router = useRouter();
   const supabase = createClient();
   const [savedAssessmentId, setSavedAssessmentId] = useState<string | null>(null);
   const [isSavingAssessment, setIsSavingAssessment] = useState(false);
@@ -131,8 +133,8 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
     residualSeverity: number;
   };
 
-  const createRiskItem = (): RiskRegisterItem => ({
-    id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+  const createRiskItem = (id: string): RiskRegisterItem => ({
+    id,
     activity: "",
     hazard: "",
     consequence: "",
@@ -148,7 +150,7 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   });
 
   const [riskItems, setRiskItems] = useState<RiskRegisterItem[]>([
-    createRiskItem(),
+    createRiskItem("initial-risk"),
   ]);
 
   const updateRiskItem = <K extends keyof RiskRegisterItem>(
@@ -164,7 +166,8 @@ export default function QuickRiskAssessmentPage({ params }: Props) {
   };
 
   const addRiskItem = () => {
-    setRiskItems((current) => [...current, createRiskItem()]);
+    const item = createRiskItem(crypto.randomUUID());
+    setRiskItems((current) => [...current, item]);
   };
 
   
@@ -422,7 +425,7 @@ const duplicateRiskItem = (id: string) => {
         source_page: window.location.pathname,
         premium_feature: "professional_output",
       });
-      window.location.href = `/${locale}/upgrade`;
+      router.push(`/${locale}/upgrade`);
       return;
     }
 
@@ -597,7 +600,7 @@ const duplicateRiskItem = (id: string) => {
         const suggestedScore = getSuggestedLibraryScore(entry);
 
         return {
-        ...createRiskItem(),
+        ...createRiskItem(crypto.randomUUID()),
 
         activity: selectedLibraryTemplate.activity[lang],
         hazard: entry.hazard[lang],
@@ -767,34 +770,16 @@ const duplicateRiskItem = (id: string) => {
     );
   });
 
-  useEffect(() => {
-    // No matching activity
-    if (filteredRiskLibrary.length === 0) {
-      setSelectedLibraryActivity("");
-      setSelectedLibraryRiskIndexes([]);
-      return;
-    }
-
-    const currentStillVisible = filteredRiskLibrary.some(
-      (template) => template.id === selectedLibraryActivity
-    );
-
-    // Keep current selection only if it still belongs to filtered results.
-    if (currentStillVisible) return;
-
-    // Otherwise automatically select first matching activity.
-    const firstMatch = filteredRiskLibrary[0];
-
-    setSelectedLibraryActivity(firstMatch.id);
-    setSelectedLibraryRiskIndexes(
-      firstMatch.items.map((_, index) => index)
-    );
-  }, [
-    librarySearch,
-    libraryCategory,
-    isTurkish,
-    selectedLibraryActivity,
-  ]);
+  // Adjust dependent selection only when filtering invalidates it. React retries
+  // this component before committing, avoiding an effect-driven stale selection.
+  const visibleSelection = filteredRiskLibrary.some(
+    (template) => template.id === selectedLibraryActivity
+  );
+  const fallbackTemplate = filteredRiskLibrary[0];
+  if (!visibleSelection && selectedLibraryActivity !== (fallbackTemplate?.id ?? "")) {
+    setSelectedLibraryActivity(fallbackTemplate?.id ?? "");
+    setSelectedLibraryRiskIndexes(fallbackTemplate?.items.map((_, index) => index) ?? []);
+  }
 
   const selectLibraryActivity = (activityId: string) => {
     setSelectedLibraryActivity(activityId);

@@ -101,11 +101,14 @@ export async function POST(request: NextRequest) {
     // Never grant Premium from an event name alone: billing retries, failed
     // payments and paused subscriptions must not create new entitlements.
     const grantedStatuses = new Set(["active", "on_trial"]);
-    const revokedStatuses = new Set(["expired", "unpaid"]);
+    const revokedStatuses = new Set(["expired", "unpaid", "paused"]);
+    const cancelledAccessEnds = Date.parse(verifiedAccessEndsAt || "");
     const nextPlan: "premium" | "free" | null = !isSubscriptionEvent
       ? null
       : grantedStatuses.has(explicitStatus)
         ? "premium"
+        : explicitStatus === "cancelled"
+          ? Number.isFinite(cancelledAccessEnds) && Date.now() < cancelledAccessEnds ? "premium" : "free"
         : (isExpired || revokedStatuses.has(explicitStatus))
           ? "free"
           : null;
@@ -113,9 +116,22 @@ export async function POST(request: NextRequest) {
     let matchedUserId: string | null = null;
     let existingSubscription: string | null = null;
 
-    // Preferred identity: a Supabase user ID explicitly attached to the Lemon checkout.
-    // Lemon Squeezy returns checkout custom data under meta.custom_data for subscription/order webhooks.
-    if (customUserId) {
+    // An existing verified subscription binding survives billing/account email
+    // changes. Never let event custom data redirect that binding to another user.
+    const { data: boundProfile, error: boundProfileError } = await supabase
+      .from("profiles").select("id,lemon_subscription_id")
+      .eq("lemon_subscription_id", String(payload.data.id)).maybeSingle();
+    if (boundProfileError) throw boundProfileError;
+    if (boundProfile?.id) {
+      if (customUserId && customUserId !== boundProfile.id) {
+        return NextResponse.json({ error: "Subscription identity mismatch" }, { status: 400 });
+      }
+      matchedUserId = boundProfile.id;
+      existingSubscription = boundProfile.lemon_subscription_id;
+    }
+
+    // New bindings require checkout identity and provider email agreement.
+    if (!matchedUserId && customUserId) {
       const { data: profileById, error: profileByIdError } = await supabase
         .from("profiles")
         .select("id, email, lemon_subscription_id")
@@ -132,8 +148,14 @@ export async function POST(request: NextRequest) {
           return NextResponse.json({ error: "Billing identity mismatch" }, { status: 400 });
         }
       } else {
-        const { data: authUser } = await supabase.auth.admin.getUserById(customUserId);
-        if (authUser?.user?.id) matchedUserId = authUser.user.id;
+        const { data: authUser, error: authUserError } = await supabase.auth.admin.getUserById(customUserId);
+        if (authUserError) throw authUserError;
+        if (authUser?.user?.id) {
+          if (!normalizedEmail || authUser.user.email?.trim().toLowerCase() !== normalizedEmail) {
+            return NextResponse.json({ error: "Billing identity mismatch" }, { status: 400 });
+          }
+          matchedUserId = authUser.user.id;
+        }
       }
     }
 
