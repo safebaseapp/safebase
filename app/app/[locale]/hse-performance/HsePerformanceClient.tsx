@@ -188,8 +188,10 @@ export default function HsePerformanceClient({
 
   useEffect(() => {
     let cancelled = false;
+    let latestRequest = 0;
 
     async function loadIncidentMetrics() {
+      const request = ++latestRequest;
       const supabase = createClient();
 
       const periodMonth = `${selectedMonth}-01`;
@@ -221,7 +223,7 @@ export default function HsePerformanceClient({
 
       const { data, error } = await query.maybeSingle();
 
-      if (cancelled) return;
+      if (cancelled || request !== latestRequest) return;
 
       if (error) {
         console.error("HSE incident metrics load error:", error);
@@ -264,8 +266,10 @@ export default function HsePerformanceClient({
 
   useEffect(() => {
     let cancelled = false;
+    let latestRequest = 0;
 
     async function loadKpiTrend() {
+      const request = ++latestRequest;
       setKpiTrendLoading(true);
 
       const supabase = createClient();
@@ -318,7 +322,7 @@ export default function HsePerformanceClient({
 
       const { data, error } = await query;
 
-      if (cancelled) return;
+      if (cancelled || request !== latestRequest) return;
 
       if (error) {
         console.error(
