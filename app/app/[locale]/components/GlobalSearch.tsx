@@ -1,4 +1,5 @@
 "use client";
+import {calculators,newTools} from "../tools/_shared/catalog";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -38,12 +39,13 @@ type SearchItem = {
 };
 
 const SEARCH_ITEMS: SearchItem[] = [
+  ...calculators.filter(c=>newTools.includes(c.id)).map(c=>({href:`/tools/${c.id}`,titleTr:c.title[0],titleEn:c.title[1],categoryTr:'Hesaplayıcılar',categoryEn:'Calculators',keywords:[c.id,c.title[0],c.title[1],c.description[0],c.description[1]],tone:'blue' as const})),
   { href: "/dashboard", titleTr: "Dashboard", titleEn: "Dashboard", categoryTr: "Çalışma Alanı", categoryEn: "Workspace", keywords: ["dashboard","workspace","saved","kayıt","activity"], tone: "cyan" },
   { href: "/tools/quick-risk-assessment", titleTr: "Risk Analizi", titleEn: "Risk Assessment", categoryTr: "HSE Araçları", categoryEn: "HSE Tools", keywords: ["risk","hirarc","assessment","risk analizi","değerlendirme"], tone: "blue" },
   { href: "/tools/method-statement", titleTr: "Method Statement", titleEn: "Method Statement", categoryTr: "HSE Araçları", categoryEn: "HSE Tools", keywords: ["method","statement","work method","çalışma yöntemi"], tone: "blue" },
   { href: "/safety-pack", titleTr: "Safety Pack", titleEn: "Safety Pack", categoryTr: "HSE Araçları", categoryEn: "HSE Tools", keywords: ["pack","safety pack","saha paketi","workflow"], tone: "blue" },
   { href: "/ppe-standards", titleTr: "KKD Standartları", titleEn: "PPE Standards", categoryTr: "HSE Araçları", categoryEn: "HSE Tools", keywords: ["ppe","kkd","en iso","helmet","gloves","standards"], tone: "blue" },
-  { href: "/tools", titleTr: "HSE Hesaplayıcılar", titleEn: "HSE Calculators", categoryTr: "HSE Araçları", categoryEn: "HSE Tools", keywords: ["calculator","hesaplayıcı","trir","ltifr","severity","risk matrix"], tone: "blue" },
+  { href: "/tools#calculators", titleTr: "HSE Hesaplayıcılar", titleEn: "HSE Calculators", categoryTr: "HSE Araçları", categoryEn: "HSE Tools", keywords: ["calculator","hesaplayıcı","trir","ltifr","severity","risk matrix"], tone: "blue" },
   { href: "/tools/risk-matrix", titleTr: "Risk Matrisi", titleEn: "Risk Matrix", categoryTr: "HSE Araçları", categoryEn: "HSE Tools", keywords: ["matrix","risk matrix","olasılık","şiddet"], tone: "amber" },
   { href: "/tools/trir", titleTr: "TRIR", titleEn: "TRIR", categoryTr: "HSE Performans", categoryEn: "HSE Performance", keywords: ["trir","recordable","incident rate"], tone: "cyan" },
   { href: "/tools/ltifr", titleTr: "LTIFR", titleEn: "LTIFR", categoryTr: "HSE Performans", categoryEn: "HSE Performance", keywords: ["ltifr","lost time","frequency"], tone: "cyan" },
@@ -247,6 +249,8 @@ export default function GlobalSearch({ locale, compact = false }: Props) {
                   <div className="flex min-h-[58px] items-center gap-3 rounded-2xl border border-sky-400/20 bg-gradient-to-r from-sky-500/[0.10] via-blue-500/[0.05] to-transparent px-4 shadow-[inset_0_1px_0_rgba(255,255,255,.04)]">
                     <Search size={20} className="shrink-0 text-sky-300" />
                     <input
+                      type="search"
+                      aria-label={tr ? "SERNEM içinde ara" : "Search SERNEM"}
                       ref={inputRef}
                       value={query}
                       onChange={(event) => setQuery(event.target.value)}

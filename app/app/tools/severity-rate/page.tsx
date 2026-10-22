@@ -1,7 +1,7 @@
 "use client";
 
 import { calculateSeverityRate } from "@/lib/hse-metrics";
-import { createClient } from "@/utils/supabase/client";
+import {storeCalculationDraft} from "@/app/[locale]/tools/_shared/CalculatorHandoff";
 
 import { useMemo, useState } from "react";
 import { useParams } from "next/navigation";
@@ -43,15 +43,16 @@ export default function SeverityRateCalculatorPage() {
     if (
       !lostWorkdays ||
       !hoursWorked ||
-      Number.isNaN(days) ||
-      Number.isNaN(hours) ||
+      !Number.isFinite(days) ||
+      !Number.isFinite(hours) ||
       days < 0 ||
       hours <= 0
     ) {
       return null;
     }
 
-    return calculateSeverityRate(days, hours);
+    const value = calculateSeverityRate(days, hours);
+    return Number.isFinite(value) ? value : null;
   }, [lostWorkdays, hoursWorked]);
 
   const performanceLevel =
@@ -108,142 +109,12 @@ export default function SeverityRateCalculatorPage() {
 
   const saveToHsePerformance = async () => {
     if (result === null) return;
-
-    const lostDaysNumber = Number(lostWorkdays);
-    const hoursNumber = Number(hoursWorked);
-
-    if (
-      Number.isNaN(lostDaysNumber) ||
-      Number.isNaN(hoursNumber) ||
-      lostDaysNumber < 0 ||
-      hoursNumber <= 0
-    ) {
-      return;
-    }
-
     setKpiSaving(true);
-    setKpiMessage("");
-
     try {
-      const supabase = createClient();
-
-      const {
-        data: { user },
-        error: userError,
-      } = await supabase.auth.getUser();
-
-      if (userError || !user) {
-        setKpiMessage(
-          isTurkish
-            ? "HSE Performance'a aktarmak için giriş yapmalısınız."
-            : "You must sign in to transfer data to HSE Performance.",
-        );
-        return;
-      }
-
-      const periodMonth =
-        `${kpiYear}-${String(kpiMonth).padStart(2, "0")}-01`;
-
-      const projectName =
-        kpiProject.trim() || "All Projects";
-
-      const { data: existing, error: readError } =
-        await supabase
-          .from("hse_incident_metrics")
-          .select("id, worked_hours")
-          .eq("user_id", user.id)
-          .eq("period_month", periodMonth)
-          .eq("project_name", projectName)
-          .maybeSingle();
-
-      if (readError) throw readError;
-
-      if (existing?.id) {
-        const existingHours = Number(existing.worked_hours ?? 0);
-
-        if (
-          existingHours > 0 &&
-          existingHours !== hoursNumber
-        ) {
-          const confirmed = window.confirm(
-            isTurkish
-              ? `Bu dönem ve proje için ${existingHours.toLocaleString(
-                  "tr-TR",
-                )} çalışma saati zaten kayıtlı. Yeni hesaplamadaki ${hoursNumber.toLocaleString(
-                  "tr-TR",
-                )} saat ile değiştirmek istiyor musunuz?`
-              : `${existingHours.toLocaleString(
-                  "en-US",
-                )} worked hours are already saved for this period and project. Do you want to replace them with ${hoursNumber.toLocaleString(
-                  "en-US",
-                )} hours from this calculation?`,
-          );
-
-          if (!confirmed) {
-            setKpiMessage(
-              isTurkish
-                ? "Aktarım iptal edildi. Mevcut çalışma saati korunuyor."
-                : "Transfer cancelled. Existing worked hours were preserved.",
-            );
-            return;
-          }
-        }
-
-        const { error: updateError } =
-          await supabase
-            .from("hse_incident_metrics")
-            .update({
-              worked_hours: hoursNumber,
-              lost_days: lostDaysNumber,
-              updated_at: new Date().toISOString(),
-            })
-            .eq("id", existing.id)
-            .eq("user_id", user.id);
-
-        if (updateError) throw updateError;
-      } else {
-        const { error: insertError } =
-          await supabase
-            .from("hse_incident_metrics")
-            .insert({
-              user_id: user.id,
-              period_month: periodMonth,
-              project_name: projectName,
-              worked_hours: hoursNumber,
-              lost_days: lostDaysNumber,
-            });
-
-        if (insertError) throw insertError;
-      }
-
-      const monthNames = isTurkish
-        ? [
-            "Ocak", "Şubat", "Mart", "Nisan",
-            "Mayıs", "Haziran", "Temmuz", "Ağustos",
-            "Eylül", "Ekim", "Kasım", "Aralık",
-          ]
-        : [
-            "January", "February", "March", "April",
-            "May", "June", "July", "August",
-            "September", "October", "November", "December",
-          ];
-
-      setKpiMessage(
-        isTurkish
-          ? `✓ ${monthNames[kpiMonth - 1]} ${kpiYear} KPI kaydına aktarıldı.`
-          : `✓ Transferred to ${monthNames[kpiMonth - 1]} ${kpiYear} KPI record.`,
-      );
-    } catch (error) {
-      console.error("Severity Rate → HSE Performance error:", error);
-
-      setKpiMessage(
-        isTurkish
-          ? "Aktarım başarısız. Lütfen tekrar deneyin."
-          : "Transfer failed. Please try again.",
-      );
-    } finally {
-      setKpiSaving(false);
-    }
+      storeCalculationDraft({source:'severity-rate',kind:'lagging',result:result.toFixed(2),unit:'200,000 h',method:'Severity Rate: existing hse-metrics engine',basis:'actual',inputs:{lost_days:Number(lostWorkdays),worked_hours:Number(hoursWorked),period_month:`${kpiYear}-${String(kpiMonth).padStart(2,'0')}-01`,project_name:kpiProject}});
+      window.location.assign(`/${isTurkish?'tr':'en'}/hse-performance#operational-calculations`);
+    } catch {setKpiMessage(isTurkish?'Oturum taslağı oluşturulamadı. Veri kaydedilmedi.':'Could not create session draft. No data saved.');}
+    finally {setKpiSaving(false);}
   };
 
   const copyResult = async () => {
@@ -384,6 +255,8 @@ export default function SeverityRateCalculatorPage() {
 
   return (
     <main className="min-h-screen bg-[#020817] px-4 py-8 text-white sm:px-6 lg:py-10">
+      <p className="relative mx-auto my-4 max-w-5xl px-4 text-sm text-amber-200">{isTurkish ? "KPI taslağı yalnız bu sekmede tutulur; otomatik kayıt yapılmaz. Dönem/proje ve vaka tanımlarını doğrulayın. Referans renk/aralıklar evrensel OSHA sınırları veya güvenlik onayı değildir; kıyas için aynı tanım ve sektör verisi gerekir." : "KPI drafts stay in this tab only; no automatic saving. Verify period/project and case definitions. Reference colours/bands are not universal OSHA limits or a safety approval; comparison needs matching definitions and industry data."}</p>
+
       <div className="mx-auto max-w-[1380px]">
         <Link
           href={`/${locale}/tools`}
@@ -651,19 +524,19 @@ export default function SeverityRateCalculatorPage() {
 
                       <h2 className="mt-2 text-xl font-black">
                         {isTurkish
-                          ? "Sonucu KPI Sistemine Aktar"
-                          : "Transfer Result to KPI System"}
+                          ? "Sonucu Kaydedilmemiş KPI Taslağı Olarak İncele"
+                          : "Review Result as an Unsaved KPI Draft"}
                       </h2>
 
                       <p className="mt-2 max-w-xl text-xs leading-5 text-slate-400">
                         {isTurkish
-                          ? "Bu Şiddet Oranı hesabındaki çalışma saati ve kayıp iş günü verilerini aylık HSE Performance kaydınıza ekleyin."
-                          : "Add the worked-hours and lost-workday data from this Severity Rate calculation to your monthly HSE Performance record."}
+                          ? "Sonucu yalnız bu sekmede taslak olarak inceleyin. Aylık KPI kaydına otomatik ekleme yapılmaz."
+                          : "Review a draft in this tab only. Nothing is added automatically to monthly KPI records."}
                       </p>
                     </div>
 
                     <span className="shrink-0 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-[9px] font-black text-emerald-300">
-                      KPI READY
+                      {isTurkish ? "TASLAK" : "DRAFT"}
                     </span>
                   </div>
 
@@ -774,8 +647,8 @@ export default function SeverityRateCalculatorPage() {
                         ? "AKTARILIYOR..."
                         : "TRANSFERRING..."
                       : isTurkish
-                        ? "↗ HSE PERFORMANCE'A AKTAR"
-                        : "↗ TRANSFER TO HSE PERFORMANCE"}
+                        ? "↗ KAYDEDİLMEMİŞ KPI TASLAĞINI İNCELE"
+                        : "↗ REVIEW UNSAVED KPI DRAFT"}
                   </button>
 
                   {kpiMessage && (

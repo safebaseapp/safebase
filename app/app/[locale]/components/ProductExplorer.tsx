@@ -269,7 +269,7 @@ const products: Product[] = [
     eyebrowEn: "HSE METRICS",
     descriptionTr: "Risk Matrisi, TRIR, LTIFR ve Severity Rate gibi temel HSE hesaplarını tek merkezden kullanın.",
     descriptionEn: "Use core HSE calculations such as Risk Matrix, TRIR, LTIFR and Severity Rate from one place.",
-    href: "/tools",
+    href: "/tools#calculators",
     icon: Calculator,
     status: "LIVE",
     accent: "blue",

@@ -1,5 +1,6 @@
 "use client";
 
+import {CalculatorDraftPanel} from "../../tools/_shared/CalculatorHandoff";
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
@@ -435,6 +436,7 @@ export default function IncidentManagementPage() {
 
   return (
     <main className="min-h-screen bg-[#020817] text-white">
+      <div className="mx-auto max-w-7xl px-4"><CalculatorDraftPanel locale={locale}/></div>
       <div className="mx-auto max-w-[1540px] px-5 py-8 lg:px-8">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div>
@@ -448,8 +450,8 @@ export default function IncidentManagementPage() {
 
             <p className="mt-2 max-w-3xl text-sm text-slate-400">
               {isTurkish
-                ? "Aylık çalışma saati, olay ve önleyici performans verilerini yönetin. Tüm OSHA oranları canlı hesaplanır."
-                : "Manage monthly worked hours, incidents and preventive performance data. OSHA rates are calculated live."}
+                ? "Aylık çalışma saati, olay ve önleyici performans verilerini yönetin. TRIR/DART 200.000, LTIFR 1.000.000, Şiddet Oranı 200.000 saat bazında hesaplanır."
+                : "Manage monthly worked hours, incidents and preventive performance data. TRIR/DART use 200,000 hours, LTIFR 1,000,000 and Severity Rate 200,000."}
             </p>
           </div>
 

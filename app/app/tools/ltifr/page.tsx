@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import jsPDF from "jspdf";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { createClient } from "@/utils/supabase/client";
+import {storeCalculationDraft} from "@/app/[locale]/tools/_shared/CalculatorHandoff";
 
 function TrendIcon({ className = "h-7 w-7" }: { className?: string }) {
   return (
@@ -189,13 +189,15 @@ export default function LTIFRCalculatorPage() {
     hoursWorked !== "" &&
     Number.isFinite(injuriesNumber) &&
     Number.isFinite(hoursNumber) &&
+    Number.isSafeInteger(injuriesNumber) &&
     injuriesNumber >= 0 &&
     hoursNumber > 0;
 
   const result = useMemo(() => {
     if (!calculated || !validInput) return null;
 
-    return calculateLTIFR(injuriesNumber, hoursNumber);
+    const value = calculateLTIFR(injuriesNumber, hoursNumber);
+    return Number.isFinite(value) ? value : null;
   }, [calculated, validInput, injuriesNumber, hoursNumber]);
 
   const calculate = () => {
@@ -210,131 +212,13 @@ export default function LTIFRCalculatorPage() {
 
 
   const saveToHsePerformance = async () => {
-    if (result === null || !validInput) return;
-
+    if (result === null) return;
     setKpiSaving(true);
-    setKpiMessage("");
-
     try {
-      const supabase = createClient();
-
-      const {
-        data: { user },
-        error: userError,
-      } = await supabase.auth.getUser();
-
-      if (userError || !user) {
-        setKpiMessage(
-          isTurkish
-            ? "HSE Performance'a aktarmak için giriş yapmalısınız."
-            : "You must sign in to transfer data to HSE Performance.",
-        );
-        return;
-      }
-
-      const periodMonth =
-        `${kpiYear}-${String(kpiMonth).padStart(2, "0")}-01`;
-
-      const projectName =
-        kpiProject.trim() || "All Projects";
-
-      const { data: existing, error: readError } =
-        await supabase
-          .from("hse_incident_metrics")
-          .select("id, worked_hours")
-          .eq("user_id", user.id)
-          .eq("period_month", periodMonth)
-          .eq("project_name", projectName)
-          .maybeSingle();
-
-      if (readError) throw readError;
-
-      if (existing?.id) {
-        const existingHours = Number(existing.worked_hours ?? 0);
-
-        if (
-          existingHours > 0 &&
-          existingHours !== hoursNumber
-        ) {
-          const confirmed = window.confirm(
-            isTurkish
-              ? `Bu dönem ve proje için ${existingHours.toLocaleString(
-                  "tr-TR",
-                )} çalışma saati zaten kayıtlı. Yeni hesaplamadaki ${hoursNumber.toLocaleString(
-                  "tr-TR",
-                )} saat ile değiştirmek istiyor musunuz?`
-              : `${existingHours.toLocaleString(
-                  "en-US",
-                )} worked hours are already saved for this period and project. Do you want to replace them with ${hoursNumber.toLocaleString(
-                  "en-US",
-                )} hours from this calculation?`,
-          );
-
-          if (!confirmed) {
-            setKpiMessage(
-              isTurkish
-                ? "Aktarım iptal edildi. Mevcut çalışma saati korunuyor."
-                : "Transfer cancelled. Existing worked hours were preserved.",
-            );
-            return;
-          }
-        }
-
-        const { error: updateError } =
-          await supabase
-            .from("hse_incident_metrics")
-            .update({
-              worked_hours: hoursNumber,
-              lti: injuriesNumber,
-              updated_at: new Date().toISOString(),
-            })
-            .eq("id", existing.id)
-            .eq("user_id", user.id);
-
-        if (updateError) throw updateError;
-      } else {
-        const { error: insertError } =
-          await supabase
-            .from("hse_incident_metrics")
-            .insert({
-              user_id: user.id,
-              period_month: periodMonth,
-              project_name: projectName,
-              worked_hours: hoursNumber,
-              lti: injuriesNumber,
-            });
-
-        if (insertError) throw insertError;
-      }
-
-      const monthNames = isTurkish
-        ? [
-            "Ocak", "Şubat", "Mart", "Nisan",
-            "Mayıs", "Haziran", "Temmuz", "Ağustos",
-            "Eylül", "Ekim", "Kasım", "Aralık",
-          ]
-        : [
-            "January", "February", "March", "April",
-            "May", "June", "July", "August",
-            "September", "October", "November", "December",
-          ];
-
-      setKpiMessage(
-        isTurkish
-          ? `✓ ${monthNames[kpiMonth - 1]} ${kpiYear} KPI kaydına aktarıldı.`
-          : `✓ Transferred to ${monthNames[kpiMonth - 1]} ${kpiYear} KPI record.`,
-      );
-    } catch (error) {
-      console.error("LTIFR → HSE Performance error:", error);
-
-      setKpiMessage(
-        isTurkish
-          ? "Aktarım başarısız. Lütfen tekrar deneyin."
-          : "Transfer failed. Please try again.",
-      );
-    } finally {
-      setKpiSaving(false);
-    }
+      storeCalculationDraft({source:'ltifr',kind:'lagging',result:result.toFixed(2),unit:'1,000,000 h',method:'LTIFR: existing hse-metrics engine',basis:'actual',inputs:{lti:injuriesNumber,worked_hours:hoursNumber,period_month:`${kpiYear}-${String(kpiMonth).padStart(2,'0')}-01`,project_name:kpiProject}});
+      window.location.assign(`/${isTurkish?'tr':'en'}/hse-performance#operational-calculations`);
+    } catch {setKpiMessage(isTurkish?'Oturum taslağı oluşturulamadı. Veri kaydedilmedi.':'Could not create session draft. No data saved.');}
+    finally {setKpiSaving(false);}
   };
 
   const downloadLTIFRPdf = async () => {
@@ -1486,6 +1370,7 @@ export default function LTIFRCalculatorPage() {
           "radial-gradient(circle at 14% 8%, rgba(37,99,235,0.10), transparent 25%), radial-gradient(circle at 88% 24%, rgba(6,182,212,0.06), transparent 27%), radial-gradient(circle at 55% 86%, rgba(124,58,237,0.05), transparent 30%), #020617",
       }}
     >
+      <p className="relative mx-auto my-4 max-w-5xl px-4 text-sm text-amber-200">{isTurkish ? "KPI taslağı yalnız bu sekmede tutulur; otomatik kayıt yapılmaz. Dönem/proje ve vaka tanımlarını doğrulayın. Referans renk/aralıklar evrensel OSHA sınırları veya güvenlik onayı değildir; kıyas için aynı tanım ve sektör verisi gerekir." : "KPI drafts stay in this tab only; no automatic saving. Verify period/project and case definitions. Reference colours/bands are not universal OSHA limits or a safety approval; comparison needs matching definitions and industry data."}</p>
       {/* BACKGROUND GLOW */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[8%] top-[12%] h-80 w-80 rounded-full bg-blue-600/[0.05] blur-[120px]" />
@@ -1495,7 +1380,7 @@ export default function LTIFRCalculatorPage() {
       <div className="relative mx-auto w-full max-w-[1380px] px-5 py-10 sm:px-8 lg:px-10 lg:py-14">
         {/* BACK */}
         <Link
-          href={isTurkish ? "/tr/tools" : "/en/tools"}
+          href={isTurkish ? "/tr/tools#calculators" : "/en/tools#calculators"}
           className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 transition hover:text-blue-300"
         >
           <span>←</span>
@@ -1789,19 +1674,19 @@ export default function LTIFRCalculatorPage() {
 
                       <h2 className="mt-2 text-xl font-black">
                         {isTurkish
-                          ? "Sonucu KPI Sistemine Aktar"
-                          : "Transfer Result to KPI System"}
+                          ? "Sonucu Kaydedilmemiş KPI Taslağı Olarak İncele"
+                          : "Review Result as an Unsaved KPI Draft"}
                       </h2>
 
                       <p className="mt-2 max-w-xl text-xs leading-5 text-slate-400">
                         {isTurkish
-                          ? "Bu LTIFR hesabındaki çalışma saati ve LTI verilerini aylık HSE Performance kaydınıza ekleyin."
-                          : "Add the worked-hours and LTI data from this LTIFR calculation to your monthly HSE Performance record."}
+                          ? "Sonucu yalnız bu sekmede taslak olarak inceleyin. Aylık KPI kaydına otomatik ekleme yapılmaz."
+                          : "Review a draft in this tab only. Nothing is added automatically to monthly KPI records."}
                       </p>
                     </div>
 
                     <span className="shrink-0 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-[9px] font-black text-emerald-300">
-                      KPI READY
+                      {isTurkish ? "TASLAK" : "DRAFT"}
                     </span>
                   </div>
 
@@ -1922,8 +1807,8 @@ export default function LTIFRCalculatorPage() {
                         ? "AKTARILIYOR..."
                         : "TRANSFERRING..."
                       : isTurkish
-                        ? "↗ HSE PERFORMANCE'A AKTAR"
-                        : "↗ TRANSFER TO HSE PERFORMANCE"}
+                        ? "↗ KAYDEDİLMEMİŞ KPI TASLAĞINI İNCELE"
+                        : "↗ REVIEW UNSAVED KPI DRAFT"}
                   </button>
 
                   {kpiMessage && (

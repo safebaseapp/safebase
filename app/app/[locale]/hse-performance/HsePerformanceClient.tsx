@@ -8,6 +8,7 @@ import {
   calculateSeverityRate,
   calculateTRIR,
 } from "@/lib/hse-metrics";
+import {CalculatorDraftPanel} from "../tools/_shared/CalculatorHandoff";
 import HseReportingPanel from "./HseReportingPanel";
 
 
@@ -1099,7 +1100,7 @@ export default function HsePerformanceClient({
           <div className="sticky top-0 flex h-screen flex-col px-3 py-6">
 
             <p className="px-3 text-[10px] font-black uppercase tracking-[0.14em] text-blue-300">
-              HSE PERFORMANCE
+              {isTurkish ? "HSE PERFORMANS" : "HSE PERFORMANCE"}
             </p>
 
             <nav className="mt-4 space-y-1">
@@ -1116,7 +1117,7 @@ export default function HsePerformanceClient({
                 className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold text-slate-400 transition hover:bg-slate-900 hover:text-white"
               >
                 <span>◔</span>
-                KPI Dashboard
+                {isTurkish ? "KPI Paneli" : "KPI Dashboard"}
               </a>
 
               <a
@@ -1204,7 +1205,7 @@ export default function HsePerformanceClient({
 
               <div>
                 <h1 className="text-[32px] font-black leading-[1.02] tracking-[-0.045em] sm:text-[42px]">
-                  HSE Performance
+                  {isTurkish ? "HSE Performans" : "HSE Performance"}
                 </h1>
 
                 <p className="mt-2 max-w-xl text-[13px] leading-5 text-slate-400 sm:text-sm">
@@ -1315,6 +1316,7 @@ export default function HsePerformanceClient({
             </div>
           </header>
 
+          <CalculatorDraftPanel locale={locale}/>
           {/* TOP KPI */}
           <section
             id="kpi"
@@ -1793,7 +1795,7 @@ export default function HsePerformanceClient({
 
                 <h2 className="mt-2 text-xl font-black">
                   {isTurkish
-                    ? "HSE Performance Trendi"
+                    ? "HSE Performans Trendi"
                     : "HSE Performance Trend"}
                 </h2>
 
@@ -1834,7 +1836,7 @@ export default function HsePerformanceClient({
                     viewBox="0 0 800 260"
                     className="h-[260px] min-w-[760px] w-full"
                     role="img"
-                    aria-label="HSE KPI performance trend"
+                    aria-label={isTurkish ? "HSE KPI performans eğilimi" : "HSE KPI performance trend"}
                   >
                     {[50, 90, 130, 170, 205].map(
                       (y) => (
@@ -2062,7 +2064,7 @@ export default function HsePerformanceClient({
                   viewBox="0 0 600 230"
                   className="h-[230px] w-full"
                   role="img"
-                  aria-label="Monthly HSE trend"
+                  aria-label={isTurkish ? "Aylık HSE eğilimi" : "Monthly HSE trend"}
                 >
                   {[40, 80, 120, 160, 200].map((y) => (
                     <line

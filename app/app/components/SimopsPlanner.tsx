@@ -1,5 +1,6 @@
 "use client";
 
+import {DraftTransfer} from "../[locale]/tools/_shared/CalculatorHandoff";
 import { useEffect, useMemo, useState } from "react";
 import { jsPDF } from "jspdf";
 import { createClient } from "../../utils/supabase/client";
@@ -2193,6 +2194,7 @@ export default function SimopsPlanner({ locale }: Props) {
 
   return (
     <section className="min-h-screen bg-slate-950 px-4 py-8 text-white sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4"><p className="text-sm text-cyan-200">{isTurkish?'Planlama aracı — kaza performans oranı değildir.':'Planning tool — not an incident performance rate.'}</p>{selected.length>1&&<DraftTransfer locale={locale} draft={{source:'simops',kind:'operational',result:`${maxInitial} → ${maxResidual}`,unit:'/25',method:isTurkish?'SIMOPS arayüz riskleri: en yüksek başlangıç → kalan risk; kaza oranı değildir':'SIMOPS interfaces: maximum initial → residual risk; not an injury rate',basis:'assessment',inputs:{activities:selected.map(activityName).join(', '),selected_activity_count:selected.length,initial_risk:maxInitial,residual_risk:maxResidual,decision}}}/>}</div>
       <div className="mx-auto w-full max-w-[1680px]">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>

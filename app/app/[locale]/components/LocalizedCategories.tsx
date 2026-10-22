@@ -14,7 +14,7 @@ export default function LocalizedCategories({ locale }: Props) {
       description: isTurkish
         ? "Risk matrisi, TRIR, LTIFR ve diğer pratik HSE hesaplamaları."
         : "Risk matrix, TRIR, LTIFR and other practical HSE calculations.",
-      href: "/tools",
+      href: "/tools#calculators",
       comingSoon: false,
       badge: isTurkish ? "Aktif" : "Available",
       accent: "blue",
