@@ -251,8 +251,14 @@ export default function HsePerformanceClient({
 
     void loadIncidentMetrics();
 
+    // A successful, explicitly approved KPI save may originate in the draft panel
+    // on this very page; reload current filters instead of showing stale totals.
+    const onMonthlyKpiSaved = () => { void loadIncidentMetrics(); };
+    window.addEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
+
     return () => {
       cancelled = true;
+      window.removeEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
     };
   }, [userId, filters.project, selectedMonth]);
 
@@ -393,8 +399,12 @@ export default function HsePerformanceClient({
 
     void loadKpiTrend();
 
+    const onMonthlyKpiSaved = () => { void loadKpiTrend(); };
+    window.addEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
+
     return () => {
       cancelled = true;
+      window.removeEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
     };
   }, [
     userId,
