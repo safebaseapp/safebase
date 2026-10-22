@@ -186,6 +186,43 @@ export default function HsePerformanceClient({
   const [kpiTrendLoading, setKpiTrendLoading] =
     useState(true);
 
+  // KPI-only projects must remain selectable even without site observations.
+  const [kpiProjectNames, setKpiProjectNames] = useState<string[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    let latestRequest = 0;
+
+    async function loadKpiProjectNames() {
+      const request = ++latestRequest;
+      const { data, error } = await createClient()
+        .from("hse_incident_metrics")
+        .select("project_name")
+        .eq("user_id", userId)
+        .limit(1000);
+
+      if (cancelled || request !== latestRequest) return;
+      if (error) {
+        console.error("HSE KPI project options load error:", error);
+        return;
+      }
+
+      setKpiProjectNames(
+        (data ?? []).map((row) => String(row.project_name ?? "")),
+      );
+    }
+
+    setKpiProjectNames([]);
+    void loadKpiProjectNames();
+    const onMonthlyKpiSaved = () => { void loadKpiProjectNames(); };
+    window.addEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
+    };
+  }, [userId]);
+
   useEffect(() => {
     let cancelled = false;
     let latestRequest = 0;
@@ -512,12 +549,11 @@ export default function HsePerformanceClient({
 
   const projectOptions = useMemo(
     () =>
-      unique(
-        observations.map(
-          (x) => x.project_name,
-        ),
-      ),
-    [observations],
+      unique([
+        ...observations.map((x) => x.project_name),
+        ...kpiProjectNames,
+      ]).filter((project) => project !== "All Projects"),
+    [observations, kpiProjectNames],
   );
 
   const companyOptions = useMemo(
