@@ -6,6 +6,7 @@ import jsPDF from "jspdf";
 
 import { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
+import MonthlyKpiSave from '@/app/[locale]/tools/_shared/MonthlyKpiSave';
 import {storeCalculationDraft} from "@/app/[locale]/tools/_shared/CalculatorHandoff";
 
 function TrendIcon({ className = "h-7 w-7" }: { className?: string }) {
@@ -1740,6 +1741,7 @@ export default function TRIRPage() {
                         : "↗ REVIEW UNSAVED KPI DRAFT"}
                   </button>
 
+                  {trir !== null && <MonthlyKpiSave key={`${kpiYear}-${kpiMonth}-${kpiProject}`} locale={isTurkish?'tr':'en'} draft={{source:'trir',kind:'lagging',result:String(trir),unit:'rate',method:'existing hse-metrics engine',basis:'actual',inputs:{recordable_cases:casesNumber,worked_hours:hoursNumber,period_month:`${kpiYear}-${String(kpiMonth).padStart(2,'0')}-01`,project_name:kpiProject}}}/> }
                   {kpiMessage && (
                     <div className="mt-3 rounded-xl border border-emerald-400/20 bg-emerald-500/[0.06] px-4 py-3 text-xs font-bold text-emerald-300">
                       {kpiMessage}

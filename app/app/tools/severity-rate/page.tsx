@@ -1,6 +1,7 @@
 "use client";
 
 import { calculateSeverityRate } from "@/lib/hse-metrics";
+import MonthlyKpiSave from '@/app/[locale]/tools/_shared/MonthlyKpiSave';
 import {storeCalculationDraft} from "@/app/[locale]/tools/_shared/CalculatorHandoff";
 
 import { useMemo, useState } from "react";
@@ -651,6 +652,7 @@ export default function SeverityRateCalculatorPage() {
                         : "↗ REVIEW UNSAVED KPI DRAFT"}
                   </button>
 
+                  {result !== null && <MonthlyKpiSave key={`${kpiYear}-${kpiMonth}-${kpiProject}`} locale={isTurkish?'tr':'en'} draft={{source:'severity-rate',kind:'lagging',result:String(result),unit:'rate',method:'existing hse-metrics engine',basis:'actual',inputs:{lost_days:Number(lostWorkdays),worked_hours:Number(hoursWorked),period_month:`${kpiYear}-${String(kpiMonth).padStart(2,'0')}-01`,project_name:kpiProject}}}/> }
                   {kpiMessage && (
                     <div className="mt-3 rounded-xl border border-emerald-400/20 bg-emerald-500/[0.06] px-4 py-3 text-xs font-bold text-emerald-300">
                       {kpiMessage}
