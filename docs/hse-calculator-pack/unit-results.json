@@ -1,0 +1,95 @@
+{
+  "checks": [
+    "calculateTRIR matches existing basis",
+    "calculateDART matches existing basis",
+    "calculateLTIFR matches existing basis",
+    "calculateSeverityRate matches existing basis",
+    "reject ambiguous/invalid numeric \"\"",
+    "reject ambiguous/invalid numeric \"-1\"",
+    "reject ambiguous/invalid numeric \"Infinity\"",
+    "reject ambiguous/invalid numeric \"NaN\"",
+    "reject ambiguous/invalid numeric \"1e3\"",
+    "reject ambiguous/invalid numeric \"1,000.5\"",
+    "reject ambiguous/invalid numeric \"1.000,5\"",
+    "TR/EN decimal parsing",
+    "sling 1000kg 30deg",
+    "sling 10kN 90deg",
+    "sling overflow must not emit Infinity",
+    "sling 60deg",
+    "invalid sling 0/30",
+    "invalid sling -1/30",
+    "invalid sling 1/0",
+    "invalid sling 1/91",
+    "invalid sling NaN/30",
+    "invalid sling Infinity/30",
+    "NIOSH 85dBA 480min",
+    "NIOSH 88dBA 240min",
+    "NIOSH 91dBA 120min",
+    "NIOSH 100dBA 15min",
+    "NIOSH 115dBA 0.46875min",
+    "NIOSH 85dBA 240min",
+    "NIOSH 0dBA 480min",
+    "NIOSH mixed levels dose",
+    "invalid noise []",
+    "invalid noise [{\"level\":85,\"minutes\":0}]",
+    "invalid noise [{\"level\":116,\"minutes\":1}]",
+    "invalid noise [{\"level\":-1,\"minutes\":1}]",
+    "invalid noise [{\"level\":85,\"minutes\":1441}]",
+    "invalid noise [{\"level\":null,\"minutes\":1}]",
+    "invalid noise [{\"level\":85,\"minutes\":-1}]",
+    "net hours overtime/breaks/absence",
+    "multi contractor rows",
+    "invalid hours {\"people\":1.5,\"days\":5,\"shift\":8,\"overtime\":1,\"breaks\":0.5,\"absence\":5}",
+    "invalid hours {\"people\":10,\"days\":5,\"shift\":8,\"overtime\":1,\"breaks\":10,\"absence\":5}",
+    "invalid hours {\"people\":10,\"days\":5,\"shift\":8,\"overtime\":1,\"breaks\":0.5,\"absence\":500}",
+    "invalid hours {\"people\":10,\"days\":5,\"shift\":24,\"overtime\":1,\"breaks\":0.5,\"absence\":5}",
+    "invalid hours {\"people\":10,\"days\":0,\"shift\":8,\"overtime\":1,\"breaks\":0.5,\"absence\":5}",
+    "invalid hours {\"people\":null,\"days\":5,\"shift\":8,\"overtime\":1,\"breaks\":0.5,\"absence\":5}",
+    "WBGT correction not inferred",
+    "all protected module SHA256 hashes unchanged",
+    "trir no longer writes from calculator",
+    "ltifr no longer writes from calculator",
+    "severity-rate no longer writes from calculator",
+    "KPI report implementation unchanged"
+  ],
+  "result": "PASS",
+  "count": 51,
+  "lint": {
+    "baselineExit": 1,
+    "currentExit": 1,
+    "baselineErrors": 4,
+    "currentErrors": 4,
+    "baselineWarnings": 11,
+    "currentWarnings": 11,
+    "newFindings": []
+  },
+  "kpiUI": {
+    "checks": [
+      {
+        "locale": "tr",
+        "result": "PASS",
+        "rates": {
+          "TRIR": 2,
+          "DART": 1,
+          "LTIFR": 5,
+          "severity": 12
+        },
+        "width": 390,
+        "writeAttempts": 0
+      },
+      {
+        "locale": "en",
+        "result": "PASS",
+        "rates": {
+          "TRIR": 2,
+          "DART": 1,
+          "LTIFR": 5,
+          "severity": 12
+        },
+        "width": 390,
+        "writeAttempts": 0
+      }
+    ],
+    "note": "Actual KPI component and unchanged reporting component, synthetic read-only client fixture injected into separate test DOM. No auth bypass in app, no live service, no persisted records. Real authenticated account/report delivery NOT TESTED."
+  }
+}
