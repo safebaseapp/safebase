@@ -1669,7 +1669,7 @@ export default function LTIFRCalculatorPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-400">
-                        SERNEM HSE PERFORMANCE
+                        SERNEM {isTurkish ? "HSE PERFORMANS" : "HSE PERFORMANCE"}
                       </p>
 
                       <h2 className="mt-2 text-xl font-black">
@@ -2128,7 +2128,7 @@ export default function LTIFRCalculatorPage() {
             </div>
 
             <div className="text-[10px] text-slate-500">
-              Professional HSE Platform
+              {isTurkish ? "Profesyonel HSE Platformu" : "Professional HSE Platform"}
             </div>
           </div>
         </section>

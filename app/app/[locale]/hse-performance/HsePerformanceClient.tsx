@@ -1177,15 +1177,15 @@ export default function HsePerformanceClient({
               <div className="mt-5 space-y-4 text-xs text-slate-400">
                 <p><span className="mr-2 text-emerald-400">✓</span>ISO 45001</p>
                 <p><span className="mr-2 text-emerald-400">✓</span>ISO 45004</p>
-                <p><span className="mr-2 text-emerald-400">✓</span>OSHA Metrics</p>
-                <p><span className="mr-2 text-emerald-400">✓</span>NEBOSH Principles</p>
+                <p><span className="mr-2 text-emerald-400">✓</span>{isTurkish ? "OSHA Metrikleri" : "OSHA Metrics"}</p>
+                <p><span className="mr-2 text-emerald-400">✓</span>{isTurkish ? "NEBOSH İlkeleri" : "NEBOSH Principles"}</p>
               </div>
             </div>
 
             <p className="mt-5 px-2 text-[10px] italic leading-5 text-slate-600">
-              “Safer People.
+              {isTurkish ? "“Daha güvenli çalışanlar." : "“Safer People."}
               <br />
-              Stronger Businesses.”
+              {isTurkish ? "Daha güçlü işletmeler.”" : "Stronger Businesses.”"}
             </p>
 
             <p className="mt-3 px-2 text-xs font-black text-blue-300">
@@ -1218,9 +1218,9 @@ export default function HsePerformanceClient({
               <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center 2xl:justify-end">
 
                 <div className="hidden px-4 text-center text-xs italic leading-5 text-slate-500 2xl:block">
-                  “Measure today.
+                  {isTurkish ? "“Bugünü ölç." : "“Measure today."}
                   <br />
-                  A safer tomorrow.”
+                  {isTurkish ? "Daha güvenli bir yarın.”" : "A safer tomorrow.”"}
                   <div className="text-[9px] not-italic">
                     — SERNEM
                   </div>
@@ -1443,7 +1443,7 @@ export default function HsePerformanceClient({
               <div className="flex items-start justify-between">
                 <div>
                   <h2 className="text-lg font-black">
-                    Leading Indicators
+                    {isTurkish ? "Öncü Göstergeler" : "Leading Indicators"}
                   </h2>
 
                   <p className="mt-1 text-[11px] text-slate-500">
@@ -1548,7 +1548,7 @@ export default function HsePerformanceClient({
               <div className="flex items-start justify-between">
                 <div>
                   <h2 className="text-lg font-black">
-                    Lagging Indicators
+                    {isTurkish ? "Sonuç (Kaza) Göstergeleri" : "Lagging Indicators"}
                   </h2>
 
                   <p className="mt-1 text-[11px] text-slate-500">
@@ -1750,11 +1750,11 @@ export default function HsePerformanceClient({
 
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {[
-                  ["Near Miss", incidentMetrics ? incidentMetrics.near_miss : "—"],
+                  [isTurkish ? "Ramak Kala" : "Near Miss", incidentMetrics ? incidentMetrics.near_miss : "—"],
                   ["LTI", incidentMetrics ? incidentMetrics.lti : "—"],
-                  ["Recordable", incidentMetrics ? incidentMetrics.recordable_cases : "—"],
-                  ["First Aid", incidentMetrics ? incidentMetrics.first_aid : "—"],
-                  ["Lost Days", incidentMetrics ? incidentMetrics.lost_days : "—"],
+                  [isTurkish ? "Kaydedilebilir Vaka" : "Recordable", incidentMetrics ? incidentMetrics.recordable_cases : "—"],
+                  [isTurkish ? "İlk Yardım" : "First Aid", incidentMetrics ? incidentMetrics.first_aid : "—"],
+                  [isTurkish ? "Kayıp Gün" : "Lost Days", incidentMetrics ? incidentMetrics.lost_days : "—"],
                   ["MTC", incidentMetrics ? incidentMetrics.medical_treatment : "—"],
                 ].map(([label, value]) => (
                   <div
@@ -1790,7 +1790,7 @@ export default function HsePerformanceClient({
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p className="text-[9px] font-black uppercase tracking-[0.18em] text-blue-400">
-                  SERNEM HSE ANALYTICS
+                  {isTurkish ? "SERNEM HSE ANALİTİK" : "SERNEM HSE ANALYTICS"}
                 </p>
 
                 <h2 className="mt-2 text-xl font-black">

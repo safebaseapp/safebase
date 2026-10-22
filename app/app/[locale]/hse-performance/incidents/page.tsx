@@ -441,7 +441,7 @@ export default function IncidentManagementPage() {
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div>
             <p className="text-[10px] font-black uppercase tracking-[0.22em] text-blue-400">
-              SERNEM HSE PERFORMANCE
+              {isTurkish ? "SERNEM HSE PERFORMANS" : "SERNEM HSE PERFORMANCE"}
             </p>
 
             <h1 className="mt-3 text-4xl font-black tracking-[-0.04em]">
@@ -597,7 +597,7 @@ export default function IncidentManagementPage() {
               />
 
               <span className="pb-1 text-[10px] font-bold text-slate-500">
-                employee-hours
+                {isTurkish ? "çalışan-saat" : "employee-hours"}
               </span>
             </div>
 
@@ -619,7 +619,7 @@ export default function IncidentManagementPage() {
                 {isTurkish ? "Olay Verileri" : "Incident Data"}
               </h2>
               <p className="mt-1 text-[11px] text-slate-500">
-                OSHA lagging indicators
+                {isTurkish ? "Sonuç (kaza) göstergeleri" : "Lagging incident indicators"}
               </p>
             </div>
 
@@ -646,13 +646,13 @@ export default function IncidentManagementPage() {
                   {isTurkish ? "Canlı Ön İzleme" : "Live Preview"}
                 </p>
                 <h2 className="mt-2 text-xl font-black">
-                  OSHA Metrics
+                  {isTurkish ? "Oran Göstergeleri" : "Rate Indicators"}
                 </h2>
                 <p className="mt-1 text-[10px] text-slate-500">
                   {workedHours.toLocaleString(
                     isTurkish ? "tr-TR" : "en-US",
                   )}{" "}
-                  employee-hours
+                  {isTurkish ? "çalışan-saat" : "employee-hours"}
                 </p>
               </div>
 

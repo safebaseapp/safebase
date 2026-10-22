@@ -519,7 +519,7 @@ export default function SeverityRateCalculatorPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-400">
-                        SERNEM HSE PERFORMANCE
+                        SERNEM {isTurkish ? "HSE PERFORMANS" : "HSE PERFORMANCE"}
                       </p>
 
                       <h2 className="mt-2 text-xl font-black">
@@ -725,7 +725,7 @@ export default function SeverityRateCalculatorPage() {
             </div>
 
             <div className="rounded-full border border-blue-400/15 bg-blue-500/[0.06] px-3 py-1.5 text-[10px] font-bold text-blue-300">
-              SR = Lost Workdays × 200,000 / Hours
+              {isTurkish ? "SR = Kayıp Gün × 200.000 / Saat" : "SR = Lost Workdays × 200,000 / Hours"}
             </div>
           </div>
 
@@ -831,7 +831,7 @@ export default function SeverityRateCalculatorPage() {
           </div>
 
           <div className="font-bold text-slate-400">
-            SERNEM Safety Platform
+            SERNEM {isTurkish ? "Güvenlik Platformu" : "Safety Platform"}
           </div>
         </div>
       </div>

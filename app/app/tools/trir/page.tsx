@@ -1511,7 +1511,7 @@ export default function TRIRPage() {
 
               <div className="relative flex items-start justify-between">
                 <p className="text-sm font-black uppercase tracking-[0.16em] text-blue-400">
-                  TRIR RESULT
+                  {isTurkish ? "TRIR SONUCU" : "TRIR RESULT"}
                 </p>
 
                 {trir !== null && (
@@ -1598,7 +1598,7 @@ export default function TRIRPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-400">
-                        SERNEM HSE PERFORMANCE
+                        SERNEM {isTurkish ? "HSE PERFORMANS" : "HSE PERFORMANCE"}
                       </p>
 
                       <h2 className="mt-2 text-xl font-black">
@@ -1938,7 +1938,7 @@ export default function TRIRPage() {
         </section>
 
         <footer className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <span>◈ SERNEM TRIR Calculator</span>
+          <span>◈ SERNEM {isTurkish ? "TRIR Hesaplayıcı" : "TRIR Calculator"}</span>
           <span>© 2026 SERNEM</span>
           <span>
             {isTurkish
