@@ -9,6 +9,9 @@ on:
       - 'app/app/tools/**'
       - 'tools/hse-calculator-pack/**'
       - '.github/workflows/p125-kpi-isolated-qa.yml'
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
