@@ -18,6 +18,47 @@ for(const [locale,width]of [['tr',390],['en',1440]]){
  });
  await c.close();
 }
+// Field interpretation must be meaningful, not just a number: localhost only, no Supabase writes.
+for(const locale of ['tr','en']){
+ const c=await b.newContext({viewport:{width:390,height:960}});
+ await c.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'&&r.request().method()==='GET'?r.continue():r.abort());
+ const p=await c.newPage();
+ await check(`${locale} sling WLL missing, exceeded and rated — with angle responsive diagram`,async()=>{
+  await p.goto(`${base}/${locale}/tools/sling-tension`);
+  const a=p.locator('[data-calculator="sling-tension"]');
+  await a.locator('[data-field="load"]').fill('1000');
+  await a.locator('[data-field="angle"]').fill('30');
+  const g=a.locator('[data-sling-assessment]');
+  await g.waitFor();
+  assert.match(await g.innerText(),locale==='tr'?/KAPASİTE KARŞILAŞTIRMASI YAPILMADI/:/CAPACITY NOT VERIFIED/);
+  const oldPath=await a.locator('svg path').first().getAttribute('d');
+  await a.locator('[data-field="angle"]').fill('60');
+  const newPath=await a.locator('svg path').first().getAttribute('d');
+  assert.notEqual(oldPath,newPath);
+  await a.locator('[data-field="angle"]').fill('30');
+  await a.locator('[data-field="assemblyWll"]').fill('8');
+  assert.match(await g.innerText(),locale==='tr'?/KAPASİTE AŞILIYOR/:/CAPACITY EXCEEDED/);
+  await a.locator('[data-field="assemblyWll"]').fill('12');
+  assert.match(await g.innerText(),locale==='tr'?/KALDIRMA ONAYI DEĞİL/:/NOT LIFT APPROVAL/);
+  await a.locator('[data-field="angle"]').fill('20');
+  assert.match(await g.innerText(),locale==='tr'?/30° altı/:/below 30°/i);
+ });
+ await check(`${locale} WBGT heavy/unacclimatized compares OSHA Table 2, never grants clearance`,async()=>{
+  await p.goto(`${base}/${locale}/tools/heat-stress`);
+  const a=p.locator('[data-calculator="heat-stress"]');
+  await a.locator('[data-field="wbgt"]').fill('28');
+  await a.locator('select').nth(0).selectOption('3');
+  await a.locator('select').nth(1).selectOption('heavy');
+  await a.locator('select').nth(2).selectOption('no');
+  const g=a.locator('[data-heat-screening]');
+  await g.waitFor();
+  assert.match(await g.innerText(),locale==='tr'?/23,00 °C/:/23.00 °C/);
+  assert.match(await g.innerText(),locale==='tr'?/8,00 °C/:/8.00 °C/);
+  assert.match(await g.innerText(),locale==='tr'?/AKSİYON GEREKLİ/:/ACTION REQUIRED/);
+ });
+ await c.close();
+}
+
 // Mount the actual draft consumer in a separate synthetic DOM, never bypass application auth.
 for(const locale of ['tr','en']){
  const p=await b.newPage({viewport:{width:320,height:900}});await p.route('**/*',r=>{if(r.request().method()!=='GET'){writes.push(r.request().method());return r.abort()}return new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort()});await p.goto(base+'/'+locale+'/tools');
