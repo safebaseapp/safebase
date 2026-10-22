@@ -3,7 +3,8 @@ import {build} from '../sim5-review/node_modules/esbuild/lib/main.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const dir='docs/hse-calculator-pack/final125',results=[],writes=[],errors=[],base=process.env.HSE_HUB_URL||'http://127.0.0.1:4188';
-const b=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']});
+const browserExecutable = process.env.HSE_CHROMIUM_EXECUTABLE || (fs.existsSync('/usr/bin/chromium') ? '/usr/bin/chromium' : undefined);
+const b=await chromium.launch({...(browserExecutable ? {executablePath:browserExecutable} : {}),args:['--no-sandbox']});
 async function check(name,fn){try{await fn();results.push({name,result:'PASS'})}catch(e){results.push({name,result:'FAIL',error:String(e).split('\n')[0]})}console.log(results.at(-1))}
 const ids=['risk-matrix','trir','ltifr','severity-rate','dart','noise-exposure','sling-tension','man-hours','heat-stress'];
 try{
