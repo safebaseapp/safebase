@@ -1,3 +1,5 @@
+> **Paket 125 FINAL güncellemesi:** Güncel KPI kayıt/taslak davranışı, dokuz aracın tasarımı ve son testler [FINAL125.md](FINAL125.md) raporundadır. Aşağıdaki ilk teslimat kaydı `43379928` öncesinin tarihsel kanıtıdır; “kalıcı kayıt yok” ifadeleri final uygulama için geçerli değildir.
+
 # HSE Calculator Hub — Issue #124
 
 ## Durum ve kapsam

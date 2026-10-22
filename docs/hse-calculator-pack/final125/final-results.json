@@ -1,0 +1,151 @@
+{
+  "results": [
+    {
+      "name": "tr risk-matrix studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr trir studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr ltifr studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr severity-rate studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr dart studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr noise-exposure studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr sling-tension studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr man-hours studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr heat-stress studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "en risk-matrix studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "en trir studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "en ltifr studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "en severity-rate studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "en dart studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "en noise-exposure studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "en sling-tension studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "en man-hours studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "en heat-stress studio identity, input focus and print isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr trir separate draft and confirmed monthly save",
+      "result": "PASS"
+    },
+    {
+      "name": "tr ltifr separate draft and confirmed monthly save",
+      "result": "PASS"
+    },
+    {
+      "name": "tr severity-rate separate draft and confirmed monthly save",
+      "result": "PASS"
+    },
+    {
+      "name": "tr dart separate draft and confirmed monthly save",
+      "result": "PASS"
+    },
+    {
+      "name": "tr period/project edit invalidates review; guest cannot save",
+      "result": "PASS"
+    },
+    {
+      "name": "tr operational result has no KPI persistence option",
+      "result": "PASS"
+    },
+    {
+      "name": "en trir separate draft and confirmed monthly save",
+      "result": "PASS"
+    },
+    {
+      "name": "en ltifr separate draft and confirmed monthly save",
+      "result": "PASS"
+    },
+    {
+      "name": "en severity-rate separate draft and confirmed monthly save",
+      "result": "PASS"
+    },
+    {
+      "name": "en dart separate draft and confirmed monthly save",
+      "result": "PASS"
+    },
+    {
+      "name": "en period/project edit invalidates review; guest cannot save",
+      "result": "PASS"
+    },
+    {
+      "name": "en operational result has no KPI persistence option",
+      "result": "PASS"
+    },
+    {
+      "name": "tr existing Risk Matrix PDF export",
+      "result": "PASS"
+    },
+    {
+      "name": "tr Severity Rate report copy and browser print",
+      "result": "PASS"
+    },
+    {
+      "name": "en existing Risk Matrix PDF export",
+      "result": "PASS"
+    },
+    {
+      "name": "en Severity Rate report copy and browser print",
+      "result": "PASS"
+    },
+    {
+      "name": "zero write requests",
+      "result": "PASS"
+    },
+    {
+      "name": "no browser errors",
+      "result": "PASS"
+    }
+  ],
+  "writes": [],
+  "errors": [],
+  "note": "Separate draft and explicit monthly persistence contracts using a synthetic in-memory client. Real Supabase/auth/RLS saves NOT VERIFIED. No live customer data or individual incident writes."
+}

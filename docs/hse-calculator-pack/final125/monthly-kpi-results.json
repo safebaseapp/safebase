@@ -1,0 +1,201 @@
+{
+  "results": [
+    {
+      "name": "trir prepare is read-only and targets exact user/period/project",
+      "result": "PASS"
+    },
+    {
+      "name": "trir explicit insert persists only chosen count and shared actual hours",
+      "result": "PASS"
+    },
+    {
+      "name": "trir confirmed update preserves unrelated counts and leading metrics",
+      "result": "PASS"
+    },
+    {
+      "name": "trir concurrent edit is never overwritten",
+      "result": "PASS"
+    },
+    {
+      "name": "trir concurrent insert fails instead of upsert",
+      "result": "PASS"
+    },
+    {
+      "name": "trir rejects missing project",
+      "result": "PASS"
+    },
+    {
+      "name": "trir rejects invalid period",
+      "result": "PASS"
+    },
+    {
+      "name": "trir rejects invalid DB count -1",
+      "result": "PASS"
+    },
+    {
+      "name": "trir rejects invalid DB count 1.5",
+      "result": "PASS"
+    },
+    {
+      "name": "trir rejects invalid DB count Infinity",
+      "result": "PASS"
+    },
+    {
+      "name": "trir rejects invalid DB count 2147483648",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr prepare is read-only and targets exact user/period/project",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr explicit insert persists only chosen count and shared actual hours",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr confirmed update preserves unrelated counts and leading metrics",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr concurrent edit is never overwritten",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr concurrent insert fails instead of upsert",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr rejects missing project",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr rejects invalid period",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr rejects invalid DB count -1",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr rejects invalid DB count 1.5",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr rejects invalid DB count Infinity",
+      "result": "PASS"
+    },
+    {
+      "name": "ltifr rejects invalid DB count 2147483648",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate prepare is read-only and targets exact user/period/project",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate explicit insert persists only chosen count and shared actual hours",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate confirmed update preserves unrelated counts and leading metrics",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate concurrent edit is never overwritten",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate concurrent insert fails instead of upsert",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate rejects missing project",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate rejects invalid period",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate rejects invalid DB count -1",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate rejects invalid DB count 1.5",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate rejects invalid DB count Infinity",
+      "result": "PASS"
+    },
+    {
+      "name": "severity-rate rejects invalid DB count 2147483648",
+      "result": "PASS"
+    },
+    {
+      "name": "dart prepare is read-only and targets exact user/period/project",
+      "result": "PASS"
+    },
+    {
+      "name": "dart explicit insert persists only chosen count and shared actual hours",
+      "result": "PASS"
+    },
+    {
+      "name": "dart confirmed update preserves unrelated counts and leading metrics",
+      "result": "PASS"
+    },
+    {
+      "name": "dart concurrent edit is never overwritten",
+      "result": "PASS"
+    },
+    {
+      "name": "dart concurrent insert fails instead of upsert",
+      "result": "PASS"
+    },
+    {
+      "name": "dart rejects missing project",
+      "result": "PASS"
+    },
+    {
+      "name": "dart rejects invalid period",
+      "result": "PASS"
+    },
+    {
+      "name": "dart rejects invalid DB count -1",
+      "result": "PASS"
+    },
+    {
+      "name": "dart rejects invalid DB count 1.5",
+      "result": "PASS"
+    },
+    {
+      "name": "dart rejects invalid DB count Infinity",
+      "result": "PASS"
+    },
+    {
+      "name": "dart rejects invalid DB count 2147483648",
+      "result": "PASS"
+    },
+    {
+      "name": "no session cannot report persistence success",
+      "result": "PASS"
+    },
+    {
+      "name": "auth error cannot report persistence success",
+      "result": "PASS"
+    },
+    {
+      "name": "read failure cannot report persistence success",
+      "result": "PASS"
+    },
+    {
+      "name": "session changed cannot report persistence success",
+      "result": "PASS"
+    },
+    {
+      "name": "write failure cannot report persistence success",
+      "result": "PASS"
+    }
+  ],
+  "note": "Synthetic in-memory client only, no network/database. Models existing monthly metrics path and optimistic concurrency; real Supabase auth/RLS persistence NOT VERIFIED."
+}
