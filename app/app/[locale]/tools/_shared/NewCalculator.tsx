@@ -45,8 +45,8 @@ export default function NewCalculator({id,locale}:{id:ToolId;locale:string}){
   if(r){
    const utilization=validWll?r.loadKN/wll*100:null;
    const over=utilization!==null&&utilization>100;
-   slingGuidance=<section data-sling-assessment className=`mt-5 rounded-2xl border p-4 ${over?'border-rose-400 bg-rose-950/30':'border-cyan-400/50 bg-cyan-950/30'}`>
-    <h3 className=`font-black text-lg ${over?'text-rose-200':'text-cyan-200'}`>{!hasWll?t('KAPASİTE KARŞILAŞTIRMASI YAPILMADI','CAPACITY NOT VERIFIED'):!validWll?t('WLL GİRDİSİ GEÇERSİZ','INVALID WLL INPUT'):over?t('BİLDİRİLEN KAPASİTE AŞILIYOR — KALDIRMAYIN','DECLARED RATED CAPACITY EXCEEDED — DO NOT LIFT'):t('BİLDİRİLEN WLL İLE ÖN KARŞILAŞTIRMA — KALDIRMA ONAYI DEĞİL','PRELIMINARY WLL COMPARISON — NOT LIFT APPROVAL')}</h3>
+   slingGuidance=<section data-sling-assessment className={`mt-5 rounded-2xl border p-4 ${over?'border-rose-400 bg-rose-950/30':'border-cyan-400/50 bg-cyan-950/30'}`}>
+    <h3 className={`font-black text-lg ${over?'text-rose-200':'text-cyan-200'}`}>{!hasWll?t('KAPASİTE KARŞILAŞTIRMASI YAPILMADI','CAPACITY NOT VERIFIED'):!validWll?t('WLL GİRDİSİ GEÇERSİZ','INVALID WLL INPUT'):over?t('BİLDİRİLEN KAPASİTE AŞILIYOR — KALDIRMAYIN','DECLARED RATED CAPACITY EXCEEDED — DO NOT LIFT'):t('BİLDİRİLEN WLL İLE ÖN KARŞILAŞTIRMA — KALDIRMA ONAYI DEĞİL','PRELIMINARY WLL COMPARISON — NOT LIFT APPROVAL')}</h3>
     <div className="mt-3 grid gap-3 sm:grid-cols-2">
      <div className="rounded-xl border border-slate-600 p-3"><p className="text-xs text-slate-300">{t('Yükün toplam ağırlık kuvveti','Total load force')}</p><p className="text-xl font-black">{format(r.loadKN)} kN</p></div>
      <div className="rounded-xl border border-slate-600 p-3"><p className="text-xs text-slate-300">{t('Her sapan kolunda hesaplanan kuvvet','Calculated force in each leg')}</p><p className="text-xl font-black">{format(r.tensionKN)} kN</p></div>
