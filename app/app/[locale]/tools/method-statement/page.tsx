@@ -3910,7 +3910,7 @@ export default function MethodStatementPage({ params }: Props) {
 
               <h1 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">
                 {isTurkish
-                  ? "Profesyonel Method Statement Oluşturucu"
+                  ? "Profesyonel Çalışma Yöntemi Oluşturucu"
                   : "Professional Method Statement Generator"}
               </h1>
 
@@ -3948,7 +3948,7 @@ export default function MethodStatementPage({ params }: Props) {
             <div>
               <p className="text-sm font-black uppercase tracking-[0.2em] text-emerald-400">
                 {isTurkish
-                  ? "Hazır Method Statement Kütüphanesi"
+                  ? "Hazır Çalışma Yöntemi Kütüphanesi"
                   : "Ready Method Statement Library"}
               </p>
 

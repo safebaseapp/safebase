@@ -1,7 +1,8 @@
 "use client";
 
+import { calculators, planning } from "../tools/_shared/catalog";
 import Sim5MenuEntry from "@/components/sim5/Sim5MenuEntry";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import {
   Activity,
   ArrowRight,
@@ -12,12 +13,9 @@ import {
   FileText,
   Gauge,
   Grid3X3,
-  HardHat,
   Images,
-  Layers3,
   LayoutDashboard,
   MessageSquareText,
-  ShieldCheck,
   Sparkles,
   TriangleAlert,
   Wrench,
@@ -48,14 +46,8 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
   const [openSection, setOpenSection] = useState<Section>(null);
 
   const toolItems = [
-    { href: "/tools/quick-risk-assessment", title: tr ? "Risk Analizi" : "Risk Assessment", icon: ShieldCheck },
-    { href: "/tools/method-statement", title: "Method Statement", icon: FileText },
-    { href: "/safety-pack", title: "Safety Pack", icon: Sparkles },
-    { href: "/ppe-standards", title: tr ? "KKD Standartları" : "PPE Standards", icon: HardHat },
-    { href: "/tools/simops", title: "SIMOPS", icon: Layers3 },
-    { href: "/tools/risk-matrix", title: tr ? "Risk Matrisi" : "Risk Matrix", icon: Grid3X3 },
-    { href: "/tools/trir", title: "TRIR", icon: Gauge },
-    { href: "/tools/ltifr", title: "LTIFR", icon: Calculator },
+    ...calculators.map(c=>({href:`/tools/${c.id}`,title:c.title[tr?0:1],icon:Calculator})),
+    ...planning.map(p=>({href:p.href,title:p.title[tr?0:1],icon:FileText})),
   ];
 
   const labItems = [
@@ -211,20 +203,23 @@ export default function DesktopMegaMenu({ locale, authenticated, onClose }: Prop
         {open && (
           <div className="relative z-20 grid grid-cols-2 gap-2 border-t border-white/[0.08] bg-[#020817]/92 p-3 backdrop-blur-xl">
             {id === "labs" && <Sim5MenuEntry locale={locale} onNavigate={onClose}/>}
-            {items.map((item) => {
+            {items.map((item, index) => {
               const ItemIcon = item.icon;
               return (
+                <Fragment key={item.href}>
+                {id === "tools" && (index === 0 || index === calculators.length) && <h3 className="col-span-2 px-2 pt-3 text-sm font-bold text-cyan-200">{index === 0 ? (tr ? "Hesaplayıcılar" : "Calculators") : (tr ? "Planlama ve Dokümantasyon" : "Planning & Documentation")}</h3>}
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={onClose}
-                  className="flex min-h-[58px] items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-3 py-2.5 text-slate-200 transition hover:border-white/[0.14] hover:bg-white/[0.05] hover:text-white"
+                  className="flex min-h-[58px] min-w-0 items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-3 py-2.5 text-slate-200 transition hover:border-white/[0.14] hover:bg-white/[0.05] hover:text-white"
                 >
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/[0.09] bg-white/[0.035] text-slate-300">
                     <ItemIcon size={16} />
                   </span>
-                  <span className="text-[11px] font-black">{item.title}</span>
+                  <span className="min-w-0 break-words text-[11px] font-black">{item.title}</span>
                 </Link>
+                </Fragment>
               );
             })}
           </div>

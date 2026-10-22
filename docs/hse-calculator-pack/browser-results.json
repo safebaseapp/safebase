@@ -1,0 +1,638 @@
+{
+  "results": [
+    {
+      "name": "tr 320 risk-matrix content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 320 trir content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 320 ltifr content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 320 severity-rate content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 320 dart content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 320 sling-tension content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 320 noise-exposure content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 320 man-hours content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 320 heat-stress content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 320 category and menus",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 risk-matrix content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 trir content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 ltifr content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 severity-rate content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 dart content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 sling-tension content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 noise-exposure content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 man-hours content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 heat-stress content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 category and menus",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 768 risk-matrix content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 768 trir content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 768 ltifr content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 768 severity-rate content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 768 dart content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 768 sling-tension content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 768 noise-exposure content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 768 man-hours content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 768 heat-stress content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 768 category and menus",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 risk-matrix content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 trir content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 ltifr content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 severity-rate content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 dart content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 sling-tension content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 noise-exposure content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 man-hours content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 heat-stress content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 category and menus",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 risk-matrix content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 trir content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 ltifr content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 severity-rate content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 dart content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 sling-tension content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 noise-exposure content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 man-hours content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 heat-stress content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 category and menus",
+      "result": "PASS"
+    },
+    {
+      "name": "en 320 risk-matrix content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 320 trir content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 320 ltifr content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 320 severity-rate content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 320 dart content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 320 sling-tension content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 320 noise-exposure content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 320 man-hours content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 320 heat-stress content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 320 category and menus",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 risk-matrix content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 trir content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 ltifr content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 severity-rate content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 dart content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 sling-tension content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 noise-exposure content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 man-hours content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 heat-stress content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 category and menus",
+      "result": "PASS"
+    },
+    {
+      "name": "en 768 risk-matrix content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 768 trir content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 768 ltifr content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 768 severity-rate content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 768 dart content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 768 sling-tension content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 768 noise-exposure content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 768 man-hours content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 768 heat-stress content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 768 category and menus",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 risk-matrix content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 trir content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 ltifr content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 severity-rate content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 dart content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 sling-tension content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 noise-exposure content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 man-hours content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 heat-stress content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 category and menus",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 risk-matrix content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 trir content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 ltifr content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 severity-rate content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 dart content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 sling-tension content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 noise-exposure content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 man-hours content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 heat-stress content/SEO/overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 category and menus",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 390 homepage navigation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1440 homepage navigation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr 1920 homepage navigation",
+      "result": "PASS"
+    },
+    {
+      "name": "en 390 homepage navigation",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1440 homepage navigation",
+      "result": "PASS"
+    },
+    {
+      "name": "en 1920 homepage navigation",
+      "result": "PASS"
+    },
+    {
+      "name": "tr dart invalid inputs suppress result",
+      "result": "PASS"
+    },
+    {
+      "name": "tr sling-tension invalid inputs suppress result",
+      "result": "PASS"
+    },
+    {
+      "name": "tr noise-exposure invalid inputs suppress result",
+      "result": "PASS"
+    },
+    {
+      "name": "tr man-hours invalid inputs suppress result",
+      "result": "PASS"
+    },
+    {
+      "name": "tr heat-stress invalid inputs suppress result",
+      "result": "PASS"
+    },
+    {
+      "name": "en dart invalid inputs suppress result",
+      "result": "PASS"
+    },
+    {
+      "name": "en sling-tension invalid inputs suppress result",
+      "result": "PASS"
+    },
+    {
+      "name": "en noise-exposure invalid inputs suppress result",
+      "result": "PASS"
+    },
+    {
+      "name": "en man-hours invalid inputs suppress result",
+      "result": "PASS"
+    },
+    {
+      "name": "en heat-stress invalid inputs suppress result",
+      "result": "PASS"
+    },
+    {
+      "name": "before tr category screenshot",
+      "result": "PASS"
+    },
+    {
+      "name": "after tr category screenshot",
+      "result": "PASS"
+    },
+    {
+      "name": "before en category screenshot",
+      "result": "PASS"
+    },
+    {
+      "name": "after en category screenshot",
+      "result": "PASS"
+    },
+    {
+      "name": "operational result survives guest login redirect without a KPI write",
+      "result": "PASS"
+    },
+    {
+      "name": "actual draft consumer separates operational estimates, returns and clears",
+      "result": "PASS"
+    },
+    {
+      "name": "tr lagging input and unsaved KPI handoff",
+      "result": "PASS"
+    },
+    {
+      "name": "en lagging input and unsaved KPI handoff",
+      "result": "PASS"
+    },
+    {
+      "name": "tr trir existing PDF export",
+      "result": "PASS"
+    },
+    {
+      "name": "tr ltifr existing PDF export",
+      "result": "PASS"
+    },
+    {
+      "name": "en trir existing PDF export",
+      "result": "PASS"
+    },
+    {
+      "name": "en ltifr existing PDF export",
+      "result": "PASS"
+    },
+    {
+      "name": "tr global calculator search",
+      "result": "PASS"
+    },
+    {
+      "name": "en global calculator search",
+      "result": "PASS"
+    },
+    {
+      "name": "no browser exceptions",
+      "result": "PASS"
+    },
+    {
+      "name": "no unauthorised write requests",
+      "result": "PASS"
+    }
+  ],
+  "errors": [],
+  "writes": [],
+  "pdfs": "Ten new-calculator A4 prints and four unchanged legacy exports under /tmp/hse-hub-*.pdf; text/page checks recorded separately.",
+  "note": "Read-only localhost fixture, synthetic no-session key. No live Supabase/customer data. Authenticated KPI persistence/report delivery NOT TESTED; draft consumer mounted in isolated test DOM only.",
+  "pdfChecks": [
+    {
+      "file": "hse-hub-en-dart.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-en-heat-stress.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-en-man-hours.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-en-noise-exposure.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-en-sling-tension.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-legacy-en-ltifr.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-legacy-en-trir.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-legacy-tr-ltifr.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-legacy-tr-trir.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-tr-dart.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-tr-heat-stress.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-tr-man-hours.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-tr-noise-exposure.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    },
+    {
+      "file": "hse-hub-tr-sling-tension.pdf",
+      "result": "PASS",
+      "pageSize": "A4",
+      "textWithinPage": true
+    }
+  ],
+  "verification": {
+    "sourceSHA": "ac6f5deb3b1b498ce0576e80551e77ff814b753e",
+    "typeScript": "PASS",
+    "normalBuild": "PASS",
+    "buildEvidence": [
+      "PASS: all 70 Toolbox topics have TR/EN standard files and 4-page branded-base PDFs.",
+      "SERNEM download/auth QA: PASS",
+      "✓ Compiled successfully in 18.6s",
+      "  Finished TypeScript in 19.6s ...",
+      "  Generating static pages using 4 workers (0/858) ...",
+      "  Generating static pages using 4 workers (214/858) ",
+      "  Generating static pages using 4 workers (428/858) ",
+      "  Generating static pages using 4 workers (643/858) ",
+      "✓ Generating static pages using 4 workers (858/858) in 1900ms"
+    ]
+  }
+}

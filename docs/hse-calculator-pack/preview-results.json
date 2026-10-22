@@ -1,0 +1,81 @@
+{
+  "base": "https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app",
+  "sha": "ac6f5deb3b1b498ce0576e80551e77ff814b753e",
+  "deployment": "7246576724",
+  "deploymentState": "READY",
+  "cases": [
+    {
+      "locale": "tr",
+      "slug": "",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/tr/tools#calculators"
+    },
+    {
+      "locale": "tr",
+      "slug": "dart",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/tr/tools/dart"
+    },
+    {
+      "locale": "tr",
+      "slug": "sling-tension",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/tr/tools/sling-tension"
+    },
+    {
+      "locale": "tr",
+      "slug": "noise-exposure",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/tr/tools/noise-exposure"
+    },
+    {
+      "locale": "tr",
+      "slug": "man-hours",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/tr/tools/man-hours"
+    },
+    {
+      "locale": "tr",
+      "slug": "heat-stress",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/tr/tools/heat-stress"
+    },
+    {
+      "locale": "en",
+      "slug": "",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/en/tools#calculators"
+    },
+    {
+      "locale": "en",
+      "slug": "dart",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/en/tools/dart"
+    },
+    {
+      "locale": "en",
+      "slug": "sling-tension",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/en/tools/sling-tension"
+    },
+    {
+      "locale": "en",
+      "slug": "noise-exposure",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/en/tools/noise-exposure"
+    },
+    {
+      "locale": "en",
+      "slug": "man-hours",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/en/tools/man-hours"
+    },
+    {
+      "locale": "en",
+      "slug": "heat-stress",
+      "result": "NOT VERIFIED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://safebase-17tq6s0h0-safebaseapps-projects.vercel.app/en/tools/heat-stress"
+    }
+  ],
+  "network": "Only read-only GET to Preview; payment/auth/analytics/live data requests blocked. No customer cookies."
+}

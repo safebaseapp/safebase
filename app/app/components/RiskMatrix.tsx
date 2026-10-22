@@ -1,5 +1,6 @@
 "use client";
 
+import {DraftTransfer} from "../[locale]/tools/_shared/CalculatorHandoff";
 import jsPDF from "jspdf";
 import { useMemo, useState } from "react";
 
@@ -525,6 +526,7 @@ const recommendations = {
 
   return (
     <section id="risk-matrix" className="bg-slate-950 px-6 py-24 text-white">
+      <div className="mx-auto max-w-6xl px-4"><p className="text-sm text-slate-300">{isTurkish?'5×5: olasılık × şiddet; düşük 1–4, orta 5–9, yüksek 10–16, çok yüksek 17–25. HIRARC aynı 1–25 aralığını kullanır; 17–25 için “kritik” etiketi verir. Kayıtlar otomatik birleştirilmez.':'5×5: likelihood × severity; low 1–4, medium 5–9, high 10–16, extreme 17–25. HIRARC uses the same 1–25 range, labelling 17–25 critical. Records are not automatically merged.'}</p><DraftTransfer locale={locale} draft={{source:'risk-matrix',kind:'operational',result:`${score} → ${residualScore}`,unit:'/25',method:'5×5 likelihood × severity; initial → residual',basis:'assessment',inputs:{likelihood,severity,residualLikelihood,residualSeverity}}}/></div>
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-400">

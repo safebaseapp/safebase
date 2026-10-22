@@ -8,6 +8,7 @@ import {
   calculateSeverityRate,
   calculateTRIR,
 } from "@/lib/hse-metrics";
+import {CalculatorDraftPanel} from "../tools/_shared/CalculatorHandoff";
 import HseReportingPanel from "./HseReportingPanel";
 
 
@@ -185,10 +186,49 @@ export default function HsePerformanceClient({
   const [kpiTrendLoading, setKpiTrendLoading] =
     useState(true);
 
+  // KPI-only projects must remain selectable even without site observations.
+  const [kpiProjectNames, setKpiProjectNames] = useState<string[]>([]);
+
   useEffect(() => {
     let cancelled = false;
+    let latestRequest = 0;
+
+    async function loadKpiProjectNames() {
+      const request = ++latestRequest;
+      const { data, error } = await createClient()
+        .from("hse_incident_metrics")
+        .select("project_name")
+        .eq("user_id", userId)
+        .limit(1000);
+
+      if (cancelled || request !== latestRequest) return;
+      if (error) {
+        console.error("HSE KPI project options load error:", error);
+        return;
+      }
+
+      setKpiProjectNames(
+        (data ?? []).map((row) => String(row.project_name ?? "")),
+      );
+    }
+
+    setKpiProjectNames([]);
+    void loadKpiProjectNames();
+    const onMonthlyKpiSaved = () => { void loadKpiProjectNames(); };
+    window.addEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
+    };
+  }, [userId]);
+
+  useEffect(() => {
+    let cancelled = false;
+    let latestRequest = 0;
 
     async function loadIncidentMetrics() {
+      const request = ++latestRequest;
       const supabase = createClient();
 
       const periodMonth = `${selectedMonth}-01`;
@@ -220,7 +260,7 @@ export default function HsePerformanceClient({
 
       const { data, error } = await query.maybeSingle();
 
-      if (cancelled) return;
+      if (cancelled || request !== latestRequest) return;
 
       if (error) {
         console.error("HSE incident metrics load error:", error);
@@ -250,15 +290,23 @@ export default function HsePerformanceClient({
 
     void loadIncidentMetrics();
 
+    // A successful, explicitly approved KPI save may originate in the draft panel
+    // on this very page; reload current filters instead of showing stale totals.
+    const onMonthlyKpiSaved = () => { void loadIncidentMetrics(); };
+    window.addEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
+
     return () => {
       cancelled = true;
+      window.removeEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
     };
   }, [userId, filters.project, selectedMonth]);
 
   useEffect(() => {
     let cancelled = false;
+    let latestRequest = 0;
 
     async function loadKpiTrend() {
+      const request = ++latestRequest;
       setKpiTrendLoading(true);
 
       const supabase = createClient();
@@ -311,7 +359,7 @@ export default function HsePerformanceClient({
 
       const { data, error } = await query;
 
-      if (cancelled) return;
+      if (cancelled || request !== latestRequest) return;
 
       if (error) {
         console.error(
@@ -392,8 +440,12 @@ export default function HsePerformanceClient({
 
     void loadKpiTrend();
 
+    const onMonthlyKpiSaved = () => { void loadKpiTrend(); };
+    window.addEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
+
     return () => {
       cancelled = true;
+      window.removeEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
     };
   }, [
     userId,
@@ -497,12 +549,11 @@ export default function HsePerformanceClient({
 
   const projectOptions = useMemo(
     () =>
-      unique(
-        observations.map(
-          (x) => x.project_name,
-        ),
-      ),
-    [observations],
+      unique([
+        ...observations.map((x) => x.project_name),
+        ...kpiProjectNames,
+      ]).filter((project) => project !== "All Projects"),
+    [observations, kpiProjectNames],
   );
 
   const companyOptions = useMemo(
@@ -1099,7 +1150,7 @@ export default function HsePerformanceClient({
           <div className="sticky top-0 flex h-screen flex-col px-3 py-6">
 
             <p className="px-3 text-[10px] font-black uppercase tracking-[0.14em] text-blue-300">
-              HSE PERFORMANCE
+              {isTurkish ? "HSE PERFORMANS" : "HSE PERFORMANCE"}
             </p>
 
             <nav className="mt-4 space-y-1">
@@ -1116,7 +1167,7 @@ export default function HsePerformanceClient({
                 className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold text-slate-400 transition hover:bg-slate-900 hover:text-white"
               >
                 <span>◔</span>
-                KPI Dashboard
+                {isTurkish ? "KPI Paneli" : "KPI Dashboard"}
               </a>
 
               <a
@@ -1176,15 +1227,15 @@ export default function HsePerformanceClient({
               <div className="mt-5 space-y-4 text-xs text-slate-400">
                 <p><span className="mr-2 text-emerald-400">✓</span>ISO 45001</p>
                 <p><span className="mr-2 text-emerald-400">✓</span>ISO 45004</p>
-                <p><span className="mr-2 text-emerald-400">✓</span>OSHA Metrics</p>
-                <p><span className="mr-2 text-emerald-400">✓</span>NEBOSH Principles</p>
+                <p><span className="mr-2 text-emerald-400">✓</span>{isTurkish ? "OSHA Metrikleri" : "OSHA Metrics"}</p>
+                <p><span className="mr-2 text-emerald-400">✓</span>{isTurkish ? "NEBOSH İlkeleri" : "NEBOSH Principles"}</p>
               </div>
             </div>
 
             <p className="mt-5 px-2 text-[10px] italic leading-5 text-slate-600">
-              “Safer People.
+              {isTurkish ? "“Daha güvenli çalışanlar." : "“Safer People."}
               <br />
-              Stronger Businesses.”
+              {isTurkish ? "Daha güçlü işletmeler.”" : "Stronger Businesses.”"}
             </p>
 
             <p className="mt-3 px-2 text-xs font-black text-blue-300">
@@ -1204,7 +1255,7 @@ export default function HsePerformanceClient({
 
               <div>
                 <h1 className="text-[32px] font-black leading-[1.02] tracking-[-0.045em] sm:text-[42px]">
-                  HSE Performance
+                  {isTurkish ? "HSE Performans" : "HSE Performance"}
                 </h1>
 
                 <p className="mt-2 max-w-xl text-[13px] leading-5 text-slate-400 sm:text-sm">
@@ -1217,9 +1268,9 @@ export default function HsePerformanceClient({
               <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center 2xl:justify-end">
 
                 <div className="hidden px-4 text-center text-xs italic leading-5 text-slate-500 2xl:block">
-                  “Measure today.
+                  {isTurkish ? "“Bugünü ölç." : "“Measure today."}
                   <br />
-                  A safer tomorrow.”
+                  {isTurkish ? "Daha güvenli bir yarın.”" : "A safer tomorrow.”"}
                   <div className="text-[9px] not-italic">
                     — SERNEM
                   </div>
@@ -1315,6 +1366,7 @@ export default function HsePerformanceClient({
             </div>
           </header>
 
+          <CalculatorDraftPanel locale={locale}/>
           {/* TOP KPI */}
           <section
             id="kpi"
@@ -1441,7 +1493,7 @@ export default function HsePerformanceClient({
               <div className="flex items-start justify-between">
                 <div>
                   <h2 className="text-lg font-black">
-                    Leading Indicators
+                    {isTurkish ? "Öncü Göstergeler" : "Leading Indicators"}
                   </h2>
 
                   <p className="mt-1 text-[11px] text-slate-500">
@@ -1546,7 +1598,7 @@ export default function HsePerformanceClient({
               <div className="flex items-start justify-between">
                 <div>
                   <h2 className="text-lg font-black">
-                    Lagging Indicators
+                    {isTurkish ? "Sonuç (Kaza) Göstergeleri" : "Lagging Indicators"}
                   </h2>
 
                   <p className="mt-1 text-[11px] text-slate-500">
@@ -1748,11 +1800,11 @@ export default function HsePerformanceClient({
 
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {[
-                  ["Near Miss", incidentMetrics ? incidentMetrics.near_miss : "—"],
+                  [isTurkish ? "Ramak Kala" : "Near Miss", incidentMetrics ? incidentMetrics.near_miss : "—"],
                   ["LTI", incidentMetrics ? incidentMetrics.lti : "—"],
-                  ["Recordable", incidentMetrics ? incidentMetrics.recordable_cases : "—"],
-                  ["First Aid", incidentMetrics ? incidentMetrics.first_aid : "—"],
-                  ["Lost Days", incidentMetrics ? incidentMetrics.lost_days : "—"],
+                  [isTurkish ? "Kaydedilebilir Vaka" : "Recordable", incidentMetrics ? incidentMetrics.recordable_cases : "—"],
+                  [isTurkish ? "İlk Yardım" : "First Aid", incidentMetrics ? incidentMetrics.first_aid : "—"],
+                  [isTurkish ? "Kayıp Gün" : "Lost Days", incidentMetrics ? incidentMetrics.lost_days : "—"],
                   ["MTC", incidentMetrics ? incidentMetrics.medical_treatment : "—"],
                 ].map(([label, value]) => (
                   <div
@@ -1788,12 +1840,12 @@ export default function HsePerformanceClient({
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p className="text-[9px] font-black uppercase tracking-[0.18em] text-blue-400">
-                  SERNEM HSE ANALYTICS
+                  {isTurkish ? "SERNEM HSE ANALİTİK" : "SERNEM HSE ANALYTICS"}
                 </p>
 
                 <h2 className="mt-2 text-xl font-black">
                   {isTurkish
-                    ? "HSE Performance Trendi"
+                    ? "HSE Performans Trendi"
                     : "HSE Performance Trend"}
                 </h2>
 
@@ -1834,7 +1886,7 @@ export default function HsePerformanceClient({
                     viewBox="0 0 800 260"
                     className="h-[260px] min-w-[760px] w-full"
                     role="img"
-                    aria-label="HSE KPI performance trend"
+                    aria-label={isTurkish ? "HSE KPI performans eğilimi" : "HSE KPI performance trend"}
                   >
                     {[50, 90, 130, 170, 205].map(
                       (y) => (
@@ -2062,7 +2114,7 @@ export default function HsePerformanceClient({
                   viewBox="0 0 600 230"
                   className="h-[230px] w-full"
                   role="img"
-                  aria-label="Monthly HSE trend"
+                  aria-label={isTurkish ? "Aylık HSE eğilimi" : "Monthly HSE trend"}
                 >
                   {[40, 80, 120, 160, 200].map((y) => (
                     <line

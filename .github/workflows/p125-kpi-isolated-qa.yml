@@ -1,0 +1,80 @@
+name: P125 KPI isolated regression
+on:
+  push:
+    branches:
+      - codex/hse-calculators-hub-kpi-pack
+    paths:
+      - 'app/app/[[]locale[]]/tools/_shared/**'
+      - 'app/app/[[]locale[]]/hse-performance/**'
+      - 'app/app/tools/**'
+      - 'tools/hse-calculator-pack/**'
+      - '.github/workflows/p125-kpi-isolated-qa.yml'
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: p125-kpi-isolated-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  isolated-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      NEXT_PUBLIC_SUPABASE_URL: https://p125-isolated-placeholder.supabase.co
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_p125_isolated_no_real_access
+      HSE_HUB_URL: http://127.0.0.1:4192
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            app/package-lock.json
+            tools/sim5-review/package-lock.json
+      - name: Install isolated test dependencies
+        run: |
+          npm ci --prefix app
+          npm ci --prefix tools/sim5-review
+      - name: Exercise real monthly KPI source with synthetic database
+        run: node tools/hse-calculator-pack/monthly-kpi-test.mjs
+      - name: TypeScript and changed file lint
+        run: |
+          cd app
+          npx tsc --noEmit
+          npx eslint 'app/[locale]/hse-performance/HsePerformanceClient.tsx' 'app/[locale]/tools/_shared/MonthlyKpiSave.tsx' 'app/[locale]/tools/_shared/monthlyKpi.ts'
+      - name: Build non-production application
+        run: npm --prefix app run build
+      - name: Install isolated Chromium
+        run: |
+          cd tools/sim5-review
+          npx playwright install --with-deps chromium
+      - name: Start app on localhost
+        run: |
+          cd app
+          nohup npm run start -- -p 4192 >/tmp/p125-local-server.log 2>&1 &
+          for i in $(seq 1 90); do
+            if curl -fsS http://127.0.0.1:4192/tr/tools >/dev/null; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/p125-local-server.log
+          exit 1
+      - name: TR/EN real DOM, KPI save event and PDF smoke (synthetic users)
+        run: node tools/hse-calculator-pack/final125.mjs
+      - name: Publish synthetic test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p125-isolated-kpi-evidence
+          path: |
+            docs/hse-calculator-pack/final125/monthly-kpi-results.json
+            docs/hse-calculator-pack/final125/final-results.json
+          if-no-files-found: warn
