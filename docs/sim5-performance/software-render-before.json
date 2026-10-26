@@ -1,0 +1,40 @@
+{
+  "frames": {
+    "intervalsMs": [
+      5.5,
+      16.600000000000364,
+      16.699999999999818,
+      2816.5999999999995,
+      2749.8999999999996,
+      2733.2000000000007,
+      2616.5999999999985,
+      2733.2000000000007,
+      2599.9000000000015,
+      2633.2000000000007,
+      2799.899999999998,
+      3899.9000000000015
+    ],
+    "averageFPS": 0.4294241422252759,
+    "medianMs": 2733.2000000000007,
+    "p95Ms": 3899.9000000000015,
+    "p99Ms": 3899.9000000000015,
+    "over50Ms": 9,
+    "gpuCompletedRenderMs": [
+      29,
+      18.799999997019768,
+      14.099999994039536,
+      13.100000008940697,
+      12.600000008940697,
+      13,
+      29,
+      11.399999991059303,
+      11.700000002980232,
+      9.800000011920929,
+      12.700000002980232,
+      9.5
+    ],
+    "note": "12-frame standing diagnostic, SwiftShader with gl.finish per render; NOT real hardware FPS or the walking route."
+  },
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "limitation": "Exploratory standing software-GPU diagnostic only. Runs overlapped other review processes; unsuitable for before/after performance acceptance. Initial rAF sample excluded from statistics. Rendering wrapper forces gl.finish; not representative hardware FPS."
+}

@@ -1,0 +1,4 @@
+[
+  { lang: 'tr', status: 200, result: 'PASS', errors: [] },
+  { lang: 'en', status: 200, result: 'PASS', errors: [] }
+]

@@ -1,0 +1,10 @@
+PASS debug opt-in panel appears
+PASS welding cached shadow pass has zero calls
+PASS road cached shadow pass has zero calls
+PASS lifting cached shadow pass has zero calls
+PASS return cached shadow pass has zero calls
+PASS moved equipment invalidates cache
+PASS visibility change invalidates cache
+PASS panel absent without flag
+PASS TR mobile panel stays inside viewport
+PASS clipboard exports anonymous metrics only

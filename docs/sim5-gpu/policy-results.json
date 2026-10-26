@@ -1,0 +1,17 @@
+{
+  "checks": [
+    "production diagnostics unavailable",
+    "missing deployment identity fails closed",
+    "preview diagnostics available",
+    "development diagnostics available",
+    "statistics use measured intervals",
+    "production flag cannot activate panel or baseline",
+    "first render invalidates shadow cache",
+    "static shadow reuses cached map",
+    "transform change invalidates map",
+    "visibility change invalidates map",
+    "sustained measured slow frames reduce DPR",
+    "long sustained recovery raises DPR with hysteresis",
+    "report throttling cannot degrade adaptive quality"
+  ]
+}

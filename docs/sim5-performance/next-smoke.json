@@ -1,0 +1,17 @@
+{
+  "cases": [
+    {
+      "lang": "tr",
+      "status": 200,
+      "result": "PASS",
+      "errors": []
+    },
+    {
+      "lang": "en",
+      "status": 200,
+      "result": "PASS",
+      "errors": []
+    }
+  ],
+  "network": "Only localhost and esm.sh allowed; analytics and all live customer services blocked. Software WebGL; not hardware FPS."
+}

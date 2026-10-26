@@ -1,0 +1,171 @@
+{
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "viewport": [
+    1280,
+    900
+  ],
+  "deviceScaleFactor": 2,
+  "results": [
+    {
+      "condition": "baseline",
+      "zone": "welding",
+      "ms": 352.79999999701977,
+      "calls": 1370,
+      "triangles": 4199831,
+      "shadowCalls": 886,
+      "shadowTriangles": 2626071,
+      "dpr": 1.8
+    },
+    {
+      "condition": "baseline",
+      "zone": "road",
+      "ms": 3179,
+      "calls": 1224,
+      "triangles": 3822168,
+      "shadowCalls": 908,
+      "shadowTriangles": 2627007,
+      "dpr": 1.8
+    },
+    {
+      "condition": "baseline",
+      "zone": "lifting",
+      "ms": 12,
+      "calls": 1156,
+      "triangles": 2773703,
+      "shadowCalls": 908,
+      "shadowTriangles": 2627007,
+      "dpr": 1.8
+    },
+    {
+      "condition": "baseline",
+      "zone": "return",
+      "ms": 20.099999994039536,
+      "calls": 1414,
+      "triangles": 4201703,
+      "shadowCalls": 908,
+      "shadowTriangles": 2627007,
+      "dpr": 1.8
+    },
+    {
+      "condition": "cached-shadow",
+      "zone": "welding",
+      "ms": 7.700000002980232,
+      "calls": 506,
+      "triangles": 1574696,
+      "shadowCalls": 0,
+      "shadowTriangles": 0,
+      "dpr": 1.8
+    },
+    {
+      "condition": "cached-shadow",
+      "zone": "road",
+      "ms": 6.200000002980232,
+      "calls": 316,
+      "triangles": 1195161,
+      "shadowCalls": 0,
+      "shadowTriangles": 0,
+      "dpr": 1.8
+    },
+    {
+      "condition": "cached-shadow",
+      "zone": "lifting",
+      "ms": 3.2999999970197678,
+      "calls": 248,
+      "triangles": 146696,
+      "shadowCalls": 0,
+      "shadowTriangles": 0,
+      "dpr": 1.8
+    },
+    {
+      "condition": "cached-shadow",
+      "zone": "return",
+      "ms": 6.5999999940395355,
+      "calls": 484,
+      "triangles": 1573760,
+      "shadowCalls": 0,
+      "shadowTriangles": 0,
+      "dpr": 1.8
+    },
+    {
+      "condition": "dpr1",
+      "zone": "welding",
+      "ms": 9.799999997019768,
+      "calls": 1370,
+      "triangles": 4199831,
+      "shadowCalls": 886,
+      "shadowTriangles": 2626071,
+      "dpr": 1
+    },
+    {
+      "condition": "dpr1",
+      "zone": "road",
+      "ms": 10.400000005960464,
+      "calls": 1202,
+      "triangles": 3821232,
+      "shadowCalls": 886,
+      "shadowTriangles": 2626071,
+      "dpr": 1
+    },
+    {
+      "condition": "dpr1",
+      "zone": "lifting",
+      "ms": 9.200000002980232,
+      "calls": 1134,
+      "triangles": 2772767,
+      "shadowCalls": 886,
+      "shadowTriangles": 2626071,
+      "dpr": 1
+    },
+    {
+      "condition": "dpr1",
+      "zone": "return",
+      "ms": 8.799999997019768,
+      "calls": 1410,
+      "triangles": 4201583,
+      "shadowCalls": 906,
+      "shadowTriangles": 2626947,
+      "dpr": 1
+    },
+    {
+      "condition": "dpr075",
+      "zone": "welding",
+      "ms": 8.5,
+      "calls": 1406,
+      "triangles": 4201463,
+      "shadowCalls": 904,
+      "shadowTriangles": 2626887,
+      "dpr": 0.75
+    },
+    {
+      "condition": "dpr075",
+      "zone": "road",
+      "ms": 8.200000002980232,
+      "calls": 1220,
+      "triangles": 3822048,
+      "shadowCalls": 904,
+      "shadowTriangles": 2626887,
+      "dpr": 0.75
+    },
+    {
+      "condition": "dpr075",
+      "zone": "lifting",
+      "ms": 6.5999999940395355,
+      "calls": 1152,
+      "triangles": 2773583,
+      "shadowCalls": 904,
+      "shadowTriangles": 2626887,
+      "dpr": 0.75
+    },
+    {
+      "condition": "dpr075",
+      "zone": "return",
+      "ms": 8.399999991059303,
+      "calls": 1406,
+      "triangles": 4201463,
+      "shadowCalls": 904,
+      "shadowTriangles": 2626887,
+      "dpr": 0.75
+    }
+  ],
+  "note": "Actual scene rasterization, gl.finish synchronized. SwiftShader CPU software GPU: not hardware FPS. Cached shadow ablation reuses baseline map, does not change materials/geometry. First zone may include compilation."
+}
