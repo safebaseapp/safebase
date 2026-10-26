@@ -1,156 +1,25 @@
-import type {
-  PosterRule,
-  PosterTone,
-} from "@/lib/posters-v2/types";
-
-import PosterIcon from "./PosterIcon";
-import ConfinedSpaceIcon from "./ConfinedSpaceIcon";
-import ElectricalIcon from "./ElectricalIcon";
-import LotoIcon from "./LotoIcon";
-import FireIcon from "./FireIcon";
-import PpeRuleIcon from "./PpeRuleIcon";
-
-type Locale = "tr" | "en";
-
-type Props = {
-  locale: Locale;
-  rule: PosterRule;
-  posterCode?: string;
-};
-
-const styles: Record<
-  PosterTone,
-  {
-    bar: string;
-    pale: string;
-    badge: string;
-    label: {
-      tr: string;
-      en: string;
-    };
-  }
-> = {
-  mandatory: {
-    bar: "bg-emerald-600",
-    pale: "bg-emerald-50",
-    badge: "bg-emerald-600",
-    label: {
-      tr: "ZORUNLU",
-      en: "MANDATORY",
-    },
-  },
-
-  warning: {
-    bar: "bg-orange-500",
-    pale: "bg-orange-50",
-    badge: "bg-orange-500",
-    label: {
-      tr: "DİKKAT",
-      en: "WARNING",
-    },
-  },
-
-  information: {
-    bar: "bg-blue-600",
-    pale: "bg-blue-50",
-    badge: "bg-blue-600",
-    label: {
-      tr: "BİLGİ",
-      en: "INFORMATION",
-    },
-  },
-};
-
-export default function RuleCard({
-  locale,
-  rule,
-  posterCode,
-}: Props) {
-  const tone = styles[rule.tone];
-
-  function renderIcon() {
-    if (posterCode === "SRN-CS-001") {
-      return (
-        <ConfinedSpaceIcon title={rule.title.en} />
-      );
-    }
-
-    if (posterCode === "SRN-EL-001") {
-      return (
-        <ElectricalIcon title={rule.title.en} />
-      );
-    }
-
-    if (posterCode === "SRN-LOTO-001") {
-      return (
-        <LotoIcon title={rule.title.en} />
-      );
-    }
-
-    if (posterCode === "SRN-FIRE-001") {
-      return (
-        <FireIcon title={rule.title.en} />
-      );
-    }
-
-    if (posterCode === "SRN-PPE-001") {
-      return (
-        <PpeRuleIcon title={rule.title.en} />
-      );
-    }
-
-    return (
-      <PosterIcon
-        type={rule.icon}
-        tone={rule.tone}
-      />
-    );
-  }
-
-  return (
-    <article className="relative overflow-hidden rounded-[18px] border border-slate-300 bg-white shadow-[0_12px_28px_rgba(15,23,42,0.12)]">
-      <div className={`h-[3px] ${tone.bar}`} />
-
-      <div className="flex h-10 items-center justify-between bg-slate-950 px-4 text-white">
-        <strong className="text-lg font-black">
-          {rule.number}
-        </strong>
-
-        <span
-          className={`rounded-full px-3 py-1 text-[9px] font-black ${tone.bar}`}
-        >
-          {tone.label[locale]}
-        </span>
-      </div>
-
-      <div
-        className={`relative flex h-[108px] items-center justify-center ${tone.pale}`}
-      >
-        {renderIcon()}
-      </div>
-
-      <h2
-        className={`flex min-h-[56px] items-center justify-center px-3 text-center text-[15px] font-black uppercase leading-[1.05] text-white ${tone.bar}`}
-      >
-        {rule.title[locale]}
-      </h2>
-
-      <ul className="min-h-[108px] space-y-2 px-4 py-3">
-        {rule.items[locale].map((item) => (
-          <li
-            key={item}
-            className="flex items-start gap-2 text-[11px] font-bold leading-[1.3] text-slate-800"
-          >
-            <span
-              className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-black text-white ${tone.badge}`}
-            >
-              ✓
-            </span>
-
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </article>
-  );
+import type {CSSProperties} from 'react';
+import type {PosterRule} from '@/lib/posters-v2/types';
+import {isTaskIconCode} from '@/lib/posters-v2/task-icons';
+import TaskIcon from './TaskIcon';
+import PosterIcon from './PosterIcon';
+import ConfinedSpaceIcon from './ConfinedSpaceIcon';
+import ElectricalIcon from './ElectricalIcon';
+import LotoIcon from './LotoIcon';
+import FireIcon from './FireIcon';
+import PpeRuleIcon from './PpeRuleIcon';
+import styles from './PosterLayout.module.css';
+const renderers:Partial<Record<string,typeof ConfinedSpaceIcon>>={ 'SRN-CS-001':ConfinedSpaceIcon,'SRN-EL-001':ElectricalIcon,'SRN-LOTO-001':LotoIcon,'SRN-FIRE-001':FireIcon,'SRN-PPE-001':PpeRuleIcon };
+export default function RuleCard({locale,rule,posterCode}:{locale:'tr'|'en';rule:PosterRule;posterCode?:string}){
+ const tr=locale==='tr',application=rule.application,kind=application?.kind;
+ const label=kind==='required-control'?(tr?'ZORUNLU':'REQUIRED'):kind==='conditional-control'?(tr?'KOŞULLU ZORUNLU':'REQUIRED IF'):kind==='hazard-warning'?(tr?'DİKKAT':'WARNING'):kind==='guidance'?(tr?'BİLGİ':'INFORMATION'):(tr?'İNCELEME GEREKLİ':'REVIEW REQUIRED');
+ const color=kind==='hazard-warning'?'#b45309':kind==='guidance'?'#1d4ed8':kind==='conditional-control'?'#0e7490':'#047857';
+ const Special=posterCode?renderers[posterCode]:undefined;
+ const icon=Special?<Special title={rule.title.en}/>:isTaskIconCode(rule.icon)?<TaskIcon code={rule.icon}/>:<PosterIcon type={rule.icon} tone={rule.tone}/>;
+ return <article className={styles.card} style={{'--rule-color':color,'--rule-pale':kind==='hazard-warning'?'#fff7ed':kind==='conditional-control'?'#ecfeff':'#f0fdf4'} as CSSProperties} data-rule-id={rule.number} data-tone-kind={kind??'unreviewed'}>
+  <div className={styles.cardMeta}><strong className={styles.cardNumber}>{rule.number}</strong><span className={styles.cardBadge}>{label}</span></div>
+  <div className={styles.cardHeading}><span className={styles.ruleIcon} role="img" aria-label={rule.title[locale]} data-rule-icon={rule.icon} data-icon-renderer={Special?'topic-specific':isTaskIconCode(rule.icon)?'task':'existing'}><span aria-hidden="true">{icon}</span></span><h2 className={styles.cardTitle}>{rule.title[locale]}</h2></div>
+  {application?.kind==='conditional-control'&&<p className={styles.condition} data-critical-text data-rule-condition>{tr?'Koşul: ':'Applies when: '}{application.when[locale]}</p>}
+  <ul className={styles.items}>{rule.items[locale].map(item=><li key={item} className={styles.item}><span aria-hidden="true" className={styles.itemMark}>✓</span><span data-critical-text data-rule-body>{item}</span></li>)}</ul>
+ </article>;
 }

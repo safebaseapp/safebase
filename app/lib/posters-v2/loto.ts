@@ -35,6 +35,7 @@ export const lotoPoster: PosterDefinition = {
       },
       icon: "equipment",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -56,6 +57,7 @@ export const lotoPoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -77,6 +79,7 @@ export const lotoPoster: PosterDefinition = {
       },
       icon: "equipment",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -98,6 +101,7 @@ export const lotoPoster: PosterDefinition = {
       },
       icon: "anchor",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "05",
@@ -119,6 +123,7 @@ export const lotoPoster: PosterDefinition = {
       },
       icon: "anchor",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -139,7 +144,8 @@ export const lotoPoster: PosterDefinition = {
         ],
       },
       icon: "fall",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -160,7 +166,8 @@ export const lotoPoster: PosterDefinition = {
         ],
       },
       icon: "weather",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -181,7 +188,8 @@ export const lotoPoster: PosterDefinition = {
         ],
       },
       icon: "training",
-      tone: "information",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
   ],
 

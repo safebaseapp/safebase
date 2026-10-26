@@ -24,6 +24,7 @@ export const chemicalSafetyPoster: PosterDefinition = {
       },
       icon: "chm-label",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -37,6 +38,7 @@ export const chemicalSafetyPoster: PosterDefinition = {
       },
       icon: "chm-sds",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -50,6 +52,7 @@ export const chemicalSafetyPoster: PosterDefinition = {
       },
       icon: "chm-storage",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Birlikte depolanan kimyasallar varsa", "en": "Chemicals are stored together"}},
     },
     {
       number: "04",
@@ -63,6 +66,7 @@ export const chemicalSafetyPoster: PosterDefinition = {
       },
       icon: "chm-vent",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "05",
@@ -76,6 +80,7 @@ export const chemicalSafetyPoster: PosterDefinition = {
       },
       icon: "chm-spill",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Dökülme riski varsa", "en": "There is a spill risk"}},
     },
     {
       number: "06",
@@ -89,6 +94,7 @@ export const chemicalSafetyPoster: PosterDefinition = {
       },
       icon: "chm-transfer",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Kimyasal aktarımı yapılıyorsa", "en": "Chemicals are transferred"}},
     },
     {
       number: "07",
@@ -102,6 +108,7 @@ export const chemicalSafetyPoster: PosterDefinition = {
       },
       icon: "chm-hygiene",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -115,6 +122,7 @@ export const chemicalSafetyPoster: PosterDefinition = {
       },
       icon: "chm-emergency",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Temas veya acil durum oluşursa", "en": "Exposure or an emergency occurs"}},
     }
   ],
   never: {

@@ -24,6 +24,7 @@ export const manualHandlingSafetyPoster: PosterDefinition = {
       },
       icon: "mh-assess",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -37,6 +38,7 @@ export const manualHandlingSafetyPoster: PosterDefinition = {
       },
       icon: "mh-route",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -50,6 +52,7 @@ export const manualHandlingSafetyPoster: PosterDefinition = {
       },
       icon: "mh-close",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -63,6 +66,7 @@ export const manualHandlingSafetyPoster: PosterDefinition = {
       },
       icon: "mh-lift",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "05",
@@ -75,7 +79,8 @@ export const manualHandlingSafetyPoster: PosterDefinition = {
         en: ["Do not twist your torso while carrying a load.", "Move your feet to change direction.", "Do not lift from an unstable posture."],
       },
       icon: "mh-twist",
-      tone: "mandatory",
+      tone: "warning",
+      application: {"kind": "hazard-warning"},
     },
     {
       number: "06",
@@ -89,6 +94,7 @@ export const manualHandlingSafetyPoster: PosterDefinition = {
       },
       icon: "mh-trolley",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Elle taşıma riski kontrol gerektiriyorsa", "en": "Manual-handling risk requires assistance"}},
     },
     {
       number: "07",
@@ -102,6 +108,7 @@ export const manualHandlingSafetyPoster: PosterDefinition = {
       },
       icon: "mh-team",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Ekip halinde kaldırılıyorsa", "en": "A team lift is used"}},
     },
     {
       number: "08",
@@ -115,6 +122,7 @@ export const manualHandlingSafetyPoster: PosterDefinition = {
       },
       icon: "mh-setdown",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     }
   ],
   never: {

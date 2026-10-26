@@ -1,3 +1,5 @@
+> **Son revizyon:** [READABILITY.md](READABILITY.md) ve `readability/` kanıtları, yorum 6414234906 kapsamındaki ikon, etiket ve gerçek A4/A3 punto sonuçları için güncel kaynaktır. Bu dosya tarihsel rapor olarak korunur.
+
 # Paket 13 — Son teknik kabul kontrolü
 
 **Aynı Draft PR #126, aynı dal.** Başlangıç HEAD `12c369032f8a35e0c38f72c4ad2742e77bb8e6eb`. Önceki audit'in sayısal limitlerin kaldırılmasını anlatan bölümleri bu ekle güncellenir; tarihsel rapor silinmez. Önceki düzeltmede yanlış genellemeleri kaldırırken uygulanabilir OSHA asgarilerini de görünmez yapmak fazla geniş bir müdahaleydi. Bu ek, asgarileri ve alternatif/istisna koşullarını birlikte geri getirir.

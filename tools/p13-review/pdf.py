@@ -4,7 +4,7 @@ from qr import decode
 afterDir=pathlib.Path(os.environ.get('P13_PDF_DIR','/tmp/p13-after'))
 evidence=pathlib.Path(os.environ.get('P13_EVIDENCE_DIR','docs/p13-review'))
 beforeDir=pathlib.Path(os.environ.get('P13_BEFORE_PDF_DIR','/tmp/p13-before'))
-rasterPrefix='/tmp/p13-accept-raster-' if evidence.name=='acceptance' else '/tmp/p13-raster-'
+rasterPrefix='/tmp/p13-'+evidence.name+'-raster-'
 rows=[]
 posters=json.loads(pathlib.Path('docs/p13-review/definitions-before.json').read_text())
 slugFiles={'scaffold-safety-rules':'scaffold.ts','hot-work-safety-rules':'hot-work.ts','confined-space-entry-rules':'confined-space.ts','electrical-safety-rules':'electrical.ts','loto-golden-rules':'loto.ts','fire-safety-rules':'fire.ts','mandatory-ppe':'ppe.ts'}
@@ -27,13 +27,13 @@ for pdf in sorted(afterDir.glob('*.pdf')):
  rows.append({'file':pdf.name,'result':'PASS' if good else 'FAIL','qrDecoded':qr,'expectedQr':expected,'titleAndLocaleGlyphs':titlePresent,'outOfPageWords':violations,'textCharacters':len(text),'sha256':hashlib.sha256(pdf.read_bytes()).hexdigest()})
  print(rows[-1],flush=True)
 assert len(rows)==60,len(rows)
-(evidence/'pdf-results.json').write_text(json.dumps({'results':rows,'note':'All 15 topics × TR/EN × A4/A3. Page count/dimensions and DOM text clipping in after-browser.json; this test independently checks PDF text bounds and decodes each rendered QR at 2500px. No claim of physical printer or phone-camera testing.'},indent=2)+'\n')
+(evidence/'pdf-results.json').write_text(json.dumps({'results':rows,'note':'All 15 topics × TR/EN × A4/A3. Page count/dimensions in after-fonts.json (readability matrix) and DOM text clipping in browser-results.json; this test independently checks PDF text bounds and decodes each rendered QR at 2500px. No claim of physical printer or phone-camera testing.'},indent=2)+'\n')
 assert all(x['result']=='PASS' for x in rows)
 
 # Deterministic before/after evidence from real browser-produced PDFs, without screenshot-scroll artefacts.
 for phase in ['before','after']:
  for locale in ['tr','en']:
-  for slug in (['working-at-height-rules','hot-work-safety-rules','ladder-safety-rules','scaffold-safety-rules','excavation-safety-rules','fire-safety-rules','confined-space-entry-rules','loto-golden-rules'] if evidence.name=='acceptance' else ['housekeeping-safety-rules','working-at-height-rules','chemical-safety-rules']):
+  for slug in (['working-at-height-rules','hot-work-safety-rules','ladder-safety-rules','scaffold-safety-rules','excavation-safety-rules','fire-safety-rules','confined-space-entry-rules','loto-golden-rules'] if evidence.name=='acceptance' else [p.stem[3:-3] for p in sorted(afterDir.glob(locale+'-*-a4.pdf'))] if evidence.name=='readability' else ['housekeeping-safety-rules','working-at-height-rules','chemical-safety-rules']):
    source=str((beforeDir if phase=='before' else afterDir)/f'{locale}-{slug}-a4.pdf')
    output=str(evidence/f'{phase}-{locale}-{slug}')
    subprocess.run(['pdftoppm','-f','1','-singlefile','-scale-to','1400','-png',source,output],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)

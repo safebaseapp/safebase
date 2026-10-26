@@ -35,6 +35,7 @@ export const confinedSpacePoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "İzin gerektiren kapalı alan girişinde", "en": "Entering a permit-required confined space"}},
     },
     {
       number: "02",
@@ -56,6 +57,7 @@ export const confinedSpacePoster: PosterDefinition = {
       },
       icon: "weather",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -77,6 +79,7 @@ export const confinedSpacePoster: PosterDefinition = {
       },
       icon: "anchor",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -98,6 +101,7 @@ export const confinedSpacePoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "İzin gerektiren giriş boyunca", "en": "Throughout permit-required entry"}},
     },
     {
       number: "05",
@@ -118,7 +122,8 @@ export const confinedSpacePoster: PosterDefinition = {
         ],
       },
       icon: "weather",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Giriş kontrol planı havalandırma gerektiriyorsa", "en": "The entry control plan requires ventilation"}},
     },
     {
       number: "06",
@@ -139,7 +144,8 @@ export const confinedSpacePoster: PosterDefinition = {
         ],
       },
       icon: "equipment",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -160,7 +166,8 @@ export const confinedSpacePoster: PosterDefinition = {
         ],
       },
       icon: "fall",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -181,23 +188,24 @@ export const confinedSpacePoster: PosterDefinition = {
         ],
       },
       icon: "weather",
-      tone: "information",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Atmosfer değişebilecekse/izin gerektiriyorsa", "en": "The atmosphere can change or the permit requires it"}},
     },
   ],
 
   never: {
     tr: [
-      "Geçerli giriş izni yoksa işi hemen durdur",
+      "Gerekli giriş izni yoksa işi hemen durdur",
       "Ölçülen oksijen izin sınırları dışında veya belirsizse girişi durdur",
       "Yanıcı veya toksik gaz izin sınırında, üzerinde veya belirsizse tahliye et",
-      "Gözcü, iletişim veya sürekli gaz ölçümü yoksa girişi durdur",
+      "Gerekli gözcü, iletişim veya atmosfer izlemesi yoksa girişi durdur",
       "Hazır ve uygulanabilir kurtarma planı yoksa girişi durdur",
     ],
     en: [
-      "Stop entry immediately if there is no valid entry permit",
+      "Stop entry immediately if a required entry permit is missing",
       "Stop entry if oxygen is outside verified permit limits or is unknown",
       "Evacuate if flammable or toxic gas reaches permit limits, exceeds them or is unknown",
-      "Stop entry if there is no attendant, communication or gas monitoring",
+      "Stop entry if required attendant, communication or atmospheric monitoring is unavailable",
       "Stop entry if there is no ready and workable rescue plan",
     ],
   },

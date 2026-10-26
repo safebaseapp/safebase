@@ -24,6 +24,7 @@ export const excavationSafetyPoster: PosterDefinition = {
       },
       icon: "exc-service",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -37,6 +38,7 @@ export const excavationSafetyPoster: PosterDefinition = {
       },
       icon: "exc-inspect",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -58,6 +60,7 @@ export const excavationSafetyPoster: PosterDefinition = {
       },
       icon: "exc-shield",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Zemin/derinlik ve yasal istisnalara göre", "en": "As required by soil, depth and applicable exceptions"}},
     },
     {
       number: "04",
@@ -79,6 +82,7 @@ export const excavationSafetyPoster: PosterDefinition = {
       },
       icon: "exc-spoil",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "05",
@@ -100,6 +104,7 @@ export const excavationSafetyPoster: PosterDefinition = {
       },
       icon: "exc-access",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -113,6 +118,7 @@ export const excavationSafetyPoster: PosterDefinition = {
       },
       icon: "exc-water",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Su birikmesi veya yağış riski varsa", "en": "Water accumulation or rainfall hazards exist"}},
     },
     {
       number: "07",
@@ -126,6 +132,7 @@ export const excavationSafetyPoster: PosterDefinition = {
       },
       icon: "exc-barrier",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Araç veya yaya trafiği varsa", "en": "Vehicle or pedestrian traffic is present"}},
     },
     {
       number: "08",
@@ -139,6 +146,7 @@ export const excavationSafetyPoster: PosterDefinition = {
       },
       icon: "exc-atmosphere",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Tehlikeli atmosfer oluşabilecekse", "en": "A hazardous atmosphere could reasonably occur"}},
     }
   ],
   never: {

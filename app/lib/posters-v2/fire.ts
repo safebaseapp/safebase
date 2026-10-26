@@ -35,6 +35,7 @@ export const firePoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Yangın belirtisi veya alarm durumunda", "en": "Fire is discovered or an alarm condition occurs"}},
     },
     {
       number: "02",
@@ -56,6 +57,7 @@ export const firePoster: PosterDefinition = {
       },
       icon: "ladder",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Tahliye gerektiğinde", "en": "Evacuation is required"}},
     },
     {
       number: "03",
@@ -77,6 +79,7 @@ export const firePoster: PosterDefinition = {
       },
       icon: "equipment",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Yetkili söndürücü kullanımında", "en": "Authorized extinguisher use"}},
     },
     {
       number: "04",
@@ -98,6 +101,7 @@ export const firePoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Başlangıç yangınına müdahale edilecekse", "en": "An incipient fire is to be tackled"}},
     },
     {
       number: "05",
@@ -118,7 +122,8 @@ export const firePoster: PosterDefinition = {
         ],
       },
       icon: "equipment",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -139,7 +144,8 @@ export const firePoster: PosterDefinition = {
         ],
       },
       icon: "weather",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -160,7 +166,8 @@ export const firePoster: PosterDefinition = {
         ],
       },
       icon: "guardrail",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -181,7 +188,8 @@ export const firePoster: PosterDefinition = {
         ],
       },
       icon: "fall",
-      tone: "information",
+      tone: "warning",
+      application: {"kind": "hazard-warning"},
     },
   ],
 

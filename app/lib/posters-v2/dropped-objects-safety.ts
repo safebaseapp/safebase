@@ -24,6 +24,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
       },
       icon: "do-identify",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -37,6 +38,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
       },
       icon: "do-tether",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Alet düşme riski ve uygun sistem varsa", "en": "Tools can fall and a compatible system is available"}},
     },
     {
       number: "03",
@@ -50,6 +52,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
       },
       icon: "do-material",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -63,6 +66,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
       },
       icon: "do-barricade",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Alt alana cisim düşebilecekse", "en": "Objects could fall into the area below"}},
     },
     {
       number: "05",
@@ -76,6 +80,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
       },
       icon: "do-transfer",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -89,6 +94,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
       },
       icon: "do-toeboard",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Açıklık veya açık kenar varsa", "en": "Openings or exposed edges are present"}},
     },
     {
       number: "07",
@@ -102,6 +108,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
       },
       icon: "do-overhead",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Üst-alt seviyede işler çakışıyorsa", "en": "Work overlaps between upper and lower levels"}},
     },
     {
       number: "08",
@@ -115,6 +122,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
       },
       icon: "do-final",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     }
   ],
   never: {

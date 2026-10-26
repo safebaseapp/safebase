@@ -33,8 +33,9 @@ export const workingAtHeightPoster: PosterDefinition = {
           "Barricade the area below and prevent unauthorized access.",
         ],
       },
-      icon: "training",
+      icon: "wah-plan",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -56,6 +57,7 @@ export const workingAtHeightPoster: PosterDefinition = {
       },
       icon: "guardrail",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -77,6 +79,7 @@ export const workingAtHeightPoster: PosterDefinition = {
       },
       icon: "harness",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Kişisel düşüş koruması kullanılıyorsa", "en": "Personal fall protection is used"}},
     },
     {
       number: "04",
@@ -96,8 +99,9 @@ export const workingAtHeightPoster: PosterDefinition = {
           "Alternative: a complete system with a safety factor of at least 2, designed, installed and used under a qualified person’s supervision.",
         ],
       },
-      icon: "anchor",
+      icon: "wah-anchor",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Kişisel düşüş durdurma kullanılıyorsa", "en": "Personal fall arrest is used"}},
     },
     {
       number: "05",
@@ -117,8 +121,9 @@ export const workingAtHeightPoster: PosterDefinition = {
           "Minimize the risk of a swing fall.",
         ],
       },
-      icon: "fall",
-      tone: "warning",
+      icon: "wah-clearance",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Düşüş durdurma sistemi kullanılıyorsa", "en": "A fall-arrest system is used"}},
     },
     {
       number: "06",
@@ -140,6 +145,7 @@ export const workingAtHeightPoster: PosterDefinition = {
       },
       icon: "ladder",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -159,8 +165,9 @@ export const workingAtHeightPoster: PosterDefinition = {
           "Isolate the area below and control access.",
         ],
       },
-      icon: "equipment",
-      tone: "warning",
+      icon: "wah-tools",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Düşen cisim tehlikesi varsa", "en": "There is a falling-object hazard"}},
     },
     {
       number: "08",
@@ -180,21 +187,22 @@ export const workingAtHeightPoster: PosterDefinition = {
           "Verify emergency communication and response arrangements.",
         ],
       },
-      icon: "training",
-      tone: "information",
+      icon: "wah-rescue",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Kişisel düşüş sistemi/kurtarma riski varsa", "en": "Personal fall protection or rescue hazards apply"}},
     },
   ],
 
   never: {
     tr: [
-      "Onaylı ankraj veya düşüş koruması yoksa",
+      "Gerekli düşüş koruması veya seçilen sistemin onaylı ankrajı yoksa",
       "Kemer, lanyard veya bağlantı ekipmanı hasarlıysa",
       "Korumasız kenar veya açık boşluk varsa",
       "Kurtarma planı ve müdahale imkânı yoksa",
       "Rüzgâr, buzlanma veya görüş koşulları güvenli değilse",
     ],
     en: [
-      "There is no approved anchorage or fall protection",
+      "Required fall protection or an approved anchorage for the selected system is unavailable",
       "The harness, lanyard or connector is damaged",
       "An unprotected edge or open hole is present",
       "No rescue plan or response capability is available",

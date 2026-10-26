@@ -24,6 +24,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
       },
       icon: "flt-operator",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -37,6 +38,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
       },
       icon: "flt-inspect",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -50,6 +52,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
       },
       icon: "flt-load",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -63,6 +66,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
       },
       icon: "flt-stable",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "05",
@@ -76,6 +80,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
       },
       icon: "flt-pedestrian",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -89,6 +94,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
       },
       icon: "flt-visibility",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -102,6 +108,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
       },
       icon: "flt-slope",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Eğim veya rampada seyirde", "en": "Travelling on slopes or ramps"}},
     },
     {
       number: "08",
@@ -115,6 +122,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
       },
       icon: "flt-park",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     }
   ],
   never: {

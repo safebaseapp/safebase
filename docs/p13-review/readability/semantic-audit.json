@@ -1,0 +1,2460 @@
+{
+  "baseline": "22ea88612ed920b72d9122bec13cbb3ead53c8c9",
+  "results": [
+    {
+      "code": "SRN-CHM-001",
+      "number": "01",
+      "title": {
+        "tr": "Etiketi Kontrol Et",
+        "en": "Check the Label"
+      },
+      "iconBefore": "chm-label",
+      "iconAfter": "chm-label",
+      "renderer": "existing renderer",
+      "geometryBefore": "cabf0431cef01d2f2dcf2e7c49d1b8e7c6894dc3891da165aec713e5328171b4",
+      "geometryAfter": "cabf0431cef01d2f2dcf2e7c49d1b8e7c6894dc3891da165aec713e5328171b4",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CHM-001",
+      "number": "02",
+      "title": {
+        "tr": "SDS'yi İncele",
+        "en": "Review the SDS"
+      },
+      "iconBefore": "chm-sds",
+      "iconAfter": "chm-sds",
+      "renderer": "existing renderer",
+      "geometryBefore": "9309a4e52d01608e39d35f1cc724624666d58b7e3c3f509254581ee5429b96fe",
+      "geometryAfter": "9309a4e52d01608e39d35f1cc724624666d58b7e3c3f509254581ee5429b96fe",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CHM-001",
+      "number": "03",
+      "title": {
+        "tr": "Uyumsuzları Ayır",
+        "en": "Segregate Incompatibles"
+      },
+      "iconBefore": "chm-storage",
+      "iconAfter": "chm-storage",
+      "renderer": "existing renderer",
+      "geometryBefore": "b8bfb264ceaaaae20931d0b6646928ea1999f4ed9434bb24565a81c9d0b1caa3",
+      "geometryAfter": "b8bfb264ceaaaae20931d0b6646928ea1999f4ed9434bb24565a81c9d0b1caa3",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Birlikte depolanan kimyasallar varsa",
+          "en": "Chemicals are stored together"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CHM-001",
+      "number": "04",
+      "title": {
+        "tr": "Maruziyeti Kontrol Et",
+        "en": "Control Exposure"
+      },
+      "iconBefore": "chm-vent",
+      "iconAfter": "chm-vent",
+      "renderer": "existing renderer",
+      "geometryBefore": "6925e6baa9c781cfdc1e7515a53b0c546d2e5c28fa0667ff2af9bec1d001e93a",
+      "geometryAfter": "6925e6baa9c781cfdc1e7515a53b0c546d2e5c28fa0667ff2af9bec1d001e93a",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CHM-001",
+      "number": "05",
+      "title": {
+        "tr": "Dökülmeye Hazır Ol",
+        "en": "Prepare for Spills"
+      },
+      "iconBefore": "chm-spill",
+      "iconAfter": "chm-spill",
+      "renderer": "existing renderer",
+      "geometryBefore": "809c0a428cd0fd50872eb311b02a7a564ff1102645071f32609c9d191b9b0e9b",
+      "geometryAfter": "809c0a428cd0fd50872eb311b02a7a564ff1102645071f32609c9d191b9b0e9b",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Dökülme riski varsa",
+          "en": "There is a spill risk"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CHM-001",
+      "number": "06",
+      "title": {
+        "tr": "Doğru Aktarım Yap",
+        "en": "Transfer Safely"
+      },
+      "iconBefore": "chm-transfer",
+      "iconAfter": "chm-transfer",
+      "renderer": "existing renderer",
+      "geometryBefore": "b8556d1f30428038e1344d68bf1e91e3a0f60d55d9eb7e8a9a6634b5ed649190",
+      "geometryAfter": "b8556d1f30428038e1344d68bf1e91e3a0f60d55d9eb7e8a9a6634b5ed649190",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Kimyasal aktarımı yapılıyorsa",
+          "en": "Chemicals are transferred"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CHM-001",
+      "number": "07",
+      "title": {
+        "tr": "Hijyeni Koru",
+        "en": "Maintain Hygiene"
+      },
+      "iconBefore": "chm-hygiene",
+      "iconAfter": "chm-hygiene",
+      "renderer": "existing renderer",
+      "geometryBefore": "5850a05c47beefa021e304e59e29ed67be826173f5470cbd014ffe94549bae4f",
+      "geometryAfter": "5850a05c47beefa021e304e59e29ed67be826173f5470cbd014ffe94549bae4f",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CHM-001",
+      "number": "08",
+      "title": {
+        "tr": "Acil Durumda Doğru Hareket Et",
+        "en": "Respond Correctly"
+      },
+      "iconBefore": "chm-emergency",
+      "iconAfter": "chm-emergency",
+      "renderer": "existing renderer",
+      "geometryBefore": "db2f0df39a8c55889b06764939e4122400ec66a667698e10e007c7dc8ba914d2",
+      "geometryAfter": "db2f0df39a8c55889b06764939e4122400ec66a667698e10e007c7dc8ba914d2",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Temas veya acil durum oluşursa",
+          "en": "Exposure or an emergency occurs"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CS-001",
+      "number": "01",
+      "title": {
+        "tr": "Giriş İzni",
+        "en": "Entry Permit"
+      },
+      "iconBefore": "training",
+      "iconAfter": "training",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "de8205b68834a69dd15dae0e0daf45e8cf2558c299f3b706fabbd7d2ffee67cd",
+      "geometryAfter": "de8205b68834a69dd15dae0e0daf45e8cf2558c299f3b706fabbd7d2ffee67cd",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "İzin gerektiren kapalı alan girişinde",
+          "en": "Entering a permit-required confined space"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CS-001",
+      "number": "02",
+      "title": {
+        "tr": "Atmosfer Ölçümü",
+        "en": "Atmospheric Testing"
+      },
+      "iconBefore": "weather",
+      "iconAfter": "weather",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "8d5934404dbafbeae539d9bc38f3a9c389d57c8cc491710e33b000666153d635",
+      "geometryAfter": "8d5934404dbafbeae539d9bc38f3a9c389d57c8cc491710e33b000666153d635",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CS-001",
+      "number": "03",
+      "title": {
+        "tr": "Enerji İzolasyonu",
+        "en": "Energy Isolation"
+      },
+      "iconBefore": "anchor",
+      "iconAfter": "anchor",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "0db2194f168471a3e167071b7c20c5ebf815fee9a7809b791bf8c5791c8f44c5",
+      "geometryAfter": "0db2194f168471a3e167071b7c20c5ebf815fee9a7809b791bf8c5791c8f44c5",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CS-001",
+      "number": "04",
+      "title": {
+        "tr": "Gözcü",
+        "en": "Entry Attendant"
+      },
+      "iconBefore": "training",
+      "iconAfter": "training",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "658c6ef51ab3c574c2eed97664c4819948814bc7dda85f31dfaa869691f0df7a",
+      "geometryAfter": "658c6ef51ab3c574c2eed97664c4819948814bc7dda85f31dfaa869691f0df7a",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "İzin gerektiren giriş boyunca",
+          "en": "Throughout permit-required entry"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CS-001",
+      "number": "05",
+      "title": {
+        "tr": "Havalandırma",
+        "en": "Ventilation"
+      },
+      "iconBefore": "weather",
+      "iconAfter": "weather",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "c646f948e0beab2ebb78440833498f5e95ffff3a93f5a461fffceb1e2d97e01f",
+      "geometryAfter": "c646f948e0beab2ebb78440833498f5e95ffff3a93f5a461fffceb1e2d97e01f",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Giriş kontrol planı havalandırma gerektiriyorsa",
+          "en": "The entry control plan requires ventilation"
+        }
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CS-001",
+      "number": "06",
+      "title": {
+        "tr": "İletişim",
+        "en": "Communication"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "equipment",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "61672e0802eaca12878f335394ab19da29c163d7685b22663539ec56ec3d519d",
+      "geometryAfter": "61672e0802eaca12878f335394ab19da29c163d7685b22663539ec56ec3d519d",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CS-001",
+      "number": "07",
+      "title": {
+        "tr": "Kurtarma Hazırlığı",
+        "en": "Rescue Readiness"
+      },
+      "iconBefore": "fall",
+      "iconAfter": "fall",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "ab2f84ed61b7e86def1d02b20db4031004f0db0316f692cf2cc52c4eac4067eb",
+      "geometryAfter": "ab2f84ed61b7e86def1d02b20db4031004f0db0316f692cf2cc52c4eac4067eb",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-CS-001",
+      "number": "08",
+      "title": {
+        "tr": "Sürekli İzleme",
+        "en": "Continuous Monitoring"
+      },
+      "iconBefore": "weather",
+      "iconAfter": "weather",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "3aadaf50b6f060b89932f03272f4ff776cbbd2fb9daf98098a0ac4a204a488c2",
+      "geometryAfter": "3aadaf50b6f060b89932f03272f4ff776cbbd2fb9daf98098a0ac4a204a488c2",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Atmosfer değişebilecekse/izin gerektiriyorsa",
+          "en": "The atmosphere can change or the permit requires it"
+        }
+      },
+      "toneBefore": "information",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-DO-001",
+      "number": "01",
+      "title": {
+        "tr": "Düşebilecek Her Şeyi Belirle",
+        "en": "Identify Drop Hazards"
+      },
+      "iconBefore": "do-identify",
+      "iconAfter": "do-identify",
+      "renderer": "existing renderer",
+      "geometryBefore": "146efe512fc3292eca9f4eda77f089857c27a3845693eae026a9977c2c5019e2",
+      "geometryAfter": "146efe512fc3292eca9f4eda77f089857c27a3845693eae026a9977c2c5019e2",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-DO-001",
+      "number": "02",
+      "title": {
+        "tr": "Aletleri Sabitle",
+        "en": "Secure Tools"
+      },
+      "iconBefore": "do-tether",
+      "iconAfter": "do-tether",
+      "renderer": "existing renderer",
+      "geometryBefore": "15f08597a4310d40a934631bfc14ed6f9755e5bceb0722f34624a08defe209a4",
+      "geometryAfter": "15f08597a4310d40a934631bfc14ed6f9755e5bceb0722f34624a08defe209a4",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Alet düşme riski ve uygun sistem varsa",
+          "en": "Tools can fall and a compatible system is available"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-DO-001",
+      "number": "03",
+      "title": {
+        "tr": "Malzemeyi Sabitle",
+        "en": "Secure Materials"
+      },
+      "iconBefore": "do-material",
+      "iconAfter": "do-material",
+      "renderer": "existing renderer",
+      "geometryBefore": "97f119410293705cb1d61adfbf400c88a84645448f62f27975b00bf0a949504a",
+      "geometryAfter": "97f119410293705cb1d61adfbf400c88a84645448f62f27975b00bf0a949504a",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-DO-001",
+      "number": "04",
+      "title": {
+        "tr": "Alt Alanı İzole Et",
+        "en": "Barricade the Area Below"
+      },
+      "iconBefore": "do-barricade",
+      "iconAfter": "do-barricade",
+      "renderer": "existing renderer",
+      "geometryBefore": "d54b9ab9787b5c10269315a1c97ef874a927144e505c6c787b68bf0fa2f97e58",
+      "geometryAfter": "d54b9ab9787b5c10269315a1c97ef874a927144e505c6c787b68bf0fa2f97e58",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Alt alana cisim düşebilecekse",
+          "en": "Objects could fall into the area below"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-DO-001",
+      "number": "05",
+      "title": {
+        "tr": "Güvenli Taşı",
+        "en": "Transfer Materials Safely"
+      },
+      "iconBefore": "do-transfer",
+      "iconAfter": "do-transfer",
+      "renderer": "existing renderer",
+      "geometryBefore": "c508061520d6e42efd77057fedda555bc794f9d62ad103627aa7fc983f5e42dc",
+      "geometryAfter": "c508061520d6e42efd77057fedda555bc794f9d62ad103627aa7fc983f5e42dc",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-DO-001",
+      "number": "06",
+      "title": {
+        "tr": "Açıklıkları Koru",
+        "en": "Protect Openings"
+      },
+      "iconBefore": "do-toeboard",
+      "iconAfter": "do-toeboard",
+      "renderer": "existing renderer",
+      "geometryBefore": "d60c68e9f794d6ec27983526ba86caa0f2f41be5da59d15753c2f449c7b62914",
+      "geometryAfter": "d60c68e9f794d6ec27983526ba86caa0f2f41be5da59d15753c2f449c7b62914",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Açıklık veya açık kenar varsa",
+          "en": "Openings or exposed edges are present"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-DO-001",
+      "number": "07",
+      "title": {
+        "tr": "Baş Üstü Çalışmayı Koordine Et",
+        "en": "Coordinate Overhead Work"
+      },
+      "iconBefore": "do-overhead",
+      "iconAfter": "do-overhead",
+      "renderer": "existing renderer",
+      "geometryBefore": "0a4d753d46f8a0705828206210a81f065e0ebd383bf585081cf9b74e4b2411f7",
+      "geometryAfter": "0a4d753d46f8a0705828206210a81f065e0ebd383bf585081cf9b74e4b2411f7",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Üst-alt seviyede işler çakışıyorsa",
+          "en": "Work overlaps between upper and lower levels"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-DO-001",
+      "number": "08",
+      "title": {
+        "tr": "İş Bitiminde Kontrol Et",
+        "en": "Final Area Check"
+      },
+      "iconBefore": "do-final",
+      "iconAfter": "do-final",
+      "renderer": "existing renderer",
+      "geometryBefore": "d2ad39ddf00f96c999ea7bd9c1d5779f153aeb6b66b63f32ee1ce6d25ddbaef2",
+      "geometryAfter": "d2ad39ddf00f96c999ea7bd9c1d5779f153aeb6b66b63f32ee1ce6d25ddbaef2",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EL-001",
+      "number": "01",
+      "title": {
+        "tr": "Enerjiyi Kes",
+        "en": "De-Energize"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "equipment",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "1c2dee634d81ad2a3da5793a8d711947c968cf58d30fe6febc7fdb38bc48bbce",
+      "geometryAfter": "1c2dee634d81ad2a3da5793a8d711947c968cf58d30fe6febc7fdb38bc48bbce",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EL-001",
+      "number": "02",
+      "title": {
+        "tr": "LOTO Uygula",
+        "en": "Apply LOTO"
+      },
+      "iconBefore": "anchor",
+      "iconAfter": "anchor",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "1610e296318bcc6b2aaea78a3dbdb0131a4eb65532c98ef3cc80e6287519837c",
+      "geometryAfter": "1610e296318bcc6b2aaea78a3dbdb0131a4eb65532c98ef3cc80e6287519837c",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EL-001",
+      "number": "03",
+      "title": {
+        "tr": "Gerilimsizliği Doğrula",
+        "en": "Verify De-Energization"
+      },
+      "iconBefore": "weather",
+      "iconAfter": "weather",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "2811ba46887e4901917340f174eb52dce1951d0034888b94fe346f0db37cfa53",
+      "geometryAfter": "2811ba46887e4901917340f174eb52dce1951d0034888b94fe346f0db37cfa53",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EL-001",
+      "number": "04",
+      "title": {
+        "tr": "Yetkili Personel",
+        "en": "Qualified Persons Only"
+      },
+      "iconBefore": "training",
+      "iconAfter": "training",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "a3c75a0d84b09328a59ed0c92db823ec35ac1c9b2e60359dac4ee37e9838d40d",
+      "geometryAfter": "a3c75a0d84b09328a59ed0c92db823ec35ac1c9b2e60359dac4ee37e9838d40d",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EL-001",
+      "number": "05",
+      "title": {
+        "tr": "Ekipmanı Kontrol Et",
+        "en": "Inspect Equipment"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "equipment",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "739362d9634ca82265f2da69202a30496ab0aebd3a7846c1d4e861585faf93bd",
+      "geometryAfter": "739362d9634ca82265f2da69202a30496ab0aebd3a7846c1d4e861585faf93bd",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EL-001",
+      "number": "06",
+      "title": {
+        "tr": "Kaçak Akım Koruması",
+        "en": "Ground-Fault Protection"
+      },
+      "iconBefore": "guardrail",
+      "iconAfter": "guardrail",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "52e44ab6b7aa60c50adf64c197650ce4218b43f294415d3398ed525b493413f9",
+      "geometryAfter": "52e44ab6b7aa60c50adf64c197650ce4218b43f294415d3398ed525b493413f9",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Ortam, ekipman veya kural gerektiriyorsa",
+          "en": "The environment, equipment or applicable rule requires it"
+        }
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EL-001",
+      "number": "07",
+      "title": {
+        "tr": "Alanı Koru",
+        "en": "Control the Work Area"
+      },
+      "iconBefore": "guardrail",
+      "iconAfter": "guardrail",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "7a5a14b2c750c1e2bb393ca13ee48a626190b24b759aea5eed7f344f63b93f1b",
+      "geometryAfter": "7a5a14b2c750c1e2bb393ca13ee48a626190b24b759aea5eed7f344f63b93f1b",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EL-001",
+      "number": "08",
+      "title": {
+        "tr": "Enerjili Çalışma Kontrolü",
+        "en": "Energized Work Controls"
+      },
+      "iconBefore": "fall",
+      "iconAfter": "fall",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "48aa4c2b51dd88eca05cf8ccaf9c0363488f03f2ecc02f0eb7d28ca1261f8073",
+      "geometryAfter": "48aa4c2b51dd88eca05cf8ccaf9c0363488f03f2ecc02f0eb7d28ca1261f8073",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Meşru ve yetkilendirilmiş enerjili işte",
+          "en": "Energized work is justified and authorized"
+        }
+      },
+      "toneBefore": "information",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EXC-001",
+      "number": "01",
+      "title": {
+        "tr": "Yeraltı Hatlarını Belirle",
+        "en": "Locate Underground Services"
+      },
+      "iconBefore": "exc-service",
+      "iconAfter": "exc-service",
+      "renderer": "existing renderer",
+      "geometryBefore": "d21436886c0474a4395d17c792f33938350079d162aae7786ee42feddab34258",
+      "geometryAfter": "d21436886c0474a4395d17c792f33938350079d162aae7786ee42feddab34258",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EXC-001",
+      "number": "02",
+      "title": {
+        "tr": "Yetkin Kişi Kontrolü",
+        "en": "Competent-Person Inspection"
+      },
+      "iconBefore": "exc-inspect",
+      "iconAfter": "exc-inspect",
+      "renderer": "existing renderer",
+      "geometryBefore": "8746968f0dc2868d4ae2009f8759960c4da4c009ffa9dd97a2a544d49e4c9f67",
+      "geometryAfter": "8746968f0dc2868d4ae2009f8759960c4da4c009ffa9dd97a2a544d49e4c9f67",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EXC-001",
+      "number": "03",
+      "title": {
+        "tr": "Göçüğe Karşı Koru",
+        "en": "Protect Against Cave-In"
+      },
+      "iconBefore": "exc-shield",
+      "iconAfter": "exc-shield",
+      "renderer": "existing renderer",
+      "geometryBefore": "6e103e3a1dfadf03a52e3b44e8065cd2e52c60065160370b89c3117e544f0add",
+      "geometryAfter": "6e103e3a1dfadf03a52e3b44e8065cd2e52c60065160370b89c3117e544f0add",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Zemin/derinlik ve yasal istisnalara göre",
+          "en": "As required by soil, depth and applicable exceptions"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EXC-001",
+      "number": "04",
+      "title": {
+        "tr": "Kazı Malzemesini Güvenli Mesafede Tut",
+        "en": "Control Spoil Piles"
+      },
+      "iconBefore": "exc-spoil",
+      "iconAfter": "exc-spoil",
+      "renderer": "existing renderer",
+      "geometryBefore": "fb1a2aed5b6e114adc6da4cc4a89c649427ea89feaab4d36dbad1eff1adfe856",
+      "geometryAfter": "fb1a2aed5b6e114adc6da4cc4a89c649427ea89feaab4d36dbad1eff1adfe856",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EXC-001",
+      "number": "05",
+      "title": {
+        "tr": "Güvenli Erişim Sağla",
+        "en": "Provide Safe Access"
+      },
+      "iconBefore": "exc-access",
+      "iconAfter": "exc-access",
+      "renderer": "existing renderer",
+      "geometryBefore": "b66b917afc4e4405643a318daf4b0eca20d4cd2fde3e380ef5464c54f907870e",
+      "geometryAfter": "b66b917afc4e4405643a318daf4b0eca20d4cd2fde3e380ef5464c54f907870e",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EXC-001",
+      "number": "06",
+      "title": {
+        "tr": "Su Birikmesini Kontrol Et",
+        "en": "Control Water Accumulation"
+      },
+      "iconBefore": "exc-water",
+      "iconAfter": "exc-water",
+      "renderer": "existing renderer",
+      "geometryBefore": "e44c896763bb7eb17fb1d455fd9055dac456f46f29b1b6a71b699ceaaf996026",
+      "geometryAfter": "e44c896763bb7eb17fb1d455fd9055dac456f46f29b1b6a71b699ceaaf996026",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Su birikmesi veya yağış riski varsa",
+          "en": "Water accumulation or rainfall hazards exist"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EXC-001",
+      "number": "07",
+      "title": {
+        "tr": "Kenarları ve Trafiği Koru",
+        "en": "Protect Edges and Traffic"
+      },
+      "iconBefore": "exc-barrier",
+      "iconAfter": "exc-barrier",
+      "renderer": "existing renderer",
+      "geometryBefore": "26fcd337b1fde73584e273b2ae5e7a750534aa9111dca23edd995799f0edabea",
+      "geometryAfter": "26fcd337b1fde73584e273b2ae5e7a750534aa9111dca23edd995799f0edabea",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Araç veya yaya trafiği varsa",
+          "en": "Vehicle or pedestrian traffic is present"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-EXC-001",
+      "number": "08",
+      "title": {
+        "tr": "Atmosfer Riskini Değerlendir",
+        "en": "Assess Atmospheric Hazards"
+      },
+      "iconBefore": "exc-atmosphere",
+      "iconAfter": "exc-atmosphere",
+      "renderer": "existing renderer",
+      "geometryBefore": "31e8407312324f5bc7e4c559f81633f274f48b4f8d3d2b2c69262ab5fe56802a",
+      "geometryAfter": "31e8407312324f5bc7e4c559f81633f274f48b4f8d3d2b2c69262ab5fe56802a",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Tehlikeli atmosfer oluşabilecekse",
+          "en": "A hazardous atmosphere could reasonably occur"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FIRE-001",
+      "number": "01",
+      "title": {
+        "tr": "Alarm Ver ve Bildir",
+        "en": "Raise the Alarm"
+      },
+      "iconBefore": "training",
+      "iconAfter": "training",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "d06910d0eac0d19d63b0a05cf04a5271b85048e19911e1a407d3732c1ecf1817",
+      "geometryAfter": "d06910d0eac0d19d63b0a05cf04a5271b85048e19911e1a407d3732c1ecf1817",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Yangın belirtisi veya alarm durumunda",
+          "en": "Fire is discovered or an alarm condition occurs"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FIRE-001",
+      "number": "02",
+      "title": {
+        "tr": "Tahliyeyi Başlat",
+        "en": "Evacuate Safely"
+      },
+      "iconBefore": "ladder",
+      "iconAfter": "ladder",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "4cea58860ca848316789def3318cdabf3ebdb48e4451aa7e481b7f0b6f61bf23",
+      "geometryAfter": "4cea58860ca848316789def3318cdabf3ebdb48e4451aa7e481b7f0b6f61bf23",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Tahliye gerektiğinde",
+          "en": "Evacuation is required"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FIRE-001",
+      "number": "03",
+      "title": {
+        "tr": "Söndürücüyü Doğru Seç",
+        "en": "Select the Correct Extinguisher"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "equipment",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "8e4110b71ae6e374de126b82cc187c3a4035e58dc10be4f3aa80ce958020654a",
+      "geometryAfter": "8e4110b71ae6e374de126b82cc187c3a4035e58dc10be4f3aa80ce958020654a",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Yetkili söndürücü kullanımında",
+          "en": "Authorized extinguisher use"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FIRE-001",
+      "number": "04",
+      "title": {
+        "tr": "Yalnızca Başlangıç Yangınına Müdahale Et",
+        "en": "Fight Incipient Fires Only"
+      },
+      "iconBefore": "training",
+      "iconAfter": "training",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "b52df4bf3c053608b4046dfed36a3c186fb59aaf6e29d25a37f2d0111cdfa189",
+      "geometryAfter": "b52df4bf3c053608b4046dfed36a3c186fb59aaf6e29d25a37f2d0111cdfa189",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Başlangıç yangınına müdahale edilecekse",
+          "en": "An incipient fire is to be tackled"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FIRE-001",
+      "number": "05",
+      "title": {
+        "tr": "Söndürücüyü Kontrol Et",
+        "en": "Inspect the Extinguisher"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "equipment",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "e38666624d6f4fd5f28ed3addc4c29d3ca2798bf9a0c996e7cc72c9a2b8bb71b",
+      "geometryAfter": "e38666624d6f4fd5f28ed3addc4c29d3ca2798bf9a0c996e7cc72c9a2b8bb71b",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FIRE-001",
+      "number": "06",
+      "title": {
+        "tr": "Yakıt ve Tutuşturma Kaynaklarını Kontrol Et",
+        "en": "Control Fuel and Ignition Sources"
+      },
+      "iconBefore": "weather",
+      "iconAfter": "weather",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "6da7243f8e6ca6955b59779a0b643c1e2876cde592e828eaef15933a9fc51b2d",
+      "geometryAfter": "6da7243f8e6ca6955b59779a0b643c1e2876cde592e828eaef15933a9fc51b2d",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FIRE-001",
+      "number": "07",
+      "title": {
+        "tr": "Çıkışları ve Yangın Ekipmanını Açık Tut",
+        "en": "Keep Exits and Equipment Clear"
+      },
+      "iconBefore": "guardrail",
+      "iconAfter": "guardrail",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "c6ce44e9754e0bc2fc6899658460da5a8e5e4eea2faa5670429fe7f2cceb3481",
+      "geometryAfter": "c6ce44e9754e0bc2fc6899658460da5a8e5e4eea2faa5670429fe7f2cceb3481",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FIRE-001",
+      "number": "08",
+      "title": {
+        "tr": "Müdahaleyi Bırak ve Geri Çekil",
+        "en": "Withdraw When Conditions Escalate"
+      },
+      "iconBefore": "fall",
+      "iconAfter": "fall",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "91f221f037f86fdac53cba1684118b7ec79f62f26b397cbe1c8068bdc17b9720",
+      "geometryAfter": "91f221f037f86fdac53cba1684118b7ec79f62f26b397cbe1c8068bdc17b9720",
+      "change": "preserved",
+      "application": {
+        "kind": "hazard-warning"
+      },
+      "toneBefore": "information",
+      "toneAfter": "warning"
+    },
+    {
+      "code": "SRN-FLT-001",
+      "number": "01",
+      "title": {
+        "tr": "Yetkili Operatör Kullanır",
+        "en": "Authorized Operators Only"
+      },
+      "iconBefore": "flt-operator",
+      "iconAfter": "flt-operator",
+      "renderer": "existing renderer",
+      "geometryBefore": "0368076d39a6f7c6159cd73d2ecf4b69ea9ee2cf6ae69e79893a547b43e36a20",
+      "geometryAfter": "0368076d39a6f7c6159cd73d2ecf4b69ea9ee2cf6ae69e79893a547b43e36a20",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FLT-001",
+      "number": "02",
+      "title": {
+        "tr": "Günlük Kontrol Yap",
+        "en": "Inspect Before Use"
+      },
+      "iconBefore": "flt-inspect",
+      "iconAfter": "flt-inspect",
+      "renderer": "existing renderer",
+      "geometryBefore": "c209ac573f4033d408beca97fae471448c6747f5bf3a7b648b725fb84379cc6c",
+      "geometryAfter": "c209ac573f4033d408beca97fae471448c6747f5bf3a7b648b725fb84379cc6c",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FLT-001",
+      "number": "03",
+      "title": {
+        "tr": "Kapasiteyi Aşma",
+        "en": "Respect Rated Capacity"
+      },
+      "iconBefore": "flt-load",
+      "iconAfter": "flt-load",
+      "renderer": "existing renderer",
+      "geometryBefore": "eca3f83421f6803efea32b65a5e44e4b1d7cc580052c5d6cb3fd36dbd636dcf6",
+      "geometryAfter": "eca3f83421f6803efea32b65a5e44e4b1d7cc580052c5d6cb3fd36dbd636dcf6",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FLT-001",
+      "number": "04",
+      "title": {
+        "tr": "Yükü Stabil Tut",
+        "en": "Keep the Load Stable"
+      },
+      "iconBefore": "flt-stable",
+      "iconAfter": "flt-stable",
+      "renderer": "existing renderer",
+      "geometryBefore": "2018dfad41d912ed386d1188459388886f738aca24be000f25d01443597b5e56",
+      "geometryAfter": "2018dfad41d912ed386d1188459388886f738aca24be000f25d01443597b5e56",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FLT-001",
+      "number": "05",
+      "title": {
+        "tr": "Yayaları Ayır",
+        "en": "Separate Pedestrians"
+      },
+      "iconBefore": "flt-pedestrian",
+      "iconAfter": "flt-pedestrian",
+      "renderer": "existing renderer",
+      "geometryBefore": "d07e91692a9ce4c665fd03ba63cf02686ab7c83f362af1ffeffc67d3aae61922",
+      "geometryAfter": "d07e91692a9ce4c665fd03ba63cf02686ab7c83f362af1ffeffc67d3aae61922",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FLT-001",
+      "number": "06",
+      "title": {
+        "tr": "Görüşü Koru",
+        "en": "Maintain Visibility"
+      },
+      "iconBefore": "flt-visibility",
+      "iconAfter": "flt-visibility",
+      "renderer": "existing renderer",
+      "geometryBefore": "1bd30b9aa16425a1d8f3d7bc992243596c1a03e4559a76b22e37621faaf3e4a4",
+      "geometryAfter": "1bd30b9aa16425a1d8f3d7bc992243596c1a03e4559a76b22e37621faaf3e4a4",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FLT-001",
+      "number": "07",
+      "title": {
+        "tr": "Eğimlerde Kontrollü Ol",
+        "en": "Control Travel on Slopes"
+      },
+      "iconBefore": "flt-slope",
+      "iconAfter": "flt-slope",
+      "renderer": "existing renderer",
+      "geometryBefore": "183c549f4e62f6be115526b45a89eba19c62fc7181c712ef5f5fe86a36cad0d4",
+      "geometryAfter": "183c549f4e62f6be115526b45a89eba19c62fc7181c712ef5f5fe86a36cad0d4",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Eğim veya rampada seyirde",
+          "en": "Travelling on slopes or ramps"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-FLT-001",
+      "number": "08",
+      "title": {
+        "tr": "Güvenli Park Et",
+        "en": "Park Safely"
+      },
+      "iconBefore": "flt-park",
+      "iconAfter": "flt-park",
+      "renderer": "existing renderer",
+      "geometryBefore": "5c7a503e1cdb4f8c26a7c01692f64ffcb1cd58bfaf4f19445787386436c1f92c",
+      "geometryAfter": "5c7a503e1cdb4f8c26a7c01692f64ffcb1cd58bfaf4f19445787386436c1f92c",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HW-001",
+      "number": "01",
+      "title": {
+        "tr": "Çalışma İzni",
+        "en": "Hot Work Permit"
+      },
+      "iconBefore": "training",
+      "iconAfter": "hw-permit",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "ffa4ac4c1140eef4d9f982da42d3fa56bdf39712624eaa993f0517c76f8cd96f",
+      "geometryAfter": "5767f2167da6fd36a7e77d3c73f3e9b4cd220a776f13e06c3770342e8d25ac09",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "İzin sistemi gerektiriyorsa",
+          "en": "A permit system requires it"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HW-001",
+      "number": "02",
+      "title": {
+        "tr": "Yanıcıları Uzaklaştır",
+        "en": "Remove Combustibles"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "hw-combustibles",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "5d4d5c92d312edcb5d8988c6a89ff461d497966902e129a366447e9b61f97e31",
+      "geometryAfter": "fda3af58fb93d9c4419d16a2baa301def71f21ce41f547887749592ad249de48",
+      "change": "semantic correction",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HW-001",
+      "number": "03",
+      "title": {
+        "tr": "Gaz Ölçümü",
+        "en": "Atmospheric Testing"
+      },
+      "iconBefore": "weather",
+      "iconAfter": "hw-gas-test",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "b8d1c9c0e899beed702c8c7e71dddbfdb3bdb7183cd38652159b115af31da1c9",
+      "geometryAfter": "0d832939dab291adcf8cadef9a66d0ef3b41de8491a229c0a6f7611504775669",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Atmosfer tehlikesi veya izin şartı varsa",
+          "en": "Atmospheric hazards or permit conditions require testing"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HW-001",
+      "number": "04",
+      "title": {
+        "tr": "Yangın Gözcüsü",
+        "en": "Fire Watch"
+      },
+      "iconBefore": "training",
+      "iconAfter": "hw-fire-watch",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "ffa4ac4c1140eef4d9f982da42d3fa56bdf39712624eaa993f0517c76f8cd96f",
+      "geometryAfter": "b330b8d690b153bfc829b781150db0c42fbd9401a6bd525a905f52527f9d0bef",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "OSHA gözcü ölçütü veya saha riski varsa",
+          "en": "OSHA fire-watch criteria or site risk applies"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HW-001",
+      "number": "05",
+      "title": {
+        "tr": "Söndürme Ekipmanı",
+        "en": "Firefighting Equipment"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "hw-extinguisher",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "5d4d5c92d312edcb5d8988c6a89ff461d497966902e129a366447e9b61f97e31",
+      "geometryAfter": "4570d8cb1ac2f2ae3a20fb738655daa3bb3656ccc896d87de6b7a2127af0ba67",
+      "change": "semantic correction",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HW-001",
+      "number": "06",
+      "title": {
+        "tr": "Kıvılcım ve Isı Kontrolü",
+        "en": "Control Sparks and Heat"
+      },
+      "iconBefore": "fall",
+      "iconAfter": "hw-spark-barrier",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "4bc353b98797677426808ee55896af24a8f0cd64bd959e79b80d99ea6d7ef21b",
+      "geometryAfter": "5fd53b2fc02527a5fca54ebc411693e5cd364c9affb3d16718cf5866301fee7f",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Kıvılcım/ısı yayılma riski varsa",
+          "en": "Sparks or heat can affect nearby people or materials"
+        }
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HW-001",
+      "number": "07",
+      "title": {
+        "tr": "Tüp ve Hortum Güvenliği",
+        "en": "Cylinder and Hose Safety"
+      },
+      "iconBefore": "anchor",
+      "iconAfter": "hw-cylinders",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "c40adc0425a3cfc86c90b3362f3940d1b7f9588611336cca4514607247be9108",
+      "geometryAfter": "752913565f4fdbb5c0b098f0866deb7e0c52225a079dc72a54d13c03088f89a8",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Tüp ve gaz hortumu kullanılıyorsa",
+          "en": "Cylinders and gas hoses are used"
+        }
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HW-001",
+      "number": "08",
+      "title": {
+        "tr": "İş Sonrası Kontrol",
+        "en": "Post-Work Fire Watch"
+      },
+      "iconBefore": "weather",
+      "iconAfter": "hw-post-watch",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "b8d1c9c0e899beed702c8c7e71dddbfdb3bdb7183cd38652159b115af31da1c9",
+      "geometryAfter": "cb9847e83a15099f492f00346b01ee0c8b4f6bfb702f8a57d8e4172bb77dc772",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Yangın gözcüsü gereken işten sonra",
+          "en": "After work requiring a fire watch"
+        }
+      },
+      "toneBefore": "information",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HSK-001",
+      "number": "01",
+      "title": {
+        "tr": "Alanı Düzenli Tut",
+        "en": "Keep the Area Orderly"
+      },
+      "iconBefore": "hsk-clean",
+      "iconAfter": "hsk-clean",
+      "renderer": "existing renderer",
+      "geometryBefore": "3618da0d4e316d8ebc84cdfb2703b95e7ad3b15baf9b5c0b3a70247b7ce4e2ea",
+      "geometryAfter": "3618da0d4e316d8ebc84cdfb2703b95e7ad3b15baf9b5c0b3a70247b7ce4e2ea",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HSK-001",
+      "number": "02",
+      "title": {
+        "tr": "Geçiş Yollarını Açık Tut",
+        "en": "Keep Access Routes Clear"
+      },
+      "iconBefore": "hsk-walkway",
+      "iconAfter": "hsk-walkway",
+      "renderer": "existing renderer",
+      "geometryBefore": "d658bb03ac005221f645ae706f2de423ea7cb8abf91a66c9b3479a29b5caa4e1",
+      "geometryAfter": "d658bb03ac005221f645ae706f2de423ea7cb8abf91a66c9b3479a29b5caa4e1",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HSK-001",
+      "number": "03",
+      "title": {
+        "tr": "Dökülmeleri Hemen Temizle",
+        "en": "Clean Spills Immediately"
+      },
+      "iconBefore": "hsk-spill",
+      "iconAfter": "hsk-spill",
+      "renderer": "existing renderer",
+      "geometryBefore": "57524f4fc5ca7effcc51ddeaba2053b6b875522f7d76390250b11e521d277cfa",
+      "geometryAfter": "57524f4fc5ca7effcc51ddeaba2053b6b875522f7d76390250b11e521d277cfa",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Dökülme varsa; eğitim sınırın içinde",
+          "en": "A spill exists; act within your training"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HSK-001",
+      "number": "04",
+      "title": {
+        "tr": "Atıkları Doğru Yönet",
+        "en": "Manage Waste Correctly"
+      },
+      "iconBefore": "hsk-bin",
+      "iconAfter": "hsk-bin",
+      "renderer": "existing renderer",
+      "geometryBefore": "d7da27af8e1a6ce6c866318291d5020c2d217d4e9368cce873d867dc2ac994c7",
+      "geometryAfter": "d7da27af8e1a6ce6c866318291d5020c2d217d4e9368cce873d867dc2ac994c7",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HSK-001",
+      "number": "05",
+      "title": {
+        "tr": "Takılma Risklerini Kaldır",
+        "en": "Remove Trip Hazards"
+      },
+      "iconBefore": "hsk-trip",
+      "iconAfter": "hsk-trip",
+      "renderer": "existing renderer",
+      "geometryBefore": "fb513c41441ced8d0d0e6174486c1a0b9dc849998816ea0b3c9b33a949103669",
+      "geometryAfter": "fb513c41441ced8d0d0e6174486c1a0b9dc849998816ea0b3c9b33a949103669",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HSK-001",
+      "number": "06",
+      "title": {
+        "tr": "Malzemeyi Güvenli İstifle",
+        "en": "Stack Materials Safely"
+      },
+      "iconBefore": "hsk-stack",
+      "iconAfter": "hsk-stack",
+      "renderer": "existing renderer",
+      "geometryBefore": "fb6d4954136ce01114c32bb9c24ea7a985722c4facdc832032809f7fbc10a295",
+      "geometryAfter": "fb6d4954136ce01114c32bb9c24ea7a985722c4facdc832032809f7fbc10a295",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HSK-001",
+      "number": "07",
+      "title": {
+        "tr": "Acil Ekipmanı Kapatma",
+        "en": "Keep Emergency Equipment Clear"
+      },
+      "iconBefore": "hsk-emergency",
+      "iconAfter": "hsk-emergency",
+      "renderer": "existing renderer",
+      "geometryBefore": "24a4d72e789ba5c752e4d370910ce2230b7a4362cfad2cfc0f4fb57afc0d0cda",
+      "geometryAfter": "24a4d72e789ba5c752e4d370910ce2230b7a4362cfad2cfc0f4fb57afc0d0cda",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-HSK-001",
+      "number": "08",
+      "title": {
+        "tr": "Güvensiz Alanı Düzelt",
+        "en": "Correct Unsafe Conditions"
+      },
+      "iconBefore": "hsk-stop",
+      "iconAfter": "hsk-stop",
+      "renderer": "existing renderer",
+      "geometryBefore": "e3e3d07a65ca4299981c3829116dc069d35a2d49680b562951162c6cbd2841f2",
+      "geometryAfter": "e3e3d07a65ca4299981c3829116dc069d35a2d49680b562951162c6cbd2841f2",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LAD-001",
+      "number": "01",
+      "title": {
+        "tr": "Kullanım Öncesi Kontrol",
+        "en": "Pre-Use Inspection"
+      },
+      "iconBefore": "ladder-inspection",
+      "iconAfter": "ladder-inspection",
+      "renderer": "existing renderer",
+      "geometryBefore": "cbdd707523ba2724d1106a3a303efa8dcb64381f90fa488dc87f0a555f97b567",
+      "geometryAfter": "cbdd707523ba2724d1106a3a303efa8dcb64381f90fa488dc87f0a555f97b567",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LAD-001",
+      "number": "02",
+      "title": {
+        "tr": "Doğru Merdiveni Seç",
+        "en": "Select the Correct Ladder"
+      },
+      "iconBefore": "ladder-select",
+      "iconAfter": "ladder-select",
+      "renderer": "existing renderer",
+      "geometryBefore": "3235b56b392e5147e96bcbf8c63dc5397a1a438f4ef19e11c405bcf79d06c58d",
+      "geometryAfter": "3235b56b392e5147e96bcbf8c63dc5397a1a438f4ef19e11c405bcf79d06c58d",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LAD-001",
+      "number": "03",
+      "title": {
+        "tr": "Sağlam Zemine Yerleştir",
+        "en": "Use Stable Ground"
+      },
+      "iconBefore": "ladder-ground",
+      "iconAfter": "ladder-ground",
+      "renderer": "existing renderer",
+      "geometryBefore": "223ef4efa38a7dd8be5bf3b2fe826025ec3217951652aa5609a1650ce5957bee",
+      "geometryAfter": "223ef4efa38a7dd8be5bf3b2fe826025ec3217951652aa5609a1650ce5957bee",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LAD-001",
+      "number": "04",
+      "title": {
+        "tr": "Doğru Açı ve Sabitleme",
+        "en": "Correct Angle and Securing"
+      },
+      "iconBefore": "ladder-angle",
+      "iconAfter": "ladder-angle",
+      "renderer": "existing renderer",
+      "geometryBefore": "e62f63af84af4d70ed8a6a5a1c3f7fde7872958d1b09b546c7fe0564d2970535",
+      "geometryAfter": "9fb7f0b622d4a0226d4c0fcbd8b624339beaf982b6e4813fb100b47e696ff561",
+      "change": "removed illegible duplicate SVG label; visible 4:1 control retained",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Dayamalı merdiven/üst seviyeye erişimde",
+          "en": "Using a leaning ladder or accessing a landing"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LAD-001",
+      "number": "05",
+      "title": {
+        "tr": "3 Nokta Temasını Koru",
+        "en": "Maintain 3-Point Contact"
+      },
+      "iconBefore": "ladder-contact",
+      "iconAfter": "ladder-contact",
+      "renderer": "existing renderer",
+      "geometryBefore": "5933e73384603e89018640fcd10d7bb09ce454aa3acd2dafb3c5d10a08aa8213",
+      "geometryAfter": "5933e73384603e89018640fcd10d7bb09ce454aa3acd2dafb3c5d10a08aa8213",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LAD-001",
+      "number": "06",
+      "title": {
+        "tr": "Aşırı Uzanma Yapma",
+        "en": "Do Not Overreach"
+      },
+      "iconBefore": "ladder-overreach",
+      "iconAfter": "ladder-overreach",
+      "renderer": "existing renderer",
+      "geometryBefore": "eb03e3012967cee5efb9296f3e22254874fdea6c44504be6b8a65c0e22d854f2",
+      "geometryAfter": "eb03e3012967cee5efb9296f3e22254874fdea6c44504be6b8a65c0e22d854f2",
+      "change": "preserved",
+      "application": {
+        "kind": "hazard-warning"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "warning"
+    },
+    {
+      "code": "SRN-LAD-001",
+      "number": "07",
+      "title": {
+        "tr": "Çalışma Alanını Koru",
+        "en": "Protect the Work Area"
+      },
+      "iconBefore": "ladder-barricade",
+      "iconAfter": "ladder-barricade",
+      "renderer": "existing renderer",
+      "geometryBefore": "7579dcab9d4c1d83e138f9f999934572df17b2965dcd6d275435baabc59ac4b4",
+      "geometryAfter": "7579dcab9d4c1d83e138f9f999934572df17b2965dcd6d275435baabc59ac4b4",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Kapı, araç veya yaya trafiği varsa",
+          "en": "Doors, vehicles or pedestrians can affect the ladder"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LAD-001",
+      "number": "08",
+      "title": {
+        "tr": "Güvensizse İşi Durdur",
+        "en": "Stop When Unsafe"
+      },
+      "iconBefore": "ladder-stop",
+      "iconAfter": "ladder-stop",
+      "renderer": "existing renderer",
+      "geometryBefore": "e3e3d07a65ca4299981c3829116dc069d35a2d49680b562951162c6cbd2841f2",
+      "geometryAfter": "e3e3d07a65ca4299981c3829116dc069d35a2d49680b562951162c6cbd2841f2",
+      "change": "preserved",
+      "application": {
+        "kind": "hazard-warning"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "warning"
+    },
+    {
+      "code": "SRN-LOTO-001",
+      "number": "01",
+      "title": {
+        "tr": "Enerjileri Belirle",
+        "en": "Identify Energy Sources"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "equipment",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "53cc954a9d487564d0b46f69e02ff7119dad962f3fe08443f183549051a9b16a",
+      "geometryAfter": "53cc954a9d487564d0b46f69e02ff7119dad962f3fe08443f183549051a9b16a",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LOTO-001",
+      "number": "02",
+      "title": {
+        "tr": "Personeli Bilgilendir",
+        "en": "Notify Affected Employees"
+      },
+      "iconBefore": "training",
+      "iconAfter": "training",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "aa72576f8b1476c0619f600b41febd239d724b3d178ebfd51cbe024be3b5aca3",
+      "geometryAfter": "aa72576f8b1476c0619f600b41febd239d724b3d178ebfd51cbe024be3b5aca3",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LOTO-001",
+      "number": "03",
+      "title": {
+        "tr": "Ekipmanı Kapat",
+        "en": "Shut Down Equipment"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "equipment",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "8fbbd9d3de0f4505664a2812c0fccdc554120cc0723e923f051707da16c63e2b",
+      "geometryAfter": "8fbbd9d3de0f4505664a2812c0fccdc554120cc0723e923f051707da16c63e2b",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LOTO-001",
+      "number": "04",
+      "title": {
+        "tr": "Enerjiyi İzole Et",
+        "en": "Isolate Every Energy Source"
+      },
+      "iconBefore": "anchor",
+      "iconAfter": "anchor",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "47020b22c44fc21f68f0d3f7cdd7789c2ea5ae99f46b4d7989009e6f3df5a025",
+      "geometryAfter": "47020b22c44fc21f68f0d3f7cdd7789c2ea5ae99f46b4d7989009e6f3df5a025",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LOTO-001",
+      "number": "05",
+      "title": {
+        "tr": "Kilitle ve Etiketle",
+        "en": "Apply Locks and Tags"
+      },
+      "iconBefore": "anchor",
+      "iconAfter": "anchor",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "099e220e96b7d16b4af4568e97601ffec7d87769db0dd13d5317346f9286d866",
+      "geometryAfter": "099e220e96b7d16b4af4568e97601ffec7d87769db0dd13d5317346f9286d866",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LOTO-001",
+      "number": "06",
+      "title": {
+        "tr": "Depolanmış Enerjiyi Boşalt",
+        "en": "Control Stored Energy"
+      },
+      "iconBefore": "fall",
+      "iconAfter": "fall",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "9a684a72208bb99f29b1cd9789ef2319636ea8db20ae14e182088bdc71b6ae4c",
+      "geometryAfter": "9a684a72208bb99f29b1cd9789ef2319636ea8db20ae14e182088bdc71b6ae4c",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LOTO-001",
+      "number": "07",
+      "title": {
+        "tr": "Sıfır Enerjiyi Doğrula",
+        "en": "Verify Zero Energy"
+      },
+      "iconBefore": "weather",
+      "iconAfter": "weather",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "8b0bd3aee2fd74ad2e5417e3623b21578bc97b767952efeb05e3bde9143d2aa1",
+      "geometryAfter": "8b0bd3aee2fd74ad2e5417e3623b21578bc97b767952efeb05e3bde9143d2aa1",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-LOTO-001",
+      "number": "08",
+      "title": {
+        "tr": "Güvenli Şekilde Devreye Al",
+        "en": "Restore Energy Safely"
+      },
+      "iconBefore": "training",
+      "iconAfter": "training",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "c78a4ef61b8bb1349ebdb5eade74278110c56f7327db2dcbafb30eb4de9b9bc2",
+      "geometryAfter": "c78a4ef61b8bb1349ebdb5eade74278110c56f7327db2dcbafb30eb4de9b9bc2",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "information",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-MH-001",
+      "number": "01",
+      "title": {
+        "tr": "Yükü Önce Değerlendir",
+        "en": "Assess the Load First"
+      },
+      "iconBefore": "mh-assess",
+      "iconAfter": "mh-assess",
+      "renderer": "existing renderer",
+      "geometryBefore": "9548204b6494597e41cce108ed1c7c77dc05b41462893c60a863c0e370205c5d",
+      "geometryAfter": "9548204b6494597e41cce108ed1c7c77dc05b41462893c60a863c0e370205c5d",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-MH-001",
+      "number": "02",
+      "title": {
+        "tr": "Taşıma Yolunu Planla",
+        "en": "Plan the Route"
+      },
+      "iconBefore": "mh-route",
+      "iconAfter": "mh-route",
+      "renderer": "existing renderer",
+      "geometryBefore": "0e9c399582773935640cef677f41872e427e5aa090372c9e543218de9ffe1399",
+      "geometryAfter": "0e9c399582773935640cef677f41872e427e5aa090372c9e543218de9ffe1399",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-MH-001",
+      "number": "03",
+      "title": {
+        "tr": "Yüke Yaklaş",
+        "en": "Get Close to the Load"
+      },
+      "iconBefore": "mh-close",
+      "iconAfter": "mh-close",
+      "renderer": "existing renderer",
+      "geometryBefore": "d4905ac6d5aa32ef7abc0a8b23571ed87c54030e2919313fa0382b325913fe03",
+      "geometryAfter": "d4905ac6d5aa32ef7abc0a8b23571ed87c54030e2919313fa0382b325913fe03",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-MH-001",
+      "number": "04",
+      "title": {
+        "tr": "Kontrollü Kaldır",
+        "en": "Lift Smoothly"
+      },
+      "iconBefore": "mh-lift",
+      "iconAfter": "mh-lift",
+      "renderer": "existing renderer",
+      "geometryBefore": "a2c2fc5f7bf4ea66bf6279cdbe4e192da3555d7ab05c96e44eb20ae26a03a704",
+      "geometryAfter": "a2c2fc5f7bf4ea66bf6279cdbe4e192da3555d7ab05c96e44eb20ae26a03a704",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-MH-001",
+      "number": "05",
+      "title": {
+        "tr": "Burularak Dönme",
+        "en": "Do Not Twist"
+      },
+      "iconBefore": "mh-twist",
+      "iconAfter": "mh-twist",
+      "renderer": "existing renderer",
+      "geometryBefore": "af7836dc44b6ad9892cfb9e859467cb71e6e594ade368173190cda76643948e9",
+      "geometryAfter": "af7836dc44b6ad9892cfb9e859467cb71e6e594ade368173190cda76643948e9",
+      "change": "preserved",
+      "application": {
+        "kind": "hazard-warning"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "warning"
+    },
+    {
+      "code": "SRN-MH-001",
+      "number": "06",
+      "title": {
+        "tr": "Mekanik Yardım Kullan",
+        "en": "Use Mechanical Assistance"
+      },
+      "iconBefore": "mh-trolley",
+      "iconAfter": "mh-trolley",
+      "renderer": "existing renderer",
+      "geometryBefore": "8657304ca9b7f52c3dbb8a373d718d3b5ed09f2fe4b65b3af5cc7e49d4755e1a",
+      "geometryAfter": "8657304ca9b7f52c3dbb8a373d718d3b5ed09f2fe4b65b3af5cc7e49d4755e1a",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Elle taşıma riski kontrol gerektiriyorsa",
+          "en": "Manual-handling risk requires assistance"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-MH-001",
+      "number": "07",
+      "title": {
+        "tr": "Ekip Kaldırmayı Koordine Et",
+        "en": "Coordinate Team Lifts"
+      },
+      "iconBefore": "mh-team",
+      "iconAfter": "mh-team",
+      "renderer": "existing renderer",
+      "geometryBefore": "58782a677037ac095b7388f81d6534a5d80cfa98c847da90863f839b51e90245",
+      "geometryAfter": "58782a677037ac095b7388f81d6534a5d80cfa98c847da90863f839b51e90245",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Ekip halinde kaldırılıyorsa",
+          "en": "A team lift is used"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-MH-001",
+      "number": "08",
+      "title": {
+        "tr": "Güvenli Şekilde Bırak",
+        "en": "Set Down Safely"
+      },
+      "iconBefore": "mh-setdown",
+      "iconAfter": "mh-setdown",
+      "renderer": "existing renderer",
+      "geometryBefore": "02d7b4137e366b830be7f0fc9ad7f29ee2ff47d84143deaf5274b731c4f0b829",
+      "geometryAfter": "02d7b4137e366b830be7f0fc9ad7f29ee2ff47d84143deaf5274b731c4f0b829",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-PPE-001",
+      "number": "01",
+      "title": {
+        "tr": "Tehlikeleri Değerlendir",
+        "en": "Assess the Hazards"
+      },
+      "iconBefore": "training",
+      "iconAfter": "training",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "399c2d7352476d970a827d96e2a8482b1283ab77274e6c09c22a1f10867d6f46",
+      "geometryAfter": "399c2d7352476d970a827d96e2a8482b1283ab77274e6c09c22a1f10867d6f46",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-PPE-001",
+      "number": "02",
+      "title": {
+        "tr": "Zorunlu Alan İşaretlerini Takip Et",
+        "en": "Follow Mandatory PPE Signs"
+      },
+      "iconBefore": "guardrail",
+      "iconAfter": "guardrail",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "43230e636195f9bb23db852fcaddafa4bd1c14ac079eba4731efc1f6ca042314",
+      "geometryAfter": "43230e636195f9bb23db852fcaddafa4bd1c14ac079eba4731efc1f6ca042314",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Zorunlu KKD tanımlı alanlarda",
+          "en": "In areas with designated mandatory PPE"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-PPE-001",
+      "number": "03",
+      "title": {
+        "tr": "Doğru KKD'yi Seç",
+        "en": "Select the Correct PPE"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "equipment",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "5d0ad032a0c6c77d649a5b3ab542f166613ba9423e4de3415229df888dcb1554",
+      "geometryAfter": "5d0ad032a0c6c77d649a5b3ab542f166613ba9423e4de3415229df888dcb1554",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-PPE-001",
+      "number": "04",
+      "title": {
+        "tr": "Doğru Beden ve Ayar",
+        "en": "Correct Fit and Adjustment"
+      },
+      "iconBefore": "harness",
+      "iconAfter": "harness",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "11fe124dca7ccd28a06acb2e2f02fc51f7962de588b1ceacaba0fc5333af6e10",
+      "geometryAfter": "11fe124dca7ccd28a06acb2e2f02fc51f7962de588b1ceacaba0fc5333af6e10",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-PPE-001",
+      "number": "05",
+      "title": {
+        "tr": "Kullanmadan Önce Kontrol Et",
+        "en": "Inspect Before Use"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "equipment",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "5362aad43eb478d5e9ae23a23d8da48129eed29ca89d25be6f41ccbfab07d433",
+      "geometryAfter": "5362aad43eb478d5e9ae23a23d8da48129eed29ca89d25be6f41ccbfab07d433",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-PPE-001",
+      "number": "06",
+      "title": {
+        "tr": "Doğru Şekilde Kullan",
+        "en": "Wear PPE Correctly"
+      },
+      "iconBefore": "training",
+      "iconAfter": "training",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "e65147df872be0d5b812f7be34a4bd9fe000439a6c9ee8e772597c9c0b8775b0",
+      "geometryAfter": "e65147df872be0d5b812f7be34a4bd9fe000439a6c9ee8e772597c9c0b8775b0",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-PPE-001",
+      "number": "07",
+      "title": {
+        "tr": "Temizle ve Güvenli Sakla",
+        "en": "Clean and Store Safely"
+      },
+      "iconBefore": "weather",
+      "iconAfter": "weather",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "99e2255d8840c28ed9c26246dbd983be68cf745d03c5171d49e4400b0dc22bba",
+      "geometryAfter": "99e2255d8840c28ed9c26246dbd983be68cf745d03c5171d49e4400b0dc22bba",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-PPE-001",
+      "number": "08",
+      "title": {
+        "tr": "Hasarlı KKD'yi Değiştir",
+        "en": "Replace Defective PPE"
+      },
+      "iconBefore": "fall",
+      "iconAfter": "fall",
+      "renderer": "preserved topic-specific renderer",
+      "geometryBefore": "2b35c9a865e99f6ad3b224a8d3ce432a3965800adefca9f9bd6a827c0f1e6e95",
+      "geometryAfter": "2b35c9a865e99f6ad3b224a8d3ce432a3965800adefca9f9bd6a827c0f1e6e95",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "information",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-SCF-001",
+      "number": "01",
+      "title": {
+        "tr": "Yetkin Kişi Kontrolü",
+        "en": "Competent Person Inspection"
+      },
+      "iconBefore": "training",
+      "iconAfter": "scf-inspect",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "ffa4ac4c1140eef4d9f982da42d3fa56bdf39712624eaa993f0517c76f8cd96f",
+      "geometryAfter": "5767f2167da6fd36a7e77d3c73f3e9b4cd220a776f13e06c3770342e8d25ac09",
+      "change": "semantic correction",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-SCF-001",
+      "number": "02",
+      "title": {
+        "tr": "Etiket ve Kullanım Durumu",
+        "en": "Tag and Use Status"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "scf-status",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "5d4d5c92d312edcb5d8988c6a89ff461d497966902e129a366447e9b61f97e31",
+      "geometryAfter": "5e0b421e10ad6313e03cacf7c71ddd0b6fc15fb16bea3cb94d7067d55709fbd7",
+      "change": "semantic correction",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-SCF-001",
+      "number": "03",
+      "title": {
+        "tr": "Temel ve Stabilite",
+        "en": "Foundation and Stability"
+      },
+      "iconBefore": "anchor",
+      "iconAfter": "scf-foundation",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "c40adc0425a3cfc86c90b3362f3940d1b7f9588611336cca4514607247be9108",
+      "geometryAfter": "cf3dc2e46ee217667e8e302c8ceb224b9d5d241b20eda19f4e597436d547ed7b",
+      "change": "semantic correction",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-SCF-001",
+      "number": "04",
+      "title": {
+        "tr": "Tam Platform",
+        "en": "Fully Decked Platform"
+      },
+      "iconBefore": "guardrail",
+      "iconAfter": "scf-platform",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "dd31bf67bccc62bc155430b397b7d6f32b71b337ec1c6f51c2ce829d71256a70",
+      "geometryAfter": "68f4675576eae6b7025ebaaa5b2cd8d45587421f61e49ec1a5a3f910769ad105",
+      "change": "semantic correction",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-SCF-001",
+      "number": "05",
+      "title": {
+        "tr": "Korkuluk Sistemi",
+        "en": "Guardrail System"
+      },
+      "iconBefore": "guardrail",
+      "iconAfter": "guardrail",
+      "renderer": "existing renderer",
+      "geometryBefore": "dd31bf67bccc62bc155430b397b7d6f32b71b337ec1c6f51c2ce829d71256a70",
+      "geometryAfter": "dd31bf67bccc62bc155430b397b7d6f32b71b337ec1c6f51c2ce829d71256a70",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "İskele tipinin düşüş koruma şartına göre",
+          "en": "As required by the scaffold type’s fall-protection rules"
+        }
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-SCF-001",
+      "number": "06",
+      "title": {
+        "tr": "Güvenli Erişim",
+        "en": "Safe Access"
+      },
+      "iconBefore": "ladder",
+      "iconAfter": "ladder",
+      "renderer": "existing renderer",
+      "geometryBefore": "94264cbc8de6b6596e84377d8de812dfc762d0c8572c0bd86942166c8846f165",
+      "geometryAfter": "94264cbc8de6b6596e84377d8de812dfc762d0c8572c0bd86942166c8846f165",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-SCF-001",
+      "number": "07",
+      "title": {
+        "tr": "Yük ve Malzeme Kontrolü",
+        "en": "Load and Material Control"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "scf-load",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "5d4d5c92d312edcb5d8988c6a89ff461d497966902e129a366447e9b61f97e31",
+      "geometryAfter": "5edba177afc00cf081f967477683c8372efdacabf124da4f7668bc9d8632cffb",
+      "change": "semantic correction",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-SCF-001",
+      "number": "08",
+      "title": {
+        "tr": "Düşen Cisimleri Önle",
+        "en": "Prevent Dropped Objects"
+      },
+      "iconBefore": "fall",
+      "iconAfter": "do-overhead",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "4bc353b98797677426808ee55896af24a8f0cd64bd959e79b80d99ea6d7ef21b",
+      "geometryAfter": "0a4d753d46f8a0705828206210a81f065e0ebd383bf585081cf9b74e4b2411f7",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Düşen cisim tehlikesi varsa",
+          "en": "There is a falling-object hazard"
+        }
+      },
+      "toneBefore": "information",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-WAH-001",
+      "number": "01",
+      "title": {
+        "tr": "İş Öncesi Planlama",
+        "en": "Pre-Work Planning"
+      },
+      "iconBefore": "training",
+      "iconAfter": "wah-plan",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "ffa4ac4c1140eef4d9f982da42d3fa56bdf39712624eaa993f0517c76f8cd96f",
+      "geometryAfter": "5767f2167da6fd36a7e77d3c73f3e9b4cd220a776f13e06c3770342e8d25ac09",
+      "change": "semantic correction",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-WAH-001",
+      "number": "02",
+      "title": {
+        "tr": "Toplu Korumayı Kullan",
+        "en": "Use Collective Protection"
+      },
+      "iconBefore": "guardrail",
+      "iconAfter": "guardrail",
+      "renderer": "existing renderer",
+      "geometryBefore": "dd31bf67bccc62bc155430b397b7d6f32b71b337ec1c6f51c2ce829d71256a70",
+      "geometryAfter": "dd31bf67bccc62bc155430b397b7d6f32b71b337ec1c6f51c2ce829d71256a70",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-WAH-001",
+      "number": "03",
+      "title": {
+        "tr": "Tam Vücut Kemeri",
+        "en": "Full Body Harness"
+      },
+      "iconBefore": "harness",
+      "iconAfter": "harness",
+      "renderer": "existing renderer",
+      "geometryBefore": "0f96ed46f4beb37bedf04cc0d77d428a490f1ed1aeefba249955c666214d82e2",
+      "geometryAfter": "0f96ed46f4beb37bedf04cc0d77d428a490f1ed1aeefba249955c666214d82e2",
+      "change": "preserved",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Kişisel düşüş koruması kullanılıyorsa",
+          "en": "Personal fall protection is used"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-WAH-001",
+      "number": "04",
+      "title": {
+        "tr": "Onaylı Ankraj",
+        "en": "Approved Anchorage"
+      },
+      "iconBefore": "anchor",
+      "iconAfter": "wah-anchor",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "c40adc0425a3cfc86c90b3362f3940d1b7f9588611336cca4514607247be9108",
+      "geometryAfter": "0c29ffc191b399edd62dace5ef1a1117b67bcde809f151f4222e83df7110f5ca",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Kişisel düşüş durdurma kullanılıyorsa",
+          "en": "Personal fall arrest is used"
+        }
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-WAH-001",
+      "number": "05",
+      "title": {
+        "tr": "Düşüş Mesafesi",
+        "en": "Fall Clearance"
+      },
+      "iconBefore": "fall",
+      "iconAfter": "wah-clearance",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "4bc353b98797677426808ee55896af24a8f0cd64bd959e79b80d99ea6d7ef21b",
+      "geometryAfter": "d23874585a4c95f01ed0d31361487fbd376f9acb927775301f2645fa53f71c11",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Düşüş durdurma sistemi kullanılıyorsa",
+          "en": "A fall-arrest system is used"
+        }
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-WAH-001",
+      "number": "06",
+      "title": {
+        "tr": "Güvenli Erişim",
+        "en": "Safe Access"
+      },
+      "iconBefore": "ladder",
+      "iconAfter": "ladder",
+      "renderer": "existing renderer",
+      "geometryBefore": "94264cbc8de6b6596e84377d8de812dfc762d0c8572c0bd86942166c8846f165",
+      "geometryAfter": "94264cbc8de6b6596e84377d8de812dfc762d0c8572c0bd86942166c8846f165",
+      "change": "preserved",
+      "application": {
+        "kind": "required-control"
+      },
+      "toneBefore": "mandatory",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-WAH-001",
+      "number": "07",
+      "title": {
+        "tr": "Düşen Cisimleri Önle",
+        "en": "Prevent Dropped Objects"
+      },
+      "iconBefore": "equipment",
+      "iconAfter": "wah-tools",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "5d4d5c92d312edcb5d8988c6a89ff461d497966902e129a366447e9b61f97e31",
+      "geometryAfter": "e9add72af81c234eef65f61a123678626633bc07ac18f976933bea67d7ad8d5d",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Düşen cisim tehlikesi varsa",
+          "en": "There is a falling-object hazard"
+        }
+      },
+      "toneBefore": "warning",
+      "toneAfter": "mandatory"
+    },
+    {
+      "code": "SRN-WAH-001",
+      "number": "08",
+      "title": {
+        "tr": "Kurtarma Hazırlığı",
+        "en": "Rescue Readiness"
+      },
+      "iconBefore": "training",
+      "iconAfter": "wah-rescue",
+      "renderer": "corrected explicit task pictogram",
+      "geometryBefore": "ffa4ac4c1140eef4d9f982da42d3fa56bdf39712624eaa993f0517c76f8cd96f",
+      "geometryAfter": "cb0094188caa90617beaefedda633009c137f71cfada32b2a8bacf3b6d65b398",
+      "change": "semantic correction",
+      "application": {
+        "kind": "conditional-control",
+        "when": {
+          "tr": "Kişisel düşüş sistemi/kurtarma riski varsa",
+          "en": "Personal fall protection or rescue hazards apply"
+        }
+      },
+      "toneBefore": "information",
+      "toneAfter": "mandatory"
+    }
+  ],
+  "kindCounts": {
+    "required-control": 74,
+    "conditional-control": 42,
+    "hazard-warning": 4
+  },
+  "protectedModules": 80,
+  "note": "All 120 actual rendered card SVGs reviewed, not only icon fields: five topic-specific renderers override generic icon fields. 19 incorrect mappings corrected, 100 correct SVG geometries preserved, one tiny duplicate 4:1 annotation removed while readable numeric content remains. CSS/size/color normalized for geometry comparison only; actual print styles and sizes tested in PDFs. Classification is editorial operational guidance, not certification of law."
+}

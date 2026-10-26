@@ -35,6 +35,7 @@ export const electricalPoster: PosterDefinition = {
       },
       icon: "equipment",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -56,6 +57,7 @@ export const electricalPoster: PosterDefinition = {
       },
       icon: "anchor",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -77,6 +79,7 @@ export const electricalPoster: PosterDefinition = {
       },
       icon: "weather",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -98,6 +101,7 @@ export const electricalPoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "05",
@@ -118,7 +122,8 @@ export const electricalPoster: PosterDefinition = {
         ],
       },
       icon: "equipment",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -139,7 +144,8 @@ export const electricalPoster: PosterDefinition = {
         ],
       },
       icon: "guardrail",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Ortam, ekipman veya kural gerektiriyorsa", "en": "The environment, equipment or applicable rule requires it"}},
     },
     {
       number: "07",
@@ -160,7 +166,8 @@ export const electricalPoster: PosterDefinition = {
         ],
       },
       icon: "guardrail",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -181,7 +188,8 @@ export const electricalPoster: PosterDefinition = {
         ],
       },
       icon: "fall",
-      tone: "information",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Meşru ve yetkilendirilmiş enerjili işte", "en": "Energized work is justified and authorized"}},
     },
   ],
 

@@ -35,6 +35,7 @@ export const ladderSafetyPoster: PosterDefinition = {
       },
       icon: "ladder-inspection",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -56,6 +57,7 @@ export const ladderSafetyPoster: PosterDefinition = {
       },
       icon: "ladder-select",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -77,6 +79,7 @@ export const ladderSafetyPoster: PosterDefinition = {
       },
       icon: "ladder-ground",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -98,6 +101,7 @@ export const ladderSafetyPoster: PosterDefinition = {
       },
       icon: "ladder-angle",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Dayamalı merdiven/üst seviyeye erişimde", "en": "Using a leaning ladder or accessing a landing"}},
     },
     {
       number: "05",
@@ -119,6 +123,7 @@ export const ladderSafetyPoster: PosterDefinition = {
       },
       icon: "ladder-contact",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -139,7 +144,8 @@ export const ladderSafetyPoster: PosterDefinition = {
         ],
       },
       icon: "ladder-overreach",
-      tone: "mandatory",
+      tone: "warning",
+      application: {"kind": "hazard-warning"},
     },
     {
       number: "07",
@@ -161,6 +167,7 @@ export const ladderSafetyPoster: PosterDefinition = {
       },
       icon: "ladder-barricade",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Kapı, araç veya yaya trafiği varsa", "en": "Doors, vehicles or pedestrians can affect the ladder"}},
     },
     {
       number: "08",
@@ -181,7 +188,8 @@ export const ladderSafetyPoster: PosterDefinition = {
         ],
       },
       icon: "ladder-stop",
-      tone: "mandatory",
+      tone: "warning",
+      application: {"kind": "hazard-warning"},
     },
   ],
 

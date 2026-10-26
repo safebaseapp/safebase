@@ -24,6 +24,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
       },
       icon: "hsk-clean",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -37,6 +38,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
       },
       icon: "hsk-walkway",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -50,6 +52,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
       },
       icon: "hsk-spill",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Dökülme varsa; eğitim sınırın içinde", "en": "A spill exists; act within your training"}},
     },
     {
       number: "04",
@@ -63,6 +66,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
       },
       icon: "hsk-bin",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "05",
@@ -76,6 +80,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
       },
       icon: "hsk-trip",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -89,6 +94,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
       },
       icon: "hsk-stack",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -102,6 +108,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
       },
       icon: "hsk-emergency",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -115,6 +122,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
       },
       icon: "hsk-stop",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     }
   ],
   never: {

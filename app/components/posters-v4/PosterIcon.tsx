@@ -1,25 +1,14 @@
-import type { PosterRule } from "@/lib/posters-v2/types";
+import type { ReactNode } from "react";
 
 type Props = {
   type: string;
   tone?: "mandatory" | "warning" | "information";
 };
 
-export default function PosterIcon({
-
-  
-
-
-  type,
-  tone = "mandatory",
-}: Props) {
-  /* SERNEM_SERIAL_ICON_ENGINE_START */
-  const sbSerialType = String(type);
-
-  const SBIcon = ({
+const SBIcon = ({
     children,
   }: {
-    children: React.ReactNode;
+    children: ReactNode;
   }) => (
     <svg
       viewBox="0 0 100 100"
@@ -33,6 +22,19 @@ export default function PosterIcon({
       {children}
     </svg>
   );
+
+export default function PosterIcon({
+
+
+
+
+  type,
+  tone = "mandatory",
+}: Props) {
+  /* SERNEM_SERIAL_ICON_ENGINE_START */
+  const sbSerialType = String(type);
+
+
 
   if (["hsk-clean","hsk-walkway","hsk-spill","hsk-bin","hsk-trip","hsk-stack","hsk-emergency","hsk-stop"].includes(sbSerialType)) {
     if (sbSerialType === "hsk-clean") return <SBIcon><path d="M28 15l14 58M42 73l-22 8M42 73l22-3"/><path d="M63 22l16 16M71 14l-16 16"/></SBIcon>;
@@ -153,8 +155,6 @@ export default function PosterIcon({
         <path d="M15 86h73M74 12v74M24 86L67 17" />
         <path d="M35 68l20 12M43 54l20 12M51 41l17 10" />
         <path d="M61 73a20 20 0 0 1 13 13" />
-        <text x="65" y="69" fontSize="12" fontWeight="900"
-          fill="currentColor" stroke="none">4:1</text>
       </svg>
     );
   }

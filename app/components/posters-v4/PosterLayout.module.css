@@ -1,0 +1,67 @@
+@font-face {font-family:SernemPosterPrint;src:url('/fonts/DejaVuSans.ttf') format('truetype');font-style:normal;font-weight:400;font-display:block;}
+@font-face {font-family:SernemPosterPrint;src:url('/fonts/DejaVuSans-Bold.ttf') format('truetype');font-style:normal;font-weight:700;font-display:block;}
+/* Font sizes are source pixels on the existing 1123px A3 canvas.
+   At A4: 17px × .92 × .7070707 × .75 = 8.29pt; 16px = 7.81pt.
+   No fit-to-page font shrinking, content hiding or alternate invisible text. */
+.poster {font-family:SernemPosterPrint,Arial,sans-serif;font-synthesis:none;font-size:16px;line-height:1.22;}
+.header {display:grid;grid-template-columns:minmax(0,1fr) 224px;gap:16px;padding:8px;border:1px solid #cbd5e1;border-radius:18px;background:white;}
+.headerMain {min-width:0;}
+.badges {display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;font-weight:800;}
+.badge {padding:4px 8px;border:1px solid #cbd5e1;border-radius:20px;background:#f1f5f9;color:#334155;}
+.pending {background:#fffbeb;border-color:#fcd34d;color:#92400e;}
+.brand {display:flex;align-items:center;gap:12px;margin-top:8px;}
+.brandName {font-size:27px;font-weight:900;line-height:1;color:#059669;}
+.brandCaption {font-size:13px;color:#475569;font-weight:700;}
+.companyLogo {max-height:56px;max-width:340px;object-fit:contain;object-position:left;}
+.title {font-size:32px;line-height:1.02;font-weight:900;margin-top:8px;letter-spacing:-.025em;text-transform:uppercase;text-wrap:balance;}
+.slogan {margin-top:8px;font-size:16px;font-weight:800;line-height:1.2;}
+.references {margin-top:8px;font-size:16px;line-height:1.2;color:#334155;overflow-wrap:anywhere;}
+.scope {display:block;}
+.document {background:#020617;color:white;border-radius:14px;padding:12px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;font-size:13px;font-weight:700;}
+.documentCode {font-size:17px;font-weight:900;}
+.qrRow {display:flex;align-items:center;gap:10px;}
+.qr {width:78px;height:78px;background:white;padding:5px;box-sizing:content-box;border-radius:8px;flex-shrink:0;}
+.qrCopy {min-width:0;font-size:13px;line-height:1.22;}
+.prejob {margin-top:8px;border:1px solid #cbd5e1;border-radius:12px;background:white;padding:6px;}
+.prejobTitle {display:flex;justify-content:space-between;gap:10px;font-size:17px;font-weight:900;color:#0f172a;margin-bottom:7px;}
+.checks {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;}
+.check {display:flex;gap:5px;align-items:start;min-width:0;padding:3px;border:1px solid #cbd5e1;border-radius:7px;font-size:16px;font-weight:700;line-height:1.15;overflow-wrap:normal;}
+.checkmark {font-size:14px;flex-shrink:0;color:#047857;}
+.rules {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:8px;align-items:stretch;}
+.card {min-width:0;border:1px solid #cbd5e1;border-top:4px solid var(--rule-color);border-radius:12px;background:white;padding:7px;}
+.cardMeta {display:flex;align-items:start;justify-content:space-between;gap:4px;font-size:13px;font-weight:900;color:#334155;line-height:1.15;}
+.cardNumber {font-size:17px;color:#0f172a;}
+.cardBadge {font-size:16px;background:var(--rule-pale);border:1px solid var(--rule-color);border-radius:5px;padding:3px 5px;text-align:right;}
+.cardHeading {display:flex;gap:8px;align-items:center;margin-top:7px;min-height:48px;}
+.ruleIcon {display:flex;flex-shrink:0;width:48px;height:48px;align-items:center;justify-content:center;}
+.ruleIcon svg {width:48px!important;height:48px!important;}
+.cardTitle {font-size:18px;font-weight:900;line-height:1.12;min-width:0;overflow-wrap:normal;}
+.condition {font-size:16px;font-weight:800;line-height:1.15;color:#075985;border-left:3px solid #0891b2;padding-left:6px;margin-top:5px;}
+.items {margin-top:6px;display:grid;gap:2px;list-style:none;padding-left:0;}
+.item {display:flex;gap:5px;align-items:start;font-size:17px;font-weight:650;line-height:1.15;overflow-wrap:normal;}
+.itemMark {color:var(--rule-color);font-size:13px;flex-shrink:0;margin-top:2px;}
+.bottom {display:grid;grid-template-columns:1.12fr .98fr 1.06fr;gap:10px;margin-top:8px;align-items:stretch;}
+.panel {min-width:0;background:white;border:2px solid var(--panel-color);border-radius:12px;padding:6px;}
+.panelTitle {font-size:18px;font-weight:900;line-height:1.1;color:var(--panel-color);margin-bottom:8px;}
+.stops {display:grid;gap:4px;}
+.stop {font-size:16px;font-weight:800;line-height:1.15;padding:3px;border-left:3px solid #dc2626;background:#fff1f2;overflow-wrap:normal;}
+.controls {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;}
+.control {min-width:0;border:1px solid #fcd34d;border-radius:8px;padding:4px;background:#fffbeb;}
+.controlValue {font-size:22px;font-weight:900;line-height:1.1;overflow-wrap:anywhere;}
+.controlLabel {font-size:16px;font-weight:650;line-height:1.18;margin-top:5px;overflow-wrap:normal;}
+.reference {margin-top:5px;font-size:16px;font-weight:750;line-height:1.2;overflow-wrap:anywhere;border-top:1px solid #cbd5e1;padding-top:4px;}
+.referenceCaption {font-size:16px;color:#475569;}
+.ppeList {display:grid;gap:4px;}
+.ppe {font-size:16px;line-height:1.2;display:flex;align-items:start;gap:7px;}
+.ppeSymbol {display:flex;align-items:center;justify-content:center;flex-shrink:0;width:26px;height:26px;font-size:23px;}
+.ppeSymbol svg {width:26px;height:26px;}
+.ppeText {min-width:0;overflow-wrap:normal;}
+.ppeText strong {font-weight:850;}
+.note {font-size:16px;font-weight:650;line-height:1.15;margin-top:5px;padding-top:4px;border-top:1px solid #cbd5e1;}
+.electricalNotes {font-size:16px;line-height:1.2;display:grid;gap:7px;margin-top:8px;}
+.footer {display:flex;gap:14px;align-items:center;justify-content:space-between;background:#020617;color:white;border-radius:12px;padding:9px 12px;margin-top:8px;font-size:16px;line-height:1.15;}
+.footerBrand {font-size:23px;font-weight:900;color:#34d399;}
+.footerStop {font-size:17px;font-weight:900;color:#fda4af;}
+.legend {font-size:16px;line-height:1.2;color:#475569;margin-top:7px;}
+
+.pending{font-size:16px;}

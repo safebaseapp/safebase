@@ -1,5 +1,5 @@
 import fs from'node:fs';import assert from'node:assert/strict';import{execFileSync}from'node:child_process';
-const dir='/tmp/p13-acceptance',out='docs/p13-review/acceptance',results=[];
+const dir=process.env.P13_PDF_DIR||'/tmp/p13-acceptance',out=process.env.P13_EVIDENCE_DIR||'docs/p13-review/acceptance',results=[];
 const topics={
  'hot-work-safety-rules':{tr:['35 ft','daha uzakta','ABD OSHA','en az 30 dakika','gözcü gereken','daha uzun','kısaltma'],en:['35 ft','beyond this distance','US OSHA','at least 30 minutes','requiring a watch','stricter local','do not shorten']},
  'working-at-height-rules':{tr:['5.000 lb (22,2 kN)','VEYA','bağımsız','güvenlik katsayısı en az 2','nitelikli kişi gözetiminde tasarla, kur ve kullan','≥6 ft'],en:['5,000 lb (22.2 kN)','OR the alternative','independent','safety factor of at least 2','designed, installed and used','qualified person','≥6 ft']},

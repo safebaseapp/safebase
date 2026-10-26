@@ -1,5 +1,9 @@
 export type PosterTone = "mandatory" | "warning" | "information";
 
+export type RuleApplication =
+  | {kind:"conditional-control";when:{tr:string;en:string}}
+  | {kind:"required-control"|"hazard-warning"|"guidance";when?:never};
+
 export type PosterRule = {
   number: string;
   title: {
@@ -27,8 +31,12 @@ export type PosterRule = {
     | `flt-${string}`
     | `mh-${string}`
     | `do-${string}`
-    | `ladder-${string}`;
+    | `ladder-${string}`
+    | `hw-${string}`
+    | `wah-${string}`
+    | `scf-${string}`;
   tone: PosterTone;
+  application?: RuleApplication;
 };
 
 export type PosterDefinition = {
