@@ -44,14 +44,14 @@ export const workingAtHeightPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Önce korkuluk, platform veya uygun iskele kullan.",
-          "Açıklıkları sağlam kapak veya bariyerle koru.",
-          "Eksik koruma varsa çalışmaya başlama.",
+          "Önce korkuluk, platform veya uygun iskeleyle toplu korumayı değerlendir; açıklıkları koru.",
+          "OSHA inşaat: korumasız kenar ≥6 ft (1,8 m) için korkuluk, güvenlik ağı veya kişisel düşüş durdurma sistemi gerekir.",
+          "Bu eşik her işe uygulanmaz; iskele ve merdiven kuralları ayrıdır. Daha düşük yükseklik otomatik güvenli değildir.",
         ],
         en: [
-          "Use guardrails, platforms or suitable scaffolds first.",
-          "Protect openings with secure covers or barriers.",
-          "Do not start if collective protection is incomplete.",
+          "Prioritize collective protection using guardrails, platforms or suitable scaffolds; protect openings.",
+          "OSHA construction: unprotected edges at ≥6 ft (1.8 m) require guardrails, safety nets or personal fall arrest.",
+          "This threshold is not universal: scaffolds and ladders have separate rules. Lower heights are not automatically safe.",
         ],
       },
       icon: "guardrail",
@@ -86,14 +86,14 @@ export const workingAtHeightPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Yalnızca belirlenmiş ve onaylanmış ankraja bağlan.",
-          "Ankraj kapasitesini yetkin kişi tasarımı ve üretici talimatıyla doğrula.",
-          "Ankrajı mümkün olduğunca baş seviyesinin üzerinde seç.",
+          "Kişisel düşüş durdurma ankrajı, platformu taşıyan veya asan ankrajdan bağımsız olmalı.",
+          "OSHA: bağlı çalışan başına en az 5.000 lb (22,2 kN); VEYA aşağıdaki alternatif tasarım.",
+          "Alternatif: güvenlik katsayısı en az 2 olan tam sistem; nitelikli kişi gözetiminde tasarla, kur ve kullan.",
         ],
         en: [
-          "Connect only to a designated and approved anchorage.",
-          "Verify anchorage capacity against the qualified design and manufacturer instructions.",
-          "Select an anchorage above head level whenever possible.",
+          "Personal fall-arrest anchorages must be independent of anchorages supporting or suspending platforms.",
+          "OSHA: at least 5,000 lb (22.2 kN) per attached employee; OR the alternative design below.",
+          "Alternative: a complete system with a safety factor of at least 2, designed, installed and used under a qualified person’s supervision.",
         ],
       },
       icon: "anchor",

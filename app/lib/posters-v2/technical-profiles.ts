@@ -2,20 +2,28 @@
  * No expert approval/date is inferred. Sources blocked in this review remain explicitly unverified.
  * Unknown codes fail visibly; never inherit working-at-height requirements. */
 export type Bilingual = {tr:string;en:string};
-export type TechnicalReference = {label:string;jurisdiction:'US-construction'|'US-general-industry'|'US-general-industry-and-construction'|'GB-guidance';url:string;verification:'not-verified-in-session'};
+export type TechnicalReference = {label:string;jurisdiction:'US-construction'|'US-general-industry'|'US-general-industry-and-construction'|'GB-guidance';url:string;verification:'not-verified-in-session';clauses?:readonly string[]};
 export type PosterTechnicalProfile = {reference:keyof typeof technicalReferences;preJob:Bilingual[];controls:{value:Bilingual;label:Bilingual}[];ppeSelection:Bilingual[];ppeIcons:string[];ppeNote:Bilingual;reviewStatus:'site-validation-required'};
 export const technicalReferences = {
   "height": {
-    "label": "OSHA 1926.501 / 1926.502",
+    "label": "OSHA 1926.501(b)(1) / .502(d)(15)",
     "jurisdiction": "US-construction",
     "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.502",
-    "verification": "not-verified-in-session"
+    "verification": "not-verified-in-session",
+    "clauses": [
+      "1926.501(b)(1)",
+      "1926.502(d)(15)(i)-(ii)"
+    ]
   },
   "ladder": {
-    "label": "OSHA 1926.1053",
+    "label": "OSHA 1926.1053(b)(1), (b)(5)",
     "jurisdiction": "US-construction",
     "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1053",
-    "verification": "not-verified-in-session"
+    "verification": "not-verified-in-session",
+    "clauses": [
+      "1926.1053(b)(1)",
+      "1926.1053(b)(5)(i)-(ii)"
+    ]
   },
   "housekeeping": {
     "label": "OSHA 1910.22 / 1926.25",
@@ -24,10 +32,15 @@ export const technicalReferences = {
     "verification": "not-verified-in-session"
   },
   "excavation": {
-    "label": "OSHA 1926.651 / 1926.652",
+    "label": "OSHA 1926.651(c), (j) / .652(a)",
     "jurisdiction": "US-construction",
     "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.651",
-    "verification": "not-verified-in-session"
+    "verification": "not-verified-in-session",
+    "clauses": [
+      "1926.651(c)(2)",
+      "1926.651(j)(2)",
+      "1926.652(a)(1)"
+    ]
   },
   "chemical": {
     "label": "OSHA 1910.1200",
@@ -54,22 +67,35 @@ export const technicalReferences = {
     "verification": "not-verified-in-session"
   },
   "scaffold": {
-    "label": "OSHA 1926.451",
+    "label": "OSHA 1926.451(a), (b), (e), (f)",
     "jurisdiction": "US-construction",
     "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.451",
-    "verification": "not-verified-in-session"
+    "verification": "not-verified-in-session",
+    "clauses": [
+      "1926.451(a)(1)",
+      "1926.451(b)(1)",
+      "1926.451(e)(1)",
+      "1926.451(f)(3)"
+    ]
   },
   "hotwork": {
-    "label": "OSHA 1910.252",
+    "label": "OSHA 1910.252(a)(2)(iii)(B)",
     "jurisdiction": "US-general-industry",
     "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.252",
-    "verification": "not-verified-in-session"
+    "verification": "not-verified-in-session",
+    "clauses": [
+      "1910.252(a)(2)(iii)(A)-(B)"
+    ]
   },
   "confined": {
-    "label": "OSHA 1910.146",
+    "label": "OSHA 1910.146(b), (d)",
     "jurisdiction": "US-general-industry",
     "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.146",
-    "verification": "not-verified-in-session"
+    "verification": "not-verified-in-session",
+    "clauses": [
+      "1910.146(b): hazardous atmosphere",
+      "1910.146(d)(3)-(5)"
+    ]
   },
   "electrical": {
     "label": "OSHA 1910.333 / 1910.334",
@@ -78,16 +104,24 @@ export const technicalReferences = {
     "verification": "not-verified-in-session"
   },
   "loto": {
-    "label": "OSHA 1910.147",
+    "label": "OSHA 1910.147(c)(6)",
     "jurisdiction": "US-general-industry",
     "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147",
-    "verification": "not-verified-in-session"
+    "verification": "not-verified-in-session",
+    "clauses": [
+      "1910.147(c)(6)(i)-(ii)"
+    ]
   },
   "fire": {
-    "label": "OSHA 1910.38 / .39 / .157",
+    "label": "OSHA 1910.157(d), (e), (g)",
     "jurisdiction": "US-general-industry",
     "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.157",
-    "verification": "not-verified-in-session"
+    "verification": "not-verified-in-session",
+    "clauses": [
+      "1910.157(d)(2), (d)(5)",
+      "1910.157(e)(2)-(3)",
+      "1910.157(g)(1)-(4)"
+    ]
   },
   "ppe": {
     "label": "OSHA 1910.132",
@@ -143,12 +177,12 @@ export const posterTechnicalProfiles = {
       },
       {
         "value": {
-          "tr": "ANKRAJ",
-          "en": "ANCHOR"
+          "tr": "5.000 lb",
+          "en": "5,000 lb"
         },
         "label": {
-          "tr": "Yetkin tasarım ve uyum",
-          "en": "Competent design and compatibility"
+          "tr": "Çalışan başına 22,2 kN VEYA nitelikli kişi gözetiminde ≥2 katsayılı tam sistem",
+          "en": "22.2 kN per employee OR complete system with factor ≥2 under qualified supervision"
         }
       },
       {
@@ -242,22 +276,22 @@ export const posterTechnicalProfiles = {
     "controls": [
       {
         "value": {
-          "tr": "AÇI",
-          "en": "ANGLE"
+          "tr": "≈4:1",
+          "en": "≈4:1"
         },
         "label": {
-          "tr": "Üretici kurulum talimatı",
-          "en": "Manufacturer setup instructions"
+          "tr": "OSHA genel dayamalı merdiven; çalışma uzunluğu/4 yatay açıklık",
+          "en": "OSHA general non-self-supporting ladder; setback = working length/4"
         }
       },
       {
         "value": {
-          "tr": "ERİŞİM",
-          "en": "ACCESS"
+          "tr": "≥3 ft",
+          "en": "≥3 ft"
         },
         "label": {
-          "tr": "Üst seviyeye güvenli geçiş",
-          "en": "Safe transition to landing"
+          "tr": "Üst erişim: 0,9 m; mümkün değilse üst sabitleme + tutamak",
+          "en": "Landing access: 0.9 m; if not possible, secure top + grasping device"
         }
       },
       {
@@ -460,42 +494,42 @@ export const posterTechnicalProfiles = {
     "controls": [
       {
         "value": {
-          "tr": "ERİŞİM",
-          "en": "ACCESS"
+          "tr": "≥4 ft",
+          "en": "≥4 ft"
         },
         "label": {
-          "tr": "Güvenli giriş ve çıkış",
-          "en": "Safe entry and exit"
+          "tr": "OSHA hendek ≥1,22 m: güvenli çıkış zorunlu",
+          "en": "OSHA trench ≥1.22 m: safe egress required"
         }
       },
       {
         "value": {
-          "tr": "KENAR",
-          "en": "EDGE"
+          "tr": "≤25 ft",
+          "en": "≤25 ft"
         },
         "label": {
-          "tr": "Malzeme ve yükleri kontrol et",
-          "en": "Control spoil and surcharge loads"
+          "tr": "OSHA: çıkışa yatay hareket en fazla 7,62 m",
+          "en": "OSHA: lateral travel to egress at most 7.62 m"
         }
       },
       {
         "value": {
-          "tr": "KORUMA",
-          "en": "PROTECT"
+          "tr": "≥2 ft",
+          "en": "≥2 ft"
         },
         "label": {
-          "tr": "Zemine uygun iksa veya şev",
-          "en": "Soil-appropriate shoring or slopes"
+          "tr": "OSHA kenar: ≥0,61 m veya yeterli tutucu düzenek",
+          "en": "OSHA edge: ≥0.61 m or adequate retaining devices"
         }
       },
       {
         "value": {
-          "tr": "KONTROL",
-          "en": "INSPECT"
+          "tr": "≥5 ft",
+          "en": "≥5 ft"
         },
         "label": {
-          "tr": "Koşul değişiminde tekrar incele",
-          "en": "Reassess when conditions change"
+          "tr": "OSHA göçük koruması; stabil kaya istisna. Daha sığda da risk değerlendirilir",
+          "en": "OSHA cave-in protection; stable-rock exception. Assess shallower hazards too"
         }
       }
     ],
@@ -1005,32 +1039,32 @@ export const posterTechnicalProfiles = {
     "controls": [
       {
         "value": {
-          "tr": "YÜK",
-          "en": "LOAD"
+          "tr": "4×",
+          "en": "4×"
         },
         "label": {
-          "tr": "Onaylı kullanım kapasitesini aşma",
-          "en": "Do not exceed approved working load"
+          "tr": "OSHA genel tasarım: kendi ağırlığı + 4× yük; kullanım kapasitesi değildir",
+          "en": "OSHA general design: own weight + 4× load; not working capacity"
         }
       },
       {
         "value": {
-          "tr": "PLATFORM",
-          "en": "PLATFORM"
+          "tr": "≤1 in",
+          "en": "≤1 in"
         },
         "label": {
-          "tr": "Tehlikeli boşluk bırakma",
-          "en": "No hazardous gaps"
+          "tr": "OSHA genel bitişik boşluk: 2,5 cm; .451(b)(1) istisnalarını doğrula",
+          "en": "OSHA general adjacent gap: 2.5 cm; verify .451(b)(1) exceptions"
         }
       },
       {
         "value": {
-          "tr": "ERİŞİM",
-          "en": "ACCESS"
+          "tr": ">2 ft",
+          "en": ">2 ft"
         },
         "label": {
-          "tr": "Çaprazlara tırmanma",
-          "en": "Never climb cross-braces"
+          "tr": "Seviye farkı >0,6 m: uygun erişim gerekir; çapraza tırmanma",
+          "en": "Level difference >0.6 m: suitable access required; do not climb braces"
         }
       },
       {
@@ -1114,22 +1148,22 @@ export const posterTechnicalProfiles = {
     "controls": [
       {
         "value": {
-          "tr": "YANICI",
-          "en": "COMBUSTIBLES"
+          "tr": "35 ft",
+          "en": "35 ft"
         },
         "label": {
-          "tr": "Uzaklaştır veya etkin koru",
-          "en": "Remove or protect effectively"
+          "tr": "OSHA gözcü ölçütü: yanıcılar <10,7 m; daha uzakta kıvılcım/ısı riski de geçerlidir",
+          "en": "OSHA watch criterion: combustibles <10.7 m; spark/heat hazards beyond this distance also count"
         }
       },
       {
         "value": {
-          "tr": "SÜRE",
-          "en": "DURATION"
+          "tr": "≥30 DK",
+          "en": "≥30 MIN"
         },
         "label": {
-          "tr": "İzin ve risk esaslı gözetim",
-          "en": "Permit and risk-based fire watch"
+          "tr": "ABD OSHA: gözcü gereken kaynak/kesme sonrası; daha sıkı kuralda uzat",
+          "en": "US OSHA: after welding/cutting requiring a watch; extend for stricter rules"
         }
       },
       {
@@ -1223,22 +1257,22 @@ export const posterTechnicalProfiles = {
     "controls": [
       {
         "value": {
-          "tr": "OKSİJEN",
-          "en": "OXYGEN"
+          "tr": "19,5–23,5%",
+          "en": "19.5–23.5%"
         },
         "label": {
-          "tr": "İzin sınırlarını ölç ve doğrula",
-          "en": "Measure and verify permit limits"
+          "tr": "OSHA: oksijen bu aralığın dışında tehlikelidir; aralık tek başına izin değildir",
+          "en": "OSHA: oxygen outside this range is hazardous; range alone is not an entry permit"
         }
       },
       {
         "value": {
-          "tr": "YANICI",
-          "en": "FLAMMABLE"
+          "tr": ">10% LFL",
+          "en": ">10% LFL"
         },
         "label": {
-          "tr": "LEL/LFL alarmını doğrula",
-          "en": "Verify LEL/LFL alarms"
+          "tr": "OSHA yanıcı gaz/buhar/sis tehlike tanımı; izin alarmı daha sıkı olabilir",
+          "en": "OSHA flammable gas/vapour/mist hazard definition; permit alarms may be stricter"
         }
       },
       {
@@ -1471,12 +1505,12 @@ export const posterTechnicalProfiles = {
       },
       {
         "value": {
-          "tr": "DENETİM",
-          "en": "REVIEW"
+          "tr": "≥1/YIL",
+          "en": "≥1/YEAR"
         },
         "label": {
-          "tr": "Prosedüre göre planlı kontrol",
-          "en": "Scheduled procedure inspection"
+          "tr": "OSHA: enerji kontrol prosedürü denetimi; uygulayandan farklı yetkili çalışan",
+          "en": "OSHA: energy-control procedure inspection; authorized employee other than the user"
         }
       }
     ],
@@ -1550,42 +1584,42 @@ export const posterTechnicalProfiles = {
     "controls": [
       {
         "value": {
-          "tr": "KAÇIŞ",
-          "en": "ESCAPE"
+          "tr": "≤75 ft",
+          "en": "≤75 ft"
         },
         "label": {
-          "tr": "Güvenli kaçış yolu açık olmalı",
-          "en": "Keep a safe exit available"
+          "tr": "ABD OSHA A sınıfı: azami yürüme mesafesi 22,9 m",
+          "en": "US OSHA Class A: maximum travel distance 22.9 m"
         }
       },
       {
         "value": {
-          "tr": "SEÇİM",
-          "en": "SELECT"
+          "tr": "≤50 ft",
+          "en": "≤50 ft"
         },
         "label": {
-          "tr": "Yakıt ve elektrik riskine uygun",
-          "en": "Match fuel and electrical hazards"
+          "tr": "ABD OSHA B sınıfı tehlike: azami yürüme mesafesi 15,2 m",
+          "en": "US OSHA Class B hazard: maximum travel distance 15.2 m"
         }
       },
       {
         "value": {
-          "tr": "KONTROL",
-          "en": "INSPECT"
+          "tr": "AYLIK",
+          "en": "MONTHLY"
         },
         "label": {
-          "tr": "Planlı kontrol ve bakım",
-          "en": "Scheduled checks and maintenance"
+          "tr": "OSHA: taşınabilir söndürücü görsel kontrolü",
+          "en": "OSHA: portable extinguisher visual inspection"
         }
       },
       {
         "value": {
-          "tr": "GERİ ÇEKİL",
-          "en": "WITHDRAW"
+          "tr": "YILLIK",
+          "en": "ANNUAL"
         },
         "label": {
-          "tr": "Duman veya büyüyen yangın",
-          "en": "Smoke or growing fire"
+          "tr": "OSHA: söndürücü bakım kontrolü; eğitim ayrı gerekliliktir",
+          "en": "OSHA: extinguisher maintenance check; training is a separate requirement"
         }
       }
     ],

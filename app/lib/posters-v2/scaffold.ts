@@ -86,14 +86,14 @@ export const scaffoldPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Çalışma platformunu tam döşe; istisnaları onaylı tasarımla doğrula.",
-          "Gevşek, çatlak veya hasarlı platform kullanma.",
-          "Tehlikeli açıklıkları kapat veya kullanımı durdur.",
+          "Çalışma platformunu tam döşe; OSHA genel bitişik platform boşluğu sınırı 1 in (2,5 cm).",
+          "İstisnaları 1926.451(b)(1) ve uygun tasarımla doğrula; daha geniş açıklığı kendiliğinden kabul etme.",
+          "Gevşek, çatlak veya hasarlı platform kullanma; tehlikeli boşlukta kullanımı durdur.",
         ],
         en: [
-          "Ensure working levels are fully planked or decked.",
-          "Do not use loose, cracked or damaged platform units.",
-          "Close hazardous gaps or stop scaffold use.",
+          "Fully plank working platforms; the OSHA general limit for adjacent platform gaps is 1 in (2.5 cm).",
+          "Verify exceptions against 1926.451(b)(1) and the appropriate design; do not assume wider gaps are allowed.",
+          "Do not use loose, cracked or damaged units; stop use where gaps are hazardous.",
         ],
       },
       icon: "guardrail",
@@ -149,14 +149,14 @@ export const scaffoldPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "İzin verilen yük kapasitesini aşma.",
-          "Malzemeleri dengeli ve güvenli şekilde yerleştir.",
-          "Geçiş yollarını ve erişim noktalarını açık tut.",
+          "OSHA genel tasarım şartı: iskele/bileşen kendi ağırlığına ve en az 4× azami amaçlanan yüke dayanır.",
+          "Özel tipler için ayrı kuralları doğrula; 4× değeri kullanım yükünü artırma izni değildir.",
+          "Onaylı kullanım kapasitesini aşma; malzemeyi dengeli sabitle ve geçişleri açık tut.",
         ],
         en: [
-          "Never exceed the permitted scaffold load.",
-          "Distribute and secure materials safely.",
-          "Keep walkways and access points clear.",
+          "OSHA general design rule: scaffolds/components support their own weight plus at least 4× maximum intended load.",
+          "Check separate rules for special types; 4× is not permission to increase the working load.",
+          "Do not exceed approved working capacity; secure materials evenly and keep access clear.",
         ],
       },
       icon: "equipment",

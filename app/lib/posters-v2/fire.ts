@@ -67,12 +67,12 @@ export const firePoster: PosterDefinition = {
         tr: [
           "Söndürücüyü yangın sınıfına ve yakıta göre seç.",
           "Elektrik tehlikesinde iletken söndürme maddesi kullanma.",
-          "Etiket ve kullanım talimatlarını müdahaleden önce doğrula.",
+          "OSHA mesafe kartları yalnız 1910.157(d) uygulanıyorsa geçerlidir; tahliye planı istisnalarını doğrula.",
         ],
         en: [
           "Select the extinguisher for the fire class and fuel involved.",
           "Do not use conductive extinguishing agents on electrical hazards.",
-          "Verify the label and operating instructions before use.",
+          "OSHA distance cards apply only where 1910.157(d) applies; check evacuation-plan exemptions.",
         ],
       },
       icon: "equipment",
@@ -87,12 +87,12 @@ export const firePoster: PosterDefinition = {
       items: {
         tr: [
           "Yalnızca küçük ve başlangıç aşamasındaki yangına müdahale et.",
-          "Sadece eğitimli, yetkili ve kendini güvende hisseden personel müdahale etsin.",
+          "OSHA çalışan kullanımı: başlangıçta ve en az yılda bir eğitim; yalnız eğitimli ve yetkili kişi müdahale etsin.",
           "Her zaman arkanda açık ve güvenli kaçış yolu bulundur.",
         ],
         en: [
           "Attempt only small, incipient-stage fires.",
-          "Only trained, authorized and confident personnel may intervene.",
+          "OSHA employee use: initial and at least annual education/training; only trained, authorized personnel may intervene.",
           "Always maintain a clear and safe escape route behind you.",
         ],
       },

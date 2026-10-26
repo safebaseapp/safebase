@@ -170,14 +170,14 @@ export const hotWorkPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "İzin ve saha prosedüründeki süre boyunca gözetle; risk sürerse devam et.",
-          "Gizli boşlukları ve için için yanma ihtimalini kontrol et.",
-          "Alan güvenli doğrulanmadan gözetimi sonlandırma.",
+          "ABD OSHA: gözcü gereken kaynak/kesme sonrası en az 30 dakika yangın gözetimi yap.",
+          "Yerel kural, izin veya risk daha uzun süre istiyorsa uzat; uygulanabilir OSHA asgarisini kısaltma.",
+          "Gizli boşlukları ve için için yanmayı kontrol et; tehlike sürerken gözetimi bitirme.",
         ],
         en: [
-          "Maintain the watch for the permit/site-procedure duration; extend it while risk remains.",
-          "Check concealed spaces and possible smouldering fires.",
-          "Do not end the watch until the area is confirmed safe.",
+          "US OSHA: maintain a fire watch for at least 30 minutes after welding/cutting requiring a watch.",
+          "Extend the watch for stricter local rules, permits or risk; do not shorten the applicable OSHA minimum.",
+          "Check concealed spaces and smouldering fires; do not end the watch while hazards remain.",
         ],
       },
       icon: "weather",

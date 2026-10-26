@@ -1,3 +1,5 @@
+> **Son teknik kabul güncellemesi:** [ACCEPTANCE.md](ACCEPTANCE.md) bu tarihsel audit’in kaldırılan sayısal limitler ve son test/Preview durumuna ilişkin bölümlerini günceller. OSHA asgarileri kapsam ve alternatifleriyle geri eklenmiştir; kaynak erişimi doğrulanmış sayılmaz.
+
 # SERNEM Paket 13 — Poster Teknik Bütünlük ve Yayın Kalitesi
 
 ## Yönetici kararı

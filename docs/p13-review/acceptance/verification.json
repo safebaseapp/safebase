@@ -1,0 +1,43 @@
+{
+  "startHEAD": "12c369032f8a35e0c38f72c4ad2742e77bb8e6eb",
+  "results": {
+    "after-browser.json": {
+      "pass": 180,
+      "sha256": "46cdc72f9aa9f70c007162c3fa71399925ec3e6ea15aee50c5ea72d4ba580c3b"
+    },
+    "mandatory-content-results.json": {
+      "pass": 32,
+      "sha256": "43e4c4ed82487f2348432014d10d4fc00f14a8da8ad3cd1c284a9e526f17bb28"
+    },
+    "pdf-results.json": {
+      "pass": 60,
+      "sha256": "d0fc778a933dcd8abcf2e4719dcdbe3ad80a7ae35b98f374f19d55b6b2c835b0"
+    },
+    "content-results.json": {
+      "pass": 36,
+      "sha256": "19259ce4ab12c81c098505558df487ec6f0ed7032014b6ef79ee8311890a7a85"
+    }
+  },
+  "normalBuild": "PASS",
+  "typeScript": "PASS",
+  "relatedESLint": {
+    "currentExit": 0,
+    "baselineExit": 1,
+    "currentErrors": 0,
+    "baselineErrors": 56,
+    "currentWarnings": 2,
+    "baselineWarnings": 3,
+    "newFindings": []
+  },
+  "protectedSourceHashes": "82 PASS",
+  "beforePdfHashes": "60 match prior PR evidence",
+  "sourceTextRetrieval": "NOT VERIFIED: tunnel 403",
+  "legalTextMatches": "Regression only; not independent legal verification",
+  "authPremiumStorage": "Existing code unchanged; real service NOT TESTED",
+  "buildEvidence": [
+    "PASS: all 70 Toolbox topics have TR/EN standard files and 4-page branded-base PDFs.",
+    "SERNEM download/auth QA: PASS",
+    "✓ Compiled successfully in 17.5s",
+    "  Finished TypeScript in 17.6s ..."
+  ]
+}

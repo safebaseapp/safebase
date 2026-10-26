@@ -86,14 +86,14 @@ export const ladderSafetyPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Dayamalı merdivende üreticinin kurulum açısını doğrula.",
-          "Üst ve alt noktayı mümkün olduğunda sabitle.",
-          "Merdivenin hareket etmeyeceğinden emin ol.",
+          "OSHA genel dayamalı merdiven: yatay açıklık yaklaşık çalışma uzunluğunun dörtte biri; özel tipleri doğrula.",
+          "Üst seviyeye erişimde yan kollar ≥3 ft (0,9 m) uzansın; merdiven uzunluğu yetmiyorsa rijit desteğe üstten sabitle VE tutamak sağla.",
+          "Merdivenin kaymasını ve hareketini önle; üretici kurulum talimatını uygula.",
         ],
         en: [
-          "Verify the manufacturer setup angle for a leaning ladder.",
-          "Secure the top and bottom whenever practicable.",
-          "Ensure the ladder cannot move during use.",
+          "OSHA general non-self-supporting ladder setup: horizontal setback about one-quarter of working length; check special types.",
+          "Landing access: rails extend ≥3 ft (0.9 m); if ladder length prevents this, secure the top to rigid support AND provide a grasping device.",
+          "Prevent slipping or displacement; follow manufacturer setup instructions.",
         ],
       },
       icon: "ladder-angle",

@@ -45,8 +45,16 @@ export const excavationSafetyPoster: PosterDefinition = {
         en: "Protect Against Cave-In",
       },
       items: {
-        tr: ["Toprak sınıfına ve derinliğe uygun koruma kullan.", "Şev, iksa veya koruyucu sistemleri projeye uygun uygula.", "Koruma sistemi dışında çalışma yapma."],
-        en: ["Use protection appropriate to soil conditions and depth.", "Apply sloping, shoring or shielding as designed.", "Do not work outside the protective system."],
+        tr: [
+          "OSHA: kazı çalışanını göçükten koru. İstisna: tamamen stabil kaya veya aşağıdaki koşul.",
+          "Derinlik <5 ft (1,52 m) ise korumasızlık ancak yetkin kişi incelemesinde göçük belirtisi yoksa mümkündür.",
+          "Toprak ve derinliğe uygun şev, iksa veya kalkan kullan; koruma sistemi dışında çalışma.",
+        ],
+        en: [
+          "OSHA: protect excavation workers from cave-ins, except excavations entirely in stable rock or the condition below.",
+          "At <5 ft (1.52 m), protection may be omitted only if a competent person finds no indication of a potential cave-in.",
+          "Use soil/depth-appropriate sloping, shoring or shielding; do not work outside the protective system.",
+        ],
       },
       icon: "exc-shield",
       tone: "mandatory",
@@ -58,8 +66,16 @@ export const excavationSafetyPoster: PosterDefinition = {
         en: "Control Spoil Piles",
       },
       items: {
-        tr: ["Kazı malzemesini kenardan güvenli mesafede tut.", "Malzemenin kazıya geri düşmesini önle.", "Ekipman yüklerini kazı kenarından uzak tut."],
-        en: ["Keep excavated material a safe distance from the edge.", "Prevent material from falling back into the excavation.", "Keep equipment loads away from excavation edges."],
+        tr: [
+          "OSHA: kazı malzemesi ve düşebilecek ekipmanı kenardan en az 2 ft (0,61 m) uzak tut.",
+          "Alternatif olarak yeterli tutucu düzenekle kazıya düşme veya yuvarlanmayı önle; gerekirse ikisini uygula.",
+          "Ekipman sürşarj yüklerini değerlendir; yalnız mesafe bırakmak göçük riskini ortadan kaldırmaz.",
+        ],
+        en: [
+          "OSHA: keep spoil and equipment that could fall at least 2 ft (0.61 m) from the edge.",
+          "Alternatively use adequate retaining devices to prevent falling or rolling in, or use both measures.",
+          "Assess equipment surcharge loads; setback alone does not eliminate cave-in hazards.",
+        ],
       },
       icon: "exc-spoil",
       tone: "mandatory",
@@ -71,8 +87,16 @@ export const excavationSafetyPoster: PosterDefinition = {
         en: "Provide Safe Access",
       },
       items: {
-        tr: ["Gerekli derinlikte merdiven, rampa veya güvenli erişim sağla.", "Erişimi çalışma noktasına yakın konumlandır.", "Hasarlı erişim ekipmanı kullanma."],
-        en: ["Provide a ladder, ramp or safe means of access where required.", "Position access close to the work location.", "Do not use damaged access equipment."],
+        tr: [
+          "OSHA hendek derinliği ≥4 ft (1,22 m): merdiven, basamaklı geçiş, rampa veya güvenli çıkış sağla.",
+          "Çıkışa ulaşmak için yatay hareket mesafesi en fazla 25 ft (7,62 m) olsun.",
+          "Erişimi açık tut; hasarlı erişim ekipmanı kullanma.",
+        ],
+        en: [
+          "OSHA trenches ≥4 ft (1.22 m) deep require stairs, ladders, ramps or another safe means of egress.",
+          "Locate egress so workers need no more than 25 ft (7.62 m) of lateral travel.",
+          "Keep access clear; do not use damaged access equipment.",
+        ],
       },
       icon: "exc-access",
       tone: "mandatory",
