@@ -1,0 +1,3227 @@
+[
+  {
+    "file": "chemical-safety.ts",
+    "code": "SRN-CHM-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Kimyasal Güvenlik Kritik Kuralları",
+      "en": "Chemical Safety Critical Rules"
+    },
+    "slogan": {
+      "tr": "ETİKETİ OKU • SDS'Yİ KONTROL ET • UYUMSUZLARI AYIR • MARUZİYETİ ÖNLE",
+      "en": "READ THE LABEL • CHECK THE SDS • SEGREGATE INCOMPATIBLES • PREVENT EXPOSURE"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Etiketi Kontrol Et",
+          "en": "Check the Label"
+        },
+        "items": {
+          "tr": [
+            "Kimyasalı kullanmadan önce etiketi oku.",
+            "İçeriği bilinmeyen kabı kullanma.",
+            "İkincil kapları uygun şekilde etiketle."
+          ],
+          "en": [
+            "Read the label before using a chemical.",
+            "Do not use unidentified containers.",
+            "Label secondary containers appropriately."
+          ]
+        },
+        "icon": "chm-label",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "SDS'yi İncele",
+          "en": "Review the SDS"
+        },
+        "items": {
+          "tr": [
+            "Tehlikeleri ve ilk yardım bilgisini kontrol et.",
+            "Gerekli KKD ve depolama şartlarını doğrula.",
+            "Acil durum bilgisinin erişilebilir olduğundan emin ol."
+          ],
+          "en": [
+            "Review hazards and first-aid information.",
+            "Confirm required PPE and storage conditions.",
+            "Ensure emergency information is accessible."
+          ]
+        },
+        "icon": "chm-sds",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Uyumsuzları Ayır",
+          "en": "Segregate Incompatibles"
+        },
+        "items": {
+          "tr": [
+            "Asit, baz, oksitleyici ve yanıcıları uyumluluğa göre ayır.",
+            "Kimyasalı uygun dolap veya alanda depola.",
+            "Gelişigüzel birlikte depolama yapma."
+          ],
+          "en": [
+            "Separate acids, bases, oxidizers and flammables by compatibility.",
+            "Store chemicals in suitable cabinets or areas.",
+            "Do not store incompatible chemicals together."
+          ]
+        },
+        "icon": "chm-storage",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Maruziyeti Kontrol Et",
+          "en": "Control Exposure"
+        },
+        "items": {
+          "tr": [
+            "Önce kapalı sistem ve havalandırma gibi mühendislik kontrollerini kullan.",
+            "Gerekli KKD'yi risk değerlendirmesine göre seç.",
+            "Maruziyet sınırlarını aşma."
+          ],
+          "en": [
+            "Use engineering controls such as enclosure and ventilation first.",
+            "Select PPE based on the risk assessment.",
+            "Do not exceed applicable exposure limits."
+          ]
+        },
+        "icon": "chm-vent",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Dökülmeye Hazır Ol",
+          "en": "Prepare for Spills"
+        },
+        "items": {
+          "tr": [
+            "Uygun spill kit ve absorban bulundur.",
+            "Dökülmede alanı izole et.",
+            "Yetkin olmadığın kimyasal dökülmeye müdahale etme."
+          ],
+          "en": [
+            "Provide a suitable spill kit and absorbents.",
+            "Isolate the area following a spill.",
+            "Do not respond to chemical spills beyond your training."
+          ]
+        },
+        "icon": "chm-spill",
+        "tone": "mandatory"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Doğru Aktarım Yap",
+          "en": "Transfer Safely"
+        },
+        "items": {
+          "tr": [
+            "Uygun pompa ve aktarım ekipmanı kullan.",
+            "Sıçrama ve statik elektrik risklerini kontrol et.",
+            "Açık kapta kontrolsüz aktarım yapma."
+          ],
+          "en": [
+            "Use suitable pumps and transfer equipment.",
+            "Control splash and static-electricity hazards.",
+            "Do not perform uncontrolled open-container transfer."
+          ]
+        },
+        "icon": "chm-transfer",
+        "tone": "mandatory"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Hijyeni Koru",
+          "en": "Maintain Hygiene"
+        },
+        "items": {
+          "tr": [
+            "Kimyasal çalışma alanında yemek veya içmekten kaçın.",
+            "Eldiven çıkarıldıktan sonra elleri yıka.",
+            "Kirlenmiş KKD'yi kontrollü şekilde çıkar."
+          ],
+          "en": [
+            "Do not eat or drink in chemical work areas.",
+            "Wash hands after removing gloves.",
+            "Remove contaminated PPE in a controlled manner."
+          ]
+        },
+        "icon": "chm-hygiene",
+        "tone": "mandatory"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Acil Durumda Doğru Hareket Et",
+          "en": "Respond Correctly"
+        },
+        "items": {
+          "tr": [
+            "Göz veya cilt temasında SDS talimatlarını uygula.",
+            "Gerekli acil duş/göz yıkama ekipmanına erişimi açık tut.",
+            "Maruziyeti derhal bildir."
+          ],
+          "en": [
+            "Follow SDS instructions after eye or skin contact.",
+            "Keep required emergency shower/eyewash equipment accessible.",
+            "Report exposure immediately."
+          ]
+        },
+        "icon": "chm-emergency",
+        "tone": "mandatory"
+      }
+    ],
+    "never": {
+      "tr": [
+        "ETİKETSİZ KİMYASAL KULLANMA",
+        "SDS BİLGİSİ OLMADAN İŞE BAŞLAMA",
+        "UYUMSUZ KİMYASALLARI BİRLİKTE DEPOLAMA",
+        "BİLİNMEYEN DÖKÜLMEYE KORUMASIZ MÜDAHALE ETME",
+        "KİMYASAL MARUZİYETİNİ GÖRMEZDEN GELME"
+      ],
+      "en": [
+        "NEVER USE AN UNLABELLED CHEMICAL",
+        "NEVER START WITHOUT SDS INFORMATION",
+        "NEVER STORE INCOMPATIBLE CHEMICALS TOGETHER",
+        "NEVER RESPOND UNPROTECTED TO AN UNKNOWN SPILL",
+        "NEVER IGNORE A CHEMICAL EXPOSURE"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Kimyasal Gözlük",
+        "Kimyasal Eldiven",
+        "Koruyucu Giysi",
+        "Emniyet Ayakkabısı",
+        "Solunum Koruması*"
+      ],
+      "en": [
+        "Chemical Goggles",
+        "Chemical Gloves",
+        "Protective Clothing",
+        "Safety Footwear",
+        "Respiratory Protection*"
+      ]
+    }
+  },
+  {
+    "file": "confined-space.ts",
+    "code": "SRN-CS-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Kapalı Alan Giriş Kritik Güvenlik Kuralları",
+      "en": "Confined Space Entry Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "İzin Al • Atmosferi Ölç • İzole Et • Kurtarmaya Hazır Ol",
+      "en": "Authorize • Test • Isolate • Prepare for Rescue"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Giriş İzni",
+          "en": "Entry Permit"
+        },
+        "items": {
+          "tr": [
+            "Geçerli kapalı alan giriş iznini doğrula.",
+            "İzin üzerindeki tehlike ve kontrolleri incele.",
+            "Koşullar değişirse girişi durdur ve izni yeniden değerlendir."
+          ],
+          "en": [
+            "Verify a valid confined-space entry permit.",
+            "Review all hazards and controls listed on the permit.",
+            "Stop entry and reassess the permit if conditions change."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Atmosfer Ölçümü",
+          "en": "Atmospheric Testing"
+        },
+        "items": {
+          "tr": [
+            "Önce oksijen, sonra yanıcı ve toksik gazları ölç.",
+            "Üst, orta ve alt seviyelerden numune al.",
+            "Sonuçları izin formuna kaydet ve sınırları doğrula."
+          ],
+          "en": [
+            "Test oxygen first, then flammable and toxic gases.",
+            "Sample the top, middle and bottom of the space.",
+            "Record results on the permit and verify acceptable limits."
+          ]
+        },
+        "icon": "weather",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Enerji İzolasyonu",
+          "en": "Energy Isolation"
+        },
+        "items": {
+          "tr": [
+            "Tüm enerji ve akış kaynaklarını belirle.",
+            "LOTO, körleme veya fiziksel ayırma uygula.",
+            "Sıfır enerji durumunu girişten önce doğrula."
+          ],
+          "en": [
+            "Identify every energy and material-flow source.",
+            "Apply LOTO, blanking or positive physical isolation.",
+            "Verify zero-energy status before entry."
+          ]
+        },
+        "icon": "anchor",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Gözcü",
+          "en": "Entry Attendant"
+        },
+        "items": {
+          "tr": [
+            "Giriş boyunca eğitimli gözcüyü görevde tut.",
+            "İçerideki personel sayısını ve durumunu takip et.",
+            "Gözcü alanı terk etmesin ve başka görev üstlenmesin."
+          ],
+          "en": [
+            "Maintain a trained attendant throughout the entry.",
+            "Track the number and condition of all entrants.",
+            "The attendant must remain at the post without conflicting duties."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Havalandırma",
+          "en": "Ventilation"
+        },
+        "items": {
+          "tr": [
+            "Temiz hava sağlayan uygun havalandırma kullan.",
+            "Hava girişini egzoz ve kirletici kaynaklardan uzak tut.",
+            "Havalandırma durursa girişi yeniden değerlendir."
+          ],
+          "en": [
+            "Use suitable ventilation supplying clean air.",
+            "Keep air intakes away from exhausts and contaminant sources.",
+            "Reassess entry immediately if ventilation stops."
+          ]
+        },
+        "icon": "weather",
+        "tone": "warning"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "İletişim",
+          "en": "Communication"
+        },
+        "items": {
+          "tr": [
+            "Giren personel ile gözcü arasında sürekli iletişim sağla.",
+            "Telsiz, sesli veya görsel yöntemi girişten önce test et.",
+            "İletişim kaybolursa alanı derhal tahliye et."
+          ],
+          "en": [
+            "Maintain continuous communication with the attendant.",
+            "Test radio, voice or visual methods before entry.",
+            "Evacuate immediately if communication is lost."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "warning"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Kurtarma Hazırlığı",
+          "en": "Rescue Readiness"
+        },
+        "items": {
+          "tr": [
+            "Girişten önce uygulanabilir kurtarma planı hazırla.",
+            "Kurtarma ekibi, tripod ve geri çekme sistemini hazır tut.",
+            "Plansız ve korumasız içeri girerek kurtarma yapma."
+          ],
+          "en": [
+            "Prepare a workable rescue plan before entry.",
+            "Ensure the rescue team and retrieval equipment are ready.",
+            "Never perform an unplanned or unprotected entry rescue."
+          ]
+        },
+        "icon": "fall",
+        "tone": "warning"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Sürekli İzleme",
+          "en": "Continuous Monitoring"
+        },
+        "items": {
+          "tr": [
+            "Atmosfer değişebilecekse ölçümü kesintisiz sürdür.",
+            "Alarm seviyelerini çalışma başlamadan önce doğrula.",
+            "Alarm, belirti veya şüphede alanı derhal tahliye et."
+          ],
+          "en": [
+            "Continuously monitor when atmospheric conditions may change.",
+            "Verify detector alarm settings before work starts.",
+            "Evacuate immediately after any alarm, symptom or concern."
+          ]
+        },
+        "icon": "weather",
+        "tone": "information"
+      }
+    ],
+    "never": {
+      "tr": [
+        "Geçerli giriş izni yoksa işi hemen durdur",
+        "Oksijen yüzde 19,5 ile 23,5 arasında değilse girişi durdur",
+        "Yanıcı atmosfer yüzde 10 LEL veya üzerindeyse girişi durdur",
+        "Gözcü, iletişim veya sürekli gaz ölçümü yoksa girişi durdur",
+        "Hazır ve uygulanabilir kurtarma planı yoksa girişi durdur"
+      ],
+      "en": [
+        "Stop entry immediately if there is no valid entry permit",
+        "Stop entry if oxygen is outside the 19.5% to 23.5% range",
+        "Stop entry if the atmosphere is at or above 10% of the LFL",
+        "Stop entry if there is no attendant, communication or gas monitoring",
+        "Stop entry if there is no ready and workable rescue plan"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Baret",
+        "Koruyucu Gözlük",
+        "Göreve Uygun Eldiven",
+        "Güvenlik Ayakkabısı",
+        "Kurtarma Kemeri"
+      ],
+      "en": [
+        "Safety Helmet",
+        "Safety Glasses",
+        "Task-Specific Gloves",
+        "Safety Footwear",
+        "Rescue Harness"
+      ]
+    }
+  },
+  {
+    "file": "dropped-objects-safety.ts",
+    "code": "SRN-DO-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Düşen Cisim Kritik Güvenlik Kuralları",
+      "en": "Dropped Objects Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "SABİTLE • ALT ALANI İZOLE ET • MALZEMEYİ KORU • DÜŞME RİSKİNİ ÖNLE",
+      "en": "SECURE • ISOLATE BELOW • CONTROL MATERIALS • PREVENT DROPPED OBJECTS"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Düşebilecek Her Şeyi Belirle",
+          "en": "Identify Drop Hazards"
+        },
+        "items": {
+          "tr": [
+            "Alet, malzeme ve gevşek parçaları işe başlamadan belirle.",
+            "Üst seviyelerdeki açıklıkları kontrol et.",
+            "Rüzgar ve titreşim etkisini değerlendir."
+          ],
+          "en": [
+            "Identify tools, materials and loose items before starting.",
+            "Check openings and edges at elevated levels.",
+            "Consider wind and vibration effects."
+          ]
+        },
+        "icon": "do-identify",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Aletleri Sabitle",
+          "en": "Secure Tools"
+        },
+        "items": {
+          "tr": [
+            "Uygun olduğunda onaylı tether sistemi kullan.",
+            "Tether bağlantı noktalarını kontrol et.",
+            "Hasarlı tether veya bağlantı kullanma."
+          ],
+          "en": [
+            "Use approved tethering systems where appropriate.",
+            "Inspect tether attachment points.",
+            "Do not use damaged tethers or connectors."
+          ]
+        },
+        "icon": "do-tether",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Malzemeyi Sabitle",
+          "en": "Secure Materials"
+        },
+        "items": {
+          "tr": [
+            "Gevşek malzemeyi kenarlardan uzak tut.",
+            "Malzemeyi devrilmeye veya yuvarlanmaya karşı koru.",
+            "Küçük parçaları uygun kaplarda tut."
+          ],
+          "en": [
+            "Keep loose materials away from edges.",
+            "Prevent materials from tipping or rolling.",
+            "Store small parts in suitable containers."
+          ]
+        },
+        "icon": "do-material",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Alt Alanı İzole Et",
+          "en": "Barricade the Area Below"
+        },
+        "items": {
+          "tr": [
+            "Düşme hattının altında exclusion zone oluştur.",
+            "Bariyer ve uyarıları görünür tut.",
+            "Yetkisiz girişe izin verme."
+          ],
+          "en": [
+            "Establish an exclusion zone beneath the drop line.",
+            "Keep barricades and warnings visible.",
+            "Prevent unauthorized entry."
+          ]
+        },
+        "icon": "do-barricade",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Güvenli Taşı",
+          "en": "Transfer Materials Safely"
+        },
+        "items": {
+          "tr": [
+            "Malzemeyi elden ele kontrolsüz atma.",
+            "Uygun kaldırma veya taşıma yöntemi kullan.",
+            "Yüksekten malzeme bırakma."
+          ],
+          "en": [
+            "Do not throw materials between levels.",
+            "Use suitable lifting or transfer methods.",
+            "Never drop materials from height."
+          ]
+        },
+        "icon": "do-transfer",
+        "tone": "mandatory"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Açıklıkları Koru",
+          "en": "Protect Openings"
+        },
+        "items": {
+          "tr": [
+            "Toe board, mesh veya uygun düşen cisim koruması kullan.",
+            "Platform açıklıklarını kontrol et.",
+            "Koruma kaldırıldıysa alanı hemen izole et."
+          ],
+          "en": [
+            "Use toe boards, mesh or suitable falling-object protection.",
+            "Control platform openings.",
+            "Immediately isolate the area if protection is removed."
+          ]
+        },
+        "icon": "do-toeboard",
+        "tone": "mandatory"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Baş Üstü Çalışmayı Koordine Et",
+          "en": "Coordinate Overhead Work"
+        },
+        "items": {
+          "tr": [
+            "Üst ve alt ekipler arasında iletişim kur.",
+            "Simultane iş risklerini değerlendir.",
+            "Alt seviyede personel varsa çalışmayı kontrol et."
+          ],
+          "en": [
+            "Maintain communication between upper and lower work teams.",
+            "Assess simultaneous-work risks.",
+            "Control work when personnel are below."
+          ]
+        },
+        "icon": "do-overhead",
+        "tone": "mandatory"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "İş Bitiminde Kontrol Et",
+          "en": "Final Area Check"
+        },
+        "items": {
+          "tr": [
+            "Platformda gevşek alet veya malzeme bırakma.",
+            "Kullanılmayan ekipmanı aşağı indir.",
+            "Bariyeri yalnızca risk tamamen kalkınca kaldır."
+          ],
+          "en": [
+            "Do not leave loose tools or materials on platforms.",
+            "Lower unused equipment safely.",
+            "Remove barricades only after the hazard is fully eliminated."
+          ]
+        },
+        "icon": "do-final",
+        "tone": "mandatory"
+      }
+    ],
+    "never": {
+      "tr": [
+        "ALT ALAN İZOLE EDİLMEDEN DÜŞEN CİSİM RİSKLİ İŞ YAPMA",
+        "ALETLERİ VE MALZEMEYİ KENARDA KORUMASIZ BIRAKMA",
+        "YÜKSEKTEN MALZEME ATMA",
+        "HASARLI TETHER KULLANMA",
+        "ALTTA PERSONEL VARKEN KONTROLSÜZ ÜST İŞ YAPMA"
+      ],
+      "en": [
+        "NEVER WORK ABOVE WITHOUT CONTROLLING THE AREA BELOW",
+        "NEVER LEAVE TOOLS OR MATERIALS UNSECURED AT EDGES",
+        "NEVER THROW MATERIALS FROM HEIGHT",
+        "NEVER USE DAMAGED TETHERS",
+        "NEVER PERFORM UNCONTROLLED OVERHEAD WORK ABOVE PEOPLE"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Çene Bağlı Baret",
+        "Koruyucu Gözlük",
+        "İş Eldiveni",
+        "Emniyet Ayakkabısı",
+        "Reflektif Yelek"
+      ],
+      "en": [
+        "Chin-Strap Helmet",
+        "Safety Glasses",
+        "Work Gloves",
+        "Safety Footwear",
+        "High-Visibility Vest"
+      ]
+    }
+  },
+  {
+    "file": "electrical.ts",
+    "code": "SRN-EL-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Elektrik Kritik Güvenlik Kuralları",
+      "en": "Electrical Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "Enerjiyi Kes • Kilitle • Gerilimsizliği Doğrula",
+      "en": "De-Energize • Lock Out • Verify Absence of Voltage"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Enerjiyi Kes",
+          "en": "De-Energize"
+        },
+        "items": {
+          "tr": [
+            "Çalışmadan önce tüm elektrik kaynaklarını belirle.",
+            "Mümkün olan her durumda ekipmanı enerjisiz bırak.",
+            "Kumanda düğmesini enerji izolasyonu olarak kabul etme."
+          ],
+          "en": [
+            "Identify every electrical energy source before work.",
+            "De-energize equipment whenever work can be performed safely without power.",
+            "Never treat a control switch as an energy-isolating device."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "LOTO Uygula",
+          "en": "Apply LOTO"
+        },
+        "items": {
+          "tr": [
+            "Ayırma cihazlarını kilitle ve etiketle.",
+            "Her çalışan kendi kişisel kilidini uygulasın.",
+            "Yeniden enerjilenmeyi prosedüre göre kontrol et."
+          ],
+          "en": [
+            "Lock and tag all electrical isolating devices.",
+            "Each authorized worker must apply a personal lock.",
+            "Control re-energization in accordance with the approved procedure."
+          ]
+        },
+        "icon": "anchor",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Gerilimsizliği Doğrula",
+          "en": "Verify De-Energization"
+        },
+        "items": {
+          "tr": [
+            "Uygun ve çalışır durumdaki ölçü cihazını kullan.",
+            "Ölçü cihazını test öncesi ve sonrası bilinen kaynakta doğrula.",
+            "Tüm fazlar ve iletkenlerde gerilim olmadığını kontrol et."
+          ],
+          "en": [
+            "Use a suitable and properly functioning test instrument.",
+            "Verify the tester on a known source before and after testing.",
+            "Confirm absence of voltage on every phase and conductor."
+          ]
+        },
+        "icon": "weather",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Yetkili Personel",
+          "en": "Qualified Persons Only"
+        },
+        "items": {
+          "tr": [
+            "Elektrik işi yalnızca eğitimli ve yetkili personelce yapılsın.",
+            "Gerilimli devrelerde test ve çalışma yetkisiz kişilere yasaktır.",
+            "Görev, ekipman ve tehlikeye uygun yeterliliği doğrula."
+          ],
+          "en": [
+            "Electrical work must be performed by trained and qualified persons.",
+            "Only qualified persons may test or work on exposed energized parts.",
+            "Verify competence for the task, equipment and hazards involved."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Ekipmanı Kontrol Et",
+          "en": "Inspect Equipment"
+        },
+        "items": {
+          "tr": [
+            "Kablo, fiş, priz, pano ve el aletlerini kullanmadan önce kontrol et.",
+            "Hasarlı izolasyon veya açık iletken bulunan ekipmanı kullanma.",
+            "Arızalı ekipmanı etiketle ve derhal hizmet dışı bırak."
+          ],
+          "en": [
+            "Inspect cords, plugs, receptacles, panels and tools before use.",
+            "Never use equipment with damaged insulation or exposed conductors.",
+            "Tag defective equipment and remove it from service immediately."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "warning"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Kaçak Akım Koruması",
+          "en": "Ground-Fault Protection"
+        },
+        "items": {
+          "tr": [
+            "Gerekli alanlarda uygun GFCI veya RCD koruması kullan.",
+            "Topraklama iletkeni ve koruma cihazlarını kontrol et.",
+            "Koruma cihazlarını devre dışı bırakma veya köprüleme."
+          ],
+          "en": [
+            "Use suitable GFCI or RCD protection where required.",
+            "Verify grounding conductors and protective devices.",
+            "Never bypass or defeat electrical protective devices."
+          ]
+        },
+        "icon": "guardrail",
+        "tone": "warning"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Alanı Koru",
+          "en": "Control the Work Area"
+        },
+        "items": {
+          "tr": [
+            "Açık pano ve elektrik tehlikelerini bariyerle.",
+            "Yetkisiz kişileri yaklaşma sınırlarının dışında tut.",
+            "Çalışma alanını kuru, düzenli ve yeterli aydınlatılmış tut."
+          ],
+          "en": [
+            "Barricade open panels and exposed electrical hazards.",
+            "Keep unauthorized persons outside established approach boundaries.",
+            "Maintain a dry, orderly and adequately illuminated work area."
+          ]
+        },
+        "icon": "guardrail",
+        "tone": "warning"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Enerjili Çalışma Kontrolü",
+          "en": "Energized Work Controls"
+        },
+        "items": {
+          "tr": [
+            "Enerjili çalışmayı yalnızca teknik olarak zorunluysa değerlendir.",
+            "Onay, risk değerlendirmesi ve uygun iş yöntemini doğrula.",
+            "Ark parlaması ve elektrik çarpmasına uygun KKD ve ekipman kullan."
+          ],
+          "en": [
+            "Consider energized work only when technically justified.",
+            "Verify authorization, risk assessment and an approved work method.",
+            "Use PPE and equipment suitable for shock and arc-flash hazards."
+          ]
+        },
+        "icon": "fall",
+        "tone": "information"
+      }
+    ],
+    "never": {
+      "tr": [
+        "Enerji izolasyonu ve LOTO uygulanmadıysa işi hemen durdur",
+        "Gerilimsizlik uygun cihazla doğrulanmadıysa işi durdur",
+        "Açık gerilimli bölümler korunmamış veya bariyerlenmemişse işi durdur",
+        "Kablo, fiş, pano veya ekipman hasarlıysa işi durdur",
+        "Yetkili personel, uygun iş yöntemi veya gerekli KKD yoksa işi durdur"
+      ],
+      "en": [
+        "Stop work immediately if electrical isolation and LOTO are not applied",
+        "Stop work if absence of voltage has not been properly verified",
+        "Stop work if exposed energized parts are not guarded or barricaded",
+        "Stop work if cords, plugs, panels or equipment are damaged",
+        "Stop work if qualified personnel, an approved method or required PPE are unavailable"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Baret",
+        "Koruyucu Gözlük",
+        "Yalıtkan Eldiven",
+        "Güvenlik Ayakkabısı",
+        "Ark Korumalı Giysi"
+      ],
+      "en": [
+        "Safety Helmet",
+        "Safety Glasses",
+        "Voltage-Rated Gloves",
+        "Safety Footwear",
+        "Arc-Rated Clothing"
+      ]
+    }
+  },
+  {
+    "file": "excavation-safety.ts",
+    "code": "SRN-EXC-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Kazı Kritik Güvenlik Kuralları",
+      "en": "Excavation Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "HATLARI BELİRLE • KAZIYI KORU • GÜVENLİ ERİŞİM SAĞLA • HER GÜN KONTROL ET",
+      "en": "LOCATE SERVICES • PROTECT THE EXCAVATION • PROVIDE SAFE ACCESS • INSPECT DAILY"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Yeraltı Hatlarını Belirle",
+          "en": "Locate Underground Services"
+        },
+        "items": {
+          "tr": [
+            "Kazıdan önce mevcut yeraltı hatlarını belirle.",
+            "Gerekli izin ve çizimleri doğrula.",
+            "Şüpheli bölgelerde kontrollü kazı yöntemi kullan."
+          ],
+          "en": [
+            "Locate existing underground services before excavation.",
+            "Verify required permits and drawings.",
+            "Use controlled excavation methods in uncertain areas."
+          ]
+        },
+        "icon": "exc-service",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Yetkin Kişi Kontrolü",
+          "en": "Competent-Person Inspection"
+        },
+        "items": {
+          "tr": [
+            "Kazıyı işe başlamadan önce kontrol ettir.",
+            "Yağmur, titreşim veya koşul değişiminden sonra tekrar kontrol et.",
+            "Tehlikeli koşul varsa girişe izin verme."
+          ],
+          "en": [
+            "Inspect the excavation before work starts.",
+            "Reinspect after rain, vibration or changing conditions.",
+            "Do not permit entry when hazardous conditions exist."
+          ]
+        },
+        "icon": "exc-inspect",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Göçüğe Karşı Koru",
+          "en": "Protect Against Cave-In"
+        },
+        "items": {
+          "tr": [
+            "Toprak sınıfına ve derinliğe uygun koruma kullan.",
+            "Şev, iksa veya koruyucu sistemleri projeye uygun uygula.",
+            "Koruma sistemi dışında çalışma yapma."
+          ],
+          "en": [
+            "Use protection appropriate to soil conditions and depth.",
+            "Apply sloping, shoring or shielding as designed.",
+            "Do not work outside the protective system."
+          ]
+        },
+        "icon": "exc-shield",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Kazı Malzemesini Güvenli Mesafede Tut",
+          "en": "Control Spoil Piles"
+        },
+        "items": {
+          "tr": [
+            "Kazı malzemesini kenardan güvenli mesafede tut.",
+            "Malzemenin kazıya geri düşmesini önle.",
+            "Ekipman yüklerini kazı kenarından uzak tut."
+          ],
+          "en": [
+            "Keep excavated material a safe distance from the edge.",
+            "Prevent material from falling back into the excavation.",
+            "Keep equipment loads away from excavation edges."
+          ]
+        },
+        "icon": "exc-spoil",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Güvenli Erişim Sağla",
+          "en": "Provide Safe Access"
+        },
+        "items": {
+          "tr": [
+            "Gerekli derinlikte merdiven, rampa veya güvenli erişim sağla.",
+            "Erişimi çalışma noktasına yakın konumlandır.",
+            "Hasarlı erişim ekipmanı kullanma."
+          ],
+          "en": [
+            "Provide a ladder, ramp or safe means of access where required.",
+            "Position access close to the work location.",
+            "Do not use damaged access equipment."
+          ]
+        },
+        "icon": "exc-access",
+        "tone": "mandatory"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Su Birikmesini Kontrol Et",
+          "en": "Control Water Accumulation"
+        },
+        "items": {
+          "tr": [
+            "Su bulunan kazıya kontrolsüz giriş yapma.",
+            "Pompalama ve drenaj yöntemlerini güvenli uygula.",
+            "Yağış sonrası koşulları yeniden değerlendir."
+          ],
+          "en": [
+            "Do not enter excavations with uncontrolled water accumulation.",
+            "Use pumping and drainage methods safely.",
+            "Reassess conditions after rainfall."
+          ]
+        },
+        "icon": "exc-water",
+        "tone": "mandatory"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Kenarları ve Trafiği Koru",
+          "en": "Protect Edges and Traffic"
+        },
+        "items": {
+          "tr": [
+            "Araç ve yaya trafiğine açık alanları bariyerle.",
+            "Gerekli yerlerde stop block veya uyarı sistemi kullan.",
+            "Gece görünürlüğünü sağla."
+          ],
+          "en": [
+            "Barricade excavations exposed to vehicle or pedestrian traffic.",
+            "Use stop blocks or warning systems where required.",
+            "Maintain visibility during night work."
+          ]
+        },
+        "icon": "exc-barrier",
+        "tone": "mandatory"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Atmosfer Riskini Değerlendir",
+          "en": "Assess Atmospheric Hazards"
+        },
+        "items": {
+          "tr": [
+            "Tehlikeli atmosfer ihtimali varsa test yap.",
+            "Gerekirse havalandırma ve kurtarma tedbirleri uygula.",
+            "Alarm veya tehlike halinde kazıyı tahliye et."
+          ],
+          "en": [
+            "Test where a hazardous atmosphere could reasonably exist.",
+            "Provide ventilation and rescue controls when required.",
+            "Evacuate the excavation if alarms or hazardous conditions occur."
+          ]
+        },
+        "icon": "exc-atmosphere",
+        "tone": "mandatory"
+      }
+    ],
+    "never": {
+      "tr": [
+        "KORUMASIZ GÖÇÜK RİSKİ OLAN KAZIYA GİRME",
+        "YERALTI HATLARINI DOĞRULAMADAN KAZIYA BAŞLAMA",
+        "KAZI KENARINDA KONTROLSÜZ MALZEME BIRAKMA",
+        "GÜVENSİZ ERİŞİMLE KAZIYA GİRME",
+        "YETKİN KİŞİ ONAYI OLMADAN TEHLİKELİ KAZIDA ÇALIŞMA"
+      ],
+      "en": [
+        "NEVER ENTER AN UNPROTECTED CAVE-IN HAZARD",
+        "NEVER EXCAVATE BEFORE VERIFYING UNDERGROUND SERVICES",
+        "NEVER LEAVE UNCONTROLLED MATERIAL AT THE EDGE",
+        "NEVER ENTER USING UNSAFE ACCESS",
+        "NEVER WORK IN A HAZARDOUS EXCAVATION WITHOUT COMPETENT-PERSON APPROVAL"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Baret",
+        "Koruyucu Gözlük",
+        "İş Eldiveni",
+        "Emniyet Ayakkabısı",
+        "Reflektif Yelek"
+      ],
+      "en": [
+        "Safety Helmet",
+        "Safety Glasses",
+        "Work Gloves",
+        "Safety Footwear",
+        "High-Visibility Vest"
+      ]
+    }
+  },
+  {
+    "file": "fire.ts",
+    "code": "SRN-FIRE-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Yangın Kritik Güvenlik Kuralları",
+      "en": "Fire Safety Critical Rules"
+    },
+    "slogan": {
+      "tr": "Alarm Ver • Güvenle Tahliye Et • Yalnızca Eğitimliysen Müdahale Et",
+      "en": "Raise the Alarm • Evacuate Safely • Fight Only If Trained"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Alarm Ver ve Bildir",
+          "en": "Raise the Alarm"
+        },
+        "items": {
+          "tr": [
+            "Yangını gördüğünde alarmı derhal etkinleştir.",
+            "Acil durum numarasını veya saha kontrol merkezini ara.",
+            "Yangının yeri, türü ve bilinen riskleri açıkça bildir."
+          ],
+          "en": [
+            "Activate the fire alarm immediately after discovering a fire.",
+            "Call the emergency number or site control centre.",
+            "Clearly report the location, fire type and known hazards."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Tahliyeyi Başlat",
+          "en": "Evacuate Safely"
+        },
+        "items": {
+          "tr": [
+            "En yakın güvenli acil çıkışı kullan.",
+            "Asansör kullanma ve kişisel eşya almak için geri dönme.",
+            "Belirlenen toplanma noktasına git ve sayıma katıl."
+          ],
+          "en": [
+            "Use the nearest safe emergency exit.",
+            "Do not use lifts or return for personal belongings.",
+            "Proceed to the assembly point and report for accountability."
+          ]
+        },
+        "icon": "ladder",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Söndürücüyü Doğru Seç",
+          "en": "Select the Correct Extinguisher"
+        },
+        "items": {
+          "tr": [
+            "Söndürücüyü yangın sınıfına ve yakıta göre seç.",
+            "Elektrik tehlikesinde iletken söndürme maddesi kullanma.",
+            "Etiket ve kullanım talimatlarını müdahaleden önce doğrula."
+          ],
+          "en": [
+            "Select the extinguisher for the fire class and fuel involved.",
+            "Do not use conductive extinguishing agents on electrical hazards.",
+            "Verify the label and operating instructions before use."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Yalnızca Başlangıç Yangınına Müdahale Et",
+          "en": "Fight Incipient Fires Only"
+        },
+        "items": {
+          "tr": [
+            "Yalnızca küçük ve başlangıç aşamasındaki yangına müdahale et.",
+            "Sadece eğitimli, yetkili ve kendini güvende hisseden personel müdahale etsin.",
+            "Her zaman arkanda açık ve güvenli kaçış yolu bulundur."
+          ],
+          "en": [
+            "Attempt only small, incipient-stage fires.",
+            "Only trained, authorized and confident personnel may intervene.",
+            "Always maintain a clear and safe escape route behind you."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Söndürücüyü Kontrol Et",
+          "en": "Inspect the Extinguisher"
+        },
+        "items": {
+          "tr": [
+            "Söndürücünün yerinde, erişilebilir ve görünür olduğunu doğrula.",
+            "Pim, mühür, hortum, basınç göstergesi ve gövdeyi kontrol et.",
+            "Hasarlı, boşalmış veya süresi geçmiş ekipmanı kullanma."
+          ],
+          "en": [
+            "Verify the extinguisher is in place, visible and accessible.",
+            "Check the pin, seal, hose, pressure indicator and cylinder.",
+            "Do not use damaged, discharged or overdue equipment."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "warning"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Yakıt ve Tutuşturma Kaynaklarını Kontrol Et",
+          "en": "Control Fuel and Ignition Sources"
+        },
+        "items": {
+          "tr": [
+            "Yanıcı atık ve gereksiz malzeme birikimini önle.",
+            "Yanıcı sıvıları onaylı kaplarda ve uygun alanlarda sakla.",
+            "Isı, kıvılcım ve açık alev kaynaklarını kontrol altında tut."
+          ],
+          "en": [
+            "Prevent accumulation of combustible waste and unnecessary materials.",
+            "Store flammable liquids in approved containers and areas.",
+            "Control heat, sparks and open-flame ignition sources."
+          ]
+        },
+        "icon": "weather",
+        "tone": "warning"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Çıkışları ve Yangın Ekipmanını Açık Tut",
+          "en": "Keep Exits and Equipment Clear"
+        },
+        "items": {
+          "tr": [
+            "Acil çıkış, kaçış yolu ve yangın kapılarını engelleme.",
+            "Söndürücü, hidrant ve alarm butonlarının önünü açık tut.",
+            "Yangın kapılarını izinsiz açık sabitleme veya devre dışı bırakma."
+          ],
+          "en": [
+            "Do not obstruct exits, escape routes or fire doors.",
+            "Keep extinguishers, hydrants and alarm points unobstructed.",
+            "Never wedge open or disable fire doors without authorization."
+          ]
+        },
+        "icon": "guardrail",
+        "tone": "warning"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Müdahaleyi Bırak ve Geri Çekil",
+          "en": "Withdraw When Conditions Escalate"
+        },
+        "items": {
+          "tr": [
+            "Yangın büyüyor, duman artıyor veya görüş kayboluyorsa geri çekil.",
+            "Söndürücü boşalmasına rağmen yangın kontrol altına alınmadıysa tahliye et.",
+            "Kapalı kap, basınçlı tüp veya patlama riski bulunan alana yaklaşma."
+          ],
+          "en": [
+            "Withdraw if the fire grows, smoke increases or visibility is lost.",
+            "Evacuate if the fire remains uncontrolled after extinguisher discharge.",
+            "Do not approach sealed vessels, cylinders or explosion hazards."
+          ]
+        },
+        "icon": "fall",
+        "tone": "information"
+      }
+    ],
+    "never": {
+      "tr": [
+        "Alarm çalışmıyor veya acil durum iletişimi kurulamıyorsa işi hemen durdur",
+        "Acil çıkış, kaçış yolu veya yangın ekipmanı engelliyse işi durdur",
+        "Söndürücü hasarlı, boş, erişilemez veya yangın sınıfına uygun değilse müdahale etme",
+        "Yangın büyüyor, yoğun duman oluşuyor veya güvenli kaçış yolu kalmıyorsa derhal tahliye et",
+        "Eğitimin, yetkin veya güvenli müdahale imkânın yoksa yangınla mücadele etme"
+      ],
+      "en": [
+        "Stop work immediately if alarms or emergency communication are unavailable",
+        "Stop work if exits, escape routes or firefighting equipment are obstructed",
+        "Do not intervene if the extinguisher is damaged, empty, inaccessible or unsuitable",
+        "Evacuate immediately if the fire grows, smoke intensifies or the escape route is threatened",
+        "Do not fight the fire unless trained, authorized and able to do so safely"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Baret",
+        "Koruyucu Gözlük",
+        "Isıya Uygun Eldiven",
+        "Güvenlik Ayakkabısı",
+        "Aleve Dayanıklı Giysi"
+      ],
+      "en": [
+        "Safety Helmet",
+        "Safety Glasses",
+        "Heat-Resistant Gloves",
+        "Safety Footwear",
+        "Flame-Resistant Clothing"
+      ]
+    }
+  },
+  {
+    "file": "forklift-safety.ts",
+    "code": "SRN-FLT-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Forklift Kritik Güvenlik Kuralları",
+      "en": "Forklift Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "YETKİLİ OPERATÖR • KONTROL ET • KAPASİTEYİ AŞMA • YAYAYI KORU",
+      "en": "AUTHORIZED OPERATOR • INSPECT • RESPECT CAPACITY • PROTECT PEDESTRIANS"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Yetkili Operatör Kullanır",
+          "en": "Authorized Operators Only"
+        },
+        "items": {
+          "tr": [
+            "Forklifti yalnızca eğitimli ve yetkili personel kullansın.",
+            "Yetkilendirme kapsamına uygun ekipman kullan.",
+            "Yetkisiz kullanıma izin verme."
+          ],
+          "en": [
+            "Only trained and authorized personnel may operate the forklift.",
+            "Operate equipment within the scope of authorization.",
+            "Prevent unauthorized use."
+          ]
+        },
+        "icon": "flt-operator",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Günlük Kontrol Yap",
+          "en": "Inspect Before Use"
+        },
+        "items": {
+          "tr": [
+            "Vardiya öncesi forklift kontrolünü tamamla.",
+            "Fren, direksiyon, korna, lastik ve çatalları kontrol et.",
+            "Emniyetsiz ekipmanı hizmet dışı bırak."
+          ],
+          "en": [
+            "Complete the pre-shift forklift inspection.",
+            "Check brakes, steering, horn, tyres and forks.",
+            "Remove unsafe equipment from service."
+          ]
+        },
+        "icon": "flt-inspect",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Kapasiteyi Aşma",
+          "en": "Respect Rated Capacity"
+        },
+        "items": {
+          "tr": [
+            "Yük kapasite plakasını kontrol et.",
+            "Yük merkezi ve ataşman etkisini dikkate al.",
+            "Aşırı veya dengesiz yük taşıma."
+          ],
+          "en": [
+            "Check the capacity plate.",
+            "Consider load centre and attachment effects.",
+            "Do not carry overloaded or unstable loads."
+          ]
+        },
+        "icon": "flt-load",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Yükü Stabil Tut",
+          "en": "Keep the Load Stable"
+        },
+        "items": {
+          "tr": [
+            "Yükü çatallara dengeli yerleştir.",
+            "Seyir sırasında yükü mümkün olduğunca düşük tut.",
+            "Gevşek malzemeyi emniyete al."
+          ],
+          "en": [
+            "Centre the load on the forks.",
+            "Keep the load as low as practicable while travelling.",
+            "Secure loose materials."
+          ]
+        },
+        "icon": "flt-stable",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Yayaları Ayır",
+          "en": "Separate Pedestrians"
+        },
+        "items": {
+          "tr": [
+            "Yaya yollarına öncelik ver.",
+            "Kör nokta ve kapılarda korna kullan.",
+            "İnsanların yükseltilmiş yük altına girmesine izin verme."
+          ],
+          "en": [
+            "Respect pedestrian routes.",
+            "Use the horn at blind spots and doorways.",
+            "Never allow people beneath elevated loads."
+          ]
+        },
+        "icon": "flt-pedestrian",
+        "tone": "mandatory"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Görüşü Koru",
+          "en": "Maintain Visibility"
+        },
+        "items": {
+          "tr": [
+            "Görüş engelliyse güvenli yönde seyret veya spotter kullan.",
+            "Kavşaklarda yavaşla.",
+            "Hızını saha koşullarına göre ayarla."
+          ],
+          "en": [
+            "Travel in a safe direction or use a spotter when the load blocks visibility.",
+            "Slow down at intersections.",
+            "Adjust speed to site conditions."
+          ]
+        },
+        "icon": "flt-visibility",
+        "tone": "mandatory"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Eğimlerde Kontrollü Ol",
+          "en": "Control Travel on Slopes"
+        },
+        "items": {
+          "tr": [
+            "Rampalarda ani dönüş yapma.",
+            "Yük yönünü güvenli konumda tut.",
+            "Kaygan ve bozuk zeminde hızını azalt."
+          ],
+          "en": [
+            "Do not make sudden turns on ramps.",
+            "Keep the load oriented safely on grades.",
+            "Reduce speed on slippery or damaged surfaces."
+          ]
+        },
+        "icon": "flt-slope",
+        "tone": "mandatory"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Güvenli Park Et",
+          "en": "Park Safely"
+        },
+        "items": {
+          "tr": [
+            "Çatalları tamamen indir.",
+            "Kontrolleri nötrle ve park frenini uygula.",
+            "Yetkisiz çalıştırmaya karşı anahtarı kontrol et."
+          ],
+          "en": [
+            "Fully lower the forks.",
+            "Neutralize controls and apply the parking brake.",
+            "Control the key against unauthorized operation."
+          ]
+        },
+        "icon": "flt-park",
+        "tone": "mandatory"
+      }
+    ],
+    "never": {
+      "tr": [
+        "YETKİSİZ FORKLİFT KULLANMA",
+        "KAPASİTE PLAKASINI AŞMA",
+        "YÜK ALTINDA İNSAN BULUNDURMA",
+        "GÖRÜŞ OLMADAN KONTROLSÜZ SEYRETME",
+        "ÇATALLAR YUKARIDAYKEN FORKLİFTİ TERK ETME"
+      ],
+      "en": [
+        "NEVER OPERATE A FORKLIFT WITHOUT AUTHORIZATION",
+        "NEVER EXCEED THE RATED CAPACITY",
+        "NEVER ALLOW PEOPLE BENEATH A LOAD",
+        "NEVER TRAVEL BLIND WITHOUT CONTROLS",
+        "NEVER LEAVE A FORKLIFT WITH FORKS RAISED"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Baret",
+        "Koruyucu Gözlük",
+        "İş Eldiveni",
+        "Emniyet Ayakkabısı",
+        "Reflektif Yelek"
+      ],
+      "en": [
+        "Safety Helmet",
+        "Safety Glasses",
+        "Work Gloves",
+        "Safety Footwear",
+        "High-Visibility Vest"
+      ]
+    }
+  },
+  {
+    "file": "hot-work.ts",
+    "code": "SRN-HW-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Sıcak Çalışma Kritik Güvenlik Kuralları",
+      "en": "Hot Work Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "İzin Al • Yanıcıları Kontrol Et • Yangını Önle",
+      "en": "Authorize • Control Combustibles • Prevent Fire"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Çalışma İzni",
+          "en": "Hot Work Permit"
+        },
+        "items": {
+          "tr": [
+            "Geçerli sıcak çalışma iznini doğrula.",
+            "Çalışma alanı ve kapsamın izinle uyumlu olduğunu kontrol et.",
+            "Koşullar değişirse işi durdur ve izni yeniden değerlendir."
+          ],
+          "en": [
+            "Verify a valid hot work permit.",
+            "Confirm the work area and scope match the authorization.",
+            "Stop work and reassess the permit if conditions change."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Yanıcıları Uzaklaştır",
+          "en": "Remove Combustibles"
+        },
+        "items": {
+          "tr": [
+            "Yanıcı malzemeleri güvenli mesafeye taşı.",
+            "Taşınamayan malzemeleri yangına dayanıklı örtüyle koru.",
+            "Zemin, boşluk ve karşı yüzleri kıvılcıma karşı kontrol et."
+          ],
+          "en": [
+            "Move combustible materials to a safe distance.",
+            "Protect immovable materials with fire-resistant covers.",
+            "Check floors, openings and opposite surfaces for spark exposure."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Gaz Ölçümü",
+          "en": "Atmospheric Testing"
+        },
+        "items": {
+          "tr": [
+            "Gerekli alanlarda atmosferi işe başlamadan önce ölç.",
+            "Oksijen, yanıcı gaz ve toksik riskleri doğrula.",
+            "Koşullar değişebilecekse sürekli veya periyodik ölçüm yap."
+          ],
+          "en": [
+            "Test the atmosphere before work where required.",
+            "Verify oxygen, flammable-gas and toxic hazards.",
+            "Use continuous or periodic monitoring when conditions may change."
+          ]
+        },
+        "icon": "weather",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Yangın Gözcüsü",
+          "en": "Fire Watch"
+        },
+        "items": {
+          "tr": [
+            "Eğitimli ve başka görev verilmeyen gözcü görevlendir.",
+            "Gözcünün tüm riskli alanları görebilmesini sağla.",
+            "Gözcüye işi durdurma ve alarm verme yetkisi ver."
+          ],
+          "en": [
+            "Assign a trained fire watch with no conflicting duties.",
+            "Ensure all exposed areas remain visible and accessible.",
+            "Authorize the fire watch to stop work and raise the alarm."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Söndürme Ekipmanı",
+          "en": "Firefighting Equipment"
+        },
+        "items": {
+          "tr": [
+            "Uygun söndürücüyü hemen erişilebilir konumda tut.",
+            "Ekipmanın kontrol edilmiş ve kullanıma hazır olduğunu doğrula.",
+            "Alarm ve acil iletişim yöntemini önceden belirle."
+          ],
+          "en": [
+            "Keep suitable extinguishing equipment immediately available.",
+            "Verify equipment is inspected and ready for use.",
+            "Confirm alarm and emergency communication arrangements."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "warning"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Kıvılcım ve Isı Kontrolü",
+          "en": "Control Sparks and Heat"
+        },
+        "items": {
+          "tr": [
+            "Kıvılcım, cüruf ve sıcak parçaların yayılmasını sınırla.",
+            "Yangın perdesi veya uygun bariyer kullan.",
+            "Duvar, boru ve metal yüzeylerden ısı iletimini değerlendir."
+          ],
+          "en": [
+            "Confine sparks, slag and hot fragments.",
+            "Use fire curtains or suitable barriers.",
+            "Assess heat conduction through walls, pipes and metal surfaces."
+          ]
+        },
+        "icon": "fall",
+        "tone": "warning"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Tüp ve Hortum Güvenliği",
+          "en": "Cylinder and Hose Safety"
+        },
+        "items": {
+          "tr": [
+            "Tüpleri dik, sabitlenmiş ve ısıdan uzakta tut.",
+            "Hortum, regülatör ve bağlantıları kullanmadan önce kontrol et.",
+            "Oksijen ekipmanını yağ ve gresten uzak tut."
+          ],
+          "en": [
+            "Keep cylinders upright, secured and away from heat.",
+            "Inspect hoses, regulators and connections before use.",
+            "Keep oxygen equipment free from oil and grease."
+          ]
+        },
+        "icon": "anchor",
+        "tone": "warning"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "İş Sonrası Kontrol",
+          "en": "Post-Work Fire Watch"
+        },
+        "items": {
+          "tr": [
+            "İş bitiminden sonra alanı en az 30 dakika gözetle.",
+            "Gizli boşlukları ve için için yanma ihtimalini kontrol et.",
+            "Alan güvenli doğrulanmadan gözetimi sonlandırma."
+          ],
+          "en": [
+            "Monitor the area for at least 30 minutes after completion.",
+            "Check concealed spaces and possible smouldering fires.",
+            "Do not end the watch until the area is confirmed safe."
+          ]
+        },
+        "icon": "weather",
+        "tone": "information"
+      }
+    ],
+    "never": {
+      "tr": [
+        "Geçerli sıcak çalışma izni yoksa işi hemen durdur",
+        "Yanıcı veya patlayıcı atmosfer riski kontrol edilmediyse işi durdur",
+        "Yanıcı malzemeler uzaklaştırılmamış veya korunmamışsa işi durdur",
+        "Yangın gözcüsü veya uygun söndürme ekipmanı yoksa işi durdur",
+        "Kıvılcım ve sıcak parçalar kontrol edilemiyorsa işi durdur"
+      ],
+      "en": [
+        "Stop work immediately if there is no valid hot work permit",
+        "Stop work if flammable or explosive atmospheric hazards are uncontrolled",
+        "Stop work if combustibles are not removed or protected",
+        "Stop work if there is no fire watch or suitable extinguishing equipment",
+        "Stop work if sparks and hot fragments cannot be contained"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Kaynak Başlığı",
+        "Koruyucu Gözlük",
+        "Isı Eldiveni",
+        "Deri Ayakkabı",
+        "Alev Geciktirici Giysi"
+      ],
+      "en": [
+        "Welding Helmet",
+        "Safety Glasses",
+        "Heat-Resistant Gloves",
+        "Leather Footwear",
+        "Flame-Resistant Clothing"
+      ]
+    }
+  },
+  {
+    "file": "housekeeping-safety.ts",
+    "code": "SRN-HSK-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Saha Düzeni ve Temizlikte Kritik Güvenlik Kuralları",
+      "en": "Housekeeping Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "TEMİZLE • DÜZENLE • GEÇİŞİ AÇIK TUT • RİSKİ HEMEN GİDER",
+      "en": "CLEAN • ORGANIZE • KEEP ACCESS CLEAR • REMOVE HAZARDS"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Alanı Düzenli Tut",
+          "en": "Keep the Area Orderly"
+        },
+        "items": {
+          "tr": [
+            "Malzeme ve ekipmanı belirlenmiş yerlerde tut.",
+            "Geçiş yollarında gereksiz malzeme bırakma.",
+            "İş bitiminde alanı düzenle."
+          ],
+          "en": [
+            "Store materials and equipment in designated locations.",
+            "Keep unnecessary materials out of access routes.",
+            "Restore the work area after the task."
+          ]
+        },
+        "icon": "hsk-clean",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Geçiş Yollarını Açık Tut",
+          "en": "Keep Access Routes Clear"
+        },
+        "items": {
+          "tr": [
+            "Yürüme yollarını, kapıları ve acil çıkışları açık tut.",
+            "Kablo ve hortumları geçiş yollarından kaldır veya koru.",
+            "Erişimi hiçbir zaman depolama alanı olarak kullanma."
+          ],
+          "en": [
+            "Keep walkways, doors and emergency exits clear.",
+            "Route or protect cables and hoses crossing access ways.",
+            "Never use access routes as storage areas."
+          ]
+        },
+        "icon": "hsk-walkway",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Dökülmeleri Hemen Temizle",
+          "en": "Clean Spills Immediately"
+        },
+        "items": {
+          "tr": [
+            "Yağ, su ve kimyasal dökülmelerini gecikmeden kontrol altına al.",
+            "Alanı temizlenene kadar işaretle veya bariyerle.",
+            "Uygun absorban ve atık yöntemini kullan."
+          ],
+          "en": [
+            "Control oil, water and chemical spills without delay.",
+            "Mark or barricade the area until it is safe.",
+            "Use suitable absorbents and disposal methods."
+          ]
+        },
+        "icon": "hsk-spill",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Atıkları Doğru Yönet",
+          "en": "Manage Waste Correctly"
+        },
+        "items": {
+          "tr": [
+            "Atıkları uygun ve etiketli kaplara koy.",
+            "Yanıcı ve tehlikeli atıkları ayrı yönet.",
+            "Kutuların taşmasını önle."
+          ],
+          "en": [
+            "Place waste in suitable labelled containers.",
+            "Segregate flammable and hazardous waste.",
+            "Prevent waste containers from overflowing."
+          ]
+        },
+        "icon": "hsk-bin",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Takılma Risklerini Kaldır",
+          "en": "Remove Trip Hazards"
+        },
+        "items": {
+          "tr": [
+            "Kablo, hortum, ambalaj ve parçaları zeminde bırakma.",
+            "Bozuk zemin ve seviye farklarını bildir.",
+            "Geçici riskleri görünür şekilde işaretle."
+          ],
+          "en": [
+            "Do not leave cables, hoses, packaging or parts on the floor.",
+            "Report damaged floors and level changes.",
+            "Clearly mark temporary hazards."
+          ]
+        },
+        "icon": "hsk-trip",
+        "tone": "mandatory"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Malzemeyi Güvenli İstifle",
+          "en": "Stack Materials Safely"
+        },
+        "items": {
+          "tr": [
+            "İstifleri dengeli ve devrilmeyecek şekilde kur.",
+            "Ağır malzemeyi mümkün olduğunca alt seviyede tut.",
+            "İstif yüksekliği ve kapasite kurallarına uy."
+          ],
+          "en": [
+            "Build stable stacks that cannot collapse.",
+            "Keep heavier materials at lower levels where practicable.",
+            "Follow stacking-height and capacity requirements."
+          ]
+        },
+        "icon": "hsk-stack",
+        "tone": "mandatory"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Acil Ekipmanı Kapatma",
+          "en": "Keep Emergency Equipment Clear"
+        },
+        "items": {
+          "tr": [
+            "Yangın ekipmanı ve ilk yardım erişimini engelleme.",
+            "Elektrik panoları ve izolasyon noktalarının önünü açık tut.",
+            "Acil ekipman çevresinde malzeme depolama."
+          ],
+          "en": [
+            "Do not obstruct fire or first-aid equipment.",
+            "Keep electrical panels and isolation points accessible.",
+            "Do not store materials around emergency equipment."
+          ]
+        },
+        "icon": "hsk-emergency",
+        "tone": "mandatory"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Güvensiz Alanı Düzelt",
+          "en": "Correct Unsafe Conditions"
+        },
+        "items": {
+          "tr": [
+            "Gördüğün housekeeping riskini mümkünse hemen gider.",
+            "Gideremiyorsan alanı koru ve bildir.",
+            "Aynı uygunsuzluğun tekrarını önle."
+          ],
+          "en": [
+            "Correct housekeeping hazards immediately where possible.",
+            "If you cannot correct the hazard, protect the area and report it.",
+            "Prevent recurrence of the same condition."
+          ]
+        },
+        "icon": "hsk-stop",
+        "tone": "mandatory"
+      }
+    ],
+    "never": {
+      "tr": [
+        "ACİL ÇIKIŞLARI VE GEÇİŞ YOLLARINI KAPATMA",
+        "DÖKÜLMEYİ KORUMASIZ BIRAKMA",
+        "GELİŞİGÜZEL MALZEME VE ATIK İSTİFLEME",
+        "YANGIN VE ACİL EKİPMAN ERİŞİMİNİ ENGELLEME",
+        "TAKILMA RİSKİNİ GÖRMEZDEN GELME"
+      ],
+      "en": [
+        "NEVER BLOCK EMERGENCY EXITS OR ACCESS ROUTES",
+        "NEVER LEAVE A SPILL UNCONTROLLED",
+        "NEVER STORE MATERIALS OR WASTE RANDOMLY",
+        "NEVER OBSTRUCT FIRE OR EMERGENCY EQUIPMENT",
+        "NEVER IGNORE A TRIP HAZARD"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Baret",
+        "Koruyucu Gözlük",
+        "İş Eldiveni",
+        "Kaymaz İş Ayakkabısı",
+        "Reflektif Yelek"
+      ],
+      "en": [
+        "Safety Helmet",
+        "Safety Glasses",
+        "Work Gloves",
+        "Slip-Resistant Safety Footwear",
+        "High-Visibility Vest"
+      ]
+    }
+  },
+  {
+    "file": "ladder-safety.ts",
+    "code": "SRN-LAD-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Merdiven Kritik Güvenlik Kuralları",
+      "en": "Ladder Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "DOĞRU SEÇ • KONTROL ET • SABİTLE • 3 NOKTA TEMASINI KORU",
+      "en": "SELECT • INSPECT • SECURE • MAINTAIN 3-POINT CONTACT"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Kullanım Öncesi Kontrol",
+          "en": "Pre-Use Inspection"
+        },
+        "items": {
+          "tr": [
+            "Basamakları, yan kolları, ayakları ve bağlantıları kontrol et.",
+            "Çatlak, eğilmiş, gevşek veya eksik parça varsa kullanma.",
+            "Hasarlı merdiveni hemen kullanım dışı bırak."
+          ],
+          "en": [
+            "Inspect rungs, side rails, feet and connections before use.",
+            "Do not use ladders with cracks, bends, loose or missing parts.",
+            "Immediately remove damaged ladders from service."
+          ]
+        },
+        "icon": "ladder-inspection",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Doğru Merdiveni Seç",
+          "en": "Select the Correct Ladder"
+        },
+        "items": {
+          "tr": [
+            "İşe uygun tipte ve yeterli uzunlukta merdiven kullan.",
+            "Merdivenin taşıma kapasitesini aşma.",
+            "Elektrik tehlikesi bulunan alanlarda metal merdiven kullanma."
+          ],
+          "en": [
+            "Use the correct ladder type and sufficient length for the task.",
+            "Never exceed the ladder load rating.",
+            "Do not use metal ladders where electrical hazards are present."
+          ]
+        },
+        "icon": "ladder-select",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Sağlam Zemine Yerleştir",
+          "en": "Use Stable Ground"
+        },
+        "items": {
+          "tr": [
+            "Merdiveni düz, sağlam ve kaymaz zemine kur.",
+            "Kutu, palet veya geçici yükselti üzerine merdiven koyma.",
+            "Ayakların kaymasını veya batmasını önle."
+          ],
+          "en": [
+            "Place the ladder on firm, level and non-slip ground.",
+            "Never place ladders on boxes, pallets or temporary platforms.",
+            "Prevent the ladder feet from slipping or sinking."
+          ]
+        },
+        "icon": "ladder-ground",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Doğru Açı ve Sabitleme",
+          "en": "Correct Angle and Securing"
+        },
+        "items": {
+          "tr": [
+            "Dayamalı merdivenlerde yaklaşık 4:1 yerleşim oranını uygula.",
+            "Üst ve alt noktayı mümkün olduğunda sabitle.",
+            "Merdivenin hareket etmeyeceğinden emin ol."
+          ],
+          "en": [
+            "Use approximately a 4:1 setup ratio for leaning ladders.",
+            "Secure the top and bottom whenever practicable.",
+            "Ensure the ladder cannot move during use."
+          ]
+        },
+        "icon": "ladder-angle",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "3 Nokta Temasını Koru",
+          "en": "Maintain 3-Point Contact"
+        },
+        "items": {
+          "tr": [
+            "Çıkarken ve inerken merdivene dönük ol.",
+            "Her zaman üç nokta temasını koru.",
+            "Elleri serbest bırakmak için alet çantası veya uygun taşıma yöntemi kullan."
+          ],
+          "en": [
+            "Face the ladder while ascending and descending.",
+            "Maintain three points of contact at all times.",
+            "Use a tool belt or suitable method to keep hands free while climbing."
+          ]
+        },
+        "icon": "ladder-contact",
+        "tone": "mandatory"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Aşırı Uzanma Yapma",
+          "en": "Do Not Overreach"
+        },
+        "items": {
+          "tr": [
+            "Vücudunu merdivenin yan kolları arasında tut.",
+            "Güvenli şekilde ulaşamıyorsan aşağı in.",
+            "Merdiveni yeniden konumlandır ve işe devam et."
+          ],
+          "en": [
+            "Keep your body between the ladder side rails.",
+            "Climb down if the work cannot be reached safely.",
+            "Reposition the ladder before continuing the task."
+          ]
+        },
+        "icon": "ladder-overreach",
+        "tone": "mandatory"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Çalışma Alanını Koru",
+          "en": "Protect the Work Area"
+        },
+        "items": {
+          "tr": [
+            "Kapı, araç veya yaya trafiği olan bölgelerde alanı bariyerle.",
+            "Kapıları kilitle veya kontrol altına al.",
+            "Merdivenin çarpılmasını veya yerinden oynamasını önle."
+          ],
+          "en": [
+            "Barricade areas exposed to doors, vehicles or pedestrian traffic.",
+            "Lock or control doors where necessary.",
+            "Prevent the ladder from being struck or displaced."
+          ]
+        },
+        "icon": "ladder-barricade",
+        "tone": "mandatory"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Güvensizse İşi Durdur",
+          "en": "Stop When Unsafe"
+        },
+        "items": {
+          "tr": [
+            "Kaygan yüzey, kuvvetli rüzgar veya kötü hava koşullarında kullanma.",
+            "Merdiven güvenli şekilde sabitlenemiyorsa işi durdur.",
+            "Gerekirse iskele veya uygun erişim ekipmanı kullan."
+          ],
+          "en": [
+            "Do not use ladders on slippery surfaces, in strong winds or unsafe weather.",
+            "Stop work if the ladder cannot be secured safely.",
+            "Use a scaffold or suitable access equipment when required."
+          ]
+        },
+        "icon": "ladder-stop",
+        "tone": "mandatory"
+      }
+    ],
+    "never": {
+      "tr": [
+        "Hasarlı veya etiketsiz merdiven kullanma",
+        "Merdiveni kutu, palet veya geçici yükselti üzerine koyma",
+        "Merdiven üzerinde aşırı yana uzanma",
+        "Elektrik tehlikesi yakınında metal merdiven kullanma",
+        "Merdiven güvenli şekilde konumlandırılamıyorsa işe devam etme"
+      ],
+      "en": [
+        "Never use a damaged or unidentified ladder",
+        "Never place a ladder on boxes, pallets or temporary platforms",
+        "Never overreach sideways while on a ladder",
+        "Never use a metal ladder near electrical hazards",
+        "Never continue when the ladder cannot be positioned safely"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Baret",
+        "Koruyucu Gözlük",
+        "İş Eldiveni",
+        "Kaymaz İş Ayakkabısı",
+        "Tam Vücut Emniyet Kemeri*"
+      ],
+      "en": [
+        "Safety Helmet",
+        "Safety Glasses",
+        "Work Gloves",
+        "Slip-Resistant Safety Footwear",
+        "Full Body Harness*"
+      ]
+    }
+  },
+  {
+    "file": "loto.ts",
+    "code": "SRN-LOTO-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "LOTO Kritik Güvenlik Kuralları",
+      "en": "LOTO Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "Enerjiyi Belirle • İzole Et • Kilitle • Sıfır Enerjiyi Doğrula",
+      "en": "Identify • Isolate • Lock Out • Verify Zero Energy"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Enerjileri Belirle",
+          "en": "Identify Energy Sources"
+        },
+        "items": {
+          "tr": [
+            "Elektrik, mekanik, hidrolik, pnömatik ve termal enerjileri belirle.",
+            "Yerçekimi, basınç, kimyasal ve depolanmış enerjiyi unutma.",
+            "Makineye özel enerji kontrol prosedürünü incele."
+          ],
+          "en": [
+            "Identify electrical, mechanical, hydraulic, pneumatic and thermal energy.",
+            "Include gravity, pressure, chemical and stored energy sources.",
+            "Review the machine-specific energy-control procedure."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Personeli Bilgilendir",
+          "en": "Notify Affected Employees"
+        },
+        "items": {
+          "tr": [
+            "Etkilenen çalışanları kapatma ve LOTO işlemi hakkında bilgilendir.",
+            "İşin kapsamını ve tahmini süresini açıkla.",
+            "Makinenin yeniden çalıştırılmayacağını belirt."
+          ],
+          "en": [
+            "Notify affected employees before shutdown and lockout.",
+            "Explain the work scope and expected duration.",
+            "State clearly that the machine must not be restarted."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Ekipmanı Kapat",
+          "en": "Shut Down Equipment"
+        },
+        "items": {
+          "tr": [
+            "Makineyi normal durdurma yöntemiyle kontrollü şekilde kapat.",
+            "Ani duruşun oluşturabileceği ek tehlikeleri önle.",
+            "Tüm hareketli parçaların tamamen durmasını bekle."
+          ],
+          "en": [
+            "Shut down the machine using its normal stopping procedure.",
+            "Prevent additional hazards caused by an uncontrolled shutdown.",
+            "Wait until all moving components have fully stopped."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Enerjiyi İzole Et",
+          "en": "Isolate Every Energy Source"
+        },
+        "items": {
+          "tr": [
+            "Tüm enerji ayırma cihazlarını güvenli konuma getir.",
+            "Vana, şalter, kesici ve beslemeleri fiziksel olarak ayır.",
+            "Kumanda butonlarını izolasyon cihazı olarak kabul etme."
+          ],
+          "en": [
+            "Place every energy-isolating device in the safe position.",
+            "Physically isolate valves, breakers, disconnects and supplies.",
+            "Never use control buttons as energy-isolating devices."
+          ]
+        },
+        "icon": "anchor",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Kilitle ve Etiketle",
+          "en": "Apply Locks and Tags"
+        },
+        "items": {
+          "tr": [
+            "Her yetkili çalışan kendi kişisel kilidini uygulasın.",
+            "Etikette isim, tarih ve çalışma bilgisi yer alsın.",
+            "Grup çalışmalarında onaylı kilit kutusu veya hasp kullan."
+          ],
+          "en": [
+            "Each authorized employee must apply a personal lock.",
+            "Include the employee name, date and work information on the tag.",
+            "Use an approved group lockbox or hasp for group lockout."
+          ]
+        },
+        "icon": "anchor",
+        "tone": "mandatory"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Depolanmış Enerjiyi Boşalt",
+          "en": "Control Stored Energy"
+        },
+        "items": {
+          "tr": [
+            "Basıncı boşalt, yayları serbest bırak ve sıcaklığı güvenli seviyeye indir.",
+            "Yükseltilmiş parçaları indir veya mekanik olarak destekle.",
+            "Enerji yeniden birikebilecekse sürekli kontrol uygula."
+          ],
+          "en": [
+            "Release pressure, restrain springs and reduce temperature safely.",
+            "Lower or mechanically block elevated components.",
+            "Maintain control when energy may reaccumulate."
+          ]
+        },
+        "icon": "fall",
+        "tone": "warning"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Sıfır Enerjiyi Doğrula",
+          "en": "Verify Zero Energy"
+        },
+        "items": {
+          "tr": [
+            "Başlatma kumandasını deneyerek beklenmedik hareket olmadığını doğrula.",
+            "Gerekli ölçümleri uygun test cihazıyla gerçekleştir.",
+            "Test sonrası kumandaları güvenli kapalı konuma getir."
+          ],
+          "en": [
+            "Attempt a normal start to confirm that no movement occurs.",
+            "Perform required measurements using suitable test instruments.",
+            "Return all controls to the safe off position after testing."
+          ]
+        },
+        "icon": "weather",
+        "tone": "warning"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Güvenli Şekilde Devreye Al",
+          "en": "Restore Energy Safely"
+        },
+        "items": {
+          "tr": [
+            "Alanı kontrol et; personel, alet ve gereksiz malzemeleri uzaklaştır.",
+            "Her çalışan yalnızca kendi kilidini prosedüre göre çıkarsın.",
+            "Enerji vermeden önce etkilenen çalışanları bilgilendir."
+          ],
+          "en": [
+            "Inspect the area and remove employees, tools and unnecessary materials.",
+            "Each employee must remove only their own lock under the procedure.",
+            "Notify affected employees before restoring energy."
+          ]
+        },
+        "icon": "training",
+        "tone": "information"
+      }
+    ],
+    "never": {
+      "tr": [
+        "Tüm enerji kaynakları belirlenmemişse işi hemen durdur",
+        "Enerji ayırma cihazları kilitlenmemiş veya etiketlenmemişse işi durdur",
+        "Depolanmış veya artık enerji kontrol edilmemişse işi durdur",
+        "Sıfır enerji durumu doğrulanmamışsa işe başlama",
+        "Başkasının kilidini onaylı özel prosedür dışında kesinlikle çıkarma"
+      ],
+      "en": [
+        "Stop work immediately if all hazardous energy sources are not identified",
+        "Stop work if energy-isolating devices are not locked and tagged",
+        "Stop work if stored or residual energy is not controlled",
+        "Do not begin work until zero-energy status has been verified",
+        "Never remove another employee's lock outside an approved special procedure"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Baret",
+        "Koruyucu Gözlük",
+        "Göreve Uygun Eldiven",
+        "Güvenlik Ayakkabısı",
+        "Göreve Uygun KKD"
+      ],
+      "en": [
+        "Safety Helmet",
+        "Safety Glasses",
+        "Task-Specific Gloves",
+        "Safety Footwear",
+        "Task-Specific PPE"
+      ]
+    }
+  },
+  {
+    "file": "manual-handling-safety.ts",
+    "code": "SRN-MH-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Elle Taşıma Kritik Güvenlik Kuralları",
+      "en": "Manual Handling Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "YÜKÜ DEĞERLENDİR • YAKIN TUT • DÖNEREK BURULMA • GEREKİRSE YARDIM AL",
+      "en": "ASSESS THE LOAD • KEEP IT CLOSE • DO NOT TWIST • GET HELP WHEN NEEDED"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Yükü Önce Değerlendir",
+          "en": "Assess the Load First"
+        },
+        "items": {
+          "tr": [
+            "Ağırlık, boyut, tutuş ve ağırlık merkezini değerlendir.",
+            "Yükün hareket edip etmeyeceğini kontrol et.",
+            "Şüphedeysen yardım veya ekipman kullan."
+          ],
+          "en": [
+            "Assess weight, size, grip and centre of gravity.",
+            "Check whether the load can shift.",
+            "Use assistance or equipment when in doubt."
+          ]
+        },
+        "icon": "mh-assess",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Taşıma Yolunu Planla",
+          "en": "Plan the Route"
+        },
+        "items": {
+          "tr": [
+            "Yürüme yolunu önceden kontrol et.",
+            "Kapı, basamak ve engelleri belirle.",
+            "Bırakma noktasını hazırla."
+          ],
+          "en": [
+            "Check the travel route before lifting.",
+            "Identify doors, steps and obstacles.",
+            "Prepare the set-down location."
+          ]
+        },
+        "icon": "mh-route",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Yüke Yaklaş",
+          "en": "Get Close to the Load"
+        },
+        "items": {
+          "tr": [
+            "Ayaklarını dengeli konumlandır.",
+            "Yükü vücuduna yakın tut.",
+            "Uzanarak kaldırma yapma."
+          ],
+          "en": [
+            "Use a stable foot position.",
+            "Keep the load close to your body.",
+            "Do not lift while overreaching."
+          ]
+        },
+        "icon": "mh-close",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Kontrollü Kaldır",
+          "en": "Lift Smoothly"
+        },
+        "items": {
+          "tr": [
+            "Ani hareketten kaçın.",
+            "Bacakları kullan ve kontrollü doğrul.",
+            "Yükü sarsma veya fırlatma."
+          ],
+          "en": [
+            "Avoid sudden movements.",
+            "Use your legs and rise smoothly.",
+            "Do not jerk or throw the load."
+          ]
+        },
+        "icon": "mh-lift",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Burularak Dönme",
+          "en": "Do Not Twist"
+        },
+        "items": {
+          "tr": [
+            "Yük taşırken gövdeyi burma.",
+            "Yön değiştirmek için ayaklarını hareket ettir.",
+            "Dengesiz pozisyonda kaldırma yapma."
+          ],
+          "en": [
+            "Do not twist your torso while carrying a load.",
+            "Move your feet to change direction.",
+            "Do not lift from an unstable posture."
+          ]
+        },
+        "icon": "mh-twist",
+        "tone": "mandatory"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Mekanik Yardım Kullan",
+          "en": "Use Mechanical Assistance"
+        },
+        "items": {
+          "tr": [
+            "Uygun trolley, hoist veya taşıma ekipmanı kullan.",
+            "Ekipmanın kapasitesini kontrol et.",
+            "Hasarlı yardımcı ekipmanı kullanma."
+          ],
+          "en": [
+            "Use a suitable trolley, hoist or handling aid.",
+            "Check equipment capacity.",
+            "Do not use damaged handling aids."
+          ]
+        },
+        "icon": "mh-trolley",
+        "tone": "mandatory"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Ekip Kaldırmayı Koordine Et",
+          "en": "Coordinate Team Lifts"
+        },
+        "items": {
+          "tr": [
+            "Tek bir kişi komut versin.",
+            "Kaldırma ve bırakmayı birlikte yapın.",
+            "Kişiler arasında yük dağılımını dengeli tutun."
+          ],
+          "en": [
+            "Use one person to coordinate commands.",
+            "Lift and lower together.",
+            "Distribute the load evenly between people."
+          ]
+        },
+        "icon": "mh-team",
+        "tone": "mandatory"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Güvenli Şekilde Bırak",
+          "en": "Set Down Safely"
+        },
+        "items": {
+          "tr": [
+            "Parmak ve elleri sıkışma noktalarından uzak tut.",
+            "Yükü stabil yüzeye bırak.",
+            "Yükü düşürme veya kontrolsüz kaydırma."
+          ],
+          "en": [
+            "Keep fingers and hands away from pinch points.",
+            "Set the load on a stable surface.",
+            "Do not drop or slide the load uncontrolled."
+          ]
+        },
+        "icon": "mh-setdown",
+        "tone": "mandatory"
+      }
+    ],
+    "never": {
+      "tr": [
+        "KAPASİTENİN ÜZERİNDE TEK BAŞINA KALDIRMAYA ÇALIŞMA",
+        "BURULARAK VE UZANARAK KALDIRMA YAPMA",
+        "GÖRÜŞÜ KAPATAN YÜKLE KONTROLSÜZ YÜRÜME",
+        "HASARLI TAŞIMA EKİPMANI KULLANMA",
+        "SIKIŞMA NOKTASINA ELİNİ SOKMA"
+      ],
+      "en": [
+        "NEVER ATTEMPT AN UNSAFE SOLO LIFT",
+        "NEVER LIFT WHILE TWISTING OR OVERREACHING",
+        "NEVER WALK BLIND BEHIND A LOAD",
+        "NEVER USE DAMAGED HANDLING EQUIPMENT",
+        "NEVER PLACE HANDS IN PINCH POINTS"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "İş Eldiveni",
+        "Emniyet Ayakkabısı",
+        "İş Kıyafeti",
+        "Reflektif Yelek",
+        "Göreve Göre KKD"
+      ],
+      "en": [
+        "Work Gloves",
+        "Safety Footwear",
+        "Work Clothing",
+        "High-Visibility Vest",
+        "Task-Specific PPE"
+      ]
+    }
+  },
+  {
+    "file": "ppe.ts",
+    "code": "SRN-PPE-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "Zorunlu KKD Kritik Güvenlik Kuralları",
+      "en": "Mandatory PPE Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "Tehlikeyi Değerlendir • Doğru KKD'yi Seç • Her Zaman Kullan",
+      "en": "Assess the Hazard • Select Correct PPE • Wear It Every Time"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Tehlikeleri Değerlendir",
+          "en": "Assess the Hazards"
+        },
+        "items": {
+          "tr": [
+            "İşe başlamadan önce tehlike ve maruziyetleri belirle.",
+            "KKD seçimini risk değerlendirmesine göre yap.",
+            "Koşullar değişirse KKD gerekliliklerini yeniden değerlendir."
+          ],
+          "en": [
+            "Identify hazards and exposures before starting work.",
+            "Select PPE according to the risk assessment.",
+            "Reassess PPE requirements whenever conditions change."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Zorunlu Alan İşaretlerini Takip Et",
+          "en": "Follow Mandatory PPE Signs"
+        },
+        "items": {
+          "tr": [
+            "Çalışma alanındaki zorunlu KKD levhalarını kontrol et.",
+            "Belirlenen KKD olmadan kontrollü alana girme.",
+            "Saha ve müşteri kurallarındaki ek gereklilikleri uygula."
+          ],
+          "en": [
+            "Check mandatory PPE signs at the work area.",
+            "Do not enter controlled areas without designated PPE.",
+            "Follow additional site and client requirements."
+          ]
+        },
+        "icon": "guardrail",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Doğru KKD'yi Seç",
+          "en": "Select the Correct PPE"
+        },
+        "items": {
+          "tr": [
+            "KKD'nin tehlikeye ve yapılan işe uygun olduğunu doğrula.",
+            "Ürün standardını, koruma sınıfını ve kullanım sınırlarını kontrol et.",
+            "Birlikte kullanılan KKD'lerin birbiriyle uyumlu olmasını sağla."
+          ],
+          "en": [
+            "Verify that PPE is suitable for the hazard and task.",
+            "Check the product standard, protection class and limitations.",
+            "Ensure multiple PPE items remain compatible when worn together."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Doğru Beden ve Ayar",
+          "en": "Correct Fit and Adjustment"
+        },
+        "items": {
+          "tr": [
+            "KKD'nin kullanıcıya uygun beden ve ölçüde olmasını sağla.",
+            "Kayış, toka ve ayar noktalarını doğru şekilde ayarla.",
+            "Gevşek, aşırı sıkı veya korumayı bozan KKD kullanma."
+          ],
+          "en": [
+            "Ensure PPE is the correct size for the user.",
+            "Adjust straps, buckles and fitting points correctly.",
+            "Do not use loose, excessively tight or ineffective PPE."
+          ]
+        },
+        "icon": "harness",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Kullanmadan Önce Kontrol Et",
+          "en": "Inspect Before Use"
+        },
+        "items": {
+          "tr": [
+            "Her kullanımdan önce çatlak, yırtık, deformasyon ve aşınmayı kontrol et.",
+            "Etiket, son kullanım tarihi ve kontrol durumunu doğrula.",
+            "Hasarlı veya koruma özelliği şüpheli KKD'yi kullanma."
+          ],
+          "en": [
+            "Check for cracks, tears, deformation and wear before every use.",
+            "Verify labels, expiry dates and inspection status.",
+            "Do not use damaged PPE or equipment with doubtful protection."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "warning"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Doğru Şekilde Kullan",
+          "en": "Wear PPE Correctly"
+        },
+        "items": {
+          "tr": [
+            "KKD'yi üretici talimatına ve eğitime uygun şekilde kullan.",
+            "Koruyucu parçaları çıkarma, değiştirme veya devre dışı bırakma.",
+            "Tehlikeli alanda KKD'yi izinsiz çıkarma."
+          ],
+          "en": [
+            "Use PPE according to training and manufacturer instructions.",
+            "Do not remove, modify or defeat protective components.",
+            "Do not remove required PPE inside hazardous areas."
+          ]
+        },
+        "icon": "training",
+        "tone": "warning"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Temizle ve Güvenli Sakla",
+          "en": "Clean and Store Safely"
+        },
+        "items": {
+          "tr": [
+            "KKD'yi kullanım sonrası uygun yöntemle temizle.",
+            "Güneş, ısı, kimyasal ve fiziksel hasardan koruyarak sakla.",
+            "Ortak kullanılan KKD'yi hijyenik şekilde dezenfekte et."
+          ],
+          "en": [
+            "Clean PPE using an approved method after use.",
+            "Store it away from sunlight, heat, chemicals and physical damage.",
+            "Disinfect shared PPE using a hygienic procedure."
+          ]
+        },
+        "icon": "weather",
+        "tone": "warning"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Hasarlı KKD'yi Değiştir",
+          "en": "Replace Defective PPE"
+        },
+        "items": {
+          "tr": [
+            "Hasarlı veya kullanım ömrü dolmuş KKD'yi derhal hizmet dışı bırak.",
+            "Darbe, kimyasal temas veya olay sonrası yeniden değerlendir.",
+            "Yetkisiz tamir veya geçici çözüm uygulama."
+          ],
+          "en": [
+            "Remove damaged or expired PPE from service immediately.",
+            "Reassess PPE after impact, chemical contact or an incident.",
+            "Do not perform unauthorized repairs or temporary fixes."
+          ]
+        },
+        "icon": "fall",
+        "tone": "information"
+      }
+    ],
+    "never": {
+      "tr": [
+        "Risk değerlendirmesinde belirlenen zorunlu KKD mevcut değilse işi hemen durdur",
+        "KKD hasarlı, uyumsuz veya göreve uygun değilse işi durdur",
+        "Zorunlu KKD olmadan kontrollü veya tehlikeli alana girme",
+        "KKD'nin koruyucu parçalarını çıkarma, değiştirme veya devre dışı bırakma",
+        "Eğitim, uygun beden veya gerekli özel test tamamlanmamışsa KKD'yi kullanma"
+      ],
+      "en": [
+        "Stop work immediately if required PPE identified by the risk assessment is unavailable",
+        "Stop work if PPE is damaged, incompatible or unsuitable for the task",
+        "Do not enter controlled or hazardous areas without mandatory PPE",
+        "Never remove, modify or defeat protective PPE components",
+        "Do not use PPE without training, correct fitting or required specialist testing"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Baret",
+        "Koruyucu Gözlük",
+        "İş Eldiveni",
+        "Güvenlik Ayakkabısı",
+        "Yüksek Görünürlüklü Giysi"
+      ],
+      "en": [
+        "Safety Helmet",
+        "Safety Glasses",
+        "Work Gloves",
+        "Safety Footwear",
+        "High-Visibility Clothing"
+      ]
+    }
+  },
+  {
+    "file": "scaffold.ts",
+    "code": "SRN-SCF-001",
+    "revision": "1.0",
+    "title": {
+      "tr": "İskele Kritik Güvenlik Kuralları",
+      "en": "Scaffold Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "Kontrol Et • Etiketi Doğrula • Güvenle Kullan",
+      "en": "Inspect • Verify Status • Use Safely"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "Yetkin Kişi Kontrolü",
+          "en": "Competent Person Inspection"
+        },
+        "items": {
+          "tr": [
+            "Her vardiya öncesi görünür kusurları kontrol ettir.",
+            "Değişiklik veya olay sonrası yeniden kontrol yaptır.",
+            "Kontrol edilmemiş iskeleyi kullanma."
+          ],
+          "en": [
+            "Arrange a visible-defect inspection before each shift.",
+            "Reinspect after alterations or events affecting integrity.",
+            "Never use an uninspected scaffold."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Etiket ve Kullanım Durumu",
+          "en": "Tag and Use Status"
+        },
+        "items": {
+          "tr": [
+            "Geçerli kontrol etiketini veya kullanım durumunu doğrula.",
+            "Kısıtlamaları ve özel önlemleri oku.",
+            "Kullanıma kapalı iskeleye çıkma."
+          ],
+          "en": [
+            "Verify the current inspection tag or use status.",
+            "Read all restrictions and special precautions.",
+            "Do not access a scaffold marked out of service."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Temel ve Stabilite",
+          "en": "Foundation and Stability"
+        },
+        "items": {
+          "tr": [
+            "Taban plakası ve sağlam altlık kullanıldığını doğrula.",
+            "Bağlantı, çapraz ve sabitlemeleri kontrol et.",
+            "Çökme, eğilme veya oynama varsa işi durdur."
+          ],
+          "en": [
+            "Verify base plates and firm supporting foundations.",
+            "Check ties, braces and stabilizing components.",
+            "Stop work if settlement, leaning or movement is found."
+          ]
+        },
+        "icon": "anchor",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Tam Platform",
+          "en": "Fully Decked Platform"
+        },
+        "items": {
+          "tr": [
+            "Çalışma platformunun mümkün olduğunca tam döşeli olmasını sağla.",
+            "Gevşek, çatlak veya hasarlı platform kullanma.",
+            "Tehlikeli açıklıkları kapat veya kullanımı durdur."
+          ],
+          "en": [
+            "Ensure working levels are fully planked or decked.",
+            "Do not use loose, cracked or damaged platform units.",
+            "Close hazardous gaps or stop scaffold use."
+          ]
+        },
+        "icon": "guardrail",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Korkuluk Sistemi",
+          "en": "Guardrail System"
+        },
+        "items": {
+          "tr": [
+            "Üst korkuluk ve ara korkuluğun eksiksiz olduğunu doğrula.",
+            "Açık kenar ve uçları koruma altına al.",
+            "Korkulukları izinsiz sökme veya değiştirme."
+          ],
+          "en": [
+            "Verify toprails and midrails are complete.",
+            "Protect all exposed sides and ends.",
+            "Never remove or modify guardrails without authorization."
+          ]
+        },
+        "icon": "guardrail",
+        "tone": "warning"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Güvenli Erişim",
+          "en": "Safe Access"
+        },
+        "items": {
+          "tr": [
+            "Onaylı merdiven, merdiven kulesi veya erişim kullan.",
+            "Çapraz bağlantıları erişim amacıyla kullanma.",
+            "Kapakları geçişten sonra kapalı tut."
+          ],
+          "en": [
+            "Use an approved ladder, stair tower or access system.",
+            "Never climb scaffold cross-braces for access.",
+            "Keep access trapdoors closed after passing."
+          ]
+        },
+        "icon": "ladder",
+        "tone": "mandatory"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Yük ve Malzeme Kontrolü",
+          "en": "Load and Material Control"
+        },
+        "items": {
+          "tr": [
+            "İzin verilen yük kapasitesini aşma.",
+            "Malzemeleri dengeli ve güvenli şekilde yerleştir.",
+            "Geçiş yollarını ve erişim noktalarını açık tut."
+          ],
+          "en": [
+            "Never exceed the permitted scaffold load.",
+            "Distribute and secure materials safely.",
+            "Keep walkways and access points clear."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "warning"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Düşen Cisimleri Önle",
+          "en": "Prevent Dropped Objects"
+        },
+        "items": {
+          "tr": [
+            "Tekmelik, ağ veya uygun düşen cisim kontrolü kullan.",
+            "Alet ve malzemeleri kenarlardan uzak tut.",
+            "Alt alanı bariyerle ve yetkisiz girişi önle."
+          ],
+          "en": [
+            "Use toe boards, screens or suitable falling-object protection.",
+            "Keep tools and materials away from platform edges.",
+            "Barricade the area below and prevent unauthorized entry."
+          ]
+        },
+        "icon": "fall",
+        "tone": "information"
+      }
+    ],
+    "never": {
+      "tr": [
+        "Geçerli kontrol durumu veya kullanım onayı yoksa",
+        "Eksik platform, eksik korkuluk veya güvensiz erişim varsa işi hemen durdur",
+        "İskele eğilmiş, çökmüş veya stabil değilse",
+        "Hasarlı bileşen veya gevşek bağlantı varsa",
+        "Aşırı yükleme veya güvensiz malzeme istifi varsa"
+      ],
+      "en": [
+        "There is no valid inspection status or approval for use",
+        "Stop work immediately if platforms or guardrails are incomplete, or access is unsafe",
+        "The scaffold is leaning, settled or unstable",
+        "Components are damaged or connections are loose",
+        "The scaffold is overloaded or materials are stored unsafely"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Çene Bağlı Baret",
+        "Koruyucu Gözlük",
+        "İş Eldiveni",
+        "Kaymaz Ayakkabı",
+        "Emniyet Kemeri"
+      ],
+      "en": [
+        "Chin-Strap Helmet",
+        "Safety Glasses",
+        "Work Gloves",
+        "Slip-Resistant Footwear",
+        "Safety Harness"
+      ]
+    }
+  },
+  {
+    "file": "working-at-height.ts",
+    "code": "SRN-WAH-001",
+    "revision": "2.0",
+    "title": {
+      "tr": "Yüksekte Çalışma Kritik Güvenlik Kuralları",
+      "en": "Working at Height Critical Safety Rules"
+    },
+    "slogan": {
+      "tr": "Planla • Toplu Korumayı Önceliklendir • Düşmeyi Önle",
+      "en": "Plan • Prioritize Collective Protection • Prevent Falls"
+    },
+    "rules": [
+      {
+        "number": "01",
+        "title": {
+          "tr": "İş Öncesi Planlama",
+          "en": "Pre-Work Planning"
+        },
+        "items": {
+          "tr": [
+            "Risk değerlendirmesi ve çalışma iznini doğrula.",
+            "Güvenli erişim ve çalışma yöntemini belirle.",
+            "Alt alanı bariyerle ve yetkisiz erişimi önle."
+          ],
+          "en": [
+            "Verify the risk assessment and work permit.",
+            "Define the safe access and work method.",
+            "Barricade the area below and prevent unauthorized access."
+          ]
+        },
+        "icon": "training",
+        "tone": "mandatory"
+      },
+      {
+        "number": "02",
+        "title": {
+          "tr": "Toplu Korumayı Kullan",
+          "en": "Use Collective Protection"
+        },
+        "items": {
+          "tr": [
+            "Önce korkuluk, platform veya uygun iskele kullan.",
+            "Açıklıkları sağlam kapak veya bariyerle koru.",
+            "Eksik koruma varsa çalışmaya başlama."
+          ],
+          "en": [
+            "Use guardrails, platforms or suitable scaffolds first.",
+            "Protect openings with secure covers or barriers.",
+            "Do not start if collective protection is incomplete."
+          ]
+        },
+        "icon": "guardrail",
+        "tone": "mandatory"
+      },
+      {
+        "number": "03",
+        "title": {
+          "tr": "Tam Vücut Kemeri",
+          "en": "Full Body Harness"
+        },
+        "items": {
+          "tr": [
+            "Her kullanımdan önce kayış, dikiş ve etiketi kontrol et.",
+            "Kemeri doğru giy, tokaları kapat ve ayarla.",
+            "Hasarlı veya düşüş yaşamış ekipmanı kullanım dışı bırak."
+          ],
+          "en": [
+            "Inspect webbing, stitching and labels before every use.",
+            "Wear, fasten and adjust the harness correctly.",
+            "Remove damaged or fall-arrested equipment from service."
+          ]
+        },
+        "icon": "harness",
+        "tone": "mandatory"
+      },
+      {
+        "number": "04",
+        "title": {
+          "tr": "Onaylı Ankraj",
+          "en": "Approved Anchorage"
+        },
+        "items": {
+          "tr": [
+            "Yalnızca belirlenmiş ve onaylanmış ankraja bağlan.",
+            "Kapasitenin kişi başına 22,2 kN olduğunu doğrula.",
+            "Ankrajı mümkün olduğunca baş seviyesinin üzerinde seç."
+          ],
+          "en": [
+            "Connect only to a designated and approved anchorage.",
+            "Verify a capacity of 22.2 kN per attached worker.",
+            "Select an anchorage above head level whenever possible."
+          ]
+        },
+        "icon": "anchor",
+        "tone": "mandatory"
+      },
+      {
+        "number": "05",
+        "title": {
+          "tr": "Düşüş Mesafesi",
+          "en": "Fall Clearance"
+        },
+        "items": {
+          "tr": [
+            "Serbest düşüşü ve toplam düşüş açıklığını hesapla.",
+            "Alt seviyeye veya engele çarpma riskini önle.",
+            "Sallanarak düşme riskini en aza indir."
+          ],
+          "en": [
+            "Calculate free-fall and total clearance distance.",
+            "Prevent contact with lower levels or obstructions.",
+            "Minimize the risk of a swing fall."
+          ]
+        },
+        "icon": "fall",
+        "tone": "warning"
+      },
+      {
+        "number": "06",
+        "title": {
+          "tr": "Güvenli Erişim",
+          "en": "Safe Access"
+        },
+        "items": {
+          "tr": [
+            "Göreve uygun ve kontrol edilmiş erişim ekipmanı kullan.",
+            "Merdivende üç nokta temasını koru.",
+            "Erişim yolunu temiz, sabit ve engelsiz tut."
+          ],
+          "en": [
+            "Use inspected access equipment suitable for the task.",
+            "Maintain three-point contact on ladders.",
+            "Keep access routes clear, stable and unobstructed."
+          ]
+        },
+        "icon": "ladder",
+        "tone": "mandatory"
+      },
+      {
+        "number": "07",
+        "title": {
+          "tr": "Düşen Cisimleri Önle",
+          "en": "Prevent Dropped Objects"
+        },
+        "items": {
+          "tr": [
+            "Aletleri uygun sabitleme sistemiyle emniyete al.",
+            "Malzemeleri kenarlardan uzakta ve güvenli istifle.",
+            "Alt çalışma alanını izole et ve girişleri kontrol et."
+          ],
+          "en": [
+            "Secure tools using a suitable tethering system.",
+            "Store materials safely away from edges.",
+            "Isolate the area below and control access."
+          ]
+        },
+        "icon": "equipment",
+        "tone": "warning"
+      },
+      {
+        "number": "08",
+        "title": {
+          "tr": "Kurtarma Hazırlığı",
+          "en": "Rescue Readiness"
+        },
+        "items": {
+          "tr": [
+            "İşe başlamadan önce uygulanabilir kurtarma planı hazırla.",
+            "Kurtarma ekipmanı ve eğitimli personeli hazır bulundur.",
+            "Acil iletişim ve müdahale yöntemini doğrula."
+          ],
+          "en": [
+            "Prepare a workable rescue plan before starting.",
+            "Ensure rescue equipment and trained personnel are available.",
+            "Verify emergency communication and response arrangements."
+          ]
+        },
+        "icon": "training",
+        "tone": "information"
+      }
+    ],
+    "never": {
+      "tr": [
+        "Onaylı ankraj veya düşüş koruması yoksa",
+        "Kemer, lanyard veya bağlantı ekipmanı hasarlıysa",
+        "Korumasız kenar veya açık boşluk varsa",
+        "Kurtarma planı ve müdahale imkânı yoksa",
+        "Rüzgâr, buzlanma veya görüş koşulları güvenli değilse"
+      ],
+      "en": [
+        "There is no approved anchorage or fall protection",
+        "The harness, lanyard or connector is damaged",
+        "An unprotected edge or open hole is present",
+        "No rescue plan or response capability is available",
+        "Wind, ice or visibility conditions are unsafe"
+      ]
+    },
+    "ppe": {
+      "tr": [
+        "Çene Bağlı Baret",
+        "Koruyucu Gözlük",
+        "İş Eldiveni",
+        "Kaymaz Ayakkabı",
+        "Tam Vücut Kemeri"
+      ],
+      "en": [
+        "Chin-Strap Helmet",
+        "Safety Glasses",
+        "Work Gloves",
+        "Slip-Resistant Footwear",
+        "Full Body Harness"
+      ]
+    }
+  }
+]

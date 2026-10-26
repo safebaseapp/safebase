@@ -33,7 +33,7 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Immediately remove damaged ladders from service.",
         ],
       },
-      icon: "ladder-inspection" as any,
+      icon: "ladder-inspection",
       tone: "mandatory",
     },
     {
@@ -54,7 +54,7 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Do not use metal ladders where electrical hazards are present.",
         ],
       },
-      icon: "ladder-select" as any,
+      icon: "ladder-select",
       tone: "mandatory",
     },
     {
@@ -75,7 +75,7 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Prevent the ladder feet from slipping or sinking.",
         ],
       },
-      icon: "ladder-ground" as any,
+      icon: "ladder-ground",
       tone: "mandatory",
     },
     {
@@ -86,17 +86,17 @@ export const ladderSafetyPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Dayamalı merdivenlerde yaklaşık 4:1 yerleşim oranını uygula.",
+          "Dayamalı merdivende üreticinin kurulum açısını doğrula.",
           "Üst ve alt noktayı mümkün olduğunda sabitle.",
           "Merdivenin hareket etmeyeceğinden emin ol.",
         ],
         en: [
-          "Use approximately a 4:1 setup ratio for leaning ladders.",
+          "Verify the manufacturer setup angle for a leaning ladder.",
           "Secure the top and bottom whenever practicable.",
           "Ensure the ladder cannot move during use.",
         ],
       },
-      icon: "ladder-angle" as any,
+      icon: "ladder-angle",
       tone: "mandatory",
     },
     {
@@ -108,16 +108,16 @@ export const ladderSafetyPoster: PosterDefinition = {
       items: {
         tr: [
           "Çıkarken ve inerken merdivene dönük ol.",
-          "Her zaman üç nokta temasını koru.",
+          "Tırmanırken üç nokta temasını koru.",
           "Elleri serbest bırakmak için alet çantası veya uygun taşıma yöntemi kullan.",
         ],
         en: [
           "Face the ladder while ascending and descending.",
-          "Maintain three points of contact at all times.",
+          "Maintain three points of contact when climbing.",
           "Use a tool belt or suitable method to keep hands free while climbing.",
         ],
       },
-      icon: "ladder-contact" as any,
+      icon: "ladder-contact",
       tone: "mandatory",
     },
     {
@@ -138,7 +138,7 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Reposition the ladder before continuing the task.",
         ],
       },
-      icon: "ladder-overreach" as any,
+      icon: "ladder-overreach",
       tone: "mandatory",
     },
     {
@@ -159,7 +159,7 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Prevent the ladder from being struck or displaced.",
         ],
       },
-      icon: "ladder-barricade" as any,
+      icon: "ladder-barricade",
       tone: "mandatory",
     },
     {
@@ -180,7 +180,7 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Use a scaffold or suitable access equipment when required.",
         ],
       },
-      icon: "ladder-stop" as any,
+      icon: "ladder-stop",
       tone: "mandatory",
     },
   ],

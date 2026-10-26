@@ -18,7 +18,16 @@ export type PosterRule = {
     | "fall"
     | "weather"
     | "equipment"
-    | "training";
+    | "training"
+    // Existing topic-specific icon families rendered by PosterIcon.
+    // Keep the finite core keys compatible with archived core-icon dictionaries.
+    | `hsk-${string}`
+    | `exc-${string}`
+    | `chm-${string}`
+    | `flt-${string}`
+    | `mh-${string}`
+    | `do-${string}`
+    | `ladder-${string}`;
   tone: PosterTone;
 };
 

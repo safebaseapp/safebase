@@ -109,12 +109,12 @@ export const confinedSpacePoster: PosterDefinition = {
         tr: [
           "Temiz hava sağlayan uygun havalandırma kullan.",
           "Hava girişini egzoz ve kirletici kaynaklardan uzak tut.",
-          "Havalandırma durursa girişi yeniden değerlendir.",
+          "Gerekli havalandırma durursa alanı tahliye et ve izni yeniden değerlendir.",
         ],
         en: [
           "Use suitable ventilation supplying clean air.",
           "Keep air intakes away from exhausts and contaminant sources.",
-          "Reassess entry immediately if ventilation stops.",
+          "Evacuate if required ventilation stops, then reassess the permit.",
         ],
       },
       icon: "weather",
@@ -150,12 +150,12 @@ export const confinedSpacePoster: PosterDefinition = {
       items: {
         tr: [
           "Girişten önce uygulanabilir kurtarma planı hazırla.",
-          "Kurtarma ekibi, tripod ve geri çekme sistemini hazır tut.",
+          "Alana uygun kurtarma ekibi ve geri çekme sistemini hazır tut.",
           "Plansız ve korumasız içeri girerek kurtarma yapma.",
         ],
         en: [
           "Prepare a workable rescue plan before entry.",
-          "Ensure the rescue team and retrieval equipment are ready.",
+          "Ensure the rescue service and space-suitable retrieval system are ready.",
           "Never perform an unplanned or unprotected entry rescue.",
         ],
       },
@@ -188,15 +188,15 @@ export const confinedSpacePoster: PosterDefinition = {
   never: {
     tr: [
       "Geçerli giriş izni yoksa işi hemen durdur",
-      "Oksijen yüzde 19,5 ile 23,5 arasında değilse girişi durdur",
-      "Yanıcı atmosfer yüzde 10 LEL veya üzerindeyse girişi durdur",
+      "Ölçülen oksijen izin sınırları dışında veya belirsizse girişi durdur",
+      "Yanıcı veya toksik gaz izin sınırında, üzerinde veya belirsizse tahliye et",
       "Gözcü, iletişim veya sürekli gaz ölçümü yoksa girişi durdur",
       "Hazır ve uygulanabilir kurtarma planı yoksa girişi durdur",
     ],
     en: [
       "Stop entry immediately if there is no valid entry permit",
-      "Stop entry if oxygen is outside the 19.5% to 23.5% range",
-      "Stop entry if the atmosphere is at or above 10% of the LFL",
+      "Stop entry if oxygen is outside verified permit limits or is unknown",
+      "Evacuate if flammable or toxic gas reaches permit limits, exceeds them or is unknown",
       "Stop entry if there is no attendant, communication or gas monitoring",
       "Stop entry if there is no ready and workable rescue plan",
     ],

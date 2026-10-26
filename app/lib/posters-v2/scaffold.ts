@@ -86,7 +86,7 @@ export const scaffoldPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Çalışma platformunun mümkün olduğunca tam döşeli olmasını sağla.",
+          "Çalışma platformunu tam döşe; istisnaları onaylı tasarımla doğrula.",
           "Gevşek, çatlak veya hasarlı platform kullanma.",
           "Tehlikeli açıklıkları kapat veya kullanımı durdur.",
         ],

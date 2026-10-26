@@ -22,7 +22,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
         tr: ["Alet, malzeme ve gevşek parçaları işe başlamadan belirle.", "Üst seviyelerdeki açıklıkları kontrol et.", "Rüzgar ve titreşim etkisini değerlendir."],
         en: ["Identify tools, materials and loose items before starting.", "Check openings and edges at elevated levels.", "Consider wind and vibration effects."],
       },
-      icon: "do-identify" as any,
+      icon: "do-identify",
       tone: "mandatory",
     },
     {
@@ -32,10 +32,10 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
         en: "Secure Tools",
       },
       items: {
-        tr: ["Uygun olduğunda onaylı tether sistemi kullan.", "Tether bağlantı noktalarını kontrol et.", "Hasarlı tether veya bağlantı kullanma."],
-        en: ["Use approved tethering systems where appropriate.", "Inspect tether attachment points.", "Do not use damaged tethers or connectors."],
+        tr: ["Gerektiğinde yük ve alete uygun sabitleme sistemi kullan.", "Alet sabitleme bağlantılarını kontrol et.", "Hasarlı alet sabitleme sistemi veya bağlantı kullanma."],
+        en: ["Use load- and tool-compatible tethering systems where required.", "Inspect tether attachment points.", "Do not use damaged tethers or connectors."],
       },
-      icon: "do-tether" as any,
+      icon: "do-tether",
       tone: "mandatory",
     },
     {
@@ -48,7 +48,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
         tr: ["Gevşek malzemeyi kenarlardan uzak tut.", "Malzemeyi devrilmeye veya yuvarlanmaya karşı koru.", "Küçük parçaları uygun kaplarda tut."],
         en: ["Keep loose materials away from edges.", "Prevent materials from tipping or rolling.", "Store small parts in suitable containers."],
       },
-      icon: "do-material" as any,
+      icon: "do-material",
       tone: "mandatory",
     },
     {
@@ -58,10 +58,10 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
         en: "Barricade the Area Below",
       },
       items: {
-        tr: ["Düşme hattının altında exclusion zone oluştur.", "Bariyer ve uyarıları görünür tut.", "Yetkisiz girişe izin verme."],
+        tr: ["Düşme hattının altında girişe kapalı güvenlik alanı oluştur.", "Bariyer ve uyarıları görünür tut.", "Yetkisiz girişe izin verme."],
         en: ["Establish an exclusion zone beneath the drop line.", "Keep barricades and warnings visible.", "Prevent unauthorized entry."],
       },
-      icon: "do-barricade" as any,
+      icon: "do-barricade",
       tone: "mandatory",
     },
     {
@@ -74,7 +74,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
         tr: ["Malzemeyi elden ele kontrolsüz atma.", "Uygun kaldırma veya taşıma yöntemi kullan.", "Yüksekten malzeme bırakma."],
         en: ["Do not throw materials between levels.", "Use suitable lifting or transfer methods.", "Never drop materials from height."],
       },
-      icon: "do-transfer" as any,
+      icon: "do-transfer",
       tone: "mandatory",
     },
     {
@@ -84,10 +84,10 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
         en: "Protect Openings",
       },
       items: {
-        tr: ["Toe board, mesh veya uygun düşen cisim koruması kullan.", "Platform açıklıklarını kontrol et.", "Koruma kaldırıldıysa alanı hemen izole et."],
+        tr: ["Tekmelik, ağ veya uygun düşen cisim koruması kullan.", "Platform açıklıklarını kontrol et.", "Koruma kaldırıldıysa alanı hemen izole et."],
         en: ["Use toe boards, mesh or suitable falling-object protection.", "Control platform openings.", "Immediately isolate the area if protection is removed."],
       },
-      icon: "do-toeboard" as any,
+      icon: "do-toeboard",
       tone: "mandatory",
     },
     {
@@ -100,7 +100,7 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
         tr: ["Üst ve alt ekipler arasında iletişim kur.", "Simultane iş risklerini değerlendir.", "Alt seviyede personel varsa çalışmayı kontrol et."],
         en: ["Maintain communication between upper and lower work teams.", "Assess simultaneous-work risks.", "Control work when personnel are below."],
       },
-      icon: "do-overhead" as any,
+      icon: "do-overhead",
       tone: "mandatory",
     },
     {
@@ -113,12 +113,12 @@ export const droppedObjectsSafetyPoster: PosterDefinition = {
         tr: ["Platformda gevşek alet veya malzeme bırakma.", "Kullanılmayan ekipmanı aşağı indir.", "Bariyeri yalnızca risk tamamen kalkınca kaldır."],
         en: ["Do not leave loose tools or materials on platforms.", "Lower unused equipment safely.", "Remove barricades only after the hazard is fully eliminated."],
       },
-      icon: "do-final" as any,
+      icon: "do-final",
       tone: "mandatory",
     }
   ],
   never: {
-    tr: ["ALT ALAN İZOLE EDİLMEDEN DÜŞEN CİSİM RİSKLİ İŞ YAPMA", "ALETLERİ VE MALZEMEYİ KENARDA KORUMASIZ BIRAKMA", "YÜKSEKTEN MALZEME ATMA", "HASARLI TETHER KULLANMA", "ALTTA PERSONEL VARKEN KONTROLSÜZ ÜST İŞ YAPMA"],
+    tr: ["ALT ALAN İZOLE EDİLMEDEN DÜŞEN CİSİM RİSKLİ İŞ YAPMA", "ALETLERİ VE MALZEMEYİ KENARDA KORUMASIZ BIRAKMA", "YÜKSEKTEN MALZEME ATMA", "HASARLI ALET SABİTLEME SİSTEMİ KULLANMA", "ALTTA PERSONEL VARKEN KONTROLSÜZ ÜST İŞ YAPMA"],
     en: ["NEVER WORK ABOVE WITHOUT CONTROLLING THE AREA BELOW", "NEVER LEAVE TOOLS OR MATERIALS UNSECURED AT EDGES", "NEVER THROW MATERIALS FROM HEIGHT", "NEVER USE DAMAGED TETHERS", "NEVER PERFORM UNCONTROLLED OVERHEAD WORK ABOVE PEOPLE"],
   },
   ppe: {

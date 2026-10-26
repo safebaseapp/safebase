@@ -128,7 +128,7 @@ export const lotoPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Basıncı boşalt, yayları serbest bırak ve sıcaklığı güvenli seviyeye indir.",
+          "Basıncı boşalt; yayları güvenle sabitle veya boşalt; sıcaklığı kontrol et.",
           "Yükseltilmiş parçaları indir veya mekanik olarak destekle.",
           "Enerji yeniden birikebilecekse sürekli kontrol uygula.",
         ],

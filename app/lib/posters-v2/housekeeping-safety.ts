@@ -22,7 +22,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
         tr: ["Malzeme ve ekipmanı belirlenmiş yerlerde tut.", "Geçiş yollarında gereksiz malzeme bırakma.", "İş bitiminde alanı düzenle."],
         en: ["Store materials and equipment in designated locations.", "Keep unnecessary materials out of access routes.", "Restore the work area after the task."],
       },
-      icon: "hsk-clean" as any,
+      icon: "hsk-clean",
       tone: "mandatory",
     },
     {
@@ -35,7 +35,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
         tr: ["Yürüme yollarını, kapıları ve acil çıkışları açık tut.", "Kablo ve hortumları geçiş yollarından kaldır veya koru.", "Erişimi hiçbir zaman depolama alanı olarak kullanma."],
         en: ["Keep walkways, doors and emergency exits clear.", "Route or protect cables and hoses crossing access ways.", "Never use access routes as storage areas."],
       },
-      icon: "hsk-walkway" as any,
+      icon: "hsk-walkway",
       tone: "mandatory",
     },
     {
@@ -45,10 +45,10 @@ export const housekeepingSafetyPoster: PosterDefinition = {
         en: "Clean Spills Immediately",
       },
       items: {
-        tr: ["Yağ, su ve kimyasal dökülmelerini gecikmeden kontrol altına al.", "Alanı temizlenene kadar işaretle veya bariyerle.", "Uygun absorban ve atık yöntemini kullan."],
-        en: ["Control oil, water and chemical spills without delay.", "Mark or barricade the area until it is safe.", "Use suitable absorbents and disposal methods."],
+        tr: ["Alanı koru; dökülmeye yalnız eğitim ve uygun ekipmanla müdahale et.", "Alanı temizlenene kadar işaretle veya bariyerle.", "Uygun absorban ve atık yöntemini kullan."],
+        en: ["Secure the area; handle spills only within training and with suitable equipment.", "Mark or barricade the area until it is safe.", "Use suitable absorbents and disposal methods."],
       },
-      icon: "hsk-spill" as any,
+      icon: "hsk-spill",
       tone: "mandatory",
     },
     {
@@ -61,7 +61,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
         tr: ["Atıkları uygun ve etiketli kaplara koy.", "Yanıcı ve tehlikeli atıkları ayrı yönet.", "Kutuların taşmasını önle."],
         en: ["Place waste in suitable labelled containers.", "Segregate flammable and hazardous waste.", "Prevent waste containers from overflowing."],
       },
-      icon: "hsk-bin" as any,
+      icon: "hsk-bin",
       tone: "mandatory",
     },
     {
@@ -74,7 +74,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
         tr: ["Kablo, hortum, ambalaj ve parçaları zeminde bırakma.", "Bozuk zemin ve seviye farklarını bildir.", "Geçici riskleri görünür şekilde işaretle."],
         en: ["Do not leave cables, hoses, packaging or parts on the floor.", "Report damaged floors and level changes.", "Clearly mark temporary hazards."],
       },
-      icon: "hsk-trip" as any,
+      icon: "hsk-trip",
       tone: "mandatory",
     },
     {
@@ -87,7 +87,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
         tr: ["İstifleri dengeli ve devrilmeyecek şekilde kur.", "Ağır malzemeyi mümkün olduğunca alt seviyede tut.", "İstif yüksekliği ve kapasite kurallarına uy."],
         en: ["Build stable stacks that cannot collapse.", "Keep heavier materials at lower levels where practicable.", "Follow stacking-height and capacity requirements."],
       },
-      icon: "hsk-stack" as any,
+      icon: "hsk-stack",
       tone: "mandatory",
     },
     {
@@ -100,7 +100,7 @@ export const housekeepingSafetyPoster: PosterDefinition = {
         tr: ["Yangın ekipmanı ve ilk yardım erişimini engelleme.", "Elektrik panoları ve izolasyon noktalarının önünü açık tut.", "Acil ekipman çevresinde malzeme depolama."],
         en: ["Do not obstruct fire or first-aid equipment.", "Keep electrical panels and isolation points accessible.", "Do not store materials around emergency equipment."],
       },
-      icon: "hsk-emergency" as any,
+      icon: "hsk-emergency",
       tone: "mandatory",
     },
     {
@@ -110,10 +110,10 @@ export const housekeepingSafetyPoster: PosterDefinition = {
         en: "Correct Unsafe Conditions",
       },
       items: {
-        tr: ["Gördüğün housekeeping riskini mümkünse hemen gider.", "Gideremiyorsan alanı koru ve bildir.", "Aynı uygunsuzluğun tekrarını önle."],
+        tr: ["Gördüğün düzen ve temizlik riskini güvenle giderebiliyorsan düzelt.", "Gideremiyorsan alanı koru ve bildir.", "Aynı uygunsuzluğun tekrarını önle."],
         en: ["Correct housekeeping hazards immediately where possible.", "If you cannot correct the hazard, protect the area and report it.", "Prevent recurrence of the same condition."],
       },
-      icon: "hsk-stop" as any,
+      icon: "hsk-stop",
       tone: "mandatory",
     }
   ],

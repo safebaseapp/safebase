@@ -170,12 +170,12 @@ export const hotWorkPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "İş bitiminden sonra alanı en az 30 dakika gözetle.",
+          "İzin ve saha prosedüründeki süre boyunca gözetle; risk sürerse devam et.",
           "Gizli boşlukları ve için için yanma ihtimalini kontrol et.",
           "Alan güvenli doğrulanmadan gözetimi sonlandırma.",
         ],
         en: [
-          "Monitor the area for at least 30 minutes after completion.",
+          "Maintain the watch for the permit/site-procedure duration; extend it while risk remains.",
           "Check concealed spaces and possible smouldering fires.",
           "Do not end the watch until the area is confirmed safe.",
         ],

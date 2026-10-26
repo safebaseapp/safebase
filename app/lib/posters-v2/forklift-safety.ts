@@ -22,7 +22,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
         tr: ["Forklifti yalnızca eğitimli ve yetkili personel kullansın.", "Yetkilendirme kapsamına uygun ekipman kullan.", "Yetkisiz kullanıma izin verme."],
         en: ["Only trained and authorized personnel may operate the forklift.", "Operate equipment within the scope of authorization.", "Prevent unauthorized use."],
       },
-      icon: "flt-operator" as any,
+      icon: "flt-operator",
       tone: "mandatory",
     },
     {
@@ -35,7 +35,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
         tr: ["Vardiya öncesi forklift kontrolünü tamamla.", "Fren, direksiyon, korna, lastik ve çatalları kontrol et.", "Emniyetsiz ekipmanı hizmet dışı bırak."],
         en: ["Complete the pre-shift forklift inspection.", "Check brakes, steering, horn, tyres and forks.", "Remove unsafe equipment from service."],
       },
-      icon: "flt-inspect" as any,
+      icon: "flt-inspect",
       tone: "mandatory",
     },
     {
@@ -48,7 +48,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
         tr: ["Yük kapasite plakasını kontrol et.", "Yük merkezi ve ataşman etkisini dikkate al.", "Aşırı veya dengesiz yük taşıma."],
         en: ["Check the capacity plate.", "Consider load centre and attachment effects.", "Do not carry overloaded or unstable loads."],
       },
-      icon: "flt-load" as any,
+      icon: "flt-load",
       tone: "mandatory",
     },
     {
@@ -61,7 +61,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
         tr: ["Yükü çatallara dengeli yerleştir.", "Seyir sırasında yükü mümkün olduğunca düşük tut.", "Gevşek malzemeyi emniyete al."],
         en: ["Centre the load on the forks.", "Keep the load as low as practicable while travelling.", "Secure loose materials."],
       },
-      icon: "flt-stable" as any,
+      icon: "flt-stable",
       tone: "mandatory",
     },
     {
@@ -74,7 +74,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
         tr: ["Yaya yollarına öncelik ver.", "Kör nokta ve kapılarda korna kullan.", "İnsanların yükseltilmiş yük altına girmesine izin verme."],
         en: ["Respect pedestrian routes.", "Use the horn at blind spots and doorways.", "Never allow people beneath elevated loads."],
       },
-      icon: "flt-pedestrian" as any,
+      icon: "flt-pedestrian",
       tone: "mandatory",
     },
     {
@@ -84,10 +84,10 @@ export const forkliftSafetyPoster: PosterDefinition = {
         en: "Maintain Visibility",
       },
       items: {
-        tr: ["Görüş engelliyse güvenli yönde seyret veya spotter kullan.", "Kavşaklarda yavaşla.", "Hızını saha koşullarına göre ayarla."],
+        tr: ["Görüş engelliyse güvenli yönde seyret veya eğitimli işaretçi kullan.", "Kavşaklarda yavaşla.", "Hızını saha koşullarına göre ayarla."],
         en: ["Travel in a safe direction or use a spotter when the load blocks visibility.", "Slow down at intersections.", "Adjust speed to site conditions."],
       },
-      icon: "flt-visibility" as any,
+      icon: "flt-visibility",
       tone: "mandatory",
     },
     {
@@ -97,10 +97,10 @@ export const forkliftSafetyPoster: PosterDefinition = {
         en: "Control Travel on Slopes",
       },
       items: {
-        tr: ["Rampalarda ani dönüş yapma.", "Yük yönünü güvenli konumda tut.", "Kaygan ve bozuk zeminde hızını azalt."],
-        en: ["Do not make sudden turns on ramps.", "Keep the load oriented safely on grades.", "Reduce speed on slippery or damaged surfaces."],
+        tr: ["Rampada dönüş yapma; üretici eğim sınırlarına uy.", "Yüklü araçta yükü eğim yukarısında tut; üretici talimatını uygula.", "Kaygan ve bozuk zeminde hızını azalt."],
+        en: ["Do not turn on ramps; follow manufacturer grade limits.", "Keep the load uphill on a loaded truck; follow manufacturer instructions.", "Reduce speed on slippery or damaged surfaces."],
       },
-      icon: "flt-slope" as any,
+      icon: "flt-slope",
       tone: "mandatory",
     },
     {
@@ -113,7 +113,7 @@ export const forkliftSafetyPoster: PosterDefinition = {
         tr: ["Çatalları tamamen indir.", "Kontrolleri nötrle ve park frenini uygula.", "Yetkisiz çalıştırmaya karşı anahtarı kontrol et."],
         en: ["Fully lower the forks.", "Neutralize controls and apply the parking brake.", "Control the key against unauthorized operation."],
       },
-      icon: "flt-park" as any,
+      icon: "flt-park",
       tone: "mandatory",
     }
   ],

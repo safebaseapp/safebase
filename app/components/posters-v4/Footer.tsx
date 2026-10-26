@@ -29,7 +29,7 @@ export default function Footer({ locale }: Props) {
 
       <div className="text-right">
         <p className="text-[8px] font-black uppercase tracking-[0.16em] text-emerald-400">
-          Verified • Pro Series • 2026
+          {isTurkish ? "Saha prosedürünü doğrulayın" : "Verify site procedure"}
         </p>
 
         <p className="mt-1 text-xs font-black">www.sernem.com</p>

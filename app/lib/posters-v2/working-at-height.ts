@@ -87,12 +87,12 @@ export const workingAtHeightPoster: PosterDefinition = {
       items: {
         tr: [
           "Yalnızca belirlenmiş ve onaylanmış ankraja bağlan.",
-          "Kapasitenin kişi başına 22,2 kN olduğunu doğrula.",
+          "Ankraj kapasitesini yetkin kişi tasarımı ve üretici talimatıyla doğrula.",
           "Ankrajı mümkün olduğunca baş seviyesinin üzerinde seç.",
         ],
         en: [
           "Connect only to a designated and approved anchorage.",
-          "Verify a capacity of 22.2 kN per attached worker.",
+          "Verify anchorage capacity against the qualified design and manufacturer instructions.",
           "Select an anchorage above head level whenever possible.",
         ],
       },

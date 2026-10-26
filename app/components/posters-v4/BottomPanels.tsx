@@ -1,5 +1,7 @@
 import type { PosterDefinition } from "@/lib/posters-v2/types";
 
+import {getPosterTechnicalProfile, technicalReferences} from "@/lib/posters-v2/technical-profiles";
+
 type Locale = "tr" | "en";
 
 type Props = {
@@ -7,703 +9,19 @@ type Props = {
   poster: PosterDefinition;
 };
 
-type CriticalValue = {
-  value: string;
-  label: string;
-};
-
-
-
-/* SERNEM_LADDER_HARNESS_START */
-function SERNEMHarnessIcon() {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      className="h-12 w-12"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {/* shoulders */}
-      <path d="M34 20L50 43L66 20" />
-
-      {/* outer shoulder straps */}
-      <path d="M34 20L25 53L34 82" />
-      <path d="M66 20L75 53L66 82" />
-
-      {/* chest straps */}
-      <path d="M29 45H71" />
-
-      {/* centre body */}
-      <path d="M50 43V64" />
-
-      {/* leg straps */}
-      <path d="M34 82L46 61" />
-      <path d="M66 82L54 61" />
-
-      {/* waist belt */}
-      <path d="M30 60H70" />
-
-      {/* central D-ring */}
-      <circle cx="50" cy="48" r="6" />
-
-      {/* leg loops */}
-      <path d="M34 82c5 6 12 7 16 1" />
-      <path d="M66 82c-5 6-12 7-16 1" />
-    </svg>
-  );
-}
-/* SERNEM_LADDER_HARNESS_END */
-
 export default function BottomPanels({
   locale,
   poster,
 }: Props) {
   const isTurkish = locale === "tr";
 
-  let values: CriticalValue[];
-  let mainReference: string;
-  let subReference: string;
-
-  if (poster.code === "SRN-PPE-001") {
-    values = [
-      {
-        value: isTurkish ? "RİSK" : "RISK",
-        label: isTurkish
-          ? "KKD seçimi risk değerlendirmesine dayanır"
-          : "PPE selection is based on the risk assessment",
-      },
-      {
-        value: isTurkish ? "UYUM" : "FIT",
-        label: isTurkish
-          ? "Doğru beden ve birlikte kullanım uyumu"
-          : "Correct sizing and compatibility",
-      },
-      {
-        value: isTurkish ? "HER KULLANIM" : "EACH USE",
-        label: isTurkish
-          ? "Kullanım öncesi görsel kontrol"
-          : "Visual inspection before use",
-      },
-      {
-        value: isTurkish ? "HEMEN" : "IMMEDIATE",
-        label: isTurkish
-          ? "Hasarlı KKD'yi hizmet dışı bırak"
-          : "Remove defective PPE from service",
-      },
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.132";
-    subReference = "Personal Protective Equipment";
-  } else if (poster.code === "SRN-FIRE-001") {
-    values = [
-      {
-        value: "22,9 m",
-        label: isTurkish
-          ? "Class A söndürücü azami erişim mesafesi"
-          : "Maximum Class A extinguisher travel distance",
-      },
-      {
-        value: "15,2 m",
-        label: isTurkish
-          ? "Class B söndürücü azami erişim mesafesi"
-          : "Maximum Class B extinguisher travel distance",
-      },
-      {
-        value: isTurkish ? "AYLIK" : "MONTHLY",
-        label: isTurkish
-          ? "Taşınabilir söndürücü görsel kontrolü"
-          : "Portable extinguisher visual inspection",
-      },
-      {
-        value: isTurkish ? "YILLIK" : "ANNUAL",
-        label: isTurkish
-          ? "Eğitim ve bakım programı"
-          : "Training and maintenance programme",
-      },
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.38 / 1910.39 / 1910.157";
-    subReference = "Emergency Action • Fire Prevention • Extinguishers";
-  } else if (poster.code === "SRN-LOTO-001") {
-    values = [
-      {
-        value: isTurkish ? "TÜMÜ" : "ALL",
-        label: isTurkish
-          ? "Tehlikeli enerji kaynakları"
-          : "Hazardous energy sources",
-      },
-      {
-        value: "0 ENERJİ",
-        label: isTurkish
-          ? "İşe başlamadan önce doğrula"
-          : "Verify before starting work",
-      },
-      {
-        value: isTurkish ? "KİŞİSEL" : "PERSONAL",
-        label: isTurkish
-          ? "Her yetkili çalışan kendi kilidini uygular"
-          : "Each authorized employee applies a lock",
-      },
-      {
-        value: isTurkish ? "YILLIK" : "ANNUAL",
-        label: isTurkish
-          ? "Enerji kontrol prosedürü denetimi"
-          : "Energy-control procedure inspection",
-      },
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.147";
-    subReference = "Control of Hazardous Energy";
-  } else if (poster.code === "SRN-EL-001") {
-    values = [
-      {
-        value: "0 V",
-        label: isTurkish
-          ? "Gerilimsizlik doğrulaması"
-          : "Absence-of-voltage verification",
-      },
-      {
-        value: "LOTO",
-        label: isTurkish
-          ? "Kilitleme ve etiketleme"
-          : "Lockout and tagout",
-      },
-      {
-        value: "GFCI / RCD",
-        label: isTurkish
-          ? "Kaçak akım koruması"
-          : "Ground-fault protection",
-      },
-      {
-        value: isTurkish
-          ? "YETKİLİ"
-          : "QUALIFIED",
-        label: isTurkish
-          ? "Elektrik işi ve test"
-          : "Electrical work and testing",
-      },
-    ];
-
-    mainReference =
-      "OSHA 29 CFR 1910.333 / 1910.334";
-
-    subReference =
-      "OSHA 1910 Subpart S • 1926 Subpart K";
-  } else if (poster.code === "SRN-CS-001") {
-    values = [
-      {
-        value: "19,5–23,5%",
-        label: isTurkish
-          ? "Kabul edilebilir oksijen aralığı"
-          : "Acceptable oxygen range",
-      },
-      {
-        value: "<10% LEL",
-        label: isTurkish
-          ? "Yanıcı atmosfer giriş sınırı"
-          : "Flammable-atmosphere entry limit",
-      },
-      {
-        value: "PEL / STEL",
-        label: isTurkish
-          ? "Toksik maddeler için izin limitleri"
-          : "Permit limits for toxic substances",
-      },
-      {
-        value: isTurkish
-          ? "SÜREKLİ"
-          : "CONTINUOUS",
-        label: isTurkish
-          ? "Atmosfer izleme ve alarm"
-          : "Atmospheric monitoring and alarms",
-      },
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.146";
-    subReference = "Permit-Required Confined Spaces";
-  } else if (poster.code === "SRN-HW-001") {
-    values = [
-      {
-        value: "10,7 m",
-        label: isTurkish
-          ? "Yanıcı madde kontrol mesafesi"
-          : "Combustible-control distance",
-      },
-      {
-        value: "30 DK",
-        label: isTurkish
-          ? "Minimum iş sonrası yangın gözetimi"
-          : "Minimum post-work fire watch",
-      },
-      {
-        value: isTurkish
-          ? "İZİN"
-          : "PERMIT",
-        label: isTurkish
-          ? "Yazılı sıcak çalışma yetkilendirmesi"
-          : "Written hot-work authorization",
-      },
-      {
-        value: isTurkish
-          ? "GÖZCÜ"
-          : "WATCH",
-        label: isTurkish
-          ? "Eğitimli yangın gözcüsü"
-          : "Trained fire watch",
-      },
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.252";
-    subReference = "Welding, Cutting and Brazing";
-  } else if (poster.code === "SRN-SCF-001") {
-    values = [
-      {
-        value: "4×",
-        label: isTurkish
-          ? "Maksimum amaçlanan yük"
-          : "Maximum intended load",
-      },
-      {
-        value: "2,5 cm",
-        label: isTurkish
-          ? "Normal platform boşluğu"
-          : "Normal platform gap",
-      },
-      {
-        value: "0,6 m",
-        label: isTurkish
-          ? "Uygun erişim gerektiren fark"
-          : "Access-system threshold",
-      },
-      {
-        value: isTurkish
-          ? "HER VARDİYA"
-          : "EACH SHIFT",
-        label: isTurkish
-          ? "Yetkin kişi kontrolü"
-          : "Competent-person inspection",
-      },
-    ];
-
-    mainReference = "OSHA 29 CFR 1926.451";
-    subReference = "OSHA 1926 Subpart L";
-
-  } else if (poster.code === "SRN-LAD-001") {
-    values = [
-      {
-        value: "4 : 1",
-        label: isTurkish
-          ? "Güvenli yerleşim oranı"
-          : "Safe setup ratio",
-      },
-      {
-        value: isTurkish ? "0,9 m" : "0.9 m / 3 ft",
-        label: isTurkish
-          ? "Üst seviyeye güvenli taşma"
-          : "Extension above landing",
-      },
-      {
-        value: isTurkish ? "3 NOKTA" : "3-POINT",
-        label: isTurkish
-          ? "Sürekli merdiven teması"
-          : "Continuous ladder contact",
-      },
-      {
-        value: isTurkish ? "MAX YÜK" : "MAX LOAD",
-        label: isTurkish
-          ? "Üretici kapasitesini aşma"
-          : "Do not exceed rated capacity",
-      },
-    ];
-
-    mainReference = "OSHA 29 CFR 1926.1053 / 1910.23";
-    subReference = "EN 131";
-
-  } else if (poster.code === "SRN-HSK-001") {
-    values = [
-      {
-        value: isTurkish ? "TEMİZ" : "CLEAN",
-        label: isTurkish
-          ? "Çalışma alanı standardı"
-          : "Work-area standard",
-      },
-      {
-        value: isTurkish ? "AÇIK" : "CLEAR",
-        label: isTurkish
-          ? "Geçiş ve acil çıkışlar"
-          : "Access and emergency exits",
-      },
-      {
-        value: isTurkish ? "HEMEN" : "IMMEDIATE",
-        label: isTurkish
-          ? "Dökülme ve takılma riskleri"
-          : "Spills and trip hazards",
-      },
-      {
-        value: isTurkish ? "HER VARDİYA" : "EACH SHIFT",
-        label: isTurkish
-          ? "Düzen ve erişim kontrolü"
-          : "Order and access check",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.22 / 1926.25";
-    subReference = "Walking-Working Surfaces • Housekeeping";
-
-  } else if (poster.code === "SRN-EXC-001") {
-    values = [
-      {
-        value: isTurkish ? "1,22 m" : "4 ft",
-        label: isTurkish
-          ? "Güvenli erişim eşiği"
-          : "Safe-access threshold",
-      },
-      {
-        value: isTurkish ? "0,61 m" : "2 ft",
-        label: isTurkish
-          ? "Spoil pile minimum setback"
-          : "Minimum spoil setback",
-      },
-      {
-        value: isTurkish ? "1,52 m" : "5 ft",
-        label: isTurkish
-          ? "Koruyucu sistem eşiği*"
-          : "Protective-system threshold*",
-      },
-      {
-        value: isTurkish ? "HER GÜN" : "DAILY",
-        label: isTurkish
-          ? "Yetkin kişi kontrolü"
-          : "Competent-person inspection",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1926.651 / 1926.652";
-    subReference = "OSHA 1926 Subpart P";
-
-  } else if (poster.code === "SRN-CHM-001") {
-    values = [
-      {
-        value: isTurkish ? "ETİKET" : "LABEL",
-        label: isTurkish
-          ? "Kap kimliği ve tehlike bilgisi"
-          : "Container identity and hazard",
-      },
-      {
-        value: isTurkish ? "SDS" : "SDS",
-        label: isTurkish
-          ? "Kullanım öncesi kontrol"
-          : "Review before use",
-      },
-      {
-        value: isTurkish ? "UYUMLULUK" : "COMPATIBILITY",
-        label: isTurkish
-          ? "Depolama ve reaksiyon kontrolü"
-          : "Storage and reaction control",
-      },
-      {
-        value: isTurkish ? "RİSKE GÖRE" : "RISK BASED",
-        label: isTurkish
-          ? "KKD ve solunum koruması"
-          : "PPE and respiratory protection",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.1200";
-    subReference = "Hazard Communication Standard";
-
-  } else if (poster.code === "SRN-FLT-001") {
-    values = [
-      {
-        value: isTurkish ? "YETKİLİ" : "AUTHORIZED",
-        label: isTurkish
-          ? "Operatör gerekliliği"
-          : "Operator requirement",
-      },
-      {
-        value: isTurkish ? "HER VARDİYA" : "EACH SHIFT",
-        label: isTurkish
-          ? "Forklift kontrolü"
-          : "Forklift inspection",
-      },
-      {
-        value: isTurkish ? "KAPASİTE" : "CAPACITY",
-        label: isTurkish
-          ? "Plaka değerini aşma"
-          : "Do not exceed data plate",
-      },
-      {
-        value: isTurkish ? "YAYA" : "PEDESTRIAN",
-        label: isTurkish
-          ? "Ayrım ve görüş kontrolü"
-          : "Separation and visibility",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.178";
-    subReference = "Powered Industrial Trucks";
-
-  } else if (poster.code === "SRN-MH-001") {
-    values = [
-      {
-        value: isTurkish ? "PLANLA" : "PLAN",
-        label: isTurkish
-          ? "Yük ve taşıma yolu"
-          : "Load and route",
-      },
-      {
-        value: isTurkish ? "YAKIN TUT" : "KEEP CLOSE",
-        label: isTurkish
-          ? "Yük-vücut mesafesi"
-          : "Load-to-body position",
-      },
-      {
-        value: isTurkish ? "YARDIM AL" : "GET HELP",
-        label: isTurkish
-          ? "Ekip veya mekanik yardım"
-          : "Team or mechanical aid",
-      },
-      {
-        value: isTurkish ? "BURULMA YOK" : "NO TWIST",
-        label: isTurkish
-          ? "Ayaklarla yön değiştir"
-          : "Turn with your feet",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1910.176";
-    subReference = "Materials Handling and Storage";
-
-  } else if (poster.code === "SRN-DO-001") {
-    values = [
-      {
-        value: isTurkish ? "100%" : "100%",
-        label: isTurkish
-          ? "Alt alan kontrolü"
-          : "Area-below control",
-      },
-      {
-        value: isTurkish ? "TETHER" : "TETHER",
-        label: isTurkish
-          ? "Uygun alet sabitleme"
-          : "Suitable tool securing",
-      },
-      {
-        value: isTurkish ? "BARRIER" : "BARRIER",
-        label: isTurkish
-          ? "Düşme hattı izolasyonu"
-          : "Drop-zone isolation",
-      },
-      {
-        value: isTurkish ? "SON KONTROL" : "FINAL CHECK",
-        label: isTurkish
-          ? "Gevşek malzeme bırakma"
-          : "No loose items left",
-      }
-    ];
-
-    mainReference = "OSHA 29 CFR 1926.501(c) / 1926.502(j)";
-    subReference = "Protection From Falling Objects";
-
-  } else {
-    values = [
-      {
-        value: "1,8 m",
-        label: isTurkish
-          ? "OSHA inşaat eşiği"
-          : "OSHA construction threshold",
-      },
-      {
-        value: "22,2 kN",
-        label: isTurkish
-          ? "Ankraj değeri / kişi"
-          : "Anchorage value / worker",
-      },
-      {
-        value: "100%",
-        label: isTurkish
-          ? "Sürekli bağlı kal"
-          : "Continuous tie-off",
-      },
-      {
-        value: isTurkish
-          ? "3 NOKTA"
-          : "3-POINT",
-        label: isTurkish
-          ? "Merdiven teması"
-          : "Ladder contact",
-      },
-    ];
-
-    mainReference =
-      poster.code === "SRN-LAD-001"
-                  ? "OSHA 29 CFR 1926.1053 / 1910.23"
-                  : "OSHA 29 CFR 1926.501 / 1926.502";
-
-    subReference =
-      poster.code === "SRN-LAD-001"
-                  ? "EN 131"
-                  : "EN 361 • EN 365 • EN 795";
-  }
-
-  const defaultStandards = [
-    "EN 397",
-    "EN 166",
-    "EN 388",
-    "ISO 20345",
-    "EN 361",
-  ];
-
-  const confinedSpaceStandards = [
-    "EN 397",
-    "EN 166",
-    "RİSKE GÖRE",
-    "ISO 20345",
-    "EN 361",
-  ];
-
-  const electricalStandards = [
-    "EN 50365",
-    "EN 166",
-    "EN 60903",
-    "EN 50321-1",
-    "IEC 61482",
-  ];
-
-  const lotoStandards = [
-    "RİSKE GÖRE",
-    "EN 166",
-    "RİSKE GÖRE",
-    "ISO 20345",
-    "RİSKE GÖRE",
-  ];
-
-  const fireStandards = [
-    "RİSKE GÖRE",
-    "EN 166",
-    "EN 407",
-    "ISO 20345",
-    "EN ISO 11612",
-  ];
-
-  const ppeStandards = [
-    "EN 397",
-    "EN 166",
-    "RİSKE GÖRE",
-    "ISO 20345",
-    "EN ISO 20471",
-  ];
-
-  const hotWorkStandards = [
-    "EN 175",
-    "EN 166",
-    "EN 407",
-    "EN ISO 20349",
-    "EN ISO 11611",
-  ];
-
-
-  const standards_SRN_HSK_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-  const standards_SRN_EXC_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-  const standards_SRN_CHM_001 = ["EN 166", "EN ISO 374", "EN 13034", "ISO 20345", "RİSKE GÖRE"];
-  const standards_SRN_FLT_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-  const standards_SRN_MH_001 = ["EN 388", "ISO 20345", "RİSKE GÖRE", "EN ISO 20471", "RİSKE GÖRE"];
-  const standards_SRN_DO_001 = ["EN 397", "EN 166", "EN 388", "ISO 20345", "EN ISO 20471"];
-
-  const standards =
-    poster.code === "SRN-PPE-001"
-      ? ppeStandards
-      : poster.code === "SRN-FIRE-001"
-        ? fireStandards
-        : poster.code === "SRN-LOTO-001"
-          ? lotoStandards
-          : poster.code === "SRN-EL-001"
-            ? electricalStandards
-            : poster.code === "SRN-CS-001"
-              ? confinedSpaceStandards
-              : poster.code === "SRN-HW-001"
-                ? hotWorkStandards
-                : poster.code === "SRN-HSK-001"
-                  ? standards_SRN_HSK_001
-                  : poster.code === "SRN-EXC-001"
-                    ? standards_SRN_EXC_001
-                    : poster.code === "SRN-CHM-001"
-                      ? standards_SRN_CHM_001
-                      : poster.code === "SRN-FLT-001"
-                        ? standards_SRN_FLT_001
-                        : poster.code === "SRN-MH-001"
-                          ? standards_SRN_MH_001
-                          : poster.code === "SRN-DO-001"
-                            ? standards_SRN_DO_001
-                            : defaultStandards;
-
-  const serialPpeIcons: Record<string, string[]> = {
-    "SRN-HSK-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-    "SRN-EXC-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-    "SRN-CHM-001": ["🥽", "🧤", "🥼", "🥾", "😷"],
-    "SRN-FLT-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-    "SRN-MH-001": ["🧤", "🥾", "👕", "🦺", "🛡️"],
-    "SRN-DO-001": ["⛑️", "🥽", "🧤", "🥾", "🦺"],
-  };
-
-  const ppeIcons =
-    poster.code === "SRN-PPE-001"
-      ? ["⛑️", "🥽", "🧤", "🥾", "🦺"]
-      : poster.code === "SRN-FIRE-001"
-        ? ["⛑️", "🥽", "🧤", "🥾", "🧥"]
-      : poster.code === "SRN-EL-001"
-        ? ["⛑️", "🥽", "🧤", "🥾", "🧥"]
-      : poster.code === "SRN-HW-001"
-        ? ["🥽", "👓", "🧤", "🥾", "🧥"]
-        : ["⛑️", "🥽", "🧤", "🥾", "🪢"];
-
-  const ppeHeading =
-    poster.code === "SRN-PPE-001"
-      ? isTurkish
-        ? "Temel Saha KKD'si"
-        : "Basic Site PPE"
-      : poster.code === "SRN-FIRE-001"
-        ? isTurkish
-          ? "Müdahale KKD'si"
-          : "Response PPE"
-        : poster.code === "SRN-CS-001" ||
-          poster.code === "SRN-EL-001" ||
-          poster.code === "SRN-LOTO-001"
-        ? isTurkish
-        ? "Gerekli KKD"
-        : "Required PPE"
-      : isTurkish
-        ? "Zorunlu KKD"
-        : "Required PPE";
-
-  const ppeNote =
-    poster.code === "SRN-PPE-001"
-      ? isTurkish
-        ? "Temel saha KKD'sine ek korumaları görev ve risk değerlendirmesine göre belirle."
-        : "Determine additional protection according to the task and risk assessment."
-      : poster.code === "SRN-FIRE-001"
-        ? isTurkish
-        ? "Yalnızca eğitimli ve yetkilendirilmiş personel başlangıç yangınına müdahale etmelidir."
-        : "Only trained and authorized personnel should fight incipient-stage fires."
-      : poster.code === "SRN-LOTO-001"
-        ? isTurkish
-        ? "KKD'yi enerji türü, görev ve risk değerlendirmesine göre seç."
-        : "Select PPE based on energy type, task and risk assessment."
-      : poster.code === "SRN-EL-001"
-        ? isTurkish
-          ? "KKD'yi gerilim, elektrik çarpması ve ark parlaması riskine göre seç."
-          : "Select PPE based on voltage, shock and arc-flash hazards."
-        : poster.code === "SRN-CS-001"
-          ? isTurkish
-            ? "KKD'yi risk değerlendirmesi ve atmosfer sonuçlarına göre seç."
-            : "Select PPE based on the risk assessment and atmospheric results."
-          : isTurkish
-            ? "Önce mühendislik kontrolleri, sonra kişisel koruma."
-            : "Engineering controls first, personal protection second.";
+  const profile = getPosterTechnicalProfile(poster.code);
+  const reference = profile ? technicalReferences[profile.reference] : undefined;
+  const values = profile?.controls.map(item => ({value:item.value[locale],label:item.label[locale]})) ?? [{value:isTurkish?'EKSİK':'MISSING',label:isTurkish?'Teknik tanımı doğrulamadan işe başlama':'Do not start without technical review'}];
+  const mainReference = reference?.label ?? (isTurkish?'Teknik kaynak tanımlı değil':'Technical reference not defined');
+  const subReference = isTurkish ? 'Kaynak kapsamını ve yerel kuralları doğrula' : 'Verify source scope and local requirements';
+  const ppeHeading = isTurkish ? 'Riske Göre KKD Seçimi' : 'Risk-Based PPE Selection';
+  const ppeNote = profile?.ppeNote[locale] ?? (isTurkish?'KKD seçimi için yetkili değerlendirme gerekli.':'Competent assessment required for PPE selection.');
 
   return (
     <section className="mt-3 grid grid-cols-[1.15fr_0.82fr_1.03fr] gap-3">
@@ -711,7 +29,7 @@ export default function BottomPanels({
         <div className="flex items-center justify-between bg-red-600 px-4 py-3 text-white">
           <div>
             <p className="text-[8px] font-black uppercase tracking-[0.18em] text-red-100">
-              Critical Stop Criteria
+              {isTurkish ? "Kritik Durdurma Kriterleri" : "Critical Stop Criteria"}
             </p>
 
             <h2 className="text-[20px] font-black uppercase leading-none">
@@ -748,13 +66,13 @@ export default function BottomPanels({
       <div className="overflow-hidden rounded-[18px] border-2 border-amber-500 bg-white">
         <div className="bg-amber-500 px-4 py-3 text-center text-white">
           <p className="text-[8px] font-black uppercase tracking-[0.18em] text-amber-100">
-            Technical Control
+            {isTurkish ? "Teknik Kontrol" : "Technical Control"}
           </p>
 
           <h2 className="text-[19px] font-black uppercase leading-none">
             {isTurkish
-              ? "Kritik Değerler"
-              : "Critical Values"}
+              ? "Kritik Kontroller"
+              : "Critical Controls"}
           </h2>
         </div>
 
@@ -791,11 +109,11 @@ export default function BottomPanels({
 
         <div className="mx-3 mb-3 rounded-xl bg-slate-950 px-3 py-2 text-center text-white">
           <p className="text-[8px] font-black uppercase tracking-[0.15em] text-emerald-400">
-            Reference
+            {isTurkish ? "Teknik Başvuru · Doğrulama Gerekli" : "Technical Reference · Validation Required"}
           </p>
 
           <p className="mt-1 text-[9px] font-black">
-            {mainReference}
+            {reference ? <a href={reference.url} target="_blank" rel="noopener noreferrer">{mainReference}</a> : mainReference}
           </p>
 
           <p className="text-[8px] font-bold text-slate-300">
@@ -807,7 +125,7 @@ export default function BottomPanels({
       <div className="overflow-hidden rounded-[18px] border-2 border-blue-700 bg-white">
         <div className="bg-blue-700 px-4 py-3 text-center text-white">
           <p className="text-[8px] font-black uppercase tracking-[0.18em] text-blue-200">
-            Personal Protective Equipment
+            {isTurkish ? "Kişisel Koruyucu Donanım" : "Personal Protective Equipment"}
           </p>
 
           <h2 className="text-[20px] font-black uppercase leading-none">
@@ -820,7 +138,7 @@ export default function BottomPanels({
             (item, index) => (
               <div
                 key={item}
-                className="text-center"
+                className="min-w-0 break-words text-center"
               >
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-700 text-2xl text-white ring-4 ring-blue-100">
                   {poster.code === "SRN-LAD-001" && index === 4 ? (
@@ -832,7 +150,7 @@ export default function BottomPanels({
                       strokeWidth="5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      aria-label="Full Body Harness"
+                      aria-label={isTurkish ? "Tam vücut kemeri" : "Full body harness"}
                     >
                       {/* shoulder straps */}
                       <path d="M31 18L50 42L69 18" />
@@ -869,16 +187,16 @@ export default function BottomPanels({
                       />
                     </svg>
                   ) : (
-                    serialPpeIcons[poster.code]?.[index] ?? ppeIcons[index] ?? "🦺"
+                    profile?.ppeIcons[index] ?? "?"
                   )}
                 </div>
 
-                <p className="mt-2 text-[9px] font-black uppercase leading-[1.15] text-slate-950">
+                <p className="mt-2 break-words text-[9px] font-black uppercase leading-[1.15] text-slate-950 [overflow-wrap:anywhere]">
                   {item}
                 </p>
 
                 <p className="mt-1 text-[6px] font-black uppercase tracking-wide text-blue-700">
-                  {standards[index]}
+                  <span data-ppe-selection>{profile?.ppeSelection[index]?.[locale] ?? (isTurkish ? "Tanım eksik" : "Definition missing")}</span>
                 </p>
               </div>
             ),

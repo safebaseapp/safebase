@@ -1,5 +1,7 @@
 import type { PosterDefinition } from "@/lib/posters-v2/types";
 
+import {getPosterTechnicalProfile, technicalReferences} from "@/lib/posters-v2/technical-profiles";
+
 type Locale = "tr" | "en";
 
 type Props = {
@@ -18,13 +20,15 @@ export default function Header({
   const isTurkish = locale === "tr";
   const resolvedQrPath = qrPath ?? `/posters/sernem-qr-${locale}.png`;
   const isCompanyBranded = Boolean(companyLogoUrl);
+  const profile = getPosterTechnicalProfile(poster.code);
+  const reference = profile ? technicalReferences[profile.reference] : undefined;
 
   return (
     <div className="sernem-poster-header grid grid-cols-[1fr_265px] gap-5 rounded-[24px] border border-slate-300 bg-white p-6 shadow-sm">
       <div>
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full bg-red-600 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-white">
-            {isTurkish ? "Yüksek Riskli Faaliyet" : "High-Risk Activity"}
+            {isTurkish ? "İSG Saha Rehberi" : "HSE Field Guide"}
           </span>
 
           <span className="rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-slate-700">
@@ -36,7 +40,7 @@ export default function Header({
           </span>
 
           <span className="rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-emerald-700">
-            Verified 2026
+            {isTurkish ? "Saha doğrulaması gerekli" : "Site validation required"}
           </span>
         </div>
 
@@ -91,45 +95,17 @@ export default function Header({
           <div className="h-px flex-1 bg-slate-300" />
         </div>
 
-        <div className="mt-3 flex items-center gap-2">
+        <div className="mt-3 flex flex-wrap items-center gap-2">
           <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[8px] font-black uppercase tracking-[0.14em] text-slate-600">
-            {poster.code === "SRN-PPE-001"
-              ? "OSHA 1910 Subpart I"
-              : poster.code === "SRN-FIRE-001"
-                ? "OSHA 1910 Subpart L"
-                : poster.code === "SRN-LOTO-001"
-                  ? "OSHA 29 CFR 1910.147"
-                  : poster.code === "SRN-EL-001"
-                    ? "OSHA 1910 Subpart S"
-                    : poster.code === "SRN-CS-001"
-                      ? "OSHA 29 CFR 1910.146"
-                      : poster.code === "SRN-HW-001"
-                        ? "OSHA 1910.252 / 1926.352"
-                        : poster.code === "SRN-SCF-001"
-                          ? "OSHA 1926.451"
-                          : "OSHA 29 CFR 1926"}
+            {reference ? <a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label}</a> : (isTurkish ? "Teknik tanım eksik" : "Technical profile missing")}
           </span>
 
           <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[8px] font-black uppercase tracking-[0.14em] text-slate-600">
-            {poster.code === "SRN-PPE-001"
-              ? "Selection • Fit • Inspection"
-              : poster.code === "SRN-FIRE-001"
-                ? "Alarm • Evacuation • Extinguishers"
-                : poster.code === "SRN-LOTO-001"
-                  ? "Hazardous Energy Control"
-                  : poster.code === "SRN-EL-001"
-                    ? "LOTO • Shock • Arc Flash"
-                    : poster.code === "SRN-CS-001"
-                      ? "Permit Space • Atmospheric Testing"
-                      : poster.code === "SRN-HW-001"
-                        ? "Hot Work • Fire Prevention"
-                        : poster.code === "SRN-SCF-001"
-                          ? "OSHA Subpart L"
-                          : "EN 361 • EN 365 • EN 795"}
+            {!reference ? (isTurkish ? 'Kaynak tanımlı değil' : 'Reference not defined') : reference.jurisdiction === 'GB-guidance' ? (isTurkish ? 'HSE · Birleşik Krallık rehberi' : 'HSE · Great Britain guidance') : (isTurkish ? 'OSHA · ABD kapsamı' : 'OSHA · US scope')}
           </span>
 
           <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[8px] font-black uppercase tracking-[0.14em] text-slate-600">
-            ISO 45001 Framework
+            {isTurkish ? "Yerel kuralları ayrıca doğrula" : "Verify local requirements separately"}
           </span>
         </div>
       </div>
@@ -138,7 +114,7 @@ export default function Header({
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-[9px] font-black uppercase tracking-[0.18em] text-emerald-400">
-              Document
+              {isTurkish ? "Doküman" : "Document"}
             </p>
 
             <p className="mt-2 text-lg font-black">{poster.code}</p>

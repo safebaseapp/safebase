@@ -1,4 +1,5 @@
 import type { PosterDefinition } from "@/lib/posters-v2/types";
+import {getPosterTechnicalProfile} from "@/lib/posters-v2/technical-profiles";
 import Header from "./Header";
 import PreJobStrip from "./PreJobStrip";
 import RuleCard from "./RuleCard";
@@ -23,6 +24,8 @@ export default function PosterMasterV4({
   return (
     <div
       id="safebase-poster"
+      data-poster-code={poster.code}
+      data-technical-review={getPosterTechnicalProfile(poster.code)?.reviewStatus ?? "missing-definition"}
       className="relative mx-auto box-border h-[1588px] w-[1123px] overflow-hidden border-[8px] border-slate-950 bg-[#edf2f7] font-sans text-slate-950 shadow-2xl print:m-0 print:h-[420mm] print:w-[297mm] print:shadow-none"
     >
       <div
@@ -38,7 +41,8 @@ export default function PosterMasterV4({
       <div
         className="absolute left-4 top-4 origin-top-left"
         style={{
-          width: "108.695652%",
+          // Preserve the 16px gutters on both sides after the existing 0.92 scale.
+          width: "calc(108.695652% - 34.782609px)",
           transform: "scale(0.92)",
         }}
       >
