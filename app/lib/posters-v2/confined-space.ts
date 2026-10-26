@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const confinedSpacePoster: PosterDefinition = {
   code: "SRN-CS-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "Kapalı Alan Giriş Kritik Güvenlik Kuralları",

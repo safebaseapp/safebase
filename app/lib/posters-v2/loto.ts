@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const lotoPoster: PosterDefinition = {
   code: "SRN-LOTO-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "LOTO Kritik Güvenlik Kuralları",

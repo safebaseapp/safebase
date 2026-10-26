@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const electricalPoster: PosterDefinition = {
   code: "SRN-EL-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "Elektrik Kritik Güvenlik Kuralları",

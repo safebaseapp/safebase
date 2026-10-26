@@ -1,0 +1,1511 @@
+{
+  "results": [
+    {
+      "name": "tr working-at-height-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "working-at-height-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-working-at-height-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 117.01589965820312
+    },
+    {
+      "name": "tr working-at-height-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "working-at-height-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-working-at-height-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 165.4937744140625
+    },
+    {
+      "name": "tr ladder-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "ladder-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-ladder-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 91.58511352539062
+    },
+    {
+      "name": "tr ladder-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "ladder-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-ladder-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 129.5274658203125
+    },
+    {
+      "name": "tr housekeeping-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "housekeeping-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-housekeeping-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 257.3216857910156
+    },
+    {
+      "name": "tr housekeeping-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "housekeeping-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-housekeeping-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 363.92626953125
+    },
+    {
+      "name": "tr excavation-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "excavation-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-excavation-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 106.48574829101562
+    },
+    {
+      "name": "tr excavation-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "excavation-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-excavation-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 150.6011962890625
+    },
+    {
+      "name": "tr chemical-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "chemical-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-chemical-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 260.5639953613281
+    },
+    {
+      "name": "tr chemical-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "chemical-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-chemical-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 368.5118408203125
+    },
+    {
+      "name": "tr forklift-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "forklift-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-forklift-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 270.0368957519531
+    },
+    {
+      "name": "tr forklift-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "forklift-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-forklift-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 381.9093017578125
+    },
+    {
+      "name": "tr manual-handling-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "manual-handling-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-manual-handling-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 282.3153381347656
+    },
+    {
+      "name": "tr manual-handling-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "manual-handling-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-manual-handling-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 399.2744140625
+    },
+    {
+      "name": "tr dropped-objects-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "dropped-objects-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-dropped-objects-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 242.42092895507812
+    },
+    {
+      "name": "tr dropped-objects-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "dropped-objects-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-dropped-objects-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 342.8524169921875
+    },
+    {
+      "name": "tr scaffold-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "scaffold-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-scaffold-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 83.24038696289062
+    },
+    {
+      "name": "tr scaffold-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "scaffold-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-scaffold-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 117.7255859375
+    },
+    {
+      "name": "tr hot-work-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "hot-work-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-hot-work-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 55.065338134765625
+    },
+    {
+      "name": "tr hot-work-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "hot-work-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-hot-work-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 77.8780517578125
+    },
+    {
+      "name": "tr confined-space-entry-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "confined-space-entry-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-confined-space-entry-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 180.15542602539062
+    },
+    {
+      "name": "tr confined-space-entry-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "confined-space-entry-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-confined-space-entry-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 254.791259765625
+    },
+    {
+      "name": "tr electrical-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "electrical-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-electrical-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 174.58547973632812
+    },
+    {
+      "name": "tr electrical-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "electrical-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-electrical-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 246.9136962890625
+    },
+    {
+      "name": "tr loto-golden-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "loto-golden-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-loto-golden-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 172.24771118164062
+    },
+    {
+      "name": "tr loto-golden-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "loto-golden-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-loto-golden-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 243.607421875
+    },
+    {
+      "name": "tr fire-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "fire-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-fire-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 136.08377075195312
+    },
+    {
+      "name": "tr fire-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "fire-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-fire-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 192.461181640625
+    },
+    {
+      "name": "tr mandatory-ppe a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "mandatory-ppe",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/tr-mandatory-ppe-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 231.45388793945312
+    },
+    {
+      "name": "tr mandatory-ppe a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "tr",
+      "id": "mandatory-ppe",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/tr-mandatory-ppe-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 327.341796875
+    },
+    {
+      "name": "en working-at-height-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "working-at-height-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-working-at-height-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 54.424957275390625
+    },
+    {
+      "name": "en working-at-height-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "working-at-height-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-working-at-height-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 76.972412109375
+    },
+    {
+      "name": "en ladder-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "ladder-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-ladder-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 55.177276611328125
+    },
+    {
+      "name": "en ladder-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "ladder-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-ladder-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 78.0362548828125
+    },
+    {
+      "name": "en housekeeping-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "housekeeping-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-housekeeping-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 220.16152954101562
+    },
+    {
+      "name": "en housekeeping-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "housekeeping-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-housekeeping-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 311.3712158203125
+    },
+    {
+      "name": "en excavation-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "excavation-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-excavation-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 17.468170166015625
+    },
+    {
+      "name": "en excavation-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "excavation-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-excavation-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 24.7049560546875
+    },
+    {
+      "name": "en chemical-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "chemical-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-chemical-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 217.66116333007812
+    },
+    {
+      "name": "en chemical-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "chemical-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-chemical-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 307.8349609375
+    },
+    {
+      "name": "en forklift-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "forklift-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-forklift-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 219.40933227539062
+    },
+    {
+      "name": "en forklift-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "forklift-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-forklift-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 310.3074951171875
+    },
+    {
+      "name": "en manual-handling-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "manual-handling-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-manual-handling-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 258.3075256347656
+    },
+    {
+      "name": "en manual-handling-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "manual-handling-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-manual-handling-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 365.320556640625
+    },
+    {
+      "name": "en dropped-objects-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "dropped-objects-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-dropped-objects-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 217.97622680664062
+    },
+    {
+      "name": "en dropped-objects-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "dropped-objects-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-dropped-objects-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 308.2806396484375
+    },
+    {
+      "name": "en scaffold-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "scaffold-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-scaffold-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 45.328155517578125
+    },
+    {
+      "name": "en scaffold-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "scaffold-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-scaffold-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 64.1068115234375
+    },
+    {
+      "name": "en hot-work-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "hot-work-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-hot-work-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 17.153228759765625
+    },
+    {
+      "name": "en hot-work-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "hot-work-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-hot-work-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 24.2593994140625
+    },
+    {
+      "name": "en confined-space-entry-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "confined-space-entry-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-confined-space-entry-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 94.94949340820312
+    },
+    {
+      "name": "en confined-space-entry-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "confined-space-entry-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-confined-space-entry-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 134.28564453125
+    },
+    {
+      "name": "en electrical-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "electrical-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-electrical-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 100.69216918945312
+    },
+    {
+      "name": "en electrical-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "electrical-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-electrical-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 142.407470703125
+    },
+    {
+      "name": "en loto-golden-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "loto-golden-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-loto-golden-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 147.05081176757812
+    },
+    {
+      "name": "en loto-golden-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "loto-golden-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-loto-golden-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 207.9718017578125
+    },
+    {
+      "name": "en fire-safety-rules a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "fire-safety-rules",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-fire-safety-rules-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 95.19338989257812
+    },
+    {
+      "name": "en fire-safety-rules a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "fire-safety-rules",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-fire-safety-rules-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 134.630615234375
+    },
+    {
+      "name": "en mandatory-ppe a4 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "mandatory-ppe",
+      "size": "a4",
+      "pdf": "/tmp/p13-final/en-mandatory-ppe-a4.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 219.40933227539062
+    },
+    {
+      "name": "en mandatory-ppe a3 content, icons, print bounds",
+      "result": "PASS",
+      "locale": "en",
+      "id": "mandatory-ppe",
+      "size": "a3",
+      "pdf": "/tmp/p13-final/en-mandatory-ppe-a3.pdf",
+      "clipped": [],
+      "overlaps": [],
+      "spareCssPx": 310.3074951171875
+    },
+    {
+      "name": "tr 320 working-at-height-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "working-at-height-rules"
+    },
+    {
+      "name": "tr 320 ladder-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "ladder-safety-rules"
+    },
+    {
+      "name": "tr 320 housekeeping-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "housekeeping-safety-rules"
+    },
+    {
+      "name": "tr 320 excavation-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "excavation-safety-rules"
+    },
+    {
+      "name": "tr 320 chemical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "chemical-safety-rules"
+    },
+    {
+      "name": "tr 320 forklift-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "forklift-safety-rules"
+    },
+    {
+      "name": "tr 320 manual-handling-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "manual-handling-safety-rules"
+    },
+    {
+      "name": "tr 320 dropped-objects-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "dropped-objects-safety-rules"
+    },
+    {
+      "name": "tr 320 scaffold-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "scaffold-safety-rules"
+    },
+    {
+      "name": "tr 320 hot-work-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "hot-work-safety-rules"
+    },
+    {
+      "name": "tr 320 confined-space-entry-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "confined-space-entry-rules"
+    },
+    {
+      "name": "tr 320 electrical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "electrical-safety-rules"
+    },
+    {
+      "name": "tr 320 loto-golden-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "loto-golden-rules"
+    },
+    {
+      "name": "tr 320 fire-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "fire-safety-rules"
+    },
+    {
+      "name": "tr 320 mandatory-ppe responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 320,
+      "id": "mandatory-ppe"
+    },
+    {
+      "name": "tr 360 working-at-height-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "working-at-height-rules"
+    },
+    {
+      "name": "tr 360 ladder-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "ladder-safety-rules"
+    },
+    {
+      "name": "tr 360 housekeeping-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "housekeeping-safety-rules"
+    },
+    {
+      "name": "tr 360 excavation-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "excavation-safety-rules"
+    },
+    {
+      "name": "tr 360 chemical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "chemical-safety-rules"
+    },
+    {
+      "name": "tr 360 forklift-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "forklift-safety-rules"
+    },
+    {
+      "name": "tr 360 manual-handling-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "manual-handling-safety-rules"
+    },
+    {
+      "name": "tr 360 dropped-objects-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "dropped-objects-safety-rules"
+    },
+    {
+      "name": "tr 360 scaffold-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "scaffold-safety-rules"
+    },
+    {
+      "name": "tr 360 hot-work-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "hot-work-safety-rules"
+    },
+    {
+      "name": "tr 360 confined-space-entry-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "confined-space-entry-rules"
+    },
+    {
+      "name": "tr 360 electrical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "electrical-safety-rules"
+    },
+    {
+      "name": "tr 360 loto-golden-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "loto-golden-rules"
+    },
+    {
+      "name": "tr 360 fire-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "fire-safety-rules"
+    },
+    {
+      "name": "tr 360 mandatory-ppe responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 360,
+      "id": "mandatory-ppe"
+    },
+    {
+      "name": "tr 390 working-at-height-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "working-at-height-rules"
+    },
+    {
+      "name": "tr 390 ladder-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "ladder-safety-rules"
+    },
+    {
+      "name": "tr 390 housekeeping-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "housekeeping-safety-rules"
+    },
+    {
+      "name": "tr 390 excavation-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "excavation-safety-rules"
+    },
+    {
+      "name": "tr 390 chemical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "chemical-safety-rules"
+    },
+    {
+      "name": "tr 390 forklift-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "forklift-safety-rules"
+    },
+    {
+      "name": "tr 390 manual-handling-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "manual-handling-safety-rules"
+    },
+    {
+      "name": "tr 390 dropped-objects-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "dropped-objects-safety-rules"
+    },
+    {
+      "name": "tr 390 scaffold-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "scaffold-safety-rules"
+    },
+    {
+      "name": "tr 390 hot-work-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "hot-work-safety-rules"
+    },
+    {
+      "name": "tr 390 confined-space-entry-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "confined-space-entry-rules"
+    },
+    {
+      "name": "tr 390 electrical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "electrical-safety-rules"
+    },
+    {
+      "name": "tr 390 loto-golden-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "loto-golden-rules"
+    },
+    {
+      "name": "tr 390 fire-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "fire-safety-rules"
+    },
+    {
+      "name": "tr 390 mandatory-ppe responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 390,
+      "id": "mandatory-ppe"
+    },
+    {
+      "name": "tr 1440 working-at-height-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "working-at-height-rules"
+    },
+    {
+      "name": "tr 1440 ladder-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "ladder-safety-rules"
+    },
+    {
+      "name": "tr 1440 housekeeping-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "housekeeping-safety-rules"
+    },
+    {
+      "name": "tr 1440 excavation-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "excavation-safety-rules"
+    },
+    {
+      "name": "tr 1440 chemical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "chemical-safety-rules"
+    },
+    {
+      "name": "tr 1440 forklift-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "forklift-safety-rules"
+    },
+    {
+      "name": "tr 1440 manual-handling-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "manual-handling-safety-rules"
+    },
+    {
+      "name": "tr 1440 dropped-objects-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "dropped-objects-safety-rules"
+    },
+    {
+      "name": "tr 1440 scaffold-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "scaffold-safety-rules"
+    },
+    {
+      "name": "tr 1440 hot-work-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "hot-work-safety-rules"
+    },
+    {
+      "name": "tr 1440 confined-space-entry-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "confined-space-entry-rules"
+    },
+    {
+      "name": "tr 1440 electrical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "electrical-safety-rules"
+    },
+    {
+      "name": "tr 1440 loto-golden-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "loto-golden-rules"
+    },
+    {
+      "name": "tr 1440 fire-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "fire-safety-rules"
+    },
+    {
+      "name": "tr 1440 mandatory-ppe responsive preview",
+      "result": "PASS",
+      "locale": "tr",
+      "width": 1440,
+      "id": "mandatory-ppe"
+    },
+    {
+      "name": "en 320 working-at-height-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "working-at-height-rules"
+    },
+    {
+      "name": "en 320 ladder-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "ladder-safety-rules"
+    },
+    {
+      "name": "en 320 housekeeping-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "housekeeping-safety-rules"
+    },
+    {
+      "name": "en 320 excavation-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "excavation-safety-rules"
+    },
+    {
+      "name": "en 320 chemical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "chemical-safety-rules"
+    },
+    {
+      "name": "en 320 forklift-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "forklift-safety-rules"
+    },
+    {
+      "name": "en 320 manual-handling-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "manual-handling-safety-rules"
+    },
+    {
+      "name": "en 320 dropped-objects-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "dropped-objects-safety-rules"
+    },
+    {
+      "name": "en 320 scaffold-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "scaffold-safety-rules"
+    },
+    {
+      "name": "en 320 hot-work-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "hot-work-safety-rules"
+    },
+    {
+      "name": "en 320 confined-space-entry-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "confined-space-entry-rules"
+    },
+    {
+      "name": "en 320 electrical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "electrical-safety-rules"
+    },
+    {
+      "name": "en 320 loto-golden-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "loto-golden-rules"
+    },
+    {
+      "name": "en 320 fire-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "fire-safety-rules"
+    },
+    {
+      "name": "en 320 mandatory-ppe responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 320,
+      "id": "mandatory-ppe"
+    },
+    {
+      "name": "en 360 working-at-height-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "working-at-height-rules"
+    },
+    {
+      "name": "en 360 ladder-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "ladder-safety-rules"
+    },
+    {
+      "name": "en 360 housekeeping-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "housekeeping-safety-rules"
+    },
+    {
+      "name": "en 360 excavation-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "excavation-safety-rules"
+    },
+    {
+      "name": "en 360 chemical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "chemical-safety-rules"
+    },
+    {
+      "name": "en 360 forklift-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "forklift-safety-rules"
+    },
+    {
+      "name": "en 360 manual-handling-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "manual-handling-safety-rules"
+    },
+    {
+      "name": "en 360 dropped-objects-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "dropped-objects-safety-rules"
+    },
+    {
+      "name": "en 360 scaffold-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "scaffold-safety-rules"
+    },
+    {
+      "name": "en 360 hot-work-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "hot-work-safety-rules"
+    },
+    {
+      "name": "en 360 confined-space-entry-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "confined-space-entry-rules"
+    },
+    {
+      "name": "en 360 electrical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "electrical-safety-rules"
+    },
+    {
+      "name": "en 360 loto-golden-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "loto-golden-rules"
+    },
+    {
+      "name": "en 360 fire-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "fire-safety-rules"
+    },
+    {
+      "name": "en 360 mandatory-ppe responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 360,
+      "id": "mandatory-ppe"
+    },
+    {
+      "name": "en 390 working-at-height-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "working-at-height-rules"
+    },
+    {
+      "name": "en 390 ladder-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "ladder-safety-rules"
+    },
+    {
+      "name": "en 390 housekeeping-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "housekeeping-safety-rules"
+    },
+    {
+      "name": "en 390 excavation-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "excavation-safety-rules"
+    },
+    {
+      "name": "en 390 chemical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "chemical-safety-rules"
+    },
+    {
+      "name": "en 390 forklift-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "forklift-safety-rules"
+    },
+    {
+      "name": "en 390 manual-handling-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "manual-handling-safety-rules"
+    },
+    {
+      "name": "en 390 dropped-objects-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "dropped-objects-safety-rules"
+    },
+    {
+      "name": "en 390 scaffold-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "scaffold-safety-rules"
+    },
+    {
+      "name": "en 390 hot-work-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "hot-work-safety-rules"
+    },
+    {
+      "name": "en 390 confined-space-entry-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "confined-space-entry-rules"
+    },
+    {
+      "name": "en 390 electrical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "electrical-safety-rules"
+    },
+    {
+      "name": "en 390 loto-golden-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "loto-golden-rules"
+    },
+    {
+      "name": "en 390 fire-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "fire-safety-rules"
+    },
+    {
+      "name": "en 390 mandatory-ppe responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 390,
+      "id": "mandatory-ppe"
+    },
+    {
+      "name": "en 1440 working-at-height-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "working-at-height-rules"
+    },
+    {
+      "name": "en 1440 ladder-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "ladder-safety-rules"
+    },
+    {
+      "name": "en 1440 housekeeping-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "housekeeping-safety-rules"
+    },
+    {
+      "name": "en 1440 excavation-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "excavation-safety-rules"
+    },
+    {
+      "name": "en 1440 chemical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "chemical-safety-rules"
+    },
+    {
+      "name": "en 1440 forklift-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "forklift-safety-rules"
+    },
+    {
+      "name": "en 1440 manual-handling-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "manual-handling-safety-rules"
+    },
+    {
+      "name": "en 1440 dropped-objects-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "dropped-objects-safety-rules"
+    },
+    {
+      "name": "en 1440 scaffold-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "scaffold-safety-rules"
+    },
+    {
+      "name": "en 1440 hot-work-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "hot-work-safety-rules"
+    },
+    {
+      "name": "en 1440 confined-space-entry-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "confined-space-entry-rules"
+    },
+    {
+      "name": "en 1440 electrical-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "electrical-safety-rules"
+    },
+    {
+      "name": "en 1440 loto-golden-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "loto-golden-rules"
+    },
+    {
+      "name": "en 1440 fire-safety-rules responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "fire-safety-rules"
+    },
+    {
+      "name": "en 1440 mandatory-ppe responsive preview",
+      "result": "PASS",
+      "locale": "en",
+      "width": 1440,
+      "id": "mandatory-ppe"
+    },
+    {
+      "name": "no browser exceptions",
+      "result": "PASS"
+    }
+  ],
+  "exceptions": [],
+  "blockedWrites": [],
+  "note": "Actual public pages and genuine print CSS, no live auth/account/storage writes. Fixed one-page frame may not hide overflowing text: every text range and card/panel is checked. Fonts are measured independently in PDFs."
+}

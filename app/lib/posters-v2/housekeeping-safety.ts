@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const housekeepingSafetyPoster: PosterDefinition = {
   code: "SRN-HSK-001",
-  revision: "1.0",
+  revision: "2.0",
   title: {
     tr: "Saha Düzeni ve Temizlikte Kritik Güvenlik Kuralları",
     en: "Housekeeping Critical Safety Rules",

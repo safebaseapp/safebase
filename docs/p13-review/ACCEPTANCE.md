@@ -1,3 +1,5 @@
+> **Güncel toplu revizyon:** [FINAL-REVISION.md](FINAL-REVISION.md), renk ve teknik kalite talimatları 6416069898 / 6416174058 için son kayıttır. Önceki logolu fixture sonucu yeni başlık/dil/PDF kontrolleriyle değiştirilmiştir; bu dosya tarihsel kanıttır.
+
 > **Son revizyon:** [READABILITY.md](READABILITY.md) ve `readability/` kanıtları, yorum 6414234906 kapsamındaki ikon, etiket ve gerçek A4/A3 punto sonuçları için güncel kaynaktır. Bu dosya tarihsel rapor olarak korunur.
 
 # Paket 13 — Son teknik kabul kontrolü

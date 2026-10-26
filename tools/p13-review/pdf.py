@@ -23,12 +23,14 @@ for pdf in sorted(afterDir.glob('*.pdf')):
      if float(a['xMin'])<0 or float(a['yMin'])<0 or float(a['xMax'])>w+.5 or float(a['yMax'])>h+.5:violations.append(word.text)
  image=rasterPrefix+pdf.stem
  subprocess.run(['pdftoppm','-f','1','-singlefile','-scale-to','2500','-png',str(pdf),image],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
- qr=decode(image+'.png');slug=pdf.stem[3:-3];file=slugFiles.get(slug,slug.removesuffix('-rules')+'.ts');poster=next(p for p in posters if p['file']==file);text=subprocess.check_output(['pdftotext','-layout',str(pdf),'-'],text=True);titlePresent=norm(poster['title'][locale],locale) in norm(text,locale);good=not violations and expected in qr and titlePresent and not re.search('NaN|Infinity|�',text)
+ qr=decode(image+'.png');slug=pdf.stem[3:-3];file=slugFiles.get(slug,slug.removesuffix('-rules')+'.ts');poster=next(p for p in posters if p['file']==file);text=subprocess.check_output(['pdftotext','-layout',str(pdf),'-'],text=True);titleText=subprocess.check_output(['pdftotext','-raw',str(pdf),'-'],text=True);titlePresent=norm(poster['title'][locale],locale) in norm(titleText,locale);good=not violations and expected in qr and titlePresent and not re.search('NaN|Infinity|�',text)
  rows.append({'file':pdf.name,'result':'PASS' if good else 'FAIL','qrDecoded':qr,'expectedQr':expected,'titleAndLocaleGlyphs':titlePresent,'outOfPageWords':violations,'textCharacters':len(text),'sha256':hashlib.sha256(pdf.read_bytes()).hexdigest()})
  print(rows[-1],flush=True)
 assert len(rows)==60,len(rows)
 (evidence/'pdf-results.json').write_text(json.dumps({'results':rows,'note':'All 15 topics × TR/EN × A4/A3. Page count/dimensions in after-fonts.json (readability matrix) and DOM text clipping in browser-results.json; this test independently checks PDF text bounds and decodes each rendered QR at 2500px. No claim of physical printer or phone-camera testing.'},indent=2)+'\n')
 assert all(x['result']=='PASS' for x in rows)
+
+if os.environ.get('P13_SKIP_PREVIEWS')=='1':raise SystemExit(0)
 
 # Deterministic before/after evidence from real browser-produced PDFs, without screenshot-scroll artefacts.
 for phase in ['before','after']:

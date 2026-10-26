@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const hotWorkPoster: PosterDefinition = {
   code: "SRN-HW-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "Sıcak Çalışma Kritik Güvenlik Kuralları",
@@ -40,19 +40,19 @@ export const hotWorkPoster: PosterDefinition = {
     {
       number: "02",
       title: {
-        tr: "Yanıcıları Uzaklaştır",
-        en: "Remove Combustibles",
+        tr: "Alanı Hazırla",
+        en: "Prepare the Work Area",
       },
       items: {
         tr: [
-          "Yanıcı malzemeleri güvenli mesafeye taşı.",
-          "Taşınamayan malzemeleri yangına dayanıklı örtüyle koru.",
-          "Zemin, boşluk ve karşı yüzleri kıvılcıma karşı kontrol et.",
+          "Yanıcıları kontrol et; varsa taşı, taşınamayanı yangına dayanıklı örtüyle koru.",
+          "Zemin, açıklık ve karşı yüzlerde kıvılcım/ısı riskini kontrol et.",
+          "Metal dumanı maruziyetini değerlendir; prosese uygun havalandırma/lokal emiş sağla.",
         ],
         en: [
-          "Move combustible materials to a safe distance.",
-          "Protect immovable materials with fire-resistant covers.",
-          "Check floors, openings and opposite surfaces for spark exposure.",
+          "Check combustibles; remove them or protect fixed items with fire-resistant covers.",
+          "Check floors, openings and opposite surfaces for sparks/heat.",
+          "Assess metal-fume exposure; provide process-matched ventilation/local exhaust.",
         ],
       },
       icon: "hw-combustibles",
@@ -68,12 +68,12 @@ export const hotWorkPoster: PosterDefinition = {
       items: {
         tr: [
           "Gerekli alanlarda atmosferi işe başlamadan önce ölç.",
-          "Oksijen, yanıcı gaz ve toksik riskleri doğrula.",
+          "Oksijen/yanıcı/toksik gazları ölç; gaz dedektörü duman kontrolünün yerini tutmaz.",
           "Koşullar değişebilecekse sürekli veya periyodik ölçüm yap.",
         ],
         en: [
           "Test the atmosphere before work where required.",
-          "Verify oxygen, flammable-gas and toxic hazards.",
+          "Check oxygen/flammable/toxic gases; a gas detector does not replace fume control.",
           "Use continuous or periodic monitoring when conditions may change.",
         ],
       },
@@ -134,12 +134,12 @@ export const hotWorkPoster: PosterDefinition = {
       items: {
         tr: [
           "Kıvılcım, cüruf ve sıcak parçaların yayılmasını sınırla.",
-          "Yangın perdesi veya uygun bariyer kullan.",
+          "Çevredekileri ark ışını ve sıçramadan uygun perdeyle koru.",
           "Duvar, boru ve metal yüzeylerden ısı iletimini değerlendir.",
         ],
         en: [
           "Confine sparks, slag and hot fragments.",
-          "Use fire curtains or suitable barriers.",
+          "Screen nearby workers from arc radiation and spatter.",
           "Assess heat conduction through walls, pipes and metal surfaces.",
         ],
       },
@@ -177,14 +177,14 @@ export const hotWorkPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "ABD OSHA: gözcü gereken kaynak/kesme sonrası en az 30 dakika yangın gözetimi yap.",
-          "Yerel kural, izin veya risk daha uzun süre istiyorsa uzat; uygulanabilir OSHA asgarisini kısaltma.",
-          "Gizli boşlukları ve için için yanmayı kontrol et; tehlike sürerken gözetimi bitirme.",
+          "ABD genel endüstri: gözcü gereken kaynak/kesme sonrası en az 30 dakika gözetim yap.",
+          "Daha uzun yerel/risk süresinde uzat; uygulanabilir OSHA asgarisini kısaltma.",
+          "Gizli/korlu yangını kontrol et. İnşaat 1926.352(e): yangın ihtimali kalmayana dek sürdür; sabit 30 dk demez.",
         ],
         en: [
-          "US OSHA: maintain a fire watch for at least 30 minutes after welding/cutting requiring a watch.",
-          "Extend the watch for stricter local rules, permits or risk; do not shorten the applicable OSHA minimum.",
-          "Check concealed spaces and smouldering fires; do not end the watch while hazards remain.",
+          "US general industry: at least 30 minutes after welding/cutting requiring a watch.",
+          "Extend for stricter local rules, permits or risk; do not shorten the applicable OSHA minimum.",
+          "Construction 1926.352(e): watch until no fire risk; no fixed 30 min. Check concealed/smouldering fires.",
         ],
       },
       icon: "hw-post-watch",
@@ -212,17 +212,17 @@ export const hotWorkPoster: PosterDefinition = {
 
   ppe: {
     tr: [
-      "Kaynak Başlığı",
+      "Yüz/Göz Koruması",
       "Koruyucu Gözlük",
       "Isı Eldiveni",
-      "Deri Ayakkabı",
+      "İş Güvenliği Ayakkabısı",
       "Alev Geciktirici Giysi",
     ],
     en: [
-      "Welding Helmet",
+      "Face/Eye Protection",
       "Safety Glasses",
       "Heat-Resistant Gloves",
-      "Leather Footwear",
+      "Safety Footwear",
       "Flame-Resistant Clothing",
     ],
   },

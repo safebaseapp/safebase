@@ -5,7 +5,7 @@ os.environ.setdefault('MPLCONFIGDIR','/tmp/p13-matplotlib')
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-p=pathlib.Path('docs/p13-review/readability');before=json.loads((p/'before-distributions.json').read_text())['results'];after=json.loads((p/'after-fonts.json').read_text())['results']
+p=pathlib.Path(os.environ.get('P13_EVIDENCE_DIR','docs/p13-review/readability'));before=json.loads((p/'before-distributions.json').read_text())['results'];after=json.loads((p/'after-fonts.json').read_text())['results']
 path=pathlib.Path('docs/p13-review/acceptance/sample-tr-hot-work-a4.pdf');doc=fitz.open(path);hist=collections.Counter();nonspace=0
 for block in doc[0].get_text('dict')['blocks']:
  for line in block.get('lines',[]):

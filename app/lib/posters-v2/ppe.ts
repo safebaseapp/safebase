@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const ppePoster: PosterDefinition = {
   code: "SRN-PPE-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "Zorunlu KKD Kritik Güvenlik Kuralları",

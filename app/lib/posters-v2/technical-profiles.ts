@@ -2,7 +2,7 @@
  * No expert approval/date is inferred. Sources blocked in this review remain explicitly unverified.
  * Unknown codes fail visibly; never inherit working-at-height requirements. */
 export type Bilingual = {tr:string;en:string};
-export type TechnicalReference = {label:string;jurisdiction:'US-construction'|'US-general-industry'|'US-general-industry-and-construction'|'GB-guidance';url:string;verification:'not-verified-in-session';clauses?:readonly string[]};
+export type TechnicalReference = {label:string;jurisdiction:'US-construction'|'US-general-industry'|'US-general-industry-and-construction'|'GB-guidance';url:string;verification:'not-verified-in-session';clauses?:readonly string[];additional?:readonly {label:string;url:string}[]};
 export type PosterTechnicalProfile = {reference:keyof typeof technicalReferences;preJob:Bilingual[];controls:{value:Bilingual;label:Bilingual}[];ppeSelection:Bilingual[];ppeIcons:string[];ppeNote:Bilingual;reviewStatus:'site-validation-required'};
 export const technicalReferences = {
   "height": {
@@ -79,13 +79,12 @@ export const technicalReferences = {
     ]
   },
   "hotwork": {
-    "label": "OSHA 1910.252(a)(2)(iii)(B)",
+    "label": "OSHA 1910.252(a)(2)(iii)(A)(1–4), (B); (c)",
     "jurisdiction": "US-general-industry",
     "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.252",
     "verification": "not-verified-in-session",
-    "clauses": [
-      "1910.252(a)(2)(iii)(A)-(B)"
-    ]
+    "clauses": ["1910.252(a)(2)(iii)(A)(1)-(4)", "1910.252(a)(2)(iii)(B)", "1910.252(c)", "1926.352(e)"],
+    "additional": [{"label":"OSHA 1926.352(e)", "url":"https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.352"}]
   },
   "confined": {
     "label": "OSHA 1910.146(b), (d)",
@@ -1116,112 +1115,112 @@ export const posterTechnicalProfiles = {
   "SRN-HW-001": {
     "reference": "hotwork",
     "preJob": [
-      {
-        "tr": "Sıcak çalışma izni",
-        "en": "Hot work permit"
-      },
-      {
-        "tr": "Gerekli gaz ölçümü",
-        "en": "Required gas testing"
-      },
-      {
-        "tr": "Yanıcı kontrolü",
-        "en": "Combustible control"
-      },
-      {
-        "tr": "Yangın gözcüsü",
-        "en": "Fire watch"
-      },
-      {
-        "tr": "Uygun söndürücü",
-        "en": "Suitable extinguisher"
-      },
-      {
-        "tr": "Kıvılcım bariyeri",
-        "en": "Spark barriers"
-      },
-      {
-        "tr": "İş sonrası gözetim",
-        "en": "Post-work watch"
-      }
+        {
+            "tr": "Gerekliyse sıcak çalışma izni",
+            "en": "Permit where required"
+        },
+        {
+            "tr": "Gerekliyse gaz ölçümü",
+            "en": "Gas test where required"
+        },
+        {
+            "tr": "Yanıcı/duman kontrolü",
+            "en": "Combustible/fume control"
+        },
+        {
+            "tr": "Gerekliyse yangın gözcüsü",
+            "en": "Fire watch where required"
+        },
+        {
+            "tr": "Uygun söndürücü",
+            "en": "Suitable extinguisher"
+        },
+        {
+            "tr": "Gerekliyse perde/bariyer",
+            "en": "Screens/barriers if needed"
+        },
+        {
+            "tr": "Gerekliyse iş sonrası gözetim",
+            "en": "Post-work watch if required"
+        }
     ],
     "controls": [
-      {
-        "value": {
-          "tr": "35 ft",
-          "en": "35 ft"
+        {
+            "value": {
+                "tr": "35 ft",
+                "en": "35 ft"
+            },
+            "label": {
+                "tr": "Gözcü ölçütü: yanıcılar <10,7 m; daha uzakta kıvılcım/ısı, açıklık ve ısı iletimi de ölçüttür",
+                "en": "Watch criterion: combustibles <10.7 m; beyond this distance: sparks, openings and conducted heat"
+            }
         },
-        "label": {
-          "tr": "OSHA gözcü ölçütü: yanıcılar <10,7 m; daha uzakta kıvılcım/ısı riski de geçerlidir",
-          "en": "OSHA watch criterion: combustibles <10.7 m; spark/heat hazards beyond this distance also count"
-        }
-      },
-      {
-        "value": {
-          "tr": "≥30 DK",
-          "en": "≥30 MIN"
+        {
+            "value": {
+                "tr": "≥30 DK",
+                "en": "≥30 MIN"
+            },
+            "label": {
+                "tr": "Genel endüstri: gözcü gereken iş sonrası; daha sıkı kuralda uzat",
+                "en": "General industry: after work requiring a watch; extend if stricter"
+            }
         },
-        "label": {
-          "tr": "ABD OSHA: gözcü gereken kaynak/kesme sonrası; daha sıkı kuralda uzat",
-          "en": "US OSHA: after welding/cutting requiring a watch; extend for stricter rules"
-        }
-      },
-      {
-        "value": {
-          "tr": "İZİN",
-          "en": "PERMIT"
+        {
+            "value": {
+                "tr": "İZİN",
+                "en": "PERMIT"
+            },
+            "label": {
+                "tr": "Gerekliyse kapsam/koşulu doğrula",
+                "en": "Where required: verify scope/conditions"
+            }
         },
-        "label": {
-          "tr": "Kapsam ve koşulları doğrula",
-          "en": "Verify scope and conditions"
+        {
+            "value": {
+                "tr": "GÖZCÜ",
+                "en": "WATCH"
+            },
+            "label": {
+                "tr": "Gerekliyse eğitimli ve hazır",
+                "en": "Where required: trained and ready"
+            }
         }
-      },
-      {
-        "value": {
-          "tr": "GÖZCÜ",
-          "en": "WATCH"
-        },
-        "label": {
-          "tr": "Eğitimli ve hazır olmalı",
-          "en": "Trained and ready"
-        }
-      }
     ],
     "ppeSelection": [
-      {
-        "tr": "Prosese uygun filtre",
-        "en": "Process-matched filter"
-      },
-      {
-        "tr": "Başlık altında göz koruması",
-        "en": "Eye protection under helmet"
-      },
-      {
-        "tr": "Isı ve sıçrama",
-        "en": "Heat and spatter"
-      },
-      {
-        "tr": "Sıcak metal ve kıvılcım",
-        "en": "Hot metal and sparks"
-      },
-      {
-        "tr": "Prosese uygun alev koruması",
-        "en": "Process-matched flame protection"
-      }
+        {
+            "tr": "Kaynak/kesme/taşlama: uygun filtre/siperlik",
+            "en": "Welding/cutting/grinding: suitable filter/shield"
+        },
+        {
+            "tr": "Prosese uygun darbe/göz koruması",
+            "en": "Process-matched impact/eye protection"
+        },
+        {
+            "tr": "Isı ve sıçrama",
+            "en": "Heat and spatter"
+        },
+        {
+            "tr": "Isı, sıçrama ve mekanik riske uygun",
+            "en": "Match heat, spatter and mechanical hazards"
+        },
+        {
+            "tr": "Prosese uygun alev koruması",
+            "en": "Process-matched flame protection"
+        }
     ],
     "ppeIcons": [
-      "🥽",
-      "👓",
-      "🧤",
-      "🥾",
-      "🧥"
+        "🥽",
+        "👓",
+        "🧤",
+        "🥾",
+        "🧥"
     ],
     "ppeNote": {
-      "tr": "KKD’yi risk, üretici ve saha prosedürüne göre seç; bu liste her işte zorunluluk değildir.",
-      "en": "Select PPE by risk, manufacturer and site procedure; this list is not mandatory for every task."
+        "tr": "Risk/üreticiye göre seç; gerekliyse solunum ve işitme koruması ekle. KKD havalandırmanın yerini tutmaz.",
+        "en": "Select by risk/manufacturer; add respiratory/hearing PPE if needed. PPE does not replace ventilation."
     },
     "reviewStatus": "site-validation-required"
-  },
+},
   "SRN-CS-001": {
     "reference": "confined",
     "preJob": [

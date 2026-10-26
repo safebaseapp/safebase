@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const droppedObjectsSafetyPoster: PosterDefinition = {
   code: "SRN-DO-001",
-  revision: "1.0",
+  revision: "2.0",
   title: {
     tr: "Düşen Cisim Kritik Güvenlik Kuralları",
     en: "Dropped Objects Critical Safety Rules",

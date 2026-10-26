@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const scaffoldPoster: PosterDefinition = {
   code: "SRN-SCF-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "İskele Kritik Güvenlik Kuralları",

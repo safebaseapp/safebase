@@ -1,3 +1,5 @@
+> **Güncel toplu revizyon:** [FINAL-REVISION.md](FINAL-REVISION.md), renk ve teknik kalite talimatları 6416069898 / 6416174058 için son kayıttır. Önceki logolu fixture sonucu yeni başlık/dil/PDF kontrolleriyle değiştirilmiştir; bu dosya tarihsel kanıttır.
+
 # Paket 13 — A4 okunabilirlik, ikon ve HSE etiket revizyonu
 
 PR #126 / `codex/sernem-p13-hse-poster-quality`. Bu rapor önceki AUDIT ve ACCEPTANCE raporlarının yerleşim/ikon/font sonuçlarını günceller; önceki kaynak erişim engelleri devam eder. Uygulanan talimat: [yorum 6414234906](https://github.com/safebaseapp/safebase/pull/126#issuecomment-6414234906). Revizyon başlangıcı: `22ea88612ed920b72d9122bec13cbb3ead53c8c9`. Yeni dal/PR açılmadı.
