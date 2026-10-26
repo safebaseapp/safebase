@@ -45,9 +45,9 @@ Import trace:
   Finished TypeScript in 19.1s ...
   Collecting page data using 4 workers ...
   Generating static pages using 4 workers (0/858) ...
-  Generating static pages using 4 workers (214/858) 
-  Generating static pages using 4 workers (428/858) 
-  Generating static pages using 4 workers (643/858) 
+  Generating static pages using 4 workers (214/858)
+  Generating static pages using 4 workers (428/858)
+  Generating static pages using 4 workers (643/858)
 ✓ Generating static pages using 4 workers (858/858) in 1602ms
   Finalizing page optimization ...
 
@@ -188,4 +188,3 @@ Route (app)
 
 ○  (Static)   prerendered as static content
 ƒ  (Dynamic)  server-rendered on demand
-
