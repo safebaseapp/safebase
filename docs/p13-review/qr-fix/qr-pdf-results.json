@@ -1,0 +1,4685 @@
+{
+  "results": [
+    {
+      "mode": "standard",
+      "file": "en-chemical-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "2be6905ca2b2fb13e4bf938cebc207022dcc55778cfb35a54cf01312022a0da7",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-chemical-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "eba0e02f8462714d1e79d74358a8b2e1b8a6a8a0bd5a88e62672e7f95b264f2d",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-confined-space-entry-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "844344f7120791efe6b6248769d256f3466a2909f0463c6d140a3d45d9efe9e4",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-confined-space-entry-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "00eed20969112f68ac6ccd9429b5a350101bfa2046064f5172adbb6aa7494d50",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-dropped-objects-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "8f6faf8f7157e66a7674780d7e156389545fc4bfd42da8c0c924169d988ec177",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-dropped-objects-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "8a4e133300c9d6ffa9191968d8c115926213a72acc8a485cf5ad6056370e10a5",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-electrical-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "398ba9e818b3f1085606979a12c0ed708cb26135027d46cbeb698acda2bed454",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-electrical-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "3ed34db9ae08f5c5fe96b629dd19d9b7d5e90a7fd4ab8155a2cf3353051d00da",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-excavation-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "e58a94790d8f82f763783c7d85473897e3955664e4ced66013747a1db8325615",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-excavation-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "37102a28e7b259d40bc0b6bbdf4a750e7a25e578d1b27c1a8620ec7fe6ceba0e",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-fire-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "73e1a5940d742666aaac42d94b334ca6c13c417586430377b90e805961d37aaa",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-fire-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "1a9d19f3e500c4680bf660fcc6890dcd626cab3baa6be563a37d2895e5e1f1fb",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-forklift-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "3569d2709f666665d51475985345ffb407e72d630d52c6aefd7457ffd625a93a",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-forklift-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "83382f29a98953ac22f527cc6dc5fd8d5cb6a29f14592ae39543ac0e0584694e",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-hot-work-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "b2374ce4379a662dc195395eea4b4039d68bfb39b1d8a4be8912e26e5d7253dc",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-hot-work-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "ae98b84ad13a8ce75a4bc8e05ef9a091e7db447fba0b87c79a3fcc476329a297",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-housekeeping-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "cb929144d8706854fd1d73cc413f34f2979eb534aa2c7c4435e20b99d6056370",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-housekeeping-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "78bfe1b2e6a953fdabdfda75c8cd143476a9f83d698e8c472fa54d0090562480",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-ladder-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "ab370c1912bf198d1a7ebcd86b2ba464d4082f45fcdc082ab6256faf358e79c9",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-ladder-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "02d70f09fd172c69c6708b3daea27c9ccd5c1b39781f31cadab8fe4a9893e540",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-loto-golden-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "c2da6491b8eaf77bc421fafa3bb2fca7b6f6d89e021acb98cd5183bccb6600db",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-loto-golden-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "3f4c3f6fb847be843cd33cb19e45b07efa4fc605f6734a09143d6c7a5360486b",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-mandatory-ppe-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "e41b383df9e2a54fcbfae92c5ba92bea566e0c480ecaab34f1ca253b1053a71c",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-mandatory-ppe-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "0748ef63de03e7c28807a370b11004f48683807fb0e05055dd0b98276ae92105",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-manual-handling-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "b0926186aebe5d5be8383dc61f2f29b3b3fe29762c0aed51f191675b7dfac749",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-manual-handling-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "42f0d8bcaa64769a24c8edc69db40f5465ef65f7ed4d46151641ec2a073f159e",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-scaffold-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "23cf8b6dffde0581756c3e8918dddbc1b2ff5c3d7e9be76173750c52ed1a2357",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-scaffold-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "a417c19cea31706624236ea95a0f45fcfe02a3fdc1ea5b14e1404d78811f0676",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-working-at-height-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "2039d98ebbd021b8686d9a53c7a1694da21f1047c71553bfa18c64230a9e515b",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "en-working-at-height-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "6c3e9ede93ca131f603466444fee49180bd0362f6fd6cc2226484ceceb70892f",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-chemical-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "187b1a9822fd2a73f8b57a17d69e49f71bddca5e1e61fb9b80fe6f7f65809080",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-chemical-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "dc99b30d6b26f8d3d89e766bdfa03c8ffac0a3f138f20336e66431da8f00e708",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-confined-space-entry-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "13e12f9ff29b19873e584a0786153402a2aa396c34460be213fcca08422e5663",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-confined-space-entry-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "09aa527cbe19e3f7f2f6527772d87fc50c0224d24e0d28c1497d2994d1e028ea",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-dropped-objects-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "30fb9713fda890d9b2404b1d9f49d48f85c7ad8d2f66144bb3dde4b3c46f1e7d",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-dropped-objects-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "017416489f7e1ec5d15345b6b2233b8bbc15daebc95e9dd7c348c82b54295f5b",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-electrical-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "647bf375982f101402357b6c270a6b7763f9a4d1d2e31b1cebfc9b1a7cac726a",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-electrical-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "0cf43475181636c60bc08a186c382ecda006379b2fb002d7573ebfbf7c1757d9",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-excavation-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "2cf97c5472955afd31a2b81d6daabd5cc12ed219f49c7dc76c05b88de9899a0a",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-excavation-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "4e32ac7846bd952ec6f5a2404ef21e2ac3843303eb3e45bb2d2e5dc796f96f93",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-fire-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "280d408ed51283ee359a303463bc7516115ecfa9f18197729fb052ba1508970b",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-fire-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "f53dab75be7db1c25cac1e076af6483d5ac01f34e01bf2ff0c46420d932f27c6",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-forklift-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "938be119f34da2867a8f5a18edd9a7597d2878af1c7b3102510782287d2b4ffb",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-forklift-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "87d74007e396b6eb41ca5e48b8b2defc665723eb0a5b9d2ddd5cc3765444d1f0",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-hot-work-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "63e76527259ec0d93c9a4885328a9895d2c4396acb7b238a0d4dd948d9ee037a",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-hot-work-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "9fed223f142ce74e4713e11b6050eeccb4959bcb90a367b453aae126588c194f",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-housekeeping-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "d4bd72a33f02445436f9525996efdaffb8370fb8ef82f6b5c1e563932dbfef87",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-housekeeping-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "da5f5299b139bc131898afbdcf81ef5537e9fc60316c48a772648d663f1dc085",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-ladder-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "c61ab58c52b3e64c5595556e01c6c6bb1395bb7426776cf67f337cdd4d9cfd4f",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-ladder-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "beec160fc7a32d540a047c5c4b96fdbb2ae98a665ba79b8ac60cc1ae44c8b418",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-loto-golden-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "112dec19c6c4672f528a3638bf89d69dca103e18bcd5a8ca531bc5ebfd47c965",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-loto-golden-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "e9ec0767a40537e8e449ea208f562560ec9faa2f1815c5bcdfba84a06c1e38fd",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-mandatory-ppe-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "1fc7885e465096f4c42826bdb17a59dc3bf278078bd5afdb6d5335c14ff2a007",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-mandatory-ppe-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "4fca5f5f917bf92974ce32d8a62a949e54b80c6461232bf38be01bf145c93e21",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-manual-handling-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "7318f6088e0b92581bc976aeb9b84138141590000cc4302c070e89289bbd89de",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-manual-handling-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "b8d25e386e0d50fa4af01f4eaef992c534cf49ee9d998e8b461d0127dc0e92f1",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-scaffold-safety-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "744248f7989b76039357e0f9ffda25b45dc78c1c4a6a4cd7146468baf6f39f5e",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-scaffold-safety-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "bbf2c4e753f80a43bae039097256ccfbc14e210a779988517e9ed67ca58ca17a",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-working-at-height-rules-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "28bb3a9a639468669850347c8283077c89965b0d2818d00752ba884d2bf3d538",
+      "result": "PASS"
+    },
+    {
+      "mode": "standard",
+      "file": "tr-working-at-height-rules-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "b8e208564dd44691490c7e602ae9b6019ed372479d467ceaa79b3cb6267bb87d",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-CHM-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "dc46ec1daf5176ac0c4ca759b5a0e5209674a5775c5ad3a312e9f0a7fbccf60b",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-CHM-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "411d64555b953590dceb2b5741fbe31f165ea2ae9946150f750fe19118c954c6",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-CS-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "b65a78b3dce832ce4dfa622b8291a3dedc7547425ad482467810bfaf294f2900",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-CS-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "d5dbe7cdb07719f9f8a9ab2614b249edb7187d6bb9aafc891cf462bd83723fbc",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-DO-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "e3a85c8e20253a8efa1cbe31b3eaebf0e4dd1e06cb49c5a3ade38a682615889c",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-DO-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "3d760812fab9a8497f555c1fa45754dce809fcaa17f90cc69cdbc5b5b7cf0c5a",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-EL-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "11561a0617b0527fca271b291ddb03f1da890a3c7ce01f38a67f2187d356d783",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-EL-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "53438eab9c2ebb60d68a04b95ab1201f8d3574c26b3c94ea1c48b244ae81e68e",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-EXC-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "40705e08cfeb5b3aaaa05881c4e4173593b245ae36d83e6d02a2ff4cb6c06262",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-EXC-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "5c1ba7dfa5f98001e2dbe8bdadddbf35f4ea5987923e8a7ba4f7c32ac4ebd4fd",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-FIRE-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "8dc3013504f105d51b52fae0ffa879117693ac79f07814a4933b0f982833ac2d",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-FIRE-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "c5d30e4a2c7aad8207386832a32e1cb1f3528b8e54dbbb311ce991dfb2dbc52f",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-FLT-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "5066142ca05cd0e701a40b92712da3fc33165c42dd00e863ee8ef8cf3b15553c",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-FLT-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "e07df4cf6c92d853cde2e26153da7fb4ba268b5add6233da460c032ec5ce05ab",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-HSK-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "ab2d1cfb989e888634915d70f7c34bd09ac79018303edc45c14eef50320d67f7",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-HSK-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "4ac9db5c4b5ef359c9d1da7e945bd400e0daec8ae3304b20b2d031e356a014e0",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-HW-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "6d9c1121ca58accbfc9aec8fe771e3ed046905866c8969674a5f955978d1b2ae",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-HW-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "3ca67d6ab6e4d1d9a9afd8d846cfd5b11f5b0cde352525ae086c6e4cb2ed0cc4",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-LAD-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "03d9f918dd72963e1ea25751a364e3422503d863b45763c0c4b78e9d7edc964d",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-LAD-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "641e5dc95abc84a41f4c9c2c28c411e658d98c90af15a9a3af2977cc49b749bc",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-LOTO-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "5fe33eeed827d99667145556606a1d6f9b8ae9f0643cb260cf8e3b4215e62d35",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-LOTO-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "f684fa697686a92e82e62264ddbc02ec9c273a80c5c1659db203f083100bc465",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-MH-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "afe0f0a940f366a0ee9a68c1a77666cee5566fbf0933c3db0509081bedc79f3c",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-MH-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "e4ea3c784b20966d5bb00a3cf6791182111361b06da47a068c51bc7c86ab7b45",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-PPE-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "511eafd33565e441c254abdfa2a660ff9c2775a1d35acc3c49a9006fd5e444f2",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-PPE-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "e2b8c98052940053c88ed9fd700de617b65e063712e60a3dececd1c0d3640122",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-SCF-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "31ff5c90b4ce40fcabce2c5a262c49c8a0810b3db63c300e2b13e91a05586900",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-SCF-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "928eb12b71c2250a82a1f5cf5df4c9eaa67d13979bb27124c852ca75ad5ff0f2",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-WAH-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "e435af6f89ca8ed6b7c1b2e95e45cf9f6d948e721502ad87082dca64ee308328",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "en-SRN-WAH-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/en/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/en/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "7db4ee573d953fa5d6abdab6bf9dd26788c583b40c687a2f74f2874305750ab0",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-CHM-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "aa621b980b583e451991c39279a65d779acbe10cf5321cc695874a72dab6e0dc",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-CHM-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "0995e81f194d2a42f5bf2bed3e825ed27c213ff3a6aeddacba82b39feae51284",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-CS-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "e1d0824e87a72a63687a19178b2ed3cb3397071b2ed556833f02a536c834b2d1",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-CS-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "f54d4c3d657d7b03de22d83e5eb674bad9826bc4cf800a6157028d8483f71ab2",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-DO-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "575f1ecf7ea63d4548a32b2169498ade4c19e5c1fee47d8c03dc1be686529bd0",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-DO-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "990f81044b709a08a20f6d5f264de97c3a98487269ec1992baa6f45116e5856e",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-EL-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "8f1c40e31eb7270c3f07475eab6f0d3cdeafdcd27cebe900ad44a57fab1706bd",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-EL-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "31f78a24a203b9079f331bfba9710e7efd6a96c962258d0c9f1ff4e44b233a48",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-EXC-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "563a167d09434af3af5c439957fcf8e52fe14a314ee3e3083682154aabbb9dee",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-EXC-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "bcc4e8353f2659adcf3b5f89c8693d6bf2ba8cb462d29662d841df0c2419b5a5",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-FIRE-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "4ddb5c5e1072f3c12fc8e867585eb4ae15afd7cf40d66928adbf434ca1ebaf40",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-FIRE-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "8bb6231130e50b3c8f9ae58b2660a800b35921fbdb5b8c0d2c824bed17eab0dd",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-FLT-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "f76e91274df1b51dd3511538a8fa506f5c58512da868178476e9f51a14fb29e7",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-FLT-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "41418fcfd04b53c6e8ae504f796cd396a08f706099e1cdfc8437ec1d130f32c2",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-HSK-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "ad0a7031956973c4ba464be6fd2c543e2f63bc241341f45db98d91a4ed23980c",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-HSK-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "dbae1dea386b7319abcdca75e07d8638f90c86cab13de5384dae88adf2374e97",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-HW-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "a4ea2b6965f00091213eaa211043d778b69f706c6a15a4e1f63d34347c4af172",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-HW-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "31ce778486e97edc8b28c76a07372f77970a577da1a562ae41340f295b0a5e62",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-LAD-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "c21b20b425f168ef580efc28c9e4db8ab4197f0f9aa09096ba2884b4d126da51",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-LAD-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "beb1b243cfa296d18eb8e5ecd716feb14f4a03f391ec151f67125ca1c28c41ea",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-LOTO-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "c4d0c1594eadbacd58a4201ac8d17c7b344009abee714a3a4972fc5ae42cca9b",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-LOTO-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "6242eb154184b1357da6242bd972142ea53aa93c1e859f6367b733cbc731d401",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-MH-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "0ac76311f5c0e15dda33988c931ea9c14ea1f92ec935e1774e889a4f5ecb65f1",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-MH-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "02f6242d589bdd3acb9d2d2bd7122c1c73abf89f60882e1f33d1ac3a1cdb2a2b",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-PPE-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "dad09c3f3f7f204ccaeadd3affc77defc1c85dee5bdf2f5369eb9b38ba0029af",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-PPE-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "ec4bc0370feb367a5404d9cf59e8f231fb7c4a21796c2f6b58144ed011ebae7d",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-SCF-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "16d1c72bec6672e1ddb990e340272a3067d58f3911cd741652809504dd8901f5",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-SCF-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "5b0db7d6131edf3a045c23e58af879268478e8c433227bae2a36b66d03634d71",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-WAH-001-a3.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1988,
+            2813
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            1170,
+            1655
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 33.10465460883247,
+          "coreMm": 25.94689145016599,
+          "square": true
+        }
+      ],
+      "sha256": "ac70cf722f21cc0bd22c017a773e3bc4331ce58871d9bac5a9bf210e0d832caf",
+      "result": "PASS"
+    },
+    {
+      "mode": "branded",
+      "file": "tr-SRN-WAH-001-a4.pdf",
+      "pages": 1,
+      "target": "https://www.sernem.com/tr/posters",
+      "scans": [
+        {
+          "dpi": 170,
+          "pixels": [
+            1405,
+            1988
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        },
+        {
+          "dpi": 100,
+          "pixels": [
+            827,
+            1170
+          ],
+          "decoded": [
+            "https://www.sernem.com/tr/posters"
+          ],
+          "result": "PASS"
+        }
+      ],
+      "qrPhysicalSize": [
+        {
+          "totalMm": 23.407335238986544,
+          "coreMm": 18.34628978190837,
+          "square": true
+        }
+      ],
+      "sha256": "5a6ad7ca1db2770734f73fb259bdfdc722a81996aa8ed499e10ab2246a29a6bc",
+      "result": "PASS"
+    }
+  ],
+  "method": "Independent Zbar decoder, each full page rendered by PyMuPDF at 170 and 100 DPI. No crops, upscale, retries or relaxed thresholds. QR image dimensions extracted from PDF image matrices; black matrix 29/37 of full asset. Physical phone/printer NOT TESTED."
+}

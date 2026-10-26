@@ -1,9 +1,12 @@
 import type {PosterDefinition} from '@/lib/posters-v2/types';
 import {getPosterTechnicalProfile,technicalReferences} from '@/lib/posters-v2/technical-profiles';
 import {getPosterPublication} from '@/lib/posters-v2/publication';
+import qrTargets from '@/lib/posters-v2/qr-targets.json';
 import styles from './PosterLayout.module.css';
 type Props={locale:'tr'|'en';poster:PosterDefinition;qrPath?:string;companyLogoUrl?:string|null};
 export default function Header({locale,poster,qrPath,companyLogoUrl}:Props){
+ const asset=qrPath??qrTargets[locale].png;
+ const qrSource=asset+(asset.includes('?')?'&':'?')+'v='+qrTargets[locale].version;
  const publication=getPosterPublication(poster.code);
  const tr=locale==='tr',profile=getPosterTechnicalProfile(poster.code),ref=profile?technicalReferences[profile.reference]:undefined;
  return <header className={`sernem-poster-header ${styles.header}`}>
@@ -13,6 +16,6 @@ export default function Header({locale,poster,qrPath,companyLogoUrl}:Props){
    <h1 className={styles.title}>{poster.title[locale]}</h1><p className={styles.slogan}>{poster.slogan[locale]}</p>
    <p className={styles.references} data-critical-text>{ref?<a href={ref.url} target="_blank" rel="noopener noreferrer">{ref.label}</a>:(tr?'Teknik tanım eksik':'Technical profile missing')}<span className={styles.scope}>{!ref?(tr?'Kaynak tanımlı değil':'Reference not defined'):ref.jurisdiction==='GB-guidance'?(tr?'HSE · Birleşik Krallık rehberi':'HSE · Great Britain guidance'):(tr?ref.jurisdiction==='US-general-industry'?'OSHA · ABD genel endüstri':ref.jurisdiction==='US-construction'?'OSHA · ABD inşaat':'OSHA · ABD endüstri/inşaat':ref.jurisdiction==='US-general-industry'?'OSHA · US general industry':ref.jurisdiction==='US-construction'?'OSHA · US construction':'OSHA · US industry/construction')} · {tr?'Yerel kuralları ayrıca doğrula':'Verify local requirements separately'}</span></p>
   </div>
-  <div className={styles.document}><div><p>{tr?'Doküman':'Document'} · {locale.toUpperCase()}</p><p className={styles.documentCode}>{poster.code}</p><p>{tr?'Revizyon':'Revision'} {poster.revision}</p>{publication&&<p data-editorial-update>{tr?'İçerik güncellemesi':'Content updated'} <time dateTime={publication.updatedAt} style={{whiteSpace:'nowrap'}}>{publication.updatedAt}</time></p>}</div><div className={styles.qrRow}><img src={qrPath??`/posters/sernem-qr-${locale}.png`} alt={tr?'SERNEM poster QR kodu':'SERNEM poster QR code'} className={styles.qr}/><p className={styles.qrCopy}>{tr?'Tarayın: dijital poster kütüphanesini açın':'Scan: open the digital poster library'}</p></div></div>
+  <div className={styles.document}><div><p>{tr?'Doküman':'Document'} · {locale.toUpperCase()}</p><p className={styles.documentCode}>{poster.code}</p><p>{tr?'Revizyon':'Revision'} {poster.revision}</p>{publication&&<p data-editorial-update>{tr?'İçerik güncellemesi':'Content updated'} <time dateTime={publication.updatedAt} style={{whiteSpace:'nowrap'}}>{publication.updatedAt}</time></p>}</div><div className={styles.qrRow}><img src={qrSource} alt={tr?'SERNEM poster QR kodu':'SERNEM poster QR code'} className={styles.qr}/><p className={styles.qrCopy}>{tr?'Tarayın: dijital poster kütüphanesini açın':'Scan: open the digital poster library'}</p></div></div>
  </header>;
 }

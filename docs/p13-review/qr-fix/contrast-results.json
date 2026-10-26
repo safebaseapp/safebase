@@ -1,0 +1,1685 @@
+{
+  "results": [
+    {
+      "locale": "tr",
+      "id": "working-at-height-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 160,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUİş Öncesi Planlama",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02ZORUNLUToplu Korumayı Kullan",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03KOŞULLU ZORUNLUTam Vücut Kemeri",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04KOŞULLU ZORUNLUOnaylı Ankraj",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05KOŞULLU ZORUNLUDüşüş Mesafesi",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "06ZORUNLUGüvenli Erişim",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07KOŞULLU ZORUNLUDüşen Cisimleri Önle",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08KOŞULLU ZORUNLUKurtarma Hazırlığı",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "ladder-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 4.72970610317123,
+      "textSamples": 154,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUKullanım Öncesi Kontrol",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02ZORUNLUDoğru Merdiveni Seç",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03ZORUNLUSağlam Zemine Yerleştir",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04KOŞULLU ZORUNLUDoğru Açı ve Sabitleme",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05ZORUNLU3 Nokta Temasını Koru",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06DİKKATAşırı Uzanma Yapma",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "07KOŞULLU ZORUNLUÇalışma Alanını Koru",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08DİKKATGüvensizse İşi Durdur",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "housekeeping-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 152,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUAlanı Düzenli Tut",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02ZORUNLUGeçiş Yollarını Açık Tut",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03KOŞULLU ZORUNLUDökülmeleri Hemen Temizle",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04ZORUNLUAtıkları Doğru Yönet",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05ZORUNLUTakılma Risklerini Kaldır",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06ZORUNLUMalzemeyi Güvenli İstifle",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07ZORUNLUAcil Ekipmanı Kapatma",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08ZORUNLUGüvensiz Alanı Düzelt",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "excavation-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 158,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUYeraltı Hatlarını Belirle",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02ZORUNLUYetkin Kişi Kontrolü",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03KOŞULLU ZORUNLUGöçüğe Karşı Koru",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04ZORUNLUKazı Malzemesini Güvenli Mesafede Tut",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05ZORUNLUGüvenli Erişim Sağla",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06KOŞULLU ZORUNLUSu Birikmesini Kontrol Et",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07KOŞULLU ZORUNLUKenarları ve Trafiği Koru",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08KOŞULLU ZORUNLUAtmosfer Riskini Değerlendir",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "chemical-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 158,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUEtiketi Kontrol Et",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02ZORUNLUSDS'yi İncele",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03KOŞULLU ZORUNLUUyumsuzları Ayır",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04ZORUNLUMaruziyeti Kontrol Et",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05KOŞULLU ZORUNLUDökülmeye Hazır Ol",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "06KOŞULLU ZORUNLUDoğru Aktarım Yap",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07ZORUNLUHijyeni Koru",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08KOŞULLU ZORUNLUAcil Durumda Doğru Hareket Et",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "forklift-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 152,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUYetkili Operatör Kullanır",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02ZORUNLUGünlük Kontrol Yap",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03ZORUNLUKapasiteyi Aşma",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04ZORUNLUYükü Stabil Tut",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05ZORUNLUYayaları Ayır",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06ZORUNLUGörüşü Koru",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07KOŞULLU ZORUNLUEğimlerde Kontrollü Ol",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08ZORUNLUGüvenli Park Et",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "manual-handling-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 4.72970610317123,
+      "textSamples": 154,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUYükü Önce Değerlendir",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02ZORUNLUTaşıma Yolunu Planla",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03ZORUNLUYüke Yaklaş",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04ZORUNLUKontrollü Kaldır",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05DİKKATBurularak Dönme",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "06KOŞULLU ZORUNLUMekanik Yardım Kullan",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07KOŞULLU ZORUNLUEkip Kaldırmayı Koordine Et",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08ZORUNLUGüvenli Şekilde Bırak",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "dropped-objects-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 158,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUDüşebilecek Her Şeyi Belirle",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02KOŞULLU ZORUNLUAletleri Sabitle",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "03ZORUNLUMalzemeyi Sabitle",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04KOŞULLU ZORUNLUAlt Alanı İzole Et",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05ZORUNLUGüvenli Taşı",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06KOŞULLU ZORUNLUAçıklıkları Koru",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07KOŞULLU ZORUNLUBaş Üstü Çalışmayı Koordine Et",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08ZORUNLUİş Bitiminde Kontrol Et",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "scaffold-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 154,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUYetkin Kişi Kontrolü",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02ZORUNLUEtiket ve Kullanım Durumu",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03ZORUNLUTemel ve Stabilite",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04ZORUNLUTam Platform",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05KOŞULLU ZORUNLUKorkuluk Sistemi",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "06ZORUNLUGüvenli Erişim",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07ZORUNLUYük ve Malzeme Kontrolü",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08KOŞULLU ZORUNLUDüşen Cisimleri Önle",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "hot-work-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 162,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01KOŞULLU ZORUNLUÇalışma İzni",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "02ZORUNLUAlanı Hazırla",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03KOŞULLU ZORUNLUGaz Ölçümü",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04KOŞULLU ZORUNLUYangın Gözcüsü",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05ZORUNLUSöndürme Ekipmanı",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06KOŞULLU ZORUNLUKıvılcım ve Isı Kontrolü",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07KOŞULLU ZORUNLUTüp ve Hortum Güvenliği",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08KOŞULLU ZORUNLUİş Sonrası Kontrol",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "confined-space-entry-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 158,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01KOŞULLU ZORUNLUGiriş İzni",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "02ZORUNLUAtmosfer Ölçümü",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03ZORUNLUEnerji İzolasyonu",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04KOŞULLU ZORUNLUGözcü",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05KOŞULLU ZORUNLUHavalandırma",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "06ZORUNLUİletişim",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07ZORUNLUKurtarma Hazırlığı",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08KOŞULLU ZORUNLUSürekli İzleme",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "electrical-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 160,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUEnerjiyi Kes",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02ZORUNLULOTO Uygula",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03ZORUNLUGerilimsizliği Doğrula",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04ZORUNLUYetkili Personel",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05ZORUNLUEkipmanı Kontrol Et",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06KOŞULLU ZORUNLUKaçak Akım Koruması",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07ZORUNLUAlanı Koru",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08KOŞULLU ZORUNLUEnerjili Çalışma Kontrolü",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "loto-golden-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 150,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUEnerjileri Belirle",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02ZORUNLUPersoneli Bilgilendir",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03ZORUNLUEkipmanı Kapat",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04ZORUNLUEnerjiyi İzole Et",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05ZORUNLUKilitle ve Etiketle",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06ZORUNLUDepolanmış Enerjiyi Boşalt",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07ZORUNLUSıfır Enerjiyi Doğrula",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08ZORUNLUGüvenli Şekilde Devreye Al",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "fire-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 4.72970610317123,
+      "textSamples": 158,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01KOŞULLU ZORUNLUAlarm Ver ve Bildir",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "02KOŞULLU ZORUNLUTahliyeyi Başlat",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "03KOŞULLU ZORUNLUSöndürücüyü Doğru Seç",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04KOŞULLU ZORUNLUYalnızca Başlangıç Yangınına Müdahale Et",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05ZORUNLUSöndürücüyü Kontrol Et",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06ZORUNLUYakıt ve Tutuşturma Kaynaklarını Kontrol Et",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07ZORUNLUÇıkışları ve Yangın Ekipmanını Açık Tut",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08DİKKATMüdahaleyi Bırak ve Geri Çekil",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "tr",
+      "id": "mandatory-ppe",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 152,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01ZORUNLUTehlikeleri Değerlendir",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02KOŞULLU ZORUNLUZorunlu Alan İşaretlerini Takip Et",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "03ZORUNLUDoğru KKD'yi Seç",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04ZORUNLUDoğru Beden ve Ayar",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05ZORUNLUKullanmadan Önce Kontrol Et",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06ZORUNLUDoğru Şekilde Kullan",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07ZORUNLUTemizle ve Güvenli Sakla",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08ZORUNLUHasarlı KKD'yi Değiştir",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "İşi Hemen Durdur",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Kritik Kontroller",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Riske Göre KKD Seçimi",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "working-at-height-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 160,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDPre-Work Planning",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIREDUse Collective Protection",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIRED IFFull Body Harness",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04REQUIRED IFApproved Anchorage",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05REQUIRED IFFall Clearance",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "06REQUIREDSafe Access",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07REQUIRED IFPrevent Dropped Objects",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08REQUIRED IFRescue Readiness",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "ladder-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 4.72970610317123,
+      "textSamples": 154,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDPre-Use Inspection",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIREDSelect the Correct Ladder",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIREDUse Stable Ground",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04REQUIRED IFCorrect Angle and Securing",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05REQUIREDMaintain 3-Point Contact",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06WARNINGDo Not Overreach",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "07REQUIRED IFProtect the Work Area",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08WARNINGStop When Unsafe",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "housekeeping-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 152,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDKeep the Area Orderly",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIREDKeep Access Routes Clear",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIRED IFClean Spills Immediately",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04REQUIREDManage Waste Correctly",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05REQUIREDRemove Trip Hazards",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06REQUIREDStack Materials Safely",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07REQUIREDKeep Emergency Equipment Clear",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08REQUIREDCorrect Unsafe Conditions",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "excavation-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 158,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDLocate Underground Services",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIREDCompetent-Person Inspection",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIRED IFProtect Against Cave-In",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04REQUIREDControl Spoil Piles",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05REQUIREDProvide Safe Access",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06REQUIRED IFControl Water Accumulation",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07REQUIRED IFProtect Edges and Traffic",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08REQUIRED IFAssess Atmospheric Hazards",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "chemical-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 158,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDCheck the Label",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIREDReview the SDS",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIRED IFSegregate Incompatibles",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04REQUIREDControl Exposure",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05REQUIRED IFPrepare for Spills",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "06REQUIRED IFTransfer Safely",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07REQUIREDMaintain Hygiene",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08REQUIRED IFRespond Correctly",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "forklift-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 152,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDAuthorized Operators Only",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIREDInspect Before Use",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIREDRespect Rated Capacity",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04REQUIREDKeep the Load Stable",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05REQUIREDSeparate Pedestrians",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06REQUIREDMaintain Visibility",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07REQUIRED IFControl Travel on Slopes",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08REQUIREDPark Safely",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "manual-handling-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 4.72970610317123,
+      "textSamples": 154,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDAssess the Load First",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIREDPlan the Route",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIREDGet Close to the Load",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04REQUIREDLift Smoothly",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05WARNINGDo Not Twist",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "06REQUIRED IFUse Mechanical Assistance",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07REQUIRED IFCoordinate Team Lifts",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08REQUIREDSet Down Safely",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "dropped-objects-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 158,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDIdentify Drop Hazards",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIRED IFSecure Tools",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "03REQUIREDSecure Materials",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04REQUIRED IFBarricade the Area Below",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05REQUIREDTransfer Materials Safely",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06REQUIRED IFProtect Openings",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07REQUIRED IFCoordinate Overhead Work",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08REQUIREDFinal Area Check",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "scaffold-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 154,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDCompetent Person Inspection",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIREDTag and Use Status",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIREDFoundation and Stability",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04REQUIREDFully Decked Platform",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05REQUIRED IFGuardrail System",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "06REQUIREDSafe Access",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07REQUIREDLoad and Material Control",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08REQUIRED IFPrevent Dropped Objects",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "hot-work-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 162,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIRED IFHot Work Permit",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "02REQUIREDPrepare the Work Area",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIRED IFAtmospheric Testing",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04REQUIRED IFFire Watch",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05REQUIREDFirefighting Equipment",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06REQUIRED IFControl Sparks and Heat",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07REQUIRED IFCylinder and Hose Safety",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "08REQUIRED IFPost-Work Fire Watch",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "confined-space-entry-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 158,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIRED IFEntry Permit",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "02REQUIREDAtmospheric Testing",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIREDEnergy Isolation",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04REQUIRED IFEntry Attendant",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05REQUIRED IFVentilation",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "06REQUIREDCommunication",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07REQUIREDRescue Readiness",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08REQUIRED IFContinuous Monitoring",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "electrical-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 160,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDDe-Energize",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIREDApply LOTO",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIREDVerify De-Energization",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04REQUIREDQualified Persons Only",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05REQUIREDInspect Equipment",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06REQUIRED IFGround-Fault Protection",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "07REQUIREDControl the Work Area",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08REQUIRED IFEnergized Work Controls",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "loto-golden-rules",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 150,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDIdentify Energy Sources",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIREDNotify Affected Employees",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "03REQUIREDShut Down Equipment",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04REQUIREDIsolate Every Energy Source",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05REQUIREDApply Locks and Tags",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06REQUIREDControl Stored Energy",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07REQUIREDVerify Zero Energy",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08REQUIREDRestore Energy Safely",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "fire-safety-rules",
+      "result": "PASS",
+      "minimumTextContrast": 4.72970610317123,
+      "textSamples": 158,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIRED IFRaise the Alarm",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "02REQUIRED IFEvacuate Safely",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "03REQUIRED IFSelect the Correct Extinguisher",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "04REQUIRED IFFight Incipient Fires Only",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "05REQUIREDInspect the Extinguisher",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06REQUIREDControl Fuel and Ignition Sources",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07REQUIREDKeep Exits and Equipment Clear",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08WARNINGWithdraw When Conditions Escalate",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    },
+    {
+      "locale": "en",
+      "id": "mandatory-ppe",
+      "result": "PASS",
+      "minimumTextContrast": 5.02163257594014,
+      "textSamples": 152,
+      "textFailures": [],
+      "iconFailures": [],
+      "bands": [
+        {
+          "text": "01REQUIREDAssess the Hazards",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "02REQUIRED IFFollow Mandatory PPE Signs",
+          "background": "rgb(15, 118, 110)"
+        },
+        {
+          "text": "03REQUIREDSelect the Correct PPE",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "04REQUIREDCorrect Fit and Adjustment",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "05REQUIREDInspect Before Use",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "06REQUIREDWear PPE Correctly",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "07REQUIREDClean and Store Safely",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "08REQUIREDReplace Defective PPE",
+          "background": "rgb(4, 120, 87)"
+        },
+        {
+          "text": "Stop Work Now",
+          "background": "rgb(185, 28, 28)"
+        },
+        {
+          "text": "Critical Controls",
+          "background": "rgb(180, 83, 9)"
+        },
+        {
+          "text": "Risk-Based PPE Selection",
+          "background": "rgb(30, 64, 175)"
+        }
+      ],
+      "labelsVisible": true
+    }
+  ],
+  "method": "Computed foreground/effective composited CSS background, conservative WCAG 4.5:1 for ALL text incl small print; 3:1 icon strokes. Labels, numbers and explicit conditions remain meaningful without hue; grayscale PDF evidence is separate. Not a WCAG certification."
+}

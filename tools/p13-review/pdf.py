@@ -13,7 +13,7 @@ def norm(text,locale):
  return re.sub(r'\s+',' ',text.casefold()).strip()
 
 for pdf in sorted(afterDir.glob('*.pdf')):
- locale=pdf.name.split('-')[0];expected=f'https://sernem.com/{locale}/posters';bbox=subprocess.check_output(['pdftotext','-bbox',str(pdf),'-'],text=True);tree=ET.fromstring(bbox);violations=[]
+ locale=pdf.name.split('-')[0];expected=json.loads(pathlib.Path('app/lib/posters-v2/qr-targets.json').read_text())[locale]['url'];bbox=subprocess.check_output(['pdftotext','-bbox',str(pdf),'-'],text=True);tree=ET.fromstring(bbox);violations=[]
  for page in tree.iter():
   if page.tag.endswith('page'):
    w,h=float(page.attrib['width']),float(page.attrib['height'])

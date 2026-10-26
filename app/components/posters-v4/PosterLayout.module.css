@@ -74,3 +74,11 @@
 .ruleIcon {background:white;color:var(--rule-color);border-radius:7px;}
 .panel {background:var(--panel-pale);}
 .panelTitle {background:var(--panel-color);color:white;box-shadow:0 0 0 6px var(--panel-color);border-radius:3px;}
+
+/* QR core >=18mm at A4; metadata beside it, library description below.
+   Existing typography, colors and page geometry are unchanged. */
+.header {grid-template-columns:minmax(0,1fr) 300px;}
+.document {display:grid;grid-template-columns:minmax(0,1fr) 136px;align-content:start;gap:8px 10px;}
+.qrRow {display:contents;}
+.qr {grid-column:2;grid-row:1;width:136px;height:136px;padding:0;border-radius:0;}
+.qrCopy {grid-column:1 / -1;grid-row:2;}

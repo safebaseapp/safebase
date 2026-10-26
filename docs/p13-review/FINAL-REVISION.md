@@ -1,3 +1,5 @@
+> **Son QR düzeltmesi:** [QR-FIX.md](QR-FIX.md) / talimat 6419563430, bu tarihsel rapordaki QR hedef ve ölçülerini günceller. Yeni kanonik adresler `https://www.sernem.com/{locale}/posters`; yeni PDF kanıtları `qr-fix/` altındadır.
+
 # Paket 13 — Toplu renk ve teknik kalite kabulü
 
 **Aynı Draft PR #126 / `codex/sernem-p13-hse-poster-quality`.** Başlangıç `4186391a31ae4fbcb455df56f1b4aa16d9526a8d`. Birlikte uygulanan talimatlar: [renk/tasarım #6416069898](https://github.com/safebaseapp/safebase/pull/126#issuecomment-6416069898) ve [teknik eksikler #6416174058](https://github.com/safebaseapp/safebase/pull/126#issuecomment-6416174058). Yeni dal/PR yok; main/production ve diğer PR'lar değiştirilmedi.
