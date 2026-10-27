@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "locale": "tr",
+      "format": "png",
+      "decoded": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "format": "svg",
+      "decoded": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "format": "png",
+      "decoded": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "format": "svg",
+      "decoded": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "result": "PASS"
+    }
+  ],
+  "method": "Independent Zbar: source PNG plus browser-rasterized actual generated SVG. Canonical payload must match exactly."
+}

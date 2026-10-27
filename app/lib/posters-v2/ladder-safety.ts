@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const ladderSafetyPoster: PosterDefinition = {
   code: "SRN-LAD-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "Merdiven Kritik Güvenlik Kuralları",
@@ -33,8 +33,9 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Immediately remove damaged ladders from service.",
         ],
       },
-      icon: "ladder-inspection" as any,
+      icon: "ladder-inspection",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -54,8 +55,9 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Do not use metal ladders where electrical hazards are present.",
         ],
       },
-      icon: "ladder-select" as any,
+      icon: "ladder-select",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -75,8 +77,9 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Prevent the ladder feet from slipping or sinking.",
         ],
       },
-      icon: "ladder-ground" as any,
+      icon: "ladder-ground",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -86,18 +89,19 @@ export const ladderSafetyPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Dayamalı merdivenlerde yaklaşık 4:1 yerleşim oranını uygula.",
-          "Üst ve alt noktayı mümkün olduğunda sabitle.",
-          "Merdivenin hareket etmeyeceğinden emin ol.",
+          "OSHA genel dayamalı merdiven: yatay açıklık yaklaşık çalışma uzunluğunun dörtte biri; özel tipleri doğrula.",
+          "Üst seviyeye erişimde yan kollar ≥3 ft (0,9 m) uzansın; merdiven uzunluğu yetmiyorsa rijit desteğe üstten sabitle VE tutamak sağla.",
+          "Merdivenin kaymasını ve hareketini önle; üretici kurulum talimatını uygula.",
         ],
         en: [
-          "Use approximately a 4:1 setup ratio for leaning ladders.",
-          "Secure the top and bottom whenever practicable.",
-          "Ensure the ladder cannot move during use.",
+          "OSHA general non-self-supporting ladder setup: horizontal setback about one-quarter of working length; check special types.",
+          "Landing access: rails extend ≥3 ft (0.9 m); if ladder length prevents this, secure the top to rigid support AND provide a grasping device.",
+          "Prevent slipping or displacement; follow manufacturer setup instructions.",
         ],
       },
-      icon: "ladder-angle" as any,
+      icon: "ladder-angle",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Dayamalı merdiven/üst seviyeye erişimde", "en": "Using a leaning ladder or accessing a landing"}},
     },
     {
       number: "05",
@@ -108,17 +112,18 @@ export const ladderSafetyPoster: PosterDefinition = {
       items: {
         tr: [
           "Çıkarken ve inerken merdivene dönük ol.",
-          "Her zaman üç nokta temasını koru.",
+          "Tırmanırken üç nokta temasını koru.",
           "Elleri serbest bırakmak için alet çantası veya uygun taşıma yöntemi kullan.",
         ],
         en: [
           "Face the ladder while ascending and descending.",
-          "Maintain three points of contact at all times.",
+          "Maintain three points of contact when climbing.",
           "Use a tool belt or suitable method to keep hands free while climbing.",
         ],
       },
-      icon: "ladder-contact" as any,
+      icon: "ladder-contact",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -138,8 +143,9 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Reposition the ladder before continuing the task.",
         ],
       },
-      icon: "ladder-overreach" as any,
-      tone: "mandatory",
+      icon: "ladder-overreach",
+      tone: "warning",
+      application: {"kind": "hazard-warning"},
     },
     {
       number: "07",
@@ -159,8 +165,9 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Prevent the ladder from being struck or displaced.",
         ],
       },
-      icon: "ladder-barricade" as any,
+      icon: "ladder-barricade",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Kapı, araç veya yaya trafiği varsa", "en": "Doors, vehicles or pedestrians can affect the ladder"}},
     },
     {
       number: "08",
@@ -180,8 +187,9 @@ export const ladderSafetyPoster: PosterDefinition = {
           "Use a scaffold or suitable access equipment when required.",
         ],
       },
-      icon: "ladder-stop" as any,
-      tone: "mandatory",
+      icon: "ladder-stop",
+      tone: "warning",
+      application: {"kind": "hazard-warning"},
     },
   ],
 

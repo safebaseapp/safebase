@@ -1,0 +1,90 @@
+{
+  "results": [
+    {
+      "name": "tr guest existing branding and print authorization",
+      "result": "PASS",
+      "prints": 0,
+      "realService": "NOT TESTED"
+    },
+    {
+      "name": "tr free existing branding and print authorization",
+      "result": "PASS",
+      "prints": 1,
+      "activitySink": "in-memory fixture only",
+      "realService": "NOT TESTED"
+    },
+    {
+      "name": "tr premium existing branding and print authorization",
+      "result": "PASS",
+      "prints": 1,
+      "activitySink": "in-memory fixture only",
+      "realService": "NOT TESTED"
+    },
+    {
+      "name": "tr admin existing branding and print authorization",
+      "result": "PASS",
+      "prints": 1,
+      "activitySink": "in-memory fixture only",
+      "realService": "NOT TESTED"
+    },
+    {
+      "name": "tr suspended existing branding and print authorization",
+      "result": "PASS",
+      "prints": 1,
+      "activitySink": "in-memory fixture only",
+      "realService": "NOT TESTED"
+    },
+    {
+      "name": "tr missing-logo existing branding and print authorization",
+      "result": "PASS",
+      "prints": 0,
+      "missingLogo": "fail-closed"
+    },
+    {
+      "name": "en guest existing branding and print authorization",
+      "result": "PASS",
+      "prints": 0,
+      "realService": "NOT TESTED"
+    },
+    {
+      "name": "en free existing branding and print authorization",
+      "result": "PASS",
+      "prints": 1,
+      "activitySink": "in-memory fixture only",
+      "realService": "NOT TESTED"
+    },
+    {
+      "name": "en premium existing branding and print authorization",
+      "result": "PASS",
+      "prints": 1,
+      "activitySink": "in-memory fixture only",
+      "realService": "NOT TESTED"
+    },
+    {
+      "name": "en admin existing branding and print authorization",
+      "result": "PASS",
+      "prints": 1,
+      "activitySink": "in-memory fixture only",
+      "realService": "NOT TESTED"
+    },
+    {
+      "name": "en suspended existing branding and print authorization",
+      "result": "PASS",
+      "prints": 1,
+      "activitySink": "in-memory fixture only",
+      "realService": "NOT TESTED"
+    },
+    {
+      "name": "en missing-logo existing branding and print authorization",
+      "result": "PASS",
+      "prints": 0,
+      "missingLogo": "fail-closed"
+    },
+    {
+      "name": "no browser exceptions",
+      "result": "PASS"
+    }
+  ],
+  "errors": [],
+  "note": "Actual unmodified toolbar/canvas and auth predicate, isolated DOM with synthetic Supabase/storage/navigation. No live account, signed URL, payment or database. window.print intercepted; actual print PDFs tested separately. PNG is absent from current toolbar (not a regression)."
+}

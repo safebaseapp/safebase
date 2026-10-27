@@ -1,0 +1,163 @@
+{
+  "base": "ef556c9517ee8b732e7013f306351219aedfc1a0",
+  "scope": [
+    "app/components/posters-v4/BottomPanels.tsx",
+    "app/components/posters-v4/Footer.tsx",
+    "app/components/posters-v4/Header.tsx",
+    "app/components/posters-v4/PosterMasterV4.tsx",
+    "app/components/posters-v4/PreJobStrip.tsx",
+    "app/lib/posters-v2/chemical-safety.ts",
+    "app/lib/posters-v2/confined-space.ts",
+    "app/lib/posters-v2/dropped-objects-safety.ts",
+    "app/lib/posters-v2/excavation-safety.ts",
+    "app/lib/posters-v2/forklift-safety.ts",
+    "app/lib/posters-v2/hot-work.ts",
+    "app/lib/posters-v2/housekeeping-safety.ts",
+    "app/lib/posters-v2/ladder-safety.ts",
+    "app/lib/posters-v2/loto.ts",
+    "app/lib/posters-v2/manual-handling-safety.ts",
+    "app/lib/posters-v2/scaffold.ts",
+    "app/lib/posters-v2/types.ts",
+    "app/lib/posters-v2/working-at-height.ts",
+    "app/lib/posters-v2/technical-profiles.ts"
+  ],
+  "openPRs": [
+    {
+      "baseRefName": "main",
+      "headRefName": "codex/sim5-demo-navigation-performance",
+      "number": 122,
+      "title": "perf(sim5): GPU gölge yükünü azalt ve Preview A/B ölçümü ekle",
+      "fileCount": 100,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "codex/sim5-showcase-image-refresh-pack9",
+      "headRefName": "fix/sim5-modern-white-tank-showcase-20261020",
+      "number": 108,
+      "title": "fix(sim5): modern white storage-tank finish and real 3D marketing re-capture",
+      "fileCount": 4,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "codex/sim5-final-homepage-menu-visual-xp-pack8",
+      "headRefName": "codex/sim5-showcase-image-refresh-pack9",
+      "number": 107,
+      "title": "SERNEM SIM 5.0 Paket 9: real scene image refresh, uncropped mobile and cache/XP verification",
+      "fileCount": 47,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "fix/sim5-demo-post-completion-webgl-20261020",
+      "headRefName": "codex/sim5-final-homepage-menu-visual-xp-pack8",
+      "number": 106,
+      "title": "SERNEM SIM 5.0 Paket 8: homepage showcase, real site visual and XP release audit",
+      "fileCount": 74,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "codex/sim5-demo-premium-labs-pack7-recovery",
+      "headRefName": "fix/sim5-demo-post-completion-webgl-20261020",
+      "number": 105,
+      "title": "fix(sim5): stabilize completed DEMO view after WebGL context loss",
+      "fileCount": 3,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "codex/sim5-industrial-exploration-height-pack",
+      "headRefName": "codex/sim5-hse-mission-scoring-pack6",
+      "number": 100,
+      "title": "SIM 5.0 Package 6: HSE inspection mission, local scoring and scene outcomes",
+      "fileCount": 64,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "feature/sim5-labs-beta-release-20261019",
+      "number": 99,
+      "title": "feat(labs): launch SERNEM SIM 5.0 as separate TR/EN Labs beta",
+      "fileCount": 100,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "codex/sim5-mobile-input-reliability",
+      "headRefName": "codex/sim5-industrial-exploration-height-pack",
+      "number": 97,
+      "title": "SIM 5 Package 5: playable industrial exploration and work-at-height inspections",
+      "fileCount": 69,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "feature/sim5-mobile-controls-direction-fix-20261019",
+      "headRefName": "codex/sim5-mobile-input-reliability",
+      "number": 96,
+      "title": "fix(sim5): unify strafe directions and reliable mobile input",
+      "fileCount": 17,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "codex/sim5-lifting-and-welder-color-pack",
+      "headRefName": "feature/sim5-mobile-controls-direction-fix-20261019",
+      "number": 95,
+      "title": "fix(sim5): reverse mirrored lateral movement and add mobile touch D-pad",
+      "fileCount": 1,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "feature/sernem-sim5-professional-site-package2-20261017",
+      "headRefName": "codex/sim5-lifting-and-welder-color-pack",
+      "number": 94,
+      "title": "feat(sim5): add balanced pipe lift and stabilize welder materials",
+      "fileCount": 44,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "feature/sernem-sim5-professional-site-package2-20261017",
+      "headRefName": "codex/sim5-welding-geometry-fix",
+      "number": 93,
+      "title": "fix(sim5): geometry-based welding pose, shield, torch and cable alignment",
+      "fileCount": 23,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "feature/labs-3d-inspector-p1",
+      "headRefName": "feature/labs-3d-inspector-p2",
+      "number": 92,
+      "title": "SERNEM Labs 3D — Paket 2: 12 sahada görülebilen uygunsuzluk ve tespit sistemi",
+      "fileCount": 9,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "feature/labs-3d-inspector-p1",
+      "number": 91,
+      "title": "SERNEM Labs: 3D Safety Inspector — Package 1 playable prototype",
+      "fileCount": 7,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "fix/safety-sign-preview-print-branding",
+      "number": 79,
+      "title": "Complete safety sign free/premium branding across preview and print",
+      "fileCount": 7,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "mobile-complete-pass",
+      "number": 2,
+      "title": "Mobile complete pass: account-gated PDFs, product discovery, workflow",
+      "fileCount": 20,
+      "overlappingFiles": []
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "feat/working-at-height-professional-pdf",
+      "number": 1,
+      "title": "Professional Working at Height Toolbox PDF",
+      "fileCount": 23,
+      "overlappingFiles": []
+    }
+  ],
+  "futurePackage": "Future unpublished scopes cannot be guaranteed conflict-free; coordinate the shared poster template and technical-profiles.ts before another poster package."
+}

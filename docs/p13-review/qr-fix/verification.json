@@ -1,0 +1,82 @@
+{
+  "baseline": "66643a24a5da9b2ba4c6dbd7a8787f7c9fd47781",
+  "instruction": 6419563430,
+  "tests": {
+    "asset-decoding": {
+      "PASS": 4,
+      "FAIL": 0
+    },
+    "browser-results": {
+      "PASS": 181,
+      "FAIL": 0
+    },
+    "fonts": {
+      "PASS": 60,
+      "FAIL": 0
+    },
+    "branded-fonts": {
+      "PASS": 60,
+      "FAIL": 0
+    },
+    "qr-pdf-results": {
+      "PASS": 120,
+      "FAIL": 0
+    },
+    "pdf-results": {
+      "PASS": 60,
+      "FAIL": 0
+    },
+    "branded-pdf-results": {
+      "PASS": 60,
+      "FAIL": 0
+    },
+    "contrast-results": {
+      "PASS": 30,
+      "FAIL": 0
+    },
+    "branded-layout-results": {
+      "PASS": 30,
+      "FAIL": 0
+    },
+    "actions-results": {
+      "PASS": 13,
+      "FAIL": 0
+    },
+    "mandatory-content-results": {
+      "PASS": 32,
+      "FAIL": 0
+    },
+    "content-results": {
+      "PASS": 36,
+      "FAIL": 0
+    }
+  },
+  "fullPageQrScans": 240,
+  "DPI": [
+    170,
+    100
+  ],
+  "typescript": "PASS",
+  "normalBuild": "PASS including prebuild PDF/download QA",
+  "ESLint": "PASS: 0 errors, 2 existing img warnings",
+  "physicalPrinterPhone": "NOT TESTED",
+  "liveHttpsAnonymousRedirect": "BLOCKED: ERR_TUNNEL_CONNECTION_FAILED in normal and approved escalated browser runs; no response/status/redirect chain, no product defect inferred",
+  "premiumStorage": "NOT TESTED live; 60 actual synthetic-logo PDFs passed",
+  "protectedHashesIdentical": 80,
+  "svgGeometriesPreserved": 120,
+  "previousPosterSourceChanges": [
+    "app/components/posters-v4/PosterLayout.module.css",
+    "app/components/posters-v4/Header.tsx"
+  ],
+  "sourceSHA256": {
+    "app/components/posters-v4/Header.tsx": "1f3058050f405d9195f9fdfb1b7e32e242cb54775dcadbff9ec9d9e59bdcca17",
+    "app/components/posters-v4/PosterLayout.module.css": "5391f1d470228f5f2217eee0c4d1ff87286d3109d7fb4a3e523f4bdde02f44da",
+    "app/lib/posters-v2/qr-targets.json": "b5889833cc2e00a869a47aaebd9935c7e634e4768539b4d72d644ce95fec187a",
+    "app/public/posters/sernem-qr-en.png": "aa4138e3c37c41933ee6c0a1256a54b58f0d6670807f6d821abe4cea5bf3d59f",
+    "app/public/posters/sernem-qr-en.svg": "4f408c22df2f208d97333519bb4916236057f9e38d0d90371b73cdca52322f3b",
+    "app/public/posters/sernem-qr-tr.svg": "bbc8f5b80d1b88ef897878baecca1bafb32042363616182272aec542c181289d",
+    "app/public/posters/sernem-qr-tr.png": "10a6152800ebf56e65a6362673f46542a31518bdf32480b2ae9c145127f1e231"
+  },
+  "assetPixelColors": "RGB 0/255 only; all four 96px border strips pure white (4 modules at 24px); 21:1 contrast",
+  "decision": "QR/PDF local QA PASS; production NO-GO pending live public access verification, independent technical/local acceptance and owner approval"
+}

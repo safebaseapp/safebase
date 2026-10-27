@@ -1,0 +1,605 @@
+{
+  "results": [
+    {
+      "file": "en-SRN-CHM-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "dc46ec1daf5176ac0c4ca759b5a0e5209674a5775c5ad3a312e9f0a7fbccf60b"
+    },
+    {
+      "file": "en-SRN-CHM-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "411d64555b953590dceb2b5741fbe31f165ea2ae9946150f750fe19118c954c6"
+    },
+    {
+      "file": "en-SRN-CS-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "b65a78b3dce832ce4dfa622b8291a3dedc7547425ad482467810bfaf294f2900"
+    },
+    {
+      "file": "en-SRN-CS-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "d5dbe7cdb07719f9f8a9ab2614b249edb7187d6bb9aafc891cf462bd83723fbc"
+    },
+    {
+      "file": "en-SRN-DO-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "e3a85c8e20253a8efa1cbe31b3eaebf0e4dd1e06cb49c5a3ade38a682615889c"
+    },
+    {
+      "file": "en-SRN-DO-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "3d760812fab9a8497f555c1fa45754dce809fcaa17f90cc69cdbc5b5b7cf0c5a"
+    },
+    {
+      "file": "en-SRN-EL-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "11561a0617b0527fca271b291ddb03f1da890a3c7ce01f38a67f2187d356d783"
+    },
+    {
+      "file": "en-SRN-EL-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "53438eab9c2ebb60d68a04b95ab1201f8d3574c26b3c94ea1c48b244ae81e68e"
+    },
+    {
+      "file": "en-SRN-EXC-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "40705e08cfeb5b3aaaa05881c4e4173593b245ae36d83e6d02a2ff4cb6c06262"
+    },
+    {
+      "file": "en-SRN-EXC-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "5c1ba7dfa5f98001e2dbe8bdadddbf35f4ea5987923e8a7ba4f7c32ac4ebd4fd"
+    },
+    {
+      "file": "en-SRN-FIRE-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "8dc3013504f105d51b52fae0ffa879117693ac79f07814a4933b0f982833ac2d"
+    },
+    {
+      "file": "en-SRN-FIRE-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "c5d30e4a2c7aad8207386832a32e1cb1f3528b8e54dbbb311ce991dfb2dbc52f"
+    },
+    {
+      "file": "en-SRN-FLT-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "5066142ca05cd0e701a40b92712da3fc33165c42dd00e863ee8ef8cf3b15553c"
+    },
+    {
+      "file": "en-SRN-FLT-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "e07df4cf6c92d853cde2e26153da7fb4ba268b5add6233da460c032ec5ce05ab"
+    },
+    {
+      "file": "en-SRN-HSK-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "ab2d1cfb989e888634915d70f7c34bd09ac79018303edc45c14eef50320d67f7"
+    },
+    {
+      "file": "en-SRN-HSK-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "4ac9db5c4b5ef359c9d1da7e945bd400e0daec8ae3304b20b2d031e356a014e0"
+    },
+    {
+      "file": "en-SRN-HW-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "6d9c1121ca58accbfc9aec8fe771e3ed046905866c8969674a5f955978d1b2ae"
+    },
+    {
+      "file": "en-SRN-HW-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "3ca67d6ab6e4d1d9a9afd8d846cfd5b11f5b0cde352525ae086c6e4cb2ed0cc4"
+    },
+    {
+      "file": "en-SRN-LAD-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "03d9f918dd72963e1ea25751a364e3422503d863b45763c0c4b78e9d7edc964d"
+    },
+    {
+      "file": "en-SRN-LAD-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "641e5dc95abc84a41f4c9c2c28c411e658d98c90af15a9a3af2977cc49b749bc"
+    },
+    {
+      "file": "en-SRN-LOTO-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "5fe33eeed827d99667145556606a1d6f9b8ae9f0643cb260cf8e3b4215e62d35"
+    },
+    {
+      "file": "en-SRN-LOTO-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "f684fa697686a92e82e62264ddbc02ec9c273a80c5c1659db203f083100bc465"
+    },
+    {
+      "file": "en-SRN-MH-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "afe0f0a940f366a0ee9a68c1a77666cee5566fbf0933c3db0509081bedc79f3c"
+    },
+    {
+      "file": "en-SRN-MH-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "e4ea3c784b20966d5bb00a3cf6791182111361b06da47a068c51bc7c86ab7b45"
+    },
+    {
+      "file": "en-SRN-PPE-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "511eafd33565e441c254abdfa2a660ff9c2775a1d35acc3c49a9006fd5e444f2"
+    },
+    {
+      "file": "en-SRN-PPE-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "e2b8c98052940053c88ed9fd700de617b65e063712e60a3dececd1c0d3640122"
+    },
+    {
+      "file": "en-SRN-SCF-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "31ff5c90b4ce40fcabce2c5a262c49c8a0810b3db63c300e2b13e91a05586900"
+    },
+    {
+      "file": "en-SRN-SCF-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "928eb12b71c2250a82a1f5cf5df4c9eaa67d13979bb27124c852ca75ad5ff0f2"
+    },
+    {
+      "file": "en-SRN-WAH-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "e435af6f89ca8ed6b7c1b2e95e45cf9f6d948e721502ad87082dca64ee308328"
+    },
+    {
+      "file": "en-SRN-WAH-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "pages": 1,
+      "sha256": "7db4ee573d953fa5d6abdab6bf9dd26788c583b40c687a2f74f2874305750ab0"
+    },
+    {
+      "file": "tr-SRN-CHM-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "aa621b980b583e451991c39279a65d779acbe10cf5321cc695874a72dab6e0dc"
+    },
+    {
+      "file": "tr-SRN-CHM-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "0995e81f194d2a42f5bf2bed3e825ed27c213ff3a6aeddacba82b39feae51284"
+    },
+    {
+      "file": "tr-SRN-CS-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "e1d0824e87a72a63687a19178b2ed3cb3397071b2ed556833f02a536c834b2d1"
+    },
+    {
+      "file": "tr-SRN-CS-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "f54d4c3d657d7b03de22d83e5eb674bad9826bc4cf800a6157028d8483f71ab2"
+    },
+    {
+      "file": "tr-SRN-DO-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "575f1ecf7ea63d4548a32b2169498ade4c19e5c1fee47d8c03dc1be686529bd0"
+    },
+    {
+      "file": "tr-SRN-DO-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "990f81044b709a08a20f6d5f264de97c3a98487269ec1992baa6f45116e5856e"
+    },
+    {
+      "file": "tr-SRN-EL-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "8f1c40e31eb7270c3f07475eab6f0d3cdeafdcd27cebe900ad44a57fab1706bd"
+    },
+    {
+      "file": "tr-SRN-EL-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "31f78a24a203b9079f331bfba9710e7efd6a96c962258d0c9f1ff4e44b233a48"
+    },
+    {
+      "file": "tr-SRN-EXC-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "563a167d09434af3af5c439957fcf8e52fe14a314ee3e3083682154aabbb9dee"
+    },
+    {
+      "file": "tr-SRN-EXC-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "bcc4e8353f2659adcf3b5f89c8693d6bf2ba8cb462d29662d841df0c2419b5a5"
+    },
+    {
+      "file": "tr-SRN-FIRE-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "4ddb5c5e1072f3c12fc8e867585eb4ae15afd7cf40d66928adbf434ca1ebaf40"
+    },
+    {
+      "file": "tr-SRN-FIRE-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "8bb6231130e50b3c8f9ae58b2660a800b35921fbdb5b8c0d2c824bed17eab0dd"
+    },
+    {
+      "file": "tr-SRN-FLT-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "f76e91274df1b51dd3511538a8fa506f5c58512da868178476e9f51a14fb29e7"
+    },
+    {
+      "file": "tr-SRN-FLT-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "41418fcfd04b53c6e8ae504f796cd396a08f706099e1cdfc8437ec1d130f32c2"
+    },
+    {
+      "file": "tr-SRN-HSK-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "ad0a7031956973c4ba464be6fd2c543e2f63bc241341f45db98d91a4ed23980c"
+    },
+    {
+      "file": "tr-SRN-HSK-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "dbae1dea386b7319abcdca75e07d8638f90c86cab13de5384dae88adf2374e97"
+    },
+    {
+      "file": "tr-SRN-HW-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "a4ea2b6965f00091213eaa211043d778b69f706c6a15a4e1f63d34347c4af172"
+    },
+    {
+      "file": "tr-SRN-HW-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "31ce778486e97edc8b28c76a07372f77970a577da1a562ae41340f295b0a5e62"
+    },
+    {
+      "file": "tr-SRN-LAD-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "c21b20b425f168ef580efc28c9e4db8ab4197f0f9aa09096ba2884b4d126da51"
+    },
+    {
+      "file": "tr-SRN-LAD-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "beb1b243cfa296d18eb8e5ecd716feb14f4a03f391ec151f67125ca1c28c41ea"
+    },
+    {
+      "file": "tr-SRN-LOTO-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "c4d0c1594eadbacd58a4201ac8d17c7b344009abee714a3a4972fc5ae42cca9b"
+    },
+    {
+      "file": "tr-SRN-LOTO-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "6242eb154184b1357da6242bd972142ea53aa93c1e859f6367b733cbc731d401"
+    },
+    {
+      "file": "tr-SRN-MH-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "0ac76311f5c0e15dda33988c931ea9c14ea1f92ec935e1774e889a4f5ecb65f1"
+    },
+    {
+      "file": "tr-SRN-MH-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "02f6242d589bdd3acb9d2d2bd7122c1c73abf89f60882e1f33d1ac3a1cdb2a2b"
+    },
+    {
+      "file": "tr-SRN-PPE-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "dad09c3f3f7f204ccaeadd3affc77defc1c85dee5bdf2f5369eb9b38ba0029af"
+    },
+    {
+      "file": "tr-SRN-PPE-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "ec4bc0370feb367a5404d9cf59e8f231fb7c4a21796c2f6b58144ed011ebae7d"
+    },
+    {
+      "file": "tr-SRN-SCF-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "16d1c72bec6672e1ddb990e340272a3067d58f3911cd741652809504dd8901f5"
+    },
+    {
+      "file": "tr-SRN-SCF-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "5b0db7d6131edf3a045c23e58af879268478e8c433227bae2a36b66d03634d71"
+    },
+    {
+      "file": "tr-SRN-WAH-001-a3.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "ac70cf722f21cc0bd22c017a773e3bc4331ce58871d9bac5a9bf210e0d832caf"
+    },
+    {
+      "file": "tr-SRN-WAH-001-a4.pdf",
+      "result": "PASS",
+      "title": true,
+      "qr": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "pages": 1,
+      "sha256": "5a6ad7ca1db2770734f73fb259bdfdc722a81996aa8ed499e10ab2246a29a6bc"
+    }
+  ],
+  "scope": "60 local PDFs, actual Master with synthetic company logo; current print header visible, QR decoded. Not real customer auth/storage or physical print."
+}

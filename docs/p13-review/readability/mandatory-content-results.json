@@ -1,0 +1,229 @@
+{
+  "results": [
+    {
+      "slug": "hot-work-safety-rules",
+      "locale": "tr",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "hot-work-safety-rules",
+      "locale": "tr",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "hot-work-safety-rules",
+      "locale": "en",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "hot-work-safety-rules",
+      "locale": "en",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "working-at-height-rules",
+      "locale": "tr",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "working-at-height-rules",
+      "locale": "tr",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "working-at-height-rules",
+      "locale": "en",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "working-at-height-rules",
+      "locale": "en",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "ladder-safety-rules",
+      "locale": "tr",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "ladder-safety-rules",
+      "locale": "tr",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "ladder-safety-rules",
+      "locale": "en",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "ladder-safety-rules",
+      "locale": "en",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "scaffold-safety-rules",
+      "locale": "tr",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "scaffold-safety-rules",
+      "locale": "tr",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "scaffold-safety-rules",
+      "locale": "en",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "scaffold-safety-rules",
+      "locale": "en",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "excavation-safety-rules",
+      "locale": "tr",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "excavation-safety-rules",
+      "locale": "tr",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "excavation-safety-rules",
+      "locale": "en",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "excavation-safety-rules",
+      "locale": "en",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "fire-safety-rules",
+      "locale": "tr",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "fire-safety-rules",
+      "locale": "tr",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "fire-safety-rules",
+      "locale": "en",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "fire-safety-rules",
+      "locale": "en",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "confined-space-entry-rules",
+      "locale": "tr",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "confined-space-entry-rules",
+      "locale": "tr",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "confined-space-entry-rules",
+      "locale": "en",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "confined-space-entry-rules",
+      "locale": "en",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "loto-golden-rules",
+      "locale": "tr",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "loto-golden-rules",
+      "locale": "tr",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "loto-golden-rules",
+      "locale": "en",
+      "size": "a4",
+      "result": "PASS",
+      "missing": []
+    },
+    {
+      "slug": "loto-golden-rules",
+      "locale": "en",
+      "size": "a3",
+      "result": "PASS",
+      "missing": []
+    }
+  ],
+  "note": "Regression of scoped mandatory content actually present in PDFs. Text matches are not independent verification of current law. Official network sources remain NOT VERIFIED."
+}

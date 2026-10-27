@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const firePoster: PosterDefinition = {
   code: "SRN-FIRE-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "Yangın Kritik Güvenlik Kuralları",
@@ -35,6 +35,7 @@ export const firePoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Yangın belirtisi veya alarm durumunda", "en": "Fire is discovered or an alarm condition occurs"}},
     },
     {
       number: "02",
@@ -56,6 +57,7 @@ export const firePoster: PosterDefinition = {
       },
       icon: "ladder",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Tahliye gerektiğinde", "en": "Evacuation is required"}},
     },
     {
       number: "03",
@@ -67,16 +69,17 @@ export const firePoster: PosterDefinition = {
         tr: [
           "Söndürücüyü yangın sınıfına ve yakıta göre seç.",
           "Elektrik tehlikesinde iletken söndürme maddesi kullanma.",
-          "Etiket ve kullanım talimatlarını müdahaleden önce doğrula.",
+          "OSHA mesafe kartları yalnız 1910.157(d) uygulanıyorsa geçerlidir; tahliye planı istisnalarını doğrula.",
         ],
         en: [
           "Select the extinguisher for the fire class and fuel involved.",
           "Do not use conductive extinguishing agents on electrical hazards.",
-          "Verify the label and operating instructions before use.",
+          "OSHA distance cards apply only where 1910.157(d) applies; check evacuation-plan exemptions.",
         ],
       },
       icon: "equipment",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Yetkili söndürücü kullanımında", "en": "Authorized extinguisher use"}},
     },
     {
       number: "04",
@@ -87,17 +90,18 @@ export const firePoster: PosterDefinition = {
       items: {
         tr: [
           "Yalnızca küçük ve başlangıç aşamasındaki yangına müdahale et.",
-          "Sadece eğitimli, yetkili ve kendini güvende hisseden personel müdahale etsin.",
+          "OSHA çalışan kullanımı: başlangıçta ve en az yılda bir eğitim; yalnız eğitimli ve yetkili kişi müdahale etsin.",
           "Her zaman arkanda açık ve güvenli kaçış yolu bulundur.",
         ],
         en: [
           "Attempt only small, incipient-stage fires.",
-          "Only trained, authorized and confident personnel may intervene.",
+          "OSHA employee use: initial and at least annual education/training; only trained, authorized personnel may intervene.",
           "Always maintain a clear and safe escape route behind you.",
         ],
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Başlangıç yangınına müdahale edilecekse", "en": "An incipient fire is to be tackled"}},
     },
     {
       number: "05",
@@ -118,7 +122,8 @@ export const firePoster: PosterDefinition = {
         ],
       },
       icon: "equipment",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -139,7 +144,8 @@ export const firePoster: PosterDefinition = {
         ],
       },
       icon: "weather",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -160,7 +166,8 @@ export const firePoster: PosterDefinition = {
         ],
       },
       icon: "guardrail",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -181,7 +188,8 @@ export const firePoster: PosterDefinition = {
         ],
       },
       icon: "fall",
-      tone: "information",
+      tone: "warning",
+      application: {"kind": "hazard-warning"},
     },
   ],
 

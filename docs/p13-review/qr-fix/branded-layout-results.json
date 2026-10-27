@@ -1,0 +1,305 @@
+{
+  "results": [
+    {
+      "locale": "tr",
+      "file": "chemical-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-CHM-001",
+      "clipped": [],
+      "spareCssPx": 374.44873046875,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "confined-space.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-CS-001",
+      "clipped": [],
+      "spareCssPx": 230.7274169921875,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "dropped-objects-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-DO-001",
+      "clipped": [],
+      "spareCssPx": 348.789306640625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "electrical.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-EL-001",
+      "clipped": [],
+      "spareCssPx": 252.8505859375,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "excavation-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-EXC-001",
+      "clipped": [],
+      "spareCssPx": 156.5380859375,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "fire.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-FIRE-001",
+      "clipped": [],
+      "spareCssPx": 198.3980712890625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "forklift-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-FLT-001",
+      "clipped": [],
+      "spareCssPx": 387.84619140625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "hot-work.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-HW-001",
+      "clipped": [],
+      "spareCssPx": 83.81494140625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "housekeeping-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-HSK-001",
+      "clipped": [],
+      "spareCssPx": 339.8624267578125,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "ladder-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-LAD-001",
+      "clipped": [],
+      "spareCssPx": 135.46435546875,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "loto.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-LOTO-001",
+      "clipped": [],
+      "spareCssPx": 249.5443115234375,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "manual-handling-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-MH-001",
+      "clipped": [],
+      "spareCssPx": 405.211181640625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "ppe.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-PPE-001",
+      "clipped": [],
+      "spareCssPx": 333.2786865234375,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "scaffold.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-SCF-001",
+      "clipped": [],
+      "spareCssPx": 123.6624755859375,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "working-at-height.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-WAH-001",
+      "clipped": [],
+      "spareCssPx": 141.429931640625,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "chemical-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-CHM-001",
+      "clipped": [],
+      "spareCssPx": 313.7862548828125,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "confined-space.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-CS-001",
+      "clipped": [],
+      "spareCssPx": 110.2218017578125,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "dropped-objects-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-DO-001",
+      "clipped": [],
+      "spareCssPx": 314.2318115234375,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "electrical.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-EL-001",
+      "clipped": [],
+      "spareCssPx": 148.3587646484375,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "excavation-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-EXC-001",
+      "clipped": [],
+      "spareCssPx": 30.65625,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "fire.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-FIRE-001",
+      "clipped": [],
+      "spareCssPx": 140.5819091796875,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "forklift-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-FLT-001",
+      "clipped": [],
+      "spareCssPx": 316.2586669921875,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "hot-work.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-HW-001",
+      "clipped": [],
+      "spareCssPx": 30.2105712890625,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "housekeeping-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-HSK-001",
+      "clipped": [],
+      "spareCssPx": 317.322509765625,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "ladder-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-LAD-001",
+      "clipped": [],
+      "spareCssPx": 83.9874267578125,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "loto.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-LOTO-001",
+      "clipped": [],
+      "spareCssPx": 213.923095703125,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "manual-handling-safety.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-MH-001",
+      "clipped": [],
+      "spareCssPx": 371.2718505859375,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "ppe.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-PPE-001",
+      "clipped": [],
+      "spareCssPx": 316.2586669921875,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "scaffold.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-SCF-001",
+      "clipped": [],
+      "spareCssPx": 70.05810546875,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "working-at-height.ts",
+      "fontFamily": "SernemPosterPrint, Arial, sans-serif",
+      "bodyFont": "17px",
+      "code": "SRN-WAH-001",
+      "clipped": [],
+      "spareCssPx": 82.9237060546875,
+      "result": "PASS"
+    }
+  ],
+  "note": "Actual PosterMasterV4 + print CSS, synthetic square logo at maximum 56px header height. All 15×TR/EN; A3 canvas geometry, A4 uniform scale preserves fit. 60 real local A4/A3 PDFs also generated with synthetic company logo. Header print visibility asserted (global print CSS hides generic headers, so the existing route override is reproduced). Not authenticated hosted PDF E2E."
+}

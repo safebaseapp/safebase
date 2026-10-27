@@ -1,0 +1,66 @@
+# Gerçek PDF punto karşılaştırması
+
+15 poster × TR/EN × A4/A3; boşluklar dahil tüm yazdırılabilir karakterler. Boyutlar PyMuPDF span.size değerleridir.
+
+| PDF | Önce <6 pt % | Sonra <6 pt % | Sonra minimum pt | Gövde minimum pt | Kritik minimum pt | Sayfa |
+|---|---:|---:|---:|---:|---:|---:|
+| en-chemical-safety-rules-a3.pdf | 27.54 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-chemical-safety-rules-a4.pdf | 85.92 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-confined-space-entry-rules-a3.pdf | 27.81 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-confined-space-entry-rules-a4.pdf | 88.29 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-dropped-objects-safety-rules-a3.pdf | 26.93 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-dropped-objects-safety-rules-a4.pdf | 85.12 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-electrical-safety-rules-a3.pdf | 28.57 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-electrical-safety-rules-a4.pdf | 88.77 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-excavation-safety-rules-a3.pdf | 24.48 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-excavation-safety-rules-a4.pdf | 86.96 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-fire-safety-rules-a3.pdf | 25.34 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-fire-safety-rules-a4.pdf | 87.48 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-forklift-safety-rules-a3.pdf | 27.85 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-forklift-safety-rules-a4.pdf | 84.66 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-hot-work-safety-rules-a3.pdf | 26.11 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-hot-work-safety-rules-a4.pdf | 88.32 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-housekeeping-safety-rules-a3.pdf | 25.76 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-housekeeping-safety-rules-a4.pdf | 85.26 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-ladder-safety-rules-a3.pdf | 25.08 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-ladder-safety-rules-a4.pdf | 87.92 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-loto-golden-rules-a3.pdf | 24.29 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-loto-golden-rules-a4.pdf | 87.40 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-mandatory-ppe-a3.pdf | 23.51 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-mandatory-ppe-a4.pdf | 86.59 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-manual-handling-safety-rules-a3.pdf | 30.28 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-manual-handling-safety-rules-a4.pdf | 84.60 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-scaffold-safety-rules-a3.pdf | 26.02 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-scaffold-safety-rules-a4.pdf | 88.52 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| en-working-at-height-rules-a3.pdf | 24.22 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| en-working-at-height-rules-a4.pdf | 87.85 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-chemical-safety-rules-a3.pdf | 26.78 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-chemical-safety-rules-a4.pdf | 85.22 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-confined-space-entry-rules-a3.pdf | 27.76 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-confined-space-entry-rules-a4.pdf | 87.98 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-dropped-objects-safety-rules-a3.pdf | 26.64 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-dropped-objects-safety-rules-a4.pdf | 84.44 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-electrical-safety-rules-a3.pdf | 28.79 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-electrical-safety-rules-a4.pdf | 88.44 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-excavation-safety-rules-a3.pdf | 25.00 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-excavation-safety-rules-a4.pdf | 85.98 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-fire-safety-rules-a3.pdf | 24.31 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-fire-safety-rules-a4.pdf | 86.10 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-forklift-safety-rules-a3.pdf | 27.31 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-forklift-safety-rules-a4.pdf | 84.86 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-hot-work-safety-rules-a3.pdf | 26.03 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-hot-work-safety-rules-a4.pdf | 87.99 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-housekeeping-safety-rules-a3.pdf | 25.96 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-housekeeping-safety-rules-a4.pdf | 84.14 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-ladder-safety-rules-a3.pdf | 24.86 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-ladder-safety-rules-a4.pdf | 86.80 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-loto-golden-rules-a3.pdf | 24.44 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-loto-golden-rules-a4.pdf | 86.76 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-mandatory-ppe-a3.pdf | 22.73 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-mandatory-ppe-a4.pdf | 85.96 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-manual-handling-safety-rules-a3.pdf | 28.83 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-manual-handling-safety-rules-a4.pdf | 83.83 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-scaffold-safety-rules-a3.pdf | 26.24 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-scaffold-safety-rules-a4.pdf | 87.82 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |
+| tr-working-at-height-rules-a3.pdf | 23.88 | 0.00 | 8.970 | 11.730 | 11.040 | 1 |
+| tr-working-at-height-rules-a4.pdf | 87.48 | 0.00 | 6.342 | 8.294 | 7.806 | 1 |

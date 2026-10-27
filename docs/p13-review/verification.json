@@ -1,0 +1,46 @@
+{
+  "baselineMain": "ef556c9517ee8b732e7013f306351219aedfc1a0",
+  "normalBuild": "PASS",
+  "typeScript": "PASS",
+  "relatedESLint": {
+    "currentExit": 0,
+    "baselineExit": 1,
+    "currentErrors": 0,
+    "baselineErrors": 56,
+    "currentWarnings": 2,
+    "baselineWarnings": 3,
+    "newFindings": []
+  },
+  "pdfDownloadQa": "PASS",
+  "buildEvidence": [
+    "Branded-base PDFs inspected: 140/140",
+    "PASS: all 70 Toolbox topics have TR/EN standard files and 4-page branded-base PDFs.",
+    "SERNEM download/auth QA: PASS",
+    "✓ Compiled successfully in 18.6s",
+    "  Finished TypeScript in 17.3s ..."
+  ],
+  "results": {
+    "after-browser.json": {
+      "sha256": "1e32cf7af808f437eb173ac3d572eeec90c3f709d47578918d00a0305483e575",
+      "pass": 180
+    },
+    "actions-results.json": {
+      "sha256": "8419f554e9bd30d3b163e172a5eee2d8c5347a26fcaa7cb3b2282608bdc606f4",
+      "pass": 13
+    },
+    "pdf-results.json": {
+      "sha256": "51727f091a131dc6aea25bfde3ff2ca7f02f72e4a86b69ca11efdfbb0caa8741",
+      "pass": 60
+    },
+    "content-results.json": {
+      "sha256": "a290272e9024816a7008b60d004fb5b3808538aebd703b152b125945d311f85f",
+      "pass": 36
+    }
+  },
+  "notTested": [
+    "real Supabase/Premium/storage signed-URL access",
+    "physical printing and phone-camera QR",
+    "current official source text and local legal applicability"
+  ],
+  "deployment": "Not requested; skip commit markers used to prevent automatic deployment. Settings unchanged."
+}

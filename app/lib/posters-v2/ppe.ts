@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const ppePoster: PosterDefinition = {
   code: "SRN-PPE-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "Zorunlu KKD Kritik Güvenlik Kuralları",
@@ -35,6 +35,7 @@ export const ppePoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -56,6 +57,7 @@ export const ppePoster: PosterDefinition = {
       },
       icon: "guardrail",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Zorunlu KKD tanımlı alanlarda", "en": "In areas with designated mandatory PPE"}},
     },
     {
       number: "03",
@@ -77,6 +79,7 @@ export const ppePoster: PosterDefinition = {
       },
       icon: "equipment",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -98,6 +101,7 @@ export const ppePoster: PosterDefinition = {
       },
       icon: "harness",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "05",
@@ -118,7 +122,8 @@ export const ppePoster: PosterDefinition = {
         ],
       },
       icon: "equipment",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -139,7 +144,8 @@ export const ppePoster: PosterDefinition = {
         ],
       },
       icon: "training",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -160,7 +166,8 @@ export const ppePoster: PosterDefinition = {
         ],
       },
       icon: "weather",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -181,7 +188,8 @@ export const ppePoster: PosterDefinition = {
         ],
       },
       icon: "fall",
-      tone: "information",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
   ],
 

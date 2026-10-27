@@ -1,0 +1,725 @@
+{
+  "results": [
+    {
+      "file": "en-chemical-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7298,
+      "sha256": "657fd67fd08681a0d24157b0b3907e7d75fb0cdd7cc805e2221b29920616d2da"
+    },
+    {
+      "file": "en-chemical-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7427,
+      "sha256": "ee6cb8d1a7b2a634e02ca3438d9de1b50ef4f9f1d14e0793c973134a47bcafd5"
+    },
+    {
+      "file": "en-confined-space-entry-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8179,
+      "sha256": "f1895fc46bb2670d5092eedfb0b8596d906d0be199e90dd22e1328133f6fa4a6"
+    },
+    {
+      "file": "en-confined-space-entry-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8281,
+      "sha256": "497cd69b49e429724843321fda3be8b3abb8962fdfafaa4beea1e09794ba241b"
+    },
+    {
+      "file": "en-dropped-objects-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7286,
+      "sha256": "9f5be31190fd0be131ff84dae237c707b84b5ddf8d4b291f7ba30c9749ba8abe"
+    },
+    {
+      "file": "en-dropped-objects-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7348,
+      "sha256": "68200b7fda7e89dcea926f276e5c8cc070f88b789f2483997401e5684fd210e4"
+    },
+    {
+      "file": "en-electrical-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8901,
+      "sha256": "2ec2c983eacc6ceacc158c88fed59292c7e0298e6603a6a7e999f2eed06769e4"
+    },
+    {
+      "file": "en-electrical-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9015,
+      "sha256": "5a803120b1e64eef2ea0fca8919e63c79fe6363dd1c2106875e4d0b80863da8d"
+    },
+    {
+      "file": "en-excavation-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8986,
+      "sha256": "03ae6f1e0db508ec4e8890d299e903a023b513937c17652ca75c617105194c05"
+    },
+    {
+      "file": "en-excavation-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9118,
+      "sha256": "21cc3a309e1b6a1eb15f33dc02972cdc65038a89eead83ec7b445425d0d87a6e"
+    },
+    {
+      "file": "en-fire-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8634,
+      "sha256": "3457508e48a1346007855a7ef55b552c167e513f2b326200e87aae45928c2fd9"
+    },
+    {
+      "file": "en-fire-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8635,
+      "sha256": "bb6ce3614c3d8da1c0225a133285e6421331602ddf7ac1ce030f8eb5aa914b03"
+    },
+    {
+      "file": "en-forklift-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 6906,
+      "sha256": "7805d534417a3e1b883eb305a342c2cf6309954d1b8be170f8cd4fe5ab44e1de"
+    },
+    {
+      "file": "en-forklift-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 6982,
+      "sha256": "7dce551143dccd69be1a147fdc7c1b0972da285d5229384077508920b696903e"
+    },
+    {
+      "file": "en-hot-work-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9384,
+      "sha256": "57ae7058f77bec8df9ac2a2eb3c02a1e6cccd102673f987976f6d1e343b80bd4"
+    },
+    {
+      "file": "en-hot-work-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9444,
+      "sha256": "7983d8446ee8d9602f461af774d68ca94fed49e36243fbf035f82d384bce0fc6"
+    },
+    {
+      "file": "en-housekeeping-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7106,
+      "sha256": "7f1a18d5c73a76db3867d6210e32e5a92d99f46dc108af1317366989b6b71335"
+    },
+    {
+      "file": "en-housekeeping-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7122,
+      "sha256": "f8ac78ba4464015dee2c41c78e6d30e04fc688edb8ab4a1fc07b8c8b80cacf5c"
+    },
+    {
+      "file": "en-ladder-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9308,
+      "sha256": "099195b7cb07bde282b49b59819554c82d73d9c6abee1265ce353858e78b2cae"
+    },
+    {
+      "file": "en-ladder-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9435,
+      "sha256": "5e837de40674b786cf7f37521f04704499c1168c556481ecb3a81c37b11cde5e"
+    },
+    {
+      "file": "en-loto-golden-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7562,
+      "sha256": "89236c9eee905a9f0a67cfde2b44d7a197b475306ce551a753ccd37beb6317e3"
+    },
+    {
+      "file": "en-loto-golden-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7692,
+      "sha256": "2dfd6bf62499db6622fbf5d2ef89c93be36c3b87ca6a12fb466978866189e670"
+    },
+    {
+      "file": "en-mandatory-ppe-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7120,
+      "sha256": "220d185232c88db87b7495eb1c70703ea438dab2adbd8cbf2b577cde141c5c8b"
+    },
+    {
+      "file": "en-mandatory-ppe-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7185,
+      "sha256": "4d9a945c4b9f9e6f4fd4d780513f40e4f027fea3dfd38ffef0bb930b50a6604f"
+    },
+    {
+      "file": "en-manual-handling-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7013,
+      "sha256": "e66035537f70128d628599f2b0a87dec94792e3cf03fc10a7f3b62bd6c425ab1"
+    },
+    {
+      "file": "en-manual-handling-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 6970,
+      "sha256": "e2658658e0521b238492efd330e16de5c80235e11b09b4a6ac4a89ca0e1078b4"
+    },
+    {
+      "file": "en-scaffold-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9107,
+      "sha256": "83000d9f10637d29d2bd3f3a86accecaa055043ffb3f68c232c1a065c8d24804"
+    },
+    {
+      "file": "en-scaffold-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9067,
+      "sha256": "1b0b7dd6b98783f8c83a829718b1994b11d77f693f07e6c7a02cbd3f9ab997bc"
+    },
+    {
+      "file": "en-working-at-height-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9261,
+      "sha256": "8a7646e2ebd09010883badd2a7c63bb56077cb973aa23a1115cb9cdb3db250db"
+    },
+    {
+      "file": "en-working-at-height-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/en/posters"
+      ],
+      "expectedQr": "https://sernem.com/en/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9119,
+      "sha256": "7c2626bd5af1b283baf138fe321d05bc2934faa3b0e8a21d6b3472f3b95fc7ce"
+    },
+    {
+      "file": "tr-chemical-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7310,
+      "sha256": "fd435fd7ee64bfc401f1a9845309b37d67f13ba77231675be394d9f739fd12d3"
+    },
+    {
+      "file": "tr-chemical-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7658,
+      "sha256": "474aa6e1a12d3b2cac956482f60cefc3fb85948c6be05afaea74f9b35f4b3244"
+    },
+    {
+      "file": "tr-confined-space-entry-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7503,
+      "sha256": "7554a1bfc65e4721011294c68c99bc12315698518d9cbb5ed927c2adfa396f1f"
+    },
+    {
+      "file": "tr-confined-space-entry-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7765,
+      "sha256": "6c05722fabb20ca60e66fbc99818cda6196241ad33eda09f4bc58eda866da730"
+    },
+    {
+      "file": "tr-dropped-objects-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 6686,
+      "sha256": "873906d6f944b0c3660d2b3abd91980b9f0dddafdc0177cb3824c2a2c660a063"
+    },
+    {
+      "file": "tr-dropped-objects-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7019,
+      "sha256": "58add13fe317f52b97a1327efb84c912707709c9e3c273252f59fdd0aa3b4ad8"
+    },
+    {
+      "file": "tr-electrical-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7868,
+      "sha256": "11b400e4ca45cd70e271d8f67be2bf88952b0aff054589c66cef538655354a8f"
+    },
+    {
+      "file": "tr-electrical-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8271,
+      "sha256": "9d20e0bb57be811654ba941b21f0be29f553d514440f299f61a10bb3e4395f57"
+    },
+    {
+      "file": "tr-excavation-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9485,
+      "sha256": "46966a9ab781ae8da57b4dc0a7c80991e8efecd2646e235cf4c86e2550e2c1dc"
+    },
+    {
+      "file": "tr-excavation-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9924,
+      "sha256": "304f45af4527d6d1c16d6e75cbdeb8d3182f22263b152a82ec9a588df71d4fc8"
+    },
+    {
+      "file": "tr-fire-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9800,
+      "sha256": "5a3cedcb8045ae958b6697ed8f47811db85fc95dbb9a3f487d9ac8ef833ed316"
+    },
+    {
+      "file": "tr-fire-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 10159,
+      "sha256": "fb7a48f88405cb2cb95691824c6a7451d489e32f9e43b50ac13e5f75ddca9364"
+    },
+    {
+      "file": "tr-forklift-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 6457,
+      "sha256": "0177a3444ed320337aca8a844a4cfff3b95ec7cfef3ebad2b853836e905a58a7"
+    },
+    {
+      "file": "tr-forklift-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 6949,
+      "sha256": "59258941d53faef0e418eeddfcb9aa0194a6a07f7f3c592bdb6565da546890d7"
+    },
+    {
+      "file": "tr-hot-work-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8992,
+      "sha256": "61e09c15f473d007c3dc052ee9b94fab0c9471b205483647804b7231787bbba9"
+    },
+    {
+      "file": "tr-hot-work-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9352,
+      "sha256": "da763536dc1a8b315a4fa235a76889902c25d722875a5fa18c06476058138d7b"
+    },
+    {
+      "file": "tr-housekeeping-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 6808,
+      "sha256": "1680d7064dc459c83586bac31b340f70f01448d7da24a9b85dc8010351b55b1d"
+    },
+    {
+      "file": "tr-housekeeping-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7080,
+      "sha256": "4ded5d5bb233b72a4388cb896e9b645e55fbdcb9b8bb84e8cb3a9491544306cc"
+    },
+    {
+      "file": "tr-ladder-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8613,
+      "sha256": "280a6a3d5bee0149c9788b4a178f0d698707aa8b6498b7fe77d448a88362991b"
+    },
+    {
+      "file": "tr-ladder-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 9004,
+      "sha256": "66d8c2a1b1c5f3ee524420606453467ae69113345cd3b119529d28af73e4c6e1"
+    },
+    {
+      "file": "tr-loto-golden-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7654,
+      "sha256": "09bf77c2aa900cf391ce3ff1aa8aad2527e979b0423bec319fc9b8423a7610f6"
+    },
+    {
+      "file": "tr-loto-golden-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7947,
+      "sha256": "a2d3c339e8547eeda442bd86f29381197ad3260eec5252035aba5c926127ca81"
+    },
+    {
+      "file": "tr-mandatory-ppe-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 6983,
+      "sha256": "4acc26b98b0143c90426ccd409e9fdd487cc1ae849bd4f0841fd3020ab9e0da5"
+    },
+    {
+      "file": "tr-mandatory-ppe-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 7348,
+      "sha256": "e4bda3e46a8cf01932740a9e5b76659f66fe19adc13d7192583b6b9631b3f0c3"
+    },
+    {
+      "file": "tr-manual-handling-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 6385,
+      "sha256": "0b85cff85409e54ee71bbdb3fd35905db5661df2e436e3cf92de67f4dd00035a"
+    },
+    {
+      "file": "tr-manual-handling-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 6564,
+      "sha256": "d38b9e9576900b80bab6587637e90e7278945685fb581e9285dc4b948641c3b1"
+    },
+    {
+      "file": "tr-scaffold-safety-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8441,
+      "sha256": "53ef739a1846ac257de662318c495241c4a48ca6f7b066d8dcaae57db7f52422"
+    },
+    {
+      "file": "tr-scaffold-safety-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8826,
+      "sha256": "e411ed4660e8bd7c9eefae5bb61dde266fa766517df13caa95c32b4239519f76"
+    },
+    {
+      "file": "tr-working-at-height-rules-a3.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8092,
+      "sha256": "27632fe909b5417583c53eb60e8ab29df27dec16f129709fedd2c47df4d72b8f"
+    },
+    {
+      "file": "tr-working-at-height-rules-a4.pdf",
+      "result": "PASS",
+      "qrDecoded": [
+        "https://sernem.com/tr/posters"
+      ],
+      "expectedQr": "https://sernem.com/tr/posters",
+      "titleAndLocaleGlyphs": true,
+      "outOfPageWords": [],
+      "textCharacters": 8370,
+      "sha256": "58f06948028473411d7c49c634334f45f4ee74fb4d3f2c716d1039937087f631"
+    }
+  ],
+  "note": "All 15 topics \u00d7 TR/EN \u00d7 A4/A3. Page count/dimensions in after-fonts.json (readability matrix) and DOM text clipping in browser-results.json; this test independently checks PDF text bounds and decodes each rendered QR at 2500px. No claim of physical printer or phone-camera testing."
+}

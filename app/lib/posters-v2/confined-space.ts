@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const confinedSpacePoster: PosterDefinition = {
   code: "SRN-CS-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "Kapalı Alan Giriş Kritik Güvenlik Kuralları",
@@ -35,6 +35,7 @@ export const confinedSpacePoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "İzin gerektiren kapalı alan girişinde", "en": "Entering a permit-required confined space"}},
     },
     {
       number: "02",
@@ -56,6 +57,7 @@ export const confinedSpacePoster: PosterDefinition = {
       },
       icon: "weather",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -77,6 +79,7 @@ export const confinedSpacePoster: PosterDefinition = {
       },
       icon: "anchor",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -98,6 +101,7 @@ export const confinedSpacePoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "İzin gerektiren giriş boyunca", "en": "Throughout permit-required entry"}},
     },
     {
       number: "05",
@@ -109,16 +113,17 @@ export const confinedSpacePoster: PosterDefinition = {
         tr: [
           "Temiz hava sağlayan uygun havalandırma kullan.",
           "Hava girişini egzoz ve kirletici kaynaklardan uzak tut.",
-          "Havalandırma durursa girişi yeniden değerlendir.",
+          "Gerekli havalandırma durursa alanı tahliye et ve izni yeniden değerlendir.",
         ],
         en: [
           "Use suitable ventilation supplying clean air.",
           "Keep air intakes away from exhausts and contaminant sources.",
-          "Reassess entry immediately if ventilation stops.",
+          "Evacuate if required ventilation stops, then reassess the permit.",
         ],
       },
       icon: "weather",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Giriş kontrol planı havalandırma gerektiriyorsa", "en": "The entry control plan requires ventilation"}},
     },
     {
       number: "06",
@@ -139,7 +144,8 @@ export const confinedSpacePoster: PosterDefinition = {
         ],
       },
       icon: "equipment",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -150,17 +156,18 @@ export const confinedSpacePoster: PosterDefinition = {
       items: {
         tr: [
           "Girişten önce uygulanabilir kurtarma planı hazırla.",
-          "Kurtarma ekibi, tripod ve geri çekme sistemini hazır tut.",
+          "Alana uygun kurtarma ekibi ve geri çekme sistemini hazır tut.",
           "Plansız ve korumasız içeri girerek kurtarma yapma.",
         ],
         en: [
           "Prepare a workable rescue plan before entry.",
-          "Ensure the rescue team and retrieval equipment are ready.",
+          "Ensure the rescue service and space-suitable retrieval system are ready.",
           "Never perform an unplanned or unprotected entry rescue.",
         ],
       },
       icon: "fall",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -181,23 +188,24 @@ export const confinedSpacePoster: PosterDefinition = {
         ],
       },
       icon: "weather",
-      tone: "information",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Atmosfer değişebilecekse/izin gerektiriyorsa", "en": "The atmosphere can change or the permit requires it"}},
     },
   ],
 
   never: {
     tr: [
-      "Geçerli giriş izni yoksa işi hemen durdur",
-      "Oksijen yüzde 19,5 ile 23,5 arasında değilse girişi durdur",
-      "Yanıcı atmosfer yüzde 10 LEL veya üzerindeyse girişi durdur",
-      "Gözcü, iletişim veya sürekli gaz ölçümü yoksa girişi durdur",
+      "Gerekli giriş izni yoksa işi hemen durdur",
+      "Ölçülen oksijen izin sınırları dışında veya belirsizse girişi durdur",
+      "Yanıcı veya toksik gaz izin sınırında, üzerinde veya belirsizse tahliye et",
+      "Gerekli gözcü, iletişim veya atmosfer izlemesi yoksa girişi durdur",
       "Hazır ve uygulanabilir kurtarma planı yoksa girişi durdur",
     ],
     en: [
-      "Stop entry immediately if there is no valid entry permit",
-      "Stop entry if oxygen is outside the 19.5% to 23.5% range",
-      "Stop entry if the atmosphere is at or above 10% of the LFL",
-      "Stop entry if there is no attendant, communication or gas monitoring",
+      "Stop entry immediately if a required entry permit is missing",
+      "Stop entry if oxygen is outside verified permit limits or is unknown",
+      "Evacuate if flammable or toxic gas reaches permit limits, exceeds them or is unknown",
+      "Stop entry if required attendant, communication or atmospheric monitoring is unavailable",
       "Stop entry if there is no ready and workable rescue plan",
     ],
   },

@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const hotWorkPoster: PosterDefinition = {
   code: "SRN-HW-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "Sıcak Çalışma Kritik Güvenlik Kuralları",
@@ -23,39 +23,41 @@ export const hotWorkPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Geçerli sıcak çalışma iznini doğrula.",
+          "İzin sistemi gerektiriyorsa geçerli sıcak çalışma iznini doğrula.",
           "Çalışma alanı ve kapsamın izinle uyumlu olduğunu kontrol et.",
           "Koşullar değişirse işi durdur ve izni yeniden değerlendir.",
         ],
         en: [
-          "Verify a valid hot work permit.",
+          "Verify a valid hot-work permit where the permit system requires one.",
           "Confirm the work area and scope match the authorization.",
           "Stop work and reassess the permit if conditions change.",
         ],
       },
-      icon: "training",
+      icon: "hw-permit",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "İzin sistemi gerektiriyorsa", "en": "A permit system requires it"}},
     },
     {
       number: "02",
       title: {
-        tr: "Yanıcıları Uzaklaştır",
-        en: "Remove Combustibles",
+        tr: "Alanı Hazırla",
+        en: "Prepare the Work Area",
       },
       items: {
         tr: [
-          "Yanıcı malzemeleri güvenli mesafeye taşı.",
-          "Taşınamayan malzemeleri yangına dayanıklı örtüyle koru.",
-          "Zemin, boşluk ve karşı yüzleri kıvılcıma karşı kontrol et.",
+          "Yanıcıları kontrol et; varsa taşı, taşınamayanı yangına dayanıklı örtüyle koru.",
+          "Zemin, açıklık ve karşı yüzlerde kıvılcım/ısı riskini kontrol et.",
+          "Metal dumanı maruziyetini değerlendir; prosese uygun havalandırma/lokal emiş sağla.",
         ],
         en: [
-          "Move combustible materials to a safe distance.",
-          "Protect immovable materials with fire-resistant covers.",
-          "Check floors, openings and opposite surfaces for spark exposure.",
+          "Check combustibles; remove them or protect fixed items with fire-resistant covers.",
+          "Check floors, openings and opposite surfaces for sparks/heat.",
+          "Assess metal-fume exposure; provide process-matched ventilation/local exhaust.",
         ],
       },
-      icon: "equipment",
+      icon: "hw-combustibles",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -66,17 +68,18 @@ export const hotWorkPoster: PosterDefinition = {
       items: {
         tr: [
           "Gerekli alanlarda atmosferi işe başlamadan önce ölç.",
-          "Oksijen, yanıcı gaz ve toksik riskleri doğrula.",
+          "Oksijen/yanıcı/toksik gazları ölç; gaz dedektörü duman kontrolünün yerini tutmaz.",
           "Koşullar değişebilecekse sürekli veya periyodik ölçüm yap.",
         ],
         en: [
           "Test the atmosphere before work where required.",
-          "Verify oxygen, flammable-gas and toxic hazards.",
+          "Check oxygen/flammable/toxic gases; a gas detector does not replace fume control.",
           "Use continuous or periodic monitoring when conditions may change.",
         ],
       },
-      icon: "weather",
+      icon: "hw-gas-test",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Atmosfer tehlikesi veya izin şartı varsa", "en": "Atmospheric hazards or permit conditions require testing"}},
     },
     {
       number: "04",
@@ -86,18 +89,19 @@ export const hotWorkPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Eğitimli ve başka görev verilmeyen gözcü görevlendir.",
+          "OSHA gözcü ölçütü veya saha riski varsa eğitimli, çelişen görevi olmayan gözcü görevlendir.",
           "Gözcünün tüm riskli alanları görebilmesini sağla.",
           "Gözcüye işi durdurma ve alarm verme yetkisi ver.",
         ],
         en: [
-          "Assign a trained fire watch with no conflicting duties.",
+          "Where OSHA watch criteria or site risk applies, assign a trained fire watch with no conflicting duties.",
           "Ensure all exposed areas remain visible and accessible.",
           "Authorize the fire watch to stop work and raise the alarm.",
         ],
       },
-      icon: "training",
+      icon: "hw-fire-watch",
       tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "OSHA gözcü ölçütü veya saha riski varsa", "en": "OSHA fire-watch criteria or site risk applies"}},
     },
     {
       number: "05",
@@ -117,8 +121,9 @@ export const hotWorkPoster: PosterDefinition = {
           "Confirm alarm and emergency communication arrangements.",
         ],
       },
-      icon: "equipment",
-      tone: "warning",
+      icon: "hw-extinguisher",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -129,17 +134,18 @@ export const hotWorkPoster: PosterDefinition = {
       items: {
         tr: [
           "Kıvılcım, cüruf ve sıcak parçaların yayılmasını sınırla.",
-          "Yangın perdesi veya uygun bariyer kullan.",
+          "Çevredekileri ark ışını ve sıçramadan uygun perdeyle koru.",
           "Duvar, boru ve metal yüzeylerden ısı iletimini değerlendir.",
         ],
         en: [
           "Confine sparks, slag and hot fragments.",
-          "Use fire curtains or suitable barriers.",
+          "Screen nearby workers from arc radiation and spatter.",
           "Assess heat conduction through walls, pipes and metal surfaces.",
         ],
       },
-      icon: "fall",
-      tone: "warning",
+      icon: "hw-spark-barrier",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Kıvılcım/ısı yayılma riski varsa", "en": "Sparks or heat can affect nearby people or materials"}},
     },
     {
       number: "07",
@@ -159,8 +165,9 @@ export const hotWorkPoster: PosterDefinition = {
           "Keep oxygen equipment free from oil and grease.",
         ],
       },
-      icon: "anchor",
-      tone: "warning",
+      icon: "hw-cylinders",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Tüp ve gaz hortumu kullanılıyorsa", "en": "Cylinders and gas hoses are used"}},
     },
     {
       number: "08",
@@ -170,51 +177,52 @@ export const hotWorkPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "İş bitiminden sonra alanı en az 30 dakika gözetle.",
-          "Gizli boşlukları ve için için yanma ihtimalini kontrol et.",
-          "Alan güvenli doğrulanmadan gözetimi sonlandırma.",
+          "ABD genel endüstri: gözcü gereken kaynak/kesme sonrası en az 30 dakika gözetim yap.",
+          "Daha uzun yerel/risk süresinde uzat; uygulanabilir OSHA asgarisini kısaltma.",
+          "Gizli/korlu yangını kontrol et. İnşaat 1926.352(e): yangın ihtimali kalmayana dek sürdür; sabit 30 dk demez.",
         ],
         en: [
-          "Monitor the area for at least 30 minutes after completion.",
-          "Check concealed spaces and possible smouldering fires.",
-          "Do not end the watch until the area is confirmed safe.",
+          "US general industry: at least 30 minutes after welding/cutting requiring a watch.",
+          "Extend for stricter local rules, permits or risk; do not shorten the applicable OSHA minimum.",
+          "Construction 1926.352(e): watch until no fire risk; no fixed 30 min. Check concealed/smouldering fires.",
         ],
       },
-      icon: "weather",
-      tone: "information",
+      icon: "hw-post-watch",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Yangın gözcüsü gereken işten sonra", "en": "After work requiring a fire watch"}},
     },
   ],
 
   never: {
     tr: [
-      "Geçerli sıcak çalışma izni yoksa işi hemen durdur",
+      "Gerekli sıcak çalışma izni yoksa işi hemen durdur",
       "Yanıcı veya patlayıcı atmosfer riski kontrol edilmediyse işi durdur",
       "Yanıcı malzemeler uzaklaştırılmamış veya korunmamışsa işi durdur",
-      "Yangın gözcüsü veya uygun söndürme ekipmanı yoksa işi durdur",
+      "Gereken gözcü yoksa veya uygun söndürme ekipmanı hazır değilse işi durdur",
       "Kıvılcım ve sıcak parçalar kontrol edilemiyorsa işi durdur",
     ],
     en: [
-      "Stop work immediately if there is no valid hot work permit",
+      "Stop work immediately if a required hot-work permit is missing",
       "Stop work if flammable or explosive atmospheric hazards are uncontrolled",
       "Stop work if combustibles are not removed or protected",
-      "Stop work if there is no fire watch or suitable extinguishing equipment",
+      "Stop work if a required fire watch is missing or suitable extinguishing equipment is unavailable",
       "Stop work if sparks and hot fragments cannot be contained",
     ],
   },
 
   ppe: {
     tr: [
-      "Kaynak Başlığı",
+      "Yüz/Göz Koruması",
       "Koruyucu Gözlük",
       "Isı Eldiveni",
-      "Deri Ayakkabı",
+      "İş Güvenliği Ayakkabısı",
       "Alev Geciktirici Giysi",
     ],
     en: [
-      "Welding Helmet",
+      "Face/Eye Protection",
       "Safety Glasses",
       "Heat-Resistant Gloves",
-      "Leather Footwear",
+      "Safety Footwear",
       "Flame-Resistant Clothing",
     ],
   },

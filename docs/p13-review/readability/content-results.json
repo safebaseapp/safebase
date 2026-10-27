@@ -1,0 +1,869 @@
+{
+  "results": [
+    {
+      "name": "SRN-CHM-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-CHM-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-CS-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-CS-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-DO-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-DO-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-EL-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-EL-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-EXC-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-EXC-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-FIRE-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-FIRE-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-FLT-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-FLT-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-HW-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-HW-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-HSK-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-HSK-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-LAD-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-LAD-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-LOTO-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-LOTO-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-MH-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-MH-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-PPE-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-PPE-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-SCF-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-SCF-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-WAH-001 tr complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "SRN-WAH-001 en complete topic-specific publication data",
+      "result": "PASS"
+    },
+    {
+      "name": "all 15 codes covered exactly; no accidental default",
+      "result": "PASS"
+    },
+    {
+      "name": "housekeeping and manual handling do not inherit fall protection or rescue/weather checks",
+      "result": "PASS"
+    },
+    {
+      "name": "no fake certification badges; scoped OSHA minima and alternatives remain visible",
+      "result": "PASS"
+    },
+    {
+      "name": "all protected auth/payment/SIM/schema/download/layout modules identical",
+      "result": "PASS"
+    },
+    {
+      "name": "tr unknown code fails visibly without a fall-standard or OSHA fallback",
+      "result": "PASS"
+    },
+    {
+      "name": "en unknown code fails visibly without a fall-standard or OSHA fallback",
+      "result": "PASS"
+    }
+  ],
+  "lint": {
+    "currentExit": 0,
+    "baselineExit": 1,
+    "currentErrors": 0,
+    "baselineErrors": 48,
+    "currentWarnings": 2,
+    "baselineWarnings": 3,
+    "newFindings": []
+  },
+  "inventory": [
+    {
+      "code": "SRN-CHM-001",
+      "file": "chemical-safety.ts",
+      "title": {
+        "tr": "Kimyasal Güvenlik Kritik Kuralları",
+        "en": "Chemical Safety Critical Rules"
+      },
+      "reference": {
+        "label": "OSHA 1910.1200",
+        "jurisdiction": "US-general-industry",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1200",
+        "verification": "not-verified-in-session"
+      },
+      "preJob": [
+        {
+          "tr": "Kimlik ve etiket",
+          "en": "Identity and label"
+        },
+        {
+          "tr": "Güncel SDS",
+          "en": "Current SDS"
+        },
+        {
+          "tr": "Kimyasal uyumluluk",
+          "en": "Chemical compatibility"
+        },
+        {
+          "tr": "Havalandırma",
+          "en": "Ventilation"
+        },
+        {
+          "tr": "Uygun KKD",
+          "en": "Suitable PPE"
+        },
+        {
+          "tr": "Dökülme hazırlığı",
+          "en": "Spill readiness"
+        },
+        {
+          "tr": "Acil duş ve göz yıkama",
+          "en": "Shower and eyewash"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-CS-001",
+      "file": "confined-space.ts",
+      "title": {
+        "tr": "Kapalı Alan Giriş Kritik Güvenlik Kuralları",
+        "en": "Confined Space Entry Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1910.146(b), (d)",
+        "jurisdiction": "US-general-industry",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.146",
+        "verification": "not-verified-in-session",
+        "clauses": [
+          "1910.146(b): hazardous atmosphere",
+          "1910.146(d)(3)-(5)"
+        ]
+      },
+      "preJob": [
+        {
+          "tr": "Giriş izni",
+          "en": "Entry permit"
+        },
+        {
+          "tr": "Atmosfer ve alarm sınırları",
+          "en": "Atmosphere and alarm limits"
+        },
+        {
+          "tr": "Enerji ve akış izolasyonu",
+          "en": "Energy and flow isolation"
+        },
+        {
+          "tr": "Eğitimli gözcü",
+          "en": "Trained attendant"
+        },
+        {
+          "tr": "Havalandırma",
+          "en": "Ventilation"
+        },
+        {
+          "tr": "İletişim testi",
+          "en": "Communication test"
+        },
+        {
+          "tr": "Uygulanabilir kurtarma",
+          "en": "Workable rescue"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-DO-001",
+      "file": "dropped-objects-safety.ts",
+      "title": {
+        "tr": "Düşen Cisim Kritik Güvenlik Kuralları",
+        "en": "Dropped Objects Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1926.501(c) / 1926.502(j)",
+        "jurisdiction": "US-construction",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.502",
+        "verification": "not-verified-in-session"
+      },
+      "preJob": [
+        {
+          "tr": "Gevşek aletler",
+          "en": "Loose tools"
+        },
+        {
+          "tr": "Uygun alet bağlantısı",
+          "en": "Suitable tool tether"
+        },
+        {
+          "tr": "Malzeme sabitleme",
+          "en": "Secured materials"
+        },
+        {
+          "tr": "Tekmelik ve ağlar",
+          "en": "Toe boards and screens"
+        },
+        {
+          "tr": "Alt alan izolasyonu",
+          "en": "Drop-zone isolation"
+        },
+        {
+          "tr": "Ekipler arası iletişim",
+          "en": "Team communication"
+        },
+        {
+          "tr": "İş sonu kontrolü",
+          "en": "Final area check"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-EL-001",
+      "file": "electrical.ts",
+      "title": {
+        "tr": "Elektrik Kritik Güvenlik Kuralları",
+        "en": "Electrical Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1910.333 / 1910.334",
+        "jurisdiction": "US-general-industry",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333",
+        "verification": "not-verified-in-session"
+      },
+      "preJob": [
+        {
+          "tr": "İzin ve risk analizi",
+          "en": "Permit and risk assessment"
+        },
+        {
+          "tr": "Tüm enerji kaynakları",
+          "en": "All energy sources"
+        },
+        {
+          "tr": "LOTO",
+          "en": "LOTO"
+        },
+        {
+          "tr": "Gerilimsizlik testi",
+          "en": "Absence-of-voltage test"
+        },
+        {
+          "tr": "Yetkin personel",
+          "en": "Qualified person"
+        },
+        {
+          "tr": "Gerekli RCD koruması",
+          "en": "Required ground-fault protection"
+        },
+        {
+          "tr": "Bariyer ve uygun KKD",
+          "en": "Barriers and suitable PPE"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-EXC-001",
+      "file": "excavation-safety.ts",
+      "title": {
+        "tr": "Kazı Kritik Güvenlik Kuralları",
+        "en": "Excavation Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1926.651(c), (j) / .652(a)",
+        "jurisdiction": "US-construction",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.651",
+        "verification": "not-verified-in-session",
+        "clauses": [
+          "1926.651(c)(2)",
+          "1926.651(j)(2)",
+          "1926.652(a)(1)"
+        ]
+      },
+      "preJob": [
+        {
+          "tr": "Yeraltı hatları",
+          "en": "Underground services"
+        },
+        {
+          "tr": "Kazı izni",
+          "en": "Excavation permit"
+        },
+        {
+          "tr": "Zemin ve koruma",
+          "en": "Soil and protection"
+        },
+        {
+          "tr": "Kenar yükleri",
+          "en": "Edge loads"
+        },
+        {
+          "tr": "Güvenli erişim",
+          "en": "Safe access"
+        },
+        {
+          "tr": "Su ve atmosfer",
+          "en": "Water and atmosphere"
+        },
+        {
+          "tr": "Yetkin kişi kontrolü",
+          "en": "Competent inspection"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-FIRE-001",
+      "file": "fire.ts",
+      "title": {
+        "tr": "Yangın Kritik Güvenlik Kuralları",
+        "en": "Fire Safety Critical Rules"
+      },
+      "reference": {
+        "label": "OSHA 1910.157(d), (e), (g)",
+        "jurisdiction": "US-general-industry",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.157",
+        "verification": "not-verified-in-session",
+        "clauses": [
+          "1910.157(d)(2), (d)(5)",
+          "1910.157(e)(2)-(3)",
+          "1910.157(g)(1)-(4)"
+        ]
+      },
+      "preJob": [
+        {
+          "tr": "Alarm ve iletişim",
+          "en": "Alarm and communication"
+        },
+        {
+          "tr": "Acil çıkışlar",
+          "en": "Emergency exits"
+        },
+        {
+          "tr": "Toplanma noktası",
+          "en": "Assembly point"
+        },
+        {
+          "tr": "Söndürücü erişimi",
+          "en": "Extinguisher access"
+        },
+        {
+          "tr": "Maddeye uygun söndürücü",
+          "en": "Fuel-appropriate extinguisher"
+        },
+        {
+          "tr": "Eğitim ve yetki",
+          "en": "Training and authorization"
+        },
+        {
+          "tr": "Yakıt ve tutuşturma",
+          "en": "Fuel and ignition"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-FLT-001",
+      "file": "forklift-safety.ts",
+      "title": {
+        "tr": "Forklift Kritik Güvenlik Kuralları",
+        "en": "Forklift Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1910.178",
+        "jurisdiction": "US-general-industry",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.178",
+        "verification": "not-verified-in-session"
+      },
+      "preJob": [
+        {
+          "tr": "Yetkili operatör",
+          "en": "Authorized operator"
+        },
+        {
+          "tr": "Vardiya kontrolü",
+          "en": "Pre-shift inspection"
+        },
+        {
+          "tr": "Kapasite plakası",
+          "en": "Capacity plate"
+        },
+        {
+          "tr": "Yük merkezi",
+          "en": "Load centre"
+        },
+        {
+          "tr": "Yaya ayrımı",
+          "en": "Pedestrian separation"
+        },
+        {
+          "tr": "Görüş ve güzergâh",
+          "en": "Visibility and route"
+        },
+        {
+          "tr": "Fren ve emniyet kemeri",
+          "en": "Brakes and seat belt"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-HW-001",
+      "file": "hot-work.ts",
+      "title": {
+        "tr": "Sıcak Çalışma Kritik Güvenlik Kuralları",
+        "en": "Hot Work Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1910.252(a)(2)(iii)(B)",
+        "jurisdiction": "US-general-industry",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.252",
+        "verification": "not-verified-in-session",
+        "clauses": [
+          "1910.252(a)(2)(iii)(A)-(B)"
+        ]
+      },
+      "preJob": [
+        {
+          "tr": "Sıcak çalışma izni",
+          "en": "Hot work permit"
+        },
+        {
+          "tr": "Gerekli gaz ölçümü",
+          "en": "Required gas testing"
+        },
+        {
+          "tr": "Yanıcı kontrolü",
+          "en": "Combustible control"
+        },
+        {
+          "tr": "Yangın gözcüsü",
+          "en": "Fire watch"
+        },
+        {
+          "tr": "Uygun söndürücü",
+          "en": "Suitable extinguisher"
+        },
+        {
+          "tr": "Kıvılcım bariyeri",
+          "en": "Spark barriers"
+        },
+        {
+          "tr": "İş sonrası gözetim",
+          "en": "Post-work watch"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-HSK-001",
+      "file": "housekeeping-safety.ts",
+      "title": {
+        "tr": "Saha Düzeni ve Temizlikte Kritik Güvenlik Kuralları",
+        "en": "Housekeeping Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1910.22 / 1926.25",
+        "jurisdiction": "US-general-industry-and-construction",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.22",
+        "verification": "not-verified-in-session"
+      },
+      "preJob": [
+        {
+          "tr": "Açık geçişler",
+          "en": "Clear walkways"
+        },
+        {
+          "tr": "Acil ekipman erişimi",
+          "en": "Emergency equipment access"
+        },
+        {
+          "tr": "Dökülme türü",
+          "en": "Spill identification"
+        },
+        {
+          "tr": "Atık ayrımı",
+          "en": "Waste segregation"
+        },
+        {
+          "tr": "Kablo ve hortumlar",
+          "en": "Cables and hoses"
+        },
+        {
+          "tr": "İstif stabilitesi",
+          "en": "Stack stability"
+        },
+        {
+          "tr": "Temizlik ekipmanı",
+          "en": "Cleaning equipment"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-LAD-001",
+      "file": "ladder-safety.ts",
+      "title": {
+        "tr": "Merdiven Kritik Güvenlik Kuralları",
+        "en": "Ladder Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1926.1053(b)(1), (b)(5)",
+        "jurisdiction": "US-construction",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1053",
+        "verification": "not-verified-in-session",
+        "clauses": [
+          "1926.1053(b)(1)",
+          "1926.1053(b)(5)(i)-(ii)"
+        ]
+      },
+      "preJob": [
+        {
+          "tr": "Merdiven tipi",
+          "en": "Ladder type"
+        },
+        {
+          "tr": "Üretici kapasitesi",
+          "en": "Manufacturer rating"
+        },
+        {
+          "tr": "Basamak ve ayaklar",
+          "en": "Rungs and feet"
+        },
+        {
+          "tr": "Zemin ve açı",
+          "en": "Ground and angle"
+        },
+        {
+          "tr": "Kaymaya karşı sabitleme",
+          "en": "Secure against movement"
+        },
+        {
+          "tr": "Güvenli erişim",
+          "en": "Safe access"
+        },
+        {
+          "tr": "Elektrik ve trafik",
+          "en": "Electricity and traffic"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-LOTO-001",
+      "file": "loto.ts",
+      "title": {
+        "tr": "LOTO Kritik Güvenlik Kuralları",
+        "en": "LOTO Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1910.147(c)(6)",
+        "jurisdiction": "US-general-industry",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147",
+        "verification": "not-verified-in-session",
+        "clauses": [
+          "1910.147(c)(6)(i)-(ii)"
+        ]
+      },
+      "preJob": [
+        {
+          "tr": "Enerji prosedürü",
+          "en": "Energy procedure"
+        },
+        {
+          "tr": "Tüm enerji kaynakları",
+          "en": "All energy sources"
+        },
+        {
+          "tr": "Etkilenen çalışanlar",
+          "en": "Affected employees"
+        },
+        {
+          "tr": "Kişisel kilitler",
+          "en": "Personal locks"
+        },
+        {
+          "tr": "Depolanmış enerji",
+          "en": "Stored energy"
+        },
+        {
+          "tr": "İzolasyon doğrulaması",
+          "en": "Isolation verification"
+        },
+        {
+          "tr": "Güvenli devreye alma",
+          "en": "Safe restoration"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-MH-001",
+      "file": "manual-handling-safety.ts",
+      "title": {
+        "tr": "Elle Taşıma Kritik Güvenlik Kuralları",
+        "en": "Manual Handling Critical Safety Rules"
+      },
+      "reference": {
+        "label": "HSE — Manual handling",
+        "jurisdiction": "GB-guidance",
+        "url": "https://www.hse.gov.uk/msd/manual-handling/index.htm",
+        "verification": "not-verified-in-session"
+      },
+      "preJob": [
+        {
+          "tr": "Yük ağırlığı ve şekli",
+          "en": "Load weight and shape"
+        },
+        {
+          "tr": "Kavrama ve ağırlık merkezi",
+          "en": "Grip and centre of gravity"
+        },
+        {
+          "tr": "Taşıma yolu",
+          "en": "Travel route"
+        },
+        {
+          "tr": "Bırakma noktası",
+          "en": "Set-down point"
+        },
+        {
+          "tr": "Mekanik yardım",
+          "en": "Mechanical assistance"
+        },
+        {
+          "tr": "Ekip iletişimi",
+          "en": "Team communication"
+        },
+        {
+          "tr": "Kişisel yeterlilik",
+          "en": "Individual capability"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-PPE-001",
+      "file": "ppe.ts",
+      "title": {
+        "tr": "Zorunlu KKD Kritik Güvenlik Kuralları",
+        "en": "Mandatory PPE Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1910.132",
+        "jurisdiction": "US-general-industry",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.132",
+        "verification": "not-verified-in-session"
+      },
+      "preJob": [
+        {
+          "tr": "Risk değerlendirmesi",
+          "en": "Risk assessment"
+        },
+        {
+          "tr": "Alan işaretleri",
+          "en": "Area signs"
+        },
+        {
+          "tr": "Doğru KKD seçimi",
+          "en": "Correct PPE selection"
+        },
+        {
+          "tr": "Beden ve uyumluluk",
+          "en": "Fit and compatibility"
+        },
+        {
+          "tr": "Kullanım öncesi kontrol",
+          "en": "Pre-use inspection"
+        },
+        {
+          "tr": "Eğitim ve talimat",
+          "en": "Training and instructions"
+        },
+        {
+          "tr": "Temizlik ve saklama",
+          "en": "Cleaning and storage"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-SCF-001",
+      "file": "scaffold.ts",
+      "title": {
+        "tr": "İskele Kritik Güvenlik Kuralları",
+        "en": "Scaffold Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1926.451(a), (b), (e), (f)",
+        "jurisdiction": "US-construction",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.451",
+        "verification": "not-verified-in-session",
+        "clauses": [
+          "1926.451(a)(1)",
+          "1926.451(b)(1)",
+          "1926.451(e)(1)",
+          "1926.451(f)(3)"
+        ]
+      },
+      "preJob": [
+        {
+          "tr": "Kontrol durumu",
+          "en": "Inspection status"
+        },
+        {
+          "tr": "Yetkin kişi",
+          "en": "Competent person"
+        },
+        {
+          "tr": "Temel ve altlık",
+          "en": "Foundation and base"
+        },
+        {
+          "tr": "Bağlantı ve çaprazlar",
+          "en": "Ties and braces"
+        },
+        {
+          "tr": "Tam platform",
+          "en": "Full platform"
+        },
+        {
+          "tr": "Güvenli erişim",
+          "en": "Safe access"
+        },
+        {
+          "tr": "Alt alan izolasyonu",
+          "en": "Area below isolated"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    },
+    {
+      "code": "SRN-WAH-001",
+      "file": "working-at-height.ts",
+      "title": {
+        "tr": "Yüksekte Çalışma Kritik Güvenlik Kuralları",
+        "en": "Working at Height Critical Safety Rules"
+      },
+      "reference": {
+        "label": "OSHA 1926.501(b)(1) / .502(d)(15)",
+        "jurisdiction": "US-construction",
+        "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.502",
+        "verification": "not-verified-in-session",
+        "clauses": [
+          "1926.501(b)(1)",
+          "1926.502(d)(15)(i)-(ii)"
+        ]
+      },
+      "preJob": [
+        {
+          "tr": "İş izni",
+          "en": "Work permit"
+        },
+        {
+          "tr": "Risk değerlendirmesi",
+          "en": "Risk assessment"
+        },
+        {
+          "tr": "Toplu koruma",
+          "en": "Collective protection"
+        },
+        {
+          "tr": "Onaylı ankraj",
+          "en": "Approved anchorage"
+        },
+        {
+          "tr": "Düşüş açıklığı",
+          "en": "Fall clearance"
+        },
+        {
+          "tr": "Kurtarma planı",
+          "en": "Rescue plan"
+        },
+        {
+          "tr": "Hava ve alt alan",
+          "en": "Weather and drop zone"
+        }
+      ],
+      "reviewStatus": "site-validation-required"
+    }
+  ],
+  "notes": "Source targets not independently verified; no fabricated expert review. Protected modules compared against baseline SHA256. Existing explicit-any lint errors not hidden."
+}

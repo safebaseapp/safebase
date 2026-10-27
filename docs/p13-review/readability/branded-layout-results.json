@@ -1,0 +1,245 @@
+{
+  "results": [
+    {
+      "locale": "tr",
+      "file": "chemical-safety.ts",
+      "code": "SRN-CHM-001",
+      "clipped": [],
+      "spareCssPx": 557.27001953125,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "confined-space.ts",
+      "code": "SRN-CS-001",
+      "clipped": [],
+      "spareCssPx": 447.2293701171875,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "dropped-objects-safety.ts",
+      "code": "SRN-DO-001",
+      "clipped": [],
+      "spareCssPx": 535.2906494140625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "electrical.ts",
+      "code": "SRN-EL-001",
+      "clipped": [],
+      "spareCssPx": 433.8319091796875,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "excavation-safety.ts",
+      "code": "SRN-EXC-001",
+      "clipped": [],
+      "spareCssPx": 343.039306640625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "fire.ts",
+      "code": "SRN-FIRE-001",
+      "clipped": [],
+      "spareCssPx": 384.8994140625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "forklift-safety.ts",
+      "code": "SRN-FLT-001",
+      "clipped": [],
+      "spareCssPx": 574.3474731445312,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "hot-work.ts",
+      "code": "SRN-HW-001",
+      "clipped": [],
+      "spareCssPx": 357.931884765625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "housekeeping-safety.ts",
+      "code": "SRN-HSK-001",
+      "clipped": [],
+      "spareCssPx": 556.3643798828125,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "ladder-safety.ts",
+      "code": "SRN-LAD-001",
+      "clipped": [],
+      "spareCssPx": 321.965576171875,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "loto.ts",
+      "code": "SRN-LOTO-001",
+      "clipped": [],
+      "spareCssPx": 436.045654296875,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "manual-handling-safety.ts",
+      "code": "SRN-MH-001",
+      "clipped": [],
+      "spareCssPx": 590.1743774414062,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "ppe.ts",
+      "code": "SRN-PPE-001",
+      "clipped": [],
+      "spareCssPx": 518.2418212890625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "scaffold.ts",
+      "code": "SRN-SCF-001",
+      "clipped": [],
+      "spareCssPx": 310.1636962890625,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "file": "working-at-height.ts",
+      "code": "SRN-WAH-001",
+      "clipped": [],
+      "spareCssPx": 357.931884765625,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "chemical-safety.ts",
+      "code": "SRN-CHM-001",
+      "clipped": [],
+      "spareCssPx": 500.2730712890625,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "confined-space.ts",
+      "code": "SRN-CS-001",
+      "clipped": [],
+      "spareCssPx": 326.7237548828125,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "dropped-objects-safety.ts",
+      "code": "SRN-DO-001",
+      "clipped": [],
+      "spareCssPx": 500.71875,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "electrical.ts",
+      "code": "SRN-EL-001",
+      "clipped": [],
+      "spareCssPx": 333.005615234375,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "excavation-safety.ts",
+      "code": "SRN-EXC-001",
+      "clipped": [],
+      "spareCssPx": 217.14306640625,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "fire.ts",
+      "code": "SRN-FIRE-001",
+      "clipped": [],
+      "spareCssPx": 327.0687255859375,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "forklift-safety.ts",
+      "code": "SRN-FLT-001",
+      "clipped": [],
+      "spareCssPx": 502.74560546875,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "hot-work.ts",
+      "code": "SRN-HW-001",
+      "clipped": [],
+      "spareCssPx": 216.697509765625,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "housekeeping-safety.ts",
+      "code": "SRN-HSK-001",
+      "clipped": [],
+      "spareCssPx": 503.809326171875,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "ladder-safety.ts",
+      "code": "SRN-LAD-001",
+      "clipped": [],
+      "spareCssPx": 270.474365234375,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "loto.ts",
+      "code": "SRN-LOTO-001",
+      "clipped": [],
+      "spareCssPx": 400.4100341796875,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "manual-handling-safety.ts",
+      "code": "SRN-MH-001",
+      "clipped": [],
+      "spareCssPx": 557.7587890625,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "ppe.ts",
+      "code": "SRN-PPE-001",
+      "clipped": [],
+      "spareCssPx": 502.74560546875,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "scaffold.ts",
+      "code": "SRN-SCF-001",
+      "clipped": [],
+      "spareCssPx": 256.544921875,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "file": "working-at-height.ts",
+      "code": "SRN-WAH-001",
+      "clipped": [],
+      "spareCssPx": 269.41064453125,
+      "result": "PASS"
+    }
+  ],
+  "note": "Actual PosterMasterV4 + print CSS, synthetic square logo at maximum 56px header height. All 15×TR/EN; A3 canvas geometry, A4 uniform scale preserves fit. Layout-only fixture, not authenticated hosted PDF E2E."
+}

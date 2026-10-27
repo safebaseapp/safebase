@@ -1,0 +1,103 @@
+{
+  "baseline": "4186391a31ae4fbcb455df56f1b4aa16d9526a8d",
+  "instructionComments": [
+    6416069898,
+    6416174058
+  ],
+  "tests": {
+    "content-results": {
+      "PASS": 36,
+      "FAIL": 0
+    },
+    "browser-results": {
+      "PASS": 181,
+      "FAIL": 0
+    },
+    "after-fonts": {
+      "PASS": 60,
+      "FAIL": 0
+    },
+    "mandatory-content-results": {
+      "PASS": 32,
+      "FAIL": 0
+    },
+    "pdf-results": {
+      "PASS": 60,
+      "FAIL": 0
+    },
+    "contrast-results": {
+      "PASS": 30,
+      "FAIL": 0
+    },
+    "actions-results": {
+      "PASS": 13,
+      "FAIL": 0
+    },
+    "branded-layout-results": {
+      "PASS": 30,
+      "FAIL": 0
+    },
+    "branded-fonts": {
+      "PASS": 60,
+      "FAIL": 0
+    },
+    "branded-pdf-results": {
+      "PASS": 60,
+      "FAIL": 0
+    },
+    "color-results": {
+      "PASS": 60,
+      "FAIL": 0
+    }
+  },
+  "typescript": "PASS",
+  "normalBuild": "PASS including prebuild PDF/download QA",
+  "ESLint": "0 errors, 2 existing img warnings",
+  "svgGeometriesPreservedFromBaseline": 120,
+  "protectedHashesIdentical": 80,
+  "sourceSHA256": {
+    "app/components/posters-v4/PpeRuleIcon.tsx": "3628c10b986ef4ff2eb9537d6ba0dbf11f9cf98911c172df279766ac4bfa19eb",
+    "app/components/posters-v4/TaskIcon.tsx": "094d6b0d00d52d473d8280497e4c736d9f49d6eac51774da5b9ede23fc38f12e",
+    "app/components/posters-v4/HotWorkIcon.tsx": "5d7b5049aae7d23a8f3aecbca9fce3ed67f58672bb7023b922206f64c62aeadc",
+    "app/components/posters-v4/PosterFormatToolbar.tsx": "96340d7afb17ea9a8762d737feedf174f65f31097856e1851b832a7745f19be1",
+    "app/components/posters-v4/PosterMasterV4.tsx": "20a6452f70a99d66422fcbc82f935ff8bae45268437ac74e266b71381f100ed4",
+    "app/components/posters-v4/RuleCard.tsx": "aafffd6d6025acd43349000d76c49cd8a19e645ec794e903dbfa6ef60da17eae",
+    "app/components/posters-v4/ConfinedSpaceIcon.tsx": "ddb1a67f8048a395681184aea35d4b26cec5df9c6f901e98798d136f7fbd1bc6",
+    "app/components/posters-v4/PpeSymbol.tsx": "4fcb8a53a99c4013bcbd02d9e97ffd839819824a54137c92472cdbe374899626",
+    "app/components/posters-v4/BottomPanels.tsx": "7b50829800048a760268dc576690c63ff4b82fe96acbc817fbe35c08c27c182b",
+    "app/components/posters-v4/LotoIcon.tsx": "eca96f52da36c50a981ec4e9e48c35d56a4514066a6d2bc5e2d011ff4dda742b",
+    "app/components/posters-v4/FireIcon.tsx": "2170bb6799f4c85b968352559185986fed1f921b1c53ad1bd29dc044a70042e0",
+    "app/components/posters-v4/ElectricalIcon.tsx": "a5730d16e5cc965683a5923f9ec3b07e3282d29ac5a833c7915256356a166df5",
+    "app/components/posters-v4/PosterLayout.module.css": "58ea725c735ccc64d0d7056a64adfc9ecc8ce47a1b11b0d367196ad1315840b6",
+    "app/components/posters-v4/Header.tsx": "409aec0f22c7648f0630663fb2c3bcf4f2a42dfffe01ecd6919a77a099d6b048",
+    "app/components/posters-v4/Footer.tsx": "ca83e83d3442d20c188e0ba4a311a5056e2c009dc6b7ec8b63e28d86c68cfdfc",
+    "app/components/posters-v4/PosterBrandingCanvas.tsx": "6d7991c6d042e500d5c44c518e1c047c609ed3440319b66ab1c686627b6af295",
+    "app/components/posters-v4/PosterIcon.tsx": "c4e9527769b0cd227b90f376f8bf265440c45fe49e6ebaf7d3c8ff62215b5f82",
+    "app/components/posters-v4/PreJobStrip.tsx": "9751294f384ee5de9d158c2e59ac2332e0d959971e2cc5b6fa7acc4f0c518b7b",
+    "app/lib/posters-v2/ladder-safety.ts": "3d7eb9f5feff057cae1a1b589664d041f5ed76cd753a81ae74feecc50805aeda",
+    "app/lib/posters-v2/types.ts": "d8f36ddc63d91eca72bc9a05203bc06f5fc3c9f37e84fe9f2b861e10f5a0cd04",
+    "app/lib/posters-v2/chemical-safety.ts": "0fed4688751b6c88445c9c07a1df5decc66b5f8762f19e5a68b2a0c959816453",
+    "app/lib/posters-v2/scaffold.ts": "6451176672a527df1be79d97a711657ae93df5516d5bfc2d3982e2a0b6789912",
+    "app/lib/posters-v2/hot-work.ts": "fae1347f27da38d5b8b3042846e6ed8430d93738df54be42e0211deab6b0a30d",
+    "app/lib/posters-v2/working-at-height.ts": "7f5f5575569ca2297df09d8123dc87095cae836880621abf0b3b1172afcb5d08",
+    "app/lib/posters-v2/task-icons.ts": "51198662ecf48f7b1b74764d973b2586aeb1437edf1705cc304ef132d2473bcc",
+    "app/lib/posters-v2/forklift-safety.ts": "28448cee16e1ac3d8f2f1cb1a98e7a2e6e10287a8d5edb20d574726db8fc0860",
+    "app/lib/posters-v2/publication.ts": "1dd75575d62909a5acb088dfae38c440ebb680918a4b87b78d11d590a9adab72",
+    "app/lib/posters-v2/housekeeping-safety.ts": "9a80857ec2900228391236d7bd9f2b30c491e1923fc0a2f1505c3db2a8e7abac",
+    "app/lib/posters-v2/excavation-safety.ts": "62816a6abd8f94b76ad72fba6de27d5046aa14527783254233e81fdfcad43538",
+    "app/lib/posters-v2/loto.ts": "7dccf7f9f04de84d405cdcd50c3e67f0f71b04fab2e87b62cd6deb9bb73b0d37",
+    "app/lib/posters-v2/dropped-objects-safety.ts": "5249901a931aa996fe4f817e5e28c57d260ce08c4130929565c5144c7fbd7c21",
+    "app/lib/posters-v2/confined-space.ts": "06d36a832ee695e6d5b546988d4991aa9b02af55c82ff2387034a167a9e210eb",
+    "app/lib/posters-v2/electrical.ts": "ad4dd909372e609d3463716cdd860460f4bcf3efd4a997ac9fd53d37d0b6b136",
+    "app/lib/posters-v2/ppe.ts": "0f1843e8de3e3c2c0c716ce1bb1a32fda3f89c06092d7ad4fdfcbdca7e469c09",
+    "app/lib/posters-v2/fire.ts": "9ebb4c98c77f3950f8bbe53369cd5cd14e9d3600c169cbb845b485f3e84d41ce",
+    "app/lib/posters-v2/technical-profiles.ts": "8ab33a27cca86654b269e66ef3b9c1ac897600f077695e332851cb400e0c8c7d",
+    "app/lib/posters-v2/manual-handling-safety.ts": "e5935874f62f9417b001b84da77261ce593a3bdd6490f80d48e078dc099bd27e"
+  },
+  "sourceVerification": "NOT VERIFIED; no independent expert/current source acceptance",
+  "realPremiumStorage": "NOT TESTED; synthetic fixtures and 60 actual local branded PDFs only",
+  "mobile": "Chromium viewport emulation; real devices NOT TESTED",
+  "physicalPrint": "NOT TESTED",
+  "hostedPreviewE2E": "NOT TESTED; exact-SHA READY reported separately",
+  "decision": "Draft review GO / production NO-GO"
+}

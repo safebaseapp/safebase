@@ -1,0 +1,33 @@
+{
+  "encoder": "ReportLab QRCode, real encoded matrix, no image synthesis",
+  "results": [
+    {
+      "locale": "tr",
+      "target": "https://www.sernem.com/tr/posters",
+      "modules": 29,
+      "quietZoneModules": 4,
+      "errorCorrection": "M",
+      "pngPixels": 888,
+      "png": "app/public/posters/sernem-qr-tr.png",
+      "svg": "app/public/posters/sernem-qr-tr.svg",
+      "decoded": [
+        "https://www.sernem.com/tr/posters"
+      ],
+      "sha256": "10a6152800ebf56e65a6362673f46542a31518bdf32480b2ae9c145127f1e231"
+    },
+    {
+      "locale": "en",
+      "target": "https://www.sernem.com/en/posters",
+      "modules": 29,
+      "quietZoneModules": 4,
+      "errorCorrection": "M",
+      "pngPixels": 888,
+      "png": "app/public/posters/sernem-qr-en.png",
+      "svg": "app/public/posters/sernem-qr-en.svg",
+      "decoded": [
+        "https://www.sernem.com/en/posters"
+      ],
+      "sha256": "aa4138e3c37c41933ee6c0a1256a54b58f0d6670807f6d821abe4cea5bf3d59f"
+    }
+  ]
+}

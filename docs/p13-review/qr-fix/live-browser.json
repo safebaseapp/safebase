@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "url": "https://www.sernem.com/tr/posters",
+      "chain": [],
+      "result": "BLOCKED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://www.sernem.com/tr/posters\nCall log:\n\u001b[2m  - navigating to \"https://www.sernem.com/tr/posters\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "url": "https://www.sernem.com/en/posters",
+      "chain": [],
+      "result": "BLOCKED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://www.sernem.com/en/posters\nCall log:\n\u001b[2m  - navigating to \"https://www.sernem.com/en/posters\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "url": "https://sernem.com/tr/posters",
+      "chain": [],
+      "result": "BLOCKED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://sernem.com/tr/posters\nCall log:\n\u001b[2m  - navigating to \"https://sernem.com/tr/posters\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "url": "https://sernem.com/en/posters",
+      "chain": [],
+      "result": "BLOCKED",
+      "error": "Error: page.goto: net::ERR_TUNNEL_CONNECTION_FAILED at https://sernem.com/en/posters\nCall log:\n\u001b[2m  - navigating to \"https://sernem.com/en/posters\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    }
+  ],
+  "note": "Public read-only browser. Network failure is not proof of a product redirect defect."
+}

@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const scaffoldPoster: PosterDefinition = {
   code: "SRN-SCF-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "İskele Kritik Güvenlik Kuralları",
@@ -33,8 +33,9 @@ export const scaffoldPoster: PosterDefinition = {
           "Never use an uninspected scaffold.",
         ],
       },
-      icon: "training",
+      icon: "scf-inspect",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -54,8 +55,9 @@ export const scaffoldPoster: PosterDefinition = {
           "Do not access a scaffold marked out of service.",
         ],
       },
-      icon: "equipment",
+      icon: "scf-status",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -75,8 +77,9 @@ export const scaffoldPoster: PosterDefinition = {
           "Stop work if settlement, leaning or movement is found.",
         ],
       },
-      icon: "anchor",
+      icon: "scf-foundation",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -86,18 +89,19 @@ export const scaffoldPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Çalışma platformunun mümkün olduğunca tam döşeli olmasını sağla.",
-          "Gevşek, çatlak veya hasarlı platform kullanma.",
-          "Tehlikeli açıklıkları kapat veya kullanımı durdur.",
+          "Çalışma platformunu tam döşe; OSHA genel bitişik platform boşluğu sınırı 1 in (2,5 cm).",
+          "İstisnaları 1926.451(b)(1) ve uygun tasarımla doğrula; daha geniş açıklığı kendiliğinden kabul etme.",
+          "Gevşek, çatlak veya hasarlı platform kullanma; tehlikeli boşlukta kullanımı durdur.",
         ],
         en: [
-          "Ensure working levels are fully planked or decked.",
-          "Do not use loose, cracked or damaged platform units.",
-          "Close hazardous gaps or stop scaffold use.",
+          "Fully plank working platforms; the OSHA general limit for adjacent platform gaps is 1 in (2.5 cm).",
+          "Verify exceptions against 1926.451(b)(1) and the appropriate design; do not assume wider gaps are allowed.",
+          "Do not use loose, cracked or damaged units; stop use where gaps are hazardous.",
         ],
       },
-      icon: "guardrail",
+      icon: "scf-platform",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "05",
@@ -118,7 +122,8 @@ export const scaffoldPoster: PosterDefinition = {
         ],
       },
       icon: "guardrail",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "İskele tipinin düşüş koruma şartına göre", "en": "As required by the scaffold type’s fall-protection rules"}},
     },
     {
       number: "06",
@@ -140,6 +145,7 @@ export const scaffoldPoster: PosterDefinition = {
       },
       icon: "ladder",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -149,18 +155,19 @@ export const scaffoldPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "İzin verilen yük kapasitesini aşma.",
-          "Malzemeleri dengeli ve güvenli şekilde yerleştir.",
-          "Geçiş yollarını ve erişim noktalarını açık tut.",
+          "OSHA genel tasarım şartı: iskele/bileşen kendi ağırlığına ve en az 4× azami amaçlanan yüke dayanır.",
+          "Özel tipler için ayrı kuralları doğrula; 4× değeri kullanım yükünü artırma izni değildir.",
+          "Onaylı kullanım kapasitesini aşma; malzemeyi dengeli sabitle ve geçişleri açık tut.",
         ],
         en: [
-          "Never exceed the permitted scaffold load.",
-          "Distribute and secure materials safely.",
-          "Keep walkways and access points clear.",
+          "OSHA general design rule: scaffolds/components support their own weight plus at least 4× maximum intended load.",
+          "Check separate rules for special types; 4× is not permission to increase the working load.",
+          "Do not exceed approved working capacity; secure materials evenly and keep access clear.",
         ],
       },
-      icon: "equipment",
-      tone: "warning",
+      icon: "scf-load",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -180,22 +187,23 @@ export const scaffoldPoster: PosterDefinition = {
           "Barricade the area below and prevent unauthorized entry.",
         ],
       },
-      icon: "fall",
-      tone: "information",
+      icon: "do-overhead",
+      tone: "mandatory",
+      application: {"kind": "conditional-control", "when": {"tr": "Düşen cisim tehlikesi varsa", "en": "There is a falling-object hazard"}},
     },
   ],
 
   never: {
     tr: [
       "Geçerli kontrol durumu veya kullanım onayı yoksa",
-      "Eksik platform, eksik korkuluk veya güvensiz erişim varsa işi hemen durdur",
+      "Platform veya gerekli düşüş koruması eksikse ya da erişim güvensizse işi hemen durdur",
       "İskele eğilmiş, çökmüş veya stabil değilse",
       "Hasarlı bileşen veya gevşek bağlantı varsa",
       "Aşırı yükleme veya güvensiz malzeme istifi varsa",
     ],
     en: [
       "There is no valid inspection status or approval for use",
-      "Stop work immediately if platforms or guardrails are incomplete, or access is unsafe",
+      "Stop work immediately if platforms or required fall protection are incomplete, or access is unsafe",
       "The scaffold is leaning, settled or unstable",
       "Components are damaged or connections are loose",
       "The scaffold is overloaded or materials are stored unsafely",

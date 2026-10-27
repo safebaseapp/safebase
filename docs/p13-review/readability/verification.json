@@ -1,0 +1,81 @@
+{
+  "baseline": "22ea88612ed920b72d9122bec13cbb3ead53c8c9",
+  "revisionInstruction": "https://github.com/safebaseapp/safebase/pull/126#issuecomment-6414234906",
+  "testResults": {
+    "content-results": {
+      "count": 36,
+      "PASS": 36
+    },
+    "browser-results": {
+      "count": 181,
+      "PASS": 181
+    },
+    "actions-results": {
+      "count": 13,
+      "PASS": 13
+    },
+    "branded-layout-results": {
+      "count": 30,
+      "PASS": 30
+    },
+    "after-fonts": {
+      "count": 60,
+      "PASS": 60
+    },
+    "pdf-results": {
+      "count": 60,
+      "PASS": 60
+    },
+    "mandatory-content-results": {
+      "count": 32,
+      "PASS": 32
+    }
+  },
+  "typescript": "PASS: npx tsc --noEmit and production build",
+  "normalBuild": "PASS: npm run build including both existing prebuild PDF/download QA scripts",
+  "ESLint": "PASS: changed TS/TSX; 0 errors, 2 existing image warnings; prior baseline 48 errors",
+  "sourceSHA256": {
+    "app/components/posters-v4/PpeRuleIcon.tsx": "3628c10b986ef4ff2eb9537d6ba0dbf11f9cf98911c172df279766ac4bfa19eb",
+    "app/components/posters-v4/TaskIcon.tsx": "094d6b0d00d52d473d8280497e4c736d9f49d6eac51774da5b9ede23fc38f12e",
+    "app/components/posters-v4/HotWorkIcon.tsx": "5d7b5049aae7d23a8f3aecbca9fce3ed67f58672bb7023b922206f64c62aeadc",
+    "app/components/posters-v4/PosterFormatToolbar.tsx": "96340d7afb17ea9a8762d737feedf174f65f31097856e1851b832a7745f19be1",
+    "app/components/posters-v4/PosterMasterV4.tsx": "20a6452f70a99d66422fcbc82f935ff8bae45268437ac74e266b71381f100ed4",
+    "app/components/posters-v4/RuleCard.tsx": "ec657bc2b146ddb6d29d13850d6a5df3e3a37bb323cef392b492d95763bd1f91",
+    "app/components/posters-v4/ConfinedSpaceIcon.tsx": "ddb1a67f8048a395681184aea35d4b26cec5df9c6f901e98798d136f7fbd1bc6",
+    "app/components/posters-v4/PpeSymbol.tsx": "4fcb8a53a99c4013bcbd02d9e97ffd839819824a54137c92472cdbe374899626",
+    "app/components/posters-v4/BottomPanels.tsx": "aec8a96295e95ec5149a0cc2ce970102f7d6de3cd54c3c4f8e3e8b3781c9f0a2",
+    "app/components/posters-v4/LotoIcon.tsx": "eca96f52da36c50a981ec4e9e48c35d56a4514066a6d2bc5e2d011ff4dda742b",
+    "app/components/posters-v4/FireIcon.tsx": "2170bb6799f4c85b968352559185986fed1f921b1c53ad1bd29dc044a70042e0",
+    "app/components/posters-v4/ElectricalIcon.tsx": "a5730d16e5cc965683a5923f9ec3b07e3282d29ac5a833c7915256356a166df5",
+    "app/components/posters-v4/PosterLayout.module.css": "985f5d473a69bd72678fa25efb98f8e890d8bb0ab5ce498fd37478171255c3a6",
+    "app/components/posters-v4/Header.tsx": "7f00a9d43a8d5899fee3aebef70a1a55258883339ae34a2fb34bc98c9ea70f7a",
+    "app/components/posters-v4/Footer.tsx": "ca83e83d3442d20c188e0ba4a311a5056e2c009dc6b7ec8b63e28d86c68cfdfc",
+    "app/components/posters-v4/PosterBrandingCanvas.tsx": "6d7991c6d042e500d5c44c518e1c047c609ed3440319b66ab1c686627b6af295",
+    "app/components/posters-v4/PosterIcon.tsx": "c4e9527769b0cd227b90f376f8bf265440c45fe49e6ebaf7d3c8ff62215b5f82",
+    "app/components/posters-v4/PreJobStrip.tsx": "9751294f384ee5de9d158c2e59ac2332e0d959971e2cc5b6fa7acc4f0c518b7b",
+    "app/lib/posters-v2/ladder-safety.ts": "505bd84e0d74edccf443a34d89288029cddf676702582bb016f5f95be0f38820",
+    "app/lib/posters-v2/types.ts": "d8f36ddc63d91eca72bc9a05203bc06f5fc3c9f37e84fe9f2b861e10f5a0cd04",
+    "app/lib/posters-v2/chemical-safety.ts": "ff1c95227fb1cc61d9d838038122b05dd378f7f5181250e2ad42aadba51a0518",
+    "app/lib/posters-v2/scaffold.ts": "33bb2a0ad7f339d8a63963510b57caab0f94eb6788bf66f2a01818081f5a24c0",
+    "app/lib/posters-v2/hot-work.ts": "75d8a992604419a4c7ff66005abe07e449db00ff1ba4b5d83840f3b650dd84ec",
+    "app/lib/posters-v2/working-at-height.ts": "7f5f5575569ca2297df09d8123dc87095cae836880621abf0b3b1172afcb5d08",
+    "app/lib/posters-v2/task-icons.ts": "51198662ecf48f7b1b74764d973b2586aeb1437edf1705cc304ef132d2473bcc",
+    "app/lib/posters-v2/forklift-safety.ts": "f80e81dfa4e9de09bec3f4370f121b32a8f95f4e1dd79b2d86879f71b593f8ca",
+    "app/lib/posters-v2/housekeeping-safety.ts": "1e4c8cd82a2592edbedab629a43666387fd796bcb30b213bcf9346cbf35b7678",
+    "app/lib/posters-v2/excavation-safety.ts": "8495a881751ddfd988266de32f8ad22b3320a63573222b32a8161411e3ff67ff",
+    "app/lib/posters-v2/loto.ts": "aa8d8373f86abce5d58b0a6a2238efead58d75b6a6ecc82fbca84aff72d0fd50",
+    "app/lib/posters-v2/dropped-objects-safety.ts": "c1446568977d1edd656fafd7ec3594aa6895a8e766b91614590958525fab1b1f",
+    "app/lib/posters-v2/confined-space.ts": "9eeb7a043d50c229a0348788881b302d27de3e58e8990c8c85308e51417268f4",
+    "app/lib/posters-v2/electrical.ts": "4b4534c864ce201505ca413ecca34a50f93c238b150379825badf1fdfdf05b07",
+    "app/lib/posters-v2/ppe.ts": "0908d764d49367f8a5a5cfec6090a4bfe6f0fb855529a17c972460f32f29a457",
+    "app/lib/posters-v2/fire.ts": "f74287b8880f1d6da822d26ba0c80cccda3bdcd8e84910057e4506adc3cc8792",
+    "app/lib/posters-v2/technical-profiles.ts": "6dbb80e2d2440616886a5f439f11e0bfe9dfd91bee648d66670dccc787b091e5",
+    "app/lib/posters-v2/manual-handling-safety.ts": "5cc46e2a11a08000bbd170e0af628d8eb07f9c159fa6a2cc43d72aa4d151ac09"
+  },
+  "sourceVerification": "NOT VERIFIED: previous official-source network 403 remains open",
+  "physicalPrint": "NOT TESTED",
+  "realPremiumStorage": "NOT TESTED; synthetic fixtures only",
+  "hostedPreviewE2E": "NOT TESTED; READY status reported separately on exact commit",
+  "productionDecision": "NO-GO until technical/legal applicability acceptance and user approval",
+  "protectedModules": 80
+}

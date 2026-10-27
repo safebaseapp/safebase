@@ -1,0 +1,365 @@
+{
+  "results": [
+    {
+      "file": "en-chemical-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.713730659820995,
+      "afterSaturatedPercent": 10.776228648106198,
+      "result": "PASS"
+    },
+    {
+      "file": "en-chemical-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.7117294514417465,
+      "afterSaturatedPercent": 10.719870826381777,
+      "result": "PASS"
+    },
+    {
+      "file": "en-confined-space-entry-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.9659013447911073,
+      "afterSaturatedPercent": 10.911701992974555,
+      "result": "PASS"
+    },
+    {
+      "file": "en-confined-space-entry-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.9540015896088274,
+      "afterSaturatedPercent": 10.942666676213866,
+      "result": "PASS"
+    },
+    {
+      "file": "en-dropped-objects-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.845466685645333,
+      "afterSaturatedPercent": 10.787780361514985,
+      "result": "PASS"
+    },
+    {
+      "file": "en-dropped-objects-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.8204243253112984,
+      "afterSaturatedPercent": 10.666669053466709,
+      "result": "PASS"
+    },
+    {
+      "file": "en-electrical-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.7795897317785132,
+      "afterSaturatedPercent": 10.776425349108514,
+      "result": "PASS"
+    },
+    {
+      "file": "en-electrical-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.796114766893174,
+      "afterSaturatedPercent": 10.766592437185391,
+      "result": "PASS"
+    },
+    {
+      "file": "en-excavation-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.9256134031347703,
+      "afterSaturatedPercent": 10.83874380302433,
+      "result": "PASS"
+    },
+    {
+      "file": "en-excavation-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.8864432144468233,
+      "afterSaturatedPercent": 10.763549267133047,
+      "result": "PASS"
+    },
+    {
+      "file": "en-fire-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.88176696152743,
+      "afterSaturatedPercent": 10.717111055955355,
+      "result": "PASS"
+    },
+    {
+      "file": "en-fire-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.8791038043205854,
+      "afterSaturatedPercent": 10.774110857314707,
+      "result": "PASS"
+    },
+    {
+      "file": "en-forklift-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.4651005928925849,
+      "afterSaturatedPercent": 10.483108390835593,
+      "result": "PASS"
+    },
+    {
+      "file": "en-forklift-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.4479403109045734,
+      "afterSaturatedPercent": 10.460449529919732,
+      "result": "PASS"
+    },
+    {
+      "file": "en-hot-work-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 2.2000113013666787,
+      "afterSaturatedPercent": 11.23681298598559,
+      "result": "PASS"
+    },
+    {
+      "file": "en-hot-work-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 2.14364478687069,
+      "afterSaturatedPercent": 11.21479768289452,
+      "result": "PASS"
+    },
+    {
+      "file": "en-housekeeping-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.4775106379478435,
+      "afterSaturatedPercent": 10.427906936821783,
+      "result": "PASS"
+    },
+    {
+      "file": "en-housekeeping-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.477942387420609,
+      "afterSaturatedPercent": 10.39099364872509,
+      "result": "PASS"
+    },
+    {
+      "file": "en-ladder-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.6707425498601276,
+      "afterSaturatedPercent": 10.719668168985473,
+      "result": "PASS"
+    },
+    {
+      "file": "en-ladder-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.6607474025648554,
+      "afterSaturatedPercent": 10.665236973442076,
+      "result": "PASS"
+    },
+    {
+      "file": "en-loto-golden-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.5093940822324634,
+      "afterSaturatedPercent": 10.515331591396942,
+      "result": "PASS"
+    },
+    {
+      "file": "en-loto-golden-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.416291342360211,
+      "afterSaturatedPercent": 10.528509133090356,
+      "result": "PASS"
+    },
+    {
+      "file": "en-mandatory-ppe-a3.pdf",
+      "beforeSaturatedPercent": 1.5253983910573288,
+      "afterSaturatedPercent": 10.515134890394625,
+      "result": "PASS"
+    },
+    {
+      "file": "en-mandatory-ppe-a4.pdf",
+      "beforeSaturatedPercent": 1.522515878187273,
+      "afterSaturatedPercent": 10.435674545493603,
+      "result": "PASS"
+    },
+    {
+      "file": "en-manual-handling-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.5440134586402168,
+      "afterSaturatedPercent": 10.675732317831626,
+      "result": "PASS"
+    },
+    {
+      "file": "en-manual-handling-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.5437106625518233,
+      "afterSaturatedPercent": 10.630974458852762,
+      "result": "PASS"
+    },
+    {
+      "file": "en-scaffold-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.713533958818678,
+      "afterSaturatedPercent": 10.784668909296519,
+      "result": "PASS"
+    },
+    {
+      "file": "en-scaffold-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.6977666712015869,
+      "afterSaturatedPercent": 10.778120681383676,
+      "result": "PASS"
+    },
+    {
+      "file": "en-working-at-height-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.9203382398908202,
+      "afterSaturatedPercent": 10.930120359555126,
+      "result": "PASS"
+    },
+    {
+      "file": "en-working-at-height-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.9045948287590309,
+      "afterSaturatedPercent": 10.894083361378232,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-chemical-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.6883562305221305,
+      "afterSaturatedPercent": 10.489617405821349,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-chemical-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.6376909141682838,
+      "afterSaturatedPercent": 10.367650744323592,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-confined-space-entry-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.897807034170898,
+      "afterSaturatedPercent": 10.753089457470026,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-confined-space-entry-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.8296612414701734,
+      "afterSaturatedPercent": 10.656895107298595,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-dropped-objects-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.7028405770563657,
+      "afterSaturatedPercent": 10.47347004172207,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-dropped-objects-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.6482167023493273,
+      "afterSaturatedPercent": 10.447381799694968,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-electrical-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.6838142255595427,
+      "afterSaturatedPercent": 10.651126810632725,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-electrical-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.66411279062274,
+      "afterSaturatedPercent": 10.629685586830592,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-excavation-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.8734518737022205,
+      "afterSaturatedPercent": 10.566581143455114,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-excavation-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.7622460743106325,
+      "afterSaturatedPercent": 10.502337870640211,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-fire-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.839512009847925,
+      "afterSaturatedPercent": 10.757935454890738,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-fire-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.796257974895637,
+      "afterSaturatedPercent": 10.676872623642208,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-forklift-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.4614884472136767,
+      "afterSaturatedPercent": 10.501258528776642,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-forklift-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.4548500970234217,
+      "afterSaturatedPercent": 10.505846466700559,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-hot-work-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 2.0473176778409528,
+      "afterSaturatedPercent": 10.698960918014306,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-hot-work-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.8914196925324187,
+      "afterSaturatedPercent": 10.70017972604309,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-housekeeping-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.4126708348205121,
+      "afterSaturatedPercent": 10.432967517154115,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-housekeeping-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.4293948745855918,
+      "afterSaturatedPercent": 10.363282900248466,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-ladder-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.598195643823839,
+      "afterSaturatedPercent": 10.486756300333104,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-ladder-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.5438896725549025,
+      "afterSaturatedPercent": 10.40409718095047,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-loto-golden-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.4421938670773307,
+      "afterSaturatedPercent": 10.589559396907575,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-loto-golden-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.4203727704304117,
+      "afterSaturatedPercent": 10.586007146079321,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-mandatory-ppe-a3.pdf",
+      "beforeSaturatedPercent": 1.5064078033791086,
+      "afterSaturatedPercent": 10.46479731571083,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-mandatory-ppe-a4.pdf",
+      "beforeSaturatedPercent": 1.4548858990240376,
+      "afterSaturatedPercent": 10.377925918500326,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-manual-handling-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.5352334411731676,
+      "afterSaturatedPercent": 10.45764455199022,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-manual-handling-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.5132073580271665,
+      "afterSaturatedPercent": 10.433240009451728,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-scaffold-safety-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.6397174372219812,
+      "afterSaturatedPercent": 10.659066378362605,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-scaffold-safety-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.5594993448233887,
+      "afterSaturatedPercent": 10.633695410899561,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-working-at-height-rules-a3.pdf",
+      "beforeSaturatedPercent": 1.9984821835384865,
+      "afterSaturatedPercent": 10.606726029837038,
+      "result": "PASS"
+    },
+    {
+      "file": "tr-working-at-height-rules-a4.pdf",
+      "beforeSaturatedPercent": 1.8269044874227571,
+      "afterSaturatedPercent": 10.588942910129818,
+      "result": "PASS"
+    }
+  ],
+  "method": "Each actual single-page PDF rasterized at 170dpi. Pillow 8-bit HSV: S>100/255, V>65/255. Baseline exact SHA 4186391a31ae4fbcb455df56f1b4aa16d9526a8d. User files not provided; percentages are not claimed identical. Color percentage alone is not acceptance: contrast, labels, grayscale, geometry and font gates also apply."
+}

@@ -1,0 +1,30 @@
+{
+  "file": "docs/p13-review/acceptance/sample-tr-hot-work-a4.pdf",
+  "sha256": "38116fd0820da888096df94900808bf97f88d6e8f089f53cc18e2fcc62dd7ed5",
+  "pages": 1,
+  "printableCharsIncludingSpaces": 3321,
+  "nonWhitespaceChars": 2878,
+  "under6Chars": 2922,
+  "under6Percent": 87.98554652213188,
+  "weightedMeanPt": 5.366082806383619,
+  "histogram": {
+    "2.927": 107,
+    "3.903": 756,
+    "4.391": 203,
+    "4.879": 511,
+    "5.367": 1326,
+    "5.855": 19,
+    "6.83": 1,
+    "7.318": 212,
+    "7.806": 30,
+    "8.782": 26,
+    "9.27": 17,
+    "9.758": 38,
+    "10.245": 20,
+    "11.709": 5,
+    "14.636": 6,
+    "19.515": 6,
+    "24.394": 38
+  },
+  "method": "All str.isprintable characters including spaces. User file not supplied; 3004 character count is not claimed reproduced. Repository sample count is recorded with SHA256."
+}

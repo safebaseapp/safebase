@@ -2,7 +2,7 @@ import type { PosterDefinition } from "./types";
 
 export const lotoPoster: PosterDefinition = {
   code: "SRN-LOTO-001",
-  revision: "1.0",
+  revision: "2.0",
 
   title: {
     tr: "LOTO Kritik Güvenlik Kuralları",
@@ -35,6 +35,7 @@ export const lotoPoster: PosterDefinition = {
       },
       icon: "equipment",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "02",
@@ -56,6 +57,7 @@ export const lotoPoster: PosterDefinition = {
       },
       icon: "training",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "03",
@@ -77,6 +79,7 @@ export const lotoPoster: PosterDefinition = {
       },
       icon: "equipment",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "04",
@@ -98,6 +101,7 @@ export const lotoPoster: PosterDefinition = {
       },
       icon: "anchor",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "05",
@@ -119,6 +123,7 @@ export const lotoPoster: PosterDefinition = {
       },
       icon: "anchor",
       tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "06",
@@ -128,7 +133,7 @@ export const lotoPoster: PosterDefinition = {
       },
       items: {
         tr: [
-          "Basıncı boşalt, yayları serbest bırak ve sıcaklığı güvenli seviyeye indir.",
+          "Basıncı boşalt; yayları güvenle sabitle veya boşalt; sıcaklığı kontrol et.",
           "Yükseltilmiş parçaları indir veya mekanik olarak destekle.",
           "Enerji yeniden birikebilecekse sürekli kontrol uygula.",
         ],
@@ -139,7 +144,8 @@ export const lotoPoster: PosterDefinition = {
         ],
       },
       icon: "fall",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "07",
@@ -160,7 +166,8 @@ export const lotoPoster: PosterDefinition = {
         ],
       },
       icon: "weather",
-      tone: "warning",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
     {
       number: "08",
@@ -181,7 +188,8 @@ export const lotoPoster: PosterDefinition = {
         ],
       },
       icon: "training",
-      tone: "information",
+      tone: "mandatory",
+      application: {"kind": "required-control"},
     },
   ],
 
