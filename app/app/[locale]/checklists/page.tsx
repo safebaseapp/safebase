@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -9,6 +10,27 @@ import InspectionLibraryClient from "./InspectionLibraryClient";
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const title = locale === "tr" ? "İSG Kontrol Listeleri ve Saha Denetimleri | SERNEM" : "HSE Checklists & Site Inspections | SERNEM";
+  const description = locale === "tr" ? "Saha denetimleri için Türkçe İSG kontrol listeleri. Yüksekte çalışma, iskele, kaldırma, sıcak çalışma ve kapalı alan konularını inceleyin." : "Browse practical HSE inspection checklists for work at height, scaffolds, lifting, hot work, confined spaces and more.";
+  const canonical = `https://www.sernem.com/${locale}/checklists`;
+  return {
+    title, description,
+    openGraph: { title, description, url: canonical, siteName: "SERNEM", type: "website", locale: locale === "tr" ? "tr_TR" : "en_US" },
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://www.sernem.com/tr/checklists",
+        en: "https://www.sernem.com/en/checklists",
+        "x-default": "https://www.sernem.com/en/checklists",
+      },
+    },
+  };
+}
+
 
 export default async function LocalizedChecklistsPage({ params }: Props) {
   const { locale } = await params;
