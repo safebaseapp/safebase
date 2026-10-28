@@ -89,6 +89,8 @@ function ArrowIcon() {
   );
 }
 
+const INITIAL_RESOURCE_COUNT = 20;
+
 export default function DownloadsClient() {
   const params = useParams<{ locale: string }>();
   const locale: Locale = params.locale === "tr" ? "tr" : "en";
@@ -96,6 +98,7 @@ export default function DownloadsClient() {
 
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
+  const [visibleCount, setVisibleCount] = useState(INITIAL_RESOURCE_COUNT);
 
   const liveResources = useMemo<ResourceItem[]>(() => {
     const inspectionResources: ResourceItem[] = inspectionCatalog.map((entry) => ({
@@ -160,6 +163,8 @@ export default function DownloadsClient() {
       return categoryMatches && (!normalized || searchable.includes(normalized));
     });
   }, [activeCategory, isTurkish, liveResources, search]);
+
+  const displayedResources = filteredResources.slice(0, visibleCount);
 
   const featuredResources = useMemo(() => {
     const featured = liveResources.filter((item) => item.featured);
@@ -318,7 +323,7 @@ export default function DownloadsClient() {
                 <input
                   type="search"
                   value={search}
-                  onChange={(event) => setSearch(event.target.value)}
+                  onChange={(event) => { setSearch(event.target.value); setVisibleCount(INITIAL_RESOURCE_COUNT); }}
                   placeholder={
                     isTurkish
                       ? "Toolbox, poster, güvenlik levhası, kontrol listesi veya rehber ara..."
@@ -337,7 +342,7 @@ export default function DownloadsClient() {
                 <button
                   key={category.id}
                   type="button"
-                  onClick={() => setActiveCategory(category.id)}
+                  onClick={() => { setActiveCategory(category.id); setVisibleCount(INITIAL_RESOURCE_COUNT); }}
                   className={`inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-xl border px-4 py-2.5 text-sm font-black transition ${
                     active
                       ? "border-blue-400 bg-blue-600 text-white shadow-[0_10px_32px_rgba(37,99,235,.30)]"
@@ -405,7 +410,7 @@ export default function DownloadsClient() {
                 </p>
               </div>
 
-              <button type="button" onClick={() => setActiveCategory("all")} className="hidden items-center gap-2 text-sm font-black text-blue-400 transition hover:text-blue-300 sm:inline-flex">
+              <button type="button" onClick={() => { setActiveCategory("all"); setVisibleCount(INITIAL_RESOURCE_COUNT); }} className="hidden items-center gap-2 text-sm font-black text-blue-400 transition hover:text-blue-300 sm:inline-flex">
                 {isTurkish ? "Tümünü Gör" : "View All"}
                 <ArrowIcon />
               </button>
@@ -493,7 +498,7 @@ export default function DownloadsClient() {
 
           {filteredResources.length > 0 ? (
             <div className="mt-7 grid grid-cols-1 gap-3 lg:grid-cols-2">
-              {filteredResources.map((item) => {
+              {displayedResources.map((item) => {
                 const meta = categoryMeta[item.category];
                 const rowAccent = resourceAccent(item);
                 const isOpenableResource =
@@ -557,10 +562,23 @@ export default function DownloadsClient() {
                 onClick={() => {
                   setSearch("");
                   setActiveCategory("all");
+                   setVisibleCount(INITIAL_RESOURCE_COUNT);
                 }}
                 className="mt-5 rounded-lg bg-blue-600 px-5 py-3 text-sm font-black transition hover:bg-blue-500"
               >
                 {isTurkish ? "Filtreleri Temizle" : "Clear Filters"}
+              </button>
+            </div>
+          )}
+
+          {filteredResources.length > visibleCount && (
+            <div className="mt-7 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setVisibleCount((count) => count + INITIAL_RESOURCE_COUNT)}
+                className="rounded-xl border border-blue-400/50 bg-blue-500/10 px-6 py-3 text-sm font-bold text-blue-200 transition hover:bg-blue-500/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
+              >
+                {isTurkish ? "Daha Fazla Göster" : "Show More"} ({filteredResources.length - visibleCount})
               </button>
             </div>
           )}
