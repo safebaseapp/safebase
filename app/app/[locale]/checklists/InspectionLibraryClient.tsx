@@ -1,9 +1,17 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { inspectionCatalog } from "../../../data/checklists/registry";
 import type { Locale } from "./hot-work/types";
 import { getCardVisualStyle, getInspectionCardVisual } from "@/lib/visual/content-card-visuals";
+
+export type InspectionSummary = {
+  slug: string;
+  title: { tr: string; en: string };
+  description: { tr: string; en: string };
+  category: { tr: string; en: string };
+  reference?: string;
+  itemCount: number;
+};
 
 type ContentControl = {
   accessLevel: "free" | "premium";
@@ -49,7 +57,7 @@ export default function InspectionLibraryClient({
   controls,
 }: {
   locale: Locale;
-  inspections: typeof inspectionCatalog;
+  inspections: InspectionSummary[];
   controls: Record<string, ContentControl>;
 }) {
   const isTurkish = locale === "tr";
@@ -133,8 +141,8 @@ export default function InspectionLibraryClient({
                       <h3 className="mt-2 text-xl font-bold leading-tight">{inspection.title[locale]}</h3>
                       <p className="mt-3 flex-1 text-sm leading-6 text-slate-400">{inspection.description[locale]}</p>
                       <div className="mt-5 grid grid-cols-2 gap-3 border-t border-slate-800 pt-4 text-xs">
-                        <div><p className="text-slate-500">{isTurkish ? "Referans" : "Reference"}</p><p className="mt-1 truncate font-medium text-slate-300">{inspection.document.standards?.[0] ?? (isTurkish ? "Saha prosedürü" : "Site procedure")}</p></div>
-                        <div><p className="text-slate-500">{isTurkish ? "Süre" : "Duration"}</p><p className="mt-1 font-medium text-slate-300">{getDuration(inspection.document.sections.flatMap((section) => section.items).length, locale)}</p></div>
+                        <div><p className="text-slate-500">{isTurkish ? "Referans" : "Reference"}</p><p className="mt-1 truncate font-medium text-slate-300">{inspection.reference ?? (isTurkish ? "Saha prosedürü" : "Site procedure")}</p></div>
+                        <div><p className="text-slate-500">{isTurkish ? "Süre" : "Duration"}</p><p className="mt-1 font-medium text-slate-300">{getDuration(inspection.itemCount, locale)}</p></div>
                       </div>
                       <span className="mt-5 font-semibold text-blue-400 transition group-hover:translate-x-1">{isPremium ? (isTurkish ? "Premium ile aç →" : "Unlock with Premium →") : (isTurkish ? "Denetimi başlat →" : "Start inspection →")}</span>
                     </a>
