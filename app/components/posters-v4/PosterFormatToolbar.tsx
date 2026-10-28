@@ -18,45 +18,53 @@ function sleep(ms: number) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
-async function waitForPosterAssets() {
-  for (let attempt = 0; attempt < 50; attempt += 1) {
-    const pendingBranding = document.querySelector(
-      '[data-poster-branding-ready="false"]',
-    );
-    if (!pendingBranding) break;
-    await sleep(100);
+const POSTER_ASSET_TIMEOUT_MS = 8000;
+
+async function waitForPosterAssets(): Promise<boolean> {
+  const deadline = Date.now() + POSTER_ASSET_TIMEOUT_MS;
+  const remaining = () => Math.max(0, deadline - Date.now());
+
+  while (document.querySelector('[data-poster-branding-ready="false"]') && remaining() > 0) {
+    await sleep(Math.min(100, remaining()));
+  }
+  if (document.querySelector('[data-poster-branding-ready="false"]')) return false;
+
+  // An unresponsive font or image must not disable the print button indefinitely.
+  if (document.fonts?.status === "loading") {
+    const fontsReady = await Promise.race([
+      document.fonts.ready.then(() => true, () => false),
+      sleep(remaining()).then(() => false),
+    ]);
+    if (!fontsReady) return false;
   }
 
-  if (document.fonts?.ready) {
-    await document.fonts.ready;
-  }
-
-  const images = Array.from(
-    document.querySelectorAll<HTMLImageElement>("#poster-print-area img"),
-  );
-
-  await Promise.all(
-    images.map(
-      (image) =>
-        new Promise<void>((resolve) => {
-          if (image.complete) {
-            resolve();
-            return;
-          }
-          const done = () => resolve();
-          image.addEventListener("load", done, { once: true });
-          image.addEventListener("error", done, { once: true });
-        }),
-    ),
-  );
+  const images = Array.from(document.querySelectorAll<HTMLImageElement>("#poster-print-area img"));
+  await Promise.all(images.map((image) => {
+    if (image.complete) return Promise.resolve();
+    return new Promise<void>((resolve) => {
+      let settled = false;
+      let timeoutId: number;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeoutId);
+        image.removeEventListener("load", finish);
+        image.removeEventListener("error", finish);
+        resolve();
+      };
+      timeoutId = window.setTimeout(finish, remaining());
+      image.addEventListener("load", finish);
+      image.addEventListener("error", finish);
+      if (image.complete) finish();
+    });
+  }));
 
   await new Promise<void>((resolve) => {
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => resolve());
-    });
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => resolve()));
   });
 
-  return !document.querySelector('[data-poster-branding-ready="false"]') &&
+  return document.fonts?.status !== "loading" &&
+    !document.querySelector('[data-poster-branding-ready="false"]') &&
     images.every((image) => image.complete && image.naturalWidth > 0);
 }
 
@@ -289,7 +297,7 @@ export default function PosterFormatToolbar({ locale }: Props) {
               : "border border-slate-300 bg-white text-slate-800 hover:border-blue-400 hover:text-blue-600"
           }`}
         >
-          PDF
+          {isTurkish ? "Standart" : "Standard"}
         </button>
 
         <button

@@ -25,6 +25,10 @@ assert.ok(!printToolbar.includes("resource_download|Poster|PDF"), "Print dialog 
 assert.ok(printToolbar.includes("poster_print_requested"), "Print intent should have a distinct event");
 assert.ok(printToolbar.includes("waitForPosterAssets"), "Print should prepare fonts and images");
 assert.ok(printToolbar.includes("naturalWidth > 0"), "Print must reject broken image assets");
+assert.ok(printToolbar.includes("POSTER_ASSET_TIMEOUT_MS"), "Print asset loading needs a timeout");
+assert.ok(printToolbar.includes("Promise.race"), "Font loading must be bounded");
+assert.ok(printToolbar.includes("window.setTimeout(finish, remaining())"), "Image loading must be bounded");
+assert.ok(printToolbar.includes('isTurkish ? "Standart" : "Standard"'), "Standard mode must not imply direct PDF download");
 assert.ok(downloads.includes("displayedResources.map"), "Downloads listing should render a bounded initial set");
 assert.ok(downloads.includes("setVisibleCount"), "Users must be able to reveal all filtered resources");
 assert.ok(downloads.includes("filteredResources.length - visibleCount"), "Remaining result count should be shown");
@@ -44,6 +48,13 @@ for (const route of ["posters", "downloads", "toolbox", "checklists", "safety-si
 for (const route of ["login", "register"]) {
   const page = read(`app/[locale]/${route}/page.tsx`);
   assert.match(page, /robots:\s*\{\s*index:\s*false,\s*follow:\s*false\s*\}/, `${route} must be noindex`);
+}
+
+for (const route of ["labs/sim5", "labs/incident-simulator", "labs/daily-safety-brain", "tools/simops"]) {
+  const page = read(`app/[locale]/${route}/page.tsx`);
+  assert.ok(page.includes("generateMetadata"), `Missing ${route} metadata`);
+  assert.ok(page.includes("openGraph"), `Missing ${route} OpenGraph metadata`);
+  assert.ok(page.includes("x-default"), `Missing ${route} language alternates`);
 }
 
 const qrTargets = read("lib/posters-v2/qr-targets.json");
