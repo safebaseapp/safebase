@@ -36,8 +36,9 @@ const checks = [
     file: "components/posters-v4/PosterFormatToolbar.tsx",
     mustContain: [
       "requirePrintAuth",
-      'resource_download|',
+      "poster_print_requested",
     ],
+    mustNotContain: ["resource_download|Poster|PDF", 'event_name: "resource_download|'],
   },
 ];
 
