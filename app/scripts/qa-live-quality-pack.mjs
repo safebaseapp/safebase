@@ -8,6 +8,8 @@ const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf
 const posterLibrary = read("app/[locale]/posters/PosterLibraryClient.tsx");
 const printToolbar = read("components/posters-v4/PosterFormatToolbar.tsx");
 const downloads = read("app/[locale]/downloads/DownloadsClient.tsx");
+const checklistPage = read("app/[locale]/checklists/page.tsx");
+const checklistCards = read("app/[locale]/checklists/InspectionLibraryClient.tsx");
 
 for (const [name, needle] of [
   ["TR A4 preview", "A4 Görüntüle"],
@@ -26,6 +28,11 @@ assert.ok(printToolbar.includes("naturalWidth > 0"), "Print must reject broken i
 assert.ok(downloads.includes("displayedResources.map"), "Downloads listing should render a bounded initial set");
 assert.ok(downloads.includes("setVisibleCount"), "Users must be able to reveal all filtered resources");
 assert.ok(downloads.includes("filteredResources.length - visibleCount"), "Remaining result count should be shown");
+assert.ok(checklistPage.includes("inspections={summaries}"), "Checklist cards must receive summaries, not full documents");
+assert.ok(checklistPage.includes("visibleInspections.map(item=><Link"), "All checklist detail URLs must remain in server-rendered index");
+assert.ok(checklistPage.includes("section.items.length"), "Checklist item counts must retain original calculation");
+assert.ok(checklistCards.includes("itemCount: number"), "Checklist card contract must contain itemCount");
+assert.ok(!checklistCards.includes("inspection.document."), "Checklist cards must not depend on full document data");
 
 for (const route of ["posters", "downloads", "toolbox", "checklists", "safety-signs", "labs"]) {
   const page = read(`app/[locale]/${route}/page.tsx`);
