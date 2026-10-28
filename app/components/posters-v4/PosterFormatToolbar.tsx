@@ -55,6 +55,9 @@ async function waitForPosterAssets() {
       window.requestAnimationFrame(() => resolve());
     });
   });
+
+  return !document.querySelector('[data-poster-branding-ready="false"]') &&
+    images.every((image) => image.complete && image.naturalWidth > 0);
 }
 
 export default function PosterFormatToolbar({ locale }: Props) {
@@ -69,6 +72,8 @@ export default function PosterFormatToolbar({ locale }: Props) {
   const [premiumState, setPremiumState] = useState<PremiumState>("loading");
   const [isSwitchingMode, setIsSwitchingMode] = useState(false);
   const [brandingNotice, setBrandingNotice] = useState<string | null>(null);
+  const [printNotice, setPrintNotice] = useState<string | null>(null);
+  const [isPreparingPrint, setIsPreparingPrint] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -195,54 +200,56 @@ export default function PosterFormatToolbar({ locale }: Props) {
   }
 
   async function printCurrentPoster() {
-    if (isSwitchingMode) return;
+    if (isSwitchingMode || isPreparingPrint) return;
     if (!(await requirePrintAuth(locale))) return;
 
-    await waitForPosterAssets();
-
-    if (brandedPoster) {
-      const brandedRoot = document.querySelector(
-        '[data-poster-branding-mode="branded"][data-poster-branding-ready="true"]',
-      );
-
-      if (
-        !brandedRoot ||
-        brandedRoot.getAttribute("data-poster-company-logo") !== "true"
-      ) {
-        setBrandingNotice(
-          isTurkish
-            ? "Kayıtlı şirket logosu logolu postere yüklenemedi. Logo ayarlarını kontrol edip tekrar deneyin."
-            : "The saved company logo could not be loaded into the branded poster. Check branding settings and try again.",
-        );
+    setPrintNotice(null);
+    setIsPreparingPrint(true);
+    try {
+      const assetsReady = await waitForPosterAssets();
+      if (!assetsReady) {
+        setPrintNotice(isTurkish
+          ? "Poster görselleri veya logo hazır değil. Lütfen tekrar deneyin."
+          : "Poster images or branding are not ready. Please try again.");
         return;
       }
-    }
 
-    window.print();
-
-    try {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { error: activityError } = await supabase
-          .from("user_activity_events")
-          .insert({
-            user_id: user.id,
-            event_name: "resource_download|Poster|PDF",
-            path: window.location.href,
-            metadata: {
-              resource_type: "poster",
-              size: selectedSize,
-              mode: brandedPoster ? "branded" : "standard",
-              locale,
-            },
-          });
-        if (activityError) {
-          console.error("Poster activity tracking error:", activityError);
+      if (brandedPoster) {
+        const brandedRoot = document.querySelector(
+          '[data-poster-branding-mode="branded"][data-poster-branding-ready="true"]',
+        );
+        if (!brandedRoot ||
+          brandedRoot.getAttribute("data-poster-company-logo") !== "true") {
+          setBrandingNotice(isTurkish
+            ? "Kayıtlı şirket logosu logolu postere yüklenemedi. Logo ayarlarını kontrol edip tekrar deneyin."
+            : "The saved company logo could not be loaded into the branded poster. Check branding settings and try again.");
+          return;
         }
       }
+
+      // A print-dialog request is not proof of a downloaded or saved PDF.
+      // Client-side GA4 intent does not contain identifiers, URLs, or tokens.
+      try {
+        const gtag = (window as Window & {
+          gtag?: (command: string, event: string, params: Record<string, string>) => void;
+        }).gtag;
+        gtag?.("event", "poster_print_requested", {
+          locale,
+          size: selectedSize,
+          mode: brandedPoster ? "branded" : "standard",
+        });
+      } catch (error) {
+        console.warn("Poster print intent measurement unavailable:", error);
+      }
+
+      window.print();
     } catch (error) {
-      console.error("Poster activity tracking failed:", error);
+      console.error("Poster print preparation failed:", error);
+      setPrintNotice(isTurkish
+        ? "Yazdırma penceresi açılamadı. Tekrar deneyin."
+        : "Could not open the print dialog. Please try again.");
+    } finally {
+      setIsPreparingPrint(false);
     }
   }
 
@@ -258,7 +265,8 @@ export default function PosterFormatToolbar({ locale }: Props) {
               key={size}
               type="button"
               onClick={() => selectSize(size)}
-              disabled={isSwitchingMode}
+              aria-pressed={selectedSize === size}
+              disabled={isSwitchingMode || isPreparingPrint}
               className={`rounded-lg px-4 py-2 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
                 selectedSize === size
                   ? "bg-slate-950 text-white"
@@ -273,7 +281,7 @@ export default function PosterFormatToolbar({ locale }: Props) {
         <button
           type="button"
           onClick={() => void selectPosterMode(false)}
-          disabled={isSwitchingMode}
+          disabled={isSwitchingMode || isPreparingPrint}
           aria-pressed={!brandedPoster}
           className={`rounded-xl px-5 py-3 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
             !brandedPoster
@@ -287,7 +295,7 @@ export default function PosterFormatToolbar({ locale }: Props) {
         <button
           type="button"
           onClick={() => void selectPosterMode(true)}
-          disabled={premiumState === "loading" || isSwitchingMode}
+          disabled={premiumState === "loading" || isSwitchingMode || isPreparingPrint}
           aria-pressed={brandedPoster}
           className={`rounded-xl border px-5 py-3 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
             brandedPoster
@@ -307,12 +315,22 @@ export default function PosterFormatToolbar({ locale }: Props) {
         <button
           type="button"
           onClick={() => void printCurrentPoster()}
-          disabled={isSwitchingMode}
+          aria-busy={isPreparingPrint}
+          disabled={isSwitchingMode || isPreparingPrint}
           className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-black text-slate-800 transition hover:border-blue-400 hover:text-blue-600 disabled:cursor-wait disabled:opacity-60"
         >
-          🖨 {isTurkish ? "Yazdır" : "Print"} · {selectedSize.toUpperCase()}
+          🖨 {isPreparingPrint
+             ? (isTurkish ? "Poster hazırlanıyor..." : "Preparing poster...")
+             : (isTurkish ? "Yazdır / PDF olarak kaydet" : "Print / Save as PDF")} · {selectedSize.toUpperCase()}
         </button>
       </div>
+
+      <p className="text-center text-xs text-slate-600">
+        {isTurkish
+          ? 'Yazdırma penceresinde "PDF olarak kaydet" seçeneğini kullanabilirsiniz. İndirme otomatik başlamaz.'
+          : 'Use "Save as PDF" in the print dialog. No file downloads automatically.'}
+      </p>
+      {printNotice ? <p role="alert" className="text-center text-sm font-semibold text-red-700">{printNotice}</p> : null}
 
       {brandingNotice ? (
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-center text-sm font-semibold text-amber-950 sm:flex-row">
