@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { isAdminUser } from "@/lib/auth/access";
 import type { PosterDefinition } from "@/lib/posters-v2/types";
 import PosterMasterV4 from "./PosterMasterV4";
 
@@ -45,19 +44,10 @@ export default function PosterBrandingCanvas({
 
         if (!user) return;
 
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("plan, role, status")
-          .eq("id", user.id)
-          .maybeSingle();
-
-        const isPremium = Boolean(
-          isAdminUser(user) ||
-            (profile?.status !== "suspended" &&
-              (profile?.plan === "premium" || profile?.role === "admin")),
-        );
-
-        if (!isPremium) return;
+        // Server-side billing/reward/admin decision; no trust in profile.plan alone.
+        const response = await fetch("/api/posters/premium-access", { cache: "no-store", credentials: "same-origin" });
+        const access = response.ok ? await response.json() as { premium?: boolean } : null;
+        if (access?.premium !== true) return;
 
         const { data: files, error: listError } = await supabase.storage
           .from(BUCKET_NAME)

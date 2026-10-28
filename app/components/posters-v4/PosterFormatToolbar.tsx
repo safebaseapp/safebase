@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { createClient } from "@/utils/supabase/client";
-import { isAdminUser } from "@/lib/auth/access";
 import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 
 type Props = {
@@ -88,31 +86,10 @@ export default function PosterFormatToolbar({ locale }: Props) {
 
     async function resolvePremium() {
       try {
-        const supabase = createClient();
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-
-        if (!user) {
-          if (active) setPremiumState("free");
-          return;
-        }
-
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("plan, role, status")
-          .eq("id", user.id)
-          .maybeSingle();
-
-        const premium = Boolean(
-          isAdminUser(user) ||
-            (profile?.status !== "suspended" &&
-              (profile?.plan === "premium" || profile?.role === "admin")),
-        );
-
-        if (active) setPremiumState(premium ? "premium" : "free");
-      } catch (error) {
-        console.error("Poster premium access check failed:", error);
+        const response = await fetch("/api/posters/premium-access", { cache: "no-store", credentials: "same-origin" });
+        const data = response.ok ? await response.json() as { premium?: boolean } : null;
+        if (active) setPremiumState(data?.premium === true ? "premium" : "free");
+      } catch {
         if (active) setPremiumState("free");
       }
     }
@@ -153,6 +130,20 @@ export default function PosterFormatToolbar({ locale }: Props) {
       if (premiumState !== "loading") {
         router.push(`/${locale}/upgrade?next=${encodeURIComponent(pathname)}`);
       }
+      return;
+    }
+
+    // Recheck at action time: a subscription can expire after page load.
+    try {
+      const response = await fetch("/api/posters/premium-access", { cache: "no-store", credentials: "same-origin" });
+      const data = response.ok ? await response.json() as { premium?: boolean } : null;
+      if (data?.premium !== true) {
+        setPremiumState("free");
+        router.push(`/${locale}/upgrade?next=${encodeURIComponent(pathname)}`);
+        return;
+      }
+    } catch {
+      setPremiumState("free");
       return;
     }
 
@@ -223,6 +214,13 @@ export default function PosterFormatToolbar({ locale }: Props) {
       }
 
       if (brandedPoster) {
+        const response = await fetch("/api/posters/premium-access", { cache: "no-store", credentials: "same-origin" });
+        const data = response.ok ? await response.json() as { premium?: boolean } : null;
+        if (data?.premium !== true) {
+          setPremiumState("free");
+          setPrintNotice(isTurkish ? "Premium erişiminiz aktif değil." : "Your Premium access is not active.");
+          return;
+        }
         const brandedRoot = document.querySelector(
           '[data-poster-branding-mode="branded"][data-poster-branding-ready="true"]',
         );

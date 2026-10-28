@@ -57,6 +57,20 @@ for (const route of ["labs/sim5", "labs/incident-simulator", "labs/daily-safety-
   assert.ok(page.includes("x-default"), `Missing ${route} language alternates`);
 }
 
+const posterAccess = read("lib/auth/poster-premium-access.ts");
+const posterApi = read("app/api/premium/posters/[slug]/route.ts");
+const posterAccessApi = read("app/api/posters/premium-access/route.ts");
+const branding = read("components/posters-v4/PosterBrandingCanvas.tsx");
+assert.ok(posterAccess.includes("hasCurrentBillingPremium"), "Poster access must validate current billing");
+assert.ok(posterAccess.includes("hasActiveReward"), "Poster access must support active rewards");
+assert.ok(posterAccess.includes('profile.status !== "active"'), "Suspended account access must fail closed");
+assert.ok(posterApi.includes("getPosterPremiumAccess"), "Premium poster PDF must use shared access");
+assert.ok(posterAccessApi.includes("getPosterPremiumAccess"), "Browser entitlement endpoint must use shared access");
+assert.ok(branding.includes('/api/posters/premium-access'), "Logo branding must use shared authorization");
+assert.ok(printToolbar.includes('/api/posters/premium-access'), "Poster controls must use shared authorization");
+assert.ok(!branding.includes('profile?.plan === "premium"'), "No stale client profile gate");
+assert.ok(!posterApi.includes('profile.plan === "premium"'), "No stale PDF profile gate");
+
 const qrTargets = read("lib/posters-v2/qr-targets.json");
 assert.ok(qrTargets.includes("https://www.sernem.com/tr/posters"));
 assert.ok(qrTargets.includes("https://www.sernem.com/en/posters"));
