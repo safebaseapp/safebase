@@ -28,6 +28,8 @@ assert.ok(printToolbar.includes("naturalWidth > 0"), "Print must reject broken i
 assert.ok(downloads.includes("displayedResources.map"), "Downloads listing should render a bounded initial set");
 assert.ok(downloads.includes("setVisibleCount"), "Users must be able to reveal all filtered resources");
 assert.ok(downloads.includes("filteredResources.length - visibleCount"), "Remaining result count should be shown");
+assert.ok(downloads.includes("liveResources.flatMap"), "Downloads must retain a server-rendered full link directory");
+assert.ok(downloads.includes("Resource link directory"), "Downloads link directory needs a semantic navigation label");
 assert.ok(checklistPage.includes("inspections={summaries}"), "Checklist cards must receive summaries, not full documents");
 assert.ok(checklistPage.includes("visibleInspections.map(item=><Link"), "All checklist detail URLs must remain in server-rendered index");
 assert.ok(checklistPage.includes("section.items.length"), "Checklist item counts must retain original calculation");
