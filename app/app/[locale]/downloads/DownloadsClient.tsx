@@ -583,6 +583,21 @@ export default function DownloadsClient() {
             </div>
           )}
 
+          <details className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+            <summary className="cursor-pointer text-sm font-bold text-slate-200">
+              {isTurkish ? "Tüm sayfa kaynaklarına göz at" : "Browse all linked resources"}
+            </summary>
+            <nav aria-label={isTurkish ? "Kaynak bağlantı dizini" : "Resource link directory"} className="mt-4">
+              <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {liveResources.flatMap((item) =>
+                  item.href
+                    ? [<li key={item.id}><Link href={item.href[locale]} className="text-xs text-blue-300 underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-cyan-300">{item.title[locale]}</Link></li>]
+                    : [],
+                )}
+              </ul>
+            </nav>
+          </details>
+
           <div className="mt-10 flex justify-center">
             <Link href={`/${locale}/tools`} className="inline-flex min-w-[270px] items-center justify-center gap-3 rounded-lg border border-blue-500/70 bg-blue-600/[0.06] px-8 py-3.5 text-sm font-black text-blue-400 shadow-[0_12px_35px_rgba(37,99,235,.08)] transition hover:bg-blue-600 hover:text-white">
               {isTurkish ? "HSE Araçlarını Keşfet" : "Explore HSE Tools"}
