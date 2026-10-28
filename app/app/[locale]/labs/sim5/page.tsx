@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Sim5GateEvent, Sim5UnlockLink } from "./Sim5Actions";
 import Link from "next/link";
 import Sim5History from "./Sim5History";
@@ -7,6 +8,26 @@ import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const title = locale === "tr" ? "SERNEM SIM 5.0 | 3D İSG Saha Simülatörü" : "SERNEM SIM 5.0 | 3D HSE Site Simulator";
+  const description = locale === "tr" ? "SERNEM SIM 5.0 ile 3D endüstriyel sahada tehlikeleri keşfedin; kaynak, kaldırma, sızıntı ve yüksekte çalışma risklerini değerlendirin." : "Explore industrial safety hazards in SERNEM SIM 5.0, a 3D HSE simulator covering hot work, lifting, leaks and work at height.";
+  const canonical = `https://www.sernem.com/${locale}/labs/sim5`;
+  return {
+    title, description,
+    openGraph: { title, description, url: canonical, siteName: "SERNEM", type: "website", locale: locale === "tr" ? "tr_TR" : "en_US" },
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://www.sernem.com/tr/labs/sim5",
+        en: "https://www.sernem.com/en/labs/sim5",
+        "x-default": "https://www.sernem.com/en/labs/sim5"
+      }
+    }
+  };
+}
 
 export default async function Sim5Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

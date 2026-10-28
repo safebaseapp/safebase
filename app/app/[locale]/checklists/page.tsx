@@ -1,14 +1,36 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "../../../i18n/routing";
 import { createClient } from "@/utils/supabase/server";
 import { inspectionCatalog } from "../../../data/checklists/registry";
-import InspectionLibraryClient from "./InspectionLibraryClient";
+import InspectionLibraryClient, { type InspectionSummary } from "./InspectionLibraryClient";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const title = locale === "tr" ? "İSG Kontrol Listeleri ve Saha Denetimleri | SERNEM" : "HSE Checklists & Site Inspections | SERNEM";
+  const description = locale === "tr" ? "Saha denetimleri için Türkçe İSG kontrol listeleri. Yüksekte çalışma, iskele, kaldırma, sıcak çalışma ve kapalı alan konularını inceleyin." : "Browse practical HSE inspection checklists for work at height, scaffolds, lifting, hot work, confined spaces and more.";
+  const canonical = `https://www.sernem.com/${locale}/checklists`;
+  return {
+    title, description,
+    openGraph: { title, description, url: canonical, siteName: "SERNEM", type: "website", locale: locale === "tr" ? "tr_TR" : "en_US" },
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://www.sernem.com/tr/checklists",
+        en: "https://www.sernem.com/en/checklists",
+        "x-default": "https://www.sernem.com/en/checklists",
+      },
+    },
+  };
+}
+
 
 export default async function LocalizedChecklistsPage({ params }: Props) {
   const { locale } = await params;
@@ -44,10 +66,20 @@ export default async function LocalizedChecklistsPage({ params }: Props) {
   }
 
   const visibleInspections = inspectionCatalog.filter((inspection) => !hiddenSlugs.has(inspection.slug));
+  // Send card summaries only. Full checklist questions stay in each detail route,
+  // and the accessible directory below keeps all visible routes crawlable.
+  const summaries: InspectionSummary[] = visibleInspections.map((inspection) => ({
+    slug: inspection.slug,
+    title: { tr: inspection.title.tr, en: inspection.title.en },
+    description: { tr: inspection.description.tr, en: inspection.description.en },
+    category: { tr: inspection.category.tr, en: inspection.category.en },
+    reference: inspection.document.standards?.[0],
+    itemCount: inspection.document.sections.reduce((total, section) => total + section.items.length, 0),
+  }));
 
   return (
     <>
-      <InspectionLibraryClient locale={locale === "tr" ? "tr" : "en"} inspections={visibleInspections} controls={controls} />
+      <InspectionLibraryClient locale={locale === "tr" ? "tr" : "en"} inspections={summaries} controls={controls} />
       <nav aria-label={locale === "tr" ? "Denetim listeleri dizini" : "Inspection checklist directory"} className="mx-auto max-w-6xl px-5 pb-12">
         <details className="rounded-2xl border border-slate-200 bg-white p-5 text-slate-900">
           <summary className="cursor-pointer font-semibold">{locale === "tr" ? "Tüm denetim listeleri" : "Browse all inspection checklists"}</summary>

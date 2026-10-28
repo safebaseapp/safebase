@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -7,6 +8,14 @@ import RegisterForm from "./RegisterForm";
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: locale === "tr" ? "SERNEM Ücretsiz Hesap Oluştur" : "Create Your SERNEM Account",
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function RegisterPage({ params }: Props) {
   const { locale } = await params;
