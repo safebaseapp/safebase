@@ -1,0 +1,725 @@
+{
+  "encoder": "ReportLab M, four-module white quiet zone; Zbar independent decoder",
+  "results": [
+    {
+      "locale": "tr",
+      "slug": "safety-helmet-must-be-worn",
+      "target": "https://www.sernem.com/tr/safety-signs/safety-helmet-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "0e84bf50fbb06b73677f8f5af9bd312fb07178a86847a1f92d4a654da38f80e8",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "eye-protection-must-be-worn",
+      "target": "https://www.sernem.com/tr/safety-signs/eye-protection-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "ec95e6b1d0c0e21a475716caca8d6a01047728806672733283b05ceefe871462",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "protective-gloves-must-be-worn",
+      "target": "https://www.sernem.com/tr/safety-signs/protective-gloves-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "105226c067f89503482681cdf6606df9da8e40ad093a0595d16f21c93886735c",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "safety-footwear-must-be-worn",
+      "target": "https://www.sernem.com/tr/safety-signs/safety-footwear-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "866c9edf956e68eafcaef0c7f1f0b758a3c6ddbf465c3705d576a9f09de11811",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "hearing-protection-must-be-worn",
+      "target": "https://www.sernem.com/tr/safety-signs/hearing-protection-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "2c2bf675668201968315ef49dd45970f08ea1b15adb301f96efb186101bbde08",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "no-smoking",
+      "target": "https://www.sernem.com/tr/safety-signs/no-smoking",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "bc1bb4462a16c8439a71e0fb7b4394cd6ea19b6e8d8dc57a2610fa2526765b03",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "no-unauthorized-entry",
+      "target": "https://www.sernem.com/tr/safety-signs/no-unauthorized-entry",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "e0d7a440b2a34500b5cdd2aac49ed91e375ba59c41ef05c92681ef0bb19d2037",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "no-open-flame",
+      "target": "https://www.sernem.com/tr/safety-signs/no-open-flame",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "795129195c68ebe0e17909d680739eacf5641d25daf77730529f3c645d0b35ec",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "warning-high-voltage",
+      "target": "https://www.sernem.com/tr/safety-signs/warning-high-voltage",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "ffc2fff84bcdee81b05e1e38fbc1eaf7d7d659aee28f64fdee79c91acdac3150",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "warning-forklift-traffic",
+      "target": "https://www.sernem.com/tr/safety-signs/warning-forklift-traffic",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "3ed7630780b55f21beb3e6c53bf1ccfbf79c78b880b74698013895d71fa46279",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "warning-falling-objects",
+      "target": "https://www.sernem.com/tr/safety-signs/warning-falling-objects",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "081a430860e0ada4ef11f779e809090a748acd71f7dd8b1b2b854733e9388386",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "warning-slippery-surface",
+      "target": "https://www.sernem.com/tr/safety-signs/warning-slippery-surface",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "05cced345ece1d754651cd37b054cf6fd640d7c539beb481221419141fa39700",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "first-aid",
+      "target": "https://www.sernem.com/tr/safety-signs/first-aid",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "14a361e90227f69480d107285fefdffac3909d55891838e61900cd256f6dd421",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "emergency-exit",
+      "target": "https://www.sernem.com/tr/safety-signs/emergency-exit",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "bcb7dac5b10c0bb19c754e15a6b9b41b54d4d8bf15c5952b42d5109ad8252c32",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "assembly-point",
+      "target": "https://www.sernem.com/tr/safety-signs/assembly-point",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "4839ae22f2a5ee53131f921ce23e6ea066071040be9f0a1df099f9bdfc1dbcb4",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "fire-extinguisher",
+      "target": "https://www.sernem.com/tr/safety-signs/fire-extinguisher",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "8a5bffaf2ddc7864c6c5b8822f955732a5e451e9e73552f1d1ca93ced0d4ba38",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "general-mandatory-action",
+      "target": "https://www.sernem.com/tr/safety-signs/general-mandatory-action",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "59f79b564a9b7680a074a11a081ea128fa08d9c1d88f6aa3e92d767f0e9cdbb0",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "refer-to-instruction-manual",
+      "target": "https://www.sernem.com/tr/safety-signs/refer-to-instruction-manual",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "923b179f1f1109b5796f95e1ba6ba652494c1a850241cbd47915007114c664ed",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "protective-clothing-must-be-worn",
+      "target": "https://www.sernem.com/tr/safety-signs/protective-clothing-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "48069ea3b7213aff0226457ee2ae6d5448b6e019f8971fff23ba3afa888a2aa7",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "wash-your-hands",
+      "target": "https://www.sernem.com/tr/safety-signs/wash-your-hands",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "8ecab16274e9154f02c43da3f9afc1d7983622a9c6052249806c799839572a9d",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "use-handrail",
+      "target": "https://www.sernem.com/tr/safety-signs/use-handrail",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "53425b4a832db0b5f54524d9db53d98b045a01cc0e826011bd9bf3a294d1741f",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "face-shield-must-be-worn",
+      "target": "https://www.sernem.com/tr/safety-signs/face-shield-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "7faa7d4a6a974b932676201a748c630d023c0d667d86cd803d4bb327c0e6d88e",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "target": "https://www.sernem.com/tr/safety-signs/high-visibility-clothing-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "c56c34594faa8d5b5d8182cb565eb89582c319eca0b92ad985815d837d033761",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "respiratory-protection-must-be-worn",
+      "target": "https://www.sernem.com/tr/safety-signs/respiratory-protection-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "826f85b047a3e356ecf525209bdc9f62381c5af877c99f367084f016727fb189",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "safety-harness-must-be-worn",
+      "target": "https://www.sernem.com/tr/safety-signs/safety-harness-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "3887cfba3cb5d5246d883a8506d4b7d18c852dad1061fded8cbcec21392ba5c4",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "not-drinking-water",
+      "target": "https://www.sernem.com/tr/safety-signs/not-drinking-water",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "bd04452ef064eeec2ad8aef7aab07ef54296aa51433b94a3524a14f1925d1eaf",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "no-access-for-forklifts",
+      "target": "https://www.sernem.com/tr/safety-signs/no-access-for-forklifts",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "0fc5efce01ed9c9dc9ca3508c0a668e534be7574074e1be1a87136e9c71c7d63",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "do-not-touch",
+      "target": "https://www.sernem.com/tr/safety-signs/do-not-touch",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "9a148c6dd4f53b82fa531b9d4aba6b4bedcdbb539edf0b1cce4869ccbd1bf59b",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "no-activated-mobile-phone",
+      "target": "https://www.sernem.com/tr/safety-signs/no-activated-mobile-phone",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "800d27ac9d9e683503cb3ba0ac0ea2a0c6519ae5cee96f897fc921d1c65dc040",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "general-warning",
+      "target": "https://www.sernem.com/tr/safety-signs/general-warning",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "0cd2ee183a98469d33329c62937434af21034f0ee81c997029747ee7fac8e0a9",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "warning-overhead-load",
+      "target": "https://www.sernem.com/tr/safety-signs/warning-overhead-load",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "e175c3c287c5504276d79910d5a6d4f19a55c674271f96f0839c92d5f96ef8e1",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "warning-toxic-material",
+      "target": "https://www.sernem.com/tr/safety-signs/warning-toxic-material",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "b85247710e95af043035c3bcc7084a254ef8962bc205fd5607a3cc01e653cbe3",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "warning-hot-surface",
+      "target": "https://www.sernem.com/tr/safety-signs/warning-hot-surface",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "10237bedb18f03ff1d31d4ca90dc009f7158c1fa116f35ff9fe45e3ae60b1424",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "warning-flammable-material",
+      "target": "https://www.sernem.com/tr/safety-signs/warning-flammable-material",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "08eea5525d2e08545f399db4df3360c5dfcb497672fe4892c7d667a8650d7bc9",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "warning-corrosive-substance",
+      "target": "https://www.sernem.com/tr/safety-signs/warning-corrosive-substance",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "c4e88624e3de9c46e6f119f1f23e0fc08f36f1f236270bc3ae593fc224091cba",
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "slug": "warning-crushing-of-hands",
+      "target": "https://www.sernem.com/tr/safety-signs/warning-crushing-of-hands",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "bca6531e615955d08012225fc6235fa4a9b324732f9c82b25fe85d8193482918",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "safety-helmet-must-be-worn",
+      "target": "https://www.sernem.com/en/safety-signs/safety-helmet-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "7738a6248cc286a68bbe654fe832f612e25c0682590cfe5b239aec7227135e1d",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "eye-protection-must-be-worn",
+      "target": "https://www.sernem.com/en/safety-signs/eye-protection-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "6a9833ed3106b2cc6100ca1ad0c7da17ca40a4d0da17496244d04486b9795eed",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "protective-gloves-must-be-worn",
+      "target": "https://www.sernem.com/en/safety-signs/protective-gloves-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "09a29b04a63dc830b8e1489dfc751577fce093716d2025ce672e525b54791fe2",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "safety-footwear-must-be-worn",
+      "target": "https://www.sernem.com/en/safety-signs/safety-footwear-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "a42f815010da56e94a7575e222a6a90c79b295e41797ecc949884811153112b7",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "hearing-protection-must-be-worn",
+      "target": "https://www.sernem.com/en/safety-signs/hearing-protection-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "a37e3f6cd0f588b0f0b843a8d0b80d7855527d9ceafcda4c7c0c39d7a2deeb65",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "no-smoking",
+      "target": "https://www.sernem.com/en/safety-signs/no-smoking",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "e8ad2984b67d84fd4a4af93e1fcac454092b7623122e804e665cff5aa408bf7e",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "no-unauthorized-entry",
+      "target": "https://www.sernem.com/en/safety-signs/no-unauthorized-entry",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "34a4ec27ac6033bb439db208a91c518f4924c8fba07930f73b49d19521965b1b",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "no-open-flame",
+      "target": "https://www.sernem.com/en/safety-signs/no-open-flame",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "f960817fc751fd7e94ab4b52a59a58b090d766bf2c28ba3509a004d55ecffe83",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "warning-high-voltage",
+      "target": "https://www.sernem.com/en/safety-signs/warning-high-voltage",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "b55c9f72c7e847c1335e89c6ac1f074a04b0f28aaeabbea17331a9c1c5a1d6a8",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "warning-forklift-traffic",
+      "target": "https://www.sernem.com/en/safety-signs/warning-forklift-traffic",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "f5acb3e3f194b858493ad027f3d3d18c9431ac55db6830eaa140be147cd3f2da",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "warning-falling-objects",
+      "target": "https://www.sernem.com/en/safety-signs/warning-falling-objects",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "a98916503232d1a049b63f5c51a804cbf21b41abee72aa2f5bed1705023e10c7",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "warning-slippery-surface",
+      "target": "https://www.sernem.com/en/safety-signs/warning-slippery-surface",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "fa0a9a24c9444cedf175203d8f7ead279f41f00482cc5e9976a890c1e87055e0",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "first-aid",
+      "target": "https://www.sernem.com/en/safety-signs/first-aid",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "55f143888e0cf37eb2f6cf9e91b7adb8629ea6dfc19da3d93a87854423ab689c",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "emergency-exit",
+      "target": "https://www.sernem.com/en/safety-signs/emergency-exit",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "4535bb39878f95b0984e4317f351963747172a29f2ab7a175f4506bf5eb82abe",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "assembly-point",
+      "target": "https://www.sernem.com/en/safety-signs/assembly-point",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "ecb0645f843681db216d5779acc8999dc1ef235f8209cd37d273d86e26fbaec8",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "fire-extinguisher",
+      "target": "https://www.sernem.com/en/safety-signs/fire-extinguisher",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "8ba7f576766497e36cbe21d811523601a87dd6d126cf6cf85547311dd1d462cc",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "general-mandatory-action",
+      "target": "https://www.sernem.com/en/safety-signs/general-mandatory-action",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "4d774cf99de2f5f31fb7e0b9b85cdd7b46028bb0de96c854795396d815f49087",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "refer-to-instruction-manual",
+      "target": "https://www.sernem.com/en/safety-signs/refer-to-instruction-manual",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "ccea15d39b49249e3855fec366319f604c41882154baeb01479ddf728e282b98",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "protective-clothing-must-be-worn",
+      "target": "https://www.sernem.com/en/safety-signs/protective-clothing-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "d156e778212b4bbfcb104d08cdf4976bcaa43c88728adc67aca5011ce5c788f0",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "wash-your-hands",
+      "target": "https://www.sernem.com/en/safety-signs/wash-your-hands",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "af04260816f9721749dc2ab230d2e662c3cfea7ba18ce2e87830bc3984acdc28",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "use-handrail",
+      "target": "https://www.sernem.com/en/safety-signs/use-handrail",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "53a67430a75b04b146701ddfd1052ad500ea099d1f241c932a8a66bf84619f53",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "face-shield-must-be-worn",
+      "target": "https://www.sernem.com/en/safety-signs/face-shield-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "4d8aa49b2ebb33c1b438232780cafc905a9126dbd6bbdbb5a351a2ba240c63cd",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "target": "https://www.sernem.com/en/safety-signs/high-visibility-clothing-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "6c504805b3d5b26b47d7bbc13486c065fe300458fac4f4aad7234a09c8d6526c",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "respiratory-protection-must-be-worn",
+      "target": "https://www.sernem.com/en/safety-signs/respiratory-protection-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "a2f408acf746ad2901618b3d5a8495b917cd2a34e85b4bf50a660c390f969898",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "safety-harness-must-be-worn",
+      "target": "https://www.sernem.com/en/safety-signs/safety-harness-must-be-worn",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "8661ba662c9741eba9ada64ae8ee246b7498930c014eaa4193aacad59152671f",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "not-drinking-water",
+      "target": "https://www.sernem.com/en/safety-signs/not-drinking-water",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "f79c2ff85df6492375e50857d17f9af5d51a613f9122caa398ffe7cf63baea10",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "no-access-for-forklifts",
+      "target": "https://www.sernem.com/en/safety-signs/no-access-for-forklifts",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "922b5e3030e0e318c5c362885748afe52745ced9f0275ea4747ca66bb82f4518",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "do-not-touch",
+      "target": "https://www.sernem.com/en/safety-signs/do-not-touch",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "7885c6f1d9da15460e6b9c94c6102ceff42d6c9463a0ed21bb3cc47b193ff1d3",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "no-activated-mobile-phone",
+      "target": "https://www.sernem.com/en/safety-signs/no-activated-mobile-phone",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "837818557887b345aa3baca622e385cfa88eb5921d89c05ec137b8739d93f1ca",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "general-warning",
+      "target": "https://www.sernem.com/en/safety-signs/general-warning",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "2650b472a03d79dc4caddf9fd891899a5663459f414e6b85f29309e97f2027f0",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "warning-overhead-load",
+      "target": "https://www.sernem.com/en/safety-signs/warning-overhead-load",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "1e065a025c9a425cd7b440d2cf8315778ec2fb41cbfca6faf120d056cd9275f4",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "warning-toxic-material",
+      "target": "https://www.sernem.com/en/safety-signs/warning-toxic-material",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "c41c8a6f88ecaacc94e86a6459f523ae747dd18de6b06dcfa4a7e3d4c1c7e37f",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "warning-hot-surface",
+      "target": "https://www.sernem.com/en/safety-signs/warning-hot-surface",
+      "modules": 33,
+      "quietZoneModules": 4,
+      "pixels": 492,
+      "sha256": "3f2cfedaffaf7ba57e6bea0e7ddd40539b45fd4e1cc40b172530caeff6bf2441",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "warning-flammable-material",
+      "target": "https://www.sernem.com/en/safety-signs/warning-flammable-material",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "b668670666eeed0d73646d3ad9a51449626eeb91898758e61295342fc98ea998",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "warning-corrosive-substance",
+      "target": "https://www.sernem.com/en/safety-signs/warning-corrosive-substance",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "23f94075c23f6e8c2e2289b194fe459f747ee8762e0e5ac16429202369f9ee8d",
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "slug": "warning-crushing-of-hands",
+      "target": "https://www.sernem.com/en/safety-signs/warning-crushing-of-hands",
+      "modules": 37,
+      "quietZoneModules": 4,
+      "pixels": 540,
+      "sha256": "39269268d5024de1a85d4cb27be22ca96c3b30b2882e0b1670eb7e8824846588",
+      "result": "PASS"
+    }
+  ]
+}
