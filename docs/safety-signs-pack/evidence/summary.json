@@ -1,5 +1,5 @@
 {
-  "typescript": "PASS (tsc --noEmit; final stdout empty, exit captured separately)",
+  "typescript": "PASS: final npx tsc --noEmit exit 0",
   "eslint": {
     "errors": 0,
     "warnings": 2
@@ -19,5 +19,10 @@
   "normalBuild": "BLOCKED: Google Fonts network; final reattempt aborted before execution, no normal build PASS",
   "fixtureBuild": "PASS: Webpack + cached real font response + loopback public Supabase fixture",
   "decision": "NO-GO",
-  "remoteDelivery": "PENDING"
+  "remoteDelivery": {
+    "branchPush": "PASS",
+    "pushedCodeSha": "83f2aff84d42b4217b7707c4001146b34369cd53",
+    "draftPR": "BLOCKED: GitHub GraphQL Forbidden; not created",
+    "preview": "NOT VERIFIED: status/check-runs API Forbidden; no URL"
+  }
 }
