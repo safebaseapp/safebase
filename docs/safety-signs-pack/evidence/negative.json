@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "locale": "tr",
+      "scenario": "anonymous",
+      "result": "PASS",
+      "downloads": 0,
+      "loginReturn": "exact"
+    },
+    {
+      "locale": "tr",
+      "scenario": "broken-svg",
+      "result": "PASS",
+      "failedRequests": [
+        "/safety-signs/iso/M014.svg",
+        "/safety-signs/iso/M014.svg"
+      ],
+      "downloads": 0,
+      "writes": 0
+    },
+    {
+      "locale": "tr",
+      "scenario": "broken-qr",
+      "result": "PASS",
+      "failedRequests": [
+        "/safety-signs/qr/tr/safety-helmet-must-be-worn.png",
+        "/safety-signs/qr/tr/safety-helmet-must-be-worn.png"
+      ],
+      "downloads": 0,
+      "writes": 0
+    },
+    {
+      "locale": "tr",
+      "scenario": "suspended",
+      "result": "PASS",
+      "note": "Only clean-denied/standard-allowed EXISTING behavior verified. Full suspended-account denial NOT VERIFIED."
+    },
+    {
+      "locale": "en",
+      "scenario": "anonymous",
+      "result": "PASS",
+      "downloads": 0,
+      "loginReturn": "exact"
+    },
+    {
+      "locale": "en",
+      "scenario": "broken-svg",
+      "result": "PASS",
+      "failedRequests": [
+        "/safety-signs/iso/M014.svg",
+        "/safety-signs/iso/M014.svg"
+      ],
+      "downloads": 0,
+      "writes": 0
+    },
+    {
+      "locale": "en",
+      "scenario": "broken-qr",
+      "result": "PASS",
+      "failedRequests": [
+        "/safety-signs/qr/en/safety-helmet-must-be-worn.png",
+        "/safety-signs/qr/en/safety-helmet-must-be-worn.png"
+      ],
+      "downloads": 0,
+      "writes": 0
+    },
+    {
+      "locale": "en",
+      "scenario": "suspended",
+      "result": "PASS",
+      "note": "Only clean-denied/standard-allowed EXISTING behavior verified. Full suspended-account denial NOT VERIFIED."
+    }
+  ],
+  "errors": [],
+  "method": "Fresh isolated browser context per negative; missing QR blocked before any preview image load to avoid reuse of an already decoded memory-cache image. No real services."
+}

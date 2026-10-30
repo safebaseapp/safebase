@@ -1,0 +1,62 @@
+{
+  "results": [
+    {
+      "name": "anonymous",
+      "expectedPremium": false,
+      "actualPremium": false,
+      "status": 401,
+      "result": "PASS",
+      "note": "Actual API with in-memory dependency fixtures."
+    },
+    {
+      "name": "free",
+      "expectedPremium": false,
+      "actualPremium": false,
+      "status": 200,
+      "result": "PASS",
+      "note": "Actual API with in-memory dependency fixtures."
+    },
+    {
+      "name": "premium",
+      "expectedPremium": true,
+      "actualPremium": true,
+      "status": 200,
+      "result": "PASS",
+      "note": "Actual API with in-memory dependency fixtures."
+    },
+    {
+      "name": "expired-stale-plan",
+      "expectedPremium": false,
+      "actualPremium": true,
+      "status": 200,
+      "result": "FAIL",
+      "note": "SECURITY BLOCKER: endpoint trusts active profile.plan, no expiry/billing check. Kept unchanged. Real storage/billing E2E NOT TESTED."
+    },
+    {
+      "name": "suspended",
+      "expectedPremium": false,
+      "actualPremium": false,
+      "status": 200,
+      "result": "PASS",
+      "note": "Clean denied; existing requirePrintAuth checks only user, so standard exports remain possible. Full suspension policy not proven."
+    },
+    {
+      "name": "active-reward",
+      "expectedPremium": true,
+      "actualPremium": true,
+      "status": 200,
+      "result": "PASS",
+      "note": "Actual API with in-memory dependency fixtures."
+    },
+    {
+      "name": "missing-profile",
+      "expectedPremium": false,
+      "actualPremium": false,
+      "status": 200,
+      "result": "PASS",
+      "note": "Actual API with in-memory dependency fixtures."
+    }
+  ],
+  "realSupabase": "NOT TESTED",
+  "changesToEligibility": "NONE"
+}

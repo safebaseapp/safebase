@@ -1,0 +1,28 @@
+{
+  "typescript": "PASS: final npx tsc --noEmit exit 0",
+  "eslint": {
+    "errors": 0,
+    "warnings": 2
+  },
+  "publishedSigns": 36,
+  "localeDetailPages": 72,
+  "newPublishedSigns": 0,
+  "blockedCandidates": 24,
+  "qrAssets": 72,
+  "artifactChecks": 432,
+  "artifactDecodeChecks": 720,
+  "browserCases": 98,
+  "layoutCases": 144,
+  "negativeBrowserCases": 8,
+  "protectedFiles": 547,
+  "minimumA4FontPt": 8.641097282194565,
+  "normalBuild": "BLOCKED: Google Fonts network; final reattempt aborted before execution, no normal build PASS",
+  "fixtureBuild": "PASS: Webpack + cached real font response + loopback public Supabase fixture",
+  "decision": "NO-GO",
+  "remoteDelivery": {
+    "branchPush": "PASS",
+    "pushedCodeSha": "83f2aff84d42b4217b7707c4001146b34369cd53",
+    "draftPR": "BLOCKED: GitHub GraphQL Forbidden; not created",
+    "preview": "NOT VERIFIED: status/check-runs API Forbidden; no URL"
+  }
+}
