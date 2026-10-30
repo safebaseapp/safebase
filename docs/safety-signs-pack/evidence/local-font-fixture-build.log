@@ -27,9 +27,9 @@ SERNEM download/auth QA: PASS
   Finished TypeScript in 20.2s ...
   Collecting page data using 4 workers ...
   Generating static pages using 4 workers (0/858) ...
-  Generating static pages using 4 workers (214/858) 
-  Generating static pages using 4 workers (428/858) 
-  Generating static pages using 4 workers (643/858) 
+  Generating static pages using 4 workers (214/858)
+  Generating static pages using 4 workers (428/858)
+  Generating static pages using 4 workers (643/858)
 ✓ Generating static pages using 4 workers (858/858) in 3.0s
   Finalizing page optimization ...
   Collecting build traces ...
@@ -171,4 +171,3 @@ Route (app)
 
 ○  (Static)   prerendered as static content
 ƒ  (Dynamic)  server-rendered on demand
-
