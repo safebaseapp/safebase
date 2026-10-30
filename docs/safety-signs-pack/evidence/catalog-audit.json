@@ -1,0 +1,370 @@
+{
+  "result": "PASS",
+  "count": 36,
+  "localeRoutes": 72,
+  "protectedFiles": 547,
+  "eligibilityApi": "byte-identical",
+  "premiumResolver": "byte-identical",
+  "assets": [
+    {
+      "slug": "safety-helmet-must-be-worn",
+      "productCode": "SRN-M-014",
+      "symbolFile": "M014",
+      "category": "mandatory",
+      "sha256": "46bdad9a9f23237d0faa48880d85c2af626c497db03d00463e097e9b7bcf0382",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "eye-protection-must-be-worn",
+      "productCode": "SRN-M-004",
+      "symbolFile": "M004",
+      "category": "mandatory",
+      "sha256": "4f48fc3c89c5cbe968886cae45c448f347f8488db9d4662b7fc3472ffdadf47c",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "protective-gloves-must-be-worn",
+      "productCode": "SRN-M-009",
+      "symbolFile": "M009",
+      "category": "mandatory",
+      "sha256": "889059fbb7391d931ae44efa0c0a46d4c065f26729b08875c3a9ddf6f7f709b3",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "safety-footwear-must-be-worn",
+      "productCode": "SRN-M-008",
+      "symbolFile": "M008",
+      "category": "mandatory",
+      "sha256": "f8ede9fe797aace32b52002ef4c4f7ddff86f56c5372817f2c81ea9e0b542e87",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "hearing-protection-must-be-worn",
+      "productCode": "SRN-M-003",
+      "symbolFile": "M003",
+      "category": "mandatory",
+      "sha256": "95011a231679328752fee3f4244d312e5e8a6370f52b0b113eea80f34c3faa7f",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "no-smoking",
+      "productCode": "SRN-P-001",
+      "symbolFile": "P002",
+      "category": "prohibition",
+      "sha256": "b59edc488d87ac6801460440ea88798a67d5e6e9e453c3d7ebef942040decbb6",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "no-unauthorized-entry",
+      "productCode": "SRN-P-002",
+      "symbolFile": "P004",
+      "category": "prohibition",
+      "sha256": "ff5c50c572254ffc59fde954b9c18a35ce87df9d85108850d9526ed7570e7b6f",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "no-open-flame",
+      "productCode": "SRN-P-003",
+      "symbolFile": "P003",
+      "category": "prohibition",
+      "sha256": "ee930b5c17855b7c7a26c6a6312af8f92795245e69836d3b4dd6c9b6481507b3",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "warning-high-voltage",
+      "productCode": "SRN-W-012",
+      "symbolFile": "W012",
+      "category": "warning",
+      "sha256": "7be82f846822961e763fb5975512531b91e59b99a2016018971ad87b92464bab",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "warning-forklift-traffic",
+      "productCode": "SRN-W-002",
+      "symbolFile": "W014",
+      "category": "warning",
+      "sha256": "df9b43c53f1014f639a46eeae4d91abbef6a3b955f2a86e503d1c6182305708a",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "warning-falling-objects",
+      "productCode": "SRN-W-003",
+      "symbolFile": "W035",
+      "category": "warning",
+      "sha256": "9ef57038fe6e5414065a9a90d2b7a79f09082ab917ea25bf3fc3b062a1785c5c",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "warning-slippery-surface",
+      "productCode": "SRN-W-004",
+      "symbolFile": "W011",
+      "category": "warning",
+      "sha256": "fe20fb31c6ef3d836a19bfd26d3a553cbd7256a7c9c723132284b3c276c33bb5",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "first-aid",
+      "productCode": "SRN-E-001",
+      "symbolFile": "E003",
+      "category": "emergency",
+      "sha256": "beb947d67ed4d41cb29ca5104933bea20b7012acfe610702fe3f3486112ac333",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "emergency-exit",
+      "productCode": "SRN-E-002",
+      "symbolFile": "E001",
+      "category": "emergency",
+      "sha256": "ee988614ccfb3f37dbd3efbf772261e93487919c6344a1cbe7e37da9985d6cbd",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "assembly-point",
+      "productCode": "SRN-E-003",
+      "symbolFile": "E007",
+      "category": "emergency",
+      "sha256": "5b1239b7a088f9d9e2408cc52d0b3dd53b26793279bc17aa34684109ffd3dfcf",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "fire-extinguisher",
+      "productCode": "SRN-F-001",
+      "symbolFile": "F001",
+      "category": "fire",
+      "sha256": "8eab9ee3de88fa5a8fe09f22bc3b3f659af44a68e6887799422d3ba817cddd49",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "general-mandatory-action",
+      "productCode": "SRN-M-001",
+      "symbolFile": "M001",
+      "category": "mandatory",
+      "sha256": "74cf07c66b3f4f310b28ec3567261da5d9d2c9c662f34f41f1eab8858b9fd83f",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "refer-to-instruction-manual",
+      "productCode": "SRN-M-002",
+      "symbolFile": "M002",
+      "category": "mandatory",
+      "sha256": "b4e456e4f10b72703e4fe39bbc05ce6efde22077beb2d500bf070bf55facd790",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "protective-clothing-must-be-worn",
+      "productCode": "SRN-M-010",
+      "symbolFile": "M010",
+      "category": "mandatory",
+      "sha256": "cd778b7164239bb80e24fa678477e632ecdd7b43122eccd945b46145c66a2c9e",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "wash-your-hands",
+      "productCode": "SRN-M-011",
+      "symbolFile": "M011",
+      "category": "mandatory",
+      "sha256": "4da507ae200c716ae6cad6101a677c5eb0e3df1e673257f9016e10b2d54e5ac9",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "use-handrail",
+      "productCode": "SRN-M-012",
+      "symbolFile": "M012",
+      "category": "mandatory",
+      "sha256": "92f10d168f8d2be6f5306b4a1e10ac84dd5f4817f795fea63cbf7701a5e9a24d",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "face-shield-must-be-worn",
+      "productCode": "SRN-M-013",
+      "symbolFile": "M013",
+      "category": "mandatory",
+      "sha256": "da48b12cb73186638ee6836744f343b9f89e6bdb9bb170ee37b7b631be704c10",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "high-visibility-clothing-must-be-worn",
+      "productCode": "SRN-M-015",
+      "symbolFile": "M015",
+      "category": "mandatory",
+      "sha256": "d1243bda63566bf9ab9dacd6f45b00ebb29f7d99922ce549b9913389c316e198",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "respiratory-protection-must-be-worn",
+      "productCode": "SRN-M-017",
+      "symbolFile": "M017",
+      "category": "mandatory",
+      "sha256": "1d5fa609c58f8fc9efe7f6cc5c6ac36e2ca59d70b773cddcd5878a1731ca9d0b",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "safety-harness-must-be-worn",
+      "productCode": "SRN-M-018",
+      "symbolFile": "M018",
+      "category": "mandatory",
+      "sha256": "f60cd9f11fa027ee7d828c918030c6d983ccb3266721032014d83972fd1cb033",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "not-drinking-water",
+      "productCode": "SRN-P-005",
+      "symbolFile": "P005",
+      "category": "prohibition",
+      "sha256": "176033a18c65c445e8b1522e296ccb2d0b6134e79a5c7ee84759d1da7225ac68",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "no-access-for-forklifts",
+      "productCode": "SRN-P-006",
+      "symbolFile": "P006",
+      "category": "prohibition",
+      "sha256": "8d380c2b4573b08138a2b392cb5395e08f3453381b723873b672c16d4b886a19",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "do-not-touch",
+      "productCode": "SRN-P-010",
+      "symbolFile": "P010",
+      "category": "prohibition",
+      "sha256": "0c5e067a2074188fcfe9d037dac16eedf597ca0d4f33334605ab5f8c424fb97b",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "no-activated-mobile-phone",
+      "productCode": "SRN-P-013",
+      "symbolFile": "P013",
+      "category": "prohibition",
+      "sha256": "bdb7a56b4324f8cf67f7891b6ab5154614df6fe9ac37d09fa5748304c2798e24",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "general-warning",
+      "productCode": "SRN-W-001",
+      "symbolFile": "W001",
+      "category": "warning",
+      "sha256": "dff34a181f65e16b0758869ca4e69690fa01ebc27c68ac09570469374c194824",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "warning-overhead-load",
+      "productCode": "SRN-W-015",
+      "symbolFile": "W015",
+      "category": "warning",
+      "sha256": "c339bb3f53d42e74da8df485341636dad67f2e4442c9a5856988963e48cbea3d",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "warning-toxic-material",
+      "productCode": "SRN-W-016",
+      "symbolFile": "W016",
+      "category": "warning",
+      "sha256": "cd466d50193ba6a1157c1a726e11d98f059b1e80baebcf14cbcb1f8fb8ee093d",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "warning-hot-surface",
+      "productCode": "SRN-W-017",
+      "symbolFile": "W017",
+      "category": "warning",
+      "sha256": "45069d1cc78b327e7e76d676a32b679d571fb22ee159039d919bc40fee2141f9",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "warning-flammable-material",
+      "productCode": "SRN-W-021",
+      "symbolFile": "W021",
+      "category": "warning",
+      "sha256": "11a6df6161e60d64ac6d159a8d987af19bea0f2456f35c373cf2294e2f38415d",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "warning-corrosive-substance",
+      "productCode": "SRN-W-023",
+      "symbolFile": "W023",
+      "category": "warning",
+      "sha256": "4d9e4468f80bc3caadd6e197842f543e8d8f350a0d9a09eeba1eda82a026ac4c",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    },
+    {
+      "slug": "warning-crushing-of-hands",
+      "productCode": "SRN-W-024",
+      "symbolFile": "W024",
+      "category": "warning",
+      "sha256": "e48b5715213db4ef978f55e8d0e1f12739ee1d8d6a10f0154556e43532edc74d",
+      "source": "@iso-safety-signs/assets@1.0.1 (existing asset)",
+      "licenseStatus": "LEGACY INDIVIDUAL ARTWORK LICENSE NOT VERIFIED",
+      "standardStatus": "ISO 7010 code mapping from existing package; official ISO/3864 conformity NOT VERIFIED"
+    }
+  ]
+}

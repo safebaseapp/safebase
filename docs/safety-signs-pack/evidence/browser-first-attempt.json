@@ -1,0 +1,716 @@
+{
+  "results": [
+    {
+      "name": "tr/safety-helmet-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/safety-helmet-must-be-worn",
+      "status": 200,
+      "title": "Baret Takmak Zorunludur | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/eye-protection-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/eye-protection-must-be-worn",
+      "status": 200,
+      "title": "Koruyucu Gözlük Takmak Zorunludur | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/protective-gloves-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/protective-gloves-must-be-worn",
+      "status": 200,
+      "title": "Koruyucu Eldiven Kullanmak Zorunludur | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/safety-footwear-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/safety-footwear-must-be-worn",
+      "status": 200,
+      "title": "Güvenlik Ayakkabısı Giymek Zorunludur | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/hearing-protection-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/hearing-protection-must-be-worn",
+      "status": 200,
+      "title": "Kulak Koruyucu Kullanmak Zorunludur | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/no-smoking route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/no-smoking",
+      "status": 200,
+      "title": "Sigara İçilmez A4 PDF Levhası | SERNEM"
+    },
+    {
+      "name": "tr/no-unauthorized-entry route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/no-unauthorized-entry",
+      "status": 200,
+      "title": "Yetkisiz Giriş Yasaktır | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/no-open-flame route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/no-open-flame",
+      "status": 200,
+      "title": "Açık Alev Yasaktır | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/warning-high-voltage route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/warning-high-voltage",
+      "status": 200,
+      "title": "Dikkat! Yüksek Gerilim | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/warning-forklift-traffic route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/warning-forklift-traffic",
+      "status": 200,
+      "title": "Dikkat! Forklift Trafiği | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/warning-falling-objects route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/warning-falling-objects",
+      "status": 200,
+      "title": "Dikkat! Düşen Cisimler | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/warning-slippery-surface route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/warning-slippery-surface",
+      "status": 200,
+      "title": "Dikkat! Kaygan Zemin | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/first-aid route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/first-aid",
+      "status": 200,
+      "title": "İlk Yardım | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/emergency-exit route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/emergency-exit",
+      "status": 200,
+      "title": "Acil Çıkış | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/assembly-point route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/assembly-point",
+      "status": 200,
+      "title": "Acil Toplanma Noktası | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/fire-extinguisher route/metadata/assets/related",
+      "result": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(await p.locator('nav[aria-label]').filter({has:p.locator('a[href*=\"/safety-signs/\"]')}).count())\n"
+    },
+    {
+      "name": "tr/general-mandatory-action route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/general-mandatory-action",
+      "status": 200,
+      "title": "Genel Zorunluluk | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/refer-to-instruction-manual route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/refer-to-instruction-manual",
+      "status": 200,
+      "title": "Talimatları Okuyun | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/protective-clothing-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/protective-clothing-must-be-worn",
+      "status": 200,
+      "title": "Koruyucu Giysi Kullanmak Zorunludur | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/wash-your-hands route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/wash-your-hands",
+      "status": 200,
+      "title": "Ellerinizi Yıkayın | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/use-handrail route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/use-handrail",
+      "status": 200,
+      "title": "Merdiven Trabzanını Kullanın | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/face-shield-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/face-shield-must-be-worn",
+      "status": 200,
+      "title": "Yüz Siperi Kullanmak Zorunludur | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/high-visibility-clothing-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/high-visibility-clothing-must-be-worn",
+      "status": 200,
+      "title": "Yüksek Görünürlüklü Giysi Zorunludur | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/respiratory-protection-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/respiratory-protection-must-be-worn",
+      "status": 200,
+      "title": "Solunum Koruyucu Kullanmak Zorunludur | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/safety-harness-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/safety-harness-must-be-worn",
+      "status": 200,
+      "title": "Emniyet Kemeri Kullanmak Zorunludur | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/not-drinking-water route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/not-drinking-water",
+      "status": 200,
+      "title": "İçme Suyu Değildir | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/no-access-for-forklifts route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/no-access-for-forklifts",
+      "status": 200,
+      "title": "Forklift Girişi Yasaktır | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/do-not-touch route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/do-not-touch",
+      "status": 200,
+      "title": "Dokunmak Yasaktır | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/no-activated-mobile-phone route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/no-activated-mobile-phone",
+      "status": 200,
+      "title": "Cep Telefonu Kullanmak Yasaktır | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/general-warning route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/general-warning",
+      "status": 200,
+      "title": "Dikkat! Genel Tehlike | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/warning-overhead-load route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/warning-overhead-load",
+      "status": 200,
+      "title": "Dikkat! Asılı Yük | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/warning-toxic-material route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/warning-toxic-material",
+      "status": 200,
+      "title": "Dikkat! Zehirli Madde | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/warning-hot-surface route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/warning-hot-surface",
+      "status": 200,
+      "title": "Dikkat! Sıcak Yüzey | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/warning-flammable-material route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/warning-flammable-material",
+      "status": 200,
+      "title": "Dikkat! Yanıcı Madde | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/warning-corrosive-substance route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/warning-corrosive-substance",
+      "status": 200,
+      "title": "Dikkat! Aşındırıcı Madde | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "tr/warning-crushing-of-hands route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/tr/safety-signs/warning-crushing-of-hands",
+      "status": 200,
+      "title": "Dikkat! El Sıkışma Tehlikesi | A4/A3 PDF ve PNG Levha"
+    },
+    {
+      "name": "en/safety-helmet-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/safety-helmet-must-be-worn",
+      "status": 200,
+      "title": "Safety Helmet Must Be Worn | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/eye-protection-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/eye-protection-must-be-worn",
+      "status": 200,
+      "title": "Eye Protection Must Be Worn | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/protective-gloves-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/protective-gloves-must-be-worn",
+      "status": 200,
+      "title": "Protective Gloves Must Be Worn | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/safety-footwear-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/safety-footwear-must-be-worn",
+      "status": 200,
+      "title": "Safety Footwear Must Be Worn | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/hearing-protection-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/hearing-protection-must-be-worn",
+      "status": 200,
+      "title": "Hearing Protection Must Be Worn | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/no-smoking route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/no-smoking",
+      "status": 200,
+      "title": "No Smoking Sign A4 PDF & A3 | SERNEM"
+    },
+    {
+      "name": "en/no-unauthorized-entry route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/no-unauthorized-entry",
+      "status": 200,
+      "title": "No Unauthorized Entry | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/no-open-flame route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/no-open-flame",
+      "status": 200,
+      "title": "No Open Flame | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/warning-high-voltage route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/warning-high-voltage",
+      "status": 200,
+      "title": "Warning! High Voltage | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/warning-forklift-traffic route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/warning-forklift-traffic",
+      "status": 200,
+      "title": "Warning! Forklift Traffic | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/warning-falling-objects route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/warning-falling-objects",
+      "status": 200,
+      "title": "Warning! Falling Objects | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/warning-slippery-surface route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/warning-slippery-surface",
+      "status": 200,
+      "title": "Warning! Slippery Surface | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/first-aid route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/first-aid",
+      "status": 200,
+      "title": "First Aid | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/emergency-exit route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/emergency-exit",
+      "status": 200,
+      "title": "Emergency Exit | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/assembly-point route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/assembly-point",
+      "status": 200,
+      "title": "Emergency Assembly Point | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/fire-extinguisher route/metadata/assets/related",
+      "result": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(await p.locator('nav[aria-label]').filter({has:p.locator('a[href*=\"/safety-signs/\"]')}).count())\n"
+    },
+    {
+      "name": "en/general-mandatory-action route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/general-mandatory-action",
+      "status": 200,
+      "title": "General Mandatory Action | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/refer-to-instruction-manual route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/refer-to-instruction-manual",
+      "status": 200,
+      "title": "Refer to Instruction Manual | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/protective-clothing-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/protective-clothing-must-be-worn",
+      "status": 200,
+      "title": "Protective Clothing Must Be Worn | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/wash-your-hands route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/wash-your-hands",
+      "status": 200,
+      "title": "Wash Your Hands | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/use-handrail route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/use-handrail",
+      "status": 200,
+      "title": "Use Handrail | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/face-shield-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/face-shield-must-be-worn",
+      "status": 200,
+      "title": "Face Shield Must Be Worn | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/high-visibility-clothing-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/high-visibility-clothing-must-be-worn",
+      "status": 200,
+      "title": "High-Visibility Clothing Must Be Worn | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/respiratory-protection-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/respiratory-protection-must-be-worn",
+      "status": 200,
+      "title": "Respiratory Protection Must Be Worn | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/safety-harness-must-be-worn route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/safety-harness-must-be-worn",
+      "status": 200,
+      "title": "Safety Harness Must Be Worn | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/not-drinking-water route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/not-drinking-water",
+      "status": 200,
+      "title": "Not Drinking Water | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/no-access-for-forklifts route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/no-access-for-forklifts",
+      "status": 200,
+      "title": "No Access for Forklifts | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/do-not-touch route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/do-not-touch",
+      "status": 200,
+      "title": "Do Not Touch | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/no-activated-mobile-phone route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/no-activated-mobile-phone",
+      "status": 200,
+      "title": "No Activated Mobile Phone | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/general-warning route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/general-warning",
+      "status": 200,
+      "title": "Warning! General Hazard | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/warning-overhead-load route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/warning-overhead-load",
+      "status": 200,
+      "title": "Warning! Overhead Load | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/warning-toxic-material route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/warning-toxic-material",
+      "status": 200,
+      "title": "Warning! Toxic Material | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/warning-hot-surface route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/warning-hot-surface",
+      "status": 200,
+      "title": "Warning! Hot Surface | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/warning-flammable-material route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/warning-flammable-material",
+      "status": 200,
+      "title": "Warning! Flammable Material | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/warning-corrosive-substance route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/warning-corrosive-substance",
+      "status": 200,
+      "title": "Warning! Corrosive Substance | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "en/warning-crushing-of-hands route/metadata/assets/related",
+      "result": "PASS",
+      "path": "/en/safety-signs/warning-crushing-of-hands",
+      "status": 200,
+      "title": "Warning! Crushing of Hands | A4/A3 PDF & PNG Sign"
+    },
+    {
+      "name": "tr invalid sign 404",
+      "result": "PASS"
+    },
+    {
+      "name": "tr library filters/search/keyboard/metadata",
+      "result": "PASS",
+      "filters": 6,
+      "total": 36
+    },
+    {
+      "name": "tr/library 320px",
+      "result": "PASS",
+      "width": 230,
+      "height": 325.328125,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 30.796875
+    },
+    {
+      "name": "tr/high-visibility-clothing-must-be-worn 320px",
+      "result": "PASS",
+      "width": 272,
+      "height": 384.734375,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 36.65625
+    },
+    {
+      "name": "tr/library 360px",
+      "result": "PASS",
+      "width": 270,
+      "height": 381.90625,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 36.375
+    },
+    {
+      "name": "tr/high-visibility-clothing-must-be-worn 360px",
+      "result": "PASS",
+      "width": 312,
+      "height": 441.328125,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 42.25
+    },
+    {
+      "name": "tr/library 390px",
+      "result": "PASS",
+      "width": 300,
+      "height": 424.34375,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 40.5625
+    },
+    {
+      "name": "tr/high-visibility-clothing-must-be-worn 390px",
+      "result": "PASS",
+      "width": 342,
+      "height": 483.75,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 46.4375
+    },
+    {
+      "name": "tr/library 768px",
+      "result": "PASS",
+      "width": 302,
+      "height": 427.171875,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 40.84375
+    },
+    {
+      "name": "tr/high-visibility-clothing-must-be-worn 768px",
+      "result": "PASS",
+      "width": 650,
+      "height": 919.421875,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 89.453125
+    },
+    {
+      "name": "tr/library 1440px",
+      "result": "PASS",
+      "width": 363.328125,
+      "height": 513.921875,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 49.421875
+    },
+    {
+      "name": "tr/high-visibility-clothing-must-be-worn 1440px",
+      "result": "PASS",
+      "width": 650,
+      "height": 919.421875,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 89.453125
+    },
+    {
+      "name": "en invalid sign 404",
+      "result": "PASS"
+    },
+    {
+      "name": "en library filters/search/keyboard/metadata",
+      "result": "PASS",
+      "filters": 6,
+      "total": 36
+    },
+    {
+      "name": "en/library 320px",
+      "result": "PASS",
+      "width": 230,
+      "height": 325.328125,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 30.796875
+    },
+    {
+      "name": "en/high-visibility-clothing-must-be-worn 320px",
+      "result": "PASS",
+      "width": 272,
+      "height": 384.734375,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 36.65625
+    },
+    {
+      "name": "en/library 360px",
+      "result": "PASS",
+      "width": 270,
+      "height": 381.90625,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 36.375
+    },
+    {
+      "name": "en/high-visibility-clothing-must-be-worn 360px",
+      "result": "PASS",
+      "width": 312,
+      "height": 441.328125,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 42.25
+    },
+    {
+      "name": "en/library 390px",
+      "result": "PASS",
+      "width": 300,
+      "height": 424.34375,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 40.5625
+    },
+    {
+      "name": "en/high-visibility-clothing-must-be-worn 390px",
+      "result": "PASS",
+      "width": 342,
+      "height": 483.75,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 46.4375
+    },
+    {
+      "name": "en/library 768px",
+      "result": "PASS",
+      "width": 302,
+      "height": 427.171875,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 40.84375
+    },
+    {
+      "name": "en/high-visibility-clothing-must-be-worn 768px",
+      "result": "PASS",
+      "width": 650,
+      "height": 919.421875,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 89.453125
+    },
+    {
+      "name": "en/library 1440px",
+      "result": "PASS",
+      "width": 363.328125,
+      "height": 513.921875,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 49.421875
+    },
+    {
+      "name": "en/high-visibility-clothing-must-be-worn 1440px",
+      "result": "PASS",
+      "width": 650,
+      "height": 919.421875,
+      "titleClipped": false,
+      "footerSeparate": true,
+      "qrWidth": 89.453125
+    },
+    {
+      "name": "sitemap all existing URLs and 72 signs, no phantom candidates",
+      "result": "PASS",
+      "urls": 866,
+      "signUrls": 72
+    },
+    {
+      "name": "no uncaught browser exceptions",
+      "result": "PASS"
+    }
+  ],
+  "errors": [],
+  "note": "Chromium viewport emulation and local production-mode fixture build; physical devices and remote Preview NOT TESTED."
+}

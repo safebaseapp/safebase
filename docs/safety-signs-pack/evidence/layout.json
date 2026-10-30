@@ -1,0 +1,5369 @@
+{
+  "results": [
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "safety-helmet-must-be-worn",
+      "calls": [
+        {
+          "text": "BARET TAKMAK ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 290.938232421875,
+          "right": 2194.790771484375,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "eye-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "KORUYUCU GÖZLÜK TAKMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 322.15771484375,
+          "right": 2165.5712890625,
+          "top": 2612.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "protective-gloves-must-be-worn",
+      "calls": [
+        {
+          "text": "KORUYUCU ELDİVEN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 598.64697265625,
+          "right": 1881.08203125,
+          "top": 2612.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "KULLANMAK ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 390.486572265625,
+          "right": 2095.242431640625,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "safety-footwear-must-be-worn",
+      "calls": [
+        {
+          "text": "GÜVENLİK AYAKKABISI GİYMEK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 263.341064453125,
+          "right": 2221.387939453125,
+          "top": 2612.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "hearing-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "KULAK KORUYUCU KULLANMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 234.2060546875,
+          "right": 2253.52294921875,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "no-smoking",
+      "calls": [
+        {
+          "text": "SİGARA İÇİLMEZ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 732.593505859375,
+          "right": 1747.051513671875,
+          "top": 2684.46875,
+          "bottom": 2817.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "no-unauthorized-entry",
+      "calls": [
+        {
+          "text": "GEÇİŞ YASAKTIR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 719.42626953125,
+          "right": 1763.302734375,
+          "top": 2684.46875,
+          "bottom": 2817.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "no-open-flame",
+      "calls": [
+        {
+          "text": "AÇIK ALEV YASAKTIR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 575.09228515625,
+          "right": 1905.63671875,
+          "top": 2704.46875,
+          "bottom": 2817.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "warning-high-voltage",
+      "calls": [
+        {
+          "text": "DİKKAT! YÜKSEK GERİLİM",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 440.138671875,
+          "right": 2039.7353515625,
+          "top": 2684.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "warning-forklift-traffic",
+      "calls": [
+        {
+          "text": "DİKKAT! FORKLİFT TRAFİĞİ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 402.083251953125,
+          "right": 2078.187744140625,
+          "top": 2681.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "warning-falling-objects",
+      "calls": [
+        {
+          "text": "DİKKAT! DÜŞEN CİSİMLER",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 443.61767578125,
+          "right": 2042.111328125,
+          "top": 2684.46875,
+          "bottom": 2817.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "warning-slippery-surface",
+      "calls": [
+        {
+          "text": "DİKKAT! KAYGAN ZEMİN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 501.47900390625,
+          "right": 1978.25,
+          "top": 2684.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "first-aid",
+      "calls": [
+        {
+          "text": "İLK YARDIM",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 889.17431640625,
+          "right": 1590.69970703125,
+          "top": 2684.46875,
+          "bottom": 2791.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "emergency-exit",
+      "calls": [
+        {
+          "text": "ACİL ÇIKIŞ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 913.135498046875,
+          "right": 1565.490478515625,
+          "top": 2684.46875,
+          "bottom": 2817.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "assembly-point",
+      "calls": [
+        {
+          "text": "ACİL TOPLANMA NOKTASI",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 432.849853515625,
+          "right": 2042.421142578125,
+          "top": 2684.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "fire-extinguisher",
+      "calls": [
+        {
+          "text": "YANGIN SÖNDÜRÜCÜ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 581.05029296875,
+          "right": 1893.6787109375,
+          "top": 2684.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "general-mandatory-action",
+      "calls": [
+        {
+          "text": "GENEL ZORUNLULUK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 578.3740234375,
+          "right": 1906.35498046875,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "refer-to-instruction-manual",
+      "calls": [
+        {
+          "text": "TALİMATLARI OKUYUN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 542.025390625,
+          "right": 1930.70361328125,
+          "top": 2684.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "protective-clothing-must-be-worn",
+      "calls": [
+        {
+          "text": "KORUYUCU GİYSİ KULLANMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 286.2080078125,
+          "right": 2201.52099609375,
+          "top": 2612.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "wash-your-hands",
+      "calls": [
+        {
+          "text": "ELLERİNİZİ YIKAYIN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 642.59228515625,
+          "right": 1837.13671875,
+          "top": 2684.46875,
+          "bottom": 2791.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "use-handrail",
+      "calls": [
+        {
+          "text": "MERDİVEN TRABZANINI",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 518.843505859375,
+          "right": 1961.427490234375,
+          "top": 2612.59375,
+          "bottom": 2719.59375
+        },
+        {
+          "text": "KULLANIN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 928.60302734375,
+          "right": 1551.1259765625,
+          "top": 2777.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "face-shield-must-be-worn",
+      "calls": [
+        {
+          "text": "YÜZ SİPERİ KULLANMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 478.114501953125,
+          "right": 2003.614501953125,
+          "top": 2612.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "high-visibility-clothing-must-be-worn",
+      "calls": [
+        {
+          "text": "YÜKSEK GÖRÜNÜRLÜKLÜ GİYSİ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 245.41796875,
+          "right": 2228.85302734375,
+          "top": 2612.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "respiratory-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "SOLUNUM KORUYUCU",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 548.572509765625,
+          "right": 1927.156494140625,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "KULLANMAK ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 390.486572265625,
+          "right": 2095.242431640625,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "safety-harness-must-be-worn",
+      "calls": [
+        {
+          "text": "EMNİYET KEMERİ KULLANMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 293.166015625,
+          "right": 2194.56298828125,
+          "top": 2612.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "not-drinking-water",
+      "calls": [
+        {
+          "text": "İÇME SUYU DEĞİLDİR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 584.761474609375,
+          "right": 1900.967529296875,
+          "top": 2681.46875,
+          "bottom": 2817.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "no-access-for-forklifts",
+      "calls": [
+        {
+          "text": "FORKLİFT GİRİŞİ YASAKTIR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 403.059814453125,
+          "right": 2082.669189453125,
+          "top": 2684.46875,
+          "bottom": 2817.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "do-not-touch",
+      "calls": [
+        {
+          "text": "DOKUNMAK YASAKTIR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 545.42431640625,
+          "right": 1940.3046875,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "no-activated-mobile-phone",
+      "calls": [
+        {
+          "text": "CEP TELEFONU KULLANMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 345.738525390625,
+          "right": 2138.990478515625,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "YASAKTIR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 928.279296875,
+          "right": 1551.44970703125,
+          "top": 2776.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "general-warning",
+      "calls": [
+        {
+          "text": "DİKKAT! GENEL TEHLİKE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 478.3466796875,
+          "right": 2005.279296875,
+          "top": 2684.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "warning-overhead-load",
+      "calls": [
+        {
+          "text": "DİKKAT! ASILI YÜK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 669.32568359375,
+          "right": 1818.4033203125,
+          "top": 2684.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "warning-toxic-material",
+      "calls": [
+        {
+          "text": "DİKKAT! ZEHİRLİ MADDE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 488.814208984375,
+          "right": 1994.811767578125,
+          "top": 2684.46875,
+          "bottom": 2791.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "warning-hot-surface",
+      "calls": [
+        {
+          "text": "DİKKAT! SICAK YÜZEY",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 558.1806640625,
+          "right": 1928.4453125,
+          "top": 2684.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "warning-flammable-material",
+      "calls": [
+        {
+          "text": "DİKKAT! YANICI MADDE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 525.77099609375,
+          "right": 1957.85498046875,
+          "top": 2684.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "warning-corrosive-substance",
+      "calls": [
+        {
+          "text": "DİKKAT! AŞINDIRICI MADDE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 395.03369140625,
+          "right": 2088.59228515625,
+          "top": 2684.46875,
+          "bottom": 2817.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": false,
+      "slug": "warning-crushing-of-hands",
+      "calls": [
+        {
+          "text": "DİKKAT! EL SIKIŞMA TEHLİKESİ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 276.9306640625,
+          "right": 2203.34033203125,
+          "top": 2684.46875,
+          "bottom": 2817.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "Bu levhanın bilgi sayfası",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 123,
+          "right": 591.279296875,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/tr/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 551.123046875,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "safety-helmet-must-be-worn",
+      "calls": [
+        {
+          "text": "BARET TAKMAK ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 290.938232421875,
+          "right": 2194.790771484375,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "eye-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "KORUYUCU GÖZLÜK TAKMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 322.15771484375,
+          "right": 2165.5712890625,
+          "top": 2872.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "protective-gloves-must-be-worn",
+      "calls": [
+        {
+          "text": "KORUYUCU ELDİVEN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 598.64697265625,
+          "right": 1881.08203125,
+          "top": 2872.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "KULLANMAK ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 390.486572265625,
+          "right": 2095.242431640625,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "safety-footwear-must-be-worn",
+      "calls": [
+        {
+          "text": "GÜVENLİK AYAKKABISI GİYMEK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 263.341064453125,
+          "right": 2221.387939453125,
+          "top": 2872.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "hearing-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "KULAK KORUYUCU KULLANMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 234.2060546875,
+          "right": 2253.52294921875,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "no-smoking",
+      "calls": [
+        {
+          "text": "SİGARA İÇİLMEZ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 732.593505859375,
+          "right": 1747.051513671875,
+          "top": 2944.46875,
+          "bottom": 3077.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "no-unauthorized-entry",
+      "calls": [
+        {
+          "text": "GEÇİŞ YASAKTIR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 719.42626953125,
+          "right": 1763.302734375,
+          "top": 2944.46875,
+          "bottom": 3077.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "no-open-flame",
+      "calls": [
+        {
+          "text": "AÇIK ALEV YASAKTIR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 575.09228515625,
+          "right": 1905.63671875,
+          "top": 2964.46875,
+          "bottom": 3077.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "warning-high-voltage",
+      "calls": [
+        {
+          "text": "DİKKAT! YÜKSEK GERİLİM",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 440.138671875,
+          "right": 2039.7353515625,
+          "top": 2944.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "warning-forklift-traffic",
+      "calls": [
+        {
+          "text": "DİKKAT! FORKLİFT TRAFİĞİ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 402.083251953125,
+          "right": 2078.187744140625,
+          "top": 2941.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "warning-falling-objects",
+      "calls": [
+        {
+          "text": "DİKKAT! DÜŞEN CİSİMLER",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 443.61767578125,
+          "right": 2042.111328125,
+          "top": 2944.46875,
+          "bottom": 3077.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "warning-slippery-surface",
+      "calls": [
+        {
+          "text": "DİKKAT! KAYGAN ZEMİN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 501.47900390625,
+          "right": 1978.25,
+          "top": 2944.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "first-aid",
+      "calls": [
+        {
+          "text": "İLK YARDIM",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 889.17431640625,
+          "right": 1590.69970703125,
+          "top": 2944.46875,
+          "bottom": 3051.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "emergency-exit",
+      "calls": [
+        {
+          "text": "ACİL ÇIKIŞ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 913.135498046875,
+          "right": 1565.490478515625,
+          "top": 2944.46875,
+          "bottom": 3077.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "assembly-point",
+      "calls": [
+        {
+          "text": "ACİL TOPLANMA NOKTASI",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 432.849853515625,
+          "right": 2042.421142578125,
+          "top": 2944.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "fire-extinguisher",
+      "calls": [
+        {
+          "text": "YANGIN SÖNDÜRÜCÜ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 581.05029296875,
+          "right": 1893.6787109375,
+          "top": 2944.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "general-mandatory-action",
+      "calls": [
+        {
+          "text": "GENEL ZORUNLULUK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 578.3740234375,
+          "right": 1906.35498046875,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "refer-to-instruction-manual",
+      "calls": [
+        {
+          "text": "TALİMATLARI OKUYUN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 542.025390625,
+          "right": 1930.70361328125,
+          "top": 2944.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "protective-clothing-must-be-worn",
+      "calls": [
+        {
+          "text": "KORUYUCU GİYSİ KULLANMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 286.2080078125,
+          "right": 2201.52099609375,
+          "top": 2872.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "wash-your-hands",
+      "calls": [
+        {
+          "text": "ELLERİNİZİ YIKAYIN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 642.59228515625,
+          "right": 1837.13671875,
+          "top": 2944.46875,
+          "bottom": 3051.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "use-handrail",
+      "calls": [
+        {
+          "text": "MERDİVEN TRABZANINI",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 518.843505859375,
+          "right": 1961.427490234375,
+          "top": 2872.59375,
+          "bottom": 2979.59375
+        },
+        {
+          "text": "KULLANIN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 928.60302734375,
+          "right": 1551.1259765625,
+          "top": 3037.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "face-shield-must-be-worn",
+      "calls": [
+        {
+          "text": "YÜZ SİPERİ KULLANMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 478.114501953125,
+          "right": 2003.614501953125,
+          "top": 2872.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "high-visibility-clothing-must-be-worn",
+      "calls": [
+        {
+          "text": "YÜKSEK GÖRÜNÜRLÜKLÜ GİYSİ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 245.41796875,
+          "right": 2228.85302734375,
+          "top": 2872.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "respiratory-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "SOLUNUM KORUYUCU",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 548.572509765625,
+          "right": 1927.156494140625,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "KULLANMAK ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 390.486572265625,
+          "right": 2095.242431640625,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "safety-harness-must-be-worn",
+      "calls": [
+        {
+          "text": "EMNİYET KEMERİ KULLANMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 293.166015625,
+          "right": 2194.56298828125,
+          "top": 2872.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "ZORUNLUDUR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 802.08203125,
+          "right": 1678.64697265625,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "not-drinking-water",
+      "calls": [
+        {
+          "text": "İÇME SUYU DEĞİLDİR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 584.761474609375,
+          "right": 1900.967529296875,
+          "top": 2941.46875,
+          "bottom": 3077.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "no-access-for-forklifts",
+      "calls": [
+        {
+          "text": "FORKLİFT GİRİŞİ YASAKTIR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 403.059814453125,
+          "right": 2082.669189453125,
+          "top": 2944.46875,
+          "bottom": 3077.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "do-not-touch",
+      "calls": [
+        {
+          "text": "DOKUNMAK YASAKTIR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 545.42431640625,
+          "right": 1940.3046875,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "no-activated-mobile-phone",
+      "calls": [
+        {
+          "text": "CEP TELEFONU KULLANMAK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 345.738525390625,
+          "right": 2138.990478515625,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "YASAKTIR",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 928.279296875,
+          "right": 1551.44970703125,
+          "top": 3036.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "general-warning",
+      "calls": [
+        {
+          "text": "DİKKAT! GENEL TEHLİKE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 478.3466796875,
+          "right": 2005.279296875,
+          "top": 2944.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "warning-overhead-load",
+      "calls": [
+        {
+          "text": "DİKKAT! ASILI YÜK",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 669.32568359375,
+          "right": 1818.4033203125,
+          "top": 2944.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "warning-toxic-material",
+      "calls": [
+        {
+          "text": "DİKKAT! ZEHİRLİ MADDE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 488.814208984375,
+          "right": 1994.811767578125,
+          "top": 2944.46875,
+          "bottom": 3051.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "warning-hot-surface",
+      "calls": [
+        {
+          "text": "DİKKAT! SICAK YÜZEY",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 558.1806640625,
+          "right": 1928.4453125,
+          "top": 2944.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "warning-flammable-material",
+      "calls": [
+        {
+          "text": "DİKKAT! YANICI MADDE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 525.77099609375,
+          "right": 1957.85498046875,
+          "top": 2944.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "warning-corrosive-substance",
+      "calls": [
+        {
+          "text": "DİKKAT! AŞINDIRICI MADDE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 395.03369140625,
+          "right": 2088.59228515625,
+          "top": 2944.46875,
+          "bottom": 3077.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "tr",
+      "clean": true,
+      "slug": "warning-crushing-of-hands",
+      "calls": [
+        {
+          "text": "DİKKAT! EL SIKIŞMA TEHLİKESİ",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 276.9306640625,
+          "right": 2203.34033203125,
+          "top": 2944.46875,
+          "bottom": 3077.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "safety-helmet-must-be-worn",
+      "calls": [
+        {
+          "text": "SAFETY HELMET MUST BE WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 208.301513671875,
+          "right": 2266.427490234375,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "eye-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "EYE PROTECTION MUST BE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 397.23095703125,
+          "right": 2086.39501953125,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 1042.1240234375,
+          "right": 1429.60498046875,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "protective-gloves-must-be-worn",
+      "calls": [
+        {
+          "text": "PROTECTIVE GLOVES MUST BE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 272.200439453125,
+          "right": 2211.425537109375,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 1042.1240234375,
+          "right": 1429.60498046875,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "safety-footwear-must-be-worn",
+      "calls": [
+        {
+          "text": "SAFETY FOOTWEAR MUST BE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 315.93701171875,
+          "right": 2162.68896484375,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 1042.1240234375,
+          "right": 1429.60498046875,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "hearing-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "HEARING PROTECTION MUST BE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 234.083984375,
+          "right": 2249.5419921875,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 1042.1240234375,
+          "right": 1429.60498046875,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "no-smoking",
+      "calls": [
+        {
+          "text": "NO SMOKING",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 838.27099609375,
+          "right": 1642.5,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "no-unauthorized-entry",
+      "calls": [
+        {
+          "text": "NO THOROUGHFARE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 605.635498046875,
+          "right": 1877.990478515625,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "no-open-flame",
+      "calls": [
+        {
+          "text": "NO OPEN FLAME",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 727.156494140625,
+          "right": 1756.469482421875,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "warning-high-voltage",
+      "calls": [
+        {
+          "text": "WARNING! HIGH VOLTAGE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 433.328857421875,
+          "right": 2042.297119140625,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "warning-forklift-traffic",
+      "calls": [
+        {
+          "text": "WARNING! FORKLIFT TRAFFIC",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 306.131591796875,
+          "right": 2170.597412109375,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "warning-falling-objects",
+      "calls": [
+        {
+          "text": "WARNING! FALLING OBJECTS",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 319.864501953125,
+          "right": 2155.761474609375,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "warning-slippery-surface",
+      "calls": [
+        {
+          "text": "WARNING! SLIPPERY SURFACE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 276.956787109375,
+          "right": 2198.669189453125,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "first-aid",
+      "calls": [
+        {
+          "text": "FIRST AID",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 942.4580078125,
+          "right": 1541.27099609375,
+          "top": 2704.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "emergency-exit",
+      "calls": [
+        {
+          "text": "EMERGENCY EXIT",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 688.887451171875,
+          "right": 1798.757568359375,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "assembly-point",
+      "calls": [
+        {
+          "text": "EMERGENCY ASSEMBLY POINT",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 277.937744140625,
+          "right": 2209.707275390625,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "fire-extinguisher",
+      "calls": [
+        {
+          "text": "FIRE EXTINGUISHER",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 619.4599609375,
+          "right": 1866.26904296875,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "general-mandatory-action",
+      "calls": [
+        {
+          "text": "GENERAL MANDATORY ACTION",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 267.003173828125,
+          "right": 2209.725830078125,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "refer-to-instruction-manual",
+      "calls": [
+        {
+          "text": "REFER TO INSTRUCTION",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 488.72265625,
+          "right": 1991.00634765625,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "MANUAL",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 977.217529296875,
+          "right": 1507.427490234375,
+          "top": 2777.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "protective-clothing-must-be-worn",
+      "calls": [
+        {
+          "text": "PROTECTIVE CLOTHING MUST",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 310.5,
+          "right": 2177.14501953125,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "BE WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 945.93701171875,
+          "right": 1533.7919921875,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "wash-your-hands",
+      "calls": [
+        {
+          "text": "WASH YOUR HANDS",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 614.969482421875,
+          "right": 1860.656494140625,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "use-handrail",
+      "calls": [
+        {
+          "text": "USE HANDRAIL",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 774.77099609375,
+          "right": 1708.8740234375,
+          "top": 2704.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "face-shield-must-be-worn",
+      "calls": [
+        {
+          "text": "FACE SHIELD MUST BE WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 320.906494140625,
+          "right": 2158.822509765625,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "high-visibility-clothing-must-be-worn",
+      "calls": [
+        {
+          "text": "HIGH-VISIBILITY CLOTHING MUST",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 216.780517578125,
+          "right": 2270.864501953125,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "BE WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 945.93701171875,
+          "right": 1533.7919921875,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "respiratory-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "RESPIRATORY PROTECTION",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 377.547119140625,
+          "right": 2102.181884765625,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "MUST BE WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 751.509521484375,
+          "right": 1728.219482421875,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "safety-harness-must-be-worn",
+      "calls": [
+        {
+          "text": "SAFETY HARNESS MUST BE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 374.866455078125,
+          "right": 2103.759521484375,
+          "top": 2632.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 1042.1240234375,
+          "right": 1429.60498046875,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "not-drinking-water",
+      "calls": [
+        {
+          "text": "NOT DRINKING WATER",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 551.28369140625,
+          "right": 1934.4453125,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "no-access-for-forklifts",
+      "calls": [
+        {
+          "text": "NO ACCESS FOR FORKLIFTS",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 359.114501953125,
+          "right": 2124.511474609375,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "do-not-touch",
+      "calls": [
+        {
+          "text": "DO NOT TOUCH",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 766.524169921875,
+          "right": 1713.204833984375,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "no-activated-mobile-phone",
+      "calls": [
+        {
+          "text": "NO ACTIVATED MOBILE PHONE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 288.496826171875,
+          "right": 2195.129150390625,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "general-warning",
+      "calls": [
+        {
+          "text": "WARNING! GENERAL HAZARD",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 312.967529296875,
+          "right": 2162.761474609375,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "warning-overhead-load",
+      "calls": [
+        {
+          "text": "WARNING! OVERHEAD LOAD",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 351.114501953125,
+          "right": 2124.614501953125,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "warning-toxic-material",
+      "calls": [
+        {
+          "text": "WARNING! TOXIC MATERIAL",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 374.307861328125,
+          "right": 2102.337158203125,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "warning-hot-surface",
+      "calls": [
+        {
+          "text": "WARNING! HOT SURFACE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 451.822509765625,
+          "right": 2023.803466796875,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "warning-flammable-material",
+      "calls": [
+        {
+          "text": "WARNING! FLAMMABLE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 504.007568359375,
+          "right": 1971.618408203125,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "MATERIAL",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 929.7626953125,
+          "right": 1554.88232421875,
+          "top": 2777.34375,
+          "bottom": 2863.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "warning-corrosive-substance",
+      "calls": [
+        {
+          "text": "WARNING! CORROSIVE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 524.698486328125,
+          "right": 1950.927490234375,
+          "top": 2631.59375,
+          "bottom": 2720.59375
+        },
+        {
+          "text": "SUBSTANCE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 858.72265625,
+          "right": 1619.9033203125,
+          "top": 2775.34375,
+          "bottom": 2864.34375
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": false,
+      "slug": "warning-crushing-of-hands",
+      "calls": [
+        {
+          "text": "WARNING! CRUSHING OF HANDS",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 222.666015625,
+          "right": 2252.9599609375,
+          "top": 2703.46875,
+          "bottom": 2792.46875
+        },
+        {
+          "text": "SERNEM.COM",
+          "font": "900 66px Arial, Helvetica, sans-serif",
+          "size": 66,
+          "left": 121,
+          "right": 570.7060546875,
+          "top": 3104.203125,
+          "bottom": 3152.203125
+        },
+        {
+          "text": "This sign’s information page",
+          "font": "500 44px Arial, Helvetica, sans-serif",
+          "size": 44,
+          "left": 120,
+          "right": 665.564453125,
+          "top": 3193.140625,
+          "bottom": 3234.140625
+        },
+        {
+          "text": "sernem.com/en/safety-signs",
+          "font": "500 36px Arial, Helvetica, sans-serif",
+          "size": 36,
+          "left": 121,
+          "right": 569.17578125,
+          "top": 3260.921875,
+          "bottom": 3295.921875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 8.641097282194565,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "safety-helmet-must-be-worn",
+      "calls": [
+        {
+          "text": "SAFETY HELMET MUST BE WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 208.301513671875,
+          "right": 2266.427490234375,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "eye-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "EYE PROTECTION MUST BE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 397.23095703125,
+          "right": 2086.39501953125,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 1042.1240234375,
+          "right": 1429.60498046875,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "protective-gloves-must-be-worn",
+      "calls": [
+        {
+          "text": "PROTECTIVE GLOVES MUST BE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 272.200439453125,
+          "right": 2211.425537109375,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 1042.1240234375,
+          "right": 1429.60498046875,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "safety-footwear-must-be-worn",
+      "calls": [
+        {
+          "text": "SAFETY FOOTWEAR MUST BE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 315.93701171875,
+          "right": 2162.68896484375,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 1042.1240234375,
+          "right": 1429.60498046875,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "hearing-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "HEARING PROTECTION MUST BE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 234.083984375,
+          "right": 2249.5419921875,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 1042.1240234375,
+          "right": 1429.60498046875,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "no-smoking",
+      "calls": [
+        {
+          "text": "NO SMOKING",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 838.27099609375,
+          "right": 1642.5,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "no-unauthorized-entry",
+      "calls": [
+        {
+          "text": "NO THOROUGHFARE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 605.635498046875,
+          "right": 1877.990478515625,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "no-open-flame",
+      "calls": [
+        {
+          "text": "NO OPEN FLAME",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 727.156494140625,
+          "right": 1756.469482421875,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "warning-high-voltage",
+      "calls": [
+        {
+          "text": "WARNING! HIGH VOLTAGE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 433.328857421875,
+          "right": 2042.297119140625,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "warning-forklift-traffic",
+      "calls": [
+        {
+          "text": "WARNING! FORKLIFT TRAFFIC",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 306.131591796875,
+          "right": 2170.597412109375,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "warning-falling-objects",
+      "calls": [
+        {
+          "text": "WARNING! FALLING OBJECTS",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 319.864501953125,
+          "right": 2155.761474609375,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "warning-slippery-surface",
+      "calls": [
+        {
+          "text": "WARNING! SLIPPERY SURFACE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 276.956787109375,
+          "right": 2198.669189453125,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "first-aid",
+      "calls": [
+        {
+          "text": "FIRST AID",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 942.4580078125,
+          "right": 1541.27099609375,
+          "top": 2964.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "emergency-exit",
+      "calls": [
+        {
+          "text": "EMERGENCY EXIT",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 688.887451171875,
+          "right": 1798.757568359375,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "assembly-point",
+      "calls": [
+        {
+          "text": "EMERGENCY ASSEMBLY POINT",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 277.937744140625,
+          "right": 2209.707275390625,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "fire-extinguisher",
+      "calls": [
+        {
+          "text": "FIRE EXTINGUISHER",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 619.4599609375,
+          "right": 1866.26904296875,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "general-mandatory-action",
+      "calls": [
+        {
+          "text": "GENERAL MANDATORY ACTION",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 267.003173828125,
+          "right": 2209.725830078125,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "refer-to-instruction-manual",
+      "calls": [
+        {
+          "text": "REFER TO INSTRUCTION",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 488.72265625,
+          "right": 1991.00634765625,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "MANUAL",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 977.217529296875,
+          "right": 1507.427490234375,
+          "top": 3037.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "protective-clothing-must-be-worn",
+      "calls": [
+        {
+          "text": "PROTECTIVE CLOTHING MUST",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 310.5,
+          "right": 2177.14501953125,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "BE WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 945.93701171875,
+          "right": 1533.7919921875,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "wash-your-hands",
+      "calls": [
+        {
+          "text": "WASH YOUR HANDS",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 614.969482421875,
+          "right": 1860.656494140625,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "use-handrail",
+      "calls": [
+        {
+          "text": "USE HANDRAIL",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 774.77099609375,
+          "right": 1708.8740234375,
+          "top": 2964.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "face-shield-must-be-worn",
+      "calls": [
+        {
+          "text": "FACE SHIELD MUST BE WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 320.906494140625,
+          "right": 2158.822509765625,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "high-visibility-clothing-must-be-worn",
+      "calls": [
+        {
+          "text": "HIGH-VISIBILITY CLOTHING MUST",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 216.780517578125,
+          "right": 2270.864501953125,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "BE WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 945.93701171875,
+          "right": 1533.7919921875,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "respiratory-protection-must-be-worn",
+      "calls": [
+        {
+          "text": "RESPIRATORY PROTECTION",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 377.547119140625,
+          "right": 2102.181884765625,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "MUST BE WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 751.509521484375,
+          "right": 1728.219482421875,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "safety-harness-must-be-worn",
+      "calls": [
+        {
+          "text": "SAFETY HARNESS MUST BE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 374.866455078125,
+          "right": 2103.759521484375,
+          "top": 2892.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "WORN",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 1042.1240234375,
+          "right": 1429.60498046875,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "not-drinking-water",
+      "calls": [
+        {
+          "text": "NOT DRINKING WATER",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 551.28369140625,
+          "right": 1934.4453125,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "no-access-for-forklifts",
+      "calls": [
+        {
+          "text": "NO ACCESS FOR FORKLIFTS",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 359.114501953125,
+          "right": 2124.511474609375,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "do-not-touch",
+      "calls": [
+        {
+          "text": "DO NOT TOUCH",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 766.524169921875,
+          "right": 1713.204833984375,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "no-activated-mobile-phone",
+      "calls": [
+        {
+          "text": "NO ACTIVATED MOBILE PHONE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 288.496826171875,
+          "right": 2195.129150390625,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "general-warning",
+      "calls": [
+        {
+          "text": "WARNING! GENERAL HAZARD",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 312.967529296875,
+          "right": 2162.761474609375,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "warning-overhead-load",
+      "calls": [
+        {
+          "text": "WARNING! OVERHEAD LOAD",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 351.114501953125,
+          "right": 2124.614501953125,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "warning-toxic-material",
+      "calls": [
+        {
+          "text": "WARNING! TOXIC MATERIAL",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 374.307861328125,
+          "right": 2102.337158203125,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "warning-hot-surface",
+      "calls": [
+        {
+          "text": "WARNING! HOT SURFACE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 451.822509765625,
+          "right": 2023.803466796875,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "warning-flammable-material",
+      "calls": [
+        {
+          "text": "WARNING! FLAMMABLE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 504.007568359375,
+          "right": 1971.618408203125,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "MATERIAL",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 929.7626953125,
+          "right": 1554.88232421875,
+          "top": 3037.34375,
+          "bottom": 3123.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "warning-corrosive-substance",
+      "calls": [
+        {
+          "text": "WARNING! CORROSIVE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 524.698486328125,
+          "right": 1950.927490234375,
+          "top": 2891.59375,
+          "bottom": 2980.59375
+        },
+        {
+          "text": "SUBSTANCE",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 858.72265625,
+          "right": 1619.9033203125,
+          "top": 3035.34375,
+          "bottom": 3124.34375
+        }
+      ],
+      "titleLines": 2,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    },
+    {
+      "locale": "en",
+      "clean": true,
+      "slug": "warning-crushing-of-hands",
+      "calls": [
+        {
+          "text": "WARNING! CRUSHING OF HANDS",
+          "font": "900 125px Arial, Helvetica, sans-serif",
+          "size": 125,
+          "left": 222.666015625,
+          "right": 2252.9599609375,
+          "top": 2963.46875,
+          "bottom": 3052.46875
+        }
+      ],
+      "titleLines": 1,
+      "minA4FontPt": 30.003810007620014,
+      "overflow": [],
+      "titleInRegion": true,
+      "result": "PASS"
+    }
+  ],
+  "method": "Actual canvas text draw calls and measured glyph bounds, standard and clean for 36×TR/EN. Minimum physical font point equivalent at A4; PDF exports are raster images, not selectable text. No physical printer or photometric color calibration."
+}

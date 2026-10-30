@@ -11,14 +11,14 @@ export default function SignRenderer({ sign, locale, compact = false }: Props) {
       <div data-sign-symbol className="flex min-h-0 flex-[72] items-center justify-center bg-white px-[8%] py-[7%]">
         <div className="h-full w-full"><SignIcon icon={sign.icon} /></div>
       </div>
-      <div data-sign-title className={`flex min-h-0 flex-[16.5] items-center justify-center px-[6%] py-[2%] text-center ${
+      <div data-sign-title className={`flex min-h-0 flex-[13.2] items-center justify-center px-[6%] py-[2%] text-center ${
         sign.category === "prohibition" ? "bg-[#df111c] text-white" : sign.category === "warning" ? "bg-slate-950 text-white" : "bg-white text-slate-950"
       }`}>
         <h2 className={`${compact ? "text-[clamp(13px,2.5vw,21px)]" : "text-[clamp(16px,3.5vw,38px)]"} break-words font-black uppercase leading-[1.06] tracking-[-0.025em]`}>
           {sign.title[locale]}
         </h2>
       </div>
-      <div data-sign-qr-footer className="flex min-h-0 flex-[11.5] items-center justify-between gap-2 border-t-2 border-slate-900 bg-white px-[4%] py-[1%] text-slate-950">
+      <div data-sign-qr-footer className="flex min-h-0 flex-[14.8] items-center justify-between gap-2 border-t-2 border-slate-900 bg-white px-[4%] py-[1%] text-slate-950">
         <div className="min-w-0">
           <p className={compact ? "text-[10px] font-black" : "text-[clamp(10px,2vw,17px)] font-black"}>SERNEM.COM</p>
           <p className={compact ? "text-[8px]" : "text-[clamp(8px,1.5vw,13px)]"}>{locale === "tr" ? "Bu levhanın bilgi sayfası" : "This sign’s information page"}</p>

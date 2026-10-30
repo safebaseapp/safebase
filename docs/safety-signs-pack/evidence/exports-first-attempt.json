@@ -1,0 +1,3900 @@
+{
+  "results": [
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-safety-helmet-must-be-worn-a4.pdf",
+      "bytes": 201622,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-safety-helmet-must-be-worn-a3.pdf",
+      "bytes": 201623,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-safety-helmet-must-be-worn-png.png",
+      "bytes": 353182,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "eye-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-eye-protection-must-be-worn-a4.pdf",
+      "bytes": 286430,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "eye-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-eye-protection-must-be-worn-a3.pdf",
+      "bytes": 286431,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "eye-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-eye-protection-must-be-worn-png.png",
+      "bytes": 457800,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-protective-gloves-must-be-worn-a4.pdf",
+      "bytes": 266760,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-protective-gloves-must-be-worn-a3.pdf",
+      "bytes": 266761,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-protective-gloves-must-be-worn-png.png",
+      "bytes": 412437,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-safety-footwear-must-be-worn-a4.pdf",
+      "bytes": 238438,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-safety-footwear-must-be-worn-a3.pdf",
+      "bytes": 238439,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-safety-footwear-must-be-worn-png.png",
+      "bytes": 393653,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-hearing-protection-must-be-worn-a4.pdf",
+      "bytes": 247285,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-hearing-protection-must-be-worn-a3.pdf",
+      "bytes": 247286,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-hearing-protection-must-be-worn-png.png",
+      "bytes": 410780,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-smoking",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-no-smoking-a4.pdf",
+      "bytes": 251602,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-smoking",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-no-smoking-a3.pdf",
+      "bytes": 251603,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-smoking",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-no-smoking-png.png",
+      "bytes": 427952,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-unauthorized-entry",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-no-unauthorized-entry-a4.pdf",
+      "bytes": 237140,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-unauthorized-entry",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-no-unauthorized-entry-a3.pdf",
+      "bytes": 237141,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-unauthorized-entry",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-no-unauthorized-entry-png.png",
+      "bytes": 406034,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-open-flame",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-no-open-flame-a4.pdf",
+      "bytes": 264453,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-open-flame",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-no-open-flame-a3.pdf",
+      "bytes": 264454,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-open-flame",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-no-open-flame-png.png",
+      "bytes": 440691,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-high-voltage",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-warning-high-voltage-a4.pdf",
+      "bytes": 188013,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-high-voltage",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-warning-high-voltage-a3.pdf",
+      "bytes": 188014,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-high-voltage",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-warning-high-voltage-png.png",
+      "bytes": 331303,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-forklift-traffic",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-warning-forklift-traffic-a4.pdf",
+      "bytes": 212707,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-forklift-traffic",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-warning-forklift-traffic-a3.pdf",
+      "bytes": 212708,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-forklift-traffic",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-warning-forklift-traffic-png.png",
+      "bytes": 356408,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-falling-objects",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-warning-falling-objects-a4.pdf",
+      "bytes": 199048,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-falling-objects",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-warning-falling-objects-a3.pdf",
+      "bytes": 199049,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-falling-objects",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-warning-falling-objects-png.png",
+      "bytes": 348025,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-slippery-surface",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-warning-slippery-surface-a4.pdf",
+      "bytes": 189646,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-slippery-surface",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-warning-slippery-surface-a3.pdf",
+      "bytes": 189647,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-slippery-surface",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-warning-slippery-surface-png.png",
+      "bytes": 337156,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "first-aid",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-first-aid-a4.pdf",
+      "bytes": 106467,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "first-aid",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-first-aid-a3.pdf",
+      "bytes": 106468,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "first-aid",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-first-aid-png.png",
+      "bytes": 228551,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "emergency-exit",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-emergency-exit-a4.pdf",
+      "bytes": 162573,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "emergency-exit",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-emergency-exit-a3.pdf",
+      "bytes": 162574,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "emergency-exit",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-emergency-exit-png.png",
+      "bytes": 299822,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "assembly-point",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-assembly-point-a4.pdf",
+      "bytes": 165002,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "assembly-point",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-assembly-point-a3.pdf",
+      "bytes": 165003,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "assembly-point",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-assembly-point-png.png",
+      "bytes": 291862,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "fire-extinguisher",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-fire-extinguisher-a4.pdf",
+      "bytes": 195193,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "fire-extinguisher",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-fire-extinguisher-a3.pdf",
+      "bytes": 195194,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "fire-extinguisher",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-fire-extinguisher-png.png",
+      "bytes": 334737,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "general-mandatory-action",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-general-mandatory-action-a4.pdf",
+      "bytes": 171746,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "general-mandatory-action",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-general-mandatory-action-a3.pdf",
+      "bytes": 171747,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "general-mandatory-action",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-general-mandatory-action-png.png",
+      "bytes": 318766,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "refer-to-instruction-manual",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-refer-to-instruction-manual-a4.pdf",
+      "bytes": 224245,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "refer-to-instruction-manual",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-refer-to-instruction-manual-a3.pdf",
+      "bytes": 224246,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "refer-to-instruction-manual",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-refer-to-instruction-manual-png.png",
+      "bytes": 392204,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-protective-clothing-must-be-worn-a4.pdf",
+      "bytes": 238211,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-protective-clothing-must-be-worn-a3.pdf",
+      "bytes": 238212,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-protective-clothing-must-be-worn-png.png",
+      "bytes": 379863,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "wash-your-hands",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-wash-your-hands-a4.pdf",
+      "bytes": 209727,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "wash-your-hands",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-wash-your-hands-a3.pdf",
+      "bytes": 209728,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "wash-your-hands",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-wash-your-hands-png.png",
+      "bytes": 380302,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "use-handrail",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-use-handrail-a4.pdf",
+      "bytes": 215528,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "use-handrail",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-use-handrail-a3.pdf",
+      "bytes": 215529,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "use-handrail",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-use-handrail-png.png",
+      "bytes": 372339,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "face-shield-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-face-shield-must-be-worn-a4.pdf",
+      "bytes": 236040,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "face-shield-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-face-shield-must-be-worn-a3.pdf",
+      "bytes": 236041,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "face-shield-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-face-shield-must-be-worn-png.png",
+      "bytes": 385266,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-high-visibility-clothing-must-be-worn-a4.pdf",
+      "bytes": 215897,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-high-visibility-clothing-must-be-worn-a3.pdf",
+      "bytes": 215898,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-high-visibility-clothing-must-be-worn-png.png",
+      "bytes": 354395,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-respiratory-protection-must-be-worn-a4.pdf",
+      "bytes": 289041,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-respiratory-protection-must-be-worn-a3.pdf",
+      "bytes": 289042,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-respiratory-protection-must-be-worn-png.png",
+      "bytes": 466739,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "safety-harness-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-safety-harness-must-be-worn-a4.pdf",
+      "bytes": 256062,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "safety-harness-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-safety-harness-must-be-worn-a3.pdf",
+      "bytes": 256063,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "safety-harness-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-safety-harness-must-be-worn-png.png",
+      "bytes": 406630,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "not-drinking-water",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-not-drinking-water-a4.pdf",
+      "bytes": 226585,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "not-drinking-water",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-not-drinking-water-a3.pdf",
+      "bytes": 226586,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "not-drinking-water",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-not-drinking-water-png.png",
+      "bytes": 397367,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-access-for-forklifts",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-no-access-for-forklifts-a4.pdf",
+      "bytes": 247089,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-access-for-forklifts",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-no-access-for-forklifts-a3.pdf",
+      "bytes": 247090,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-access-for-forklifts",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-no-access-for-forklifts-png.png",
+      "bytes": 412905,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "do-not-touch",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-do-not-touch-a4.pdf",
+      "bytes": 232579,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "do-not-touch",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-do-not-touch-a3.pdf",
+      "bytes": 232580,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "do-not-touch",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-do-not-touch-png.png",
+      "bytes": 403249,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-activated-mobile-phone",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-no-activated-mobile-phone-a4.pdf",
+      "bytes": 282162,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-activated-mobile-phone",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-no-activated-mobile-phone-a3.pdf",
+      "bytes": 282163,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "no-activated-mobile-phone",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-no-activated-mobile-phone-png.png",
+      "bytes": 450696,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "general-warning",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-general-warning-a4.pdf",
+      "bytes": 174998,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "general-warning",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-general-warning-a3.pdf",
+      "bytes": 174999,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "general-warning",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-general-warning-png.png",
+      "bytes": 314319,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-overhead-load",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-warning-overhead-load-a4.pdf",
+      "bytes": 204490,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-overhead-load",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-warning-overhead-load-a3.pdf",
+      "bytes": 204491,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-overhead-load",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-warning-overhead-load-png.png",
+      "bytes": 348953,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-toxic-material",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-warning-toxic-material-a4.pdf",
+      "bytes": 227739,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-toxic-material",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-warning-toxic-material-a3.pdf",
+      "bytes": 227740,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-toxic-material",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-warning-toxic-material-png.png",
+      "bytes": 383342,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-hot-surface",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-warning-hot-surface-a4.pdf",
+      "bytes": 194368,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-hot-surface",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-warning-hot-surface-a3.pdf",
+      "bytes": 194369,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-hot-surface",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-warning-hot-surface-png.png",
+      "bytes": 338795,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-flammable-material",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-warning-flammable-material-a4.pdf",
+      "bytes": 197379,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-flammable-material",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-warning-flammable-material-a3.pdf",
+      "bytes": 197380,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-flammable-material",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-warning-flammable-material-png.png",
+      "bytes": 338270,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-corrosive-substance",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-warning-corrosive-substance-a4.pdf",
+      "bytes": 206553,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-corrosive-substance",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-warning-corrosive-substance-a3.pdf",
+      "bytes": 206554,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-corrosive-substance",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-warning-corrosive-substance-png.png",
+      "bytes": 363654,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-crushing-of-hands",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-tr-warning-crushing-of-hands-a4.pdf",
+      "bytes": 180168,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-crushing-of-hands",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-tr-warning-crushing-of-hands-a3.pdf",
+      "bytes": 180169,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "tr",
+      "slug": "warning-crushing-of-hands",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-tr-warning-crushing-of-hands-png.png",
+      "bytes": 320915,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-safety-helmet-must-be-worn-a4.pdf",
+      "bytes": 204789,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-safety-helmet-must-be-worn-a3.pdf",
+      "bytes": 204790,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-safety-helmet-must-be-worn-png.png",
+      "bytes": 356230,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "eye-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-eye-protection-must-be-worn-a4.pdf",
+      "bytes": 277321,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "eye-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-eye-protection-must-be-worn-a3.pdf",
+      "bytes": 277322,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "eye-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-eye-protection-must-be-worn-png.png",
+      "bytes": 446127,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-protective-gloves-must-be-worn-a4.pdf",
+      "bytes": 260451,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-protective-gloves-must-be-worn-a3.pdf",
+      "bytes": 260452,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-protective-gloves-must-be-worn-png.png",
+      "bytes": 408548,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-safety-footwear-must-be-worn-a4.pdf",
+      "bytes": 228770,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-safety-footwear-must-be-worn-a3.pdf",
+      "bytes": 228771,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-safety-footwear-must-be-worn-png.png",
+      "bytes": 382551,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-hearing-protection-must-be-worn-a4.pdf",
+      "bytes": 247837,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-hearing-protection-must-be-worn-a3.pdf",
+      "bytes": 247838,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-hearing-protection-must-be-worn-png.png",
+      "bytes": 408953,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-smoking",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-no-smoking-a4.pdf",
+      "bytes": 249572,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-smoking",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-no-smoking-a3.pdf",
+      "bytes": 249573,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-smoking",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-no-smoking-png.png",
+      "bytes": 426477,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-unauthorized-entry",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-no-unauthorized-entry-a4.pdf",
+      "bytes": 236889,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-unauthorized-entry",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-no-unauthorized-entry-a3.pdf",
+      "bytes": 236890,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-unauthorized-entry",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-no-unauthorized-entry-png.png",
+      "bytes": 401811,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-open-flame",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-no-open-flame-a4.pdf",
+      "bytes": 258193,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-open-flame",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-no-open-flame-a3.pdf",
+      "bytes": 258194,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-open-flame",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-no-open-flame-png.png",
+      "bytes": 431218,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-high-voltage",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-warning-high-voltage-a4.pdf",
+      "bytes": 191703,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-high-voltage",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-warning-high-voltage-a3.pdf",
+      "bytes": 191704,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-high-voltage",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-warning-high-voltage-png.png",
+      "bytes": 335210,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-forklift-traffic",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-warning-forklift-traffic-a4.pdf",
+      "bytes": 217897,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-forklift-traffic",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-warning-forklift-traffic-a3.pdf",
+      "bytes": 217898,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-forklift-traffic",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-warning-forklift-traffic-png.png",
+      "bytes": 360861,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-falling-objects",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-warning-falling-objects-a4.pdf",
+      "bytes": 200255,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-falling-objects",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-warning-falling-objects-a3.pdf",
+      "bytes": 200256,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-falling-objects",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-warning-falling-objects-png.png",
+      "bytes": 350359,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-slippery-surface",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-warning-slippery-surface-a4.pdf",
+      "bytes": 199484,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-slippery-surface",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-warning-slippery-surface-a3.pdf",
+      "bytes": 199485,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-slippery-surface",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-warning-slippery-surface-png.png",
+      "bytes": 350153,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "first-aid",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-first-aid-a4.pdf",
+      "bytes": 103352,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "first-aid",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-first-aid-a3.pdf",
+      "bytes": 103353,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "first-aid",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-first-aid-png.png",
+      "bytes": 226607,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "emergency-exit",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-emergency-exit-a4.pdf",
+      "bytes": 167394,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "emergency-exit",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-emergency-exit-a3.pdf",
+      "bytes": 167395,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "emergency-exit",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-emergency-exit-png.png",
+      "bytes": 302558,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "assembly-point",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-assembly-point-a4.pdf",
+      "bytes": 171093,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "assembly-point",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-assembly-point-a3.pdf",
+      "bytes": 171094,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "assembly-point",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-assembly-point-png.png",
+      "bytes": 300082,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "fire-extinguisher",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-fire-extinguisher-a4.pdf",
+      "bytes": 185852,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "fire-extinguisher",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-fire-extinguisher-a3.pdf",
+      "bytes": 185853,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "fire-extinguisher",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-fire-extinguisher-png.png",
+      "bytes": 321969,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "general-mandatory-action",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-general-mandatory-action-a4.pdf",
+      "bytes": 186952,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "general-mandatory-action",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-general-mandatory-action-a3.pdf",
+      "bytes": 186953,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "general-mandatory-action",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-general-mandatory-action-png.png",
+      "bytes": 334117,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "refer-to-instruction-manual",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-refer-to-instruction-manual-a4.pdf",
+      "bytes": 232132,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "refer-to-instruction-manual",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-refer-to-instruction-manual-a3.pdf",
+      "bytes": 232133,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "refer-to-instruction-manual",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-refer-to-instruction-manual-png.png",
+      "bytes": 399843,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-protective-clothing-must-be-worn-a4.pdf",
+      "bytes": 233410,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-protective-clothing-must-be-worn-a3.pdf",
+      "bytes": 233411,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-protective-clothing-must-be-worn-png.png",
+      "bytes": 372236,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "wash-your-hands",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-wash-your-hands-a4.pdf",
+      "bytes": 217243,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "wash-your-hands",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-wash-your-hands-a3.pdf",
+      "bytes": 217244,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "wash-your-hands",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-wash-your-hands-png.png",
+      "bytes": 394533,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "use-handrail",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-use-handrail-a4.pdf",
+      "bytes": 196773,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "use-handrail",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-use-handrail-a3.pdf",
+      "bytes": 196774,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "use-handrail",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-use-handrail-png.png",
+      "bytes": 358208,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "face-shield-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-face-shield-must-be-worn-a4.pdf",
+      "bytes": 226596,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "face-shield-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-face-shield-must-be-worn-a3.pdf",
+      "bytes": 226597,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "face-shield-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-face-shield-must-be-worn-png.png",
+      "bytes": 378538,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-high-visibility-clothing-must-be-worn-a4.pdf",
+      "bytes": 217856,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-high-visibility-clothing-must-be-worn-a3.pdf",
+      "bytes": 217857,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-high-visibility-clothing-must-be-worn-png.png",
+      "bytes": 352960,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-respiratory-protection-must-be-worn-a4.pdf",
+      "bytes": 283146,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-respiratory-protection-must-be-worn-a3.pdf",
+      "bytes": 283147,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-respiratory-protection-must-be-worn-png.png",
+      "bytes": 461250,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "safety-harness-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-safety-harness-must-be-worn-a4.pdf",
+      "bytes": 254732,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "safety-harness-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-safety-harness-must-be-worn-a3.pdf",
+      "bytes": 254733,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "safety-harness-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-safety-harness-must-be-worn-png.png",
+      "bytes": 409438,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "not-drinking-water",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-not-drinking-water-a4.pdf",
+      "bytes": 230163,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "not-drinking-water",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-not-drinking-water-a3.pdf",
+      "bytes": 230164,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "not-drinking-water",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-not-drinking-water-png.png",
+      "bytes": 399302,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-access-for-forklifts",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-no-access-for-forklifts-a4.pdf",
+      "bytes": 251338,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-access-for-forklifts",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-no-access-for-forklifts-a3.pdf",
+      "bytes": 251339,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-access-for-forklifts",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-no-access-for-forklifts-png.png",
+      "bytes": 418986,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "do-not-touch",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-do-not-touch-a4.pdf",
+      "bytes": 224048,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "do-not-touch",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-do-not-touch-a3.pdf",
+      "bytes": 224049,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "do-not-touch",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-do-not-touch-png.png",
+      "bytes": 394586,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-activated-mobile-phone",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-no-activated-mobile-phone-a4.pdf",
+      "bytes": 271191,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-activated-mobile-phone",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-no-activated-mobile-phone-a3.pdf",
+      "bytes": 271192,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "no-activated-mobile-phone",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-no-activated-mobile-phone-png.png",
+      "bytes": 441434,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "general-warning",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-general-warning-a4.pdf",
+      "bytes": 186317,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "general-warning",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-general-warning-a3.pdf",
+      "bytes": 186318,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "general-warning",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-general-warning-png.png",
+      "bytes": 329505,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-overhead-load",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-warning-overhead-load-a4.pdf",
+      "bytes": 216077,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-overhead-load",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-warning-overhead-load-a3.pdf",
+      "bytes": 216078,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-overhead-load",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-warning-overhead-load-png.png",
+      "bytes": 361262,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-toxic-material",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-warning-toxic-material-a4.pdf",
+      "bytes": 237606,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-toxic-material",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-warning-toxic-material-a3.pdf",
+      "bytes": 237607,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-toxic-material",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-warning-toxic-material-png.png",
+      "bytes": 395269,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-hot-surface",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-warning-hot-surface-a4.pdf",
+      "bytes": 200526,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-hot-surface",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-warning-hot-surface-a3.pdf",
+      "bytes": 200527,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-hot-surface",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-warning-hot-surface-png.png",
+      "bytes": 344617,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-flammable-material",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-warning-flammable-material-a4.pdf",
+      "bytes": 210916,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-flammable-material",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-warning-flammable-material-a3.pdf",
+      "bytes": 210917,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-flammable-material",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-warning-flammable-material-png.png",
+      "bytes": 348387,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-corrosive-substance",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-warning-corrosive-substance-a4.pdf",
+      "bytes": 222661,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-corrosive-substance",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-warning-corrosive-substance-a3.pdf",
+      "bytes": 222662,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-corrosive-substance",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-warning-corrosive-substance-png.png",
+      "bytes": 381773,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-crushing-of-hands",
+      "format": "a4",
+      "file": "/tmp/signs-exports/free-en-warning-crushing-of-hands-a4.pdf",
+      "bytes": 185069,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-crushing-of-hands",
+      "format": "a3",
+      "file": "/tmp/signs-exports/free-en-warning-crushing-of-hands-a3.pdf",
+      "bytes": 185070,
+      "result": "PASS"
+    },
+    {
+      "mode": "free",
+      "locale": "en",
+      "slug": "warning-crushing-of-hands",
+      "format": "png",
+      "file": "/tmp/signs-exports/free-en-warning-crushing-of-hands-png.png",
+      "bytes": 327672,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-safety-helmet-must-be-worn-a4.pdf",
+      "bytes": 161979,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-safety-helmet-must-be-worn-a3.pdf",
+      "bytes": 161980,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-safety-helmet-must-be-worn-png.png",
+      "bytes": 318099,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "eye-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-eye-protection-must-be-worn-a4.pdf",
+      "bytes": 246695,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "eye-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-eye-protection-must-be-worn-a3.pdf",
+      "bytes": 246696,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "eye-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-eye-protection-must-be-worn-png.png",
+      "bytes": 424246,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-protective-gloves-must-be-worn-a4.pdf",
+      "bytes": 227327,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-protective-gloves-must-be-worn-a3.pdf",
+      "bytes": 227328,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-protective-gloves-must-be-worn-png.png",
+      "bytes": 378432,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-safety-footwear-must-be-worn-a4.pdf",
+      "bytes": 198459,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-safety-footwear-must-be-worn-a3.pdf",
+      "bytes": 198460,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-safety-footwear-must-be-worn-png.png",
+      "bytes": 360307,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-hearing-protection-must-be-worn-a4.pdf",
+      "bytes": 207758,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-hearing-protection-must-be-worn-a3.pdf",
+      "bytes": 207759,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-hearing-protection-must-be-worn-png.png",
+      "bytes": 377099,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-smoking",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-no-smoking-a4.pdf",
+      "bytes": 213469,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-smoking",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-no-smoking-a3.pdf",
+      "bytes": 213470,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-smoking",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-no-smoking-png.png",
+      "bytes": 393805,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-unauthorized-entry",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-no-unauthorized-entry-a4.pdf",
+      "bytes": 198573,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-unauthorized-entry",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-no-unauthorized-entry-a3.pdf",
+      "bytes": 198574,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-unauthorized-entry",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-no-unauthorized-entry-png.png",
+      "bytes": 371928,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-open-flame",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-no-open-flame-a4.pdf",
+      "bytes": 226286,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-open-flame",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-no-open-flame-a3.pdf",
+      "bytes": 226287,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-open-flame",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-no-open-flame-png.png",
+      "bytes": 406744,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-high-voltage",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-warning-high-voltage-a4.pdf",
+      "bytes": 150021,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-high-voltage",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-warning-high-voltage-a3.pdf",
+      "bytes": 150022,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-high-voltage",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-warning-high-voltage-png.png",
+      "bytes": 297343,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-forklift-traffic",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-warning-forklift-traffic-a4.pdf",
+      "bytes": 173274,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-forklift-traffic",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-warning-forklift-traffic-a3.pdf",
+      "bytes": 173275,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-forklift-traffic",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-warning-forklift-traffic-png.png",
+      "bytes": 321562,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-falling-objects",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-warning-falling-objects-a4.pdf",
+      "bytes": 161247,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-falling-objects",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-warning-falling-objects-a3.pdf",
+      "bytes": 161248,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-falling-objects",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-warning-falling-objects-png.png",
+      "bytes": 313166,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-slippery-surface",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-warning-slippery-surface-a4.pdf",
+      "bytes": 150647,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-slippery-surface",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-warning-slippery-surface-a3.pdf",
+      "bytes": 150648,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-slippery-surface",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-warning-slippery-surface-png.png",
+      "bytes": 302716,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "first-aid",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-first-aid-a4.pdf",
+      "bytes": 68305,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "first-aid",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-first-aid-a3.pdf",
+      "bytes": 68306,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "first-aid",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-first-aid-png.png",
+      "bytes": 194552,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "emergency-exit",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-emergency-exit-a4.pdf",
+      "bytes": 124533,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "emergency-exit",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-emergency-exit-a3.pdf",
+      "bytes": 124534,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "emergency-exit",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-emergency-exit-png.png",
+      "bytes": 265896,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "assembly-point",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-assembly-point-a4.pdf",
+      "bytes": 127109,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "assembly-point",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-assembly-point-a3.pdf",
+      "bytes": 127110,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "assembly-point",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-assembly-point-png.png",
+      "bytes": 257106,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "fire-extinguisher",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-fire-extinguisher-a4.pdf",
+      "bytes": 157066,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "fire-extinguisher",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-fire-extinguisher-a3.pdf",
+      "bytes": 157067,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "fire-extinguisher",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-fire-extinguisher-png.png",
+      "bytes": 300714,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "general-mandatory-action",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-general-mandatory-action-a4.pdf",
+      "bytes": 132700,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "general-mandatory-action",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-general-mandatory-action-a3.pdf",
+      "bytes": 132701,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "general-mandatory-action",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-general-mandatory-action-png.png",
+      "bytes": 284639,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "refer-to-instruction-manual",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-refer-to-instruction-manual-a4.pdf",
+      "bytes": 185125,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "refer-to-instruction-manual",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-refer-to-instruction-manual-a3.pdf",
+      "bytes": 185126,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "refer-to-instruction-manual",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-refer-to-instruction-manual-png.png",
+      "bytes": 357849,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-protective-clothing-must-be-worn-a4.pdf",
+      "bytes": 198494,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-protective-clothing-must-be-worn-a3.pdf",
+      "bytes": 198495,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-protective-clothing-must-be-worn-png.png",
+      "bytes": 344548,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "wash-your-hands",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-wash-your-hands-a4.pdf",
+      "bytes": 171339,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "wash-your-hands",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-wash-your-hands-a3.pdf",
+      "bytes": 171340,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "wash-your-hands",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-wash-your-hands-png.png",
+      "bytes": 346738,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "use-handrail",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-use-handrail-a4.pdf",
+      "bytes": 176729,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "use-handrail",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-use-handrail-a3.pdf",
+      "bytes": 176730,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "use-handrail",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-use-handrail-png.png",
+      "bytes": 338896,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "face-shield-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-face-shield-must-be-worn-a4.pdf",
+      "bytes": 196576,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "face-shield-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-face-shield-must-be-worn-a3.pdf",
+      "bytes": 196577,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "face-shield-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-face-shield-must-be-worn-png.png",
+      "bytes": 352538,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-high-visibility-clothing-must-be-worn-a4.pdf",
+      "bytes": 176813,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-high-visibility-clothing-must-be-worn-a3.pdf",
+      "bytes": 176814,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-high-visibility-clothing-must-be-worn-png.png",
+      "bytes": 318840,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-respiratory-protection-must-be-worn-a4.pdf",
+      "bytes": 249006,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-respiratory-protection-must-be-worn-a3.pdf",
+      "bytes": 249007,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-respiratory-protection-must-be-worn-png.png",
+      "bytes": 433870,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "safety-harness-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-safety-harness-must-be-worn-a4.pdf",
+      "bytes": 216955,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "safety-harness-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-safety-harness-must-be-worn-a3.pdf",
+      "bytes": 216956,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "safety-harness-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-safety-harness-must-be-worn-png.png",
+      "bytes": 372556,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "not-drinking-water",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-not-drinking-water-a4.pdf",
+      "bytes": 188060,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "not-drinking-water",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-not-drinking-water-a3.pdf",
+      "bytes": 188061,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "not-drinking-water",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-not-drinking-water-png.png",
+      "bytes": 363441,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-access-for-forklifts",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-no-access-for-forklifts-a4.pdf",
+      "bytes": 208939,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-access-for-forklifts",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-no-access-for-forklifts-a3.pdf",
+      "bytes": 208940,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-access-for-forklifts",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-no-access-for-forklifts-png.png",
+      "bytes": 378535,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "do-not-touch",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-do-not-touch-a4.pdf",
+      "bytes": 194066,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "do-not-touch",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-do-not-touch-a3.pdf",
+      "bytes": 194067,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "do-not-touch",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-do-not-touch-png.png",
+      "bytes": 369295,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-activated-mobile-phone",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-no-activated-mobile-phone-a4.pdf",
+      "bytes": 242713,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-activated-mobile-phone",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-no-activated-mobile-phone-a3.pdf",
+      "bytes": 242714,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "no-activated-mobile-phone",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-no-activated-mobile-phone-png.png",
+      "bytes": 417799,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "general-warning",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-general-warning-a4.pdf",
+      "bytes": 136755,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "general-warning",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-general-warning-a3.pdf",
+      "bytes": 136756,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "general-warning",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-general-warning-png.png",
+      "bytes": 280521,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-overhead-load",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-warning-overhead-load-a4.pdf",
+      "bytes": 166043,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-overhead-load",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-warning-overhead-load-a3.pdf",
+      "bytes": 166044,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-overhead-load",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-warning-overhead-load-png.png",
+      "bytes": 314950,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-toxic-material",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-warning-toxic-material-a4.pdf",
+      "bytes": 189335,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-toxic-material",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-warning-toxic-material-a3.pdf",
+      "bytes": 189336,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-toxic-material",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-warning-toxic-material-png.png",
+      "bytes": 349304,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-hot-surface",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-warning-hot-surface-a4.pdf",
+      "bytes": 156341,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-hot-surface",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-warning-hot-surface-a3.pdf",
+      "bytes": 156342,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-hot-surface",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-warning-hot-surface-png.png",
+      "bytes": 304501,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-flammable-material",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-warning-flammable-material-a4.pdf",
+      "bytes": 158249,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-flammable-material",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-warning-flammable-material-a3.pdf",
+      "bytes": 158250,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-flammable-material",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-warning-flammable-material-png.png",
+      "bytes": 303861,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-corrosive-substance",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-warning-corrosive-substance-a4.pdf",
+      "bytes": 168024,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-corrosive-substance",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-warning-corrosive-substance-a3.pdf",
+      "bytes": 168025,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-corrosive-substance",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-warning-corrosive-substance-png.png",
+      "bytes": 329809,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-crushing-of-hands",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-tr-warning-crushing-of-hands-a4.pdf",
+      "bytes": 140724,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-crushing-of-hands",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-tr-warning-crushing-of-hands-a3.pdf",
+      "bytes": 140725,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "tr",
+      "slug": "warning-crushing-of-hands",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-tr-warning-crushing-of-hands-png.png",
+      "bytes": 287081,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-safety-helmet-must-be-worn-a4.pdf",
+      "bytes": 164796,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-safety-helmet-must-be-worn-a3.pdf",
+      "bytes": 164797,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "safety-helmet-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-safety-helmet-must-be-worn-png.png",
+      "bytes": 320254,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "eye-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-eye-protection-must-be-worn-a4.pdf",
+      "bytes": 237949,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "eye-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-eye-protection-must-be-worn-a3.pdf",
+      "bytes": 237950,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "eye-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-eye-protection-must-be-worn-png.png",
+      "bytes": 411817,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-protective-gloves-must-be-worn-a4.pdf",
+      "bytes": 220607,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-protective-gloves-must-be-worn-a3.pdf",
+      "bytes": 220608,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "protective-gloves-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-protective-gloves-must-be-worn-png.png",
+      "bytes": 375209,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-safety-footwear-must-be-worn-a4.pdf",
+      "bytes": 189346,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-safety-footwear-must-be-worn-a3.pdf",
+      "bytes": 189347,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "safety-footwear-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-safety-footwear-must-be-worn-png.png",
+      "bytes": 348968,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-hearing-protection-must-be-worn-a4.pdf",
+      "bytes": 207495,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-hearing-protection-must-be-worn-a3.pdf",
+      "bytes": 207496,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "hearing-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-hearing-protection-must-be-worn-png.png",
+      "bytes": 375362,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-smoking",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-no-smoking-a4.pdf",
+      "bytes": 211406,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-smoking",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-no-smoking-a3.pdf",
+      "bytes": 211407,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-smoking",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-no-smoking-png.png",
+      "bytes": 392034,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-unauthorized-entry",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-no-unauthorized-entry-a4.pdf",
+      "bytes": 198324,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-unauthorized-entry",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-no-unauthorized-entry-a3.pdf",
+      "bytes": 198325,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-unauthorized-entry",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-no-unauthorized-entry-png.png",
+      "bytes": 367508,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-open-flame",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-no-open-flame-a4.pdf",
+      "bytes": 219621,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-open-flame",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-no-open-flame-a3.pdf",
+      "bytes": 219622,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-open-flame",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-no-open-flame-png.png",
+      "bytes": 396448,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-high-voltage",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-warning-high-voltage-a4.pdf",
+      "bytes": 153070,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-high-voltage",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-warning-high-voltage-a3.pdf",
+      "bytes": 153071,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-high-voltage",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-warning-high-voltage-png.png",
+      "bytes": 300753,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-forklift-traffic",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-warning-forklift-traffic-a4.pdf",
+      "bytes": 177839,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-forklift-traffic",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-warning-forklift-traffic-a3.pdf",
+      "bytes": 177840,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-forklift-traffic",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-warning-forklift-traffic-png.png",
+      "bytes": 325635,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-falling-objects",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-warning-falling-objects-a4.pdf",
+      "bytes": 162103,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-falling-objects",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-warning-falling-objects-a3.pdf",
+      "bytes": 162104,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-falling-objects",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-warning-falling-objects-png.png",
+      "bytes": 314843,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-slippery-surface",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-warning-slippery-surface-a4.pdf",
+      "bytes": 160185,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-slippery-surface",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-warning-slippery-surface-a3.pdf",
+      "bytes": 160186,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-slippery-surface",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-warning-slippery-surface-png.png",
+      "bytes": 313627,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "first-aid",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-first-aid-a4.pdf",
+      "bytes": 64600,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "first-aid",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-first-aid-a3.pdf",
+      "bytes": 64601,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "first-aid",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-first-aid-png.png",
+      "bytes": 192065,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "emergency-exit",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-emergency-exit-a4.pdf",
+      "bytes": 128987,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "emergency-exit",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-emergency-exit-a3.pdf",
+      "bytes": 128988,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "emergency-exit",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-emergency-exit-png.png",
+      "bytes": 268145,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "assembly-point",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-assembly-point-a4.pdf",
+      "bytes": 132882,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "assembly-point",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-assembly-point-a3.pdf",
+      "bytes": 132883,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "assembly-point",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-assembly-point-png.png",
+      "bytes": 264916,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "fire-extinguisher",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-fire-extinguisher-a4.pdf",
+      "bytes": 146783,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "fire-extinguisher",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-fire-extinguisher-a3.pdf",
+      "bytes": 146784,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "fire-extinguisher",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-fire-extinguisher-png.png",
+      "bytes": 287928,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "general-mandatory-action",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-general-mandatory-action-a4.pdf",
+      "bytes": 147336,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "general-mandatory-action",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-general-mandatory-action-a3.pdf",
+      "bytes": 147337,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "general-mandatory-action",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-general-mandatory-action-png.png",
+      "bytes": 299532,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "refer-to-instruction-manual",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-refer-to-instruction-manual-a4.pdf",
+      "bytes": 192817,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "refer-to-instruction-manual",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-refer-to-instruction-manual-a3.pdf",
+      "bytes": 192818,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "refer-to-instruction-manual",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-refer-to-instruction-manual-png.png",
+      "bytes": 365424,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-protective-clothing-must-be-worn-a4.pdf",
+      "bytes": 193194,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-protective-clothing-must-be-worn-a3.pdf",
+      "bytes": 193195,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "protective-clothing-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-protective-clothing-must-be-worn-png.png",
+      "bytes": 336181,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "wash-your-hands",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-wash-your-hands-a4.pdf",
+      "bytes": 179026,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "wash-your-hands",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-wash-your-hands-a3.pdf",
+      "bytes": 179027,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "wash-your-hands",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-wash-your-hands-png.png",
+      "bytes": 360250,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "use-handrail",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-use-handrail-a4.pdf",
+      "bytes": 158447,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "use-handrail",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-use-handrail-a3.pdf",
+      "bytes": 158448,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "use-handrail",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-use-handrail-png.png",
+      "bytes": 323760,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "face-shield-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-face-shield-must-be-worn-a4.pdf",
+      "bytes": 187084,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "face-shield-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-face-shield-must-be-worn-a3.pdf",
+      "bytes": 187085,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "face-shield-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-face-shield-must-be-worn-png.png",
+      "bytes": 344419,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-high-visibility-clothing-must-be-worn-a4.pdf",
+      "bytes": 178027,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-high-visibility-clothing-must-be-worn-a3.pdf",
+      "bytes": 178028,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "high-visibility-clothing-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-high-visibility-clothing-must-be-worn-png.png",
+      "bytes": 317239,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-respiratory-protection-must-be-worn-a4.pdf",
+      "bytes": 242884,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-respiratory-protection-must-be-worn-a3.pdf",
+      "bytes": 242885,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "respiratory-protection-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-respiratory-protection-must-be-worn-png.png",
+      "bytes": 427809,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "safety-harness-must-be-worn",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-safety-harness-must-be-worn-a4.pdf",
+      "bytes": 214983,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "safety-harness-must-be-worn",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-safety-harness-must-be-worn-a3.pdf",
+      "bytes": 214984,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "safety-harness-must-be-worn",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-safety-harness-must-be-worn-png.png",
+      "bytes": 375795,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "not-drinking-water",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-not-drinking-water-a4.pdf",
+      "bytes": 191151,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "not-drinking-water",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-not-drinking-water-a3.pdf",
+      "bytes": 191152,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "not-drinking-water",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-not-drinking-water-png.png",
+      "bytes": 365100,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-access-for-forklifts",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-no-access-for-forklifts-a4.pdf",
+      "bytes": 212943,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-access-for-forklifts",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-no-access-for-forklifts-a3.pdf",
+      "bytes": 212944,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-access-for-forklifts",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-no-access-for-forklifts-png.png",
+      "bytes": 383622,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "do-not-touch",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-do-not-touch-a4.pdf",
+      "bytes": 184985,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "do-not-touch",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-do-not-touch-a3.pdf",
+      "bytes": 184986,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "do-not-touch",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-do-not-touch-png.png",
+      "bytes": 360141,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-activated-mobile-phone",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-no-activated-mobile-phone-a4.pdf",
+      "bytes": 231277,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-activated-mobile-phone",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-no-activated-mobile-phone-a3.pdf",
+      "bytes": 231278,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "no-activated-mobile-phone",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-no-activated-mobile-phone-png.png",
+      "bytes": 406987,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "general-warning",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-general-warning-a4.pdf",
+      "bytes": 148001,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "general-warning",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-general-warning-a3.pdf",
+      "bytes": 148002,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "general-warning",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-general-warning-png.png",
+      "bytes": 295435,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-overhead-load",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-warning-overhead-load-a4.pdf",
+      "bytes": 176924,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-overhead-load",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-warning-overhead-load-a3.pdf",
+      "bytes": 176925,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-overhead-load",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-warning-overhead-load-png.png",
+      "bytes": 326922,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-toxic-material",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-warning-toxic-material-a4.pdf",
+      "bytes": 199036,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-toxic-material",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-warning-toxic-material-a3.pdf",
+      "bytes": 199037,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-toxic-material",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-warning-toxic-material-png.png",
+      "bytes": 360802,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-hot-surface",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-warning-hot-surface-a4.pdf",
+      "bytes": 161991,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-hot-surface",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-warning-hot-surface-a3.pdf",
+      "bytes": 161992,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-hot-surface",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-warning-hot-surface-png.png",
+      "bytes": 309704,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-flammable-material",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-warning-flammable-material-a4.pdf",
+      "bytes": 171123,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-flammable-material",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-warning-flammable-material-a3.pdf",
+      "bytes": 171124,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-flammable-material",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-warning-flammable-material-png.png",
+      "bytes": 313069,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-corrosive-substance",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-warning-corrosive-substance-a4.pdf",
+      "bytes": 183214,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-corrosive-substance",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-warning-corrosive-substance-a3.pdf",
+      "bytes": 183215,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-corrosive-substance",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-warning-corrosive-substance-png.png",
+      "bytes": 347744,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-crushing-of-hands",
+      "format": "a4",
+      "file": "/tmp/signs-exports/premium-en-warning-crushing-of-hands-a4.pdf",
+      "bytes": 145257,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-crushing-of-hands",
+      "format": "a3",
+      "file": "/tmp/signs-exports/premium-en-warning-crushing-of-hands-a3.pdf",
+      "bytes": 145258,
+      "result": "PASS"
+    },
+    {
+      "mode": "premium",
+      "locale": "en",
+      "slug": "warning-crushing-of-hands",
+      "format": "png",
+      "file": "/tmp/signs-exports/premium-en-warning-crushing-of-hands-png.png",
+      "bytes": 293683,
+      "result": "PASS"
+    },
+    {
+      "name": "broken-svg",
+      "result": "PASS",
+      "downloads": 0,
+      "writes": 0
+    }
+  ],
+  "errors": [],
+  "method": "Actual SignDownloadButtons + Renderer + capture module + jsPDF. Auth and entitlement GET mocked, activity in memory; real Supabase/payment NOT TESTED. Two synchronous clicks for every generated format."
+}

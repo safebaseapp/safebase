@@ -108,12 +108,12 @@ export const safetySigns: SafetySign[] = [
     category: "prohibition",
     icon: "no-entry",
     title: {
-      tr: "Yetkisiz Giriş Yasaktır",
-      en: "No Unauthorized Entry",
+      tr: "Geçiş Yasaktır",
+      en: "No Thoroughfare",
     },
     description: {
-      tr: "Kontrollü ve kısıtlı erişim alanları için.",
-      en: "For controlled and restricted-access areas.",
+      tr: "Yaya geçişinin yasak olduğu alanlar için. Yetkili giriş istisnası bu sembolden çıkarılmamalıdır.",
+      en: "For areas where pedestrian passage is prohibited. This symbol does not imply an authorized-entry exception.",
     },
   },
   {

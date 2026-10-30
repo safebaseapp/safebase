@@ -1,7 +1,7 @@
 import type { SignLocale } from "./types";
 import { signQrAsset } from "./qr";
 
-export const SIGN_CANVAS = { width: 2480, height: 3508, iconRatio: 0.72, footerHeight: 400 };
+export const SIGN_CANVAS = { width: 2480, height: 3508, iconRatio: 0.72, footerHeight: 520 };
 
 async function loadImage(src: string): Promise<HTMLImageElement> {
   const image = new Image();
@@ -76,7 +76,7 @@ export async function captureSafetySign({ slug, title, locale, clean }: {
       ctx.font = "500 44px Arial, Helvetica, sans-serif";
       ctx.fillText(locale === "tr" ? "Bu levhanın bilgi sayfası" : "This sign’s information page", 120, top + 225);
       ctx.font = "500 36px Arial, Helvetica, sans-serif"; ctx.fillText(`sernem.com/${locale}/safety-signs`, 120, top + 290);
-      ctx.imageSmoothingEnabled = false; ctx.drawImage(qr, width - 360, top + 40, 320, 320);
+      ctx.imageSmoothingEnabled = false; ctx.drawImage(qr, width - 480, top + 40, 440, 440);
     }
     return canvas;
   } finally { URL.revokeObjectURL(blobUrl); }
