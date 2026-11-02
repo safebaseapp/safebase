@@ -4939,10 +4939,10 @@ export default function MethodStatementPage({ params }: Props) {
                       });
                     }, 500);
                   }}
-                  className={`group template-${preset.number} w-full min-w-0 rounded-2xl border border-white/10 bg-slate-950/25 p-4 text-left transition hover:border-emerald-400/40 ${loadedTemplateButton === buttonId ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
+                  className={`group template-${preset.number} w-full min-w-0 ${loadedTemplateButton === buttonId ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
                 >
                   <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="flex min-w-0 items-start gap-4">
+                    <div className="flex items-start gap-4">
                       <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-2xl ${preset.iconBg}`} aria-hidden="true">
                         {preset.icon}
                       </span>
