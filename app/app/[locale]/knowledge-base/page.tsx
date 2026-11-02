@@ -79,6 +79,24 @@ export default async function KnowledgeBasePage({ params }: Props) {
   return (
     <>
       <GuideDirectoryClient locale={locale} guides={guides} />
+
+      <aside className="mx-auto max-w-6xl px-5 pb-8">
+        <div className="flex flex-col gap-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-slate-900 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-xl font-extrabold">
+              {locale === "tr" ? "Yeni: Ücretsiz düzenlenebilir İSG formları" : "New: Free editable HSE forms"}
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-700">
+              {locale === "tr"
+                ? "JSA, ramak kala ve olay araştırma formlarını açın; tarayıcıda doldurup yazdırın veya PDF olarak kaydedin."
+                : "Open JSA, near-miss and incident investigation worksheets; fill them in and print or save as PDF."}
+            </p>
+          </div>
+          <Link href={"/" + locale + "/field-forms"} className="shrink-0 rounded-xl bg-emerald-700 px-5 py-3 text-center font-bold text-white hover:bg-emerald-600">
+            {locale === "tr" ? "Saha formlarını aç" : "Explore field forms"} →
+          </Link>
+        </div>
+      </aside>
       <nav aria-label={locale === "tr" ? "Öncelikli teknik rehberler" : "Featured technical safety guides"} className="mx-auto max-w-6xl px-5 pb-10">
         <div className="rounded-2xl border border-blue-200 bg-white p-6 text-slate-900">
           <h2 className="text-xl font-extrabold">
