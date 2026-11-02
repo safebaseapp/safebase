@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import SignRenderer from "@/components/safety-signs/SignRenderer";
+import { resolveIsoCode } from "@/lib/safety-signs/symbols";
 import {
   safetySigns,
   signCategories,
@@ -39,6 +40,7 @@ export default function SafetySignsClient({
 
       const searchableText = [
         sign.code,
+        resolveIsoCode(sign.icon) ?? "",
         sign.title[locale],
         sign.description[locale],
       ]
@@ -77,6 +79,7 @@ export default function SafetySignsClient({
         <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_auto]">
           <input
             type="search"
+            aria-label={isTurkish ? "Güvenlik levhası ara" : "Search safety signs"}
             value={query}
             onChange={(event) =>
               setQuery(event.target.value)
@@ -107,13 +110,14 @@ export default function SafetySignsClient({
             return (
               <button
                 type="button"
+                aria-pressed={active}
                 key={item.id}
                 onClick={() =>
                   setCategory(item.id)
                 }
                 className={`rounded-full border px-5 py-2.5 text-sm font-black transition ${
                   active
-                    ? "border-emerald-500 bg-emerald-600 text-white"
+                    ? "border-emerald-500 bg-emerald-700 text-white"
                     : "border-white/10 bg-white/[0.04] text-slate-400 hover:text-white"
                 }`}
               >
@@ -123,6 +127,8 @@ export default function SafetySignsClient({
           })}
         </div>
 
+        <p role="status" className="mt-5 text-sm text-slate-300">{isTurkish ? `${filteredSigns.length} levha gösteriliyor` : `${filteredSigns.length} signs shown`}</p>
+        {filteredSigns.length === 0 && <p className="mt-6 text-slate-200">{isTurkish ? "Eşleşen levha yok. Başka kelime veya kategori deneyin." : "No matching signs. Try another keyword or category."}</p>}
         <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {filteredSigns.map((sign) => (
             <article
@@ -131,7 +137,8 @@ export default function SafetySignsClient({
             >
               <Link
                 href={`/${locale}/safety-signs/${sign.slug}`}
-                className="block h-[500px] overflow-hidden rounded-[20px]"
+                aria-label={sign.title[locale]}
+                className="block aspect-[2480/3508] overflow-hidden rounded-[20px]"
               >
                 <SignRenderer
                   sign={sign}
@@ -143,7 +150,7 @@ export default function SafetySignsClient({
               <div className="px-2 pb-2 pt-6">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-400">
-                    {sign.code}
+                    {sign.code} · {resolveIsoCode(sign.icon)}
                   </p>
 
                   <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[10px] font-black uppercase text-emerald-300">
@@ -175,7 +182,7 @@ export default function SafetySignsClient({
 
                 <Link
                   href={`/${locale}/safety-signs/${sign.slug}`}
-                  className="mt-5 flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-4 text-sm font-black text-white transition group-hover:bg-emerald-500"
+                  className="mt-5 flex items-center justify-center rounded-xl bg-emerald-700 px-4 py-4 text-sm font-black text-white transition group-hover:bg-emerald-800"
                 >
                   👁 {isTurkish ? "Önizle ve İndir" : "Preview & Download"}
                 </Link>

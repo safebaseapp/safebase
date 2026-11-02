@@ -1,0 +1,6 @@
+app/app/[locale]/field-forms/[slug]/FieldFormClient.tsx
+app/app/[locale]/field-forms/[slug]/page.tsx
+app/app/[locale]/field-forms/page.tsx
+app/app/[locale]/knowledge-base/page.tsx
+app/app/sitemap.ts
+app/lib/content/fieldForms.ts

@@ -4,7 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SignRenderer from "@/components/safety-signs/SignRenderer";
 import SignDownloadButtons from "@/components/safety-signs/SignDownloadButtons";
-import { getSafetySign } from "@/lib/safety-signs/data";
+import { resolveIsoCode } from "@/lib/safety-signs/symbols";
+import { safetySigns, getSafetySign } from "@/lib/safety-signs/data";
 
 type Props = {
   params: Promise<{
@@ -73,6 +74,8 @@ export default async function SafetySignDetailPage({
   }
 
   const isTurkish = locale === "tr";
+  const sameCategory = safetySigns.filter(other => other.category === sign.category && other.slug !== sign.slug);
+  const relatedSigns = (sameCategory.length ? sameCategory : safetySigns.filter(other => other.category === "emergency")).slice(0, 3);
 
   return (
     <>
@@ -113,7 +116,7 @@ export default async function SafetySignDetailPage({
         </Link>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_360px]">
-          <div className="mx-auto h-[900px] w-[650px] max-w-full">
+          <div className="mx-auto aspect-[2480/3508] w-full max-w-[650px]">
             <SignRenderer
               sign={sign}
               locale={locale}
@@ -134,6 +137,7 @@ export default async function SafetySignDetailPage({
             </p>
 
             <SignDownloadButtons
+              signSlug={sign.slug}
               signCode={sign.code}
               signTitle={sign.title[locale]}
               locale={locale}
@@ -146,6 +150,22 @@ export default async function SafetySignDetailPage({
             </p>
           </aside>
         </div>
+        <section className="mt-10 rounded-2xl bg-white p-5 text-slate-900">
+          <h2 className="text-xl font-bold">{isTurkish ? "Sembol ve kullanım" : "Symbol and application"}</h2>
+          <p className="mt-3 text-sm leading-6">{isTurkish
+            ? `Sembol dosyası: ${resolveIsoCode(sign.icon)}. ${sign.code} bir SERNEM katalog kodudur; ISO uygunluk sertifikası değildir. Yerleşim, görüş mesafesi ve yerel gereklilikler sahaya özel değerlendirilmelidir.`
+            : `Symbol file: ${resolveIsoCode(sign.icon)}. ${sign.code} is a SERNEM catalogue code, not an ISO conformity certificate. Placement, viewing distance and local requirements need a site-specific assessment.`}</p>
+          <p className="mt-2 text-sm">{isTurkish ? "Standart önizleme gösterilir. Premium dışa aktarımlar QR ve SERNEM etiketi içermez." : "The standard preview is shown. Premium exports contain neither QR nor SERNEM branding."}</p>
+          <a href="/safety-signs/iso/THIRD_PARTY_NOTICES.md" className="mt-3 inline-block text-blue-700 underline">{isTurkish ? "Sembol kaynak ve lisans notları" : "Symbol source and licensing notes"}</a>
+        </section>
+        <nav className="mt-8" aria-label={isTurkish ? "İlgili güvenlik levhaları" : "Related safety signs"}>
+          <h2 className="text-xl font-bold text-slate-900">{isTurkish ? "İlgili levhalar" : "Related signs"}</h2>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {relatedSigns.map(other => (
+              <Link key={other.slug} href={`/${locale}/safety-signs/${other.slug}`} className="rounded-xl bg-white p-4 font-semibold text-blue-700 underline">{other.title[locale]}</Link>
+            ))}
+          </div>
+        </nav>
       </div>
     </main>
     </>
