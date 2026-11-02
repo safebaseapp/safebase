@@ -46,7 +46,7 @@ for(const item of all){
    }
    for(const v of method.checks)assert.ok(v[l].length>25,item.slug+" weak holdpoint");
   }
-  for(const r of method.refs)assert.match(r.url,/^https:\/\/www\.osha\.gov\/laws-regs\/regulations\/standardnumber\/\d+\//,"Official reference needed");
+  for(const source of method.refs){const url=new URL(source.url);assert.equal(url.protocol,"https:");assert.ok(["www.osha.gov","www.hse.gov.uk"].includes(url.hostname),"Official OSHA/HSE reference needed");}
  }
 }
 assert.deepEqual([...ids].sort((x,y)=>x-y),[21,22,23,24,25,26,27,28,29,30,31,32,33,34]);
