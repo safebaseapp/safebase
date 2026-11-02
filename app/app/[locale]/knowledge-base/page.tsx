@@ -98,6 +98,15 @@ export default async function KnowledgeBasePage({ params }: Props) {
           </Link>
         </div>
       </aside>
+      <aside className="mx-auto max-w-6xl px-5 pb-10">
+        <div className="flex flex-col gap-4 rounded-2xl border border-sky-200 bg-sky-50 p-6 text-slate-900 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-xl font-bold">{locale === "tr" ? "Yeni: İşe özel çalışma metodu örnekleri" : "New: Task-specific method statement examples"}</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-7 text-slate-700">{locale === "tr" ? "Proses hattı açma, pnömatik test, grating, trifor, kaynak ve flanş işleri için tehlike ve kontrol adımlarını inceleyin." : "Explore safe-work examples for line breaking, pneumatic testing, grating, chain hoists, welding and flange assembly."}</p>
+          </div>
+          <Link href={`/${locale}/method-statements`} className="shrink-0 rounded-xl bg-sky-700 px-5 py-3 text-center font-bold text-white hover:bg-sky-600">{locale === "tr" ? "Metot örneklerini aç" : "Read method examples"} →</Link>
+        </div>
+      </aside>
       <nav aria-label={locale === "tr" ? "Öncelikli teknik rehberler" : "Featured technical safety guides"} className="mx-auto max-w-6xl px-5 pb-10">
         <div className="rounded-2xl border border-blue-200 bg-white p-6 text-slate-900">
           <h2 className="text-xl font-extrabold">

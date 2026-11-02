@@ -6,6 +6,7 @@ import { safetySigns } from "@/lib/safety-signs/data";
 import { safetyPacks } from "@/lib/safety-pack/data";
 import { allGuides } from "@/app/[locale]/knowledge-base/data/guides/all-guides";
 import { fieldForms } from "@/lib/content/fieldForms";
+import { methodExamples } from "@/lib/content/methodExamples";
 import { ppeStandards } from "@/app/[locale]/ppe-standards/data";
 import { inspectionCatalog } from "@/data/checklists/registry";
 
@@ -42,6 +43,7 @@ const publicRoutes = [
   "/risk-assessment",
   "/knowledge-base",
   "/field-forms",
+  "/method-statements",
   "/ppe-standards",
   "/posters",
   "/safety-signs",
@@ -159,6 +161,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     )),
     ...locales.flatMap((locale) => fieldForms.map((form) =>
       localizedEntry(locale, `/field-forms/${form.slug}`, { changeFrequency: "monthly", priority: 0.85 }),
+    )),
+    ...locales.flatMap(locale => methodExamples.map(example =>
+      localizedEntry(locale, `/method-statements/${example.slug}`, {changeFrequency:"monthly",priority:0.85}),
     )),
     ...safetyPackPages,
     ...guidePages,
