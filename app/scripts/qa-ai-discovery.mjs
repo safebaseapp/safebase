@@ -2,7 +2,7 @@
 // not ranking, actual crawling, citations, or rendered JSON-LD correctness.
 import { readFile } from "node:fs/promises";
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), "utf8");
-const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, signs, risks, hub] = await Promise.all([
+const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, signs, risks, hub, sourceLinks] = await Promise.all([
   read("app/robots.ts"),
   read("app/[locale]/toolbox/[slug]/page.tsx"),
   read("app/[locale]/knowledge-base/[slug]/page.tsx"),
@@ -13,6 +13,7 @@ const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, sign
   read("app/[locale]/safety-signs/[slug]/page.tsx"),
   read("app/[locale]/risk-assessment/[slug]/page.tsx"),
   read("app/[locale]/knowledge-base/page.tsx"),
+  read("lib/seo/hse-sources.ts"),
 ]);
 const checks = [
   ["OAI-SearchBot explicitly allowed", robots.includes("OAI-SearchBot") && robots.includes('allow: "/"')],
@@ -66,7 +67,7 @@ const checks = [
     ["roof-work", "cable-pulling", "steel-erection"].every(slug => risks.includes('"' + slug + '"')) &&
     risks.includes("const intent = searchIntentMetadata") &&
     risks.includes("activity.items.slice(0, 3)")],
-  ["OSHA 1910/1926 references link to official sources", guideTemplate.includes("www.osha.gov/laws-regs/regulations/standardnumber/") && guideTemplate.includes("officialSource")],
+  ["OSHA 1910/1926 references link to official sources", guideTemplate.includes("officialOshaReference(reference)") && guideTemplate.includes('import { officialOshaReference }') && sourceLinks.includes("www.osha.gov/laws-regs/regulations/standardnumber/") && sourceLinks.includes("1910|1926")],
 ];
 const failures = checks.filter(([, passed]) => !passed);
 for (const [label, passed] of checks) {
