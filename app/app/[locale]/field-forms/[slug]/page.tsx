@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!form) return {};
   const url = "https://www.sernem.com/" + locale + "/field-forms/" + slug;
   return {
-    title: form.title[locale] + " | Free Printable Template | SERNEM",
+    title: form.title[locale] + (locale === "tr" ? " | Ücretsiz Yazdırılabilir Form | SERNEM" : " | Free Printable Template | SERNEM"),
     description: form.description[locale],
     alternates: {
       canonical: url,
