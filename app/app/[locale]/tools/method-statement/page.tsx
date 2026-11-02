@@ -4923,7 +4923,6 @@ export default function MethodStatementPage({ params }: Props) {
 
             {growthMethodPresets.map((preset) => {
               const buttonId = `template-${preset.number}`;
-              const example = getGrowthMethodExample(preset.slug);
               return (
                 <button
                   key={preset.slug}
@@ -4951,7 +4950,7 @@ export default function MethodStatementPage({ params }: Props) {
                         <p className="mt-1 text-sm leading-6 text-slate-400">
                           {preset.description[locale]}
                         </p>
-                        <span className="sr-only">{example?.title[locale]}</span>
+                        <span className="sr-only">{preset.activity[locale]}</span>
                       </div>
                     </div>
                     <span className={`shrink-0 rounded-xl px-4 py-2.5 text-center text-sm font-black text-slate-950 transition ${preset.button}`}>

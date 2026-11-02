@@ -1,4 +1,5 @@
 import { getMethodExample, type MethodLocale } from "@/lib/content/methodExamples";
+import { advancedMethodPresets } from "./advancedMethodPresets";
 export type GrowthMethodPreset = {
   slug: string; number: number; icon: string; iconBg: string; button: string;
   activity: Record<MethodLocale,string>;
@@ -13,7 +14,7 @@ export type GrowthMethodPreset = {
 };
 // Additive presets for the existing 20-template generator: no replacement of legacy loaders.
 // Safety-critical steps reuse the same carefully bounded source content as public method guides.
-export const growthMethodPresets: GrowthMethodPreset[] = [
+const baseGrowthMethodPresets: GrowthMethodPreset[] = [
   {
     "slug": "process-line-breaking",
     "number": 21,
@@ -273,4 +274,11 @@ export const growthMethodPresets: GrowthMethodPreset[] = [
     }
   }
 ];
-export function getGrowthMethodExample(slug:string){return getMethodExample(slug);}
+// Keep the original six specialist presets unchanged and append eight new ones.
+export const growthMethodPresets: GrowthMethodPreset[] = [
+  ...baseGrowthMethodPresets,
+  ...advancedMethodPresets,
+];
+export function getGrowthMethodExample(slug: string) {
+  return getMethodExample(slug) ?? advancedMethodPresets.find((preset) => preset.slug === slug)?.method;
+}
