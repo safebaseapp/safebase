@@ -54,6 +54,8 @@ jobs:
           npm ci --prefix tools/sim5-review --no-audit --no-fund
           node tools/safety-signs-pack/access-audit.mjs
           node tools/safety-signs-pack/billing-audit.mjs
+      - name: Validate 72 TR/EN QR images and canonical destinations
+        run: node scripts/qa-safety-sign-qr-integrity.mjs
       - name: Check Turkish and English content
         run: node scripts/i18n-quality-check.mjs
       - name: Verify ChatGPT search accessibility and semantic reference pages
