@@ -7,6 +7,7 @@ import MethodStatementPrint from "./MethodStatementPrint";
 import PrintButton from "@/components/ui/PrintButton";
 import { trackEvent } from "@/lib/analytics";
 import { requirePrintAuth } from "@/lib/auth/require-print-auth";
+import { growthMethodPresets, getGrowthMethodExample } from "@/lib/content/growthMethodPresets";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -3890,6 +3891,52 @@ export default function MethodStatementPage({ params }: Props) {
   };
 
 
+  // Additional six ready-to-edit work methods: use the exact same editor and PDF
+  // state as the 20 legacy templates, with localized content and unique IDs.
+  const loadGrowthMethodTemplate = (slug: string) => {
+    const preset = growthMethodPresets.find((entry) => entry.slug === slug);
+    const method = getGrowthMethodExample(slug);
+    if (!preset || !method) return;
+    const language = locale;
+    setActivity(preset.activity[language]);
+    setDocumentNo(`SRN-MS-${String(preset.number).padStart(3, "0")}`);
+    setScope([method.intro[language], method.description[language]].join("\n\n"));
+    setResponsibilities(preset.responsibilities[language]);
+    setCompetency(preset.competency[language]);
+    setPpe(preset.ppe[language]);
+    setToolsEquipment(preset.tools[language]);
+    setPermits(preset.permits[language]);
+    setPreWorkRequirements(method.checks.map((check, index) => `${index + 1}. ${check[language]}`).join("\n"));
+    setEmergencyArrangements([
+      method.stop[language],
+      language === "tr"
+        ? "Acil durumda çalışmayı durdurun, personeli tehlikeden uzaklaştırın, alanı güvene alın ve tesis acil durum prosedürü ile yetkili gözetimi uygulayın."
+        : "In an emergency, stop work, withdraw people from danger, secure the area and follow site emergency procedures and competent supervision.",
+    ].join("\n\n"));
+    setEnvironmentalControls(preset.environment[language]);
+    setReferences([
+      ...method.refs.map((source) => `• ${source.title}: ${source.url}`),
+      language === "tr"
+        ? "• İşyeri/proje onaylı PTW, risk değerlendirmesi, ekipman üretici ve uygulama prosedürleri"
+        : "• Approved site PTW, risk assessment, equipment manufacturer and work procedures",
+    ].join("\n"));
+    setMethodSteps(method.steps.map((step, index) => ({
+      id: `growth-${preset.number}-${index}-${Date.now()}`,
+      step: step.title[language],
+      hazards: step.hazard[language],
+      controls: step.control[language],
+      responsible: preset.stepOwner[language],
+    })));
+    trackEvent("method_statement_created", {
+      locale,
+      template_id: preset.slug,
+      source: "ready_template",
+    });
+    setLoadedTemplate(preset.slug);
+    window.setTimeout(() => setLoadedTemplate(null), 1200);
+  };
+
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <ActivityTracker eventName="method_statement_open" />
@@ -3966,7 +4013,7 @@ export default function MethodStatementPage({ params }: Props) {
             </div>
 
             <div className="rounded-2xl border border-emerald-400/20 bg-slate-950/70 px-5 py-4 text-center">
-              <p className="text-3xl font-black text-emerald-300">20</p>
+              <p className="text-3xl font-black text-emerald-300">{20 + growthMethodPresets.length}</p>
               <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-400">
                 {isTurkish ? "Hazır Şablon" : "Ready Template"}
               </p>
@@ -4872,6 +4919,50 @@ export default function MethodStatementPage({ params }: Props) {
                 </span>
               </div>
             </button>
+
+
+            {growthMethodPresets.map((preset) => {
+              const buttonId = `template-${preset.number}`;
+              const example = getGrowthMethodExample(preset.slug);
+              return (
+                <button
+                  key={preset.slug}
+                  type="button"
+                  onClick={() => {
+                    loadGrowthMethodTemplate(preset.slug);
+                    showLoadedButtonFeedback(buttonId);
+                    setLocalizedTemplateName(preset.activity.en, preset.activity.tr);
+                    window.setTimeout(() => {
+                      document.getElementById("method-statement-editor-target")?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                    }, 500);
+                  }}
+                  className={`group template-${preset.number} w-full min-w-0 rounded-2xl border border-white/10 bg-slate-950/25 p-4 text-left transition hover:border-emerald-400/40 ${loadedTemplateButton === buttonId ? "ring-2 ring-emerald-400 shadow-xl scale-[1.01]" : ""}`}
+                >
+                  <div className="flex h-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex min-w-0 items-start gap-4">
+                      <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-2xl ${preset.iconBg}`} aria-hidden="true">
+                        {preset.icon}
+                      </span>
+                      <div className="min-w-0">
+                        <h3 className="font-black text-white">{preset.activity[locale]}</h3>
+                        <p className="mt-1 text-sm leading-6 text-slate-400">
+                          {preset.description[locale]}
+                        </p>
+                        <span className="sr-only">{example?.title[locale]}</span>
+                      </div>
+                    </div>
+                    <span className={`shrink-0 rounded-xl px-4 py-2.5 text-center text-sm font-black text-slate-950 transition ${preset.button}`}>
+                      {loadedTemplateButton === buttonId
+                        ? (isTurkish ? "✓ Yüklendi" : "✓ Loaded")
+                        : (isTurkish ? "Şablonu Yükle" : "Load Template")}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
 
 
 
