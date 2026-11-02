@@ -17,7 +17,13 @@ export async function generateMetadata({
   const locale = rawLocale === "tr" ? "tr" : "en";
   const canonical = `https://www.sernem.com/${locale}/posters`;
 
+  const title = locale === "tr" ? "İSG Güvenlik Posterleri | A4 ve A3 | SERNEM" : "HSE Safety Posters | A4 & A3 | SERNEM";
+  const description = locale === "tr" ? "15 konu başlığında Türkçe ve İngilizce iş güvenliği posterleri. A4/A3 önizleme, giriş sonrası yazdırma veya tarayıcıdan PDF olarak kaydetme." : "Browse 15 safety poster topics in Turkish and English. Preview A4/A3 designs, then sign in to print or save as PDF through your browser.";
+
   return {
+    title,
+    description,
+    openGraph: { title, description, url: canonical, type: "website", siteName: "SERNEM", locale: locale === "tr" ? "tr_TR" : "en_US" },
     alternates: {
       canonical,
       languages: {

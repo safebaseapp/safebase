@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { safetySigns } from "@/lib/safety-signs/data";
 import { notFound } from "next/navigation";
@@ -8,6 +9,27 @@ type Props = {
     locale: string;
   }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const title = locale === "tr" ? "ISO Güvenlik İşaretleri ve Levhaları | SERNEM" : "ISO Safety Signs & Workplace Symbols | SERNEM";
+  const description = locale === "tr" ? "İş yerinde kullanılan uyarı, yasak, zorunluluk ve acil durum güvenlik levhalarını Türkçe açıklamalarla keşfedin." : "Explore workplace warning, prohibition, mandatory and emergency safety signs with clear English explanations.";
+  const canonical = `https://www.sernem.com/${locale}/safety-signs`;
+  return {
+    title, description,
+    openGraph: { title, description, url: canonical, siteName: "SERNEM", type: "website", locale: locale === "tr" ? "tr_TR" : "en_US" },
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://www.sernem.com/tr/safety-signs",
+        en: "https://www.sernem.com/en/safety-signs",
+        "x-default": "https://www.sernem.com/en/safety-signs",
+      },
+    },
+  };
+}
+
 
 export default async function SafetySignsPage({
   params,

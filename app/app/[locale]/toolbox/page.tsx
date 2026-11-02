@@ -18,7 +18,13 @@ export async function generateMetadata({
   const locale = rawLocale === "tr" ? "tr" : "en";
   const canonical = `https://www.sernem.com/${locale}/toolbox`;
 
+  const title = locale === "tr" ? "Toolbox Talk Konuları ve Saha Konuşmaları | SERNEM" : "Toolbox Talk Topics & Safety Briefings | SERNEM";
+  const description = locale === "tr" ? "Kaynak, yüksekte çalışma, kaldırma ve diğer saha riskleri için Türkçe ve İngilizce Toolbox Talk konularını inceleyin." : "Browse English and Turkish Toolbox Talk topics for hot work, working at height, lifting operations and other site risks.";
+
   return {
+    title,
+    description,
+    openGraph: { title, description, url: canonical, type: "website", siteName: "SERNEM", locale: locale === "tr" ? "tr_TR" : "en_US" },
     alternates: {
       canonical,
       languages: {

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import { premiumTrialEnabled } from "@/lib/premium-trial-config";
 import TrackedCheckoutLink from "@/components/analytics/TrackedCheckoutLink";
@@ -14,6 +15,21 @@ type Benefit = {
   title: string;
   text: string;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const title = locale === "tr" ? "SERNEM Premium | Profesyonel HSE Araçları" : "SERNEM Premium | Professional HSE Tools";
+  const description = locale === "tr"
+    ? "SERNEM Premium ile gelişmiş HSE kaynaklarını, Toolbox içeriklerini ve profesyonel doküman deneyimini keşfedin."
+    : "Explore SERNEM Premium for advanced HSE resources, Toolbox Talks and professional document workflows.";
+  const canonical = `https://www.sernem.com/${locale}/upgrade`;
+  return {
+    title, description,
+    openGraph: { title, description, url: canonical, siteName: "SERNEM", type: "website", locale: locale === "tr" ? "tr_TR" : "en_US" },
+    alternates: { canonical, languages: { tr: "https://www.sernem.com/tr/upgrade", en: "https://www.sernem.com/en/upgrade", "x-default": "https://www.sernem.com/en/upgrade" } },
+  };
+}
 
 export default async function UpgradePage({ params }: Props) {
   const { locale } = await params;

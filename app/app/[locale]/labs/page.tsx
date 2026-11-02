@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import showcaseImage from "@/components/sim5/showcase-image";
 import Sim5PromoLink from "@/components/sim5/Sim5PromoLink";
@@ -10,6 +11,27 @@ import ActivityTracker from "@/components/analytics/ActivityTracker";
 import s from "./labs.module.css";
 
 type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const title = locale === "tr" ? "SERNEM Labs | İnteraktif İSG Simülasyonları" : "SERNEM Labs | Interactive HSE Simulations";
+  const description = locale === "tr" ? "Olay simülasyonu, tehlike farkındalığı, günlük güvenlik testi ve 3D saha uygulamalarını SERNEM Labs'te keşfedin." : "Explore incident scenarios, hazard recognition, daily safety challenges and interactive 3D field training in SERNEM Labs.";
+  const canonical = `https://www.sernem.com/${locale}/labs`;
+  return {
+    title, description,
+    openGraph: { title, description, url: canonical, siteName: "SERNEM", type: "website", locale: locale === "tr" ? "tr_TR" : "en_US" },
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://www.sernem.com/tr/labs",
+        en: "https://www.sernem.com/en/labs",
+        "x-default": "https://www.sernem.com/en/labs",
+      },
+    },
+  };
+}
+
 
 type LabCard = {
   id: string;

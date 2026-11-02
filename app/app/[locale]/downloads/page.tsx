@@ -17,7 +17,13 @@ export async function generateMetadata({
   const locale = rawLocale === "tr" ? "tr" : "en";
   const canonical = `https://www.sernem.com/${locale}/downloads`;
 
+  const title = locale === "tr" ? "Ücretsiz İSG Dokümanları ve Şablonları | SERNEM" : "HSE Downloads & Safety Templates | SERNEM";
+  const description = locale === "tr" ? "İSG dokümanları, Toolbox Talk kaynakları ve saha için düzenlenebilir profesyonel şablonları keşfedin. Erişim koşulları içerik türüne göre değişebilir." : "Explore HSE document downloads, Toolbox Talk resources and professional field templates. Access requirements depend on each resource.";
+
   return {
+    title,
+    description,
+    openGraph: { title, description, url: canonical, type: "website", siteName: "SERNEM", locale: locale === "tr" ? "tr_TR" : "en_US" },
     alternates: {
       canonical,
       languages: {

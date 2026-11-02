@@ -1,4 +1,4 @@
-import { hasActiveReward } from "@/lib/auth/reward-access";
+import { getPosterPremiumAccess } from "@/lib/auth/poster-premium-access";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { PDFDocument, rgb } from "pdf-lib";
@@ -72,46 +72,21 @@ export async function GET(request: Request, { params }: RouteProps) {
     );
   }
 
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  // Shared server-side billing, reward and admin entitlement verification.
+  const access = await getPosterPremiumAccess();
+  const user = access.user;
   if (!user) {
     const nextPath = `${new URL(request.url).pathname}${new URL(request.url).search}`;
     const loginUrl = createSafeUrl(request, `/${locale}/login`);
     loginUrl.searchParams.set("next", nextPath);
-
+    return NextResponse.redirect(loginUrl);
+  }
+  if (!access.allowed) {
     return NextResponse.redirect(
-      loginUrl,
+      createSafeUrl(request, access.reason === "inactive" ? `/${locale}/dashboard` : `/${locale}/upgrade`)
     );
   }
-
-  const { data: profile, error: profileError } = await supabase
-    .from("profiles")
-    .select("plan,role,status")
-    .eq("id", user.id)
-    .single();
-
-  if (
-    profileError ||
-    !profile ||
-    profile.status === "suspended"
-  ) {
-    return NextResponse.redirect(
-      createSafeUrl(request, `/${locale}/dashboard`),
-    );
-  }
-
-  const isPremium =
-    profile.plan === "premium" || profile.role === "admin" || await hasActiveReward(supabase,user.id);
-
-  if (!isPremium) {
-    return NextResponse.redirect(
-      createSafeUrl(request, `/${locale}/upgrade`),
-    );
-  }
+  const supabase = await createClient();
 
   const sourcePdfPath = path.join(
     process.cwd(),
