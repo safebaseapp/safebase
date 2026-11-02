@@ -1,3 +1,4 @@
+import { growthFieldForms } from "./growthFieldForms";
 export type FieldLocale = "tr" | "en";
 export type BiText = Record<FieldLocale, string>;
 
@@ -267,6 +268,7 @@ export const fieldForms: FieldForm[] = [
       { label: "OSHA — Incident Investigation", url: "https://obis.osha.gov/dcsp/products/topics/incidentinvestigation/" },
     ],
   },
+  ...growthFieldForms,
 ];
 
 export function getFieldForm(slug: string) {

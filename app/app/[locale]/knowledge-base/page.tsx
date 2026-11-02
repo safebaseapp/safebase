@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import GuideDirectoryClient from "./components/GuideDirectoryClient";
 import { allGuides } from "./data/guides/all-guides";
+import { fieldForms } from "@/lib/content/fieldForms";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -84,12 +85,12 @@ export default async function KnowledgeBasePage({ params }: Props) {
         <div className="flex flex-col gap-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-slate-900 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-xl font-extrabold">
-              {locale === "tr" ? "Yeni: Ücretsiz düzenlenebilir İSG formları" : "New: Free editable HSE forms"}
+              {locale === "tr" ? `${fieldForms.length} ücretsiz düzenlenebilir İSG saha formu` : `${fieldForms.length} free editable HSE field forms`}
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-700">
               {locale === "tr"
-                ? "JSA, ramak kala ve olay araştırma formlarını açın; tarayıcıda doldurup yazdırın veya PDF olarak kaydedin."
-                : "Open JSA, near-miss and incident investigation worksheets; fill them in and print or save as PDF."}
+                ? "JSA, LOTO, sıcak çalışma, kapalı alan, kaldırma planı, PTW devir ve toolbox dahil saha formlarını doldurup yazdırın."
+                : "Use free printable JSA, LOTO, hot work, confined space, lifting, PTW and toolbox forms, with action tracking."}
             </p>
           </div>
           <Link href={"/" + locale + "/field-forms"} className="shrink-0 rounded-xl bg-emerald-700 px-5 py-3 text-center font-bold text-white hover:bg-emerald-600">

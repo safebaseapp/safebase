@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
-    "prebuild": "node scripts/polish-toolbox-pdfs.mjs && node scripts/qa-toolbox-pdfs.mjs && node scripts/qa-download-flows.mjs && node scripts/qa-live-quality-pack.mjs",
+    "prebuild": "node scripts/polish-toolbox-pdfs.mjs && node scripts/qa-toolbox-pdfs.mjs && node scripts/qa-download-flows.mjs && node scripts/qa-live-quality-pack.mjs && node scripts/qa-field-forms-growth.mjs",
     "qa:toolbox-pdfs": "node scripts/qa-toolbox-pdfs.mjs",
     "qa:download-flows": "node scripts/qa-download-flows.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "qa:live-quality": "node scripts/qa-live-quality-pack.mjs"
+    "qa:live-quality": "node scripts/qa-live-quality-pack.mjs",
+    "qa:field-forms-growth": "node scripts/qa-field-forms-growth.mjs"
   },
   "dependencies": {
     "@iso-safety-signs/assets": "^1.0.1",

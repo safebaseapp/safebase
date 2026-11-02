@@ -11,8 +11,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const isTr = locale === "tr";
   const title = isTr ? "Ücretsiz İSG Saha Formları ve Şablonları | SERNEM" : "Free HSE Field Forms & Printable Templates | SERNEM";
   const description = isTr
-    ? "JSA/JHA, ramak kala bildirimi ve olay araştırması için ücretsiz, düzenlenebilir, yazdırılabilir saha formları. TR/EN, tarayıcıdan PDF kaydetme."
-    : "Free editable, printable HSE worksheets: JSA/JHA, near miss report and incident investigation. Available in English and Turkish.";
+    ? `${fieldForms.length} ücretsiz İSG saha formu: JSA, LOTO, sıcak çalışma, kapalı alan, kaldırma, PTW devir, toolbox, güvenlik gözlemi ve olay araştırması. TR/EN, yazdırılabilir.`
+    : `${fieldForms.length} free editable HSE forms: JSA, LOTO, hot work, confined space, lifting, PTW handover, toolbox, safety observations and incident investigation. TR/EN.`;
   return {
     title,
     description,
@@ -47,15 +47,15 @@ export default async function FieldFormsLanding({ params }: Props) {
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
             {isTr
-              ? "İş güvenliği analizi, ramak kala bildirimi ve olay araştırması için doğrudan tarayıcıda doldurulabilen formlar. Yazdırın veya tarayıcının PDF olarak kaydet seçeneğini kullanın."
-              : "Fill in field-ready worksheets for job safety analysis, near miss reporting and incident investigation. Print them or use your browser's Save as PDF option."}
+              ? "JSA, LOTO, sıcak çalışma, kapalı alan, kaldırma planı, PTW vardiya devri, toolbox ve gözlem takibi dahil saha formlarını tarayıcıda doldurun; yazdırın veya PDF kaydedin."
+              : "Use editable worksheets for JSA, LOTO, hot work, confined space, lifting plans, PTW handover, toolbox talks and safety observations. Print or save them as PDFs."}
           </p>
           <p className="mt-4 text-sm text-slate-400">
             {isTr ? "Form girişleri sunucuya gönderilmez; sayfa kapatılırsa otomatik geri yüklenmez." : "Your entries stay in the current browser page. They are not uploaded or automatically restored."}
           </p>
         </div>
       </section>
-      <section className="mx-auto grid max-w-6xl gap-6 px-5 py-12 md:grid-cols-3">
+      <section className="mx-auto grid max-w-6xl gap-6 px-5 py-12 md:grid-cols-2 xl:grid-cols-3">
         {fieldForms.map((form, index) => (
           <article key={form.slug} className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.05] p-7">
             <p className="text-xs font-extrabold uppercase tracking-wider text-emerald-400">

@@ -124,6 +124,15 @@ export default async function DownloadsPage({
   return (
     <>
       <SafetyPackPromo locale={locale} compact />
+      <section className="mx-auto max-w-7xl px-5 pt-5 text-white sm:px-8">
+        <div className="flex flex-col gap-4 rounded-2xl border border-sky-500/20 bg-sky-950/30 p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-lg font-bold">{isTurkish ? "Yeni: Ücretsiz düzenlenebilir saha formları" : "New: Free editable HSE field forms"}</h2>
+            <p className="mt-2 text-sm text-slate-300">{isTurkish ? "LOTO, sıcak çalışma, kaldırma planı, PTW vardiya devri ve diğer saha formlarını doldurun; tarayıcıdan yazdırın." : "Use free LOTO, hot work, lifting, PTW handover and other worksheets; fill them in and print from your browser."}</p>
+          </div>
+          <Link href={`/${locale}/field-forms`} className="shrink-0 rounded-xl bg-sky-600 px-5 py-3 text-center font-semibold text-white hover:bg-sky-500">{isTurkish ? "Saha formlarını aç" : "Browse field forms"}</Link>
+        </div>
+      </section>
       <DownloadsClient />
     </>
   );
