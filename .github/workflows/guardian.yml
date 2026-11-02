@@ -57,6 +57,8 @@ jobs:
           node tools/safety-signs-pack/poster-access-audit.mjs
       - name: Validate 72 TR/EN QR images and canonical destinations
         run: node scripts/qa-safety-sign-qr-integrity.mjs
+      - name: Verify 20 original + 6 new Method Statement templates
+        run: node scripts/qa-method-library-26.mjs
       - name: Check Turkish and English content
         run: node scripts/i18n-quality-check.mjs
       - name: Verify ChatGPT search accessibility and semantic reference pages
