@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
@@ -14,6 +15,26 @@ import { localizeHseText, normalizeHseEnglish } from "@/lib/labs/scenarios/hse-l
 import s from "./catalog.module.css";
 
 type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale === "tr" ? "tr" : "en";
+  const title = locale === "tr" ? "İSG Olay Simülatörü | Karar Senaryoları | SERNEM" : "HSE Incident Simulator | Safety Decisions | SERNEM";
+  const description = locale === "tr" ? "İş güvenliği olay simülasyonlarında karar verin; saha güvenliği, müdahale ve risk değerlendirme becerilerinizi geliştirin." : "Make safety decisions in interactive HSE incident scenarios and strengthen field judgment, response and risk assessment skills.";
+  const canonical = `https://www.sernem.com/${locale}/labs/incident-simulator`;
+  return {
+    title, description,
+    openGraph: { title, description, url: canonical, siteName: "SERNEM", type: "website", locale: locale === "tr" ? "tr_TR" : "en_US" },
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://www.sernem.com/tr/labs/incident-simulator",
+        en: "https://www.sernem.com/en/labs/incident-simulator",
+        "x-default": "https://www.sernem.com/en/labs/incident-simulator"
+      }
+    }
+  };
+}
 
 export default async function IncidentSimulatorPage({ params }: Props) {
   const { locale } = await params;

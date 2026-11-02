@@ -2,7 +2,7 @@
 // not ranking, actual crawling, citations, or rendered JSON-LD correctness.
 import { readFile } from "node:fs/promises";
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), "utf8");
-const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, signs, risks, hub] = await Promise.all([
+const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, signs, risks, hub, sourceLinks, guideSchemaSource] = await Promise.all([
   read("app/robots.ts"),
   read("app/[locale]/toolbox/[slug]/page.tsx"),
   read("app/[locale]/knowledge-base/[slug]/page.tsx"),
@@ -13,20 +13,22 @@ const [robots, toolbox, guides, sitemap, directory, guideTemplate, answers, sign
   read("app/[locale]/safety-signs/[slug]/page.tsx"),
   read("app/[locale]/risk-assessment/[slug]/page.tsx"),
   read("app/[locale]/knowledge-base/page.tsx"),
+  read("lib/seo/hse-sources.ts"),
+  read("lib/seo/guide-schema.ts"),
 ]);
 const checks = [
   ["OAI-SearchBot explicitly allowed", robots.includes("OAI-SearchBot") && robots.includes('allow: "/"')],
-  ["robots protects private API endpoints", robots.includes('"/api/"')],
-  ["robots protects private user dashboards", robots.includes('"/tr/dashboard/"') && robots.includes('"/en/dashboard/"')],
+  ["robots protects private API endpoints", robots.includes('"/api"')],
+  ["robots protects private user dashboards", robots.includes('"/tr/dashboard"') && robots.includes('"/en/dashboard"')],
   ["published Toolbox content never redirects readers to login or Premium",
     !toolbox.includes('redirect(') && toolbox.includes('if (!access.published || !access.visible)') &&
     toolbox.includes("authentication and Premium") === false],
   ["public Toolbox reading remains indexable independently of PDF entitlements",
     toolbox.includes("index: true") && toolbox.includes("follow: true")],
   ["toolbox has semantic article data", toolbox.includes('"@type": "TechArticle"') && toolbox.includes('"@type": "BreadcrumbList"')],
-  ["guide has semantic article data", guides.includes('"@type": "TechArticle"') && guides.includes('"@type": "BreadcrumbList"')],
+  ["guide has semantic article data", guideTemplate.includes("guideSchema(guide, language)") && guideSchemaSource.includes('"@type": "TechArticle"') && guideSchemaSource.includes('"@type": "BreadcrumbList"')],
   ["toolbox article uses real content", toolbox.includes("headline: content.title")],
-  ["knowledge guide uses real content", guides.includes("headline: guide.title[language]")],
+  ["knowledge guide uses real content", guideTemplate.includes("guideSchema(guide, language)") && guideSchemaSource.includes("headline: guide.title[language]")],
   ["sitemap includes toolbox and guides", sitemap.includes("toolboxData.map(") && sitemap.includes("allGuides.map(")],
   ["sitemap declares both languages", sitemap.includes('"x-default"') && sitemap.includes('const locales = ["tr", "en"]')],
   ["public reference directory links real SERNEM content", directory.includes("https://www.sernem.com/en/knowledge-base/confined-space-attendant-duties")],
@@ -66,7 +68,7 @@ const checks = [
     ["roof-work", "cable-pulling", "steel-erection"].every(slug => risks.includes('"' + slug + '"')) &&
     risks.includes("const intent = searchIntentMetadata") &&
     risks.includes("activity.items.slice(0, 3)")],
-  ["OSHA 1910/1926 references link to official sources", guideTemplate.includes("www.osha.gov/laws-regs/regulations/standardnumber/") && guideTemplate.includes("officialSource")],
+  ["OSHA 1910/1926 references link to official sources", guideTemplate.includes("officialOshaReference(reference)") && guideTemplate.includes('import { officialOshaReference }') && sourceLinks.includes("www.osha.gov/laws-regs/regulations/standardnumber/") && sourceLinks.includes("1910|1926")],
 ];
 const failures = checks.filter(([, passed]) => !passed);
 for (const [label, passed] of checks) {

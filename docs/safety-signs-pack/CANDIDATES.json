@@ -1,0 +1,345 @@
+{
+  "target": 60,
+  "existingPublished": 36,
+  "addedPublished": 0,
+  "blockedCandidates": [
+    {
+      "candidateCode": "E004",
+      "name": {
+        "tr": "Acil telefon",
+        "en": "Emergency telephone"
+      },
+      "category": "emergency",
+      "proposedSlug": "emergency-telephone",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "emergency/e004/ISO_7010_E004.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:E004",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "E010",
+      "name": {
+        "tr": "Otomatik harici defibrilatör",
+        "en": "Automated external heart defibrillator"
+      },
+      "category": "emergency",
+      "proposedSlug": "automated-external-heart-defibrillator",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "emergency/e010/ISO_7010_E010.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:E010",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "E011",
+      "name": {
+        "tr": "Göz duşu istasyonu",
+        "en": "Eyewash station"
+      },
+      "category": "emergency",
+      "proposedSlug": "eyewash-station",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "emergency/e011/ISO_7010_E011.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:E011",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "E012",
+      "name": {
+        "tr": "Güvenlik duşu",
+        "en": "Safety shower"
+      },
+      "category": "emergency",
+      "proposedSlug": "safety-shower",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "emergency/e012/ISO_7010_E012.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:E012",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "E013",
+      "name": {
+        "tr": "Sedye",
+        "en": "Stretcher"
+      },
+      "category": "emergency",
+      "proposedSlug": "stretcher",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "emergency/e013/ISO_7010_E013.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:E013",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "E020",
+      "name": {
+        "tr": "Acil durdurma düğmesi",
+        "en": "Emergency stop button"
+      },
+      "category": "emergency",
+      "proposedSlug": "emergency-stop-button",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "emergency/e020/ISO_7010_E020.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:E020",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "F002",
+      "name": {
+        "tr": "Yangın hortumu makarası",
+        "en": "Fire hose reel"
+      },
+      "category": "fire",
+      "proposedSlug": "fire-hose-reel",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "fire/f002/ISO_7010_F002.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:F002",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "F003",
+      "name": {
+        "tr": "Yangın merdiveni",
+        "en": "Fire ladder"
+      },
+      "category": "fire",
+      "proposedSlug": "fire-ladder",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "fire/f003/ISO_7010_F003.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:F003",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "F004",
+      "name": {
+        "tr": "Yangınla mücadele ekipmanları",
+        "en": "Collection of firefighting equipment"
+      },
+      "category": "fire",
+      "proposedSlug": "collection-of-firefighting-equipment",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "fire/f004/ISO_7010_F004.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:F004",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "F005",
+      "name": {
+        "tr": "Yangın alarmı butonu",
+        "en": "Fire alarm call point"
+      },
+      "category": "fire",
+      "proposedSlug": "fire-alarm-call-point",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "fire/f005/ISO_7010_F005.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:F005",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "F006",
+      "name": {
+        "tr": "Yangın acil telefonu",
+        "en": "Fire emergency telephone"
+      },
+      "category": "fire",
+      "proposedSlug": "fire-emergency-telephone",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "fire/f006/ISO_7010_F006.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:F006",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "M005",
+      "name": {
+        "tr": "Topraklama terminalini bağlayın",
+        "en": "Connect an earth terminal to the ground"
+      },
+      "category": "mandatory",
+      "proposedSlug": "connect-an-earth-terminal-to-the-ground",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "mandatory/m005/ISO_7010_M005.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:M005",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "M006",
+      "name": {
+        "tr": "Fişi prizden çıkarın",
+        "en": "Disconnect mains plug from electrical outlet"
+      },
+      "category": "mandatory",
+      "proposedSlug": "disconnect-mains-plug-from-electrical-outlet",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "mandatory/m006/ISO_7010_M006.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:M006",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "M019",
+      "name": {
+        "tr": "Kaynak maskesi kullanın",
+        "en": "Wear a welding mask"
+      },
+      "category": "mandatory",
+      "proposedSlug": "wear-a-welding-mask",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "mandatory/m019/ISO_7010_M019.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:M019",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "M021",
+      "name": {
+        "tr": "Bakım/onarım öncesi bağlantıyı kesin",
+        "en": "Disconnect before carrying out maintenance or repair"
+      },
+      "category": "mandatory",
+      "proposedSlug": "disconnect-before-carrying-out-maintenance-or-repair",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "mandatory/m021/ISO_7010_M021.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:M021",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "P011",
+      "name": {
+        "tr": "Su ile söndürmeyin",
+        "en": "Do not extinguish with water"
+      },
+      "category": "prohibition",
+      "proposedSlug": "do-not-extinguish-with-water",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "prohibition/p011/ISO_7010_P011.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:P011",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "P012",
+      "name": {
+        "tr": "Ağır yük yasaktır",
+        "en": "No heavy load"
+      },
+      "category": "prohibition",
+      "proposedSlug": "no-heavy-load",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "prohibition/p012/ISO_7010_P012.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:P012",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "W006",
+      "name": {
+        "tr": "Manyetik alan",
+        "en": "Magnetic field"
+      },
+      "category": "warning",
+      "proposedSlug": "magnetic-field",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "warning/w006/ISO_7010_W006.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:W006",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "W007",
+      "name": {
+        "tr": "Zemin seviyesinde engel",
+        "en": "Floor-level obstacle"
+      },
+      "category": "warning",
+      "proposedSlug": "floor-level-obstacle",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "warning/w007/ISO_7010_W007.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:W007",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "W008",
+      "name": {
+        "tr": "Düşme tehlikesi",
+        "en": "Drop (fall)"
+      },
+      "category": "warning",
+      "proposedSlug": "drop-fall",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "warning/w008/ISO_7010_W008.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:W008",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "W018",
+      "name": {
+        "tr": "Otomatik çalışmaya başlama",
+        "en": "Automatic start-up"
+      },
+      "category": "warning",
+      "proposedSlug": "automatic-start-up",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "warning/w018/ISO_7010_W018.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:W018",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "W019",
+      "name": {
+        "tr": "Ezilme tehlikesi",
+        "en": "Crushing"
+      },
+      "category": "warning",
+      "proposedSlug": "crushing",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "warning/w019/ISO_7010_W019.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:W019",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "W020",
+      "name": {
+        "tr": "Baş üstü engel",
+        "en": "Overhead obstacle"
+      },
+      "category": "warning",
+      "proposedSlug": "overhead-obstacle",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "warning/w020/ISO_7010_W020.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:W020",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    },
+    {
+      "candidateCode": "W022",
+      "name": {
+        "tr": "Keskin eleman",
+        "en": "Sharp element"
+      },
+      "category": "warning",
+      "proposedSlug": "sharp-element",
+      "status": "BLOCKED_NOT_PUBLISHED",
+      "reason": "Official code/meaning and individual artwork licensing not independently verifiable: ISO/Commons CONNECT 403, including escalated read-only retry",
+      "packageSvg": "warning/w022/ISO_7010_W022.svg",
+      "isoReference": "https://www.iso.org/obp/ui/#iso:grs:7010:W022",
+      "artworkSource": "Wikimedia Commons via upstream Wikipedia scraper; per-file author/license metadata unavailable"
+    }
+  ],
+  "upstreamCommit": "6fc253a3151c8d9dc7655125ebe0286056bb32d3",
+  "rule": "Not application data; no route, sitemap URL or new artwork published until evidence is complete."
+}

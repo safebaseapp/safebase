@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "name": "before-tr-library-390.png",
+      "locale": "tr",
+      "width": 390,
+      "slug": "",
+      "result": "PASS"
+    },
+    {
+      "name": "before-tr-detail-390.png",
+      "locale": "tr",
+      "width": 390,
+      "slug": "/high-visibility-clothing-must-be-worn",
+      "result": "PASS"
+    },
+    {
+      "name": "before-tr-library-1440.png",
+      "locale": "tr",
+      "width": 1440,
+      "slug": "",
+      "result": "PASS"
+    },
+    {
+      "name": "before-tr-detail-1440.png",
+      "locale": "tr",
+      "width": 1440,
+      "slug": "/high-visibility-clothing-must-be-worn",
+      "result": "PASS"
+    },
+    {
+      "name": "before-en-library-390.png",
+      "locale": "en",
+      "width": 390,
+      "slug": "",
+      "result": "PASS"
+    },
+    {
+      "name": "before-en-detail-390.png",
+      "locale": "en",
+      "width": 390,
+      "slug": "/high-visibility-clothing-must-be-worn",
+      "result": "PASS"
+    },
+    {
+      "name": "before-en-library-1440.png",
+      "locale": "en",
+      "width": 1440,
+      "slug": "",
+      "result": "PASS"
+    },
+    {
+      "name": "before-en-detail-1440.png",
+      "locale": "en",
+      "width": 1440,
+      "slug": "/high-visibility-clothing-must-be-worn",
+      "result": "PASS"
+    }
+  ],
+  "source": "Existing local production server 4244, Safety Signs sources verified byte-identical to main. Global navbar/other landing metadata reflect earlier local branch and are not a full-main baseline claim."
+}

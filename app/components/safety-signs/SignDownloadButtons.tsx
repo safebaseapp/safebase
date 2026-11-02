@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { jsPDF } from "jspdf";
 import { requirePrintAuth } from "@/lib/auth/require-print-auth";
 import { createClient } from "@/utils/supabase/client";
 
+import { captureSafetySign } from "@/lib/safety-signs/export";
+
 type Props = {
+  signSlug: string;
   signCode: string;
   signTitle: string;
   locale: string;
@@ -17,10 +20,12 @@ type DownloadAccessResponse = {
 };
 
 export default function SignDownloadButtons({
+  signSlug,
   signCode,
   signTitle,
   locale,
 }: Props) {
+  const busy = useRef(false);
   const [loading, setLoading] = useState<string | null>(null);
 
   const safeName = `${signCode}-${signTitle}`
@@ -53,151 +58,7 @@ export default function SignDownloadButtons({
   }
 
   async function captureSign(isPremium: boolean) {
-    const element = document.querySelector(
-      "[data-safety-sign-renderer]"
-    ) as HTMLElement | null;
-
-    if (!element) {
-      throw new Error("Safety sign renderer not found.");
-    }
-
-    const svgImage = element.querySelector("img") as HTMLImageElement | null;
-
-    if (!svgImage) {
-      throw new Error("Safety sign SVG not found.");
-    }
-
-    if (!svgImage.complete) {
-      await new Promise<void>((resolve, reject) => {
-        svgImage.onload = () => resolve();
-        svgImage.onerror = () => reject(new Error("SVG could not be loaded."));
-      });
-    }
-
-    const width = 2480;
-    const height = 3508;
-
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-
-    const ctx = canvas.getContext("2d");
-
-    if (!ctx) {
-      throw new Error("Canvas is unavailable.");
-    }
-
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, width, height);
-
-    const iconAreaHeight = Math.round(height * 0.72);
-    const brandAreaHeight = isPremium ? 0 : Math.round(height * 0.045);
-    const titleAreaHeight = height - iconAreaHeight - brandAreaHeight;
-
-    const response = await fetch(svgImage.src);
-
-    if (!response.ok) {
-      throw new Error("Safety sign SVG could not be fetched.");
-    }
-
-    const svgBlob = await response.blob();
-    const svgUrl = URL.createObjectURL(svgBlob);
-
-    try {
-      const img = new Image();
-
-      await new Promise<void>((resolve, reject) => {
-        img.onload = () => resolve();
-        img.onerror = () => reject(new Error("Safety sign image could not be rendered."));
-        img.src = svgUrl;
-      });
-
-      const paddingX = width * 0.08;
-      const paddingY = iconAreaHeight * 0.07;
-
-      const availableWidth = width - paddingX * 2;
-      const availableHeight = iconAreaHeight - paddingY * 2;
-
-      const scale = Math.min(
-        availableWidth / img.naturalWidth,
-        availableHeight / img.naturalHeight
-      );
-
-      const drawWidth = img.naturalWidth * scale;
-      const drawHeight = img.naturalHeight * scale;
-
-      ctx.drawImage(
-        img,
-        (width - drawWidth) / 2,
-        paddingY + (availableHeight - drawHeight) / 2,
-        drawWidth,
-        drawHeight
-      );
-    } finally {
-      URL.revokeObjectURL(svgUrl);
-    }
-
-    const titleContainer = element.children[1] as HTMLElement | undefined;
-
-    if (!titleContainer) {
-      throw new Error("Safety sign title area not found.");
-    }
-
-    const styles = window.getComputedStyle(titleContainer);
-
-    ctx.fillStyle = styles.backgroundColor || "#ffffff";
-    ctx.fillRect(0, iconAreaHeight, width, titleAreaHeight);
-
-    ctx.fillStyle = styles.color || "#020617";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.font = "900 125px Arial, Helvetica, sans-serif";
-
-    const maxTextWidth = width * 0.84;
-    let fontSize = 125;
-
-    while (fontSize > 55) {
-      ctx.font = `900 ${fontSize}px Arial, Helvetica, sans-serif`;
-
-      if (ctx.measureText(signTitle.toUpperCase()).width <= maxTextWidth) {
-        break;
-      }
-
-      fontSize -= 4;
-    }
-
-    ctx.fillText(
-      signTitle.toUpperCase(),
-      width / 2,
-      iconAreaHeight + titleAreaHeight / 2,
-      maxTextWidth
-    );
-
-    if (!isPremium) {
-      const brandTop = height - brandAreaHeight;
-
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, brandTop, width, brandAreaHeight);
-
-      ctx.strokeStyle = "#0f172a";
-      ctx.lineWidth = 5;
-      ctx.beginPath();
-      ctx.moveTo(0, brandTop + 2.5);
-      ctx.lineTo(width, brandTop + 2.5);
-      ctx.stroke();
-
-      ctx.fillStyle = "#0f172a";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.font = "900 54px Arial, Helvetica, sans-serif";
-      ctx.fillText(
-        "SERNEM.COM",
-        width / 2,
-        brandTop + brandAreaHeight / 2
-      );
-    }
-
-    return canvas;
+    return captureSafetySign({ slug: signSlug, title: signTitle, locale: locale === "tr" ? "tr" : "en", clean: isPremium });
   }
 
   async function downloadPNG(isPremium: boolean) {
@@ -258,10 +119,11 @@ export default function SignDownloadButtons({
   }
 
   async function run(type: "a4" | "a3" | "png") {
+    if (busy.current) return;
+    busy.current = true;
     const resolvedLocale = locale === "tr" ? "tr" : "en";
-    if (!(await requirePrintAuth(resolvedLocale))) return;
-
     try {
+      if (!(await requirePrintAuth(resolvedLocale))) return;
       setLoading(type);
 
       const isPremium = await resolvePremiumDownloadAccess();
@@ -303,6 +165,7 @@ export default function SignDownloadButtons({
           : "The file could not be generated. Please try again."
       );
     } finally {
+      busy.current = false;
       setLoading(null);
     }
   }
@@ -311,8 +174,8 @@ export default function SignDownloadButtons({
     <div className="mt-7 space-y-3">
       <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs font-bold leading-5 text-emerald-950">
         {locale === "tr"
-          ? "Ücretsiz indirmeler SERNEM.COM etiketi içerir. Premium üyeler temiz, logosuz sürümü otomatik olarak indirir."
-          : "Free downloads include a SERNEM.COM label. Premium members automatically receive the clean, logo-free version."}
+          ? "Standart önizleme ve ücretsiz indirmeler ayrı alt bilgide SERNEM.COM etiketi ve bu levhaya özel QR içerir. İndirmek için giriş gerekir. Premium üyeler temiz, logosuz ve QR içermeyen sürümü otomatik olarak indirir."
+          : "Standard previews and free downloads include SERNEM.COM and a sign-specific QR in a separate footer. Sign in to download. Premium members automatically receive the clean version without branding or QR."}
       </div>
 
       <button

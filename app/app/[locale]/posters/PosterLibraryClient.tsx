@@ -96,7 +96,7 @@ export default function PosterLibraryClient({
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.26em] text-emerald-400">
-                SERNEM Poster Library
+                {isTurkish ? "SERNEM Poster Kütüphanesi" : "SERNEM Poster Library"}
               </p>
 
               <h1 className="mt-5 max-w-4xl text-5xl font-black tracking-[-0.05em] sm:text-7xl">
@@ -107,12 +107,14 @@ export default function PosterLibraryClient({
 
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-400">
                 {isTurkish
-                  ? "Yazdırmaya hazır profesyonel HSE posterlerini A4 veya A3 formatında görüntüleyin ve PDF olarak kaydedin."
-                  : "View print-ready professional HSE posters in A4 or A3 format and save them as PDF."}
+                  ? "Profesyonel HSE posterlerini A4 veya A3 olarak önizleyin. Yazdırma penceresinden PDF olarak kaydetmek için giriş yapın."
+                  : "Preview professional HSE posters in A4 or A3. Sign in to save a PDF using your browser's print dialog."}
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">
-                {["⬇ Download A4", "⬇ Download A3", "PDF Included", "TR + EN"].map(
+                {(isTurkish
+                  ? ["👁 A4 Önizleme", "👁 A3 Önizleme", "🖨 PDF olarak kaydet", "TR + EN"]
+                  : ["👁 Preview A4", "👁 Preview A3", "🖨 Save PDF via Print", "TR + EN"]).map(
                   (item) => (
                     <span
                       key={item}
@@ -141,6 +143,7 @@ export default function PosterLibraryClient({
 
             <input
               type="search"
+              aria-label={isTurkish ? "Poster ara" : "Search posters"}
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder={
@@ -171,6 +174,7 @@ export default function PosterLibraryClient({
                       type="button"
                       key={item.id}
                       onClick={() => setCategory(item.id)}
+                      aria-pressed={active}
                       className={`flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-sm font-black transition ${
                         active
                           ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20"
@@ -343,7 +347,7 @@ export default function PosterLibraryClient({
                     </div>
 
                     
-<div className="mt-6 flex items-center gap-2 flex-nowrap">
+<div className="mt-6 flex flex-wrap items-center gap-2">
   <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">
     ✓ {isTurkish ? "Yazdırmaya Hazır" : "Print Ready"}
   </span>
@@ -353,7 +357,7 @@ export default function PosterLibraryClient({
   </span>
 
   <span className="rounded-full border border-violet-400/20 bg-violet-400/10 px-3 py-1 text-xs font-bold text-violet-300">
-    📄 PDF
+    🖨 {isTurkish ? "PDF olarak kaydet" : "Print to PDF"}
   </span>
 </div>
 
@@ -369,7 +373,7 @@ export default function PosterLibraryClient({
                             }
                             className="inline-flex items-center justify-center rounded-xl border border-blue-400/30 bg-blue-400/10 px-4 py-3 text-sm font-black text-blue-300 transition hover:-translate-y-1 hover:bg-blue-400/20"
                           >
-                            {isPremium ? "🔒 A4 PDF" : "A4 PDF"}
+                            {isPremium ? (isTurkish ? "🔒 A4 · Premium" : "🔒 A4 · Premium") : (isTurkish ? "A4 Görüntüle" : "Preview A4")}
                           </Link>
 
                           <Link
@@ -380,7 +384,7 @@ export default function PosterLibraryClient({
                             }
                             className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-3 text-sm font-black text-white transition hover:-translate-y-1 hover:bg-emerald-500"
                           >
-                            {isPremium ? (isTurkish ? "👑 Kilidi Aç" : "👑 Unlock") : "A3 PDF"}
+                            {isPremium ? (isTurkish ? "👑 Kilidi Aç" : "👑 Unlock") : (isTurkish ? "A3 Görüntüle" : "Preview A3")}
                           </Link>
 
                           <Link

@@ -1,0 +1,1099 @@
+{
+  "main": "80a1a0e3e95931a5058a2fe45e6f00e7604a8382",
+  "branch": "codex/safety-signs-library-qr-expansion",
+  "slugs": [
+    "safety-helmet-must-be-worn",
+    "eye-protection-must-be-worn",
+    "protective-gloves-must-be-worn",
+    "safety-footwear-must-be-worn",
+    "hearing-protection-must-be-worn",
+    "no-smoking",
+    "no-unauthorized-entry",
+    "no-open-flame",
+    "warning-high-voltage",
+    "warning-forklift-traffic",
+    "warning-falling-objects",
+    "warning-slippery-surface",
+    "first-aid",
+    "emergency-exit",
+    "assembly-point",
+    "fire-extinguisher",
+    "general-mandatory-action",
+    "refer-to-instruction-manual",
+    "protective-clothing-must-be-worn",
+    "wash-your-hands",
+    "use-handrail",
+    "face-shield-must-be-worn",
+    "high-visibility-clothing-must-be-worn",
+    "respiratory-protection-must-be-worn",
+    "safety-harness-must-be-worn",
+    "not-drinking-water",
+    "no-access-for-forklifts",
+    "do-not-touch",
+    "no-activated-mobile-phone",
+    "general-warning",
+    "warning-overhead-load",
+    "warning-toxic-material",
+    "warning-hot-surface",
+    "warning-flammable-material",
+    "warning-corrosive-substance",
+    "warning-crushing-of-hands"
+  ],
+  "signs": [
+    {
+      "slug": "safety-helmet-must-be-worn",
+      "code": "SRN-M-014",
+      "category": "mandatory",
+      "icon": "helmet",
+      "title": {
+        "tr": "Baret Takmak Zorunludur",
+        "en": "Safety Helmet Must Be Worn"
+      },
+      "description": {
+        "tr": "Baret kullanımının zorunlu olduğu alanlar için.",
+        "en": "For areas where safety helmets are mandatory."
+      }
+    },
+    {
+      "slug": "eye-protection-must-be-worn",
+      "code": "SRN-M-004",
+      "category": "mandatory",
+      "icon": "glasses",
+      "title": {
+        "tr": "Koruyucu Gözlük Takmak Zorunludur",
+        "en": "Eye Protection Must Be Worn"
+      },
+      "description": {
+        "tr": "Göz koruması gereken çalışma alanları için.",
+        "en": "For work areas requiring eye protection."
+      }
+    },
+    {
+      "slug": "protective-gloves-must-be-worn",
+      "code": "SRN-M-009",
+      "category": "mandatory",
+      "icon": "gloves",
+      "title": {
+        "tr": "Koruyucu Eldiven Kullanmak Zorunludur",
+        "en": "Protective Gloves Must Be Worn"
+      },
+      "description": {
+        "tr": "Göreve uygun koruyucu eldiven kullanımı için.",
+        "en": "For task-appropriate protective glove requirements."
+      }
+    },
+    {
+      "slug": "safety-footwear-must-be-worn",
+      "code": "SRN-M-008",
+      "category": "mandatory",
+      "icon": "footwear",
+      "title": {
+        "tr": "Güvenlik Ayakkabısı Giymek Zorunludur",
+        "en": "Safety Footwear Must Be Worn"
+      },
+      "description": {
+        "tr": "Koruyucu iş ayakkabısı gereken alanlar için.",
+        "en": "For areas requiring protective safety footwear."
+      }
+    },
+    {
+      "slug": "hearing-protection-must-be-worn",
+      "code": "SRN-M-003",
+      "category": "mandatory",
+      "icon": "hearing",
+      "title": {
+        "tr": "Kulak Koruyucu Kullanmak Zorunludur",
+        "en": "Hearing Protection Must Be Worn"
+      },
+      "description": {
+        "tr": "Gürültülü çalışma alanları için.",
+        "en": "For high-noise work areas."
+      }
+    },
+    {
+      "slug": "no-smoking",
+      "code": "SRN-P-001",
+      "category": "prohibition",
+      "icon": "no-smoking",
+      "title": {
+        "tr": "Sigara İçilmez",
+        "en": "No Smoking"
+      },
+      "description": {
+        "tr": "Sigara içmenin yasak olduğu alanlar için.",
+        "en": "For areas where smoking is prohibited."
+      }
+    },
+    {
+      "slug": "no-unauthorized-entry",
+      "code": "SRN-P-002",
+      "category": "prohibition",
+      "icon": "no-entry",
+      "title": {
+        "tr": "Yetkisiz Giriş Yasaktır",
+        "en": "No Unauthorized Entry"
+      },
+      "description": {
+        "tr": "Kontrollü ve kısıtlı erişim alanları için.",
+        "en": "For controlled and restricted-access areas."
+      }
+    },
+    {
+      "slug": "no-open-flame",
+      "code": "SRN-P-003",
+      "category": "prohibition",
+      "icon": "no-flame",
+      "title": {
+        "tr": "Açık Alev Yasaktır",
+        "en": "No Open Flame"
+      },
+      "description": {
+        "tr": "Yanıcı veya patlayıcı tehlike bulunan alanlar için.",
+        "en": "For areas containing flammable or explosive hazards."
+      }
+    },
+    {
+      "slug": "warning-high-voltage",
+      "code": "SRN-W-012",
+      "category": "warning",
+      "icon": "high-voltage",
+      "title": {
+        "tr": "Dikkat! Yüksek Gerilim",
+        "en": "Warning! High Voltage"
+      },
+      "description": {
+        "tr": "Elektrik çarpması ve yüksek gerilim tehlikesi için.",
+        "en": "For electrical shock and high-voltage hazards."
+      }
+    },
+    {
+      "slug": "warning-forklift-traffic",
+      "code": "SRN-W-002",
+      "category": "warning",
+      "icon": "forklift",
+      "title": {
+        "tr": "Dikkat! Forklift Trafiği",
+        "en": "Warning! Forklift Traffic"
+      },
+      "description": {
+        "tr": "Forklift ve yaya yollarının kesiştiği alanlar için.",
+        "en": "For areas where forklifts and pedestrians interact."
+      }
+    },
+    {
+      "slug": "warning-falling-objects",
+      "code": "SRN-W-003",
+      "category": "warning",
+      "icon": "falling-objects",
+      "title": {
+        "tr": "Dikkat! Düşen Cisimler",
+        "en": "Warning! Falling Objects"
+      },
+      "description": {
+        "tr": "Yukarıdan malzeme düşme riski bulunan alanlar için.",
+        "en": "For areas exposed to falling-object hazards."
+      }
+    },
+    {
+      "slug": "warning-slippery-surface",
+      "code": "SRN-W-004",
+      "category": "warning",
+      "icon": "slippery",
+      "title": {
+        "tr": "Dikkat! Kaygan Zemin",
+        "en": "Warning! Slippery Surface"
+      },
+      "description": {
+        "tr": "Kayma riski bulunan zeminler için.",
+        "en": "For floors presenting a slip hazard."
+      }
+    },
+    {
+      "slug": "first-aid",
+      "code": "SRN-E-001",
+      "category": "emergency",
+      "icon": "first-aid",
+      "title": {
+        "tr": "İlk Yardım",
+        "en": "First Aid"
+      },
+      "description": {
+        "tr": "İlk yardım ekipmanı veya istasyonunu göstermek için.",
+        "en": "Identifies first-aid equipment or stations."
+      }
+    },
+    {
+      "slug": "emergency-exit",
+      "code": "SRN-E-002",
+      "category": "emergency",
+      "icon": "emergency-exit",
+      "title": {
+        "tr": "Acil Çıkış",
+        "en": "Emergency Exit"
+      },
+      "description": {
+        "tr": "Acil tahliye çıkışlarını göstermek için.",
+        "en": "Identifies emergency evacuation exits."
+      }
+    },
+    {
+      "slug": "assembly-point",
+      "code": "SRN-E-003",
+      "category": "emergency",
+      "icon": "assembly-point",
+      "title": {
+        "tr": "Acil Toplanma Noktası",
+        "en": "Emergency Assembly Point"
+      },
+      "description": {
+        "tr": "Tahliye sonrası toplanma alanlarını göstermek için.",
+        "en": "Identifies emergency assembly locations."
+      }
+    },
+    {
+      "slug": "fire-extinguisher",
+      "code": "SRN-F-001",
+      "category": "fire",
+      "icon": "fire-extinguisher",
+      "title": {
+        "tr": "Yangın Söndürücü",
+        "en": "Fire Extinguisher"
+      },
+      "description": {
+        "tr": "Yangın söndürücü konumunu göstermek için.",
+        "en": "Identifies the location of a fire extinguisher."
+      }
+    },
+    {
+      "slug": "general-mandatory-action",
+      "code": "SRN-M-001",
+      "category": "mandatory",
+      "icon": "M001",
+      "title": {
+        "tr": "Genel Zorunluluk",
+        "en": "General Mandatory Action"
+      },
+      "description": {
+        "tr": "Belirtilen zorunlu güvenlik talimatına uyulması gereken alanlar için.",
+        "en": "For areas requiring compliance with a specified mandatory safety action."
+      }
+    },
+    {
+      "slug": "refer-to-instruction-manual",
+      "code": "SRN-M-002",
+      "category": "mandatory",
+      "icon": "M002",
+      "title": {
+        "tr": "Talimatları Okuyun",
+        "en": "Refer to Instruction Manual"
+      },
+      "description": {
+        "tr": "İşleme başlamadan önce kullanım talimatlarının okunması gereken ekipmanlar için.",
+        "en": "For equipment requiring the instruction manual to be read before use."
+      }
+    },
+    {
+      "slug": "protective-clothing-must-be-worn",
+      "code": "SRN-M-010",
+      "category": "mandatory",
+      "icon": "M010",
+      "title": {
+        "tr": "Koruyucu Giysi Kullanmak Zorunludur",
+        "en": "Protective Clothing Must Be Worn"
+      },
+      "description": {
+        "tr": "Vücut koruması gerektiren tehlikeli çalışma alanları için.",
+        "en": "For hazardous work areas requiring protective clothing."
+      }
+    },
+    {
+      "slug": "wash-your-hands",
+      "code": "SRN-M-011",
+      "category": "mandatory",
+      "icon": "M011",
+      "title": {
+        "tr": "Ellerinizi Yıkayın",
+        "en": "Wash Your Hands"
+      },
+      "description": {
+        "tr": "Hijyen kontrolü gerektiren çalışma ve geçiş alanları için.",
+        "en": "For work and transition areas requiring hand hygiene."
+      }
+    },
+    {
+      "slug": "use-handrail",
+      "code": "SRN-M-012",
+      "category": "mandatory",
+      "icon": "M012",
+      "title": {
+        "tr": "Merdiven Trabzanını Kullanın",
+        "en": "Use Handrail"
+      },
+      "description": {
+        "tr": "Merdiven ve geçişlerde korkuluk kullanımının zorunlu olduğu alanlar için.",
+        "en": "For stairs and access routes where handrail use is mandatory."
+      }
+    },
+    {
+      "slug": "face-shield-must-be-worn",
+      "code": "SRN-M-013",
+      "category": "mandatory",
+      "icon": "M013",
+      "title": {
+        "tr": "Yüz Siperi Kullanmak Zorunludur",
+        "en": "Face Shield Must Be Worn"
+      },
+      "description": {
+        "tr": "Yüz ve gözlerin sıçrama veya parçacıklardan korunması gereken işler için.",
+        "en": "For tasks requiring face and eye protection from splashes or particles."
+      }
+    },
+    {
+      "slug": "high-visibility-clothing-must-be-worn",
+      "code": "SRN-M-015",
+      "category": "mandatory",
+      "icon": "M015",
+      "title": {
+        "tr": "Yüksek Görünürlüklü Giysi Zorunludur",
+        "en": "High-Visibility Clothing Must Be Worn"
+      },
+      "description": {
+        "tr": "Araç ve iş makinesi trafiği bulunan çalışma alanları için.",
+        "en": "For work areas containing vehicle and mobile-equipment traffic."
+      }
+    },
+    {
+      "slug": "respiratory-protection-must-be-worn",
+      "code": "SRN-M-017",
+      "category": "mandatory",
+      "icon": "M017",
+      "title": {
+        "tr": "Solunum Koruyucu Kullanmak Zorunludur",
+        "en": "Respiratory Protection Must Be Worn"
+      },
+      "description": {
+        "tr": "Toz, duman, buhar veya zararlı gaz maruziyeti bulunan işler için.",
+        "en": "For tasks involving exposure to dust, fumes, vapours or hazardous gases."
+      }
+    },
+    {
+      "slug": "safety-harness-must-be-worn",
+      "code": "SRN-M-018",
+      "category": "mandatory",
+      "icon": "M018",
+      "title": {
+        "tr": "Emniyet Kemeri Kullanmak Zorunludur",
+        "en": "Safety Harness Must Be Worn"
+      },
+      "description": {
+        "tr": "Düşme riski bulunan yüksekte çalışma alanları için.",
+        "en": "For work-at-height areas presenting a fall hazard."
+      }
+    },
+    {
+      "slug": "not-drinking-water",
+      "code": "SRN-P-005",
+      "category": "prohibition",
+      "icon": "P005",
+      "title": {
+        "tr": "İçme Suyu Değildir",
+        "en": "Not Drinking Water"
+      },
+      "description": {
+        "tr": "İnsan tüketimine uygun olmayan su kaynaklarını belirtmek için.",
+        "en": "Identifies water sources that are not suitable for human consumption."
+      }
+    },
+    {
+      "slug": "no-access-for-forklifts",
+      "code": "SRN-P-006",
+      "category": "prohibition",
+      "icon": "P006",
+      "title": {
+        "tr": "Forklift Girişi Yasaktır",
+        "en": "No Access for Forklifts"
+      },
+      "description": {
+        "tr": "Forklift ve endüstriyel araç girişinin yasak olduğu alanlar için.",
+        "en": "For areas where forklifts and industrial vehicles are prohibited."
+      }
+    },
+    {
+      "slug": "do-not-touch",
+      "code": "SRN-P-010",
+      "category": "prohibition",
+      "icon": "P010",
+      "title": {
+        "tr": "Dokunmak Yasaktır",
+        "en": "Do Not Touch"
+      },
+      "description": {
+        "tr": "Temas edilmesi tehlikeli veya yasak olan ekipman ve yüzeyler için.",
+        "en": "For equipment and surfaces that must not be touched."
+      }
+    },
+    {
+      "slug": "no-activated-mobile-phone",
+      "code": "SRN-P-013",
+      "category": "prohibition",
+      "icon": "P013",
+      "title": {
+        "tr": "Cep Telefonu Kullanmak Yasaktır",
+        "en": "No Activated Mobile Phone"
+      },
+      "description": {
+        "tr": "Cep telefonu kullanımının güvenlik veya proses riski oluşturduğu alanlar için.",
+        "en": "For areas where mobile-phone use creates a safety or process risk."
+      }
+    },
+    {
+      "slug": "general-warning",
+      "code": "SRN-W-001",
+      "category": "warning",
+      "icon": "W001",
+      "title": {
+        "tr": "Dikkat! Genel Tehlike",
+        "en": "Warning! General Hazard"
+      },
+      "description": {
+        "tr": "Özel bir sembolle tanımlanmayan genel tehlikeleri belirtmek için.",
+        "en": "Indicates a general hazard not represented by a more specific symbol."
+      }
+    },
+    {
+      "slug": "warning-overhead-load",
+      "code": "SRN-W-015",
+      "category": "warning",
+      "icon": "W015",
+      "title": {
+        "tr": "Dikkat! Asılı Yük",
+        "en": "Warning! Overhead Load"
+      },
+      "description": {
+        "tr": "Vinç operasyonu ve asılı yük tehlikesi bulunan alanlar için.",
+        "en": "For areas containing crane operations and suspended-load hazards."
+      }
+    },
+    {
+      "slug": "warning-toxic-material",
+      "code": "SRN-W-016",
+      "category": "warning",
+      "icon": "W016",
+      "title": {
+        "tr": "Dikkat! Zehirli Madde",
+        "en": "Warning! Toxic Material"
+      },
+      "description": {
+        "tr": "Zehirli madde veya akut toksisite riski bulunan alanlar için.",
+        "en": "For areas containing toxic substances or acute toxicity hazards."
+      }
+    },
+    {
+      "slug": "warning-hot-surface",
+      "code": "SRN-W-017",
+      "category": "warning",
+      "icon": "W017",
+      "title": {
+        "tr": "Dikkat! Sıcak Yüzey",
+        "en": "Warning! Hot Surface"
+      },
+      "description": {
+        "tr": "Temas halinde yanık oluşturabilecek sıcak yüzeyler için.",
+        "en": "For hot surfaces capable of causing contact burns."
+      }
+    },
+    {
+      "slug": "warning-flammable-material",
+      "code": "SRN-W-021",
+      "category": "warning",
+      "icon": "W021",
+      "title": {
+        "tr": "Dikkat! Yanıcı Madde",
+        "en": "Warning! Flammable Material"
+      },
+      "description": {
+        "tr": "Yanıcı madde, gaz, sıvı veya buhar bulunan alanlar için.",
+        "en": "For areas containing flammable substances, gases, liquids or vapours."
+      }
+    },
+    {
+      "slug": "warning-corrosive-substance",
+      "code": "SRN-W-023",
+      "category": "warning",
+      "icon": "W023",
+      "title": {
+        "tr": "Dikkat! Aşındırıcı Madde",
+        "en": "Warning! Corrosive Substance"
+      },
+      "description": {
+        "tr": "Cilt, göz veya metallere zarar verebilen aşındırıcı maddeler için.",
+        "en": "For corrosive substances capable of damaging skin, eyes or metals."
+      }
+    },
+    {
+      "slug": "warning-crushing-of-hands",
+      "code": "SRN-W-024",
+      "category": "warning",
+      "icon": "W024",
+      "title": {
+        "tr": "Dikkat! El Sıkışma Tehlikesi",
+        "en": "Warning! Crushing of Hands"
+      },
+      "description": {
+        "tr": "El sıkışması veya ezilmesi riski bulunan hareketli ekipmanlar için.",
+        "en": "For moving equipment presenting hand crushing or trapping hazards."
+      }
+    }
+  ],
+  "protected": {
+    ".github/workflows/sim5-pack10-daily-xp-ci.yml": "7f36421a448d4228d6e8101c2dc321fdb7c7cc50fe92a65d739dcd1ff668227c",
+    "app/.poster-series-02-backup-20260807-140150/app/[locale]/posters/[slug]/page.tsx": "435f492b6d297fe784c93337114083472e3513f2e42562cb9524929996107b38",
+    "app/.poster-series-02-backup-20260807-140150/app/[locale]/posters/poster-data.ts": "da2827ed53a00804a73c784dbbaa2708498b11c5f727bf4ebbcd557addd7e2f4",
+    "app/.poster-series-02-backup-20260807-140150/components/posters-v4/BottomPanels.tsx": "c5c80d293e04ffc35ad8b3e2d51da0bc6793038f7dd855279b16d71d019b4c56",
+    "app/.poster-series-02-backup-20260807-140150/components/posters-v4/PosterIcon.tsx": "d8e778dabbc6cd63bbbb8a58cb5cd3971fc2add88d7bf0f7615e340ec5a5f6f1",
+    "app/.poster-series-03-backup-20260807-141125/app/[locale]/posters/[slug]/page.tsx": "435f492b6d297fe784c93337114083472e3513f2e42562cb9524929996107b38",
+    "app/.poster-series-03-backup-20260807-141125/app/[locale]/posters/poster-data.ts": "da2827ed53a00804a73c784dbbaa2708498b11c5f727bf4ebbcd557addd7e2f4",
+    "app/.poster-series-03-backup-20260807-141125/components/posters-v4/BottomPanels.tsx": "c5c80d293e04ffc35ad8b3e2d51da0bc6793038f7dd855279b16d71d019b4c56",
+    "app/.poster-series-03-backup-20260807-141125/components/posters-v4/PosterIcon.tsx": "d8e778dabbc6cd63bbbb8a58cb5cd3971fc2add88d7bf0f7615e340ec5a5f6f1",
+    "app/.poster-series-backup-20260807-135032/app/[locale]/posters/[slug]/page.tsx": "a3238a917fcf8b94880de1e45b35da7e74c65a3dda69b036920a39503635d9e5",
+    "app/.poster-series-backup-20260807-135032/app/[locale]/posters/poster-data.ts": "c4bc51e49ba8f6279207fdb7cba8843fce28e5b2e19f73eeb1d49bb1ca61ca0c",
+    "app/.poster-series-backup-20260807-135032/components/posters-v4/BottomPanels.tsx": "d5d71a22555a7b6be60e322329a75e18972ea58ed19eed87df80c4ecba8be8dc",
+    "app/.poster-series-backup-20260807-135032/components/posters-v4/PosterIcon.tsx": "dc10b1c778667f517a630e563ac030e55ce519bc4d477e3ab4542307a6e76cc8",
+    "app/app/[locale]/components/LocalizedNavbar.tsx": "0e18ec9ad644a33ab51e38ef45965f18c180741d173b95319a47970ed1e62146",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-clean-navigation": "e2a05344f7c3cee42dc9024cbd8ef8b9692f62b87a411677f30a3c41e28b929a",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-clean-top-nav": "186259276369e059ecd8387cc47d53ac81e43e04f7726c11489b3e892f1321d9",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-dropdown-nav": "8f3a2bf071c4d3172231b5822888c33fdf83a7624e47a1b895142429076fc64a",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-hse-megamenu": "80edfe257b556d8b8a4138d59ecffcc4c879c43ec01b6df5196445294ec20471",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-hse-menu-clean": "00c8cf679f9ec33a739b955478544d09b9f64e5b5de41edaf26b07930e2e5e7e",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-megamenu-layout-fix": "b66a657e2a2fb9379f274d1f70aba1cd8cbd20274968896ea712906c3fda6182",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-mobile-logo-20260901-144809": "56bf382635e0df6917fdd64c3e94c0ad1d50b40be679955f0e9330d1fd12a498",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-premium-header": "a6ee3afa11e694ca26224407ed41661c5287386f40cbfff6d60e5f60e28ef792",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-premium-nav-20260901-153432": "c1b9c7bdd75b5f682adce387d62ae56714ab97a71e04d46861e8d17b4321b9b7",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-simple-tools-menu": "30b4af21627e4e976c1afb12d0affc1bb5ae4387cbd2f09cafe5bf78372d30b2",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-tools-clean-final": "30b4af21627e4e976c1afb12d0affc1bb5ae4387cbd2f09cafe5bf78372d30b2",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-tools-compact-final": "d343065ceed2c073eae2c5ea64e879616bae1662d486e292e5a2c247cb06e300",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-tools-final-compact": "2664d9af2eeefe6644e3ed2ce8b110de8f762dc4ae44a7c770a28a51816aa4cd",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.backup-tools-final-polish": "d343065ceed2c073eae2c5ea64e879616bae1662d486e292e5a2c247cb06e300",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.bak-hse-performance-20260908-144753": "4b9d020ea12a9168b5cdf78e3e657bc04ea3f94cdd1e2d732d53e0236bd1d9d7",
+    "app/app/[locale]/components/LocalizedNavbar.tsx.bak-mobile-admin": "0a9b8d41d26e1ddda2c01fc70d5bdf114159253800373a196ba5ae6d263e00cd",
+    "app/app/[locale]/components/LocalizedNavbar.tsxcd": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app/app/[locale]/labs/sim5/IndustrialScene.tsx": "84f3ec517e09291a791bad130befd855c9e83bedb385d7205f9bd627f91a4fd2",
+    "app/app/[locale]/labs/sim5/LiftingOperation.ts": "c3be6a3133356369d69ef0815d574125f75c0ac9e81959f0032ee8710b8c853d",
+    "app/app/[locale]/labs/sim5/MissionConsequences.ts": "416ae5b4ba5df87e5ee4fe298c6795b4182e4197ee9543bd66db822034f0829b",
+    "app/app/[locale]/labs/sim5/MissionPanel.tsx": "06cc570477934db4562781076510cbe26bef097b3ae65fc1a82c695ada5b2ab8",
+    "app/app/[locale]/labs/sim5/MissionSceneEffects.ts": "b771b1151b720373653812a3040ac4e67c648fd07bde17f4765a6ff93feaa453",
+    "app/app/[locale]/labs/sim5/MissionState.ts": "5d887680333aa3c8b0dcd10e9e2746330991a8e28322d4be5d52d30b727fa7fd",
+    "app/app/[locale]/labs/sim5/RealModels.tsx": "3b616735505e894e874e5b13dfd2af0f83149039e58f1ad5e34f25d208efecd6",
+    "app/app/[locale]/labs/sim5/Sim5Actions.tsx": "d097a882be446b8f91d293d11c795a295119e5a19710d4214cd08f86ad6fe74d",
+    "app/app/[locale]/labs/sim5/Sim5DailyReward.tsx": "0cbe904731bbec2ec356e4b7a71ac2059d32e065f2f9e88d5c7e9c8c19078f8c",
+    "app/app/[locale]/labs/sim5/Sim5History.tsx": "6fc9267fcedc0283781d4d550f7d705c675694a8e15bc5e7a4724867663f599f",
+    "app/app/[locale]/labs/sim5/SiteEvidence.ts": "1b46a81d47d6c2a8975fb99ab13ba6f72a41acb809617c000d0a57c0997cdc58",
+    "app/app/[locale]/labs/sim5/SiteInspections.ts": "62297734c13e9705934192bab5d8bc6a23b3f78e80d5100fe81a7a051629cb7b",
+    "app/app/[locale]/labs/sim5/SiteNavigation.ts": "632596618d3621c1071c6bf3f463b2ba4f7926779723505be7d8bbf7cdb70da1",
+    "app/app/[locale]/labs/sim5/WeldingOperation.ts": "4ee6ee88db9d27d9187d45e659b0af2274838ee5ff076b537267d0b84b05c71a",
+    "app/app/[locale]/labs/sim5/demo/page.tsx": "c0abea9dac2409743a6cb6ace4416fc763de696144c5722d7079896d1dadb928",
+    "app/app/[locale]/labs/sim5/page.tsx": "fad0712c6e8beb9e0844667a155b129296d4b66da0c86db79b2b7427626c50b2",
+    "app/app/[locale]/labs/sim5/useMission.ts": "2f954db8570d088b9db78a8f2c781fec026bedb313b70adadcb143ecef49192a",
+    "app/app/[locale]/labs/sim5/useMissionPersistence.ts": "847abdad652d364aeb7b1d8208f51c507e66facdfc17643422398e147e1053b7",
+    "app/app/[locale]/posters/PosterLibraryClient.tsx": "7041b119dd0bfec45d23c87a332baca03d571045dd535f35be546067506b97d2",
+    "app/app/[locale]/posters/[slug]/layout.tsx": "c4279f10b4ad35554cc3c519fb511880d33c7ce34587560d34d1b50f0642b836",
+    "app/app/[locale]/posters/[slug]/page.tsx": "60655788e5dc1f8daec16963e0722d0c7974bd6309718a74830b91f1fb59a1f3",
+    "app/app/[locale]/posters/page.tsx": "ef05bf666e857fd073dfb7121e4713fadf129fdc3aac6c3f1ce3ca0a7f319e72",
+    "app/app/[locale]/posters/poster-data.ts": "007192f07e8f2b168069adc0ae7a4d66aa766f4f6a1314dff6f11fd4b123781b",
+    "app/app/[locale]/safety-signs/page.tsx": "8490b2b7728e85d48e8db830ff33dac4716e16c66bae1d61e5038b35f74cb42b",
+    "app/app/api/account/route.ts": "dfa94842d5f909e02b951fa78623e6f5296fc3c2d21f8c3b43160def91579708",
+    "app/app/api/account/subscription/route.ts": "f4784f46e6194e3732684c426d502ae495a18f00574e50305f3f4ec12998ef56",
+    "app/app/api/ai/account-state/route.ts": "d210319ac7ea7a9c37a51637b876b46ecbe66291dd15b273974abdb378bcc0ab",
+    "app/app/api/ai/assessment/route.ts": "3044aa2bf3bd32ef7ac3fddc2075d03a5514ee4301963e8cfaa868352b42ef4c",
+    "app/app/api/ai/short-answer/route.ts": "92aa00393ecf609df57054d60ae26e88bca52775c10dfe4c5ff334f6262197a2",
+    "app/app/api/ask/route.ts": "f32ecba60d02d33dbe707a4aab45b9dbbe8679d824ed9989d5b34b3d69c32d16",
+    "app/app/api/ask/route.ts.before-ai-v2": "8a73a80c11851e7a97f1290ddfc073eafdd9d32f010c9cbf91dacdedb52ab433",
+    "app/app/api/cron/agent-pilot/route.ts": "55eccfda55e2e99ad514891590f2dde7e52e091d62e6ebae75fa073d8a79bda3",
+    "app/app/api/labs/attempt/route.ts": "def0b29fb8f7324d522006c033db6d7b7b86aa5ca484960842b30d82003eb964",
+    "app/app/api/labs/daily-brain/route.ts": "ea5230e9483fc7244f8a384bc472c0c5ce17e3d4a08cc912300e151471af7c81",
+    "app/app/api/labs/incident-attempt/route.ts": "3f49b13b82a554885a129ee69d99fd951a512a9a64aa5c2f2a8e5ec494d18ed4",
+    "app/app/api/labs/incident-summary/route.ts": "25384d0ec12812bf0122ba33aade4055712c16feed911c846b8aec67f55f6669",
+    "app/app/api/labs/progress/route.ts": "0c8337ff0978f48a213d3f7458e7ac8fcc0fc0fe77e9c56b637f7957d59f4543",
+    "app/app/api/labs/sim5/runs/route.ts": "889a6407a00d81ad5eba112c48e26916cc355266a13bff4c0d9fc336dad33a56",
+    "app/app/api/premium-trial/cancel/route.ts": "4a44cf0147a82f192bedfe228ae22e671ef4c3c1a9b9e7194b8be6c56c42034b",
+    "app/app/api/premium-trial/checkout/route.ts": "9bfb4a59159ce5d5e345cf149cd696175f35c783982bf676c2d06e5f80dbbecf",
+    "app/app/api/premium/posters/[slug]/route.ts": "d5df581459055e292d2791a781c9f88cc992e2047bab55263ec74fc4e6ee171e",
+    "app/app/api/premium/posters/[slug]/word/route.ts": "a77528e06254c7163589f4299c7f86c519be23ca9c3f7491682443a5f6a2f635",
+    "app/app/api/premium/toolbox/[slug]/route.ts": "63160d1a6d08f63a77c5c66c6d2ef3b26f66fea7f359eb043ddd80c8a999b3fc",
+    "app/app/api/premium/toolbox/[slug]/route.ts.before-activity": "817161831d9f1aba4c2c64107ed6924118caee56cf27e45efe73371c841e0de3",
+    "app/app/api/premium/toolbox/[slug]/word/route.ts": "37e34935955b017d2eb6ef16b38788e4ce15b536d96acf79c44c134fecb13aa5",
+    "app/app/api/premium/toolbox/[slug]/word/route.ts.backup-mobile-word-20260907-131856": "87f410954fa42d1915f1c7fdb3eaf95d833a7d75c0540b6ac77a7be5a54aaef6",
+    "app/app/api/safety-signs/download-access/route.ts": "663a39faf1dd0853f20c3f3b50195e364ba97f39c577ed1fe7a02f803adc9a3e",
+    "app/app/api/toolbox/[slug]/pdf/route.ts": "a7fc2a5d463f2e20810016bdc1b14ac704d7c558029467d0a707d74d664c628b",
+    "app/app/api/webhooks/lemonsqueezy/route.ts": "9670911c202e8e63db8b3993e1a5436f1a7e95ed5617748c5d6b1a0a12f08a8e",
+    "app/app/sitemap.ts": "a5d980d9d45134982603cb4e8e0be9b74b51b265ad7b635fdaef74f97ab62317",
+    "app/backups/sernem-global-tracking-20260907-104236/app/[locale]/posters/[slug]/page.tsx": "fb53920e32bf286c777542023177a2a59b9b455f0253752618204a0843a4c322",
+    "app/backups/sernem-global-tracking-20260907-104236/app/[locale]/posters/page.tsx": "f1f8665b1ab76a2750e83d06d849a6100928f8b24a49e87347485f490469cca4",
+    "app/components/LocalizedNavbar.tsx": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "app/components/posters-v4.backup-before-final-polish/BottomPanels.tsx": "ae25bc627d9a4aa7fceac5cb52134451b249c834ea00ce7ad4732540f94fc12e",
+    "app/components/posters-v4.backup-before-final-polish/Footer.tsx": "4115a8b1470c78b4b9922be3d2ac0fab5261219096ddc7ed0475be1775a07727",
+    "app/components/posters-v4.backup-before-final-polish/Header.tsx": "8dfa91a3c80a4b75383b7e7d3a8aede8053b0c2fa9c819dc75f35fc9c9391a8c",
+    "app/components/posters-v4.backup-before-final-polish/PosterMasterV4.tsx": "b07f07806089cf921ed547b23bd48cbef5fc64071a6e136234a563e2bf1c3363",
+    "app/components/posters-v4.backup-before-final-polish/PreJobStrip.tsx": "17c6c70f938c77d9a82f29c8dcb49abcd862e97e22a192ace1dbfd8d1a666c4e",
+    "app/components/posters-v4.backup-before-final-polish/RuleCard.tsx": "ee67448e578028be3ea5ff585f17d99f98db38cff40f6603896fbf886d819df3",
+    "app/components/posters-v4/BottomPanels.tsx": "7b50829800048a760268dc576690c63ff4b82fe96acbc817fbe35c08c27c182b",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-confined-final": "cab0b1e4bbfa7513a704b34bf38228bd9a554806f8f40011e7c2b936ff592ea1",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-confined-final-force": "cab0b1e4bbfa7513a704b34bf38228bd9a554806f8f40011e7c2b936ff592ea1",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-confined-space": "cab0b1e4bbfa7513a704b34bf38228bd9a554806f8f40011e7c2b936ff592ea1",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-confined-space-panel-fix": "cab0b1e4bbfa7513a704b34bf38228bd9a554806f8f40011e7c2b936ff592ea1",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-cs-repair": "cab0b1e4bbfa7513a704b34bf38228bd9a554806f8f40011e7c2b936ff592ea1",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-electrical": "55a81f06d5af8ae7fbcddc56d2ead2346e267a1adc4274c7c74cf4def7942079",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-electrical-bottom-fill": "28aff4460aaa324a5f523c969fac429860234884a8722fd196b3bc89e6f99f96",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-electrical-overflow-fix": "032ccd57c8a1696611fdd4a1e88aaabe322169898300990e52de356648f77d1b",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-fire": "e9de4f0de784f52dc348db835e27116fd3839b91a651a6412ec348520faf4a88",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-hot-work": "7265aa005b718e4afdd5e293549cdfd18fb91c2e8b80f88b29e93f4c06c7f4e8",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-hot-work-fix": "7265aa005b718e4afdd5e293549cdfd18fb91c2e8b80f88b29e93f4c06c7f4e8",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-loto": "c3eab14bafebf8849ea671cba976ae668d28db15898dd22fbba1ebdcd1b235df",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-ppe": "db04614db78bbb192be3c175493b23a526b6d0d43f2e1a3fb1fa4983e80685b1",
+    "app/components/posters-v4/BottomPanels.tsx.backup-before-scaffold": "fbde0c2f5391a96e4bf76ef1d3858c61b443b36008cbb694bd2f45c30fda78ff",
+    "app/components/posters-v4/ConfinedSpaceIcon.tsx": "ddb1a67f8048a395681184aea35d4b26cec5df9c6f901e98798d136f7fbd1bc6",
+    "app/components/posters-v4/ElectricalIcon.tsx": "a5730d16e5cc965683a5923f9ec3b07e3282d29ac5a833c7915256356a166df5",
+    "app/components/posters-v4/FireIcon.tsx": "2170bb6799f4c85b968352559185986fed1f921b1c53ad1bd29dc044a70042e0",
+    "app/components/posters-v4/Footer.tsx": "ca83e83d3442d20c188e0ba4a311a5056e2c009dc6b7ec8b63e28d86c68cfdfc",
+    "app/components/posters-v4/Header.tsx": "1f3058050f405d9195f9fdfb1b7e32e242cb54775dcadbff9ec9d9e59bdcca17",
+    "app/components/posters-v4/Header.tsx.backup-before-electrical": "5269edb08aa070463ad5ee4ce4de4eb40aa8727805f95e0de93b80a54d5ad775",
+    "app/components/posters-v4/Header.tsx.backup-before-fire": "602328f9d9d2a3d550a8438400a9c6911dea5d7edea4fc7a46eec2fef14291a9",
+    "app/components/posters-v4/Header.tsx.backup-before-loto": "78998914c053b5f0e9994e813045c92f3735705a7bddd3901118c53be168e0e9",
+    "app/components/posters-v4/Header.tsx.backup-before-ppe": "d2e019d388b5036a77563dcc7f7f90e409b45b0877967920485b825753d29c2c",
+    "app/components/posters-v4/HotWorkIcon.tsx": "5d7b5049aae7d23a8f3aecbca9fce3ed67f58672bb7023b922206f64c62aeadc",
+    "app/components/posters-v4/LotoIcon.tsx": "eca96f52da36c50a981ec4e9e48c35d56a4514066a6d2bc5e2d011ff4dda742b",
+    "app/components/posters-v4/PosterBrandingCanvas.tsx": "6d7991c6d042e500d5c44c518e1c047c609ed3440319b66ab1c686627b6af295",
+    "app/components/posters-v4/PosterFormatToolbar.tsx": "96340d7afb17ea9a8762d737feedf174f65f31097856e1851b832a7745f19be1",
+    "app/components/posters-v4/PosterFormatToolbar.tsx.backup-before-dynamic-path": "414c3cbcfce9e113c831ddc7da6305b2451c561bbdca7c4efdc0958d206dc43b",
+    "app/components/posters-v4/PosterIcon.tsx": "c4e9527769b0cd227b90f376f8bf265440c45fe49e6ebaf7d3c8ff62215b5f82",
+    "app/components/posters-v4/PosterLayout.module.css": "5391f1d470228f5f2217eee0c4d1ff87286d3109d7fb4a3e523f4bdde02f44da",
+    "app/components/posters-v4/PosterMasterV4.tsx": "20a6452f70a99d66422fcbc82f935ff8bae45268437ac74e266b71381f100ed4",
+    "app/components/posters-v4/PosterMasterV4.tsx.backup-before-final-height-repair": "30f12a6ed8242ec1348306f38131ee7bb0aa593bfc1046d04e164517e49b36dc",
+    "app/components/posters-v4/PosterMasterV4.tsx.backup-before-global-height-fix": "d1eb21ce5281a123f6751f9948b630a9496461ff956145316a57b2405d0f0c89",
+    "app/components/posters-v4/PosterMasterV4.tsx.backup-before-hot-work-icons": "1e4ef1bb87cf7d54a33fcbacb6af728e6fea8bfaba5fbdce6b09b7368daa04d4",
+    "app/components/posters-v4/PpeRuleIcon.tsx": "3628c10b986ef4ff2eb9537d6ba0dbf11f9cf98911c172df279766ac4bfa19eb",
+    "app/components/posters-v4/PpeSymbol.tsx": "4fcb8a53a99c4013bcbd02d9e97ffd839819824a54137c92472cdbe374899626",
+    "app/components/posters-v4/PreJobStrip.tsx": "9751294f384ee5de9d158c2e59ac2332e0d959971e2cc5b6fa7acc4f0c518b7b",
+    "app/components/posters-v4/PreJobStrip.tsx.backup-before-confined-space": "e4d954fe7a486d6b2ec475777343051917e1d75648c558be723f3434dd9b094b",
+    "app/components/posters-v4/PreJobStrip.tsx.backup-before-electrical": "73bce2d9ebd49fae59ee1582e9b8ff512a662cf7d45e6dc8d8a974335648b468",
+    "app/components/posters-v4/PreJobStrip.tsx.backup-before-fire": "ee2e0acfc78c2ee01f37b96b88376e55b41922a687fb5766bd35bb6a5b7283ac",
+    "app/components/posters-v4/PreJobStrip.tsx.backup-before-hot-work": "d42a6e19e957134099041eb09ca253527ef25b9c20c372126ffcf4b57bab1f1e",
+    "app/components/posters-v4/PreJobStrip.tsx.backup-before-loto": "be7a3b99a5b62bec1e3baef0531f62363a844a6afb79fc8581516cf989dd220e",
+    "app/components/posters-v4/PreJobStrip.tsx.backup-before-ppe": "cc959e2424bc373435f73fb847138421bc62fb4323aa8eab14db55afb957256c",
+    "app/components/posters-v4/PreJobStrip.tsx.backup-before-scaffold": "78bbf7036ad949cf3441e274debcda6a01077d3b15b3986ae743e6a1c9f97341",
+    "app/components/posters-v4/RuleCard.tsx": "aafffd6d6025acd43349000d76c49cd8a19e645ec794e903dbfa6ef60da17eae",
+    "app/components/posters-v4/RuleCard.tsx.backup-before-confined-final": "9c77f25a8af4d0523f7bc86b2d42892839148300bb8447e2ed00062eecb636b6",
+    "app/components/posters-v4/RuleCard.tsx.backup-before-confined-space": "9c77f25a8af4d0523f7bc86b2d42892839148300bb8447e2ed00062eecb636b6",
+    "app/components/posters-v4/RuleCard.tsx.backup-before-cs-repair": "860758b28d4231facfee55dc033a206fd8a3980bd7182cbb879b61bb2bb7edeb",
+    "app/components/posters-v4/RuleCard.tsx.backup-before-electrical": "6e2648290df0f1f515cc2a05a9958483ba017f419593fe33fa68f08d72b64e51",
+    "app/components/posters-v4/RuleCard.tsx.backup-before-fire": "bd8d3ada6e94e4ed1a08d71a0ab6263fab32269f92da62c5f1993c7fea770006",
+    "app/components/posters-v4/RuleCard.tsx.backup-before-hot-work-icons": "dcde4025f8055273c00787cb924d7266edf7193b3fb651839ae2213a5131c9bf",
+    "app/components/posters-v4/RuleCard.tsx.backup-before-loto": "59784f1e7aa4b0320b9408207e420f0c133401851702e82f79c2a0ae59819435",
+    "app/components/posters-v4/RuleCard.tsx.backup-before-ppe": "875ea3f87fc9613b77f61c2f82b66d84fa6469a447ca1bd3ed615ab0adf6b46c",
+    "app/components/posters-v4/TaskIcon.tsx": "094d6b0d00d52d473d8280497e4c736d9f49d6eac51774da5b9ede23fc38f12e",
+    "app/components/posters/PosterMaster.tsx": "10ea6b1ddf31c02f9a862c9266298b13b5e456fa8ae450354c248561840922ff",
+    "app/components/posters/PosterMaster.tsx.backup-before-a3-final": "b0b88ad32e679ec93bdc6a893a197c90d52e0e4ba0979e3dca77a2859e0a38ae",
+    "app/components/posters/PosterMaster.tsx.backup-before-final-controls": "2d0e30aeb2da529fd7e6ea4cbba22c54389e4adb3cb70e9ed8be4b274aa22f8a",
+    "app/components/posters/PosterMaster.tsx.backup-before-final-header-qr": "c6255bdfd16465807818c97facf64ca0318d4a4730ff903d7d5504b2b76ea229",
+    "app/components/posters/PosterMaster.tsx.backup-before-v3-final-fit": "ceb0ebdf2c240ea24e67d7354040ed0f8cac033171b20a0441e7e6ceef35d8ad",
+    "app/components/posters/PosterMaster.tsx.backup-before-v3-premium": "ecfd083ebf8f44b1df2cd896777e9546fe25fa055419f5d47ae8e7da2cd631bb",
+    "app/components/posters/PosterMaster.tsx.backup-before-v4": "9388ceb2f4444588b1075273c1d174c077e023fb65bf7a9c3d9ef2131f55d6a8",
+    "app/components/posters/PosterMasterV4.tsx": "58f04f186b73692023da9d7b75506bcc8f8139c5d341f3f2e12b96feb74ab594",
+    "app/components/posters/PosterMasterV4.tsx.backup-ladder-final": "59ec7f0e4c716ce4424774dfc35270226b3913b3fd25a15e2d9d9ebda8d3de11",
+    "app/components/posters/PrintPosterButton.tsx": "30fcfbc9350a5045f5f854879fa6a67cfa452998fbd8e4537b07d99eb8a04c2f",
+    "app/components/sim5/Sim5MenuEntry.tsx": "2eafaf7a9a4b500e79dcdd75a2dcfedbd8c1e60a00ee352215bc68a0072e4dd9",
+    "app/components/sim5/Sim5PromoLink.tsx": "fad3bfcebe9f07f5f2a5dcefe3c1662c0c85d8876ef57edd04d630b0386325a5",
+    "app/components/sim5/Sim5Showcase.tsx": "15da09f29c734b2d4194beaf0c4aad55b54c980704b0ad5cb75ac499d30866b0",
+    "app/components/sim5/showcase-image.ts": "fea968801ab5d2e0fc47ee0e31355322bb287dab3f6aad575a70b12941e0dd17",
+    "app/components/sim5/sim5-showcase.module.css": "c6ad570c94604bca429e2d73d817838ba3a89b2337f3f5d6e0edb11b46c94910",
+    "app/data/posters/drafts/ladder-safety-rules-poster.json": "87020f537357599187e148c2c1bad6336583839e8ea3996de85cee52064167a2",
+    "app/data/posters/engine/confined-space-entry-rules-poster.json": "7b9f76f71cb3ce6ad71f4ff659f4476766cc802b7d9809c75c3957839ddda253",
+    "app/data/posters/engine/electrical-safety-rules-poster.json": "ff3adf34fb37a0354f3f728b7798d579fe42905aece6f855407991cd2b89c8c2",
+    "app/data/posters/engine/hot-work-safety-rules-poster.json": "ee913a95409794bb502ba16f34584fb3aacf167a16af0845a0207a9384470ca8",
+    "app/data/posters/engine/ladder-safety-rules-poster.json": "5a14ca736e985e489de102ca13a256ab5dbd1117bd5fc7976dc6894ac9504bee",
+    "app/data/posters/engine/loto-golden-rules-poster.json": "1259455e9c0c14958f944d6e75cf1f4759411b89e831fb0b20e4a991d5b5e06b",
+    "app/data/posters/engine/mandatory-ppe-poster.json": "7fe156c1db546585ca52478f04d534e470a73780766be1a17cd1cff6370a2ae1",
+    "app/data/posters/engine/scaffold-safety-rules-poster.json": "31c602be0c7f9ffad387fa5eec783a006344cf12b1ccd85e840c7d576d6089c0",
+    "app/data/posters/engine/working-at-height-rules-poster.json": "6d8e0f61513bb42b10f143cb23e52277c8602c4edf874b3a06c0b4dff8dd8b86",
+    "app/data/posters/series-02.json": "1c26ee0f01531d20f8eba69656caa17f2f12d0ca3b22d77c26dd2a04851e3c7e",
+    "app/lib/auth/access.ts": "1428e32e133829637dae26b78ac1fe5a7a4d0bc564a0c62c6b502a592cf5e66e",
+    "app/lib/auth/access.ts.backup-before-admin-fallback": "4ec6fa1075c7a219fda9ab723baef990e264bc973ba02b16e38ded2aacbe6ab7",
+    "app/lib/auth/billing-premium.ts": "9869699d2a699fc907a9e5528c454eaea4d46c75374f2d382fe577600a2d3851",
+    "app/lib/auth/require-print-auth.ts": "90302973222f66cb8523f36f25c6886d4244211f9be2f099d5263ad56967a8a9",
+    "app/lib/auth/reward-access.ts": "0c2ec17813216cc5e902f12245162b19dc1ff365fa3edd67ca5adada9e383cfc",
+    "app/lib/auth/server-access.ts": "a2fa2aff158c204e2ac11c54f16ddf012005f100a9fe16df587355578596c9af",
+    "app/lib/lemonsqueezy.ts": "aeb629b58ca71ea28d7f853eab609363a2e2f4c80b2d1ac8d9c4d5b051bad511",
+    "app/lib/posters-v2/chemical-safety.ts": "0fed4688751b6c88445c9c07a1df5decc66b5f8762f19e5a68b2a0c959816453",
+    "app/lib/posters-v2/confined-space.ts": "06d36a832ee695e6d5b546988d4991aa9b02af55c82ff2387034a167a9e210eb",
+    "app/lib/posters-v2/confined-space.ts.backup-before-confined-final": "a339bb3a0bf3765b15055d8636218cc5e72e3e944d9cc7076d6807c4084e2f44",
+    "app/lib/posters-v2/confined-space.ts.backup-before-confined-final-force": "d4b444572ab7dfd78bb334a2b22a32cba548e5cf3dfead7006c11bc05759f118",
+    "app/lib/posters-v2/confined-space.ts.backup-before-cs-repair": "d4b444572ab7dfd78bb334a2b22a32cba548e5cf3dfead7006c11bc05759f118",
+    "app/lib/posters-v2/dropped-objects-safety.ts": "5249901a931aa996fe4f817e5e28c57d260ce08c4130929565c5144c7fbd7c21",
+    "app/lib/posters-v2/electrical.ts": "ad4dd909372e609d3463716cdd860460f4bcf3efd4a997ac9fd53d37d0b6b136",
+    "app/lib/posters-v2/excavation-safety.ts": "62816a6abd8f94b76ad72fba6de27d5046aa14527783254233e81fdfcad43538",
+    "app/lib/posters-v2/fire.ts": "9ebb4c98c77f3950f8bbe53369cd5cd14e9d3600c169cbb845b485f3e84d41ce",
+    "app/lib/posters-v2/forklift-safety.ts": "28448cee16e1ac3d8f2f1cb1a98e7a2e6e10287a8d5edb20d574726db8fc0860",
+    "app/lib/posters-v2/hot-work.ts": "fae1347f27da38d5b8b3042846e6ed8430d93738df54be42e0211deab6b0a30d",
+    "app/lib/posters-v2/housekeeping-safety.ts": "9a80857ec2900228391236d7bd9f2b30c491e1923fc0a2f1505c3db2a8e7abac",
+    "app/lib/posters-v2/ladder-safety.ts": "3d7eb9f5feff057cae1a1b589664d041f5ed76cd753a81ae74feecc50805aeda",
+    "app/lib/posters-v2/ladder-safety.ts.backup-ladder-final": "510ec87c6b1a8e130f19d33a3e45dc8f51a44f732c6cae44049b32a12ea4ffbc",
+    "app/lib/posters-v2/loto.ts": "7dccf7f9f04de84d405cdcd50c3e67f0f71b04fab2e87b62cd6deb9bb73b0d37",
+    "app/lib/posters-v2/manual-handling-safety.ts": "e5935874f62f9417b001b84da77261ce593a3bdd6490f80d48e078dc099bd27e",
+    "app/lib/posters-v2/ppe.ts": "0f1843e8de3e3c2c0c716ce1bb1a32fda3f89c06092d7ad4fdfcbdca7e469c09",
+    "app/lib/posters-v2/publication.ts": "1dd75575d62909a5acb088dfae38c440ebb680918a4b87b78d11d590a9adab72",
+    "app/lib/posters-v2/qr-targets.json": "b5889833cc2e00a869a47aaebd9935c7e634e4768539b4d72d644ce95fec187a",
+    "app/lib/posters-v2/scaffold.ts": "6451176672a527df1be79d97a711657ae93df5516d5bfc2d3982e2a0b6789912",
+    "app/lib/posters-v2/task-icons.ts": "51198662ecf48f7b1b74764d973b2586aeb1437edf1705cc304ef132d2473bcc",
+    "app/lib/posters-v2/technical-profiles.ts": "8ab33a27cca86654b269e66ef3b9c1ac897600f077695e332851cb400e0c8c7d",
+    "app/lib/posters-v2/types.ts": "d8f36ddc63d91eca72bc9a05203bc06f5fc3c9f37e84fe9f2b861e10f5a0cd04",
+    "app/lib/posters-v2/working-at-height.ts": "7f5f5575569ca2297df09d8123dc87095cae836880621abf0b3b1172afcb5d08",
+    "app/lib/posters-v2/working-at-height.ts.backup-before-osha-upgrade": "4328a2b5a6d0401cb6b791b64edbfc6946599d1831b5f52e58b3a46e403c37ad",
+    "app/lib/posters/export-poster-pdf.ts": "4963b6e9b14558c27f69a462ba6834e62f6d14c5d352ab584b4dcb10ff0f2f4e",
+    "app/lib/posters/poster-word-data.json": "1e22b30715e7667b81dae145ef612b8d96bcc17ef7a478c09ac03f1cbd1fa8e9",
+    "app/lib/seo/public-posters.ts": "54ac30cbcad021a954e0d0f891ac781292956dcfb2201895fbaac36e3db8efbe",
+    "app/lib/sim5/access-policy.ts": "2a0e53f7988c33b575b4a52915bc5ec494adc1068b4123ef8961393e393b7279",
+    "app/lib/sim5/replay.ts": "696b4331388ccca444f01c078a57c29716c268145160d774a15b5298cb96b52d",
+    "app/lib/sim5/server-access.ts": "b1d573fe320544653f6e1979d021bf974f6a34b4a2cfdca793271bd4a9364123",
+    "app/public/images/sim5-site-showcase.webp": "1714fd693fec860b0776ae27ee604edaa21eb7dbfbfe47b0fd6869ca7b2a38b6",
+    "app/public/posters/safebase-qr.png": "3c7d8656f01059b8f7e23c3b16ef70f166c6bb044a9942a2066dbbb443d52d9c",
+    "app/public/posters/sernem-qr-en.png": "aa4138e3c37c41933ee6c0a1256a54b58f0d6670807f6d821abe4cea5bf3d59f",
+    "app/public/posters/sernem-qr-en.svg": "4f408c22df2f208d97333519bb4916236057f9e38d0d90371b73cdca52322f3b",
+    "app/public/posters/sernem-qr-tr.png": "10a6152800ebf56e65a6362673f46542a31518bdf32480b2ae9c145127f1e231",
+    "app/public/posters/sernem-qr-tr.svg": "bbc8f5b80d1b88ef897878baecca1bafb32042363616182272aec542c181289d",
+    "app/public/posters/sernem-qr.png": "ffe95e3c4c780da0ee8dd9cc0fdda5e6dab12098f8f0ff8b5f8a875e7d6c0673",
+    "app/public/sim5/README.md": "63c4a01d8e3a93384fe28cfccf666110cdc3ccff9f89e0a2146fd33a7d041346",
+    "app/public/sim5/SERNEM_SIM4_Factory_optimized.glb": "0bfb3c1baed3478cbffed6ab078e4e080c0a361ae2f185896ecc4607922d9785",
+    "app/public/sim5/SERNEM_Welder_06_under25MB.glb": "147b7b18d9121c77b08ab3137e2f8678174806b470ad82a9ecf6a7184fd245c7",
+    "app/public/sim5/large_industrial_storage_tanks (1).glb": "57f8af41a804fb9f231437c73c5fcd1d11047a4aac42aaa43f0b52dd8d3558e8",
+    "app/scripts/generate-posters.py": "254d3ba63eda10d2e3653d13903c80c88dd298c5eb1d3a86a85bf999f92cdff6",
+    "app/supabase/migrations/20260813_create_simops_assessments.sql": "3c3f8244e34db303f64897529b53b5b5ecbc3511820b4be594d442351ff800b1",
+    "app/supabase/migrations/20260908-103053_hse_observations.sql": "cc53ff4752fe75e221222f0c28edde55ea14fb5256389281e04ae607d629bde5",
+    "app/supabase/migrations/20260909_hse_incident_metrics.sql": "f424cfea06cab9363a3e1f4729064de589d8ca5bad7efbb1a7967fc7280b6e07",
+    "app/supabase/migrations/20260930_sernem_labs_v1.sql": "845da6c1efa91103f18b2f1b60a41752250935736cba0f6fda409fe4a8b768a5",
+    "app/supabase/migrations/20261005_account_billing_lifecycle.sql": "a4b8d2baafc34c5bdb6826fdd30e003ebc232422ef562a01a11b22a61203113f",
+    "app/supabase/migrations/20261013_premium_trial_deadlines.sql": "1f6e669ac95e5daa98ac4f817f61c463eed878a781320e74783ae0ff9df7465c",
+    "app/supabase/migrations/20261013_premium_trial_reservations.sql": "756aeee08a6a7574920b92444562779a707dac47217f765ba743bf8bfc6bde2a",
+    "app/supabase/migrations/20261020_sim5_daily_inspection_xp.sql": "a100baa4ca3d0e34240a3b999b7528acda6c655b6a190fc823db87720aa404ae",
+    "app/supabase/migrations/20261020_sim5_runs.sql": "4bca72aaf7ece5be0a67db524e25e777d0f70d5f6bbee47b9474dcdc03fd1a00",
+    "app/utils/supabase/client.ts": "8317fec273b554a10f9d6b18f701a3a5e73c21a955ffedb8096197879ef118a3",
+    "app/utils/supabase/proxy.ts": "421490fb366fcd81fb76b5b998e667a5c6b69eb6e320b55f1c05873453ab7862",
+    "app/utils/supabase/server.ts": "37c3bac9d2f03e18092ff331261b78340d5d7258b04b23390647dab558762b2d",
+    "docs/p12-review/evidence/failure-en-posters-working-at-height-rules.png": "127c35de780f00ee7feaa762254923f0bcd7809ab2054edfd359ef77e28ed919",
+    "docs/p12-review/evidence/failure-tr-posters-working-at-height-rules.png": "1a2ceccb7f6b5f9e6a46e68ffdb7c384daf5c620e0d16bd4b03955ad23126606",
+    "docs/p12-review/evidence/mobile-followup/before-en-posters-working-at-height-rules.png": "127c35de780f00ee7feaa762254923f0bcd7809ab2054edfd359ef77e28ed919",
+    "docs/sim5-height-review/.gitattributes": "ee784d707a2ce52992476647abc6cdd5a396f89261f40950e100b134ca176966",
+    "docs/sim5-height-review/CHANGED_FILES.txt": "76c2fd82620aa8930f53be56b8bbd484c9e572ec7615ae551576bedc8b787f28",
+    "docs/sim5-height-review/LICENSES.md": "d736d24e85b5c6e76f092d6b3eb8559d22e1af2a29969dbd1f3021bb6e5867af",
+    "docs/sim5-height-review/README.md": "9029f5750e2ca1d69f043b041a6df8d5db2a496d7212637fdf4d247f3948b501",
+    "docs/sim5-height-review/controls-desktop.png": "c8cc41379f1ac6ded349ea734874ddd8ddb2dc05a46bc5010506a8bb481e9938",
+    "docs/sim5-height-review/controls-landscape.png": "6cc5b2c7a51217798e7d47c0a00c555a4fe628b1e24882c5a69da74483df7ff8",
+    "docs/sim5-height-review/controls-portrait.png": "81493da2a6e3543be207913520a7e99d2685da5b7817f58453a2c8b2c4ae1330",
+    "docs/sim5-height-review/controls-small-portrait.png": "a8684b2f4fac12a32e46ff4764eb8ac390f4254f9b40a82a61a4bf56a6c894be",
+    "docs/sim5-height-review/desktop-ascent-17.png": "14ce386e862971c93e900a6e417297359d0819a6a6879df91f007ea0a0bb35da",
+    "docs/sim5-height-review/desktop-ascent-21.png": "cdcbda5989ca56db47b0e8f3246dab942879b35f813d386754167a75f5107f97",
+    "docs/sim5-height-review/desktop-ascent-26.6.png": "37f4dd69aa70e7ff4896c7cfc1e3b0acc282a35faa29cd0d4c7f1f1f84897cc3",
+    "docs/sim5-height-review/desktop-descent-15.png": "6890980ca756501b698358b29cd949039a50f58545d0105d957b6107cc95b7c3",
+    "docs/sim5-height-review/desktop-descent-20.png": "81dfc750ce3fe77d078da563ab4cb35bfb778508e798f9e555e7b500b2ffd99d",
+    "docs/sim5-height-review/desktop-descent-24.png": "7471402f9a739178880d67443be569df561e42ba90c8ef7e35a8221da8aac55f",
+    "docs/sim5-height-review/desktop-ground.png": "7e47ce0a53e020c23c1097507de352684ec4f2f7c54ca016a72f1944ba39b6cc",
+    "docs/sim5-height-review/desktop-upper-tool.png": "0464805f43c1a89b4b96e6987185390820d8ebb3677a2bbb43fb160f58059483",
+    "docs/sim5-height-review/desktop-upper-walkway.png": "bae8f258cf6950ab5e628943c6ec032101a00913b920eea210d03b4fe83e7dee",
+    "docs/sim5-height-review/height-results.json": "6beaa6cfbac02aedda131f99a10b5f2086eeb480164f1809551b8c1b01876517",
+    "docs/sim5-height-review/lifting-color-results.json": "c4b4f01a923011fde510596699706c59b08c7c57a7d0d691e9f4e16b52e4caab",
+    "docs/sim5-height-review/lifting.png": "469996644e2ba19f288e32ca61f399ca89d0df2b1795dd78dafab3681b20fdf5",
+    "docs/sim5-height-review/materials.png": "0dd774976bed2a55afc658df54458c56739b476dbb5398192f81e41d3118869a",
+    "docs/sim5-height-review/mobile-controls-results.json": "8d1f83d810e53a2bf326e2c4a7f32368b6bd61237a551f5a69706b9c14c086e2",
+    "docs/sim5-height-review/mobile-landscape-ascent-17.png": "7325e9ec0c0db464cdbc3afdcec723dafea3234de03abb5f16c0b406b604562e",
+    "docs/sim5-height-review/mobile-landscape-ascent-21.png": "34407a4e979cd3166139c904045baaa7a1b8b686ec6697600aa6de99e69d7d15",
+    "docs/sim5-height-review/mobile-landscape-ascent-26.6.png": "010b44a3e94997c8926c59daf9e1a73d2a48ccb417062f5cbb4ee10bac808935",
+    "docs/sim5-height-review/mobile-landscape-descent-15.png": "8b61559eed6163195eb53058085a860ff171a85e55170d1fc5540fd3b5381c64",
+    "docs/sim5-height-review/mobile-landscape-descent-20.png": "452a0145c9d367865a0728855426ee9d8403a711eab061da03f2639f406bfb3a",
+    "docs/sim5-height-review/mobile-landscape-descent-24.png": "2dcce18d7c55ad608c8dfe19416bfd477454c42e23e197429b68bfd4c8a2c04e",
+    "docs/sim5-height-review/mobile-landscape-ground.png": "b4b2b82ff1276cf8db540eff4c1a2ae162ceda10e29c6157bb9681a15c47da94",
+    "docs/sim5-height-review/mobile-landscape-upper-tool.png": "f62f5a2a8205451c260066f8422dbcca465edd62f84ba63df7cae3e781f6f7cb",
+    "docs/sim5-height-review/mobile-landscape-upper-walkway.png": "d7891ab11827f5889dda9c142b3b3846685769943faddd372a88dcf8029af313",
+    "docs/sim5-height-review/mobile-portrait-ascent-17.png": "d8188b9db263dce6f263d0ebf0e872b8ea1adea626f7e76057f5511430e11b79",
+    "docs/sim5-height-review/mobile-portrait-ascent-21.png": "a701a3dc02b006f509b2600049163d590919bf0007508eef440199022725c01d",
+    "docs/sim5-height-review/mobile-portrait-ascent-26.6.png": "3e8272ec97447e02cc29949e7a61ac8bb9a0538e4cc8b3d4b2d916150b66577a",
+    "docs/sim5-height-review/mobile-portrait-descent-15.png": "dfd8be00f06a791d703366c7b3b6270c113c4324e2557420ca162a8170e1d6e7",
+    "docs/sim5-height-review/mobile-portrait-descent-20.png": "0be4c1ba8f6111ef785fa4f436623e1e9a4861e772d3d7eb28282bd0db3943f0",
+    "docs/sim5-height-review/mobile-portrait-descent-24.png": "1d5993eb5e59aaa1dcef3f94e4ed5ea527309168c9a05db73880b3d70fc105ae",
+    "docs/sim5-height-review/mobile-portrait-ground.png": "f1843d405fc5ac081ec810cb1d24462c9518d81f00c1d59a72b0806e31658812",
+    "docs/sim5-height-review/mobile-portrait-upper-tool.png": "5411743436daf0e9d3c39b637713688f2279aebc0913dc0e76a9fc2b35ac88d9",
+    "docs/sim5-height-review/mobile-portrait-upper-walkway.png": "52767a0709b74d63792fea740432338e17f41a5f825528ccd55919e669d52347",
+    "docs/sim5-height-review/navigation-results.json": "33a0607763a66a2592c6ddebc2c150bddf2202f792b9b2e21ff35806aefe1cb0",
+    "docs/sim5-height-review/runtime-geometry.json": "5eb299e3672163e71460db30fca02c6917c09454d4df75b0506d3a1e0817576b",
+    "docs/sim5-height-review/runtime-validation.json": "6ccc6da2b1d4d78aa724bc8282503ff348cc18726f6b63a01d08381e33cecb55",
+    "docs/sim5-height-review/signaller.png": "aca34caf00d2b6bad469f91c331e3563c9351418cf5e50641e33f0f4d16f0da4",
+    "docs/sim5-height-review/site-east.png": "d7e176d29a15819e3d34ed5667b1a2adb6994ef78b803d72fa69253984e6378f",
+    "docs/sim5-height-review/site-south.png": "eac922f578755963ec59473719408a22bdbb745f439e59bd2aa8be074004e809",
+    "docs/sim5-height-review/site-west.png": "b60a0412c0df8a02ecf0539ada038e7730069becdc225df24aff76ecf7a3cc07",
+    "docs/sim5-height-review/source-geometry.json": "48081451764499d40ccb276f67de50744eb3d3e89abffba03c3d1d5bb7d3ecdc",
+    "docs/sim5-height-review/stairs.png": "1e0d7379128fa31beaaa6b3b34c3fca7ba3518958017cb940d6a2e62a6ddf649",
+    "docs/sim5-height-review/tool.png": "d8e853a73683bb5b015d9748d5be592218090b40d59d2dcf11fe1fd43411e5de",
+    "docs/sim5-height-review/upper-platform.png": "e4608d9f4ad1acde357c462b04c05d70e32c6afa981067c15dfe08cc6b755d23",
+    "docs/sim5-height-review/validation.json": "3720fdc62254a1990b143ec08f6b8098b68c0f08e979b7126e359c19daf7365e",
+    "docs/sim5-height-review/welding-results.json": "f3c760c2c756473a7be9ecb63572311304c301bb7314bee3f32ea11b18ee6246",
+    "docs/sim5-height-review/welding.png": "23da33a385519846f81a0c0375840a14b65da107ef7a2612fa2402904bc38065",
+    "docs/sim5-lifting-color-review/README.md": "bb91a0352ad51d4ce4abe73e273fa41bcbd73a4ebb5ae4e93b3f527a09819931",
+    "docs/sim5-lifting-color-review/pack-lifting-front.png": "3b9570b1b7420eaf7098a3fbf4fd9a1e7ee1bdd393985f90a25caf692aadf3ba",
+    "docs/sim5-lifting-color-review/pack-lifting-head-reeving.png": "bfbd310584835736394bae056d1322bb05217be070c3d8d6228f7705e5854cde",
+    "docs/sim5-lifting-color-review/pack-lifting-rear.png": "450fe7905047422728ecaab8af67b2b30578551c202e0682e9cf1eeec871714b",
+    "docs/sim5-lifting-color-review/pack-lifting-rigging.png": "d3a750ed3966bb881fad9dab629d6fcb3adce2e20c24e8dbc342f122901ee033",
+    "docs/sim5-lifting-color-review/pack-lifting-road-side.png": "c0cc9ebbe64e52ed83155972b9edd7eb021e868f0b849c491a2ff735f2c62466",
+    "docs/sim5-lifting-color-review/pack-results.json": "f771a789206c18a71cc3f803f7c5bf3fc23efe2dc0460ec2f15e5474541a7b0c",
+    "docs/sim5-lifting-color-review/pack-site-en-approach.png": "9280a868ff10834868d26a7fc32599a0bb82ba08da66056e3f46483141d3912a",
+    "docs/sim5-lifting-color-review/pack-site-en-overview.png": "f587dc14cc35dd6bde4a5e3dd730053302842fcba93fe51142f56799d0894889",
+    "docs/sim5-lifting-color-review/pack-site-en-rear.png": "8e7e0b1da94ee5bfb049c808974062f873bb1e729f039ede9334f96cf940bdd6",
+    "docs/sim5-lifting-color-review/pack-site-tr-approach.png": "69165eef9a663ad523df0943a336d3b7b01d633ded65ca029cdd355fdd47da34",
+    "docs/sim5-lifting-color-review/pack-site-tr-overview.png": "72c74f5e2b33602971da30d0926ee68966d1aa231c27f4682df960ad95a43c06",
+    "docs/sim5-lifting-color-review/pack-site-tr-rear.png": "e8e36ebe7f67c6e953977070ab08b51ef00d563704be7a7b594442a4272766bd",
+    "docs/sim5-lifting-color-review/pack-weld-contact.png": "192deb6d40832e0394adfee9e36a401dce8b75b585454903945864af8f170b5f",
+    "docs/sim5-lifting-color-review/pack-welder-1.png": "9d6725b8b76df80e6557f7041e1f690f12f85c8f98271e8cf752fc0184032df9",
+    "docs/sim5-lifting-color-review/pack-welder-2.png": "80b7539700a6cdbb29b2b30e1af79f1ceff90467ecff762ba18a9e285c3df486",
+    "docs/sim5-lifting-color-review/pack-welder-3.png": "f1f72bcfc61effe2cdf8ce465561b59c9caeedf97c9e7c6f14e220ff72b0e9e6",
+    "docs/sim5-lifting-color-review/welding-regression-results.json": "0f235cf88c069f40bb16f3a0f2f18f61fd487f87394347133c0d2688e6dbd8ee",
+    "docs/sim5-mission-review/README.md": "bf34ac028ccd8bc3e589b7102f71b3b32892b10d48f3f306dc8d1597510e93f9",
+    "docs/sim5-mission-review/VALIDATION.md": "51f58d70c02312fe54f330360ccc347a33110b22809f652227bb8615ab80f543",
+    "docs/sim5-mission-review/renders/desktop-ascent-17.png": "582a14b1bc36a4c547bbc4e76ab39c05b637f0b2934c7440fdfde109dba648f8",
+    "docs/sim5-mission-review/renders/desktop-ascent-21.png": "01c00eba024807ca833170ebed041409d64f9f7603b4813ef32f97a9c6358a80",
+    "docs/sim5-mission-review/renders/desktop-ascent-26.6.png": "5bb7a84675699e932fa62dbdcf5044dd2160cc529660699449d6f57afa276acb",
+    "docs/sim5-mission-review/renders/desktop-descent-15.png": "52b1e569951bc9256235b41c2d62afb6889f84a8b1b78b9f8a722d5ccf637274",
+    "docs/sim5-mission-review/renders/desktop-descent-20.png": "93fc1ae1725bdc20ea2e8917dfc4c2a5b6c4e3570d1263e91a2f09e1347b3f90",
+    "docs/sim5-mission-review/renders/desktop-droppedTool-after-control.png": "f56b3768f7b77e9aa5f7d7524ad690bf0c35266c4d5bdfe619ab1fcc72fd6cae",
+    "docs/sim5-mission-review/renders/desktop-droppedTool-before-control.png": "8d0ab00092a74503e3723c1fbdb7134277359299f0a6439f88b2fcb0c0a1c303",
+    "docs/sim5-mission-review/renders/desktop-ground.png": "40845d68770253f811eddc1015b0330edf6f50780d0a8cb2837871d01b995aed",
+    "docs/sim5-mission-review/renders/desktop-materials-after-control.png": "1ef4be8ff50bf1a70fe88f33d7ef0e3fbc418337563094eb5e291eb0f1918cb4",
+    "docs/sim5-mission-review/renders/desktop-materials-before-control.png": "4b626fb0eb3e7245ce4769a8000c607ce43afd62efc9960d71529c617e49f19a",
+    "docs/sim5-mission-review/renders/desktop-upper-walkway.png": "32842bb8ce93396ba1285b440a598eb8306a7aaded0d68b10c3fb7f101146143",
+    "docs/sim5-mission-review/renders/ground-control-requests.png": "544d761a0cf2011df5e9c91d8c9d4ec94cefebbc87b6d6ab995d8a33098b9f76",
+    "docs/sim5-mission-review/renders/landscape-report.png": "ae9a950b92e0cdb4dd964595d38da76a251f1a2658f76d831b9fb17f1b7a7619",
+    "docs/sim5-mission-review/renders/lifting.png": "cab4e8ff18ee598616785e5a08f9abe1baa79fa4171e46d8abb75e46a50688af",
+    "docs/sim5-mission-review/renders/mobile-landscape-ascent-21.png": "c07c7647e3010621a95b7c8b415fe066eb2886123afb3c9f5a63a795d5d6429d",
+    "docs/sim5-mission-review/renders/mobile-landscape-descent-15.png": "14bca9ec7709a654c2dcb404dea73353fda60e76f8814a04f38ebb4b34051996",
+    "docs/sim5-mission-review/renders/mobile-landscape-upper-walkway.png": "455f53a22dcd282f160e31f44579961f1ecb78116512db3f01a8e5f21e5225c2",
+    "docs/sim5-mission-review/renders/mobile-portrait-ascent-21.png": "95e8bf65672b7a06f1b6fb09608956d5f9faa982e02b870fa97e0099e4ed35e1",
+    "docs/sim5-mission-review/renders/mobile-portrait-descent-15.png": "7c6a7ad0a9a0db8eb073def9b30d0b7eac1d0e4eda56339a4c99d9d8a00b7ff6",
+    "docs/sim5-mission-review/renders/mobile-portrait-upper-walkway.png": "0f0e0483d1633e979eda939e844f19eeee72c9a157319071f7c79eaa8075a465",
+    "docs/sim5-mission-review/renders/partial-report.png": "dc64081d41414fd207b4a28a6f8ea4a9a77bb377e05bbf4f6920b0520333d355",
+    "docs/sim5-mission-review/renders/signaller.png": "817f1b4b16d3664e8d785187977467df16eb58582b379b6899675da42ba15cf9",
+    "docs/sim5-mission-review/renders/site-east.png": "817379de15fe83f217983e8a78afb9cd3dce97bc91b8bcf6fd2342cbab9df157",
+    "docs/sim5-mission-review/renders/site-south.png": "05373fc9e7253617f45fcf03d2073a3eb45626fc120eac83b848ddeafbc65186",
+    "docs/sim5-mission-review/renders/site-west.png": "809cb208f150f2f19617b4f172bea3e6356cbbdec963c216e358721b9c4c4a0f",
+    "docs/sim5-mission-review/renders/small-portrait-report.png": "364f994e32ba98f5c2647b63eb3a0d005f0655024e2ad7f3ba0dab17d92daa56",
+    "docs/sim5-mission-review/renders/stairs.png": "1a6767b23aa56b68d9f5384ffa49aea2131877b919b0d0691e84fbdbd73ff878",
+    "docs/sim5-mission-review/renders/upper-platform.png": "712c289e4917537f3b9505136415ef17dacc4c1c2c15227f48d312dbe88495a8",
+    "docs/sim5-mission-review/renders/welding-before.png": "bee262e647fb2bf729994c2c4364a506fd387d3272e647aaab4f29fa0c37be4f",
+    "docs/sim5-mission-review/renders/welding-status.png": "d939b0664c12aa7003c046337bfcd9ce4d7a6739dc08a295311edacfeb80b9cc",
+    "docs/sim5-mission-review/renders/welding-stopped.png": "ba1350a82d207b86d271985d8e905696a86f47eabdb13f3b209b2d04d150e434",
+    "docs/sim5-mission-review/results/controls-results.json": "0814c157aaa13c95f4cee51f7fd613be3eab74ed2f62b025d29de3f36b5d2ab6",
+    "docs/sim5-mission-review/results/height-results.json": "25dd5ab6a4b36d598f25dc6d9ac2619ee179052051e3c98155e05531a3ac819e",
+    "docs/sim5-mission-review/results/mission-browser-results.json": "eda43c2d5a460514f4cdbb521fbd0415522787b566372fafecd8faad99483653",
+    "docs/sim5-mission-review/results/mission-state-results.json": "9e4dd12900b3eec5d67f2d62290533a3e43feafb37a619ed5da61e90679afc64",
+    "docs/sim5-mission-review/results/navigation-results.json": "b2d378d9191dce568dce4e50722a4de97b0c64dd933180a9a34613cf7ed731fb",
+    "docs/sim5-mission-review/results/next-build.txt": "8755aefcca1b63fe91dd41c452fd15506444f18338e3aa027d7064e0ebc33bc6",
+    "docs/sim5-mission-review/results/pack-results.json": "dd844017ae3927d7326cb7132f7f897b7ed9bdf0a05aa794d2cf0b4af0bf2654",
+    "docs/sim5-mission-review/results/results.json": "01e3bfca20f2b48eceea62aa9aa6b50132bc070f27cc7cf0c963b6d36a627f18",
+    "docs/sim5-mission-review/results/runtime-validation.json": "683ceb839f56e92487968c8d5ef3c7d97b588a431cdd95b8118cfb1c68481a6a",
+    "docs/sim5-mission-review/results/summary.json": "4dd82ce795da5b476e0fcbc77c1886f1e7b369549f97019e49b04b15848ef4fd",
+    "docs/sim5-mobile-controls-review/README.md": "236646c47194dc2c11cb678845e24880f22fad915098204104122d2032815d19",
+    "docs/sim5-mobile-controls-review/controls-desktop.png": "43d3cdab89743cc979a713d912b67e3adc4bc0d92ad9ca9cdaf309efd2db94ab",
+    "docs/sim5-mobile-controls-review/controls-landscape.png": "8c8ab4ba2940d29142219cd8c8b015f37831dbb620a8e0ecabb39f918b3e063f",
+    "docs/sim5-mobile-controls-review/controls-portrait.png": "c277ba9c46b9d8ce909da3b289bbf852dcf9151c05edf19dea666f368d93984d",
+    "docs/sim5-mobile-controls-review/controls-results.json": "a29fdf371f1177c35e3ccfb247a203c4940391cdacb968a6383f1632f22f5d59",
+    "docs/sim5-mobile-controls-review/controls-small-portrait.png": "d40e3525110b5d9f8480a49980a0b4c6f9db8ac5636c43e9268508db9193dcd0",
+    "docs/sim5-mobile-controls-review/lifting-color-results.json": "50c3cce3cb172580d4caa4a5c60b74b79a9c23a151538932150bf466eccb6c24",
+    "docs/sim5-mobile-controls-review/lint-comparison.json": "01ed97c923ed49f2b5643b9134c6439fa874d509855de24b349faaa5dffa81f2",
+    "docs/sim5-mobile-controls-review/validation.json": "c27b92c310c6db3b766d02b8b2c7e81cbd859fba38197019e552317b3463349c",
+    "docs/sim5-mobile-controls-review/welding-regression-results.json": "b1b60fe9a2df4160bda07e94aac2399d782f1c778967a78a4c805e5151a944cc",
+    "docs/sim5-pack7-review/ARCHITECTURE.md": "1fb9b68c36f9093ac1646036ccaa044efc25b752188e248349fb3853a131018a",
+    "docs/sim5-pack7-review/README.md": "22f5fe9fc8617ede522ee5aec2eaf9fbd3f05b2a1c1b60932919e1d4f2f4dc88",
+    "docs/sim5-pack7-review/VALIDATION.md": "5f23b5e1e1ad6f622bd36e39c7f5f919852bff9abc8a3013430b275755dedb3a",
+    "docs/sim5-pack7-review/renders/demo-report-en-844x390.png": "4aaf3e12673a7fbd38d80ea713b62f5ff8799b5dd0b5fd31b5cc5d4986adeb4b",
+    "docs/sim5-pack7-review/renders/demo-report-tr-390x844.png": "f87b5531437e0e3fecd2a3898bad6fa0b3adfed5a7abefa614885ec7856e68a9",
+    "docs/sim5-pack7-review/renders/demo-tr-390x844.png": "525f5665b84b1d673e6221798d4b62b68ede20fc880a3c53820af22340997620",
+    "docs/sim5-pack7-review/renders/full-six-finding-report.png": "fe94073fd9b897194f709eb4fb5c0cd448f767ba7e38a0b7ccb20cc8641c069e",
+    "docs/sim5-pack7-review/renders/full-upper-walkway.png": "19349b191aadf3bc78568a8f74bb283b8df39dc3ac648b3a8c1acc0ce434699f",
+    "docs/sim5-pack7-review/renders/next-gate-en.png": "7238cb8696a92c27ec65923c3711bfa0c08a514aab2549f5f2efcfd6d613af97",
+    "docs/sim5-pack7-review/renders/next-gate-tr.png": "f6e4e849031d82ef0f4f5809dd875a49c0fbb4cc45b3d683d1a711761ca7a784",
+    "docs/sim5-pack7-review/renders/signaller-1.png": "955204f6776548a3b62fff49f14acdad62ac1fa0c4fa8a76c3477b1ec249bccb",
+    "docs/sim5-pack7-review/renders/unavailable.png": "e5c7c21f6a590e01667b50bb90d94303ba34a3ccaa16364565f3ea265632382f",
+    "docs/sim5-pack7-review/renders/welding-stopped.png": "1ed21915d0974ad9a9a06192c6ee979decdd8971227b233c6bbfde0db2ff3edf",
+    "docs/sim5-pack7-review/results/analytics-results.json": "2b395ed05bd86b459b0e915f6ea179a0ab0c85c60799463f6b380ae046eedd9f",
+    "docs/sim5-pack7-review/results/api-results.json": "f7fe7e5d5e9c0f89db4c92501f3300dc160b928a55de61cd1e2b9adb23adbf72",
+    "docs/sim5-pack7-review/results/asset-provenance.json": "578358d4c76292b47476c6fa05ca8b4a2c6ee97cec188015ee1e57ca239a1070",
+    "docs/sim5-pack7-review/results/cdn-browser-limitation.json": "c05d7c0936fb0a5320f283cfac1af88c1ecf7f8150e3325ca7447a504cc548be",
+    "docs/sim5-pack7-review/results/changed-files-lint.txt": "efffa1f7f49d773027938493e7c17e80f2f43a3eb32b4c4e9545a299aed2d4d1",
+    "docs/sim5-pack7-review/results/connector-results.json": "b32b6a2a99e0cbd08511585851f5e105a95aca93a2c50bf54f469624ad13efa7",
+    "docs/sim5-pack7-review/results/controls-results.json": "de5861f295658792dfc0d88fc7d80e2a44ac3fdb32f980f3e369004f0750c771",
+    "docs/sim5-pack7-review/results/database-results.json": "0f736cd103a9d0b19c6c05b2c5f0e17421ff74886f4945e17603115329a1025b",
+    "docs/sim5-pack7-review/results/demo-results.json": "a3e4ecd12c1071c848bd61118078331cecc713cf15134b7b6b06163de4aeb445",
+    "docs/sim5-pack7-review/results/height-results.json": "1a5d935b520dc3b5ccd4c541abb255dda44f950a8c721be4d872e23be9057488",
+    "docs/sim5-pack7-review/results/mission-browser-results.json": "6b0ed4055928cd839126c47eddfb47ead8f807344ac417382a0f390fef2362a1",
+    "docs/sim5-pack7-review/results/mission-state-results.json": "75feaa803d000a31b35a58d57f9316ff986bfd82c7c4f83744143567812eeb42",
+    "docs/sim5-pack7-review/results/navigation-results.json": "01342123264b9b1d669b77fde197eb7b146b80c36c5acff224b65cfb37cb777d",
+    "docs/sim5-pack7-review/results/next-build.txt": "508d78e3c7177d6d3ed39c11a88d76c0f1265a686960781c3dd5b94c957e90dc",
+    "docs/sim5-pack7-review/results/next-smoke-results.json": "0c81210a1d4c740ef7a5f83e9991a9cdd6d1c8e9bef22bd42cf046ca62789be0",
+    "docs/sim5-pack7-review/results/pack-results.json": "8b9f520703426e2a2c1a40c49cbbb0a64ffd112e695e6fcc08232f18b9355acf",
+    "docs/sim5-pack7-review/results/persistence-results.json": "3337f89dfbe15f68ff112b1d521114f4f6cf02450dc569009017621a7e95ead9",
+    "docs/sim5-pack7-review/results/recorder-results.json": "af248b41104859fdcce6a1d0ccde865636d4149f0a964bc8e2e1fc3a34086c95",
+    "docs/sim5-pack7-review/results/runtime-validation.json": "89a417a4ac816bb416590bb6798f0acd7a0a863b9d5d21d2a22e0990fde6c44d",
+    "docs/sim5-pack7-review/results/seo-results.json": "7fe446af4026bc1b3c70dc21c3462f77ee649dcdfafbb0a76a6b78824f39200f",
+    "docs/sim5-pack7-review/results/signaller-results.json": "f70bf6b5321fd4265a83aeaf34a15fa03ba3cd20ca3e118241a565c530f64ed0",
+    "docs/sim5-pack7-review/results/suite-results.json": "fbbb49fddf4aa3e7cd45334a1da83d279980973f1fb8ef57f2f1d77f6ecfe3eb",
+    "docs/sim5-pack7-review/results/summary.json": "6a726beda1d4b4034b39b4c1e241468c5b3cd03266b419e36bcb478066833c90",
+    "docs/sim5-pack7-review/results/webgl-failure-results.json": "a476fa8fd67190379f8b7815921092fd988c15abf491615f7e12ac9772ce4345",
+    "docs/sim5-pack7-review/results/welding-results.json": "03c7621e986f37b076f432eb35f4e28542000e5f646dca58ca20fda17e11f9bd",
+    "docs/sim5-pack8-review/README.md": "fea86408b4636070909b7272c840f7f39bccd0101db2f427302694aaaf1d4726",
+    "docs/sim5-pack8-review/access.md": "6b4f1a077d65d25f9ec573a39d4b340e463be76a424317886f2d8b6d0618c5a2",
+    "docs/sim5-pack8-review/changed-files.txt": "e7c2afe2f7c90acd01ac2f60ab0f2bde95975880597540d8006e0c24cdbb87f5",
+    "docs/sim5-pack8-review/renders/completed-context-loss-en.webp": "5ab1082837b025828c6949ddf7fda785ea41d4e7e3e85876e40f8c05c7ad3269",
+    "docs/sim5-pack8-review/renders/completed-context-loss-tr.webp": "e9f788e3ee124c4e035b776069ed1c2594fead1eceec70209fb77e71846e7fbe",
+    "docs/sim5-pack8-review/renders/homepage-en-desktop.webp": "c20ae659807b484818f43bc33442c7eed1558ba1efd808069228d02390ad1e8c",
+    "docs/sim5-pack8-review/renders/homepage-en-mobile.webp": "371df839de0d193843fab7634eb69f618375c8713622dcfa16f471dc74506726",
+    "docs/sim5-pack8-review/renders/homepage-tr-desktop.webp": "e9acd80670967a48b287634eaae47f68d6602b602cfaf51b4bfdaae22f76cec2",
+    "docs/sim5-pack8-review/renders/homepage-tr-mobile.webp": "e9469fa8d7e68fcc97253c348aef130be7228e66a11d53a8f19ab02245ea6550",
+    "docs/sim5-pack8-review/renders/labs-en-desktop.webp": "8a9ab9fa41d4eab1f3305d929ef3b2133a7e473eac77b7b36cc48c5d8e2cb7da",
+    "docs/sim5-pack8-review/renders/labs-en-mobile.webp": "8ab04e4f36eb1e73ff5333b85a51a2f88fdeb55f51cb82f155171f68e199298f",
+    "docs/sim5-pack8-review/renders/labs-tr-desktop.webp": "99cd32ee0be79b9eff2887806b3c85dce56b6803ae44e553dcea1181a06d6d33",
+    "docs/sim5-pack8-review/renders/labs-tr-mobile.webp": "f4ea4e4ac9c0efa51f94d37fe00c4831d937fc19e1401505378d1916c2002ac9",
+    "docs/sim5-pack8-review/renders/menu-en-desktop.webp": "80a05ca8dccec9151c91324ae38c056434cba1fcf6f70e9d7a7ab3b639a57f82",
+    "docs/sim5-pack8-review/renders/menu-en-mobile.webp": "41839128d2ba5d8bcefb37ef2c40ce8dc58e5423ee0e945d5b9e3bc0cfa8273d",
+    "docs/sim5-pack8-review/renders/menu-tr-desktop.webp": "128265f8005a99509470f10bb86c909fbdf977404ba31999a454d6c577e2f870",
+    "docs/sim5-pack8-review/renders/menu-tr-mobile.webp": "14e6da6c9c8a7c3644449dbeb5e904951b7cae78c64187bedff29c1571fa61f4",
+    "docs/sim5-pack8-review/results/cdn-browser-failure.json": "a236c4aebc8bf9e5003cd8dcae775302e8651753387bd7086e7dbff0668ee67b",
+    "docs/sim5-pack8-review/results/changed-files-lint.txt": "4c48cef96aab3bc37cba8903e39919863fe3088760a6151053dcd251e0e54723",
+    "docs/sim5-pack8-review/results/completion-webgl-results.json": "f4232bfbbfe563f3bc9f1a173f2c4e5e2318217700b051bab3199a0360ef65d3",
+    "docs/sim5-pack8-review/results/database.txt": "3a2abe73fe99a232b582d583f329f98d83621379bfe18ccce5df78f8ad48314c",
+    "docs/sim5-pack8-review/results/next-build.txt": "9379e7cdf20229e6cf1ff2903aba243aa2d3bb78fcdd69b4b5397753b6c2991d",
+    "docs/sim5-pack8-review/results/next-smoke.txt": "f8a1e6f09380990cf67f4b718cd6cd0712ef160acc5a19119635154d0eba8cb6",
+    "docs/sim5-pack8-review/results/original-regressions.txt": "c3b54598069d765dcdf90ae520f54935933b242468bc93a256b6dd7a32550b48",
+    "docs/sim5-pack8-review/results/package6/height-results.json": "8cc0734563ceb42770d319fbb2d5fd372d8a74f23adf4db5b8edaacb4b114ff7",
+    "docs/sim5-pack8-review/results/package6/mission-browser-results.json": "adc109ca91e61912bbb074e786f43889c92dce3f3fe9daafd05a4ee68577cf29",
+    "docs/sim5-pack8-review/results/package6/mission-state-results.json": "f38c023f2a7b2e5be7ac4078522e5104e0d7ea13727c085b2cf10de12cc8e008",
+    "docs/sim5-pack8-review/results/package6/navigation-results.json": "fd7943e213d04a08d13ad23df4420a3e1173f75f899794ffc96af736344ecf2e",
+    "docs/sim5-pack8-review/results/package6/runtime-validation.json": "9c5cec269b3f42155b92b56db91bbcac76ad9b25913fc6b06f6372977f11d2d6",
+    "docs/sim5-pack8-review/results/package7.txt": "c739d389f559c2e1256dfaade2380c6a0810a12b781c59c99839a35cedc3e3b1",
+    "docs/sim5-pack8-review/results/package7/analytics-results.json": "2b395ed05bd86b459b0e915f6ea179a0ab0c85c60799463f6b380ae046eedd9f",
+    "docs/sim5-pack8-review/results/package7/api-results.json": "f7fe7e5d5e9c0f89db4c92501f3300dc160b928a55de61cd1e2b9adb23adbf72",
+    "docs/sim5-pack8-review/results/package7/connector-results.json": "b32b6a2a99e0cbd08511585851f5e105a95aca93a2c50bf54f469624ad13efa7",
+    "docs/sim5-pack8-review/results/package7/database-results.json": "bde3ec9b7098ea96a9f067f4ae14f9a55a69f45b25cf56d0818978bc0f7979ea",
+    "docs/sim5-pack8-review/results/package7/demo-results.json": "7bf1dc390e7eb589e133e17dda0efa9004cb598575b70a943f878367faf8e233",
+    "docs/sim5-pack8-review/results/package7/next-smoke-results.json": "0c81210a1d4c740ef7a5f83e9991a9cdd6d1c8e9bef22bd42cf046ca62789be0",
+    "docs/sim5-pack8-review/results/package7/persistence-results.json": "3337f89dfbe15f68ff112b1d521114f4f6cf02450dc569009017621a7e95ead9",
+    "docs/sim5-pack8-review/results/package7/recorder-results.json": "f6a2e8c8fd2c7a586b5ce237e684dd42326f601c773d21d8fd3e0e106cbc9813",
+    "docs/sim5-pack8-review/results/package7/seo-results.json": "7fe446af4026bc1b3c70dc21c3462f77ee649dcdfafbb0a76a6b78824f39200f",
+    "docs/sim5-pack8-review/results/package7/signaller-results.json": "f70bf6b5321fd4265a83aeaf34a15fa03ba3cd20ca3e118241a565c530f64ed0",
+    "docs/sim5-pack8-review/results/package7/suite-results.json": "8e996f97c16a1919af3e6449f5dac6566a99286a5df8318a7e23496d1212ec72",
+    "docs/sim5-pack8-review/results/package7/webgl-failure-results.json": "a476fa8fd67190379f8b7815921092fd988c15abf491615f7e12ac9772ce4345",
+    "docs/sim5-pack8-review/results/redirects.txt": "a426b7658ee5f0eb77c76d9fc8660b093dd30f3e171d7003f75b74b6ca7630fd",
+    "docs/sim5-pack8-review/results/repository-lint.txt": "eaf71c8649ec1d1bc7dda5a7c499438b7d460e03f7dac44d5dad229dea5525bf",
+    "docs/sim5-pack8-review/results/showcase-analytics-results.json": "8fc830292221da6a2028cb8ffbfb618fb9fc636a3709981d00b30512224ea77a",
+    "docs/sim5-pack8-review/results/showcase-results.json": "68b9f20fcb501ebaf592380cbf75635e676e4f6392664f07c6d42b3683d6ad0d",
+    "docs/sim5-pack8-review/results/typescript.txt": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d",
+    "docs/sim5-pack8-review/showcase-provenance.json": "075d8ae18598da3bf2e90607235abdc25c55cd17756626b25359785fd58f1207",
+    "docs/sim5-pack8-review/visual.md": "b1e87a0dc875c759c22b32060e3aed205cc97491e28b4cb3022d042536b08ff9",
+    "docs/sim5-pack8-review/xp-security.md": "417e13609a3c0c6ea9952498b00a2cad48e0b9ddd28c53a727a252b6a060d33b",
+    "docs/sim5-pack9-review/README.md": "4d777a0dedb80387320f3ce81d3ebb54dc583c55fbc75ef6d61ffdff105f30d8",
+    "docs/sim5-pack9-review/angles/pack8-before.webp": "5ed1fc862f626928c43f0973fcbcda988983a867c12ce8aae46d06ffb3d21ffb",
+    "docs/sim5-pack9-review/angles/south-low.webp": "1f00110596cb1601aa8e1b6c0f2316ed42d276f7c8198b1687ca5eff3676fd12",
+    "docs/sim5-pack9-review/angles/southeast-low.webp": "ab84a172e637cffdbbe93e74cb771b1a39e4d668cc20f595498cd974b5573acb",
+    "docs/sim5-pack9-review/angles/southwest.webp": "8c8ea3942ce6eba9ed9fae5273839530d5523f572e26fdb4a7b892a01d14086b",
+    "docs/sim5-pack9-review/capture-provenance.json": "38158db4059e51b4d878b69c60df2763fe5d466302026ec3566692089fd955af",
+    "docs/sim5-pack9-review/renders/home-en-1600.webp": "f3519a56c7cf1c0e68ac18b48b681145a4aefd21aa01b62d45ad3c6e1499bd63",
+    "docs/sim5-pack9-review/renders/home-en-390.webp": "62ff86e6ed3a1de7709988790a36d25b25f5655bd260f58e5b4e4106c94d09be",
+    "docs/sim5-pack9-review/renders/home-tr-1600.webp": "3a85779917d628e481728dc87c6b55a087c0e789807a7aa6fcfd47319c2bf01d",
+    "docs/sim5-pack9-review/renders/home-tr-390.webp": "7b94562a8849835aae42bee5ee5cfb6fe46886804249fb9198d271d3d17bf553",
+    "docs/sim5-pack9-review/renders/labs-en-1600.webp": "65e20e7929983e63ad8973eb9b6947f90be6a2885ac653182f9d409f9089ea89",
+    "docs/sim5-pack9-review/renders/labs-en-390.webp": "06a131d6060f2ae555bd3d4b7a63872fdb7804044a52bb384648eab3934cf891",
+    "docs/sim5-pack9-review/renders/labs-tr-1600.webp": "7ed0b4bb80188ffc25b42b60e7c7f97d63ae3a4eb30e0957c519f675d01f22e8",
+    "docs/sim5-pack9-review/renders/labs-tr-390.webp": "21f1f653c72a5cb40664dd5bf64f206656f18c65608a55ffa7ee616b4e8db5a8",
+    "docs/sim5-pack9-review/renders/menu-en-1600.webp": "1897151143009f1121425e3e4ca55039ebeaff266361907e850ea3f7df2baf1f",
+    "docs/sim5-pack9-review/renders/menu-en-390.webp": "11b5b2736f374ea8be975f0c385196bdb06ce451d1f54b737bac809d183a02ce",
+    "docs/sim5-pack9-review/renders/menu-tr-1600.webp": "ff2320cb815621e92a6522365ed6777f83fa292b94f1d9ba06f8fc497bd92f35",
+    "docs/sim5-pack9-review/renders/menu-tr-390.webp": "0c299c9b3b52d54c842db01a721a894d2e59f03dfd8f239270309ed37dc3ffdd",
+    "docs/sim5-pack9-review/results/cache-results.json": "bc242d20aff9a7fd29ad9eb52a7de41eb74753a5a2c9f270891bc94e59c920b5",
+    "docs/sim5-pack9-review/results/sim9-access.log": "d5ff8b84ed0b516bc11fe8c76ed183c3d442d8272c322d1c1fd78ec4747b4bb8",
+    "docs/sim5-pack9-review/results/sim9-analytics.log": "5c399171ab23ef9c0c63754bdc6f1fa3faa73b6afe2349092b0c49d6e322ec0e",
+    "docs/sim5-pack9-review/results/sim9-api.log": "1f406455b742f6f7ea8d0a105c4e64b467cacfe0d39808a5aea4057e5ee24178",
+    "docs/sim5-pack9-review/results/sim9-build.log": "d8c788490474a1dce2dfe44ff72a26f4322d632e85c029229efaa1f0bd2b8829",
+    "docs/sim5-pack9-review/results/sim9-cache.log": "78859325955b6a600184f546e3f160995c33ca0b19f9915c41f32bf1c65346ab",
+    "docs/sim5-pack9-review/results/sim9-db.log": "3a2abe73fe99a232b582d583f329f98d83621379bfe18ccce5df78f8ad48314c",
+    "docs/sim5-pack9-review/results/sim9-demo.log": "e7245bfcff0fb4f5e1861f49909834e5bdcb5a4f31cd2497766fadeb14e7ad79",
+    "docs/sim5-pack9-review/results/sim9-lint.log": "2d06fef62052fc51da3d876153b4be9c5efb59e780560fcf9cd1d5414c5bc997",
+    "docs/sim5-pack9-review/results/sim9-mission-state.log": "c3bd28968e270695f0a96d74deb346a647509e54a10d23a9088301276f333256",
+    "docs/sim5-pack9-review/results/sim9-persistence-browser.log": "0d85f064b1fd2e64874c429eee99d80b3aed50265bf3131151e9c36d47c3ff3c",
+    "docs/sim5-pack9-review/results/sim9-redirect.log": "a426b7658ee5f0eb77c76d9fc8660b093dd30f3e171d7003f75b74b6ca7630fd",
+    "docs/sim5-pack9-review/results/sim9-replay.log": "244f2a2cf2e9837c56e57f4fec035dfa9a94bccc48465e487060f3206d120b1c",
+    "docs/sim5-pack9-review/results/sim9-showcase.log": "1142788cd6eb5de3ce27e514c391da6668089428fb73a713bbead93b57fbc6a0",
+    "docs/sim5-pack9-review/results/sim9-source.log": "55eaa0f266099d623efcc92ed05c86714223b7a082ef16a97c0d756f30b771b5",
+    "docs/sim5-pack9-review/results/sim9-tsc.log": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d",
+    "docs/sim5-pack9-review/results/sim9-webgl.log": "bd8e7690024e3cb582be97388d71c5c2c718045987a009d00e023f827be40da8",
+    "docs/sim5-pack9-review/results/white-cylinder-source.json": "1a11c75183df852dde0c07ad3c1342afdb59a77fc6a56bbfa434b8d67d86d667",
+    "docs/sim5-pack9-review/source-audit.json": "97915f511633cb8d95937cb2f9f3f6732d10c3a28668e50a5e805a6d40387438",
+    "docs/sim5-welding-review/01-front.png": "c1087a794f1efaeab8c6c6c2c98c495ec710a784f80dfdc4bc3f9a4fe2a378ee",
+    "docs/sim5-welding-review/02-operator-side.png": "c86cd035212842e320facec935d35720d8f53cf6ee78f6a44c163213f6ddd64f",
+    "docs/sim5-welding-review/03-rear-connections.png": "4f984037a547019bb78e5c764e4d7af51334b7a0fb3c679d2add6418fa5e2fee",
+    "docs/sim5-welding-review/04-torch-contact.png": "e4aed06d4a818b001400a2e6763780bb24a677bc154d1a593766b67156efde42",
+    "docs/sim5-welding-review/05-face-shield.png": "a28f771acc5f2aca33b7717a7bb466d8620cfbdb53f76316316df9d3c44680bf",
+    "docs/sim5-welding-review/06-extinguisher.png": "aca800adef4d6b4e34b6a17e4ea32c1f71ef9505ca898f374e7e2bb5dd8a9600",
+    "docs/sim5-welding-review/README.md": "6faef5273664f5f9131194aa780ac0baea608ec7219f4a44b5e572dfbc02fecd",
+    "docs/sim5-welding-review/asset-inspection.json": "7a8a6fc8ed5043311330a6ac219c43cd4a766164acd8f5641a1ea56941c8a231",
+    "docs/sim5-welding-review/results.json": "f18397fa7a4bf4ac75829d69adcbd7e3b1020aad6b672357a8162ea818271800",
+    "docs/sim5-welding-review/site-tr.png": "33d2f09ebf702d8649805b0a793bff646b9be18354d0bf83a4b6e40ce0fa2375",
+    "docs/sim5-white-tank-review/provenance.json": "4b011b034eff8751d0b4df34c5b34606c4b9fecea97b42015bee63319e8e0b93",
+    "tools/sim5-review/.gitignore": "c3007e8cfe9e6668bf6eaf8e62f44d583c9b86893520d1e4e599db431558b705",
+    "tools/sim5-review/README.md": "8f419e9e7c5dca4642d81b1c688fef609e5147d4bc4a40386022bdfe56833f3c",
+    "tools/sim5-review/access-server-test.mjs": "8eb355e98f556a36bd2e15fa6282d54e91cc5bf57a0fbd5807db0afb8fb7d1dc",
+    "tools/sim5-review/access-test.mjs": "434f09184c9c1dcc26669e964c045b66611cfc71a6227d1a6ce655f94e1efb8a",
+    "tools/sim5-review/analytics-test.mjs": "29b786cdac9f4f92f9989f04025e09480e77f071858ddd5d5aa6c2729a2906f1",
+    "tools/sim5-review/api-test.mjs": "2d89b6f54645ead2143b9b5b66a55aad010b085f9b1bf1e80f3a529130d08f1d",
+    "tools/sim5-review/capture-modern-tank-showcase.mjs": "6c48f8e598cc3d317a877dfee8344e564fb0b3531539746e98b7abd4d438183d",
+    "tools/sim5-review/capture-showcase-pack9.mjs": "ea1d8455bc7e05b893d6765e13a71e15d53aa21781be451765031c57f2c8ac6c",
+    "tools/sim5-review/capture-showcase.mjs": "cb048dd4ce3dbbf4f112611faa98c1ed75e9c1a00b4598c9f0a6d78c058cf840",
+    "tools/sim5-review/completion-webgl-test.mjs": "79e1e951a690785fea59e2fd81ce37725037b331061ab0cbc935a67be622e54b",
+    "tools/sim5-review/connector-test.mjs": "aac831862d5737d75b70a80733e817264e94540004481cb3d9e950e3ed579f6e",
+    "tools/sim5-review/controls-test.mjs": "c2640029ef1b414d8bdf824edfe1d7c9e07b4fc84db09143a4438fd43840ec63",
+    "tools/sim5-review/daily-xp-db-test.mjs": "185114cafa9dd5b87a4bdff8638023aedebd44379b1dd1b7211e620e989c8faf",
+    "tools/sim5-review/database-test.mjs": "32aa09fe52ab0e51c92ef0f898e4c28d825b82914219b23b8104b0342fe67830",
+    "tools/sim5-review/demo-browser-test.mjs": "856d8b78f7c589ec299810ed5e44162b0ba9b638579b76fe7987b2a40c3bdc24",
+    "tools/sim5-review/demo-state-test.mjs": "9a99232bb25073ae0ddeb0524e2acb72b22ed500f9ddef49fd7b177b595421a4",
+    "tools/sim5-review/height-test.mjs": "84b1752cdcb250b112325cf39d256f6991e3a457d751302fd7a9936185b230c4",
+    "tools/sim5-review/inspect.mjs": "aa2f4f53467f48864efe88b559096613183cfa21445bf32741dabc0f0b6da98a",
+    "tools/sim5-review/lifting.html": "4c61aa143d2a102d009d5402ebd0fd28eab08873be5ee75b649fefa40dc3c76a",
+    "tools/sim5-review/mission-browser-test.mjs": "cd7af8974e23b8b616ae1811b1f1295029bfdb069d2c5632c541e9487d1c03d1",
+    "tools/sim5-review/mission-state-test.mjs": "a8feb3646e536ea617c2cbb845c8de31c10eedc0cac7e8d548ac5229d3729de4",
+    "tools/sim5-review/mission-suite.mjs": "d9a8848b4b11db88af5e557ac09fa309b48ec773736219f0187622ed40caf0d2",
+    "tools/sim5-review/mission-test-support.mjs": "aefef8beb6bb2f64f5c793e9041bf938ec9f2123cb859a161c27abc9a4ba078a",
+    "tools/sim5-review/navigation-test.mjs": "6b8457e66f1d7d9408795682d268e396a9e9d04b2f755754a81bdc64695c707f",
+    "tools/sim5-review/next-demo-browser-test.mjs": "16266f60c36c88bf7b536143b81ba2c6369088da4c50c947b43e5c7a229631fd",
+    "tools/sim5-review/next-smoke-test.mjs": "7a468f697a4f9fb411bac29425a57cdf48b1d4ddebfe728e90541ec05725cc08",
+    "tools/sim5-review/pack-test.mjs": "97b3baea1a3993b5539640b94752fe10152d0652c2d9a1dfe7006baa54e9fecc",
+    "tools/sim5-review/package-lock.json": "3441427506a9539a31605c937bba79adf8f141f131dd4308202244d43b06000a",
+    "tools/sim5-review/package.json": "f02325b77f2fca3e663818e66bcce80ab26de4269e27a0542f091c1e6b11edac",
+    "tools/sim5-review/package7-suite.mjs": "75aba1fea023d19abfb44885d02aa896cf4dac98461fd1bb1ee69396c91b496b",
+    "tools/sim5-review/package8-suite.mjs": "052758f2a82e09c241ab0a760f9004bfffaaa235c7e5d14b20bc2e6967751352",
+    "tools/sim5-review/page-gate-test.mjs": "913c8adfabc2246b33fd17a14c6e937385d23a9ea786cac903e19a26eed0243f",
+    "tools/sim5-review/performance-test.mjs": "7fee02739ce6b6510f68ffb02bb3539e37f5049af0e14b18d0e406841539ea70",
+    "tools/sim5-review/persistence-browser-test.mjs": "08d8692861404402108011213f694b73a3229c1652101f8d789b02d8591abafc",
+    "tools/sim5-review/persistence-test.mjs": "e5e60ed20f4b500a93b3d1009a328abfe1c69b0a18428b2b26812a69327aa7dc",
+    "tools/sim5-review/redirect-test.mjs": "5260d23049001ba4a2f02a69e2e772a09ee4b5cd8d0deee3a48e29789a7d5be7",
+    "tools/sim5-review/render-site.mjs": "eb1d7ce5ab2107145c3fb4ba8abb1a856a96ebf5027b71482c7c5e591e1badd3",
+    "tools/sim5-review/review-three.js": "a570be9074b697111e54a2aa4211f7b36998572f773b696f33bec30be2b5fe02",
+    "tools/sim5-review/review.html": "91d067e6105d5ff3797e3e2265e5e415f6d8fd9c016a94f424e2c6271ffd1ea8",
+    "tools/sim5-review/seo-test.mjs": "6706ba35afe492eaf1c05ed29a59ad59f2b9e0787c5f4fd8d4df5fabe8aa852e",
+    "tools/sim5-review/server.mjs": "2626b0af48f882b859f9ccb69f8ccd57a6b60526e3e63850434abe499e497580",
+    "tools/sim5-review/showcase-analytics-test.mjs": "30188e5c186da04741d0b921742839fac0294607bc080f07bd2c80c1ccacb47e",
+    "tools/sim5-review/showcase-browser-test.mjs": "b0331cdfc122518a7ff2155097fe89716eaf95e17a8320f3c6e295429afef497",
+    "tools/sim5-review/showcase-cache-test.mjs": "1a1254603619e746ee3fab521206861b4e229d249788d203412e36f99c4a06b7",
+    "tools/sim5-review/showcase-source-test.mjs": "72acb75f20fbd39ef8579c24193f567ceef26393e0f8732e3744393de82cef9a",
+    "tools/sim5-review/signaller-test.mjs": "6695e01053f987b82c9f72d751e369bb3a4f05fe8b87c3945ddc41fc54d50d09",
+    "tools/sim5-review/site-geometry.mjs": "7f8fde34d8ab34a0d85f2c476b44b9ac6241e01aaa4e0adbe6c2fd23c3c5213e",
+    "tools/sim5-review/site.html": "0318ed3764a377b33eb91676d9b7bf46c70f13068e7e5e7ba1e3f8e7d4112d53",
+    "tools/sim5-review/site.jsx": "6f97c525e6c08dd9901d85b7bdc8457a6643a50391cba99da1da7f71bf4a569e",
+    "tools/sim5-review/test.mjs": "90f97ff142b839b1bc89e77bd6f5ac70712b2527b8a5c6bd9e0384c8b8479a5a",
+    "tools/sim5-review/webgl-failure-test.mjs": "748776c6581c456e3d3319055b7a4c41164cd8f9a91261d7c800c0600d565639"
+  },
+  "pr128": "f54a77d414acc158fbea65d126ce624d40a45f3d",
+  "pr129": "dca1225923e976d7a7d122fb240de026b447174d"
+}
