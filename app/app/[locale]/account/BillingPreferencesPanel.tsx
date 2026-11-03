@@ -114,6 +114,32 @@ export default function BillingPreferencesPanel({ locale, onAccessChange }: Prop
     }
   }
 
+
+  async function resumeRenewal() {
+    const end = Date.parse(billing?.subscription?.endsAt || "");
+    if (billingBusy || !isCancelled || !billing?.billingManaged ||
+      billing.protectedAccount || !Number.isFinite(end) || end <= Date.now()) return;
+    if (!window.confirm(tr
+      ? "Aboneliği yeniden etkinleştirmek istiyor musunuz? Dönem sonunda otomatik ödeme yeniden başlayabilir."
+      : "Reactivate your subscription? Automatic payments may resume at the next billing renewal.")) return;
+    setBillingBusy(true);
+    setBillingError("");
+    setBillingNotice("");
+    try {
+      const response = await fetch("/api/account/subscription", { method: "PATCH", cache: "no-store" });
+      const data = await response.json().catch(() => null);
+      if (!data?.confirmed) throw new Error(data?.error || "Resumption not confirmed");
+      setBillingNotice(tr ? "Abonelik yeniden etkinleştirildi." : "Subscription reactivated.");
+      await reloadBilling();
+    } catch (error) {
+      console.error("Resumption failed", error);
+      setBillingError(tr ? "Yeniden etkinleştirme doğrulanamadı. Ödeme portalından kontrol edin." :
+        "Reactivation could not be confirmed. Check the billing portal.");
+    } finally {
+      setBillingBusy(false);
+    }
+  }
+
   async function openBillingPortal() {
     setBillingBusy(true);
     setBillingError("");
@@ -159,7 +185,7 @@ export default function BillingPreferencesPanel({ locale, onAccessChange }: Prop
 
   return (
     <>
-      <section className="rounded-[26px] border border-violet-400/20 bg-slate-900/70 p-6" aria-labelledby="subscription-heading">
+      <section id="subscription-preferences" className="scroll-mt-24 rounded-[26px] border border-violet-400/20 bg-slate-900/70 p-6" aria-labelledby="subscription-heading">
         <p className="text-xs font-black uppercase tracking-[0.2em] text-violet-300">SERNEM PREMIUM</p>
         <h2 id="subscription-heading" className="mt-3 text-xl font-black">
           {tr ? "Premium Aboneliğimi Yönet" : "Manage Premium Subscription"}
@@ -204,6 +230,13 @@ export default function BillingPreferencesPanel({ locale, onAccessChange }: Prop
                       className="min-h-11 rounded-xl border border-rose-400/40 px-5 py-3 text-sm font-bold text-rose-200 transition hover:bg-rose-400/10 disabled:opacity-60">
                       {billingBusy ? (tr ? "İşleniyor…" : "Processing…") :
                         (tr ? "Aboneliği İptal Et" : "Cancel Subscription")}
+                    </button>
+                  )}
+                  {isCancelled && Number.isFinite(Date.parse(billing.subscription?.endsAt || "")) &&
+                    Date.parse(billing.subscription?.endsAt || "") > Date.now() && (
+                    <button type="button" disabled={billingBusy} onClick={resumeRenewal}
+                      className="min-h-11 rounded-xl border border-emerald-400/40 px-5 py-3 text-sm font-bold text-emerald-200 transition hover:bg-emerald-400/10 disabled:opacity-60">
+                      {tr ? "Aboneliği Yeniden Başlat" : "Reactivate Subscription"}
                     </button>
                   )}
                   <button type="button" disabled={billingBusy} onClick={openBillingPortal}
