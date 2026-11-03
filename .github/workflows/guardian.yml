@@ -59,6 +59,8 @@ jobs:
         run: node scripts/qa-account-billing-marketing.mjs
       - name: Verify 12 bilingual specialist HSE guides and live guide catalog
         run: node scripts/qa-knowledge-specialist-12.mjs
+      - name: Verify 124-guide bilingual industrial content, crosslinks, images and original unified directory
+        run: node scripts/qa-knowledge-industrial-next12.mjs
       - name: Validate 72 TR/EN QR images and canonical destinations
         run: node scripts/qa-safety-sign-qr-integrity.mjs
       - name: Verify 34 ready Method Statement templates and eight specialist procedures

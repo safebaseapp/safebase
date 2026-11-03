@@ -1,5 +1,6 @@
 import type { RelatedGuide } from "../../components/GuideTemplate";
 const titles: Record<string, {en:string;tr:string}> = {
+  "respiratory-protection": { "en": "Respiratory Protection", "tr": "Solunum Koruması" },
   "welding-safety": {
     "en": "Welding Safety",
     "tr": "Kaynak Güvenliği"
