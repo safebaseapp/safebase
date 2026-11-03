@@ -5,8 +5,9 @@ import GuideDirectoryClient from "./components/GuideDirectoryClient";
 import { allGuides } from "./data/guides/all-guides";
 import { fieldForms } from "@/lib/content/fieldForms";
 import { specialistGuides } from "./data/guides/specialist-guides";
+import { industrialGrowthGuides } from "./data/guides/industrial-growth-next";
 
-const specialistSlugs = new Set(specialistGuides.map((guide) => guide.slug));
+const specialistSlugs = new Set([...specialistGuides, ...industrialGrowthGuides].map((guide) => guide.slug));
 
 type Props = {
   params: Promise<{ locale: string }>;
