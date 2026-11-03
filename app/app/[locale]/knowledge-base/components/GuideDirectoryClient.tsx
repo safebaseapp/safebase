@@ -11,6 +11,7 @@ type GuideCard = {
   category: string;
   readTime: number;
   riskLevel?: string;
+  isSpecialist?: boolean;
 };
 
 type Props = {
@@ -120,7 +121,14 @@ export default function GuideDirectoryClient({ locale, guides }: Props) {
                 className="group flex min-h-[285px] flex-col rounded-[26px] border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:border-blue-400/30 hover:bg-white/[0.065] hover:shadow-2xl hover:shadow-blue-950/20"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-black text-emerald-300">OSHA</span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-black text-emerald-300">OSHA</span>
+                    {guide.isSpecialist && (
+                      <span className="rounded-full border border-sky-400/25 bg-sky-500/15 px-3 py-1 text-xs font-black text-sky-200">
+                        {isTurkish ? "Yeni" : "New"}
+                      </span>
+                    )}
+                  </div>
                   <span className="text-xs font-bold text-slate-500">{guide.readTime} {isTurkish ? "dk" : "min"}</span>
                 </div>
                 <p className="mt-6 text-xs font-black uppercase tracking-[0.14em] text-blue-400">{guide.category}</p>
