@@ -102,7 +102,7 @@ assert.equal(new Set(imageAssignments.map(x=>x[1])).size,12,"Duplicate image key
 assert.equal(new Set(imageAssignments.map(x=>x[2])).size,12,"Specialist guide covers should not repeat images");
 for(const [_,slug,key] of imageAssignments) {
   assert.ok(slugs.has(slug),"Photo assigned to non-specialist guide: "+slug);
-  assert.ok(new RegExp('\\\\b'+key+': \\{ key:').test(visualSource)||key==="inspection","Photo key does not exist in verified gallery: "+key);
+  assert.ok(visualSource.includes(key+": { key:"),"Photo key does not exist in verified gallery: "+key);
 }
 assert.ok(visualSource.includes('const specialist = specialistGuideVisualKeys[slug]')&&
   visualSource.includes('if (specialist) return VISUALS[specialist]'),"Cover selection not slug-specific");
