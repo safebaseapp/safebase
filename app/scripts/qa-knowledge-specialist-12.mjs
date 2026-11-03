@@ -70,7 +70,7 @@ for (const g of specialistA) {
     assert.equal(g.mistakes[lang].length,3,g.slug+": duplicate/missing mistakes");
     assert.equal(g.extraControls[lang].length,2,g.slug+": insufficient specific safeguards");
   }
-  assert.ok(g.keywords.en.length>20&&g.keywords.tr.length>20);
+  assert.ok(g.keywords.en.length===3&&g.keywords.tr.length===3&&g.keywords.en.every(x=>x.length>=8)&&g.keywords.tr.every(x=>x.length>=8),g.slug+": weak search-keyword coverage");
 }
 for(const x of specialistB) {
   assert.equal(x.hazards.length,6,x.slug+" hazard list");
