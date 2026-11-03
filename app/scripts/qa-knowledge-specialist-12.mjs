@@ -85,7 +85,29 @@ for(const x of specialistB) {
 assert.equal(current.size+slugs.size,112);
 assert.ok(sourceAll.includes("...specialistGuides")&&sourceAll.includes("allGuides.length !== 112"),"Total guide catalog not expanded");
 assert.ok(sourceDetail.includes("[...generatedGuides, ...specialistGuides]"),"New TR/EN static routes missing");
-assert.ok(sourceHub.includes("specialistGuides.map((guide)")&&sourceHub.includes("allGuides.length"),"Featured guides or dynamic total missing");
+// All new topics must be inside the ORIGINAL filterable 112-card directory,
+// not repeated as a second 12-card block with the generic fallback photo.
+assert.ok(sourceHub.includes("const guides = allGuides.map((guide)")&&sourceHub.includes("allGuides.length"),"Unified guide data source missing");
+assert.ok(sourceHub.includes("isSpecialist: specialistSlugs.has(guide.slug)"),"New guide markers not included within unified source");
+assert.ok(!sourceHub.includes('specialist-guides-heading')&&!sourceHub.includes("specialistGuides.map((guide)"),"Detached specialist block must not return");
+assert.ok(sourceClient.includes("filtered.map((guide)"),"Guide cards no longer use search and category filters");
+assert.ok(sourceClient.includes("getGuideCardVisual(guide.slug, guide.category, guide.title)"),"Unified cards not using topic-specific visuals");
+assert.ok(sourceClient.includes("guide.isSpecialist") && sourceClient.includes('isTurkish ? "Yeni" : "New"'),"New guides not labeled inside original cards");
+const visualSource = read("lib/visual/content-card-visuals.ts");
+const photoMap = visualSource.match(/const specialistGuideVisualKeys: Record<string, VisualKey> = \{([\s\S]*?)\};/);
+assert.ok(photoMap,"Explicit specialist cover photo map missing");
+const imageAssignments = [...photoMap[1].matchAll(/"([^"]+)": "([^"]+)"/g)];
+assert.equal(imageAssignments.length,12,"Exactly twelve specialist cover assignments required");
+assert.equal(new Set(imageAssignments.map(x=>x[1])).size,12,"Duplicate image keys for the specialist guide map");
+assert.equal(new Set(imageAssignments.map(x=>x[2])).size,12,"Specialist guide covers should not repeat images");
+for(const [_,slug,key] of imageAssignments) {
+  assert.ok(slugs.has(slug),"Photo assigned to non-specialist guide: "+slug);
+  assert.ok(new RegExp('\\\\b'+key+': \\{ key:').test(visualSource)||key==="inspection","Photo key does not exist in verified gallery: "+key);
+}
+assert.ok(visualSource.includes('const specialist = specialistGuideVisualKeys[slug]')&&
+  visualSource.includes('if (specialist) return VISUALS[specialist]'),"Cover selection not slug-specific");
+console.log("PASS: all twelve specialist guides are inside the searchable/filtered 112-card grid, with 12 varied cover images.");
+
 assert.ok(sourceClient.includes("{guides.length} HSE Guides")&&sourceClient.includes("${guides.length} Profesyonel İSG"),"Hero guide counter stale");
 assert.ok(sitemap.includes("allGuides.map((guide)")&&sitemap.includes("/knowledge-base/${guide.slug}"),"Sitemap guide expansion missing");
 assert.ok(registry.includes("...specialistIndustrialGuides")&&registry.includes("...specialistProcessGuides"),"Specialist registry missing");
