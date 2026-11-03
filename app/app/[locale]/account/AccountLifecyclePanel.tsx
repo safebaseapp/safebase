@@ -35,8 +35,7 @@ export default function AccountLifecyclePanel({ locale }: { locale: string }) {
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
   const [showDelete, setShowDelete] = useState(false);
-  const [busy, setBusy] = useState<"cancel" | "resume" | "portal" | "delete" | null>(null);
-  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState<"delete" | null>(null);
   const [error, setError] = useState("");
 
   async function load() {
@@ -50,37 +49,6 @@ export default function AccountLifecyclePanel({ locale }: { locale: string }) {
     const supabase = createClient();
     void supabase.auth.getUser().then(({ data }) => setEmail(data.user?.email || ""));
   }, [isTr]);
-
-  async function act(kind: "cancel" | "resume" | "portal") {
-    setBusy(kind);
-    setError("");
-    setMessage("");
-    try {
-      const response = await fetch("/api/account/subscription", {
-        method: kind === "cancel" ? "DELETE" : kind === "resume" ? "PATCH" : "POST",
-      });
-      const body = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(body.error || "Request failed");
-      if (kind === "portal") {
-        window.location.assign(body.url);
-        return;
-      }
-      await load();
-      setMessage(
-        kind === "cancel"
-          ? isTr
-            ? "Abonelik yenilemesi iptal edildi. Premium erişimin dönem sonuna kadar devam edecek."
-            : "Renewal cancelled. Premium access remains active until the end of the paid period."
-          : isTr
-            ? "Aboneliğin yeniden etkinleştirildi."
-            : "Your subscription has been reactivated."
-      );
-    } catch (e) {
-      setError(e instanceof Error ? e.message : isTr ? "İşlem tamamlanamadı." : "The action could not be completed.");
-    } finally {
-      setBusy(null);
-    }
-  }
 
   async function deleteAccount() {
     if (!email || confirmEmail.trim().toLowerCase() !== email.trim().toLowerCase()) return;
@@ -114,7 +82,7 @@ export default function AccountLifecyclePanel({ locale }: { locale: string }) {
       <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2">
         <div className="rounded-[26px] border border-violet-400/20 bg-violet-500/[0.045] p-6">
           <p className="text-xs font-black uppercase tracking-[0.2em] text-violet-400">
-            {isTr ? "ABONELİK & FATURALAMA" : "SUBSCRIPTION & BILLING"}
+            {data?.protectedAccount ? (isTr ? "ABONELİK & FATURALAMA" : "SUBSCRIPTION & BILLING") : (isTr ? "ABONELİK ÖZETİ" : "SUBSCRIPTION SUMMARY")}
           </p>
           <div className="mt-4 flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -130,7 +98,7 @@ export default function AccountLifecyclePanel({ locale }: { locale: string }) {
               </p>
             </div>
             <span className={`rounded-full px-3 py-1 text-xs font-black ${cancelling ? "bg-amber-500/10 text-amber-300" : "bg-emerald-500/10 text-emerald-300"}`}>
-              {data?.protectedAccount ? (isTr ? "KORUMALI" : "PROTECTED") : cancelling ? (isTr ? "İPTAL BEKLİYOR" : "CANCELLING") : (isTr ? "AKTİF" : "ACTIVE")}
+              {data?.protectedAccount ? (isTr ? "KORUMALI" : "PROTECTED") : cancelling ? (isTr ? "YENİLEME KAPALI" : "NO RENEWAL") : data?.plan === "premium" ? (isTr ? "PREMIUM" : "PREMIUM") : (isTr ? "FREE" : "FREE")}
             </span>
           </div>
 
@@ -183,28 +151,16 @@ export default function AccountLifecyclePanel({ locale }: { locale: string }) {
             </div>
           )}
 
-          {message && <div className="mt-5 rounded-xl border border-emerald-400/20 bg-emerald-500/[0.07] px-4 py-3 text-sm text-emerald-300">{message}</div>}
           {error && <div className="mt-5 rounded-xl border border-red-400/20 bg-red-500/[0.07] px-4 py-3 text-sm text-red-300">{error}</div>}
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            {data?.billingManaged && !data.protectedAccount && (
-              <button type="button" disabled={busy !== null} onClick={() => void act("portal")} className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 font-black transition hover:bg-white/[0.08] disabled:opacity-50">
-                {busy === "portal" ? (isTr ? "Açılıyor..." : "Opening...") : (isTr ? "Faturalamayı Yönet" : "Manage Billing")}
-              </button>
-            )}
-
-            {data?.billingManaged && !data.protectedAccount && !cancelling && (
-              <button type="button" disabled={busy !== null} onClick={() => void act("cancel")} className="rounded-xl border border-amber-400/25 bg-amber-500/[0.06] px-4 py-3 font-black text-amber-200 transition hover:bg-amber-500/[0.1] disabled:opacity-50">
-                {busy === "cancel" ? (isTr ? "İptal ediliyor..." : "Cancelling...") : (isTr ? "Aboneliği İptal Et" : "Cancel Subscription")}
-              </button>
-            )}
-
-            {data?.billingManaged && !data.protectedAccount && cancelling && (
-              <button type="button" disabled={busy !== null} onClick={() => void act("resume")} className="rounded-xl bg-violet-600 px-4 py-3 font-black transition hover:bg-violet-500 disabled:opacity-50">
-                {busy === "resume" ? (isTr ? "Etkinleştiriliyor..." : "Reactivating...") : (isTr ? "Aboneliği Yeniden Etkinleştir" : "Reactivate Subscription")}
-              </button>
-            )}
-          </div>
+          {data && !data.protectedAccount && (
+            <a
+              href="#subscription-preferences"
+              className="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-500/[0.08] px-5 py-3 text-sm font-black text-violet-200 transition hover:bg-violet-500/[0.16]"
+            >
+              {isTr ? "Aboneliğimi ve İletişim Tercihlerimi Yönet" : "Manage Subscription & Email Preferences"} →
+            </a>
+          )}
 
           {data && !data.billingManaged && !data.protectedAccount && data.plan === "premium" && (
             <p className="mt-5 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-4 py-3 text-sm text-blue-300">
