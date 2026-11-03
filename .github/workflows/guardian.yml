@@ -55,6 +55,8 @@ jobs:
           node tools/safety-signs-pack/access-audit.mjs
           node tools/safety-signs-pack/billing-audit.mjs
           node tools/safety-signs-pack/poster-access-audit.mjs
+      - name: Verify billing cancellation, paid cycle and marketing privacy fixtures
+        run: node scripts/qa-account-billing-marketing.mjs
       - name: Validate 72 TR/EN QR images and canonical destinations
         run: node scripts/qa-safety-sign-qr-integrity.mjs
       - name: Verify 34 ready Method Statement templates and eight specialist procedures

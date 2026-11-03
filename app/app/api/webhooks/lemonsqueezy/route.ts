@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { createClient } from "@supabase/supabase-js";
-import { getLemonSubscription } from "../../../../lib/lemonsqueezy";
+import { getLemonSubscription, getRecentPaidSubscriptionInvoice } from "../../../../lib/lemonsqueezy";
 import { PREMIUM_TRIAL_VARIANT_ID } from "../../../../lib/premium-trial-config";
 
 export const runtime = "nodejs";
@@ -96,6 +96,20 @@ export async function POST(request: NextRequest) {
     // payments and paused subscriptions must not create new entitlements.
     const grantedStatuses = new Set(["active", "on_trial"]);
     const revokedStatuses = new Set(["expired", "unpaid"]);
+
+    // Provider paid invoices are stronger evidence than a trial/checkout event.
+    // Even if the invoice API is briefly unavailable, never reject an otherwise
+    // valid Lemon webhook; status-based access remains bounded by its end date.
+    let paidInvoiceAt: string | null = null;
+    if (isSubscriptionEvent && fields.lemon_subscription_id &&
+        (explicitStatus === "active" || explicitStatus === "cancelled")) {
+      try {
+        const invoice = await getRecentPaidSubscriptionInvoice(fields.lemon_subscription_id);
+        if (invoice.verified) paidInvoiceAt = invoice.paidAt;
+      } catch (error) {
+        console.error("Lemon invoice evidence lookup unavailable", error);
+      }
+    }
     const nextPlan: "premium" | "free" | null = !isSubscriptionEvent
       ? null
       : grantedStatuses.has(explicitStatus)
@@ -192,6 +206,21 @@ export async function POST(request: NextRequest) {
       if (fields.lemon_subscription_id) update.lemon_subscription_id = fields.lemon_subscription_id;
       if (fields.lemon_customer_id) update.lemon_customer_id = fields.lemon_customer_id;
       if (fields.subscription_status) update.subscription_status = fields.subscription_status;
+      // Never extend an unpaid trial into a new paid month.
+      if (isSubscriptionEvent && explicitStatus === "on_trial") {
+        update.subscription_paid_through_at = null;
+        update.subscription_paid_verified_at = null;
+      } else if (isSubscriptionEvent && explicitStatus === "active" && fields.subscription_renews_at) {
+        // Lemon only enters active after the first successful paid charge.
+        update.subscription_paid_through_at = fields.subscription_renews_at;
+        if (paidInvoiceAt) update.subscription_paid_verified_at = paidInvoiceAt;
+      } else if (isSubscriptionEvent && explicitStatus === "cancelled" &&
+          paidInvoiceAt && fields.subscription_ends_at) {
+        update.subscription_paid_through_at = fields.subscription_ends_at;
+        update.subscription_paid_verified_at = paidInvoiceAt;
+      } else if (isSubscriptionEvent && isExpired) {
+        update.subscription_paid_through_at = null;
+      }
       if (payload?.data?.type === "subscriptions") {
         update.subscription_cancelled = fields.subscription_cancelled;
         update.subscription_renews_at = fields.subscription_renews_at;

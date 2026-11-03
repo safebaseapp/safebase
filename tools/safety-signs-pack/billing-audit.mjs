@@ -19,7 +19,7 @@ const result = await build({
         loader: "js",
         contents: a.path === "server-only"
           ? "export default {}"
-          : `export function createClient(){return {from(){return {select(){return {eq(){return {async maybeSingle(){return globalThis.billingCase.queryError?{error:{message:'fixture error'}}:{data:globalThis.billingCase.trial??null,error:null}}}}}}}}}}`,
+          : `export function createClient(){return {from(table){return {select(){return {eq(){return {async maybeSingle(){const c=globalThis.billingCase;return c.queryError?{error:{message:'fixture error'}}:{data:table==="profiles"?c.profile:(c.trial??null),error:null};}}}}}}}}}`,
       }));
     },
   }],
@@ -37,16 +37,27 @@ const cases = [
   ["legacy premium no reservation", "premium", null, true],
   ["current trial", "free", { status: "on_trial", trial_ends_at: future, lemon_subscription_id: "fixture" }, true],
   ["expired stale premium", "premium", { status: "on_trial", trial_ends_at: expired, lemon_subscription_id: "fixture" }, false],
-  ["cancelled past grace", "premium", { status: "cancelled", access_ends_at: expired, lemon_subscription_id: "fixture" }, false],
-  ["cancelled current grace", "free", { status: "cancelled", access_ends_at: future, lemon_subscription_id: "fixture" }, true],
+  ["cancelled past grace", "premium", { status: "cancelled", trial_ends_at: expired, access_ends_at: expired, lemon_subscription_id: "fixture" }, false],
+  ["cancelled current trial grace", "free", { status: "cancelled", trial_ends_at: future, access_ends_at: future, lemon_subscription_id: "fixture" }, true],
   ["reserved", "premium", { status: "reserved", trial_ends_at: future, lemon_subscription_id: "fixture" }, false],
   ["trial no subscription", "premium", { status: "on_trial", trial_ends_at: future, lemon_subscription_id: null }, false],
   ["active confirmed record", "premium", { status: "active", lemon_subscription_id: "fixture" }, true],
   ["active without plan", "free", { status: "active", lemon_subscription_id: "fixture" }, false],
+  ["paid cancel until end", "premium", null, true, { subscription_status:"cancelled",subscription_cancelled:true,subscription_ends_at:future,subscription_paid_through_at:future,lemon_subscription_id:"fixture" }],
+  ["paid cancel after end", "premium", null, false, { subscription_status:"cancelled",subscription_cancelled:true,subscription_ends_at:expired,subscription_paid_through_at:future,lemon_subscription_id:"fixture" }],
 ];
 const results = [];
-for (const [name, plan, trial, expected] of cases) {
-  globalThis.billingCase = { trial };
+for (const [name, plan, trial, expected, overrides = {}] of cases) {
+  const profile = {
+    plan,
+    lemon_subscription_id: trial?.lemon_subscription_id || null,
+    subscription_status: trial?.status || null,
+    subscription_cancelled: trial?.status === "cancelled",
+    subscription_ends_at: trial?.access_ends_at || null,
+    subscription_paid_through_at: null,
+    ...overrides,
+  };
+  globalThis.billingCase = { trial, profile };
   const actual = await hasCurrentBillingPremium(null, "synthetic-user", plan);
   assert.equal(actual, expected, name);
   results.push({ name, expected, actual, result: "PASS" });

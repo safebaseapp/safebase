@@ -72,6 +72,46 @@ export async function resumeLemonSubscription(subscriptionId: string) {
   });
 }
 
+
+export type LemonPaidInvoice = {
+  verified: boolean;
+  paidAt: string | null;
+};
+/**
+ * Check the payment provider for a non-refunded, nonzero paid invoice
+ * issued within the current monthly billing interval (up to 45 days).
+ * A cancelled free trial should never be mistaken for a paid month.
+ */
+export async function getRecentPaidSubscriptionInvoice(subscriptionId: string, reference = Date.now()): Promise<LemonPaidInvoice> {
+  const params = new URLSearchParams({
+    "filter[subscription_id]": subscriptionId,
+    "filter[status]": "paid",
+    "page[size]": "20",
+  });
+  const response = await lemonRequest(`/subscription-invoices?${params.toString()}`) as unknown as {
+    data?: Array<{
+      attributes?: {
+        subscription_id?: number | string;
+        status?: string;
+        refunded?: boolean;
+        total?: number;
+        refunded_amount?: number;
+        created_at?: string;
+      };
+    }>;
+  };
+  const latest = response.data?.find((invoice) => {
+    const a = invoice.attributes;
+    if (!a || String(a.subscription_id) !== subscriptionId) return false;
+    const when = Date.parse(a.created_at || "");
+    const actualPaid = Number(a.total || 0) - Number(a.refunded_amount || 0);
+    return a.status === "paid" && !a.refunded && actualPaid > 0 &&
+      Number.isFinite(when) && when <= reference &&
+      reference - when <= 45 * 24 * 60 * 60 * 1000;
+  });
+  return { verified: Boolean(latest), paidAt: latest?.attributes?.created_at || null };
+}
+
 export function subscriptionFields(subscription: LemonSubscription) {
   const attributes = subscription.data.attributes || {};
   return {
