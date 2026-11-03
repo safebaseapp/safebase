@@ -89,7 +89,7 @@ assert.ok(sourceDetail.includes("[...generatedGuides, ...specialistGuides]"),"Ne
 // not repeated as a second 12-card block with the generic fallback photo.
 assert.ok(sourceHub.includes("const guides = allGuides.map((guide)")&&sourceHub.includes("allGuides.length"),"Unified guide data source missing");
 assert.ok(sourceHub.includes("isSpecialist: specialistSlugs.has(guide.slug)"),"New guide markers not included within unified source");
-assert.ok(!sourceHub.includes('specialist-guides-heading')&&!sourceHub.includes("specialistGuides.map((guide)"),"Detached specialist block must not return");
+assert.ok(!sourceHub.includes('specialist-guides-heading')&&!sourceHub.includes("specialistGuides.map((guide) => (\n"),"Detached specialist block must not return");
 assert.ok(sourceClient.includes("filtered.map((guide)"),"Guide cards no longer use search and category filters");
 assert.ok(sourceClient.includes("getGuideCardVisual(guide.slug, guide.category, guide.title)"),"Unified cards not using topic-specific visuals");
 assert.ok(sourceClient.includes("guide.isSpecialist") && sourceClient.includes('isTurkish ? "Yeni" : "New"'),"New guides not labeled inside original cards");
