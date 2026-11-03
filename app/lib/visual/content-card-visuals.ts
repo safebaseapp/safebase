@@ -57,6 +57,25 @@ const VISUALS = {
 
 // Exact slug-first selection preserves all 100 existing guide images while
 // giving the 12 newest technical articles accurate and varied cover contexts.
+/** Exact-slug cover assignment for the 12 new field guides.
+ *  Use twelve DISTINCT existing photographic assets; no duplicate generic
+ *  crane cover, no unverified third-party URL and no extra catalog section.
+ */
+const industrialGrowthGuideVisualKeys: Record<string, VisualKey> = {
+  "flange-gasket-bolting-integrity": "industrialValve",
+  "hydraulic-bolt-tensioning-safety": "tools",
+  "temporary-pipe-support-load-transfer": "structuralSteel",
+  "positive-isolation-spades-blinds": "nitrogenPipeline",
+  "process-piping-chemical-cleaning": "chemical",
+  "compressed-air-blowing-exclusion-zone": "steamPiping",
+  "instrument-loop-checking-commissioning": "processControlRoom",
+  "electric-heat-tracing-energization": "industrialElectrical",
+  "firewater-system-flushing-handover": "factoryInspection",
+  "temporary-pressure-hoses-couplings": "machinery",
+  "cooling-tower-legionella-maintenance": "environmental",
+  "industrial-grating-removal-openings": "scaffold",
+};
+
 const specialistGuideVisualKeys: Record<string, VisualKey> = {
   "pwht-heat-treatment-safety": "pwhtWork",
   "industrial-radiography-controlled-area": "radiographyArea",
@@ -118,6 +137,8 @@ export function getInspectionCardVisual(slug: string): ContentVisual {
 
 export function getGuideCardVisual(slug: string, category = "", title = ""): ContentVisual {
   const value = `${normalized(slug)}-${normalized(category)}-${normalized(title)}`;
+  const growthVisual = industrialGrowthGuideVisualKeys[slug];
+  if (growthVisual) return VISUALS[growthVisual];
   const specialist = specialistGuideVisualKeys[slug];
   if (specialist) return VISUALS[specialist];
 
