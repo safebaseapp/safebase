@@ -40,7 +40,37 @@ const VISUALS = {
   environmental: { key: "environmental", imageUrl: photo(17166070), position: "center 42%", accent: "16 185 129", accent2: "134 239 172" },
   ppe: { key: "ppe", imageUrl: photo(17993024), position: "center 36%", accent: "34 197 94", accent2: "134 239 172" },
   safetyTeam: { key: "safety-team", imageUrl: photo(35082106), position: "center 40%", accent: "59 130 246", accent2: "103 232 249" },
+  // Verified industrial work/inspection photography. Specialist cards must not
+  // all inherit the generic hook/crane fallback when their work scopes differ.
+  pwhtWork: { key: "pwht-work", imageUrl: photo(15419840), position: "center 44%", accent: "249 115 22", accent2: "251 191 36" },
+  radiographyArea: { key: "industrial-inspection", imageUrl: photo(30226733), position: "center 45%", accent: "139 92 246", accent2: "196 181 253" },
+  nitrogenPipeline: { key: "process-pipeline", imageUrl: photo(15340288), position: "center 48%", accent: "20 184 166", accent2: "94 234 212" },
+  structuralSteel: { key: "steel-erection", imageUrl: photo(15110002), position: "center 44%", accent: "14 165 233", accent2: "125 211 252" },
+  industrialElectrical: { key: "industrial-electrical-panel", imageUrl: photo(35072822), position: "center 34%", accent: "99 102 241", accent2: "165 180 252" },
+  rotatingMaintenance: { key: "rotating-machinery-maintenance", imageUrl: photo(31580848), position: "center 40%", accent: "100 116 139", accent2: "203 213 225" },
+  industrialValve: { key: "industrial-valve-maintenance", imageUrl: photo(29226619), position: "center 47%", accent: "14 165 233", accent2: "103 232 249" },
+  steamPiping: { key: "industrial-steam-piping", imageUrl: photo(12380628), position: "center 42%", accent: "245 158 11", accent2: "253 186 116" },
+  processControlRoom: { key: "industrial-control-room", imageUrl: photo(32845663), position: "center 43%", accent: "20 184 166", accent2: "103 232 249" },
+  mechanicalInspection: { key: "mechanical-inspection", imageUrl: photo(35383622), position: "center 41%", accent: "59 130 246", accent2: "147 197 253" },
+  commissioningWalkdown: { key: "commissioning-walkdown", imageUrl: photo(20065002), position: "center 43%", accent: "14 165 233", accent2: "103 232 249" },
 } as const satisfies Record<string, ContentVisual>;
+
+// Exact slug-first selection preserves all 100 existing guide images while
+// giving the 12 newest technical articles accurate and varied cover contexts.
+const specialistGuideVisualKeys: Record<string, VisualKey> = {
+  "pwht-heat-treatment-safety": "pwhtWork",
+  "industrial-radiography-controlled-area": "radiographyArea",
+  "nitrogen-purging-oxygen-deficiency": "nitrogenPipeline",
+  "structural-steel-temporary-stability": "structuralSteel",
+  "industrial-cable-pulling-safety": "industrialElectrical",
+  "rotating-equipment-alignment-guards": "rotatingMaintenance",
+  "pressure-safety-valve-psv-maintenance": "industrialValve",
+  "steam-blowing-commissioning-exclusion": "steamPiping",
+  "pre-startup-safety-review-pssr": "processControlRoom",
+  "management-of-change-moc": "inspection",
+  "mechanical-completion-punch-list": "mechanicalInspection",
+  "commissioning-permit-handover": "commissioningWalkdown",
+};
 
 const inspectionVisualKeys: Record<string, VisualKey> = {
   "work-at-height": "height",
@@ -88,6 +118,8 @@ export function getInspectionCardVisual(slug: string): ContentVisual {
 
 export function getGuideCardVisual(slug: string, category = "", title = ""): ContentVisual {
   const value = `${normalized(slug)}-${normalized(category)}-${normalized(title)}`;
+  const specialist = specialistGuideVisualKeys[slug];
+  if (specialist) return VISUALS[specialist];
 
   if (containsAny(value, ["first-aid"])) return VISUALS.firstAid;
   if (containsAny(value, ["environment", "spill-response", "waste"])) return VISUALS.environmental;
