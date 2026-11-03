@@ -72,5 +72,16 @@ assert.ok(UI.includes("Aboneliği İptal Et") && UI.includes("Pazarlama E-postal
 assert.ok(accountPage.includes("<BillingPreferencesPanel") && accountPage.includes("verifiedPremiumAccess"));
 for (const needle of ["enable row level security", "auth.uid()", "marketing_email_opt_in boolean not null default false", "grant select, insert, update on table public.user_communication_preferences to authenticated"])
   assert.ok(migration.includes(needle), "Marketing table RLS missing " + needle);
+// The legacy account lifecycle summary must not bypass the newer confirmed
+// cancellation flow. Account deletion and protected admin status must remain.
+const oldPanel = read("app/[locale]/account/AccountLifecyclePanel.tsx");
+assert.ok(oldPanel.includes('href="#subscription-preferences"'), "Old summary must link to canonical subscription manager");
+assert.ok(!oldPanel.includes('act("cancel")') && !oldPanel.includes('async function act('), "Unconfirmed duplicate cancel flow must not remain");
+assert.ok(oldPanel.includes("Korumalı Owner Hesabı"), "Owner protection must remain");
+assert.ok(oldPanel.includes("async function deleteAccount()"), "Account deletion flow must remain");
+assert.ok(UI.includes('id="subscription-preferences"'), "Canonical subscription manager missing anchored destination");
+assert.ok(UI.includes("window.confirm("), "Cancellation/restart must require user confirmation");
+assert.ok(UI.includes("resumeRenewal"), "Existing reactivation capability must not be lost");
+console.log("PASS: only one confirmed billing action UI; protected admin and deletion preserved.");
 console.log("PASS: " + cases.length + " billing/expiry/trial/legacy entitlement scenarios and authenticated marketing/account wiring.");
 console.log("NO-LIVE-WRITES: This test changes no actual subscriptions, users, charges or email preferences.");
