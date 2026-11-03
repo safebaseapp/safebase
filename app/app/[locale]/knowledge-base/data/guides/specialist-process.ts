@@ -1,4 +1,5 @@
 import type { SafetyGuide, LocalizedText } from "../../components/GuideTemplate";
+import { specialistRelatedGuide } from "./specialist-related";
 type Pair = LocalizedText;
 const raw = [
   {
@@ -552,7 +553,7 @@ export const specialistProcessGuides: SafetyGuide[] = raw.map(item => ({
     content:item.stop,
   },
   references:item.references,
-  relatedGuides:item.related.map(slug=>({slug,title:{en:slug.replaceAll("-"," "),tr:slug.replaceAll("-"," ")}})),
+  relatedGuides:item.related.map(specialistRelatedGuide),
   searchKeywords:{
     en:item.keywords.en.split(";").map(s=>s.trim()),
     tr:item.keywords.tr.split(";").map(s=>s.trim()),
