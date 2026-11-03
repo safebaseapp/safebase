@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "../../../utils/supabase/client";
+import BillingPreferencesPanel from "./BillingPreferencesPanel";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -158,6 +159,7 @@ export default function AccountPage({ params }: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [verifiedPremiumAccess, setVerifiedPremiumAccess] = useState<boolean | null>(null);
 
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -238,7 +240,7 @@ export default function AccountPage({ params }: Props) {
 
   const isAdmin = normalizedRole === "admin";
   const isOwner = originalEmail.toLowerCase() === OWNER_EMAIL;
-  const isPremium = normalizedPlan === "premium" || isAdmin;
+  const isPremium = isAdmin || (verifiedPremiumAccess ?? (normalizedPlan === "premium"));
 
   const planTitle = isPremium ? "Premium" : "Free";
 
@@ -961,6 +963,8 @@ export default function AccountPage({ params }: Props) {
                 </div>
               )}
             </section>
+
+            <BillingPreferencesPanel locale={locale} onAccessChange={setVerifiedPremiumAccess} />
 
             <section className="rounded-[26px] border border-white/10 bg-slate-900/70 p-6">
               <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-400">
