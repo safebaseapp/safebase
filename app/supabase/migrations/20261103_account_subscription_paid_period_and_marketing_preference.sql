@@ -10,6 +10,24 @@ create table if not exists public.user_communication_preferences (
   marketing_email_changed_at timestamptz not null default now()
 );
 
+-- Prevent direct API callers from forging marketing-consent timestamps.
+create or replace function public.stamp_marketing_preference_time()
+returns trigger
+language plpgsql
+security invoker
+set search_path = pg_catalog
+as $
+begin
+  new.marketing_email_changed_at := now();
+  return new;
+end;
+$;
+
+drop trigger if exists stamp_marketing_preference_time on public.user_communication_preferences;
+create trigger stamp_marketing_preference_time
+before insert or update on public.user_communication_preferences
+for each row execute function public.stamp_marketing_preference_time();
+
 alter table public.user_communication_preferences enable row level security;
 
 -- The authenticated user can read and update only their own voluntary preference.
