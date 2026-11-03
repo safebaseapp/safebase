@@ -22,6 +22,8 @@ const cases = [
   ["manual premium without sub", { plan: "premium" }, true],
   ["paid legacy status", { plan: "premium", lemon_subscription_id: "s1", subscription_status: "paid" }, true],
   ["active paid", { plan: "premium", lemon_subscription_id: "s1", subscription_status: "active" }, true],
+  ["active paid with renewed future period", { plan: "premium", lemon_subscription_id: "s1", subscription_status: "active", subscription_paid_through_at: future }, true],
+  ["active stale flag after paid period", { plan: "premium", lemon_subscription_id: "s1", subscription_status: "active", subscription_paid_through_at: past }, false],
   ["paid canceled, valid grace", { plan: "premium", lemon_subscription_id: "s1", subscription_status: "cancelled", subscription_cancelled: true, subscription_ends_at: paidEnd, subscription_paid_through_at: paidEnd }, true],
   ["paid canceled, expired", { plan: "premium", lemon_subscription_id: "s1", subscription_status: "cancelled", subscription_cancelled: true, subscription_ends_at: past, subscription_paid_through_at: paidEnd }, false],
   ["paid explicit cutoff earlier", { plan: "premium", lemon_subscription_id: "s1", subscription_status: "cancelled", subscription_cancelled: true, subscription_ends_at: future, subscription_paid_through_at: past }, false],
