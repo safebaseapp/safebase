@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
-    "prebuild": "node scripts/polish-toolbox-pdfs.mjs && node scripts/qa-toolbox-pdfs.mjs && node scripts/qa-download-flows.mjs && node scripts/qa-live-quality-pack.mjs && node scripts/qa-field-forms-growth.mjs && node scripts/qa-method-statements-growth.mjs && node scripts/qa-method-library-34.mjs",
+    "prebuild": "node scripts/polish-toolbox-pdfs.mjs && node scripts/qa-toolbox-pdfs.mjs && node scripts/qa-download-flows.mjs && node scripts/qa-live-quality-pack.mjs && node scripts/qa-field-forms-growth.mjs && node scripts/qa-method-statements-growth.mjs && node scripts/qa-method-library-34.mjs && node scripts/qa-account-billing-marketing.mjs",
     "qa:toolbox-pdfs": "node scripts/qa-toolbox-pdfs.mjs",
     "qa:download-flows": "node scripts/qa-download-flows.mjs",
     "build": "next build",
@@ -14,7 +14,8 @@
     "qa:field-forms-growth": "node scripts/qa-field-forms-growth.mjs",
     "qa:method-statements-growth": "node scripts/qa-method-statements-growth.mjs",
     "qa:method-library-26": "node scripts/qa-method-library-26.mjs",
-    "qa:method-library-34": "node scripts/qa-method-library-34.mjs"
+    "qa:method-library-34": "node scripts/qa-method-library-34.mjs",
+    "qa:account-billing-marketing": "node scripts/qa-account-billing-marketing.mjs"
   },
   "dependencies": {
     "@iso-safety-signs/assets": "^1.0.1",
