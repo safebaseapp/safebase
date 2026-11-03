@@ -1,4 +1,5 @@
 import type { SafetyGuide, LocalizedText } from "../../components/GuideTemplate";
+import { specialistRelatedGuide } from "./specialist-related";
 import { advancedMethodPresets } from "@/lib/content/advancedMethodPresets";
 
 type Pair = LocalizedText;
@@ -527,10 +528,7 @@ export const specialistIndustrialGuides: SafetyGuide[] = editorial.map(item => {
        tr:`${method.stop.tr} Tesis acil durum planını uygula, alanı emniyete al ve yalnız yetkili onayından sonra yeniden başlat.`},
     },
     references:item.references,
-    relatedGuides:item.related.map(slug=>({slug,title:{
-      en:slug.replaceAll("-"," ").replace(/\b\w/g,s=>s.toUpperCase()),
-      tr:slug.replaceAll("-"," "),
-    }})),
+    relatedGuides:item.related.map(specialistRelatedGuide),
     searchKeywords:item.keywords,
     aiText:{
       en:`Compare this ${item.title.en.toLowerCase()} guide with the SERNEM Method Statement generator, the task permit and the approved engineering procedure. Ask SERNEM AI for a site-specific hazard review.`,
