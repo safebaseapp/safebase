@@ -32,6 +32,9 @@ export function hasBillingEntitlement(value: SubscriptionEntitlement, now = Date
   const cancelled = Boolean(value.subscription_cancelled || status === "cancelled");
   const paidPeriod = deadline(value.subscription_paid_through_at);
   const paidPeriodActive = paidPeriod !== null && paidPeriod > now;
+  // When a paid billing period is explicitly recorded, do not trust a stale
+  // active/paid flag beyond that period if renewal webhooks are delayed.
+  if (paidPeriod !== null && !paidPeriodActive) return false;
   const subscriptionId = value.lemon_subscription_id;
   const trial = value.trial;
 
