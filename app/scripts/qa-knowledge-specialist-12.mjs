@@ -83,8 +83,8 @@ for(const x of specialistB) {
   }
 }
 assert.equal(current.size+slugs.size,112);
-assert.ok(sourceAll.includes("...specialistGuides")&&sourceAll.includes("allGuides.length !== 112"),"Total guide catalog not expanded");
-assert.ok(sourceDetail.includes("[...generatedGuides, ...specialistGuides]"),"New TR/EN static routes missing");
+assert.ok(sourceAll.includes("...specialistGuides")&&sourceAll.includes("allGuides.length !== 124"),"Total guide catalog not expanded");
+assert.ok(sourceDetail.includes("[...generatedGuides, ...specialistGuides, ...industrialGrowthGuides]"),"New TR/EN static routes missing");
 // All new topics must be inside the ORIGINAL filterable 112-card directory,
 // not repeated as a second 12-card block with the generic fallback photo.
 assert.ok(sourceHub.includes("const guides = allGuides.map((guide)")&&sourceHub.includes("allGuides.length"),"Unified guide data source missing");
@@ -106,7 +106,7 @@ for(const [_,slug,key] of imageAssignments) {
 }
 assert.ok(visualSource.includes('const specialist = specialistGuideVisualKeys[slug]')&&
   visualSource.includes('if (specialist) return VISUALS[specialist]'),"Cover selection not slug-specific");
-console.log("PASS: all twelve specialist guides are inside the searchable/filtered 112-card grid, with 12 varied cover images.");
+console.log("PASS: all twelve original specialist guides remain inside the searchable/filtered 124-card grid, with 12 varied cover images.");
 
 assert.ok(sourceClient.includes("{guides.length} HSE Guides")&&sourceClient.includes("${guides.length} Profesyonel İSG"),"Hero guide counter stale");
 assert.ok(sitemap.includes("allGuides.map((guide)")&&sitemap.includes("/knowledge-base/${guide.slug}"),"Sitemap guide expansion missing");
