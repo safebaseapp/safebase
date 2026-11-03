@@ -137,7 +137,7 @@ export async function DELETE() {
     // A provider status of "active" is a paid subscription; "on_trial"
     // is a free trial. Independently inspect paid invoices as evidence.
     let verifiedPaidAt: string | null = profile.subscription_paid_verified_at || null;
-    if (String(before.status).toLowerCase() === "active") {
+    if (["active", "cancelled"].includes(String(before.status).toLowerCase())) {
       try {
         const invoice = await getRecentPaidSubscriptionInvoice(id);
         if (invoice.verified) verifiedPaidAt = invoice.paidAt;
@@ -153,9 +153,12 @@ export async function DELETE() {
       return NextResponse.json({ error: "Provider did not confirm cancellation" }, { status: 502 });
 
     const isTrialCancellation = String(before.status).toLowerCase() === "on_trial" ||
-      (alreadyCancelled && Boolean(trial?.trial_ends_at) && !profile.subscription_paid_through_at);
+      (alreadyCancelled && Boolean(trial?.trial_ends_at) && !verifiedPaidAt &&
+        !profile.subscription_paid_through_at);
     const providerEnd = fields.subscription_ends_at;
-    const trialCutoff = isTrialCancellation
+    // Provider may expose a later subscription interval when a free trial is
+    // cancelled. Never use the provider end by itself as evidence of trial access.
+    const trialCutoff = isTrialCancellation && (before.trial_ends_at || trial?.trial_ends_at)
       ? validUntil(before.trial_ends_at, trial?.trial_ends_at, providerEnd)
       : null;
     const paidThrough = isTrialCancellation
