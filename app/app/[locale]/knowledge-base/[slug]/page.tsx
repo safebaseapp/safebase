@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import GuideTemplate from "../components/GuideTemplate";
 import { getGuideBySlug } from "../data/guides/all-guides";
 import { generatedGuides } from "../data/guides/generated";
+import { specialistGuides } from "../data/guides/specialist-guides";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -10,7 +11,7 @@ type Props = {
 
 export function generateStaticParams() {
   return ["tr", "en"].flatMap((locale) =>
-    generatedGuides.map((guide) => ({ locale, slug: guide.slug })),
+    [...generatedGuides, ...specialistGuides].map((guide) => ({ locale, slug: guide.slug })),
   );
 }
 

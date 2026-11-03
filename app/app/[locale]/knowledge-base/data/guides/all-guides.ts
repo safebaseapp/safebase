@@ -15,6 +15,7 @@ import { chemicalSafetyGuide } from "./chemical-safety";
 import { permitToWorkGuide } from "./permit-to-work";
 import { manualHandlingGuide } from "./manual-handling";
 import { generatedGuides } from "./generated";
+import { specialistGuides } from "./specialist-guides";
 
 const coreGuides: SafetyGuide[] = [
   manualHandlingGuide,
@@ -33,10 +34,10 @@ const coreGuides: SafetyGuide[] = [
   chemicalSafetyGuide,
 ];
 
-export const allGuides: SafetyGuide[] = [...coreGuides, ...generatedGuides];
+export const allGuides: SafetyGuide[] = [...coreGuides, ...generatedGuides, ...specialistGuides];
 
-if (allGuides.length !== 100) {
-  throw new Error(`SERNEM knowledge base expected 100 guides, received ${allGuides.length}.`);
+if (allGuides.length !== 112) {
+  throw new Error(`SERNEM knowledge base expected 112 guides, received ${allGuides.length}.`);
 }
 
 const uniqueGuideSlugs = new Set(allGuides.map((guide) => guide.slug));

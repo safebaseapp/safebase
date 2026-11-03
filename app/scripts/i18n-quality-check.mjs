@@ -111,7 +111,7 @@ for (const absolute of guideSources) {
   }
 }
 const guideCatalog = load("app/[locale]/knowledge-base/data/guides/all-guides.ts");
-check(guideCatalog.includes("allGuides.length !== 100"), "100-guide count guard missing");
+check(guideCatalog.includes("allGuides.length !== 112"), "112-guide count guard missing");
 check(guideCatalog.includes("uniqueGuideSlugs.size !== allGuides.length"), "Duplicate guide guard missing");
 const guideFactory = load("app/[locale]/knowledge-base/data/guides/generated/factory.ts");
 for (const key of ["category", "title", "description", "overview", "hazards", "controls", "requiredPPE", "aiText"]) {

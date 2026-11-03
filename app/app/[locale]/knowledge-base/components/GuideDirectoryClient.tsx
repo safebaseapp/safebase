@@ -54,10 +54,10 @@ export default function GuideDirectoryClient({ locale, guides }: Props) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,99,235,.22),transparent_45%),radial-gradient(circle_at_80%_20%,rgba(16,185,129,.12),transparent_28%)]" />
         <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8">
           <span className="inline-flex rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-emerald-300">
-            SERNEM • 100 HSE Guides
+            SERNEM • {guides.length} HSE Guides
           </span>
           <h1 className="mt-6 max-w-4xl text-5xl font-black tracking-[-0.05em] sm:text-6xl">
-            {isTurkish ? "100 Profesyonel İSG Rehberi" : "100 Professional HSE Guides"}
+            {isTurkish ? `${guides.length} Profesyonel İSG Rehberi` : `${guides.length} Professional HSE Guides`}
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-400">
             {isTurkish
