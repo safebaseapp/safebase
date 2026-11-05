@@ -35,6 +35,11 @@ try {
       viewport: layout.viewport, isMobile: layout.mobile, hasTouch: layout.mobile, reducedMotion: "reduce",
     });
     const page = await context.newPage();
+    // Capture GA4 event calls locally; no test events are sent to Google's property.
+    await page.addInitScript(() => {
+      window.__sernemQaEvents = [];
+      window.gtag = (...args) => window.__sernemQaEvents.push(args);
+    });
     const errors = [];
     page.on("pageerror", e => errors.push(e.message));
     for (const test of checks) {
@@ -56,6 +61,22 @@ try {
       results.push({ layout: layout.name, route: test.name, status, heading: title.slice(0, 60), ...geometry });
       console.log("SERNEM_GROWTH_QA", JSON.stringify(results.at(-1)));
       assert.ok(geometry.overflowPx <= 12, layout.name + " " + test.name + ": horizontal overflow " + geometry.overflowPx + "px");
+      if (test.name === "home") {
+        // Production GA4 must not be loaded in a Vercel preview (owner QA is not a real visitor).
+        await page.waitForTimeout(450);
+        assert.equal(
+          await page.locator('script[src*="googletagmanager.com/gtag/js"]').count(),
+          0,
+          "Preview contains production GA4 script",
+        );
+      }
+      if (test.name === "upgrade-tr" || test.name === "upgrade-en") {
+        await page.waitForFunction(
+          () => window.__sernemQaEvents?.some((event) => event[0] === "event" && event[1] === "premium_view"),
+          null, { timeout: 10000 },
+        );
+        console.log("SERNEM_GROWTH_ANALYTICS", layout.name, test.name, "premium_view captured locally");
+      }
       if (test.name === "register-tr") {
         assert.equal(await page.locator("input[type=email]").count(), 1);
         assert.equal(await page.locator("input[type=password]").count(), 1);
