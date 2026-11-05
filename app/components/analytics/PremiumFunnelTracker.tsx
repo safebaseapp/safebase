@@ -7,7 +7,17 @@ import Link from "next/link";
 // Only generic funnel events are sent; never send identity or HSE document data.
 function trackPremiumFunnel(eventName: string) {
   if (typeof window === "undefined") return;
-  const analyticsWindow = window as Window & { dataLayer?: unknown[] };
+  const analyticsWindow = window as Window & {
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+  };
+  // Use Google's supported gtag event API when the tag has initialized.
+  if (typeof analyticsWindow.gtag === "function") {
+    analyticsWindow.gtag("event", eventName, { funnel: "premium" });
+    return;
+  }
+  // The Google tag snippet is afterInteractive, so early clicks may precede it.
+  // Keep the command in the same dataLayer queue that gtag.js will initialize.
   analyticsWindow.dataLayer ??= [];
   analyticsWindow.dataLayer.push(["event", eventName, { funnel: "premium" }]);
 }
