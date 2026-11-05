@@ -1,4 +1,5 @@
 import HomeLabsBridge from "./HomeLabsBridge";
+import { PremiumGrowthLink } from "@/components/analytics/PremiumFunnelTracker";
 import Link from "next/link";
 import Sim5Showcase from "@/components/sim5/Sim5Showcase";
 import { ArrowRight, ArrowUpRight, Check, FileText, ShieldCheck, Crosshair } from "lucide-react";
@@ -21,6 +22,7 @@ export default function CinematicHome({ locale }: { locale: "tr" | "en" }) {
         <h1 id="home-title">{t("Serious operations.", "Zorlu operasyonlar.")}<br/><em>{t("Stronger safety.", "Güçlü iş güvenliği.")}</em></h1>
         <p className={s.heroLead}>{t("From the first risk assessment to the final report. One working platform for the people responsible for safety.", "İlk risk analizinden son rapora. İş güvenliğinin sorumluluğunu taşıyanlar için tek çalışma platformu.")}</p>
         <div className={s.actions}>{action("/tools", "Explore Tools", "Araçları Keşfet", true)}{action("/tools/quick-risk-assessment", "Build Risk Assessment", "Risk Analizi Oluştur")}</div>
+        <div className="mt-5"><PremiumGrowthLink href={`/${locale}/upgrade`} eventName="premium_home_cta_click" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-amber-200 underline decoration-amber-300/40 underline-offset-4 transition hover:text-white">{tr ? "Premium üyelik · €9,99/ay" : "Explore Premium · €9.99/month"} →</PremiumGrowthLink></div>
         <div className={s.heroBottom}><div><span className={s.eyebrow}>SERNEM / {t("FIELD OPERATIONS", "SAHA OPERASYONLARI")}</span><p>{t("Plan with clarity. Act with confidence.", "Net planlama. Güvenli uygulama.")}</p></div><div className={s.heroPreview}><span className={s.signal}/><b>HSE Performance</b><span>TRIR / LTIFR / DART</span><ArrowRight size={18}/></div></div>
       </div>
       <span className={s.heroIndex}>01 — 10 / SERNEM</span>
