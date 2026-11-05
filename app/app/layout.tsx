@@ -52,6 +52,10 @@ export default async function RootLayout({
   const locale =
     requestHeaders.get("x-sernem-locale") === "tr" ? "tr" : "en";
 
+  // Preview, staging and local visits are tests, not real SERNEM users.
+  // Never transmit them to the production GA4 property.
+  const enableProductionGa4 = process.env.VERCEL_ENV === "production";
+
   return (
     <html
       lang={locale}
@@ -86,18 +90,22 @@ export default async function RootLayout({
           }}
         />
         {children}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-B4TTF1KM9J"
-          strategy="afterInteractive"
-        />
-        <Script id="sernem-ga4" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-B4TTF1KM9J');
-          `}
-        </Script>
+        {enableProductionGa4 && (
+          <>
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-B4TTF1KM9J"
+              strategy="afterInteractive"
+            />
+            <Script id="sernem-ga4" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-B4TTF1KM9J');
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
