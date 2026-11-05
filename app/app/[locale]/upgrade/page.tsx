@@ -246,7 +246,7 @@ export default async function UpgradePage({ params }: Props) {
                 <p className="mt-4 text-xs text-white/42">
                   {isTurkish ? "Hesabınız yok mu?" : "No account yet?"}{" "}
                   <Link
-                    href={`/${locale}/register`}
+                    href={`/${locale}/register?next=${encodeURIComponent(`/${locale}/upgrade`)}`}
                     className="font-bold text-white/75 underline decoration-white/25 underline-offset-4 transition hover:text-white"
                   >
                     {isTurkish ? "Ücretsiz hesap oluştur" : "Create a free account"}
