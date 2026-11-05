@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PremiumGrowthLink } from "@/components/analytics/PremiumFunnelTracker";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { methodExamples } from "@/lib/content/methodExamples";
@@ -40,8 +41,14 @@ export default async function MethodExamplesHub({params}:Props){
      </section>
      <section className="mt-14 rounded-2xl border border-sky-400/20 bg-sky-950/40 p-7">
        <h2 className="text-2xl font-bold">{tr?"Kendi Method Statement belgenizi hazırlayın":"Build your own method statement"}</h2>
-       <p className="mt-3 max-w-3xl leading-7 text-slate-300">{tr?"SERNEM’in mevcut 20 hazır şablonlu oluşturucusuna geçin, iş yerinize özel ayrıntıları ve görev sorumlularını düzenleyin. PDF için giriş yapmanız gerekebilir.":"Open the existing SERNEM method statement tool with 20 preset templates, and customize task controls and responsibilities. Sign-in may be required for printing."}</p>
+       <p className="mt-3 max-w-3xl leading-7 text-slate-300">{tr?"SERNEM’in 34 hazır şablonlu oluşturucusuna geçin, iş yerinize özel ayrıntıları ve görev sorumlularını düzenleyin. PDF için giriş yapmanız gerekebilir.":"Open the existing SERNEM method statement tool with 34 preset templates, and customize task controls and responsibilities. Sign-in may be required for printing."}</p>
        <Link href={`/${locale}/tools/method-statement`} className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-sky-600 px-5 py-3 font-bold hover:bg-sky-500">{tr?"Method Statement oluşturucusu":"Open method statement generator"} →</Link>
+     </section>
+     <section aria-labelledby="method-premium-heading" className="mt-8 rounded-2xl border border-amber-300/25 bg-amber-300/[0.05] p-7">
+       <p className="text-xs font-bold uppercase tracking-widest text-amber-300">SERNEM / PREMIUM</p>
+       <h2 id="method-premium-heading" className="mt-3 text-2xl font-bold">{tr?"Birden fazla saha dokümanı hazırlıyor musunuz?":"Preparing documents for multiple tasks?"}</h2>
+       <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">{tr?"Örnek metodları ücretsiz inceleyin. Gelişmiş doküman çıktıları ve Premium AI desteğine ihtiyaç duyuyorsanız Free / Premium karşılaştırmasına bakın.":"Continue browsing the free method examples. If you need advanced document outputs and Premium AI assistance, compare Free and Premium before deciding."}</p>
+       <PremiumGrowthLink href={`/${locale}/upgrade`} eventName="premium_method_cta_click" className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-amber-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-200">{tr?"Premium farkını incele":"Compare Premium features"} →</PremiumGrowthLink>
      </section>
    </div>
  </main>;
