@@ -16,8 +16,13 @@ export default function HomeLabsBridge({ locale }: { locale: "tr" | "en" }) {
 
       <div className="relative mx-auto grid min-h-[360px] max-w-7xl items-center gap-8 px-5 py-10 sm:px-6 md:min-h-[390px] md:py-12 lg:grid-cols-[250px_minmax(0,1fr)_360px] lg:gap-12 xl:grid-cols-[270px_minmax(0,1fr)_390px]">
         <div className="flex items-center justify-center lg:justify-start">
-          <div className="w-full max-w-[230px] overflow-hidden rounded-[28px] border border-white/10 bg-[#111827] shadow-[0_24px_70px_rgba(0,0,0,.24)]">
+          <div className="relative w-full max-w-[230px] overflow-hidden rounded-[28px] border border-white/10 bg-[#111827] shadow-[0_24px_70px_rgba(0,0,0,.24)]">
             <img src={LABS_LOGO} alt="SERNEM Labs" className="block h-auto w-full" />
+            <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-[11%] flex justify-center">
+              <span className="grid h-[88px] w-[88px] place-items-center rounded-[23px] border border-violet-300/25 bg-gradient-to-br from-blue-600/35 via-violet-600/30 to-cyan-500/20 shadow-[0_0_40px_rgba(139,92,246,.20)]">
+                <Puzzle size={57} strokeWidth={1.8} className="text-violet-100 drop-shadow-[0_0_12px_rgba(139,92,246,.7)]" />
+              </span>
+            </span>
           </div>
         </div>
 
