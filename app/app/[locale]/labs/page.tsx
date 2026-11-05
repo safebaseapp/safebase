@@ -5,7 +5,7 @@ import Sim5PromoLink from "@/components/sim5/Sim5PromoLink";
 import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
-import { ArrowRight, LockKeyhole, Puzzle, ScanSearch, Sparkles } from "lucide-react";
+import { ArrowRight, LockKeyhole, ScanSearch, Sparkles } from "lucide-react";
 import { routing } from "../../../i18n/routing";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
 import s from "./labs.module.css";
@@ -75,13 +75,8 @@ export default async function LabsPage({ params }: Props) {
         <div className={s.container}>
           <div className={s.heroGrid}>
             <div className={s.heroCopy}>
-              <div style={{ position: "relative", width: 154, overflow: "hidden", borderRadius: 22, border: "1px solid rgba(196,181,253,.18)", boxShadow: "0 18px 48px rgba(0,0,0,.24)", marginBottom: 22 }}>
+              <div style={{ width: 154, overflow: "hidden", borderRadius: 22, border: "1px solid rgba(196,181,253,.18)", boxShadow: "0 18px 48px rgba(0,0,0,.24)", marginBottom: 22 }}>
                 <img src="/images/sernem-labs-logo.webp" alt="SERNEM Labs" style={{ display: "block", width: "100%", height: "auto" }} />
-                <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-[10%] flex justify-center">
-                  <span className="grid h-[60px] w-[60px] place-items-center rounded-2xl border border-violet-300/25 bg-gradient-to-br from-blue-600/35 via-violet-600/30 to-cyan-500/20 shadow-[0_0_25px_rgba(139,92,246,.22)]">
-                    <Puzzle size={38} strokeWidth={1.8} className="text-violet-100 drop-shadow-[0_0_8px_rgba(139,92,246,.65)]" />
-                  </span>
-                </span>
               </div>
               <p className={s.eyebrow}><span className={s.signal} /> SERNEM / HSE LABS</p>
               <h1 id="labs-title">
