@@ -40,6 +40,8 @@ jobs:
           npm ci --prefix tools/sim5-review
       - name: Exercise real monthly KPI source with synthetic database
         run: node tools/hse-calculator-pack/monthly-kpi-test.mjs
+      - name: Generate Next.js image and route type references
+        run: npm --prefix app exec next typegen
       - name: TypeScript and changed file lint
         run: |
           cd app
