@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
+import PremiumFunnelTracker, { PremiumGrowthLink } from "@/components/analytics/PremiumFunnelTracker";
 import { premiumTrialEnabled } from "@/lib/premium-trial-config";
 import TrackedCheckoutLink from "@/components/analytics/TrackedCheckoutLink";
 import Link from "next/link";
@@ -21,8 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const locale = rawLocale === "tr" ? "tr" : "en";
   const title = locale === "tr" ? "SERNEM Premium | Profesyonel HSE Araçları" : "SERNEM Premium | Professional HSE Tools";
   const description = locale === "tr"
-    ? "SERNEM Premium ile gelişmiş HSE kaynaklarını, Toolbox içeriklerini ve profesyonel doküman deneyimini keşfedin."
-    : "Explore SERNEM Premium for advanced HSE resources, Toolbox Talks and professional document workflows.";
+    ? "SERNEM Premium: €9,99/ay ile gelişmiş HSE doküman iş akışı, Premium AI desteği ve profesyonel kaynaklar. Önce ücretsiz araçları keşfedin."
+    : "SERNEM Premium: professional HSE document workflows, Premium AI support and advanced resources for €9.99/month. Explore free resources before deciding.";
   const canonical = `https://www.sernem.com/${locale}/upgrade`;
   return {
     title, description,
@@ -143,6 +144,7 @@ export default async function UpgradePage({ params }: Props) {
   return (
     <main className="min-h-screen bg-[#05080d] text-white">
       <ActivityTracker eventName="premium_view" />
+      <PremiumFunnelTracker />
 
       <section className="relative isolate min-h-[720px] overflow-hidden border-b border-white/10">
         <div
@@ -244,7 +246,7 @@ export default async function UpgradePage({ params }: Props) {
                 <p className="mt-4 text-xs text-white/42">
                   {isTurkish ? "Hesabınız yok mu?" : "No account yet?"}{" "}
                   <Link
-                    href={`/${locale}/register`}
+                    href={`/${locale}/register?next=${encodeURIComponent(`/${locale}/upgrade`)}`}
                     className="font-bold text-white/75 underline decoration-white/25 underline-offset-4 transition hover:text-white"
                   >
                     {isTurkish ? "Ücretsiz hesap oluştur" : "Create a free account"}
@@ -326,6 +328,46 @@ export default async function UpgradePage({ params }: Props) {
                 </div>
               ))}
             </div>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-amber-300">
+                {isTurkish ? "ÖNCE ÜCRETSİZ KEŞFEDİN" : "EXPLORE BEFORE SUBSCRIBING"}
+              </p>
+              <h3 className="mt-3 text-xl font-semibold text-white">
+                {isTurkish ? "Gerçek bir HSE işiyle başlayın." : "Start with a real HSE task."}
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-white/60">
+                {isTurkish
+                  ? "Önce açık risk analizi ve Toolbox Talk kütüphanelerini inceleyin. Premium'e yalnızca gelişmiş çıktılar ve destek ihtiyacınız olduğunda geçin."
+                  : "Explore the public Risk Assessment and Toolbox Talk libraries first. Upgrade only when you need the additional Premium outputs and assistance."}
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <PremiumGrowthLink eventName="premium_free_example_click" href={`/${locale}/risk-assessment`} className="inline-flex min-h-11 items-center rounded-xl border border-white/20 px-4 py-3 text-sm font-bold text-white transition hover:border-amber-300/60">
+                  {isTurkish ? "Risk analizlerini incele" : "Explore risk assessments"} →
+                </PremiumGrowthLink>
+                <PremiumGrowthLink eventName="premium_free_example_click" href={`/${locale}/toolbox`} className="inline-flex min-h-11 items-center rounded-xl border border-white/20 px-4 py-3 text-sm font-bold text-white transition hover:border-amber-300/60">
+                  {isTurkish ? "Toolbox Talk konuları" : "Browse Toolbox Talks"} →
+                </PremiumGrowthLink>
+              </div>
+            </article>
+            <article className="rounded-2xl border border-amber-300/20 bg-amber-300/[0.05] p-6 sm:p-8">
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-amber-300">
+                {isTurkish ? "EKİPLER İÇİN" : "FOR CONTRACTOR TEAMS"}
+              </p>
+              <h3 className="mt-3 text-xl font-semibold text-white">
+                {isTurkish ? "Ekibinizle birlikte mi kullanmak istiyorsunuz?" : "Planning to use SERNEM with your team?"}
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-white/60">
+                {isTurkish
+                  ? "Taşeron ve mühendislik ekipleri için ortak HSE doküman iş akışlarını keşfediyoruz. İhtiyacınızı anlatın; uygun bir pilot çalışmayı birlikte değerlendirelim. Kurumsal paket henüz satışa sunulmadı."
+                  : "We're exploring shared HSE documentation workflows with contractor and engineering teams. Tell us what you need and we'll discuss whether a pilot makes sense. A team plan is not yet on sale."}
+              </p>
+              <PremiumGrowthLink eventName="premium_team_pilot_click" href={`/${locale}/contact`} className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-amber-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-200">
+                {isTurkish ? "Kurumsal pilot için iletişime geç" : "Enquire about a team pilot"} →
+              </PremiumGrowthLink>
+            </article>
           </div>
 
           <div className="mt-16 flex flex-col gap-5 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
