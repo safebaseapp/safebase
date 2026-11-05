@@ -3,12 +3,6 @@ on:
   push:
     branches:
       - codex/hse-calculators-hub-kpi-pack
-    paths:
-      - 'app/app/[[]locale[]]/tools/_shared/**'
-      - 'app/app/[[]locale[]]/hse-performance/**'
-      - 'app/app/tools/**'
-      - 'tools/hse-calculator-pack/**'
-      - '.github/workflows/p125-kpi-isolated-qa.yml'
   pull_request:
     types: [opened, reopened, synchronize, edited]
     branches:
