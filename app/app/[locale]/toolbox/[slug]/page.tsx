@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PremiumGrowthLink } from "@/components/analytics/PremiumFunnelTracker";
 import { notFound } from "next/navigation";
 import ToolboxActions from "./ToolboxActions";
 import {
@@ -531,6 +532,26 @@ export default async function ToolboxDetailPage({ params }: Props) {
               ))}
             </div>
           )}
+
+
+          <aside className="mt-8 rounded-[24px] border border-amber-300/25 bg-slate-950 p-6 text-white print:hidden sm:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-amber-300">SERNEM / PREMIUM</p>
+            <h2 className="mt-3 text-xl font-black sm:text-2xl">
+              {isTurkish ? "Bu Toolbox'ı düzenli hazırlıyor musunuz?" : "Prepare Toolbox Talks regularly?"}
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-300">
+              {isTurkish
+                ? "Ücretsiz saha kaynaklarını kullanmaya devam edin. Daha kapsamlı doküman çıktıları ve Premium AI desteği gerekiyorsa Free / Premium farklarını inceleyin."
+                : "Keep using the public safety resources. If you need advanced document outputs or Premium AI assistance, compare the Free and Premium options."}
+            </p>
+            <PremiumGrowthLink
+              href={`/${locale}/upgrade`}
+              eventName="premium_toolbox_cta_click"
+              className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-amber-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-200"
+            >
+              {isTurkish ? "Premium özellikleri karşılaştır" : "Compare Premium features"} →
+            </PremiumGrowthLink>
+          </aside>
 
           <div className="mt-4 grid gap-4 sm:grid-cols-2 print:hidden">
             {previous ? (
