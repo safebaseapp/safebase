@@ -28,6 +28,23 @@ jobs:
         run: npm ci --prefix tools/sim5-review --no-audit --no-fund
       - name: Install headless Chromium
         run: ./tools/sim5-review/node_modules/.bin/playwright install --with-deps chromium
+      - name: Wait until branch preview serves the updated GA4-isolated build
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 35); do
+            file=$(mktemp)
+            if curl -fLsS --max-time 20 "${SERNEM_GROWTH_QA_BASE_URL}/en" -o "$file" && ! grep -q 'gtag/js?id=G-B4TTF1KM9J' "$file"; then
+              rm -f "$file"
+              echo "Preview serves a non-production Analytics build"
+              exit 0
+            fi
+            rm -f "$file"
+            echo "Preview still serving old build, attempt $attempt/35"
+            sleep 10
+          done
+          echo "::error::Preview alias did not update to the analytics-isolated build"
+          exit 1
       - name: Smoke test TR/EN, desktop, mobile 390px, signup intent and print-safe CTAs
         run: node tools/sim5-review/premium-growth-browser-qa.mjs
       - name: Preserve visual QA evidence
