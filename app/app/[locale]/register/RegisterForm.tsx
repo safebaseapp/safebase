@@ -22,6 +22,7 @@ export default function RegisterForm({ locale }: Props) {
   const isTurkish = locale === "tr";
   const nextPath = safeNextPath(searchParams.get("next"), locale);
   const nextQuery = encodeURIComponent(nextPath);
+  const returnsToPremium = nextPath === `/${locale}/upgrade`;
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,7 +51,13 @@ export default function RegisterForm({ locale }: Props) {
     }
 
     trackEvent("sign_up", { method: "email", locale });
-    setSuccessMessage(isTurkish ? "Hesabın oluşturuldu. E-posta adresine gönderilen doğrulama bağlantısını kontrol et. Doğrulamadan sonra Premium sayfasına döneceksin." : "Your account was created. Check your email for the confirmation link. After confirmation, you'll return to the Premium page.");
+    setSuccessMessage(returnsToPremium
+      ? (isTurkish
+          ? "Kayıt talebin alındı. E-postana gelen doğrulama bağlantısını aç. Doğrulamadan sonra Premium sayfasına dönebilirsin."
+          : "Your registration request was received. Open the confirmation link in your email, then continue to the Premium page.")
+      : (isTurkish
+          ? "Kayıt talebin alındı. E-postana gelen doğrulama bağlantısını açarak hesabını doğrula ve SERNEM'e giriş yap."
+          : "Your registration request was received. Confirm your email address using the link sent to you, then sign in to SERNEM."));
     setFullName("");
     setEmail("");
     setPassword("");
