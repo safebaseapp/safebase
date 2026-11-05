@@ -4,15 +4,6 @@ on:
   push:
     branches:
       - growth/premium-conversion-20261105
-    paths:
-      - 'tools/sim5-review/premium-growth-browser-qa.mjs'
-      - '.github/workflows/sernem-premium-growth-preview-qa.yml'
-      - 'app/components/analytics/PremiumFunnelTracker.tsx'
-      - 'app/components/growth/PPEPremiumNextStep.tsx'
-      - 'app/app/[[]locale[]]/upgrade/**'
-      - 'app/app/[[]locale[]]/register/**'
-      - 'app/app/[[]locale[]]/toolbox/[[]slug[]]/**'
-      - 'app/app/[[]locale[]]/ppe-standards/[[]slug[]]/**'
   workflow_dispatch:
 
 permissions:
