@@ -1,0 +1,49 @@
+name: SERNEM Premium conversion responsive QA
+
+on:
+  push:
+    branches:
+      - growth/premium-conversion-20261105
+    paths:
+      - 'tools/sim5-review/premium-growth-browser-qa.mjs'
+      - '.github/workflows/sernem-premium-growth-preview-qa.yml'
+      - 'app/components/analytics/PremiumFunnelTracker.tsx'
+      - 'app/components/growth/PPEPremiumNextStep.tsx'
+      - 'app/app/[[]locale[]]/upgrade/**'
+      - 'app/app/[[]locale[]]/register/**'
+      - 'app/app/[[]locale[]]/toolbox/[[]slug[]]/**'
+      - 'app/app/[[]locale[]]/ppe-standards/[[]slug[]]/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  read-only-preview-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    env:
+      SERNEM_GROWTH_QA_BASE_URL: https://safebase-git-growth-premium-conver-7c2a0a-safebaseapps-projects.vercel.app
+    steps:
+      - name: Checkout reviewed PR branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+      - name: Install read-only Playwright dependencies
+        run: npm ci --prefix tools/sim5-review --no-audit --no-fund
+      - name: Install headless Chromium
+        run: ./tools/sim5-review/node_modules/.bin/playwright install --with-deps chromium
+      - name: Smoke test TR/EN, desktop, mobile 390px, signup intent and print-safe CTAs
+        run: node tools/sim5-review/premium-growth-browser-qa.mjs
+      - name: Preserve visual QA evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: premium-growth-browser-evidence
+          path: tools/sim5-review/artifacts/premium-growth/
+          if-no-files-found: warn
+          retention-days: 7
