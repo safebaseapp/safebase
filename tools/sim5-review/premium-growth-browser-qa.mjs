@@ -20,7 +20,7 @@ const checks = [
   { name: "register-tr", route: "/tr/register?next=%2Ftr%2Fupgrade", h1: /Hesabını oluştur/i },
   { name: "tools", route: "/en/tools", h1: /HSE Tools/i, link: "/en/upgrade" },
   { name: "toolbox", route: "/en/toolbox/excavation-safety", h1: /Excavation/i, link: "/en/upgrade" },
-  { name: "ppe-expanded", route: "/tr/ppe-standards/en-iso-16321-1-occupational-eye-face-protection", h1: /EN ISO 16321-1/i, link: "/tr/upgrade" },
+  { name: "ppe-expanded", route: "/tr/ppe-standards/en-iso-16321-1-occupational-eye-face-protection", h1: /İşyerinde göz ve yüz koruması/i, link: "/tr/upgrade" },
   { name: "ppe-classic", route: "/tr/ppe-standards/en-175-welding-eye-face-protection", h1: /EN 175/i, link: "/tr/upgrade" },
 ];
 const layouts = [
