@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
+import PremiumFunnelTracker, { PremiumGrowthLink } from "@/components/analytics/PremiumFunnelTracker";
 import { premiumTrialEnabled } from "@/lib/premium-trial-config";
 import TrackedCheckoutLink from "@/components/analytics/TrackedCheckoutLink";
 import Link from "next/link";
@@ -143,6 +144,7 @@ export default async function UpgradePage({ params }: Props) {
   return (
     <main className="min-h-screen bg-[#05080d] text-white">
       <ActivityTracker eventName="premium_view" />
+      <PremiumFunnelTracker />
 
       <section className="relative isolate min-h-[720px] overflow-hidden border-b border-white/10">
         <div
@@ -342,12 +344,12 @@ export default async function UpgradePage({ params }: Props) {
                   : "Explore the public Risk Assessment and Toolbox Talk libraries first. Upgrade only when you need the additional Premium outputs and assistance."}
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
-                <Link href={`/${locale}/risk-assessment`} className="inline-flex min-h-11 items-center rounded-xl border border-white/20 px-4 py-3 text-sm font-bold text-white transition hover:border-amber-300/60">
+                <PremiumGrowthLink eventName="premium_free_example_click" href={`/${locale}/risk-assessment`} className="inline-flex min-h-11 items-center rounded-xl border border-white/20 px-4 py-3 text-sm font-bold text-white transition hover:border-amber-300/60">
                   {isTurkish ? "Risk analizlerini incele" : "Explore risk assessments"} →
-                </Link>
-                <Link href={`/${locale}/toolbox`} className="inline-flex min-h-11 items-center rounded-xl border border-white/20 px-4 py-3 text-sm font-bold text-white transition hover:border-amber-300/60">
+                </PremiumGrowthLink>
+                <PremiumGrowthLink eventName="premium_free_example_click" href={`/${locale}/toolbox`} className="inline-flex min-h-11 items-center rounded-xl border border-white/20 px-4 py-3 text-sm font-bold text-white transition hover:border-amber-300/60">
                   {isTurkish ? "Toolbox Talk konuları" : "Browse Toolbox Talks"} →
-                </Link>
+                </PremiumGrowthLink>
               </div>
             </article>
             <article className="rounded-2xl border border-amber-300/20 bg-amber-300/[0.05] p-6 sm:p-8">
@@ -362,9 +364,9 @@ export default async function UpgradePage({ params }: Props) {
                   ? "Taşeron ve mühendislik ekipleri için ortak HSE doküman iş akışlarını keşfediyoruz. İhtiyacınızı anlatın; uygun bir pilot çalışmayı birlikte değerlendirelim. Kurumsal paket henüz satışa sunulmadı."
                   : "We're exploring shared HSE documentation workflows with contractor and engineering teams. Tell us what you need and we'll discuss whether a pilot makes sense. A team plan is not yet on sale."}
               </p>
-              <Link href={`/${locale}/contact`} className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-amber-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-200">
+              <PremiumGrowthLink eventName="premium_team_pilot_click" href={`/${locale}/contact`} className="mt-5 inline-flex min-h-11 items-center rounded-xl bg-amber-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-200">
                 {isTurkish ? "Kurumsal pilot için iletişime geç" : "Enquire about a team pilot"} →
-              </Link>
+              </PremiumGrowthLink>
             </article>
           </div>
 
