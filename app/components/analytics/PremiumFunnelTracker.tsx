@@ -21,7 +21,7 @@ export default function PremiumFunnelTracker() {
 
 type GrowthLinkProps = {
   href: string;
-  eventName: "premium_free_example_click" | "premium_team_pilot_click";
+  eventName: "premium_free_example_click" | "premium_team_pilot_click" | "premium_tools_cta_click";
   className: string;
   children: ReactNode;
 };
