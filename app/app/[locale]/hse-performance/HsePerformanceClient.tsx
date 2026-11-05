@@ -187,7 +187,12 @@ export default function HsePerformanceClient({
     useState(true);
 
   // KPI-only projects must remain selectable even without site observations.
-  const [kpiProjectNames, setKpiProjectNames] = useState<string[]>([]);
+  // Key cached KPI projects to their owner so an account switch never displays stale names.
+  const [kpiProjectState, setKpiProjectState] = useState<{ userId: string; names: string[] }>({
+    userId,
+    names: [],
+  });
+  const kpiProjectNames = kpiProjectState.userId === userId ? kpiProjectState.names : [];
 
   useEffect(() => {
     let cancelled = false;
@@ -207,12 +212,12 @@ export default function HsePerformanceClient({
         return;
       }
 
-      setKpiProjectNames(
-        (data ?? []).map((row) => String(row.project_name ?? "")),
-      );
+      setKpiProjectState({
+        userId,
+        names: (data ?? []).map((row) => String(row.project_name ?? "")),
+      });
     }
 
-    setKpiProjectNames([]);
     void loadKpiProjectNames();
     const onMonthlyKpiSaved = () => { void loadKpiProjectNames(); };
     window.addEventListener("sernem:monthly-kpi-saved", onMonthlyKpiSaved);
