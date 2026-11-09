@@ -64,8 +64,8 @@ export default async function FAQPage({ params }: PageProps) {
                 a: "SERNEM freemium bir model kullanır. Platformun belirli araçları ve kaynakları ücretsiz olarak kullanılabilir. Premium üyelik ise ek profesyonel özelliklere, kaynaklara ve doküman fonksiyonlarına erişim sağlar.",
               },
               {
-                q: "Premium üyelik neler sunacak?",
-                a: "Premium; ek profesyonel araçlara, kaynaklara, gelişmiş doküman özelliklerine ve Premium olarak sunulan platform fonksiyonlarına erişim sağlayacaktır. Sunulan özellikler platform geliştikçe güncellenebilir.",
+                q: "Premium üyelik neler sunuyor?",
+                a: "Premium; HSE sorularında risk, kontrol, KKD ve iş izinlerini birlikte değerlendiren gelişmiş AI desteği, desteklenen Risk Analizi ve Toolbox araçlarında profesyonel doküman çıktıları ve ek Premium içerikler sunar. Ücretsiz ve Premium özelliklerin güncel karşılaştırmasını Premium sayfasında inceleyebilirsiniz. Çıktı seçenekleri kullanılan araca göre değişebilir.",
               },
               {
                 q: "Her aracı kullanmak için hesap açmam gerekiyor mu?",
@@ -153,8 +153,8 @@ export default async function FAQPage({ params }: PageProps) {
                 a: "SERNEM uses a freemium model. Selected tools and resources are available free of charge, while Premium membership provides access to additional professional features, resources and document functionality.",
               },
               {
-                q: "What will Premium include?",
-                a: "Premium will provide access to additional professional tools, resources, advanced document functionality and platform features offered as Premium. Available features may evolve as the platform develops.",
+                q: "What does Premium include today?",
+                a: "Premium provides advanced AI support for reviewing HSE questions alongside hazards, controls, PPE and permits; professional document outputs in supported Risk Assessment and Toolbox tools; and additional Premium resources. See the current Free/Premium comparison on the Premium page. Output options vary by tool.",
               },
               {
                 q: "Do I need an account to use every tool?",
@@ -257,6 +257,14 @@ export default async function FAQPage({ params }: PageProps) {
                   </details>
                 ))}
               </div>
+              {(section.title === "Üyelik ve Premium" || section.title === "Accounts and Premium") && (
+                <Link
+                  href={`/${locale}/upgrade`}
+                  className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-amber-300 underline decoration-amber-300/40 underline-offset-4 transition hover:text-amber-200"
+                >
+                  {isTurkish ? "Ücretsiz ve Premium özellikleri karşılaştır" : "Compare Free and Premium features"} →
+                </Link>
+              )}
             </section>
           ))}
         </div>
