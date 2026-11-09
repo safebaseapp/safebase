@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ActivityTracker from "@/components/analytics/ActivityTracker";
+import { PremiumGrowthLink } from "@/components/analytics/PremiumFunnelTracker";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SignRenderer from "@/components/safety-signs/SignRenderer";
@@ -142,6 +143,27 @@ export default async function SafetySignDetailPage({
               signTitle={sign.title[locale]}
               locale={locale}
             />
+
+            <section
+              aria-label={isTurkish ? "Premium levha indirme avantajı" : "Premium sign download benefit"}
+              className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-slate-900"
+            >
+              <h2 className="text-base font-black">
+                {isTurkish ? "SERNEM etiketi ve QR olmadan indirin" : "Download without SERNEM branding or QR"}
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-slate-700">
+                {isTurkish
+                  ? "Ücretsiz indirmelerde SERNEM etiketi ve levhaya özel QR bulunur. Premium ile A4, A3 ve PNG levhaların temiz sürümlerini indirebilirsiniz."
+                  : "Free downloads include SERNEM branding and a sign-specific QR. Premium enables clean A4, A3 and PNG sign downloads."}
+              </p>
+              <PremiumGrowthLink
+                href={`/${locale}/upgrade`}
+                eventName="premium_sign_cta_click"
+                className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
+              >
+                {isTurkish ? "Premium özelliklerini ve fiyatı gör" : "View Premium features and pricing"} →
+              </PremiumGrowthLink>
+            </section>
 
             <p className="mt-6 text-xs font-semibold leading-5 text-slate-500">
               {isTurkish
