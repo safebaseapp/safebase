@@ -5,12 +5,33 @@ export function createSiteNavigation(T:any,scene:any,colliders:any[],boxes:any[]
  const ground:any[]=[];
  scene.updateMatrixWorld(true);
  scene.traverse((o:any)=>{if(o.isMesh&&o.visible&&!o.userData.inspectionId)ground.push(o)});
+ // Broad phase only: keep the exact triangle raycast and hit ordering below.
+ // Refresh transformed bounds when a mesh moves; animated/skinned geometry
+ // always takes the original path because its local bounds may be deformed.
+ const supports=ground.map(mesh=>{
+  if(!mesh.geometry.boundingBox)mesh.geometry.computeBoundingBox();
+  return {mesh,matrix:mesh.matrixWorld.clone(),bounds:mesh.geometry.boundingBox.clone().applyMatrix4(mesh.matrixWorld)};
+ });
+ const candidates:any[]=[];
+ const origin=new T.Vector3(),downward=new T.Vector3(0,-1,0);
  let feet=.1;
  const eyeHeight=1.7, radius=.22, maxStep=.32;
  const normal=new T.Vector3();
  function floor(x:number,z:number,from:number){
-  down.set(new T.Vector3(x,from+maxStep+.015,z),new T.Vector3(0,-1,0));down.near=0;down.far=maxStep*2+.04;
-  for(const hit of down.intersectObjects(ground,false)){
+  down.set(origin.set(x,from+maxStep+.015,z),downward);down.near=0;down.far=maxStep*2+.04;
+  candidates.length=0;
+  for(const entry of supports){
+   const {mesh,matrix,bounds}=entry;
+   if(mesh.isSkinnedMesh||mesh.morphTargetInfluences?.length){candidates.push(mesh);continue;}
+   if(!matrix.equals(mesh.matrixWorld)){
+    matrix.copy(mesh.matrixWorld);
+    bounds.copy(mesh.geometry.boundingBox).applyMatrix4(matrix);
+   }
+   // Inclusive and padded: edges and thin stair seams must reach narrow phase.
+   const epsilon=1e-5;
+   if(x>=bounds.min.x-epsilon&&x<=bounds.max.x+epsilon&&z>=bounds.min.z-epsilon&&z<=bounds.max.z+epsilon&&bounds.max.y>=origin.y-down.far-epsilon&&bounds.min.y<=origin.y+epsilon)candidates.push(mesh);
+  }
+  for(const hit of down.intersectObjects(candidates,false)){
    if(!hit.face)continue;
    normal.copy(hit.face.normal).transformDirection(hit.object.matrixWorld);
    if(normal.y>.72&&hit.point.y>=from-maxStep-.01)return hit.point.y;

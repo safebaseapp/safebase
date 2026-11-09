@@ -1,0 +1,1324 @@
+{
+  "timestamp": "2026-10-21T14:19:55.421Z",
+  "checks": [
+    "leak: complete TR/EN scene evidence and control data",
+    "hotwork: complete TR/EN scene evidence and control data",
+    "lifting: complete TR/EN scene evidence and control data",
+    "access: complete TR/EN scene evidence and control data",
+    "droppedTool: complete TR/EN scene evidence and control data",
+    "droppedTool: same XZ on ground cannot inspect upper finding",
+    "materials: complete TR/EN scene evidence and control data",
+    "materials: same XZ on ground cannot inspect upper finding",
+    "desktop: hotwork rejects wrong control and records correct decision",
+    "desktop: lifting rejects wrong control and records correct decision",
+    "desktop: lifting exclusion volume prevents entry",
+    "desktop: access rejects wrong control and records correct decision",
+    "desktop: leak rejects wrong control and records correct decision",
+    "desktop: real input raises eye Y by over 9 metres",
+    "desktop: droppedTool rejects wrong control and records correct decision",
+    "desktop: droppedTool has an actual closed-container scene result",
+    "desktop: materials rejects wrong control and records correct decision",
+    "desktop: materials has an actual closed-container scene result",
+    "desktop: upper walking surface keeps eye above 12.8m",
+    "desktop: bridge rail blocks travel and retains upper level",
+    "desktop: returns to ground by the same stairs",
+    "desktop: release leaves no horizontal stuck movement",
+    "desktop: all six scene decisions complete before explicit finish",
+    "desktop: imported tank wall blocks the player",
+    "desktop: explicit finish produces measured score and wrong-decision report",
+    "desktop: real WebGL and no horizontal page overflow",
+    "desktop: replay restores both original upper evidence positions and removes control lids",
+    "mobile-portrait: real input raises eye Y by over 9 metres",
+    "mobile-portrait: droppedTool rejects wrong control and records correct decision",
+    "mobile-portrait: droppedTool has an actual closed-container scene result",
+    "mobile-portrait: materials rejects wrong control and records correct decision",
+    "mobile-portrait: materials has an actual closed-container scene result",
+    "mobile-portrait: upper walking surface keeps eye above 12.8m",
+    "mobile-portrait: bridge rail blocks travel and retains upper level",
+    "mobile-portrait: returns to ground by the same stairs",
+    "mobile-portrait: release leaves no horizontal stuck movement",
+    "mobile-portrait: explicit finish produces measured score and wrong-decision report",
+    "mobile-portrait: real WebGL and no horizontal page overflow",
+    "mobile-portrait: replay restores both original upper evidence positions and removes control lids",
+    "mobile-landscape: real input raises eye Y by over 9 metres",
+    "mobile-landscape: droppedTool rejects wrong control and records correct decision",
+    "mobile-landscape: droppedTool has an actual closed-container scene result",
+    "mobile-landscape: materials rejects wrong control and records correct decision",
+    "mobile-landscape: materials has an actual closed-container scene result",
+    "mobile-landscape: upper walking surface keeps eye above 12.8m",
+    "mobile-landscape: bridge rail blocks travel and retains upper level",
+    "mobile-landscape: returns to ground by the same stairs",
+    "mobile-landscape: release leaves no horizontal stuck movement",
+    "mobile-landscape: explicit finish produces measured score and wrong-decision report",
+    "mobile-landscape: real WebGL and no horizontal page overflow",
+    "mobile-landscape: replay restores both original upper evidence positions and removes control lids",
+    "no browser errors"
+  ],
+  "routes": [
+    {
+      "device": "desktop",
+      "label": "main-road",
+      "position": [
+        1.0986722815062629e-14,
+        1.8649292022732629,
+        0.28659999999988894
+      ],
+      "time": 1792592157275
+    },
+    {
+      "device": "desktop",
+      "label": "factory-gate",
+      "position": [
+        -13.762616488069076,
+        1.5600074385356162,
+        0.004859601177024589
+      ],
+      "time": 1792592159621
+    },
+    {
+      "device": "desktop",
+      "label": "welding-approach",
+      "position": [
+        -18.08556835485585,
+        1.7549407033789712,
+        -2.0404855817797802
+      ],
+      "time": 1792592160735
+    },
+    {
+      "device": "desktop",
+      "label": "factory-exit",
+      "position": [
+        -17.006596752413948,
+        1.7550000001490116,
+        19.866059008618915
+      ],
+      "time": 1792592165983
+    },
+    {
+      "device": "desktop",
+      "label": "lifting-outside",
+      "position": [
+        -17.000043881319808,
+        1.879983943207717,
+        46.81465821191486
+      ],
+      "time": 1792592170149
+    },
+    {
+      "device": "desktop",
+      "label": "lifting-return",
+      "position": [
+        -17.120820182829068,
+        1.8792077496815707,
+        47.009872224575574
+      ],
+      "time": 1792592172753
+    },
+    {
+      "device": "desktop",
+      "label": "west-gate",
+      "position": [
+        -14.087735359008628,
+        1.8799999976389128,
+        47.00027735562192
+      ],
+      "time": 1792592173519
+    },
+    {
+      "device": "desktop",
+      "label": "road-crossing",
+      "position": [
+        -0.20463536167346874,
+        1.7700000013362203,
+        47.000005338539566
+      ],
+      "time": 1792592175824
+    },
+    {
+      "device": "desktop",
+      "label": "tank-gate",
+      "position": [
+        -0.0005862112172790431,
+        1.7700004336691961,
+        -5.848200741744702
+      ],
+      "time": 1792592183773
+    },
+    {
+      "device": "desktop",
+      "label": "access-side-approach",
+      "position": [
+        16.861382498290606,
+        1.8799999990848464,
+        -8.974300824847965
+      ],
+      "time": 1792592186510
+    },
+    {
+      "device": "desktop",
+      "label": "access-bypass",
+      "position": [
+        24.91064236785445,
+        1.7550000011944376,
+        -8.99971818564475
+      ],
+      "time": 1792592188377
+    },
+    {
+      "device": "desktop",
+      "label": "leak-safe-approach",
+      "position": [
+        24.037714818797784,
+        1.7550000001490118,
+        -15.7100783178655
+      ],
+      "time": 1792592189633
+    },
+    {
+      "device": "desktop",
+      "label": "tank-south",
+      "position": [
+        24.996979275820745,
+        1.7550000001490116,
+        13.906790886381756
+      ],
+      "time": 1792592195024
+    },
+    {
+      "device": "desktop",
+      "label": "east-aisle",
+      "position": [
+        64.77857128854076,
+        1.7550000001490116,
+        13.999482976002394
+      ],
+      "time": 1792592200980
+    },
+    {
+      "device": "desktop",
+      "label": "stair-approach",
+      "position": [
+        64.99859355875445,
+        1.7550000001490116,
+        -14.815877036334957
+      ],
+      "time": 1792592205348
+    },
+    {
+      "device": "desktop",
+      "label": "stair-bottom",
+      "position": [
+        63.491223476883484,
+        1.7550000001490116,
+        -14.979271884112267
+      ],
+      "time": 1792592205803
+    },
+    {
+      "device": "desktop",
+      "label": "ascent-17",
+      "position": [
+        63.326355994266855,
+        1.9495163532248934,
+        -16.72148849325582
+      ],
+      "time": 1792592210012
+    },
+    {
+      "device": "desktop",
+      "label": "ascent-19",
+      "position": [
+        63.30341394254344,
+        4.058796629637253,
+        -18.704855809781634
+      ],
+      "time": 1792592211930
+    },
+    {
+      "device": "desktop",
+      "label": "ascent-21",
+      "position": [
+        63.30038984070911,
+        6.42195203175315,
+        -20.73805356081525
+      ],
+      "time": 1792592213280
+    },
+    {
+      "device": "desktop",
+      "label": "ascent-22",
+      "position": [
+        63.29895215782839,
+        6.855312992395886,
+        -21.704652491638136
+      ],
+      "time": 1792592215059
+    },
+    {
+      "device": "desktop",
+      "label": "ascent-24",
+      "position": [
+        63.29597743637024,
+        8.737958651361831,
+        -23.704650279394976
+      ],
+      "time": 1792592216191
+    },
+    {
+      "device": "desktop",
+      "label": "ascent-26",
+      "position": [
+        63.299482204209156,
+        10.87522319471812,
+        -25.7046472085432
+      ],
+      "time": 1792592217447
+    },
+    {
+      "device": "desktop",
+      "label": "ascent-26.6",
+      "position": [
+        63.300533634560836,
+        11.54391702191932,
+        -26.304646287287667
+      ],
+      "time": 1792592217869
+    },
+    {
+      "device": "desktop",
+      "label": "top-landing",
+      "position": [
+        63.300430722776255,
+        11.55615112706854,
+        -26.37124620777682
+      ],
+      "time": 1792592218570
+    },
+    {
+      "device": "desktop",
+      "label": "connector",
+      "position": [
+        62.733996918199594,
+        11.55046626557896,
+        -26.56850944569208
+      ],
+      "time": 1792592219138
+    },
+    {
+      "device": "desktop",
+      "label": "upper-access",
+      "position": [
+        61.76929815693174,
+        12.221099965773462,
+        -26.63221611730733
+      ],
+      "time": 1792592219870
+    },
+    {
+      "device": "desktop",
+      "label": "tank-platform",
+      "position": [
+        60.26937392371113,
+        12.906140015749427,
+        -26.647292409882432
+      ],
+      "time": 1792592220882
+    },
+    {
+      "device": "desktop",
+      "label": "valve-bypass",
+      "position": [
+        60.06182226833123,
+        12.90984926673267,
+        -25.840357127254954
+      ],
+      "time": 1792592221554
+    },
+    {
+      "device": "desktop",
+      "label": "dropped-tool-approach",
+      "position": [
+        58.256201666032666,
+        12.913426219061181,
+        -25.367144912118405
+      ],
+      "time": 1792592222743
+    },
+    {
+      "device": "desktop",
+      "label": "inner-platform",
+      "position": [
+        56.0662209736039,
+        12.912486234587048,
+        -25.574761401803634
+      ],
+      "time": 1792592227790
+    },
+    {
+      "device": "desktop",
+      "label": "bridge-entry",
+      "position": [
+        55.865925355249125,
+        12.909832641073173,
+        -26.3837343465106
+      ],
+      "time": 1792592228460
+    },
+    {
+      "device": "desktop",
+      "label": "upper-walkway",
+      "position": [
+        55.26050096524855,
+        12.909945665410968,
+        -26.5698978982397
+      ],
+      "time": 1792592229023
+    },
+    {
+      "device": "desktop",
+      "label": "materials-approach",
+      "position": [
+        52.26082880224917,
+        12.909999999105928,
+        -26.597591842088434
+      ],
+      "time": 1792592230784
+    },
+    {
+      "device": "desktop",
+      "label": "rail-return",
+      "position": [
+        52.079690116050635,
+        12.90999999910593,
+        -26.77000547693128
+      ],
+      "time": 1792592236508
+    },
+    {
+      "device": "desktop",
+      "label": "return-bridge",
+      "position": [
+        54.71066963842404,
+        12.90999999910593,
+        -26.661889831202437
+      ],
+      "time": 1792592238228
+    },
+    {
+      "device": "desktop",
+      "label": "return-platform",
+      "position": [
+        55.510621988927454,
+        12.909014959703525,
+        -26.65315845536687
+      ],
+      "time": 1792592238881
+    },
+    {
+      "device": "desktop",
+      "label": "return-inner",
+      "position": [
+        55.72253038259015,
+        12.910675105996042,
+        -25.881941966503152
+      ],
+      "time": 1792592239545
+    },
+    {
+      "device": "desktop",
+      "label": "return-valve-bypass",
+      "position": [
+        59.746798039006904,
+        12.911853563677193,
+        -25.61668957816734
+      ],
+      "time": 1792592241817
+    },
+    {
+      "device": "desktop",
+      "label": "return-access",
+      "position": [
+        59.92929530359224,
+        12.908835799167724,
+        -26.36145597672387
+      ],
+      "time": 1792592242464
+    },
+    {
+      "device": "desktop",
+      "label": "down-connector",
+      "position": [
+        61.24075007504706,
+        12.790301548695089,
+        -26.620406812907614
+      ],
+      "time": 1792592243419
+    },
+    {
+      "device": "desktop",
+      "label": "down-seam",
+      "position": [
+        62.20728321304739,
+        11.901258111199848,
+        -26.643120974728408
+      ],
+      "time": 1792592244156
+    },
+    {
+      "device": "desktop",
+      "label": "down-landing",
+      "position": [
+        63.00706736545575,
+        11.556252148966957,
+        -26.648155809031557
+      ],
+      "time": 1792592244815
+    },
+    {
+      "device": "desktop",
+      "label": "descent-26",
+      "position": [
+        63.19923201778053,
+        11.388646580313445,
+        -26.222963727265093
+      ],
+      "time": 1792592245286
+    },
+    {
+      "device": "desktop",
+      "label": "descent-24",
+      "position": [
+        63.288278478672865,
+        9.260413754827272,
+        -24.258580951988694
+      ],
+      "time": 1792592246521
+    },
+    {
+      "device": "desktop",
+      "label": "descent-22",
+      "position": [
+        63.298483320438244,
+        7.104841027957626,
+        -22.292207431722385
+      ],
+      "time": 1792592248390
+    },
+    {
+      "device": "desktop",
+      "label": "descent-20",
+      "position": [
+        63.299806294812626,
+        5.958865552949723,
+        -20.292407869331466
+      ],
+      "time": 1792592249670
+    },
+    {
+      "device": "desktop",
+      "label": "descent-18",
+      "position": [
+        63.30112926918701,
+        3.8279543676483447,
+        -18.292608306940576
+      ],
+      "time": 1792592251323
+    },
+    {
+      "device": "desktop",
+      "label": "descent-16",
+      "position": [
+        63.3024524420274,
+        1.9570022608856465,
+        -16.292508744615322
+      ],
+      "time": 1792592252293
+    },
+    {
+      "device": "desktop",
+      "label": "descent-15",
+      "position": [
+        63.30322440862282,
+        1.7681367014013196,
+        -15.12560899996391
+      ],
+      "time": 1792592252586
+    },
+    {
+      "device": "desktop",
+      "label": "return-east",
+      "position": [
+        64.93186789229726,
+        1.7550000001672055,
+        -15.005043610714864
+      ],
+      "time": 1792592254045
+    },
+    {
+      "device": "desktop",
+      "label": "return-south",
+      "position": [
+        64.99955697802667,
+        1.7550000001490116,
+        13.810376886610392
+      ],
+      "time": 1792592258439
+    },
+    {
+      "device": "desktop",
+      "label": "wall-approach-south",
+      "position": [
+        25.218303989059926,
+        1.7550000001490116,
+        13.998965109525772
+      ],
+      "time": 1792592264377
+    },
+    {
+      "device": "desktop",
+      "label": "tank-wall-approach",
+      "position": [
+        25.003655310116045,
+        1.7550000001490116,
+        0.23443865982098072
+      ],
+      "time": 1792592266609
+    },
+    {
+      "device": "desktop",
+      "metrics": {
+        "width": 1280,
+        "scroll": 1280,
+        "meshCount": 1043,
+        "textures": 27,
+        "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      },
+      "consequences": {
+        "toolBox": true,
+        "tool": [
+          58.9,
+          11.235,
+          -25.1
+        ],
+        "closedFittings": true,
+        "fittings": [
+          46,
+          11.235,
+          -25.3
+        ]
+      }
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "ascent-17",
+      "position": [
+        63.3,
+        2.159161286502291,
+        -16.899600000000003
+      ],
+      "time": 1792592279352
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "ascent-19",
+      "position": [
+        63.3,
+        4.294040505819629,
+        -18.79959999999997
+      ],
+      "time": 1792592281021
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "ascent-21",
+      "position": [
+        63.3,
+        6.428619328435844,
+        -20.766199999999937
+      ],
+      "time": 1792592282195
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "ascent-22",
+      "position": [
+        63.3,
+        6.855345413242011,
+        -21.765999999999917
+      ],
+      "time": 1792592283890
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "ascent-24",
+      "position": [
+        63.3,
+        8.752254356693037,
+        -23.79939999999988
+      ],
+      "time": 1792592285085
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "ascent-26",
+      "position": [
+        63.3,
+        10.87962648589106,
+        -25.799599999999845
+      ],
+      "time": 1792592286269
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "ascent-26.6",
+      "position": [
+        63.3,
+        11.551497308373074,
+        -26.432999999999836
+      ],
+      "time": 1792592286785
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "top-landing",
+      "position": [
+        63.3,
+        11.556154238276122,
+        -26.53279999999984
+      ],
+      "time": 1792592287584
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "connector",
+      "position": [
+        62.739384100956364,
+        11.550466530125464,
+        -26.614930224275287
+      ],
+      "time": 1792592288483
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "upper-access",
+      "position": [
+        61.70639755919636,
+        12.373576727497973,
+        -26.644159739202493
+      ],
+      "time": 1792592289335
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "tank-platform",
+      "position": [
+        60.239806148940524,
+        12.906169012480227,
+        -26.649179237563523
+      ],
+      "time": 1792592290403
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "valve-bypass",
+      "position": [
+        60.04671095829346,
+        12.910076485255964,
+        -25.80436576267755
+      ],
+      "time": 1792592291434
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "dropped-tool-approach",
+      "position": [
+        58.20189990443085,
+        12.913343015137992,
+        -25.349753647192188
+      ],
+      "time": 1792592293028
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "inner-platform",
+      "position": [
+        56.04676520760477,
+        12.912461252073033,
+        -25.574290233379738
+      ],
+      "time": 1792592297866
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "bridge-entry",
+      "position": [
+        55.845578940530935,
+        12.909689790852152,
+        -26.45131025934317
+      ],
+      "time": 1792592298948
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "upper-walkway",
+      "position": [
+        55.22916733525387,
+        12.909956965391105,
+        -26.596151458177296
+      ],
+      "time": 1792592299885
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "materials-approach",
+      "position": [
+        52.262569442236384,
+        12.909999999105928,
+        -26.599687153886638
+      ],
+      "time": 1792592301698
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "rail-return",
+      "position": [
+        52.07829276763167,
+        12.90999999910593,
+        -26.771619821960545
+      ],
+      "time": 1792592306547
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "return-bridge",
+      "position": [
+        54.775756766935544,
+        12.90999999910593,
+        -26.659334415698716
+      ],
+      "time": 1792592308633
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "return-platform",
+      "position": [
+        55.542524925675856,
+        12.909038846685105,
+        -26.65234651600786
+      ],
+      "time": 1792592309349
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "return-inner",
+      "position": [
+        55.748431467261156,
+        12.910985216887536,
+        -25.810769748189017
+      ],
+      "time": 1792592310417
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "return-valve-bypass",
+      "position": [
+        59.776684508444966,
+        12.911820230171227,
+        -25.611070784261916
+      ],
+      "time": 1792592313067
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "return-access",
+      "position": [
+        59.95182174006078,
+        12.908703455358363,
+        -26.425860640667835
+      ],
+      "time": 1792592314099
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "down-connector",
+      "position": [
+        61.27126558083907,
+        12.790298752401041,
+        -26.61688469944678
+      ],
+      "time": 1792592315383
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "down-seam",
+      "position": [
+        62.27090260755885,
+        11.895213053727625,
+        -26.643825649891674
+      ],
+      "time": 1792592316217
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "down-landing",
+      "position": [
+        63.070688212682505,
+        11.556226952137706,
+        -26.648624174357323
+      ],
+      "time": 1792592316953
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "descent-26",
+      "position": [
+        63.21521510953939,
+        11.556156144887009,
+        -26.23981989834628
+      ],
+      "time": 1792592317811
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "descent-24",
+      "position": [
+        63.29086770677842,
+        9.259837614394863,
+        -24.24125123939786
+      ],
+      "time": 1792592319147
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "descent-22",
+      "position": [
+        63.29901615684878,
+        7.099268296414224,
+        -22.24146784043644
+      ],
+      "time": 1792592320999
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "descent-20",
+      "position": [
+        63.29990853152456,
+        5.744721439978749,
+        -20.20826803626875
+      ],
+      "time": 1792592322352
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "descent-18",
+      "position": [
+        63.30078624688784,
+        3.596844987050342,
+        -18.208468228884055
+      ],
+      "time": 1792592324085
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "descent-16",
+      "position": [
+        63.3017225995012,
+        1.9539812702776544,
+        -16.07506843436735
+      ],
+      "time": 1792592325106
+    },
+    {
+      "device": "mobile-portrait",
+      "label": "descent-15",
+      "position": [
+        63.30218344615169,
+        1.764727459637183,
+        -15.025068535500516
+      ],
+      "time": 1792592325455
+    },
+    {
+      "device": "mobile-portrait",
+      "metrics": {
+        "width": 390,
+        "scroll": 390,
+        "meshCount": 1031,
+        "textures": 20,
+        "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      },
+      "consequences": {
+        "toolBox": true,
+        "tool": [
+          58.9,
+          11.235,
+          -25.1
+        ],
+        "closedFittings": true,
+        "fittings": [
+          46,
+          11.235,
+          -25.3
+        ]
+      }
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "ascent-17",
+      "position": [
+        63.3,
+        2.159041678155804,
+        -16.9001
+      ],
+      "time": 1792592339054
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "ascent-19",
+      "position": [
+        63.3,
+        4.0578491505669945,
+        -18.73329999999997
+      ],
+      "time": 1792592341283
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "ascent-21",
+      "position": [
+        63.3,
+        6.425782462954531,
+        -20.766499999999937
+      ],
+      "time": 1792592342481
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "ascent-22",
+      "position": [
+        63.3,
+        6.855355693990273,
+        -21.799899999999926
+      ],
+      "time": 1792592343920
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "ascent-24",
+      "position": [
+        63.3,
+        8.752302364285997,
+        -23.799699999999895
+      ],
+      "time": 1792592345121
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "ascent-26",
+      "position": [
+        63.3,
+        10.879625468093646,
+        -25.76629999999986
+      ],
+      "time": 1792592346353
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "ascent-26.6",
+      "position": [
+        63.3,
+        11.54986601803213,
+        -26.399499999999854
+      ],
+      "time": 1792592346866
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "top-landing",
+      "position": [
+        63.3,
+        11.556154239009075,
+        -26.499499999999852
+      ],
+      "time": 1792592347902
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "connector",
+      "position": [
+        62.67751934404061,
+        11.55039996429119,
+        -26.61660419700543
+      ],
+      "time": 1792592348882
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "upper-access",
+      "position": [
+        61.7444945100695,
+        12.221277509097265,
+        -26.643065852154585
+      ],
+      "time": 1792592349664
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "tank-platform",
+      "position": [
+        60.211106623692714,
+        12.906661674288019,
+        -26.649160924985093
+      ],
+      "time": 1792592350781
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "valve-bypass",
+      "position": [
+        60.04016018878967,
+        12.910116798645763,
+        -25.79958875242177
+      ],
+      "time": 1792592351749
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "dropped-tool-approach",
+      "position": [
+        58.22712796037741,
+        12.913382683298643,
+        -25.35561837194786
+      ],
+      "time": 1792592353046
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "inner-platform",
+      "position": [
+        56.03859366405521,
+        12.912442426420471,
+        -25.57597670244849
+      ],
+      "time": 1792592362846
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "bridge-entry",
+      "position": [
+        55.85061701336866,
+        12.90975130606901,
+        -26.422148681892775
+      ],
+      "time": 1792592363813
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "upper-walkway",
+      "position": [
+        55.174454858571586,
+        12.909968011124848,
+        -26.60326947147863
+      ],
+      "time": 1792592364496
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "materials-approach",
+      "position": [
+        52.24125641420365,
+        12.909999999105928,
+        -26.600248551395385
+      ],
+      "time": 1792592366322
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "rail-return",
+      "position": [
+        52.05881711095904,
+        12.90999999910593,
+        -26.740973110677743
+      ],
+      "time": 1792592376363
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "return-bridge",
+      "position": [
+        54.757326568926416,
+        12.90999999910593,
+        -26.657506079695526
+      ],
+      "time": 1792592378257
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "return-platform",
+      "position": [
+        55.5573058401328,
+        12.909051359307195,
+        -26.651747117980012
+      ],
+      "time": 1792592378997
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "return-inner",
+      "position": [
+        55.75215631412253,
+        12.91100449021517,
+        -25.807336759927704
+      ],
+      "time": 1792592379897
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "return-valve-bypass",
+      "position": [
+        59.74740001243707,
+        12.91187762406059,
+        -25.61232960345616
+      ],
+      "time": 1792592382378
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "return-access",
+      "position": [
+        59.94447082375659,
+        12.908719579563046,
+        -26.421888332225038
+      ],
+      "time": 1792592383261
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "down-connector",
+      "position": [
+        61.29660932369826,
+        12.622817174445123,
+        -26.620173573670932
+      ],
+      "time": 1792592384415
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "down-seam",
+      "position": [
+        62.262912562092254,
+        11.89349271007197,
+        -26.644123760920596
+      ],
+      "time": 1792592385239
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "down-landing",
+      "position": [
+        63.06289972051019,
+        11.556284193474651,
+        -26.648656570913833
+      ],
+      "time": 1792592385965
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "descent-26",
+      "position": [
+        63.21169001765332,
+        11.556156145307666,
+        -26.241597597943027
+      ],
+      "time": 1792592386657
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "descent-24",
+      "position": [
+        63.29042106863232,
+        9.259860713128504,
+        -24.24314784335535
+      ],
+      "time": 1792592387978
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "descent-22",
+      "position": [
+        63.29896065049636,
+        7.099270343814883,
+        -22.243366076376308
+      ],
+      "time": 1792592389879
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "descent-20",
+      "position": [
+        63.299887250126126,
+        5.9602264023799405,
+        -20.24356629104451
+      ],
+      "time": 1792592391218
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "descent-18",
+      "position": [
+        63.300813942425115,
+        3.602333308424923,
+        -18.24356650573418
+      ],
+      "time": 1792592392846
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "descent-16",
+      "position": [
+        63.3018716690152,
+        1.9529705744863135,
+        -15.960766750780941
+      ],
+      "time": 1792592393879
+    },
+    {
+      "device": "mobile-landscape",
+      "label": "descent-15",
+      "position": [
+        63.3023040173073,
+        1.7647125886112538,
+        -15.027666850944385
+      ],
+      "time": 1792592394197
+    },
+    {
+      "device": "mobile-landscape",
+      "metrics": {
+        "width": 844,
+        "scroll": 844,
+        "meshCount": 1042,
+        "textures": 23,
+        "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+      },
+      "consequences": {
+        "toolBox": true,
+        "tool": [
+          58.9,
+          11.235,
+          -25.1
+        ],
+        "closedFittings": true,
+        "fittings": [
+          46,
+          11.235,
+          -25.3
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "renderer": "Chromium / SwiftShader; on-demand render captures, live component input/animation loop",
+  "mobileFixture": "XZ placement at stair entrance only; no Y assignments; all vertical travel is native D-pad input"
+}

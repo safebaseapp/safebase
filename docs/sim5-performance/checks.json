@@ -1,0 +1,7 @@
+{
+ "typescript": {"command":"cd app && npx tsc --noEmit","exitCode":0},
+ "eslintFull": {"command":"cd app && npm run lint","exitCode":1,"errors":183,"warnings":114,"note":"All findings outside changed navigation file; frozen/out-of-scope sources left untouched."},
+ "eslintChangedFile": {"command":"cd app && npx eslint 'app/[locale]/labs/sim5/SiteNavigation.ts'","exitCode":0},
+ "normalBuild": {"command":"npm --prefix app run build","exitCode":0,"prebuild":"PDF polish, PDF QA and download/auth QA ran normally; generated PDFs restored afterwards."},
+ "gitDiffCheck": {"exitCode":0}
+}

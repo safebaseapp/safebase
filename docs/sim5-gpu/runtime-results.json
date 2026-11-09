@@ -1,0 +1,337 @@
+{
+  "checks": [
+    "debug opt-in panel appears",
+    "welding cached shadow pass has zero calls",
+    "road cached shadow pass has zero calls",
+    "lifting cached shadow pass has zero calls",
+    "return cached shadow pass has zero calls",
+    "moved equipment invalidates cache",
+    "visibility change invalidates cache",
+    "panel absent without flag",
+    "TR mobile panel stays inside viewport",
+    "clipboard exports anonymous metrics only"
+  ],
+  "rows": [
+    {
+      "profile": "baseline",
+      "pass": 0,
+      "zone": "welding",
+      "ms": 371.59999999403954,
+      "calls": 1414,
+      "triangles": 4201703,
+      "shadowCalls": 908,
+      "dpr": 1.8
+    },
+    {
+      "profile": "baseline",
+      "pass": 0,
+      "zone": "road",
+      "ms": 74.8999999910593,
+      "calls": 1224,
+      "triangles": 3822168,
+      "shadowCalls": 908,
+      "dpr": 1.8
+    },
+    {
+      "profile": "baseline",
+      "pass": 0,
+      "zone": "lifting",
+      "ms": 10.799999997019768,
+      "calls": 1156,
+      "triangles": 2773703,
+      "shadowCalls": 908,
+      "dpr": 1.8
+    },
+    {
+      "profile": "baseline",
+      "pass": 0,
+      "zone": "return",
+      "ms": 9.5,
+      "calls": 1414,
+      "triangles": 4201703,
+      "shadowCalls": 908,
+      "dpr": 1.8
+    },
+    {
+      "profile": "baseline",
+      "pass": 1,
+      "zone": "welding",
+      "ms": 9.799999997019768,
+      "calls": 1414,
+      "triangles": 4201703,
+      "shadowCalls": 908,
+      "dpr": 1.8
+    },
+    {
+      "profile": "baseline",
+      "pass": 1,
+      "zone": "road",
+      "ms": 9.199999988079071,
+      "calls": 1220,
+      "triangles": 3822048,
+      "shadowCalls": 904,
+      "dpr": 1.8
+    },
+    {
+      "profile": "baseline",
+      "pass": 1,
+      "zone": "lifting",
+      "ms": 10.099999994039536,
+      "calls": 1134,
+      "triangles": 2772767,
+      "shadowCalls": 886,
+      "dpr": 1.8
+    },
+    {
+      "profile": "baseline",
+      "pass": 1,
+      "zone": "return",
+      "ms": 10,
+      "calls": 1406,
+      "triangles": 4201463,
+      "shadowCalls": 904,
+      "dpr": 1.8
+    },
+    {
+      "profile": "high",
+      "pass": 0,
+      "zone": "welding",
+      "ms": 6.5999999940395355,
+      "calls": 1383,
+      "triangles": 4199947,
+      "shadowCalls": 881,
+      "dpr": 1.8
+    },
+    {
+      "profile": "high",
+      "pass": 0,
+      "zone": "road",
+      "ms": 8.299999997019768,
+      "calls": 316,
+      "triangles": 1195161,
+      "shadowCalls": 0,
+      "dpr": 1.8
+    },
+    {
+      "profile": "high",
+      "pass": 0,
+      "zone": "lifting",
+      "ms": 4.899999991059303,
+      "calls": 248,
+      "triangles": 146696,
+      "shadowCalls": 0,
+      "dpr": 1.8
+    },
+    {
+      "profile": "high",
+      "pass": 0,
+      "zone": "return",
+      "ms": 14.200000002980232,
+      "calls": 502,
+      "triangles": 1574576,
+      "shadowCalls": 0,
+      "dpr": 1.8
+    },
+    {
+      "profile": "high",
+      "pass": 1,
+      "zone": "welding",
+      "ms": 6.5,
+      "calls": 502,
+      "triangles": 1574576,
+      "shadowCalls": 0,
+      "dpr": 1.8
+    },
+    {
+      "profile": "high",
+      "pass": 1,
+      "zone": "road",
+      "ms": 2.5999999940395355,
+      "calls": 316,
+      "triangles": 1195161,
+      "shadowCalls": 0,
+      "dpr": 1.8
+    },
+    {
+      "profile": "high",
+      "pass": 1,
+      "zone": "lifting",
+      "ms": 1.699999988079071,
+      "calls": 248,
+      "triangles": 146696,
+      "shadowCalls": 0,
+      "dpr": 1.8
+    },
+    {
+      "profile": "high",
+      "pass": 1,
+      "zone": "return",
+      "ms": 2.5999999940395355,
+      "calls": 502,
+      "triangles": 1574576,
+      "shadowCalls": 0,
+      "dpr": 1.8
+    },
+    {
+      "profile": "balanced",
+      "pass": 0,
+      "zone": "welding",
+      "ms": 12,
+      "calls": 1365,
+      "triangles": 4199131,
+      "shadowCalls": 881,
+      "dpr": 1.25
+    },
+    {
+      "profile": "balanced",
+      "pass": 0,
+      "zone": "road",
+      "ms": 2.2000000029802322,
+      "calls": 316,
+      "triangles": 1195161,
+      "shadowCalls": 0,
+      "dpr": 1.25
+    },
+    {
+      "profile": "balanced",
+      "pass": 0,
+      "zone": "lifting",
+      "ms": 3,
+      "calls": 248,
+      "triangles": 146696,
+      "shadowCalls": 0,
+      "dpr": 1.25
+    },
+    {
+      "profile": "balanced",
+      "pass": 0,
+      "zone": "return",
+      "ms": 2.5,
+      "calls": 502,
+      "triangles": 1574576,
+      "shadowCalls": 0,
+      "dpr": 1.25
+    },
+    {
+      "profile": "balanced",
+      "pass": 1,
+      "zone": "welding",
+      "ms": 4.200000002980232,
+      "calls": 502,
+      "triangles": 1574576,
+      "shadowCalls": 0,
+      "dpr": 1.25
+    },
+    {
+      "profile": "balanced",
+      "pass": 1,
+      "zone": "road",
+      "ms": 2.5999999940395355,
+      "calls": 316,
+      "triangles": 1195161,
+      "shadowCalls": 0,
+      "dpr": 1.25
+    },
+    {
+      "profile": "balanced",
+      "pass": 1,
+      "zone": "lifting",
+      "ms": 7.899999991059303,
+      "calls": 248,
+      "triangles": 146696,
+      "shadowCalls": 0,
+      "dpr": 1.25
+    },
+    {
+      "profile": "balanced",
+      "pass": 1,
+      "zone": "return",
+      "ms": 3,
+      "calls": 502,
+      "triangles": 1574576,
+      "shadowCalls": 0,
+      "dpr": 1.25
+    },
+    {
+      "profile": "low",
+      "pass": 0,
+      "zone": "welding",
+      "ms": 12.799999997019768,
+      "calls": 1383,
+      "triangles": 4199947,
+      "shadowCalls": 881,
+      "dpr": 0.85
+    },
+    {
+      "profile": "low",
+      "pass": 0,
+      "zone": "road",
+      "ms": 1.7999999970197678,
+      "calls": 316,
+      "triangles": 1195161,
+      "shadowCalls": 0,
+      "dpr": 0.85
+    },
+    {
+      "profile": "low",
+      "pass": 0,
+      "zone": "lifting",
+      "ms": 5.799999997019768,
+      "calls": 248,
+      "triangles": 146696,
+      "shadowCalls": 0,
+      "dpr": 0.85
+    },
+    {
+      "profile": "low",
+      "pass": 0,
+      "zone": "return",
+      "ms": 8.5,
+      "calls": 484,
+      "triangles": 1573760,
+      "shadowCalls": 0,
+      "dpr": 0.85
+    },
+    {
+      "profile": "low",
+      "pass": 1,
+      "zone": "welding",
+      "ms": 7.899999991059303,
+      "calls": 484,
+      "triangles": 1573760,
+      "shadowCalls": 0,
+      "dpr": 0.85
+    },
+    {
+      "profile": "low",
+      "pass": 1,
+      "zone": "road",
+      "ms": 7.200000002980232,
+      "calls": 316,
+      "triangles": 1195161,
+      "shadowCalls": 0,
+      "dpr": 0.85
+    },
+    {
+      "profile": "low",
+      "pass": 1,
+      "zone": "lifting",
+      "ms": 2.5,
+      "calls": 248,
+      "triangles": 146696,
+      "shadowCalls": 0,
+      "dpr": 0.85
+    },
+    {
+      "profile": "low",
+      "pass": 1,
+      "zone": "return",
+      "ms": 6.5,
+      "calls": 502,
+      "triangles": 1574576,
+      "shadowCalls": 0,
+      "dpr": 0.85
+    }
+  ],
+  "note": "SwiftShader rasterization and gl.finish completion, not hardware FPS. Camera positions fixed in test wrapper; two passes per quality. RAF runs on demand in this integration fixture and is NOT a real FPS benchmark."
+}

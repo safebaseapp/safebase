@@ -1,0 +1,91 @@
+CHECK tr-1280x1000 keyboard moves
+CHECK tr-1280x1000 rejects leak
+CHECK tr-1280x1000 rejects access
+CHECK tr-1280x1000 rejects droppedTool
+CHECK tr-1280x1000 rejects materials
+CHECK tr-1280x1000 normalized two-finding report
+CHECK tr-1280x1000 analytics start/complete once without PII
+CHECK tr-1280x1000 no premium findings in report
+CHECK tr-1280x1000 no horizontal overflow
+CHECK tr-1280x1000 replay returns to briefing
+CHECK tr-1280x1000 no guest state persistence
+CHECK en-1280x1000 keyboard moves
+CHECK en-1280x1000 rejects leak
+CHECK en-1280x1000 rejects access
+CHECK en-1280x1000 rejects droppedTool
+CHECK en-1280x1000 rejects materials
+CHECK en-1280x1000 normalized two-finding report
+CHECK en-1280x1000 analytics start/complete once without PII
+CHECK en-1280x1000 no premium findings in report
+CHECK en-1280x1000 no horizontal overflow
+CHECK en-1280x1000 replay returns to briefing
+CHECK en-1280x1000 no guest state persistence
+CHECK tr-320x568 native touch moves
+CHECK tr-320x568 rejects leak
+CHECK tr-320x568 rejects access
+CHECK tr-320x568 rejects droppedTool
+CHECK tr-320x568 rejects materials
+CHECK tr-320x568 normalized two-finding report
+CHECK tr-320x568 analytics start/complete once without PII
+CHECK tr-320x568 no premium findings in report
+CHECK tr-320x568 no horizontal overflow
+CHECK tr-320x568 replay returns to briefing
+CHECK tr-320x568 no guest state persistence
+CHECK en-320x568 native touch moves
+CHECK en-320x568 rejects leak
+CHECK en-320x568 rejects access
+CHECK en-320x568 rejects droppedTool
+CHECK en-320x568 rejects materials
+CHECK en-320x568 normalized two-finding report
+CHECK en-320x568 analytics start/complete once without PII
+CHECK en-320x568 no premium findings in report
+CHECK en-320x568 no horizontal overflow
+CHECK en-320x568 replay returns to briefing
+CHECK en-320x568 no guest state persistence
+CHECK tr-390x844 native touch moves
+CHECK tr-390x844 rejects leak
+CHECK tr-390x844 rejects access
+CHECK tr-390x844 rejects droppedTool
+CHECK tr-390x844 rejects materials
+CHECK tr-390x844 normalized two-finding report
+CHECK tr-390x844 analytics start/complete once without PII
+CHECK tr-390x844 no premium findings in report
+CHECK tr-390x844 no horizontal overflow
+CHECK tr-390x844 replay returns to briefing
+CHECK tr-390x844 no guest state persistence
+CHECK en-390x844 native touch moves
+CHECK en-390x844 rejects leak
+CHECK en-390x844 rejects access
+CHECK en-390x844 rejects droppedTool
+CHECK en-390x844 rejects materials
+CHECK en-390x844 normalized two-finding report
+CHECK en-390x844 analytics start/complete once without PII
+CHECK en-390x844 no premium findings in report
+CHECK en-390x844 no horizontal overflow
+CHECK en-390x844 replay returns to briefing
+CHECK en-390x844 no guest state persistence
+CHECK tr-844x390 native touch moves
+CHECK tr-844x390 rejects leak
+CHECK tr-844x390 rejects access
+CHECK tr-844x390 rejects droppedTool
+CHECK tr-844x390 rejects materials
+CHECK tr-844x390 normalized two-finding report
+CHECK tr-844x390 analytics start/complete once without PII
+CHECK tr-844x390 no premium findings in report
+CHECK tr-844x390 no horizontal overflow
+CHECK tr-844x390 replay returns to briefing
+CHECK tr-844x390 no guest state persistence
+CHECK en-844x390 native touch moves
+CHECK en-844x390 rejects leak
+CHECK en-844x390 rejects access
+CHECK en-844x390 rejects droppedTool
+CHECK en-844x390 rejects materials
+CHECK en-844x390 normalized two-finding report
+CHECK en-844x390 analytics start/complete once without PII
+CHECK en-844x390 no premium findings in report
+CHECK en-844x390 no horizontal overflow
+CHECK en-844x390 replay returns to briefing
+CHECK en-844x390 no guest state persistence
+CHECK no browser exceptions
+CHECK no demo writes
+PASS 90

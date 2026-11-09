@@ -1,0 +1,5 @@
+{
+  "syntheticSteps": 12000,
+  "actualGeometrySteps": 13180,
+  "result": "PASS: identical accept/reject, feet and positions; randomized floors/walls/steps/ceilings and moving support"
+}

@@ -1,0 +1,7 @@
+CHECK unavailable has localized accessible fallback
+CHECK unavailable cannot start a broken mission
+CHECK asset-failure has localized accessible fallback
+CHECK asset-failure cannot start a broken mission
+CHECK context-loss has localized accessible fallback
+CHECK context-loss cannot start a broken mission
+PASS 6

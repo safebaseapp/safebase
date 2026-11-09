@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "scene": "welding",
+      "width": 1232,
+      "height": 648,
+      "meanAbsoluteChannelDifference": 0.03037484634706857,
+      "pixelsChangedOver10": 0,
+      "changedPercent": 0
+    },
+    {
+      "scene": "road",
+      "width": 1232,
+      "height": 648,
+      "meanAbsoluteChannelDifference": 0.41368797097963766,
+      "pixelsChangedOver10": 173,
+      "changedPercent": 0.021670073753407088
+    },
+    {
+      "scene": "lifting",
+      "width": 1232,
+      "height": 648,
+      "meanAbsoluteChannelDifference": 0.018340231013842124,
+      "pixelsChangedOver10": 0,
+      "changedPercent": 0
+    }
+  ],
+  "note": "Same real scene and test-only camera positions. Animation timing and software-render variance may differ. Application renderer, models, materials, cameras unchanged."
+}

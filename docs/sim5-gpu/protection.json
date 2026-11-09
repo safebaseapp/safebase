@@ -1,0 +1,9 @@
+{
+  "base": "87fd75d302471ba1f03340fe7ba93b28b5cbf405",
+  "result": "PASS",
+  "allowedApplicationChanges": [
+    "app/app/[locale]/labs/sim5/RealModels.tsx",
+    "app/app/[locale]/labs/sim5/RenderPerformance.ts"
+  ],
+  "note": "All other app code/assets, collision/navigation, access/auth, payment/Supabase/XP/scoring/questions and deployment config unchanged. No live customer tests."
+}

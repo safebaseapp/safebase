@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "unavailable has localized accessible fallback",
+    "unavailable cannot start a broken mission",
+    "asset-failure has localized accessible fallback",
+    "asset-failure cannot start a broken mission",
+    "context-loss has localized accessible fallback",
+    "context-loss cannot start a broken mission"
+  ]
+}

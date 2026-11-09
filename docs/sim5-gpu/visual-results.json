@@ -1,0 +1,33 @@
+{
+  "results": [
+    {
+      "zone": "welding",
+      "meanChannelDelta": 0.0029410131406659183,
+      "changedPercentOver10": 0.0028809924643257976,
+      "width": 2464,
+      "height": 1296
+    },
+    {
+      "zone": "road",
+      "meanChannelDelta": 0,
+      "changedPercentOver10": 0,
+      "width": 2464,
+      "height": 1296
+    },
+    {
+      "zone": "lifting",
+      "meanChannelDelta": 0,
+      "changedPercentOver10": 0,
+      "width": 2464,
+      "height": 1296
+    },
+    {
+      "zone": "return",
+      "meanChannelDelta": 0.03583484898589065,
+      "changedPercentOver10": 0.036419502565335896,
+      "width": 2464,
+      "height": 1296
+    }
+  ],
+  "note": "Same loaded scene/textures and camera, same high DPR. Animated arc phase and tiny non-casting particles can differ. No geometry/material/visibility removal."
+}

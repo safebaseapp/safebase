@@ -1,0 +1,10 @@
+{
+  "result": "NOT VERIFIED",
+  "languages": [
+    "tr",
+    "en"
+  ],
+  "failure": "Failed to fetch dynamically imported module: https://esm.sh/three@0.180.0",
+  "evidence": "next-smoke-first-attempt.log",
+  "note": "Summary of initial sandboxed run; raw console evidence retained separately. Elevated retry passed."
+}

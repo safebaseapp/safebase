@@ -1,0 +1,26 @@
+[
+  {
+    lang: 'tr',
+    result: 'NOT VERIFIED',
+    error: 'TimeoutError: page.waitForFunction: Timeout 60000ms exceeded.',
+    alerts: [
+      '3D sahne açılamadı. WebGL destekleyen bir tarayıcıda yeniden dene. TypeError: Failed to fetch dynamically imported module: https://esm.sh/three@0.180.0',
+      '3D görüntü durdu; yeni görev başlatılamaz. Yeniden yüklemeyi dene.Yeniden yükle',
+      'Yürümek için önce denetimi başlatYön tuşları ve WASD, görev başladıktan sonra açılır. Kaynak ve vinç risklerini sahada keşfet.Saha yükleniyor…',
+      ''
+    ],
+    errors: []
+  },
+  {
+    lang: 'en',
+    result: 'NOT VERIFIED',
+    error: 'TimeoutError: page.waitForFunction: Timeout 60000ms exceeded.',
+    alerts: [
+      'Unable to open the 3D scene. Retry in a WebGL-capable browser. TypeError: Failed to fetch dynamically imported module: https://esm.sh/three@0.180.0',
+      'The 3D view stopped; a new mission cannot start. Try reloading.Reload',
+      'Start the inspection to walkThe arrows and WASD unlock when the inspection starts. Explore welding and lifting hazards.Loading site…',
+      ''
+    ],
+    errors: []
+  }
+]

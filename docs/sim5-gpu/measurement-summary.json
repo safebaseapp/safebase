@@ -1,0 +1,97 @@
+{
+  "renderWorkload": [
+    {
+      "zone": "welding",
+      "baseline": {
+        "profile": "baseline",
+        "pass": 1,
+        "zone": "welding",
+        "ms": 9.799999997019768,
+        "calls": 1414,
+        "triangles": 4201703,
+        "shadowCalls": 908,
+        "dpr": 1.8
+      },
+      "high": {
+        "profile": "high",
+        "pass": 1,
+        "zone": "welding",
+        "ms": 6.5,
+        "calls": 502,
+        "triangles": 1574576,
+        "shadowCalls": 0,
+        "dpr": 1.8
+      }
+    },
+    {
+      "zone": "road",
+      "baseline": {
+        "profile": "baseline",
+        "pass": 1,
+        "zone": "road",
+        "ms": 9.199999988079071,
+        "calls": 1220,
+        "triangles": 3822048,
+        "shadowCalls": 904,
+        "dpr": 1.8
+      },
+      "high": {
+        "profile": "high",
+        "pass": 1,
+        "zone": "road",
+        "ms": 2.5999999940395355,
+        "calls": 316,
+        "triangles": 1195161,
+        "shadowCalls": 0,
+        "dpr": 1.8
+      }
+    },
+    {
+      "zone": "lifting",
+      "baseline": {
+        "profile": "baseline",
+        "pass": 1,
+        "zone": "lifting",
+        "ms": 10.099999994039536,
+        "calls": 1134,
+        "triangles": 2772767,
+        "shadowCalls": 886,
+        "dpr": 1.8
+      },
+      "high": {
+        "profile": "high",
+        "pass": 1,
+        "zone": "lifting",
+        "ms": 1.699999988079071,
+        "calls": 248,
+        "triangles": 146696,
+        "shadowCalls": 0,
+        "dpr": 1.8
+      }
+    },
+    {
+      "zone": "return",
+      "baseline": {
+        "profile": "baseline",
+        "pass": 1,
+        "zone": "return",
+        "ms": 10,
+        "calls": 1406,
+        "triangles": 4201463,
+        "shadowCalls": 904,
+        "dpr": 1.8
+      },
+      "high": {
+        "profile": "high",
+        "pass": 1,
+        "zone": "return",
+        "ms": 2.5999999940395355,
+        "calls": 502,
+        "triangles": 1574576,
+        "shadowCalls": 0,
+        "dpr": 1.8
+      }
+    }
+  ],
+  "note": "Second-pass synchronized rasterization, software GPU only. First-pass rows and all qualities remain in runtime-results.json."
+}
