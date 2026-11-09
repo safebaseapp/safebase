@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "base": "9d0d7c2a61d0ddf6e0276e85681aad982b146ddb",
+  "heroTail": "byte-identical from Sim5Showcase onward",
+  "hashes": [
+    {
+      "file": "app/app/[locale]/components/HomepageMotion.tsx",
+      "sha256": "69c536231ec8dfa1827509d8f0c32d730d29152427aa144e903d5b3357d3a27d"
+    },
+    {
+      "file": "app/app/[locale]/components/homepage.module.css",
+      "sha256": "ebe9612cc90b8950d71fac81220a26799e98d1cd53727f9094f613dcc3638a76"
+    },
+    {
+      "file": "app/app/[locale]/page.tsx",
+      "sha256": "1bfb88e2034c63f5aad6c3c27d9fb6d2e9da5f719e299b4820cf44991c1fb82e"
+    },
+    {
+      "file": "app/app/[locale]/components/HomeLabsBridge.tsx",
+      "sha256": "d09779dcad5d0c4aeab7aca515db8dee6c3d4a74bce7b8610d3ecbb0aef242e1"
+    },
+    {
+      "file": "app/components/sim5/Sim5Showcase.tsx",
+      "sha256": "15da09f29c734b2d4194beaf0c4aad55b54c980704b0ad5cb75ac499d30866b0"
+    },
+    {
+      "file": "app/components/analytics/PremiumFunnelTracker.tsx",
+      "sha256": "cab5f88a7bf0b4a6390e073ba6e59d3b694d04ecc30cc15f606aebdc8e7b967d"
+    },
+    {
+      "file": "app/public/videos/sernem-refinery-hero.mp4",
+      "sha256": "f8e356a923dc6a321465747d9dd15db2083c9ae8eb98f6884acf48889cae805b"
+    },
+    {
+      "file": "app/public/images/sernem-hero-refinery.png",
+      "sha256": "376d9362556e772757fd1cde45eddee2d84b60fc7a6f99c9acf5c27e8fb20934"
+    }
+  ]
+}

@@ -1,0 +1,675 @@
+{
+  "results": [
+    {
+      "name": "tr 320px visible copy, links and layout",
+      "result": "PASS",
+      "geometry": {
+        "boxes": [
+          {
+            "text": " GERÇEK SAHALAR İÇİN TASARLANDI",
+            "left": 20,
+            "right": 300,
+            "top": 191.96875,
+            "bottom": 209.96875,
+            "width": 280,
+            "height": 18
+          },
+          {
+            "text": "Zorlu operasyonlar.Güçlü iş güvenliği.",
+            "left": 20,
+            "right": 300,
+            "top": 239.96875,
+            "bottom": 419.46875,
+            "width": 280,
+            "height": 179.5
+          },
+          {
+            "text": "İlk risk analizinden son rapora. İş güvenliğinin sorumluluğunu taşıyanlar için tek çalışma platformu.",
+            "left": 20,
+            "right": 300,
+            "top": 449.46875,
+            "bottom": 525.03125,
+            "width": 280,
+            "height": 75.5625
+          },
+          {
+            "text": "Araçları KeşfetRisk Analizi Oluştur",
+            "left": 20,
+            "right": 300,
+            "top": 557.03125,
+            "bottom": 673.03125,
+            "width": 280,
+            "height": 116
+          },
+          {
+            "text": "Premium üyelik · €9,99/ay →",
+            "left": 20,
+            "right": 300,
+            "top": 693.03125,
+            "bottom": 737.03125,
+            "width": 280,
+            "height": 44
+          }
+        ],
+        "bottom": 833,
+        "overflow": false
+      }
+    },
+    {
+      "name": "tr 320px actual playback, end-loop and pause/resume",
+      "result": "PASS",
+      "t1": 1.608642,
+      "t2": 2.72161,
+      "loop": {
+        "time": 0.453356,
+        "duration": 15.233333,
+        "ended": false,
+        "paused": false
+      },
+      "paused1": 0.489434,
+      "paused2": 0.489434,
+      "resumed": 1.199691
+    },
+    {
+      "name": "tr 320px reduced-motion and Premium event",
+      "result": "PASS",
+      "pausedAt": 1.238026,
+      "premiumEvent": [
+        "event",
+        "premium_home_cta_click",
+        {
+          "funnel": "premium"
+        }
+      ]
+    },
+    {
+      "name": "tr 390px visible copy, links and layout",
+      "result": "PASS",
+      "geometry": {
+        "boxes": [
+          {
+            "text": " GERÇEK SAHALAR İÇİN TASARLANDI",
+            "left": 20,
+            "right": 370,
+            "top": 282.4375,
+            "bottom": 300.4375,
+            "width": 350,
+            "height": 18
+          },
+          {
+            "text": "Zorlu operasyonlar.Güçlü iş güvenliği.",
+            "left": 20,
+            "right": 370,
+            "top": 330.4375,
+            "bottom": 420.1875,
+            "width": 350,
+            "height": 89.75
+          },
+          {
+            "text": "İlk risk analizinden son rapora. İş güvenliğinin sorumluluğunu taşıyanlar için tek çalışma platformu.",
+            "left": 20,
+            "right": 370,
+            "top": 450.1875,
+            "bottom": 500.5625,
+            "width": 350,
+            "height": 50.375
+          },
+          {
+            "text": "Araçları KeşfetRisk Analizi Oluştur",
+            "left": 20,
+            "right": 370,
+            "top": 532.5625,
+            "bottom": 582.5625,
+            "width": 350,
+            "height": 50
+          },
+          {
+            "text": "Premium üyelik · €9,99/ay →",
+            "left": 20,
+            "right": 370,
+            "top": 602.5625,
+            "bottom": 646.5625,
+            "width": 350,
+            "height": 44
+          }
+        ],
+        "bottom": 833,
+        "overflow": false
+      }
+    },
+    {
+      "name": "tr 390px actual playback, end-loop and pause/resume",
+      "result": "PASS",
+      "t1": 1.670457,
+      "t2": 2.781954,
+      "loop": {
+        "time": 0.538189,
+        "duration": 15.233333,
+        "ended": false,
+        "paused": false
+      },
+      "paused1": 0.570165,
+      "paused2": 0.570165,
+      "resumed": 1.280272
+    },
+    {
+      "name": "tr 390px reduced-motion and Premium event",
+      "result": "PASS",
+      "pausedAt": 1.32812,
+      "premiumEvent": [
+        "event",
+        "premium_home_cta_click",
+        {
+          "funnel": "premium"
+        }
+      ]
+    },
+    {
+      "name": "tr 768px visible copy, links and layout",
+      "result": "PASS",
+      "geometry": {
+        "boxes": [
+          {
+            "text": " GERÇEK SAHALAR İÇİN TASARLANDI",
+            "left": 32,
+            "right": 736,
+            "top": 266.5,
+            "bottom": 284.5,
+            "width": 704,
+            "height": 18
+          },
+          {
+            "text": "Zorlu operasyonlar.Güçlü iş güvenliği.",
+            "left": 32,
+            "right": 736,
+            "top": 314.5,
+            "bottom": 430.40625,
+            "width": 704,
+            "height": 115.90625
+          },
+          {
+            "text": "İlk risk analizinden son rapora. İş güvenliğinin sorumluluğunu taşıyanlar için tek çalışma platformu.",
+            "left": 32,
+            "right": 512,
+            "top": 460.40625,
+            "bottom": 518,
+            "width": 480,
+            "height": 57.59375
+          },
+          {
+            "text": "Araçları KeşfetRisk Analizi Oluştur",
+            "left": 32,
+            "right": 736,
+            "top": 550,
+            "bottom": 601.5,
+            "width": 704,
+            "height": 51.5
+          },
+          {
+            "text": "Premium üyelik · €9,99/ay →",
+            "left": 32,
+            "right": 736,
+            "top": 621.5,
+            "bottom": 665.5,
+            "width": 704,
+            "height": 44
+          }
+        ],
+        "bottom": 816,
+        "overflow": false
+      }
+    },
+    {
+      "name": "tr 768px actual playback, end-loop and pause/resume",
+      "result": "PASS",
+      "t1": 1.8001,
+      "t2": 2.909127,
+      "loop": {
+        "time": 0.471214,
+        "duration": 15.233333,
+        "ended": false,
+        "paused": false
+      },
+      "paused1": 0.501519,
+      "paused2": 0.501519,
+      "resumed": 1.211727
+    },
+    {
+      "name": "tr 768px reduced-motion and Premium event",
+      "result": "PASS",
+      "pausedAt": 1.248454,
+      "premiumEvent": [
+        "event",
+        "premium_home_cta_click",
+        {
+          "funnel": "premium"
+        }
+      ]
+    },
+    {
+      "name": "tr 1440px visible copy, links and layout",
+      "result": "PASS",
+      "geometry": {
+        "boxes": [
+          {
+            "text": " GERÇEK SAHALAR İÇİN TASARLANDI",
+            "left": 60,
+            "right": 1380,
+            "top": 330.890625,
+            "bottom": 348.890625,
+            "width": 1320,
+            "height": 18
+          },
+          {
+            "text": "Zorlu operasyonlar.Güçlü iş güvenliği.",
+            "left": 60,
+            "right": 1110,
+            "top": 378.890625,
+            "bottom": 561.015625,
+            "width": 1050,
+            "height": 182.125
+          },
+          {
+            "text": "İlk risk analizinden son rapora. İş güvenliğinin sorumluluğunu taşıyanlar için tek çalışma platformu.",
+            "left": 60,
+            "right": 540,
+            "top": 591.015625,
+            "bottom": 648.609375,
+            "width": 480,
+            "height": 57.59375
+          },
+          {
+            "text": "Araçları KeşfetRisk Analizi Oluştur",
+            "left": 60,
+            "right": 1380,
+            "top": 680.609375,
+            "bottom": 732.109375,
+            "width": 1320,
+            "height": 51.5
+          },
+          {
+            "text": "Premium üyelik · €9,99/ay →",
+            "left": 60,
+            "right": 1380,
+            "top": 752.109375,
+            "bottom": 796.109375,
+            "width": 1320,
+            "height": 44
+          }
+        ],
+        "bottom": 996,
+        "overflow": false
+      }
+    },
+    {
+      "name": "tr 1440px actual playback, end-loop and pause/resume",
+      "result": "PASS",
+      "t1": 2.069598,
+      "t2": 3.177733,
+      "loop": {
+        "time": 0.536464,
+        "duration": 15.233333,
+        "ended": false,
+        "paused": false
+      },
+      "paused1": 0.584888,
+      "paused2": 0.584888,
+      "resumed": 1.293988
+    },
+    {
+      "name": "tr 1440px reduced-motion and Premium event",
+      "result": "PASS",
+      "pausedAt": 1.33195,
+      "premiumEvent": [
+        "event",
+        "premium_home_cta_click",
+        {
+          "funnel": "premium"
+        }
+      ]
+    },
+    {
+      "name": "en 320px visible copy, links and layout",
+      "result": "PASS",
+      "geometry": {
+        "boxes": [
+          {
+            "text": " ENGINEERED FOR THE REAL WORLD",
+            "left": 20,
+            "right": 300,
+            "top": 214.40625,
+            "bottom": 232.40625,
+            "width": 280,
+            "height": 18
+          },
+          {
+            "text": "Serious operations.Stronger safety.",
+            "left": 20,
+            "right": 300,
+            "top": 262.40625,
+            "bottom": 397.03125,
+            "width": 280,
+            "height": 134.625
+          },
+          {
+            "text": "From the first risk assessment to the final report. One working platform for the people responsible for safety.",
+            "left": 20,
+            "right": 300,
+            "top": 427.03125,
+            "bottom": 502.59375,
+            "width": 280,
+            "height": 75.5625
+          },
+          {
+            "text": "Explore ToolsBuild Risk Assessment",
+            "left": 20,
+            "right": 300,
+            "top": 534.59375,
+            "bottom": 650.59375,
+            "width": 280,
+            "height": 116
+          },
+          {
+            "text": "Explore Premium · €9.99/month →",
+            "left": 20,
+            "right": 300,
+            "top": 670.59375,
+            "bottom": 714.59375,
+            "width": 280,
+            "height": 44
+          }
+        ],
+        "bottom": 833,
+        "overflow": false
+      }
+    },
+    {
+      "name": "en 320px actual playback, end-loop and pause/resume",
+      "result": "PASS",
+      "t1": 1.644297,
+      "t2": 2.754094,
+      "loop": {
+        "time": 0.523126,
+        "duration": 15.233333,
+        "ended": false,
+        "paused": false
+      },
+      "paused1": 0.551529,
+      "paused2": 0.551529,
+      "resumed": 1.259246
+    },
+    {
+      "name": "en 320px reduced-motion and Premium event",
+      "result": "PASS",
+      "pausedAt": 1.30216,
+      "premiumEvent": [
+        "event",
+        "premium_home_cta_click",
+        {
+          "funnel": "premium"
+        }
+      ]
+    },
+    {
+      "name": "en 390px visible copy, links and layout",
+      "result": "PASS",
+      "geometry": {
+        "boxes": [
+          {
+            "text": " ENGINEERED FOR THE REAL WORLD",
+            "left": 20,
+            "right": 370,
+            "top": 249.4375,
+            "bottom": 267.4375,
+            "width": 350,
+            "height": 18
+          },
+          {
+            "text": "Serious operations.Stronger safety.",
+            "left": 20,
+            "right": 370,
+            "top": 297.4375,
+            "bottom": 387.1875,
+            "width": 350,
+            "height": 89.75
+          },
+          {
+            "text": "From the first risk assessment to the final report. One working platform for the people responsible for safety.",
+            "left": 20,
+            "right": 370,
+            "top": 417.1875,
+            "bottom": 467.5625,
+            "width": 350,
+            "height": 50.375
+          },
+          {
+            "text": "Explore ToolsBuild Risk Assessment",
+            "left": 20,
+            "right": 370,
+            "top": 499.5625,
+            "bottom": 615.5625,
+            "width": 350,
+            "height": 116
+          },
+          {
+            "text": "Explore Premium · €9.99/month →",
+            "left": 20,
+            "right": 370,
+            "top": 635.5625,
+            "bottom": 679.5625,
+            "width": 350,
+            "height": 44
+          }
+        ],
+        "bottom": 833,
+        "overflow": false
+      }
+    },
+    {
+      "name": "en 390px actual playback, end-loop and pause/resume",
+      "result": "PASS",
+      "t1": 1.636081,
+      "t2": 2.743912,
+      "loop": {
+        "time": 0.536923,
+        "duration": 15.233333,
+        "ended": false,
+        "paused": false
+      },
+      "paused1": 0.576486,
+      "paused2": 0.576486,
+      "resumed": 1.288473
+    },
+    {
+      "name": "en 390px reduced-motion and Premium event",
+      "result": "PASS",
+      "pausedAt": 1.321251,
+      "premiumEvent": [
+        "event",
+        "premium_home_cta_click",
+        {
+          "funnel": "premium"
+        }
+      ]
+    },
+    {
+      "name": "en 768px visible copy, links and layout",
+      "result": "PASS",
+      "geometry": {
+        "boxes": [
+          {
+            "text": " ENGINEERED FOR THE REAL WORLD",
+            "left": 32,
+            "right": 736,
+            "top": 266.5,
+            "bottom": 284.5,
+            "width": 704,
+            "height": 18
+          },
+          {
+            "text": "Serious operations.Stronger safety.",
+            "left": 32,
+            "right": 736,
+            "top": 314.5,
+            "bottom": 430.40625,
+            "width": 704,
+            "height": 115.90625
+          },
+          {
+            "text": "From the first risk assessment to the final report. One working platform for the people responsible for safety.",
+            "left": 32,
+            "right": 512,
+            "top": 460.40625,
+            "bottom": 518,
+            "width": 480,
+            "height": 57.59375
+          },
+          {
+            "text": "Explore ToolsBuild Risk Assessment",
+            "left": 32,
+            "right": 736,
+            "top": 550,
+            "bottom": 601.5,
+            "width": 704,
+            "height": 51.5
+          },
+          {
+            "text": "Explore Premium · €9.99/month →",
+            "left": 32,
+            "right": 736,
+            "top": 621.5,
+            "bottom": 665.5,
+            "width": 704,
+            "height": 44
+          }
+        ],
+        "bottom": 816,
+        "overflow": false
+      }
+    },
+    {
+      "name": "en 768px actual playback, end-loop and pause/resume",
+      "result": "PASS",
+      "t1": 1.772734,
+      "t2": 2.881682,
+      "loop": {
+        "time": 0.532123,
+        "duration": 15.233333,
+        "ended": false,
+        "paused": false
+      },
+      "paused1": 0.575124,
+      "paused2": 0.575124,
+      "resumed": 1.283072
+    },
+    {
+      "name": "en 768px reduced-motion and Premium event",
+      "result": "PASS",
+      "pausedAt": 1.319721,
+      "premiumEvent": [
+        "event",
+        "premium_home_cta_click",
+        {
+          "funnel": "premium"
+        }
+      ]
+    },
+    {
+      "name": "en 1440px visible copy, links and layout",
+      "result": "PASS",
+      "geometry": {
+        "boxes": [
+          {
+            "text": " ENGINEERED FOR THE REAL WORLD",
+            "left": 60,
+            "right": 1380,
+            "top": 330.890625,
+            "bottom": 348.890625,
+            "width": 1320,
+            "height": 18
+          },
+          {
+            "text": "Serious operations.Stronger safety.",
+            "left": 60,
+            "right": 1110,
+            "top": 378.890625,
+            "bottom": 561.015625,
+            "width": 1050,
+            "height": 182.125
+          },
+          {
+            "text": "From the first risk assessment to the final report. One working platform for the people responsible for safety.",
+            "left": 60,
+            "right": 540,
+            "top": 591.015625,
+            "bottom": 648.609375,
+            "width": 480,
+            "height": 57.59375
+          },
+          {
+            "text": "Explore ToolsBuild Risk Assessment",
+            "left": 60,
+            "right": 1380,
+            "top": 680.609375,
+            "bottom": 732.109375,
+            "width": 1320,
+            "height": 51.5
+          },
+          {
+            "text": "Explore Premium · €9.99/month →",
+            "left": 60,
+            "right": 1380,
+            "top": 752.109375,
+            "bottom": 796.109375,
+            "width": 1320,
+            "height": 44
+          }
+        ],
+        "bottom": 996,
+        "overflow": false
+      }
+    },
+    {
+      "name": "en 1440px actual playback, end-loop and pause/resume",
+      "result": "PASS",
+      "t1": 2.042566,
+      "t2": 3.15005,
+      "loop": {
+        "time": 0.534046,
+        "duration": 15.233333,
+        "ended": false,
+        "paused": false
+      },
+      "paused1": 0.574969,
+      "paused2": 0.574969,
+      "resumed": 1.285799
+    },
+    {
+      "name": "en 1440px reduced-motion and Premium event",
+      "result": "PASS",
+      "pausedAt": 1.324668,
+      "premiumEvent": [
+        "event",
+        "premium_home_cta_click",
+        {
+          "funnel": "premium"
+        }
+      ]
+    },
+    {
+      "name": "tr slow video poster and initial reduced motion",
+      "result": "PASS",
+      "time": 0,
+      "paused": true,
+      "ready": 0
+    },
+    {
+      "name": "en slow video poster and initial reduced motion",
+      "result": "PASS",
+      "time": 0,
+      "paused": true,
+      "ready": 0
+    }
+  ],
+  "note": "Local Chromium; actual currentTime and natural loop after seeking near the end, no synthetic media events. Viewport emulation, physical Safari/iOS/Preview/production are separate gates."
+}

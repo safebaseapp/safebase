@@ -1,0 +1,30 @@
+[
+  {
+    "commit": "faa31a8c^",
+    "scrims": [
+      ".heroScrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,17,27,.76),rgba(6,17,27,.34) 55%,rgba(6,17,27,.05)),linear-gradient(0deg,#0b1219,transparent 30%)}",
+      ".heroScrim{background:linear-gradient(90deg,#071522b3,#07152220),linear-gradient(0deg,#0b1219,transparent 65%)}"
+    ]
+  },
+  {
+    "commit": "faa31a8c",
+    "scrims": [
+      ".heroScrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(5,14,24,.99) 0%,rgba(5,14,24,.985) 44%,rgba(5,14,24,.90) 57%,rgba(5,14,24,.28) 76%,rgba(5,14,24,.04) 100%),linear-gradient(0deg,#0b1219,transparent 30%)}",
+      ".heroScrim{background:linear-gradient(90deg,rgba(5,14,24,.99),rgba(5,14,24,.93) 58%,rgba(5,14,24,.36)),linear-gradient(0deg,#0b1219,transparent 65%)}"
+    ]
+  },
+  {
+    "commit": "7ae840be",
+    "scrims": [
+      ".heroScrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,17,27,.76),rgba(6,17,27,.34) 55%,rgba(6,17,27,.05)),linear-gradient(0deg,#0b1219,transparent 30%)}",
+      ".heroScrim{background:linear-gradient(90deg,#071522b3,#07152220),linear-gradient(0deg,#0b1219,transparent 65%)}"
+    ]
+  },
+  {
+    "commit": "9d0d7c2a",
+    "scrims": [
+      ".heroScrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,17,27,.76),rgba(6,17,27,.34) 55%,rgba(6,17,27,.05)),linear-gradient(0deg,#0b1219,transparent 30%)}",
+      ".heroScrim{background:linear-gradient(90deg,#071522b3,#07152220),linear-gradient(0deg,#0b1219,transparent 65%)}"
+    ]
+  }
+]

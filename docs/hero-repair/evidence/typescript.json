@@ -1,0 +1,5 @@
+{
+  "command": "npx tsc --noEmit -p app/tsconfig.json",
+  "result": "PASS",
+  "note": "Fixture production-mode build also completed TypeScript. Normal build blocked separately."
+}

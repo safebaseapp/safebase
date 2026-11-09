@@ -14,25 +14,17 @@ export default function CinematicHome({ locale }: { locale: "tr" | "en" }) {
   const t = (en: string, turkish: string) => tr ? turkish : en;
   const action = (path: string, en: string, turkish: string, primary = false) => <Link href={`/${locale}${path}`} className={primary ? s.primary : s.action}>{t(en, turkish)}<ArrowUpRight size={17} aria-hidden="true" /></Link>;
   return <HomepageMotion><main>
-    {/* The legacy refinery film contains its own SERNEM branding and copy.
-        Do not overlay a second headline: it makes both sets of text unreadable. */}
+    {/* The original PNG contains baked-in copy; the loading poster is a text-free
+        frame from the unchanged refinery film, so HTML remains the only headline. */}
     <section className={s.hero} aria-labelledby="home-title">
-      <video className={s.heroVideo} src="/videos/sernem-refinery-hero.mp4" poster="/images/sernem-hero-refinery.png" autoPlay muted loop playsInline controls={false} preload="auto" aria-hidden="true" disablePictureInPicture />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1219]/60 via-transparent to-transparent" aria-hidden="true" />
-      <h1 id="home-title" className="sr-only">SERNEM — {t("Global HSE Knowledge Platform", "Küresel İSG ve HSE Bilgi Platformu")}</h1>
-    </section>
-    {/* Keep active conversion links accessible without placing text over the video. */}
-    <section className="border-b border-white/10 bg-[#0b1219] py-7" aria-label={t("Explore SERNEM", "SERNEM'i keşfedin")}>
-      <div className={`${s.container} flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between`}>
-        <div>
-          <p className={s.eyebrow}>SERNEM / {t("FIELD OPERATIONS", "SAHA OPERASYONLARI")}</p>
-          <p className="mt-2 text-sm text-[#c4cdd3]">{t("Plan with clarity. Act with confidence.", "Net planlama. Güvenli uygulama.")}</p>
-        </div>
-        <div className="flex flex-wrap items-center gap-5">
-          {action("/tools", "Explore Tools", "Araçları Keşfet", true)}
-          {action("/tools/quick-risk-assessment", "Build Risk Assessment", "Risk Analizi Oluştur")}
-          <PremiumGrowthLink href={`/${locale}/upgrade`} eventName="premium_home_cta_click" className="inline-flex min-h-11 items-center text-sm font-semibold text-amber-200 underline decoration-amber-300/40 underline-offset-4 transition hover:text-white">{tr ? "Premium üyelik · €9,99/ay" : "Explore Premium · €9.99/month"} →</PremiumGrowthLink>
-        </div>
+      <video className={s.heroVideo} src="/videos/sernem-refinery-hero.mp4" poster="/images/sernem-refinery-hero-poster.webp" autoPlay muted loop playsInline controls={false} preload="auto" aria-hidden="true" disablePictureInPicture />
+      <div className={s.heroScrim} aria-hidden="true" />
+      <div className={`${s.container} ${s.heroContent}`}>
+        <p className={s.eyebrow}><span className={s.signal}/> {t("ENGINEERED FOR THE REAL WORLD", "GERÇEK SAHALAR İÇİN TASARLANDI")}</p>
+        <h1 id="home-title">{t("Serious operations.", "Zorlu operasyonlar.")}<br/><em>{t("Stronger safety.", "Güçlü iş güvenliği.")}</em></h1>
+        <p className={s.heroLead}>{t("From the first risk assessment to the final report. One working platform for the people responsible for safety.", "İlk risk analizinden son rapora. İş güvenliğinin sorumluluğunu taşıyanlar için tek çalışma platformu.")}</p>
+        <div className={s.actions}>{action("/tools", "Explore Tools", "Araçları Keşfet", true)}{action("/tools/quick-risk-assessment", "Build Risk Assessment", "Risk Analizi Oluştur")}</div>
+        <div className="mt-5"><PremiumGrowthLink href={`/${locale}/upgrade`} eventName="premium_home_cta_click" className="inline-flex min-h-11 items-center text-sm font-semibold text-amber-200 underline decoration-amber-300/40 underline-offset-4 transition hover:text-white">{tr ? "Premium üyelik · €9,99/ay" : "Explore Premium · €9.99/month"} →</PremiumGrowthLink></div>
       </div>
     </section>
 
