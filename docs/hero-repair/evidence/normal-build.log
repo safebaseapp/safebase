@@ -1,0 +1,116 @@
+
+> app@0.1.0 prebuild
+> node scripts/polish-toolbox-pdfs.mjs && node scripts/qa-toolbox-pdfs.mjs && node scripts/qa-download-flows.mjs && node scripts/qa-live-quality-pack.mjs && node scripts/qa-field-forms-growth.mjs && node scripts/qa-method-statements-growth.mjs && node scripts/qa-method-library-34.mjs && node scripts/qa-account-billing-marketing.mjs && node scripts/qa-knowledge-specialist-12.mjs && node scripts/qa-knowledge-industrial-next12.mjs
+
+[toolbox-pdf] Polished 280 toolbox PDFs: branded metadata, footer spacing, dates and known EN/batch text issues.
+
+SERNEM Toolbox PDF QA
+---------------------
+Master slugs: 70
+Standard TR/EN files present: 140/140
+Branded-base PDFs inspected: 140/140
+Required branded-base page count: 4
+
+PASS: all 70 Toolbox topics have TR/EN standard files and 4-page branded-base PDFs.
+SERNEM download/auth QA: PASS
+Issue #127 source-level regression guard: PASS (NOT full E2E).
+PASS: 7 new bilingual forms / 14 localized pages; 10 unique forms total; practical steps, editable fields, FAQs, official references, canonical/links/sitemap verified.
+LIMIT: source-level checks; interactive input, printed PDF layout, and search indexing must be tested separately.
+PASS: 6 task-specific method examples / 12 translated detail URLs + 2 hubs; correct structures, hazard controls, stop points, FAQ, official source domains, sitemap and internal links.
+LIMIT: This does not verify live crawling, print output, permit suitability, engineering details or current indexing.
+PASS: 34 unique ready-to-load cards: 20 original + 6 unchanged + 8 specialist bilingual presets.
+PASS: Eight expert work templates supply 48 job steps, hazard/control pairs, holdpoints, stop conditions and official regulatory reference URLs.
+PASS: Original PDF authorization and editor bindings remain unchanged. No new standalone public SEO pages created.
+LIMIT: Static validation does not replace browser interaction, signed-in PDF print test or competent site-specific engineering approval.
+PASS: only one confirmed billing action UI; protected admin and deletion preserved.
+PASS: 32 billing/expiry/trial/legacy entitlement scenarios and authenticated marketing/account wiring.
+NO-LIVE-WRITES: This test changes no actual subscriptions, users, charges or email preferences.
+PASS: all twelve original specialist guides remain inside the searchable/filtered 124-card grid, with 12 varied cover images.
+PASS: baseline 100 guides preserved, 12 original specialist topics appended (112 total, 224 TR/EN detail URLs).
+PASS: all 12 bilingual entries have content depth, official references, correct related links and valid static metadata/sitemap.
+PASS: 8 specialist articles track six-step verified methods; 4 process-safety guides add unique hazards, safeguards and holdpoints.
+LIMIT: Static checks do not prove Google indexing or physical onsite applicability.
+PASS: existing 112 original guides preserved, 12 expert guides added; 124 TR + 124 EN = 248 localized detail pages.
+PASS: 12 original bilingual guides, 5 hazards, 6 controls, 4 common mistakes, 5 checks, 2 PPE items, stop-work rules and official references each.
+PASS: 12 topic-matched unique covers, one filterable library, no detached duplicate gallery, sitemap & 24 new static routes.
+LIMIT: static checks cannot validate competent engineering approvals, live payment interactions or Google indexing.
+
+> app@0.1.0 build
+> next build
+
+▲ Next.js 16.2.10 (Turbopack)
+- Experiments (use with caution):
+  · serverActions
+
+  Creating an optimized production build ...
+Turbopack build encountered 3 warnings:
+[next]/internal/font/google/geist_a71539c9.module.css
+Error while requesting resource
+There was an issue establishing a connection while requesting https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap
+
+Import trace:
+  Server Component:
+    [next]/internal/font/google/geist_a71539c9.module.css
+    [next]/internal/font/google/geist_a71539c9.js
+    ./app/layout.tsx
+
+
+[next]/internal/font/google/geist_mono_8d43a2aa.module.css
+Error while requesting resource
+There was an issue establishing a connection while requesting https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap
+
+Import trace:
+  Server Component:
+    [next]/internal/font/google/geist_mono_8d43a2aa.module.css
+    [next]/internal/font/google/geist_mono_8d43a2aa.js
+    ./app/layout.tsx
+
+
+./next.config.ts
+Encountered unexpected file in NFT list
+A file was traced that indicates that the whole project was traced unintentionally. Somewhere in the import trace below, there are:
+- filesystem operations (like path.join, path.resolve or fs.readFile), or
+- very dynamic requires (like require('./' + foo)).
+To resolve this, you can
+- remove them if possible, or
+- only use them in development, or
+- make sure they are statically scoped to some subfolder: path.join(process.cwd(), 'data', bar), or
+- add ignore comments: path.join(/*turbopackIgnore: true*/ process.cwd(), bar)
+
+Import trace:
+  Server Component:
+    ./next.config.ts
+    ./app/[locale]/admin/content/page.tsx
+
+
+
+> Build error occurred
+Error: Turbopack build failed with 2 errors:
+[next]/internal/font/google/geist_a71539c9.module.css
+next/font: error:
+Failed to fetch `Geist` from Google Fonts.
+
+Import trace:
+  Server Component:
+    [next]/internal/font/google/geist_a71539c9.module.css
+    [next]/internal/font/google/geist_a71539c9.js
+    ./app/layout.tsx
+
+
+[next]/internal/font/google/geist_mono_8d43a2aa.module.css
+next/font: error:
+Failed to fetch `Geist Mono` from Google Fonts.
+
+Import trace:
+  Server Component:
+    [next]/internal/font/google/geist_mono_8d43a2aa.module.css
+    [next]/internal/font/google/geist_mono_8d43a2aa.js
+    ./app/layout.tsx
+
+
+    at ignore-listed frames
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

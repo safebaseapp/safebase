@@ -1,0 +1,200 @@
+
+> app@0.1.0 prebuild
+> node scripts/polish-toolbox-pdfs.mjs && node scripts/qa-toolbox-pdfs.mjs && node scripts/qa-download-flows.mjs && node scripts/qa-live-quality-pack.mjs && node scripts/qa-field-forms-growth.mjs && node scripts/qa-method-statements-growth.mjs && node scripts/qa-method-library-34.mjs && node scripts/qa-account-billing-marketing.mjs && node scripts/qa-knowledge-specialist-12.mjs && node scripts/qa-knowledge-industrial-next12.mjs
+
+[toolbox-pdf] Polished 280 toolbox PDFs: branded metadata, footer spacing, dates and known EN/batch text issues.
+
+SERNEM Toolbox PDF QA
+---------------------
+Master slugs: 70
+Standard TR/EN files present: 140/140
+Branded-base PDFs inspected: 140/140
+Required branded-base page count: 4
+
+PASS: all 70 Toolbox topics have TR/EN standard files and 4-page branded-base PDFs.
+SERNEM download/auth QA: PASS
+Issue #127 source-level regression guard: PASS (NOT full E2E).
+PASS: 7 new bilingual forms / 14 localized pages; 10 unique forms total; practical steps, editable fields, FAQs, official references, canonical/links/sitemap verified.
+LIMIT: source-level checks; interactive input, printed PDF layout, and search indexing must be tested separately.
+PASS: 6 task-specific method examples / 12 translated detail URLs + 2 hubs; correct structures, hazard controls, stop points, FAQ, official source domains, sitemap and internal links.
+LIMIT: This does not verify live crawling, print output, permit suitability, engineering details or current indexing.
+PASS: 34 unique ready-to-load cards: 20 original + 6 unchanged + 8 specialist bilingual presets.
+PASS: Eight expert work templates supply 48 job steps, hazard/control pairs, holdpoints, stop conditions and official regulatory reference URLs.
+PASS: Original PDF authorization and editor bindings remain unchanged. No new standalone public SEO pages created.
+LIMIT: Static validation does not replace browser interaction, signed-in PDF print test or competent site-specific engineering approval.
+PASS: only one confirmed billing action UI; protected admin and deletion preserved.
+PASS: 32 billing/expiry/trial/legacy entitlement scenarios and authenticated marketing/account wiring.
+NO-LIVE-WRITES: This test changes no actual subscriptions, users, charges or email preferences.
+PASS: all twelve original specialist guides remain inside the searchable/filtered 124-card grid, with 12 varied cover images.
+PASS: baseline 100 guides preserved, 12 original specialist topics appended (112 total, 224 TR/EN detail URLs).
+PASS: all 12 bilingual entries have content depth, official references, correct related links and valid static metadata/sitemap.
+PASS: 8 specialist articles track six-step verified methods; 4 process-safety guides add unique hazards, safeguards and holdpoints.
+LIMIT: Static checks do not prove Google indexing or physical onsite applicability.
+PASS: existing 112 original guides preserved, 12 expert guides added; 124 TR + 124 EN = 248 localized detail pages.
+PASS: 12 original bilingual guides, 5 hazards, 6 controls, 4 common mistakes, 5 checks, 2 PPE items, stop-work rules and official references each.
+PASS: 12 topic-matched unique covers, one filterable library, no detached duplicate gallery, sitemap & 24 new static routes.
+LIMIT: static checks cannot validate competent engineering approvals, live payment interactions or Google indexing.
+
+> app@0.1.0 build
+> next build --webpack
+
+▲ Next.js 16.2.10 (webpack)
+- Experiments (use with caution):
+  · serverActions
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 38.0s
+  Running TypeScript ...
+  Finished TypeScript in 21.1s ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/941) ...
+  Generating static pages using 4 workers (235/941)
+  Generating static pages using 4 workers (470/941)
+  Generating static pages using 4 workers (705/941)
+✓ Generating static pages using 4 workers (941/941) in 3.0s
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /[locale]
+├ ƒ /[locale]/about
+├ ƒ /[locale]/account
+├ ƒ /[locale]/account-suspended
+├ ƒ /[locale]/admin
+├ ƒ /[locale]/admin-check
+├ ƒ /[locale]/admin/content
+├ ƒ /[locale]/admin/features
+├ ƒ /[locale]/admin/memberships
+├ ƒ /[locale]/admin/rewards
+├ ƒ /[locale]/admin/settings
+├ ƒ /[locale]/admin/users
+├ ƒ /[locale]/admin/users/[id]
+├ ƒ /[locale]/ai-assistant
+├ ƒ /[locale]/checklists
+├ ƒ /[locale]/checklists/[slug]
+├ ƒ /[locale]/checklists/all
+├ ƒ /[locale]/checklists/confined-space
+├ ƒ /[locale]/checklists/hot-work
+├ ƒ /[locale]/checklists/lifting
+├ ƒ /[locale]/checklists/loto
+├ ƒ /[locale]/checklists/scaffold
+├ ƒ /[locale]/checklists/work-at-height
+├ ƒ /[locale]/contact
+├ ƒ /[locale]/cookies
+├ ƒ /[locale]/dashboard
+├ ƒ /[locale]/dashboard/labs
+├ ƒ /[locale]/downloads
+├ ƒ /[locale]/faq
+├ ƒ /[locale]/field-forms
+├ ƒ /[locale]/field-forms/[slug]
+├ ƒ /[locale]/forgot-password
+├ ƒ /[locale]/hse-performance
+├ ƒ /[locale]/hse-performance/field-report
+├ ƒ /[locale]/hse-performance/incidents
+├ ƒ /[locale]/hse-performance/observations
+├ ƒ /[locale]/hse-performance/report
+├ ƒ /[locale]/hse-performance/report/print
+├ ƒ /[locale]/knowledge-base
+├ ƒ /[locale]/knowledge-base/[slug]
+├ ƒ /[locale]/knowledge-base/chemical-safety
+├ ƒ /[locale]/knowledge-base/confined-space
+├ ƒ /[locale]/knowledge-base/crane-safety
+├ ƒ /[locale]/knowledge-base/electrical-safety
+├ ƒ /[locale]/knowledge-base/excavation
+├ ƒ /[locale]/knowledge-base/fire-safety
+├ ƒ /[locale]/knowledge-base/grinding
+├ ƒ /[locale]/knowledge-base/hot-work
+├ ƒ /[locale]/knowledge-base/loto
+├ ƒ /[locale]/knowledge-base/manual-handling
+├ ƒ /[locale]/knowledge-base/permit-to-work
+├ ƒ /[locale]/knowledge-base/ppe
+├ ƒ /[locale]/knowledge-base/scaffolding
+├ ƒ /[locale]/knowledge-base/working-at-height
+├ ƒ /[locale]/labs
+├ ƒ /[locale]/labs/ai-workplace-safety
+├ ƒ /[locale]/labs/daily-safety-brain
+├ ƒ /[locale]/labs/incident-simulator
+├ ƒ /[locale]/labs/incident-simulator/[scenarioId]
+├ ƒ /[locale]/labs/sim5
+├ ƒ /[locale]/labs/sim5/demo
+├ ƒ /[locale]/labs/spot-the-hazard
+├ ƒ /[locale]/labs/spot-the-hazard/[scenarioId]
+├ ƒ /[locale]/login
+├ ƒ /[locale]/method-statements
+├ ƒ /[locale]/method-statements/[slug]
+├ ƒ /[locale]/posters
+├ ƒ /[locale]/posters/[slug]
+├ ƒ /[locale]/ppe-standards
+├ ƒ /[locale]/ppe-standards/[slug]
+├ ƒ /[locale]/premium-trial
+├ ƒ /[locale]/premium-trial/conditions
+├ ƒ /[locale]/privacy
+├ ƒ /[locale]/register
+├ ƒ /[locale]/reset-password
+├ ƒ /[locale]/risk-assessment
+├ ƒ /[locale]/risk-assessment/[slug]
+├ ƒ /[locale]/safety-pack
+├ ƒ /[locale]/safety-pack/[slug]
+├ ƒ /[locale]/safety-signs
+├ ƒ /[locale]/safety-signs/[slug]
+├ ƒ /[locale]/terms
+├ ƒ /[locale]/toolbox
+├ ƒ /[locale]/toolbox/[slug]
+├ ƒ /[locale]/tools
+├ ƒ /[locale]/tools/dart
+├ ƒ /[locale]/tools/heat-stress
+├ ƒ /[locale]/tools/ltifr
+├ ƒ /[locale]/tools/man-hours
+├ ƒ /[locale]/tools/method-statement
+├ ƒ /[locale]/tools/noise-exposure
+├ ƒ /[locale]/tools/quick-risk-assessment
+├ ƒ /[locale]/tools/risk-matrix
+├ ƒ /[locale]/tools/severity-rate
+├ ƒ /[locale]/tools/simops
+├ ƒ /[locale]/tools/sling-tension
+├ ƒ /[locale]/tools/trir
+├ ƒ /[locale]/upgrade
+├ ƒ /ai-assistant
+├ ƒ /api/account
+├ ƒ /api/account/marketing-preferences
+├ ƒ /api/account/subscription
+├ ƒ /api/ai/account-state
+├ ƒ /api/ai/assessment
+├ ƒ /api/ai/short-answer
+├ ƒ /api/ask
+├ ƒ /api/cron/agent-pilot
+├ ƒ /api/labs/attempt
+├ ƒ /api/labs/daily-brain
+├ ƒ /api/labs/incident-attempt
+├ ƒ /api/labs/incident-summary
+├ ƒ /api/labs/progress
+├ ƒ /api/labs/sim5/runs
+├ ƒ /api/posters/premium-access
+├ ƒ /api/premium-trial/cancel
+├ ƒ /api/premium-trial/checkout
+├ ƒ /api/premium/posters/[slug]
+├ ƒ /api/premium/posters/[slug]/word
+├ ƒ /api/premium/toolbox/[slug]
+├ ƒ /api/premium/toolbox/[slug]/word
+├ ƒ /api/safety-signs/download-access
+├ ƒ /api/toolbox/[slug]/pdf
+├ ƒ /api/webhooks/lemonsqueezy
+├ ƒ /checklists
+├ ƒ /guides
+├ ƒ /guides/[slug]
+├ ○ /manifest.webmanifest
+├ ○ /robots.txt
+├ ○ /sitemap.xml
+├ ƒ /tools
+├ ƒ /tools/ltifr
+├ ƒ /tools/risk-matrix
+├ ƒ /tools/severity-rate
+└ ƒ /tools/trir
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand

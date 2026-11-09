@@ -1,0 +1,32 @@
+const {chromium} = await import(process.env.HERO_PLAYWRIGHT_MODULE || new URL('../sim5-review/node_modules/playwright/index.mjs', import.meta.url).href);
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const base=process.env.BASE||'http://127.0.0.1:4270',results=[];
+const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']});
+const record=async(name,fn)=>{try{results.push({name,result:'PASS',...await fn()})}catch(e){results.push({name,result:'FAIL',error:String(e)});console.log(name,String(e))}};
+try{
+for(const locale of ['tr','en'])for(const width of [320,390,768,1440]){
+ const c=await browser.newContext({viewport:{width,height:1000},reducedMotion:'no-preference'});await c.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(String(e)));await p.goto(`${base}/${locale}`,{waitUntil:'domcontentloaded'});const hero=p.locator('section[aria-labelledby="home-title"]'),v=hero.locator('video');
+ await record(`${locale} ${width}px visible copy, links and layout`,async()=>{
+  await hero.locator('#home-title').waitFor();await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(1500);
+  assert.equal(await hero.locator('h1').innerText(),locale==='tr'?'Zorlu operasyonlar.\nGüçlü iş güvenliği.':'Serious operations.\nStronger safety.');
+  const lead=locale==='tr'?'İlk risk analizinden son rapora. İş güvenliğinin sorumluluğunu taşıyanlar için tek çalışma platformu.':'From the first risk assessment to the final report. One working platform for the people responsible for safety.';assert.equal(await hero.getByText(lead,{exact:true}).count(),1);assert.ok(await hero.locator('h1').isVisible());
+  const geometry=await hero.evaluate(root=>{const h=root.getBoundingClientRect(),copy=root.querySelector('h1').parentElement;const boxes=[...copy.children].map(e=>{const b=e.getBoundingClientRect();return {text:e.textContent,left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height}});return {boxes,bottom:h.bottom,overflow:document.documentElement.scrollWidth>innerWidth+1}});assert.equal(geometry.overflow,false);for(let i=0;i<geometry.boxes.length;i++){const b=geometry.boxes[i];assert.ok(b.left>=0&&b.right<=width+1&&b.bottom<=geometry.bottom+1,JSON.stringify(geometry));if(i)assert.ok(geometry.boxes[i-1].bottom<=b.top+1,JSON.stringify(geometry))}
+  for(const path of ['/tools','/tools/quick-risk-assessment','/upgrade'])assert.equal(await hero.locator(`a[href="/${locale}${path}"]`).count(),1);
+  await p.screenshot({path:`docs/hero-repair/evidence/${locale}-${width}-playing.png`});return {geometry};
+ });
+ await record(`${locale} ${width}px actual playback, end-loop and pause/resume`,async()=>{
+  await v.evaluate(video=>new Promise((resolve,reject)=>{if(video.readyState>=2)return resolve();video.addEventListener('loadeddata',resolve,{once:true});setTimeout(()=>reject(new Error('video not decoded')),15000)}));
+  const t1=await v.evaluate(e=>e.currentTime);await p.waitForTimeout(1100);const t2=await v.evaluate(e=>e.currentTime);assert.ok(t2>t1+.25,`${t1}->${t2}`);
+  await v.evaluate(e=>{e.currentTime=e.duration-.4});await p.waitForTimeout(1100);const loop=await v.evaluate(e=>({time:e.currentTime,duration:e.duration,ended:e.ended,paused:e.paused}));assert.ok(loop.time>0&&loop.time<3&&!loop.ended&&!loop.paused,JSON.stringify(loop));
+  const toggle=p.getByRole('button',{name:'Pause background videos / Videoları duraklat',exact:true});await toggle.click();await p.waitForFunction(()=>document.querySelector('section[aria-labelledby="home-title"] video').paused);const paused1=await v.evaluate(e=>e.currentTime);await p.waitForTimeout(600);const paused2=await v.evaluate(e=>e.currentTime);assert.ok(Math.abs(paused2-paused1)<.05);await p.getByRole('button',{name:'Play background videos / Videoları oynat',exact:true}).click();await p.waitForTimeout(700);const resumed=await v.evaluate(e=>e.currentTime);assert.ok(resumed>paused2+.2);return {t1,t2,loop,paused1,paused2,resumed};
+ });
+ await record(`${locale} ${width}px reduced-motion and Premium event`,async()=>{
+  await p.emulateMedia({reducedMotion:'reduce'});await p.waitForFunction(()=>document.querySelector('section[aria-labelledby="home-title"] video').paused);const a=await v.evaluate(e=>e.currentTime);await p.waitForTimeout(500);assert.ok(Math.abs(await v.evaluate(e=>e.currentTime)-a)<.05);
+  await p.evaluate(()=>{window.heroEvents=[];window.gtag=(...args)=>window.heroEvents.push(args)});const premium=hero.locator(`a[href="/${locale}/upgrade"]`);await premium.evaluate(a=>a.addEventListener('click',e=>e.preventDefault()));await premium.click();const events=await p.evaluate(()=>window.heroEvents.filter(e=>e[1]==='premium_home_cta_click'));assert.equal(events.length,1);assert.deepEqual(events[0],['event','premium_home_cta_click',{funnel:'premium'}]);assert.deepEqual(errors,[]);return {pausedAt:a,premiumEvent:events[0]};
+ });await c.close();
+}
+for(const locale of ['tr','en'])await record(`${locale} slow video poster and initial reduced motion`,async()=>{
+ const c=await browser.newContext({viewport:{width:390,height:1000},reducedMotion:'reduce'});let held=[];await c.route('**/*',r=>{const u=new URL(r.request().url());if(u.pathname==='/videos/sernem-refinery-hero.mp4'){held.push(r);return}return u.hostname==='127.0.0.1'?r.continue():r.abort()});const p=await c.newPage();await p.goto(`${base}/${locale}`,{waitUntil:'domcontentloaded'});await p.locator('#home-title').waitFor();await p.waitForTimeout(1500);const video=p.locator('section[aria-labelledby="home-title"] video');assert.equal(await video.getAttribute('poster'),'/images/sernem-refinery-hero-poster.webp');const state=await video.evaluate(v=>({time:v.currentTime,paused:v.paused,ready:v.readyState}));assert.equal(state.time,0);assert.ok(state.paused);await p.screenshot({path:`docs/hero-repair/evidence/${locale}-390-loading-reduced.png`});for(const r of held)await r.abort();await c.close();return state;
+});
+}finally{await browser.close();fs.writeFileSync('docs/hero-repair/evidence/browser.json',JSON.stringify({results,note:'Local Chromium; actual currentTime and natural loop after seeking near the end, no synthetic media events. Viewport emulation, physical Safari/iOS/Preview/production are separate gates.'},null,2)+'\n')}
+console.log(results.filter(r=>r.result==='PASS').length,'PASS',results.filter(r=>r.result==='FAIL').length,'FAIL');if(results.some(r=>r.result==='FAIL'))process.exitCode=1;

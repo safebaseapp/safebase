@@ -1,0 +1,17 @@
+{
+  "results": [
+    {
+      "locale": "tr",
+      "result": "PASS",
+      "sim5": "existing showcase present",
+      "labsLogo": "same existing source, loaded and visible"
+    },
+    {
+      "locale": "en",
+      "result": "PASS",
+      "sim5": "existing showcase present",
+      "labsLogo": "same existing source, loaded and visible"
+    }
+  ],
+  "note": "Homepage showcase and Labs presentation smoke, not SIM/WebGL gameplay E2E. Source hashes also unchanged."
+}

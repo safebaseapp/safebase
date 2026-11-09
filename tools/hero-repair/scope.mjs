@@ -1,0 +1,7 @@
+import fs from'node:fs';import cp from'node:child_process';import crypto from'node:crypto';import assert from'node:assert/strict';
+const base='9d0d7c2a61d0ddf6e0276e85681aad982b146ddb',file='app/app/[locale]/components/CinematicHome.tsx';
+const old=cp.execFileSync('git',['show',base+':'+file],{encoding:'utf8'}),current=fs.readFileSync(file,'utf8');assert.equal(current.slice(current.indexOf('    <Sim5Showcase')),old.slice(old.indexOf('    <Sim5Showcase')),'all content after hero unchanged');
+const protectedFiles=['app/app/[locale]/components/HomepageMotion.tsx','app/app/[locale]/components/homepage.module.css','app/app/[locale]/page.tsx','app/app/[locale]/components/HomeLabsBridge.tsx','app/components/sim5/Sim5Showcase.tsx','app/components/analytics/PremiumFunnelTracker.tsx','app/public/videos/sernem-refinery-hero.mp4','app/public/images/sernem-hero-refinery.png'];
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');const hashes=protectedFiles.map(f=>{const hash=sha(fs.readFileSync(f));assert.equal(hash,sha(cp.execFileSync('git',['show',base+':'+f],{maxBuffer:20e6})),f);return{file:f,sha256:hash}});
+assert.equal((current.match(/eventName="premium_home_cta_click"/g)||[]).length,1);assert.ok(current.includes('autoPlay muted loop playsInline'));
+fs.writeFileSync('docs/hero-repair/evidence/scope.json',JSON.stringify({result:'PASS',base,heroTail:'byte-identical from Sim5Showcase onward',hashes},null,2)+'\n');console.log('PASS hero-only source boundary and original media/analytics/Labs/SIM hashes');
