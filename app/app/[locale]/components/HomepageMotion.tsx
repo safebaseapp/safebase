@@ -136,7 +136,7 @@ export function HomepageMotion({ children }: { children: ReactNode }) {
   const pauseLabel = "Pause background videos / Videoları duraklat";
   const playLabel = "Play background videos / Videoları oynat";
   return (
-    <div ref={root} className={s.home} data-paused={!playing}>
+    <div ref={root} className={s.home} data-paused={manuallyPaused.current}>
       {children}
       <button
         className={s.motionControl}
