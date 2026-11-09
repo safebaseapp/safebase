@@ -17,7 +17,7 @@ export default function CinematicHome({ locale }: { locale: "tr" | "en" }) {
     {/* The original PNG contains baked-in copy; the loading poster is a text-free
         frame from the unchanged refinery film, so HTML remains the only headline. */}
     <section className={s.hero} aria-labelledby="home-title">
-      <video className={s.heroVideo} src="/videos/sernem-refinery-hero.mp4" poster="/images/sernem-refinery-hero-poster.webp" autoPlay muted loop playsInline controls={false} preload="auto" aria-hidden="true" disablePictureInPicture />
+      <video data-home-hero-video="true" className={s.heroVideo} src="/videos/sernem-refinery-hero.mp4" poster="/images/sernem-refinery-hero-poster.webp" autoPlay muted loop playsInline controls={false} preload="auto" aria-hidden="true" disablePictureInPicture />
       <div className={s.heroScrim} aria-hidden="true" />
       <div className={`${s.container} ${s.heroContent}`}>
         <p className={s.eyebrow}><span className={s.signal}/> {t("ENGINEERED FOR THE REAL WORLD", "GERÇEK SAHALAR İÇİN TASARLANDI")}</p>

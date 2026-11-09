@@ -5,36 +5,152 @@ import s from "./homepage.module.css";
 
 export function HomepageMotion({ children }: { children: ReactNode }) {
   const root = useRef<HTMLDivElement>(null);
-  const [paused, setPaused] = useState(false);
+  const manuallyPaused = useRef(false);
+  const explicitPlayback = useRef(false);
+  const syncRef = useRef<(() => void) | null>(null);
+  const [playing, setPlaying] = useState(false);
+
   useEffect(() => {
     const node = root.current;
     if (!node) return;
-    const preference = matchMedia("(prefers-reduced-motion: reduce)");
-    const videos = Array.from(node.querySelectorAll("video"));
+
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const videos = Array.from(node.querySelectorAll<HTMLVideoElement>("video"));
+    const hero = node.querySelector<HTMLVideoElement>("[data-home-hero-video]");
     const visibility = new Map<HTMLVideoElement, boolean>();
-    const sync = () => videos.forEach(video => {
-      if (visibility.get(video) && !video.getAttribute("src") && video.dataset.src) {
-        video.preload = "metadata";
-        video.src = video.dataset.src;
-        video.load();
+
+    const sync = () => {
+      for (const video of videos) {
+        if (visibility.get(video) && !video.getAttribute("src") && video.dataset.src) {
+          video.preload = "metadata";
+          video.src = video.dataset.src;
+          video.load();
+        }
+
+        const shouldPause =
+          manuallyPaused.current ||
+          (preference.matches && !explicitPlayback.current) ||
+          document.hidden ||
+          !visibility.get(video);
+
+        if (shouldPause) {
+          if (!video.paused) video.pause();
+        } else if (video.paused) {
+          // Muted inline playback is permitted on most browsers. If the browser
+          // blocks autoplay, the visible VIDEO control supplies a user gesture.
+          video.muted = true;
+          video.defaultMuted = true;
+          video.playsInline = true;
+          void video.play().catch(() => {
+            if (video === hero) setPlaying(false);
+          });
+        }
       }
-      if (paused || preference.matches || document.hidden || !visibility.get(video)) video.pause();
-      else void video.play().catch(() => {});
-    });
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.setAttribute("data-visible", "true"); observer.unobserve(entry.target); }
-    }), { threshold: 0.12 });
-    node.querySelectorAll("[data-reveal]").forEach(el => observer.observe(el));
-    const videoObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => visibility.set(entry.target as HTMLVideoElement, entry.isIntersecting)); sync();
+    };
+
+    syncRef.current = sync;
+    const revealObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.setAttribute("data-visible", "true");
+          revealObserver.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.12 });
+    node.querySelectorAll("[data-reveal]").forEach((el) => revealObserver.observe(el));
+
+    const videoObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        visibility.set(entry.target as HTMLVideoElement, entry.isIntersecting);
+      }
+      sync();
     }, { rootMargin: "180px" });
-    videos.forEach(video => videoObserver.observe(video));
+
+    const onHeroPlaying = () => setPlaying(true);
+    const onHeroPaused = () => setPlaying(false);
+    const onHeroTimeUpdate = () => {
+      if (hero && !hero.paused) setPlaying(true);
+    };
+
+    hero?.addEventListener("playing", onHeroPlaying);
+    hero?.addEventListener("pause", onHeroPaused);
+    hero?.addEventListener("ended", onHeroPaused);
+    hero?.addEventListener("error", onHeroPaused);
+    hero?.addEventListener("timeupdate", onHeroTimeUpdate);
+
+    for (const video of videos) {
+      videoObserver.observe(video);
+      video.addEventListener("canplay", sync);
+    }
     preference.addEventListener("change", sync);
     document.addEventListener("visibilitychange", sync);
+    window.addEventListener("pageshow", sync);
     sync();
-    return () => { observer.disconnect(); videoObserver.disconnect(); preference.removeEventListener("change", sync); document.removeEventListener("visibilitychange", sync); videos.forEach(video => video.pause()); };
-  }, [paused]);
-  return <div ref={root} className={s.home} data-paused={paused}>{children}<button className={s.motionControl} type="button" aria-pressed={paused} onClick={() => setPaused(value => !value)} aria-label={paused ? "Play background videos / Videoları oynat" : "Pause background videos / Videoları duraklat"}>{paused ? "▶" : "Ⅱ"}<span> VIDEO</span></button></div>;
+
+    return () => {
+      syncRef.current = null;
+      revealObserver.disconnect();
+      videoObserver.disconnect();
+      preference.removeEventListener("change", sync);
+      document.removeEventListener("visibilitychange", sync);
+      window.removeEventListener("pageshow", sync);
+      for (const video of videos) {
+        video.removeEventListener("canplay", sync);
+        video.pause();
+      }
+      hero?.removeEventListener("playing", onHeroPlaying);
+      hero?.removeEventListener("pause", onHeroPaused);
+      hero?.removeEventListener("ended", onHeroPaused);
+      hero?.removeEventListener("error", onHeroPaused);
+      hero?.removeEventListener("timeupdate", onHeroTimeUpdate);
+    };
+  }, []);
+
+  const togglePlayback = () => {
+    const hero = root.current?.querySelector<HTMLVideoElement>("[data-home-hero-video]");
+    const isPlaying = !!hero && !hero.paused && !hero.ended;
+
+    if (isPlaying && !manuallyPaused.current) {
+      manuallyPaused.current = true;
+      explicitPlayback.current = false;
+      hero.pause();
+      syncRef.current?.();
+      return;
+    }
+
+    manuallyPaused.current = false;
+    // Explicitly pressing Play overrides a reduced-motion preference; the
+    // initial visit still respects that accessibility setting.
+    explicitPlayback.current = true;
+
+    if (hero) {
+      hero.muted = true;
+      hero.defaultMuted = true;
+      hero.playsInline = true;
+      // Call play synchronously *within the click* for browser user activation.
+      void hero.play().catch(() => setPlaying(false));
+    }
+    syncRef.current?.();
+  };
+
+  const pauseLabel = "Pause background videos / Videoları duraklat";
+  const playLabel = "Play background videos / Videoları oynat";
+  return (
+    <div ref={root} className={s.home} data-paused={manuallyPaused.current}>
+      {children}
+      <button
+        className={s.motionControl}
+        type="button"
+        aria-pressed={playing}
+        aria-label={playing ? pauseLabel : playLabel}
+        title={playing ? pauseLabel : playLabel}
+        data-hero-playback={playing ? "playing" : "paused"}
+        onClick={togglePlayback}
+      >
+        {playing ? "Ⅱ" : "▶"}<span> VIDEO</span>
+      </button>
+    </div>
+  );
 }
 
 export function RiskWorkflow({ tr }: { tr: boolean }) {
