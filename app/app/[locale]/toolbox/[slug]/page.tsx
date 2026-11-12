@@ -534,6 +534,25 @@ export default async function ToolboxDetailPage({ params }: Props) {
           )}
 
 
+          {slug === "nitrogen-inert-gas-safety" && (
+            <section className="rounded-[24px] border border-sky-200 bg-sky-50 p-6 print:hidden sm:p-8" aria-labelledby="nitrogen-guide-link-title">
+              <h2 id="nitrogen-guide-link-title" className="text-lg font-black text-slate-950">
+                {isTurkish ? "Azotla purge için saha rehberi" : "Field guide for nitrogen purging"}
+              </h2>
+              <p className="mt-2 text-sm leading-7 text-slate-700">
+                {isTurkish
+                  ? "Bu Toolbox konuşmasını tamamlamadan önce oksijen yetersizliği, izolasyon, gaz ölçümü ve güvenli erişim için iş öncesi kontrol noktalarını inceleyin. Rehber, sahaya özel risk değerlendirmesi ve izinlerin yerine geçmez."
+                  : "Before delivering this Toolbox Talk, review pre-start checks for oxygen deficiency, isolation, atmospheric testing and safe access. This guide does not replace site-specific risk assessments or permits."}
+              </p>
+              <Link
+                href={`/${locale}/knowledge-base/nitrogen-purging-oxygen-deficiency`}
+                className="mt-4 inline-flex min-h-11 items-center font-bold text-blue-800 underline underline-offset-4 hover:text-blue-600"
+              >
+                {isTurkish ? "Azotla purge ve oksijen eksikliği rehberini oku" : "Read the nitrogen purging and oxygen deficiency guide"} →
+              </Link>
+            </section>
+          )}
+
           <aside className="mt-8 rounded-[24px] border border-amber-300/25 bg-slate-950 p-6 text-white print:hidden sm:p-8">
             <p className="text-xs font-black uppercase tracking-[0.16em] text-amber-300">SERNEM / PREMIUM</p>
             <h2 className="mt-3 text-xl font-black sm:text-2xl">
