@@ -360,6 +360,8 @@ function getAutoCategory(slug: string) {
     "working-near-open-edges",
     "scaffold-modification-control",
     "working-over-water",
+    "mewp-pre-use-and-emergency-lowering",
+    "temporary-floor-openings-cover-control",
   ].includes(slug)) return "work-at-height";
 
   // 02 — Lifting & Rigging Operations
@@ -371,6 +373,8 @@ function getAutoCategory(slug: string) {
     "rigging-inspection",
     "tag-line-safety",
     "load-stability-center-of-gravity",
+    "lifting-load-landing-and-unhooking",
+    "hydraulic-jacks-and-load-support",
   ].includes(slug)) return "lifting-rigging";
 
   // 03 — Mobile Equipment & Traffic Safety
@@ -400,6 +404,7 @@ function getAutoCategory(slug: string) {
     "grinding-cutting-safety",
     "welding-fumes",
     "hot-work-near-fuel-systems",
+    "oxy-fuel-torch-flashback-prevention",
   ].includes(slug)) return "hot-work-fire";
 
   // 06 — Chemical & Hazardous Materials
@@ -409,6 +414,7 @@ function getAutoCategory(slug: string) {
     "spill-response",
     "hazardous-waste-handling",
     "painting-coating-safety",
+    "chemical-flushing-circulation-safety",
   ].includes(slug)) return "chemical-hazmat";
 
   // 07 — Confined Space & Gas Safety
@@ -417,6 +423,7 @@ function getAutoCategory(slug: string) {
     "gas-testing-atmospheric-monitoring",
     "compressed-gas-cylinders",
     "nitrogen-inert-gas-safety",
+    "confined-space-rescue-readiness",
   ].includes(slug)) return "confined-gas";
 
   // 08 — Excavation & Groundworks
@@ -434,6 +441,8 @@ function getAutoCategory(slug: string) {
     "hose-coupling-safety",
     "abrasive-blasting-safety",
     "manual-torque-wrench-safety",
+    "rotating-equipment-guarding-safety",
+    "pneumatic-tools-and-air-hoses",
   ].includes(slug)) return "tools-machinery";
 
   // 10 — PPE & Occupational Health
@@ -454,12 +463,26 @@ function getAutoCategory(slug: string) {
     "stop-work-authority",
     "line-breaking-process-opening",
     "barricading-exclusion-zones",
+    "industrial-radiography-ndt-exclusion",
+    "permit-to-work-shift-handover",
   ].includes(slug)) return "ptw-control";
 
   // 12 — General Site Safety & Human Factors
   return "general-site";
 }
 function getAutoIcon(slug: string) {
+  if (slug === "mewp-pre-use-and-emergency-lowering") return "🏗️";
+  if (slug === "chemical-flushing-circulation-safety") return "🧪";
+  if (slug === "rotating-equipment-guarding-safety") return "⚙️";
+  if (slug === "pneumatic-tools-and-air-hoses") return "🔧";
+  if (slug === "lifting-load-landing-and-unhooking") return "🪝";
+  if (slug === "temporary-floor-openings-cover-control") return "🚧";
+  if (slug === "industrial-radiography-ndt-exclusion") return "☢️";
+  if (slug === "confined-space-rescue-readiness") return "🛟";
+  if (slug === "hydraulic-jacks-and-load-support") return "🏗️";
+  if (slug === "oxy-fuel-torch-flashback-prevention") return "🔥";
+  if (slug === "worksite-first-aid-access-and-response") return "🚑";
+  if (slug === "permit-to-work-shift-handover") return "📋";
   if (slug === "manual-torque-wrench-safety") return "🔩";
   if (slug === "hot-work-near-fuel-systems") return "🔥";
   if (slug.includes("stored-energy-hydraulic-systems")) return "🔋";
