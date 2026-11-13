@@ -83,7 +83,7 @@ for (const record of records.filter((entry) => entry.sourceFile?.startsWith("edi
   for (const locale of ["tr", "en"]) {
     const data = record[locale];
     const title = String(data.title).replace(/\s+TOOLBOX TALK$/i, "");
-    if (title.length > 36 && pdfLineCount(title, 35) > 2)
+    if (title.length > 28 && pdfLineCount(title, 31) > 2)
       errors.push(record.slug + "/" + locale + ": PDF title needs more than two lines");
     for (const [field, maxChars, maxLines] of [
       ["objective", 96, 3], ["remember", 78, 3], ["supervisor_script", 108, 5],
