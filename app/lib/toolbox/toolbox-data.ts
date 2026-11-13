@@ -15439,6 +15439,690 @@ export const toolboxData = [
       "Storage clear"
     ]
   }
+},
+{
+  "slug": "trench-water-ingress-dewatering",
+  "sourceFile": "editorial_20261113_trench_water_ingress_dewatering",
+  "base": "trench-water-ingress-dewatering-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "KAZIDA SU BİRİKMESİ VE TAHLİYE GÜVENLİĞİ TOOLBOX TALK",
+    "subtitle": "Yağış ve su girişinden sonra göçük riskini yeniden değerlendirin.",
+    "objective": "Kazı içinde su birikmesi, zemin zayıflaması ve kontrolsüz pompaj nedeniyle göçük ve boğulmayı önlemek.",
+    "explanation": [
+      "Yağmur, sızıntı ve yeraltı suyu kazı duvarının dayanımını azaltabilir. Görünürde küçük su birikmesi bile zemin koşullarının değiştiğini gösterebilir.",
+      "İşe girmeden önce yetkin kişi kazı korumasını, giriş çıkışı, çevre yüklerini ve suyun kaynağını yeniden değerlendirmelidir.",
+      "Pompaj, suyun güvenli uzaklaştırılması için planlanmalı; iş sırasında çalışanlar korunmasız kazıda bırakılmamalıdır."
+    ],
+    "scenario": [
+      "Gece yağışından sonra bir hendekte su toplandı ve sabah çalışanlar işe döndü.",
+      "Zemin yumuşamıştı ve önceki vardiyanın kazı kontrolü artık geçerli değildi.",
+      "Yeniden yetkili inceleme, güvenli tahliye ve uygun iksa göçük riskini azaltırdı."
+    ],
+    "remember": "Su giren kazıya, yetkin kişinin yeniden güvenli ilan etmesinden önce girmeyin.",
+    "hazards": [
+      "Su nedeniyle zemin göçmesi.",
+      "Hendekte ani su yükselmesi.",
+      "İksa veya şevin zayıflaması.",
+      "Pompaj kablosunda elektrik riski.",
+      "Kaygan giriş ve çıkış.",
+      "Pompa hortumunun kontrolsüz hareketi.",
+      "Çevre yüklerinin şeve etkisi.",
+      "Kirli suya maruziyet."
+    ],
+    "controls": [
+      "Yağış ve su girişini işe başlamadan inceleyin.",
+      "Yetkin kazı kontrolünü yenileyin.",
+      "İksa veya şev uygunluğunu doğrulayın.",
+      "Su kaynağını ve akış yönünü belirleyin.",
+      "Uygun pompa ve tahliye planı kullanın.",
+      "Pompaj ekipmanının elektrik riskini kontrol edin.",
+      "Kazıda güvenli giriş çıkış sağlayın.",
+      "Şev kenarı yüklerini uzak tutun.",
+      "Çalışanları tehlikeli pompaj alanından ayırın.",
+      "Koşullar değişirse kazıyı boşaltın."
+    ],
+    "supervisor_script": "Arkadaşlar, yağıştan sonraki kazı dünkü kazı değildir. Su girişi ve zemin durumu yetkili kişi tarafından kontrol edilmeden içeri girmeyeceğiz.",
+    "questions": [
+      "Dün geceden beri yağış oldu mu?",
+      "Kazıda su var mı?",
+      "İksa yeniden kontrol edildi mi?",
+      "Su nereye pompalanacak?",
+      "Hangi durumda tahliye edeceğiz?"
+    ],
+    "verification": [
+      "Hava durumu incelendi",
+      "Su girişi kontrol edildi",
+      "Kazı yeniden incelendi",
+      "İksa uygun",
+      "Şev güvenli",
+      "Pompa uygun",
+      "Elektrik korunuyor",
+      "Giriş çıkış güvenli",
+      "Kenar yükleri kontrol",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "TRENCH WATER INGRESS AND DEWATERING TOOLBOX TALK",
+    "subtitle": "Reassess excavation stability after rain and water entry.",
+    "objective": "Prevent trench collapse, flooding and unsafe pumping caused by groundwater or rainwater entering excavations.",
+    "explanation": [
+      "Rain, leakage and groundwater can weaken trench sides. Even a small visible pool may indicate changing ground conditions.",
+      "A competent person must reassess excavation supports, access, edge loads and the source of water before re-entry.",
+      "Plan controlled dewatering and safe discharge without leaving personnel exposed in an unprotected excavation."
+    ],
+    "scenario": [
+      "Water collected in a trench after overnight rainfall.",
+      "The ground softened, making the prior shift's excavation inspection unreliable.",
+      "A new inspection, controlled dewatering and suitable support would have reduced collapse risk."
+    ],
+    "remember": "Do not re-enter a water-affected trench until a competent person confirms safe conditions.",
+    "hazards": [
+      "Ground collapse due to water.",
+      "Rapid flooding of a trench.",
+      "Failure of shoring or slopes.",
+      "Electrical hazards at pumps.",
+      "Slippery entry or exit.",
+      "Uncontrolled pump hoses.",
+      "Surcharge loads near edges.",
+      "Contact with contaminated water."
+    ],
+    "controls": [
+      "Check rainfall and water ingress before work.",
+      "Repeat competent excavation inspections.",
+      "Verify shoring or batter suitability.",
+      "Identify the source and direction of water.",
+      "Use an approved pump and discharge plan.",
+      "Check electrical safety of pumps.",
+      "Maintain safe trench entry and exit.",
+      "Keep loads clear of trench edges.",
+      "Segregate workers from pumping hazards.",
+      "Evacuate if conditions deteriorate."
+    ],
+    "supervisor_script": "A trench after heavy rain is not the same trench as yesterday. We will not enter until ground, water and supports are rechecked by a competent person.",
+    "questions": [
+      "Has rain affected the site?",
+      "Is there water in the trench?",
+      "Has shoring been rechecked?",
+      "Where will water discharge?",
+      "What triggers evacuation?"
+    ],
+    "verification": [
+      "Weather reviewed",
+      "Water level checked",
+      "Trench re-inspected",
+      "Shoring suitable",
+      "Slopes stable",
+      "Pump suitable",
+      "Electrical risk controlled",
+      "Access safe",
+      "Edge loads checked",
+      "Crew briefed"
+    ]
+  }
+},
+{
+  "slug": "heavy-rain-temporary-electrical-safety",
+  "sourceFile": "editorial_20261113_heavy_rain_temporary_electrical_safety",
+  "base": "heavy-rain-temporary-electrical-safety-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "ŞİDDETLİ YAĞMURDA GEÇİCİ ELEKTRİK GÜVENLİĞİ TOOLBOX TALK",
+    "subtitle": "Islak sahada panolar, kablolar ve el aletleri.",
+    "objective": "Şiddetli yağış sırasında geçici elektrik beslemesi, panolar ve taşınabilir aletlerde çarpılma riskini önlemek.",
+    "explanation": [
+      "Yağmur suyu hasarlı kablo, açık pano ve uygunsuz bağlantıların içine girerek elektrik tehlikesi yaratabilir.",
+      "Yağış şiddeti arttığında açıkta kalan tehlikeli işler durdurulmalı; elektrik beslemeleri yetkili kişilerce kontrol edilmelidir.",
+      "Suyu tahliye etmek için enerji altındaki pano veya kabloya dokunulmaz. İzolasyon ve müdahale yalnız yetkin ekip tarafından yapılır."
+    ],
+    "scenario": [
+      "Sağanak sırasında geçici dağıtım panosu çevresinde su birikti.",
+      "Bir çalışan uzatma kablosunu sudan çıkarmaya çalışarak temas riski yaşadı.",
+      "Çalışmayı durdurma, alanı ayırma ve yetkili elektrik izolasyonu riski önlerdi."
+    ],
+    "remember": "Islak elektrik ekipmanına dokunmayın. Önce alanı güvenli hale getirip yetkili elektrikçiye haber verin.",
+    "hazards": [
+      "Islanan panoda elektrik çarpması.",
+      "Hasarlı kablo yalıtımı.",
+      "Suya batmış priz veya bağlantı.",
+      "Kaygan kablo güzergâhı.",
+      "Uygunsuz uzatma kablosu.",
+      "Yağmurda açık pano kapağı.",
+      "Koruma cihazının çalışmaması.",
+      "Yetkisiz enerji kesme girişimi."
+    ],
+    "controls": [
+      "Yağış uyarılarını takip edin.",
+      "Riskli açık alan işlerini durdurun.",
+      "Panoların hava koşullarına uygunluğunu kontrol edin.",
+      "Hasarlı kabloyu kullanımdan çıkarın.",
+      "Priz ve bağlantıları sudan uzak tutun.",
+      "Kablo yollarını güvenli düzenleyin.",
+      "Uygun kaçak akım korumasını doğrulayın.",
+      "Islak panoya yetkisiz müdahaleyi önleyin.",
+      "Alanı bariyerleyip elektrik ekibini çağırın.",
+      "Yağış sonrası yeniden kontrol yapın."
+    ],
+    "supervisor_script": "Arkadaşlar, şiddetli yağmurda açık riskli işleri durduruyoruz. Islak kabloyu veya panoyu elle taşımayacağız. Yetkili elektrik ekibi güvenli durumu doğrulayacak.",
+    "questions": [
+      "Hangi pano yağıştan etkileniyor?",
+      "Su altında kablo var mı?",
+      "Kim elektriği güvenle izole eder?",
+      "Çalışma ne zaman durdurulur?",
+      "Yeniden başlama iznini kim verir?"
+    ],
+    "verification": [
+      "Hava uyarısı biliniyor",
+      "Riskli işler durdu",
+      "Panolar korumalı",
+      "Kablolar sağlam",
+      "Bağlantılar kuru",
+      "Kablo geçişi güvenli",
+      "RCD uygun",
+      "Yetkisiz erişim yok",
+      "Elektrik ekibi hazır",
+      "Yeniden kontrol planlı"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "HEAVY RAIN AND TEMPORARY ELECTRICAL SAFETY TOOLBOX TALK",
+    "subtitle": "Protect panels, leads and tools in wet conditions.",
+    "objective": "Prevent electric shock from temporary distribution, panels and portable electrical tools during heavy rainfall.",
+    "explanation": [
+      "Rainwater entering damaged cables, open panels or unsuitable connectors creates electrical hazards.",
+      "When heavy rain increases exposure, stop unsafe outdoor tasks and have competent electricians assess electrical supplies.",
+      "Do not touch wet energised equipment to move or drain it. Isolation and intervention are for authorised personnel."
+    ],
+    "scenario": [
+      "Heavy rain caused water to pool around a temporary distribution board.",
+      "A worker tried to lift an extension lead from the flooded area.",
+      "Stopping work, isolating access and requesting electrical isolation would have prevented exposure."
+    ],
+    "remember": "Do not touch wet electrical equipment. Secure the area and contact competent electricians.",
+    "hazards": [
+      "Shock at a wet electrical panel.",
+      "Damaged cable insulation.",
+      "Flooded sockets or connectors.",
+      "Slippery cable routes.",
+      "Unsuitable extension leads.",
+      "Open panel doors in rain.",
+      "Failure of protective devices.",
+      "Unauthorised isolation attempts."
+    ],
+    "controls": [
+      "Monitor severe weather alerts.",
+      "Stop exposed unsafe activities.",
+      "Check enclosure weather protection.",
+      "Remove damaged cables from use.",
+      "Keep connectors out of standing water.",
+      "Route cables away from wet paths.",
+      "Verify suitable residual-current protection.",
+      "Prevent unauthorised panel access.",
+      "Barricade hazards and call electricians.",
+      "Re-inspect equipment after the storm."
+    ],
+    "supervisor_script": "During heavy rain we will stop unsafe exposed tasks. Nobody moves wet electrical equipment by hand. Qualified electricians must verify safe conditions.",
+    "questions": [
+      "Which panels are exposed?",
+      "Are any cables submerged?",
+      "Who can isolate power safely?",
+      "When must work stop?",
+      "Who authorises restart?"
+    ],
+    "verification": [
+      "Weather alert known",
+      "Unsafe tasks stopped",
+      "Enclosures suitable",
+      "Cables intact",
+      "Connections protected",
+      "Routing safe",
+      "RCD suitable",
+      "Access restricted",
+      "Electricians informed",
+      "Restart inspection planned"
+    ]
+  }
+},
+{
+  "slug": "hand-arm-vibration-exposure",
+  "sourceFile": "editorial_20261113_hand_arm_vibration_exposure",
+  "base": "hand-arm-vibration-exposure-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "EL-KOL TİTREŞİMİ VE MARUZİYET KONTROLÜ TOOLBOX TALK",
+    "subtitle": "Kırıcı, matkap ve taşlamada titreşimi azaltın.",
+    "objective": "Titreşimli el aletleri kullanımında el-kol titreşim sendromu ve sinir-damar hasarı riskini azaltmak.",
+    "explanation": [
+      "Kırıcı, matkap, taşlama ve benzeri el aletleri titreşimi ele iletir. Uzun veya yoğun maruziyet kalıcı sağlık sorunlarına neden olabilir.",
+      "Günlük maruziyet yalnız tek alete göre değil, kullanılan tüm titreşimli alet ve gerçek çalışma sürelerine göre değerlendirilmelidir.",
+      "Daha az titreşimli yöntemler, bakımlı aletler, uygun iş süresi ve sağlık gözetimi risk değerlendirmesine göre planlanır."
+    ],
+    "scenario": [
+      "Bir çalışan vardiya boyunca birden çok kırıcı ve taşlama kullandı.",
+      "Yalnız tek aletin kullanım süresi kaydedildiği için toplam maruziyet gözden kaçtı.",
+      "Tüm görevleri içeren maruziyet hesabı ve iş planı riskleri azaltabilirdi."
+    ],
+    "remember": "Titreşim maruziyetini yalnız hissinize göre değerlendirmeyin; süre ve alet bilgileriyle kontrol edin.",
+    "hazards": [
+      "El ve parmaklarda sinir hasarı.",
+      "Dolaşım bozukluğu ve uyuşma.",
+      "Uzun süreli titreşim maruziyeti.",
+      "Bakımsız aletin fazla titreşmesi.",
+      "Soğukta şikâyetlerin artması.",
+      "Yanlış alet seçimi.",
+      "Gereksiz sıkı kavrama.",
+      "Maruziyet sürelerinin izlenmemesi."
+    ],
+    "controls": [
+      "Titreşim riskini görev bazında değerlendirin.",
+      "Kullanılan tüm titreşimli aletleri listeleyin.",
+      "Gerçek kullanım sürelerini kaydedin.",
+      "Düşük titreşimli yöntemleri seçin.",
+      "Aletlerin bakımını ve durumunu kontrol edin.",
+      "Kesici uçları uygun ve keskin tutun.",
+      "İşi planlayıp maruziyeti azaltın.",
+      "Gereksiz kavrama kuvvetinden kaçının.",
+      "Belirti ve şikâyetleri erken bildirin.",
+      "Gerekli sağlık gözetimini düzenleyin."
+    ],
+    "supervisor_script": "Arkadaşlar, titreşim hasarı bir günde fark edilmeyebilir. Hangi aletle ne kadar çalıştığımızı takip edeceğiz. Uyuşma veya parmakta renk değişimi varsa bildirin.",
+    "questions": [
+      "Hangi aletler titreşim üretiyor?",
+      "Günlük kullanım süresi ne?",
+      "Alet bakımlı mı?",
+      "Daha az titreşimli yol var mı?",
+      "Belirti görülürse kime bildirilir?"
+    ],
+    "verification": [
+      "Risk değerlendirmesi var",
+      "Aletler listelendi",
+      "Süreler ölçülüyor",
+      "Alternatifler incelendi",
+      "Aletler bakımlı",
+      "Uçlar uygun",
+      "İş planı uygun",
+      "Kavrama değerlendirilmiş",
+      "Bildirim yöntemi biliniyor",
+      "Sağlık gözetimi planlı"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "HAND-ARM VIBRATION EXPOSURE CONTROL TOOLBOX TALK",
+    "subtitle": "Reduce vibration from breakers, drills and grinders.",
+    "objective": "Reduce the risk of hand-arm vibration syndrome and nerve or blood vessel damage from vibrating tools.",
+    "explanation": [
+      "Breakers, drills and grinders transmit vibration into the hands. Excessive exposure can cause lasting health problems.",
+      "Assess combined daily exposure using all vibrating tools and actual trigger times, not just one tool.",
+      "Select lower-vibration methods, maintain tools and manage exposure duration and health surveillance as required."
+    ],
+    "scenario": [
+      "A worker used several breakers and grinders during one shift.",
+      "Only time on one tool was recorded, so total vibration exposure was underestimated.",
+      "Combined exposure assessment and better work planning would have reduced risk."
+    ],
+    "remember": "Do not judge vibration safety by sensation. Assess tool magnitude and actual exposure duration.",
+    "hazards": [
+      "Nerve damage to hands and fingers.",
+      "Circulatory problems and numbness.",
+      "Excessive daily vibration exposure.",
+      "Poorly maintained vibrating tools.",
+      "Symptoms worsened by cold.",
+      "Selecting unsuitable equipment.",
+      "Unnecessary gripping force.",
+      "Missing exposure records."
+    ],
+    "controls": [
+      "Assess vibration risk for the task.",
+      "List all vibrating equipment.",
+      "Record real trigger times.",
+      "Choose lower-vibration methods.",
+      "Inspect and maintain equipment.",
+      "Keep bits and cutters in good condition.",
+      "Plan tasks to reduce exposure.",
+      "Avoid excessive gripping force.",
+      "Report early symptoms promptly.",
+      "Arrange health surveillance as required."
+    ],
+    "supervisor_script": "Vibration injuries may develop without an obvious incident. Record tool use, control exposure and report numbness or colour changes in the fingers.",
+    "questions": [
+      "Which tools cause vibration?",
+      "What is the daily trigger time?",
+      "Are tools maintained?",
+      "Can we use a lower-vibration method?",
+      "Who receives symptom reports?"
+    ],
+    "verification": [
+      "Risk assessment available",
+      "Tools inventoried",
+      "Duration recorded",
+      "Alternatives considered",
+      "Tools maintained",
+      "Bits suitable",
+      "Work plan controlled",
+      "Grip assessed",
+      "Reporting understood",
+      "Health checks arranged"
+    ]
+  }
+},
+{
+  "slug": "fatigue-shift-work",
+  "sourceFile": "editorial_20261113_fatigue_shift_work",
+  "base": "fatigue-shift-work-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "YORGUNLUK VE VARDİYALI ÇALIŞMA GÜVENLİĞİ TOOLBOX TALK",
+    "subtitle": "Uykusuzluk ve dikkat kaybını erken belirleyin.",
+    "objective": "Uzun vardiya, yetersiz dinlenme ve uykusuzluk nedeniyle hata, ekipman kazası ve dikkat kaybını azaltmak.",
+    "explanation": [
+      "Yorgunluk tepki süresini ve karar verme kalitesini düşürebilir. Özellikle araç, kaldırma ve enerji işleri etkilenebilir.",
+      "İş yükü, vardiya planı, dinlenme ve yüksek riskli görevlerin zamanlaması birlikte değerlendirilmelidir.",
+      "Çalışanın yorgunluğu güvenle bildirebilmesi ve gerektiğinde yeniden görevlendirme yapılabilmesi önemlidir."
+    ],
+    "scenario": [
+      "Bir çalışan gece vardiyasının son saatinde ağır kaldırma işine katıldı.",
+      "Dikkat azaldığından işaretçi komutunu geç fark etti.",
+      "Kritik iş zamanlaması, dinlenme ve görev uygunluğu kontrolü olayı önleyebilirdi."
+    ],
+    "remember": "Dikkat veya uyanıklık azaldıysa işi güvenli şekilde durdurun ve amirinize bildirin.",
+    "hazards": [
+      "Yavaşlayan tepki süresi.",
+      "Yanlış komut algılama.",
+      "Araç kullanırken uyuklama.",
+      "Kritik işlemi atlama.",
+      "Vardiya sonunda dikkatsizlik.",
+      "Uzun süren kesintisiz çalışma.",
+      "Yetersiz uyku ve dinlenme.",
+      "Yorgunluğu bildirmekten kaçınma."
+    ],
+    "controls": [
+      "Vardiya sürelerini ve iş yükünü değerlendirin.",
+      "Yüksek riskli görevleri uygun planlayın.",
+      "Yeterli dinlenme araları sağlayın.",
+      "Yorgunluk belirtilerini ekipte konuşun.",
+      "Araç operatörü uygunluğunu doğrulayın.",
+      "Kritik işlerde karşılıklı kontrol uygulayın.",
+      "İş akışında güvenli durdurmayı destekleyin.",
+      "Yorgunluk bildirimini teşvik edin.",
+      "Gerekirse görev ve ekibi yeniden düzenleyin.",
+      "Vardiya tesliminde riskleri aktarın."
+    ],
+    "supervisor_script": "Arkadaşlar, yorgunluk gizlenirse risk büyür. Özellikle gece ve uzun vardiyalarda dikkat kaybını bildirmek güvenli çalışma şartıdır. Gerektiğinde işi yeniden planlayacağız.",
+    "questions": [
+      "Kimler uzun vardiyada?",
+      "Hangi işler kritik?",
+      "Dinlenme araları yeterli mi?",
+      "Yorgunluğu kime bildiririz?",
+      "İşi durdurma yetkimiz var mı?"
+    ],
+    "verification": [
+      "Vardiya süresi incelendi",
+      "İş yükü uygun",
+      "Kritik işler planlı",
+      "Dinlenme araları var",
+      "Yorgunluk belirtileri biliniyor",
+      "Operatör uygunluğu kontrol",
+      "Karşılıklı kontrol var",
+      "Bildirim yolu açık",
+      "Görev değişikliği mümkün",
+      "Teslim düzeni hazır"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "FATIGUE AND SHIFT WORK SAFETY TOOLBOX TALK",
+    "subtitle": "Recognise reduced alertness before errors occur.",
+    "objective": "Reduce safety errors caused by fatigue, inadequate rest and extended or irregular shifts.",
+    "explanation": [
+      "Fatigue can slow reactions and impair judgment, especially in vehicle operation, lifting and hazardous-energy tasks.",
+      "Assess workload, shift patterns, rest opportunities and the timing of high-risk activities together.",
+      "Workers need a safe way to report fatigue, with supervision ready to reassign or postpone work when necessary."
+    ],
+    "scenario": [
+      "A worker joined a critical lift near the end of an overnight shift.",
+      "Reduced alertness caused a delayed response to the banksman's signal.",
+      "Better scheduling, rest and fit-for-task checks could have prevented the near miss."
+    ],
+    "remember": "If alertness is reduced, stop safely and notify the supervisor.",
+    "hazards": [
+      "Slower reaction time.",
+      "Misunderstanding instructions.",
+      "Drowsiness while driving.",
+      "Skipping critical checks.",
+      "Low alertness late in a shift.",
+      "Long unbroken work periods.",
+      "Insufficient sleep or rest.",
+      "Failure to report fatigue."
+    ],
+    "controls": [
+      "Review shift duration and workload.",
+      "Schedule critical tasks appropriately.",
+      "Provide suitable rest breaks.",
+      "Discuss fatigue signs with teams.",
+      "Check operator fitness for work.",
+      "Use peer checks for critical steps.",
+      "Support safe work stoppage.",
+      "Encourage early fatigue reporting.",
+      "Reassign or postpone tasks when needed.",
+      "Handover risks between shifts."
+    ],
+    "supervisor_script": "Fatigue is a safety concern, not something to hide. Report reduced alertness, especially on nights and long shifts. We can change the work plan to stay safe.",
+    "questions": [
+      "Who has worked extended hours?",
+      "Which tasks are critical?",
+      "Are rest breaks adequate?",
+      "Who receives a fatigue report?",
+      "Can we stop or reassign the job?"
+    ],
+    "verification": [
+      "Shift hours reviewed",
+      "Workload appropriate",
+      "Critical work planned",
+      "Breaks available",
+      "Fatigue signs understood",
+      "Operator fitness checked",
+      "Peer checks ready",
+      "Reporting accessible",
+      "Reassignment possible",
+      "Handover prepared"
+    ]
+  }
 }
 ] as ToolboxRecord[];
 
