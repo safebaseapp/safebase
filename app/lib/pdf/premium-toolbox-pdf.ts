@@ -331,7 +331,7 @@ function header({
 
   // Long bilingual safety titles must remain legible within the A4 header.
   // Two complete lines are preferred over clipping a safety topic heading.
-  const headerTitleLines = title.length > 36 ? wrapText(title, 35) : [title];
+  const headerTitleLines = title.length > 28 ? wrapText(title, 31) : [title];
   if (headerTitleLines.length > 2) {
     throw new Error(`Toolbox PDF header title does not fit: ${title}`);
   }
