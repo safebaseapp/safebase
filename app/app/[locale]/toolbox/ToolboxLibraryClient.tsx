@@ -539,7 +539,7 @@ const autoToolboxItems: ToolboxItem[] = toolboxData
   }));
 
 const toolboxItems: ToolboxItem[] = [
-  ...baseToolboxItems,
+  ...baseToolboxItems.map((item) => ({ ...item, category: getAutoCategory(item.slug) })),
   ...autoToolboxItems,
 ];
 
