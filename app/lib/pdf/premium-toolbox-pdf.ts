@@ -329,6 +329,16 @@ function header({
   const docRefLabel = locale === "tr" ? "DOK. REF" : "DOC REF";
   const revLabel = locale === "tr" ? "REV" : "REV";
 
+  // Long bilingual safety titles must remain legible within the A4 header.
+  // Two complete lines are preferred over clipping a safety topic heading.
+  const headerTitleLines = title.length > 36 ? wrapText(title, 35) : [title];
+  if (headerTitleLines.length > 2) {
+    throw new Error(`Toolbox PDF header title does not fit: ${title}`);
+  }
+  const headerTitleMarkup = headerTitleLines
+    .map((line, index) => `<text x="54" y="${headerTitleLines.length > 1 ? 77 + index * 27 : 91}" font-family="SernemPdf" font-size="${headerTitleLines.length > 1 ? 22 : title.length > 24 ? 29 : 35}" font-weight="800" fill="#ffffff">${esc(line)}</text>`)
+    .join("");
+
   return `
     <rect
       x="0"
@@ -356,14 +366,7 @@ function header({
       fill="#52b8ff"
     >HSE • TOOLBOX TALK</text>
 
-    <text
-      x="54"
-      y="91"
-      font-family="SernemPdf"
-      font-size="${title.length > 24 ? 29 : 35}"
-      font-weight="800"
-      fill="#ffffff"
-    >${esc(title)}</text>
+    ${headerTitleMarkup}
 
     <text
       x="54"
