@@ -10,6 +10,7 @@ const masterSource = await readFile(path.join(appRoot, "lib/toolbox/premium-mast
 const pdfRouter = await readFile(path.join(appRoot, "lib/toolbox/standard-pdf.ts"), "utf8");
 const library = await readFile(path.join(appRoot, "app/[locale]/toolbox/ToolboxLibraryClient.tsx"), "utf8");
 const renderer = await readFile(path.join(appRoot, "lib/pdf/premium-toolbox-pdf-v2.ts"), "utf8");
+const legacyRenderer = await readFile(path.join(appRoot, "lib/pdf/premium-toolbox-pdf.ts"), "utf8");
 const errors = [];
 const marker = "export const toolboxData = ";
 const start = dataSource.indexOf(marker);
@@ -101,6 +102,11 @@ for (const record of records.filter((entry) => entry.sourceFile?.startsWith("edi
           errors.push(record.slug + "/" + locale + ": PDF " + field + "[" + index + "] would clip");
       }
     }
+    for (const [index, hazard] of data.hazards.slice(0, 3).entries()) {
+      if (pdfLineCount(hazard, 23) > 4) {
+        errors.push(record.slug + "/" + locale + ": focus hazard[" + index + "] would clip");
+      }
+    }
     for (const [field, maxChars, lineHeight] of [
       ["explanation", 51, 12.6], ["scenario", 50, 12.8],
     ]) {
@@ -129,6 +135,12 @@ if (!library.includes("getAutoCategory(item.slug)"))
   errors.push("Base Toolbox categories must use the shared classification");
 if (!/ILLUSTRATIVE SITE IMAGE/.test(renderer) || !/TEMSİLİ SAHA GÖRSELİ/.test(renderer))
   errors.push("Generic refinery photo must be identified as illustrative");
+if (!legacyRenderer.includes("paragraph(hazard, x + 57, 390, 23"))
+  errors.push("PDF focus cards do not have safe wrapping width");
+if (legacyRenderer.includes("const generatedDate ="))
+  errors.push("Attendance date must not auto-populate the download date");
+if (!legacyRenderer.includes('      x="385"') || !legacyRenderer.includes('      x="485"'))
+  errors.push("PDF sign-off document control columns may overlap");
 console.log(`Toolbox structural QA: ${records.length} bilingual topics; ${masters.length} static PDF masters; ${errors.length} issues`);
 if (errors.length) {
   for (const issue of errors) console.error("FAIL:", issue);
