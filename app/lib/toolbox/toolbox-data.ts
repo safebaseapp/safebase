@@ -10647,7 +10647,7 @@ export const toolboxData = [
       "Incorrect container use.",
       "Unlabelled secondary containers.",
       "Static electricity.",
-      "Spills.",
+      "Uncontrolled spills and potential exposure.",
       "Inadequate PPE."
     ],
     "controls_title": "CONTROLS",
@@ -10965,7 +10965,7 @@ export const toolboxData = [
       "Contaminated sharps.",
       "Unlabelled containers.",
       "Open waste containers.",
-      "Spills.",
+      "Uncontrolled spills and potential exposure.",
       "Incorrect disposal."
     ],
     "controls_title": "CONTROLS",
@@ -11125,7 +11125,7 @@ export const toolboxData = [
       "Damaged cables.",
       "Incorrect grounding.",
       "Water exposure.",
-      "Noise."
+      "Excessive noise exposure from equipment."
     ],
     "controls_title": "CONTROLS",
     "controls": [
@@ -11520,7 +11520,7 @@ export const toolboxData = [
       "Suya düşme.",
       "Boğulma.",
       "Soğuk su şoku.",
-      "Akıntı.",
+      "Güçlü akıntı nedeniyle sürüklenme.",
       "Kaygan yüzey.",
       "Yetersiz aydınlatma.",
       "Uygunsuz can yeleği.",
