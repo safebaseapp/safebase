@@ -13,6 +13,7 @@ type DocumentProfile = {
   siteName?: string;
   workArea?: string;
   presentedBy?: string;
+  date?: string;
   revision?: string;
 };
 
