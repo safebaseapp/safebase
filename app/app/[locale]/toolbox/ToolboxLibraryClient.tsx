@@ -361,7 +361,8 @@ function getAutoCategory(slug: string) {
     "scaffold-modification-control",
     "working-over-water",
     "mewp-pre-use-and-emergency-lowering",
-    "temporary-floor-openings-cover-control",
+    "temporary-floor-openings-cover-control", 
+    "temporary-stairways-safe-access",
   ].includes(slug)) return "work-at-height";
 
   // 02 — Lifting & Rigging Operations
@@ -374,7 +375,9 @@ function getAutoCategory(slug: string) {
     "tag-line-safety",
     "load-stability-center-of-gravity",
     "lifting-load-landing-and-unhooking",
-    "hydraulic-jacks-and-load-support",
+    "hydraulic-jacks-and-load-support", 
+    "pipe-spool-temporary-supports", 
+    "manual-chain-lever-hoists",
   ].includes(slug)) return "lifting-rigging";
 
   // 03 — Mobile Equipment & Traffic Safety
@@ -382,7 +385,8 @@ function getAutoCategory(slug: string) {
     "mobile-equipment-safety",
     "forklift-safety",
     "forklift-loading-unloading",
-    "vehicle-pedestrian-interface",
+    "vehicle-pedestrian-interface", 
+    "excavator-swing-zone-control",
   ].includes(slug)) return "mobile-traffic";
 
   // 04 — Electrical Safety & LOTO
@@ -394,7 +398,10 @@ function getAutoCategory(slug: string) {
     "overhead-power-lines",
     "portable-generator-safety",
     "extension-leads-cable-management",
-    "stored-energy-hydraulic-systems",
+    "stored-energy-hydraulic-systems", 
+    "first-energisation-commissioning", 
+    "arc-flash-electrical-boundaries", 
+    "heavy-rain-temporary-electrical-safety",
   ].includes(slug)) return "electrical-loto";
 
   // 05 — Hot Work & Fire Safety
@@ -414,7 +421,8 @@ function getAutoCategory(slug: string) {
     "spill-response",
     "hazardous-waste-handling",
     "painting-coating-safety",
-    "chemical-flushing-circulation-safety",
+    "chemical-flushing-circulation-safety", 
+    "eyewash-emergency-shower-readiness",
   ].includes(slug)) return "chemical-hazmat";
 
   // 07 — Confined Space & Gas Safety
@@ -429,7 +437,8 @@ function getAutoCategory(slug: string) {
   // 08 — Excavation & Groundworks
   if ([
     "excavation-safety",
-    "underground-services",
+    "underground-services", 
+    "trench-water-ingress-dewatering",
   ].includes(slug)) return "excavation-groundworks";
 
   // 09 — Tools, Machinery & Pressure Systems
@@ -442,7 +451,9 @@ function getAutoCategory(slug: string) {
     "abrasive-blasting-safety",
     "manual-torque-wrench-safety",
     "rotating-equipment-guarding-safety",
-    "pneumatic-tools-and-air-hoses",
+    "pneumatic-tools-and-air-hoses", 
+    "stored-pressure-depressurisation", 
+    "concrete-core-drilling-service-check",
   ].includes(slug)) return "tools-machinery";
 
   // 10 — PPE & Occupational Health
@@ -453,7 +464,10 @@ function getAutoCategory(slug: string) {
     "noise-hearing-protection",
     "respiratory-protection",
     "eye-face-protection",
-    "hand-injury-prevention",
+    "hand-injury-prevention", 
+    "silica-dust-concrete-cutting", 
+    "hand-arm-vibration-exposure", 
+    "fatigue-shift-work",
   ].includes(slug)) return "ppe-health";
 
   // 11 — Permit to Work & Operational Control
@@ -471,6 +485,22 @@ function getAutoCategory(slug: string) {
   return "general-site";
 }
 function getAutoIcon(slug: string) {
+  if (slug === "first-energisation-commissioning") return "⚡";
+  if (slug === "arc-flash-electrical-boundaries") return "⚡";
+  if (slug === "stored-pressure-depressurisation") return "🧯";
+  if (slug === "silica-dust-concrete-cutting") return "😷";
+  if (slug === "concrete-core-drilling-service-check") return "🔩";
+  if (slug === "pipe-spool-temporary-supports") return "🏗️";
+  if (slug === "manual-chain-lever-hoists") return "🪝";
+  if (slug === "excavator-swing-zone-control") return "🚜";
+  if (slug === "trench-water-ingress-dewatering") return "💧";
+  if (slug === "heavy-rain-temporary-electrical-safety") return "🌧️";
+  if (slug === "hand-arm-vibration-exposure") return "🧤";
+  if (slug === "fatigue-shift-work") return "🌙";
+  if (slug === "night-work-illumination") return "🔦";
+  if (slug === "formwork-pre-pour-inspection") return "🏗️";
+  if (slug === "temporary-stairways-safe-access") return "🪜";
+  if (slug === "eyewash-emergency-shower-readiness") return "🚿";
   if (slug === "mewp-pre-use-and-emergency-lowering") return "🏗️";
   if (slug === "chemical-flushing-circulation-safety") return "🧪";
   if (slug === "rotating-equipment-guarding-safety") return "⚙️";
