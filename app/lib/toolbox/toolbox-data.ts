@@ -14071,6 +14071,690 @@ export const toolboxData = [
       "Hand-back arranged"
     ]
   }
+},
+{
+  "slug": "first-energisation-commissioning",
+  "sourceFile": "editorial_20261113_first_energisation_commissioning",
+  "base": "first-energisation-commissioning-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "İLK ENERJİLENDİRME VE DEVREYE ALMA TOOLBOX TALK",
+    "subtitle": "Kontrollü enerji verme ve güvenli alan yönetimi.",
+    "objective": "Elektrik tesisatının ilk enerjilendirilmesinde beklenmeyen enerji, temas, ark ve ekipman arızası risklerini önlemek.",
+    "explanation": [
+      "İlk enerji verme yalnızca şalterin açılması değildir. Test kayıtları, devre sınırları, ekipman durumu ve geçici bağlantılar yetkili ekipçe doğrulanmalıdır.",
+      "Enerji verme planı, görev dağılımı, haberleşme ve durdurma yöntemi önceden onaylanmalıdır. Yetkisiz personel panolardan uzak tutulur.",
+      "Enerji verildikten sonra sistemin durumu değişir. İlgili izinler, uyarılar ve erişim kuralları yeni duruma göre güncellenmelidir."
+    ],
+    "scenario": [
+      "Yeni bir panonun enerji verme saati komşu ekibe bildirilmedi.",
+      "Bir çalışan açık bırakılan kablo bölmesine yaklaşarak gerilimli parçaya temas riski yaşadı.",
+      "Ortak bilgilendirme, erişim kısıtı ve doğrulanmış devre sınırları tehlikeyi azaltırdı."
+    ],
+    "remember": "İlk enerji verme yalnızca yetkili elektrik ekibinin onaylı prosedürüyle yapılır.",
+    "hazards": [
+      "Beklenmeyen gerilim altında kalma.",
+      "Açık terminale istemsiz temas.",
+      "Ark parlaması ve yanık.",
+      "Yanlış devrenin enerjilendirilmesi.",
+      "Eksik muhafaza veya geçici bağlantı.",
+      "Komşu ekibin habersiz çalışması.",
+      "Hatalı faz veya test bağlantısı.",
+      "Acil kesme yönteminin bilinmemesi."
+    ],
+    "controls": [
+      "Onaylı enerji verme planını doğrulayın.",
+      "Yetkili elektrik personelini belirleyin.",
+      "Ön test ve kontrol kayıtlarını tamamlayın.",
+      "Devre sınırlarını ve etiketleri doğrulayın.",
+      "Geçici kablo ve test bağlantılarını kontrol edin.",
+      "Açık kısımları kapatıp erişimi kısıtlayın.",
+      "Gerekli şok ve ark korumasını değerlendirin.",
+      "Komşu ekipleri ve işletmeyi bilgilendirin.",
+      "Acil durdurma ve iletişimi doğrulayın.",
+      "Enerji sonrası durumu kayıt altına alın."
+    ],
+    "supervisor_script": "Arkadaşlar, ilk enerji verme izinsiz yapılmayacak. Hangi devrenin ne zaman enerjileneceği ve sınırları bellidir. Yetkili ekip dışında kimse panoya yaklaşmayacak.",
+    "questions": [
+      "Enerji verme yetkilisi kim?",
+      "Hangi devreler etkilenecek?",
+      "Test kayıtları tamam mı?",
+      "Acil kesme nasıl yapılacak?",
+      "Komşu ekip haberdar mı?"
+    ],
+    "verification": [
+      "Enerji planı onaylı",
+      "Yetkili ekip belirlendi",
+      "Testler tamamlandı",
+      "Devre sınırları net",
+      "Etiketler doğrulandı",
+      "Geçici bağlantılar kontrol",
+      "Muhafazalar kapalı",
+      "Erişim kontrolü hazır",
+      "Acil yöntem biliniyor",
+      "İşletme bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "FIRST ENERGISATION AND COMMISSIONING TOOLBOX TALK",
+    "subtitle": "Safe first power-on and controlled access.",
+    "objective": "Prevent shock, arc events, unexpected energisation and equipment damage during initial electrical commissioning.",
+    "explanation": [
+      "First energisation is more than operating a breaker. Authorised staff must verify test records, circuit boundaries, equipment condition and temporary connections.",
+      "The energisation sequence, roles, communication and stop method must be approved in advance. Keep unauthorised personnel outside controlled areas.",
+      "Once power is applied, the system status changes. Update permits, warning notices and access rules to match the energised condition."
+    ],
+    "scenario": [
+      "A newly installed panel was scheduled for energisation without notifying adjacent contractors.",
+      "A worker approached an open cable compartment and risked contact with live parts.",
+      "Shared notification, access control and verified boundaries would have reduced the risk."
+    ],
+    "remember": "First energisation must only follow an approved procedure led by authorised electrical personnel.",
+    "hazards": [
+      "Unexpected exposure to live voltage.",
+      "Contact with open terminals.",
+      "Arc flash and burns.",
+      "Energising the wrong circuit.",
+      "Unprotected temporary wiring.",
+      "Other crews unaware of the change.",
+      "Incorrect phasing or test connections.",
+      "Unknown emergency shutdown method."
+    ],
+    "controls": [
+      "Verify the approved energisation plan.",
+      "Nominate qualified electrical personnel.",
+      "Complete required test and inspection records.",
+      "Confirm circuits, boundaries and labels.",
+      "Inspect temporary leads and test connections.",
+      "Secure covers and restrict access.",
+      "Assess shock and arc flash protection.",
+      "Notify adjacent crews and operations.",
+      "Confirm emergency shutdown and contact.",
+      "Document the post-energisation status."
+    ],
+    "supervisor_script": "Initial energisation is controlled by the authorised electrical team. We will confirm the circuit, area boundary and communication before power is applied. Everyone else stays clear.",
+    "questions": [
+      "Who authorises energisation?",
+      "Which circuits will become live?",
+      "Are tests documented?",
+      "How is power isolated in an emergency?",
+      "Have adjacent teams been told?"
+    ],
+    "verification": [
+      "Plan authorised",
+      "Qualified team assigned",
+      "Tests complete",
+      "Circuit boundary clear",
+      "Labels checked",
+      "Temporary leads checked",
+      "Covers secured",
+      "Access controlled",
+      "Emergency method known",
+      "Operations notified"
+    ]
+  }
+},
+{
+  "slug": "arc-flash-electrical-boundaries",
+  "sourceFile": "editorial_20261113_arc_flash_electrical_boundaries",
+  "base": "arc-flash-electrical-boundaries-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "ELEKTRİK ARK PARLAMASI VE YAKLAŞMA SINIRLARI TOOLBOX TALK",
+    "subtitle": "Ark riski, temas mesafesi ve yetkili erişim.",
+    "objective": "Gerilimli ekipman yakınında elektrik arkı ve şok nedeniyle ağır yaralanma risklerini önlemek.",
+    "explanation": [
+      "Ark parlaması, temas olmadan da ciddi ısı ve basınç oluşturabilir. Şok yaklaşma sınırları ile ark parlaması sınırı farklı amaçlara hizmet eder.",
+      "Güvenli sınırlar ve koruyucu ekipman, yetkin kişilerin yaptığı iş ve ekipman risk değerlendirmesine göre belirlenir.",
+      "Enerjili çalışma varsayılan yöntem değildir. Önce enerjisiz güvenli çalışma seçeneği ve uygun izolasyon değerlendirilmelidir."
+    ],
+    "scenario": [
+      "Bir bakım çalışanı açık bir elektrik pano kapısının yakınında iş yaptı.",
+      "Çalışma alanı sınırı belirlenmediğinden yetkisiz biri panonun önünden geçti.",
+      "Risk değerlendirmesi, sınır işaretleri ve erişim kontrolü bu maruziyeti azaltırdı."
+    ],
+    "remember": "Ark riski bulunan sınıra izinsiz girmeyin; yetkili değerlendirme olmadan koruma seviyesi seçmeyin.",
+    "hazards": [
+      "Ark parlamasına bağlı ciddi yanık.",
+      "Elektrik şoku ve temas.",
+      "Ark basıncıyla yaralanma.",
+      "Uçan sıcak metal parçacığı.",
+      "Yanlış yaklaşma sınırı.",
+      "Uygun olmayan yüz koruması.",
+      "Yetkisiz pano açılması.",
+      "Enerji durumunun yanlış sanılması."
+    ],
+    "controls": [
+      "Önce enerjisiz çalışma seçeneğini değerlendirin.",
+      "Yetkili elektrik risk değerlendirmesini inceleyin.",
+      "Şok ve ark sınırlarını ayrı belirleyin.",
+      "Uygun bariyer ve uyarı yerleştirin.",
+      "Yetkisiz kişileri sınır dışında tutun.",
+      "Ekipman etiket ve arıza durumunu kontrol edin.",
+      "Gereken ark koruyucu KKD'yi yetkinlikle seçin.",
+      "İzolasyon ve test yöntemini doğrulayın.",
+      "Acil müdahale ve haberleşmeyi planlayın.",
+      "Koşullar değişirse işi durdurun."
+    ],
+    "supervisor_script": "Ark ve elektrik çarpması aynı tehlike değildir. Pano önündeki sınırları yetkili ekip belirleyecek; doğru koruma ve izin yoksa gerilimli bölgeye yaklaşmayacağız.",
+    "questions": [
+      "Bu ekipman enerjili mi?",
+      "Ark sınırını kim belirledi?",
+      "Şok sınırı nerede?",
+      "Kim erişmeye yetkili?",
+      "Enerjisiz yöntem mümkün mü?"
+    ],
+    "verification": [
+      "Enerji durumu biliniyor",
+      "Risk değerlendirmesi hazır",
+      "Ark sınırı belirli",
+      "Şok sınırı belirli",
+      "Erişim kısıtlı",
+      "Uyarılar yerinde",
+      "KKD uygun",
+      "İzolasyon planlı",
+      "Acil yardım hazır",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "ELECTRICAL ARC FLASH AND APPROACH BOUNDARIES TOOLBOX TALK",
+    "subtitle": "Separate arc hazards from electrical shock limits.",
+    "objective": "Prevent serious injury from arc flash and electric shock when working near energised equipment.",
+    "explanation": [
+      "Arc flash can cause severe heat and pressure without direct contact. Shock approach boundaries and arc flash boundaries protect against different hazards.",
+      "A qualified assessment of the task and equipment must determine safe limits and protective equipment.",
+      "Energised work is not the default option. First consider safe de-energisation and verified electrical isolation."
+    ],
+    "scenario": [
+      "A maintenance worker performed nearby work beside an open electrical enclosure.",
+      "Without a defined boundary, an unauthorised person walked close to the exposed equipment.",
+      "Task-specific hazard assessment, barriers and access control would have reduced the risk."
+    ],
+    "remember": "Never enter a defined arc or shock boundary without authorisation and appropriate controls.",
+    "hazards": [
+      "Severe thermal burns from an arc.",
+      "Electric shock from live conductors.",
+      "Pressure effects of an arc event.",
+      "Ejected hot metal particles.",
+      "Wrong approach distances.",
+      "Inadequate face protection.",
+      "Unauthorised panel opening.",
+      "Incorrect assumption of isolation."
+    ],
+    "controls": [
+      "Consider de-energised working first.",
+      "Review the qualified hazard assessment.",
+      "Identify shock and arc boundaries separately.",
+      "Install suitable barriers and warnings.",
+      "Restrict entry to authorised personnel.",
+      "Check equipment labels and condition.",
+      "Select rated arc PPE for the actual task.",
+      "Verify electrical isolation arrangements.",
+      "Plan emergency response and contact.",
+      "Stop work if conditions change."
+    ],
+    "supervisor_script": "Arc flash and electrical shock need different control boundaries. Competent electrical staff will define the area. No one enters without the correct permission and protection.",
+    "questions": [
+      "Is the equipment energised?",
+      "Who assessed the arc boundary?",
+      "Where is the shock limit?",
+      "Who can enter the work area?",
+      "Can the task be de-energised?"
+    ],
+    "verification": [
+      "Electrical status known",
+      "Risk assessment ready",
+      "Arc boundary marked",
+      "Shock boundary marked",
+      "Access restricted",
+      "Warnings installed",
+      "PPE suitable",
+      "Isolation reviewed",
+      "Emergency plan available",
+      "Crew briefed"
+    ]
+  }
+},
+{
+  "slug": "stored-pressure-depressurisation",
+  "sourceFile": "editorial_20261113_stored_pressure_depressurisation",
+  "base": "stored-pressure-depressurisation-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "DEPOLANMIŞ BASINCIN BOŞALTILMASI TOOLBOX TALK",
+    "subtitle": "Hat açmadan önce sıfır basıncı doğrulayın.",
+    "objective": "Boru, hortum, tank ve ekipman açılmadan önce kalıntı basıncın kontrolsüz salınmasını önlemek.",
+    "explanation": [
+      "Kapalı vana veya duran pompa basıncın sıfır olduğu anlamına gelmez. Kör hacimlerde sıvı ya da gaz basınç altında kalabilir.",
+      "Enerji izolasyonu, uygun drenaj veya havalandırma ve sıfır enerji doğrulaması onaylı prosedürle yapılmalıdır.",
+      "Boşaltma noktası güvenli bir yere yönlenmeli ve içerik tehlikesi, sıcaklık ile çevresel etkiler değerlendirilmelidir."
+    ],
+    "scenario": [
+      "Bakım ekibi vanayı kapattıktan sonra bir hortum bağlantısını sökmek istedi.",
+      "Hat içinde kalan basınç sıvıyı fışkırtarak yakındaki personeli tehlikeye attı.",
+      "Kalıntı basıncın güvenli tahliyesi ve uygun ölçümle doğrulanması olayı önlerdi."
+    ],
+    "remember": "Vana kapalı olsa da basınç kalabilir. Açmadan önce izolasyonu ve sıfır basıncı doğrulayın.",
+    "hazards": [
+      "Basınçlı sıvının fışkırması.",
+      "Basınçlı gazın ani boşalması.",
+      "Bağlantı parçasının fırlaması.",
+      "Sıcak akışkanla yanma.",
+      "Tehlikeli kimyasal maruziyeti.",
+      "Drenajın yanlış yere verilmesi.",
+      "Kör hacimde basınç kalması.",
+      "Manometrenin hatalı okunması."
+    ],
+    "controls": [
+      "Onaylı açma ve izolasyon planını kullanın.",
+      "Tüm basınç kaynaklarını belirleyin.",
+      "İzolasyon noktalarını doğrulayın.",
+      "İzolasyon ve kilitleme prosedürünü uygulayın.",
+      "Tahliye yolunu güvenli alana yönlendirin.",
+      "İçeriğin kimyasal ve sıcaklık riskini inceleyin.",
+      "Sıfır basıncı uygun yöntemle doğrulayın.",
+      "Kör hacimleri ayrıca değerlendirin.",
+      "Açma sırasında fırlama hattından uzak durun.",
+      "Şüphe varsa durup yetkiliyi çağırın."
+    ],
+    "supervisor_script": "Arkadaşlar, vananın kapanması basıncın bittiği anlamına gelmez. Hattı açmadan önce güvenli tahliye ve sıfır enerji doğrulaması yapılacak.",
+    "questions": [
+      "Basınç hangi noktada kalabilir?",
+      "İzolasyon nerede?",
+      "Tahliye nereye yapılacak?",
+      "Sıfır basınç nasıl doğrulanır?",
+      "İçerik tehlikesi nedir?"
+    ],
+    "verification": [
+      "Prosedür onaylı",
+      "Kaynaklar belirlendi",
+      "İzolasyon doğrulandı",
+      "Kilitler uygulandı",
+      "Tahliye güvenli",
+      "Akışkan tanımlı",
+      "Sıcaklık kontrol edildi",
+      "Ölçüm uygun",
+      "Kör hacimler değerlendirildi",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "STORED PRESSURE RELEASE AND ZERO-ENERGY TOOLBOX TALK",
+    "subtitle": "Verify zero pressure before opening equipment.",
+    "objective": "Prevent uncontrolled release of residual pressure before opening piping, hoses, vessels or equipment.",
+    "explanation": [
+      "A closed valve or stopped pump does not prove zero pressure. Fluids and gases can remain pressurised in trapped sections.",
+      "Isolation, controlled venting or draining and verification must follow an approved procedure.",
+      "Discharge routes must be safe. Assess the substance, temperature and environmental consequences before releasing contents."
+    ],
+    "scenario": [
+      "A crew planned to disconnect a hose after closing the supply valve.",
+      "Residual pressure ejected fluid and exposed nearby personnel.",
+      "Controlled venting and verified zero pressure would have prevented the release."
+    ],
+    "remember": "A shut valve is not proof of zero pressure. Verify isolation and depressurisation before opening.",
+    "hazards": [
+      "High-pressure liquid spray.",
+      "Sudden compressed-gas release.",
+      "Ejected connection components.",
+      "Burns from hot fluids.",
+      "Hazardous chemical exposure.",
+      "Unsafe discharge to drains.",
+      "Trapped pressure in dead legs.",
+      "Misleading pressure gauge reading."
+    ],
+    "controls": [
+      "Use the approved opening procedure.",
+      "Identify all pressure sources.",
+      "Verify isolation locations.",
+      "Apply authorised energy isolation.",
+      "Route discharge to a safe location.",
+      "Assess chemical and thermal hazards.",
+      "Verify zero pressure using suitable means.",
+      "Assess trapped pockets separately.",
+      "Remain clear of the release path.",
+      "Stop and consult the responsible specialist."
+    ],
+    "supervisor_script": "Closed valves do not guarantee that pressure is gone. Before any break in containment, we will isolate, vent safely and verify zero energy.",
+    "questions": [
+      "Where can pressure remain trapped?",
+      "Which isolations are required?",
+      "Where will discharge go?",
+      "How is zero pressure verified?",
+      "What substance is contained?"
+    ],
+    "verification": [
+      "Procedure approved",
+      "Pressure sources mapped",
+      "Isolations checked",
+      "Locks applied",
+      "Discharge route safe",
+      "Substance identified",
+      "Temperature checked",
+      "Gauge suitable",
+      "Trapped sections reviewed",
+      "Crew briefed"
+    ]
+  }
+},
+{
+  "slug": "silica-dust-concrete-cutting",
+  "sourceFile": "editorial_20261113_silica_dust_concrete_cutting",
+  "base": "silica-dust-concrete-cutting-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "BETON KESİMİNDE SİLİKA TOZU KONTROLÜ TOOLBOX TALK",
+    "subtitle": "Solunabilir silika maruziyetini kaynağında azaltın.",
+    "objective": "Beton ve taş kesme sırasında solunabilir kristalin silika tozuna bağlı meslek hastalığı riskini önlemek.",
+    "explanation": [
+      "Beton, tuğla ve birçok taş kesildiğinde gözle zor fark edilen ince silika tozu çıkabilir. Maruziyet ağır akciğer hastalıklarına neden olabilir.",
+      "Mümkün olduğunda ön kesimli ürün, ıslak kesim veya alete bağlı uygun toz emişi gibi kaynak kontrolleri tercih edilmelidir.",
+      "Kontroller yeterli değilse uygun solunum koruması, yüz uyumu, alan ayrımı ve temizlik düzeni risk değerlendirmesine göre uygulanır."
+    ],
+    "scenario": [
+      "Bir ekip kapalı bölümde kuru beton kesimi yaptı.",
+      "Toz yayıldı; aynı alandaki çalışanlar uygun koruma olmadan maruz kaldı.",
+      "Islak kesim, emiş, erişim kontrolü ve uygun solunum koruması maruziyeti azaltırdı."
+    ],
+    "remember": "Görünür toz yokluğu güvenli hava demek değildir; tozu kaynağında kontrol edin.",
+    "hazards": [
+      "Solunabilir silika tozunun solunması.",
+      "Kapalı alanda toz birikmesi.",
+      "Yakındaki ekiplerin etkilenmesi.",
+      "Kuru süpürmeyle tozun yeniden kalkması.",
+      "Yanlış seçilmiş solunum koruması.",
+      "Islak kesimde kaygan yüzey.",
+      "Su ve elektrik temas riski.",
+      "Kesici disk kaynaklı yaralanma."
+    ],
+    "controls": [
+      "Daha az toz üreten yöntemi seçin.",
+      "Islak kesim veya uygun emiş sağlayın.",
+      "Kesme ekipmanını kontrol edin.",
+      "Çalışma alanını diğer ekiplerden ayırın.",
+      "Toz emiş filtrelerini uygun tutun.",
+      "Gereken solunum korumasını doğrulayın.",
+      "Solunum maskesi yüz uyumunu kontrol edin.",
+      "Kuru süpürme ve basınçlı hava kullanmayın.",
+      "Islak yüzey ve elektrik riskini kontrol edin.",
+      "Atık toz ve bulamacı güvenle toplayın."
+    ],
+    "supervisor_script": "Arkadaşlar, silika tozu görünmese de tehlikelidir. Önceliğimiz kaynağında ıslatma veya emiş; gerekli maskeyi doğru kullanacağız ve alanı ayıracağız.",
+    "questions": [
+      "Hangi malzeme kesiliyor?",
+      "Toz nasıl bastırılacak?",
+      "Yakın ekipler korunuyor mu?",
+      "Maske seçimi uygun mu?",
+      "Atık nasıl temizlenecek?"
+    ],
+    "verification": [
+      "Malzeme değerlendirildi",
+      "Kesim yöntemi uygun",
+      "Toz kontrolü hazır",
+      "Ekipman kontrol edildi",
+      "Alan ayrıldı",
+      "Filtreler uygun",
+      "Solunum koruması doğrulandı",
+      "Yüz uyumu sağlandı",
+      "Elektrik-su riski kontrol",
+      "Atık planı hazır"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "SILICA DUST CONTROL DURING CONCRETE CUTTING TOOLBOX TALK",
+    "subtitle": "Control respirable crystalline silica at source.",
+    "objective": "Reduce exposure to respirable crystalline silica when cutting concrete, stone and masonry.",
+    "explanation": [
+      "Concrete, brick and stone cutting can release fine silica dust that is difficult to see. Breathing this dust can cause severe lung disease.",
+      "Where practical, use pre-cut materials, wet cutting or suitable on-tool extraction to control dust at source.",
+      "Apply task-assessed respiratory protection, fit checks, segregation and safe cleaning where engineering controls are insufficient."
+    ],
+    "scenario": [
+      "A crew dry-cut concrete in an enclosed area.",
+      "Fine dust spread to nearby workers without adequate protection.",
+      "Water suppression, extraction, segregation and suitable respirators would have reduced exposure."
+    ],
+    "remember": "Invisible dust can still be hazardous. Control silica at its source.",
+    "hazards": [
+      "Breathing respirable silica.",
+      "Dust accumulating indoors.",
+      "Exposure of neighbouring workers.",
+      "Dust raised by dry sweeping.",
+      "Incorrect respiratory protection.",
+      "Slips on wet cutting slurry.",
+      "Water contacting electrical tools.",
+      "Injury from a cutting blade."
+    ],
+    "controls": [
+      "Choose a lower-dust method.",
+      "Use water suppression or suitable extraction.",
+      "Inspect cutting equipment before use.",
+      "Segregate the work area.",
+      "Maintain extraction filters.",
+      "Assess required respirators.",
+      "Confirm correct respirator fit.",
+      "Avoid dry sweeping and compressed air.",
+      "Control wet surfaces and electrical risks.",
+      "Collect dust and slurry safely."
+    ],
+    "supervisor_script": "Silica dust may be harmful even when it cannot be seen. We will control it using wet methods or extraction, segregate the area and use suitable respiratory protection.",
+    "questions": [
+      "What material are we cutting?",
+      "How is dust suppressed?",
+      "Are neighbouring crews protected?",
+      "Is the respirator suitable?",
+      "How will waste be removed?"
+    ],
+    "verification": [
+      "Material assessed",
+      "Method selected",
+      "Dust controls ready",
+      "Tools checked",
+      "Area segregated",
+      "Filters suitable",
+      "Respirator selected",
+      "Fit confirmed",
+      "Water/electric risk checked",
+      "Waste plan ready"
+    ]
+  }
 }
 ] as ToolboxRecord[];
 
