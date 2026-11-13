@@ -66,6 +66,52 @@ for (const record of records) {
     errors.push(`${record.slug}: editorial entry has no explicit catalogue icon`);
   }
 }
+
+function pdfLineCount(text, maximumCharacters) {
+  let current = "";
+  let count = 0;
+  for (const word of String(text ?? "").split(/\s+/).filter(Boolean)) {
+    const next = current ? current + " " + word : word;
+    if (next.length > maximumCharacters && current) {
+      count += 1;
+      current = word;
+    } else current = next;
+  }
+  return current ? count + 1 : count;
+}
+for (const record of records.filter((entry) => entry.sourceFile?.startsWith("editorial_20261113_"))) {
+  for (const locale of ["tr", "en"]) {
+    const data = record[locale];
+    const title = String(data.title).replace(/\s+TOOLBOX TALK$/i, "");
+    if (title.length > 36 && pdfLineCount(title, 35) > 2)
+      errors.push(record.slug + "/" + locale + ": PDF title needs more than two lines");
+    for (const [field, maxChars, maxLines] of [
+      ["objective", 96, 3], ["remember", 78, 3], ["supervisor_script", 108, 5],
+    ]) {
+      if (pdfLineCount(data[field], maxChars) > maxLines)
+        errors.push(record.slug + "/" + locale + ": PDF " + field + " would clip");
+    }
+    for (const [field, maxChars, maxLines, maximumEntries] of [
+      ["explanation", 51, 4, 3], ["scenario", 50, 4, 3],
+      ["hazards", 38, 2, 8], ["controls", 40, 2, 10],
+      ["questions", 40, 2, 6], ["verification", 30, 2, 10],
+    ]) {
+      for (const [index, sentence] of data[field].slice(0, maximumEntries).entries()) {
+        if (pdfLineCount(sentence, maxChars) > maxLines)
+          errors.push(record.slug + "/" + locale + ": PDF " + field + "[" + index + "] would clip");
+      }
+    }
+    for (const [field, maxChars, lineHeight] of [
+      ["explanation", 51, 12.6], ["scenario", 50, 12.8],
+    ]) {
+      const totalLines = data[field].slice(0, 3)
+        .reduce((total, sentence) => total + pdfLineCount(sentence, maxChars), 0);
+      if (totalLines * lineHeight + 6 > 220)
+        errors.push(record.slug + "/" + locale + ": PDF " + field + " exceeds briefing card");
+    }
+  }
+}
+
 if (masters.length !== new Set(masters).size) errors.push("Duplicate premium master slug");
 for (const slug of masters) {
   if (!names.has(slug)) errors.push(`Master PDF has no corresponding content: ${slug}`);
