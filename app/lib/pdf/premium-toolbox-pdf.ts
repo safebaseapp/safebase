@@ -708,9 +708,9 @@ function pageOne(
           fill="#65bfff"
         >0${index + 1}</text>
 
-        ${paragraph(hazard, x + 57, 390, 29, {
-          fontSize: 10.3,
-          lineHeight: 14,
+        ${paragraph(hazard, x + 57, 390, 23, {
+          fontSize: 9.6,
+          lineHeight: 13,
           weight: 700,
           fill: "#ffffff",
           maxLines: 4,
@@ -1309,15 +1309,13 @@ function pageThree(
       x="68"
       y="430"
       font-family="SernemPdf"
-      font-size="${Math.max(6.8, Math.min(10, 180 / Math.max(1, (`REF: ${docRef}`).length * 0.56)))}"
+      font-size="${Math.max(6, Math.min(9.6, 285 / Math.max(1, (`REF: ${docRef}`).length * 0.60)))}"
       font-weight="700"
       fill="#ffffff"
-      textLength="${Math.min(180, Math.max(1, (`REF: ${docRef}`).length * 5.6))}"
-      lengthAdjust="spacingAndGlyphs"
     >REF: ${esc(docRef)}</text>
 
     <text
-      x="280"
+      x="385"
       y="430"
       font-family="SernemPdf"
       font-size="10"
@@ -1326,7 +1324,7 @@ function pageThree(
     >REV: ${esc(revision)}</text>
 
     <text
-      x="410"
+      x="485"
       y="430"
       font-family="SernemPdf"
       font-size="10"
