@@ -60,7 +60,7 @@ for (const record of records) {
       errors.push(`${record.slug}/${locale}: draft placeholder found`);
   }
 }
-if (records.length < 84) errors.push(`Catalogue unexpectedly shrank to ${records.length}; expected at least 84`);
+if (records.length < 100) errors.push(`Catalogue unexpectedly shrank to ${records.length}; expected at least 100`);
 for (const record of records) {
   if (record.sourceFile?.startsWith("editorial_20261113_") && !library.includes(`if (slug === "${record.slug}")`)) {
     errors.push(`${record.slug}: editorial entry has no explicit catalogue icon`);
