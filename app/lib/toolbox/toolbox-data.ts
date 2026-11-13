@@ -11682,8 +11682,8 @@ export const toolboxData = [
     "application_subtitle": "Tork değeri, lokma bağlantısı, el pozisyonu ve kontrollü kuvvet uygulaması.",
     "objective": "Manuel tork sıkma sırasında lokmanın ayrılması, anahtarın kayması veya ani direnç kaybı nedeniyle el-parmak sıkışmasını ve kontrol kaybını önlemek.",
     "explanation": [
-      "Yüksek tork uygulanırken anahtar üzerinde depolanan kuvvet, lokma veya kare sürücü bağlantısı ayrıldığında aniden serbest kalabilir. Bu sırada anahtarı arkadan destekleyen el bitişik boru, çelik yapı veya ekipman arasında sıkışabilir.",
-      "İşe başlamadan önce üretici talimatına uygun lokma, kare sürücü ve sabitleme düzeni; uygun oturma derinliği, kalibrasyon durumu, erişim ve çevredeki sıkışma noktaları kontrol edilmelidir. Lokma uygun görünse bile tutuş ve pozisyon ayrıca değerlendirilmelidir.",
+      "Yüksek tork sırasında lokma veya kare sürücü bağlantısı ayrılırsa anahtar aniden hareket edebilir. Arkadan destekleyen el, boru veya yapı arasında sıkışabilir.",
+      "İşe başlamadan önce lokma ve sürücünün uyumunu, tam oturuşunu, kalibrasyonu, güvenli erişimi ve sıkışma noktalarını kontrol edin. Elin kaçış hattında kalmadığını doğrulayın.",
       "Belirlenen tork değeri ve yağlayıcı kullanımı onaylı mühendislik prosedürüne uygun olmalıdır. Yağlayıcı, cıvata ön yükünü etkileyebilir; sahada keyfi tork değişikliği yapılmamalıdır."
     ],
     "scenario": [
@@ -11707,7 +11707,7 @@ export const toolboxData = [
       "Lokma boyutu, kare sürücü ve tutma mekanizmasının uyumunu kontrol edin.",
       "Lokmanın bağlantı üzerinde tam oturduğunu sıkma öncesinde doğrulayın.",
       "Kalibrasyon durumu ve anahtarın hasar kontrolünü yapın.",
-      "Yağlama şartını ve hedef torku QA/QC veya yetkili teknik sorumluyla doğrulayın.",
+      "Yağlama şartı ve hedef torku yetkili teknik sorumluyla doğrulayın.",
       "Anahtarın olası kayma yönünü ve bitişik sıkışma noktalarını belirleyin.",
       "Destek elini çelik yapı, boru ve hareket hattından uzak konumlandırın.",
       "Dengeli duruş, kontrollü kuvvet ve yeterli çalışma boşluğu sağlayın.",
@@ -11766,8 +11766,8 @@ export const toolboxData = [
     "application_subtitle": "Target torque, socket engagement, hand position and controlled force application.",
     "objective": "Prevent hand and finger entrapment or loss of control when a manual torque wrench slips, a socket disengages or applied resistance is suddenly lost.",
     "explanation": [
-      "High manual torque can create significant reaction forces. If a socket or square-drive connection disengages, the wrench may move suddenly and trap a supporting hand against an adjacent pipe, scaffold tube or structure.",
-      "Before applying force, verify the manufacturer-specified socket, drive and retention method; full socket engagement, tool condition, calibration, access and nearby pinch points. Apparently serviceable equipment does not remove the need for safe hand placement.",
+      "If the socket or square drive disengages under high torque, the wrench can move suddenly. A supporting hand may become trapped against adjacent pipes or structures.",
+      "Check socket-drive compatibility, full seating, calibration, access and pinch points before applying force. Keep hands out of the possible travel path.",
       "The specified torque and lubrication condition must match the approved engineering procedure. Lubrication can affect bolt preload; operators must not improvise torque adjustments."
     ],
     "scenario": [
@@ -11791,7 +11791,7 @@ export const toolboxData = [
       "Check socket size, square-drive compatibility and retention.",
       "Confirm that the socket is fully seated before applying force.",
       "Inspect the wrench and verify calibration status.",
-      "Confirm lubrication and torque requirements with the competent technical authority.",
+      "Verify lubrication and torque requirements with technical staff.",
       "Identify the likely wrench travel path and adjacent pinch points.",
       "Keep the supporting hand away from structures and the movement path.",
       "Maintain stable footing, controlled force and adequate clearance.",
@@ -11855,14 +11855,14 @@ export const toolboxData = [
     "application_subtitle": "Sıcak iş izni, sistem izolasyonu, yanıcı madde kontrolü ve yangın gözetimi.",
     "objective": "Yeni veya mevcut boru üzerinde yapılacak kaynak ve taşlama işlerinin yakındaki aktif dizel tankı, yakıt hattı veya yangın koruma sistemleri üzerinde yangın, patlama ve işletme riski oluşturmamasını sağlamak.",
     "explanation": [
-      "Kaynak yapılacak borunun yeni ve boş olması, aynı odadaki aktif dizel sistemi tehlikesini ortadan kaldırmaz. Kıvılcım, cüruf, sıcak yüzey ve duman bitişik ekipmanı, kaçak yakıtı veya yanıcı kalıntıları etkileyebilir.",
-      "Mümkünse sıcak iş yerine soğuk bağlantı yöntemi seçilmeli veya işlem güvenli bir alana taşınmalıdır. Bu mümkün değilse tesis sahibi ve yetkili ekip, canlı yakıt sistemlerinin etkilenmesini değerlendirerek gerekli fiziksel izolasyon, boşaltma, temizleme, purge veya güvenli koruma yöntemini onaylamalıdır.",
-      "Bir tankın boşaltılması tek başına gazsızlık kanıtı değildir. Temizlik/purge sonrası ilgili atmosferin yetkili kişi tarafından doğrulanması, gerekli yangın ve gaz izleme önlemleri, saha acil durum düzeni ve yangın sistemi kullanılabilirliği ayrıca kontrol edilmelidir."
+      "Yeni ve boş boruda kaynak yapmak, aynı odadaki aktif dizel sisteminin riskini ortadan kaldırmaz. Kıvılcım ve ısı, yakıt kaçağını veya yanıcı kalıntıyı tutuşturabilir.",
+      "Öncelikle soğuk bağlantı veya güvenli alanda imalatı değerlendirin. Gerekliyse tesis sahibi, yakıt sisteminde izolasyon, boşaltma, temizlik, purge ya da uygun korumayı onaylamalıdır.",
+      "Tankın boşaltılması gazsızlık kanıtı değildir. Gereken atmosfer ölçümü, yangın izleme, acil durum ve yangın koruma sisteminin kullanılabilirliği yetkili kişilerce doğrulanmalıdır."
     ],
     "scenario": [
       "Bir ekip devreye alınmamış yeni bir boruya, aktif dizel tankı bulunan yangın odasında kaynak yapmayı planladı.",
       "Yeni borunun boş olduğu düşünülerek çalışma alanındaki komşu yakıt hatları, drenaj noktaları ve tank bağlantıları yeterince değerlendirilmedi.",
-      "İzin öncesi SIMOPS değerlendirmesi, yakıt sistemini güvenli duruma alma veya fiziksel ayırma, uygun gaz/atmosfer kontrolleri ve yangın korumasının doğrulanması olmadan sıcak iş başlatılmamalıdır."
+      "Sıcak işe ancak SIMOPS, yakıt sistemi izolasyonu veya korunması, gerekli atmosfer ölçümü ve yangın kontrolleri onaylandıktan sonra başlanmalıdır."
     ],
     "remember": "Yeni boru üzerinde kaynak yapılması, yakındaki aktif yakıt sistemini güvenli hale getirmez. İzolasyon ve saha koşulları doğrulanmadıysa sıcak işi başlatmayın.",
     "hazards": [
@@ -11876,16 +11876,16 @@ export const toolboxData = [
       "Yangın sonrası gizli kor, gecikmiş tutuşma ve kurtarma güçlüğü."
     ],
     "controls": [
-      "Sıcak işin yerine soğuk yöntem veya güvenli alanda imalat seçeneğini değerlendirin.",
-      "Tesis sahibi ve ilgili disiplinlerle SIMOPS ve sahaya özgü risk değerlendirmesi yapın.",
+      "Önce soğuk bağlantı veya güvenli alanda imalat seçeneğini değerlendirin.",
+      "SIMOPS ve sahaya özgü riskleri tesis sahibiyle değerlendirin.",
       "Sıcak çalışma iznini, yer ve iş kapsamı dahil doğrulayın.",
-      "Aktif dizel tankı ve hatlarının etkilenmesini değerlendirin; gereken izolasyon/boşaltma/temizleme/purge işlemini yetkili planla yürütün.",
-      "İzolasyon, gazsızlık ve diğer gerekli atmosfer kontrollerini yetkin kişilerce doğrulayın.",
-      "Kıvılcım, cüruf ve ısının komşu ekipmana yayılmasını onaylı fiziksel korumayla önleyin.",
+      "Aktif dizel tankı ve hatları için onaylı izolasyon planı uygulayın.",
+      "Gerekli izolasyon ve atmosfer ölçümlerini yetkili kişiye doğrulatın.",
+      "Komşu ekipmanı kıvılcım, cüruf ve ısıdan fiziksel olarak koruyun.",
       "Yakın gider, açıklık, kablo geçişi ve alt seviyeleri kontrol edin.",
       "Yangın gözcüsü, uygun söndürme ekipmanı ve acil iletişimi hazır tutun.",
-      "Yangın suyu/koruma sisteminin kullanılabilirliğini ve varsa impairment planını onaylayın.",
-      "İzin gerekliliklerine göre iş esnasında ve sonrasında gözetimi sürdürün; koşullar değişirse durun."
+      "Yangın koruma sisteminin kullanılabilirliğini onaylayın.",
+      "İş sırasında ve sonrasında gereken gözetimi sürdürün."
     ],
     "supervisor_script": "Arkadaşlar, kaynak yapılacak yeni borunun boş olması bu odadaki dizel sistemini güvenli yapmaz. İş izni, yakıt sistemlerinin izolasyon durumu, atmosfer ölçümleri, fiziksel koruma ve yangın gözcüsü teyit edilmeden işe başlamayacağız. Yangın koruma sistemi etkileniyorsa onaylı alternatif önlemleri görmeden sıcak işe izin vermeyeceğiz.",
     "questions": [
@@ -11940,9 +11940,9 @@ export const toolboxData = [
     "application_subtitle": "Hot-work permits, system isolation, combustible controls and fire watch.",
     "objective": "Prevent fire, explosion and impairment of facility protection systems during welding or grinding on new or existing pipework near active diesel tanks, fuel lines or fire-protection equipment.",
     "explanation": [
-      "Welding on a new, uncommissioned and empty pipe does not remove the hazard of a live diesel system in the same room. Sparks, slag, heat and fumes can affect adjacent equipment, leaked fuel or combustible residues.",
-      "Prefer a cold-work method or move fabrication to a safe area where practicable. Otherwise, the facility owner and competent personnel must assess exposure of live fuel systems and approve any necessary positive isolation, draining, cleaning, purging or suitable protection.",
-      "Draining a tank alone does not prove it is gas-free. After cleaning or purging, competent verification of the relevant atmosphere, required monitoring, emergency arrangements and the availability of fire protection must be addressed."
+      "Welding an empty new pipe does not remove hazards from a live diesel system nearby. Sparks and heat can ignite leaked fuel or combustible residue.",
+      "Prefer cold connections or fabrication in a safe area. If hot work remains necessary, the owner must approve suitable fuel-system isolation, draining, cleaning, purging or protection.",
+      "Draining a tank does not prove it is gas-free. Competent personnel must verify required atmospheric checks, monitoring, emergency arrangements and fire-protection availability."
     ],
     "scenario": [
       "A crew planned to weld a new, uncommissioned pipe inside a firewater room that also contained a live diesel tank.",
@@ -11964,13 +11964,13 @@ export const toolboxData = [
       "Consider cold-working methods or off-site fabrication first.",
       "Complete site-specific risk and SIMOPS reviews with facility representatives.",
       "Verify the hot-work permit, location and exact work scope.",
-      "Assess nearby active diesel tanks and lines; implement approved isolation, draining, cleaning or purging where required.",
-      "Have competent persons verify isolations, gas-free conditions and other required atmospheric checks.",
-      "Use approved physical protection against sparks, slag and heat at neighbouring equipment.",
+      "Apply the approved plan for isolating or protecting live fuel systems.",
+      "Have competent staff verify isolations and required atmosphere tests.",
+      "Protect neighbouring equipment from sparks, slag and heat.",
       "Inspect drains, openings, penetrations and lower/adjacent areas.",
-      "Provide a dedicated fire watch, suitable extinguishers and emergency communications.",
-      "Confirm firewater/fire-protection availability and an approved impairment plan if affected.",
-      "Maintain monitoring during and after work as required; stop when conditions change."
+      "Provide dedicated fire watch and suitable emergency equipment.",
+      "Verify fire protection availability and any impairment plan.",
+      "Monitor during and after work as required; stop if conditions change."
     ],
     "supervisor_script": "Although the new pipe is empty, the diesel equipment in this room may still be operating. We will not begin until the permit, fuel-system isolation status, atmospheric testing, physical protection and fire watch have been verified. If the fire-protection system may be impaired, approved alternative arrangements must be in place first.",
     "questions": [
@@ -12058,7 +12058,7 @@ export const toolboxData = [
       "Üstteki yapı, enerji hattı ve sıkışma noktalarını kontrol edin.",
       "Üretici yük, erişim, eğim ve rüzgâr limitlerine uyun.",
       "Çevrede yaya-araç ayrımı ve bariyerleme sağlayın.",
-      "Düşmeye karşı gerekli bağlantı düzenini makine tipine ve risk değerlendirmesine göre uygulayın.",
+      "Düşme korumasını MEWP tipi ve risk değerlendirmesine göre seçin.",
       "Acil durum indirme kumandasını tanıyan eğitimli görevli belirleyin.",
       "Kurtarma yöntemini sahada anlatın ve uygun şekilde prova edin.",
       "Koşullar değişirse platformu güvenli konuma indirip işi durdurun."
@@ -12142,7 +12142,7 @@ export const toolboxData = [
       "Identify overhead structures, power lines and entrapment points.",
       "Comply with manufacturer load, outreach, slope and wind limits.",
       "Separate pedestrians and vehicles from the operating area.",
-      "Apply suitable fall-protection arrangements for the machine type and risk assessment.",
+      "Select fall protection for the MEWP type and task risk.",
       "Nominate a trained, available emergency lowering person.",
       "Brief and appropriately practise the rescue procedure.",
       "Lower safely and stop if site conditions change."
@@ -12204,7 +12204,7 @@ export const toolboxData = [
     "application_subtitle": "SDS, hat izolasyonu, hortumlar, kimyasal uyumluluk, atık ve acil müdahale.",
     "objective": "Kimyasal yıkama ve sirkülasyon sırasında korozif maruziyet, yanlış bağlantı, basınçlı kaçak, uyumsuz reaksiyon ve çevresel salımı önlemek.",
     "explanation": [
-      "Kimyasal yıkama; pompalar, geçici hortumlar, manifoldlar ve tanklarla kurulan geçici bir prosestir. Hatların yanlış bağlanması veya uygun olmayan hortum kullanımı ciddi kimyasal sıçramaya yol açabilir.",
+      "Kimyasal yıkamada geçici pompalar, hortumlar ve manifoldlar kullanılır. Yanlış hat bağlantısı veya uyumsuz hortum ciddi kimyasal sıçramaya yol açabilir.",
       "Kullanılacak ürünün güncel SDS'si, gerçek konsantrasyonu, sıcaklık ve malzeme uyumluluğu teknik planla doğrulanmalı; kimyasallar kesinlikle rastgele karıştırılmamalıdır.",
       "Drenaj, numune alma ve atık boşaltma noktaları kontrollü olmalı; göz duşu, acil duş, dökülme düzeni ve maruziyet halinde yapılacak işlemler ekipçe bilinmelidir."
     ],
@@ -12226,11 +12226,11 @@ export const toolboxData = [
     ],
     "controls": [
       "Onaylı yıkama prosedürü, kimyasal envanteri ve SDS'yi inceleyin.",
-      "Kimyasalı, malzeme uyumluluğunu ve proses sınırlarını teknik sorumluyla doğrulayın.",
+      "Kimyasal ve ekipman uyumunu, proses sınırlarını doğrulayın.",
       "Yıkama devresi ile canlı sistemlerin izolasyonunu belgeleyin.",
       "Geçici hortum, conta, manifold ve pompaların uygunluğunu kontrol edin.",
       "Bağlantıları, sabitlemeyi ve kaçakların olası yönünü doğrulayın.",
-      "Doldurma, sirkülasyon, numune alma ve boşaltma aşamalarını yetkili prosedüre göre yürütün.",
+      "Dolum, sirkülasyon, numune ve boşaltmada onaylı prosedürü uygulayın.",
       "Uygun eldiven, göz/yüz ve vücut korumasını SDS'ye göre seçin.",
       "Göz duşu, acil duş ve dökülme müdahale düzenini hazır tutun.",
       "Atıkları onaylı, etiketli kap veya toplama sistemine yönlendirin.",
@@ -12310,7 +12310,7 @@ export const toolboxData = [
     ],
     "controls": [
       "Review the approved flushing procedure, chemical inventory and SDS.",
-      "Verify chemical and equipment compatibility and process limits with technical staff.",
+      "Verify chemical, equipment and process limits with competent staff.",
       "Document isolations between flushing circuits and live systems.",
       "Inspect temporary hoses, gaskets, manifolds and pumps for suitability.",
       "Check connection restraint and potential leak paths.",
