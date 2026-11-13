@@ -14755,6 +14755,690 @@ export const toolboxData = [
       "Waste plan ready"
     ]
   }
+},
+{
+  "slug": "concrete-core-drilling-service-check",
+  "sourceFile": "editorial_20261113_concrete_core_drilling_service_check",
+  "base": "concrete-core-drilling-service-check-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "BETON KAROT DELME VE GİZLİ HAT KONTROLÜ TOOLBOX TALK",
+    "subtitle": "Delmeden önce gömülü enerji ve tesisat hatlarını bulun.",
+    "objective": "Beton karot delme sırasında gizli kablo, donatı ve boruların hasarını ve personel yaralanmasını önlemek.",
+    "explanation": [
+      "Karot delme noktası beton içinde elektrik, gaz, su veya proses hattına denk gelebilir. Yalnız eski çizimlere güvenmek yeterli değildir.",
+      "Delme izni, güncel çizimler ve yetkin tarama yöntemleri kullanılarak hedef nokta ile derinlik doğrulanmalıdır.",
+      "Delme sırasında su, kesilen karot, döner takım ve alt kat düşen cisim riskleri de kontrol edilir."
+    ],
+    "scenario": [
+      "Bir ekip döşemeden geçiş açmak için karot makinesini kurdu.",
+      "Alttaki kablo tavası çizimde güncel değildi ve delme sırasında temas riski oluştu.",
+      "Saha taraması, alt kat kontrolü ve yetkili delme onayı riski azaltırdı."
+    ],
+    "remember": "Delme noktası ve derinliği doğrulanmadan karot çalışmasına başlamayın.",
+    "hazards": [
+      "Gizli elektrik kablosuna temas.",
+      "Gaz veya proses borusu hasarı.",
+      "Döner karot ucuna kapılma.",
+      "Karot parçasının alt kata düşmesi.",
+      "Su ve elektrik teması.",
+      "Makinenin yerinden kopması.",
+      "Silika tozu veya sıçrama.",
+      "Delik etrafında düşme tehlikesi."
+    ],
+    "controls": [
+      "Delme izni ve yetkili onayını alın.",
+      "Güncel çizim ve değişiklikleri inceleyin.",
+      "Uygun tarama ile gizli hatları belirleyin.",
+      "Delme noktası ve derinliğini işaretleyin.",
+      "Şüpheli hatları yetkililere doğrulatın.",
+      "Makineyi uygun şekilde sabitleyin.",
+      "Alt katı kontrol edip bariyerleyin.",
+      "Su ve elektrik bağlantılarını güvenle kurun.",
+      "Karot parçasını düşmeye karşı tutun.",
+      "Açılan deliği güvenle kapatın."
+    ],
+    "supervisor_script": "Arkadaşlar, beton içini görmeden delme yapmayacağız. Gizli kabloları ve boruları taratıp noktayı onaylatacağız. Alt seviyeyi ve delme sonrası açıklığı da koruyacağız.",
+    "questions": [
+      "Delme noktası onaylı mı?",
+      "Gizli hat taraması yapıldı mı?",
+      "Alt katta çalışan var mı?",
+      "Makine nasıl sabitlendi?",
+      "Delik bitince nasıl korunacak?"
+    ],
+    "verification": [
+      "Delme izni onaylı",
+      "Çizimler kontrol edildi",
+      "Hat taraması yapıldı",
+      "Derinlik doğrulandı",
+      "Nokta işaretli",
+      "Makine sabit",
+      "Alt kat ayrıldı",
+      "Su-elektrik güvenli",
+      "Karot tutma planlı",
+      "Delik koruması hazır"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "CONCRETE CORE DRILLING AND HIDDEN SERVICES TOOLBOX TALK",
+    "subtitle": "Locate embedded services before drilling.",
+    "objective": "Prevent strikes to embedded cables and pipes, as well as injury during concrete core drilling.",
+    "explanation": [
+      "The drill path may intersect concealed electricity, gas, water or process services. Old drawings alone do not establish clearance.",
+      "Use authorised drilling permits, updated plans and competent scanning to confirm location and depth.",
+      "Also control drilling water, rotating parts, falling cores, lower floors and the finished opening."
+    ],
+    "scenario": [
+      "A crew prepared a floor core for a pipe penetration.",
+      "An undocumented cable tray below the slab created a strike and falling-object hazard.",
+      "Service scans, lower-level controls and approved drilling locations would have reduced risk."
+    ],
+    "remember": "Do not core drill until the drilling point and depth are verified.",
+    "hazards": [
+      "Contact with hidden electrical cables.",
+      "Damage to gas or process piping.",
+      "Entanglement in rotating equipment.",
+      "Falling concrete cores.",
+      "Water near electrical tools.",
+      "Unsecured drill mounting.",
+      "Silica dust or splash exposure.",
+      "Fall through the new opening."
+    ],
+    "controls": [
+      "Obtain the approved drilling permit.",
+      "Review current drawings and revisions.",
+      "Scan for hidden services.",
+      "Mark the point and depth.",
+      "Escalate suspected services for confirmation.",
+      "Secure the coring equipment.",
+      "Check and segregate lower levels.",
+      "Control water and electrical supply.",
+      "Secure the core against falling.",
+      "Cover the opening after drilling."
+    ],
+    "supervisor_script": "We will not drill blindly through a slab. Hidden services must be surveyed and the location approved. Protect the level below and the opening after work.",
+    "questions": [
+      "Is the drill point approved?",
+      "Were embedded services scanned?",
+      "Who works below us?",
+      "How is the machine anchored?",
+      "How will the hole be protected?"
+    ],
+    "verification": [
+      "Permit approved",
+      "Drawings reviewed",
+      "Service scan complete",
+      "Depth verified",
+      "Point marked",
+      "Drill secured",
+      "Lower level segregated",
+      "Water and power safe",
+      "Core retained",
+      "Opening protection ready"
+    ]
+  }
+},
+{
+  "slug": "pipe-spool-temporary-supports",
+  "sourceFile": "editorial_20261113_pipe_spool_temporary_supports",
+  "base": "pipe-spool-temporary-supports-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "BORU SPOOLUMUN GEÇİCİ DESTEKLENMESİ TOOLBOX TALK",
+    "subtitle": "Montaj sırasında beklenmeyen boru hareketini önleyin.",
+    "objective": "Boru spool montajında veya bağlantı sökümünde geçici destek yetersizliği nedeniyle düşme ve sıkışmayı önlemek.",
+    "explanation": [
+      "Boru hattı askıda veya flanş bağlantısı üzerinde görünürde sabit dursa bile bağlantı çözülünce hareket edebilir.",
+      "Geçici destekler borunun ağırlığına, ağırlık merkezine ve olası yan yüklere göre yetkin ekipçe planlanmalıdır.",
+      "Kalıcı askılar tam devreye girmeden kaldırma aksesuarları veya geçici destekler kontrolsüz şekilde sökülmemelidir."
+    ],
+    "scenario": [
+      "Bir spool flanşlarına yaklaştırıldı ve montaj ekibi vinç sapanını gevşetti.",
+      "Geçici destek tamamlanmadığı için boru aşağıya doğru döndü.",
+      "Desteklerin kapasite ve yerleşimini doğrulamak bu hareketi önleyebilirdi."
+    ],
+    "remember": "Boru kararlı şekilde desteklenmeden askı, sapan veya bağlantıyı çözmeyin.",
+    "hazards": [
+      "Spoolun aniden dönmesi.",
+      "Yetersiz askı kapasitesi.",
+      "Geçici desteğin devrilmesi.",
+      "Flanşta el sıkışması.",
+      "Boru ucunun düşmesi.",
+      "Kalıcı mesnedin eksik olması.",
+      "Yükün beklenmedik kayması.",
+      "Ekipler arasında komut karmaşası."
+    ],
+    "controls": [
+      "Montaj ve destek planını doğrulayın.",
+      "Spool ağırlığını ve merkezini belirleyin.",
+      "Geçici desteğin kapasitesini onaylayın.",
+      "Destek ayaklarını güvenli zemine kurun.",
+      "Yanal hareket için emniyet sağlayın.",
+      "Montaj ekiplerini tek komuta bağlayın.",
+      "Sıkışma alanlarını boş tutun.",
+      "Kaldırma ekipmanını erken ayırmayın.",
+      "Kalıcı mesnetleri kontrol edin.",
+      "Destek sökümünü planlı yürütün."
+    ],
+    "supervisor_script": "Arkadaşlar, bu borunun ağırlığını yalnız flanşa veya geçici takozlara bırakmayacağız. Destekler onaylanmadan sapanı ve bağlantıyı çözmeyeceğiz.",
+    "questions": [
+      "Spool ağırlığı biliniyor mu?",
+      "Geçici destek kimce onaylandı?",
+      "Yük yana kayabilir mi?",
+      "Sapan ne zaman ayrılacak?",
+      "Kalıcı mesnet hazır mı?"
+    ],
+    "verification": [
+      "Montaj planı mevcut",
+      "Ağırlık doğrulandı",
+      "Merkez değerlendirildi",
+      "Destek kapasitesi uygun",
+      "Zemin güvenli",
+      "Yanal hareket önlendi",
+      "İşaretçi belirli",
+      "El sıkışma alanı boş",
+      "Mesnetler kontrol edildi",
+      "Söküm sırası onaylı"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "PIPE SPOOL TEMPORARY SUPPORTS TOOLBOX TALK",
+    "subtitle": "Prevent unintended pipe movement during installation.",
+    "objective": "Prevent pipe movement, falling loads and crushing when temporary supports are used for spool installation or removal.",
+    "explanation": [
+      "A spool may seem stable while held by rigging or flange bolts, but can shift when a connection is released.",
+      "Competent planning must address spool mass, centre of gravity, support capacity and possible side loads.",
+      "Do not remove lifting gear or temporary support before permanent restraints and supports are proven effective."
+    ],
+    "scenario": [
+      "A spool was placed near its flange and the lifting sling was loosened.",
+      "An unfinished temporary support allowed the spool to rotate downward.",
+      "Rated supports and a controlled release sequence would have prevented movement."
+    ],
+    "remember": "Do not release lifting gear or pipe connections until the spool is safely supported.",
+    "hazards": [
+      "Sudden spool rotation.",
+      "Insufficient support capacity.",
+      "Temporary stand overturning.",
+      "Hands trapped at flanges.",
+      "Falling pipe end.",
+      "Incomplete permanent supports.",
+      "Unexpected load shift.",
+      "Conflicting crew instructions."
+    ],
+    "controls": [
+      "Verify the installation support plan.",
+      "Confirm spool mass and balance.",
+      "Approve temporary support capacity.",
+      "Place supports on stable ground.",
+      "Restrain potential sideways movement.",
+      "Use one coordinated signalling system.",
+      "Keep pinch zones clear.",
+      "Do not release rigging prematurely.",
+      "Inspect permanent hangers and shoes.",
+      "Remove temporary supports in sequence."
+    ],
+    "supervisor_script": "The spool must never rely on flange bolts or makeshift packing for stability. Check support capacity before releasing any sling or connection.",
+    "questions": [
+      "Do we know the spool weight?",
+      "Who approved the supports?",
+      "Could the load move sideways?",
+      "When can rigging be released?",
+      "Are permanent supports ready?"
+    ],
+    "verification": [
+      "Plan available",
+      "Mass verified",
+      "Balance assessed",
+      "Supports rated",
+      "Ground stable",
+      "Side movement controlled",
+      "Signals agreed",
+      "Pinch points clear",
+      "Permanent supports checked",
+      "Removal sequence approved"
+    ]
+  }
+},
+{
+  "slug": "manual-chain-lever-hoists",
+  "sourceFile": "editorial_20261113_manual_chain_lever_hoists",
+  "base": "manual-chain-lever-hoists-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "MANUEL ZİNCİRLİ CARASKAL VE GİRGIR TOOLBOX TALK",
+    "subtitle": "Yük kapasitesi, ankraj ve zincir güvenliği.",
+    "objective": "Zincirli caraskal ve kollu çekme cihazlarıyla yük taşırken aşırı yük, ankraj kopması ve sıkışmayı önlemek.",
+    "explanation": [
+      "Manuel caraskalın güvenli çalışma yükü yalnız cihaz için değil, ankraj ve tüm bağlantılar için doğrulanmalıdır.",
+      "Zincir, kanca mandalı, gövde ve fren mekanizması kullanım öncesi kontrol edilir. Hasarlı cihaz servis dışı bırakılır.",
+      "Yük hareketinde işaretleşme ve kaçış alanı planlanmalı, kimse yükün altında veya çekiş hattında durmamalıdır."
+    ],
+    "scenario": [
+      "Bir ekip ağır bir parçayı caraskalla hizalamaya çalıştı.",
+      "Bağlanan geçici ankraj yük yönüne uygun olmadığı için hareket ederken gevşedi.",
+      "Uygun ankraj seçimi ve kontrollü hareket yükü güvenli tutardı."
+    ],
+    "remember": "Caraskal sağlam olsa da ankraj zayıfsa sistem güvensizdir.",
+    "hazards": [
+      "Cihaz kapasitesini aşma.",
+      "Yetersiz ankrajın kopması.",
+      "Zincir veya kancanın hasarı.",
+      "Yükün kontrolsüz hareketi.",
+      "Elin zincire sıkışması.",
+      "Askıdaki yükün altına girme.",
+      "Yan yükleme nedeniyle hasar.",
+      "Frenin görev yapmaması."
+    ],
+    "controls": [
+      "Yük ağırlığını ve yönünü doğrulayın.",
+      "Caraskal kapasitesini kontrol edin.",
+      "Ankraj kapasite ve yönünü onaylayın.",
+      "Zincir ve kancaları inceleyin.",
+      "Kanca mandalını kontrol edin.",
+      "Fren ve cihaz durumunu test edin.",
+      "Uygunsuz yan yüklemeyi önleyin.",
+      "Kimseyi yük altında tutmayın.",
+      "Yükü yavaş ve kontrollü hareket ettirin.",
+      "Arızalı cihazı kullanımdan çıkarın."
+    ],
+    "supervisor_script": "Arkadaşlar, caraskalın üzerindeki kapasite tek başına yeterli değil. Bağlandığı ankraj ve bağlantıları da doğrulayacağız. Hasarlı zincir veya kancayla çalışmayacağız.",
+    "questions": [
+      "Yük kaç kilo?",
+      "Ankraj yeterli mi?",
+      "Kanca mandalı sağlam mı?",
+      "Çekiş hattında kim var?",
+      "Arızalı cihazı kim ayıracak?"
+    ],
+    "verification": [
+      "Yük ağırlığı biliniyor",
+      "Kapasite uygun",
+      "Ankraj onaylı",
+      "Zincir sağlam",
+      "Kanca sağlam",
+      "Mandallar çalışıyor",
+      "Fren kontrol edildi",
+      "Yön uygun",
+      "Yük altı boş",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "MANUAL CHAIN AND LEVER HOIST SAFETY TOOLBOX TALK",
+    "subtitle": "Control anchor strength, rated load and chain movement.",
+    "objective": "Prevent overload, anchor failure and crushing injuries during manual chain or lever hoist operations.",
+    "explanation": [
+      "The rated capacity of the hoist, anchor and every connection must suit the load and pull direction.",
+      "Inspect chain, hooks, latches, body and braking functions before use. Remove damaged equipment from service.",
+      "Plan communication, load travel and escape zones. Nobody should stand beneath the load or in the pull path."
+    ],
+    "scenario": [
+      "A crew used a lever hoist to align a heavy component.",
+      "A temporary anchor was unsuitable for the pull direction and loosened during movement.",
+      "Approved anchor capacity and controlled movement would have reduced the hazard."
+    ],
+    "remember": "A good hoist with an unsuitable anchor is an unsafe lifting system.",
+    "hazards": [
+      "Hoist rated capacity exceeded.",
+      "Anchor point failure.",
+      "Damaged chain or hook.",
+      "Uncontrolled load movement.",
+      "Hands trapped by chain.",
+      "Personnel below the load.",
+      "Side loading of equipment.",
+      "Hoist brake malfunction."
+    ],
+    "controls": [
+      "Verify load weight and direction.",
+      "Check hoist rated capacity.",
+      "Confirm anchor rating and direction.",
+      "Inspect chain and hooks.",
+      "Check hook safety latches.",
+      "Verify brake and equipment condition.",
+      "Prevent unapproved side loading.",
+      "Keep personnel clear of loads.",
+      "Move the load gradually.",
+      "Quarantine defective hoists."
+    ],
+    "supervisor_script": "The hoist rating is not the whole system rating. Confirm the anchor, chain, hook and travel path before moving the load.",
+    "questions": [
+      "What is the load mass?",
+      "Is the anchor suitable?",
+      "Do hooks latch securely?",
+      "Who is in the pull path?",
+      "Who isolates a damaged hoist?"
+    ],
+    "verification": [
+      "Load mass known",
+      "Capacity suitable",
+      "Anchor rated",
+      "Chain inspected",
+      "Hooks inspected",
+      "Latches working",
+      "Brake checked",
+      "Pull direction safe",
+      "Load path clear",
+      "Crew briefed"
+    ]
+  }
+},
+{
+  "slug": "excavator-swing-zone-control",
+  "sourceFile": "editorial_20261113_excavator_swing_zone_control",
+  "base": "excavator-swing-zone-control-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "EKSKAVATÖR DÖNÜŞ ALANI VE YAYA AYRIMI TOOLBOX TALK",
+    "subtitle": "Kör nokta ve makine dönüş yarıçapına dikkat.",
+    "objective": "Ekskavatör üst yapısının dönüşü sırasında yaya çarpması, sıkışma ve kova hareketi yaralanmalarını önlemek.",
+    "explanation": [
+      "Ekskavatörün kabini ve karşı ağırlığı dönüş sırasında yaya geçiş yoluna taşabilir. Operatör tüm kör noktaları göremeyebilir.",
+      "Çalışma bölgesi makinenin erişim ve dönüş çapına göre fiziksel olarak ayrılmalıdır. İşaretçi kullanımı ve iletişim yöntemi açık olmalıdır.",
+      "Makineye yaklaşılması gerekiyorsa operatör durdurmalı, güvenli durumu doğrulamalı ve ancak sonra giriş izni vermelidir."
+    ],
+    "scenario": [
+      "Bir çalışan çalışan ekskavatörün arkasından kestirme geçmek istedi.",
+      "Üst yapı döndüğünde karşı ağırlık çalışanın geçtiği alana yaklaştı.",
+      "Fiziksel yaya ayrımı ve operatörle doğrulanmış yaklaşma tehlikeyi önlerdi."
+    ],
+    "remember": "Operatör sizi görmediyse güvenli olduğunuzu varsaymayın; dönüş alanına izinsiz girmeyin.",
+    "hazards": [
+      "Karşı ağırlıkla sıkışma.",
+      "Kova veya bomla çarpışma.",
+      "Kör noktada yayaya çarpma.",
+      "Geri manevrada ezilme.",
+      "Dönüş alanında malzeme istifi.",
+      "Zemindeki boşluğa devrilme.",
+      "İşaretçi iletişim hatası.",
+      "Yetkisiz makine yaklaşması."
+    ],
+    "controls": [
+      "Makine çalışma sınırını belirleyin.",
+      "Dönüş yarıçapını bariyerleyin.",
+      "Yaya güzergâhını ayırın.",
+      "Operatör görüşünü kontrol edin.",
+      "Gerekliyse yetkin işaretçi kullanın.",
+      "Radyo veya el işaretlerini netleştirin.",
+      "Makineye izinsiz yaklaşmayı önleyin.",
+      "Yaklaşmada hareketi durdurun.",
+      "Zemin ve şev mesafesini kontrol edin.",
+      "Dönüş alanını istiften temiz tutun."
+    ],
+    "supervisor_script": "Arkadaşlar, ekskavatörün arkası da tehlikeli hareket alanıdır. Kestirme geçmek yok. Operatör makineyi durdurmadan hiç kimse dönüş alanına girmeyecek.",
+    "questions": [
+      "Dönüş yarıçapı nerede?",
+      "Yaya geçişi nereden?",
+      "Operatör beni görebilir mi?",
+      "İşaretçi kim?",
+      "Makineye yaklaşma kuralı nedir?"
+    ],
+    "verification": [
+      "Çalışma alanı belirlendi",
+      "Dönüş alanı ayrıldı",
+      "Yaya yolu açık",
+      "Kör noktalar biliniyor",
+      "İşaretçi yetkin",
+      "İletişim açık",
+      "Yetkisiz giriş önlendi",
+      "Durma kuralı açık",
+      "Zemin kontrol edildi",
+      "İstif alanı güvenli"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "EXCAVATOR SWING ZONE AND PEDESTRIAN SAFETY TOOLBOX TALK",
+    "subtitle": "Keep clear of slew radius and blind spots.",
+    "objective": "Prevent pedestrian strikes and crushing around excavator slewing, counterweight and bucket movements.",
+    "explanation": [
+      "An excavator counterweight can extend into nearby pedestrian routes as the upper body slews. Operators cannot always see every blind spot.",
+      "Physically separate the operating zone based on machine reach and slew radius. Agree on signals and spotter arrangements.",
+      "Anyone needing access must wait for the machine to stop and receive clear permission from the operator."
+    ],
+    "scenario": [
+      "A worker tried to cross behind an operating excavator.",
+      "The upper structure swung and the counterweight entered the pedestrian path.",
+      "A marked pedestrian route and verified stop-and-approach rule would have prevented exposure."
+    ],
+    "remember": "Do not assume the operator has seen you. Never enter the swing zone without permission.",
+    "hazards": [
+      "Crushing by the counterweight.",
+      "Contact with boom or bucket.",
+      "Pedestrians in blind spots.",
+      "Crushing during reversing.",
+      "Materials inside the slew radius.",
+      "Machine instability near voids.",
+      "Unclear spotter instructions.",
+      "Unauthorised approach to equipment."
+    ],
+    "controls": [
+      "Define the operating limits.",
+      "Barricade the slew radius.",
+      "Provide separate pedestrian paths.",
+      "Review the operator's visibility.",
+      "Use a competent spotter when needed.",
+      "Agree radio or hand signals.",
+      "Prevent unauthorised entry.",
+      "Stop machinery before approach.",
+      "Assess ground and edge clearance.",
+      "Keep the swing zone clear of storage."
+    ],
+    "supervisor_script": "The rear counterweight is also a dangerous moving part. Nobody takes shortcuts through the excavator operating zone. Stop the machine before approaching.",
+    "questions": [
+      "Where is the swing radius?",
+      "Where do pedestrians walk?",
+      "Can the operator see me?",
+      "Who is the spotter?",
+      "What is the approach rule?"
+    ],
+    "verification": [
+      "Operating area mapped",
+      "Swing zone secured",
+      "Pedestrian route open",
+      "Blind spots assessed",
+      "Spotter assigned",
+      "Signals agreed",
+      "Access restricted",
+      "Stop rule briefed",
+      "Ground checked",
+      "Storage clear"
+    ]
+  }
 }
 ] as ToolboxRecord[];
 
