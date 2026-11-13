@@ -360,6 +360,9 @@ function getAutoCategory(slug: string) {
     "working-near-open-edges",
     "scaffold-modification-control",
     "working-over-water",
+    "mewp-pre-use-and-emergency-lowering",
+    "temporary-floor-openings-cover-control", 
+    "temporary-stairways-safe-access",
   ].includes(slug)) return "work-at-height";
 
   // 02 — Lifting & Rigging Operations
@@ -371,6 +374,10 @@ function getAutoCategory(slug: string) {
     "rigging-inspection",
     "tag-line-safety",
     "load-stability-center-of-gravity",
+    "lifting-load-landing-and-unhooking",
+    "hydraulic-jacks-and-load-support", 
+    "pipe-spool-temporary-supports", 
+    "manual-chain-lever-hoists",
   ].includes(slug)) return "lifting-rigging";
 
   // 03 — Mobile Equipment & Traffic Safety
@@ -378,7 +385,8 @@ function getAutoCategory(slug: string) {
     "mobile-equipment-safety",
     "forklift-safety",
     "forklift-loading-unloading",
-    "vehicle-pedestrian-interface",
+    "vehicle-pedestrian-interface", 
+    "excavator-swing-zone-control",
   ].includes(slug)) return "mobile-traffic";
 
   // 04 — Electrical Safety & LOTO
@@ -390,7 +398,10 @@ function getAutoCategory(slug: string) {
     "overhead-power-lines",
     "portable-generator-safety",
     "extension-leads-cable-management",
-    "stored-energy-hydraulic-systems",
+    "stored-energy-hydraulic-systems", 
+    "first-energisation-commissioning", 
+    "arc-flash-electrical-boundaries", 
+    "heavy-rain-temporary-electrical-safety",
   ].includes(slug)) return "electrical-loto";
 
   // 05 — Hot Work & Fire Safety
@@ -399,6 +410,8 @@ function getAutoCategory(slug: string) {
     "fire-safety",
     "grinding-cutting-safety",
     "welding-fumes",
+    "hot-work-near-fuel-systems",
+    "oxy-fuel-torch-flashback-prevention",
   ].includes(slug)) return "hot-work-fire";
 
   // 06 — Chemical & Hazardous Materials
@@ -408,6 +421,8 @@ function getAutoCategory(slug: string) {
     "spill-response",
     "hazardous-waste-handling",
     "painting-coating-safety",
+    "chemical-flushing-circulation-safety", 
+    "eyewash-emergency-shower-readiness",
   ].includes(slug)) return "chemical-hazmat";
 
   // 07 — Confined Space & Gas Safety
@@ -416,12 +431,14 @@ function getAutoCategory(slug: string) {
     "gas-testing-atmospheric-monitoring",
     "compressed-gas-cylinders",
     "nitrogen-inert-gas-safety",
+    "confined-space-rescue-readiness",
   ].includes(slug)) return "confined-gas";
 
   // 08 — Excavation & Groundworks
   if ([
     "excavation-safety",
-    "underground-services",
+    "underground-services", 
+    "trench-water-ingress-dewatering",
   ].includes(slug)) return "excavation-groundworks";
 
   // 09 — Tools, Machinery & Pressure Systems
@@ -432,6 +449,11 @@ function getAutoCategory(slug: string) {
     "flange-joint-integrity",
     "hose-coupling-safety",
     "abrasive-blasting-safety",
+    "manual-torque-wrench-safety",
+    "rotating-equipment-guarding-safety",
+    "pneumatic-tools-and-air-hoses", 
+    "stored-pressure-depressurisation", 
+    "concrete-core-drilling-service-check",
   ].includes(slug)) return "tools-machinery";
 
   // 10 — PPE & Occupational Health
@@ -442,7 +464,10 @@ function getAutoCategory(slug: string) {
     "noise-hearing-protection",
     "respiratory-protection",
     "eye-face-protection",
-    "hand-injury-prevention",
+    "hand-injury-prevention", 
+    "silica-dust-concrete-cutting", 
+    "hand-arm-vibration-exposure", 
+    "fatigue-shift-work",
   ].includes(slug)) return "ppe-health";
 
   // 11 — Permit to Work & Operational Control
@@ -452,12 +477,44 @@ function getAutoCategory(slug: string) {
     "stop-work-authority",
     "line-breaking-process-opening",
     "barricading-exclusion-zones",
+    "industrial-radiography-ndt-exclusion",
+    "permit-to-work-shift-handover",
   ].includes(slug)) return "ptw-control";
 
   // 12 — General Site Safety & Human Factors
   return "general-site";
 }
 function getAutoIcon(slug: string) {
+  if (slug === "first-energisation-commissioning") return "⚡";
+  if (slug === "arc-flash-electrical-boundaries") return "⚡";
+  if (slug === "stored-pressure-depressurisation") return "🧯";
+  if (slug === "silica-dust-concrete-cutting") return "😷";
+  if (slug === "concrete-core-drilling-service-check") return "🔩";
+  if (slug === "pipe-spool-temporary-supports") return "🏗️";
+  if (slug === "manual-chain-lever-hoists") return "🪝";
+  if (slug === "excavator-swing-zone-control") return "🚜";
+  if (slug === "trench-water-ingress-dewatering") return "💧";
+  if (slug === "heavy-rain-temporary-electrical-safety") return "🌧️";
+  if (slug === "hand-arm-vibration-exposure") return "🧤";
+  if (slug === "fatigue-shift-work") return "🌙";
+  if (slug === "night-work-illumination") return "🔦";
+  if (slug === "formwork-pre-pour-inspection") return "🏗️";
+  if (slug === "temporary-stairways-safe-access") return "🪜";
+  if (slug === "eyewash-emergency-shower-readiness") return "🚿";
+  if (slug === "mewp-pre-use-and-emergency-lowering") return "🏗️";
+  if (slug === "chemical-flushing-circulation-safety") return "🧪";
+  if (slug === "rotating-equipment-guarding-safety") return "⚙️";
+  if (slug === "pneumatic-tools-and-air-hoses") return "🔧";
+  if (slug === "lifting-load-landing-and-unhooking") return "🪝";
+  if (slug === "temporary-floor-openings-cover-control") return "🚧";
+  if (slug === "industrial-radiography-ndt-exclusion") return "☢️";
+  if (slug === "confined-space-rescue-readiness") return "🛟";
+  if (slug === "hydraulic-jacks-and-load-support") return "🏗️";
+  if (slug === "oxy-fuel-torch-flashback-prevention") return "🔥";
+  if (slug === "worksite-first-aid-access-and-response") return "🚑";
+  if (slug === "permit-to-work-shift-handover") return "📋";
+  if (slug === "manual-torque-wrench-safety") return "🔩";
+  if (slug === "hot-work-near-fuel-systems") return "🔥";
   if (slug.includes("stored-energy-hydraulic-systems")) return "🔋";
   if (slug.includes("high-pressure-water-jetting")) return "💦";
   if (slug.includes("flange-joint-integrity")) return "🔩";
@@ -539,7 +596,7 @@ const autoToolboxItems: ToolboxItem[] = toolboxData
   }));
 
 const toolboxItems: ToolboxItem[] = [
-  ...baseToolboxItems,
+  ...baseToolboxItems.map((item) => ({ ...item, category: getAutoCategory(item.slug) })),
   ...autoToolboxItems,
 ];
 

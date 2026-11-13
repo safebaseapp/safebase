@@ -13,6 +13,7 @@ type DocumentProfile = {
   siteName?: string;
   workArea?: string;
   presentedBy?: string;
+  date?: string;
   revision?: string;
 };
 
@@ -119,7 +120,7 @@ async function buildFieldVisualPage({
     .join(" / ");
 
   const pageTitle = locale === "tr" ? "SAHA GÖRSELİ & UYGULAMA" : "FIELD VISUAL & APPLICATION";
-  const visualLabel = locale === "tr" ? "GERÇEK SAHA GÖRSELİ" : "REAL FIELD VISUAL";
+  const visualLabel = locale === "tr" ? "TEMSİLİ SAHA GÖRSELİ" : "ILLUSTRATIVE SITE IMAGE";
   const focusLabel = locale === "tr" ? "SAHADA ODAKLAN" : "FIELD FOCUS";
   const controlsLabel = locale === "tr" ? "KRİTİK KONTROLLER" : "CRITICAL CONTROLS";
   const ruleLabel = locale === "tr" ? "ANA KURAL" : "KEY RULE";

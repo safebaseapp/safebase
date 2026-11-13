@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
-    "prebuild": "node scripts/polish-toolbox-pdfs.mjs && node scripts/qa-toolbox-pdfs.mjs && node scripts/qa-download-flows.mjs && node scripts/qa-live-quality-pack.mjs && node scripts/qa-field-forms-growth.mjs && node scripts/qa-method-statements-growth.mjs && node scripts/qa-method-library-34.mjs && node scripts/qa-account-billing-marketing.mjs && node scripts/qa-knowledge-specialist-12.mjs && node scripts/qa-knowledge-industrial-next12.mjs",
+    "prebuild": "node scripts/qa-toolbox-content.mjs && node scripts/polish-toolbox-pdfs.mjs && node scripts/qa-toolbox-pdfs.mjs && node scripts/qa-download-flows.mjs && node scripts/qa-live-quality-pack.mjs && node scripts/qa-field-forms-growth.mjs && node scripts/qa-method-statements-growth.mjs && node scripts/qa-method-library-34.mjs && node scripts/qa-account-billing-marketing.mjs && node scripts/qa-knowledge-specialist-12.mjs && node scripts/qa-knowledge-industrial-next12.mjs",
     "qa:toolbox-pdfs": "node scripts/qa-toolbox-pdfs.mjs",
     "qa:download-flows": "node scripts/qa-download-flows.mjs",
     "build": "next build",
@@ -17,7 +17,9 @@
     "qa:method-library-34": "node scripts/qa-method-library-34.mjs",
     "qa:account-billing-marketing": "node scripts/qa-account-billing-marketing.mjs",
     "qa:knowledge-specialist-12": "node scripts/qa-knowledge-specialist-12.mjs",
-    "qa:knowledge-industrial-next12": "node scripts/qa-knowledge-industrial-next12.mjs"
+    "qa:knowledge-industrial-next12": "node scripts/qa-knowledge-industrial-next12.mjs",
+    "qa:toolbox-content": "node scripts/qa-toolbox-content.mjs",
+    "qa:toolbox-dynamic-pdfs": "node scripts/qa-toolbox-dynamic-pdf-render.mjs"
   },
   "dependencies": {
     "@iso-safety-signs/assets": "^1.0.1",

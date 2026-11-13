@@ -6,6 +6,12 @@ on:
       - main
     paths:
       - "app/public/downloads/**"
+      - "app/lib/toolbox/toolbox-data.ts"
+      - "app/app/[locale]/toolbox/ToolboxLibraryClient.tsx"
+      - "app/lib/pdf/premium-toolbox-pdf-v2.ts"
+      - "app/lib/pdf/premium-toolbox-pdf.ts"
+      - "app/scripts/qa-toolbox-content.mjs"
+      - "app/scripts/qa-toolbox-dynamic-pdf-render.mjs"
       - "app/lib/toolbox/premium-master-slugs.ts"
       - "app/scripts/qa-toolbox-pdfs.mjs"
       - "app/package.json"
@@ -13,6 +19,12 @@ on:
   pull_request:
     paths:
       - "app/public/downloads/**"
+      - "app/lib/toolbox/toolbox-data.ts"
+      - "app/app/[locale]/toolbox/ToolboxLibraryClient.tsx"
+      - "app/lib/pdf/premium-toolbox-pdf-v2.ts"
+      - "app/lib/pdf/premium-toolbox-pdf.ts"
+      - "app/scripts/qa-toolbox-content.mjs"
+      - "app/scripts/qa-toolbox-dynamic-pdf-render.mjs"
       - "app/lib/toolbox/premium-master-slugs.ts"
       - "app/scripts/qa-toolbox-pdfs.mjs"
       - "app/package.json"
@@ -42,3 +54,17 @@ jobs:
 
       - name: Audit Toolbox PDFs
         run: npm run qa:toolbox-pdfs
+
+      - name: Audit Toolbox bilingual catalogue
+        run: npm run qa:toolbox-content
+
+      - name: Render 60 new Toolbox PDFs
+        run: npm run qa:toolbox-dynamic-pdfs
+
+      - name: Upload PDF print-review samples
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: toolbox-print-review-samples
+          path: app/toolbox-pdf-qa-samples/*.pdf
+          retention-days: 7
