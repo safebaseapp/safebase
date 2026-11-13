@@ -11,6 +11,7 @@ type DocumentProfile = {
   siteName?: string;
   workArea?: string;
   presentedBy?: string;
+  date?: string;
   revision?: string;
 };
 
@@ -1163,18 +1164,11 @@ function pageThree(
     .filter(Boolean)
     .join(" / ");
 
-  const generatedDate = new Intl.DateTimeFormat(
-    locale === "tr" ? "tr-TR" : "en-GB",
-    {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    },
-  ).format(new Date());
-
+  // Attendance must reflect the actual briefing date, not the download date.
+  // Leave blank unless a presenter explicitly supplied a training date.
   const fieldValues = [
     projectSite,
-    generatedDate,
+    documentProfile?.date?.trim() ?? "",
     documentProfile?.presentedBy?.trim() ?? "",
     documentProfile?.workArea?.trim() ?? "",
   ];
