@@ -16123,6 +16123,690 @@ export const toolboxData = [
       "Handover prepared"
     ]
   }
+},
+{
+  "slug": "night-work-illumination",
+  "sourceFile": "editorial_20261113_night_work_illumination",
+  "base": "night-work-illumination-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "GECE ÇALIŞMASI VE AYDINLATMA GÜVENLİĞİ TOOLBOX TALK",
+    "subtitle": "Karanlıkta görüş, yaya yolları ve acil erişim.",
+    "objective": "Gece ve düşük ışıkta yürüme, ekipman kullanma ve işaretleşme sırasında görünürlük kaynaklı kazaları önlemek.",
+    "explanation": [
+      "Gece işlerinde gölgeler, parlama ve yetersiz aydınlatma mesafeyi yanlış değerlendirmeye neden olabilir.",
+      "Aydınlatma sadece iş noktasına değil, erişim merdivenleri, yaya yolları, kaldırma alanı ve acil kaçışa da sağlanmalıdır.",
+      "Geçici lambaların kablo düzeni, elektrik koruması ve sabitlemesi yağış ve araç hareketine uygun olmalıdır."
+    ],
+    "scenario": [
+      "Gece bir ekip boru montajı için geçici projektör kullandı.",
+      "Lamba arkasındaki merdiven bölgesi karanlıkta kaldı ve çalışan basamağı fark etmedi.",
+      "Tüm erişim güzergâhının aydınlatılması ve kontrolü düşme riskini azaltırdı."
+    ],
+    "remember": "İş noktası aydınlık olsa bile giriş çıkış ve acil yolları karanlık bırakmayın.",
+    "hazards": [
+      "Merdivende basamağın görülmemesi.",
+      "Yaya ve araç çarpışması.",
+      "Işıkta körleşme veya parlama.",
+      "Gölgede kalan açık boşluk.",
+      "Geçici kabloya takılma.",
+      "Hasarlı projektörden elektrik riski.",
+      "İşaretçinin görülememesi.",
+      "Acil tahliyede yön kaybı."
+    ],
+    "controls": [
+      "Gece işe özel riskleri değerlendirin.",
+      "Çalışma noktasını yeterli aydınlatın.",
+      "Merdiven ve yürüyüş yollarını kontrol edin.",
+      "Açıklık ve kenarları görünür işaretleyin.",
+      "Işığın parlamasını ve gölgeyi azaltın.",
+      "Geçici lambaları güvenli sabitleyin.",
+      "Kablo ve enerji korumasını doğrulayın.",
+      "Yaya ve araç rotalarını ayırın.",
+      "Acil kaçış yollarını aydınlatın.",
+      "Lamba arızasında işi güvenle durdurun."
+    ],
+    "supervisor_script": "Arkadaşlar, yalnız çalışma yerini değil oraya giden yolu da aydınlatacağız. Karanlık bir boşluk, kör nokta veya kaçış güzergâhı bırakmayacağız.",
+    "questions": [
+      "En karanlık nokta nerede?",
+      "Merdivenler görünüyor mu?",
+      "Aydınlatma göz kamaştırıyor mu?",
+      "Acil yol aydınlık mı?",
+      "Lamba bozulursa ne yapacağız?"
+    ],
+    "verification": [
+      "Gece riskleri değerlendirildi",
+      "İş alanı aydınlık",
+      "Yollar görünür",
+      "Merdivenler aydınlık",
+      "Açıklıklar işaretli",
+      "Parlama kontrol edildi",
+      "Projektör sabit",
+      "Kablolar güvenli",
+      "Acil yollar açık",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "NIGHT WORK LIGHTING AND VISIBILITY TOOLBOX TALK",
+    "subtitle": "Control shadows, access routes and emergency visibility.",
+    "objective": "Prevent slips, collisions and signalling errors caused by poor visibility during night work.",
+    "explanation": [
+      "Darkness, glare and shadows can distort distances and conceal hazards in night operations.",
+      "Lighting is needed across work positions, ladders, walkways, lifting zones and emergency routes, not only at the task.",
+      "Temporary lights require safe cable routing, weather protection, secure mounting and appropriate electrical safeguards."
+    ],
+    "scenario": [
+      "A crew used a temporary floodlight for a night pipe installation.",
+      "A nearby access staircase remained in shadow and a worker missed a step.",
+      "Lighting the complete access route and checking shadows would have reduced the risk."
+    ],
+    "remember": "Never leave access or emergency routes dark while lighting only the workface.",
+    "hazards": [
+      "Unseen steps on stairs.",
+      "Vehicle and pedestrian collision.",
+      "Glare and poor depth perception.",
+      "Hidden floor openings.",
+      "Trips over lighting cables.",
+      "Electrical faults at damaged lights.",
+      "Banksman signals not visible.",
+      "Poor emergency exit visibility."
+    ],
+    "controls": [
+      "Assess night-specific work hazards.",
+      "Illuminate the work position.",
+      "Check stairs and access routes.",
+      "Mark openings and unprotected edges.",
+      "Control glare and dark shadows.",
+      "Mount temporary lights securely.",
+      "Verify power and cable protection.",
+      "Separate pedestrians and vehicles.",
+      "Illuminate emergency exit routes.",
+      "Stop safely if lighting fails."
+    ],
+    "supervisor_script": "We will light the route to the job, not just the job. Check stairs, floor openings and emergency exits for dark zones and glare.",
+    "questions": [
+      "Where are dark spots?",
+      "Can we see every stair?",
+      "Is lighting causing glare?",
+      "Are emergency routes visible?",
+      "What happens if a light fails?"
+    ],
+    "verification": [
+      "Night risks assessed",
+      "Work area lit",
+      "Routes visible",
+      "Stairs illuminated",
+      "Openings marked",
+      "Glare controlled",
+      "Lights secured",
+      "Cables safe",
+      "Exits visible",
+      "Crew briefed"
+    ]
+  }
+},
+{
+  "slug": "formwork-pre-pour-inspection",
+  "sourceFile": "editorial_20261113_formwork_pre_pour_inspection",
+  "base": "formwork-pre-pour-inspection-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "KALIP VE BETON DÖKÜM ÖNCESİ KONTROL TOOLBOX TALK",
+    "subtitle": "Dökümde kalıp ve geçici desteğin kararlılığı.",
+    "objective": "Beton dökümü sırasında kalıp ve destek sisteminin yetersizliği nedeniyle çökme, düşme ve sıkışmayı önlemek.",
+    "explanation": [
+      "Taze beton kalıp ve desteklere önemli yük uygular. Döküm hızı, yükseklik ve yerleşim planı kararlılığı etkiler.",
+      "Kalıp, dikme, bağ, mesnet ve çalışma platformları yetkin kişi tarafından onaylanmış projeye göre kontrol edilmelidir.",
+      "Döküm sırasında anormal hareket, sızıntı veya oturma görülürse iş durdurulmalı ve güvenli mesafeye çekilinmelidir."
+    ],
+    "scenario": [
+      "Bir ekip yüksek bir perde duvara beton döküyordu.",
+      "Bağlantı gevşekliği nedeniyle kalıp açılma belirtisi verdi ve döküm sürdürüldü.",
+      "Ön kontrol, döküm hızı sınırı ve derhal durdurma kararı olayı önleyebilirdi."
+    ],
+    "remember": "Onaylı kalıp ve destek kontrolü olmadan döküme başlamayın; deformasyonda işi durdurun.",
+    "hazards": [
+      "Kalıp bağlantısının açılması.",
+      "Geçici desteklerin çökmesi.",
+      "Taze betonun ani boşalması.",
+      "Döküm platformundan düşme.",
+      "Pompa hortumunun savrulması.",
+      "Yüklerin düzensiz birikmesi.",
+      "Yetersiz zemin taşıma gücü.",
+      "Anormal oturmanın fark edilmemesi."
+    ],
+    "controls": [
+      "Onaylı kalıp planını inceleyin.",
+      "Dikme ve bağları kontrol edin.",
+      "Mesnet ve zemin uygunluğunu doğrulayın.",
+      "Döküm hızına ve sıraya uyun.",
+      "Yük birikmesini kontrol edin.",
+      "Platform ve kenar koruması sağlayın.",
+      "Beton pompası hareketini planlayın.",
+      "Kontrol görevlisini belirleyin.",
+      "Oturma ve deformasyonu izleyin.",
+      "Anormal durumda dökümü durdurun."
+    ],
+    "supervisor_script": "Arkadaşlar, kalıp onayı tamamlanmadan beton dökülmeyecek. Döküm hızı plana uygun olacak. Kalıpta açılma veya oturma görülürse derhal duracağız.",
+    "questions": [
+      "Kalıp kimce onaylandı?",
+      "Dikmeler kontrol edildi mi?",
+      "Döküm hızı ne olmalı?",
+      "Kim deformasyonu izleyecek?",
+      "Acil durdurma komutu kimde?"
+    ],
+    "verification": [
+      "Kalıp projesi onaylı",
+      "Bağlar kontrol edildi",
+      "Dikmeler uygun",
+      "Zemin değerlendirildi",
+      "Döküm sırası biliniyor",
+      "Yük dağılımı uygun",
+      "Platform güvenli",
+      "Pompa planı hazır",
+      "Gözetim belirlendi",
+      "Durdurma kuralı açık"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "FORMWORK AND PRE-POUR INSPECTION TOOLBOX TALK",
+    "subtitle": "Prevent formwork instability during concrete placing.",
+    "objective": "Prevent collapse, falls and crush injuries caused by inadequate formwork or temporary supports during concrete pouring.",
+    "explanation": [
+      "Fresh concrete creates significant loads on forms and supports. Pour rate, height and sequence influence stability.",
+      "Competent personnel must inspect forms, ties, props, bearing points and platforms against the approved design.",
+      "Stop pouring and clear the danger area if unusual movement, leakage or settlement is observed."
+    ],
+    "scenario": [
+      "A crew poured concrete into a tall wall form.",
+      "A loose connection caused signs of movement, but pouring continued.",
+      "Pre-pour checks, controlled placing rate and prompt stop-work would have prevented exposure."
+    ],
+    "remember": "Do not pour without approved formwork inspection. Stop immediately for deformation.",
+    "hazards": [
+      "Form tie connection failure.",
+      "Collapse of temporary props.",
+      "Sudden release of wet concrete.",
+      "Falls from placing platforms.",
+      "Concrete pump hose movement.",
+      "Unplanned concentrated loads.",
+      "Insufficient ground bearing.",
+      "Failure to notice settlement."
+    ],
+    "controls": [
+      "Review the approved formwork design.",
+      "Inspect ties and props.",
+      "Verify bearing points and ground.",
+      "Follow the specified pour sequence.",
+      "Control pour rate and loading.",
+      "Provide safe platforms and edge guards.",
+      "Plan pump hose movement.",
+      "Appoint a formwork observer.",
+      "Monitor settlement and movement.",
+      "Stop for abnormal deformation."
+    ],
+    "supervisor_script": "No concrete will be poured without approved formwork checks. Follow the specified placing rate and stop immediately if the form moves or settles.",
+    "questions": [
+      "Who approved the formwork?",
+      "Are props inspected?",
+      "What pour rate is permitted?",
+      "Who monitors movement?",
+      "Who gives the stop command?"
+    ],
+    "verification": [
+      "Design approved",
+      "Ties inspected",
+      "Props suitable",
+      "Ground checked",
+      "Pour sequence known",
+      "Loading controlled",
+      "Platform safe",
+      "Pump plan ready",
+      "Observer assigned",
+      "Stop rule understood"
+    ]
+  }
+},
+{
+  "slug": "temporary-stairways-safe-access",
+  "sourceFile": "editorial_20261113_temporary_stairways_safe_access",
+  "base": "temporary-stairways-safe-access-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "GEÇİCİ MERDİVEN VE GÜVENLİ ERİŞİM TOOLBOX TALK",
+    "subtitle": "Yapım sahasında sağlam ve kesintisiz geçişler.",
+    "objective": "Geçici merdiven ve erişim yollarında düşme, kayma ve kontrolsüz geçiş risklerini önlemek.",
+    "explanation": [
+      "Geçici merdivenler yapı ilerledikçe yer değiştirir. Basamak, sahanlık ve korkuluk bütünlüğü her değişiklikte kontrol edilmelidir.",
+      "Merdiven üzerinden malzeme taşımak görüşü engelleyebilir. Büyük yükler için uygun mekanik taşıma yöntemi seçilmelidir.",
+      "Acil kaçış, aydınlatma, kaymaz yüzey ve alt üst girişlerin açık tutulması günlük iş planının parçasıdır."
+    ],
+    "scenario": [
+      "Bir ekip geçici merdivenin bir korkuluğunu taşıma için söktü.",
+      "Korkuluk geri takılmadı ve çalışan karanlıkta korumasız bölüme yaklaştı.",
+      "Yetkili değişiklik, geçici alternatif koruma ve geri teslim kontrolü riski önlerdi."
+    ],
+    "remember": "Korkuluğu eksik, dengesiz veya kaygan geçici merdiveni kullanmayın.",
+    "hazards": [
+      "Korkuluk eksikliğinde düşme.",
+      "Kırık veya eksik basamak.",
+      "Kaygan basamak yüzeyi.",
+      "Sahanlıkta açıklık.",
+      "Yetersiz aydınlatma.",
+      "Taşınan yükün görüşü kesmesi.",
+      "Girişin malzemeyle kapanması.",
+      "Yetkisiz merdiven değişikliği."
+    ],
+    "controls": [
+      "Merdiven kurulumunu yetkiliye doğrulatın.",
+      "Basamak ve sahanlıkları inceleyin.",
+      "Korkuluk ve kenar korumasını kontrol edin.",
+      "Kaymaz yüzeyi ve temizliği sağlayın.",
+      "Merdiveni yeterli aydınlatın.",
+      "Giriş çıkışları açık tutun.",
+      "Büyük yükleri uygun yöntemle taşıyın.",
+      "Yetkisiz değişiklikleri önleyin.",
+      "Eksik korumayı derhal bildirip ayırın.",
+      "Geri teslim sonrası kontrol yapın."
+    ],
+    "supervisor_script": "Arkadaşlar, merdiven bir erişim sistemi olarak güvenli olmalı. Korkuluğu eksik veya kaygan merdiveni kullanmayacağız. Değişiklik sonrası yeniden kontrol isteyeceğiz.",
+    "questions": [
+      "Korkuluklar tam mı?",
+      "Basamaklar sağlam mı?",
+      "Giriş çıkış açık mı?",
+      "Büyük yükler nasıl taşınacak?",
+      "Merdiveni kim değiştirebilir?"
+    ],
+    "verification": [
+      "Kurulum uygun",
+      "Basamaklar sağlam",
+      "Sahanlık güvenli",
+      "Korkuluklar tam",
+      "Kaymaz yüzey mevcut",
+      "Aydınlatma yeterli",
+      "Giriş çıkış açık",
+      "Yük taşıma planlı",
+      "Yetkisiz değişiklik yok",
+      "Geri teslim kontrolü var"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "TEMPORARY STAIRWAYS AND SAFE ACCESS TOOLBOX TALK",
+    "subtitle": "Maintain secure routes during construction changes.",
+    "objective": "Prevent falls, slips and unsafe access on temporary stairs, platforms and connecting routes.",
+    "explanation": [
+      "Temporary stairs may be moved or altered as construction progresses. Check steps, landings and guardrails after changes.",
+      "Carrying bulky materials can hide steps and handrails. Use suitable handling or lifting methods for oversized loads.",
+      "Daily plans must maintain emergency escape routes, lighting, slip resistance and clear entry and exit."
+    ],
+    "scenario": [
+      "A stair handrail was removed to move materials through the area.",
+      "The rail was not reinstated and a worker approached the exposed edge in poor light.",
+      "Authorised change control, interim guarding and hand-back checks would have reduced the hazard."
+    ],
+    "remember": "Do not use temporary stairs with missing handrails, unstable steps or slippery surfaces.",
+    "hazards": [
+      "Falls where handrails are missing.",
+      "Broken or absent steps.",
+      "Slippery treads.",
+      "Open edges at landings.",
+      "Insufficient lighting.",
+      "Loads obstructing sight lines.",
+      "Blocked stair entrances.",
+      "Unauthorised stair modification."
+    ],
+    "controls": [
+      "Confirm authorised stair installation.",
+      "Inspect treads and landings.",
+      "Check handrails and edge protection.",
+      "Maintain non-slip clean surfaces.",
+      "Provide suitable stair lighting.",
+      "Keep entrances and exits clear.",
+      "Use safe methods for bulky loads.",
+      "Prevent unauthorised alterations.",
+      "Report and barricade unsafe access.",
+      "Re-inspect after any change."
+    ],
+    "supervisor_script": "Stairways are safety-critical access. Do not use incomplete, slippery or unstable temporary stairs. Every modification needs control and reinspection.",
+    "questions": [
+      "Are handrails complete?",
+      "Are the steps sound?",
+      "Are exits clear?",
+      "How do we move bulky loads?",
+      "Who can change the stairs?"
+    ],
+    "verification": [
+      "Installation checked",
+      "Treads intact",
+      "Landings safe",
+      "Handrails fitted",
+      "Slip controls present",
+      "Lighting sufficient",
+      "Entries clear",
+      "Load handling planned",
+      "No unapproved changes",
+      "Handover inspected"
+    ]
+  }
+},
+{
+  "slug": "eyewash-emergency-shower-readiness",
+  "sourceFile": "editorial_20261113_eyewash_emergency_shower_readiness",
+  "base": "eyewash-emergency-shower-readiness-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — Onaylı saha prosedürü, risk değerlendirmesi, üretici talimatları ve geçerli yerel mevzuat önceliklidir.",
+    "title": "GÖZ DUŞU VE ACİL DUŞ HAZIRLIĞI TOOLBOX TALK",
+    "subtitle": "Kimyasal sıçramasında hızlı ve erişilebilir ilk müdahale.",
+    "objective": "Korozif kimyasal temasında göz ve vücut yıkama ekipmanına erişim gecikmesini önlemek.",
+    "explanation": [
+      "Kimyasal sıçramasında ilk müdahale için saniyeler kritik olabilir. Göz duşu ve acil duşun varlığı kadar konumu ve çalışır olması da önemlidir.",
+      "Ürünün SDS bilgileri, acil yardım yöntemi, yıkama ekipmanı ve ulaşım güzergâhı işe başlamadan doğrulanmalıdır.",
+      "Düşük su debisi, bloke edilmiş yol veya kullanılmayan ekipmanın arızası müdahaleyi geciktirebilir. Teknik ve tıbbi prosedürler önceliklidir."
+    ],
+    "scenario": [
+      "Bir çalışan kimyasal aktarma sırasında yüz bölgesine sıçrama riski yaşadı.",
+      "En yakın göz duşunun önü malzemelerle kapalıydı ve ekip acil numarayı bilmiyordu.",
+      "Erişim kontrolü, ekipman testi ve önceden yapılan acil durum konuşması müdahaleyi hızlandırırdı."
+    ],
+    "remember": "Kimyasal temas riskinde göz duşuna giden yol açık ve ekipman kullanıma hazır olmalıdır.",
+    "hazards": [
+      "Kimyasalın göze sıçraması.",
+      "Korozif sıvıyla cilt teması.",
+      "Göz duşuna erişim gecikmesi.",
+      "Çalışmayan duş veya musluk.",
+      "Yıkama suyunun yetersiz olması.",
+      "Acil yardım çağrısının gecikmesi.",
+      "Kirli kıyafetin devam eden teması.",
+      "Panik ve yanlış müdahale."
+    ],
+    "controls": [
+      "Kimyasalın SDS ve ilk yardımını inceleyin.",
+      "Göz duşu ve acil duş yerini bulun.",
+      "Ekipmanın çalışır durumunu doğrulayın.",
+      "Erişim yolunu engellerden temizleyin.",
+      "Yeterli yıkama akışını prosedürle kontrol edin.",
+      "Gereken KKD'yi kimyasala göre seçin.",
+      "Maruziyette acil alarm yöntemini bilin.",
+      "Eğitim sınırında ilk yardım uygulayın.",
+      "Kirlenmiş malzeme yönetimini planlayın.",
+      "Sağlık ekibi ve bildirim düzenini doğrulayın."
+    ],
+    "supervisor_script": "Arkadaşlar, bugün kullanacağımız kimyasala ait SDS'yi kontrol ediyoruz. Göz duşuna nasıl ulaşacağımızı ve acil durumda kimi arayacağımızı herkes bilsin.",
+    "questions": [
+      "SDS'de ilk yardım ne diyor?",
+      "Göz duşu nerede?",
+      "Yol açık mı?",
+      "Ekipman çalışıyor mu?",
+      "Sağlık ekibini kim arar?"
+    ],
+    "verification": [
+      "SDS incelendi",
+      "İlk yardım bilgisi açık",
+      "Göz duşu yeri biliniyor",
+      "Acil duş konumu biliniyor",
+      "Ekipman çalışır",
+      "Erişim yolu açık",
+      "Yıkama kontrolü uygun",
+      "KKD doğrulandı",
+      "Acil numara biliniyor",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Approved site procedure, risk assessment, manufacturer instructions and local regulations take priority.",
+    "title": "EMERGENCY EYEWASH AND SAFETY SHOWER TOOLBOX TALK",
+    "subtitle": "Prepare immediate response to chemical splashes.",
+    "objective": "Prevent delays reaching suitable eyewash and emergency drenching equipment after corrosive chemical exposure.",
+    "explanation": [
+      "A rapid initial response may be critical after chemical splashes. Eyewash and shower location, access and working condition all matter.",
+      "Verify the substance SDS, first-aid instructions, emergency washing facilities and access route before work begins.",
+      "Obstructed paths, poor water supply or failed equipment delay response. Follow competent medical and site emergency procedures."
+    ],
+    "scenario": [
+      "A worker was exposed to a potential face splash during chemical transfer.",
+      "Materials blocked the nearest eyewash station, and the crew did not know the emergency call number.",
+      "Access checks, facility testing and a pre-job emergency briefing would have improved response."
+    ],
+    "remember": "Where chemical splash hazards exist, keep emergency washing equipment accessible and ready.",
+    "hazards": [
+      "Chemical splash to the eyes.",
+      "Corrosive contact with skin.",
+      "Delayed access to eyewash.",
+      "Nonfunctional shower equipment.",
+      "Insufficient flushing supply.",
+      "Delayed emergency assistance.",
+      "Continued contact from contaminated clothing.",
+      "Panic and unsuitable first aid."
+    ],
+    "controls": [
+      "Review substance SDS and first-aid needs.",
+      "Locate eyewash and safety showers.",
+      "Verify facilities are operational.",
+      "Keep access routes unobstructed.",
+      "Check flushing supply per site procedure.",
+      "Select appropriate chemical PPE.",
+      "Know emergency alarm arrangements.",
+      "Give first aid only within training.",
+      "Plan contaminated clothing management.",
+      "Confirm medical response and reporting."
+    ],
+    "supervisor_script": "Before chemical work, review the SDS and locate the eyewash and safety shower. Everyone needs to know the clear access route and emergency call method.",
+    "questions": [
+      "What does the SDS require?",
+      "Where is the eyewash?",
+      "Is the access route clear?",
+      "Do the stations work?",
+      "Who calls medical support?"
+    ],
+    "verification": [
+      "SDS reviewed",
+      "First-aid needs known",
+      "Eyewash located",
+      "Shower located",
+      "Equipment operational",
+      "Route unobstructed",
+      "Water supply checked",
+      "PPE suitable",
+      "Emergency contact known",
+      "Crew briefed"
+    ]
+  }
 }
 ] as ToolboxRecord[];
 
