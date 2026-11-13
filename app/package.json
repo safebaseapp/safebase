@@ -18,7 +18,8 @@
     "qa:account-billing-marketing": "node scripts/qa-account-billing-marketing.mjs",
     "qa:knowledge-specialist-12": "node scripts/qa-knowledge-specialist-12.mjs",
     "qa:knowledge-industrial-next12": "node scripts/qa-knowledge-industrial-next12.mjs",
-    "qa:toolbox-content": "node scripts/qa-toolbox-content.mjs"
+    "qa:toolbox-content": "node scripts/qa-toolbox-content.mjs",
+    "qa:toolbox-dynamic-pdfs": "node scripts/qa-toolbox-dynamic-pdf-render.mjs"
   },
   "dependencies": {
     "@iso-safety-signs/assets": "^1.0.1",
