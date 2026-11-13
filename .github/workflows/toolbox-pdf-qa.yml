@@ -6,6 +6,10 @@ on:
       - main
     paths:
       - "app/public/downloads/**"
+      - "app/lib/toolbox/toolbox-data.ts"
+      - "app/app/[locale]/toolbox/ToolboxLibraryClient.tsx"
+      - "app/lib/pdf/premium-toolbox-pdf-v2.ts"
+      - "app/scripts/qa-toolbox-content.mjs"
       - "app/lib/toolbox/premium-master-slugs.ts"
       - "app/scripts/qa-toolbox-pdfs.mjs"
       - "app/package.json"
@@ -13,6 +17,10 @@ on:
   pull_request:
     paths:
       - "app/public/downloads/**"
+      - "app/lib/toolbox/toolbox-data.ts"
+      - "app/app/[locale]/toolbox/ToolboxLibraryClient.tsx"
+      - "app/lib/pdf/premium-toolbox-pdf-v2.ts"
+      - "app/scripts/qa-toolbox-content.mjs"
       - "app/lib/toolbox/premium-master-slugs.ts"
       - "app/scripts/qa-toolbox-pdfs.mjs"
       - "app/package.json"
@@ -42,3 +50,6 @@ jobs:
 
       - name: Audit Toolbox PDFs
         run: npm run qa:toolbox-pdfs
+
+      - name: Audit Toolbox bilingual catalogue
+        run: npm run qa:toolbox-content
