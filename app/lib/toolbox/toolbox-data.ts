@@ -11995,6 +11995,2082 @@ export const toolboxData = [
     ],
     "footer": "SERNEM HSE Resource — Facility isolation procedures, hot-work permits, gas testing, fire safety and emergency plans always take precedence."
   }
+},
+{
+  "slug": "mewp-pre-use-and-emergency-lowering",
+  "sourceFile": "editorial_20261113_mewp_pre_use_and_emergency_lowering",
+  "base": "mewp-pre-use-and-emergency-lowering-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "MEWP (MAKASLI / EKLEMLİ PLATFORM) KONTROL VE KURTARMA TOOLBOX TALK",
+    "subtitle": "Platform sıkışması, devrilme ve acil indirme riskleri.",
+    "application_subtitle": "Operatör yetkinliği, zemin, üst engeller ve kurtarma hazırlığı.",
+    "objective": "Mobil yükseltilebilir çalışma platformlarında sıkışma, devrilme, düşme ve gecikmiş kurtarma riskini önlemek.",
+    "explanation": [
+      "MEWP hareketinde üstteki çelik yapı veya boru ile sepet korkuluğu arasında sıkışma meydana gelebilir. Sepet kontrolüne basılı kalınması acil durumu ağırlaştırabilir.",
+      "Zemin taşıma kapasitesi, eğim, rüzgâr, çalışma yüksekliği ve makinenin erişim diyagramı işe başlamadan değerlendirilmelidir. Her makinenin kontrolleri ve koruma sistemleri farklıdır.",
+      "Acil durumda zeminden indirme yapacak yetkin kişi ve ekipmana özgü kurtarma planı bulunmalı, operatör ve kurtarma görevlisi makineye aşina olmalıdır."
+    ],
+    "scenario": [
+      "Bir eklemli platform boru köprüsünün altına yükseldi; operatör sepetin üstündeki kirişi fark etmedi.",
+      "Sepet yükselirken çalışan korkuluk ile kiriş arasında sıkışma tehlikesi yaşadı; zemindeki ekip acil indirme kumandasını bilmiyordu.",
+      "Önceden planlanmış yaklaşma rotası, üst engel kontrolü ve uygulamalı acil indirme eğitimi müdahaleyi hızlandırırdı."
+    ],
+    "remember": "Platformu yükseltmeden önce üstteki engeli ve acil indirmeyi kontrol edin; yerde kurtarma yapacak kişi hazır değilse başlamayın.",
+    "hazards": [
+      "Sepet ile üst çelik yapı arasında sıkışma.",
+      "Yetersiz zemin nedeniyle devrilme.",
+      "Korkuluk dışına uzanma veya platformdan düşme.",
+      "Rüzgâr ya da erişim limitlerinin aşılması.",
+      "Yaya veya ekipmanla çarpışma.",
+      "Acil indirme yönteminin bilinmemesi.",
+      "Hasarlı korkuluk, alarm veya kontrol sistemi.",
+      "Makine tipine özgü eğitimin bulunmaması."
+    ],
+    "controls": [
+      "İşe uygun MEWP tipini seçin ve operatör yetkisini doğrulayın.",
+      "Kullanım öncesi makine ve emniyet fonksiyon kontrolünü yapın.",
+      "Zemini, eğimi, çukur ve yeraltı boşluklarını değerlendirin.",
+      "Üstteki yapı, enerji hattı ve sıkışma noktalarını kontrol edin.",
+      "Üretici yük, erişim, eğim ve rüzgâr limitlerine uyun.",
+      "Çevrede yaya-araç ayrımı ve bariyerleme sağlayın.",
+      "Düşmeye karşı gerekli bağlantı düzenini makine tipine ve risk değerlendirmesine göre uygulayın.",
+      "Acil durum indirme kumandasını tanıyan eğitimli görevli belirleyin.",
+      "Kurtarma yöntemini sahada anlatın ve uygun şekilde prova edin.",
+      "Koşullar değişirse platformu güvenli konuma indirip işi durdurun."
+    ],
+    "supervisor_script": "Bugün platformun sadece yüksekliğine değil üstteki engellere bakacağız. Zemini ve makineyi kontrol edeceğiz. Sepette bir sıkışma olursa kim zeminden indirme yapacak ve nasıl çağıracağız, herkes biliyor olmalı.",
+    "questions": [
+      "Üst engel ve sıkışma noktaları nerede?",
+      "Zeminin uygunluğu doğrulandı mı?",
+      "Acil indirme kumandasını kim kullanacak?",
+      "Platformun rüzgâr limiti nedir?",
+      "İletişim kesilirse ne yapacağız?"
+    ],
+    "verification": [
+      "Operatör yetkili",
+      "Makine kontrol edildi",
+      "Zemin değerlendirildi",
+      "Üst engeller kontrol edildi",
+      "Çalışma alanı ayrıldı",
+      "Yük ve rüzgâr limitleri uygun",
+      "Düşme koruması uygun",
+      "Acil indirme görevlisi hazır",
+      "Kurtarma planı anlatıldı",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "MEWP PRE-USE CHECKS AND EMERGENCY LOWERING TOOLBOX TALK",
+    "subtitle": "Control platform entrapment, overturning and rescue delays.",
+    "application_subtitle": "Operator competence, ground stability, overhead hazards and rescue readiness.",
+    "objective": "Prevent entrapment, overturning, falls and delayed rescue during mobile elevating work platform operations.",
+    "explanation": [
+      "A MEWP basket may trap an operator against overhead steelwork or pipework. Contact with platform controls during entrapment can worsen the incident.",
+      "Assess bearing capacity, slopes, wind, working height and the machine's reach configuration before starting. Controls and protective systems vary by model.",
+      "A trained person on the ground must be able to operate the machine-specific emergency lowering system under a practical site rescue plan."
+    ],
+    "scenario": [
+      "An articulated platform was raised beneath a pipe rack without identifying an overhead beam.",
+      "The worker became exposed to crushing between the basket rail and the beam; the crew below did not know the emergency descent controls.",
+      "A planned approach path, overhead clearance checks and practised lowering arrangements would have improved prevention and response."
+    ],
+    "remember": "Check overhead clearance and emergency lowering before lifting the platform; do not begin without rescue capability.",
+    "hazards": [
+      "Crushing between basket and overhead structures.",
+      "Overturning due to unsuitable ground.",
+      "Falls from leaning outside the platform.",
+      "Exceeding wind, reach or stability limits.",
+      "Collision with vehicles or pedestrians.",
+      "Unknown or inaccessible emergency lowering controls.",
+      "Defective guardrails, alarms or controls.",
+      "Insufficient model-specific familiarisation."
+    ],
+    "controls": [
+      "Select the correct MEWP and verify operator competence.",
+      "Complete pre-use inspection and safety function checks.",
+      "Assess ground strength, slopes, voids and trenches.",
+      "Identify overhead structures, power lines and entrapment points.",
+      "Comply with manufacturer load, outreach, slope and wind limits.",
+      "Separate pedestrians and vehicles from the operating area.",
+      "Apply suitable fall-protection arrangements for the machine type and risk assessment.",
+      "Nominate a trained, available emergency lowering person.",
+      "Brief and appropriately practise the rescue procedure.",
+      "Lower safely and stop if site conditions change."
+    ],
+    "supervisor_script": "We will assess the machine, ground and overhead clearance, not just the work height. Everyone must know who can operate emergency lowering from the ground and how to summon help.",
+    "questions": [
+      "Where are the overhead entrapment points?",
+      "Has ground suitability been confirmed?",
+      "Who can operate emergency lowering?",
+      "What is the platform's wind limit?",
+      "What happens if communications fail?"
+    ],
+    "verification": [
+      "Operator competent",
+      "Pre-use check completed",
+      "Ground assessed",
+      "Overhead hazards checked",
+      "Area segregated",
+      "Load and wind limits suitable",
+      "Fall protection assessed",
+      "Ground rescue person available",
+      "Rescue procedure briefed",
+      "Crew informed"
+    ]
+  }
+},
+{
+  "slug": "chemical-flushing-circulation-safety",
+  "sourceFile": "editorial_20261113_chemical_flushing_circulation_safety",
+  "base": "chemical-flushing-circulation-safety-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "KİMYASAL YIKAMA VE SİRKÜLASYON GÜVENLİĞİ TOOLBOX TALK",
+    "subtitle": "Kimyasal devreye alma yıkamasında maruziyet ve kaçakları önleyin.",
+    "application_subtitle": "SDS, hat izolasyonu, hortumlar, kimyasal uyumluluk, atık ve acil müdahale.",
+    "objective": "Kimyasal yıkama ve sirkülasyon sırasında korozif maruziyet, yanlış bağlantı, basınçlı kaçak, uyumsuz reaksiyon ve çevresel salımı önlemek.",
+    "explanation": [
+      "Kimyasal yıkama; pompalar, geçici hortumlar, manifoldlar ve tanklarla kurulan geçici bir prosestir. Hatların yanlış bağlanması veya uygun olmayan hortum kullanımı ciddi kimyasal sıçramaya yol açabilir.",
+      "Kullanılacak ürünün güncel SDS'si, gerçek konsantrasyonu, sıcaklık ve malzeme uyumluluğu teknik planla doğrulanmalı; kimyasallar kesinlikle rastgele karıştırılmamalıdır.",
+      "Drenaj, numune alma ve atık boşaltma noktaları kontrollü olmalı; göz duşu, acil duş, dökülme düzeni ve maruziyet halinde yapılacak işlemler ekipçe bilinmelidir."
+    ],
+    "scenario": [
+      "Bir yıkama ekibi geçici sirkülasyon hattına uygun olmayan conta yerleştirdi.",
+      "Pompa devreye alınırken bağlantıdan kimyasal sızdı ve düşük seviyede çalışan personelin el ve yüz bölgesine sıçrama riski oluştu.",
+      "Ürünle uyumlu conta, bağlantıların kontrolü, güvenli ilk doldurma ve bariyerleme sızıntı maruziyetini azaltabilirdi."
+    ],
+    "remember": "Kimyasal yıkamayı sıradan su testi gibi görmeyin; ürün, basınç, sıcaklık, hortum ve maruziyet kontrolü birlikte onaylanmalıdır.",
+    "hazards": [
+      "Korozif kimyasalla göz ve cilt teması.",
+      "Kimyasal buhar veya aerosol solunması.",
+      "Geçici bağlantı ve hortumlardan basınçlı kaçak.",
+      "Uyumsuz kimyasalların reaksiyonu.",
+      "Yanlış hat izolasyonu veya yanlış vana açılması.",
+      "Kaygan zemin ve düşük kotlarda dökülme.",
+      "Uygun olmayan conta, pompa veya malzeme.",
+      "Kimyasal atığın uygunsuz boşaltılması."
+    ],
+    "controls": [
+      "Onaylı yıkama prosedürü, kimyasal envanteri ve SDS'yi inceleyin.",
+      "Kimyasalı, malzeme uyumluluğunu ve proses sınırlarını teknik sorumluyla doğrulayın.",
+      "Yıkama devresi ile canlı sistemlerin izolasyonunu belgeleyin.",
+      "Geçici hortum, conta, manifold ve pompaların uygunluğunu kontrol edin.",
+      "Bağlantıları, sabitlemeyi ve kaçakların olası yönünü doğrulayın.",
+      "Doldurma, sirkülasyon, numune alma ve boşaltma aşamalarını yetkili prosedüre göre yürütün.",
+      "Uygun eldiven, göz/yüz ve vücut korumasını SDS'ye göre seçin.",
+      "Göz duşu, acil duş ve dökülme müdahale düzenini hazır tutun.",
+      "Atıkları onaylı, etiketli kap veya toplama sistemine yönlendirin.",
+      "Sızıntı, anormal basınç veya beklenmeyen reaksiyonda işi derhal durdurun."
+    ],
+    "supervisor_script": "Arkadaşlar, kimyasal yıkamada ürünün SDS'sini bilmeden, hat izolasyonunu ve hortum uyumunu kontrol etmeden pompaya start vermeyeceğiz. Sıçrama olursa kimin nereden müdahale edeceği, göz duşu ve atığın nereye gideceği önceden belirlenmiş olmalı.",
+    "questions": [
+      "Hangi kimyasal ve SDS kullanılacak?",
+      "Geçici devre canlı sistemlerden izole mi?",
+      "Hortum ve contalar kimyasala uygun mu?",
+      "Göz duşu ve acil duş nerede?",
+      "Atık sıvı nereye alınacak?"
+    ],
+    "verification": [
+      "Prosedür onaylı",
+      "SDS mevcut",
+      "Malzeme uyumluluğu kontrol edildi",
+      "Devre izolasyonu doğrulandı",
+      "Hortum ve contalar uygun",
+      "Dökülme alanı hazır",
+      "KKD uygun",
+      "Göz duşu erişilebilir",
+      "Atık toplama düzeni hazır",
+      "Durdurma koşulları anlatıldı"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "CHEMICAL FLUSHING AND CIRCULATION SAFETY TOOLBOX TALK",
+    "subtitle": "Prevent chemical exposure and leaks during system cleaning.",
+    "application_subtitle": "SDS, isolations, hoses, compatibility, waste and emergency response.",
+    "objective": "Prevent corrosive exposure, incorrect connections, pressure leaks, incompatible reactions and environmental releases during chemical flushing and circulation.",
+    "explanation": [
+      "Chemical flushing often relies on temporary pumps, hoses, manifolds and tanks. Incorrect tie-ins or incompatible hoses and seals can lead to serious splashes.",
+      "Verify the current SDS, actual chemical concentration, temperature limits and materials compatibility against the approved engineering plan. Never improvise chemical mixing.",
+      "Control draining, sampling and waste transfer. Personnel must know where eyewash, emergency showers, spill controls and emergency response arrangements are located."
+    ],
+    "scenario": [
+      "A flushing crew installed an incompatible gasket in a temporary circulation connection.",
+      "When the pump started, the joint leaked and created a splash hazard for workers near the low point.",
+      "A compatibility check, joint inspection, controlled initial filling and an exclusion zone would have reduced exposure."
+    ],
+    "remember": "Chemical flushing is not an ordinary water test: chemical, temperature, pressure, hose and exposure controls must be verified together.",
+    "hazards": [
+      "Corrosive splash onto eyes and skin.",
+      "Inhalation of chemical mist or vapour.",
+      "Pressurised leaks from temporary hoses and fittings.",
+      "Reaction between incompatible chemicals.",
+      "Incorrect isolation or inadvertent valve opening.",
+      "Slips and spills in low-level work areas.",
+      "Incompatible gaskets, pumps or materials.",
+      "Uncontrolled discharge of hazardous waste."
+    ],
+    "controls": [
+      "Review the approved flushing procedure, chemical inventory and SDS.",
+      "Verify chemical and equipment compatibility and process limits with technical staff.",
+      "Document isolations between flushing circuits and live systems.",
+      "Inspect temporary hoses, gaskets, manifolds and pumps for suitability.",
+      "Check connection restraint and potential leak paths.",
+      "Follow approved filling, circulation, sampling and draining steps.",
+      "Select gloves, eye/face and body protection against the actual substance.",
+      "Provide accessible eyewash, showers and spill response materials.",
+      "Direct wastes to approved, labelled containment or treatment.",
+      "Stop immediately for leaks, abnormal pressure or unexpected reactions."
+    ],
+    "supervisor_script": "We will not start the circulation pump until the SDS, isolations and hose compatibility are confirmed. Everyone must know the splash response, eyewash location and approved waste collection point.",
+    "questions": [
+      "Which chemical and SDS apply?",
+      "Is the temporary circuit separated from live systems?",
+      "Are the hoses and seals compatible?",
+      "Where is emergency eyewash?",
+      "Where will the waste liquid go?"
+    ],
+    "verification": [
+      "Procedure approved",
+      "SDS available",
+      "Compatibility confirmed",
+      "Isolations verified",
+      "Hoses and seals suitable",
+      "Spill response ready",
+      "PPE appropriate",
+      "Eyewash accessible",
+      "Waste collection arranged",
+      "Stop conditions briefed"
+    ]
+  }
+},
+{
+  "slug": "rotating-equipment-guarding-safety",
+  "sourceFile": "editorial_20261113_rotating_equipment_guarding_safety",
+  "base": "rotating-equipment-guarding-safety-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "DÖNEN EKİPMAN VE MAKİNE KORUYUCULARI TOOLBOX TALK",
+    "subtitle": "Mil, kaplin, kayış ve hareketli parçalara kapılmayı önleyin.",
+    "application_subtitle": "Muhafaza, erişim, izolasyon ve deneme çalıştırması güvenliği.",
+    "objective": "Dönen miller, kaplinler, kasnaklar ve hareketli mekanizmalarda el, saç ve giysi kaptırma riskini önlemek.",
+    "explanation": [
+      "Düşük hızda dönen düzgün bir mil bile bol giysi, eldiven, saç veya takıyı yakalayabilir. Kayış-kasnak ve dişli birleşimleri ciddi sıkışma noktaları oluşturur.",
+      "Makine muhafazası yalnızca koruyucu değil, ekipmanın emniyet fonksiyonunun parçasıdır. Muhafaza çıkarılmış ekipman normal işletmeye alınmamalıdır.",
+      "Temizlik, ayar, arıza giderme ve bakım için hareketin tamamen durduğunu ve tüm tehlikeli enerjilerin izole edildiğini doğrulamak gerekir."
+    ],
+    "scenario": [
+      "Bir pompa kaplin muhafazası bakım için çıkarıldı ve yeniden takılmadan pompa kısa süreli denemeye alındı.",
+      "Yakındaki çalışan dönen kapline yaklaşırken iş kıyafetinin gevşek kısmı hareketli parçaya takılma riski oluşturdu.",
+      "İzolasyon, muhafaza geri takılma kontrolü ve yetkili yeniden başlatma prosedürü bu tehlikeyi önleyebilirdi."
+    ],
+    "remember": "Koruyucusu eksik çalışan ekipmana yaklaşmayın; bakımda izolasyon ve sıfır enerji doğrulaması olmadan hareketli bölgeye müdahale etmeyin.",
+    "hazards": [
+      "Dönen mile saç veya kıyafet kaptırma.",
+      "Kayış-kasnak arasında el sıkışması.",
+      "Kaplin ve dişlilerde ezilme.",
+      "Muhafazanın sökülmüş veya hasarlı olması.",
+      "Beklenmedik otomatik yeniden başlatma.",
+      "Temizlik sırasında makineye uzanma.",
+      "Dönen parçalardan parça fırlaması.",
+      "Bakım sonrası muhafaza unutulması."
+    ],
+    "controls": [
+      "İşe başlamadan makineye ait tehlike noktalarını belirleyin.",
+      "Muhafaza, kapak ve emniyet kilitlerini kontrol edin.",
+      "Eksik veya hasarlı koruyuculu makineyi kullanmayın.",
+      "Hareketli parçalara uzanmayın veya temizlik yapmayın.",
+      "Bakımda yetkili enerji izolasyonu ve kilitleme uygulayın.",
+      "Durdurma sonrası kalıntı hareket ve depolanmış enerjiyi doğrulayın.",
+      "Bol kıyafet, takı ve açık saçları riskli alandan uzak tutun.",
+      "Koruyucu düzenini yetkisiz şekilde değiştirmeyin.",
+      "Yeniden başlatmadan önce tüm muhafazaları yerine takın.",
+      "Deneme çalıştırmasını yetkili, kontrollü alanda yapın."
+    ],
+    "supervisor_script": "Arkadaşlar, dönen ekipmana el uzatmak bir saniyelik karardır ama sonuç ağır olabilir. Muhafaza takılı mı kontrol edeceğiz. Bakım ya da temizlik için enerji izole edilmeden ve tam duruş doğrulanmadan makineye yaklaşmayacağız.",
+    "questions": [
+      "En yakın dönme veya sıkışma noktası nerede?",
+      "Muhafazalar yerinde mi?",
+      "Otomatik yeniden çalışma mümkün mü?",
+      "Bakım için hangi enerji kaynakları izole edilmeli?",
+      "Deneme çalıştırmasına kim izin veriyor?"
+    ],
+    "verification": [
+      "Tehlikeli hareket noktaları belirlendi",
+      "Muhafazalar kontrol edildi",
+      "Emniyet kilitleri çalışır",
+      "Makine çalışma alanı düzenli",
+      "Yetkisiz erişim önlendi",
+      "Bakım izolasyonu hazır",
+      "Kalıntı enerji doğrulanabilir",
+      "Kıyafet ve saç kontrolü yapıldı",
+      "Yeniden başlatma yetkisi belirli",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "ROTATING EQUIPMENT AND MACHINE GUARDING TOOLBOX TALK",
+    "subtitle": "Prevent entanglement in shafts, couplings, belts and moving parts.",
+    "application_subtitle": "Guards, safe access, isolation and test-run controls.",
+    "objective": "Prevent entanglement and crush injuries around rotating shafts, couplings, pulleys and other moving machinery.",
+    "explanation": [
+      "Even a slowly rotating smooth shaft can catch loose clothing, gloves, hair or jewellery. Belts and pulleys create powerful in-running nip points.",
+      "A guard is part of the machine's protection system. Equipment with a guard removed for maintenance must not be returned to normal operation.",
+      "Cleaning, adjustment and fault finding require confirmed stopping, isolation and control of all hazardous energy sources."
+    ],
+    "scenario": [
+      "A pump coupling guard was removed for maintenance and the machine was briefly restarted before refitting it.",
+      "A worker near the exposed rotating coupling risked having loose clothing caught by the equipment.",
+      "Isolation, guard reinstatement and controlled authorisation before restart would have prevented the exposure."
+    ],
+    "remember": "Stay away from exposed moving machinery; never reach into a hazardous area without isolation and verified zero energy.",
+    "hazards": [
+      "Clothing or hair caught by rotating shafts.",
+      "Hands trapped at belt and pulley nip points.",
+      "Crushing at couplings and gears.",
+      "Missing or damaged guarding.",
+      "Unexpected automatic restart.",
+      "Reaching into machinery during cleaning.",
+      "Flying fragments from rotating parts.",
+      "Guard left off after maintenance."
+    ],
+    "controls": [
+      "Identify dangerous moving parts before work.",
+      "Inspect guards, covers and interlocks.",
+      "Do not operate machines with deficient guards.",
+      "Never reach into moving equipment for cleaning or adjustment.",
+      "Use authorised energy isolation and lockout for maintenance.",
+      "Verify residual movement and stored energy are controlled.",
+      "Secure loose hair and clothing; remove inappropriate jewellery.",
+      "Never bypass or modify safeguards without authorisation.",
+      "Refit all guards before restarting.",
+      "Perform test runs only under controlled competent supervision."
+    ],
+    "supervisor_script": "Rotating equipment can cause severe injury in seconds. We will confirm all guards are intact and will not enter moving areas until the equipment is isolated, stopped and verified safe.",
+    "questions": [
+      "Where are the nearest rotating or nip hazards?",
+      "Are all guards in place?",
+      "Can the machine restart automatically?",
+      "Which energy sources must be isolated?",
+      "Who authorises the test run?"
+    ],
+    "verification": [
+      "Danger points identified",
+      "Guards inspected",
+      "Interlocks functional",
+      "Work area clear",
+      "Access restricted",
+      "Isolation method defined",
+      "Stored energy considered",
+      "Loose clothing controlled",
+      "Restart authority known",
+      "Crew informed"
+    ]
+  }
+},
+{
+  "slug": "pneumatic-tools-and-air-hoses",
+  "sourceFile": "editorial_20261113_pneumatic_tools_and_air_hoses",
+  "base": "pneumatic-tools-and-air-hoses-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "PNÖMATİK EL ALETLERİ VE BASINÇLI HAVA HORTUMLARI TOOLBOX TALK",
+    "subtitle": "Hortum savrulması ve yanlış bağlantıları kontrol edin.",
+    "application_subtitle": "Basınç sınırı, kuplaj, emniyet bağlantısı ve güvenli ayırma.",
+    "objective": "Pnömatik alet kullanımı sırasında hortum kopması, bağlantı ayrılması, fırlayan uç ve basınçlı hava kaynaklı yaralanmaları önlemek.",
+    "explanation": [
+      "Basınçlı hava hortumu ve kuplajı ayrıldığında hortum kontrolsüz savrularak ağır yaralanmaya neden olabilir. Aletin izin verilen basıncı, hattın kapasitesi ve bağlantı tipi uyumlu olmalıdır.",
+      "Gerekli pozitif kilitleme ve hortum emniyet bağı üretici ve saha kurallarına göre kullanılmalıdır. Hortumda yırtık, hasarlı kuplaj veya uygunsuz tamir varsa devreden çıkarılmalıdır.",
+      "Bağlantı sökmeden önce besleme kapatılmalı, hat basınçsız hale getirilmeli ve sıfır basınç doğrulanmalıdır. Basınçlı hava vücuda, kişiye veya giysiye yöneltilmemelidir."
+    ],
+    "scenario": [
+      "Bir çalışan pnömatik aleti farklı tip kuplaja uygun olmayan adaptörle bağladı.",
+      "Çalışma sırasında kuplaj açıldı ve basınçlı hortum çevrede savruldu.",
+      "Uygun bağlantı, hortum emniyet sistemi, basınç kontrolü ve kullanım öncesi kontrol olayı önleyebilirdi."
+    ],
+    "remember": "Basınçlı hortumu sökmeden önce beslemeyi kesin ve basıncı tahliye edin; ayrılan hortuma yaklaşmayın.",
+    "hazards": [
+      "Kuplaj ayrılması sonrası hortum savrulması.",
+      "Pnömatik alet ucunun fırlaması.",
+      "Basınçlı havanın cilde veya göze yönelmesi.",
+      "Hortum üzerinde takılma ve ezilme.",
+      "Hasarlı hortumdan kaçak.",
+      "İzin verilen basıncın aşılması.",
+      "Uygunsuz kuplaj veya yetkisiz tamir.",
+      "Gürültü ve titreşim maruziyeti."
+    ],
+    "controls": [
+      "İşe uygun ve üretici talimatına uygun alet seçin.",
+      "Basınç regülatörünü alet ve hortum limitine göre doğrulayın.",
+      "Hortum ve kuplajları hasar ve uyum açısından inceleyin.",
+      "Gerekli emniyet klipsi ve pozitif tutma sistemlerini kullanın.",
+      "Alet uçlarının doğru sabitlendiğini doğrulayın.",
+      "Hortumları yaya yolu ve keskin kenarlardan koruyun.",
+      "Gerekli göz, yüz ve işitme korumasını kullanın.",
+      "Basınçlı havayı temizlik için uygunsuz şekilde kullanmayın.",
+      "Ayırmadan önce beslemeyi kapatıp hattı boşaltın.",
+      "Savrulma veya kaçak halinde alanı ayırıp güvenli duruş sağlayın."
+    ],
+    "supervisor_script": "Bugün pnömatik alete basınç vermeden kuplajların, hortumların ve emniyet bağlantılarının uygunluğunu kontrol edeceğiz. Hattı ayırırken önce basıncı sıfırlayacağız. Kaçak veya bağlantı gevşekse işi durduracağız.",
+    "questions": [
+      "Aletin izin verilen basıncı nedir?",
+      "Kuplaj pozitif olarak sabit mi?",
+      "Hortum hasarsız mı?",
+      "Ayırmadan önce basıncı nasıl boşaltacağız?",
+      "Hortum savrulursa nasıl müdahale edeceğiz?"
+    ],
+    "verification": [
+      "Alet uygun",
+      "Regülatör ayarı doğrulandı",
+      "Hortum sağlam",
+      "Kuplaj uygun",
+      "Emniyet bağı kontrol edildi",
+      "Alet ucu sabit",
+      "Hortum geçişi güvenli",
+      "KKD uygun",
+      "Basınç boşaltma yöntemi biliniyor",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "PNEUMATIC TOOLS AND COMPRESSED-AIR HOSES TOOLBOX TALK",
+    "subtitle": "Control hose whip and improper compressed-air connections.",
+    "application_subtitle": "Pressure rating, couplings, restraints and safe disconnecting.",
+    "objective": "Prevent hose whip, accidental separation, ejected tool attachments and compressed-air injuries during pneumatic tool use.",
+    "explanation": [
+      "A disconnected pressurised hose can whip violently. Tool pressure ratings, hose capacity and coupling types must match the intended service.",
+      "Use suitable positive retention, safety clips and hose restraints where required by the manufacturer and site procedure. Remove cut, damaged or makeshift-repaired hoses from service.",
+      "Shut off the supply and release pressure before disconnecting. Never direct compressed air at a person or use it in an unsafe cleaning method."
+    ],
+    "scenario": [
+      "A pneumatic tool was connected through an incompatible adapter.",
+      "During use, the coupling opened and the pressurised hose whipped across the work area.",
+      "Compatible positive connections, appropriate restraint and pre-use pressure checks would have prevented the event."
+    ],
+    "remember": "Isolate and depressurise a hose before disconnecting; stay clear of a hose that begins whipping.",
+    "hazards": [
+      "Violent hose whip after coupling separation.",
+      "Ejection of pneumatic tool attachments.",
+      "Compressed air directed at skin or eyes.",
+      "Trips and crushing damage to hoses.",
+      "Air leaks from damaged hose.",
+      "Excessive operating pressure.",
+      "Incompatible or improvised couplings.",
+      "Noise and hand-arm vibration exposure."
+    ],
+    "controls": [
+      "Select a suitable tool and follow manufacturer instructions.",
+      "Verify regulator settings against hose and tool ratings.",
+      "Inspect hoses and couplings for condition and compatibility.",
+      "Use required safety clips and positive retention systems.",
+      "Confirm attachments and bits are secured.",
+      "Protect hoses from pedestrian paths and sharp edges.",
+      "Provide appropriate eye, face and hearing protection.",
+      "Do not misuse compressed air for cleaning.",
+      "Close the supply and bleed pressure before disconnecting.",
+      "Segregate the area and stop work for leakage or whipping."
+    ],
+    "supervisor_script": "Before air is supplied we will inspect the hose, coupling and safety retention. Depressurise before disconnecting. Stop work if any fitting leaks, loosens or shows damage.",
+    "questions": [
+      "What is the tool's maximum approved pressure?",
+      "Is the coupling positively retained?",
+      "Is the hose damaged?",
+      "How will we depressurise before removal?",
+      "What should we do if a hose whips?"
+    ],
+    "verification": [
+      "Tool selected",
+      "Regulator setting confirmed",
+      "Hose sound",
+      "Couplings suitable",
+      "Retention checked",
+      "Tool attachment secure",
+      "Routing safe",
+      "PPE suitable",
+      "Bleed-down method understood",
+      "Crew briefed"
+    ]
+  }
+},
+{
+  "slug": "lifting-load-landing-and-unhooking",
+  "sourceFile": "editorial_20261113_lifting_load_landing_and_unhooking",
+  "base": "lifting-load-landing-and-unhooking-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "ASKIDAKİ YÜKÜ YERLEŞTİRME VE SAPAN SÖKME GÜVENLİĞİ TOOLBOX TALK",
+    "subtitle": "Yükün oturtulması sırasında el ve ayak sıkışmasını önleyin.",
+    "application_subtitle": "Yük kararlılığı, sehpa, indirme komutları ve güvenli kanca ayırma.",
+    "objective": "Kaldırılmış yükün yerine oturtulması, yük aktarılması ve sapanların çıkarılması sırasında ezilme, yük devrilmesi ve sıkışma yaralanmalarını önlemek.",
+    "explanation": [
+      "Yük yere veya sehpa üzerine indirildiğinde kendiliğinden kararlı hale gelmeyebilir. Ağırlık merkezi, yüzey eğimi, takozlar ve destek düzeni doğru planlanmalıdır.",
+      "Sapanlar henüz gerginken veya yük yükünü tamamen desteğe aktarmamışken bağlantı çözülmesi yükün hareket etmesine neden olabilir.",
+      "İşaretçi ve operatör arasında tek ve açık komut düzeni bulunmalı; hiç kimse elini yük ile destek yüzeyi arasında tutmamalıdır."
+    ],
+    "scenario": [
+      "Bir ekip ağır bir spool'u çelik sehpa üzerine indirirken sapanları erken gevşetti.",
+      "Spool sehpa üzerinde döndü ve yakındaki çalışanın parmaklarını sıkıştırabilecek bir hareket yaptı.",
+      "Doğru takozlama, destek kararlılığını doğrulama ve gerginlik tamamen kalkmadan bağlantıyı çözmeme yaralanmayı önleyebilirdi."
+    ],
+    "remember": "Yük tamamen kararlı ve desteklenmiş değilse sapanı çıkarmayın; elinizi yükün altına veya sıkışma hattına koymayın.",
+    "hazards": [
+      "Yük ile zemin arasında el sıkışması.",
+      "Destek veya sehpanın devrilmesi.",
+      "Yükün yuvarlanması veya kayması.",
+      "Sapanların erken gevşetilmesi.",
+      "Kanca veya sapanın geri sekmesi.",
+      "Yük altında çalışan bulunması.",
+      "Yetersiz takoz veya destek.",
+      "Operatör-işaretçi iletişim kaybı."
+    ],
+    "controls": [
+      "İndirme yerini ve yükün ağırlık merkezini önceden değerlendirin.",
+      "Sehpa, takoz ve desteklerin kapasitesini doğrulayın.",
+      "Güvenli ve düz bir yerleştirme alanı sağlayın.",
+      "Kontrollü alana yetkisiz girişi önleyin.",
+      "Kaldırma planındaki işaretçi-komut sistemini kullanın.",
+      "Ellerin ve ayakların temas/ezilme hattından uzak tutulmasını sağlayın.",
+      "Yükü yavaş indirip kararlılığını doğrulayın.",
+      "Sapan gerilimi kalkmadan bağlantıları çözmeyin.",
+      "Sapan ve kancaları kontrollü biçimde çekip çıkarın.",
+      "Yerleştirme sonrası yükün yuvarlanma veya kayma riskini yeniden kontrol edin."
+    ],
+    "supervisor_script": "Arkadaşlar, en tehlikeli anlardan biri yükün yere oturduğu ve sapanların söküldüğü andır. Önce desteklerin yeterli olduğunu ve yükün hareket etmeyeceğini doğrulayacağız. Elimizi yükün altına sokmayacağız.",
+    "questions": [
+      "Yük hangi destek üzerine oturacak?",
+      "Yuvarlanma ihtimali var mı?",
+      "Yük tamamen kararlı mı?",
+      "Sapanı kim ve ne zaman sökecek?",
+      "İndirme komutunu kim verecek?"
+    ],
+    "verification": [
+      "İndirme yeri hazır",
+      "Yük merkezi değerlendirildi",
+      "Destek kapasitesi uygun",
+      "Takozlar hazır",
+      "Dışlama alanı var",
+      "İşaretçi belirli",
+      "El ve ayaklar güvende",
+      "Yük kararlılığı kontrol edilir",
+      "Sapan gerilimi sıfırlanır",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "LOAD LANDING AND SLING REMOVAL SAFETY TOOLBOX TALK",
+    "subtitle": "Prevent crushing while placing and unhooking suspended loads.",
+    "application_subtitle": "Load stability, supports, lowering signals and controlled hook release.",
+    "objective": "Prevent crushing, load tipping and pinch injuries while lowering, supporting and removing lifting accessories from loads.",
+    "explanation": [
+      "A load may remain unstable after it touches the ground or a support. Centre of gravity, slope, chocks and support capacity must be planned.",
+      "Removing or loosening rigging while the load is partly suspended or not reliably supported can trigger sudden movement.",
+      "Use one clear signalling arrangement and keep hands away from the interface between the load and its landing supports."
+    ],
+    "scenario": [
+      "A team lowered a heavy pipe spool onto a steel cradle and began releasing rigging too early.",
+      "The spool rotated on the cradle, placing a nearby worker's fingers in a potential pinch zone.",
+      "Suitable chocks, verified stability and waiting until sling tension was fully removed would have controlled the event."
+    ],
+    "remember": "Never release rigging until the load is stable and supported; keep hands clear of landing and crush zones.",
+    "hazards": [
+      "Hand trapping between load and support.",
+      "Overturning of landing stands or frames.",
+      "Rolling or sliding load.",
+      "Premature sling release.",
+      "Recoil of hooks or lifting gear.",
+      "Personnel beneath suspended loads.",
+      "Insufficient chocks or supports.",
+      "Loss of signals between rigger and operator."
+    ],
+    "controls": [
+      "Assess landing location and load centre of gravity.",
+      "Confirm stand, chock and support capacity.",
+      "Provide a stable clear landing area.",
+      "Restrict access to the landing zone.",
+      "Use the lifting-plan signalling arrangement.",
+      "Keep hands and feet away from crushing interfaces.",
+      "Lower slowly and verify stability.",
+      "Never unhook before rigging is unloaded.",
+      "Remove hooks and slings in a controlled sequence.",
+      "Reassess rolling and sliding risks after landing."
+    ],
+    "supervisor_script": "The landing and unhooking phase is a critical part of every lift. Confirm the load is fully supported and cannot move. Nobody is to put hands or feet beneath the load.",
+    "questions": [
+      "Where will the load be supported?",
+      "Could it roll or slide?",
+      "Is it fully stable?",
+      "Who releases the slings, and when?",
+      "Who gives lowering commands?"
+    ],
+    "verification": [
+      "Landing location ready",
+      "Centre of gravity assessed",
+      "Supports rated",
+      "Chocks available",
+      "Exclusion zone set",
+      "Slinger identified",
+      "Hands and feet clear",
+      "Load stability verified",
+      "Rigging tension removed",
+      "Crew briefed"
+    ]
+  }
+},
+{
+  "slug": "temporary-floor-openings-cover-control",
+  "sourceFile": "editorial_20261113_temporary_floor_openings_cover_control",
+  "base": "temporary-floor-openings-cover-control-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "GEÇİCİ ZEMİN BOŞLUKLARI VE AÇIKLIKLARIN KORUNMASI TOOLBOX TALK",
+    "subtitle": "Geçici kapak ve bariyerlerle açıklıklardan düşmeyi önleyin.",
+    "application_subtitle": "Açıklık kaydı, kapak dayanımı, sabitleme, uyarı ve geri teslim.",
+    "objective": "Döşeme, platform ve tesisat geçişlerinde açılan geçici boşluklardan insan ve malzeme düşmesini önlemek.",
+    "explanation": [
+      "Kablo, boru veya ekipman montajı için açılan açıklıklar, özellikle kalabalık sahalarda gözden kaçabilir. Sadece uyarı şeridi her durumda yeterli düşme koruması değildir.",
+      "Açıklık kapağı uygun yüke dayanmalı, yerinden oynamayacak şekilde sabitlenmeli ve altındaki tehlikeyi belirten işaret taşımalıdır.",
+      "Koruma sökülmesi gerekiyorsa yetkili çalışma sistemi, uygun toplu koruma ve açıklığın yeniden güvenli teslimi planlanmalıdır."
+    ],
+    "scenario": [
+      "Bir bakım ekibi boru geçişi için döşeme kapağını kaldırdı ve açıklığı yalnız kırmızı-beyaz şeritle çevirdi.",
+      "Malzeme taşıyan çalışan şeridi fark etmeden açıklığın kenarına yaklaştı.",
+      "Yük taşıma kapasitesi doğrulanmış sabit kapak veya yeterli korkuluk, erişim kontrolü ve vardiya teslim kaydı düşme riskini azaltırdı."
+    ],
+    "remember": "Açık boşluğu kısa süreli diye korumasız bırakmayın. Kapağı veya korkuluğu yetkisiz çıkarmayın.",
+    "hazards": [
+      "Açıklıktan alt kata düşme.",
+      "Düşen malzemeyle alttaki çalışanın yaralanması.",
+      "Dayanımı yetersiz kapağın kırılması.",
+      "Sabitlenmemiş kapağın kayması.",
+      "Yalnız şeritle yapılan yetersiz koruma.",
+      "Gece çalışmasında açıklığın görünmemesi.",
+      "Birden fazla ekip arasında koruma sorumluluğu belirsizliği.",
+      "İş bitince kapağın geri takılmaması."
+    ],
+    "controls": [
+      "Tüm geçici açıklıkları sahada belirleyip kayıt altına alın.",
+      "Mümkün olan yerde açıklığı güvenli şekilde kapalı tutun.",
+      "Kapağın beklenen insan ve ekipman yükünü taşıyacağını doğrulayın.",
+      "Kapağı kazara yer değiştirmeye karşı sabitleyin.",
+      "Kapağın altındaki tehlikeyi açık şekilde etiketleyin.",
+      "Açıklık açık kalacaksa uygun korkuluk ve erişim koruması sağlayın.",
+      "Alt seviyeyi düşen cisim riskine karşı ayırın.",
+      "Aydınlatmayı ve yaya güzergâhını kontrol edin.",
+      "Koruma sökme ve yerine koyma sorumlularını belirleyin.",
+      "Vardiya ve iş bitiminde korumanın güvenli teslimini kaydedin."
+    ],
+    "supervisor_script": "Bugün döşeme ve platform üzerindeki açıklıkları kontrol edeceğiz. Sadece şerit çekmenin yeterli olduğu varsayılmayacak. Kapak sabit ve yeterli dayanımda olmalı; kaldırılırsa yetkili koruma ve teslim planı uygulanmalı.",
+    "questions": [
+      "Açıklıkların yerini kim biliyor?",
+      "Kapak hangi yüke dayanmalı?",
+      "Kapak nasıl sabitlendi?",
+      "Koruma kaldırılırsa kim sorumlu?",
+      "Alt kattaki ekip nasıl korunacak?"
+    ],
+    "verification": [
+      "Açıklıklar kayıtlı",
+      "Kapak dayanımı uygun",
+      "Kapak sabit",
+      "Uyarı işareti var",
+      "Korkuluk gerekli yerde hazır",
+      "Alt seviye korumalı",
+      "Yaya yolu düzenli",
+      "Aydınlatma yeterli",
+      "Sorumlular belli",
+      "Geri teslim planlı"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "TEMPORARY FLOOR OPENINGS AND COVER CONTROL TOOLBOX TALK",
+    "subtitle": "Prevent falls through penetrations using secure covers and barriers.",
+    "application_subtitle": "Opening register, cover strength, fixing, warning and hand-back.",
+    "objective": "Prevent persons and materials falling through temporary floor and platform openings created during construction or maintenance.",
+    "explanation": [
+      "Openings left for cable, pipe or equipment installation may be overlooked on busy worksites. Warning tape alone is not a reliable substitute for effective fall prevention.",
+      "An opening cover must be strong enough for foreseeable loads, secured against accidental displacement and clearly marked to warn of the hazard beneath.",
+      "Where protection must be temporarily removed, authorise a safe system with collective protection, controlled access and reliable reinstatement."
+    ],
+    "scenario": [
+      "A maintenance crew removed a floor cover for a pipe penetration and installed only warning tape.",
+      "A worker carrying materials approached the edge without noticing the temporary opening.",
+      "A rated secured cover or effective guardrails, restricted access and a handover record would have reduced the risk."
+    ],
+    "remember": "Never leave a floor opening unprotected because the task is short. Do not remove covers or rails without authorisation.",
+    "hazards": [
+      "Falls to a lower level through openings.",
+      "Falling materials striking workers below.",
+      "Failure of an under-rated cover.",
+      "Unsecured cover displacement.",
+      "Ineffective tape-only protection.",
+      "Poor visibility during night work.",
+      "Unclear ownership between contractors.",
+      "Failure to reinstate the cover after work."
+    ],
+    "controls": [
+      "Identify and register all temporary openings.",
+      "Keep openings securely covered wherever practicable.",
+      "Verify cover strength for foreseeable people and equipment loads.",
+      "Secure covers against unintended movement.",
+      "Mark covers with clear hazard warnings.",
+      "Use suitable guardrails and access prevention if open.",
+      "Segregate lower levels from falling-object exposure.",
+      "Provide adequate lighting and pedestrian routes.",
+      "Assign responsibility for removal and reinstatement.",
+      "Verify hand-back after each shift and task completion."
+    ],
+    "supervisor_script": "Check all deck and floor openings before work. Do not assume that warning tape is enough. Covers must be rated and secured; any removal needs authorised protection and a clear hand-back.",
+    "questions": [
+      "Who knows where the openings are?",
+      "What load must each cover support?",
+      "How is the cover secured?",
+      "Who restores protection?",
+      "How are workers below protected?"
+    ],
+    "verification": [
+      "Openings registered",
+      "Cover rating appropriate",
+      "Covers secure",
+      "Warnings visible",
+      "Guardrails provided",
+      "Lower level protected",
+      "Walkways clear",
+      "Lighting adequate",
+      "Owners identified",
+      "Reinstatement planned"
+    ]
+  }
+},
+{
+  "slug": "industrial-radiography-ndt-exclusion",
+  "sourceFile": "editorial_20261113_industrial_radiography_ndt_exclusion",
+  "base": "industrial-radiography-ndt-exclusion-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "ENDÜSTRİYEL RADYOGRAFİ (NDT) ALAN GÜVENLİĞİ TOOLBOX TALK",
+    "subtitle": "Radyografi sırasında izinsiz girişi ve iyonlaştırıcı radyasyon maruziyetini önleyin.",
+    "application_subtitle": "Yetkili ekip, kontrollü alan, bariyer, iletişim ve acil durum.",
+    "objective": "Kaynak ve boru NDT radyografisi sırasında yetkisiz personelin kontrol alanına girerek iyonlaştırıcı radyasyona maruz kalmasını önlemek.",
+    "explanation": [
+      "Endüstriyel radyografide X-ışını jeneratörü veya kapalı radyoaktif kaynak kullanılabilir. Radyasyon her zaman duyularla fark edilemez; maruziyet kontrolü yalnız işaret levhasına bırakılamaz.",
+      "Radyografi yalnız yetkili ve eğitimli uzman ekip tarafından onaylı radyasyon koruma planı, ölçüm cihazları, kaynak kontrolü ve gerek duyulan izinlerle yürütülmelidir.",
+      "Komşu işler, alt ve üst katlar, açık kapılar ve gizli geçişler planlamaya dahil edilmeli; bölgenin güvenli serbest bırakıldığını yalnız yetkili radyografi sorumlusu bildirmelidir."
+    ],
+    "scenario": [
+      "Bir saha ekibi kaynakların radyografi kontrolünü yürütürken üst kattaki bakım geçişine yeterli bariyer kurmadı.",
+      "Başka bir çalışan uyarıdan habersiz şekilde kontrol alanına yaklaşabildi.",
+      "Tüm erişimlerin kontrolü, ortak SIMOPS bildirimi ve yetkili saha taraması izinsiz yaklaşmayı önlerdi."
+    ],
+    "remember": "Radyografi alanı serbest bırakılmadan bariyerleri geçmeyin. Şüpheli kaynak olayı veya ölçümde ekipmanı elle müdahale etmeyin; uzman ekibi çağırın.",
+    "hazards": [
+      "İyonlaştırıcı radyasyon maruziyeti.",
+      "Bariyer dışında kalmış geçiş noktaları.",
+      "Üst/alt kattaki çalışanların habersiz bulunması.",
+      "İzinsiz alan girişi.",
+      "Eksik alan ölçümü ve gözetim.",
+      "Kaynak veya jeneratör arızası.",
+      "İletişim kopukluğu ve eşzamanlı çalışmalar.",
+      "Kontrol alanının erken açılması."
+    ],
+    "controls": [
+      "Radyografiyi yalnız yetkili uzman ekibe yaptırın.",
+      "Onaylı radyasyon koruma planını ve saha izinlerini doğrulayın.",
+      "Çevre alan, katlar ve tüm erişimleri değerlendirin.",
+      "Kontrollü alan sınırlarını uzman ölçümüyle belirleyin.",
+      "Bariyer, uyarı, erişim kontrolü ve gözcüyü planlayın.",
+      "Komşu iş ekiplerini ve vardiyaları önceden bilgilendirin.",
+      "Uygun radyasyon ölçümü ve uzman personel doz kontrolünü doğrulayın.",
+      "Kaynak/jeneratör arızasında yetkili acil prosedürü uygulayın.",
+      "Yetkisiz kişilerin alan sınırını geçmesini önleyin.",
+      "Serbest bırakma kararını yalnız yetkili radyografi sorumlusundan alın."
+    ],
+    "supervisor_script": "Arkadaşlar, NDT radyografi alanındaki bariyer bir tercih değildir. Bu iş sadece uzman ekip tarafından yürütülür. Radyografi bitse bile alanın güvenli olduğu yetkili kişi tarafından teyit edilmeden geçiş yapmayacağız.",
+    "questions": [
+      "Radyografi sorumlusu kim?",
+      "Kontrollü alan hangi katları etkiliyor?",
+      "Bariyerlerde bekleyen gözcü var mı?",
+      "Kaynak arızasında kimi çağıracağız?",
+      "Alanı kim serbest bırakabilir?"
+    ],
+    "verification": [
+      "Uzman ekip yetkili",
+      "Radyasyon planı onaylı",
+      "İş izinleri uygun",
+      "Tüm geçişler değerlendirildi",
+      "Alan sınırları belirlendi",
+      "Bariyer ve işaretler hazır",
+      "Komşu işler bilgilendirildi",
+      "Ölçüm cihazları uygun",
+      "Acil prosedür biliniyor",
+      "Serbest bırakma yetkisi belirli"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "INDUSTRIAL RADIOGRAPHY (NDT) EXCLUSION ZONE TOOLBOX TALK",
+    "subtitle": "Prevent unauthorised access and ionising-radiation exposure.",
+    "application_subtitle": "Authorised crew, controlled areas, barriers, communications and emergencies.",
+    "objective": "Prevent accidental exposure of personnel entering controlled areas during weld and piping radiographic NDT.",
+    "explanation": [
+      "Industrial radiography may use X-ray generators or sealed radioactive sources. Ionising radiation cannot be reliably detected by human senses and a warning sign alone is not a control system.",
+      "Only qualified and authorised specialists may undertake radiography under a site radiation protection plan, suitable instruments, source control and required permissions.",
+      "Adjacent work, upper and lower floors, unlocked access points and hidden routes must be included. Only the responsible radiation team may confirm release of the area."
+    ],
+    "scenario": [
+      "A radiography crew did not fully secure an upper-level maintenance passage during testing.",
+      "A worker from another team approached the controlled area unaware of the activity.",
+      "Full access checks, joint SIMOPS communication and specialist area surveys would have prevented entry."
+    ],
+    "remember": "Never cross radiography barriers until the authorised specialist releases the area; do not attempt to handle a suspected faulty source.",
+    "hazards": [
+      "Exposure to ionising radiation.",
+      "Unsecured entries into the exclusion zone.",
+      "Uninformed workers above or below the work.",
+      "Unauthorised entry.",
+      "Incomplete surveys and monitoring.",
+      "Source or generator malfunction.",
+      "Poor simultaneous-operation communication.",
+      "Premature release of the controlled area."
+    ],
+    "controls": [
+      "Use only competent authorised radiography personnel.",
+      "Verify the approved radiation protection plan and site permits.",
+      "Survey all adjacent areas, levels and access routes.",
+      "Establish controlled boundaries using specialist measurements.",
+      "Provide effective barriers, warning signs and access control.",
+      "Notify neighbouring teams and shifts before work.",
+      "Confirm specialist radiation measurements and dose arrangements.",
+      "Apply authorised emergency procedures for source faults.",
+      "Prevent any unauthorised boundary crossing.",
+      "Accept area clearance only from the responsible radiation specialist."
+    ],
+    "supervisor_script": "Radiography boundaries are mandatory controls, not suggestions. Only specialists perform this work. Nobody crosses until the responsible radiography person confirms the area is released.",
+    "questions": [
+      "Who is the radiography supervisor?",
+      "Which levels are inside the boundary?",
+      "Are all entries guarded?",
+      "Who responds to source trouble?",
+      "Who can release the area?"
+    ],
+    "verification": [
+      "Competent specialists assigned",
+      "Protection plan approved",
+      "Site permits checked",
+      "All accesses reviewed",
+      "Boundaries established",
+      "Barriers and notices installed",
+      "Adjacent teams informed",
+      "Survey instruments suitable",
+      "Emergency procedure known",
+      "Release authority defined"
+    ]
+  }
+},
+{
+  "slug": "confined-space-rescue-readiness",
+  "sourceFile": "editorial_20261113_confined_space_rescue_readiness",
+  "base": "confined-space-rescue-readiness-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "KAPALI ALAN KURTARMA HAZIRLIĞI TOOLBOX TALK",
+    "subtitle": "Girişten önce uygulamalı kurtarma düzenini doğrulayın.",
+    "application_subtitle": "Gözcü, iletişim, girişsiz kurtarma, müdahale süresi ve ekipman.",
+    "objective": "Kapalı alan acillerinde plansız ikinci girişleri ve kurtarma gecikmelerini önlemek.",
+    "explanation": [
+      "Kapalı alanda tehlikeli atmosfere maruz kalan bir çalışanı kurtarmak için hazırlıksız giriş yapılması ikinci bir kazazedeye neden olabilir.",
+      "İş başlamadan kurtarma görevlisi, uygun ekipman, giriş/çıkış güzergâhı ve iletişim planı risk değerlendirmesine göre kurulmalıdır. Mümkün olan yerlerde güvenli girişsiz kurtarma tercih edilir.",
+      "Hazır ekipmanın varlığı tek başına yeterli değildir; kurtarma yöntemi ilgili alan ve personel için uygulanabilir olmalı ve uygun şekilde prova edilmelidir."
+    ],
+    "scenario": [
+      "Bir tankta çalışan personelin iletişimi kesildi; gözcü acil durumda kimi arayacağını bilmiyordu.",
+      "Ekipten biri korumasız şekilde tank girişine yöneldi.",
+      "Önceden atanmış kurtarma ekibi, alarm düzeni ve girişsiz kurtarma uygulaması ikinci maruziyet riskini azaltırdı."
+    ],
+    "remember": "Gözcü kurtarmak için refleksle içeri girmez; alarm verir ve onaylı kurtarma prosedürünü başlatır.",
+    "hazards": [
+      "Gaz veya oksijen yetersizliğinde ikinci kazazede.",
+      "Gözcünün görev yerini terk etmesi.",
+      "Uygun olmayan kurtarma yöntemi.",
+      "Kurtarma ekipmanına erişememe.",
+      "İletişimin kesilmesi.",
+      "Acil hizmetlere geç haber verilmesi.",
+      "Dar geçitte sedye veya kurtarma erişiminin mümkün olmaması.",
+      "Olay sırasında giriş kayıtlarının kaybı."
+    ],
+    "controls": [
+      "Girişe özel kurtarma planını ve izin koşullarını doğrulayın.",
+      "Kurtarma ekibini ve çağrı yöntemini belirleyin.",
+      "Gözcünün yalnızca kendi görevini yaptığını doğrulayın.",
+      "İçerideki kişi sayısı ve iletişim kayıtlarını sürdürün.",
+      "Girişsiz kurtarmanın uygunluğunu değerlendirin.",
+      "Kurtarma ekipmanı, erişim ve bağlantı düzenini kontrol edin.",
+      "Gaz ölçüm ve acil solunum koruma ihtiyacını uzman ekiple belirleyin.",
+      "Uygulanabilir kurtarma yöntemini ekipçe prova edin.",
+      "Yetkisiz/korumasız kurtarma girişini yasaklayın.",
+      "Koşullar değişirse girişi durdurup tahliye edin."
+    ],
+    "supervisor_script": "Bir arkadaşımız kapalı alanda etkilenirse gözcü içeri atlamayacak. Önce alarmı verecek ve hazırladığımız kurtarma planını başlatacak. Kurtarma ekibinin erişimini, ekipmanını ve iletişimini iş başlamadan kontrol edeceğiz.",
+    "questions": [
+      "Kim gözcü ve kim kurtarma sorumlusu?",
+      "Girişsiz kurtarma mümkün mü?",
+      "Alarm nasıl verilecek?",
+      "Kurtarma ekipmanı hazır mı?",
+      "İçeride kaç kişinin olduğu nasıl izleniyor?"
+    ],
+    "verification": [
+      "Kurtarma planı alana özel",
+      "Ekip belirlenmiş",
+      "Gözcü görevini biliyor",
+      "İletişim açık",
+      "Giriş kayıtları hazır",
+      "Kurtarma ekipmanı kontrol edilmiş",
+      "Acil erişim açık",
+      "Gaz tehlikesi değerlendirildi",
+      "Uygulama/prova yapılmış",
+      "İzinsiz giriş kuralı anlatıldı"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "CONFINED SPACE RESCUE READINESS TOOLBOX TALK",
+    "subtitle": "Verify practicable rescue arrangements before entry.",
+    "application_subtitle": "Attendants, communications, non-entry rescue, timing and equipment.",
+    "objective": "Prevent unplanned secondary entries and delayed rescue during confined-space emergencies.",
+    "explanation": [
+      "Attempting to rescue an incapacitated entrant without a suitable rescue plan can expose additional people to the same hazardous atmosphere.",
+      "Establish a risk-based rescue team, equipment, access route and communication plan before entry. Non-entry rescue should be considered wherever suitable and practical.",
+      "Having equipment nearby is insufficient: the arrangements must work in the specific space and should be appropriately practised by the people involved."
+    ],
+    "scenario": [
+      "An entrant in a vessel stopped responding and the attendant did not know the emergency call method.",
+      "A colleague attempted to approach the opening to perform an unprotected rescue.",
+      "A nominated rescue team, effective alarm procedure and planned non-entry retrieval could have reduced secondary casualties."
+    ],
+    "remember": "The attendant must not rush inside; raise the alarm and initiate the authorised rescue plan.",
+    "hazards": [
+      "A second casualty from oxygen deficiency or gas.",
+      "Attendant abandoning the assigned post.",
+      "Unsuitable rescue strategy.",
+      "Unavailable rescue equipment.",
+      "Loss of communication.",
+      "Delayed emergency notification.",
+      "Access too narrow for planned retrieval.",
+      "Inaccurate entrant accountability."
+    ],
+    "controls": [
+      "Verify a rescue plan appropriate to the specific space.",
+      "Nominate rescue personnel and call-out arrangements.",
+      "Keep the attendant dedicated to attendant duties.",
+      "Maintain communication and entrant counts.",
+      "Assess suitable non-entry rescue options.",
+      "Check rescue devices, access and retrieval connections.",
+      "Review atmospheric hazards and breathing protection with specialists.",
+      "Practise the applicable rescue sequence.",
+      "Prevent unauthorised unprotected entry.",
+      "Suspend entry and evacuate if conditions change."
+    ],
+    "supervisor_script": "If a colleague becomes unresponsive inside, the attendant does not rush in. Raise the alarm and use the rescue system planned for this space. We verify rescue equipment and communications before entry.",
+    "questions": [
+      "Who is the attendant and rescue lead?",
+      "Can non-entry rescue be used?",
+      "How will the alarm be raised?",
+      "Is rescue equipment ready?",
+      "How are entrant numbers recorded?"
+    ],
+    "verification": [
+      "Space-specific plan ready",
+      "Rescue team appointed",
+      "Attendant briefed",
+      "Communications working",
+      "Entry log ready",
+      "Rescue equipment checked",
+      "Access clear",
+      "Atmospheric risk assessed",
+      "Practice completed",
+      "No unplanned entry rule clear"
+    ]
+  }
+},
+{
+  "slug": "hydraulic-jacks-and-load-support",
+  "sourceFile": "editorial_20261113_hydraulic_jacks_and_load_support",
+  "base": "hydraulic-jacks-and-load-support-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "HİDROLİK KRİKO VE YÜK DESTEKLEME GÜVENLİĞİ TOOLBOX TALK",
+    "subtitle": "Kriko ile kaldırılan yük altında güvenli çalışma sınırları.",
+    "application_subtitle": "Kapasite, basma noktası, zemin, destekleme ve sıkışma alanları.",
+    "objective": "Kriko arızası, yana kayma veya yeterli destek bulunmaması sonucu ağır yüklerin çökmesi ve personelin sıkışmasını önlemek.",
+    "explanation": [
+      "Hidrolik kriko yükü yükseltmek için kullanılır; üretici tarafından özel olarak izin verilmedikçe yükseltilmiş yükü uzun süre tek başına taşımak için yeterli güvenli destek kabul edilmemelidir.",
+      "Basma noktası, zemin dayanımı, yükün ağırlık merkezi ve yana kayma riski kaldırma planında belirlenmelidir.",
+      "Çalışma için yükseltilmiş yüke erişim gerekiyorsa uygun kapasitede tasarlanmış mekanik destek, sehpa ve takoz düzeni doğrulanmalıdır."
+    ],
+    "scenario": [
+      "Bir ekip ağır bir ekipmanı hidrolik krikoyla kaldırdı ve bağlantı sökmek için altına elini uzattı.",
+      "Kriko yumuşak zemin üzerinde hafif yana kaydı ve yük aniden alçalmaya başladı.",
+      "Onaylı destek sehpası, uygun basma zemini ve el sıkışma hattının dışında çalışma planı yaralanmayı önlerdi."
+    ],
+    "remember": "Sadece kriko ile yükseltilmiş yükün altına girmeyin; mühendislik onaylı ikincil destek olmadan çalışmayın.",
+    "hazards": [
+      "Kriko kapasitesinin aşılması.",
+      "Basma noktasından kayma.",
+      "Yumuşak veya eğimli zemin.",
+      "Krikonun hidrolik arızası.",
+      "Yükün yana dönmesi.",
+      "El veya ayak sıkışması.",
+      "Uygunsuz takoz veya sehpaların çökmesi.",
+      "Eşzamanlı ekip hareketi."
+    ],
+    "controls": [
+      "Kaldırma ve destekleme yöntemini yetkili kişiyle planlayın.",
+      "Yük ağırlığını ve kriko kapasitesini doğrulayın.",
+      "Basma noktası ve zemin taşıma kapasitesini değerlendirin.",
+      "Kriko ve contalarında kaçak/hasar kontrolü yapın.",
+      "Yük merkezini ve yanal hareketi kontrol edin.",
+      "Ellerin ve ayakların sıkışma hattından uzak kalmasını sağlayın.",
+      "Uygun dayanımlı, tasarlanmış ikincil destek sağlayın.",
+      "Yükü desteklere kontrollü ve dengeli şekilde aktarın.",
+      "Yük altında yalnız güvenli destek doğrulandığında çalışın.",
+      "Sızıntı, kayma veya ses değişiminde işi durdurun."
+    ],
+    "supervisor_script": "Arkadaşlar, kriko yükü kaldırır ama tek başına güvenli çalışma sehpası değildir. Yükün altına el sokmadan önce onaylı mekanik desteği yerleştirip yükün dengeli aktarıldığını kontrol edeceğiz.",
+    "questions": [
+      "Yükün ağırlığı ve krikonun kapasitesi ne?",
+      "Basma zemini sağlam mı?",
+      "Yük yana kayabilir mi?",
+      "İkincil destekler nerede?",
+      "Hangi durumda işi durduracağız?"
+    ],
+    "verification": [
+      "Kaldırma planı onaylı",
+      "Yük ağırlığı biliniyor",
+      "Kriko kapasitesi uygun",
+      "Zemin değerlendirildi",
+      "Basma noktası doğru",
+      "Kriko hasarsız",
+      "Sıkışma alanı boş",
+      "İkincil destek hazır",
+      "Yük dengesi doğrulandı",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "HYDRAULIC JACKS AND LOAD SUPPORT SAFETY TOOLBOX TALK",
+    "subtitle": "Control raised-load collapse and crushing hazards.",
+    "application_subtitle": "Capacity, lifting points, ground, secondary supports and pinch zones.",
+    "objective": "Prevent crushing from jack failure, slipping or inadequate support when lifting and working around heavy equipment.",
+    "explanation": [
+      "A hydraulic jack is primarily a lifting device. Unless expressly designed and approved otherwise, it must not be treated as the sole support for personnel working beneath a raised load.",
+      "Confirm lifting points, ground bearing, centre of gravity and lateral movement potential within the approved lifting method.",
+      "Where access beneath or beside a raised load is necessary, use engineered or manufacturer-approved stands, cribs or other secondary support of adequate capacity."
+    ],
+    "scenario": [
+      "A crew raised a heavy item with a hydraulic jack and reached underneath to loosen a connection.",
+      "The jack moved sideways slightly on weak ground and the item began to settle.",
+      "Rated secondary supports, suitable bearing and keeping hands clear would have prevented a crush incident."
+    ],
+    "remember": "Never work beneath a load supported only by a jack; verify an approved secondary support arrangement.",
+    "hazards": [
+      "Jack rated capacity exceeded.",
+      "Slipping from the designated lifting point.",
+      "Soft or sloped ground.",
+      "Hydraulic jack failure.",
+      "Lateral movement of the load.",
+      "Hand or foot entrapment.",
+      "Collapse of makeshift stands or cribbing.",
+      "Uncoordinated work by multiple people."
+    ],
+    "controls": [
+      "Plan lifting and support with a competent person.",
+      "Verify load mass and jack rating.",
+      "Assess contact points and ground bearing.",
+      "Inspect the jack for faults or leaks.",
+      "Control centre of gravity and lateral movement.",
+      "Keep hands and feet away from crushing zones.",
+      "Provide rated engineered secondary supports.",
+      "Transfer load to supports carefully and evenly.",
+      "Work beneath a load only with verified safe support.",
+      "Stop for leaks, slipping or unusual movement."
+    ],
+    "supervisor_script": "A jack lifts the load, but is not automatically a safe work support. Before anyone reaches underneath, check rated secondary supports and stable load transfer.",
+    "questions": [
+      "What is the load mass and jack capacity?",
+      "Is ground bearing adequate?",
+      "Can the load slide sideways?",
+      "Where are the secondary supports?",
+      "When must we stop?"
+    ],
+    "verification": [
+      "Method approved",
+      "Load mass known",
+      "Jack rating sufficient",
+      "Ground assessed",
+      "Lifting points correct",
+      "Jack inspected",
+      "Pinch zone clear",
+      "Secondary support ready",
+      "Load stability verified",
+      "Crew briefed"
+    ]
+  }
+},
+{
+  "slug": "oxy-fuel-torch-flashback-prevention",
+  "sourceFile": "editorial_20261113_oxy_fuel_torch_flashback_prevention",
+  "base": "oxy-fuel-torch-flashback-prevention-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "OKSİJEN-YAKIT KESME TAKIMI VE GERİ TEPME GÜVENLİĞİ TOOLBOX TALK",
+    "subtitle": "Alev geri tepmesini, gaz kaçağını ve yangını önleyin.",
+    "application_subtitle": "Tüp, regülatör, hortum, şaloma, geri tepme emniyeti ve ateşleme.",
+    "objective": "Oksijen-yakıt gazı ile kesme/kaynak işleminde geri tepme, kaçak, hortum yangını ve yüksek basınç kaynaklı yaralanmaları önlemek.",
+    "explanation": [
+      "Yanlış gaz basıncı, tıkanmış meme, hasarlı hortum veya uygun olmayan ekipman alevin geri yürümesi ve hortum içinde yanma tehlikesini artırabilir.",
+      "Geri tepme emniyetleri, çekvalfler ve diğer koruyucular ekipmana ve üretici standardına uygun olmalı; şaloma, regülatör ve bağlantılar her kullanım öncesi kontrol edilmelidir.",
+      "Oksijen ekipmanı yağ ve gresle kirletilmemeli; kaçak kontrolü güvenli uygun yöntemle yapılmalı, açık alevle kontrol edilmemelidir."
+    ],
+    "scenario": [
+      "Bir kesme ekibi hasarlı gaz hortumuyla çalışmaya devam etti; şaloma memesinin durumu kontrol edilmedi.",
+      "Kesme sırasında anormal ses ve alev davranışı ortaya çıktı, ancak ekip işi durdurmakta gecikti.",
+      "Geri tepme koruması, ön kullanım kontrolleri ve anormal durumda üretici acil kapatma yöntemi riski azaltabilirdi."
+    ],
+    "remember": "Gaz kaçağı veya anormal alev davranışında kesmeyi durdurun; üreticinin güvenli kapatma ve izolasyon prosedürünü uygulayın.",
+    "hazards": [
+      "Şaloma ve hortumda alev geri tepmesi.",
+      "Gaz kaçağı ve yangın.",
+      "Oksijenin yanlış kullanımıyla şiddetli tutuşma.",
+      "Hasarlı regülatör veya basınç uygunsuzluğu.",
+      "Hortumun sıcak cürufla zarar görmesi.",
+      "Tüpün devrilmesi veya darbe alması.",
+      "Kapalı alanda gaz birikimi.",
+      "Kıvılcımların yanıcı maddelere ulaşması."
+    ],
+    "controls": [
+      "Geçerli sıcak çalışma izni ve alan kontrollerini doğrulayın.",
+      "Tüpleri doğru konumlandırın ve devrilmeye karşı sabitleyin.",
+      "Gaz türüne uygun regülatör, hortum ve şaloma kullanın.",
+      "Onaylı geri tepme önleyici ve gaz geri akış korumalarını kontrol edin.",
+      "Hortum, valf ve bağlantıları kullanım öncesi inceleyin.",
+      "Oksijen bağlantılarını yağ ve gresten uzak tutun.",
+      "Kaçak kontrolünü onaylı güvenli yöntemle yapın.",
+      "Kıvılcım ve sıcak cürufu yanıcı malzemelerden ayırın.",
+      "Anormal alev, ses veya kaçakta işi durdurup güvenli kapatma uygulayın.",
+      "İş sonrası tüp vanaları ve hortum düzenini kontrol edin."
+    ],
+    "supervisor_script": "Arkadaşlar, kesme işleminde önce şalomanın, hortumların ve geri tepme emniyetlerinin uygunluğunu kontrol edeceğiz. Gaz kaçağını alevle aramayacağız. Anormal ses veya alevde derhal durup güvenli kapatacağız.",
+    "questions": [
+      "Geri tepme emniyeti nerede?",
+      "Hortum ve regülatör sağlam mı?",
+      "Kaçak nasıl kontrol edilecek?",
+      "Yanıcı maddeler korunmuş mu?",
+      "Alev geri tepmesinde hangi acil prosedür var?"
+    ],
+    "verification": [
+      "Sıcak iş izni geçerli",
+      "Tüpler sabit",
+      "Regülatör uygun",
+      "Hortumlar sağlam",
+      "Geri tepme koruması mevcut",
+      "Oksijen ekipmanı yağsız",
+      "Kaçak kontrolü yapıldı",
+      "Yangın koruması hazır",
+      "Acil kapatma biliniyor",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "OXY-FUEL TORCH AND FLASHBACK PREVENTION TOOLBOX TALK",
+    "subtitle": "Prevent flashback, gas leaks and torch-related fire.",
+    "application_subtitle": "Cylinders, regulators, hoses, torch, flashback protection and ignition.",
+    "objective": "Prevent flashback, gas leaks, hose fires and pressure-related injuries during oxy-fuel cutting and welding.",
+    "explanation": [
+      "Incorrect gas pressure, blocked tips, damaged hoses or unsuitable equipment can lead to flashback and flame travel into a gas system.",
+      "Flashback arrestors, check valves and other protective devices must suit the equipment and manufacturer instructions. Inspect the torch, hoses, connections and regulators before use.",
+      "Keep oxygen equipment free of oil and grease. Never use an open flame to locate a gas leak."
+    ],
+    "scenario": [
+      "A cutting crew continued with a damaged hose and did not inspect the torch tip.",
+      "Unusual flame behaviour and noise developed during cutting, but work was not immediately stopped.",
+      "Suitable flashback protection, inspection and manufacturer-approved emergency shutdown could have reduced the risk."
+    ],
+    "remember": "Stop for gas leaks or abnormal flame behaviour and follow the equipment manufacturer's safe shutdown and isolation procedure.",
+    "hazards": [
+      "Flame flashback into torch or hoses.",
+      "Gas leakage and fire.",
+      "Violent ignition involving oxygen contamination.",
+      "Regulator damage or unsuitable pressure.",
+      "Slag damage to hoses.",
+      "Cylinder impact or overturning.",
+      "Gas accumulation in confined areas.",
+      "Sparks reaching combustible materials."
+    ],
+    "controls": [
+      "Verify hot-work permits and area controls.",
+      "Secure cylinders in their approved position.",
+      "Use regulators, hoses and torches rated for each gas.",
+      "Inspect approved flashback and reverse-flow protection.",
+      "Check hoses, valves and joints before use.",
+      "Keep oxygen fittings free from oils and grease.",
+      "Use an approved safe gas-leak check method.",
+      "Protect combustibles from sparks and hot slag.",
+      "Stop for abnormal flame, sound or leaks and shut down safely.",
+      "Check cylinder valves and hose condition after work."
+    ],
+    "supervisor_script": "Before cutting, we check flashback protection, torch, hoses and regulators. Never check gas leaks with a flame. Any abnormal sound or flame means stop and follow safe shutdown.",
+    "questions": [
+      "Where is the flashback arrestor?",
+      "Are regulators and hoses sound?",
+      "How will leaks be checked?",
+      "Are combustibles protected?",
+      "What is the emergency shutdown procedure?"
+    ],
+    "verification": [
+      "Hot-work permit approved",
+      "Cylinders secured",
+      "Regulators suitable",
+      "Hoses intact",
+      "Flashback protection checked",
+      "Oxygen fittings oil-free",
+      "Leak check completed",
+      "Fire controls in place",
+      "Emergency stop understood",
+      "Crew briefed"
+    ]
+  }
+},
+{
+  "slug": "worksite-first-aid-access-and-response",
+  "sourceFile": "editorial_20261113_worksite_first_aid_access_and_response",
+  "base": "worksite-first-aid-access-and-response-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "ŞANTİYE İLK YARDIM VE ACİL MÜDAHALE ERİŞİMİ TOOLBOX TALK",
+    "subtitle": "Yaralanmada hızlı ve düzenli ilk müdahaleyi sağlayın.",
+    "application_subtitle": "Alarm, ilk yardımcı, ambulans erişimi, olay yeri ve bildirim.",
+    "objective": "İş kazasında yardım çağrısı, yetkili ilk yardım ve acil servis erişimindeki gecikmeleri önlemek.",
+    "explanation": [
+      "İlk yardımın kalitesi sadece dolapta malzeme bulunmasına bağlı değildir. İlk yardımcıların kim olduğu, nasıl aranacağı ve ambulansın hangi kapıdan geleceği bilinmelidir.",
+      "Kazazedeyi gereksiz hareket ettirmek veya eğitim dışı müdahale yapmak ek zarar oluşturabilir. Tehlike devam ediyorsa müdahale edenlerin güvenliği ve profesyonel yardım önceliklidir.",
+      "Yaralanma sonrası saha koordinatları, erişim engelleri, refakat ve ilk raporlama yöntemi önceden belirlenmelidir."
+    ],
+    "scenario": [
+      "Bir çalışan elinden yaralandı; ekip yaralının bulunduğu yapıyı tarif edemedi ve acil çıkış yolu malzemelerle kapalıydı.",
+      "İlk yardımcıya ve sağlık ekibine ulaşılması gecikti.",
+      "Açık acil güzergâh, saha lokasyon kodu ve belirlenmiş çağrı zinciri müdahaleyi hızlandırabilirdi."
+    ],
+    "remember": "Önce kendi güvenliğinizi sağlayın, acil yardım çağırın ve yalnız eğitimli olduğunuz ilk yardım uygulamalarını yapın.",
+    "hazards": [
+      "Acil numara veya lokasyonun bilinmemesi.",
+      "İlk yardım ekibine ulaşamama.",
+      "Ambulans güzergâhının kapalı olması.",
+      "Eğitimsiz müdahale ile ek yaralanma.",
+      "Olay yerindeki devam eden tehlike.",
+      "Yanlış veya geç bildirim.",
+      "İlk yardım setinin eksikliği.",
+      "Kalabalığın müdahaleyi engellemesi."
+    ],
+    "controls": [
+      "Saha acil numarasını ve çağrı zincirini doğrulayın.",
+      "Vardiyadaki ilk yardımcıları belirleyin.",
+      "İlk yardım seti ve gerekli ekipmanın yerini kontrol edin.",
+      "Acil araç yollarını açık tutun.",
+      "Çalışma alanı, kat ve saha koordinatlarını ekipçe paylaşın.",
+      "Olay yerindeki devam eden enerji ve çevre tehlikelerini değerlendirin.",
+      "İlk yardımı yalnız eğitim ve yetki sınırında uygulayın.",
+      "Kazazedeyi yalnız gerekli ve güvenli olduğunda hareket ettirin.",
+      "Acil sağlık ekibi için refakat ve karşılama noktasını belirleyin.",
+      "Olay sonrası yetkili HSE/amir bildirimini prosedüre göre yapın."
+    ],
+    "supervisor_script": "Arkadaşlar, bugün acil numarayı ve bulunduğumuz alan kodunu herkes bilecek. İlk yardımcıyı kimin çağıracağını, ambulansın hangi yoldan geleceğini ve yolu kimin açacağını önceden belirleyeceğiz.",
+    "questions": [
+      "Acil numaramız ne?",
+      "İlk yardımcı kim ve nerede?",
+      "Burasının saha lokasyon kodu nedir?",
+      "Ambulans hangi kapıdan gelir?",
+      "Olay yerinde devam eden tehlike varsa ne yaparız?"
+    ],
+    "verification": [
+      "Acil numara biliniyor",
+      "İlk yardımcı atandı",
+      "İlk yardım seti erişilebilir",
+      "Acil yol açık",
+      "Saha lokasyonu biliniyor",
+      "Çağrı zinciri tanımlı",
+      "Olay yeri kontrol planı var",
+      "Refakat kişisi belirli",
+      "Bildirim kuralı açık",
+      "Ekip bilgilendirildi"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "WORKSITE FIRST AID ACCESS AND EMERGENCY RESPONSE TOOLBOX TALK",
+    "subtitle": "Enable prompt, coordinated first aid after an injury.",
+    "application_subtitle": "Alarm, first aiders, ambulance access, scene safety and reporting.",
+    "objective": "Prevent delays in emergency calls, competent first aid and emergency medical access after worksite injuries.",
+    "explanation": [
+      "First aid readiness means more than a stocked box. Workers must know the available first aiders, how to contact them and where emergency vehicles enter.",
+      "Unnecessary casualty movement or care beyond a person's training may cause further harm. Scene safety and prompt professional assistance remain priorities.",
+      "Confirm exact worksite location, access routes, escorts and initial incident reporting procedures before an incident occurs."
+    ],
+    "scenario": [
+      "A worker sustained a hand injury, but the team could not accurately identify the structure location and emergency access was obstructed.",
+      "Finding the first aider and directing medical responders took longer than necessary.",
+      "Clear emergency routes, location codes and a defined call chain would have improved response."
+    ],
+    "remember": "Make the scene safe, summon professional help and give only first aid you are trained to provide.",
+    "hazards": [
+      "Unknown emergency number or worksite location.",
+      "Unavailability of a first aider.",
+      "Obstructed ambulance access.",
+      "Inappropriate intervention by untrained staff.",
+      "Continuing hazards at the incident scene.",
+      "Incorrect or delayed notifications.",
+      "Missing first aid supplies.",
+      "Crowding that blocks response."
+    ],
+    "controls": [
+      "Confirm the site emergency number and call sequence.",
+      "Identify first aiders available on the shift.",
+      "Check access to first aid equipment and supplies.",
+      "Keep emergency vehicle routes clear.",
+      "Share the work area, level and location code.",
+      "Assess ongoing energy and environmental risks at the scene.",
+      "Provide first aid only within competence and training.",
+      "Move casualties only when necessary and safe.",
+      "Nominate emergency vehicle reception and escorts.",
+      "Follow site incident notification and HSE reporting procedures."
+    ],
+    "supervisor_script": "Everyone must know our emergency number and exact worksite location. We will identify the available first aider, who calls and how the ambulance reaches this work area.",
+    "questions": [
+      "What is the emergency number?",
+      "Who is the first aider on this shift?",
+      "What is this location code?",
+      "Which entrance will the ambulance use?",
+      "What if a danger remains at the scene?"
+    ],
+    "verification": [
+      "Emergency number known",
+      "First aider identified",
+      "First aid kit accessible",
+      "Access route clear",
+      "Location code known",
+      "Call chain defined",
+      "Scene safety planned",
+      "Escort nominated",
+      "Reporting path explained",
+      "Crew informed"
+    ]
+  }
+},
+{
+  "slug": "permit-to-work-shift-handover",
+  "sourceFile": "editorial_20261113_permit_to_work_shift_handover",
+  "base": "permit-to-work-shift-handover-toolbox-talk",
+  "tr": {
+    "objective_title": "AMAÇ",
+    "explanation_title": "KONU ANLATIMI",
+    "scenario_title": "GERÇEKÇİ SAHA SENARYOSU",
+    "remember_title": "UNUTMAYIN",
+    "hazards_title": "TEMEL TEHLİKELER",
+    "controls_title": "KONTROL ÖNLEMLERİ",
+    "supervisor_title": "SÜPERVİZÖR KONUŞMA METNİ",
+    "questions_title": "EKİBE SORULACAK SORULAR",
+    "verification_title": "İŞE BAŞLAMADAN ÖNCE DOĞRULAYIN",
+    "attendance_title": "KATILIM VE ONAY",
+    "fields": [
+      "Proje / Saha",
+      "Tarih",
+      "Konuşmayı yapan",
+      "Çalışma alanı"
+    ],
+    "table_headers": [
+      "No",
+      "Ad Soyad",
+      "Firma / Görev",
+      "İmza"
+    ],
+    "notes_title": "Süpervizör notları / ek saha talimatları",
+    "duration": "8–10 DAKİKA",
+    "footer": "SERNEM HSE Resource — İşe özel risk değerlendirmesi, yetkili teknik prosedürler, üretici talimatları ve yerel mevzuat önceliklidir.",
+    "title": "ÇALIŞMA İZNİ VE VARDİYA TESLİM GÜVENLİĞİ TOOLBOX TALK",
+    "subtitle": "Yarım kalan işlerde izin, izolasyon ve saha durumunu aktarın.",
+    "application_subtitle": "İzin geçerliliği, görev değişimi, SIMOPS ve güvenli geri teslim.",
+    "objective": "Vardiya değişiminde devam eden işlerin, tehlikeli enerjinin ve çalışma izinlerinin yanlış anlaşılmasından kaynaklanan kazaları önlemek.",
+    "explanation": [
+      "Bir izin kâğıdının mevcut olması tek başına güvenli çalışma anlamına gelmez. İzin, belirli iş, yer, süre, izolasyon ve sorumlular için geçerlidir.",
+      "İş bir sonraki vardiyaya devredilecekse mevcut açık ekipmanlar, izolasyonlar, devam eden sıcak iş veya gaz ölçümü gereksinimleri ve değişen saha koşulları yazılı ve sözlü aktarılmalıdır.",
+      "Yeni vardiya izin ve izolasyonların geçerliliğini yetkili prosedüre göre doğrulamadan işi sürdürmemelidir; tamamlanan işler kontrollü geri teslim ve devreye alma ile kapatılmalıdır."
+    ],
+    "scenario": [
+      "Bir bakım ekibi vardiya sonunda proses hattını açık ve kilitli bıraktı; yeni ekip izolasyon sertifikasının durumunu yanlış anladı.",
+      "İş devam ederken başka bir ekip hattın kullanıma hazır olduğunu düşündü.",
+      "Yazılı/sözlü teslim, açık izin ve izolasyon kayıtlarının karşılıklı doğrulanması çakışmayı önleyebilirdi."
+    ],
+    "remember": "Yeni vardiyada eski izni otomatik geçerli saymayın; iş, izolasyon ve değişen koşulları tekrar doğrulayın.",
+    "hazards": [
+      "Geçersiz veya süresi dolan izinle işe devam.",
+      "İzolasyonun yanlış anlaşılması veya erken kaldırılması.",
+      "Açık flanş/hat veya kapak durumunun bildirilmemesi.",
+      "Eşzamanlı çalışma çatışması.",
+      "Görev ve gözcü sorumlusunun belirsizliği.",
+      "Vardiya değişiminde eksik gaz ölçümü.",
+      "Tamamlanmamış işin erken devreye alınması.",
+      "Yetersiz sözlü-yazılı teslim."
+    ],
+    "controls": [
+      "Devam eden tüm izinleri vardiya sonunda listeleyin.",
+      "İşin gerçek tamamlanma durumunu kaydedin.",
+      "İzolasyon ve kilit durumunu sertifikalarla karşılaştırın.",
+      "Açık hat, koruma sökümü ve test sınırlarını belirtin.",
+      "Yeni vardiya ekipleriyle yüz yüze ve yazılı teslim yapın.",
+      "SIMOPS ve komşu ekip etkilerini tekrar değerlendirin.",
+      "İzin uzatma/yenileme işlemini yetkili sisteme göre yapın.",
+      "Gerekli gaz, atmosfer ve saha kontrollerini yeniden doğrulayın.",
+      "Yeni sorumlu, gözcü ve acil durum kontaklarını belirleyin.",
+      "İş bitiminde ekipmanı onaylı geri teslim ve devreye alma sistemiyle kapatın."
+    ],
+    "supervisor_script": "Arkadaşlar, vardiya değişimi işin riskini sıfırlamaz. Açık izinler, enerji izolasyonları, sökülmüş parçalar ve değişen koşullar yeni ekibe hem yazılı hem sözlü aktarılacak. Yetkili onayı olmadan izin uzatılıp çalışmaya devam edilmeyecek.",
+    "questions": [
+      "Açık hangi izinler var?",
+      "Hangi izolasyonlar devam ediyor?",
+      "Hangi hat veya koruma açık?",
+      "Yeni vardiya için yeniden ölçüm gerekli mi?",
+      "İşi kim geri teslim edecek?"
+    ],
+    "verification": [
+      "Açık izinler listelendi",
+      "İş durumu kaydedildi",
+      "İzolasyonlar doğrulandı",
+      "Açık sistemler işaretli",
+      "Sözlü teslim tamam",
+      "Yazılı teslim tamam",
+      "SIMOPS kontrol edildi",
+      "Ölçümler güncel",
+      "Yeni görevler belli",
+      "Geri teslim planlı"
+    ]
+  },
+  "en": {
+    "objective_title": "OBJECTIVE",
+    "explanation_title": "TOPIC EXPLANATION",
+    "scenario_title": "REALISTIC SITE SCENARIO",
+    "remember_title": "REMEMBER",
+    "hazards_title": "KEY HAZARDS",
+    "controls_title": "CONTROL MEASURES",
+    "supervisor_title": "SUPERVISOR TALKING SCRIPT",
+    "questions_title": "DISCUSSION QUESTIONS",
+    "verification_title": "PRE-WORK VERIFICATION",
+    "attendance_title": "ATTENDANCE AND APPROVAL",
+    "fields": [
+      "Project / Site",
+      "Date",
+      "Presented by",
+      "Work area"
+    ],
+    "table_headers": [
+      "No",
+      "Full Name",
+      "Company / Role",
+      "Signature"
+    ],
+    "notes_title": "Supervisor notes / additional site instructions",
+    "duration": "8–10 MINUTES",
+    "footer": "SERNEM HSE Resource — Task-specific risk assessment, authorised procedures, manufacturer instructions and local law take precedence.",
+    "title": "PERMIT-TO-WORK SHIFT HANDOVER TOOLBOX TALK",
+    "subtitle": "Transfer permit, isolation and incomplete-work status reliably.",
+    "application_subtitle": "Permit validity, responsibility change, SIMOPS and safe hand-back.",
+    "objective": "Prevent incidents arising from poor understanding of work status, hazardous-energy isolations and work permits across shift changes.",
+    "explanation": [
+      "Holding a permit does not itself make a job safe. A permit applies to defined work, location, period, isolations and responsible personnel.",
+      "When work crosses shifts, communicate open equipment, live isolations, hot-work or atmospheric testing needs and site changes using both written and verbal handover.",
+      "The incoming team must verify valid permissions and isolations under the authorised system before restarting. Completed work requires controlled plant hand-back and return to service."
+    ],
+    "scenario": [
+      "A maintenance team left a process line open and locked out at shift end; the incoming crew misunderstood the isolation certificate status.",
+      "Another work group assumed the line was ready for use while the task remained incomplete.",
+      "Written and face-to-face handover plus matching open-permit and isolation records would have prevented the conflict."
+    ],
+    "remember": "Never assume the previous shift's permit remains valid. Recheck the work, isolation and changed conditions.",
+    "hazards": [
+      "Continuing work on an expired permit.",
+      "Isolations misunderstood or removed prematurely.",
+      "Open lines, flanges or covers not communicated.",
+      "Clashing simultaneous operations.",
+      "Unclear supervisors or attendants.",
+      "Out-of-date gas measurements.",
+      "Premature commissioning of unfinished work.",
+      "Incomplete verbal or written handover."
+    ],
+    "controls": [
+      "List all permits outstanding at shift end.",
+      "Record actual completion and equipment status.",
+      "Reconcile isolations and locks with certificates.",
+      "Identify open lines, missing guards and test boundaries.",
+      "Use written plus face-to-face shift handover.",
+      "Reassess interacting work and SIMOPS.",
+      "Renew or extend permits only under authorised rules.",
+      "Repeat necessary atmospheric and area checks.",
+      "Identify incoming supervisors, attendants and emergency contacts.",
+      "Use the approved plant hand-back and return-to-service process."
+    ],
+    "supervisor_script": "Shift change does not remove the task hazards. We will communicate outstanding permits, isolations, open equipment and changing conditions in writing and verbally. No continuation without the required authorisation.",
+    "questions": [
+      "Which permits remain open?",
+      "Which isolations remain active?",
+      "Which lines or guards are open?",
+      "Do we need fresh gas tests?",
+      "Who is responsible for hand-back?"
+    ],
+    "verification": [
+      "Open permits listed",
+      "Work status documented",
+      "Isolations verified",
+      "Open systems marked",
+      "Verbal handover completed",
+      "Written handover completed",
+      "SIMOPS reviewed",
+      "Tests current",
+      "Incoming roles clear",
+      "Hand-back arranged"
+    ]
+  }
 }
 ] as ToolboxRecord[];
 
