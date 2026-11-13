@@ -399,6 +399,7 @@ function getAutoCategory(slug: string) {
     "fire-safety",
     "grinding-cutting-safety",
     "welding-fumes",
+    "hot-work-near-fuel-systems",
   ].includes(slug)) return "hot-work-fire";
 
   // 06 — Chemical & Hazardous Materials
@@ -432,6 +433,7 @@ function getAutoCategory(slug: string) {
     "flange-joint-integrity",
     "hose-coupling-safety",
     "abrasive-blasting-safety",
+    "manual-torque-wrench-safety",
   ].includes(slug)) return "tools-machinery";
 
   // 10 — PPE & Occupational Health
@@ -458,6 +460,8 @@ function getAutoCategory(slug: string) {
   return "general-site";
 }
 function getAutoIcon(slug: string) {
+  if (slug === "manual-torque-wrench-safety") return "🔩";
+  if (slug === "hot-work-near-fuel-systems") return "🔥";
   if (slug.includes("stored-energy-hydraulic-systems")) return "🔋";
   if (slug.includes("high-pressure-water-jetting")) return "💦";
   if (slug.includes("flange-joint-integrity")) return "🔩";
