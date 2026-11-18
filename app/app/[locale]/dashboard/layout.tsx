@@ -1,8 +1,12 @@
+import { unstable_rethrow } from "next/navigation";
 import PendingIncidentImport from "./labs/PendingIncidentImport";
 import TrialDashboardCard from "./TrialDashboardCard";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { createClient } from "../../../utils/supabase/server";
 import { premiumTrialEnabled } from "../../../lib/premium-trial-config";
+
+// Trial status depends on the signed-in user and must never be prerendered.
+export const dynamic = "force-dynamic";
 
 type Props = { children: React.ReactNode; params: Promise<{ locale: string }> };
 
@@ -39,6 +43,8 @@ export default async function DashboardLayout({ children, params }: Props) {
         }
       }
     } catch (error) {
+      // Let Next.js handle internal dynamic-rendering and navigation signals.
+      unstable_rethrow(error);
       // The dashboard must remain available even when trial status is temporarily unavailable.
       console.error("Dashboard trial card unavailable", error);
     }
