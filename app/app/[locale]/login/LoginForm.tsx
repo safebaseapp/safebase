@@ -35,22 +35,37 @@ export default function LoginForm({ locale }: Props) {
     event.preventDefault();
     setErrorMessage("");
     setIsLoading(true);
+    try {
+      trackEvent("login_attempt", { method: "password", locale });
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email.trim().toLowerCase(),
+        password,
+      });
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        trackEvent("login_error", { method: "password", locale, error_code: error.code || "unknown" });
+        const isUnconfirmed = error.code === "email_not_confirmed";
+        setErrorMessage(isUnconfirmed
+          ? (isTurkish
+              ? "E-posta adresin henüz doğrulanmamış. Kayıt sırasında gönderilen bağlantıyı ve spam klasörünü kontrol et."
+              : "Your email is not confirmed yet. Check your inbox and spam folder for the confirmation link.")
+          : (isTurkish
+              ? "Giriş başarısız. E-posta adresini ve şifreni kontrol et. Gerekirse Şifremi unuttum bağlantısını kullan."
+              : "Sign in failed. Check your email and password, or use Forgot password."));
+        return;
+      }
 
-    if (error) {
-      setErrorMessage(
-        isTurkish
-          ? "Giriş başarısız. E-posta adresini ve şifreni kontrol et."
-          : "Login failed. Check your email address and password.",
-      );
+      trackEvent("login", { method: "password", locale });
+      router.push(nextPath);
+      router.refresh();
+    } catch {
+      trackEvent("login_error", { method: "password", locale, error_code: "network_or_unexpected" });
+      setErrorMessage(isTurkish
+        ? "Bağlantı hatası oluştu. İnternet bağlantını kontrol edip tekrar dene."
+        : "A connection error occurred. Check your internet connection and try again.");
+    } finally {
       setIsLoading(false);
-      return;
     }
-
-    trackEvent("login", { method: "password", locale });
-    router.push(nextPath);
-    router.refresh();
   }
 
   return (
