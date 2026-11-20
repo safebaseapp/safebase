@@ -38,7 +38,8 @@
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "fontkit": "2.0.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

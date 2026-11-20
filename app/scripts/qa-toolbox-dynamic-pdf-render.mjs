@@ -47,6 +47,8 @@ const logoPath = path.join(appRoot, "public", "brand", "sernem-logo.svg");
 const logoBytes = await sharp(await fsp.readFile(logoPath)).png().toBuffer();
 const samples = new Set([
   "hot-work-near-fuel-systems",
+  "formwork-pre-pour-inspection",
+  "manual-torque-wrench-safety",
   "first-energisation-commissioning",
   "silica-dust-concrete-cutting",
   "eyewash-emergency-shower-readiness",

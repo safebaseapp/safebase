@@ -2,6 +2,7 @@ import { PDFDocument, rgb } from "pdf-lib";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
+import { outlineToolboxSvgText } from "./svg-text-outlines";
 
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 import { generatePremiumToolboxPdf as generateLegacyPremiumToolboxPdf } from "./premium-toolbox-pdf";
@@ -198,7 +199,7 @@ async function buildFieldVisualPage({
     </svg>
   `;
 
-  return sharp(Buffer.from(svg)).png().toBuffer();
+  return sharp(Buffer.from(await outlineToolboxSvgText(svg))).png().toBuffer();
 }
 
 function rewritePageNumber(page: ReturnType<PDFDocument["getPage"]>, pageNumber: number) {

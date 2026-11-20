@@ -1,7 +1,6 @@
 import { PDFDocument } from "pdf-lib";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import sharp from "sharp";
+import { outlineToolboxSvgText } from "./svg-text-outlines";
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 import compactPdfData from "@/lib/toolbox/pdf-compact-overrides.json";
 
@@ -28,48 +27,8 @@ const PAGE_W = 794;
 const PAGE_H = 1123;
 
 async function loadEmbeddedFontCss() {
-  const regularCandidates = [
-    path.join(process.cwd(), "public", "fonts", "DejaVuSans.ttf"),
-    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-  ];
-
-  const boldCandidates = [
-    path.join(process.cwd(), "public", "fonts", "DejaVuSans-Bold.ttf"),
-    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
-  ];
-
-  async function loadFont(candidates: string[]) {
-    for (const fontPath of candidates) {
-      try {
-        const bytes = await readFile(fontPath);
-        return Buffer.from(bytes).toString("base64");
-      } catch {}
-    }
-    throw new Error("Unicode PDF font could not be loaded.");
-  }
-
-  const regular = await loadFont(regularCandidates);
-  const bold = await loadFont(boldCandidates);
-
-  return `
-      @font-face {
-        font-family: "SernemPdf";
-        src: url("data:font/ttf;base64,${regular}") format("truetype");
-        font-weight: 400;
-        font-style: normal;
-      }
-
-      @font-face {
-        font-family: "SernemPdf";
-        src: url("data:font/ttf;base64,${bold}") format("truetype");
-        font-weight: 700;
-        font-style: normal;
-      }
-
-      text, tspan {
-        font-family: "SernemPdf";
-      }
-  `;
+  // Text is converted into font outlines before rasterizing; no CSS font embedding required.
+  return "";
 }
 
 function esc(value: unknown) {
@@ -1449,7 +1408,7 @@ function pageThree(
 }
 
 async function svgToPng(svg: string) {
-  return sharp(Buffer.from(svg))
+  return sharp(Buffer.from(await outlineToolboxSvgText(svg)))
     .png()
     .toBuffer();
 }
