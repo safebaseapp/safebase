@@ -17402,8 +17402,7 @@ export const toolboxData = [
       ]
     }
   }
-]
- as ToolboxRecord[];
+] as ToolboxRecord[];
 
 export function getToolboxBySlug(slug: string) {
   return toolboxData.find((item) => item.slug === slug);
