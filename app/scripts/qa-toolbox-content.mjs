@@ -10,6 +10,7 @@ const masterSource = await readFile(path.join(appRoot, "lib/toolbox/premium-mast
 const pdfRouter = await readFile(path.join(appRoot, "lib/toolbox/standard-pdf.ts"), "utf8");
 const library = await readFile(path.join(appRoot, "app/[locale]/toolbox/ToolboxLibraryClient.tsx"), "utf8");
 const renderer = await readFile(path.join(appRoot, "lib/pdf/premium-toolbox-pdf-v2.ts"), "utf8");
+const legacyRenderer = await readFile(path.join(appRoot, "lib/pdf/premium-toolbox-pdf.ts"), "utf8");
 const errors = [];
 const marker = "export const toolboxData = ";
 const start = dataSource.indexOf(marker);
@@ -60,7 +61,66 @@ for (const record of records) {
       errors.push(`${record.slug}/${locale}: draft placeholder found`);
   }
 }
-if (records.length < 70) errors.push(`Catalogue unexpectedly shrank to ${records.length}`);
+if (records.length < 100) errors.push(`Catalogue unexpectedly shrank to ${records.length}; expected at least 100`);
+for (const record of records) {
+  if (record.sourceFile?.startsWith("editorial_20261113_") && !library.includes(`if (slug === "${record.slug}")`)) {
+    errors.push(`${record.slug}: editorial entry has no explicit catalogue icon`);
+  }
+}
+
+function pdfLineCount(text, maximumCharacters) {
+  let current = "";
+  let count = 0;
+  for (const word of String(text ?? "").split(/\s+/).filter(Boolean)) {
+    const next = current ? current + " " + word : word;
+    if (next.length > maximumCharacters && current) {
+      count += 1;
+      current = word;
+    } else current = next;
+  }
+  return current ? count + 1 : count;
+}
+// Preserve the two existing production topics verbatim: their longer briefing text predates this strict new-content PDF wrap guard.
+// They retain the existing renderer and require separate rendered-PDF review, not silent text shortening.
+const existingProductionLongFormSlugs = new Set(["manual-torque-wrench-safety", "hot-work-near-fuel-systems"]);
+for (const record of records.filter((entry) => entry.sourceFile?.startsWith("editorial_20261113_") && !existingProductionLongFormSlugs.has(entry.slug))) {
+  for (const locale of ["tr", "en"]) {
+    const data = record[locale];
+    const title = String(data.title).replace(/\s+TOOLBOX TALK$/i, "");
+    if (title.length > 28 && pdfLineCount(title, 31) > 2)
+      errors.push(record.slug + "/" + locale + ": PDF title needs more than two lines");
+    for (const [field, maxChars, maxLines] of [
+      ["objective", 96, 3], ["remember", 78, 3], ["supervisor_script", 108, 5],
+    ]) {
+      if (pdfLineCount(data[field], maxChars) > maxLines)
+        errors.push(record.slug + "/" + locale + ": PDF " + field + " would clip");
+    }
+    for (const [field, maxChars, maxLines, maximumEntries] of [
+      ["explanation", 51, 4, 3], ["scenario", 50, 4, 3],
+      ["hazards", 38, 2, 8], ["controls", 40, 2, 10],
+      ["questions", 40, 2, 6], ["verification", 30, 2, 10],
+    ]) {
+      for (const [index, sentence] of data[field].slice(0, maximumEntries).entries()) {
+        if (pdfLineCount(sentence, maxChars) > maxLines)
+          errors.push(record.slug + "/" + locale + ": PDF " + field + "[" + index + "] would clip");
+      }
+    }
+    for (const [index, hazard] of data.hazards.slice(0, 3).entries()) {
+      if (pdfLineCount(hazard, 23) > 4) {
+        errors.push(record.slug + "/" + locale + ": focus hazard[" + index + "] would clip");
+      }
+    }
+    for (const [field, maxChars, lineHeight] of [
+      ["explanation", 51, 12.6], ["scenario", 50, 12.8],
+    ]) {
+      const totalLines = data[field].slice(0, 3)
+        .reduce((total, sentence) => total + pdfLineCount(sentence, maxChars), 0);
+      if (totalLines * lineHeight + 6 > 220)
+        errors.push(record.slug + "/" + locale + ": PDF " + field + " exceeds briefing card");
+    }
+  }
+}
+
 if (masters.length !== new Set(masters).size) errors.push("Duplicate premium master slug");
 for (const slug of masters) {
   if (!names.has(slug)) errors.push(`Master PDF has no corresponding content: ${slug}`);
@@ -78,6 +138,12 @@ if (!library.includes("getAutoCategory(item.slug)"))
   errors.push("Base Toolbox categories must use the shared classification");
 if (!/ILLUSTRATIVE SITE IMAGE/.test(renderer) || !/TEMSİLİ SAHA GÖRSELİ/.test(renderer))
   errors.push("Generic refinery photo must be identified as illustrative");
+if (!legacyRenderer.includes("paragraph(hazard, x + 57, 390, 23"))
+  errors.push("PDF focus cards do not have safe wrapping width");
+if (legacyRenderer.includes("const generatedDate ="))
+  errors.push("Attendance date must not auto-populate the download date");
+if (!legacyRenderer.includes('      x="385"') || !legacyRenderer.includes('      x="485"'))
+  errors.push("PDF sign-off document control columns may overlap");
 console.log(`Toolbox structural QA: ${records.length} bilingual topics; ${masters.length} static PDF masters; ${errors.length} issues`);
 if (errors.length) {
   for (const issue of errors) console.error("FAIL:", issue);
