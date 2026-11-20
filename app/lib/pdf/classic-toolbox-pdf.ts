@@ -118,12 +118,14 @@ function first(args:ClassicArgs,data:Content,code:string,rev:string) {
     section(tr?"BAŞLICA TEHLİKELER":"MAIN HAZARDS",304,RED)+
     hazardCards(data)+
     section(tr?"SAHADA DOĞRULANACAK KRİTİK NOKTALAR":"CRITICAL SITE VERIFICATIONS",640,BLUE)+
-    metricCards(data)+mnemonic(args.locale)+"</svg>";
+    metricCards(data)+mnemonic(args.locale)+
+    section(tr?"SÜPERVİZÖR KONUŞMA METNİ":"SUPERVISOR BRIEF",1003,BLUE)+
+    paragraph(str(data.supervisor_script),52,1034,692,{size:9.2,leading:11.5,maxHeight:29,fill:SLATE})+"</svg>";
 }
 function requirementCards(data:Content,locale:Locale) {
   const tr=locale==="tr", controls=arr(data.controls), explanations=arr(data.explanation);
   const headers=tr?["ONAYLI YÖNTEM","EKİPMAN VE ALAN","KONTROL VE DOĞRULAMA","GÖZETİM VE İLETİŞİM"]:["APPROVED METHOD","EQUIPMENT AND AREA","CONTROL AND VERIFICATION","SUPERVISION AND COMMUNICATION"];
-  const items=[controls[0]??explanations[0],controls[1]??explanations[1],controls[2]??explanations[2],controls[3]??explanations[0]];
+  const items=[explanations[1]??controls[0],explanations[2]??controls[1],controls[0]??"",controls[1]??""];
   let out="";
   for(let i=0;i<4;i++){
     const x=i%2?405:52, y=309+Math.floor(i/2)*127,color=colors[i];
@@ -150,15 +152,18 @@ function second(args:ClassicArgs,data:Content,code:string,rev:string) {
     section(tr?"İŞE BAŞLAMADAN ÖNCE ASGARİ KANITLAR":"MINIMUM PRE-START VERIFICATION",586,BLUE)+
     checklistGrid(arr(data.verification),625,350,31,6)+
     section(tr?"SÜPERVİZÖR KONUŞMA NOKTALARI":"SUPERVISOR DISCUSSION POINTS",754,GREEN);
-  for(let i=0;i<Math.min(3,qs.length);i++)svg+='<circle cx="59" cy="'+(785+i*30)+'" r="4" fill="'+GREEN+'"/>'+
-    paragraph(qs[i],76,790+i*30,655,{size:11,leading:15,maxHeight:28});
+  for(let i=0;i<Math.min(5,qs.length);i++) {
+    const x=i%2?411:59, y=786+Math.floor(i/2)*29;
+    svg+='<circle cx="'+x+'" cy="'+(y-4)+'" r="4" fill="'+GREEN+'"/>'+
+      paragraph(qs[i],x+15,y,304,{size:10.5,leading:13,maxHeight:26});
+  }
   svg+=rect(52,890,692,148,"#f5f8fc","#dbe2eb",9)+
     '<rect x="52" y="890" width="692" height="29" rx="4" fill="'+NAVY+'"/>'+
-    t(tr?"ŞEMATİK SAHA UYGULAMASI — GÜVENLİK KONTROLÜ":"SCHEMATIC FIELD APPLICATION — SAFETY CHECK",71,909,10,"#ffffff",700)+
+    t(tr?"SAHA SENARYOSU — ŞEMATİK UYGULAMA":"FIELD SCENARIO — SCHEMATIC APPLICATION",71,909,10,"#ffffff",700)+
     '<path d="M96 978 l34 -57 l34 57 z" stroke="'+BLUE+'" stroke-width="4" fill="none"/>'+
     t("!",125,968,25,BLUE,700)+
-    paragraph(str(data.remember),193,949,502,{size:12.1,leading:17,maxHeight:62,fill:NAVY,weight:700})+
-    t(tr?"Şematik anlatım; işe özel saha prosedürü ve risk değerlendirmesi önceliklidir.":"Illustrative only; approved site procedures and risk assessments take priority.",193,1017,9,SLATE);
+    paragraph(arr(data.scenario).join(" "),193,949,502,{size:10.7,leading:14,maxHeight:72,fill:NAVY})+
+    t(tr?"Temsili şema — onaylı saha prosedürü önceliklidir.":"Illustration only — approved site procedures take precedence.",193,1025,8.5,SLATE);
   return svg+"</svg>";
 }
 function controlBlocks(data:Content,locale:Locale) {
