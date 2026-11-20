@@ -27,10 +27,16 @@ function t(s: string, x: number, y: number, size=12, fill=NAVY, weight=400): str
   return '<text x="' + x + '" y="' + y + '" font-size="' + size + '" fill="' + fill + '" font-weight="' + weight + '">' + esc(s) + '</text>';
 }
 function paragraph(s: string, x: number, y: number, width: number, options: {size?:number; leading?:number; maxHeight?:number; fill?:string; weight?:number}={}): string {
-  const size = options.size ?? 11.5, leading = options.leading ?? size*1.45;
-  const chars = Math.max(12, Math.floor(width / (size*0.57)));
-  const ls = wrap(s, chars);
-  if (options.maxHeight && ls.length*leading>options.maxHeight) throw new Error("Classic PDF paragraph overflows: " + s.slice(0,75));
+  let size = options.size ?? 11.5;
+  let leading = options.leading ?? size * 1.45;
+  let ls = wrap(s, Math.max(12, Math.floor(width / (size * 0.57))));
+  while (options.maxHeight && ls.length * leading > options.maxHeight && size > 7.75) {
+    size -= 0.25;
+    leading = size * 1.27;
+    ls = wrap(s, Math.max(12, Math.floor(width / (size * 0.57))));
+  }
+  if (options.maxHeight && ls.length * leading > options.maxHeight)
+    throw new Error("Classic PDF paragraph overflows after fit: " + s.slice(0,75));
   return ls.map((line,i)=>t(line,x,y+i*leading,size,options.fill??SLATE,options.weight??400)).join("\n");
 }
 function section(name:string,y:number,color=BLUE) {
@@ -146,13 +152,13 @@ function second(args:ClassicArgs,data:Content,code:string,rev:string) {
     section(tr?"SÜPERVİZÖR KONUŞMA NOKTALARI":"SUPERVISOR DISCUSSION POINTS",754,GREEN);
   for(let i=0;i<Math.min(3,qs.length);i++)svg+='<circle cx="59" cy="'+(785+i*30)+'" r="4" fill="'+GREEN+'"/>'+
     paragraph(qs[i],76,790+i*30,655,{size:11,leading:15,maxHeight:28});
-  svg+=rect(52,890,692,118,"#f5f8fc","#dbe2eb",9)+
+  svg+=rect(52,890,692,148,"#f5f8fc","#dbe2eb",9)+
     '<rect x="52" y="890" width="692" height="29" rx="4" fill="'+NAVY+'"/>'+
     t(tr?"ŞEMATİK SAHA UYGULAMASI — GÜVENLİK KONTROLÜ":"SCHEMATIC FIELD APPLICATION — SAFETY CHECK",71,909,10,"#ffffff",700)+
     '<path d="M96 978 l34 -57 l34 57 z" stroke="'+BLUE+'" stroke-width="4" fill="none"/>'+
     t("!",125,968,25,BLUE,700)+
-    paragraph(str(data.remember),193,949,502,{size:12.3,leading:18,maxHeight:47,fill:NAVY,weight:700})+
-    t(tr?"Şematik anlatım; işe özel saha prosedürü ve risk değerlendirmesi önceliklidir.":"Illustrative only; approved site procedures and risk assessments take priority.",193,993,9,SLATE);
+    paragraph(str(data.remember),193,949,502,{size:12.1,leading:17,maxHeight:62,fill:NAVY,weight:700})+
+    t(tr?"Şematik anlatım; işe özel saha prosedürü ve risk değerlendirmesi önceliklidir.":"Illustrative only; approved site procedures and risk assessments take priority.",193,1017,9,SLATE);
   return svg+"</svg>";
 }
 function controlBlocks(data:Content,locale:Locale) {
