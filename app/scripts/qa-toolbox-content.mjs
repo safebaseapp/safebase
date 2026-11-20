@@ -11,6 +11,7 @@ const pdfRouter = await readFile(path.join(appRoot, "lib/toolbox/standard-pdf.ts
 const library = await readFile(path.join(appRoot, "app/[locale]/toolbox/ToolboxLibraryClient.tsx"), "utf8");
 const renderer = await readFile(path.join(appRoot, "lib/pdf/premium-toolbox-pdf-v2.ts"), "utf8");
 const legacyRenderer = await readFile(path.join(appRoot, "lib/pdf/premium-toolbox-pdf.ts"), "utf8");
+const compactPdfData = JSON.parse(await readFile(path.join(appRoot, "lib/toolbox/pdf-compact-overrides.json"), "utf8"));
 const errors = [];
 const marker = "export const toolboxData = ";
 const start = dataSource.indexOf(marker);
@@ -80,12 +81,14 @@ function pdfLineCount(text, maximumCharacters) {
   }
   return current ? count + 1 : count;
 }
-// Preserve the two existing production topics verbatim: their longer briefing text predates this strict new-content PDF wrap guard.
-// They retain the existing renderer and require separate rendered-PDF review, not silent text shortening.
+// Catalogue retains the original long-form briefing. PDF-only concise variants must pass the same wrapping controls.
 const existingProductionLongFormSlugs = new Set(["manual-torque-wrench-safety", "hot-work-near-fuel-systems"]);
-for (const record of records.filter((entry) => entry.sourceFile?.startsWith("editorial_20261113_") && !existingProductionLongFormSlugs.has(entry.slug))) {
+for (const slug of existingProductionLongFormSlugs) {
+  if (!compactPdfData[slug]?.tr || !compactPdfData[slug]?.en) errors.push(`${slug}: missing bilingual PDF compact variant`);
+}
+for (const record of records.filter((entry) => entry.sourceFile?.startsWith("editorial_20261113_"))) {
   for (const locale of ["tr", "en"]) {
-    const data = record[locale];
+    const data = existingProductionLongFormSlugs.has(record.slug) ? compactPdfData[record.slug]?.[locale] : record[locale];
     const title = String(data.title).replace(/\s+TOOLBOX TALK$/i, "");
     if (title.length > 28 && pdfLineCount(title, 31) > 2)
       errors.push(record.slug + "/" + locale + ": PDF title needs more than two lines");

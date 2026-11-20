@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
+import compactPdfData from "@/lib/toolbox/pdf-compact-overrides.json";
 
 type Locale = "tr" | "en";
 
@@ -1466,7 +1467,10 @@ export async function generatePremiumToolboxPdf({
     throw new Error(`Toolbox not found: ${slug}`);
   }
 
-  const c = record[locale] as Record<string, unknown>;
+  // HTML uses the original long-form site briefing; PDF uses a reviewed concise fit-safe version.
+  // Avoid clipped safety sentences without modifying any of the 100 catalogue records.
+  const pdfOverrides = compactPdfData as Record<string, Record<Locale, Record<string, unknown>>>;
+  const c = (pdfOverrides[slug]?.[locale] ?? record[locale]) as Record<string, unknown>;
 
   const rawTitle = asString(
     c.title,
