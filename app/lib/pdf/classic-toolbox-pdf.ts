@@ -146,7 +146,7 @@ function checklistGrid(items:string[],start:number,colW=350,step=32, max=6) {
 function second(args:ClassicArgs,data:Content,code:string,rev:string) {
   const tr=args.locale==="tr",explain=arr(data.explanation),qs=arr(data.questions);
   let svg=shell(args,data,2,code,rev)+
-    section(tr?"STANDARTLAR VE SAHA GEREKLİLİKLERİ":"STANDARDS AND SITE REQUIREMENTS",207,SLATE)+
+    section(tr?"SAHA GEREKLİLİKLERİ VE ONAYLI YÖNTEM":"SITE REQUIREMENTS AND APPROVED METHOD",207,SLATE)+
     paragraph(explain[0]??str(data.objective),52,238,692,{size:11,leading:16,maxHeight:48})+
     requirementCards(data,args.locale)+
     section(tr?"İŞE BAŞLAMADAN ÖNCE ASGARİ KANITLAR":"MINIMUM PRE-START VERIFICATION",586,BLUE)+
@@ -185,7 +185,7 @@ function controlBlocks(data:Content,locale:Locale) {
 function third(args:ClassicArgs,data:Content,code:string,rev:string) {
   const tr=args.locale==="tr";
   let svg=shell(args,data,3,code,rev)+
-    section(tr?"KRİTİK KONTROL ÖNLEMLERİ (KONTROL HİYERARŞİSİ)":"CRITICAL CONTROLS (HIERARCHY OF CONTROLS)",205,GREEN)+
+    section(tr?"KRİTİK KONTROLLER VE UYGULAMA ADIMLARI":"CRITICAL CONTROLS AND FIELD ACTIONS",205,GREEN)+
     controlBlocks(data,args.locale)+
     rect(52,788,692,95,"#fef2f2","#fecaca",8)+
     '<rect x="52" y="788" width="9" height="95" rx="3" fill="'+RED+'"/>'+
@@ -230,7 +230,8 @@ export async function generateClassicToolboxPdf(args: ClassicArgs): Promise<Uint
   const pdf=await PDFDocument.create();
   for(const svg of pages) {
     const paths=await outlineToolboxSvgText(svg);
-    const image=await sharp(Buffer.from(paths)).png().toBuffer();
+    // 2x SVG raster density improves A4 print resolution while keeping the existing 72 masters untouched.
+    const image=await sharp(Buffer.from(paths), { density: 144 }).png().toBuffer();
     const png=await pdf.embedPng(image);
     const page=pdf.addPage([W,H]);
     page.drawImage(png,{x:0,y:0,width:W,height:H});
