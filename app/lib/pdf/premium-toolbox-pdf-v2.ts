@@ -6,6 +6,7 @@ import { outlineToolboxSvgText } from "./svg-text-outlines";
 
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
 import { generatePremiumToolboxPdf as generateLegacyPremiumToolboxPdf } from "./premium-toolbox-pdf";
+import { generateClassicToolboxPdf } from "./classic-toolbox-pdf";
 
 type Locale = "tr" | "en";
 
@@ -222,6 +223,13 @@ function rewritePageNumber(page: ReturnType<PDFDocument["getPage"]>, pageNumber:
 export async function generatePremiumToolboxPdf(args: GeneratePremiumToolboxPdfArgs) {
   const record = getToolboxBySlug(args.slug);
   if (!record) throw new Error(`Toolbox not found: ${args.slug}`);
+
+  // New 28 editorial topics use the original 72-topic visual document structure.
+  // Keep the 72 pre-existing topics, including the two existing editorial hotfixes, unchanged.
+  const legacyEditorialSlugs = new Set(["manual-torque-wrench-safety", "hot-work-near-fuel-systems"]);
+  if (record.sourceFile?.startsWith("editorial_20261113_") && !legacyEditorialSlugs.has(args.slug)) {
+    return generateClassicToolboxPdf(args);
+  }
 
   const localized = record[args.locale] as Record<string, unknown>;
   const title = asString(localized.title, "TOOLBOX TALK").replace(/\s+TOOLBOX TALK$/i, "").trim();
