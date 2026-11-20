@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import { getToolboxBySlug } from "@/lib/toolbox/toolbox-data";
+import compactPdfData from "@/lib/toolbox/pdf-compact-overrides.json";
 
 type Locale = "tr" | "en";
 
@@ -11,6 +12,7 @@ type DocumentProfile = {
   siteName?: string;
   workArea?: string;
   presentedBy?: string;
+  date?: string;
   revision?: string;
 };
 
@@ -329,6 +331,16 @@ function header({
   const docRefLabel = locale === "tr" ? "DOK. REF" : "DOC REF";
   const revLabel = locale === "tr" ? "REV" : "REV";
 
+  // Long bilingual safety titles must remain legible within the A4 header.
+  // Two complete lines are preferred over clipping a safety topic heading.
+  const headerTitleLines = title.length > 28 ? wrapText(title, 31) : [title];
+  if (headerTitleLines.length > 2) {
+    throw new Error(`Toolbox PDF header title does not fit: ${title}`);
+  }
+  const headerTitleMarkup = headerTitleLines
+    .map((line, index) => `<text x="54" y="${headerTitleLines.length > 1 ? 77 + index * 27 : 91}" font-family="SernemPdf" font-size="${headerTitleLines.length > 1 ? 22 : title.length > 24 ? 29 : 35}" font-weight="800" fill="#ffffff">${esc(line)}</text>`)
+    .join("");
+
   return `
     <rect
       x="0"
@@ -356,14 +368,7 @@ function header({
       fill="#52b8ff"
     >HSE • TOOLBOX TALK</text>
 
-    <text
-      x="54"
-      y="91"
-      font-family="SernemPdf"
-      font-size="${title.length > 24 ? 29 : 35}"
-      font-weight="800"
-      fill="#ffffff"
-    >${esc(title)}</text>
+    ${headerTitleMarkup}
 
     <text
       x="54"
@@ -704,9 +709,9 @@ function pageOne(
           fill="#65bfff"
         >0${index + 1}</text>
 
-        ${paragraph(hazard, x + 57, 390, 29, {
-          fontSize: 10.3,
-          lineHeight: 14,
+        ${paragraph(hazard, x + 57, 390, 23, {
+          fontSize: 9.6,
+          lineHeight: 13,
           weight: 700,
           fill: "#ffffff",
           maxLines: 4,
@@ -1160,18 +1165,11 @@ function pageThree(
     .filter(Boolean)
     .join(" / ");
 
-  const generatedDate = new Intl.DateTimeFormat(
-    locale === "tr" ? "tr-TR" : "en-GB",
-    {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    },
-  ).format(new Date());
-
+  // Attendance must reflect the actual briefing date, not the download date.
+  // Leave blank unless a presenter explicitly supplied a training date.
   const fieldValues = [
     projectSite,
-    generatedDate,
+    documentProfile?.date?.trim() ?? "",
     documentProfile?.presentedBy?.trim() ?? "",
     documentProfile?.workArea?.trim() ?? "",
   ];
@@ -1312,15 +1310,13 @@ function pageThree(
       x="68"
       y="430"
       font-family="SernemPdf"
-      font-size="${Math.max(6.8, Math.min(10, 180 / Math.max(1, (`REF: ${docRef}`).length * 0.56)))}"
+      font-size="${Math.max(6, Math.min(9.6, 285 / Math.max(1, (`REF: ${docRef}`).length * 0.60)))}"
       font-weight="700"
       fill="#ffffff"
-      textLength="${Math.min(180, Math.max(1, (`REF: ${docRef}`).length * 5.6))}"
-      lengthAdjust="spacingAndGlyphs"
     >REF: ${esc(docRef)}</text>
 
     <text
-      x="280"
+      x="385"
       y="430"
       font-family="SernemPdf"
       font-size="10"
@@ -1329,7 +1325,7 @@ function pageThree(
     >REV: ${esc(revision)}</text>
 
     <text
-      x="410"
+      x="485"
       y="430"
       font-family="SernemPdf"
       font-size="10"
@@ -1471,7 +1467,10 @@ export async function generatePremiumToolboxPdf({
     throw new Error(`Toolbox not found: ${slug}`);
   }
 
-  const c = record[locale] as Record<string, unknown>;
+  // HTML uses the original long-form site briefing; PDF uses a reviewed concise fit-safe version.
+  // Avoid clipped safety sentences without modifying any of the 100 catalogue records.
+  const pdfOverrides = compactPdfData as Record<string, Record<Locale, Record<string, unknown>>>;
+  const c = (pdfOverrides[slug]?.[locale] ?? record[locale]) as Record<string, unknown>;
 
   const rawTitle = asString(
     c.title,
