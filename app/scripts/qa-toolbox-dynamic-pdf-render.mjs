@@ -83,7 +83,11 @@ for (const record of newRecords) {
     }
     for (const [index, page] of pdf.getPages().entries()) {
       const { width, height } = page.getSize();
-      if (Math.abs(width - 794) > 0.1 || Math.abs(height - 1123) > 0.1) {
+      // The existing two long-form editorial PDFs retain their old geometry; the 28 new classic PDFs must be true ISO A4.
+      const legacyLongForm = record.slug === "manual-torque-wrench-safety" || record.slug === "hot-work-near-fuel-systems";
+      const expectedWidth = legacyLongForm ? 794 : 595.28;
+      const expectedHeight = legacyLongForm ? 1123 : 841.89;
+      if (Math.abs(width - expectedWidth) > 0.1 || Math.abs(height - expectedHeight) > 0.1) {
         throw new Error(
           "Invalid PDF page dimensions: " + record.slug + "/" + locale +
           " page " + (index + 1),
@@ -98,5 +102,5 @@ for (const record of newRecords) {
     console.log("OK " + checked + "/60: " + record.slug + "/" + locale);
   }
 }
-console.log("PASS: rendered " + checked + " dynamically generated bilingual PDFs, all four-page 794x1123 documents.");
+console.log("PASS: rendered " + checked + " bilingual four-page PDFs; new 28 are native A4, existing two legacy editorial documents preserved.");
 console.log("LIMIT: This test does not prove page legibility, user auth, Premium access, or technical approval.");

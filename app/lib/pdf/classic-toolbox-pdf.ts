@@ -8,6 +8,8 @@ type Profile = { projectName?: string; siteName?: string; workArea?: string; pre
 export type ClassicArgs = { slug: string; locale: Locale; logoBytes: Uint8Array; logoMime: string; documentProfile?: Profile };
 type Content = Record<string, unknown>;
 const W = 794, H = 1123;
+// SVG uses high-resolution layout coordinates; PDF page units must be true A4 points.
+const PDF_W = 595.28, PDF_H = 841.89;
 const NAVY = "#0b1b33", BLUE = "#2563eb", SLATE = "#475569", GREEN = "#10b981", RED = "#dc2626";
 const colors = ["#2563eb", "#10b981", "#d97706", "#475569"];
 function str(x: unknown): string { return typeof x === "string" ? x : ""; }
@@ -233,8 +235,8 @@ export async function generateClassicToolboxPdf(args: ClassicArgs): Promise<Uint
     // 2x SVG raster density improves A4 print resolution while keeping the existing 72 masters untouched.
     const image=await sharp(Buffer.from(paths), { density: 144 }).png().toBuffer();
     const png=await pdf.embedPng(image);
-    const page=pdf.addPage([W,H]);
-    page.drawImage(png,{x:0,y:0,width:W,height:H});
+    const page=pdf.addPage([PDF_W,PDF_H]);
+    page.drawImage(png,{x:0,y:0,width:PDF_W,height:PDF_H});
   }
   pdf.setTitle(str(data.title));
   pdf.setSubject("SERNEM classic four-page HSE Toolbox Talk");
